@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import dashboardJson from "./data/showrooms.json";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
@@ -39,6 +39,7 @@ type DashboardData = {
     showroomCount: number;
     quarter: string;
     sourceWeek: string;
+    updatedAt: string;
     startDate: string;
     endDate: string;
     combatMax: number;
@@ -50,6 +51,20 @@ type DashboardData = {
     "cdsid" | "showroom" | "dealer" | "manager" | "size" | "region" | "combat"
   >;
   showrooms: Showroom[];
+};
+
+type Viewer = {
+  displayName: string;
+  email: string | null;
+  isEditor: boolean;
+};
+
+type LatestUpdate = {
+  title: string;
+  note?: string;
+  effectiveDate: string;
+  updatedBy?: string;
+  attachments?: { filename: string; sizeBytes: number }[];
 };
 
 const dashboard = dashboardJson as DashboardData;
@@ -342,12 +357,348 @@ function ComparisonTable({
   );
 }
 
-export default function Dashboard() {
+function CriteriaGuide() {
+  const [active, setActive] = useState<TrendMetricKey>("v3s");
+
+  return (
+    <section className="panel criteria-panel" id="criteria">
+      <div className="criteria-heading">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">HOW THE SCORE WORKS</span>
+            <h2>평가 기준 한눈에 보기</h2>
+          </div>
+        </div>
+        <div className="criteria-tabs" role="tablist" aria-label="평가 기준 지표">
+          {(["v3s", "voc", "cx"] as TrendMetricKey[]).map((metric) => (
+            <button
+              key={metric}
+              type="button"
+              role="tab"
+              aria-selected={active === metric}
+              className={active === metric ? "active" : ""}
+              onClick={() => setActive(metric)}
+            >
+              {metricMeta[metric].label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {active === "v3s" && (
+        <div className="criteria-body" role="tabpanel">
+          <div className="criteria-summary">
+            <span className="criteria-number">01</span>
+            <div>
+              <strong>500점을 100점으로 환산</strong>
+              <p>
+                미스터리 쇼퍼 400점과 ONE Voice 100점을 합산해 전시장별
+                분기 점수를 만듭니다.
+              </p>
+            </div>
+            <div className="criteria-tags">
+              <span>개별 평가</span>
+              <span>분기 1회</span>
+              <span className="appealable">2영업일 내 소명</span>
+            </div>
+          </div>
+          <div className="v3s-composition" aria-label="V3S 500점 구성">
+            {[
+              ["Self Check & Greeting", 100],
+              ["Consulting", 150],
+              ["Farewell", 50],
+              ["Premium Manner", 50],
+              ["CNC", 50],
+              ["시승 만족도", 50],
+              ["해피콜 이행률", 50],
+            ].map(([label, score]) => (
+              <div
+                key={String(label)}
+                style={{ "--segment": score } as React.CSSProperties}
+              >
+                <strong>{score}점</strong>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+          <div className="criteria-ladder three">
+            <div className="good">
+              <span>V3S 90점 이상</span>
+              <strong>DSC 100점</strong>
+              <small>RTC 0.2%</small>
+            </div>
+            <div className="caution">
+              <span>85점 이상</span>
+              <strong>DSC 90점</strong>
+              <small>RTC 0.1%</small>
+            </div>
+            <div className="warning">
+              <span>85점 미만</span>
+              <strong>DSC 80점</strong>
+              <small>RTC 0%</small>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {active === "voc" && (
+        <div className="criteria-body voc-criteria" role="tabpanel">
+          <div className="criteria-summary">
+            <span className="criteria-number">02</span>
+            <div>
+              <strong>고객 만족도와 프로세스의 가중 합</strong>
+              <p>
+                방문 후 7일 이내 설문을 보내고, 네 항목의 점수와 이행률을
+                중요도에 따라 합산합니다.
+              </p>
+            </div>
+            <div className="criteria-tags">
+              <span>개별 평가</span>
+              <span>연중 상시</span>
+              <span className="appealable">해피콜 증빙 가능</span>
+            </div>
+          </div>
+          <div className="voc-formula">
+            <div className="voc-ring" aria-label="VOC 가중치 60, 20, 10, 10">
+              <span>VOC</span>
+              <strong>100점</strong>
+            </div>
+            <div className="weight-list">
+              {[
+                ["종합 만족도", "영업직원 상담 만족", 60],
+                ["Greeting", "최초 맞이", 20],
+                ["Consulting", "아이패드 활용", 10],
+                ["Farewell", "방문감사 해피콜", 10],
+              ].map(([label, description, weight]) => (
+                <div key={String(label)}>
+                  <i className={`weight-${weight}`} />
+                  <strong>{label}</strong>
+                  <span>{description}</span>
+                  <b>{weight}%</b>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="criteria-ladder two">
+            <div className="good">
+              <span>VOC 85점 이상</span>
+              <strong>DSC 100점</strong>
+              <small>RTC 0.2%</small>
+            </div>
+            <div className="warning">
+              <span>85점 미만</span>
+              <strong>DSC 90점</strong>
+              <small>RTC 0.1%</small>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {active === "cx" && (
+        <div className="criteria-body" role="tabpanel">
+          <div className="criteria-summary">
+            <span className="criteria-number">03</span>
+            <div>
+              <strong>5개 고객경험 항목, 총 130점</strong>
+              <p>
+                만족도뿐 아니라 긴급경보 처리, 조치계획, 앱 가입까지 운영
+                행동을 함께 평가합니다.
+              </p>
+            </div>
+            <div className="criteria-tags">
+              <span>그룹 평가</span>
+              <span>월·분기 마감</span>
+              <span className="locked">항목별 보정 상이</span>
+            </div>
+          </div>
+          <div className="cx-stack" aria-label="CX Management 130점 구성">
+            {[
+              ["신차 출고 만족도", "90점 이상", 40],
+              ["시승 만족도", "90점 이상", 50],
+              ["긴급경보", "2일 이내 처리", 10],
+              ["조치계획", "분기 내 제출", 10],
+              ["Hej Volvo 앱", "가입률 90% 이상", 20],
+            ].map(([label, threshold, score]) => (
+              <div key={String(label)}>
+                <span>{label}</span>
+                <small>{threshold}</small>
+                <strong>{score}점</strong>
+              </div>
+            ))}
+          </div>
+          <div className="criteria-ladder two">
+            <div className="good">
+              <span>합산 100점 이상</span>
+              <strong>RTC 0.2%</strong>
+              <small>월 마감 · 분기 지급</small>
+            </div>
+            <div className="warning">
+              <span>합산 100점 미만</span>
+              <strong>RTC 0.1%</strong>
+              <small>월 마감 · 분기 지급</small>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <p className="criteria-source">
+        기준: 2026 Retailer Terms &amp; Conditions Guideline · Competence
+        pp.40-51 · Updated 2026.07.24
+      </p>
+    </section>
+  );
+}
+
+function AdminDrawer({
+  viewer,
+  open,
+  onClose,
+  onSaved,
+}: {
+  viewer: Viewer;
+  open: boolean;
+  onClose: () => void;
+  onSaved: (update: LatestUpdate) => void;
+}) {
+  const [status, setStatus] = useState<"idle" | "saving" | "done" | "error">(
+    "idle",
+  );
+  const [message, setMessage] = useState("");
+
+  if (!open) return null;
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("saving");
+    setMessage("");
+    const form = new FormData(event.currentTarget);
+
+    try {
+      const response = await fetch("/api/dashboard-updates", {
+        method: "POST",
+        body: form,
+      });
+      const payload = (await response.json()) as {
+        update?: LatestUpdate;
+        error?: string;
+      };
+      if (!response.ok || !payload.update) {
+        throw new Error(payload.error ?? "업데이트를 저장하지 못했습니다.");
+      }
+      setStatus("done");
+      setMessage("업데이트가 등록되었습니다.");
+      onSaved(payload.update);
+      event.currentTarget.reset();
+    } catch (error) {
+      setStatus("error");
+      setMessage(
+        error instanceof Error ? error.message : "업데이트를 저장하지 못했습니다.",
+      );
+    }
+  }
+
+  return (
+    <div className="admin-backdrop" role="presentation" onMouseDown={onClose}>
+      <aside
+        className="admin-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="admin-title"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <div className="admin-drawer-head">
+          <div>
+            <span className="eyebrow">EDITOR ONLY</span>
+            <h2 id="admin-title">데이터 업데이트 등록</h2>
+          </div>
+          <button type="button" onClick={onClose} aria-label="닫기">
+            ×
+          </button>
+        </div>
+        <div className="editor-identity">
+          <span>{viewer.displayName}</span>
+          <strong>{viewer.email ?? "로컬 미리보기"}</strong>
+          <em>수정 · 첨부 권한</em>
+        </div>
+        <form onSubmit={submit}>
+          <label>
+            <span>업데이트 제목</span>
+            <input
+              name="title"
+              required
+              placeholder="예: 26W30 VOC 백데이터 반영"
+            />
+          </label>
+          <label>
+            <span>적용일</span>
+            <input
+              name="effectiveDate"
+              type="date"
+              required
+              defaultValue={new Date().toISOString().slice(0, 10)}
+            />
+          </label>
+          <label>
+            <span>변경 메모</span>
+            <textarea
+              name="note"
+              rows={4}
+              placeholder="변경된 지표와 사유를 간단히 기록하세요."
+            />
+          </label>
+          <label className="file-drop">
+            <span>증빙 또는 데이터 파일</span>
+            <input
+              name="file"
+              type="file"
+              accept=".csv,.xls,.xlsx,.pdf,.png,.jpg,.jpeg"
+            />
+            <small>CSV · Excel · PDF · PNG · JPG, 최대 10MB</small>
+          </label>
+          {message && <p className={`admin-message ${status}`}>{message}</p>}
+          <button
+            className="admin-submit"
+            type="submit"
+            disabled={status === "saving" || !viewer.email}
+          >
+            {status === "saving" ? "저장 중…" : "업데이트 저장"}
+          </button>
+          {!viewer.email && (
+            <p className="preview-helper">
+              실제 저장은 배포된 사이트에서 허용된 편집자 계정으로 로그인한
+              경우에만 가능합니다.
+            </p>
+          )}
+        </form>
+      </aside>
+    </div>
+  );
+}
+
+export default function Dashboard({ viewer }: { viewer: Viewer }) {
   const [selectedCode, setSelectedCode] = useState("6KR6834");
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
   const [comparisonMetric, setComparisonMetric] = useState<MetricKey>("combat");
   const [group, setGroup] = useState<GroupKey>("all");
   const [profileOpen, setProfileOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
+  const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
+    title: `${dashboard.meta.quarter} 원본 데이터 반영`,
+    effectiveDate: dashboard.meta.updatedAt,
+  });
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/dashboard-updates")
+      .then((response) => response.json())
+      .then((payload: { update?: LatestUpdate | null }) => {
+        if (mounted && payload.update) setLatestUpdate(payload.update);
+      })
+      .catch(() => undefined);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
@@ -361,6 +712,34 @@ export default function Dashboard() {
   const topPercent = Math.ceil(
     (nationalRank / dashboard.meta.showroomCount) * 100,
   );
+  const rankInGroup = (members: Showroom[]) =>
+    [...members]
+      .sort((a, b) => valueOf(b, "combat") - valueOf(a, "combat"))
+      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
+  const mobileRanks = [
+    {
+      label: "전국",
+      rank: nationalRank,
+      count: dashboard.meta.showroomCount,
+    },
+    {
+      label: selected.dealer,
+      rank: rankInGroup(
+        dashboard.showrooms.filter((item) => item.dealer === selected.dealer),
+      ),
+      count: dashboard.showrooms.filter(
+        (item) => item.dealer === selected.dealer,
+      ).length,
+    },
+    {
+      label: `${selected.size} Size`,
+      rank: rankInGroup(
+        dashboard.showrooms.filter((item) => item.size === selected.size),
+      ),
+      count: dashboard.showrooms.filter((item) => item.size === selected.size)
+        .length,
+    },
+  ];
 
   const kpis = [
     {
@@ -457,6 +836,9 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="topbar-actions">
+          <span className={`role-badge ${viewer.isEditor ? "editor" : "viewer"}`}>
+            {viewer.isEditor ? "EDIT 권한" : "VIEW ONLY"}
+          </span>
           <span className="private-badge">
             <i aria-hidden="true" /> PRIVATE · 관리자 전용
           </span>
@@ -464,6 +846,15 @@ export default function Dashboard() {
             2026 {dashboard.meta.quarter}
             <small>{dashboard.meta.sourceWeek}</small>
           </span>
+          {viewer.isEditor && (
+            <button
+              className="admin-open"
+              type="button"
+              onClick={() => setAdminOpen(true)}
+            >
+              데이터 관리
+            </button>
+          )}
           <button
             className="profile-button"
             type="button"
@@ -515,6 +906,14 @@ export default function Dashboard() {
             {selected.showroom.replace("볼보 ", "")}
             <small>전시장의 현재 위상</small>
           </h1>
+          <div className="update-status">
+            <i aria-hidden="true" />
+            <time>
+              최근 업데이트{" "}
+              {latestUpdate.effectiveDate.replaceAll("-", ".")}
+            </time>
+            <span>{latestUpdate.title}</span>
+          </div>
         </div>
         <dl>
           <div>
@@ -530,6 +929,61 @@ export default function Dashboard() {
             <dd>{selected.size}</dd>
           </div>
         </dl>
+      </section>
+
+      <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
+        <div className="mobile-power">
+          <div>
+            <span className="eyebrow">SHOWROOM POWER</span>
+            <strong>{displayNumber(combat)}</strong>
+            <small>/ {dashboard.meta.combatMax}</small>
+          </div>
+          <div>
+            <span className={`tier-badge ${tier.className}`}>{tier.name}</span>
+            <strong>
+              전국 {nationalRank}위
+              <small> · 상위 {topPercent}%</small>
+            </strong>
+            <span className={combatDelta >= 0 ? "positive" : "negative"}>
+              평균 대비 {combatDelta >= 0 ? "+" : ""}
+              {combatDelta.toFixed(1)}
+            </span>
+          </div>
+        </div>
+        <div className="mobile-kpis">
+          {kpis.map((item) => {
+            const signal = getSignal(item.value, item.average);
+            return (
+              <button
+                type="button"
+                key={item.key}
+                className={signal.tone}
+                onClick={() => setTrendMetric(item.key)}
+              >
+                <span>{metricMeta[item.key].short}</span>
+                <strong>{displayNumber(item.value)}</strong>
+                <small>
+                  평균 대비 {signal.delta >= 0 ? "+" : ""}
+                  {signal.delta.toFixed(1)}
+                </small>
+              </button>
+            );
+          })}
+        </div>
+        <div className="mobile-alert-row">
+          <div>
+            <span aria-hidden="true">{warningCount ? "!" : "✓"}</span>
+            <strong>
+              {warningCount
+                ? `평균 미달 ${warningCount}개 · 우선 조치 필요`
+                : "핵심 지표 모두 평균 이상"}
+            </strong>
+          </div>
+          <nav aria-label="모바일 빠른 이동">
+            <a href="#correction">조치</a>
+            <a href="#criteria">평가 기준</a>
+          </nav>
+        </div>
       </section>
 
       {warningCount > 0 ? (
@@ -745,8 +1199,19 @@ export default function Dashboard() {
                   : "VOLVO KOREA"}
           </strong>
         </div>
+        <div className="mobile-comparison-summary">
+          {mobileRanks.map((item) => (
+            <div key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.rank}위</strong>
+              <small>{item.count}개 전시장</small>
+            </div>
+          ))}
+        </div>
         <ComparisonTable selected={selected} metric={comparisonMetric} group={group} />
       </section>
+
+      <CriteriaGuide />
 
       <footer className="dashboard-footer">
         <span>DSC COMMAND · 2026 Retail Performance Intelligence</span>
@@ -755,6 +1220,15 @@ export default function Dashboard() {
           전시장
         </span>
       </footer>
+      <AdminDrawer
+        viewer={viewer}
+        open={adminOpen}
+        onClose={() => setAdminOpen(false)}
+        onSaved={(update) => {
+          setLatestUpdate(update);
+          setAdminOpen(false);
+        }}
+      />
     </main>
   );
 }

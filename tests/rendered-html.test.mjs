@@ -35,6 +35,8 @@ test("server-renders the DSC Command dashboard", async () => {
   assert.match(html, /DSC COMMAND/);
   assert.match(html, /전시장 전투력/);
   assert.match(html, /3대 핵심 지표/);
+  assert.match(html, /평가 기준 한눈에 보기/);
+  assert.match(html, /최근 업데이트/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);
@@ -50,6 +52,7 @@ test("ships project metadata and removes the disposable starter", async () => {
   ]);
 
   assert.match(page, /import Dashboard/);
+  assert.match(page, /isEditorEmail/);
   assert.match(layout, /generateMetadata/);
   assert.match(layout, /볼보 관리자 전용/);
   assert.match(layout, /og\.png/);

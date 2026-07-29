@@ -52,6 +52,16 @@ const numberAt = (row, index) => {
 };
 
 function quarterData(rows) {
+  const updateTokens = rows
+    .slice(0, 3)
+    .flatMap((row) =>
+      row.flatMap((value) => value.match(/\b\d{6}\b/g) ?? []),
+    )
+    .sort();
+  const latestUpdate = updateTokens.at(-1) ?? "";
+  const updatedAt = latestUpdate
+    ? `20${latestUpdate.slice(0, 2)}.${latestUpdate.slice(2, 4)}.${latestUpdate.slice(4, 6)}`
+    : "";
   const records = rows
     .slice(7)
     .filter((row) => row[0]?.startsWith("6KR"))
@@ -83,6 +93,7 @@ function quarterData(rows) {
   return {
     records,
     sourceWeek: rows[2]?.[1] ?? "",
+    updatedAt,
     quarter: rows[2]?.[6] ?? "",
     startDate: rows[4]?.[2] ?? "",
     endDate: rows[4]?.[3] ?? "",
@@ -129,6 +140,7 @@ const output = {
     showroomCount: showrooms.length,
     quarter: q2.quarter,
     sourceWeek: q2.sourceWeek,
+    updatedAt: q2.updatedAt,
     startDate: q2.startDate,
     endDate: q2.endDate,
     combatMax: 330,
