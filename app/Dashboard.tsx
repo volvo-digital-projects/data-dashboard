@@ -1201,7 +1201,7 @@ export default function Dashboard({
             <span className="identity-icon" aria-hidden="true">
               ◎
             </span>
-            <dt>권역</dt>
+            <dt>권역별</dt>
             <dd>{selected.region}</dd>
           </div>
           <div>
