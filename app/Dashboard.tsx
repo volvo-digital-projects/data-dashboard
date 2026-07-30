@@ -1283,12 +1283,6 @@ export default function Dashboard({
 
       <section className="hero-grid">
         <article className={`combat-card ${tier.className}`}>
-          <div className="card-heading">
-            <div>
-              <span className="eyebrow">SHOWROOM POWER INDEX</span>
-              <h2>전시장 전투력</h2>
-            </div>
-          </div>
           <div className="combat-main">
             <div
               className="quarter-score-chart"
@@ -1355,11 +1349,6 @@ export default function Dashboard({
         </article>
 
         <div className="kpi-column">
-          <div className="section-heading compact">
-            <div>
-              <h2>3대 핵심 지표</h2>
-            </div>
-          </div>
           <div className="metric-grid">
             {kpis.map((item) => (
               <MetricCard

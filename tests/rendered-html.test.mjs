@@ -38,8 +38,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(html, /DSC COMMAND/);
-  assert.match(html, /전시장 전투력/);
-  assert.match(html, /3대 핵심 지표/);
+  assert.doesNotMatch(
+    visibleHtml,
+    /SHOWROOM POWER INDEX|전시장 전투력|3대 핵심 지표/,
+  );
   assert.doesNotMatch(html, /CORE SIGNALS/);
   assert.doesNotMatch(html, /class="topbar"/);
   assert.doesNotMatch(html, /class="identity-tools"|class="identity-tool"/);
@@ -191,12 +193,16 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.identity-strip dl div[\s\S]*?padding: 0 10px 0 0/);
   assert.match(css, /\.identity-icon[\s\S]*?width: 30px[\s\S]*?height: 100%/);
   assert.match(css, /\.identity-profile\s*\{[\s\S]*?width: 112px/);
-  assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
-  assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 28px/);
+  assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 226px/);
+  assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 24px/);
   assert.match(css, /\.quarter-score-row > strong[\s\S]*?font-size: 14px/);
   assert.doesNotMatch(css, /\.combat-gauge/);
   assert.doesNotMatch(css, /\.tier-badge/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 4px/);
+  assert.match(
+    css,
+    /\.metric-code\s*\{[\s\S]*?font-family: var\(--font-volvo\)[\s\S]*?font-size: 14px/,
+  );
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
   assert.match(css, /\.quarter-band strong[\s\S]*?font-size: 11px/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -19px 24px 3px/);
