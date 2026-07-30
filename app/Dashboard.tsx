@@ -100,7 +100,7 @@ const metricMeta: Record<
   combat: { label: "종합 전투력", short: "TOTAL", max: 330, unit: "점" },
   v3s: { label: "V3S", short: "V3S", max: 100, unit: "점" },
   voc: { label: "VOC", short: "VOC", max: 100, unit: "점" },
-  cx: { label: "CX Index", short: "CX", max: 130, unit: "점" },
+  cx: { label: "CX Index", short: "CX Index", max: 130, unit: "점" },
 };
 
 const metricDescriptions: Record<TrendMetricKey, string> = {

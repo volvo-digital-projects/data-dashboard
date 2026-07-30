@@ -75,7 +75,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /CX 분기 평가점수[\s\S]*Q1[\s\S]*114\.7[\s\S]*Q2[\s\S]*113\.8[\s\S]*Q3[\s\S]*Q4/,
+    /CX Index 분기 평가점수[\s\S]*Q1[\s\S]*114\.7[\s\S]*Q2[\s\S]*113\.8[\s\S]*Q3[\s\S]*Q4/,
   );
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
   assert.match(visibleHtml, /330점 만점/);
