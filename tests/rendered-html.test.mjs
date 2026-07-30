@@ -46,6 +46,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /identity-profile[\s\S]*?지점장[\s\S]*?김길성/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(html, /최근 업데이트/);
+  assert.match(visibleHtml, /Q3 평가 진행중입니다\./);
+  assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);

@@ -1003,7 +1003,7 @@ export default function Dashboard({
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
-    title: `${dashboard.meta.quarter} 원본 데이터 반영`,
+    title: "Q3 평가 진행중입니다.",
     effectiveDate: dashboard.meta.updatedAt,
   });
 
@@ -1023,6 +1023,10 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
+  const displayUpdateTitle =
+    latestUpdate.effectiveDate.replaceAll(".", "-") === "2026-07-29"
+      ? "Q3 평가 진행중입니다."
+      : latestUpdate.title;
   const combat = selected.combat ?? 0;
   const tier = getTier(combat);
   const nationalRank =
@@ -1099,7 +1103,7 @@ export default function Dashboard({
               최근 업데이트{" "}
               {latestUpdate.effectiveDate.replaceAll("-", ".")}
             </time>
-            <span>{latestUpdate.title}</span>
+            <span>{displayUpdateTitle}</span>
           </div>
         </div>
         <dl>
