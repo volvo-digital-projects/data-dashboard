@@ -639,66 +639,83 @@ input:focus-visible {
   color: #b6eee7;
 }
 
-.gauge-zone {
+.combat-main {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 18px;
+  justify-content: space-between;
+  gap: 22px;
   position: relative;
   z-index: 1;
 }
 
-.combat-gauge {
-  --gauge-angle: 0deg;
-  width: 140px;
-  height: 140px;
+.quarter-score-chart {
+  min-width: 0;
+  flex: 1;
+}
+
+.quarter-score-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #9db2bc;
+  font-size: 9px;
+}
+
+.quarter-score-meta span {
+  letter-spacing: 0.05em;
+}
+
+.quarter-score-meta small {
+  color: #7f99a6;
+  font-size: 8px;
+}
+
+.quarter-score-row {
   display: grid;
-  flex: 0 0 auto;
-  place-items: center;
-  position: relative;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 212deg,
-    #71b3ca 0deg,
-    #dceaf0 var(--gauge-angle),
-    rgba(255, 255, 255, 0.11) var(--gauge-angle),
-    rgba(255, 255, 255, 0.11) 360deg
-  );
-  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.16);
+  grid-template-columns: 24px minmax(72px, 1fr) 42px;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
 }
 
-.combat-gauge::before {
-  content: "";
-  width: 112px;
-  height: 112px;
-  position: absolute;
-  border-radius: 50%;
-  background: #0d2a3b;
-  box-shadow: 0 8px 34px rgba(0, 0, 0, 0.27);
+.quarter-score-row > span {
+  color: #91a8b3;
+  font-size: 9px;
+  font-weight: 700;
 }
 
-.combat-gauge div {
-  position: relative;
-  text-align: center;
+.quarter-score-row > i {
+  height: 6px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
 }
 
-.combat-gauge strong,
-.combat-gauge span {
+.quarter-score-row > i b {
+  height: 100%;
   display: block;
+  background: rgba(143, 190, 208, 0.58);
+  border-radius: inherit;
 }
 
-.combat-gauge strong {
+.quarter-score-row.current > i b {
+  background: #8fbfd3;
+}
+
+.quarter-score-row > strong {
+  color: #d8e6eb;
   font-family: var(--font-ui);
-  font-size: 39px;
+  font-size: 14px;
   font-weight: 400;
-  letter-spacing: -0.05em;
+  text-align: right;
 }
 
-.combat-gauge span {
-  margin-top: 2px;
-  color: #96b1be;
-  font-size: 11px;
+.quarter-score-row.current > span,
+.quarter-score-row.current > strong {
+  color: white;
 }
 
 .rank-stack {

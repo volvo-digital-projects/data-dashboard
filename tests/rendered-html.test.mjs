@@ -51,6 +51,12 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);
+  assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 2);
+  assert.match(visibleHtml, /330점 만점/);
+  assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
+  assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
+  assert.match(visibleHtml, /전국 평균 <strong>305\.4/);
+  assert.doesNotMatch(html, /class="combat-gauge"/);
   assert.doesNotMatch(visibleHtml, /카드를 선택하면 주간 흐름이 바뀝니다/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
@@ -146,6 +152,9 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.identity-strip dl div[\s\S]*?padding: 0 10px 0 0/);
   assert.match(css, /\.identity-icon[\s\S]*?width: 30px[\s\S]*?height: 100%/);
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
+  assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 28px/);
+  assert.match(css, /\.quarter-score-row > strong[\s\S]*?font-size: 14px/);
+  assert.doesNotMatch(css, /\.combat-gauge/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 4px/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
   assert.match(css, /\.quarter-band strong[\s\S]*?font-size: 11px/);

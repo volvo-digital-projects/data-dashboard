@@ -1004,6 +1004,7 @@ export default function Dashboard({
       ? "Q3 평가 진행중입니다."
       : latestUpdate.title;
   const combat = selected.combat ?? 0;
+  const q1Combat = selected.q1?.combat ?? combat;
   const tier = getTier(combat);
   const nationalRank =
     [...dashboard.showrooms]
@@ -1066,7 +1067,6 @@ export default function Dashboard({
   ];
   const warningCount = kpis.filter((item) => item.value < item.average).length;
   const combatDelta = combat - dashboard.meta.combatAverage;
-  const gaugeAngle = Math.min(360, Math.max(0, (combat / dashboard.meta.combatMax) * 360));
 
   return (
     <main className="dashboard">
@@ -1243,15 +1243,41 @@ export default function Dashboard({
             </div>
             <span className={`tier-badge ${tier.className}`}>{tier.name}</span>
           </div>
-          <div className="gauge-zone">
+          <div className="combat-main">
             <div
-              className="combat-gauge"
-              style={{ "--gauge-angle": `${gaugeAngle}deg` } as React.CSSProperties}
+              className="quarter-score-chart"
+              aria-label={`Q1 ${displayNumber(q1Combat)}점, Q2 ${displayNumber(
+                combat,
+              )}점, ${dashboard.meta.combatMax}점 만점`}
             >
-              <div>
-                <strong>{displayNumber(combat)}</strong>
-                <span>/ {dashboard.meta.combatMax}</span>
+              <div className="quarter-score-meta">
+                <span>분기 스코어</span>
+                <small>{dashboard.meta.combatMax}점 만점</small>
               </div>
+              {[
+                { label: "Q1", value: q1Combat, current: false },
+                { label: "Q2", value: combat, current: true },
+              ].map((quarter) => (
+                <div
+                  className={`quarter-score-row ${
+                    quarter.current ? "current" : ""
+                  }`}
+                  key={quarter.label}
+                >
+                  <span>{quarter.label}</span>
+                  <i aria-hidden="true">
+                    <b
+                      style={{
+                        width: `${Math.min(
+                          100,
+                          (quarter.value / dashboard.meta.combatMax) * 100,
+                        )}%`,
+                      }}
+                    />
+                  </i>
+                  <strong>{displayNumber(quarter.value)}</strong>
+                </div>
+              ))}
             </div>
             <div className="rank-stack">
               <span>{tier.label} 레벨</span>
@@ -1275,9 +1301,9 @@ export default function Dashboard({
             </span>
             <span>
               Q1 대비{" "}
-              <strong className={(combat - (selected.q1?.combat ?? combat)) >= 0 ? "positive" : "negative"}>
-                {combat - (selected.q1?.combat ?? combat) >= 0 ? "+" : ""}
-                {(combat - (selected.q1?.combat ?? combat)).toFixed(1)}
+              <strong className={combat - q1Combat >= 0 ? "positive" : "negative"}>
+                {combat - q1Combat >= 0 ? "+" : ""}
+                {(combat - q1Combat).toFixed(1)}
               </strong>
             </span>
           </div>
