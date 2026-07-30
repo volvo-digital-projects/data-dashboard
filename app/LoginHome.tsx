@@ -2,16 +2,7 @@
 
 import type { FormEvent } from "react";
 
-type LoginViewer = {
-  displayName: string;
-  email: string | null;
-};
-
-export default function LoginHome({
-  viewer,
-}: {
-  viewer: LoginViewer;
-}) {
+export default function LoginHome() {
   function openDashboard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -27,12 +18,6 @@ export default function LoginHome({
       <div className="login-photo" aria-hidden="true" />
 
       <section className="login-panel" aria-labelledby="login-title">
-        <div className="login-access-state">
-          <i aria-hidden="true" />
-          <span>PRIVATE ACCESS</span>
-          <strong>{viewer.email ? viewer.displayName : "관리자 미리보기"}</strong>
-        </div>
-
         <div className="login-copy">
           <p className="login-kicker">2026 RETAIL PERFORMANCE INTELLIGENCE</p>
           <h1 id="login-title">
@@ -69,7 +54,6 @@ export default function LoginHome({
                 maxLength={16}
                 pattern="[A-Za-z0-9-]+"
                 placeholder="CDSID를 입력해 주세요"
-                aria-describedby="cdsid-help"
                 required
                 autoFocus
               />
@@ -80,10 +64,6 @@ export default function LoginHome({
               <b aria-hidden="true">→</b>
             </button>
           </form>
-
-          <p className="login-help" id="cdsid-help">
-            CDSID는 담당 전시장을 불러오는 식별값입니다.
-          </p>
         </div>
 
         <footer>

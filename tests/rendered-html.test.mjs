@@ -36,7 +36,8 @@ test("server-renders the Volvo Data Dashboard login cover", async () => {
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
   assert.match(html, /action="\/dashboard"/);
-  assert.match(html, /PRIVATE ACCESS/);
+  assert.doesNotMatch(html, /PRIVATE ACCESS|관리자 미리보기/);
+  assert.doesNotMatch(html, /CDSID는 담당 전시장을 불러오는 식별값입니다/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
