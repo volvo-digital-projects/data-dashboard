@@ -78,3 +78,23 @@ test("ships project metadata and removes the disposable starter", async () => {
     access(new URL("../app/_sites-preview", templateRoot)),
   );
 });
+
+test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async () => {
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(css, /font-family: "Volvo Centum Web"/);
+  assert.match(css, /font-family: "Paperlogy 5"/);
+  assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
+  assert.doesNotMatch(css, /Georgia|Helvetica|Pretendard|--font-sans/);
+
+  await Promise.all([
+    access(new URL("public/fonts/volvo-centum-light.ttf", templateRoot)),
+    access(new URL("public/fonts/volvo-centum-regular.ttf", templateRoot)),
+    access(new URL("public/fonts/volvo-centum-semibold.ttf", templateRoot)),
+    access(new URL("public/fonts/volvo-centum-bold.ttf", templateRoot)),
+    access(new URL("public/fonts/paperlogy-5-medium.ttf", templateRoot)),
+  ]);
+});
