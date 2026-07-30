@@ -248,7 +248,20 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
   assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);
   assert.match(css, /\.average-trend-line\s*\{[\s\S]*?stroke-width: 1\.45/);
-  assert.match(css, /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8/);
+  assert.match(
+    css,
+    /\.average-trend-line\s*\{[\s\S]*?stroke-width: 1\.45[\s\S]*?animation: none/,
+  );
+  assert.match(
+    css,
+    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: 1[\s\S]*?animation: showroom-line-draw 520ms cubic-bezier\(0\.32, 0, 0\.2, 1\) 1420ms both/,
+  );
+  assert.match(dashboardSource, /pathLength="1"[\s\S]*?className="trend-line"/);
+  assert.match(
+    dashboardSource,
+    /const chartAnimationStart = 1420[\s\S]*?const chartAnimationDuration = 520/,
+  );
+  assert.match(css, /@keyframes showroom-line-draw\s*\{[\s\S]*?stroke-dashoffset: 1[\s\S]*?stroke-dashoffset: 0/);
 });
 
 test("ships the premium neutral design system and Pretendard typography", async () => {

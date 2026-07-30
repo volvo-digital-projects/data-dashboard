@@ -340,6 +340,11 @@ function WeeklyTrend({
     plotLeft + ((week - 0.5) / 52) * plotWidth;
   const activeQuarterStart = x(26.5);
   const activeQuarterEnd = x(39.5);
+  const chartAnimationStart = 1420;
+  const chartAnimationDuration = 520;
+  const pointAnimationDelay = (week: number) =>
+    chartAnimationStart +
+    ((week - 1) / Math.max(1, latestWeek - 1)) * chartAnimationDuration;
   const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13.5, 26.5, 39.5];
@@ -588,6 +593,7 @@ function WeeklyTrend({
                     points={segment
                       .map((point) => `${x(point.week)},${y(point.value)}`)
                       .join(" ")}
+                    pathLength="1"
                     className="trend-line"
                   />
                 ),
@@ -602,6 +608,9 @@ function WeeklyTrend({
                     height="9"
                     data-week={point.label}
                     className="actual-week-point"
+                    style={{
+                      animationDelay: `${pointAnimationDelay(point.week)}ms`,
+                    }}
                   >
                     <title>
                       {`${point.label} ${displayShowroomName(
@@ -617,6 +626,9 @@ function WeeklyTrend({
                     cy={y(point.value)}
                     r="4.5"
                     className="actual-quarter-point"
+                    style={{
+                      animationDelay: `${pointAnimationDelay(point.week)}ms`,
+                    }}
                   >
                     <title>
                       {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
@@ -630,6 +642,9 @@ function WeeklyTrend({
                   y={actualValueLabelY(point)}
                   textAnchor="middle"
                   className="actual-point-value"
+                  style={{
+                    animationDelay: `${pointAnimationDelay(point.week) + 55}ms`,
+                  }}
                   aria-hidden="true"
                 >
                   {displayNumber(point.value)}

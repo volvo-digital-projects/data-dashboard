@@ -3676,7 +3676,6 @@ input:focus-visible,
 .trend-line {
   fill: none;
   vector-effect: non-scaling-stroke;
-  animation: chart-enter 420ms ease-out both;
 }
 
 .average-trend-line {
@@ -3684,17 +3683,21 @@ input:focus-visible,
   stroke-width: 1.45;
   stroke-dasharray: 6 6;
   opacity: 0.82;
+  animation: none;
 }
 
 .trend-line {
   stroke: var(--blue);
   stroke-width: 1.8;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: showroom-line-draw 520ms cubic-bezier(0.32, 0, 0.2, 1) 1420ms both;
 }
 
-.national-average-point,
 .actual-week-point,
 .actual-quarter-point {
-  animation: point-enter 360ms ease-out both;
+  opacity: 0;
+  animation: point-enter 180ms ease-out both;
   transform-box: fill-box;
   transform-origin: center;
 }
@@ -3703,6 +3706,7 @@ input:focus-visible,
   fill: white;
   stroke: var(--warning);
   stroke-width: 1.5;
+  animation: none;
 }
 
 .actual-week-point,
@@ -3717,6 +3721,11 @@ input:focus-visible,
   font-family: var(--font-latin);
   font-size: 9px;
   font-weight: 750;
+}
+
+.actual-point-value {
+  opacity: 0;
+  animation: actual-value-enter 160ms ease-out both;
 }
 
 .actual-point-value {
@@ -4089,6 +4098,15 @@ input:focus-visible,
   }
 }
 
+@keyframes showroom-line-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @keyframes point-enter {
   from {
     opacity: 0;
@@ -4097,6 +4115,15 @@ input:focus-visible,
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes actual-value-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
