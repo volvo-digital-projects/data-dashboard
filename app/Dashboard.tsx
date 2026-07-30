@@ -1089,43 +1089,41 @@ export default function Dashboard({
             <span>{displayUpdateTitle}</span>
           </div>
         </div>
-        <div className="identity-meta-row">
-          <div className="identity-detail-rail">
-            <dl>
-              <div>
-                <span className="identity-icon" aria-hidden="true">
-                  ⌂
-                </span>
-                <dt>딜러사</dt>
-                <dd>{selected.dealer}</dd>
-              </div>
-              <div>
-                <span className="identity-icon" aria-hidden="true">
-                  ◎
-                </span>
-                <dt>권역별</dt>
-                <dd>{selected.region}</dd>
-              </div>
-              <div>
-                <span className="identity-icon" aria-hidden="true">
-                  ↔
-                </span>
-                <dt>사이즈</dt>
-                <dd>{selected.size}</dd>
-              </div>
-            </dl>
-            <button
-              className="identity-profile"
-              type="button"
-              onClick={() => setProfileOpen((open) => !open)}
-              aria-expanded={profileOpen}
-              aria-label={`${selected.manager} 지점장 프로필`}
-            >
-              <span className="identity-profile-icon" aria-hidden="true" />
-              <span className="identity-profile-role">지점장</span>
-              <strong>{selected.manager}</strong>
-            </button>
-          </div>
+        <div className="identity-detail-rail">
+          <dl>
+            <div>
+              <span className="identity-icon" aria-hidden="true">
+                ⌂
+              </span>
+              <dt>딜러사</dt>
+              <dd>{selected.dealer}</dd>
+            </div>
+            <div>
+              <span className="identity-icon" aria-hidden="true">
+                ◎
+              </span>
+              <dt>권역별</dt>
+              <dd>{selected.region}</dd>
+            </div>
+            <div>
+              <span className="identity-icon" aria-hidden="true">
+                ↔
+              </span>
+              <dt>사이즈</dt>
+              <dd>{selected.size}</dd>
+            </div>
+          </dl>
+          <button
+            className="identity-profile"
+            type="button"
+            onClick={() => setProfileOpen((open) => !open)}
+            aria-expanded={profileOpen}
+            aria-label={`${selected.manager} 지점장 프로필`}
+          >
+            <span className="identity-profile-icon" aria-hidden="true" />
+            <span className="identity-profile-role">지점장</span>
+            <strong>{selected.manager}</strong>
+          </button>
         </div>
         {profileOpen && (
           <div className="profile-popover">

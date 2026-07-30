@@ -378,9 +378,10 @@ input:focus-visible {
 
 .identity-strip {
   min-height: 86px;
-  display: grid;
-  align-content: center;
-  gap: 6px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
   position: relative;
 }
 
@@ -389,14 +390,7 @@ input:focus-visible {
   display: flex;
   align-items: flex-end;
   gap: 13px;
-}
-
-.identity-meta-row {
-  min-width: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
+  flex: 1 1 auto;
 }
 
 .identity-detail-rail {
@@ -2216,14 +2210,10 @@ input:focus-visible {
 
   .identity-strip {
     min-height: 0;
-    gap: 7px;
-    padding: 6px 0;
-  }
-
-  .identity-meta-row {
     align-items: stretch;
     flex-direction: column;
     gap: 7px;
+    padding: 6px 0;
   }
 
   .identity-detail-rail {
