@@ -1540,7 +1540,7 @@ export default function Dashboard({
               </strong>
             </span>
             <span>
-              전국 순위{" "}
+              전시장 경쟁력 전국 순위{" "}
               <strong>
                 {nationalRank}위 / {dashboard.meta.showroomCount}개점
               </strong>

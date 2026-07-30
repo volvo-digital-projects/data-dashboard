@@ -88,7 +88,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /상반기 누적 평균 298\.8점/);
   assert.match(visibleHtml, /Q2 전국 평균 <strong>305\.4/);
   assert.match(visibleHtml, /Q2 전국 평균 대비 <strong>-10\.5/);
-  assert.match(visibleHtml, /전국 순위 <strong>32위 \/ 39개점/);
+  assert.match(visibleHtml, /전시장 경쟁력 전국 순위 <strong>32위 \/ 39개점/);
   assert.doesNotMatch(visibleHtml, /상위 83%/);
   assert.doesNotMatch(html, /class="combat-gauge"/);
   assert.doesNotMatch(visibleHtml, /WATCH|집중 관리 레벨|52-WEEK PULSE/);
