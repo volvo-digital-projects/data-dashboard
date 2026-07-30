@@ -45,6 +45,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="identity-tools"|class="identity-tool"/);
   assert.match(
     html,
+    /class="identity-title"><h1>볼보 강남 대치<\/h1><div class="update-status">/,
+  );
+  assert.match(
+    html,
     /class="identity-detail-rail"[\s\S]*?<\/dl><button class="identity-profile"/,
   );
   assert.match(html, /identity-profile[\s\S]*?지점장[\s\S]*?김길성/);

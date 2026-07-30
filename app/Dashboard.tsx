@@ -1080,8 +1080,6 @@ export default function Dashboard({
       <section className="identity-strip">
         <div className="identity-title">
           <h1>{displayShowroomName(selected.showroom)}</h1>
-        </div>
-        <div className="identity-meta-row">
           <div className="update-status">
             <i aria-hidden="true" />
             <time>
@@ -1090,6 +1088,8 @@ export default function Dashboard({
             </time>
             <span>{displayUpdateTitle}</span>
           </div>
+        </div>
+        <div className="identity-meta-row">
           <div className="identity-detail-rail">
             <dl>
               <div>
