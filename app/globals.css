@@ -1001,26 +1001,103 @@ input:focus-visible {
   align-items: center;
 }
 
-.segmented {
-  display: inline-flex;
-  padding: 3px;
-  background: #eef0ed;
+.trend-selector {
+  display: inline-grid;
+  grid-template-columns: repeat(3, minmax(72px, 1fr));
+  gap: 7px;
+  flex: 0 0 auto;
 }
 
-.segmented button {
-  min-width: 54px;
-  height: 31px;
-  border: 0;
-  color: var(--muted);
-  background: transparent;
+.trend-selector button {
+  position: relative;
+  min-width: 72px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 11px;
+  color: #68757b;
+  border: 1px solid #d9e0e2;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.66);
   font-size: 9px;
   font-weight: 800;
   cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
-.segmented button.active {
-  color: white;
+.trend-selector button::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: -1px;
+  left: 12px;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--blue);
+  opacity: 0;
+  transform: scaleX(0.45);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.trend-selector button:hover {
+  color: var(--navy);
+  border-color: #b8c8ce;
+  background: var(--white);
+  transform: translateY(-1px);
+}
+
+.trend-selector button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.trend-selector button.active {
+  color: var(--navy);
+  border-color: rgba(12, 39, 56, 0.42);
+  background: var(--white);
+  box-shadow: 0 5px 14px rgba(12, 39, 56, 0.09);
+}
+
+.trend-selector button.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.trend-selector-icon {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  flex: 0 0 22px;
+  place-items: center;
+  color: var(--blue);
+  border-radius: 50%;
+  background: #e8f1f4;
+  font-family: var(--font-volvo), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.trend-selector button.active .trend-selector-icon {
+  color: var(--white);
   background: var(--navy);
+}
+
+.trend-selector-label {
+  line-height: 1;
+  letter-spacing: 0.02em;
 }
 
 .trend-wrap {
@@ -2360,9 +2437,22 @@ input:focus-visible {
     font-size: 15px;
   }
 
-  .segmented button {
-    min-width: 44px;
-    min-height: 34px;
+  .trend-selector {
+    grid-template-columns: repeat(3, minmax(60px, 1fr));
+    gap: 5px;
+  }
+
+  .trend-selector button {
+    min-width: 60px;
+    height: 36px;
+    padding: 0 8px;
+  }
+
+  .trend-selector-icon {
+    width: 19px;
+    height: 19px;
+    flex-basis: 19px;
+    font-size: 10px;
   }
 
   .trend-chart {
@@ -2571,7 +2661,10 @@ input:focus-visible {
     scroll-behavior: auto;
   }
 
-  .metric-card {
+  .metric-card,
+  .trend-selector button,
+  .trend-selector button::after,
+  .trend-selector-icon {
     transition: none;
   }
 }

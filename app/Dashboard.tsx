@@ -103,6 +103,12 @@ const metricMeta: Record<
   cx: { label: "CX Index", short: "CX", max: 130, unit: "점" },
 };
 
+const trendSelectorMeta: Record<TrendMetricKey, { icon: string }> = {
+  v3s: { icon: "↗" },
+  voc: { icon: "◎" },
+  cx: { icon: "✦" },
+};
+
 const groupMeta: Record<GroupKey, { label: string; helper: string }> = {
   all: { label: "전국 39개", helper: "볼보 전체 전시장" },
   dealer: { label: "소속 딜러사", helper: "같은 딜러사" },
@@ -1335,15 +1341,26 @@ export default function Dashboard({
             <div>
               <h2>52주 스코어 추이</h2>
             </div>
-            <div className="segmented">
+            <div
+              className="trend-selector"
+              role="group"
+              aria-label="52주 지표 선택"
+            >
               {(["v3s", "voc", "cx"] as TrendMetricKey[]).map((metric) => (
                 <button
                   key={metric}
                   type="button"
                   className={trendMetric === metric ? "active" : ""}
+                  aria-label={`${metricMeta[metric].label} 52주 추이 보기`}
+                  aria-pressed={trendMetric === metric}
                   onClick={() => setTrendMetric(metric)}
                 >
-                  {metricMeta[metric].short}
+                  <span className="trend-selector-icon" aria-hidden="true">
+                    {trendSelectorMeta[metric].icon}
+                  </span>
+                  <span className="trend-selector-label">
+                    {metricMeta[metric].short}
+                  </span>
                 </button>
               ))}
             </div>

@@ -71,6 +71,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /전국 주간 평균 · W26 91\.8점 · 평균 미달 6주/);
   assert.match(visibleHtml, /52주 스코어 추이/);
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
+  assert.match(html, /class="trend-selector"/);
+  assert.equal((html.match(/class="trend-selector-icon"/g) ?? []).length, 3);
+  assert.match(html, /aria-label="VOC 52주 추이 보기" aria-pressed="true"/);
+  assert.doesNotMatch(html, /class="segmented"/);
   for (let week = 1; week <= 52; week += 1) {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
