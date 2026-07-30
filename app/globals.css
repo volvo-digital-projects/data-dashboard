@@ -1020,7 +1020,17 @@ input:focus-visible {
 }
 
 .week-grid {
-  stroke: #e3e6e3;
+  stroke: #d9dfdc;
+  stroke-width: 1;
+}
+
+.week-axis {
+  stroke: #cfd6d3;
+  stroke-width: 1;
+}
+
+.week-tick {
+  stroke: #cbd3d0;
   stroke-width: 1;
 }
 
@@ -1030,6 +1040,25 @@ input:focus-visible {
   fill: var(--muted);
   font-family: var(--font-ui);
   font-size: 10px;
+}
+
+.week-label {
+  font-size: 7px;
+  letter-spacing: -0.02em;
+}
+
+.week-slot.entered .week-label {
+  fill: #546975;
+  font-weight: 700;
+}
+
+.week-slot.pending .week-label {
+  fill: #aeb7b3;
+}
+
+.week-slot.pending .week-tick,
+.week-slot.pending .week-grid {
+  opacity: 0.48;
 }
 
 .average-line {
@@ -1094,6 +1123,11 @@ input:focus-visible {
 .coverage-dot.filled {
   border-color: var(--blue);
   background: var(--blue);
+}
+
+.coverage-dot.year {
+  border-color: #8fa5b0;
+  background: #dbe5e9;
 }
 
 .correction-panel {

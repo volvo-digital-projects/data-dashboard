@@ -224,6 +224,9 @@ function WeeklyTrend({
   const x = (week: number) => 40 + ((week - 1) / 51) * 960;
   const y = (value: number) => 145 - ((value - min) / Math.max(1, max - min)) * 112;
   const path = rawPoints.map((point) => `${x(point.week)},${y(point.value)}`).join(" ");
+  const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
+  const latestWeek = Math.max(0, ...rawPoints.map((point) => point.week));
+  const quarterWeeks = new Set([1, 13, 26, 39, 52]);
 
   return (
     <div className="trend-wrap">
@@ -231,22 +234,31 @@ function WeeklyTrend({
         className="trend-chart"
         viewBox="0 0 1040 190"
         role="img"
-        aria-label={`${metricMeta[metric].label} 52주 데이터 입력 현황`}
+        aria-label={`${metricMeta[metric].label} W01부터 W52까지 연간 데이터 입력 현황`}
       >
-        {[1, 13, 26, 39, 52].map((week) => (
-          <g key={week}>
-            <line
-              x1={x(week)}
-              x2={x(week)}
-              y1="18"
-              y2="150"
-              className="week-grid"
-            />
-            <text x={x(week)} y="178" textAnchor="middle" className="week-label">
-              W{String(week).padStart(2, "0")}
-            </text>
-          </g>
-        ))}
+        <line x1="40" x2="1000" y1="150" y2="150" className="week-axis" />
+        {weeks.map((week) => {
+          const isQuarterWeek = quarterWeeks.has(week);
+          const isEnteredPeriod = week <= latestWeek;
+
+          return (
+            <g
+              key={week}
+              className={`week-slot ${isEnteredPeriod ? "entered" : "pending"}`}
+            >
+              <line
+                x1={x(week)}
+                x2={x(week)}
+                y1={isQuarterWeek ? 18 : 142}
+                y2="150"
+                className={isQuarterWeek ? "week-grid" : "week-tick"}
+              />
+              <text x={x(week)} y="178" textAnchor="middle" className="week-label">
+                {`W${String(week).padStart(2, "0")}`}
+              </text>
+            </g>
+          );
+        })}
         <line
           x1="40"
           x2="1000"
@@ -280,7 +292,10 @@ function WeeklyTrend({
           <i className="coverage-dot filled" /> 입력값 {rawPoints.length}개
         </span>
         <span>
-          <i className="coverage-dot" /> Google Sheets 주간 백데이터 연결 대기
+          <i className="coverage-dot year" /> W01–W52 전체 주차
+        </span>
+        <span>
+          <i className="coverage-dot" /> 연한 주차는 데이터 입력 대기
         </span>
       </div>
     </div>

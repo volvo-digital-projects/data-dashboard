@@ -46,6 +46,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /CX Index/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
+  for (let week = 1; week <= 52; week += 1) {
+    assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
+  }
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
