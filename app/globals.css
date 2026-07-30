@@ -166,11 +166,18 @@ input:focus-visible {
 
 .login-panel::after {
   content: "";
-  width: clamp(48px, 5vw, 84px);
+  width: clamp(64px, 6vw, 104px);
   position: absolute;
   z-index: -1;
   inset: 0 auto 0 100%;
-  background: linear-gradient(90deg, rgba(10, 27, 39, 0.82), rgba(10, 27, 39, 0.22) 54%, transparent);
+  background: linear-gradient(
+    90deg,
+    #0a1b27 0%,
+    rgba(10, 27, 39, 0.72) 22%,
+    rgba(10, 27, 39, 0.34) 52%,
+    rgba(10, 27, 39, 0.1) 76%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
