@@ -291,6 +291,7 @@ function WeeklyTrend({
   const trendScrollRef = useRef<HTMLDivElement>(null);
   const [showActual, setShowActual] = useState(true);
   const [showNational, setShowNational] = useState(true);
+  const [hoverWeek, setHoverWeek] = useState<number | null>(null);
   const latestWeek =
     metric === "voc"
       ? weeklyDashboard.meta.vocLatestWeek
@@ -436,6 +437,18 @@ function WeeklyTrend({
   const nationalSegments = averageSeries
     ? makeSegments(averageSeries, latestWeek)
     : [];
+  const hoverActual =
+    hoverWeek === null
+      ? null
+      : weeklySeries?.[hoverWeek - 1] ??
+        rawPoints.find((point) => point.week === hoverWeek)?.value ??
+        null;
+  const hoverNational =
+    hoverWeek === null || hoverWeek > latestWeek ? null : averageAt(hoverWeek);
+  const hoverDelta =
+    hoverActual === null || hoverNational === null
+      ? null
+      : hoverActual - hoverNational;
 
   useEffect(() => {
     if (trendScrollRef.current) {
@@ -465,6 +478,14 @@ function WeeklyTrend({
             viewBox="0 0 1360 200"
             role="img"
             aria-label={`${metricMeta[metric].label} W01부터 W52까지 연간 데이터 입력 현황`}
+            onPointerMove={(event) => {
+              const bounds = event.currentTarget.getBoundingClientRect();
+              const viewX =
+                ((event.clientX - bounds.left) / Math.max(1, bounds.width)) * 1360;
+              const week = Math.round(1 + ((viewX - 28) / 1304) * 51);
+              setHoverWeek(Math.max(1, Math.min(52, week)));
+            }}
+            onPointerLeave={() => setHoverWeek(null)}
           >
             <line x1="28" x2="1332" y1="170" y2="170" className="week-axis" />
             {weeks.map((week) => (
@@ -622,7 +643,55 @@ function WeeklyTrend({
                 )}
               </g>
             ))}
+            {hoverWeek !== null && (
+              <line
+                x1={x(hoverWeek)}
+                x2={x(hoverWeek)}
+                y1="18"
+                y2="170"
+                className="hover-guide"
+                aria-hidden="true"
+              />
+            )}
           </svg>
+          {hoverWeek !== null && (
+            <div
+              className={`chart-tooltip ${
+                hoverWeek <= 4 ? "at-start" : hoverWeek >= 49 ? "at-end" : ""
+              }`}
+              style={{ left: `${2 + ((hoverWeek - 1) / 51) * 96}%` }}
+              role="status"
+              aria-live="polite"
+            >
+              <strong>W{String(hoverWeek).padStart(2, "0")}</strong>
+              {hoverWeek > latestWeek ? (
+                <span className="tooltip-upcoming">집계 예정</span>
+              ) : (
+                <>
+                  <span>
+                    <i className="tooltip-key actual" />
+                    {displayShowroomName(showroom.showroom)}
+                    <b>{hoverActual === null ? "—" : `${displayNumber(hoverActual)}점`}</b>
+                  </span>
+                  <span>
+                    <i className="tooltip-key national" />
+                    전국 평균
+                    <b>
+                      {hoverNational === null
+                        ? "—"
+                        : `${displayNumber(hoverNational)}점`}
+                    </b>
+                  </span>
+                  {hoverDelta !== null && (
+                    <em className={hoverDelta >= 0 ? "positive" : "negative"}>
+                      평균 대비 {hoverDelta >= 0 ? "+" : ""}
+                      {hoverDelta.toFixed(1)}점
+                    </em>
+                  )}
+                </>
+              )}
+            </div>
+          )}
           <div className="week-ruler" aria-label="W01부터 W52까지 주차">
             {weeks.map((week) => {
               const value =

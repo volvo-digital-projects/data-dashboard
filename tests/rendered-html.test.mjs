@@ -208,71 +208,47 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
   assert.equal(weekly.cx.byCdsid["6KR6834"][30], null);
 });
 
-test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async () => {
+test("ships the premium neutral design system and Pretendard typography", async () => {
   const css = await readFile(
     new URL("../app/globals.css", import.meta.url),
     "utf8",
   );
 
-  assert.match(css, /font-family: "Volvo Centum Web"/);
-  assert.match(css, /font-family: "Paperlogy 5"/);
-  assert.match(css, /font-family: "Paperlogy 9"/);
-  assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
-  assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 86px/);
-  assert.match(css, /\.identity-strip h1[\s\S]*?font-size: clamp\(35px, 2\.85vw, 44px\)/);
-  assert.match(css, /\.identity-strip\s*\{[\s\S]*?align-items: flex-end/);
-  assert.match(css, /\.identity-detail-rail[\s\S]*?justify-content: flex-end/);
-  assert.match(css, /\.identity-strip dl div[\s\S]*?padding: 0 10px 0 0/);
-  assert.match(css, /\.identity-icon[\s\S]*?width: 30px[\s\S]*?height: 100%/);
-  assert.match(css, /\.identity-profile\s*\{[\s\S]*?width: 112px/);
-  assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 226px/);
-  assert.match(css, /\.combat-main\s*\{[\s\S]*?gap: 0/);
+  assert.match(css, /font-family: "Pretendard Variable"/);
+  assert.match(css, /--font-korean:[\s\S]*"Pretendard Variable"[\s\S]*"SUIT"/);
+  assert.match(css, /--font-latin:[\s\S]*"Inter"/);
+  assert.match(css, /--paper: #f6f8fa/);
+  assert.match(css, /--white: #ffffff/);
+  assert.match(css, /--line: #e5e9ee/);
+  assert.match(css, /--ink: #111827/);
+  assert.match(css, /--secondary: #667085/);
+  assert.match(css, /--muted: #98a2b3/);
+  assert.match(css, /--navy: #102a43/);
+  assert.match(css, /--blue: #2f6b8a/);
+  assert.match(css, /--good: #1f8f6a/);
+  assert.match(css, /--warning: #d14b41/);
+  assert.match(css, /--caution: #c58a1b/);
+  assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
   assert.match(
     css,
-    /\.combat-summary-stack\s*\{[\s\S]*?min-width: 124px[\s\S]*?padding-left: 10px/,
+    /\.identity-strip h1\s*\{[\s\S]*?font-family: var\(--font-korean\)[\s\S]*?font-size: clamp\(40px, 3\.25vw, 44px\)/,
   );
-  assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 24px/);
-  assert.match(css, /\.quarter-score-row > strong[\s\S]*?font-size: 14px/);
-  assert.doesNotMatch(css, /\.combat-gauge/);
-  assert.doesNotMatch(css, /\.tier-badge/);
-  assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 6px/);
-  assert.match(css, /--navy: #123747/);
-  assert.match(css, /--blue: #397a9b/);
-  assert.match(css, /--warning: #c64e45/);
-  assert.match(css, /--caution: #b7791f/);
-  assert.match(css, /--paper: #f4f6f5/);
-  assert.match(
-    css,
-    /\.metric-code\s*\{[\s\S]*?font-family: var\(--font-volvo\)[\s\S]*?font-size: 14px/,
-  );
-  assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
-  assert.match(css, /\.quarter-band strong[\s\S]*?font-size: 11px/);
-  assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -19px 24px 3px/);
-  assert.match(css, /\.week-ruler span[\s\S]*?font-size: 8px/);
-  assert.match(css, /\.actual-point-value,[\s\S]*?\.national-point-value[\s\S]*?font-size: 8px/);
-  assert.match(css, /\.actual-point-value\s*\{[\s\S]*?fill: var\(--blue\)/);
-  assert.match(css, /\.national-point-value\s*\{[\s\S]*?fill: var\(--warning\)/);
-  assert.match(
-    css,
-    /\.metric-card\.warning\.active\s*\{[\s\S]*?border-color: var\(--line\)[\s\S]*?box-shadow: inset 0 3px 0 var\(--warning\)/,
-  );
-  assert.match(
-    css,
-    /\.trend-selector button\.active\s*\{[\s\S]*?color: var\(--white\)[\s\S]*?background: var\(--navy\)/,
-  );
-  assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 40px/);
-  assert.match(css, /\.comparison-bar b\s*\{[\s\S]*?background: var\(--warning\)/);
-  assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
-  assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
-  assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
-  assert.doesNotMatch(css, /Georgia|Helvetica|Pretendard|--font-sans/);
+  assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 14px/);
+  assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
+  assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
+  assert.match(css, /\.metric-card-value\s*\{[\s\S]*?font-size: clamp\(46px, 3\.25vw, 56px\)/);
+  assert.match(css, /\.trend-selector\s*\{[\s\S]*?border-radius: 12px/);
+  assert.match(css, /\.trend-selector button\s*\{[\s\S]*?height: 40px[\s\S]*?border-radius: 9px/);
+  assert.match(css, /\.trend-selector button\.active\s*\{[\s\S]*?background: var\(--navy\)/);
+  assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 210px/);
+  assert.match(css, /\.chart-tooltip\s*\{[\s\S]*?border-radius: 12px/);
+  assert.match(css, /\.hover-guide\s*\{[\s\S]*?stroke-dasharray: 3 4/);
+  assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);
+  assert.match(css, /\.comparison-table\s*\{[\s\S]*?display: grid[\s\S]*?gap: 8px/);
+  assert.match(css, /\.table-row\.selected\s*\{[\s\S]*?background: #eef5f8/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 
   await Promise.all([
-    access(new URL("public/fonts/volvo-centum-light.ttf", templateRoot)),
-    access(new URL("public/fonts/volvo-centum-regular.ttf", templateRoot)),
-    access(new URL("public/fonts/volvo-centum-semibold.ttf", templateRoot)),
-    access(new URL("public/fonts/volvo-centum-bold.ttf", templateRoot)),
-    access(new URL("public/fonts/paperlogy-5-medium.ttf", templateRoot)),
-    access(new URL("public/fonts/paperlogy-9-black.ttf", templateRoot)),
+    access(new URL("public/fonts/pretendard-variable.ttf", templateRoot)),
   ]);
 });
