@@ -1334,7 +1334,7 @@ export default function Dashboard({
         <article className="panel trend-panel">
           <div className="section-heading">
             <div>
-              <h2>주간 성과 흐름</h2>
+              <h2>52주 스코어 추이</h2>
             </div>
             <div className="segmented">
               {(["v3s", "voc", "cx"] as TrendMetricKey[]).map((metric) => (
