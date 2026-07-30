@@ -1277,6 +1277,7 @@ input:focus-visible {
   fill: white;
   stroke: var(--warning);
   stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
 }
 
 .actual-week-point,
@@ -1284,6 +1285,11 @@ input:focus-visible {
   fill: white;
   stroke: var(--blue);
   stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.actual-week-point {
+  shape-rendering: geometricPrecision;
 }
 
 .actual-point-value {

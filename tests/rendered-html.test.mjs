@@ -82,7 +82,17 @@ test("server-renders the selected CDSID dashboard", async () => {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
   assert.match(html, /r="4.5" class="national-average-point"/);
-  assert.match(html, /width="9" height="9" class="actual-week-point"/);
+  const actualMarkerWeeks = [
+    ...html.matchAll(
+      /width="9" height="9" data-week="(W\d{2})" class="actual-week-point"/g,
+    ),
+  ].map((match) => match[1]);
+  assert.equal(actualMarkerWeeks.length, 25);
+  assert.deepEqual(
+    actualMarkerWeeks,
+    Array.from({ length: 26 }, (_, index) => `W${String(index + 1).padStart(2, "0")}`)
+      .filter((week) => week !== "W22"),
+  );
   assert.equal((html.match(/class="actual-point-value"/g) ?? []).length, 25);
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);

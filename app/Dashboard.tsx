@@ -441,6 +441,7 @@ function WeeklyTrend({
                     y={y(point.value) - 4.5}
                     width="9"
                     height="9"
+                    data-week={point.label}
                     className="actual-week-point"
                   >
                     <title>
