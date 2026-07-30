@@ -232,10 +232,18 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const quarterDividers = \[13\.5, 26\.5, 39\.5\]/,
+    /const quarterDividers = \[13, 26, 39\]/,
   );
-  assert.match(dashboardSource, /const activeQuarterStart = x\(26\.5\)/);
-  assert.match(dashboardSource, /const activeQuarterEnd = x\(39\.5\)/);
+  assert.match(
+    dashboardSource,
+    /const weekBoundaryX = \(completedWeeks: number\) =>[\s\S]*?plotLeft \+ \(completedWeeks \/ 52\) \* plotWidth/,
+  );
+  assert.match(dashboardSource, /const activeQuarterStart = weekBoundaryX\(26\)/);
+  assert.match(dashboardSource, /const activeQuarterEnd = weekBoundaryX\(39\)/);
+  assert.match(
+    dashboardSource,
+    /x1=\{weekBoundaryX\(completedWeeks\)\}[\s\S]*?data-week-boundary=\{completedWeeks\}/,
+  );
   assert.match(dashboardSource, /preserveAspectRatio="none"/);
   assert.match(
     dashboardSource,

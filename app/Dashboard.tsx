@@ -338,8 +338,10 @@ function WeeklyTrend({
   const plotWidth = plotRight - plotLeft;
   const x = (week: number) =>
     plotLeft + ((week - 0.5) / 52) * plotWidth;
-  const activeQuarterStart = x(26.5);
-  const activeQuarterEnd = x(39.5);
+  const weekBoundaryX = (completedWeeks: number) =>
+    plotLeft + (completedWeeks / 52) * plotWidth;
+  const activeQuarterStart = weekBoundaryX(26);
+  const activeQuarterEnd = weekBoundaryX(39);
   const chartAnimationStart = 1420;
   const chartAnimationDuration = 520;
   const pointAnimationDelay = (week: number) =>
@@ -347,7 +349,7 @@ function WeeklyTrend({
     ((week - 1) / Math.max(1, latestWeek - 1)) * chartAnimationDuration;
   const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
-  const quarterDividers = [13.5, 26.5, 39.5];
+  const quarterDividers = [13, 26, 39];
   const quarterLabels = [
     { label: "Q1", range: "W01–W13" },
     { label: "Q2", range: "W14–W26" },
@@ -500,13 +502,14 @@ function WeeklyTrend({
                 className={`week-tick ${week <= latestWeek ? "entered" : "pending"}`}
               />
             ))}
-            {quarterDividers.map((week) => (
+            {quarterDividers.map((completedWeeks) => (
               <line
-                key={week}
-                x1={x(week)}
-                x2={x(week)}
+                key={completedWeeks}
+                x1={weekBoundaryX(completedWeeks)}
+                x2={weekBoundaryX(completedWeeks)}
                 y1="18"
                 y2="170"
+                data-week-boundary={completedWeeks}
                 className="week-grid"
               />
             ))}
