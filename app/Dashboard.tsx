@@ -1214,30 +1214,6 @@ export default function Dashboard({
         </div>
       </section>
 
-      {warningCount > 0 ? (
-        <section className="warning-banner">
-          <span className="warning-beacon" aria-hidden="true">
-            !
-          </span>
-          <div>
-            <strong>전국 평균 미달 지표 {warningCount}개 감지</strong>
-            <p>
-              평균선 아래 지표를 먼저 확인하세요. 주간 흐름에서 하락이 시작된
-              시점을 확인할 수 있습니다.
-            </p>
-          </div>
-          <a href="#weekly-trend">주간 흐름 확인 →</a>
-        </section>
-      ) : (
-        <section className="clear-banner">
-          <span aria-hidden="true">✓</span>
-          <div>
-            <strong>핵심 지표 3개 모두 전국 평균 이상</strong>
-            <p>현재 페이스를 유지하며 상위 그룹과의 격차를 확인하세요.</p>
-          </div>
-        </section>
-      )}
-
       <section className="hero-grid">
         <article className={`combat-card ${tier.className}`}>
           <div className="card-heading">
