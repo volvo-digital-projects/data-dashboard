@@ -2116,20 +2116,6 @@ input:focus-visible {
   font-weight: 700;
 }
 
-.group-context {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 11px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.group-context strong {
-  color: var(--blue);
-  letter-spacing: 0.05em;
-}
-
 .comparison-table {
   margin-top: 8px;
   border-top: 1px solid var(--ink);
@@ -2665,7 +2651,6 @@ input:focus-visible {
   }
 
   .comparison-controls,
-  .group-context,
   .comparison-table {
     display: none;
   }
@@ -3936,11 +3921,6 @@ input:focus-visible,
 .comparison-controls select:focus {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(47, 107, 138, 0.11);
-}
-
-.group-context {
-  margin-top: 16px;
-  font-size: 12px;
 }
 
 .comparison-table {

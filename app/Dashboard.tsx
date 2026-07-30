@@ -109,11 +109,11 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
   cx: "Customer Experience Index · 고객 경험 종합 지수",
 };
 
-const groupMeta: Record<GroupKey, { label: string; helper: string }> = {
-  all: { label: "전국 39개", helper: "볼보 전체 전시장" },
-  dealer: { label: "소속 딜러사", helper: "같은 딜러사" },
-  region: { label: "동일 권역", helper: "수도권 · 지방권" },
-  size: { label: "동급 사이즈", helper: "같은 전시장 규모" },
+const groupMeta: Record<GroupKey, { label: string }> = {
+  all: { label: "전국 39개" },
+  dealer: { label: "소속 딜러사" },
+  region: { label: "동일 권역" },
+  size: { label: "동급 사이즈" },
 };
 
 const valueOf = (item: Showroom, metric: MetricKey) =>
@@ -1635,18 +1635,6 @@ export default function Dashboard({
               </select>
             </label>
           </div>
-        </div>
-        <div className="group-context">
-          <span>{groupMeta[group].helper}</span>
-          <strong>
-            {group === "dealer"
-              ? selected.dealer
-              : group === "region"
-                ? selected.region
-                : group === "size"
-                  ? `${selected.size} Size`
-                  : "VOLVO KOREA"}
-          </strong>
         </div>
         <div className="mobile-comparison-summary">
           {mobileRanks.map((item) => (
