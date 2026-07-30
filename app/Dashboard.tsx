@@ -1167,14 +1167,23 @@ export default function Dashboard({
         </div>
         <dl>
           <div>
+            <span className="identity-icon" aria-hidden="true">
+              ⌂
+            </span>
             <dt>딜러사</dt>
             <dd>{selected.dealer}</dd>
           </div>
           <div>
+            <span className="identity-icon" aria-hidden="true">
+              ◎
+            </span>
             <dt>권역</dt>
             <dd>{selected.region}</dd>
           </div>
           <div>
+            <span className="identity-icon" aria-hidden="true">
+              ↔
+            </span>
             <dt>사이즈</dt>
             <dd>{selected.size}</dd>
           </div>

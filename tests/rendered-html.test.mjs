@@ -48,6 +48,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /CX Index/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
+  assert.equal((html.match(/identity-icon/g) ?? []).length, 3);
   assert.match(visibleHtml, /최신 W26/);
   assert.match(visibleHtml, /실제 입력 12주/);
   assert.match(visibleHtml, /전국 평균 미달 6주/);

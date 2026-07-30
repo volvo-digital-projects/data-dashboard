@@ -427,24 +427,48 @@ input:focus-visible {
 
 .identity-strip dl {
   display: flex;
+  gap: 6px;
   margin: 0;
 }
 
 .identity-strip dl div {
-  min-width: 100px;
-  padding: 0 20px;
-  border-left: 1px solid var(--line);
+  min-width: 138px;
+  min-height: 56px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid rgba(16, 42, 57, 0.09);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.identity-icon {
+  width: 34px;
+  height: 34px;
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .identity-strip dt {
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.09em;
+  align-self: end;
+  font-size: 8px;
+  letter-spacing: 0.08em;
 }
 
 .identity-strip dd {
-  margin: 5px 0 0;
-  font-size: 14px;
+  margin: 2px 0 0;
+  align-self: start;
+  font-size: 13px;
   font-weight: 800;
 }
 
@@ -1982,17 +2006,15 @@ input:focus-visible {
 
   .identity-strip dl {
     width: 100%;
+    gap: 4px;
   }
 
   .identity-strip dl div {
     min-width: 0;
     flex: 1;
-    padding: 0 9px;
-  }
-
-  .identity-strip dl div:first-child {
-    padding-left: 0;
-    border-left: 0;
+    grid-template-columns: 26px minmax(0, 1fr);
+    column-gap: 6px;
+    padding: 7px;
   }
 
   .identity-strip dt {
@@ -2005,6 +2027,12 @@ input:focus-visible {
     font-size: 9px;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .identity-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
   }
 
   .update-status {
