@@ -40,7 +40,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /DSC COMMAND/);
   assert.match(html, /전시장 전투력/);
   assert.match(html, /3대 핵심 지표/);
-  assert.match(html, /평가 기준 한눈에 보기/);
+  assert.match(html, /href="\/dashboard\/6KR6834\/criteria"/);
+  assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(html, /최근 업데이트/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
@@ -61,10 +62,23 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
+test("serves score criteria as a separate CDSID page", async () => {
+  const response = await render("/dashboard/6KR6834/criteria");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const visibleHtml = html.replaceAll("<!-- -->", "");
+  assert.match(visibleHtml, /평가 기준 한눈에 보기/);
+  assert.match(visibleHtml, /V3S · VOC · CX Index의 산정 구조/);
+  assert.match(html, /href="\/dashboard\/6KR6834"/);
+  assert.match(visibleHtml, /500점을 100점으로 환산/);
+});
+
 test("ships project metadata and removes the disposable starter", async () => {
-  const [page, dashboardPage, layout, packageJson] = await Promise.all([
+  const [page, dashboardPage, criteriaPage, layout, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/dashboard/[cdsid]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/dashboard/[cdsid]/criteria/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
@@ -73,6 +87,7 @@ test("ships project metadata and removes the disposable starter", async () => {
   assert.doesNotMatch(page, /LoginHome/);
   assert.match(dashboardPage, /import Dashboard/);
   assert.match(dashboardPage, /isEditorEmail/);
+  assert.match(criteriaPage, /CriteriaGuide/);
   assert.match(layout, /generateMetadata/);
   assert.match(layout, /볼보 관리자 전용/);
   assert.match(layout, /og\.png/);

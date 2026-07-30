@@ -620,11 +620,36 @@ function ComparisonTable({
   );
 }
 
-function CriteriaGuide() {
+export function CriteriaGuide({ cdsid }: { cdsid: string }) {
   const [active, setActive] = useState<TrendMetricKey>("v3s");
 
   return (
-    <section className="panel criteria-panel" id="criteria">
+    <main className="criteria-page">
+      <header className="criteria-page-topbar">
+        <Link className="brand" href={`/dashboard/${cdsid}`} aria-label="대시보드로 돌아가기">
+          <span className="brand-mark" aria-hidden="true">
+            V
+          </span>
+          <div>
+            <strong>DSC COMMAND</strong>
+            <span>Score Criteria Sheet</span>
+          </div>
+        </Link>
+        <Link className="criteria-back" href={`/dashboard/${cdsid}`}>
+          ← {cdsid} 대시보드
+        </Link>
+      </header>
+
+      <div className="criteria-page-heading">
+        <div>
+          <span className="eyebrow">SCORING REFERENCE</span>
+          <h1>평가 기준</h1>
+          <p>V3S · VOC · CX Index의 산정 구조와 점수 구간을 확인합니다.</p>
+        </div>
+        <span>2026 DSC</span>
+      </div>
+
+      <section className="panel criteria-panel">
       <div className="criteria-heading">
         <div className="section-heading">
           <div>
@@ -808,7 +833,8 @@ function CriteriaGuide() {
         기준: 2026 Retailer Terms &amp; Conditions Guideline · Competence
         pp.40-51 · Updated 2026.07.24
       </p>
-    </section>
+      </section>
+    </main>
   );
 }
 
@@ -1050,6 +1076,12 @@ export default function Dashboard({
           </div>
         </Link>
         <div className="topbar-actions">
+          <Link
+            className="criteria-open"
+            href={`/dashboard/${selected.cdsid}/criteria`}
+          >
+            평가 기준
+          </Link>
           <span className="period-badge">
             2026 {dashboard.meta.quarter}
             <small>{dashboard.meta.sourceWeek}</small>
@@ -1203,7 +1235,7 @@ export default function Dashboard({
           </div>
           <nav aria-label="모바일 빠른 이동">
             <a href="#weekly-trend">주간</a>
-            <a href="#criteria">평가 기준</a>
+            <Link href={`/dashboard/${selected.cdsid}/criteria`}>평가 기준</Link>
           </nav>
         </div>
       </section>
@@ -1365,8 +1397,6 @@ export default function Dashboard({
         </div>
         <ComparisonTable selected={selected} metric={comparisonMetric} group={group} />
       </section>
-
-      <CriteriaGuide />
 
       <footer className="dashboard-footer">
         <span>DSC COMMAND · 2026 Retail Performance Intelligence</span>

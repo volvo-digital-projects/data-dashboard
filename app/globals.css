@@ -193,6 +193,27 @@ input:focus-visible {
   gap: 10px;
 }
 
+.criteria-open,
+.criteria-back {
+  min-height: 39px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  font-size: 9px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.criteria-open:hover,
+.criteria-back:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+
 .admin-open {
   min-height: 39px;
   padding: 0 14px;
@@ -1171,8 +1192,59 @@ input:focus-visible {
   margin-top: 18px;
 }
 
+.criteria-page {
+  width: min(1600px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 36px 36px;
+}
+
+.criteria-page-topbar {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.criteria-page-heading {
+  min-height: 126px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.criteria-page-heading h1 {
+  margin: 7px 0 0;
+  font-family: var(--font-ui);
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.criteria-page-heading p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.criteria-page-heading > span {
+  padding: 8px 11px;
+  color: white;
+  background: var(--navy);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
 .criteria-panel {
   margin-top: 18px;
+}
+
+.criteria-page .criteria-panel {
+  margin-top: 0;
 }
 
 .criteria-heading {
@@ -1862,6 +1934,7 @@ input:focus-visible {
 
   .brand div > span,
   .period-badge,
+  .criteria-open,
   .profile-button span:not(.avatar),
   .profile-button b {
     display: none;
@@ -2223,6 +2296,42 @@ input:focus-visible {
 
   .criteria-panel {
     margin-top: 14px;
+  }
+
+  .criteria-page {
+    padding: 0 12px 22px;
+  }
+
+  .criteria-page-topbar {
+    min-height: 64px;
+  }
+
+  .criteria-page-topbar .brand div > span {
+    display: none;
+  }
+
+  .criteria-back {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 8px;
+  }
+
+  .criteria-page-heading {
+    min-height: 104px;
+  }
+
+  .criteria-page-heading h1 {
+    font-size: 28px;
+  }
+
+  .criteria-page-heading p {
+    max-width: 260px;
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  .criteria-page-heading > span {
+    display: none;
   }
 
   .criteria-heading {
