@@ -3947,7 +3947,7 @@ input:focus-visible,
   min-height: 56px;
   grid-template-columns:
     72px minmax(180px, 1.15fr) minmax(145px, 0.9fr)
-    minmax(200px, 1.6fr) 104px;
+    minmax(200px, 1.6fr) 144px;
   gap: 18px;
   padding: 0 16px;
   border: 1px solid transparent;
@@ -4048,8 +4048,21 @@ input:focus-visible,
 }
 
 .comparison-value small {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  color: var(--muted);
   font-family: var(--font-latin);
   font-size: 10px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.comparison-value small b {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 750;
 }
 
 .positive {

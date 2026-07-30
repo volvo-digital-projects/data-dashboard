@@ -854,9 +854,12 @@ function ComparisonTable({
             </span>
             <span className="comparison-value">
               <strong>{displayNumber(value)}</strong>
-              <small className={delta >= 0 ? "positive" : "negative"}>
-                {delta >= 0 ? "▲" : "▼"}
-                {Math.abs(delta).toFixed(1)}
+              <small>
+                <span>전국 평균 대비</span>
+                <b className={delta >= 0 ? "positive" : "negative"}>
+                  {delta >= 0 ? "▲" : "▼"}
+                  {Math.abs(delta).toFixed(1)}
+                </b>
               </small>
             </span>
           </div>

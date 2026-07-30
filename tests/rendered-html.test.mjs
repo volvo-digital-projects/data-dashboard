@@ -238,6 +238,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.doesNotMatch(dashboardSource, /isMajorWeek/);
   assert.match(dashboardSource, /\{label\}\s*<\/span>/);
+  assert.match(dashboardSource, /<span>전국 평균 대비<\/span>/);
   assert.match(css, /\.quarter-band\s*\{[\s\S]*?margin: 0 2\.0588235%/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
   assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);
@@ -308,6 +309,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);
   assert.match(css, /\.comparison-table\s*\{[\s\S]*?display: grid[\s\S]*?gap: 8px/);
   assert.match(css, /\.table-row\.selected\s*\{[\s\S]*?background: #eef5f8/);
+  assert.match(
+    css,
+    /\.comparison-value small\s*\{[\s\S]*?display: flex[\s\S]*?white-space: nowrap/,
+  );
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 
   await Promise.all([
