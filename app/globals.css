@@ -43,21 +43,240 @@ body {
 }
 
 button,
-select {
+select,
+input {
   font: inherit;
 }
 
 button,
 a,
-select {
+select,
+input {
   -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible,
 a:focus-visible,
-select:focus-visible {
+select:focus-visible,
+input:focus-visible {
   outline: 3px solid rgba(62, 120, 150, 0.34);
   outline-offset: 2px;
+}
+
+.login-home {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background: #081621;
+}
+
+.login-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("/volvo-dashboard-cover.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.login-panel {
+  width: min(760px, 47vw);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  padding: clamp(28px, 4.5vw, 78px) clamp(32px, 5.2vw, 88px) clamp(26px, 4vw, 62px);
+  background: #081722;
+}
+
+.login-panel::after {
+  content: "";
+  width: clamp(100px, 12vw, 210px);
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto 0 100%;
+  background: linear-gradient(90deg, #081722, rgba(8, 23, 34, 0.84) 44%, transparent);
+  pointer-events: none;
+}
+
+.login-access-state {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: max-content;
+  max-width: 100%;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+}
+
+.login-access-state i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #83bda8;
+  box-shadow: 0 0 0 4px rgba(131, 189, 168, 0.11);
+}
+
+.login-access-state strong {
+  max-width: 150px;
+  overflow: hidden;
+  color: white;
+  font-size: 9px;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.login-copy {
+  width: min(100%, 390px);
+  margin: clamp(22px, 4vh, 54px) 0;
+}
+
+.login-kicker {
+  margin: 0 0 18px;
+  color: #a6c4d2;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.login-copy h1 {
+  margin: 0;
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  font-size: clamp(47px, 4.35vw, 74px);
+  font-weight: 300;
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+}
+
+.login-rule {
+  width: min(330px, 84%);
+  height: 2px;
+  display: block;
+  margin: 27px 0 28px;
+  background: #d76027;
+}
+
+.login-description {
+  margin: 0 0 34px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.cdsid-form {
+  display: grid;
+  gap: 12px;
+}
+
+.cdsid-field {
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.33);
+  background: rgba(4, 16, 24, 0.33);
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.cdsid-field:focus-within {
+  border-color: rgba(255, 255, 255, 0.74);
+  background: rgba(4, 16, 24, 0.57);
+}
+
+.cdsid-icon {
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: #c4d4dc;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: Georgia, serif;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.cdsid-field input {
+  min-width: 0;
+  height: 62px;
+  padding: 0 17px;
+  border: 0;
+  outline: 0;
+  color: white;
+  background: transparent;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.cdsid-field input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: none;
+}
+
+.cdsid-form button {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  color: #0c2738;
+  border: 0;
+  background: #f7f7f5;
+  font-size: 14px;
+  font-weight: 850;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.cdsid-form button:hover {
+  background: #dcebf1;
+  transform: translateY(-1px);
+}
+
+.cdsid-form button b {
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.cdsid-error {
+  margin: -2px 0 0;
+  color: #ffb4a8;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.login-help {
+  margin: 13px 0 0;
+  color: rgba(255, 255, 255, 0.43);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.login-panel footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 13px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.login-panel footer span + span::before {
+  content: "·";
+  margin-right: 13px;
 }
 
 .dashboard {
@@ -79,6 +298,8 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 13px;
+  color: inherit;
+  text-decoration: none;
 }
 
 .brand-mark {
@@ -284,6 +505,19 @@ select:focus-visible {
   color: var(--muted);
   font-size: 10px;
   line-height: 1.5;
+}
+
+.profile-home-link {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 14px 0 10px;
+  color: white;
+  background: var(--navy);
+  font-size: 10px;
+  font-weight: 800;
+  text-decoration: none;
 }
 
 .identity-strip {
@@ -1800,6 +2034,87 @@ select:focus-visible {
 }
 
 @media (max-width: 760px) {
+  .login-home {
+    min-height: 100svh;
+    padding-top: 39svh;
+    overflow: visible;
+    background: #081722;
+  }
+
+  .login-photo {
+    height: 43svh;
+    bottom: auto;
+    background-position: 69% top;
+    background-size: auto 43svh;
+  }
+
+  .login-photo::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 38%;
+    background: linear-gradient(0deg, #081722, transparent);
+  }
+
+  .login-panel {
+    width: 100%;
+    min-height: 61svh;
+    padding: 26px 22px 22px;
+    background: #081722;
+  }
+
+  .login-panel::after {
+    display: none;
+  }
+
+  .login-access-state {
+    min-height: 28px;
+  }
+
+  .login-copy {
+    width: 100%;
+    margin: 25px 0 32px;
+  }
+
+  .login-kicker {
+    margin-bottom: 12px;
+    font-size: 7px;
+  }
+
+  .login-copy h1 {
+    font-size: clamp(42px, 13vw, 56px);
+    line-height: 1.04;
+  }
+
+  .login-rule {
+    margin: 19px 0 18px;
+  }
+
+  .login-description {
+    margin-bottom: 22px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .cdsid-field,
+  .cdsid-form button {
+    min-height: 58px;
+  }
+
+  .cdsid-field input {
+    height: 56px;
+    font-size: 13px;
+  }
+
+  .login-panel footer {
+    margin-top: auto;
+  }
+
+  .login-panel footer span + span::before {
+    content: "";
+    margin: 0;
+  }
+
   .dashboard {
     padding: 0 12px 22px;
   }

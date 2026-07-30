@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import dashboardJson from "./data/showrooms.json";
 
@@ -675,8 +676,14 @@ function AdminDrawer({
   );
 }
 
-export default function Dashboard({ viewer }: { viewer: Viewer }) {
-  const [selectedCode, setSelectedCode] = useState("6KR6834");
+export default function Dashboard({
+  viewer,
+  initialCdsid,
+}: {
+  viewer: Viewer;
+  initialCdsid: string;
+}) {
+  const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
   const [comparisonMetric, setComparisonMetric] = useState<MetricKey>("combat");
   const [group, setGroup] = useState<GroupKey>("all");
@@ -826,7 +833,7 @@ export default function Dashboard({ viewer }: { viewer: Viewer }) {
   return (
     <main className="dashboard">
       <header className="topbar">
-        <div className="brand">
+        <Link className="brand" href="/" aria-label="Volvo Data Dashboard 홈">
           <span className="brand-mark" aria-hidden="true">
             V
           </span>
@@ -834,7 +841,7 @@ export default function Dashboard({ viewer }: { viewer: Viewer }) {
             <strong>DSC COMMAND</strong>
             <span>Retail Performance Intelligence</span>
           </div>
-        </div>
+        </Link>
         <div className="topbar-actions">
           <span className={`role-badge ${viewer.isEditor ? "editor" : "viewer"}`}>
             {viewer.isEditor ? "EDIT 권한" : "VIEW ONLY"}
@@ -871,30 +878,44 @@ export default function Dashboard({ viewer }: { viewer: Viewer }) {
         </div>
         {profileOpen && (
           <div className="profile-popover">
-            <div>
-              <span>CDSID 프로필 전환</span>
-              <strong>접속 계정에 연결된 전시장을 선택하세요</strong>
-            </div>
-            <label>
-              <span className="sr-only">CDSID 프로필</span>
-              <select
-                value={selectedCode}
-                onChange={(event) => {
-                  setSelectedCode(event.target.value);
-                  setProfileOpen(false);
-                }}
-              >
-                {dashboard.showrooms.map((item) => (
-                  <option key={item.cdsid} value={item.cdsid}>
-                    {item.cdsid} · {item.showroom} · {item.manager}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <small>
-              Google Sheets의 CDSID-전시장 매핑 연결 전까지 사용하는 관리자
-              미리보기입니다.
-            </small>
+            {viewer.isEditor ? (
+              <>
+                <div>
+                  <span>CDSID 프로필 전환</span>
+                  <strong>데이터 점검을 위해 전시장을 선택하세요</strong>
+                </div>
+                <label>
+                  <span className="sr-only">CDSID 프로필</span>
+                  <select
+                    value={selectedCode}
+                    onChange={(event) => {
+                      setSelectedCode(event.target.value);
+                      setProfileOpen(false);
+                    }}
+                  >
+                    {dashboard.showrooms.map((item) => (
+                      <option key={item.cdsid} value={item.cdsid}>
+                        {item.cdsid} · {item.showroom} · {item.manager}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <small>편집 권한 계정은 전체 전시장을 점검할 수 있습니다.</small>
+              </>
+            ) : (
+              <>
+                <div>
+                  <span>MY CDSID</span>
+                  <strong>
+                    {selected.cdsid} · {selected.showroom}
+                  </strong>
+                </div>
+                <Link className="profile-home-link" href="/">
+                  CDSID 다시 입력
+                </Link>
+                <small>VIEW ONLY 계정은 선택한 전시장 데이터를 조회합니다.</small>
+              </>
+            )}
           </div>
         )}
       </header>
