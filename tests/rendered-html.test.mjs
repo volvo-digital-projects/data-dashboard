@@ -64,6 +64,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);
+  assert.equal((visibleHtml.match(/점 \/ 100점 만점/g) ?? []).length, 2);
+  assert.equal((visibleHtml.match(/점 \/ 130점 만점/g) ?? []).length, 1);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.match(
     visibleHtml,

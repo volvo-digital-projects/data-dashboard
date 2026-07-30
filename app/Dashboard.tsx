@@ -235,7 +235,7 @@ function MetricCard({
       </div>
       <div className="metric-card-value">
         {displayNumber(value)}
-        <span>점</span>
+        <span>점 / {metricMeta[metric].max}점 만점</span>
       </div>
       <div
         className="metric-benchmark"
