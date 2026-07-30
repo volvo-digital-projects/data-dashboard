@@ -1050,12 +1050,6 @@ export default function Dashboard({
           </div>
         </Link>
         <div className="topbar-actions">
-          <span className={`role-badge ${viewer.isEditor ? "editor" : "viewer"}`}>
-            {viewer.isEditor ? "EDIT 권한" : "VIEW ONLY"}
-          </span>
-          <span className="private-badge">
-            <i aria-hidden="true" /> PRIVATE · 관리자 전용
-          </span>
           <span className="period-badge">
             2026 {dashboard.meta.quarter}
             <small>{dashboard.meta.sourceWeek}</small>

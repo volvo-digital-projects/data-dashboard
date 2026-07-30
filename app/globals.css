@@ -193,25 +193,6 @@ input:focus-visible {
   gap: 10px;
 }
 
-.role-badge {
-  min-height: 28px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 9px;
-  border: 1px solid #aeb8bd;
-  color: var(--ink-soft);
-  background: rgba(255, 255, 255, 0.58);
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-}
-
-.role-badge.editor {
-  color: var(--good);
-  border-color: rgba(41, 117, 94, 0.38);
-  background: var(--good-soft);
-}
-
 .admin-open {
   min-height: 39px;
   padding: 0 14px;
@@ -228,7 +209,6 @@ input:focus-visible {
   background: var(--navy);
 }
 
-.private-badge,
 .period-badge {
   min-height: 39px;
   display: flex;
@@ -241,14 +221,6 @@ input:focus-visible {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
-}
-
-.private-badge i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--good);
-  box-shadow: 0 0 0 4px rgba(41, 117, 94, 0.12);
 }
 
 .period-badge {
@@ -1876,9 +1848,6 @@ input:focus-visible {
     font-size: 48px;
   }
 
-  .private-badge {
-    display: none;
-  }
 }
 
 @media (max-width: 760px) {
@@ -1892,7 +1861,6 @@ input:focus-visible {
   }
 
   .brand div > span,
-  .private-badge,
   .period-badge,
   .profile-button span:not(.avatar),
   .profile-button b {
@@ -1915,12 +1883,6 @@ input:focus-visible {
 
   .topbar-actions {
     gap: 6px;
-  }
-
-  .role-badge {
-    min-height: 34px;
-    padding: 0 8px;
-    font-size: 7px;
   }
 
   .admin-open {
