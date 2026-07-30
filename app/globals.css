@@ -72,6 +72,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Paperlogy 9";
+  src: url("/fonts/paperlogy-9-black.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
 :root {
   --ink: #101820;
   --ink-soft: #394650;
@@ -386,10 +394,10 @@ input:focus-visible {
 
 .identity-strip h1 {
   margin: 0;
-  font-family: var(--font-ui);
+  font-family: "Paperlogy 9", var(--font-korean), sans-serif;
   font-size: clamp(30px, 3vw, 46px);
-  font-weight: 400;
-  letter-spacing: -0.04em;
+  font-weight: 900;
+  letter-spacing: -0.06em;
 }
 
 .update-status {

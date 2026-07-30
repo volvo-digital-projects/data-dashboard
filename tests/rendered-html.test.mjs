@@ -124,6 +124,8 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
 
   assert.match(css, /font-family: "Volvo Centum Web"/);
   assert.match(css, /font-family: "Paperlogy 5"/);
+  assert.match(css, /font-family: "Paperlogy 9"/);
+  assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
   assert.doesNotMatch(css, /Georgia|Helvetica|Pretendard|--font-sans/);
 
@@ -133,5 +135,6 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
     access(new URL("public/fonts/volvo-centum-semibold.ttf", templateRoot)),
     access(new URL("public/fonts/volvo-centum-bold.ttf", templateRoot)),
     access(new URL("public/fonts/paperlogy-5-medium.ttf", templateRoot)),
+    access(new URL("public/fonts/paperlogy-9-black.ttf", templateRoot)),
   ]);
 });
