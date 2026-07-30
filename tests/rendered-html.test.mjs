@@ -51,6 +51,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);
+  assert.doesNotMatch(visibleHtml, /카드를 선택하면 주간 흐름이 바뀝니다/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
   assert.equal((html.match(/identity-icon/g) ?? []).length, 3);

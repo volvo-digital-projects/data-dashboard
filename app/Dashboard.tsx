@@ -1267,7 +1267,6 @@ export default function Dashboard({
               <span className="eyebrow">CORE SIGNALS</span>
               <h2>3대 핵심 지표</h2>
             </div>
-            <p>카드를 선택하면 주간 흐름이 바뀝니다</p>
           </div>
           <div className="metric-grid">
             {kpis.map((item) => (
