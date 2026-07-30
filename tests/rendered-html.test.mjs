@@ -64,10 +64,12 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);
-  assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 2);
+  assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
   assert.match(visibleHtml, /330점 만점/);
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
+  assert.match(visibleHtml, /Q3[\s\S]*Q4/);
+  assert.match(visibleHtml, /누적 평균[\s\S]*298\.8/);
   assert.match(visibleHtml, /전국 평균 <strong>305\.4/);
   assert.doesNotMatch(html, /class="combat-gauge"/);
   assert.doesNotMatch(visibleHtml, /WATCH|집중 관리 레벨|52-WEEK PULSE/);

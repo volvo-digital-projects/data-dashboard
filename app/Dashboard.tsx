@@ -1069,6 +1069,7 @@ export default function Dashboard({
       : latestUpdate.title;
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;
+  const cumulativeAverage = (q1Combat + combat) / 2;
   const tier = getTier(combat);
   const nationalRank =
     [...dashboard.showrooms]
@@ -1287,6 +1288,8 @@ export default function Dashboard({
               className="quarter-score-chart"
               aria-label={`Q1 ${displayNumber(q1Combat)}점, Q2 ${displayNumber(
                 combat,
+              )}점, Q3 및 Q4 평가 예정, 누적 평균 ${displayNumber(
+                cumulativeAverage,
               )}점, ${dashboard.meta.combatMax}점 만점`}
             >
               <div className="quarter-score-meta">
@@ -1296,34 +1299,45 @@ export default function Dashboard({
               {[
                 { label: "Q1", value: q1Combat, current: false },
                 { label: "Q2", value: combat, current: true },
+                { label: "Q3", value: null, current: false },
+                { label: "Q4", value: null, current: false },
               ].map((quarter) => (
                 <div
                   className={`quarter-score-row ${
                     quarter.current ? "current" : ""
-                  }`}
+                  } ${quarter.value === null ? "planned" : ""}`}
                   key={quarter.label}
                 >
                   <span>{quarter.label}</span>
                   <i aria-hidden="true">
                     <b
                       style={{
-                        width: `${Math.min(
-                          100,
-                          (quarter.value / dashboard.meta.combatMax) * 100,
-                        )}%`,
+                        width:
+                          quarter.value === null
+                            ? "0%"
+                            : `${Math.min(
+                                100,
+                                (quarter.value / dashboard.meta.combatMax) *
+                                  100,
+                              )}%`,
                       }}
                     />
                   </i>
-                  <strong>{displayNumber(quarter.value)}</strong>
+                  <strong>
+                    {quarter.value === null
+                      ? "—"
+                      : displayNumber(quarter.value)}
+                  </strong>
                 </div>
               ))}
             </div>
-            <div className="rank-stack">
+            <div className="cumulative-stack">
+              <span>누적 평균</span>
               <strong>
-                {nationalRank}
-                <small>위</small>
+                {displayNumber(cumulativeAverage)}
+                <small>점</small>
               </strong>
-              <em>전국 {dashboard.meta.showroomCount}개 중 상위 {topPercent}%</em>
+              <em>Q1 · Q2 평균</em>
             </div>
           </div>
           <div className="combat-footer">
@@ -1338,10 +1352,9 @@ export default function Dashboard({
               </strong>
             </span>
             <span>
-              Q1 대비{" "}
-              <strong className={combat - q1Combat >= 0 ? "positive" : "negative"}>
-                {combat - q1Combat >= 0 ? "+" : ""}
-                {(combat - q1Combat).toFixed(1)}
+              전국 순위{" "}
+              <strong>
+                {nationalRank}위 · 상위 {topPercent}%
               </strong>
             </span>
           </div>
