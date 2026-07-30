@@ -2923,10 +2923,10 @@ input:focus-visible,
 }
 
 .identity-strip {
-  min-height: 88px;
+  min-height: 76px;
   align-items: center;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .identity-title {

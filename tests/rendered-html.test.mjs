@@ -270,6 +270,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.identity-strip h1\s*\{[\s\S]*?font-family: var\(--font-korean\)[\s\S]*?font-size: clamp\(40px, 3\.25vw, 44px\)/,
   );
+  assert.match(
+    css,
+    /\.identity-strip\s*\{[\s\S]*?min-height: 76px[\s\S]*?margin-bottom: 12px/,
+  );
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 14px/);
   assert.match(
     css,
