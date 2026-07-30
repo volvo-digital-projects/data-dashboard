@@ -208,6 +208,30 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
   assert.equal(weekly.cx.byCdsid["6KR6834"][30], null);
 });
 
+test("aligns every quarter boundary to the same 52-week grid", async () => {
+  const [dashboardSource, css] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(dashboardSource, /const plotLeft = 28/);
+  assert.match(dashboardSource, /const plotRight = 1332/);
+  assert.match(
+    dashboardSource,
+    /plotLeft \+ \(\(week - 0\.5\) \/ 52\) \* plotWidth/,
+  );
+  assert.match(
+    dashboardSource,
+    /const quarterDividers = \[13\.5, 26\.5, 39\.5\]/,
+  );
+  assert.match(dashboardSource, /width=\{plotRight - x\(latestWeek \+ 0\.5\)\}/);
+  assert.match(css, /\.quarter-band\s*\{[\s\S]*?margin: 0 2\.0588235%/);
+  assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
+  assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);
+  assert.match(css, /\.average-trend-line\s*\{[\s\S]*?stroke-width: 1\.45/);
+  assert.match(css, /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8/);
+});
+
 test("ships the premium neutral design system and Pretendard typography", async () => {
   const css = await readFile(
     new URL("../app/globals.css", import.meta.url),

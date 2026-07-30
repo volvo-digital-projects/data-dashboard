@@ -335,7 +335,11 @@ function WeeklyTrend({
     Math.max(...chartValues, metricMeta[metric].max * 0.4) + 8,
   );
   const min = Math.max(0, Math.min(...chartValues) - 8);
-  const x = (week: number) => 28 + ((week - 1) / 51) * 1304;
+  const plotLeft = 28;
+  const plotRight = 1332;
+  const plotWidth = plotRight - plotLeft;
+  const x = (week: number) =>
+    plotLeft + ((week - 0.5) / 52) * plotWidth;
   const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13.5, 26.5, 39.5];
@@ -482,12 +486,20 @@ function WeeklyTrend({
               const bounds = event.currentTarget.getBoundingClientRect();
               const viewX =
                 ((event.clientX - bounds.left) / Math.max(1, bounds.width)) * 1360;
-              const week = Math.round(1 + ((viewX - 28) / 1304) * 51);
+              const week = Math.floor(
+                ((viewX - plotLeft) / plotWidth) * 52 + 1,
+              );
               setHoverWeek(Math.max(1, Math.min(52, week)));
             }}
             onPointerLeave={() => setHoverWeek(null)}
           >
-            <line x1="28" x2="1332" y1="170" y2="170" className="week-axis" />
+            <line
+              x1={plotLeft}
+              x2={plotRight}
+              y1="170"
+              y2="170"
+              className="week-axis"
+            />
             {weeks.map((week) => (
               <line
                 key={week}
@@ -513,12 +525,12 @@ function WeeklyTrend({
                 <rect
                   x={x(latestWeek + 0.5)}
                   y="18"
-                  width={1332 - x(latestWeek + 0.5)}
+                  width={plotRight - x(latestWeek + 0.5)}
                   height="152"
                   className="future-window"
                 />
                 <text
-                  x={(x(latestWeek + 0.5) + 1332) / 2}
+                  x={(x(latestWeek + 0.5) + plotRight) / 2}
                   y="88"
                   textAnchor="middle"
                   className="future-window-label"
@@ -526,7 +538,7 @@ function WeeklyTrend({
                   Q3 평가 진행 중
                 </text>
                 <text
-                  x={(x(latestWeek + 0.5) + 1332) / 2}
+                  x={(x(latestWeek + 0.5) + plotRight) / 2}
                   y="104"
                   textAnchor="middle"
                   className="future-window-help"
@@ -577,8 +589,8 @@ function WeeklyTrend({
             ) : (
               <>
                 <line
-                  x1="28"
-                  x2="1332"
+                  x1={plotLeft}
+                  x2={plotRight}
                   y1={y(average)}
                   y2={y(average)}
                   className="average-line"

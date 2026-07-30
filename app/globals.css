@@ -3497,14 +3497,14 @@ input:focus-visible,
 }
 
 .quarter-band {
-  margin: 0 24px;
-  border-bottom-color: #e7ebee;
+  margin: 0 2.0588235%;
+  border-bottom-color: rgba(152, 162, 179, 0.28);
 }
 
 .quarter-band span {
   min-height: 34px;
   padding: 0 12px;
-  border-left-color: #e7ebee;
+  border-left-color: rgba(152, 162, 179, 0.28);
 }
 
 .quarter-band strong {
@@ -3528,14 +3528,18 @@ input:focus-visible,
 .week-axis,
 .week-grid {
   stroke: #dfe5e8;
+  stroke-width: 0.6;
+  vector-effect: non-scaling-stroke;
 }
 
 .week-tick.entered {
   stroke: #c9d3d9;
+  stroke-width: 0.65;
 }
 
 .week-tick.pending {
   stroke: #e9edef;
+  stroke-width: 0.55;
 }
 
 .future-window {
@@ -3563,14 +3567,14 @@ input:focus-visible,
 
 .average-trend-line {
   stroke: var(--warning);
-  stroke-width: 2;
+  stroke-width: 1.45;
   stroke-dasharray: 6 6;
   opacity: 0.82;
 }
 
 .trend-line {
   stroke: var(--blue);
-  stroke-width: 2.5;
+  stroke-width: 1.8;
 }
 
 .national-average-point,
@@ -3584,14 +3588,14 @@ input:focus-visible,
 .national-average-point {
   fill: white;
   stroke: var(--warning);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 
 .actual-week-point,
 .actual-quarter-point {
   fill: white;
   stroke: var(--blue);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 
 .actual-point-value,
@@ -3695,7 +3699,7 @@ input:focus-visible,
 }
 
 .week-ruler {
-  margin: -18px 24px 8px;
+  margin: -18px 2.0588235% 8px;
   border-color: #e3e8eb;
   background: #f6f8f9;
 }
