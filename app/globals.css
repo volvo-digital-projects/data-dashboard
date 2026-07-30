@@ -657,7 +657,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 0;
   position: relative;
   z-index: 1;
 }
@@ -741,8 +741,8 @@ input:focus-visible {
 }
 
 .cumulative-stack {
-  min-width: 128px;
-  padding-left: 16px;
+  min-width: 124px;
+  padding-left: 10px;
   border-left: 1px solid rgba(255, 255, 255, 0.13);
 }
 
