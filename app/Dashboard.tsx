@@ -484,7 +484,10 @@ function WeeklyTrend({
           </svg>
           <div className="week-ruler" aria-label="W01부터 W52까지 주차">
             {weeks.map((week) => {
-              const value = weeklySeries?.[week - 1] ?? null;
+              const value =
+                weeklySeries?.[week - 1] ??
+                rawPoints.find((point) => point.week === week)?.value ??
+                null;
               const isEntered = value !== null;
               const isMissing = week <= latestWeek && value === null;
               const isWarning =
