@@ -66,6 +66,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   }
   assert.match(html, /r="4.5" class="national-average-point"/);
   assert.match(html, /width="9" height="9" class="actual-week-point"/);
+  assert.equal((html.match(/class="actual-point-value"/g) ?? []).length, 12);
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);
   assert.match(html, /class="coverage-line national"/);
@@ -147,6 +148,10 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 4px/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
+  assert.match(css, /\.quarter-band strong[\s\S]*?font-size: 11px/);
+  assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -19px 24px 3px/);
+  assert.match(css, /\.week-ruler span[\s\S]*?font-size: 8px/);
+  assert.match(css, /\.actual-point-value[\s\S]*?font-size: 8px/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);

@@ -288,6 +288,14 @@ function WeeklyTrend({
   const min = Math.max(0, Math.min(...chartValues) - 8);
   const x = (week: number) => 28 + ((week - 1) / 51) * 1304;
   const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
+  const actualValueLabelY = (
+    point: { value: number },
+    index: number,
+  ) => {
+    const pointY = y(point.value);
+    const canPlaceBelow = pointY < 150;
+    return pointY + (index % 2 === 1 && canPlaceBelow ? 15 : -10);
+  };
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13.5, 26.5, 39.5];
   const quarterLabels = [
@@ -419,7 +427,7 @@ function WeeklyTrend({
                   />
                 ),
             )}
-            {rawPoints.map((point) => (
+            {rawPoints.map((point, index) => (
               <g key={`${point.week}-${point.label}`}>
                 {isWeeklyMetric ? (
                   <rect
@@ -451,6 +459,15 @@ function WeeklyTrend({
                     </title>
                   </circle>
                 )}
+                <text
+                  x={x(point.week)}
+                  y={actualValueLabelY(point, index)}
+                  textAnchor="middle"
+                  className="actual-point-value"
+                  aria-hidden="true"
+                >
+                  {displayNumber(point.value)}
+                </text>
               </g>
             ))}
           </svg>
