@@ -36,6 +36,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal(response.status, 200);
 
   const html = await response.text();
+  const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(html, /DSC COMMAND/);
   assert.match(html, /전시장 전투력/);
   assert.match(html, /3대 핵심 지표/);
@@ -46,6 +47,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /CX Index/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
+  assert.match(visibleHtml, /최신 W26/);
+  assert.match(visibleHtml, /실제 입력 12주/);
+  assert.match(visibleHtml, /전국 평균 미달 6주/);
   for (let week = 1; week <= 52; week += 1) {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
@@ -72,6 +76,22 @@ test("ships project metadata and removes the disposable starter", async () => {
   await assert.rejects(
     access(new URL("../app/_sites-preview", templateRoot)),
   );
+});
+
+test("ships Google Sheet weekly VOC and calculated CX series", async () => {
+  const weekly = JSON.parse(
+    await readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
+  );
+
+  assert.equal(weekly.meta.vocLatestWeek, 26);
+  assert.equal(weekly.meta.cxLatestWeek, 30);
+  assert.equal(Object.keys(weekly.voc.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.cx.byCdsid).length, 39);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][13], 64);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][16], 64);
+  assert.equal(weekly.cx.byCdsid["6KR6834"][0], 80);
+  assert.equal(weekly.cx.byCdsid["6KR6834"][29], 90);
+  assert.equal(weekly.cx.byCdsid["6KR6834"][30], null);
 });
 
 test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async () => {

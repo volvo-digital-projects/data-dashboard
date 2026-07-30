@@ -1068,6 +1068,16 @@ input:focus-visible {
   opacity: 0.7;
 }
 
+.average-trend-line {
+  fill: none;
+  stroke: var(--warning);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.62;
+}
+
 .average-label {
   fill: var(--warning);
   font-size: 9px;
@@ -1081,10 +1091,30 @@ input:focus-visible {
   stroke-linecap: round;
 }
 
+.trend-gap-line {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.4;
+}
+
 .trend-point {
   fill: white;
   stroke: var(--blue);
-  stroke-width: 3;
+  stroke-width: 2.5;
+}
+
+.trend-point.warning {
+  fill: #fff8f5;
+  stroke: var(--warning);
+}
+
+.trend-point.good {
+  fill: white;
+  stroke: var(--blue);
 }
 
 .trend-point-core {
@@ -1128,6 +1158,11 @@ input:focus-visible {
 .coverage-dot.year {
   border-color: #8fa5b0;
   background: #dbe5e9;
+}
+
+.coverage-dot.warning {
+  border-color: var(--warning);
+  background: var(--warning);
 }
 
 .correction-panel {

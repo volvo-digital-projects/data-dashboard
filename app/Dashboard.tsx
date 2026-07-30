@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import dashboardJson from "./data/showrooms.json";
+import weeklyJson from "./data/weekly.json";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
@@ -68,7 +69,29 @@ type LatestUpdate = {
   attachments?: { filename: string; sizeBytes: number }[];
 };
 
+type WeeklyData = {
+  meta: {
+    workbookUrl: string;
+    syncedAt: string;
+    vocLatestWeek: number;
+    cxLatestWeek: number;
+    rules: {
+      voc: string;
+      cx: string;
+    };
+  };
+  voc: {
+    average: (number | null)[];
+    byCdsid: Record<string, (number | null)[]>;
+  };
+  cx: {
+    average: (number | null)[];
+    byCdsid: Record<string, (number | null)[]>;
+  };
+};
+
 const dashboard = dashboardJson as DashboardData;
+const weeklyDashboard = weeklyJson as WeeklyData;
 
 const metricMeta: Record<
   MetricKey,
@@ -209,24 +232,112 @@ function WeeklyTrend({
 }) {
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
-  const weekly = metric === "voc" ? showroom.vocWeekly : null;
   const average = dashboard.averages[metric] ?? 0;
-  const rawPoints = [
-    previous === null ? null : { week: 13, value: previous, label: "Q1 마감" },
-    weekly === null || weekly <= 0
-      ? null
-      : { week: 17, value: weekly, label: dashboard.meta.sourceWeek },
-    { week: 26, value: current, label: "Q2 마감" },
-  ].filter(Boolean) as { week: number; value: number; label: string }[];
-
-  const max = Math.max(metricMeta[metric].max, ...rawPoints.map((point) => point.value));
-  const min = Math.max(0, Math.min(average, ...rawPoints.map((point) => point.value)) - 12);
+  const nativeWeekly =
+    metric === "voc" || metric === "cx" ? weeklyDashboard[metric] : null;
+  const weeklySeries = nativeWeekly?.byCdsid[showroom.cdsid] ?? null;
+  const averageSeries = nativeWeekly?.average ?? null;
+  const latestWeek =
+    metric === "voc"
+      ? weeklyDashboard.meta.vocLatestWeek
+      : metric === "cx"
+        ? weeklyDashboard.meta.cxLatestWeek
+        : 26;
+  const rawPoints = weeklySeries
+    ? weeklySeries
+        .slice(0, latestWeek)
+        .map((value, index) =>
+          value === null
+            ? null
+            : {
+                week: index + 1,
+                value,
+                label: `W${String(index + 1).padStart(2, "0")}`,
+              },
+        )
+        .filter(Boolean) as { week: number; value: number; label: string }[]
+    : ([
+        previous === null ? null : { week: 13, value: previous, label: "Q1 마감" },
+        { week: 26, value: current, label: "Q2 마감" },
+      ].filter(Boolean) as { week: number; value: number; label: string }[]);
+  const averagePoints = averageSeries
+    ? averageSeries
+        .slice(0, latestWeek)
+        .map((value, index) =>
+          value === null
+            ? null
+            : { week: index + 1, value, label: "전국 평균" },
+        )
+        .filter(Boolean) as { week: number; value: number; label: string }[]
+    : [];
+  const chartValues = [
+    ...rawPoints.map((point) => point.value),
+    ...averagePoints.map((point) => point.value),
+    average,
+  ];
+  const max = Math.min(
+    metricMeta[metric].max,
+    Math.max(...chartValues, metricMeta[metric].max * 0.4) + 8,
+  );
+  const min = Math.max(0, Math.min(...chartValues) - 8);
   const x = (week: number) => 40 + ((week - 1) / 51) * 960;
   const y = (value: number) => 145 - ((value - min) / Math.max(1, max - min)) * 112;
-  const path = rawPoints.map((point) => `${x(point.week)},${y(point.value)}`).join(" ");
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
-  const latestWeek = Math.max(0, ...rawPoints.map((point) => point.week));
   const quarterWeeks = new Set([1, 13, 26, 39, 52]);
+  const averageAt = (week: number) =>
+    averageSeries?.[week - 1] ?? average;
+  const warningCount = rawPoints.filter(
+    (point) => point.value < averageAt(point.week),
+  ).length;
+  const latestPoint = rawPoints.at(-1) ?? null;
+  const previousPoint = rawPoints.at(-2) ?? null;
+  const latestDelta =
+    latestPoint && previousPoint ? latestPoint.value - previousPoint.value : null;
+  const minPoint = rawPoints.reduce(
+    (lowest, point) => (!lowest || point.value < lowest.value ? point : lowest),
+    null as (typeof rawPoints)[number] | null,
+  );
+  const maxPoint = rawPoints.reduce(
+    (highest, point) => (!highest || point.value > highest.value ? point : highest),
+    null as (typeof rawPoints)[number] | null,
+  );
+  const largestSwingPoint = rawPoints.reduce(
+    (largest, point, index) => {
+      if (index === 0) return largest;
+      const delta = Math.abs(point.value - rawPoints[index - 1].value);
+      return !largest || delta > largest.delta ? { point, delta } : largest;
+    },
+    null as { point: (typeof rawPoints)[number]; delta: number } | null,
+  )?.point;
+  const highlightedWeeks = new Set(
+    [latestPoint, minPoint, maxPoint, largestSwingPoint]
+      .filter(Boolean)
+      .map((point) => point!.week),
+  );
+  const makeSegments = (
+    series: (number | null)[],
+    limit: number,
+  ) => {
+    const segments: { week: number; value: number }[][] = [];
+    let segment: { week: number; value: number }[] = [];
+
+    series.slice(0, limit).forEach((value, index) => {
+      if (value === null) {
+        if (segment.length) segments.push(segment);
+        segment = [];
+        return;
+      }
+      segment.push({ week: index + 1, value });
+    });
+    if (segment.length) segments.push(segment);
+    return segments;
+  };
+  const storeSegments = weeklySeries
+    ? makeSegments(weeklySeries, latestWeek)
+    : [rawPoints];
+  const nationalSegments = averageSeries
+    ? makeSegments(averageSeries, latestWeek)
+    : [];
 
   return (
     <div className="trend-wrap">
@@ -259,43 +370,127 @@ function WeeklyTrend({
             </g>
           );
         })}
-        <line
-          x1="40"
-          x2="1000"
-          y1={y(average)}
-          y2={y(average)}
-          className="average-line"
-        />
-        <text x="998" y={y(average) - 7} textAnchor="end" className="average-label">
-          전국 평균 {displayNumber(average)}
-        </text>
-        {rawPoints.length > 1 && (
-          <polyline points={path} className="trend-line" />
+        {nationalSegments.length ? (
+          <>
+            {nationalSegments.map((segment, index) => (
+              <polyline
+                key={`national-${index}`}
+                points={segment
+                  .map((point) => `${x(point.week)},${y(point.value)}`)
+                  .join(" ")}
+                className="average-trend-line"
+              />
+            ))}
+            {averagePoints.length > 0 && (
+              <text
+                x="998"
+                y={Math.max(14, y(averagePoints.at(-1)!.value) - 7)}
+                textAnchor="end"
+                className="average-label"
+              >
+                전국 평균 {displayNumber(averagePoints.at(-1)!.value)}
+              </text>
+            )}
+          </>
+        ) : (
+          <>
+            <line
+              x1="40"
+              x2="1000"
+              y1={y(average)}
+              y2={y(average)}
+              className="average-line"
+            />
+            <text
+              x="998"
+              y={y(average) - 7}
+              textAnchor="end"
+              className="average-label"
+            >
+              전국 평균 {displayNumber(average)}
+            </text>
+          </>
+        )}
+        {weeklySeries && rawPoints.length > 1 && (
+          <polyline
+            points={rawPoints
+              .map((point) => `${x(point.week)},${y(point.value)}`)
+              .join(" ")}
+            className="trend-gap-line"
+          />
+        )}
+        {storeSegments.map(
+          (segment, index) =>
+            segment.length > 1 && (
+              <polyline
+                key={`store-${index}`}
+                points={segment
+                  .map((point) => `${x(point.week)},${y(point.value)}`)
+                  .join(" ")}
+                className="trend-line"
+              />
+            ),
         )}
         {rawPoints.map((point) => (
           <g key={`${point.week}-${point.label}`}>
-            <circle cx={x(point.week)} cy={y(point.value)} r="7" className="trend-point" />
-            <circle cx={x(point.week)} cy={y(point.value)} r="2.5" className="trend-point-core" />
-            <text
-              x={x(point.week)}
-              y={Math.max(15, y(point.value) - 14)}
-              textAnchor="middle"
-              className="point-value"
+            <circle
+              cx={x(point.week)}
+              cy={y(point.value)}
+              r={highlightedWeeks.has(point.week) ? "5.5" : "3.5"}
+              className={`trend-point ${
+                point.value < averageAt(point.week) ? "warning" : "good"
+              }`}
             >
-              {displayNumber(point.value)}
-            </text>
+              <title>
+                {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
+                  averageAt(point.week),
+                )}점`}
+              </title>
+            </circle>
+            {highlightedWeeks.has(point.week) && (
+              <>
+                <circle
+                  cx={x(point.week)}
+                  cy={y(point.value)}
+                  r="2"
+                  className="trend-point-core"
+                />
+                <text
+                  x={x(point.week)}
+                  y={Math.max(14, y(point.value) - 11)}
+                  textAnchor="middle"
+                  className="point-value"
+                >
+                  {displayNumber(point.value)}
+                </text>
+              </>
+            )}
           </g>
         ))}
       </svg>
       <div className="data-coverage">
         <span>
-          <i className="coverage-dot filled" /> 입력값 {rawPoints.length}개
+          <i className="coverage-dot filled" /> 최신 W
+          {String(latestWeek).padStart(2, "0")} · 실제 입력 {rawPoints.length}주
         </span>
         <span>
-          <i className="coverage-dot year" /> W01–W52 전체 주차
+          <i className="coverage-dot warning" /> 전국 평균 미달 {warningCount}주
         </span>
         <span>
-          <i className="coverage-dot" /> 연한 주차는 데이터 입력 대기
+          <i className="coverage-dot year" />
+          {latestPoint && previousPoint
+            ? `${latestPoint.label} 직전 입력주 대비 ${
+                latestDelta! >= 0 ? "+" : ""
+              }${latestDelta!.toFixed(1)}`
+            : "W01–W52 전체 주차"}
+        </span>
+        <span>
+          <i className="coverage-dot" />
+          {metric === "voc"
+            ? "0.0 미응답은 제외 · 공백은 응답 대기"
+            : metric === "cx"
+              ? "5개 공식 평가항목 환산 · 최대 130점"
+              : "분기 평가값만 표시 · 주간값 미생성"}
         </span>
       </div>
     </div>
