@@ -103,10 +103,10 @@ const metricMeta: Record<
   cx: { label: "CX Index", short: "CX", max: 130, unit: "점" },
 };
 
-const trendSelectorMeta: Record<TrendMetricKey, { icon: string }> = {
-  v3s: { icon: "↗" },
-  voc: { icon: "◎" },
-  cx: { icon: "✦" },
+const metricDescriptions: Record<TrendMetricKey, string> = {
+  v3s: "Volvo Sales Standard · 영업 프로세스 평가",
+  voc: "Voice of Customer · 고객 의견 평가",
+  cx: "Customer Experience Index · 고객 경험 종합 지수",
 };
 
 const groupMeta: Record<GroupKey, { label: string; helper: string }> = {
@@ -157,13 +157,28 @@ function AppealBadge({
   type: "possible" | "partial" | "locked";
 }) {
   const content = {
-    possible: { icon: "↻", label: "사후 보정 가능" },
-    partial: { icon: "◐", label: "일부 보정 가능" },
-    locked: { icon: "⊘", label: "사후 보정 불가" },
+    possible: {
+      icon: "↻",
+      label: "사후 보정 가능",
+      description: "검증 자료 제출 후 담당자 확인을 거쳐 보정할 수 있습니다.",
+    },
+    partial: {
+      icon: "◐",
+      label: "일부 평가 불가",
+      description: "필수 평가 항목 중 미완료 항목이 존재합니다.",
+    },
+    locked: {
+      icon: "⊘",
+      label: "사후 보정 불가",
+      description: "확정된 항목으로 사후 보정 대상이 아닙니다.",
+    },
   }[type];
 
   return (
-    <span className={`appeal-badge ${type}`} title={content.label}>
+    <span
+      className={`appeal-badge ${type}`}
+      title={`${content.label}: ${content.description}`}
+    >
       <span aria-hidden="true">{content.icon}</span>
       {content.label}
     </span>
@@ -189,6 +204,12 @@ function MetricCard({
 }) {
   const signal = getSignal(value, average);
   const fill = Math.min(100, Math.max(0, (value / metricMeta[metric].max) * 100));
+  const signalRule =
+    signal.tone === "warning"
+      ? "경고: Q2 전국 평균 대비 5점 이상 미달"
+      : signal.tone === "caution"
+        ? "주의: Q2 전국 평균 미만, 5점 미만 차이"
+        : "정상: Q2 전국 평균 이상";
   const quarterScores = [
     { label: "Q1", value: previous, state: "complete" },
     { label: "Q2", value, state: "current" },
@@ -204,8 +225,10 @@ function MetricCard({
       aria-pressed={active}
     >
       <div className="metric-card-topline">
-        <span className="metric-code">{metricMeta[metric].short}</span>
-        <span className={`signal-pill ${signal.tone}`}>
+        <span className="metric-code" title={metricDescriptions[metric]}>
+          {metricMeta[metric].short}
+        </span>
+        <span className={`signal-pill ${signal.tone}`} title={signalRule}>
           <SignalIcon tone={signal.tone} />
           {signal.label}
         </span>
@@ -214,11 +237,14 @@ function MetricCard({
         {displayNumber(value)}
         <span>점</span>
       </div>
-      <div className="metric-benchmark">
-        <span>전국 평균 {displayNumber(average)}</span>
+      <div
+        className="metric-benchmark"
+        title={`Q2 전국 평균 ${displayNumber(average)}점`}
+      >
+        <span>Q2 전국 평균 대비</span>
         <strong className={signal.tone}>
           {signal.delta >= 0 ? "+" : ""}
-          {signal.delta.toFixed(1)}
+          {signal.delta.toFixed(1)}점
         </strong>
       </div>
       <div className="metric-track" aria-hidden="true">
@@ -248,9 +274,11 @@ function MetricCard({
 function WeeklyTrend({
   showroom,
   metric,
+  showAllValues,
 }: {
   showroom: Showroom;
   metric: TrendMetricKey;
+  showAllValues: boolean;
 }) {
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
@@ -261,6 +289,8 @@ function WeeklyTrend({
   const weeklySeries = nativeWeekly?.byCdsid[showroom.cdsid] ?? null;
   const averageSeries = nativeWeekly?.average ?? null;
   const trendScrollRef = useRef<HTMLDivElement>(null);
+  const [showActual, setShowActual] = useState(true);
+  const [showNational, setShowNational] = useState(true);
   const latestWeek =
     metric === "voc"
       ? weeklyDashboard.meta.vocLatestWeek
@@ -364,6 +394,22 @@ function WeeklyTrend({
   ).length;
   const latestPoint = rawPoints.at(-1) ?? null;
   const previousPoint = rawPoints.at(-2) ?? null;
+  const highestPoint = rawPoints.reduce(
+    (best, point) => (!best || point.value > best.value ? point : best),
+    null as { week: number; value: number; label: string } | null,
+  );
+  const lowestPoint = rawPoints.reduce(
+    (best, point) => (!best || point.value < best.value ? point : best),
+    null as { week: number; value: number; label: string } | null,
+  );
+  const importantActualWeeks = new Set([
+    latestPoint?.week,
+    highestPoint?.week,
+    lowestPoint?.week,
+    ...rawPoints
+      .filter((point) => point.value - averageAt(point.week) <= -5)
+      .map((point) => point.week),
+  ]);
   const latestDelta =
     latestPoint && previousPoint ? latestPoint.value - previousPoint.value : null;
   const annotationWeek = latestPoint?.week ?? latestWeek;
@@ -441,7 +487,34 @@ function WeeklyTrend({
                 className="week-grid"
               />
             ))}
-            {nationalSegments.length ? (
+            {latestWeek < 52 && (
+              <g className="future-window-group" aria-hidden="true">
+                <rect
+                  x={x(latestWeek + 0.5)}
+                  y="18"
+                  width={1332 - x(latestWeek + 0.5)}
+                  height="152"
+                  className="future-window"
+                />
+                <text
+                  x={(x(latestWeek + 0.5) + 1332) / 2}
+                  y="88"
+                  textAnchor="middle"
+                  className="future-window-label"
+                >
+                  Q3 평가 진행 중
+                </text>
+                <text
+                  x={(x(latestWeek + 0.5) + 1332) / 2}
+                  y="104"
+                  textAnchor="middle"
+                  className="future-window-help"
+                >
+                  데이터 집계 후 자동 반영됩니다.
+                </text>
+              </g>
+            )}
+            {showNational && (nationalSegments.length ? (
               <>
                 {nationalSegments.map((segment, index) => (
                   <polyline
@@ -466,15 +539,17 @@ function WeeklyTrend({
                         )}점`}
                       </title>
                     </circle>
-                    <text
-                      x={x(point.week)}
-                      y={nationalValueLabelY(point)}
-                      textAnchor="middle"
-                      className="national-point-value"
-                      aria-hidden="true"
-                    >
-                      {displayNumber(point.value)}
-                    </text>
+                    {(showAllValues || point.week === annotationWeek) && (
+                      <text
+                        x={x(point.week)}
+                        y={nationalValueLabelY(point)}
+                        textAnchor="middle"
+                        className="national-point-value"
+                        aria-hidden="true"
+                      >
+                        {displayNumber(point.value)}
+                      </text>
+                    )}
                   </g>
                 ))}
               </>
@@ -488,8 +563,8 @@ function WeeklyTrend({
                   className="average-line"
                 />
               </>
-            )}
-            {storeSegments.map(
+            ))}
+            {showActual && storeSegments.map(
               (segment, index) =>
                 segment.length > 1 && (
                   <polyline
@@ -501,7 +576,7 @@ function WeeklyTrend({
                   />
                 ),
             )}
-            {rawPoints.map((point) => (
+            {showActual && rawPoints.map((point) => (
               <g key={`${point.week}-${point.label}`}>
                 {isWeeklyMetric ? (
                   <rect
@@ -534,15 +609,17 @@ function WeeklyTrend({
                     </title>
                   </circle>
                 )}
-                <text
-                  x={x(point.week)}
-                  y={actualValueLabelY(point)}
-                  textAnchor="middle"
-                  className="actual-point-value"
-                  aria-hidden="true"
-                >
-                  {displayNumber(point.value)}
-                </text>
+                {(showAllValues || importantActualWeeks.has(point.week)) && (
+                  <text
+                    x={x(point.week)}
+                    y={actualValueLabelY(point)}
+                    textAnchor="middle"
+                    className="actual-point-value"
+                    aria-hidden="true"
+                  >
+                    {displayNumber(point.value)}
+                  </text>
+                )}
               </g>
             ))}
           </svg>
@@ -564,11 +641,16 @@ function WeeklyTrend({
                     ? "missing"
                     : "future";
               const label = `W${String(week).padStart(2, "0")}`;
+              const isMajorWeek =
+                week === 1 ||
+                (week - 1) % 4 === 0 ||
+                [13, 26, 39, 52].includes(week);
 
               return (
                 <span
                   key={week}
                   className={status}
+                  aria-label={label}
                   title={
                     value === null
                       ? `${label} ${isMissing ? "데이터 없음" : "입력 예정"}`
@@ -577,15 +659,20 @@ function WeeklyTrend({
                         )}점`
                   }
                 >
-                  {label}
+                  {isMajorWeek ? label : ""}
                 </span>
               );
             })}
           </div>
         </div>
       </div>
-      <div className="data-coverage">
-        <span>
+      <div className="data-coverage" aria-label="차트 범례">
+        <button
+          type="button"
+          className={showActual ? "active" : ""}
+          aria-pressed={showActual}
+          onClick={() => setShowActual((visible) => !visible)}
+        >
           <i className={isWeeklyMetric ? "coverage-line actual" : "coverage-dot filled"} />
           {isWeeklyMetric
             ? `${displayShowroomName(showroom.showroom)} 실제값 · ${annotationLabel} ${
@@ -594,15 +681,20 @@ function WeeklyTrend({
             : `최신 W${String(latestWeek).padStart(2, "0")} · 실제 입력 ${
                 rawPoints.length
               }주`}
-        </span>
-        <span>
+        </button>
+        <button
+          type="button"
+          className={showNational ? "active" : ""}
+          aria-pressed={showNational}
+          onClick={() => setShowNational((visible) => !visible)}
+        >
           <i className={isWeeklyMetric ? "coverage-line national" : "coverage-dot warning"} />
           {isWeeklyMetric
             ? `전국 주간 평균 · ${annotationLabel} ${displayNumber(
                 averageAt(annotationWeek),
               )}점 · 평균 미달 ${warningCount}주`
             : `전국 평균 미달 ${warningCount}주`}
-        </span>
+        </button>
         <span>
           <i className="coverage-dot year" />
           {latestPoint && previousPoint
@@ -654,6 +746,10 @@ function ComparisonTable({
   );
   const visible = members.slice(windowStart, windowStart + windowSize);
   const max = metricMeta[metric].max;
+  const benchmark =
+    metric === "combat"
+      ? dashboard.meta.combatAverage
+      : dashboard.averages[metric] ?? 0;
 
   return (
     <div className="comparison-table">
@@ -662,11 +758,14 @@ function ComparisonTable({
         <span>전시장</span>
         <span>딜러 · 권역</span>
         <span>{metricMeta[metric].label}</span>
-        <span>위치</span>
+        <span>점수 · 평균 대비</span>
       </div>
       {visible.map((item) => {
-        const rank = members.findIndex((member) => member.cdsid === item.cdsid) + 1;
+        const rank =
+          members.findIndex((member) => valueOf(member, metric) === valueOf(item, metric)) +
+          1;
         const value = valueOf(item, metric);
+        const delta = value - benchmark;
         const isSelected = item.cdsid === selected.cdsid;
         return (
           <div
@@ -679,16 +778,31 @@ function ComparisonTable({
             </span>
             <span className="showroom-name">
               {displayShowroomName(item.showroom)}
-              {isSelected && <em>MY</em>}
+              {isSelected && <em>내 전시장</em>}
             </span>
             <span className="dealer-region">
               {item.dealer}
               <small>{item.region}</small>
             </span>
-            <span className="comparison-bar">
+            <span
+              className="comparison-bar"
+              title={`${metricMeta[metric].label} ${displayNumber(
+                value,
+              )}점 · 전국 평균 ${displayNumber(benchmark)}점`}
+            >
               <i style={{ width: `${Math.min(100, (value / max) * 100)}%` }} />
+              <b
+                aria-hidden="true"
+                style={{ left: `${Math.min(100, (benchmark / max) * 100)}%` }}
+              />
             </span>
-            <strong>{displayNumber(value)}</strong>
+            <span className="comparison-value">
+              <strong>{displayNumber(value)}</strong>
+              <small className={delta >= 0 ? "positive" : "negative"}>
+                {delta >= 0 ? "▲" : "▼"}
+                {Math.abs(delta).toFixed(1)}
+              </small>
+            </span>
           </div>
         );
       })}
@@ -1049,6 +1163,7 @@ export default function Dashboard({
 }) {
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
+  const [showAllTrendValues, setShowAllTrendValues] = useState(false);
   const [comparisonMetric, setComparisonMetric] = useState<MetricKey>("combat");
   const [group, setGroup] = useState<GroupKey>("all");
   const [profileOpen, setProfileOpen] = useState(false);
@@ -1086,9 +1201,6 @@ export default function Dashboard({
     [...dashboard.showrooms]
       .sort((a, b) => valueOf(b, "combat") - valueOf(a, "combat"))
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
-  const topPercent = Math.ceil(
-    (nationalRank / dashboard.meta.showroomCount) * 100,
-  );
   const rankInGroup = (members: Showroom[]) =>
     [...members]
       .sort((a, b) => valueOf(b, "combat") - valueOf(a, "combat"))
@@ -1243,15 +1355,18 @@ export default function Dashboard({
         <div className="mobile-power">
           <div>
             <strong>{displayNumber(combat)}</strong>
-            <small>/ {dashboard.meta.combatMax}</small>
+            <small>
+              / {dashboard.meta.combatMax} · 상반기 평균{" "}
+              {displayNumber(cumulativeAverage)}
+            </small>
           </div>
           <div>
             <strong>
               전국 {nationalRank}위
-              <small> · 상위 {topPercent}%</small>
+              <small> / {dashboard.meta.showroomCount}개점</small>
             </strong>
             <span className={combatDelta >= 0 ? "positive" : "negative"}>
-              평균 대비 {combatDelta >= 0 ? "+" : ""}
+              Q2 전국 평균 대비 {combatDelta >= 0 ? "+" : ""}
               {combatDelta.toFixed(1)}
             </span>
           </div>
@@ -1269,7 +1384,7 @@ export default function Dashboard({
                 <span>{metricMeta[item.key].short}</span>
                 <strong>{displayNumber(item.value)}</strong>
                 <small>
-                  평균 대비 {signal.delta >= 0 ? "+" : ""}
+                  Q2 평균 대비 {signal.delta >= 0 ? "+" : ""}
                   {signal.delta.toFixed(1)}
                 </small>
               </button>
@@ -1342,21 +1457,22 @@ export default function Dashboard({
                 </div>
               ))}
             </div>
-            <div className="cumulative-stack">
-              <span>누적 평균</span>
+            <div className="combat-summary-stack">
+              <span>Q2 종합 점수</span>
               <strong>
-                {displayNumber(cumulativeAverage)}
+                {displayNumber(combat)}
                 <small>점</small>
               </strong>
-              <em>Q1 · Q2 평균</em>
+              <em>상반기 누적 평균 {displayNumber(cumulativeAverage)}점</em>
             </div>
           </div>
           <div className="combat-footer">
             <span>
-              전국 평균 <strong>{displayNumber(dashboard.meta.combatAverage)}</strong>
+              Q2 전국 평균{" "}
+              <strong>{displayNumber(dashboard.meta.combatAverage)}</strong>
             </span>
             <span className={combatDelta >= 0 ? "positive" : "negative"}>
-              평균 대비{" "}
+              Q2 전국 평균 대비{" "}
               <strong>
                 {combatDelta >= 0 ? "+" : ""}
                 {combatDelta.toFixed(1)}
@@ -1365,7 +1481,7 @@ export default function Dashboard({
             <span>
               전국 순위{" "}
               <strong>
-                {nationalRank}위 · 상위 {topPercent}%
+                {nationalRank}위 / {dashboard.meta.showroomCount}개점
               </strong>
             </span>
           </div>
@@ -1395,31 +1511,42 @@ export default function Dashboard({
             <div>
               <h2>52주 스코어 추이</h2>
             </div>
-            <div
-              className="trend-selector"
-              role="group"
-              aria-label="52주 지표 선택"
-            >
-              {(["v3s", "voc", "cx"] as TrendMetricKey[]).map((metric) => (
-                <button
-                  key={metric}
-                  type="button"
-                  className={trendMetric === metric ? "active" : ""}
-                  aria-label={`${metricMeta[metric].label} 52주 추이 보기`}
-                  aria-pressed={trendMetric === metric}
-                  onClick={() => setTrendMetric(metric)}
-                >
-                  <span className="trend-selector-icon" aria-hidden="true">
-                    {trendSelectorMeta[metric].icon}
-                  </span>
-                  <span className="trend-selector-label">
+            <div className="trend-actions">
+              <div
+                className="trend-selector"
+                role="group"
+                aria-label="52주 지표 선택"
+              >
+                {(["v3s", "voc", "cx"] as TrendMetricKey[]).map((metric) => (
+                  <button
+                    key={metric}
+                    type="button"
+                    className={trendMetric === metric ? "active" : ""}
+                    aria-label={`${metricMeta[metric].label} 52주 추이 보기`}
+                    aria-pressed={trendMetric === metric}
+                    onClick={() => setTrendMetric(metric)}
+                  >
                     {metricMeta[metric].short}
-                  </span>
-                </button>
-              ))}
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                className={`show-values-toggle ${
+                  showAllTrendValues ? "active" : ""
+                }`}
+                aria-pressed={showAllTrendValues}
+                onClick={() => setShowAllTrendValues((visible) => !visible)}
+              >
+                모든 값 표시
+              </button>
             </div>
           </div>
-          <WeeklyTrend showroom={selected} metric={trendMetric} />
+          <WeeklyTrend
+            showroom={selected}
+            metric={trendMetric}
+            showAllValues={showAllTrendValues}
+          />
         </article>
       </section>
 
@@ -1429,6 +1556,9 @@ export default function Dashboard({
             <div>
               <span className="eyebrow">COMPETITIVE POSITION</span>
               <h2>내 전시장의 경쟁 위치</h2>
+              <small className="comparison-subtitle">
+                전국 {dashboard.meta.showroomCount}개점 기준
+              </small>
             </div>
           </div>
           <div className="comparison-controls">

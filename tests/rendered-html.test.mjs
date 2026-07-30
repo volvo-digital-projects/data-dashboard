@@ -82,8 +82,12 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
   assert.match(visibleHtml, /Q3[\s\S]*Q4/);
-  assert.match(visibleHtml, /누적 평균[\s\S]*298\.8/);
-  assert.match(visibleHtml, /전국 평균 <strong>305\.4/);
+  assert.match(visibleHtml, /Q2 종합 점수[\s\S]*294\.9/);
+  assert.match(visibleHtml, /상반기 누적 평균 298\.8점/);
+  assert.match(visibleHtml, /Q2 전국 평균 <strong>305\.4/);
+  assert.match(visibleHtml, /Q2 전국 평균 대비 <strong>-10\.5/);
+  assert.match(visibleHtml, /전국 순위 <strong>32위 \/ 39개점/);
+  assert.doesNotMatch(visibleHtml, /상위 83%/);
   assert.doesNotMatch(html, /class="combat-gauge"/);
   assert.doesNotMatch(visibleHtml, /WATCH|집중 관리 레벨|52-WEEK PULSE/);
   assert.doesNotMatch(visibleHtml, /카드를 선택하면 주간 흐름이 바뀝니다/);
@@ -99,7 +103,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /52주 스코어 추이/);
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
   assert.match(html, /class="trend-selector"/);
-  assert.equal((html.match(/class="trend-selector-icon"/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /class="trend-selector-icon"/);
+  assert.match(html, /class="show-values-toggle /);
+  assert.match(visibleHtml, /모든 값 표시/);
   assert.match(html, /aria-label="VOC 52주 추이 보기" aria-pressed="true"/);
   assert.doesNotMatch(html, /class="segmented"/);
   for (let week = 1; week <= 52; week += 1) {
@@ -117,12 +123,23 @@ test("server-renders the selected CDSID dashboard", async () => {
     Array.from({ length: 26 }, (_, index) => `W${String(index + 1).padStart(2, "0")}`)
       .filter((week) => week !== "W22"),
   );
-  assert.equal((html.match(/class="actual-point-value"/g) ?? []).length, 25);
-  assert.equal((html.match(/class="national-point-value"/g) ?? []).length, 26);
+  const actualLabelCount = (html.match(/class="actual-point-value"/g) ?? []).length;
+  assert.ok(actualLabelCount > 0 && actualLabelCount < 25);
+  assert.equal((html.match(/class="national-point-value"/g) ?? []).length, 1);
   assert.match(html, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
+  assert.match(html, /class="future-window"/);
+  assert.match(visibleHtml, /Q3 평가 진행 중/);
+  assert.match(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);
   assert.match(html, /class="coverage-line national"/);
+  assert.equal((html.match(/class="comparison-bar"/g) ?? []).length, 3);
+  assert.equal((html.match(/<b aria-hidden="true" style="left:/g) ?? []).length, 3);
+  assert.match(visibleHtml, /내 전시장/);
+  assert.match(visibleHtml, /전국 39개점 기준/);
+  assert.match(html, /aria-label="VOC 분기 평가점수"/);
+  assert.match(html, /경고: Q2 전국 평균 대비 5점 이상 미달/);
+  assert.match(visibleHtml, /Q2 전국 평균 대비[\s\S]*?-7\.9점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -212,13 +229,18 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.combat-main\s*\{[\s\S]*?gap: 0/);
   assert.match(
     css,
-    /\.cumulative-stack\s*\{[\s\S]*?min-width: 124px[\s\S]*?padding-left: 10px/,
+    /\.combat-summary-stack\s*\{[\s\S]*?min-width: 124px[\s\S]*?padding-left: 10px/,
   );
   assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 24px/);
   assert.match(css, /\.quarter-score-row > strong[\s\S]*?font-size: 14px/);
   assert.doesNotMatch(css, /\.combat-gauge/);
   assert.doesNotMatch(css, /\.tier-badge/);
-  assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 4px/);
+  assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 6px/);
+  assert.match(css, /--navy: #123747/);
+  assert.match(css, /--blue: #397a9b/);
+  assert.match(css, /--warning: #c64e45/);
+  assert.match(css, /--caution: #b7791f/);
+  assert.match(css, /--paper: #f4f6f5/);
   assert.match(
     css,
     /\.metric-code\s*\{[\s\S]*?font-family: var\(--font-volvo\)[\s\S]*?font-size: 14px/,
@@ -230,6 +252,16 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.actual-point-value,[\s\S]*?\.national-point-value[\s\S]*?font-size: 8px/);
   assert.match(css, /\.actual-point-value\s*\{[\s\S]*?fill: var\(--blue\)/);
   assert.match(css, /\.national-point-value\s*\{[\s\S]*?fill: var\(--warning\)/);
+  assert.match(
+    css,
+    /\.metric-card\.warning\.active\s*\{[\s\S]*?border-color: var\(--line\)[\s\S]*?box-shadow: inset 0 3px 0 var\(--warning\)/,
+  );
+  assert.match(
+    css,
+    /\.trend-selector button\.active\s*\{[\s\S]*?color: var\(--white\)[\s\S]*?background: var\(--navy\)/,
+  );
+  assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 40px/);
+  assert.match(css, /\.comparison-bar b\s*\{[\s\S]*?background: var\(--warning\)/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
