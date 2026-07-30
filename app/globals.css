@@ -3221,10 +3221,24 @@ input:focus-visible,
 .quarter-score-row > i b {
   border-radius: inherit;
   background: #7fa9bf;
+  transform-origin: left center;
+  animation: progress-fill 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quarter-score-row.current > i b {
   background: #b6d6e4;
+}
+
+.quarter-score-row:nth-child(3) > i b {
+  animation-delay: 90ms;
+}
+
+.quarter-score-row:nth-child(4) > i b {
+  animation-delay: 180ms;
+}
+
+.quarter-score-row:nth-child(5) > i b {
+  animation-delay: 270ms;
 }
 
 .quarter-score-row > strong {
@@ -3414,6 +3428,16 @@ input:focus-visible,
 .metric-track span {
   border-radius: inherit;
   background: var(--good);
+  transform-origin: left center;
+  animation: progress-fill 1100ms cubic-bezier(0.16, 1, 0.3, 1) 130ms both;
+}
+
+.metric-card:nth-child(2) .metric-track span {
+  animation-delay: 190ms;
+}
+
+.metric-card:nth-child(3) .metric-track span {
+  animation-delay: 250ms;
 }
 
 .metric-track i {
@@ -4084,6 +4108,20 @@ input:focus-visible,
   }
 }
 
+@keyframes progress-fill {
+  0% {
+    opacity: 0.5;
+    transform: scaleX(0);
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
 @media (max-width: 1240px) {
   .dashboard {
     padding-inline: 24px;
@@ -4221,7 +4259,9 @@ input:focus-visible,
   .national-average-point,
   .actual-week-point,
   .actual-quarter-point,
-  .chart-tooltip {
+  .chart-tooltip,
+  .quarter-score-row > i b,
+  .metric-track span {
     animation: none;
   }
 

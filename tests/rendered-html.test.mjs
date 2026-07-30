@@ -290,6 +290,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 210px/);
   assert.match(css, /\.chart-tooltip\s*\{[\s\S]*?border-radius: 12px/);
   assert.match(css, /\.hover-guide\s*\{[\s\S]*?stroke-dasharray: 3 4/);
+  assert.match(
+    css,
+    /\.quarter-score-row > i b\s*\{[\s\S]*?animation: progress-fill 1100ms cubic-bezier\(0\.16, 1, 0\.3, 1\) both/,
+  );
+  assert.match(
+    css,
+    /\.metric-track span\s*\{[\s\S]*?animation: progress-fill 1100ms cubic-bezier\(0\.16, 1, 0\.3, 1\) 130ms both/,
+  );
+  assert.match(css, /@keyframes progress-fill\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/);
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);
   assert.match(css, /\.comparison-table\s*\{[\s\S]*?display: grid[\s\S]*?gap: 8px/);
   assert.match(css, /\.table-row\.selected\s*\{[\s\S]*?background: #eef5f8/);
