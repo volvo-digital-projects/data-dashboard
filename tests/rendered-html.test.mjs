@@ -70,8 +70,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /class="comparison-head table-row"/);
   assert.match(visibleHtml, /권역별/);
   assert.match(visibleHtml, /<h1>볼보 강남 대치<\/h1>/);
-  assert.match(visibleHtml, /볼보 강남 대치 실제값 · W26 100\.0점 · 입력 12주/);
-  assert.match(visibleHtml, /전국 주간 평균 · W26 91\.8점 · 평균 미달 6주/);
+  assert.match(visibleHtml, /볼보 강남 대치 실제값 · W26 100\.0점 · 입력 25주/);
+  assert.match(visibleHtml, /전국 주간 평균 · W26 91\.8점 · 평균 미달 11주/);
   assert.match(visibleHtml, /52주 스코어 추이/);
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
   assert.match(html, /class="trend-selector"/);
@@ -83,7 +83,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   }
   assert.match(html, /r="4.5" class="national-average-point"/);
   assert.match(html, /width="9" height="9" class="actual-week-point"/);
-  assert.equal((html.match(/class="actual-point-value"/g) ?? []).length, 12);
+  assert.equal((html.match(/class="actual-point-value"/g) ?? []).length, 25);
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);
   assert.match(html, /class="coverage-line national"/);
@@ -141,6 +141,13 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
   assert.equal(weekly.meta.cxLatestWeek, 30);
   assert.equal(Object.keys(weekly.voc.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.cx.byCdsid).length, 39);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][0], 100);
+  assert.equal(
+    weekly.voc.byCdsid["6KR6834"]
+      .slice(0, 26)
+      .filter((value) => value !== null).length,
+    25,
+  );
   assert.equal(weekly.voc.byCdsid["6KR6834"][13], 64);
   assert.equal(weekly.voc.byCdsid["6KR6834"][16], 64);
   assert.equal(weekly.cx.byCdsid["6KR6834"][0], 80);
