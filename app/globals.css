@@ -145,7 +145,7 @@ input:focus-visible {
 .login-photo {
   position: absolute;
   inset: 0;
-  background-image: url("/volvo-dashboard-cover.png");
+  background-image: url("/volvo-dashboard-cover-poses-v2.png");
   background-position: 64% center;
   background-size: cover;
   filter: brightness(1.04) saturate(0.98);
