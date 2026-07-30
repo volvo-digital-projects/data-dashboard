@@ -53,6 +53,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   for (let week = 1; week <= 52; week += 1) {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
+  assert.match(visibleHtml, /Q1/);
+  assert.match(visibleHtml, /Q4/);
+  assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 

@@ -972,10 +972,8 @@ input:focus-visible {
 }
 
 .content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 0.7fr);
-  gap: 18px;
   margin-top: 18px;
+  scroll-margin-top: 18px;
 }
 
 .panel {
@@ -1012,9 +1010,59 @@ input:focus-visible {
   margin-top: 16px;
 }
 
+.trend-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: #aab7bc #edf0ee;
+  scrollbar-width: thin;
+}
+
+.trend-scroll:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.trend-canvas {
+  min-width: 1180px;
+}
+
+.quarter-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 24px 2px;
+  border-bottom: 1px solid #dfe4e1;
+}
+
+.quarter-band span {
+  min-height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 9px;
+  color: var(--muted);
+  border-left: 1px solid #dfe4e1;
+  font-size: 8px;
+}
+
+.quarter-band span:last-child {
+  border-right: 1px solid #dfe4e1;
+}
+
+.quarter-band strong {
+  color: var(--navy);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.quarter-band small {
+  color: #8b989d;
+  font-size: 7px;
+}
+
 .trend-chart {
   width: 100%;
-  height: 210px;
+  height: 224px;
   display: block;
   overflow: visible;
 }
@@ -1034,7 +1082,6 @@ input:focus-visible {
   stroke-width: 1;
 }
 
-.week-label,
 .average-label,
 .point-value {
   fill: var(--muted);
@@ -1042,22 +1089,7 @@ input:focus-visible {
   font-size: 10px;
 }
 
-.week-label {
-  font-size: 7px;
-  letter-spacing: -0.02em;
-}
-
-.week-slot.entered .week-label {
-  fill: #546975;
-  font-weight: 700;
-}
-
-.week-slot.pending .week-label {
-  fill: #aeb7b3;
-}
-
-.week-slot.pending .week-tick,
-.week-slot.pending .week-grid {
+.week-tick.pending {
   opacity: 0.48;
 }
 
@@ -1121,6 +1153,61 @@ input:focus-visible {
   fill: var(--blue);
 }
 
+.week-ruler {
+  display: grid;
+  grid-template-columns: repeat(52, minmax(0, 1fr));
+  margin: -3px 24px 16px;
+  border-left: 1px solid #dfe4e1;
+  border-bottom: 1px solid #dfe4e1;
+}
+
+.week-ruler span {
+  min-width: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #a6afab;
+  border-top: 3px solid transparent;
+  border-right: 1px solid #e5e9e6;
+  background: #f5f6f4;
+  font-family: var(--font-ui);
+  font-size: 7px;
+  letter-spacing: -0.04em;
+  cursor: default;
+}
+
+.week-ruler span:nth-child(13n) {
+  border-right-color: #9ca9ae;
+}
+
+.week-ruler span.entered {
+  color: #385463;
+  border-top-color: var(--blue);
+  background: #eef4f5;
+  font-weight: 800;
+}
+
+.week-ruler span.warning {
+  color: #9e382e;
+  border-top-color: var(--warning);
+  background: var(--warning-soft);
+  font-weight: 800;
+}
+
+.week-ruler span.missing {
+  color: #8e9894;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #f0f2ef 0,
+      #f0f2ef 3px,
+      #e6e9e6 3px,
+      #e6e9e6 4px
+    );
+}
+
 .point-value {
   fill: var(--ink);
   font-size: 11px;
@@ -1163,111 +1250,6 @@ input:focus-visible {
 .coverage-dot.warning {
   border-color: var(--warning);
   background: var(--warning);
-}
-
-.correction-panel {
-  display: flex;
-  flex-direction: column;
-}
-
-.issue-count {
-  width: 29px;
-  height: 29px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: var(--warning);
-  background: var(--warning-soft);
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.issue-list {
-  margin: 16px 0;
-}
-
-.issue-item {
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  border-bottom: 1px solid #e7e9e6;
-}
-
-.issue-item:first-child {
-  border-top: 1px solid #e7e9e6;
-}
-
-.issue-item strong,
-.issue-item span {
-  display: block;
-}
-
-.issue-item strong {
-  font-size: 11px;
-}
-
-.issue-item div > span {
-  margin-top: 3px;
-  color: var(--warning);
-  font-size: 9px;
-}
-
-.empty-issues {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  min-height: 150px;
-  text-align: center;
-}
-
-.empty-issues > span {
-  width: 32px;
-  height: 32px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 10px;
-  border-radius: 50%;
-  color: white;
-  background: var(--good);
-}
-
-.empty-issues strong {
-  font-size: 11px;
-}
-
-.empty-issues p {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.mail-action {
-  min-height: 43px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  margin-top: auto;
-  color: white;
-  background: var(--navy);
-  font-size: 11px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.mail-action:hover {
-  background: var(--navy-2);
-}
-
-.mail-helper {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 8px;
-  line-height: 1.55;
-  text-align: center;
 }
 
 .comparison-panel {
@@ -1943,8 +1925,7 @@ input:focus-visible {
     padding: 0 24px 26px;
   }
 
-  .hero-grid,
-  .content-grid {
+  .hero-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2271,17 +2252,7 @@ input:focus-visible {
   }
 
   .content-grid {
-    display: flex;
-    flex-direction: column;
     margin-top: 14px;
-  }
-
-  .correction-panel {
-    order: 1;
-  }
-
-  .trend-panel {
-    order: 2;
   }
 
   .section-heading h2 {
@@ -2294,7 +2265,11 @@ input:focus-visible {
   }
 
   .trend-chart {
-    height: 168px;
+    height: 200px;
+  }
+
+  .trend-canvas {
+    min-width: 1040px;
   }
 
   .comparison-panel {

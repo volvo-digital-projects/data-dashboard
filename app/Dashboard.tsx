@@ -280,10 +280,16 @@ function WeeklyTrend({
     Math.max(...chartValues, metricMeta[metric].max * 0.4) + 8,
   );
   const min = Math.max(0, Math.min(...chartValues) - 8);
-  const x = (week: number) => 40 + ((week - 1) / 51) * 960;
-  const y = (value: number) => 145 - ((value - min) / Math.max(1, max - min)) * 112;
+  const x = (week: number) => 28 + ((week - 1) / 51) * 1304;
+  const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
-  const quarterWeeks = new Set([1, 13, 26, 39, 52]);
+  const quarterDividers = [13.5, 26.5, 39.5];
+  const quarterLabels = [
+    { label: "Q1", range: "W01–W13" },
+    { label: "Q2", range: "W14–W26" },
+    { label: "Q3", range: "W27–W39" },
+    { label: "Q4", range: "W40–W52" },
+  ];
   const averageAt = (week: number) =>
     averageSeries?.[week - 1] ?? average;
   const warningCount = rawPoints.filter(
@@ -341,133 +347,176 @@ function WeeklyTrend({
 
   return (
     <div className="trend-wrap">
-      <svg
-        className="trend-chart"
-        viewBox="0 0 1040 190"
-        role="img"
-        aria-label={`${metricMeta[metric].label} W01부터 W52까지 연간 데이터 입력 현황`}
-      >
-        <line x1="40" x2="1000" y1="150" y2="150" className="week-axis" />
-        {weeks.map((week) => {
-          const isQuarterWeek = quarterWeeks.has(week);
-          const isEnteredPeriod = week <= latestWeek;
-
-          return (
-            <g
-              key={week}
-              className={`week-slot ${isEnteredPeriod ? "entered" : "pending"}`}
-            >
+      <div className="trend-scroll" tabIndex={0} aria-label="52주 성과 그래프">
+        <div className="trend-canvas">
+          <div className="quarter-band" aria-hidden="true">
+            {quarterLabels.map((quarter) => (
+              <span key={quarter.label}>
+                <strong>{quarter.label}</strong>
+                <small>{quarter.range}</small>
+              </span>
+            ))}
+          </div>
+          <svg
+            className="trend-chart"
+            viewBox="0 0 1360 200"
+            role="img"
+            aria-label={`${metricMeta[metric].label} W01부터 W52까지 연간 데이터 입력 현황`}
+          >
+            <line x1="28" x2="1332" y1="170" y2="170" className="week-axis" />
+            {weeks.map((week) => (
               <line
+                key={week}
                 x1={x(week)}
                 x2={x(week)}
-                y1={isQuarterWeek ? 18 : 142}
-                y2="150"
-                className={isQuarterWeek ? "week-grid" : "week-tick"}
-              />
-              <text x={x(week)} y="178" textAnchor="middle" className="week-label">
-                {`W${String(week).padStart(2, "0")}`}
-              </text>
-            </g>
-          );
-        })}
-        {nationalSegments.length ? (
-          <>
-            {nationalSegments.map((segment, index) => (
-              <polyline
-                key={`national-${index}`}
-                points={segment
-                  .map((point) => `${x(point.week)},${y(point.value)}`)
-                  .join(" ")}
-                className="average-trend-line"
+                y1="165"
+                y2="170"
+                className={`week-tick ${week <= latestWeek ? "entered" : "pending"}`}
               />
             ))}
-            {averagePoints.length > 0 && (
-              <text
-                x="998"
-                y={Math.max(14, y(averagePoints.at(-1)!.value) - 7)}
-                textAnchor="end"
-                className="average-label"
-              >
-                전국 평균 {displayNumber(averagePoints.at(-1)!.value)}
-              </text>
-            )}
-          </>
-        ) : (
-          <>
-            <line
-              x1="40"
-              x2="1000"
-              y1={y(average)}
-              y2={y(average)}
-              className="average-line"
-            />
-            <text
-              x="998"
-              y={y(average) - 7}
-              textAnchor="end"
-              className="average-label"
-            >
-              전국 평균 {displayNumber(average)}
-            </text>
-          </>
-        )}
-        {weeklySeries && rawPoints.length > 1 && (
-          <polyline
-            points={rawPoints
-              .map((point) => `${x(point.week)},${y(point.value)}`)
-              .join(" ")}
-            className="trend-gap-line"
-          />
-        )}
-        {storeSegments.map(
-          (segment, index) =>
-            segment.length > 1 && (
-              <polyline
-                key={`store-${index}`}
-                points={segment
-                  .map((point) => `${x(point.week)},${y(point.value)}`)
-                  .join(" ")}
-                className="trend-line"
+            {quarterDividers.map((week) => (
+              <line
+                key={week}
+                x1={x(week)}
+                x2={x(week)}
+                y1="18"
+                y2="170"
+                className="week-grid"
               />
-            ),
-        )}
-        {rawPoints.map((point) => (
-          <g key={`${point.week}-${point.label}`}>
-            <circle
-              cx={x(point.week)}
-              cy={y(point.value)}
-              r={highlightedWeeks.has(point.week) ? "5.5" : "3.5"}
-              className={`trend-point ${
-                point.value < averageAt(point.week) ? "warning" : "good"
-              }`}
-            >
-              <title>
-                {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
-                  averageAt(point.week),
-                )}점`}
-              </title>
-            </circle>
-            {highlightedWeeks.has(point.week) && (
+            ))}
+            {nationalSegments.length ? (
               <>
-                <circle
-                  cx={x(point.week)}
-                  cy={y(point.value)}
-                  r="2"
-                  className="trend-point-core"
+                {nationalSegments.map((segment, index) => (
+                  <polyline
+                    key={`national-${index}`}
+                    points={segment
+                      .map((point) => `${x(point.week)},${y(point.value)}`)
+                      .join(" ")}
+                    className="average-trend-line"
+                  />
+                ))}
+                {averagePoints.length > 0 && (
+                  <text
+                    x={x(averagePoints.at(-1)!.week)}
+                    y={Math.max(14, y(averagePoints.at(-1)!.value) - 7)}
+                    textAnchor="end"
+                    className="average-label"
+                  >
+                    전국 평균 {displayNumber(averagePoints.at(-1)!.value)}
+                  </text>
+                )}
+              </>
+            ) : (
+              <>
+                <line
+                  x1="28"
+                  x2="1332"
+                  y1={y(average)}
+                  y2={y(average)}
+                  className="average-line"
                 />
                 <text
-                  x={x(point.week)}
-                  y={Math.max(14, y(point.value) - 11)}
-                  textAnchor="middle"
-                  className="point-value"
+                  x="1330"
+                  y={y(average) - 7}
+                  textAnchor="end"
+                  className="average-label"
                 >
-                  {displayNumber(point.value)}
+                  전국 평균 {displayNumber(average)}
                 </text>
               </>
             )}
-          </g>
-        ))}
-      </svg>
+            {weeklySeries && rawPoints.length > 1 && (
+              <polyline
+                points={rawPoints
+                  .map((point) => `${x(point.week)},${y(point.value)}`)
+                  .join(" ")}
+                className="trend-gap-line"
+              />
+            )}
+            {storeSegments.map(
+              (segment, index) =>
+                segment.length > 1 && (
+                  <polyline
+                    key={`store-${index}`}
+                    points={segment
+                      .map((point) => `${x(point.week)},${y(point.value)}`)
+                      .join(" ")}
+                    className="trend-line"
+                  />
+                ),
+            )}
+            {rawPoints.map((point) => (
+              <g key={`${point.week}-${point.label}`}>
+                <circle
+                  cx={x(point.week)}
+                  cy={y(point.value)}
+                  r={highlightedWeeks.has(point.week) ? "5.5" : "3.5"}
+                  className={`trend-point ${
+                    point.value < averageAt(point.week) ? "warning" : "good"
+                  }`}
+                >
+                  <title>
+                    {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
+                      averageAt(point.week),
+                    )}점`}
+                  </title>
+                </circle>
+                {highlightedWeeks.has(point.week) && (
+                  <>
+                    <circle
+                      cx={x(point.week)}
+                      cy={y(point.value)}
+                      r="2"
+                      className="trend-point-core"
+                    />
+                    <text
+                      x={x(point.week)}
+                      y={Math.max(14, y(point.value) - 11)}
+                      textAnchor="middle"
+                      className="point-value"
+                    >
+                      {displayNumber(point.value)}
+                    </text>
+                  </>
+                )}
+              </g>
+            ))}
+          </svg>
+          <div className="week-ruler" aria-label="W01부터 W52까지 주차">
+            {weeks.map((week) => {
+              const value = weeklySeries?.[week - 1] ?? null;
+              const isEntered = value !== null;
+              const isMissing = week <= latestWeek && value === null;
+              const isWarning =
+                value !== null && value < averageAt(week);
+              const status = isWarning
+                ? "warning"
+                : isEntered
+                  ? "entered"
+                  : isMissing
+                    ? "missing"
+                    : "future";
+              const label = `W${String(week).padStart(2, "0")}`;
+
+              return (
+                <span
+                  key={week}
+                  className={status}
+                  title={
+                    value === null
+                      ? `${label} ${isMissing ? "데이터 없음" : "입력 예정"}`
+                      : `${label} ${displayNumber(value)}점 · 전국 평균 ${displayNumber(
+                          averageAt(week),
+                        )}점`
+                  }
+                >
+                  {label}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </div>
       <div className="data-coverage">
         <span>
           <i className="coverage-dot filled" /> 최신 W
@@ -985,61 +1034,6 @@ export default function Dashboard({
   const combatDelta = combat - dashboard.meta.combatAverage;
   const gaugeAngle = Math.min(360, Math.max(0, (combat / dashboard.meta.combatMax) * 360));
 
-  const correctiveItems = [
-    {
-      label: "V3S",
-      value: selected.v3s,
-      average: dashboard.averages.v3s,
-      appeal: "possible" as const,
-    },
-    {
-      label: "VOC",
-      value: selected.voc,
-      average: dashboard.averages.voc,
-      appeal: "partial" as const,
-    },
-    {
-      label: "출고 만족도",
-      value: selected.delivery,
-      average: dashboard.averages.delivery,
-      appeal: "locked" as const,
-    },
-    {
-      label: "시승 만족도",
-      value: selected.testDrive,
-      average: dashboard.averages.testDrive,
-      appeal: "locked" as const,
-    },
-    {
-      label: "긴급 경보",
-      value: selected.emergency,
-      average: dashboard.averages.emergency,
-      appeal: "possible" as const,
-    },
-  ].filter(
-    (item) =>
-      item.value !== null &&
-      item.average !== null &&
-      (item.value as number) < (item.average as number),
-  );
-
-  const mailSubject = `[DSC 보정 요청] ${selected.showroom} / ${dashboard.meta.quarter}`;
-  const mailBody = [
-    "DSC KPI 사후 보정 검토를 요청드립니다.",
-    "",
-    `전시장: ${selected.showroom}`,
-    `지점장: ${selected.manager}`,
-    `CDSID: ${selected.cdsid}`,
-    `기준: ${dashboard.meta.quarter} · ${dashboard.meta.sourceWeek}`,
-    "",
-    `V3S: ${displayNumber(selected.v3s)} (평균 ${displayNumber(dashboard.averages.v3s)})`,
-    `VOC: ${displayNumber(selected.voc)} (평균 ${displayNumber(dashboard.averages.voc)})`,
-    `CX Index: ${displayNumber(selected.cx)} (평균 ${displayNumber(dashboard.averages.cx)})`,
-    "",
-    "보정 요청 사유 및 증빙:",
-  ].join("\r\n");
-  const mailto = `mailto:hanjh@edutnc.com,hlee1@volvocars.com?cc=tnc@edutnc.com&subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-
   return (
     <main className="dashboard">
       <header className="topbar">
@@ -1211,7 +1205,7 @@ export default function Dashboard({
             </strong>
           </div>
           <nav aria-label="모바일 빠른 이동">
-            <a href="#correction">조치</a>
+            <a href="#weekly-trend">주간</a>
             <a href="#criteria">평가 기준</a>
           </nav>
         </div>
@@ -1225,11 +1219,11 @@ export default function Dashboard({
           <div>
             <strong>전국 평균 미달 지표 {warningCount}개 감지</strong>
             <p>
-              평균선 아래 지표를 먼저 확인하세요. 보정 가능한 항목은 즉시 검토 요청할
-              수 있습니다.
+              평균선 아래 지표를 먼저 확인하세요. 주간 흐름에서 하락이 시작된
+              시점을 확인할 수 있습니다.
             </p>
           </div>
-          <a href="#correction">리스크 확인 →</a>
+          <a href="#weekly-trend">주간 흐름 확인 →</a>
         </section>
       ) : (
         <section className="clear-banner">
@@ -1315,7 +1309,7 @@ export default function Dashboard({
         </div>
       </section>
 
-      <section className="content-grid">
+      <section className="content-grid" id="weekly-trend">
         <article className="panel trend-panel">
           <div className="section-heading">
             <div>
@@ -1336,49 +1330,6 @@ export default function Dashboard({
             </div>
           </div>
           <WeeklyTrend showroom={selected} metric={trendMetric} />
-        </article>
-
-        <article className="panel correction-panel" id="correction">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">ACTION CENTER</span>
-              <h2>보정 검토 센터</h2>
-            </div>
-            <span className="issue-count">{correctiveItems.length}</span>
-          </div>
-          {correctiveItems.length ? (
-            <div className="issue-list">
-              {correctiveItems.slice(0, 4).map((item) => {
-                const delta = (item.value as number) - (item.average as number);
-                return (
-                  <div className="issue-item" key={item.label}>
-                    <div>
-                      <strong>{item.label}</strong>
-                      <span>
-                        {displayNumber(item.value)} · 평균 대비 {delta.toFixed(1)}
-                      </span>
-                    </div>
-                    <AppealBadge type={item.appeal} />
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="empty-issues">
-              <span aria-hidden="true">✓</span>
-              <strong>현재 평균 미달 항목이 없습니다</strong>
-              <p>주간 이상 신호가 생기면 여기에 자동으로 표시됩니다.</p>
-            </div>
-          )}
-          <a className="mail-action" href={mailto}>
-            <span aria-hidden="true">↗</span>
-            Outlook으로 보정 요청
-          </a>
-          <p className="mail-helper">
-            TO: hanjh@edutnc.com · hlee1@volvocars.com
-            <br />
-            CC: tnc@edutnc.com
-          </p>
         </article>
       </section>
 
