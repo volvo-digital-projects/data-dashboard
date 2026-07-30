@@ -36,14 +36,14 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: "Volvo Data Dashboard",
-      description: "Showroom Power Index · 볼보 관리자 전용",
+      description: "볼보 관리자 전용 데이터 대시보드",
       type: "website",
       images: [{ url: socialImage, width: 1536, height: 1024 }],
     },
     twitter: {
       card: "summary_large_image",
       title: "Volvo Data Dashboard",
-      description: "Showroom Power Index · 볼보 관리자 전용",
+      description: "볼보 관리자 전용 데이터 대시보드",
       images: [socialImage],
     },
   };

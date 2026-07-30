@@ -1230,7 +1230,6 @@ export default function Dashboard({
       <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
         <div className="mobile-power">
           <div>
-            <span className="eyebrow">SHOWROOM POWER</span>
             <strong>{displayNumber(combat)}</strong>
             <small>/ {dashboard.meta.combatMax}</small>
           </div>

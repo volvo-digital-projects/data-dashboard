@@ -40,7 +40,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /DSC COMMAND/);
   assert.doesNotMatch(
     visibleHtml,
-    /SHOWROOM POWER INDEX|전시장 전투력|3대 핵심 지표/,
+    /SHOWROOM POWER(?: INDEX)?|전시장 전투력|3대 핵심 지표/,
   );
   assert.doesNotMatch(html, /CORE SIGNALS/);
   assert.doesNotMatch(html, /class="topbar"/);
