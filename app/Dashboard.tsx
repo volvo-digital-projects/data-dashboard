@@ -1155,11 +1155,7 @@ export default function Dashboard({
 
       <section className="identity-strip">
         <div>
-          <span className="eyebrow">MY SHOWROOM · {selected.cdsid}</span>
-          <h1>
-            {selected.showroom.replace("볼보 ", "")}
-            <small>전시장의 현재 위상</small>
-          </h1>
+          <h1>{selected.showroom.replace("볼보 ", "")}</h1>
           <div className="update-status">
             <i aria-hidden="true" />
             <time>

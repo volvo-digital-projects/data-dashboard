@@ -385,19 +385,11 @@ input:focus-visible {
 }
 
 .identity-strip h1 {
-  margin: 7px 0 0;
+  margin: 0;
   font-family: var(--font-ui);
   font-size: clamp(30px, 3vw, 46px);
   font-weight: 400;
   letter-spacing: -0.04em;
-}
-
-.identity-strip h1 small {
-  margin-left: 12px;
-  color: var(--muted);
-  font-family: inherit;
-  font-size: 15px;
-  letter-spacing: -0.02em;
 }
 
 .update-status {
@@ -1986,11 +1978,6 @@ input:focus-visible {
 
   .identity-strip h1 {
     font-size: 20px;
-  }
-
-  .identity-strip h1 small {
-    margin-left: 5px;
-    font-size: 10px;
   }
 
   .identity-strip dl {
