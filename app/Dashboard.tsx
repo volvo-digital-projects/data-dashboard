@@ -724,11 +724,6 @@ function WeeklyTrend({
                     ? "missing"
                     : "future";
               const label = `W${String(week).padStart(2, "0")}`;
-              const isMajorWeek =
-                week === 1 ||
-                (week - 1) % 4 === 0 ||
-                [13, 26, 39, 52].includes(week);
-
               return (
                 <span
                   key={week}
@@ -742,7 +737,7 @@ function WeeklyTrend({
                         )}점`
                   }
                 >
-                  {isMajorWeek ? label : ""}
+                  {label}
                 </span>
               );
             })}

@@ -236,6 +236,8 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /width=\{activeQuarterEnd - activeQuarterStart\}/,
   );
+  assert.doesNotMatch(dashboardSource, /isMajorWeek/);
+  assert.match(dashboardSource, /\{label\}\s*<\/span>/);
   assert.match(css, /\.quarter-band\s*\{[\s\S]*?margin: 0 2\.0588235%/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
   assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);
