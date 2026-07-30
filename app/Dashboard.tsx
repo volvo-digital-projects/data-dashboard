@@ -1309,7 +1309,6 @@ export default function Dashboard({
         <div className="kpi-column">
           <div className="section-heading compact">
             <div>
-              <span className="eyebrow">CORE SIGNALS</span>
               <h2>3대 핵심 지표</h2>
             </div>
           </div>

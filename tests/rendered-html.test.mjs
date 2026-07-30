@@ -40,6 +40,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /DSC COMMAND/);
   assert.match(html, /전시장 전투력/);
   assert.match(html, /3대 핵심 지표/);
+  assert.doesNotMatch(html, /CORE SIGNALS/);
   assert.match(html, /href="\/dashboard\/6KR6834\/criteria"/);
   assert.doesNotMatch(html, /class="topbar"/);
   assert.match(html, /class="identity-tools"/);
