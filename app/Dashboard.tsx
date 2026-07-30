@@ -464,6 +464,7 @@ function WeeklyTrend({
           <svg
             className="trend-chart"
             viewBox="0 0 1360 200"
+            preserveAspectRatio="none"
             role="img"
             aria-label={`${metricMeta[metric].label} W01부터 W52까지 연간 데이터 입력 현황`}
             onPointerMove={(event) => {
