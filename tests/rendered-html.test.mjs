@@ -43,6 +43,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /href="\/dashboard\/6KR6834\/criteria"/);
   assert.doesNotMatch(html, /class="topbar"/);
   assert.match(html, /class="identity-tools"/);
+  assert.match(html, /identity-profile[\s\S]*?지점장[\s\S]*?김길성/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(html, /최근 업데이트/);
   assert.match(html, /V3S/);
@@ -135,6 +136,8 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
   assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 58px/);
   assert.match(css, /\.identity-strip > div:first-child/);
+  assert.match(css, /\.identity-strip dl div[\s\S]*?padding: 0 10px 0 0/);
+  assert.match(css, /\.identity-icon[\s\S]*?width: 30px[\s\S]*?height: 100%/);
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);

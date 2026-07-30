@@ -443,31 +443,31 @@ input:focus-visible {
 
 .identity-strip dl {
   display: flex;
-  gap: 0;
+  gap: 6px;
   margin: 0;
 }
 
 .identity-strip dl div {
-  min-width: 104px;
+  min-width: 112px;
   min-height: 38px;
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
+  grid-template-columns: 30px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
   column-gap: 8px;
-  padding: 3px 10px;
-  border: 0;
-  border-left: 1px solid rgba(16, 42, 57, 0.11);
-  background: transparent;
+  padding: 0 10px 0 0;
+  border: 1px solid rgba(16, 42, 57, 0.11);
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .identity-icon {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 100%;
+  min-height: 36px;
   grid-row: 1 / span 2;
   display: grid;
   place-items: center;
-  align-self: center;
+  align-self: stretch;
   color: var(--blue);
   background: var(--blue-soft);
   font-family: var(--font-ui);
@@ -518,16 +518,34 @@ input:focus-visible {
 }
 
 .identity-profile {
-  width: 30px;
-  min-width: 30px;
-  padding: 0;
+  width: 54px;
+  min-width: 54px;
+  height: 38px;
+  align-content: center;
+  justify-items: start;
+  gap: 1px;
+  padding: 0 8px;
   border: 0;
-  border-radius: 50%;
+  border-radius: 0;
+  text-align: left;
 }
 
-.identity-profile .avatar {
-  width: 30px;
-  height: 30px;
+.identity-profile-role,
+.identity-profile strong {
+  display: block;
+  line-height: 1.1;
+}
+
+.identity-profile-role {
+  color: var(--muted);
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.identity-profile strong {
+  color: var(--ink);
+  font-size: 10px;
+  white-space: nowrap;
 }
 
 .hero-grid {
@@ -2086,7 +2104,7 @@ input:focus-visible {
 
   .identity-strip > div:first-child {
     width: 100%;
-    padding-right: 104px;
+    padding-right: 128px;
   }
 
   .identity-tools {
@@ -2107,9 +2125,15 @@ input:focus-visible {
   .identity-strip dl div {
     min-width: 0;
     flex: 1;
-    grid-template-columns: 26px minmax(0, 1fr);
+    grid-template-columns: 28px minmax(0, 1fr);
     column-gap: 6px;
-    padding: 7px;
+    padding: 0 6px 0 0;
+  }
+
+  .identity-icon {
+    width: 28px;
+    height: 100%;
+    min-height: 36px;
   }
 
   .identity-strip dt {

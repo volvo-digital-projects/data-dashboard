@@ -1150,7 +1150,8 @@ export default function Dashboard({
             aria-expanded={profileOpen}
             aria-label={`${selected.manager} 지점장 프로필`}
           >
-            <span className="avatar">{selected.manager.slice(0, 1)}</span>
+            <span className="identity-profile-role">지점장</span>
+            <strong>{selected.manager}</strong>
           </button>
         </div>
         {profileOpen && (
