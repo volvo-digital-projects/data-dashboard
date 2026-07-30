@@ -57,6 +57,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
   assert.match(visibleHtml, /전국 평균 <strong>305\.4/);
   assert.doesNotMatch(html, /class="combat-gauge"/);
+  assert.doesNotMatch(visibleHtml, /WATCH|집중 관리 레벨|52-WEEK PULSE/);
   assert.doesNotMatch(visibleHtml, /카드를 선택하면 주간 흐름이 바뀝니다/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
@@ -155,6 +156,7 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 28px/);
   assert.match(css, /\.quarter-score-row > strong[\s\S]*?font-size: 14px/);
   assert.doesNotMatch(css, /\.combat-gauge/);
+  assert.doesNotMatch(css, /\.tier-badge/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 4px/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
   assert.match(css, /\.quarter-band strong[\s\S]*?font-size: 11px/);

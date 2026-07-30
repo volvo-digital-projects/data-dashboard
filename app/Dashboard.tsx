@@ -124,10 +124,10 @@ const displayShowroomName = (name: string) => {
 };
 
 function getTier(score: number) {
-  if (score >= 320) return { name: "DIAMOND", label: "최상위", className: "diamond" };
-  if (score >= 310) return { name: "PLATINUM", label: "우수", className: "platinum" };
-  if (score >= 300) return { name: "GOLD", label: "관찰", className: "gold" };
-  return { name: "WATCH", label: "집중 관리", className: "watch" };
+  if (score >= 320) return { className: "diamond" };
+  if (score >= 310) return { className: "platinum" };
+  if (score >= 300) return { className: "gold" };
+  return { className: "watch" };
 }
 
 function getSignal(value: number, average: number) {
@@ -1187,7 +1187,6 @@ export default function Dashboard({
             <small>/ {dashboard.meta.combatMax}</small>
           </div>
           <div>
-            <span className={`tier-badge ${tier.className}`}>{tier.name}</span>
             <strong>
               전국 {nationalRank}위
               <small> · 상위 {topPercent}%</small>
@@ -1241,7 +1240,6 @@ export default function Dashboard({
               <span className="eyebrow">SHOWROOM POWER INDEX</span>
               <h2>전시장 전투력</h2>
             </div>
-            <span className={`tier-badge ${tier.className}`}>{tier.name}</span>
           </div>
           <div className="combat-main">
             <div
@@ -1280,7 +1278,6 @@ export default function Dashboard({
               ))}
             </div>
             <div className="rank-stack">
-              <span>{tier.label} 레벨</span>
               <strong>
                 {nationalRank}
                 <small>위</small>
@@ -1337,7 +1334,6 @@ export default function Dashboard({
         <article className="panel trend-panel">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">52-WEEK PULSE</span>
               <h2>주간 성과 흐름</h2>
             </div>
             <div className="segmented">

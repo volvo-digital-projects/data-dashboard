@@ -613,32 +613,6 @@ input:focus-visible {
   color: #90bccf;
 }
 
-.tier-badge {
-  padding: 6px 9px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #bfdae6;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.13em;
-}
-
-.tier-badge.watch {
-  color: #ffd0ca;
-  border-color: rgba(255, 162, 150, 0.45);
-}
-
-.tier-badge.gold {
-  color: #f1d59b;
-}
-
-.tier-badge.platinum {
-  color: #cfe5ef;
-}
-
-.tier-badge.diamond {
-  color: #b6eee7;
-}
-
 .combat-main {
   flex: 1;
   display: flex;
@@ -722,20 +696,13 @@ input:focus-visible {
   max-width: 140px;
 }
 
-.rank-stack span,
 .rank-stack strong,
 .rank-stack em {
   display: block;
 }
 
-.rank-stack span {
-  color: #93afbd;
-  font-size: 10px;
-  letter-spacing: 0.07em;
-}
-
 .rank-stack strong {
-  margin-top: 5px;
+  margin-top: 0;
   font-family: var(--font-ui);
   font-size: 50px;
   font-weight: 400;
@@ -2244,10 +2211,6 @@ input:focus-visible {
     gap: 7px;
     padding-left: 15px;
     border-left: 1px solid rgba(255, 255, 255, 0.17);
-  }
-
-  .mobile-power .tier-badge {
-    width: max-content;
   }
 
   .mobile-power > div:last-child > strong {
