@@ -118,6 +118,11 @@ const displayNumber = (value: number | null | undefined, digits = 1) =>
     ? "—"
     : value.toFixed(digits);
 
+const displayShowroomName = (name: string) => {
+  const trimmed = name.trim();
+  return trimmed.startsWith("볼보 ") ? trimmed : `볼보 ${trimmed}`;
+};
+
 function getTier(score: number) {
   if (score >= 320) return { name: "DIAMOND", label: "최상위", className: "diamond" };
   if (score >= 310) return { name: "PLATINUM", label: "우수", className: "platinum" };
@@ -425,9 +430,8 @@ function WeeklyTrend({
                     className="actual-week-point"
                   >
                     <title>
-                      {`${point.label} ${showroom.showroom.replace(
-                        "볼보 ",
-                        "",
+                      {`${point.label} ${displayShowroomName(
+                        showroom.showroom,
                       )} 실제값 ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
                         averageAt(point.week),
                       )}점`}
@@ -492,7 +496,7 @@ function WeeklyTrend({
         <span>
           <i className={isWeeklyMetric ? "coverage-line actual" : "coverage-dot filled"} />
           {isWeeklyMetric
-            ? `${showroom.showroom.replace("볼보 ", "")} 실제값 · ${annotationLabel} ${
+            ? `${displayShowroomName(showroom.showroom)} 실제값 · ${annotationLabel} ${
                 latestPoint ? `${displayNumber(latestPoint.value)}점` : "—"
               } · 입력 ${rawPoints.length}주`
             : `최신 W${String(latestWeek).padStart(2, "0")} · 실제 입력 ${
@@ -582,7 +586,7 @@ function ComparisonTable({
               <small>/{members.length}</small>
             </span>
             <span className="showroom-name">
-              {item.showroom.replace("볼보 ", "")}
+              {displayShowroomName(item.showroom)}
               {isSelected && <em>MY</em>}
             </span>
             <span className="dealer-region">
@@ -1051,7 +1055,7 @@ export default function Dashboard({
     <main className="dashboard">
       <section className="identity-strip">
         <div>
-          <h1>{selected.showroom.replace("볼보 ", "")}</h1>
+          <h1>{displayShowroomName(selected.showroom)}</h1>
           <div className="update-status">
             <i aria-hidden="true" />
             <time>
@@ -1132,7 +1136,8 @@ export default function Dashboard({
                   >
                     {dashboard.showrooms.map((item) => (
                       <option key={item.cdsid} value={item.cdsid}>
-                        {item.cdsid} · {item.showroom} · {item.manager}
+                        {item.cdsid} · {displayShowroomName(item.showroom)} ·{" "}
+                        {item.manager}
                       </option>
                     ))}
                   </select>
@@ -1144,7 +1149,7 @@ export default function Dashboard({
                 <div>
                   <span>MY CDSID</span>
                   <strong>
-                    {selected.cdsid} · {selected.showroom}
+                    {selected.cdsid} · {displayShowroomName(selected.showroom)}
                   </strong>
                 </div>
                 <Link className="profile-home-link" href="/">
