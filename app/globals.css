@@ -2972,17 +2972,19 @@ input:focus-visible,
   align-items: stretch;
   overflow: hidden;
   border: 1px solid rgba(16, 24, 40, 0.07);
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 8px 24px rgba(16, 42, 67, 0.045);
 }
 
 .identity-strip dl div {
-  min-width: 116px;
+  width: 126px;
+  min-width: 126px;
   min-height: 50px;
   grid-template-columns: 36px minmax(0, 1fr);
   column-gap: 10px;
   padding: 0 14px;
+  justify-items: center;
   transition: background 180ms ease;
 }
 
@@ -3004,7 +3006,7 @@ input:focus-visible,
   position: relative;
   align-self: center;
   border: 1px solid rgba(47, 107, 138, 0.1);
-  border-radius: 11px;
+  border-radius: 6px;
   color: var(--blue);
   background: linear-gradient(145deg, #f3f8fa, #e8f2f6);
   box-shadow:
@@ -3089,18 +3091,22 @@ input:focus-visible,
 
 .identity-strip dt,
 .identity-profile-role {
+  width: 100%;
   color: var(--muted);
   font-size: 10px;
   font-weight: 520;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .identity-strip dd,
 .identity-profile strong {
+  width: 100%;
   margin-top: 2px;
   color: var(--ink);
   font-size: 13px;
   font-weight: 680;
+  text-align: center;
 }
 
 .identity-profile {
@@ -3110,6 +3116,7 @@ input:focus-visible,
   grid-template-columns: 36px minmax(0, 1fr);
   column-gap: 10px;
   padding: 0 14px;
+  justify-items: center;
   transition: background 180ms ease;
 }
 
@@ -3120,7 +3127,7 @@ input:focus-visible,
   position: relative;
   align-self: center;
   border: 1px solid rgba(47, 107, 138, 0.1);
-  border-radius: 11px;
+  border-radius: 6px;
   color: var(--blue);
   background: linear-gradient(145deg, #f3f8fa, #e8f2f6);
   box-shadow:
@@ -3528,7 +3535,7 @@ input:focus-visible,
   grid-template-columns: repeat(3, minmax(76px, 1fr));
   gap: 4px;
   padding: 4px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #f0f3f5;
 }
 
@@ -3537,7 +3544,7 @@ input:focus-visible,
   height: 40px;
   padding: 0 16px;
   border: 0;
-  border-radius: 9px;
+  border-radius: 6px;
   background: transparent;
   color: var(--secondary);
   font-family: var(--font-latin);
@@ -3556,7 +3563,7 @@ input:focus-visible,
 
 .trend-selector button:first-child,
 .trend-selector button:last-child {
-  border-radius: 9px;
+  border-radius: 6px;
 }
 
 .trend-selector button:hover {
@@ -3579,7 +3586,7 @@ input:focus-visible,
   min-height: 44px;
   padding: 0 16px;
   border: 1px solid rgba(16, 24, 40, 0.08);
-  border-radius: 12px;
+  border-radius: 8px;
   background: white;
   color: var(--secondary);
   font-size: 13px;

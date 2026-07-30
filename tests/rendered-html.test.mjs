@@ -275,7 +275,19 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.identity-strip\s*\{[\s\S]*?min-height: 76px[\s\S]*?margin-bottom: 12px/,
   );
-  assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 14px/);
+  assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 8px/);
+  assert.match(
+    css,
+    /\.identity-strip dl div\s*\{[\s\S]*?width: 126px[\s\S]*?min-width: 126px[\s\S]*?justify-items: center/,
+  );
+  assert.match(
+    css,
+    /\.identity-strip dt,[\s\S]*?\.identity-profile-role\s*\{[\s\S]*?width: 100%[\s\S]*?text-align: center/,
+  );
+  assert.match(
+    css,
+    /\.identity-profile\s*\{[\s\S]*?width: 126px[\s\S]*?min-width: 126px[\s\S]*?justify-items: center/,
+  );
   assert.match(
     css,
     /\.identity-icon--dealer::before\s*\{[\s\S]*?border: 1\.4px solid currentColor/,
@@ -291,8 +303,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card-value\s*\{[\s\S]*?font-size: clamp\(46px, 3\.25vw, 56px\)/);
-  assert.match(css, /\.trend-selector\s*\{[\s\S]*?border-radius: 12px/);
-  assert.match(css, /\.trend-selector button\s*\{[\s\S]*?height: 40px[\s\S]*?border-radius: 9px/);
+  assert.match(css, /\.trend-selector\s*\{[\s\S]*?border-radius: 8px/);
+  assert.match(css, /\.trend-selector button\s*\{[\s\S]*?height: 40px[\s\S]*?border-radius: 6px/);
   assert.match(css, /\.trend-selector button\.active\s*\{[\s\S]*?background: var\(--navy\)/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 210px/);
   assert.match(css, /\.chart-tooltip\s*\{[\s\S]*?border-radius: 12px/);
