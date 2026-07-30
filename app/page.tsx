@@ -1,7 +1,7 @@
-import LoginHome from "./LoginHome";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  return <LoginHome />;
+  redirect("/dashboard/6KR6834");
 }

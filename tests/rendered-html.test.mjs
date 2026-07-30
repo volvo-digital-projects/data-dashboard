@@ -25,20 +25,10 @@ async function render(pathname = "/") {
   );
 }
 
-test("server-renders the Volvo Data Dashboard login cover", async () => {
+test("redirects the removed login route to the sample dashboard", async () => {
   const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, /<title>Volvo Data Dashboard<\/title>/i);
-  assert.match(html, /Volvo Data/);
-  assert.match(html, /CDSID를 입력해 주세요/);
-  assert.match(html, /Data Dashboard 시작/);
-  assert.match(html, /action="\/dashboard"/);
-  assert.doesNotMatch(html, /PRIVATE ACCESS|관리자 미리보기/);
-  assert.doesNotMatch(html, /CDSID는 담당 전시장을 불러오는 식별값입니다/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+  assert.ok([307, 308].includes(response.status));
+  assert.match(response.headers.get("location") ?? "", /\/dashboard\/6KR6834$/);
 });
 
 test("server-renders the selected CDSID dashboard", async () => {
@@ -67,7 +57,8 @@ test("ships project metadata and removes the disposable starter", async () => {
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /import LoginHome/);
+  assert.match(page, /redirect\("\/dashboard\/6KR6834"\)/);
+  assert.doesNotMatch(page, /LoginHome/);
   assert.match(dashboardPage, /import Dashboard/);
   assert.match(dashboardPage, /isEditorEmail/);
   assert.match(layout, /generateMetadata/);
