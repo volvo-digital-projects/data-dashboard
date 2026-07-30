@@ -50,11 +50,13 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /6KR6834/);
   assert.equal((html.match(/identity-icon/g) ?? []).length, 3);
   assert.match(visibleHtml, /최신 W26/);
-  assert.match(visibleHtml, /실제 입력 12주/);
-  assert.match(visibleHtml, /전국 평균 미달 6주/);
+  assert.match(visibleHtml, /강남 대치 실제값 · 최신 W26 · 입력 12주/);
+  assert.match(visibleHtml, /전국 주간 평균 · 평균 미달 6주/);
   for (let week = 1; week <= 52; week += 1) {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
+  assert.match(html, /r="4.5" class="national-average-point"/);
+  assert.match(html, /width="9" height="9" class="actual-week-point"/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -126,6 +128,8 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /font-family: "Paperlogy 5"/);
   assert.match(css, /font-family: "Paperlogy 9"/);
   assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
+  assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
+  assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
   assert.doesNotMatch(css, /Georgia|Helvetica|Pretendard|--font-sans/);
 

@@ -233,6 +233,7 @@ function WeeklyTrend({
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
   const average = dashboard.averages[metric] ?? 0;
+  const isWeeklyMetric = metric === "voc" || metric === "cx";
   const nativeWeekly =
     metric === "voc" || metric === "cx" ? weeklyDashboard[metric] : null;
   const weeklySeries = nativeWeekly?.byCdsid[showroom.cdsid] ?? null;
@@ -338,9 +339,7 @@ function WeeklyTrend({
     if (segment.length) segments.push(segment);
     return segments;
   };
-  const storeSegments = weeklySeries
-    ? makeSegments(weeklySeries, latestWeek)
-    : [rawPoints];
+  const storeSegments = [rawPoints];
   const nationalSegments = averageSeries
     ? makeSegments(averageSeries, latestWeek)
     : [];
@@ -395,6 +394,21 @@ function WeeklyTrend({
                     className="average-trend-line"
                   />
                 ))}
+                {averagePoints.map((point) => (
+                  <circle
+                    key={`average-${point.week}`}
+                    cx={x(point.week)}
+                    cy={y(point.value)}
+                    r="4.5"
+                    className="national-average-point"
+                  >
+                    <title>
+                      {`W${String(point.week).padStart(2, "0")} 전국 평균 ${displayNumber(
+                        point.value,
+                      )}점`}
+                    </title>
+                  </circle>
+                ))}
                 {averagePoints.length > 0 && (
                   <text
                     x={x(averagePoints.at(-1)!.week)}
@@ -425,14 +439,6 @@ function WeeklyTrend({
                 </text>
               </>
             )}
-            {weeklySeries && rawPoints.length > 1 && (
-              <polyline
-                points={rawPoints
-                  .map((point) => `${x(point.week)},${y(point.value)}`)
-                  .join(" ")}
-                className="trend-gap-line"
-              />
-            )}
             {storeSegments.map(
               (segment, index) =>
                 segment.length > 1 && (
@@ -447,37 +453,46 @@ function WeeklyTrend({
             )}
             {rawPoints.map((point) => (
               <g key={`${point.week}-${point.label}`}>
-                <circle
-                  cx={x(point.week)}
-                  cy={y(point.value)}
-                  r={highlightedWeeks.has(point.week) ? "5.5" : "3.5"}
-                  className={`trend-point ${
-                    point.value < averageAt(point.week) ? "warning" : "good"
-                  }`}
-                >
-                  <title>
-                    {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
-                      averageAt(point.week),
-                    )}점`}
-                  </title>
-                </circle>
+                {isWeeklyMetric ? (
+                  <rect
+                    x={x(point.week) - 4.5}
+                    y={y(point.value) - 4.5}
+                    width="9"
+                    height="9"
+                    className="actual-week-point"
+                  >
+                    <title>
+                      {`${point.label} ${showroom.showroom.replace(
+                        "볼보 ",
+                        "",
+                      )} 실제값 ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
+                        averageAt(point.week),
+                      )}점`}
+                    </title>
+                  </rect>
+                ) : (
+                  <circle
+                    cx={x(point.week)}
+                    cy={y(point.value)}
+                    r="4.5"
+                    className="actual-quarter-point"
+                  >
+                    <title>
+                      {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
+                        averageAt(point.week),
+                      )}점`}
+                    </title>
+                  </circle>
+                )}
                 {highlightedWeeks.has(point.week) && (
-                  <>
-                    <circle
-                      cx={x(point.week)}
-                      cy={y(point.value)}
-                      r="2"
-                      className="trend-point-core"
-                    />
-                    <text
-                      x={x(point.week)}
-                      y={Math.max(14, y(point.value) - 11)}
-                      textAnchor="middle"
-                      className="point-value"
-                    >
-                      {displayNumber(point.value)}
-                    </text>
-                  </>
+                  <text
+                    x={x(point.week)}
+                    y={Math.max(14, y(point.value) - 12)}
+                    textAnchor="middle"
+                    className="point-value"
+                  >
+                    {displayNumber(point.value)}
+                  </text>
                 )}
               </g>
             ))}
@@ -522,11 +537,20 @@ function WeeklyTrend({
       </div>
       <div className="data-coverage">
         <span>
-          <i className="coverage-dot filled" /> 최신 W
-          {String(latestWeek).padStart(2, "0")} · 실제 입력 {rawPoints.length}주
+          <i className={isWeeklyMetric ? "coverage-marker actual" : "coverage-dot filled"} />
+          {isWeeklyMetric
+            ? `${showroom.showroom.replace("볼보 ", "")} 실제값 · 최신 W${String(
+                latestWeek,
+              ).padStart(2, "0")} · 입력 ${rawPoints.length}주`
+            : `최신 W${String(latestWeek).padStart(2, "0")} · 실제 입력 ${
+                rawPoints.length
+              }주`}
         </span>
         <span>
-          <i className="coverage-dot warning" /> 전국 평균 미달 {warningCount}주
+          <i className={isWeeklyMetric ? "coverage-marker national" : "coverage-dot warning"} />
+          {isWeeklyMetric
+            ? `전국 주간 평균 · 평균 미달 ${warningCount}주`
+            : `전국 평균 미달 ${warningCount}주`}
         </span>
         <span>
           <i className="coverage-dot year" />

@@ -1055,19 +1055,19 @@ input:focus-visible {
 
 .average-line {
   stroke: var(--warning);
-  stroke-width: 1;
-  stroke-dasharray: 5 5;
-  opacity: 0.7;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+  opacity: 0.9;
 }
 
 .average-trend-line {
   fill: none;
   stroke: var(--warning);
-  stroke-width: 1.5;
-  stroke-dasharray: 4 5;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.62;
+  opacity: 0.9;
 }
 
 .average-label {
@@ -1078,39 +1078,22 @@ input:focus-visible {
 .trend-line {
   fill: none;
   stroke: var(--blue);
-  stroke-width: 3;
+  stroke-width: 2.5;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
-.trend-gap-line {
-  fill: none;
-  stroke: var(--blue);
-  stroke-width: 1.5;
-  stroke-dasharray: 3 5;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  opacity: 0.4;
-}
-
-.trend-point {
+.national-average-point {
   fill: white;
-  stroke: var(--blue);
+  stroke: var(--warning);
   stroke-width: 2.5;
 }
 
-.trend-point.warning {
-  fill: #fff8f5;
-  stroke: var(--warning);
-}
-
-.trend-point.good {
+.actual-week-point,
+.actual-quarter-point {
   fill: white;
   stroke: var(--blue);
-}
-
-.trend-point-core {
-  fill: var(--blue);
+  stroke-width: 2.5;
 }
 
 .week-ruler {
@@ -1210,6 +1193,24 @@ input:focus-visible {
 .coverage-dot.warning {
   border-color: var(--warning);
   background: var(--warning);
+}
+
+.coverage-marker {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border: 2px solid currentColor;
+  background: white;
+}
+
+.coverage-marker.actual {
+  color: var(--blue);
+  border-radius: 0;
+}
+
+.coverage-marker.national {
+  color: var(--warning);
+  border-radius: 50%;
 }
 
 .comparison-panel {
