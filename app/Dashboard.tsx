@@ -596,11 +596,12 @@ function ComparisonTable({
     0,
     members.findIndex((item) => item.cdsid === selected.cdsid),
   );
+  const windowSize = 3;
   const windowStart = Math.min(
-    Math.max(0, selectedIndex - 2),
-    Math.max(0, members.length - 5),
+    Math.max(0, selectedIndex - 1),
+    Math.max(0, members.length - windowSize),
   );
-  const visible = members.slice(windowStart, windowStart + 5);
+  const visible = members.slice(windowStart, windowStart + windowSize);
   const max = metricMeta[metric].max;
 
   return (
@@ -1089,48 +1090,67 @@ export default function Dashboard({
 
   return (
     <main className="dashboard">
-      <header className="topbar">
-        <Link className="brand" href="/" aria-label="Volvo Data Dashboard 홈">
-          <span className="brand-mark" aria-hidden="true">
-            V
-          </span>
-          <div>
-            <strong>DSC COMMAND</strong>
-            <span>Retail Performance Intelligence</span>
+      <section className="identity-strip">
+        <div>
+          <h1>{selected.showroom.replace("볼보 ", "")}</h1>
+          <div className="update-status">
+            <i aria-hidden="true" />
+            <time>
+              최근 업데이트{" "}
+              {latestUpdate.effectiveDate.replaceAll("-", ".")}
+            </time>
+            <span>{latestUpdate.title}</span>
           </div>
-        </Link>
-        <div className="topbar-actions">
+        </div>
+        <dl>
+          <div>
+            <span className="identity-icon" aria-hidden="true">
+              ⌂
+            </span>
+            <dt>딜러사</dt>
+            <dd>{selected.dealer}</dd>
+          </div>
+          <div>
+            <span className="identity-icon" aria-hidden="true">
+              ◎
+            </span>
+            <dt>권역별</dt>
+            <dd>{selected.region}</dd>
+          </div>
+          <div>
+            <span className="identity-icon" aria-hidden="true">
+              ↔
+            </span>
+            <dt>사이즈</dt>
+            <dd>{selected.size}</dd>
+          </div>
+        </dl>
+        <div className="identity-tools">
           <Link
-            className="criteria-open"
+            className="identity-tool"
             href={`/dashboard/${selected.cdsid}/criteria`}
+            aria-label="평가 기준"
           >
-            평가 기준
+            기준
           </Link>
-          <span className="period-badge">
-            2026 {dashboard.meta.quarter}
-            <small>{dashboard.meta.sourceWeek}</small>
-          </span>
           {viewer.isEditor && (
             <button
-              className="admin-open"
+              className="identity-tool"
               type="button"
               onClick={() => setAdminOpen(true)}
+              aria-label="데이터 관리"
             >
-              데이터 관리
+              관리
             </button>
           )}
           <button
-            className="profile-button"
+            className="identity-profile"
             type="button"
             onClick={() => setProfileOpen((open) => !open)}
             aria-expanded={profileOpen}
+            aria-label={`${selected.manager} 지점장 프로필`}
           >
             <span className="avatar">{selected.manager.slice(0, 1)}</span>
-            <span>
-              <strong>{selected.manager} 지점장</strong>
-              <small>{selected.showroom.replace("볼보 ", "")}</small>
-            </span>
-            <b aria-hidden="true">⌄</b>
           </button>
         </div>
         {profileOpen && (
@@ -1175,43 +1195,6 @@ export default function Dashboard({
             )}
           </div>
         )}
-      </header>
-
-      <section className="identity-strip">
-        <div>
-          <h1>{selected.showroom.replace("볼보 ", "")}</h1>
-          <div className="update-status">
-            <i aria-hidden="true" />
-            <time>
-              최근 업데이트{" "}
-              {latestUpdate.effectiveDate.replaceAll("-", ".")}
-            </time>
-            <span>{latestUpdate.title}</span>
-          </div>
-        </div>
-        <dl>
-          <div>
-            <span className="identity-icon" aria-hidden="true">
-              ⌂
-            </span>
-            <dt>딜러사</dt>
-            <dd>{selected.dealer}</dd>
-          </div>
-          <div>
-            <span className="identity-icon" aria-hidden="true">
-              ◎
-            </span>
-            <dt>권역별</dt>
-            <dd>{selected.region}</dd>
-          </div>
-          <div>
-            <span className="identity-icon" aria-hidden="true">
-              ↔
-            </span>
-            <dt>사이즈</dt>
-            <dd>{selected.size}</dd>
-          </div>
-        </dl>
       </section>
 
       <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>

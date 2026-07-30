@@ -41,6 +41,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /전시장 전투력/);
   assert.match(html, /3대 핵심 지표/);
   assert.match(html, /href="\/dashboard\/6KR6834\/criteria"/);
+  assert.doesNotMatch(html, /class="topbar"/);
+  assert.match(html, /class="identity-tools"/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(html, /최근 업데이트/);
   assert.match(html, /V3S/);
@@ -49,6 +51,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
   assert.equal((html.match(/identity-icon/g) ?? []).length, 3);
+  assert.equal((html.match(/class="table-row/g) ?? []).length, 3);
+  assert.match(html, /class="comparison-head table-row"/);
   assert.match(visibleHtml, /권역별/);
   assert.match(visibleHtml, /최신 W26/);
   assert.match(visibleHtml, /강남 대치 실제값 · 최신 W26 · 입력 12주/);
@@ -129,9 +133,10 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /font-family: "Paperlogy 5"/);
   assert.match(css, /font-family: "Paperlogy 9"/);
   assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
-  assert.match(css, /\.topbar\s*\{[\s\S]*?min-height: 64px/);
-  assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 76px/);
+  assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 58px/);
   assert.match(css, /\.identity-strip > div:first-child/);
+  assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
+  assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
