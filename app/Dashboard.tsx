@@ -1077,8 +1077,10 @@ export default function Dashboard({
   return (
     <main className="dashboard">
       <section className="identity-strip">
-        <div>
+        <div className="identity-title">
           <h1>{displayShowroomName(selected.showroom)}</h1>
+        </div>
+        <div className="identity-meta-row">
           <div className="update-status">
             <i aria-hidden="true" />
             <time>
@@ -1087,58 +1089,61 @@ export default function Dashboard({
             </time>
             <span>{displayUpdateTitle}</span>
           </div>
-        </div>
-        <dl>
-          <div>
-            <span className="identity-icon" aria-hidden="true">
-              ⌂
-            </span>
-            <dt>딜러사</dt>
-            <dd>{selected.dealer}</dd>
+          <div className="identity-detail-rail">
+            <dl>
+              <div>
+                <span className="identity-icon" aria-hidden="true">
+                  ⌂
+                </span>
+                <dt>딜러사</dt>
+                <dd>{selected.dealer}</dd>
+              </div>
+              <div>
+                <span className="identity-icon" aria-hidden="true">
+                  ◎
+                </span>
+                <dt>권역별</dt>
+                <dd>{selected.region}</dd>
+              </div>
+              <div>
+                <span className="identity-icon" aria-hidden="true">
+                  ↔
+                </span>
+                <dt>사이즈</dt>
+                <dd>{selected.size}</dd>
+              </div>
+            </dl>
+            <div className="identity-tools">
+              <Link
+                className="identity-tool"
+                href={`/dashboard/${selected.cdsid}/criteria`}
+                aria-label="평가 기준"
+              >
+                기준
+              </Link>
+              {viewer.isEditor && (
+                <button
+                  className="identity-tool"
+                  type="button"
+                  onClick={() => setAdminOpen(true)}
+                  aria-label="데이터 관리"
+                >
+                  관리
+                </button>
+              )}
+              <button
+                className="identity-profile"
+                type="button"
+                onClick={() => setProfileOpen((open) => !open)}
+                aria-expanded={profileOpen}
+                aria-label={`${selected.manager} 지점장 프로필`}
+              >
+                <span className="identity-profile-icon" aria-hidden="true" />
+                <span className="identity-profile-role">지점장</span>
+                <strong>{selected.manager}</strong>
+              </button>
+            </div>
           </div>
-          <div>
-            <span className="identity-icon" aria-hidden="true">
-              ◎
-            </span>
-            <dt>권역별</dt>
-            <dd>{selected.region}</dd>
-          </div>
-          <div>
-            <span className="identity-icon" aria-hidden="true">
-              ↔
-            </span>
-            <dt>사이즈</dt>
-            <dd>{selected.size}</dd>
-          </div>
-        </dl>
-        <div className="identity-tools">
-          <Link
-            className="identity-tool"
-            href={`/dashboard/${selected.cdsid}/criteria`}
-            aria-label="평가 기준"
-          >
-            기준
-          </Link>
-          {viewer.isEditor && (
-            <button
-              className="identity-tool"
-              type="button"
-              onClick={() => setAdminOpen(true)}
-              aria-label="데이터 관리"
-            >
-              관리
-            </button>
-          )}
-          <button
-            className="identity-profile"
-            type="button"
-            onClick={() => setProfileOpen((open) => !open)}
-            aria-expanded={profileOpen}
-            aria-label={`${selected.manager} 지점장 프로필`}
-          >
-            <span className="identity-profile-role">지점장</span>
-            <strong>{selected.manager}</strong>
-          </button>
         </div>
         {profileOpen && (
           <div className="profile-popover">

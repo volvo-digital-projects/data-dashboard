@@ -45,6 +45,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="topbar"/);
   assert.match(html, /class="identity-tools"/);
   assert.match(html, /identity-profile[\s\S]*?지점장[\s\S]*?김길성/);
+  assert.match(html, /class="identity-profile-icon"/);
+  assert.match(html, /class="identity-meta-row"/);
+  assert.match(html, /class="identity-detail-rail"/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(html, /최근 업데이트/);
   assert.match(visibleHtml, /Q3 평가 진행중입니다\./);
@@ -155,10 +158,13 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /font-family: "Paperlogy 5"/);
   assert.match(css, /font-family: "Paperlogy 9"/);
   assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
-  assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 58px/);
-  assert.match(css, /\.identity-strip > div:first-child/);
+  assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 86px/);
+  assert.match(css, /\.identity-strip h1[\s\S]*?font-size: clamp\(35px, 2\.85vw, 44px\)/);
+  assert.match(css, /\.identity-meta-row[\s\S]*?align-items: flex-end/);
+  assert.match(css, /\.identity-detail-rail[\s\S]*?justify-content: flex-end/);
   assert.match(css, /\.identity-strip dl div[\s\S]*?padding: 0 10px 0 0/);
   assert.match(css, /\.identity-icon[\s\S]*?width: 30px[\s\S]*?height: 100%/);
+  assert.match(css, /\.identity-profile\s*\{[\s\S]*?width: 112px/);
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
   assert.match(css, /\.quarter-score-row\s*\{[\s\S]*?min-height: 28px/);
   assert.match(css, /\.quarter-score-row > strong[\s\S]*?font-size: 14px/);
