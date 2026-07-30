@@ -274,11 +274,9 @@ function MetricCard({
 function WeeklyTrend({
   showroom,
   metric,
-  showAllValues,
 }: {
   showroom: Showroom;
   metric: TrendMetricKey;
-  showAllValues: boolean;
 }) {
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
@@ -401,22 +399,6 @@ function WeeklyTrend({
   ).length;
   const latestPoint = rawPoints.at(-1) ?? null;
   const previousPoint = rawPoints.at(-2) ?? null;
-  const highestPoint = rawPoints.reduce(
-    (best, point) => (!best || point.value > best.value ? point : best),
-    null as { week: number; value: number; label: string } | null,
-  );
-  const lowestPoint = rawPoints.reduce(
-    (best, point) => (!best || point.value < best.value ? point : best),
-    null as { week: number; value: number; label: string } | null,
-  );
-  const importantActualWeeks = new Set([
-    latestPoint?.week,
-    highestPoint?.week,
-    lowestPoint?.week,
-    ...rawPoints
-      .filter((point) => point.value - averageAt(point.week) <= -5)
-      .map((point) => point.week),
-  ]);
   const latestDelta =
     latestPoint && previousPoint ? latestPoint.value - previousPoint.value : null;
   const annotationWeek = latestPoint?.week ?? latestWeek;
@@ -574,17 +556,15 @@ function WeeklyTrend({
                         )}점`}
                       </title>
                     </circle>
-                    {(showAllValues || point.week === annotationWeek) && (
-                      <text
-                        x={x(point.week)}
-                        y={nationalValueLabelY(point)}
-                        textAnchor="middle"
-                        className="national-point-value"
-                        aria-hidden="true"
-                      >
-                        {displayNumber(point.value)}
-                      </text>
-                    )}
+                    <text
+                      x={x(point.week)}
+                      y={nationalValueLabelY(point)}
+                      textAnchor="middle"
+                      className="national-point-value"
+                      aria-hidden="true"
+                    >
+                      {displayNumber(point.value)}
+                    </text>
                   </g>
                 ))}
               </>
@@ -644,17 +624,15 @@ function WeeklyTrend({
                     </title>
                   </circle>
                 )}
-                {(showAllValues || importantActualWeeks.has(point.week)) && (
-                  <text
-                    x={x(point.week)}
-                    y={actualValueLabelY(point)}
-                    textAnchor="middle"
-                    className="actual-point-value"
-                    aria-hidden="true"
-                  >
-                    {displayNumber(point.value)}
-                  </text>
-                )}
+                <text
+                  x={x(point.week)}
+                  y={actualValueLabelY(point)}
+                  textAnchor="middle"
+                  className="actual-point-value"
+                  aria-hidden="true"
+                >
+                  {displayNumber(point.value)}
+                </text>
               </g>
             ))}
             {hoverWeek !== null && (
@@ -1241,7 +1219,6 @@ export default function Dashboard({
 }) {
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
-  const [showAllTrendValues, setShowAllTrendValues] = useState(false);
   const [comparisonMetric, setComparisonMetric] = useState<MetricKey>("combat");
   const [group, setGroup] = useState<GroupKey>("all");
   const [profileOpen, setProfileOpen] = useState(false);
@@ -1611,23 +1588,9 @@ export default function Dashboard({
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                className={`show-values-toggle ${
-                  showAllTrendValues ? "active" : ""
-                }`}
-                aria-pressed={showAllTrendValues}
-                onClick={() => setShowAllTrendValues((visible) => !visible)}
-              >
-                모든 값 표시
-              </button>
             </div>
           </div>
-          <WeeklyTrend
-            showroom={selected}
-            metric={trendMetric}
-            showAllValues={showAllTrendValues}
-          />
+          <WeeklyTrend showroom={selected} metric={trendMetric} />
         </article>
       </section>
 

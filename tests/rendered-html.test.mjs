@@ -110,8 +110,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
   assert.match(html, /class="trend-selector"/);
   assert.doesNotMatch(html, /class="trend-selector-icon"/);
-  assert.match(html, /class="show-values-toggle /);
-  assert.match(visibleHtml, /모든 값 표시/);
+  assert.doesNotMatch(html, /show-values-toggle/);
+  assert.doesNotMatch(visibleHtml, /모든 값 표시/);
   assert.match(html, /aria-label="VOC 52주 추이 보기" aria-pressed="true"/);
   assert.doesNotMatch(html, /class="segmented"/);
   for (let week = 1; week <= 52; week += 1) {
@@ -130,8 +130,8 @@ test("server-renders the selected CDSID dashboard", async () => {
       .filter((week) => week !== "W22"),
   );
   const actualLabelCount = (html.match(/class="actual-point-value"/g) ?? []).length;
-  assert.ok(actualLabelCount > 0 && actualLabelCount < 25);
-  assert.equal((html.match(/class="national-point-value"/g) ?? []).length, 1);
+  assert.equal(actualLabelCount, 25);
+  assert.equal((html.match(/class="national-point-value"/g) ?? []).length, 26);
   assert.match(html, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(html, /class="future-window"/);
   assert.match(visibleHtml, /Q3 평가 진행 중/);
