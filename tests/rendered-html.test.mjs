@@ -144,6 +144,7 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.identity-strip dl div[\s\S]*?padding: 0 10px 0 0/);
   assert.match(css, /\.identity-icon[\s\S]*?width: 30px[\s\S]*?height: 100%/);
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 294px/);
+  assert.match(css, /\.metric-card\s*\{[\s\S]*?border-radius: 4px/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 164px/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);

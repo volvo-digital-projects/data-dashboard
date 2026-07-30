@@ -807,6 +807,7 @@ input:focus-visible {
   color: var(--ink);
   background: white;
   border: 1px solid var(--line);
+  border-radius: 4px;
   text-align: left;
   cursor: pointer;
   transition:
