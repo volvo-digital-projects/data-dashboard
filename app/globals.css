@@ -3393,9 +3393,14 @@ input:focus-visible,
 }
 
 .metric-card-value span {
-  margin-left: 6px;
+  display: inline-block;
+  margin-left: 10px;
+  font-family: var(--font-korean);
   font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+  vertical-align: 0.12em;
   white-space: nowrap;
 }
 

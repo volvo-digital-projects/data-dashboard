@@ -321,6 +321,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card-value\s*\{[\s\S]*?font-size: clamp\(46px, 3\.25vw, 56px\)/);
+  assert.match(
+    css,
+    /\.metric-card-value span\s*\{[\s\S]*?margin-left: 10px[\s\S]*?letter-spacing: 0\.02em[\s\S]*?word-spacing: 0\.08em/,
+  );
   assert.match(css, /\.trend-selector\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(css, /\.trend-selector button\s*\{[\s\S]*?height: 40px[\s\S]*?border-radius: 6px/);
   assert.match(css, /\.trend-selector button\.active\s*\{[\s\S]*?background: var\(--navy\)/);
