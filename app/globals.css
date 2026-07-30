@@ -504,16 +504,7 @@ input:focus-visible {
   font-weight: 800;
 }
 
-.identity-tools {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  gap: 5px;
-}
-
-.identity-tool,
 .identity-profile {
-  min-width: 32px;
   height: 38px;
   display: inline-grid;
   place-items: center;
@@ -525,12 +516,6 @@ input:focus-visible {
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
-}
-
-.identity-tool:hover,
-.identity-profile:hover {
-  border-color: var(--blue);
-  background: var(--blue-soft);
 }
 
 .identity-profile {
@@ -547,6 +532,11 @@ input:focus-visible {
   border-radius: 0;
   background: rgba(255, 255, 255, 0.56);
   text-align: left;
+}
+
+.identity-profile:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
 }
 
 .identity-profile-icon {
@@ -2243,10 +2233,6 @@ input:focus-visible {
 
   .identity-strip h1 {
     font-size: 26px;
-  }
-
-  .identity-tools {
-    width: 100%;
   }
 
   .identity-strip dl {

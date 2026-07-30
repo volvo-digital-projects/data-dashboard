@@ -1114,36 +1114,17 @@ export default function Dashboard({
                 <dd>{selected.size}</dd>
               </div>
             </dl>
-            <div className="identity-tools">
-              <Link
-                className="identity-tool"
-                href={`/dashboard/${selected.cdsid}/criteria`}
-                aria-label="평가 기준"
-              >
-                기준
-              </Link>
-              {viewer.isEditor && (
-                <button
-                  className="identity-tool"
-                  type="button"
-                  onClick={() => setAdminOpen(true)}
-                  aria-label="데이터 관리"
-                >
-                  관리
-                </button>
-              )}
-              <button
-                className="identity-profile"
-                type="button"
-                onClick={() => setProfileOpen((open) => !open)}
-                aria-expanded={profileOpen}
-                aria-label={`${selected.manager} 지점장 프로필`}
-              >
-                <span className="identity-profile-icon" aria-hidden="true" />
-                <span className="identity-profile-role">지점장</span>
-                <strong>{selected.manager}</strong>
-              </button>
-            </div>
+            <button
+              className="identity-profile"
+              type="button"
+              onClick={() => setProfileOpen((open) => !open)}
+              aria-expanded={profileOpen}
+              aria-label={`${selected.manager} 지점장 프로필`}
+            >
+              <span className="identity-profile-icon" aria-hidden="true" />
+              <span className="identity-profile-role">지점장</span>
+              <strong>{selected.manager}</strong>
+            </button>
           </div>
         </div>
         {profileOpen && (
