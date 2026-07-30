@@ -146,29 +146,31 @@ input:focus-visible {
   position: absolute;
   inset: 0;
   background-image: url("/volvo-dashboard-cover.png");
-  background-position: center;
+  background-position: 64% center;
   background-size: cover;
+  filter: brightness(1.04) saturate(0.98);
 }
 
 .login-panel {
-  width: min(760px, 47vw);
+  width: min(650px, 42vw);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   z-index: 1;
-  padding: clamp(28px, 4.5vw, 78px) clamp(32px, 5.2vw, 88px) clamp(26px, 4vw, 62px);
-  background: #081722;
+  padding: clamp(28px, 4.5vw, 78px) clamp(28px, 3.7vw, 62px) clamp(26px, 4vw, 62px)
+    clamp(32px, 5.2vw, 88px);
+  background: #0a1b27;
 }
 
 .login-panel::after {
   content: "";
-  width: clamp(100px, 12vw, 210px);
+  width: clamp(48px, 5vw, 84px);
   position: absolute;
   z-index: -1;
   inset: 0 auto 0 100%;
-  background: linear-gradient(90deg, #081722, rgba(8, 23, 34, 0.84) 44%, transparent);
+  background: linear-gradient(90deg, rgba(10, 27, 39, 0.82), rgba(10, 27, 39, 0.22) 54%, transparent);
   pointer-events: none;
 }
 
@@ -2114,6 +2116,7 @@ input:focus-visible {
     bottom: auto;
     background-position: 69% top;
     background-size: auto 43svh;
+    filter: none;
   }
 
   .login-photo::after {
