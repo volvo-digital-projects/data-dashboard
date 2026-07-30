@@ -188,9 +188,13 @@ function MetricCard({
   appeal: "possible" | "partial" | "locked";
 }) {
   const signal = getSignal(value, average);
-  const quarterDelta =
-    previous === null || previous === 0 ? null : value - previous;
   const fill = Math.min(100, Math.max(0, (value / metricMeta[metric].max) * 100));
+  const quarterScores = [
+    { label: "Q1", value: previous, state: "complete" },
+    { label: "Q2", value, state: "current" },
+    { label: "Q3", value: null, state: "planned" },
+    { label: "Q4", value: null, state: "planned" },
+  ];
 
   return (
     <button
@@ -221,14 +225,21 @@ function MetricCard({
         <span style={{ width: `${fill}%` }} />
         <i style={{ left: `${(average / metricMeta[metric].max) * 100}%` }} />
       </div>
+      <div
+        className="metric-quarter-strip"
+        aria-label={`${metricMeta[metric].short} 분기 평가점수`}
+      >
+        {quarterScores.map((quarter) => (
+          <span className={quarter.state} key={quarter.label}>
+            <small>{quarter.label}</small>
+            <strong>
+              {quarter.value === null ? "—" : displayNumber(quarter.value)}
+            </strong>
+          </span>
+        ))}
+      </div>
       <div className="metric-card-footer">
         <AppealBadge type={appeal} />
-        <span className={`quarter-change ${(quarterDelta ?? 0) >= 0 ? "up" : "down"}`}>
-          Q1 대비{" "}
-          {quarterDelta === null
-            ? "—"
-            : `${quarterDelta >= 0 ? "+" : ""}${quarterDelta.toFixed(1)}`}
-        </span>
       </div>
     </button>
   );

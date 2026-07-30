@@ -64,6 +64,19 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
   assert.match(html, /CX Index/);
+  assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
+  assert.match(
+    visibleHtml,
+    /V3S 분기 평가점수[\s\S]*Q1[\s\S]*94\.9[\s\S]*Q2[\s\S]*93\.6[\s\S]*Q3[\s\S]*Q4/,
+  );
+  assert.match(
+    visibleHtml,
+    /VOC 분기 평가점수[\s\S]*Q1[\s\S]*93\.1[\s\S]*Q2[\s\S]*87\.5[\s\S]*Q3[\s\S]*Q4/,
+  );
+  assert.match(
+    visibleHtml,
+    /CX 분기 평가점수[\s\S]*Q1[\s\S]*114\.7[\s\S]*Q2[\s\S]*113\.8[\s\S]*Q3[\s\S]*Q4/,
+  );
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
   assert.match(visibleHtml, /330점 만점/);
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
