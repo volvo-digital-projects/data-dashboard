@@ -57,14 +57,16 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="table-row/g) ?? []).length, 3);
   assert.match(html, /class="comparison-head table-row"/);
   assert.match(visibleHtml, /권역별/);
-  assert.match(visibleHtml, /최신 W26/);
-  assert.match(visibleHtml, /강남 대치 실제값 · 최신 W26 · 입력 12주/);
-  assert.match(visibleHtml, /전국 주간 평균 · 평균 미달 6주/);
+  assert.match(visibleHtml, /강남 대치 실제값 · W26 100\.0점 · 입력 12주/);
+  assert.match(visibleHtml, /전국 주간 평균 · W26 91\.8점 · 평균 미달 6주/);
   for (let week = 1; week <= 52; week += 1) {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
   assert.match(html, /r="4.5" class="national-average-point"/);
   assert.match(html, /width="9" height="9" class="actual-week-point"/);
+  assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
+  assert.match(html, /class="coverage-line actual"/);
+  assert.match(html, /class="coverage-line national"/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);

@@ -1267,22 +1267,20 @@ input:focus-visible {
   background: var(--warning);
 }
 
-.coverage-marker {
-  width: 9px;
-  height: 9px;
+.coverage-line {
+  width: 28px;
+  height: 0;
   flex: 0 0 auto;
-  border: 2px solid currentColor;
-  background: white;
+  border-top: 2.5px solid currentColor;
 }
 
-.coverage-marker.actual {
+.coverage-line.actual {
   color: var(--blue);
-  border-radius: 0;
 }
 
-.coverage-marker.national {
+.coverage-line.national {
   color: var(--warning);
-  border-radius: 50%;
+  border-top-style: dashed;
 }
 
 .comparison-panel {

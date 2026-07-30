@@ -300,27 +300,8 @@ function WeeklyTrend({
   const previousPoint = rawPoints.at(-2) ?? null;
   const latestDelta =
     latestPoint && previousPoint ? latestPoint.value - previousPoint.value : null;
-  const minPoint = rawPoints.reduce(
-    (lowest, point) => (!lowest || point.value < lowest.value ? point : lowest),
-    null as (typeof rawPoints)[number] | null,
-  );
-  const maxPoint = rawPoints.reduce(
-    (highest, point) => (!highest || point.value > highest.value ? point : highest),
-    null as (typeof rawPoints)[number] | null,
-  );
-  const largestSwingPoint = rawPoints.reduce(
-    (largest, point, index) => {
-      if (index === 0) return largest;
-      const delta = Math.abs(point.value - rawPoints[index - 1].value);
-      return !largest || delta > largest.delta ? { point, delta } : largest;
-    },
-    null as { point: (typeof rawPoints)[number]; delta: number } | null,
-  )?.point;
-  const highlightedWeeks = new Set(
-    [latestPoint, minPoint, maxPoint, largestSwingPoint]
-      .filter(Boolean)
-      .map((point) => point!.week),
-  );
+  const annotationWeek = latestPoint?.week ?? latestWeek;
+  const annotationLabel = `W${String(annotationWeek).padStart(2, "0")}`;
   const makeSegments = (
     series: (number | null)[],
     limit: number,
@@ -409,16 +390,6 @@ function WeeklyTrend({
                     </title>
                   </circle>
                 ))}
-                {averagePoints.length > 0 && (
-                  <text
-                    x={x(averagePoints.at(-1)!.week)}
-                    y={Math.max(14, y(averagePoints.at(-1)!.value) - 7)}
-                    textAnchor="end"
-                    className="average-label"
-                  >
-                    전국 평균 {displayNumber(averagePoints.at(-1)!.value)}
-                  </text>
-                )}
               </>
             ) : (
               <>
@@ -429,14 +400,6 @@ function WeeklyTrend({
                   y2={y(average)}
                   className="average-line"
                 />
-                <text
-                  x="1330"
-                  y={y(average) - 7}
-                  textAnchor="end"
-                  className="average-label"
-                >
-                  전국 평균 {displayNumber(average)}
-                </text>
               </>
             )}
             {storeSegments.map(
@@ -484,16 +447,6 @@ function WeeklyTrend({
                     </title>
                   </circle>
                 )}
-                {highlightedWeeks.has(point.week) && (
-                  <text
-                    x={x(point.week)}
-                    y={Math.max(14, y(point.value) - 12)}
-                    textAnchor="middle"
-                    className="point-value"
-                  >
-                    {displayNumber(point.value)}
-                  </text>
-                )}
               </g>
             ))}
           </svg>
@@ -537,19 +490,21 @@ function WeeklyTrend({
       </div>
       <div className="data-coverage">
         <span>
-          <i className={isWeeklyMetric ? "coverage-marker actual" : "coverage-dot filled"} />
+          <i className={isWeeklyMetric ? "coverage-line actual" : "coverage-dot filled"} />
           {isWeeklyMetric
-            ? `${showroom.showroom.replace("볼보 ", "")} 실제값 · 최신 W${String(
-                latestWeek,
-              ).padStart(2, "0")} · 입력 ${rawPoints.length}주`
+            ? `${showroom.showroom.replace("볼보 ", "")} 실제값 · ${annotationLabel} ${
+                latestPoint ? `${displayNumber(latestPoint.value)}점` : "—"
+              } · 입력 ${rawPoints.length}주`
             : `최신 W${String(latestWeek).padStart(2, "0")} · 실제 입력 ${
                 rawPoints.length
               }주`}
         </span>
         <span>
-          <i className={isWeeklyMetric ? "coverage-marker national" : "coverage-dot warning"} />
+          <i className={isWeeklyMetric ? "coverage-line national" : "coverage-dot warning"} />
           {isWeeklyMetric
-            ? `전국 주간 평균 · 평균 미달 ${warningCount}주`
+            ? `전국 주간 평균 · ${annotationLabel} ${displayNumber(
+                averageAt(annotationWeek),
+              )}점 · 평균 미달 ${warningCount}주`
             : `전국 평균 미달 ${warningCount}주`}
         </span>
         <span>
