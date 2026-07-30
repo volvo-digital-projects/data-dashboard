@@ -2980,7 +2980,7 @@ input:focus-visible,
 .identity-strip dl div {
   min-width: 116px;
   min-height: 50px;
-  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
   column-gap: 10px;
   padding: 0 14px;
   transition: background 180ms ease;
@@ -2997,13 +2997,94 @@ input:focus-visible,
 }
 
 .identity-icon {
-  width: 32px;
-  min-height: 34px;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  display: block;
+  position: relative;
   align-self: center;
-  border-radius: 9px;
+  border: 1px solid rgba(47, 107, 138, 0.1);
+  border-radius: 11px;
   color: var(--blue);
-  background: #eef5f8;
-  font-size: 12px;
+  background: linear-gradient(145deg, #f3f8fa, #e8f2f6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 3px 9px rgba(16, 42, 67, 0.045);
+}
+
+.identity-icon::before,
+.identity-icon::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.identity-icon--dealer::before {
+  width: 18px;
+  height: 14px;
+  left: 8px;
+  top: 12px;
+  border: 1.4px solid currentColor;
+  border-radius: 2px 2px 1px 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 30%,
+      currentColor 31% 35%,
+      transparent 36% 64%,
+      currentColor 65% 69%,
+      transparent 70%
+    );
+}
+
+.identity-icon--dealer::after {
+  width: 20px;
+  height: 5px;
+  left: 7px;
+  top: 8px;
+  border: 1.4px solid currentColor;
+  border-radius: 3px 3px 2px 2px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.identity-icon--region::before {
+  width: 14px;
+  height: 14px;
+  left: 10px;
+  top: 7px;
+  border: 1.4px solid currentColor;
+  border-radius: 50% 50% 50% 2px;
+  background: rgba(255, 255, 255, 0.55);
+  transform: rotate(-45deg);
+}
+
+.identity-icon--region::after {
+  width: 4px;
+  height: 4px;
+  left: 15px;
+  top: 12px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.identity-icon--size::before {
+  width: 10px;
+  height: 10px;
+  left: 8px;
+  top: 8px;
+  border-top: 1.4px solid currentColor;
+  border-left: 1.4px solid currentColor;
+  border-radius: 2px 0 0;
+}
+
+.identity-icon--size::after {
+  width: 10px;
+  height: 10px;
+  right: 8px;
+  bottom: 8px;
+  border-right: 1.4px solid currentColor;
+  border-bottom: 1.4px solid currentColor;
+  border-radius: 0 0 2px;
 }
 
 .identity-strip dt,
@@ -3026,29 +3107,42 @@ input:focus-visible,
   width: 126px;
   min-width: 126px;
   height: 50px;
-  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
   column-gap: 10px;
   padding: 0 14px;
   transition: background 180ms ease;
 }
 
 .identity-profile-icon {
-  width: 32px;
-  min-height: 34px;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  position: relative;
   align-self: center;
-  border-radius: 9px;
+  border: 1px solid rgba(47, 107, 138, 0.1);
+  border-radius: 11px;
   color: var(--blue);
-  background: #eef5f8;
+  background: linear-gradient(145deg, #f3f8fa, #e8f2f6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 3px 9px rgba(16, 42, 67, 0.045);
 }
 
 .identity-profile-icon::before {
+  width: 8px;
+  height: 8px;
   top: 7px;
-  left: 12px;
+  left: 13px;
+  border-width: 1.4px;
 }
 
 .identity-profile-icon::after {
+  width: 18px;
+  height: 10px;
   bottom: 6px;
-  left: 9px;
+  left: 8px;
+  border-width: 1.4px;
+  border-radius: 11px 11px 3px 3px;
 }
 
 .profile-popover {

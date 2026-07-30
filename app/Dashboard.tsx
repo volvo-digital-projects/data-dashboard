@@ -1354,23 +1354,26 @@ export default function Dashboard({
         <div className="identity-detail-rail">
           <dl>
             <div>
-              <span className="identity-icon" aria-hidden="true">
-                ⌂
-              </span>
+              <span
+                className="identity-icon identity-icon--dealer"
+                aria-hidden="true"
+              />
               <dt>딜러사</dt>
               <dd>{selected.dealer}</dd>
             </div>
             <div>
-              <span className="identity-icon" aria-hidden="true">
-                ◎
-              </span>
+              <span
+                className="identity-icon identity-icon--region"
+                aria-hidden="true"
+              />
               <dt>권역별</dt>
               <dd>{selected.region}</dd>
             </div>
             <div>
-              <span className="identity-icon" aria-hidden="true">
-                ↔
-              </span>
+              <span
+                className="identity-icon identity-icon--size"
+                aria-hidden="true"
+              />
               <dt>사이즈</dt>
               <dd>{selected.size}</dd>
             </div>

@@ -93,7 +93,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /카드를 선택하면 주간 흐름이 바뀝니다/);
   assert.match(html, /전국 39개/);
   assert.match(html, /6KR6834/);
-  assert.equal((html.match(/identity-icon/g) ?? []).length, 3);
+  assert.equal((html.match(/class="identity-icon /g) ?? []).length, 3);
+  assert.match(html, /identity-icon--dealer/);
+  assert.match(html, /identity-icon--region/);
+  assert.match(html, /identity-icon--size/);
+  assert.doesNotMatch(visibleHtml, /⌂|◎|↔/);
   assert.equal((html.match(/class="table-row/g) ?? []).length, 3);
   assert.match(html, /class="comparison-head table-row"/);
   assert.match(visibleHtml, /권역별/);
@@ -258,6 +262,18 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.identity-strip h1\s*\{[\s\S]*?font-family: var\(--font-korean\)[\s\S]*?font-size: clamp\(40px, 3\.25vw, 44px\)/,
   );
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 14px/);
+  assert.match(
+    css,
+    /\.identity-icon--dealer::before\s*\{[\s\S]*?border: 1\.4px solid currentColor/,
+  );
+  assert.match(
+    css,
+    /\.identity-icon--region::before\s*\{[\s\S]*?border-radius: 50% 50% 50% 2px/,
+  );
+  assert.match(
+    css,
+    /\.identity-icon--size::before\s*\{[\s\S]*?border-top: 1\.4px solid currentColor/,
+  );
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card-value\s*\{[\s\S]*?font-size: clamp\(46px, 3\.25vw, 56px\)/);
