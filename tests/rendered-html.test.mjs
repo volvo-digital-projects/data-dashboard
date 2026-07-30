@@ -128,6 +128,9 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /font-family: "Paperlogy 5"/);
   assert.match(css, /font-family: "Paperlogy 9"/);
   assert.match(css, /\.identity-strip h1[\s\S]*font-family: "Paperlogy 9"/);
+  assert.match(css, /\.topbar\s*\{[\s\S]*?min-height: 64px/);
+  assert.match(css, /\.identity-strip\s*\{[\s\S]*?min-height: 76px/);
+  assert.match(css, /\.identity-strip > div:first-child/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);

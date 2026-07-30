@@ -145,11 +145,11 @@ input:focus-visible {
 .dashboard {
   width: min(1500px, 100%);
   margin: 0 auto;
-  padding: 0 42px 30px;
+  padding: 0 34px 28px;
 }
 
 .topbar {
-  min-height: 88px;
+  min-height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -160,21 +160,21 @@ input:focus-visible {
 .brand {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 10px;
   color: inherit;
   text-decoration: none;
 }
 
 .brand-mark {
-  width: 37px;
-  height: 37px;
+  width: 31px;
+  height: 31px;
   display: grid;
   place-items: center;
   border: 1px solid var(--navy);
   border-radius: 50%;
   color: var(--navy);
   font-family: var(--font-ui);
-  font-size: 20px;
+  font-size: 17px;
   line-height: 1;
 }
 
@@ -184,30 +184,30 @@ input:focus-visible {
 }
 
 .brand strong {
-  font-size: 15px;
+  font-size: 13px;
   letter-spacing: 0.13em;
 }
 
 .brand div > span {
-  margin-top: 3px;
+  margin-top: 1px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 8px;
   letter-spacing: 0.08em;
 }
 
 .topbar-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
 }
 
 .criteria-open,
 .criteria-back {
-  min-height: 39px;
+  min-height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 14px;
+  padding: 0 11px;
   color: var(--navy);
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.62);
@@ -223,8 +223,8 @@ input:focus-visible {
 }
 
 .admin-open {
-  min-height: 39px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 11px;
   border: 1px solid var(--navy);
   color: var(--navy);
   background: transparent;
@@ -239,11 +239,11 @@ input:focus-visible {
 }
 
 .period-badge {
-  min-height: 39px;
+  min-height: 34px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 13px;
+  padding: 0 11px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.54);
   color: var(--ink-soft);
@@ -267,13 +267,13 @@ input:focus-visible {
 }
 
 .profile-button {
-  min-width: 190px;
-  min-height: 48px;
+  min-width: 168px;
+  min-height: 40px;
   display: grid;
-  grid-template-columns: 34px 1fr auto;
+  grid-template-columns: 28px 1fr auto;
   align-items: center;
-  gap: 9px;
-  padding: 5px 10px 5px 6px;
+  gap: 8px;
+  padding: 3px 7px 3px 4px;
   border: 0;
   background: transparent;
   color: var(--ink);
@@ -286,14 +286,14 @@ input:focus-visible {
 }
 
 .avatar {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
   border-radius: 50%;
   background: var(--blue-soft);
   color: var(--navy);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 800;
 }
 
@@ -303,13 +303,13 @@ input:focus-visible {
 }
 
 .profile-button strong {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .profile-button small {
-  margin-top: 2px;
+  margin-top: 1px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .profile-button b {
@@ -321,7 +321,7 @@ input:focus-visible {
   width: 390px;
   position: absolute;
   z-index: 20;
-  top: 74px;
+  top: 56px;
   right: 0;
   padding: 20px;
   background: var(--white);
@@ -377,11 +377,18 @@ input:focus-visible {
 }
 
 .identity-strip {
-  min-height: 128px;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 22px;
+}
+
+.identity-strip > div:first-child {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .eyebrow {
@@ -395,7 +402,7 @@ input:focus-visible {
 .identity-strip h1 {
   margin: 0;
   font-family: "Paperlogy 9", var(--font-korean), sans-serif;
-  font-size: clamp(30px, 3vw, 46px);
+  font-size: clamp(28px, 2.4vw, 36px);
   font-weight: 900;
   letter-spacing: -0.06em;
 }
@@ -404,7 +411,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-top: 10px;
+  margin-top: 0;
   color: var(--muted);
   font-size: 9px;
 }
@@ -435,26 +442,27 @@ input:focus-visible {
 
 .identity-strip dl {
   display: flex;
-  gap: 6px;
+  gap: 0;
   margin: 0;
 }
 
 .identity-strip dl div {
-  min-width: 138px;
-  min-height: 56px;
+  min-width: 112px;
+  min-height: 42px;
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-columns: 24px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
-  column-gap: 10px;
-  padding: 8px 12px;
-  border: 1px solid rgba(16, 42, 57, 0.09);
-  background: rgba(255, 255, 255, 0.48);
+  column-gap: 8px;
+  padding: 4px 12px;
+  border: 0;
+  border-left: 1px solid rgba(16, 42, 57, 0.11);
+  background: transparent;
 }
 
 .identity-icon {
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
   grid-row: 1 / span 2;
   display: grid;
   place-items: center;
@@ -462,21 +470,21 @@ input:focus-visible {
   color: var(--blue);
   background: var(--blue-soft);
   font-family: var(--font-ui);
-  font-size: 16px;
+  font-size: 11px;
   font-weight: 400;
 }
 
 .identity-strip dt {
   color: var(--muted);
   align-self: end;
-  font-size: 8px;
+  font-size: 7px;
   letter-spacing: 0.08em;
 }
 
 .identity-strip dd {
-  margin: 2px 0 0;
+  margin: 1px 0 0;
   align-self: start;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
 }
 
@@ -1937,6 +1945,21 @@ input:focus-visible {
     padding: 0 24px 26px;
   }
 
+  .identity-strip {
+    gap: 12px;
+  }
+
+  .identity-strip > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .identity-strip dl div {
+    min-width: 102px;
+    padding-inline: 9px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
   }
@@ -1953,7 +1976,7 @@ input:focus-visible {
   }
 
   .topbar {
-    min-height: 64px;
+    min-height: 56px;
     gap: 8px;
   }
 
@@ -1970,9 +1993,9 @@ input:focus-visible {
   }
 
   .brand-mark {
-    width: 34px;
-    height: 34px;
-    flex: 0 0 34px;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
   }
 
   .brand strong {
@@ -1991,22 +2014,32 @@ input:focus-visible {
 
   .profile-button {
     min-width: auto;
-    grid-template-columns: 34px;
+    min-height: 30px;
+    grid-template-columns: 30px;
     padding: 0;
+  }
+
+  .profile-button .avatar {
+    width: 30px;
+    height: 30px;
   }
 
   .profile-popover {
     width: min(390px, calc(100vw - 28px));
-    top: 64px;
+    top: 56px;
   }
 
   .identity-strip {
-    min-height: 116px;
+    min-height: 94px;
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    padding: 14px 0;
+    gap: 7px;
+    padding: 9px 0;
+  }
+
+  .identity-strip > div:first-child {
+    width: 100%;
   }
 
   .identity-strip h1 {
@@ -2048,7 +2081,7 @@ input:focus-visible {
     max-width: 100%;
     flex-wrap: wrap;
     gap: 3px 6px;
-    margin-top: 6px;
+    margin-top: 2px;
   }
 
   .update-status span {
