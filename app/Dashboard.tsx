@@ -340,6 +340,8 @@ function WeeklyTrend({
   const plotWidth = plotRight - plotLeft;
   const x = (week: number) =>
     plotLeft + ((week - 0.5) / 52) * plotWidth;
+  const activeQuarterStart = x(26.5);
+  const activeQuarterEnd = x(39.5);
   const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13.5, 26.5, 39.5];
@@ -520,17 +522,17 @@ function WeeklyTrend({
                 className="week-grid"
               />
             ))}
-            {latestWeek < 52 && (
+            {latestWeek < 40 && (
               <g className="future-window-group" aria-hidden="true">
                 <rect
-                  x={x(latestWeek + 0.5)}
+                  x={activeQuarterStart}
                   y="18"
-                  width={plotRight - x(latestWeek + 0.5)}
+                  width={activeQuarterEnd - activeQuarterStart}
                   height="152"
                   className="future-window"
                 />
                 <text
-                  x={(x(latestWeek + 0.5) + plotRight) / 2}
+                  x={(activeQuarterStart + activeQuarterEnd) / 2}
                   y="88"
                   textAnchor="middle"
                   className="future-window-label"
@@ -538,7 +540,7 @@ function WeeklyTrend({
                   Q3 평가 진행 중
                 </text>
                 <text
-                  x={(x(latestWeek + 0.5) + plotRight) / 2}
+                  x={(activeQuarterStart + activeQuarterEnd) / 2}
                   y="104"
                   textAnchor="middle"
                   className="future-window-help"

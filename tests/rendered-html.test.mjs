@@ -228,7 +228,12 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const quarterDividers = \[13\.5, 26\.5, 39\.5\]/,
   );
-  assert.match(dashboardSource, /width=\{plotRight - x\(latestWeek \+ 0\.5\)\}/);
+  assert.match(dashboardSource, /const activeQuarterStart = x\(26\.5\)/);
+  assert.match(dashboardSource, /const activeQuarterEnd = x\(39\.5\)/);
+  assert.match(
+    dashboardSource,
+    /width=\{activeQuarterEnd - activeQuarterStart\}/,
+  );
   assert.match(css, /\.quarter-band\s*\{[\s\S]*?margin: 0 2\.0588235%/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
   assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);
