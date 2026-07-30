@@ -1279,8 +1279,8 @@ input:focus-visible {
   shape-rendering: geometricPrecision;
 }
 
-.actual-point-value {
-  fill: var(--ink);
+.actual-point-value,
+.national-point-value {
   stroke: white;
   stroke-width: 3px;
   paint-order: stroke;
@@ -1289,6 +1289,14 @@ input:focus-visible {
   font-weight: 800;
   letter-spacing: -0.03em;
   pointer-events: none;
+}
+
+.actual-point-value {
+  fill: var(--blue);
+}
+
+.national-point-value {
+  fill: var(--warning);
 }
 
 .week-ruler {

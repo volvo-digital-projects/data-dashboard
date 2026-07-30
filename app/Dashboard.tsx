@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import dashboardJson from "./data/showrooms.json";
 import weeklyJson from "./data/weekly.json";
 
@@ -249,6 +249,7 @@ function WeeklyTrend({
     metric === "voc" || metric === "cx" ? weeklyDashboard[metric] : null;
   const weeklySeries = nativeWeekly?.byCdsid[showroom.cdsid] ?? null;
   const averageSeries = nativeWeekly?.average ?? null;
+  const trendScrollRef = useRef<HTMLDivElement>(null);
   const latestWeek =
     metric === "voc"
       ? weeklyDashboard.meta.vocLatestWeek
@@ -294,14 +295,6 @@ function WeeklyTrend({
   const min = Math.max(0, Math.min(...chartValues) - 8);
   const x = (week: number) => 28 + ((week - 1) / 51) * 1304;
   const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
-  const actualValueLabelY = (
-    point: { value: number },
-    index: number,
-  ) => {
-    const pointY = y(point.value);
-    const canPlaceBelow = pointY < 150;
-    return pointY + (index % 2 === 1 && canPlaceBelow ? 15 : -10);
-  };
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13.5, 26.5, 39.5];
   const quarterLabels = [
@@ -312,6 +305,49 @@ function WeeklyTrend({
   ];
   const averageAt = (week: number) =>
     averageSeries?.[week - 1] ?? average;
+  const actualAt = (week: number) => weeklySeries?.[week - 1] ?? null;
+  const labelBaselineY = (
+    pointY: number,
+    pairedPointY: number | null,
+    preferred: "above" | "below",
+  ) => {
+    const candidates =
+      preferred === "above"
+        ? [pointY - 10, pointY + 15]
+        : [pointY + 15, pointY - 10];
+
+    const available = candidates.find((baseline) => {
+      const labelTop = baseline - 8;
+      const labelBottom = baseline + 2;
+      const staysInPlot = labelTop >= 6 && labelBottom <= 166;
+      const clearsPairedMarker =
+        pairedPointY === null ||
+        labelBottom < pairedPointY - 5 ||
+        labelTop > pairedPointY + 5;
+      return staysInPlot && clearsPairedMarker;
+    });
+
+    return available ?? Math.max(14, Math.min(164, candidates[0]));
+  };
+  const actualValueLabelY = (point: { week: number; value: number }) => {
+    const pointY = y(point.value);
+    const pairedPointY = y(averageAt(point.week));
+    return labelBaselineY(
+      pointY,
+      pairedPointY,
+      pointY <= pairedPointY ? "above" : "below",
+    );
+  };
+  const nationalValueLabelY = (point: { week: number; value: number }) => {
+    const pointY = y(point.value);
+    const actualValue = actualAt(point.week);
+    const pairedPointY = actualValue === null ? null : y(actualValue);
+    return labelBaselineY(
+      pointY,
+      pairedPointY,
+      pairedPointY === null || pointY < pairedPointY ? "above" : "below",
+    );
+  };
   const warningCount = rawPoints.filter(
     (point) => point.value < averageAt(point.week),
   ).length;
@@ -344,9 +380,20 @@ function WeeklyTrend({
     ? makeSegments(averageSeries, latestWeek)
     : [];
 
+  useEffect(() => {
+    if (trendScrollRef.current) {
+      trendScrollRef.current.scrollLeft = 0;
+    }
+  }, [metric, showroom.cdsid]);
+
   return (
     <div className="trend-wrap">
-      <div className="trend-scroll" tabIndex={0} aria-label="52주 성과 그래프">
+      <div
+        ref={trendScrollRef}
+        className="trend-scroll"
+        tabIndex={0}
+        aria-label="W01부터 시작하는 52주 성과 그래프"
+      >
         <div className="trend-canvas">
           <div className="quarter-band" aria-hidden="true">
             {quarterLabels.map((quarter) => (
@@ -395,19 +442,29 @@ function WeeklyTrend({
                   />
                 ))}
                 {averagePoints.map((point) => (
-                  <circle
-                    key={`average-${point.week}`}
-                    cx={x(point.week)}
-                    cy={y(point.value)}
-                    r="4.5"
-                    className="national-average-point"
-                  >
-                    <title>
-                      {`W${String(point.week).padStart(2, "0")} 전국 평균 ${displayNumber(
-                        point.value,
-                      )}점`}
-                    </title>
-                  </circle>
+                  <g key={`average-${point.week}`}>
+                    <circle
+                      cx={x(point.week)}
+                      cy={y(point.value)}
+                      r="4.5"
+                      className="national-average-point"
+                    >
+                      <title>
+                        {`W${String(point.week).padStart(2, "0")} 전국 평균 ${displayNumber(
+                          point.value,
+                        )}점`}
+                      </title>
+                    </circle>
+                    <text
+                      x={x(point.week)}
+                      y={nationalValueLabelY(point)}
+                      textAnchor="middle"
+                      className="national-point-value"
+                      aria-hidden="true"
+                    >
+                      {displayNumber(point.value)}
+                    </text>
+                  </g>
                 ))}
               </>
             ) : (
@@ -433,7 +490,7 @@ function WeeklyTrend({
                   />
                 ),
             )}
-            {rawPoints.map((point, index) => (
+            {rawPoints.map((point) => (
               <g key={`${point.week}-${point.label}`}>
                 {isWeeklyMetric ? (
                   <rect
@@ -468,7 +525,7 @@ function WeeklyTrend({
                 )}
                 <text
                   x={x(point.week)}
-                  y={actualValueLabelY(point, index)}
+                  y={actualValueLabelY(point)}
                   textAnchor="middle"
                   className="actual-point-value"
                   aria-hidden="true"

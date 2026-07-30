@@ -101,6 +101,8 @@ test("server-renders the selected CDSID dashboard", async () => {
       .filter((week) => week !== "W22"),
   );
   assert.equal((html.match(/class="actual-point-value"/g) ?? []).length, 25);
+  assert.equal((html.match(/class="national-point-value"/g) ?? []).length, 26);
+  assert.match(html, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);
   assert.match(html, /class="coverage-line national"/);
@@ -199,7 +201,9 @@ test("ships Volvo Centum for Latin text and Paperlogy 5 for Korean text", async 
   assert.match(css, /\.quarter-band strong[\s\S]*?font-size: 11px/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -19px 24px 3px/);
   assert.match(css, /\.week-ruler span[\s\S]*?font-size: 8px/);
-  assert.match(css, /\.actual-point-value[\s\S]*?font-size: 8px/);
+  assert.match(css, /\.actual-point-value,[\s\S]*?\.national-point-value[\s\S]*?font-size: 8px/);
+  assert.match(css, /\.actual-point-value\s*\{[\s\S]*?fill: var\(--blue\)/);
+  assert.match(css, /\.national-point-value\s*\{[\s\S]*?fill: var\(--warning\)/);
   assert.match(css, /\.average-trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /\.trend-line[\s\S]*stroke-width: 2\.5/);
   assert.match(css, /--font-ui:[\s\S]*var\(--font-volvo\)[\s\S]*var\(--font-korean\)/);
