@@ -38,8 +38,6 @@ type ScatterLabelPlacement =
 type ScatterCalloutLayout = {
   offsetX: number;
   offsetY: number;
-  leaderLength: number;
-  leaderAngle: number;
   placement: ScatterLabelPlacement;
 };
 
@@ -185,8 +183,6 @@ const buildScatterCalloutLayout = (
       { placement: "right-up" as const, x: 1, y: -1 },
       { placement: "left-down" as const, x: -1, y: 1 },
       { placement: "right-down" as const, x: 1, y: 1 },
-      { placement: point.x > safeWidth / 2 ? "left-up" as const : "right-up" as const, x: point.x > safeWidth / 2 ? -1 : 1, y: 0 },
-      { placement: point.y > safeHeight / 2 ? "right-up" as const : "right-down" as const, x: 0, y: point.y > safeHeight / 2 ? -1 : 1 },
     ].filter(
       (direction, index, allDirections) =>
         allDirections.findIndex(
@@ -203,8 +199,8 @@ const buildScatterCalloutLayout = (
     }> = [];
 
     directions.forEach((direction, directionIndex) => {
-      [10, 28, 46, 64, 82].forEach((gap, gapIndex) => {
-        [0, -22, 22, -44, 44].forEach((lane, laneIndex) => {
+      [5, 9, 13].forEach((gap, gapIndex) => {
+        [0, -8, 8, -16, 16].forEach((lane, laneIndex) => {
           const perpendicularX = -direction.y;
           const perpendicularY = direction.x;
           const offsetX =
@@ -268,25 +264,9 @@ const buildScatterCalloutLayout = (
     );
     placedBoxes.push(best.box);
 
-    const centerDistance = Math.max(
-      Math.hypot(best.offsetX, best.offsetY),
-      1,
-    );
-    const boundaryScale = Math.min(
-      Math.abs(best.offsetX) > 0
-        ? labelWidth / 2 / Math.abs(best.offsetX)
-        : Number.POSITIVE_INFINITY,
-      Math.abs(best.offsetY) > 0
-        ? labelHeight / 2 / Math.abs(best.offsetY)
-        : Number.POSITIVE_INFINITY,
-    );
-    const leaderLength = Math.max(8, centerDistance * (1 - boundaryScale));
-
     layouts.set(point.item.cdsid, {
       offsetX: best.offsetX,
       offsetY: best.offsetY,
-      leaderLength,
-      leaderAngle: Math.atan2(best.offsetY, best.offsetX) * (180 / Math.PI),
       placement: best.placement,
     });
   });
@@ -577,8 +557,6 @@ export default function CompetitiveAnalysis({
                 const callout = scatterCallouts.get(item.cdsid) ?? {
                   offsetX: 16,
                   offsetY: -16,
-                  leaderLength: 8,
-                  leaderAngle: -45,
                   placement: "right-up" as const,
                 };
                 const pointStyle = {
@@ -586,8 +564,6 @@ export default function CompetitiveAnalysis({
                   "--point-y": `${pointY}%`,
                   "--callout-x": `${callout.offsetX}px`,
                   "--callout-y": `${callout.offsetY}px`,
-                  "--leader-length": `${callout.leaderLength}px`,
-                  "--leader-angle": `${callout.leaderAngle}deg`,
                 } as CSSProperties;
                 const pointLabel = `${displayShowroomName(item.showroom)} · 종합 만족도 ${displayNumber(
                   item.vocScore,
@@ -609,7 +585,6 @@ export default function CompetitiveAnalysis({
                     aria-label={pointLabel}
                     tabIndex={denseScatter && !isSelected ? 0 : undefined}
                   >
-                    <span className="scatter-callout-leader" aria-hidden="true" />
                     <i />
                     <b
                       className={`scatter-label ${

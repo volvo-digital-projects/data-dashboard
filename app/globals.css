@@ -3353,6 +3353,8 @@ input:focus-visible {
 
 .scatter-point {
   --callout-color: #7f96a2;
+  --callout-fill: rgba(255, 255, 255, 0.97);
+  --callout-border: color-mix(in srgb, var(--callout-color) 32%, white);
   position: absolute;
   left: var(--point-x);
   bottom: var(--point-y);
@@ -3417,43 +3419,16 @@ input:focus-visible {
     0 7px 14px rgba(16, 42, 67, 0.2);
 }
 
-.scatter-callout-leader {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  width: var(--leader-length);
-  height: 1px;
-  display: block;
-  background: color-mix(in srgb, var(--callout-color) 68%, white);
-  transform: translateY(-50%) rotate(var(--leader-angle));
-  transform-origin: 0 50%;
-  pointer-events: none;
-}
-
-.scatter-callout-leader::before {
-  position: absolute;
-  top: 50%;
-  left: 8px;
-  width: 0;
-  height: 0;
-  border-top: 3px solid transparent;
-  border-right: 5px solid var(--callout-color);
-  border-bottom: 3px solid transparent;
-  content: "";
-  transform: translate(-100%, -50%);
-}
-
 .scatter-point > b {
   position: absolute;
   z-index: 2;
   top: 50%;
   left: 50%;
   padding: 4px 8px;
-  border: 1px solid color-mix(in srgb, var(--callout-color) 32%, white);
+  border: 1px solid var(--callout-border);
   border-radius: 5px;
   color: #526273;
-  background: rgba(255, 255, 255, 0.97);
+  background: var(--callout-fill);
   font-size: 8px;
   font-weight: 650;
   line-height: 1.25;
@@ -3469,7 +3444,70 @@ input:focus-visible {
     box-shadow 150ms ease;
 }
 
+.scatter-point > b::before,
+.scatter-point > b::after {
+  width: 0;
+  height: 0;
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.scatter-point.label-right-up > b::before,
+.scatter-point.label-left-up > b::before {
+  bottom: -7px;
+  border-top: 7px solid var(--callout-border);
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.scatter-point.label-right-up > b::after,
+.scatter-point.label-left-up > b::after {
+  bottom: -5px;
+  border-top: 6px solid var(--callout-fill);
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
+}
+
+.scatter-point.label-right-down > b::before,
+.scatter-point.label-left-down > b::before {
+  top: -7px;
+  border-right: 4px solid transparent;
+  border-bottom: 7px solid var(--callout-border);
+  border-left: 4px solid transparent;
+}
+
+.scatter-point.label-right-down > b::after,
+.scatter-point.label-left-down > b::after {
+  top: -5px;
+  border-right: 3px solid transparent;
+  border-bottom: 6px solid var(--callout-fill);
+  border-left: 3px solid transparent;
+}
+
+.scatter-point.label-right-up > b::before,
+.scatter-point.label-right-down > b::before {
+  left: 7px;
+}
+
+.scatter-point.label-right-up > b::after,
+.scatter-point.label-right-down > b::after {
+  left: 8px;
+}
+
+.scatter-point.label-left-up > b::before,
+.scatter-point.label-left-down > b::before {
+  right: 7px;
+}
+
+.scatter-point.label-left-up > b::after,
+.scatter-point.label-left-down > b::after {
+  right: 8px;
+}
+
 .scatter-point.selected > b {
+  --callout-fill: var(--navy);
+  --callout-border: var(--navy);
   padding: 5px 8px;
   border-color: transparent;
   color: white;
