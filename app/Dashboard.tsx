@@ -464,7 +464,7 @@ function V3SPerformance({
             <h3>분기 평가</h3>
           </div>
           <div className="v3s-cumulative">
-            <span>상반기 누적 평균</span>
+            <span>2026 누적 평균</span>
             <strong>
               {displayNumber(cumulativeAverage)}
               <small>점</small>

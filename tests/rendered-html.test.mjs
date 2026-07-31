@@ -85,6 +85,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
   assert.match(visibleHtml, /330점 만점/);
+  assert.match(visibleHtml, /2026 누적 평균/);
+  assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
   assert.match(visibleHtml, /Q3[\s\S]*Q4/);
