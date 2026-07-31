@@ -434,7 +434,8 @@ export default function CompetitiveAnalysis({
       <header className="analysis-header">
         <div>
           <Link href={`/dashboard/${selected.cdsid}`} className="analysis-back">
-            <span aria-hidden="true">←</span> 메인 대시보드
+            <span className="analysis-back-icon" aria-hidden="true" />
+            <span>메인 대시보드</span>
           </Link>
           <div className="analysis-title-row">
             <h1>{displayShowroomName(selected.showroom)} 경쟁력 분석</h1>
