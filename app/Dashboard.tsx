@@ -1561,7 +1561,7 @@ export default function Dashboard({
             <span>
               전시장 경쟁력 전국 순위{" "}
               <strong>
-                {nationalRank}위 / {dashboard.meta.showroomCount}개점
+                {nationalRank}위 / 전체 {dashboard.meta.showroomCount}
               </strong>
             </span>
           </div>
