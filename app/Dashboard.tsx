@@ -945,14 +945,22 @@ function WeeklyTrend({
             {showActual && storeSegments.map(
               (segment, index) =>
                 segment.length > 1 && (
-                  <polyline
-                    key={`store-${index}`}
-                    points={segment
-                      .map((point) => `${x(point.week)},${y(point.value)}`)
-                      .join(" ")}
-                    pathLength="1"
-                    className="trend-line"
-                  />
+                  <g key={`store-${index}`}>
+                    <polyline
+                      points={segment
+                        .map((point) => `${x(point.week)},${y(point.value)}`)
+                        .join(" ")}
+                      className="trend-line-base"
+                      aria-hidden="true"
+                    />
+                    <polyline
+                      points={segment
+                        .map((point) => `${x(point.week)},${y(point.value)}`)
+                        .join(" ")}
+                      pathLength="1"
+                      className="trend-line"
+                    />
+                  </g>
                 ),
             )}
             {showActual && rawPoints.map((point) => (
