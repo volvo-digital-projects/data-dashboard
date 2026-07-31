@@ -63,7 +63,7 @@ const viewMeta: Record<
   },
   showroom: {
     label: "전국 전시장 내 분석",
-    description: "전국 39개 전시장의 고객만족도와 해피콜 이행을 비교합니다.",
+    description: "전국 39개 전시장의 종합 만족도와 해피콜 이행을 비교합니다.",
     short: "전시장",
   },
   region: {
@@ -478,7 +478,7 @@ export default function CompetitiveAnalysis({
       <section className="analysis-summary-grid">
         <article className="analysis-summary-card satisfaction">
           <div>
-            <span>고객만족도</span>
+            <span>종합 만족도</span>
             <small>VOC + ONE Voice / 상담 및 출고 후 만족도 평가</small>
           </div>
           <strong>
@@ -521,7 +521,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-summary-card balance">
           <div>
             <span>균형 경쟁력</span>
-            <small>고객만족도와 해피콜 합산 평균</small>
+            <small>종합 만족도와 해피콜 합산 평균</small>
           </div>
           <strong>
             {displayNumber(selectedPoint.combined)}
@@ -538,7 +538,7 @@ export default function CompetitiveAnalysis({
           <header className="analysis-card-heading">
             <div>
               <span>DUAL METRIC POSITION</span>
-              <h2>고객만족도 × 해피콜 이행</h2>
+              <h2>종합 만족도 × 해피콜 이행</h2>
             </div>
             <div className="analysis-legend" aria-label="차트 범례">
               <span className="selected">내 전시장</span>
@@ -548,7 +548,7 @@ export default function CompetitiveAnalysis({
           </header>
 
           <div className="analysis-scatter-shell">
-            <div className="scatter-y-title">고객만족도</div>
+            <div className="scatter-y-title">종합 만족도</div>
             <div
               className="analysis-scatter"
               style={scatterStyle}
@@ -564,7 +564,7 @@ export default function CompetitiveAnalysis({
                 해피콜 평균 {displayNumber(groupHappyAverage)}점
               </span>
               <span className="scatter-average-value horizontal">
-                고객만족도 평균 {displayNumber(groupVocAverage)}점
+                종합 만족도 평균 {displayNumber(groupVocAverage)}점
               </span>
               {groupItems.map((item) => {
                 const pointX = clamp(
@@ -589,7 +589,7 @@ export default function CompetitiveAnalysis({
                   "--leader-length": `${callout.leaderLength}px`,
                   "--leader-angle": `${callout.leaderAngle}deg`,
                 } as CSSProperties;
-                const pointLabel = `${displayShowroomName(item.showroom)} · 고객만족도 ${displayNumber(
+                const pointLabel = `${displayShowroomName(item.showroom)} · 종합 만족도 ${displayNumber(
                   item.vocScore,
                 )} · 해피콜 ${displayNumber(item.happyScore)}`;
                 return (
