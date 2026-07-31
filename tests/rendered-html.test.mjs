@@ -250,7 +250,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);
-  assert.match(visibleHtml, /해피콜 평균 \d+\.\d점/);
+  assert.match(
+    html.replaceAll("<!-- -->", ""),
+    /class="scatter-average-value vertical"><span>해피콜 이행<\/span><strong>평균 \d+\.\d점<\/strong>/,
+  );
   assert.match(
     html.replaceAll("<!-- -->", ""),
     /class="scatter-average-value horizontal"><span>종합 만족도<\/span><strong>평균 \d+\.\d점<\/strong>/,
@@ -598,6 +601,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.scatter-average-value\.horizontal\s*\{[^}]*left: 0[^}]*display: flex[^}]*flex-direction: column/,
+  );
+  assert.match(
+    css,
+    /\.scatter-average-value\.vertical\s*\{[^}]*left: var\(--avg-x\)[^}]*bottom: 12px[^}]*display: flex[^}]*flex-direction: column/,
   );
   assert.match(analysisSource, /--callout-tail-x/);
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);

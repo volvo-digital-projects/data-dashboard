@@ -3326,7 +3326,11 @@ input:focus-visible {
 
 .scatter-average-value.vertical {
   left: var(--avg-x);
-  top: 10px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0;
   transform: translateX(-50%);
 }
 
@@ -3340,7 +3344,7 @@ input:focus-visible {
   transform: translateY(50%);
 }
 
-.scatter-average-value.horizontal strong {
+.scatter-average-value strong {
   font-size: inherit;
   font-weight: 750;
 }

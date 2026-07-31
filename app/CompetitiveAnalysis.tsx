@@ -558,7 +558,8 @@ export default function CompetitiveAnalysis({
               <i className="scatter-average-line vertical" />
               <i className="scatter-average-line horizontal" />
               <span className="scatter-average-value vertical">
-                해피콜 평균 {displayNumber(groupHappyAverage)}점
+                <span>해피콜 이행</span>
+                <strong>평균 {displayNumber(groupHappyAverage)}점</strong>
               </span>
               <span className="scatter-average-value horizontal">
                 <span>종합 만족도</span>
