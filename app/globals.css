@@ -3940,7 +3940,7 @@ input:focus-visible,
   width: 126px;
   min-width: 126px;
   min-height: 50px;
-  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-columns: 22px minmax(0, 1fr);
   column-gap: 10px;
   padding: 0 14px;
   justify-items: center;
@@ -3958,14 +3958,15 @@ input:focus-visible,
 }
 
 .identity-icon {
-  width: 36px;
-  height: 36px;
-  min-height: 36px;
+  width: 22px;
+  height: 22px;
+  min-height: 22px;
+  aspect-ratio: 1;
   display: block;
   position: relative;
   align-self: center;
   border: 1px solid rgba(47, 107, 138, 0.1);
-  border-radius: 6px;
+  border-radius: 4px;
   color: var(--blue);
   background: linear-gradient(145deg, #f3f8fa, #e8f2f6);
   box-shadow:
@@ -3981,12 +3982,12 @@ input:focus-visible,
 }
 
 .identity-icon--dealer::before {
-  width: 18px;
-  height: 14px;
-  left: 8px;
-  top: 12px;
-  border: 1.4px solid currentColor;
-  border-radius: 2px 2px 1px 1px;
+  width: 11px;
+  height: 9px;
+  left: 5px;
+  top: 8px;
+  border: 1px solid currentColor;
+  border-radius: 1.5px 1.5px 1px 1px;
   background:
     linear-gradient(
       90deg,
@@ -3999,53 +4000,53 @@ input:focus-visible,
 }
 
 .identity-icon--dealer::after {
-  width: 20px;
-  height: 5px;
-  left: 7px;
-  top: 8px;
-  border: 1.4px solid currentColor;
-  border-radius: 3px 3px 2px 2px;
+  width: 12px;
+  height: 4px;
+  left: 4px;
+  top: 5px;
+  border: 1px solid currentColor;
+  border-radius: 2px 2px 1px 1px;
   background: rgba(255, 255, 255, 0.55);
 }
 
 .identity-icon--region::before {
-  width: 14px;
-  height: 14px;
-  left: 10px;
-  top: 7px;
-  border: 1.4px solid currentColor;
+  width: 9px;
+  height: 9px;
+  left: 6px;
+  top: 4px;
+  border: 1px solid currentColor;
   border-radius: 50% 50% 50% 2px;
   background: rgba(255, 255, 255, 0.55);
   transform: rotate(-45deg);
 }
 
 .identity-icon--region::after {
-  width: 4px;
-  height: 4px;
-  left: 15px;
-  top: 12px;
+  width: 3px;
+  height: 3px;
+  left: 9px;
+  top: 7px;
   border-radius: 50%;
   background: currentColor;
 }
 
 .identity-icon--size::before {
-  width: 10px;
-  height: 10px;
-  left: 8px;
-  top: 8px;
-  border-top: 1.4px solid currentColor;
-  border-left: 1.4px solid currentColor;
-  border-radius: 2px 0 0;
+  width: 6px;
+  height: 6px;
+  left: 5px;
+  top: 5px;
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  border-radius: 1px 0 0;
 }
 
 .identity-icon--size::after {
-  width: 10px;
-  height: 10px;
-  right: 8px;
-  bottom: 8px;
-  border-right: 1.4px solid currentColor;
-  border-bottom: 1.4px solid currentColor;
-  border-radius: 0 0 2px;
+  width: 6px;
+  height: 6px;
+  right: 5px;
+  bottom: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0 0 1px;
 }
 
 .identity-strip dt,
@@ -4079,7 +4080,7 @@ input:focus-visible,
   width: 126px;
   min-width: 126px;
   height: 50px;
-  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-columns: 22px minmax(0, 1fr);
   column-gap: 10px;
   padding: 0 14px;
   justify-items: center;
@@ -4087,13 +4088,14 @@ input:focus-visible,
 }
 
 .identity-profile-icon {
-  width: 36px;
-  height: 36px;
-  min-height: 36px;
+  width: 22px;
+  height: 22px;
+  min-height: 22px;
+  aspect-ratio: 1;
   position: relative;
   align-self: center;
   border: 1px solid rgba(47, 107, 138, 0.1);
-  border-radius: 6px;
+  border-radius: 4px;
   color: var(--blue);
   background: linear-gradient(145deg, #f3f8fa, #e8f2f6);
   box-shadow:
@@ -4102,20 +4104,20 @@ input:focus-visible,
 }
 
 .identity-profile-icon::before {
-  width: 8px;
-  height: 8px;
-  top: 7px;
-  left: 13px;
-  border-width: 1.4px;
+  width: 5px;
+  height: 5px;
+  top: 4px;
+  left: 8px;
+  border-width: 1px;
 }
 
 .identity-profile-icon::after {
-  width: 18px;
-  height: 10px;
-  bottom: 6px;
-  left: 8px;
-  border-width: 1.4px;
-  border-radius: 11px 11px 3px 3px;
+  width: 11px;
+  height: 6px;
+  bottom: 4px;
+  left: 5px;
+  border-width: 1px;
+  border-radius: 7px 7px 2px 2px;
 }
 
 .profile-popover {

@@ -663,7 +663,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.identity-icon--dealer::before\s*\{[\s\S]*?border: 1\.4px solid currentColor/,
+    /\.identity-icon\s*\{[\s\S]*?width: 22px[\s\S]*?height: 22px[\s\S]*?min-height: 22px[\s\S]*?aspect-ratio: 1/,
+  );
+  assert.match(
+    css,
+    /\.identity-profile-icon\s*\{[\s\S]*?width: 22px[\s\S]*?height: 22px[\s\S]*?min-height: 22px[\s\S]*?aspect-ratio: 1/,
+  );
+  assert.match(
+    css,
+    /\.identity-icon--dealer::before\s*\{[\s\S]*?border: 1px solid currentColor/,
   );
   assert.match(
     css,
@@ -671,7 +679,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.identity-icon--size::before\s*\{[\s\S]*?border-top: 1\.4px solid currentColor/,
+    /\.identity-icon--size::before\s*\{[\s\S]*?border-top: 1px solid currentColor/,
   );
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
