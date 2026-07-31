@@ -4727,18 +4727,19 @@ input:focus-visible,
 }
 
 .chart-tooltip {
-  width: 230px;
+  width: 206px;
   position: absolute;
   top: 46px;
   z-index: 5;
   display: grid;
-  gap: 8px;
-  padding: 13px 14px;
+  gap: 6px;
+  padding: 11px 12px;
   color: var(--ink);
   border: 1px solid rgba(16, 24, 40, 0.08);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 16px 36px rgba(16, 42, 67, 0.14);
+  letter-spacing: -0.015em;
   pointer-events: none;
   transform: translateX(-50%);
   animation: tooltip-in 140ms ease-out both;
@@ -4756,7 +4757,7 @@ input:focus-visible,
   color: var(--navy);
   font-family: var(--font-latin);
   font-size: 12px;
-  letter-spacing: 0.025em;
+  letter-spacing: -0.005em;
   white-space: nowrap;
 }
 
@@ -4764,7 +4765,7 @@ input:focus-visible,
   display: grid;
   grid-template-columns: 8px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   color: var(--secondary);
   font-size: 11px;
 }
@@ -4798,7 +4799,7 @@ input:focus-visible,
 }
 
 .chart-tooltip em {
-  padding-top: 8px;
+  padding-top: 6px;
   border-top: 1px solid var(--line);
   font-size: 11px;
   font-style: normal;

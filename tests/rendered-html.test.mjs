@@ -580,7 +580,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /\.v3s-history-empty-copy\s*\{/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 210px/);
-  assert.match(css, /\.chart-tooltip\s*\{[\s\S]*?border-radius: 12px/);
+  assert.match(
+    css,
+    /\.chart-tooltip\s*\{[\s\S]*?width: 206px[\s\S]*?gap: 6px[\s\S]*?padding: 11px 12px[\s\S]*?border-radius: 12px[\s\S]*?letter-spacing: -0\.015em/,
+  );
   assert.match(css, /\.hover-guide\s*\{[\s\S]*?stroke-dasharray: 3 4/);
   assert.match(
     css,
