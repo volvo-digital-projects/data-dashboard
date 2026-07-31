@@ -312,6 +312,9 @@ export default function CompetitiveAnalysis({
   const regionShowroomCount = showrooms.filter(
     (item) => item.region === selected.region,
   ).length;
+  const sizeShowroomCount = showrooms.filter(
+    (item) => item.size === selected.size,
+  ).length;
 
   const groupItems = useMemo(() => {
     const filtered =
@@ -471,7 +474,7 @@ export default function CompetitiveAnalysis({
                 : key === "region"
                   ? `${selected.region} ${regionShowroomCount}개소`
                   : key === "size"
-                    ? selected.size
+                    ? `${selected.size} ${sizeShowroomCount}개소`
                     : "전국 39개소"}
             </small>
           </button>

@@ -227,6 +227,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
+  assert.match(visibleHtml, /U 7개소/);
   const kolonResponse = await render(
     "/dashboard/6KR6861/analysis?view=dealer",
   );
