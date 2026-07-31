@@ -165,7 +165,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /점수 차이/);
   assert.doesNotMatch(visibleHtml, /점수 · 평균 대비/);
   assert.match(visibleHtml, /class="dealer-region">[^<]+ · [^<]+ · [^<]+<\/span>/);
-  assert.match(visibleHtml, /전국 39개점 기준/);
+  assert.doesNotMatch(visibleHtml, /전국 39개점 기준/);
   assert.match(visibleHtml, /볼보 강남대치 경쟁력/);
   assert.doesNotMatch(visibleHtml, /COMPETITIVE POSITION/);
   assert.match(html, /aria-label="VOC 분기 평가점수"/);

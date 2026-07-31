@@ -2064,14 +2064,11 @@ export default function Dashboard({
 
       <section className="panel comparison-panel">
         <div className="comparison-title-row">
-          <div className="section-heading">
-            <div>
-              <h2>{displayShowroomName(selected.showroom)} 경쟁력</h2>
-              <small className="comparison-subtitle">
-                전국 {dashboard.meta.showroomCount}개점 기준
-              </small>
+            <div className="section-heading">
+              <div>
+                <h2>{displayShowroomName(selected.showroom)} 경쟁력</h2>
+              </div>
             </div>
-          </div>
           <div className="comparison-controls">
             <label>
               <span>비교 그룹</span>
