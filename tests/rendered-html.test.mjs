@@ -378,6 +378,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
   );
   assert.match(dashboardSource, /function V3SPerformance/);
+  assert.match(
+    dashboardSource,
+    /label: "Q3"[\s\S]*?statusText: "Q3 평가진행"/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="v3s-upcoming-bar"[\s\S]*?<b>\{quarter\.statusText\}<\/b>/,
+  );
   assert.match(dashboardSource, /const groupQuarterAverageOf/);
   assert.match(
     dashboardSource,

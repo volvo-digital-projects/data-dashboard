@@ -383,6 +383,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       value: showroom.q1?.v3s ?? null,
       average: quarterAverageOf("v3s", "q1"),
       benchmarks: peerBenchmarks("q1"),
+      statusText: null,
       state: "complete",
     },
     {
@@ -390,6 +391,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       value: showroom.v3s,
       average: quarterAverageOf("v3s", "q2"),
       benchmarks: peerBenchmarks("q2"),
+      statusText: null,
       state: "current",
     },
     {
@@ -397,6 +399,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       value: null,
       average: null,
       benchmarks: peerBenchmarks(null),
+      statusText: "Q3 평가진행",
       state: "upcoming",
     },
     {
@@ -404,6 +407,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       value: null,
       average: null,
       benchmarks: peerBenchmarks(null),
+      statusText: "평가 예정",
       state: "upcoming",
     },
   ];
@@ -480,7 +484,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                 className="v3s-bar-stage"
                 aria-label={`${quarter.label} ${
                   quarter.value === null
-                    ? "평가 예정"
+                    ? quarter.statusText
                     : `${displayNumber(quarter.value)}점`
                 }`}
               >
@@ -502,7 +506,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                       key={benchmark.key}
                       title={`${benchmark.label} ${
                         benchmark.value === null
-                          ? "평가 예정"
+                          ? quarter.statusText
                           : `${displayNumber(benchmark.value)}점`
                       }`}
                       style={{
@@ -518,7 +522,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                   ))}
                   {quarter.value === null ? (
                     <span className="v3s-upcoming-bar">
-                      <b>평가 예정</b>
+                      <b>{quarter.statusText}</b>
                     </span>
                   ) : (
                     <span
@@ -542,7 +546,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                 </span>
                 <small>
                   {quarter.average === null
-                    ? "평가 예정"
+                    ? quarter.statusText
                     : `전국 ${displayNumber(quarter.average)}`}
                 </small>
               </div>
