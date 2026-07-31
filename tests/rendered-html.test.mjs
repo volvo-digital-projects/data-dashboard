@@ -224,9 +224,17 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(visibleHtml, /고객만족도 × 해피콜 이행/);
   assert.match(visibleHtml, /고객만족도[\s\S]*87\.5/);
+  assert.match(
+    visibleHtml,
+    /에이치 평균 93\.4점 대비 -5\.9점/,
+  );
   assert.match(visibleHtml, /VOC \+ ONE Voice \/ 상담 및 출고 후 만족도 평가/);
   assert.doesNotMatch(visibleHtml, /VOC · 상담\/시승\/출고 경험/);
   assert.match(visibleHtml, /해피콜 이행[\s\S]*100\.0/);
+  assert.match(
+    visibleHtml,
+    /에이치 평균 93\.8점 대비 \+6\.2점/,
+  );
   assert.match(
     visibleHtml,
     /VOC \+ ONE Voice \/ 상담 및 출고 후 해피콜 시행여부/,
@@ -294,6 +302,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(showroomHtml, /--leader-angle:[^;"]+deg/);
   assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전시장 25위 \/ 전체 39/);
   assert.doesNotMatch(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 25위 \/ 전체 39/);
+  assert.match(
+    showroomHtml.replaceAll("<!-- -->", ""),
+    /전국 39개 전시장 평균 96\.2점 대비 -8\.7점/,
+  );
+  assert.match(
+    showroomHtml.replaceAll("<!-- -->", ""),
+    /전국 39개 전시장 평균 92\.9점 대비 \+7\.1점/,
+  );
 });
 
 test("ships project metadata and removes the disposable starter", async () => {

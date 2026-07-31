@@ -490,7 +490,7 @@ export default function CompetitiveAnalysis({
               selectedPoint.vocScore >= groupVocAverage ? "positive" : "negative"
             }
           >
-            {groupLabel} 평균 대비{" "}
+            {groupLabel} 평균 {displayNumber(groupVocAverage)}점 대비{" "}
             {selectedPoint.vocScore >= groupVocAverage ? "+" : ""}
             {displayNumber(selectedPoint.vocScore - groupVocAverage)}점
           </em>
@@ -512,7 +512,7 @@ export default function CompetitiveAnalysis({
                 : "negative"
             }
           >
-            {groupLabel} 평균 대비{" "}
+            {groupLabel} 평균 {displayNumber(groupHappyAverage)}점 대비{" "}
             {selectedPoint.happyScore >= groupHappyAverage ? "+" : ""}
             {displayNumber(selectedPoint.happyScore - groupHappyAverage)}점
           </em>
