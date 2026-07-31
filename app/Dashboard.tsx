@@ -1246,7 +1246,7 @@ export default function Dashboard({
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
-    title: "Q3 평가 진행중입니다.",
+    title: "현재 Q3평가 진행중",
     effectiveDate: dashboard.meta.updatedAt,
   });
 
@@ -1268,7 +1268,7 @@ export default function Dashboard({
     dashboard.showrooms[0];
   const displayUpdateTitle =
     latestUpdate.effectiveDate.replaceAll(".", "-") === "2026-07-29"
-      ? "Q3 평가 진행중입니다."
+      ? "현재 Q3평가 진행중"
       : latestUpdate.title;
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;

@@ -2915,7 +2915,7 @@ input:focus-visible,
 }
 
 .identity-title {
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
 }
 
@@ -2929,9 +2929,10 @@ input:focus-visible,
 
 .update-status {
   gap: 8px;
-  margin: 10px 0 0;
+  margin: 0 0 2px;
   color: var(--secondary);
   font-size: 12px;
+  line-height: 1.1;
 }
 
 .update-status i {
