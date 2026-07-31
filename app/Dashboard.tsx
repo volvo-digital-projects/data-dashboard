@@ -461,7 +461,7 @@ function V3SPerformance({
       <section className="v3s-quarter-panel">
         <header className="v3s-subhead">
           <div>
-            <h3>분기 평가 흐름</h3>
+            <h3>분기 평가</h3>
           </div>
           <div className="v3s-cumulative">
             <span>상반기 누적 평균</span>

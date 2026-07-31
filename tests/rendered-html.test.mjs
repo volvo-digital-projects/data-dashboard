@@ -138,6 +138,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="trend-selector"/);
   assert.doesNotMatch(html, /class="trend-selector-icon"/);
   assert.equal((html.match(/class="score-tier /g) ?? []).length, 3);
+  assert.match(visibleHtml, /분기 평가/);
+  assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);
   assert.match(
     html,
     /id="score-v3s"[\s\S]*?id="score-voc"[\s\S]*?id="score-cx"/,
