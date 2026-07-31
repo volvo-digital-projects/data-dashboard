@@ -771,8 +771,12 @@ function WeeklyTrend({
     Math.max(...chartValues, metricMeta[metric].max * 0.4) + 8,
   );
   const min = Math.max(0, Math.min(...chartValues) - 8);
-  const plotLeft = 28;
-  const plotRight = 1332;
+  const chartWidth = compact ? 1768 : 1360;
+  const chartHeight = compact ? 150 : 210;
+  const chartYScale = chartHeight / 200;
+  const chartY = (coordinate: number) => coordinate * chartYScale;
+  const plotLeft = (28 / 1360) * chartWidth;
+  const plotRight = chartWidth - plotLeft;
   const plotWidth = plotRight - plotLeft;
   const x = (week: number) =>
     plotLeft + ((week - 0.5) / 52) * plotWidth;
@@ -789,7 +793,8 @@ function WeeklyTrend({
   const markerSize = 6.3;
   const markerRadius = markerSize / 2;
   const y = (value: number) =>
-    170 - ((value - min) / Math.max(1, max - min)) * 126;
+    chartY(170) -
+    ((value - min) / Math.max(1, max - min)) * chartY(126);
   const firstActualWeek = rawPoints[0]?.week ?? 1;
   const lastActualWeek = rawPoints.at(-1)?.week ?? firstActualWeek;
   const actualWeekSpan = Math.max(1, lastActualWeek - firstActualWeek);
@@ -821,7 +826,8 @@ function WeeklyTrend({
     const available = candidates.find((baseline) => {
       const labelTop = baseline - 8;
       const labelBottom = baseline + 2;
-      const staysInPlot = labelTop >= 6 && labelBottom <= 166;
+      const staysInPlot =
+        labelTop >= chartY(6) && labelBottom <= chartY(166);
       const clearsPairedMarker =
         pairedPointY === null ||
         labelBottom < pairedPointY - 5 ||
@@ -829,7 +835,10 @@ function WeeklyTrend({
       return staysInPlot && clearsPairedMarker;
     });
 
-    return available ?? Math.max(14, Math.min(164, candidates[0]));
+    return (
+      available ??
+      Math.max(chartY(14), Math.min(chartY(164), candidates[0]))
+    );
   };
   const actualValueLabelY = (point: { week: number; value: number }) => {
     const pointY = y(point.value);
@@ -920,14 +929,15 @@ function WeeklyTrend({
           </div>
           <svg
             className="trend-chart"
-            viewBox="0 0 1360 200"
+            viewBox={`0 0 ${chartWidth} ${chartHeight}`}
             preserveAspectRatio="none"
             role="img"
             aria-label={`${metricMeta[metric].label} W01부터 W52까지 연간 데이터 입력 현황`}
             onPointerMove={(event) => {
               const bounds = event.currentTarget.getBoundingClientRect();
               const viewX =
-                ((event.clientX - bounds.left) / Math.max(1, bounds.width)) * 1360;
+                ((event.clientX - bounds.left) / Math.max(1, bounds.width)) *
+                chartWidth;
               const week = Math.floor(
                 ((viewX - plotLeft) / plotWidth) * 52 + 1,
               );
@@ -938,8 +948,8 @@ function WeeklyTrend({
             <line
               x1={plotLeft}
               x2={plotRight}
-              y1="170"
-              y2="170"
+              y1={chartY(170)}
+              y2={chartY(170)}
               className="week-axis"
             />
             {weeks.map((week) => (
@@ -947,8 +957,8 @@ function WeeklyTrend({
                 key={week}
                 x1={x(week)}
                 x2={x(week)}
-                y1="165"
-                y2="170"
+                y1={chartY(165)}
+                y2={chartY(170)}
                 className={`week-tick ${week <= latestWeek ? "entered" : "pending"}`}
               />
             ))}
@@ -957,8 +967,8 @@ function WeeklyTrend({
                 key={completedWeeks}
                 x1={weekBoundaryX(completedWeeks)}
                 x2={weekBoundaryX(completedWeeks)}
-                y1="18"
-                y2="170"
+                y1={chartY(18)}
+                y2={chartY(170)}
                 data-week-boundary={completedWeeks}
                 className="week-grid"
               />
@@ -967,14 +977,14 @@ function WeeklyTrend({
               <g className="future-window-group" aria-hidden="true">
                 <rect
                   x={activeQuarterStart}
-                  y="18"
+                  y={chartY(18)}
                   width={activeQuarterEnd - activeQuarterStart}
-                  height="152"
+                  height={chartY(152)}
                   className="future-window"
                 />
                 <text
                   x={(activeQuarterStart + activeQuarterEnd) / 2}
-                  y="88"
+                  y={chartY(88)}
                   textAnchor="middle"
                   className="future-window-label"
                 >
@@ -982,7 +992,7 @@ function WeeklyTrend({
                 </text>
                 <text
                   x={(activeQuarterStart + activeQuarterEnd) / 2}
-                  y="104"
+                  y={chartY(104)}
                   textAnchor="middle"
                   className="future-window-help"
                 >
@@ -994,14 +1004,14 @@ function WeeklyTrend({
               <g className="future-window-group" aria-hidden="true">
                 <rect
                   x={upcomingQuarterStart}
-                  y="18"
+                  y={chartY(18)}
                   width={upcomingQuarterEnd - upcomingQuarterStart}
-                  height="152"
+                  height={chartY(152)}
                   className="future-window future-window-upcoming"
                 />
                 <text
                   x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
-                  y="88"
+                  y={chartY(88)}
                   textAnchor="middle"
                   className="future-window-label"
                 >
@@ -1009,7 +1019,7 @@ function WeeklyTrend({
                 </text>
                 <text
                   x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
-                  y="104"
+                  y={chartY(104)}
                   textAnchor="middle"
                   className="future-window-help"
                 >
@@ -1137,8 +1147,8 @@ function WeeklyTrend({
               <line
                 x1={x(hoverWeek)}
                 x2={x(hoverWeek)}
-                y1="18"
-                y2="170"
+                y1={chartY(18)}
+                y2={chartY(170)}
                 className="hover-guide"
                 aria-hidden="true"
               />

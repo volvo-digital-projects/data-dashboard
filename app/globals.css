@@ -6016,6 +6016,7 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .trend-canvas {
+  width: 1768px;
   min-width: 1768px;
 }
 
@@ -6313,10 +6314,6 @@ button.quarter-score-row:disabled {
 }
 
 @media (max-width: 760px) {
-  .trend-wrap.compact .trend-canvas {
-    min-width: 1456px;
-  }
-
   .dashboard {
     padding: 12px 14px 24px;
   }
