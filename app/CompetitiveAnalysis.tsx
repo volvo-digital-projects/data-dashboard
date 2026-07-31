@@ -55,7 +55,14 @@ const displayNumber = (value: number) => value.toFixed(1);
 
 const displayShowroomName = (name: string) => {
   const trimmed = name.trim();
-  return trimmed.startsWith("볼보 ") ? trimmed : `볼보 ${trimmed}`;
+  const showroomName = trimmed.startsWith("볼보 ")
+    ? trimmed.slice(3).trim()
+    : trimmed;
+  const compactName = showroomName.replace(/\s+/g, "");
+  const normalizedName = /^[가-힣]{4}$/.test(compactName)
+    ? compactName
+    : showroomName;
+  return `볼보 ${normalizedName}`;
 };
 
 const averageOf = (items: AnalysisPoint[], key: "vocScore" | "happyScore" | "combined") =>

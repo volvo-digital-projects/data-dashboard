@@ -226,6 +226,18 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.match(html, /class="scatter-point selected"/);
   assert.match(html, /href="\/dashboard\/6KR6834"/);
+
+  const regionResponse = await render(
+    "/dashboard/6KR6834/analysis?view=region",
+  );
+  assert.equal(regionResponse.status, 200);
+  const regionVisibleHtml = (await regionResponse.text()).replaceAll(
+    "<!-- -->",
+    "",
+  );
+  assert.match(regionVisibleHtml, /볼보 강남신사/);
+  assert.match(regionVisibleHtml, /볼보 분당판교/);
+  assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);
 });
 
 test("ships project metadata and removes the disposable starter", async () => {
