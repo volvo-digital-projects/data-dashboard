@@ -257,6 +257,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
   assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);
+
+  const sizeResponse = await render(
+    "/dashboard/6KR6842/analysis?view=size",
+  );
+  assert.equal(sizeResponse.status, 200);
+  const sizeHtml = await sizeResponse.text();
+  assert.match(sizeHtml, /scatter-point [^"]*dense/);
+  assert.match(sizeHtml, /scatter-label comparison/);
+  assert.match(sizeHtml, /볼보 해운대/);
 });
 
 test("ships project metadata and removes the disposable starter", async () => {
@@ -508,6 +517,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.positive\s*\{\s*color: var\(--blue\) !important;/);
   assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
   assert.match(css, /--caution: #c58a1b/);
+  assert.doesNotMatch(
+    css,
+    /\.scatter-point\.dense:not\(\.selected\)\s*>\s*b\s*\{[^}]*opacity:\s*0\s*;/s,
+  );
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
   assert.match(
     css,

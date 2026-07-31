@@ -315,11 +315,21 @@ export default function CompetitiveAnalysis({
                 const pointY = clamp(
                   ((item.vocScore - 75) / 25) * 100,
                 );
+                const isSelected = item.cdsid === selected.cdsid;
+                const denseLabelShiftX =
+                  denseScatter && !isSelected
+                    ? [-8, 0, 8][index % 3]
+                    : 0;
+                const denseLabelShiftY =
+                  denseScatter && !isSelected
+                    ? [-4, 4][Math.floor(index / 3) % 2]
+                    : 0;
                 const pointStyle = {
                   "--point-x": `${pointX}%`,
                   "--point-y": `${pointY}%`,
+                  "--label-shift-x": `${denseLabelShiftX}px`,
+                  "--label-shift-y": `${denseLabelShiftY}px`,
                 } as CSSProperties;
-                const isSelected = item.cdsid === selected.cdsid;
                 const labelPlacement = scatterLabelPlacement(
                   pointX,
                   pointY,
