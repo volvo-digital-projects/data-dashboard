@@ -559,6 +559,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.analysis-ranking-list > div\.selected\s*\{[^}]*border-color: rgba\(47, 107, 138, 0\.11\)[^}]*inset 3px 0 0 var\(--blue\)[^}]*0 12px 22px -16px rgba\(16, 42, 67, 0\.42\)/,
+  );
+  assert.match(
+    css,
     /\.comparison-value small\s*\{[\s\S]*?display: flex[\s\S]*?white-space: nowrap/,
   );
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);

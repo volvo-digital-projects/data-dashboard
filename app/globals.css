@@ -3471,10 +3471,13 @@ input:focus-visible {
 .analysis-ranking-list > div {
   min-height: 40px;
   padding: 5px 8px;
+  border: 1px solid transparent;
   border-radius: 8px;
   background: #fafbfc;
   transition:
     background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
     transform 160ms ease;
 }
 
@@ -3484,8 +3487,24 @@ input:focus-visible {
 }
 
 .analysis-ranking-list > div.selected {
-  box-shadow: inset 3px 0 0 var(--blue);
+  position: relative;
+  z-index: 1;
+  transform: translateY(-1px);
+  border-color: rgba(47, 107, 138, 0.11);
   background: #eaf3f7;
+  box-shadow:
+    inset 3px 0 0 var(--blue),
+    0 12px 22px -16px rgba(16, 42, 67, 0.42),
+    0 4px 8px -6px rgba(16, 42, 67, 0.18);
+}
+
+.analysis-ranking-list > div.selected:hover {
+  background: #eaf3f7;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 3px 0 0 var(--blue),
+    0 14px 26px -16px rgba(16, 42, 67, 0.46),
+    0 5px 10px -7px rgba(16, 42, 67, 0.2);
 }
 
 .analysis-rank {
