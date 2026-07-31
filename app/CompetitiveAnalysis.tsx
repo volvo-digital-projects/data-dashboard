@@ -273,7 +273,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-summary-card balance">
           <div>
             <span>균형 경쟁력</span>
-            <small>고객만족도와 해피콜 단순 평균</small>
+            <small>고객만족도와 해피콜 합산 평균</small>
           </div>
           <strong>
             {displayNumber(selectedPoint.combined)}
