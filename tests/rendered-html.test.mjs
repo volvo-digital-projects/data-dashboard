@@ -518,6 +518,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /label: "Q4"[\s\S]{0,220}?state: "in-progress"/,
   );
+  assert.doesNotMatch(
+    dashboardSource,
+    /className="v3s-quarter-label"[\s\S]{0,140}?<span>/,
+  );
   assert.match(
     dashboardSource,
     /className="v3s-upcoming-bar"[\s\S]*?<b>\{quarter\.statusText\}<\/b>/,
@@ -677,6 +681,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.profile-popover option\s*\{[^}]*font-family: inherit[^}]*font-variant-numeric: tabular-nums[^}]*font-feature-settings: "tnum" 1/,
+  );
+  assert.match(
+    css,
+    /\.v3s-quarter-label\s*\{[^}]*grid-template-columns: 1fr[^}]*justify-items: center[^}]*text-align: center/,
   );
   assert.match(css, /--white: #ffffff/);
   assert.match(css, /--line: #e5e9ee/);

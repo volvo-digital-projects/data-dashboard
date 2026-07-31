@@ -543,11 +543,6 @@ function V3SPerformance({
               </div>
               <div className="v3s-quarter-label">
                 <strong>{quarter.label}</strong>
-                <span>
-                  {quarter.value === null
-                    ? "—"
-                    : `${displayNumber(quarter.value)}점`}
-                </span>
                 <small>
                   {quarter.average === null
                     ? quarter.statusText

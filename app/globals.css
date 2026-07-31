@@ -5679,10 +5679,12 @@ button.quarter-score-row:disabled {
 
 .v3s-quarter-label {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
   align-items: baseline;
-  gap: 2px 6px;
+  justify-items: center;
+  gap: 2px;
   padding-top: 7px;
+  text-align: center;
 }
 
 .v3s-quarter-label strong {
@@ -5690,15 +5692,6 @@ button.quarter-score-row:disabled {
   font-family: var(--font-latin);
   font-size: 12px;
   font-weight: 750;
-}
-
-.v3s-quarter-label span {
-  justify-self: end;
-  color: var(--ink);
-  font-family: var(--font-latin);
-  font-size: 12px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
 .v3s-quarter-label small {
@@ -6601,10 +6594,6 @@ button.quarter-score-row:disabled {
   .v3s-quarter-label {
     grid-template-columns: 1fr;
     gap: 1px;
-  }
-
-  .v3s-quarter-label span {
-    justify-self: start;
   }
 
   .v3s-quarter-label small {
