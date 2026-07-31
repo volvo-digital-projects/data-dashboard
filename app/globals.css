@@ -4068,6 +4068,13 @@ input:focus-visible,
   text-align: center;
 }
 
+.identity-strip dt,
+.identity-strip dd,
+.identity-profile-role,
+.identity-profile strong {
+  line-height: 1.1;
+}
+
 .identity-profile {
   width: 126px;
   min-width: 126px;

@@ -590,6 +590,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(
     css,
+    /\.identity-strip dt,\s*\.identity-strip dd,\s*\.identity-profile-role,\s*\.identity-profile strong\s*\{[^}]*line-height: 1\.1/,
+  );
+  assert.match(
+    css,
     /@media \(min-width: 761px\)\s*\{[\s\S]*?\.identity-detail-rail\s*\{[\s\S]*?grid-template-columns: repeat\(4, 126px\)/,
   );
   assert.match(
