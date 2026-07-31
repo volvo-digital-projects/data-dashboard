@@ -599,6 +599,18 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.legend-average\s*\{[\s\S]*?background: var\(--es90-orange\)/,
   );
+  assert.match(
+    css,
+    /\.trend-wrap\.compact \.trend-canvas\s*\{[^}]*min-width: 1768px/,
+  );
+  assert.match(
+    css,
+    /\.trend-wrap\.compact \.week-ruler span\s*\{[^}]*letter-spacing: 0/,
+  );
+  assert.match(
+    css,
+    /\.trend-wrap\.compact \.actual-point-value,[\s\S]*?\.trend-wrap\.compact \.national-point-value\s*\{[^}]*letter-spacing: 0/,
+  );
   assert.match(css, /--ink: #111827/);
   assert.match(css, /--secondary: #667085/);
   assert.match(css, /--muted: #98a2b3/);

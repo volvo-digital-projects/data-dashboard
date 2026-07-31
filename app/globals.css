@@ -6015,6 +6015,10 @@ button.quarter-score-row:disabled {
   margin-top: 8px;
 }
 
+.trend-wrap.compact .trend-canvas {
+  min-width: 1768px;
+}
+
 .trend-wrap.compact .quarter-band span {
   min-height: 27px;
   padding-inline: 10px;
@@ -6048,6 +6052,12 @@ button.quarter-score-row:disabled {
 .trend-wrap.compact .week-ruler span {
   min-height: 21px;
   font-size: 7px;
+  letter-spacing: 0;
+}
+
+.trend-wrap.compact .actual-point-value,
+.trend-wrap.compact .national-point-value {
+  letter-spacing: 0;
 }
 
 .trend-wrap.compact .data-coverage {
@@ -6303,6 +6313,10 @@ button.quarter-score-row:disabled {
 }
 
 @media (max-width: 760px) {
+  .trend-wrap.compact .trend-canvas {
+    min-width: 1456px;
+  }
+
   .dashboard {
     padding: 12px 14px 24px;
   }
