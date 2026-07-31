@@ -518,6 +518,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /@keyframes v3s-bar-rise\s*\{[\s\S]*?scaleY\(0\)[\s\S]*?scaleY\(1\)/,
   );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.v3s-quarter-panel,[\s\S]*?min-height: 224px[\s\S]*?\.v3s-quarter-bars\s*\{[\s\S]*?height: 126px[\s\S]*?\.v3s-bar-stage\s*\{[\s\S]*?height: 86px/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard \.comparison-panel\s*\{[\s\S]*?margin-top: 16px[\s\S]*?padding: 14px 20px 12px[\s\S]*?\.table-row\s*\{[\s\S]*?min-height: 40px/,
+  );
   assert.match(css, /\.v3s-history-empty-copy\s*\{/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 210px/);
   assert.match(css, /\.chart-tooltip\s*\{[\s\S]*?border-radius: 12px/);

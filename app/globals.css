@@ -5598,6 +5598,142 @@ button.quarter-score-row:disabled {
   }
 }
 
+@media (min-width: 1241px) {
+  .content-grid {
+    margin-top: 16px;
+  }
+
+  .dashboard .trend-panel {
+    padding: 18px 20px 16px;
+  }
+
+  .trend-panel .section-heading {
+    align-items: center;
+  }
+
+  .trend-panel .section-heading h2,
+  .comparison-title-row h2 {
+    font-size: 20px;
+  }
+
+  .trend-selector {
+    padding: 3px;
+  }
+
+  .trend-selector button {
+    height: 34px;
+    padding-inline: 14px;
+  }
+
+  .v3s-performance {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .v3s-quarter-panel,
+  .v3s-history-panel {
+    min-height: 224px;
+    padding: 14px 16px;
+  }
+
+  .v3s-subhead {
+    min-height: 40px;
+  }
+
+  .v3s-subhead > div:first-child > span {
+    margin-bottom: 2px;
+  }
+
+  .v3s-subhead h3 {
+    font-size: 16px;
+  }
+
+  .v3s-cumulative strong {
+    font-size: 22px;
+  }
+
+  .v3s-quarter-bars {
+    height: 126px;
+    gap: 12px;
+    padding: 6px 8px 0;
+  }
+
+  .v3s-bar-stage {
+    height: 86px;
+  }
+
+  .v3s-quarter-label {
+    padding-top: 4px;
+  }
+
+  .v3s-quarter-label small {
+    font-size: 8px;
+  }
+
+  .v3s-quarter-legend {
+    min-height: 18px;
+    margin-top: 2px;
+    padding-top: 5px;
+  }
+
+  .v3s-history-chart svg {
+    height: 104px;
+  }
+
+  .v3s-history-years {
+    margin-top: -13px;
+  }
+
+  .v3s-history-summary {
+    margin-top: 6px;
+  }
+
+  .v3s-history-summary span {
+    padding: 6px 8px;
+  }
+
+  .v3s-history-empty {
+    min-height: 134px;
+  }
+
+  .v3s-history-ghost {
+    height: 112px;
+    padding: 10px 10px 18px;
+  }
+
+  .v3s-history-empty-copy {
+    gap: 4px;
+    padding: 10px 14px;
+  }
+
+  .dashboard .comparison-panel {
+    margin-top: 16px;
+    padding: 14px 20px 12px;
+  }
+
+  .comparison-controls select {
+    height: 34px;
+  }
+
+  .comparison-table {
+    gap: 4px;
+    margin-top: 5px;
+  }
+
+  .comparison-head {
+    min-height: 20px;
+  }
+
+  .table-row {
+    min-height: 40px;
+    border-radius: 10px;
+  }
+
+  .dashboard-footer {
+    margin-top: 16px;
+  }
+}
+
 @media (max-width: 1240px) {
   .dashboard {
     padding-inline: 24px;
