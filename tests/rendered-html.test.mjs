@@ -662,7 +662,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.profile-popover select\s*\{[^}]*font-variant-numeric: tabular-nums/,
+    /\.profile-popover select\s*\{[^}]*font-family: "Cascadia Mono", Consolas,[^}]*font-variant-numeric: tabular-nums[^}]*font-feature-settings: "tnum" 1/,
+  );
+  assert.match(
+    css,
+    /\.profile-popover option\s*\{[^}]*font-family: inherit[^}]*font-variant-numeric: tabular-nums[^}]*font-feature-settings: "tnum" 1/,
   );
   assert.match(css, /--white: #ffffff/);
   assert.match(css, /--line: #e5e9ee/);

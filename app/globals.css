@@ -364,10 +364,18 @@ input:focus-visible {
   border-radius: 8px;
   background: linear-gradient(180deg, #ffffff, #f7fafb);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  font-family: "Cascadia Mono", Consolas, "Courier New", "Malgun Gothic", monospace;
   font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
   cursor: pointer;
+}
+
+.profile-popover option {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 
 .profile-popover > small {
