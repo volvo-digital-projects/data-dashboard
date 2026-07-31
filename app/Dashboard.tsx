@@ -1917,7 +1917,6 @@ export default function Dashboard({
                     ))}
                   </select>
                 </label>
-                <small>편집 권한 계정은 전체 전시장을 점검할 수 있습니다.</small>
               </>
             ) : (
               <>

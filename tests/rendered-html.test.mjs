@@ -57,7 +57,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /class="identity-profile-icon"/);
   assert.doesNotMatch(
     html,
-    /전시장별 경쟁력 분석|CDSID 프로필 전환|데이터 점검을 위해 전시장을 선택하세요/,
+    /전시장별 경쟁력 분석|CDSID 프로필 전환|데이터 점검을 위해 전시장을 선택하세요|편집 권한 계정은 전체 전시장을 점검할 수 있습니다/,
   );
   assert.doesNotMatch(html, /class="identity-meta-row"/);
   assert.match(html, /class="identity-detail-rail"/);
