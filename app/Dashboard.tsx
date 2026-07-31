@@ -754,15 +754,6 @@ function WeeklyTrend({
       pairedPointY === null || pointY < pairedPointY ? "above" : "below",
     );
   };
-  const warningCount = rawPoints.filter(
-    (point) => point.value < averageAt(point.week),
-  ).length;
-  const latestPoint = rawPoints.at(-1) ?? null;
-  const previousPoint = rawPoints.at(-2) ?? null;
-  const latestDelta =
-    latestPoint && previousPoint ? latestPoint.value - previousPoint.value : null;
-  const annotationWeek = latestPoint?.week ?? latestWeek;
-  const annotationLabel = `W${String(annotationWeek).padStart(2, "0")}`;
   const makeSegments = (
     series: (number | null)[],
     limit: number,
@@ -1111,14 +1102,8 @@ function WeeklyTrend({
           aria-pressed={showActual}
           onClick={() => setShowActual((visible) => !visible)}
         >
-          <i className={isWeeklyMetric ? "coverage-line actual" : "coverage-dot filled"} />
-          {isWeeklyMetric
-            ? `${displayShowroomName(showroom.showroom)} 실제값 · ${annotationLabel} ${
-                latestPoint ? `${displayNumber(latestPoint.value)}점` : "—"
-              } · 입력 ${rawPoints.length}주`
-            : `최신 W${String(latestWeek).padStart(2, "0")} · 실제 입력 ${
-                rawPoints.length
-              }주`}
+          <i className="coverage-line actual" />
+          {displayShowroomName(showroom.showroom)}
         </button>
         <button
           type="button"
@@ -1126,29 +1111,9 @@ function WeeklyTrend({
           aria-pressed={showNational}
           onClick={() => setShowNational((visible) => !visible)}
         >
-          <i className={isWeeklyMetric ? "coverage-line national" : "coverage-dot warning"} />
-          {isWeeklyMetric
-            ? `전국 주간 평균 · ${annotationLabel} ${displayNumber(
-                averageAt(annotationWeek),
-              )}점 · 평균 미달 ${warningCount}주`
-            : `전국 평균 미달 ${warningCount}주`}
+          <i className="coverage-line national" />
+          주간 전국 평균
         </button>
-        <span>
-          <i className="coverage-dot year" />
-          {latestPoint && previousPoint
-            ? `${latestPoint.label} 직전 입력주 대비 ${
-                latestDelta! >= 0 ? "+" : ""
-              }${latestDelta!.toFixed(1)}`
-            : "W01–W52 전체 주차"}
-        </span>
-        <span>
-          <i className="coverage-dot" />
-          {metric === "voc"
-            ? "0.0 미응답은 제외 · 공백은 응답 대기"
-            : metric === "cx"
-              ? "5개 공식 평가항목 환산 · 최대 130점"
-              : "분기 평가값만 표시 · 주간값 미생성"}
-        </span>
       </div>
     </div>
   );
