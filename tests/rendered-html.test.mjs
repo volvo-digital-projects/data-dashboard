@@ -244,7 +244,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const weekBoundaryX = \(completedWeeks: number\) =>[\s\S]*?plotLeft \+ \(completedWeeks \/ 52\) \* plotWidth/,
   );
-  assert.match(dashboardSource, /const activeQuarterStart = weekBoundaryX\(26\)/);
+  assert.match(
+    dashboardSource,
+    /const evaluationProgressWeek = Math\.max\(26, Math\.min\(latestWeek, 39\)\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /const activeQuarterStart = weekBoundaryX\(evaluationProgressWeek\)/,
+  );
   assert.match(dashboardSource, /const activeQuarterEnd = weekBoundaryX\(39\)/);
   assert.match(
     dashboardSource,
@@ -254,6 +261,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(
     dashboardSource,
     /width=\{activeQuarterEnd - activeQuarterStart\}/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="future-window"[\s\S]*?className="average-trend-line"[\s\S]*?className="trend-line"/,
   );
   assert.doesNotMatch(dashboardSource, /isMajorWeek/);
   assert.match(dashboardSource, /\{label\}\s*<\/span>/);

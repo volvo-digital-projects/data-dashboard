@@ -340,7 +340,8 @@ function WeeklyTrend({
     plotLeft + ((week - 0.5) / 52) * plotWidth;
   const weekBoundaryX = (completedWeeks: number) =>
     plotLeft + (completedWeeks / 52) * plotWidth;
-  const activeQuarterStart = weekBoundaryX(26);
+  const evaluationProgressWeek = Math.max(26, Math.min(latestWeek, 39));
+  const activeQuarterStart = weekBoundaryX(evaluationProgressWeek);
   const activeQuarterEnd = weekBoundaryX(39);
   const chartAnimationStart = 1420;
   const chartAnimationDuration = 520;
@@ -513,7 +514,7 @@ function WeeklyTrend({
                 className="week-grid"
               />
             ))}
-            {latestWeek < 40 && (
+            {evaluationProgressWeek < 39 && (
               <g className="future-window-group" aria-hidden="true">
                 <rect
                   x={activeQuarterStart}
