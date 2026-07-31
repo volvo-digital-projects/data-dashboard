@@ -238,6 +238,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);
+  assert.match(visibleHtml, /해피콜 평균 \d+\.\d/);
+  assert.match(visibleHtml, /고객만족도 평균 \d+\.\d/);
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.match(html, /class="scatter-point selected\b/);
   assert.equal(

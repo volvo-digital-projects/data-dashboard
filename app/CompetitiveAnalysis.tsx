@@ -308,6 +308,12 @@ export default function CompetitiveAnalysis({
               <span className="scatter-quadrant bottom-right">해피콜 우세</span>
               <i className="scatter-average-line vertical" />
               <i className="scatter-average-line horizontal" />
+              <span className="scatter-average-value vertical">
+                해피콜 평균 {displayNumber(groupHappyAverage)}
+              </span>
+              <span className="scatter-average-value horizontal">
+                고객만족도 평균 {displayNumber(groupVocAverage)}
+              </span>
               {groupItems.map((item, index) => {
                 const pointX = clamp(
                   ((item.happyScore - 65) / 35) * 100,
