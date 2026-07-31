@@ -660,6 +660,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.scatter-zone\.improve\s*\{[^}]*width: var\(--avg-x\)[^}]*height: var\(--avg-y\)[^}]*linear-gradient\(\s*to bottom left/,
   );
+  assert.match(css, /\.scatter-quadrant\.top-right\s*\{[^}]*color: #245873/);
+  assert.match(css, /\.scatter-quadrant\.bottom-left\s*\{[^}]*color: #963f3a/);
   assert.match(
     css,
     /\.profile-popover select\s*\{[^}]*font-family: "Cascadia Mono", Consolas,[^}]*font-variant-numeric: tabular-nums[^}]*font-feature-settings: "tnum" 1/,

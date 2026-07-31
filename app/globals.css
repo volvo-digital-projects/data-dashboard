@@ -3399,13 +3399,13 @@ input:focus-visible {
 .scatter-quadrant.top-right {
   top: 8px;
   right: 10px;
-  color: rgba(47, 107, 138, 0.62);
+  color: #245873;
 }
 
 .scatter-quadrant.bottom-left {
   bottom: 8px;
   left: 10px;
-  color: rgba(197, 138, 27, 0.58);
+  color: #963f3a;
 }
 
 .scatter-quadrant.bottom-right {
