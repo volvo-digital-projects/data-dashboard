@@ -144,10 +144,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(html, /class="v3s-performance compact"/);
   assert.equal((html.match(/class="trend-wrap compact"/g) ?? []).length, 2);
+  const v3sStart = html.indexOf('id="score-v3s"');
+  const vocStart = html.indexOf('id="score-voc"');
+  assert.ok(v3sStart >= 0 && vocStart > v3sStart);
+  const v3sHtml = html.slice(v3sStart, vocStart);
+  assert.equal((v3sHtml.match(/class="v3s-quarter-column /g) ?? []).length, 3);
+  assert.doesNotMatch(v3sHtml, />Q3<|Q3 평가진행/);
   assert.doesNotMatch(html, /show-values-toggle/);
   assert.doesNotMatch(visibleHtml, /모든 값 표시/);
   assert.doesNotMatch(html, /class="segmented"/);
-  const vocStart = html.indexOf('id="score-voc"');
   const cxStart = html.indexOf('id="score-cx"');
   assert.ok(vocStart >= 0 && cxStart > vocStart);
   const vocHtml = html.slice(vocStart, cxStart);
@@ -446,9 +451,9 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
   );
   assert.match(dashboardSource, /function V3SPerformance/);
-  assert.match(
+  assert.doesNotMatch(
     dashboardSource,
-    /label: "Q3"[\s\S]*?statusText: "Q3 평가진행"/,
+    /label: "Q3"[\s\S]{0,180}?statusText: "Q3 평가진행"/,
   );
   assert.match(
     dashboardSource,
@@ -585,6 +590,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--paper: #f6f8fa/);
   assert.match(css, /--white: #ffffff/);
   assert.match(css, /--line: #e5e9ee/);
+  assert.match(css, /--es90-orange: #f15a24/);
+  assert.match(
+    css,
+    /\.v3s-average-marker\s*\{[\s\S]*?background: var\(--es90-orange\)/,
+  );
+  assert.match(
+    css,
+    /\.legend-average\s*\{[\s\S]*?background: var\(--es90-orange\)/,
+  );
   assert.match(css, /--ink: #111827/);
   assert.match(css, /--secondary: #667085/);
   assert.match(css, /--muted: #98a2b3/);

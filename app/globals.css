@@ -104,6 +104,7 @@
   --warning-soft: #f8e8e4;
   --caution: #b7791f;
   --caution-soft: #f7eddc;
+  --es90-orange: #f15a24;
   --secondary: #66757d;
   --muted: #8a969c;
   --font-volvo: "Volvo Centum Web";
@@ -1007,7 +1008,7 @@ input:focus-visible {
 
 .metric-quarter-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 7px;
   border: 1px solid #e2e6e4;
   background: #f7f8f6;
@@ -5499,7 +5500,7 @@ button.quarter-score-row:disabled {
   left: 0;
   z-index: 2;
   display: block;
-  background: rgba(197, 138, 27, 0.78);
+  background: var(--es90-orange);
 }
 
 .v3s-average-marker i {
@@ -5509,7 +5510,7 @@ button.quarter-score-row:disabled {
   top: 50%;
   right: 1px;
   border-radius: 50%;
-  background: var(--caution);
+  background: var(--es90-orange);
   transform: translateY(-50%);
 }
 
@@ -5610,7 +5611,7 @@ button.quarter-score-row:disabled {
   width: 10px;
   height: 1px;
   position: relative;
-  background: var(--caution);
+  background: var(--es90-orange);
 }
 
 .legend-average::after {
