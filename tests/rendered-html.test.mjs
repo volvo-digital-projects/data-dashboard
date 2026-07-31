@@ -274,7 +274,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(sizeHtml, /볼보 해운대/);
 
   const showroomResponse = await render(
-    "/dashboard/6KR6842/analysis?view=showroom",
+    "/dashboard/6KR6834/analysis?view=showroom",
   );
   assert.equal(showroomResponse.status, 200);
   const showroomHtml = await showroomResponse.text();
@@ -286,6 +286,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     (showroomHtml.match(/style="opacity:1;visibility:visible"/g) ?? []).length,
     39,
   );
+  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전시장 25위 \/ 전체 39/);
+  assert.doesNotMatch(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 25위 \/ 전체 39/);
 });
 
 test("ships project metadata and removes the disposable starter", async () => {

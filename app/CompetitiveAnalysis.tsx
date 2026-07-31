@@ -43,7 +43,7 @@ const viewMeta: Record<
   showroom: {
     label: "전국 전시장 내 분석",
     description: "전국 39개 전시장의 고객만족도와 해피콜 이행을 비교합니다.",
-    short: "전국 전시장",
+    short: "전시장",
   },
   region: {
     label: "동일 수도권 내 분석",
