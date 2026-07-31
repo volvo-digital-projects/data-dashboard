@@ -207,13 +207,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(visibleHtml, /볼보 강남대치 경쟁력 분석/);
-  assert.match(visibleHtml, /딜러사별 분석/);
-  assert.match(visibleHtml, /전시장별 분석/);
-  assert.match(visibleHtml, /수도권별 분석/);
-  assert.match(visibleHtml, /사이즈별 분석/);
+  assert.match(visibleHtml, /소속 딜러사 내 분석/);
+  assert.match(visibleHtml, /전국 전시장 내 분석/);
+  assert.match(visibleHtml, /동일 수도권 내 분석/);
+  assert.match(visibleHtml, /동일 사이즈 내 분석/);
   assert.match(
     html,
-    /aria-pressed="true"[\s\S]*?딜러사별 분석/,
+    /aria-pressed="true"[\s\S]*?소속 딜러사 내 분석/,
   );
   assert.match(visibleHtml, /고객만족도 × 해피콜 이행/);
   assert.match(visibleHtml, /고객만족도[\s\S]*87\.5/);

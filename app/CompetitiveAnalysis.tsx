@@ -30,22 +30,22 @@ const viewMeta: Record<
   { label: string; description: string; short: string }
 > = {
   dealer: {
-    label: "딜러사별 분석",
+    label: "소속 딜러사 내 분석",
     description: "같은 딜러사 소속 전시장의 고객 경험 경쟁력을 비교합니다.",
     short: "소속 딜러사",
   },
   showroom: {
-    label: "전시장별 분석",
+    label: "전국 전시장 내 분석",
     description: "전국 39개 전시장의 고객만족도와 해피콜 이행을 비교합니다.",
     short: "전국 전시장",
   },
   region: {
-    label: "수도권별 분석",
+    label: "동일 수도권 내 분석",
     description: "수도권 소재 전시장 안에서 현재 위치와 균형을 확인합니다.",
     short: "수도권",
   },
   size: {
-    label: "사이즈별 분석",
+    label: "동일 사이즈 내 분석",
     description: "동급 사이즈 전시장끼리 운영 품질과 고객 경험을 비교합니다.",
     short: "동급 사이즈",
   },
