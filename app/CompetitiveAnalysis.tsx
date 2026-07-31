@@ -280,7 +280,7 @@ export default function CompetitiveAnalysis({
             <small>점</small>
           </strong>
           <em>
-            {viewMeta[view].short} {safeSelectedRank}위 / {groupItems.length}
+            {viewMeta[view].short} {safeSelectedRank}위 / 전체 {groupItems.length}
           </em>
         </article>
       </section>

@@ -243,6 +243,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "<!-- -->",
     "",
   );
+  assert.match(regionVisibleHtml, /수도권 10위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
   assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);
