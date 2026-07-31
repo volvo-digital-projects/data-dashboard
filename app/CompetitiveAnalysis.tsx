@@ -38,6 +38,8 @@ type ScatterLabelPlacement =
 type ScatterCalloutLayout = {
   offsetX: number;
   offsetY: number;
+  tailX: number;
+  tailY: number;
   placement: ScatterLabelPlacement;
 };
 
@@ -264,9 +266,24 @@ const buildScatterCalloutLayout = (
     );
     placedBoxes.push(best.box);
 
+    const pointsLeft = best.placement.startsWith("right");
+    const pointsUp = best.placement.endsWith("down");
+    const anchorX =
+      best.offsetX + (pointsLeft ? -labelWidth / 2 : labelWidth / 2);
+    const anchorY =
+      best.offsetY + (pointsUp ? -labelHeight / 2 : labelHeight / 2);
+    const centerDistance = Math.max(1, Math.hypot(anchorX, anchorY));
+    const pointRadius = isSelected ? 6.5 : 4.5;
+    const overlapScale = Math.max(
+      0.2,
+      (centerDistance - pointRadius + 1) / centerDistance,
+    );
+
     layouts.set(point.item.cdsid, {
       offsetX: best.offsetX,
       offsetY: best.offsetY,
+      tailX: Math.max(3, Math.abs(anchorX) * overlapScale),
+      tailY: Math.max(3, Math.abs(anchorY) * overlapScale),
       placement: best.placement,
     });
   });
@@ -557,6 +574,8 @@ export default function CompetitiveAnalysis({
                 const callout = scatterCallouts.get(item.cdsid) ?? {
                   offsetX: 16,
                   offsetY: -16,
+                  tailX: 5,
+                  tailY: 5,
                   placement: "right-up" as const,
                 };
                 const pointStyle = {
@@ -564,6 +583,8 @@ export default function CompetitiveAnalysis({
                   "--point-y": `${pointY}%`,
                   "--callout-x": `${callout.offsetX}px`,
                   "--callout-y": `${callout.offsetY}px`,
+                  "--callout-tail-x": `${callout.tailX}px`,
+                  "--callout-tail-y": `${callout.tailY}px`,
                 } as CSSProperties;
                 const pointLabel = `${displayShowroomName(item.showroom)} · 종합 만족도 ${displayNumber(
                   item.vocScore,

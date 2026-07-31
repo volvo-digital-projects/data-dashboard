@@ -558,6 +558,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     new URL("../app/Dashboard.tsx", import.meta.url),
     "utf8",
   );
+  const analysisSource = await readFile(
+    new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
+    "utf8",
+  );
 
   assert.match(css, /font-family: "Pretendard Variable"/);
   assert.match(css, /--font-korean:[\s\S]*"Pretendard Variable"[\s\S]*"SUIT"/);
@@ -582,12 +586,13 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.doesNotMatch(css, /\.scatter-callout-leader|--leader-length|--leader-angle/);
   assert.match(
     css,
-    /\.scatter-point\.label-right-up > b::before,[\s\S]*?border-top: 7px solid var\(--callout-border\)/,
+    /\.scatter-point\.label-right-up > b::before,[\s\S]*?left: calc\(-1 \* var\(--callout-tail-x\)\)[\s\S]*?clip-path: polygon\(calc\(100% - 7px\) 0, 100% 0, 0 100%\)/,
   );
   assert.match(
     css,
-    /\.scatter-point\.label-right-down > b::before,[\s\S]*?border-bottom: 7px solid var\(--callout-border\)/,
+    /\.scatter-point\.label-right-down > b::before,[\s\S]*?top: calc\(-1 \* var\(--callout-tail-y\)\)[\s\S]*?clip-path: polygon\(0 0, calc\(100% - 7px\) 100%, 100% 100%\)/,
   );
+  assert.match(analysisSource, /--callout-tail-x/);
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
   assert.match(
     css,

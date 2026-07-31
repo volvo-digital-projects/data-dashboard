@@ -3431,63 +3431,71 @@ input:focus-visible {
 
 .scatter-point > b::before,
 .scatter-point > b::after {
-  width: 0;
-  height: 0;
   position: absolute;
+  z-index: -1;
+  display: block;
   content: "";
   pointer-events: none;
 }
 
 .scatter-point.label-right-up > b::before,
-.scatter-point.label-left-up > b::before {
-  bottom: -7px;
-  border-top: 7px solid var(--callout-border);
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
+.scatter-point.label-right-up > b::after {
+  left: calc(-1 * var(--callout-tail-x));
+  bottom: calc(-1 * var(--callout-tail-y));
+  clip-path: polygon(calc(100% - 7px) 0, 100% 0, 0 100%);
 }
 
-.scatter-point.label-right-up > b::after,
+.scatter-point.label-left-up > b::before,
 .scatter-point.label-left-up > b::after {
-  bottom: -5px;
-  border-top: 6px solid var(--callout-fill);
-  border-right: 3px solid transparent;
-  border-left: 3px solid transparent;
+  right: calc(-1 * var(--callout-tail-x));
+  bottom: calc(-1 * var(--callout-tail-y));
+  clip-path: polygon(0 0, 7px 0, 100% 100%);
 }
 
 .scatter-point.label-right-down > b::before,
-.scatter-point.label-left-down > b::before {
-  top: -7px;
-  border-right: 4px solid transparent;
-  border-bottom: 7px solid var(--callout-border);
-  border-left: 4px solid transparent;
+.scatter-point.label-right-down > b::after {
+  left: calc(-1 * var(--callout-tail-x));
+  top: calc(-1 * var(--callout-tail-y));
+  clip-path: polygon(0 0, calc(100% - 7px) 100%, 100% 100%);
 }
 
-.scatter-point.label-right-down > b::after,
+.scatter-point.label-left-down > b::before,
 .scatter-point.label-left-down > b::after {
-  top: -5px;
-  border-right: 3px solid transparent;
-  border-bottom: 6px solid var(--callout-fill);
-  border-left: 3px solid transparent;
+  right: calc(-1 * var(--callout-tail-x));
+  top: calc(-1 * var(--callout-tail-y));
+  clip-path: polygon(100% 0, 0 100%, 7px 100%);
 }
 
-.scatter-point.label-right-up > b::before,
-.scatter-point.label-right-down > b::before {
-  left: 7px;
+.scatter-point > b::before {
+  width: calc(var(--callout-tail-x) + 8px);
+  height: calc(var(--callout-tail-y) + 2px);
+  background: var(--callout-border);
+}
+
+.scatter-point > b::after {
+  width: calc(var(--callout-tail-x) + 5px);
+  height: var(--callout-tail-y);
+  background: var(--callout-fill);
 }
 
 .scatter-point.label-right-up > b::after,
 .scatter-point.label-right-down > b::after {
-  left: 8px;
-}
-
-.scatter-point.label-left-up > b::before,
-.scatter-point.label-left-down > b::before {
-  right: 7px;
+  left: calc(-1 * var(--callout-tail-x) + 1px);
 }
 
 .scatter-point.label-left-up > b::after,
 .scatter-point.label-left-down > b::after {
-  right: 8px;
+  right: calc(-1 * var(--callout-tail-x) + 1px);
+}
+
+.scatter-point.label-right-up > b::after,
+.scatter-point.label-left-up > b::after {
+  bottom: calc(-1 * var(--callout-tail-y) + 1px);
+}
+
+.scatter-point.label-right-down > b::after,
+.scatter-point.label-left-down > b::after {
+  top: calc(-1 * var(--callout-tail-y) + 1px);
 }
 
 .scatter-point.selected > b {
