@@ -546,7 +546,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /\.trend-selector\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(css, /\.trend-selector button\s*\{[\s\S]*?height: 40px[\s\S]*?border-radius: 6px/);
-  assert.match(css, /\.trend-selector button\.active\s*\{[\s\S]*?background: var\(--navy\)/);
+  assert.match(
+    css,
+    /\.trend-selector button\.active\s*\{[\s\S]*?linear-gradient\(\s*135deg,[\s\S]*?var\(--navy\)[\s\S]*?inset 0 1px 0 rgba\(255, 255, 255, 0\.16\)[\s\S]*?translateY\(-1px\)/,
+  );
+  assert.match(
+    css,
+    /\.trend-selector button\.active:active\s*\{[\s\S]*?translateY\(0\) scale\(0\.985\)/,
+  );
   assert.match(
     css,
     /\.v3s-performance\s*\{[\s\S]*?grid-template-columns: minmax\(0, 1\.22fr\) minmax\(360px, 0\.78fr\)/,

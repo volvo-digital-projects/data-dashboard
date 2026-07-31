@@ -4515,8 +4515,37 @@ input:focus-visible,
 .trend-selector button.active {
   color: white;
   border: 0;
-  background: var(--navy);
-  box-shadow: 0 4px 12px rgba(16, 42, 67, 0.16);
+  background: linear-gradient(
+    135deg,
+    #1a496b 0%,
+    var(--navy) 54%,
+    #0a2033 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 10px 20px -10px rgba(16, 42, 67, 0.72),
+    0 4px 9px -5px rgba(16, 42, 67, 0.42);
+  transform: translateY(-1px);
+}
+
+.trend-selector button.active:hover {
+  background: linear-gradient(
+    135deg,
+    #205272 0%,
+    #12324d 54%,
+    #0b2236 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 12px 22px -10px rgba(16, 42, 67, 0.76),
+    0 5px 10px -5px rgba(16, 42, 67, 0.46);
+}
+
+.trend-selector button.active:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow:
+    inset 0 1px 2px rgba(5, 18, 29, 0.24),
+    0 5px 12px -8px rgba(16, 42, 67, 0.62);
 }
 
 .show-values-toggle {
