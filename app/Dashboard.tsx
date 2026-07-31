@@ -1620,8 +1620,7 @@ export default function Dashboard({
         <div className="comparison-title-row">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">COMPETITIVE POSITION</span>
-              <h2>내 전시장의 경쟁 위치</h2>
+              <h2>{displayShowroomName(selected.showroom)} 경쟁력</h2>
               <small className="comparison-subtitle">
                 전국 {dashboard.meta.showroomCount}개점 기준
               </small>
