@@ -309,10 +309,10 @@ export default function CompetitiveAnalysis({
               <i className="scatter-average-line vertical" />
               <i className="scatter-average-line horizontal" />
               <span className="scatter-average-value vertical">
-                해피콜 평균 {displayNumber(groupHappyAverage)}
+                해피콜 평균 {displayNumber(groupHappyAverage)}점
               </span>
               <span className="scatter-average-value horizontal">
-                고객만족도 평균 {displayNumber(groupVocAverage)}
+                고객만족도 평균 {displayNumber(groupVocAverage)}점
               </span>
               {groupItems.map((item, index) => {
                 const pointX = clamp(
