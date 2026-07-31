@@ -158,6 +158,26 @@ const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
     : 0;
 };
 
+const groupQuarterAverageOf = (
+  showroom: Showroom,
+  metric: MetricKey,
+  quarter: QuarterKey,
+  group: Exclude<GroupKey, "all">,
+) => {
+  const values = dashboard.showrooms
+    .filter((item) => {
+      if (group === "dealer") return item.dealer === showroom.dealer;
+      if (group === "region") return item.region === showroom.region;
+      return item.size === showroom.size;
+    })
+    .map((item) => quarterValueOf(item, metric, quarter))
+    .filter((value): value is number => value !== null);
+
+  return values.length
+    ? values.reduce((sum, value) => sum + value, 0) / values.length
+    : null;
+};
+
 const displayNumber = (value: number | null | undefined, digits = 1) =>
   value === null || value === undefined || !Number.isFinite(value)
     ? "—"
@@ -331,29 +351,59 @@ function MetricCard({
 }
 
 function V3SPerformance({ showroom }: { showroom: Showroom }) {
+  const peerBenchmarks = (quarter: QuarterKey | null) => [
+    {
+      key: "dealer",
+      label: `동일 소속사 ${showroom.dealer} 평균`,
+      value:
+        quarter === null
+          ? null
+          : groupQuarterAverageOf(showroom, "v3s", quarter, "dealer"),
+    },
+    {
+      key: "region",
+      label: `동일 권역별 ${showroom.region} 평균`,
+      value:
+        quarter === null
+          ? null
+          : groupQuarterAverageOf(showroom, "v3s", quarter, "region"),
+    },
+    {
+      key: "size",
+      label: `동일 사이즈 ${showroom.size} 평균`,
+      value:
+        quarter === null
+          ? null
+          : groupQuarterAverageOf(showroom, "v3s", quarter, "size"),
+    },
+  ];
   const quarterScores = [
     {
       label: "Q1",
       value: showroom.q1?.v3s ?? null,
       average: quarterAverageOf("v3s", "q1"),
+      benchmarks: peerBenchmarks("q1"),
       state: "complete",
     },
     {
       label: "Q2",
       value: showroom.v3s,
       average: quarterAverageOf("v3s", "q2"),
+      benchmarks: peerBenchmarks("q2"),
       state: "current",
     },
     {
       label: "Q3",
       value: null,
       average: null,
+      benchmarks: peerBenchmarks(null),
       state: "upcoming",
     },
     {
       label: "Q4",
       value: null,
       average: null,
+      benchmarks: peerBenchmarks(null),
       state: "upcoming",
     },
   ];
@@ -434,19 +484,21 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                     : `${displayNumber(quarter.value)}점`
                 }`}
               >
-                {quarter.value === null ? (
-                  <span className="v3s-upcoming-bar">
-                    <b>평가 예정</b>
+                {quarter.value !== null && (
+                  <span
+                    className="v3s-average-marker"
+                    style={{ bottom: `${quarter.average}%` }}
+                    title={`전국 평균 ${displayNumber(quarter.average)}점`}
+                  >
+                    <i />
                   </span>
-                ) : (
-                  <>
-                    <span
-                      className="v3s-average-marker"
-                      style={{ bottom: `${quarter.average}%` }}
-                      title={`전국 평균 ${displayNumber(quarter.average)}점`}
-                    >
-                      <i />
+                )}
+                <span className="v3s-bar-cluster">
+                  {quarter.value === null ? (
+                    <span className="v3s-upcoming-bar">
+                      <b>평가 예정</b>
                     </span>
+                  ) : (
                     <span
                       className="v3s-bar-fill"
                       style={{
@@ -456,8 +508,30 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                     >
                       <b>{displayNumber(quarter.value)}</b>
                     </span>
-                  </>
-                )}
+                  )}
+                  {quarter.benchmarks.map((benchmark, benchmarkIndex) => (
+                    <span
+                      className={`v3s-peer-bar ${benchmark.key} ${
+                        benchmark.value === null ? "planned" : ""
+                      }`}
+                      key={benchmark.key}
+                      title={`${benchmark.label} ${
+                        benchmark.value === null
+                          ? "평가 예정"
+                          : `${displayNumber(benchmark.value)}점`
+                      }`}
+                      style={{
+                        height:
+                          benchmark.value === null
+                            ? "48%"
+                            : `${benchmark.value}%`,
+                        animationDelay: `${
+                          300 + index * 100 + benchmarkIndex * 45
+                        }ms`,
+                      }}
+                    />
+                  ))}
+                </span>
               </div>
               <div className="v3s-quarter-label">
                 <strong>{quarter.label}</strong>
@@ -483,6 +557,12 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
           <span>
             <i className="legend-average" /> 분기 전국 평균
           </span>
+          {peerBenchmarks("q2").map((benchmark) => (
+            <span className="v3s-peer-legend" key={benchmark.key}>
+              <i className={`legend-peer ${benchmark.key}`} />
+              {benchmark.label}
+            </span>
+          ))}
           <small>100점 만점</small>
         </div>
       </section>

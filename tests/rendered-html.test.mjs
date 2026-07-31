@@ -378,6 +378,21 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
   );
   assert.match(dashboardSource, /function V3SPerformance/);
+  assert.match(dashboardSource, /const groupQuarterAverageOf/);
+  assert.match(
+    dashboardSource,
+    /groupQuarterAverageOf\(showroom, "v3s", quarter, "dealer"\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /groupQuarterAverageOf\(showroom, "v3s", quarter, "region"\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /groupQuarterAverageOf\(showroom, "v3s", quarter, "size"\)/,
+  );
+  assert.match(dashboardSource, /className="v3s-bar-cluster"/);
+  assert.match(dashboardSource, /className=\{`v3s-peer-bar/);
   assert.match(dashboardSource, /trendMetric === "v3s"/);
   assert.match(dashboardSource, /analysis\?view=showroom/);
   assert.match(dashboardSource, /2026 PERFORMANCE/);
@@ -564,6 +579,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.v3s-bar-fill\s*\{[\s\S]*?linear-gradient\(180deg, #5c96b2 0%, #2f6b8a 52%, #173f5b 100%\)/,
+  );
+  assert.match(
+    css,
+    /\.v3s-peer-bar\s*\{[\s\S]*?width: 5px[\s\S]*?animation: v3s-bar-rise 760ms/,
+  );
+  assert.match(
+    css,
+    /\.v3s-peer-bar\.dealer\s*\{[\s\S]*?#8395a2[\s\S]*?\.v3s-peer-bar\.region\s*\{[\s\S]*?#829c94[\s\S]*?\.v3s-peer-bar\.size\s*\{[\s\S]*?#9e9182/,
   );
   assert.match(
     css,
