@@ -1657,6 +1657,9 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
+  const showroomCodeWidth = Math.max(
+    ...dashboard.showrooms.map((item) => item.cdsid.length),
+  );
   const displayUpdateTitle =
     latestUpdate.effectiveDate.replaceAll(".", "-") === "2026-07-29"
       ? "현재 Q3평가 진행중"
@@ -1791,7 +1794,8 @@ export default function Dashboard({
                   >
                     {dashboard.showrooms.map((item) => (
                       <option key={item.cdsid} value={item.cdsid}>
-                        {item.cdsid} · {displayShowroomName(item.showroom)} ·{" "}
+                        {item.cdsid.padEnd(showroomCodeWidth, "\u2007")} ·{" "}
+                        {displayShowroomName(item.showroom)} ·{" "}
                         {item.manager}
                       </option>
                     ))}

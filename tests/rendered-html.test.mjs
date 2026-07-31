@@ -550,6 +550,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(dashboardSource, /5개년 데이터 연결 예정/);
   assert.match(
     dashboardSource,
+    /item\.cdsid\.padEnd\(showroomCodeWidth, "\\u2007"\)/,
+  );
+  assert.match(
+    dashboardSource,
     /historicalV3s\?: HistoricalV3sPoint\[\]/,
   );
   assert.match(
@@ -647,6 +651,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--font-korean:[\s\S]*"Pretendard Variable"[\s\S]*"SUIT"/);
   assert.match(css, /--font-latin:[\s\S]*"Inter"/);
   assert.match(css, /--paper: #f6f8fa/);
+  assert.match(
+    css,
+    /\.profile-popover select\s*\{[^}]*font-variant-numeric: tabular-nums/,
+  );
   assert.match(css, /--white: #ffffff/);
   assert.match(css, /--line: #e5e9ee/);
   assert.match(css, /--es90-orange: #f15a24/);
