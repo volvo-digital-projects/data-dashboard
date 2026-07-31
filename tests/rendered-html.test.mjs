@@ -385,6 +385,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /quarterAverageOf\("v3s", selectedQuarter\)/,
   );
+  assert.match(
+    dashboardSource,
+    /key=\{`showroom-score-\$\{selected\.cdsid\}`\}/,
+  );
+  assert.match(
+    dashboardSource,
+    /key=\{`showroom-trend-\$\{selected\.cdsid\}`\}/,
+  );
   assert.match(css, /\.quarter-band\s*\{[\s\S]*?margin: 0 2\.0588235%/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
   assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);

@@ -1921,7 +1921,10 @@ export default function Dashboard({
         </div>
       </section>
 
-      <section className="hero-grid">
+      <section
+        className="hero-grid"
+        key={`showroom-score-${selected.cdsid}`}
+      >
         <article className={`combat-card ${tier.className}`}>
           <div className="combat-main">
             <div
@@ -2036,7 +2039,11 @@ export default function Dashboard({
         </div>
       </section>
 
-      <section className="content-grid" id="weekly-trend">
+      <section
+        className="content-grid"
+        id="weekly-trend"
+        key={`showroom-trend-${selected.cdsid}`}
+      >
         <article className="panel trend-panel">
           <div className="section-heading">
             <div>
