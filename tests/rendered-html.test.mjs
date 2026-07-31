@@ -317,6 +317,12 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
+    /\.future-window\s*\{[\s\S]*?fill: #eef2f5[\s\S]*?opacity: 0\.9/,
+  );
+  assert.match(css, /\.future-window-label\s*\{[\s\S]*?fill: #596b80/);
+  assert.match(css, /\.future-window-help\s*\{[\s\S]*?fill: #8795a7/);
+  assert.match(
+    css,
     /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: 1[\s\S]*?animation: showroom-line-draw 520ms cubic-bezier\(0\.32, 0, 0\.2, 1\) 1420ms both/,
   );
   assert.match(dashboardSource, /pathLength="1"[\s\S]*?className="trend-line"/);

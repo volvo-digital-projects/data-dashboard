@@ -3663,18 +3663,18 @@ input:focus-visible,
 }
 
 .future-window {
-  fill: #f4f6f8;
-  opacity: 0.78;
+  fill: #eef2f5;
+  opacity: 0.9;
 }
 
 .future-window-label {
-  fill: var(--secondary);
+  fill: #596b80;
   font-size: 12px;
   font-weight: 700;
 }
 
 .future-window-help {
-  fill: var(--muted);
+  fill: #8795a7;
   font-size: 10px;
 }
 
