@@ -550,6 +550,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.combat-summary-stack strong,[\s\S]*?\.metric-card-value\s*\{[^}]*min-height: 70px[^}]*display: flex[^}]*align-items: flex-end[^}]*margin-top: 0/,
+  );
+  assert.match(
+    css,
     /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard \.comparison-panel\s*\{[\s\S]*?margin-top: 16px[\s\S]*?padding: 14px 20px 12px[\s\S]*?\.table-row\s*\{[\s\S]*?min-height: 40px/,
   );
   assert.match(css, /\.v3s-history-empty-copy\s*\{/);

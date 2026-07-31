@@ -5643,6 +5643,24 @@ button.quarter-score-row:disabled {
 }
 
 @media (min-width: 1241px) {
+  .combat-summary-stack > span {
+    margin-bottom: 0;
+  }
+
+  .combat-summary-stack strong,
+  .metric-card-value {
+    min-height: 70px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 0;
+  }
+
+  .combat-summary-stack strong small,
+  .metric-card-value span {
+    align-self: flex-end;
+    margin-bottom: 4px;
+  }
+
   .content-grid {
     margin-top: 16px;
   }
