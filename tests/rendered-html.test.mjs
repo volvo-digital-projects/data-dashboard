@@ -435,7 +435,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.identity-strip\s*\{[\s\S]*?min-height: 76px[\s\S]*?margin-bottom: 12px/,
+    /\.identity-strip\s*\{[^}]*min-height: 82px[^}]*margin: -6px -10px 16px[^}]*border-bottom-color: rgba\(47, 107, 138, 0\.2\)/,
+  );
+  assert.match(
+    css,
+    /\.identity-strip\s*\{[^}]*linear-gradient\([^}]*rgba\(231, 240, 244, 0\.93\)[^}]*box-shadow:/,
   );
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(
