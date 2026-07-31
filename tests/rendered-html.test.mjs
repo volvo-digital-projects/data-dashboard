@@ -409,7 +409,15 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const resizeObserver = new ResizeObserver\(updateWidth\)/,
   );
-  assert.match(dashboardSource, /const chartHeight = compact \? 150 : 210/);
+  assert.match(dashboardSource, /const chartHeight = compact \? 125 : 210/);
+  assert.match(
+    css,
+    /\.v3s-performance\.compact \.v3s-quarter-panel,[\s\S]*?min-height: 172px/,
+  );
+  assert.match(
+    css,
+    /\.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 125px/,
+  );
   assert.match(
     dashboardSource,
     /const plotLeft = \(28 \/ 1360\) \* chartWidth/,

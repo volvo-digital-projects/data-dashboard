@@ -5965,13 +5965,13 @@ button.quarter-score-row:disabled {
 
 .score-stack {
   display: grid;
-  gap: 14px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .score-tier {
   min-width: 0;
-  padding: 14px 16px 12px;
+  padding: 10px 14px 9px;
   border: 1px solid rgba(16, 24, 40, 0.07);
   border-radius: 12px;
   background: linear-gradient(145deg, #ffffff 0%, #f9fbfc 100%);
@@ -5989,11 +5989,11 @@ button.quarter-score-row:disabled {
 }
 
 .score-tier-heading {
-  min-height: 28px;
+  min-height: 24px;
   display: flex;
   align-items: baseline;
   gap: 10px;
-  padding: 0 2px 8px;
+  padding: 0 2px 5px;
   border-bottom: 1px solid rgba(152, 162, 179, 0.16);
 }
 
@@ -6012,7 +6012,7 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact {
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .trend-wrap.compact .trend-canvas {
@@ -6030,8 +6030,8 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .quarter-band span {
-  min-height: 27px;
-  padding-inline: 10px;
+  min-height: 23px;
+  padding-inline: 8px;
 }
 
 .trend-wrap.compact .quarter-band strong {
@@ -6043,24 +6043,24 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .trend-chart {
-  height: 150px;
+  height: 125px;
 }
 
 .trend-wrap.compact .future-window-label {
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .trend-wrap.compact .future-window-help {
-  font-size: 8px;
+  font-size: 7px;
 }
 
 .trend-wrap.compact .week-ruler {
-  margin-top: -16px;
-  margin-bottom: 4px;
+  margin-top: -13px;
+  margin-bottom: 2px;
 }
 
 .trend-wrap.compact .week-ruler span {
-  min-height: 21px;
+  min-height: 18px;
   font-size: 7px;
   letter-spacing: 0;
 }
@@ -6071,65 +6071,65 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .data-coverage {
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 5px;
+  padding-top: 5px;
 }
 
 .trend-wrap.compact .data-coverage button {
-  min-height: 28px;
+  min-height: 24px;
 }
 
 .v3s-performance.compact {
-  gap: 12px;
-  margin-top: 8px;
+  gap: 8px;
+  margin-top: 5px;
 }
 
 .v3s-performance.compact .v3s-quarter-panel,
 .v3s-performance.compact .v3s-history-panel {
-  min-height: 204px;
-  padding: 12px 14px;
+  min-height: 172px;
+  padding: 9px 12px;
 }
 
 .v3s-performance.compact .v3s-subhead {
-  min-height: 36px;
+  min-height: 30px;
 }
 
 .v3s-performance.compact .v3s-subhead h3 {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .v3s-performance.compact .v3s-cumulative strong {
-  font-size: 21px;
+  font-size: 18px;
 }
 
 .v3s-performance.compact .v3s-quarter-bars {
-  height: 112px;
-  padding-top: 4px;
+  height: 92px;
+  padding-top: 3px;
 }
 
 .v3s-performance.compact .v3s-bar-stage {
-  height: 76px;
+  height: 60px;
 }
 
 .v3s-performance.compact .v3s-quarter-legend {
-  margin-top: 2px;
-  padding-top: 5px;
+  margin-top: 1px;
+  padding-top: 3px;
 }
 
 .v3s-performance.compact .v3s-history-chart svg {
-  height: 88px;
+  height: 68px;
 }
 
 .v3s-performance.compact .v3s-history-empty {
-  min-height: 116px;
+  min-height: 90px;
 }
 
 .v3s-performance.compact .v3s-history-ghost {
-  height: 100px;
+  height: 78px;
 }
 
 .v3s-performance.compact .v3s-history-summary {
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 @media (min-width: 1241px) {
