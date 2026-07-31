@@ -390,7 +390,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /@keyframes progress-fill\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/);
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);
   assert.match(css, /\.comparison-table\s*\{[\s\S]*?display: grid[\s\S]*?gap: 8px/);
-  assert.match(css, /\.table-row\.selected\s*\{[\s\S]*?background: #eef5f8/);
+  assert.match(
+    css,
+    /\.table-row\.selected\s*\{[\s\S]*?background: #eef5f8;[\s\S]*?0 12px 22px -16px rgba\(16, 42, 67, 0\.42\)/,
+  );
   assert.match(
     css,
     /\.comparison-value small\s*\{[\s\S]*?display: flex[\s\S]*?white-space: nowrap/,

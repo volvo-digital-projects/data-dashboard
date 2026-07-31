@@ -3984,9 +3984,22 @@ input:focus-visible,
 .table-row.selected {
   position: relative;
   top: auto;
+  z-index: 1;
+  transform: translateY(-1px);
   border-color: rgba(47, 107, 138, 0.11);
   background: #eef5f8;
-  box-shadow: inset 3px 0 0 var(--blue);
+  box-shadow:
+    inset 3px 0 0 var(--blue),
+    0 12px 22px -16px rgba(16, 42, 67, 0.42),
+    0 4px 8px -6px rgba(16, 42, 67, 0.18);
+}
+
+.table-row.selected:hover {
+  background: #eef5f8;
+  box-shadow:
+    inset 3px 0 0 var(--blue),
+    0 14px 26px -16px rgba(16, 42, 67, 0.46),
+    0 5px 10px -7px rgba(16, 42, 67, 0.2);
 }
 
 .rank-number,
