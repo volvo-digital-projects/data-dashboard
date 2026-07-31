@@ -452,6 +452,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.dashboard \.comparison-panel\s*\{[\s\S]*?padding: 18px 24px 16px/,
   );
+  assert.match(
+    css,
+    /\.combat-main\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)[^}]*align-items: stretch/,
+  );
+  assert.match(
+    css,
+    /\.combat-summary-stack strong\s*\{[^}]*font-size: clamp\(60px, 4\.2vw, 68px\)[^}]*white-space: nowrap/,
+  );
   assert.match(css, /\.table-row\s*\{[^}]*min-height: 48px/);
   assert.match(css, /\.comparison-head\s*\{[^}]*min-height: 24px/);
   assert.match(
