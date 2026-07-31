@@ -35,7 +35,16 @@ type QuarterRecord = {
   happyCall: number | null;
 };
 
-type Showroom = QuarterRecord & { q1: QuarterRecord | null };
+type HistoricalV3sPoint = {
+  year: number;
+  value: number | null;
+  average?: number | null;
+};
+
+type Showroom = QuarterRecord & {
+  q1: QuarterRecord | null;
+  historicalV3s?: HistoricalV3sPoint[];
+};
 
 type DashboardData = {
   meta: {
@@ -311,6 +320,304 @@ function MetricCard({
         <AppealBadge type={appeal} />
       </div>
     </button>
+  );
+}
+
+function V3SPerformance({ showroom }: { showroom: Showroom }) {
+  const quarterScores = [
+    {
+      label: "Q1",
+      value: showroom.q1?.v3s ?? null,
+      average: quarterAverageOf("v3s", "q1"),
+      state: "complete",
+    },
+    {
+      label: "Q2",
+      value: showroom.v3s,
+      average: quarterAverageOf("v3s", "q2"),
+      state: "current",
+    },
+    {
+      label: "Q3",
+      value: null,
+      average: null,
+      state: "upcoming",
+    },
+    {
+      label: "Q4",
+      value: null,
+      average: null,
+      state: "upcoming",
+    },
+  ];
+  const enteredQuarters = quarterScores.filter(
+    (quarter): quarter is (typeof quarterScores)[number] & { value: number } =>
+      quarter.value !== null,
+  );
+  const cumulativeAverage = enteredQuarters.length
+    ? enteredQuarters.reduce((sum, quarter) => sum + quarter.value, 0) /
+      enteredQuarters.length
+    : null;
+  const history = [2021, 2022, 2023, 2024, 2025].map(
+    (year) =>
+      showroom.historicalV3s?.find((point) => point.year === year) ?? {
+        year,
+        value: null,
+        average: null,
+      },
+  );
+  const historyValues = history.filter(
+    (point): point is HistoricalV3sPoint & { value: number } =>
+      point.value !== null,
+  );
+  const hasHistory = historyValues.length > 0;
+  const historyMin = hasHistory
+    ? Math.max(0, Math.min(...historyValues.map((point) => point.value)) - 8)
+    : 0;
+  const historyMax = hasHistory
+    ? Math.min(100, Math.max(...historyValues.map((point) => point.value)) + 8)
+    : 100;
+  const historyX = (year: number) => 28 + ((year - 2021) / 4) * 384;
+  const historyY = (value: number) =>
+    126 -
+    ((value - historyMin) / Math.max(1, historyMax - historyMin)) * 94;
+  const historyPath = historyValues
+    .map(
+      (point, index) =>
+        `${index === 0 ? "M" : "L"} ${historyX(point.year)} ${historyY(
+          point.value,
+        )}`,
+    )
+    .join(" ");
+  const firstHistory = historyValues.at(0) ?? null;
+  const latestHistory = historyValues.at(-1) ?? null;
+  const historyDelta =
+    firstHistory && latestHistory
+      ? latestHistory.value - firstHistory.value
+      : null;
+
+  return (
+    <div className="v3s-performance" aria-label="V3S 분기 및 5개년 성과">
+      <section className="v3s-quarter-panel">
+        <header className="v3s-subhead">
+          <div>
+            <span>2026 PERFORMANCE</span>
+            <h3>분기 평가 흐름</h3>
+          </div>
+          <div className="v3s-cumulative">
+            <span>상반기 누적 평균</span>
+            <strong>
+              {displayNumber(cumulativeAverage)}
+              <small>점</small>
+            </strong>
+          </div>
+        </header>
+
+        <div className="v3s-quarter-bars">
+          {quarterScores.map((quarter, index) => (
+            <div
+              className={`v3s-quarter-column ${quarter.state}`}
+              key={quarter.label}
+            >
+              <div
+                className="v3s-bar-stage"
+                aria-label={`${quarter.label} ${
+                  quarter.value === null
+                    ? "평가 예정"
+                    : `${displayNumber(quarter.value)}점`
+                }`}
+              >
+                {quarter.value === null ? (
+                  <span className="v3s-upcoming-bar">
+                    <b>평가 예정</b>
+                  </span>
+                ) : (
+                  <>
+                    <span
+                      className="v3s-average-marker"
+                      style={{ bottom: `${quarter.average}%` }}
+                      title={`전국 평균 ${displayNumber(quarter.average)}점`}
+                    >
+                      <i />
+                    </span>
+                    <span
+                      className="v3s-bar-fill"
+                      style={{
+                        height: `${quarter.value}%`,
+                        animationDelay: `${140 + index * 100}ms`,
+                      }}
+                    >
+                      <b>{displayNumber(quarter.value)}</b>
+                    </span>
+                  </>
+                )}
+              </div>
+              <div className="v3s-quarter-label">
+                <strong>{quarter.label}</strong>
+                <span>
+                  {quarter.value === null
+                    ? "—"
+                    : `${displayNumber(quarter.value)}점`}
+                </span>
+                <small>
+                  {quarter.average === null
+                    ? "평가 예정"
+                    : `전국 ${displayNumber(quarter.average)}`}
+                </small>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="v3s-quarter-legend">
+          <span>
+            <i className="legend-bar" />{" "}
+            {displayShowroomName(showroom.showroom)}
+          </span>
+          <span>
+            <i className="legend-average" /> 분기 전국 평균
+          </span>
+          <small>100점 만점</small>
+        </div>
+      </section>
+
+      <section className="v3s-history-panel">
+        <header className="v3s-subhead">
+          <div>
+            <span>2021–2025 HISTORY</span>
+            <h3>5개년 실력 추세</h3>
+          </div>
+          {historyDelta !== null && (
+            <strong
+              className={`v3s-history-delta ${
+                historyDelta >= 0 ? "positive" : "negative"
+              }`}
+            >
+              5년간 {historyDelta >= 0 ? "+" : ""}
+              {displayNumber(historyDelta)}점
+            </strong>
+          )}
+        </header>
+
+        {hasHistory ? (
+          <>
+            <div className="v3s-history-chart">
+              <svg
+                viewBox="0 0 440 150"
+                preserveAspectRatio="none"
+                role="img"
+                aria-label={`${displayShowroomName(
+                  showroom.showroom,
+                )} 2021년부터 2025년까지 V3S 추세`}
+              >
+                <defs>
+                  <linearGradient
+                    id={`v3s-history-fill-${showroom.cdsid}`}
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#2f6b8a" stopOpacity="0.18" />
+                    <stop offset="100%" stopColor="#2f6b8a" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <line x1="28" x2="412" y1="126" y2="126" className="v3s-history-axis" />
+                {history.map((point) => (
+                  <line
+                    key={point.year}
+                    x1={historyX(point.year)}
+                    x2={historyX(point.year)}
+                    y1="122"
+                    y2="126"
+                    className="v3s-history-tick"
+                  />
+                ))}
+                {historyValues.length > 1 && (
+                  <path
+                    d={`${historyPath} L ${historyX(
+                      latestHistory?.year ?? 2025,
+                    )} 126 L ${historyX(
+                      firstHistory?.year ?? 2021,
+                    )} 126 Z`}
+                    fill={`url(#v3s-history-fill-${showroom.cdsid})`}
+                    className="v3s-history-area"
+                  />
+                )}
+                <path d={historyPath} className="v3s-history-line" pathLength="1" />
+                {historyValues.map((point) => (
+                  <g key={point.year}>
+                    <circle
+                      cx={historyX(point.year)}
+                      cy={historyY(point.value)}
+                      r="4"
+                      className="v3s-history-point"
+                    />
+                    <text
+                      x={historyX(point.year)}
+                      y={historyY(point.value) - 10}
+                      textAnchor="middle"
+                      className="v3s-history-value"
+                    >
+                      {displayNumber(point.value)}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+              <div className="v3s-history-years" aria-hidden="true">
+                {history.map((point) => (
+                  <span key={point.year}>{point.year}</span>
+                ))}
+              </div>
+            </div>
+            <div className="v3s-history-summary">
+              <span>
+                시작점
+                <strong>{displayNumber(firstHistory?.value)}점</strong>
+              </span>
+              <span>
+                최근점
+                <strong>{displayNumber(latestHistory?.value)}점</strong>
+              </span>
+              <span>
+                5년 증감
+                <strong
+                  className={
+                    historyDelta !== null && historyDelta < 0
+                      ? "negative"
+                      : "positive"
+                  }
+                >
+                  {historyDelta === null
+                    ? "—"
+                    : `${historyDelta >= 0 ? "+" : ""}${displayNumber(
+                        historyDelta,
+                      )}점`}
+                </strong>
+              </span>
+            </div>
+          </>
+        ) : (
+          <div className="v3s-history-empty">
+            <div className="v3s-history-ghost" aria-hidden="true">
+              {[48, 58, 54, 70, 76].map((height, index) => (
+                <span key={history[index].year}>
+                  <i style={{ height: `${height}%` }} />
+                  <small>{history[index].year}</small>
+                </span>
+              ))}
+            </div>
+            <div className="v3s-history-empty-copy">
+              <strong>5개년 데이터 연결 예정</strong>
+              <span>
+                전시장별 2021–2025 점수가 들어오면
+                <br />
+                성장 방향과 5년 증감을 자동 표시합니다.
+              </span>
+            </div>
+          </div>
+        )}
+      </section>
+    </div>
   );
 }
 
@@ -1726,7 +2033,11 @@ export default function Dashboard({
               </div>
             </div>
           </div>
-          <WeeklyTrend showroom={selected} metric={trendMetric} />
+          {trendMetric === "v3s" ? (
+            <V3SPerformance showroom={selected} />
+          ) : (
+            <WeeklyTrend showroom={selected} metric={trendMetric} />
+          )}
         </article>
       </section>
 

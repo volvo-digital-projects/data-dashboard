@@ -303,6 +303,15 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
   );
+  assert.match(dashboardSource, /function V3SPerformance/);
+  assert.match(dashboardSource, /trendMetric === "v3s"/);
+  assert.match(dashboardSource, /2026 PERFORMANCE/);
+  assert.match(dashboardSource, /2021–2025 HISTORY/);
+  assert.match(dashboardSource, /5개년 데이터 연결 예정/);
+  assert.match(
+    dashboardSource,
+    /historicalV3s\?: HistoricalV3sPoint\[\]/,
+  );
   assert.match(
     dashboardSource,
     /quarterValueOf\(selected, "v3s", selectedQuarter\)/,
@@ -412,6 +421,19 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.trend-selector\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(css, /\.trend-selector button\s*\{[\s\S]*?height: 40px[\s\S]*?border-radius: 6px/);
   assert.match(css, /\.trend-selector button\.active\s*\{[\s\S]*?background: var\(--navy\)/);
+  assert.match(
+    css,
+    /\.v3s-performance\s*\{[\s\S]*?grid-template-columns: minmax\(0, 1\.22fr\) minmax\(360px, 0\.78fr\)/,
+  );
+  assert.match(
+    css,
+    /\.v3s-bar-fill\s*\{[\s\S]*?linear-gradient\(180deg, #5c96b2 0%, #2f6b8a 52%, #173f5b 100%\)/,
+  );
+  assert.match(
+    css,
+    /@keyframes v3s-bar-rise\s*\{[\s\S]*?scaleY\(0\)[\s\S]*?scaleY\(1\)/,
+  );
+  assert.match(css, /\.v3s-history-empty-copy\s*\{/);
   assert.match(css, /\.trend-chart\s*\{[\s\S]*?height: 210px/);
   assert.match(css, /\.chart-tooltip\s*\{[\s\S]*?border-radius: 12px/);
   assert.match(css, /\.hover-guide\s*\{[\s\S]*?stroke-dasharray: 3 4/);
