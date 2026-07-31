@@ -105,6 +105,18 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /identity-icon--dealer/);
   assert.match(html, /identity-icon--region/);
   assert.match(html, /identity-icon--size/);
+  assert.match(
+    html,
+    /href="\/dashboard\/6KR6834\/analysis\?view=dealer"/,
+  );
+  assert.match(
+    html,
+    /href="\/dashboard\/6KR6834\/analysis\?view=region"/,
+  );
+  assert.match(
+    html,
+    /href="\/dashboard\/6KR6834\/analysis\?view=size"/,
+  );
   assert.doesNotMatch(visibleHtml, /⌂|◎|↔/);
   assert.equal((html.match(/class="table-row/g) ?? []).length, 3);
   assert.match(html, /class="comparison-head table-row"/);
@@ -180,11 +192,40 @@ test("serves score criteria as a separate CDSID page", async () => {
   assert.match(visibleHtml, /500점을 100점으로 환산/);
 });
 
+test("serves the dual-metric competitive analysis sample", async () => {
+  const response = await render(
+    "/dashboard/6KR6834/analysis?view=dealer",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const visibleHtml = html.replaceAll("<!-- -->", "");
+  assert.match(visibleHtml, /볼보 강남대치 경쟁력 분석/);
+  assert.match(visibleHtml, /딜러사별 분석/);
+  assert.match(visibleHtml, /전시장별 분석/);
+  assert.match(visibleHtml, /수도권별 분석/);
+  assert.match(visibleHtml, /사이즈별 분석/);
+  assert.match(
+    html,
+    /aria-pressed="true"[\s\S]*?딜러사별 분석/,
+  );
+  assert.match(visibleHtml, /고객만족도 × 해피콜 이행/);
+  assert.match(visibleHtml, /고객만족도[\s\S]*87\.5/);
+  assert.match(visibleHtml, /해피콜 이행[\s\S]*100\.0/);
+  assert.match(visibleHtml, /균형 경쟁력[\s\S]*93\.8/);
+  assert.match(visibleHtml, /에이치 순위/);
+  assert.match(html, /class="analysis-scatter"/);
+  assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
+  assert.match(html, /class="scatter-point selected"/);
+  assert.match(html, /href="\/dashboard\/6KR6834"/);
+});
+
 test("ships project metadata and removes the disposable starter", async () => {
-  const [page, dashboardPage, criteriaPage, layout, packageJson] = await Promise.all([
+  const [page, dashboardPage, criteriaPage, analysisPage, layout, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/dashboard/[cdsid]/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/dashboard/[cdsid]/criteria/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/dashboard/[cdsid]/analysis/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
@@ -194,6 +235,7 @@ test("ships project metadata and removes the disposable starter", async () => {
   assert.match(dashboardPage, /import Dashboard/);
   assert.match(dashboardPage, /isEditorEmail/);
   assert.match(criteriaPage, /CriteriaGuide/);
+  assert.match(analysisPage, /CompetitiveAnalysis/);
   assert.match(layout, /generateMetadata/);
   assert.match(layout, /볼보 관리자 전용/);
   assert.match(layout, /og\.png/);
@@ -305,6 +347,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(dashboardSource, /function V3SPerformance/);
   assert.match(dashboardSource, /trendMetric === "v3s"/);
+  assert.match(dashboardSource, /analysis\?view=showroom/);
   assert.match(dashboardSource, /2026 PERFORMANCE/);
   assert.match(dashboardSource, /2021–2025 HISTORY/);
   assert.match(dashboardSource, /5개년 데이터 연결 예정/);

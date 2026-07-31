@@ -1731,7 +1731,12 @@ export default function Dashboard({
         </div>
         <div className="identity-detail-rail">
           <dl>
-            <div>
+            <div className="identity-analysis-entry">
+              <Link
+                className="identity-analysis-hit"
+                href={`/dashboard/${selected.cdsid}/analysis?view=dealer`}
+                aria-label={`${selected.dealer} 딜러사별 경쟁력 분석`}
+              />
               <span
                 className="identity-icon identity-icon--dealer"
                 aria-hidden="true"
@@ -1739,7 +1744,12 @@ export default function Dashboard({
               <dt>딜러사</dt>
               <dd>{selected.dealer}</dd>
             </div>
-            <div>
+            <div className="identity-analysis-entry">
+              <Link
+                className="identity-analysis-hit"
+                href={`/dashboard/${selected.cdsid}/analysis?view=region`}
+                aria-label={`${selected.region} 수도권별 경쟁력 분석`}
+              />
               <span
                 className="identity-icon identity-icon--region"
                 aria-hidden="true"
@@ -1747,7 +1757,12 @@ export default function Dashboard({
               <dt>권역별</dt>
               <dd>{selected.region}</dd>
             </div>
-            <div>
+            <div className="identity-analysis-entry">
+              <Link
+                className="identity-analysis-hit"
+                href={`/dashboard/${selected.cdsid}/analysis?view=size`}
+                aria-label={`${selected.size} 사이즈별 경쟁력 분석`}
+              />
               <span
                 className="identity-icon identity-icon--size"
                 aria-hidden="true"
@@ -1770,6 +1785,12 @@ export default function Dashboard({
         </div>
         {profileOpen && (
           <div className="profile-popover">
+            <Link
+              className="profile-analysis-link"
+              href={`/dashboard/${selected.cdsid}/analysis?view=showroom`}
+            >
+              전시장별 경쟁력 분석 <span aria-hidden="true">→</span>
+            </Link>
             {viewer.isEditor ? (
               <>
                 <div>
