@@ -159,6 +159,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(html, /class="future-window"/);
   assert.match(visibleHtml, /Q3 평가 진행 중/);
+  assert.match(html, /class="future-window future-window-upcoming"/);
+  assert.match(visibleHtml, /Q4 평가 예정 중/);
   assert.match(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);

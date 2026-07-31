@@ -700,6 +700,8 @@ function WeeklyTrend({
   const evaluationProgressWeek = Math.max(26, Math.min(latestWeek, 39));
   const activeQuarterStart = weekBoundaryX(evaluationProgressWeek);
   const activeQuarterEnd = weekBoundaryX(39);
+  const upcomingQuarterStart = weekBoundaryX(39);
+  const upcomingQuarterEnd = weekBoundaryX(52);
   const chartAnimationStart = 1420;
   const chartAnimationDuration = 520;
   const markerSize = 6.3;
@@ -893,6 +895,33 @@ function WeeklyTrend({
                 </text>
                 <text
                   x={(activeQuarterStart + activeQuarterEnd) / 2}
+                  y="104"
+                  textAnchor="middle"
+                  className="future-window-help"
+                >
+                  데이터 집계 후 자동 반영됩니다.
+                </text>
+              </g>
+            )}
+            {latestWeek < 39 && (
+              <g className="future-window-group" aria-hidden="true">
+                <rect
+                  x={upcomingQuarterStart}
+                  y="18"
+                  width={upcomingQuarterEnd - upcomingQuarterStart}
+                  height="152"
+                  className="future-window future-window-upcoming"
+                />
+                <text
+                  x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
+                  y="88"
+                  textAnchor="middle"
+                  className="future-window-label"
+                >
+                  Q4 평가 예정 중
+                </text>
+                <text
+                  x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
                   y="104"
                   textAnchor="middle"
                   className="future-window-help"

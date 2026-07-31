@@ -4544,6 +4544,11 @@ input:focus-visible,
   opacity: 0.9;
 }
 
+.future-window-upcoming {
+  fill: #f2f5f7;
+  opacity: 0.84;
+}
+
 .future-window-label {
   fill: #596b80;
   font-size: 12px;
