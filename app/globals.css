@@ -5678,11 +5678,11 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-quarter-label {
+  min-height: 19px;
   display: grid;
   grid-template-columns: 1fr;
-  align-items: baseline;
+  align-items: center;
   justify-items: center;
-  gap: 2px;
   padding-top: 7px;
   text-align: center;
 }
@@ -5692,12 +5692,6 @@ button.quarter-score-row:disabled {
   font-family: var(--font-latin);
   font-size: 12px;
   font-weight: 750;
-}
-
-.v3s-quarter-label small {
-  grid-column: 1 / -1;
-  color: var(--muted);
-  font-size: 9px;
 }
 
 .v3s-quarter-legend {
@@ -6337,10 +6331,6 @@ button.quarter-score-row:disabled {
     padding-top: 4px;
   }
 
-  .v3s-quarter-label small {
-    font-size: 8px;
-  }
-
   .v3s-quarter-legend {
     min-height: 18px;
     margin-top: 2px;
@@ -6593,11 +6583,6 @@ button.quarter-score-row:disabled {
 
   .v3s-quarter-label {
     grid-template-columns: 1fr;
-    gap: 1px;
-  }
-
-  .v3s-quarter-label small {
-    display: none;
   }
 
   .v3s-quarter-legend {

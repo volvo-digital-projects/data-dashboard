@@ -543,7 +543,6 @@ function V3SPerformance({
               </div>
               <div className="v3s-quarter-label">
                 <strong>{quarter.label}</strong>
-                {quarter.average === null && <small>{quarter.statusText}</small>}
               </div>
             </div>
           ))}

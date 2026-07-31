@@ -533,6 +533,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.doesNotMatch(
     dashboardSource,
+    /className="v3s-quarter-label"[\s\S]{0,140}?<small>/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
     /className="v3s-quarter-label"[\s\S]{0,180}?`전국 \$\{displayNumber\(quarter\.average\)\}`/,
   );
   assert.match(
@@ -697,7 +701,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.v3s-quarter-label\s*\{[^}]*grid-template-columns: 1fr[^}]*justify-items: center[^}]*text-align: center/,
+    /\.v3s-quarter-label\s*\{[^}]*min-height: 19px[^}]*grid-template-columns: 1fr[^}]*align-items: center[^}]*justify-items: center[^}]*text-align: center/,
   );
   assert.match(css, /--white: #ffffff/);
   assert.match(css, /--line: #e5e9ee/);
