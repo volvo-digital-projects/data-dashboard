@@ -784,12 +784,28 @@ function WeeklyTrend({
   const upcomingQuarterEnd = weekBoundaryX(52);
   const chartAnimationStart = 1420;
   const chartAnimationDuration = 520;
+  const chartAnimationPointLag = 18;
   const markerSize = 6.3;
   const markerRadius = markerSize / 2;
+  const y = (value: number) =>
+    170 - ((value - min) / Math.max(1, max - min)) * 126;
+  const pointTravelByWeek = new Map<number, number>();
+  let totalPointTravel = 0;
+  rawPoints.forEach((point, index) => {
+    if (index > 0) {
+      const previousPoint = rawPoints[index - 1];
+      totalPointTravel += Math.hypot(
+        x(point.week) - x(previousPoint.week),
+        y(point.value) - y(previousPoint.value),
+      );
+    }
+    pointTravelByWeek.set(point.week, totalPointTravel);
+  });
   const pointAnimationDelay = (week: number) =>
     chartAnimationStart +
-    ((week - 1) / Math.max(1, latestWeek - 1)) * chartAnimationDuration;
-  const y = (value: number) => 170 - ((value - min) / Math.max(1, max - min)) * 126;
+    ((pointTravelByWeek.get(week) ?? 0) / Math.max(1, totalPointTravel)) *
+      chartAnimationDuration +
+    chartAnimationPointLag;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13, 26, 39];
   const quarterLabels = [
@@ -1061,7 +1077,7 @@ function WeeklyTrend({
             {showActual && storeSegments.map(
               (segment, index) =>
                 segment.length > 1 && (
-                  <g key={`store-${index}`}>
+                  <g key={`store-${showroom.cdsid}-${metric}-${index}`}>
                     <polyline
                       points={segment
                         .map((point) => `${x(point.week)},${y(point.value)}`)
@@ -1073,7 +1089,9 @@ function WeeklyTrend({
                 ),
             )}
             {showActual && rawPoints.map((point) => (
-              <g key={`${point.week}-${point.label}`}>
+              <g
+                key={`${showroom.cdsid}-${metric}-${point.week}-${point.label}`}
+              >
                 {isWeeklyMetric ? (
                   <rect
                     x={x(point.week) - markerRadius}
@@ -2146,7 +2164,11 @@ export default function Dashboard({
           {trendMetric === "v3s" ? (
             <V3SPerformance showroom={selected} />
           ) : (
-            <WeeklyTrend showroom={selected} metric={trendMetric} />
+            <WeeklyTrend
+              key={`${selected.cdsid}-${trendMetric}`}
+              showroom={selected}
+              metric={trendMetric}
+            />
           )}
         </article>
       </section>

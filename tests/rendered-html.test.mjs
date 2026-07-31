@@ -434,12 +434,20 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(css, /\.future-window-help\s*\{[\s\S]*?fill: #8795a7/);
   assert.match(
     css,
-    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: 1[\s\S]*?animation: showroom-line-draw 520ms cubic-bezier\(0\.32, 0, 0\.2, 1\) 1420ms both/,
+    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: 1\.02 1[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?animation: showroom-line-draw 520ms linear 1420ms both/,
   );
   assert.match(dashboardSource, /pathLength="1"[\s\S]*?className="trend-line"/);
   assert.match(
     dashboardSource,
-    /const chartAnimationStart = 1420[\s\S]*?const chartAnimationDuration = 520/,
+    /const chartAnimationStart = 1420[\s\S]*?const chartAnimationDuration = 520[\s\S]*?const chartAnimationPointLag = 18/,
+  );
+  assert.match(
+    dashboardSource,
+    /const pointTravelByWeek = new Map<number, number>\(\)[\s\S]*?Math\.hypot\([\s\S]*?pointTravelByWeek\.set\(point\.week, totalPointTravel\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /key=\{`\$\{selected\.cdsid\}-\$\{trendMetric\}`\}[\s\S]*?showroom=\{selected\}[\s\S]*?metric=\{trendMetric\}/,
   );
   assert.match(
     dashboardSource,
