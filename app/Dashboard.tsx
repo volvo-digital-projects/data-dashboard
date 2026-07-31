@@ -2081,7 +2081,9 @@ export default function Dashboard({
             <div className="combat-summary-stack">
               <span>누적 평균</span>
               <strong>
-                {displayNumber(cumulativeAverage)}
+                <span className="combat-score-number">
+                  {displayNumber(cumulativeAverage)}
+                </span>
                 <small>점</small>
               </strong>
               <em>Q1·Q2 평가 기준</em>

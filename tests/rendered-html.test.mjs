@@ -479,6 +479,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     new URL("../app/globals.css", import.meta.url),
     "utf8",
   );
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
 
   assert.match(css, /font-family: "Pretendard Variable"/);
   assert.match(css, /--font-korean:[\s\S]*"Pretendard Variable"[\s\S]*"SUIT"/);
@@ -533,6 +537,18 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.combat-summary-stack strong\s*\{[^}]*font-size: clamp\(60px, 4\.2vw, 68px\)[^}]*white-space: nowrap/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="combat-score-number"[\s\S]*?displayNumber\(cumulativeAverage\)/,
+  );
+  assert.match(
+    css,
+    /\.combat-score-number\s*\{[\s\S]*?animation: combat-score-drop 760ms cubic-bezier\(0\.16, 1, 0\.3, 1\) 180ms both/,
+  );
+  assert.match(
+    css,
+    /@keyframes combat-score-drop\s*\{[\s\S]*?translateY\(-24px\) scale\(0\.985\)[\s\S]*?translateY\(2px\) scale\(1\)[\s\S]*?translateY\(0\) scale\(1\)/,
   );
   assert.match(
     css,
