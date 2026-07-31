@@ -3687,7 +3687,7 @@ input:focus-visible,
 .average-trend-line {
   stroke: var(--warning);
   stroke-width: 1.45;
-  stroke-dasharray: 6 6;
+  stroke-dasharray: 3 3;
   opacity: 0.82;
   animation: none;
 }

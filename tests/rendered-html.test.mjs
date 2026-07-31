@@ -264,7 +264,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(css, /\.average-trend-line\s*\{[\s\S]*?stroke-width: 1\.45/);
   assert.match(
     css,
-    /\.average-trend-line\s*\{[\s\S]*?stroke-width: 1\.45[\s\S]*?animation: none/,
+    /\.average-trend-line\s*\{[\s\S]*?stroke-width: 1\.45[\s\S]*?stroke-dasharray: 3 3[\s\S]*?animation: none/,
   );
   assert.match(
     css,
