@@ -220,7 +220,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /볼보 강남대치 경쟁력 분석/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
   assert.match(visibleHtml, /전국 전시장 내 분석/);
-  assert.match(visibleHtml, /동일 수도권 내 분석/);
+  assert.match(visibleHtml, /동일 권역별 내 분석/);
   assert.match(visibleHtml, /동일 사이즈 내 분석/);
   assert.match(
     html,
@@ -271,7 +271,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "<!-- -->",
     "",
   );
-  assert.match(regionVisibleHtml, /수도권 10위 \/ 전체 19/);
+  assert.match(regionVisibleHtml, /권역별 10위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
   assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);

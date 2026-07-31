@@ -65,9 +65,9 @@ const viewMeta: Record<
     short: "전시장",
   },
   region: {
-    label: "동일 수도권 내 분석",
-    description: "수도권 소재 전시장 안에서 현재 위치와 균형을 확인합니다.",
-    short: "수도권",
+    label: "동일 권역별 내 분석",
+    description: "동일 권역 소재 전시장 안에서 현재 위치와 균형을 확인합니다.",
+    short: "권역별",
   },
   size: {
     label: "동일 사이즈 내 분석",

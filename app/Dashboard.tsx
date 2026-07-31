@@ -1845,7 +1845,7 @@ export default function Dashboard({
               <Link
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=region`}
-                aria-label={`${selected.region} 수도권별 경쟁력 분석`}
+                aria-label={`${selected.region} 권역별 경쟁력 분석`}
               />
               <span
                 className="identity-icon identity-icon--region"
