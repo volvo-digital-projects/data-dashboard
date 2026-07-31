@@ -391,6 +391,14 @@ function V3SPerformance({
       state: "current",
     },
     {
+      label: "Q3",
+      value: null,
+      average: null,
+      benchmarks: peerBenchmarks(null),
+      statusText: "평가 진행",
+      state: "upcoming",
+    },
+    {
       label: "Q4",
       value: null,
       average: null,

@@ -148,8 +148,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   const vocStart = html.indexOf('id="score-voc"');
   assert.ok(v3sStart >= 0 && vocStart > v3sStart);
   const v3sHtml = html.slice(v3sStart, vocStart);
-  assert.equal((v3sHtml.match(/class="v3s-quarter-column /g) ?? []).length, 3);
-  assert.doesNotMatch(v3sHtml, />Q3<|Q3 평가진행/);
+  assert.equal((v3sHtml.match(/class="v3s-quarter-column /g) ?? []).length, 4);
+  assert.match(v3sHtml, />Q3<[\s\S]*?>Q4</);
+  assert.doesNotMatch(v3sHtml, /Q3 평가진행/);
   assert.doesNotMatch(html, /show-values-toggle/);
   assert.doesNotMatch(visibleHtml, /모든 값 표시/);
   assert.doesNotMatch(html, /class="segmented"/);
@@ -459,6 +460,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.doesNotMatch(
     dashboardSource,
     /label: "Q3"[\s\S]{0,180}?statusText: "Q3 평가진행"/,
+  );
+  assert.match(
+    dashboardSource,
+    /label: "Q3"[\s\S]{0,180}?statusText: "평가 진행"/,
   );
   assert.match(
     dashboardSource,
