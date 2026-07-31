@@ -887,7 +887,7 @@ function ComparisonTable({
       <div className="comparison-head table-row">
         <span>순위</span>
         <span>전시장</span>
-        <span>딜러 · 권역</span>
+        <span>딜러 · 권역 · 사이즈</span>
         <span>{metricMeta[metric].label}</span>
         <span>점수 · 평균 대비</span>
       </div>
@@ -912,8 +912,7 @@ function ComparisonTable({
               {isSelected && <em>내 전시장</em>}
             </span>
             <span className="dealer-region">
-              {item.dealer}
-              <small>{item.region}</small>
+              {item.dealer} · {item.region} · {item.size}
             </span>
             <span
               className="comparison-bar"

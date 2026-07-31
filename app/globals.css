@@ -2175,13 +2175,7 @@ input:focus-visible {
 .dealer-region {
   color: var(--ink-soft);
   font-size: 12px;
-}
-
-.dealer-region small {
-  display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 10px;
+  white-space: nowrap;
 }
 
 .comparison-bar {
