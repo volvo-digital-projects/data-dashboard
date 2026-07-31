@@ -5249,7 +5249,7 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-bar-cluster {
-  width: min(94%, 112px);
+  width: min(96%, 120px);
   height: 100%;
   position: absolute;
   bottom: 0;
@@ -5258,13 +5258,25 @@ button.quarter-score-row:disabled {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 5px;
+  gap: 14px;
   transform: translateX(-50%);
+}
+
+.v3s-peer-bar-group {
+  width: 40px;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 0 0 40px;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 .v3s-bar-fill {
   width: min(58%, 54px);
   position: relative;
+  z-index: 1;
   flex: 0 1 54px;
   display: block;
   border-radius: 7px 7px 2px 2px;

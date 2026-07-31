@@ -400,6 +400,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /groupQuarterAverageOf\(showroom, "v3s", quarter, "size"\)/,
   );
   assert.match(dashboardSource, /className="v3s-bar-cluster"/);
+  assert.match(dashboardSource, /className="v3s-peer-bar-group"/);
   assert.match(dashboardSource, /className=\{`v3s-peer-bar/);
   assert.match(
     dashboardSource,
@@ -620,6 +621,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.v3s-peer-bar\s*\{[\s\S]*?width: 10px[\s\S]*?min-width: 10px[\s\S]*?animation: v3s-bar-rise 760ms/,
+  );
+  assert.match(
+    css,
+    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(96%, 120px\)[\s\S]*?gap: 14px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 40px[\s\S]*?flex: 0 0 40px[\s\S]*?gap: 5px/,
   );
   assert.match(
     css,

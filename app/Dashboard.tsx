@@ -497,28 +497,30 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                   </span>
                 )}
                 <span className="v3s-bar-cluster">
-                  {quarter.benchmarks.map((benchmark, benchmarkIndex) => (
-                    <span
-                      className={`v3s-peer-bar ${benchmark.key} ${
-                        benchmark.value === null ? "planned" : ""
-                      }`}
-                      key={benchmark.key}
-                      title={`${benchmark.label} ${
-                        benchmark.value === null
-                          ? quarter.statusText
-                          : `${displayNumber(benchmark.value)}점`
-                      }`}
-                      style={{
-                        height:
+                  <span className="v3s-peer-bar-group">
+                    {quarter.benchmarks.map((benchmark, benchmarkIndex) => (
+                      <span
+                        className={`v3s-peer-bar ${benchmark.key} ${
+                          benchmark.value === null ? "planned" : ""
+                        }`}
+                        key={benchmark.key}
+                        title={`${benchmark.label} ${
                           benchmark.value === null
-                            ? "48%"
-                            : `${benchmark.value}%`,
-                        animationDelay: `${
-                          300 + index * 100 + benchmarkIndex * 45
-                        }ms`,
-                      }}
-                    />
-                  ))}
+                            ? quarter.statusText
+                            : `${displayNumber(benchmark.value)}점`
+                        }`}
+                        style={{
+                          height:
+                            benchmark.value === null
+                              ? "48%"
+                              : `${benchmark.value}%`,
+                          animationDelay: `${
+                            300 + index * 100 + benchmarkIndex * 45
+                          }ms`,
+                        }}
+                      />
+                    ))}
+                  </span>
                   {quarter.value === null ? (
                     <span className="v3s-upcoming-bar">
                       <b>{quarter.statusText}</b>
