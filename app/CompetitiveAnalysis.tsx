@@ -201,8 +201,8 @@ const buildScatterCalloutLayout = (
     }> = [];
 
     directions.forEach((direction, directionIndex) => {
-      [5, 9, 13].forEach((gap, gapIndex) => {
-        [0, -8, 8, -16, 16].forEach((lane, laneIndex) => {
+      [3, 5, 7].forEach((gap, gapIndex) => {
+        [0, -4, 4, -7, 7].forEach((lane, laneIndex) => {
           const perpendicularX = -direction.y;
           const perpendicularY = direction.x;
           const offsetX =

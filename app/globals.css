@@ -3456,38 +3456,38 @@ input:focus-visible {
 .scatter-point.label-right-up > b::after {
   left: calc(-1 * var(--callout-tail-x));
   bottom: calc(-1 * var(--callout-tail-y));
-  clip-path: polygon(calc(100% - 7px) 0, 100% 0, 0 100%);
+  clip-path: polygon(calc(100% - 5px) 0, 100% 0, 0 100%);
 }
 
 .scatter-point.label-left-up > b::before,
 .scatter-point.label-left-up > b::after {
   right: calc(-1 * var(--callout-tail-x));
   bottom: calc(-1 * var(--callout-tail-y));
-  clip-path: polygon(0 0, 7px 0, 100% 100%);
+  clip-path: polygon(0 0, 5px 0, 100% 100%);
 }
 
 .scatter-point.label-right-down > b::before,
 .scatter-point.label-right-down > b::after {
   left: calc(-1 * var(--callout-tail-x));
   top: calc(-1 * var(--callout-tail-y));
-  clip-path: polygon(0 0, calc(100% - 7px) 100%, 100% 100%);
+  clip-path: polygon(0 0, calc(100% - 5px) 100%, 100% 100%);
 }
 
 .scatter-point.label-left-down > b::before,
 .scatter-point.label-left-down > b::after {
   right: calc(-1 * var(--callout-tail-x));
   top: calc(-1 * var(--callout-tail-y));
-  clip-path: polygon(100% 0, 0 100%, 7px 100%);
+  clip-path: polygon(100% 0, 0 100%, 5px 100%);
 }
 
 .scatter-point > b::before {
-  width: calc(var(--callout-tail-x) + 8px);
-  height: calc(var(--callout-tail-y) + 2px);
+  width: calc(var(--callout-tail-x) + 5px);
+  height: calc(var(--callout-tail-y) + 1px);
   background: var(--callout-border);
 }
 
 .scatter-point > b::after {
-  width: calc(var(--callout-tail-x) + 5px);
+  width: calc(var(--callout-tail-x) + 3px);
   height: var(--callout-tail-y);
   background: var(--callout-fill);
 }

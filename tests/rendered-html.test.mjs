@@ -269,6 +269,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.doesNotMatch(html, /scatter-callout-leader/);
   assert.match(html, /class="scatter-point selected\b/);
+  const dealerTailValues = [
+    ...html.matchAll(/--callout-tail-[xy]:(\d+(?:\.\d+)?)px/g),
+  ].map((match) => Number(match[1]));
+  assert.ok(dealerTailValues.length >= 14);
+  assert.ok(dealerTailValues.every((value) => value >= 3 && value <= 7));
   assert.equal(
     (html.match(/class="scatter-label comparison"/g) ?? []).length,
     6,
@@ -657,11 +662,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.doesNotMatch(css, /\.scatter-callout-leader|--leader-length|--leader-angle/);
   assert.match(
     css,
-    /\.scatter-point\.label-right-up > b::before,[\s\S]*?left: calc\(-1 \* var\(--callout-tail-x\)\)[\s\S]*?clip-path: polygon\(calc\(100% - 7px\) 0, 100% 0, 0 100%\)/,
+    /\.scatter-point\.label-right-up > b::before,[\s\S]*?left: calc\(-1 \* var\(--callout-tail-x\)\)[\s\S]*?clip-path: polygon\(calc\(100% - 5px\) 0, 100% 0, 0 100%\)/,
   );
   assert.match(
     css,
-    /\.scatter-point\.label-right-down > b::before,[\s\S]*?top: calc\(-1 \* var\(--callout-tail-y\)\)[\s\S]*?clip-path: polygon\(0 0, calc\(100% - 7px\) 100%, 100% 100%\)/,
+    /\.scatter-point\.label-right-down > b::before,[\s\S]*?top: calc\(-1 \* var\(--callout-tail-y\)\)[\s\S]*?clip-path: polygon\(0 0, calc\(100% - 5px\) 100%, 100% 100%\)/,
   );
   assert.match(
     css,
@@ -672,6 +677,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.scatter-average-value\.vertical\s*\{[^}]*left: var\(--avg-x\)[^}]*bottom: 12px[^}]*display: flex[^}]*flex-direction: column/,
   );
   assert.match(analysisSource, /--callout-tail-x/);
+  assert.match(analysisSource, /\[3, 5, 7\]\.forEach\(\(gap, gapIndex\) =>/);
+  assert.match(analysisSource, /\[0, -4, 4, -7, 7\]\.forEach\(\(lane, laneIndex\) =>/);
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
   assert.match(
     css,
