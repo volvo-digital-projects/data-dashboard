@@ -165,7 +165,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
   assert.match(html, /class="coverage-line actual"/);
   assert.match(html, /class="coverage-line national"/);
-  assert.match(html, /class="trend-line-base"/);
+  assert.doesNotMatch(html, /class="trend-line-base"/);
   assert.match(html, /class="trend-line"/);
   assert.equal((html.match(/class="comparison-bar"/g) ?? []).length, 3);
   assert.equal((html.match(/<b aria-hidden="true" style="left:/g) ?? []).length, 3);
