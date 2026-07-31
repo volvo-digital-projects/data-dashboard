@@ -578,7 +578,7 @@ function V3SPerformance({
       <section className="v3s-history-panel">
         <header className="v3s-subhead">
           <div>
-            <h3>5개년 실력 추세</h3>
+            <h3>5개년 추이</h3>
           </div>
           {historyDelta !== null && (
             <strong
