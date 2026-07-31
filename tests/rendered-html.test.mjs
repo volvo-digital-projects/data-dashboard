@@ -611,6 +611,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(
     css,
+    /\.profile-popover\s*\{[\s\S]*?width: min\(320px, calc\(100vw - 28px\)\)[\s\S]*?padding: 10px[\s\S]*?border-radius: 10px/,
+  );
+  assert.match(
+    css,
+    /\.profile-popover select\s*\{[\s\S]*?height: 42px[\s\S]*?margin: 0[\s\S]*?border-radius: 8px[\s\S]*?cursor: pointer/,
+  );
+  assert.match(
+    css,
     /\.identity-strip dt,\s*\.identity-strip dd,\s*\.identity-profile-role,\s*\.identity-profile strong\s*\{[^}]*line-height: 1\.1/,
   );
   assert.match(
