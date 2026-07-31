@@ -4743,11 +4743,17 @@ input:focus-visible,
 .trend-line {
   stroke: var(--blue);
   stroke-width: 1.8;
-  stroke-dasharray: 1.02 1;
-  stroke-dashoffset: 1.02;
+  stroke-dasharray: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  animation: showroom-line-draw 520ms linear 1420ms both;
+  animation: none;
+}
+
+.trend-line-reveal-mask {
+  fill: white;
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: showroom-line-reveal 520ms linear 1420ms both;
 }
 
 .actual-week-point,
@@ -5818,12 +5824,12 @@ button.quarter-score-row:disabled {
   }
 }
 
-@keyframes showroom-line-draw {
+@keyframes showroom-line-reveal {
   from {
-    stroke-dashoffset: 1.02;
+    transform: scaleX(0);
   }
   to {
-    stroke-dashoffset: 0;
+    transform: scaleX(1);
   }
 }
 
@@ -6290,6 +6296,7 @@ button.quarter-score-row:disabled {
   .metric-card,
   .average-trend-line,
   .trend-line,
+  .trend-line-reveal-mask,
   .combat-score-number,
   .v3s-bar-fill,
   .v3s-peer-bar,
@@ -6312,7 +6319,11 @@ button.quarter-score-row:disabled {
   }
 
   .trend-line {
-    stroke-dashoffset: 0;
+    stroke-dasharray: none;
+  }
+
+  .trend-line-reveal-mask {
+    transform: scaleX(1);
   }
 
   .actual-week-point,

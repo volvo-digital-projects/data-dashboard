@@ -513,16 +513,28 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(css, /\.future-window-help\s*\{[\s\S]*?fill: #8795a7/);
   assert.match(
     css,
-    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: 1\.02 1[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?animation: showroom-line-draw 520ms linear 1420ms both/,
+    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: none[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?animation: none/,
   );
-  assert.match(dashboardSource, /pathLength="1"[\s\S]*?className="trend-line"/);
+  assert.match(
+    dashboardSource,
+    /<clipPath id=\{revealClipId\} clipPathUnits="userSpaceOnUse">[\s\S]*?className="trend-line-reveal-mask"/,
+  );
+  assert.match(
+    dashboardSource,
+    /clipPath=\{`url\(#\$\{revealClipId\}\)`\}[\s\S]*?className="trend-line"/,
+  );
+  const actualTrendPolyline = dashboardSource.match(
+    /<polyline\s+points=\{segment[\s\S]*?className="trend-line"\s*\/>/,
+  )?.[0];
+  assert.ok(actualTrendPolyline);
+  assert.doesNotMatch(actualTrendPolyline, /pathLength=/);
   assert.match(
     dashboardSource,
     /const chartAnimationStart = 1420[\s\S]*?const chartAnimationDuration = 520[\s\S]*?const chartAnimationPointLag = 18/,
   );
   assert.match(
     dashboardSource,
-    /const pointTravelByWeek = new Map<number, number>\(\)[\s\S]*?Math\.hypot\([\s\S]*?pointTravelByWeek\.set\(point\.week, totalPointTravel\)/,
+    /const revealStartX = x\(firstActualWeek\) - markerRadius - 1[\s\S]*?const revealEndX = x\(lastActualWeek\) \+ markerRadius \+ 1[\s\S]*?const revealWidth = Math\.max\(1, revealEndX - revealStartX\)/,
   );
   assert.match(
     dashboardSource,
@@ -537,7 +549,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /width=\{markerSize\}[\s\S]*?height=\{markerSize\}/,
   );
   assert.equal((dashboardSource.match(/r=\{markerRadius\}/g) ?? []).length, 2);
-  assert.match(css, /@keyframes showroom-line-draw\s*\{[\s\S]*?stroke-dashoffset: 1[\s\S]*?stroke-dashoffset: 0/);
+  assert.match(
+    css,
+    /@keyframes showroom-line-reveal\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/,
+  );
 });
 
 test("ships the premium neutral design system and Pretendard typography", async () => {

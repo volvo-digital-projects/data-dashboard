@@ -797,21 +797,15 @@ function WeeklyTrend({
   const markerRadius = markerSize / 2;
   const y = (value: number) =>
     170 - ((value - min) / Math.max(1, max - min)) * 126;
-  const pointTravelByWeek = new Map<number, number>();
-  let totalPointTravel = 0;
-  rawPoints.forEach((point, index) => {
-    if (index > 0) {
-      const previousPoint = rawPoints[index - 1];
-      totalPointTravel += Math.hypot(
-        x(point.week) - x(previousPoint.week),
-        y(point.value) - y(previousPoint.value),
-      );
-    }
-    pointTravelByWeek.set(point.week, totalPointTravel);
-  });
+  const firstActualWeek = rawPoints[0]?.week ?? 1;
+  const lastActualWeek = rawPoints.at(-1)?.week ?? firstActualWeek;
+  const revealStartX = x(firstActualWeek) - markerRadius - 1;
+  const revealEndX = x(lastActualWeek) + markerRadius + 1;
+  const revealWidth = Math.max(1, revealEndX - revealStartX);
+  const revealClipId = `trend-line-reveal-${showroom.cdsid}-${metric}`;
   const pointAnimationDelay = (week: number) =>
     chartAnimationStart +
-    ((pointTravelByWeek.get(week) ?? 0) / Math.max(1, totalPointTravel)) *
+    ((x(week) - revealStartX) / revealWidth) *
       chartAnimationDuration +
     chartAnimationPointLag;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
@@ -952,6 +946,17 @@ function WeeklyTrend({
             }}
             onPointerLeave={() => setHoverWeek(null)}
           >
+            <defs>
+              <clipPath id={revealClipId} clipPathUnits="userSpaceOnUse">
+                <rect
+                  x={revealStartX}
+                  y="0"
+                  width={revealWidth}
+                  height="200"
+                  className="trend-line-reveal-mask"
+                />
+              </clipPath>
+            </defs>
             <line
               x1={plotLeft}
               x2={plotRight}
@@ -1090,7 +1095,7 @@ function WeeklyTrend({
                       points={segment
                         .map((point) => `${x(point.week)},${y(point.value)}`)
                         .join(" ")}
-                      pathLength="1"
+                      clipPath={`url(#${revealClipId})`}
                       className="trend-line"
                     />
                   </g>
