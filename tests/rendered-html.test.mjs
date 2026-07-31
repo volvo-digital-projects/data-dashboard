@@ -225,6 +225,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
+  assert.match(
+    dashboardSource,
+    /className=\{signal\.delta >= 0 \? "positive" : "negative"\}/,
+  );
 
   assert.match(dashboardSource, /const plotLeft = 28/);
   assert.match(dashboardSource, /const plotRight = 1332/);
@@ -293,6 +297,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--blue: #2f6b8a/);
   assert.match(css, /--good: #1f8f6a/);
   assert.match(css, /--warning: #d14b41/);
+  assert.match(css, /\.positive\s*\{\s*color: var\(--blue\) !important;/);
+  assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
   assert.match(css, /--caution: #c58a1b/);
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
   assert.match(

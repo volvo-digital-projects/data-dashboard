@@ -4071,11 +4071,32 @@ input:focus-visible,
 }
 
 .positive {
-  color: var(--good) !important;
+  color: var(--blue) !important;
 }
 
 .negative {
-  color: var(--warning) !important;
+  color: var(--caution) !important;
+}
+
+.combat-footer span.positive {
+  color: #79b2cf !important;
+}
+
+.combat-footer span.negative {
+  color: #e0a33c !important;
+}
+
+.combat-footer span.positive strong,
+.combat-footer span.negative strong {
+  color: currentColor;
+}
+
+.mobile-power .positive {
+  color: #79b2cf !important;
+}
+
+.mobile-power .negative {
+  color: #e0a33c !important;
 }
 
 .dashboard-footer {

@@ -242,7 +242,7 @@ function MetricCard({
         title={`Q2 전국 평균 ${displayNumber(average)}점`}
       >
         <span>Q2 전국 평균 대비</span>
-        <strong className={signal.tone}>
+        <strong className={signal.delta >= 0 ? "positive" : "negative"}>
           {signal.delta >= 0 ? "+" : ""}
           {signal.delta.toFixed(1)}점
         </strong>
