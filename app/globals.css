@@ -5307,8 +5307,8 @@ button.quarter-score-row:disabled {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: end;
-  gap: 16px;
-  padding: 10px 10px 0;
+  gap: 14px;
+  padding: 10px 18px 0;
 }
 
 .v3s-quarter-column {
@@ -5328,7 +5328,7 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-bar-cluster {
-  width: min(98%, 146px);
+  width: min(92%, 120px);
   height: 100%;
   position: absolute;
   bottom: 0;
@@ -5337,28 +5337,29 @@ button.quarter-score-row:disabled {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   transform: translateX(-50%);
 }
 
 .v3s-peer-bar-group {
-  width: 64px;
+  width: 74px;
   height: 100%;
   position: relative;
   z-index: 2;
   display: flex;
-  flex: 0 0 64px;
+  flex: 0 0 74px;
   align-items: flex-end;
-  gap: 5px;
+  gap: 4px;
 }
 
 .v3s-bar-fill {
-  width: min(58%, 54px);
+  width: 28px;
+  min-width: 28px;
   position: relative;
   z-index: 1;
-  flex: 0 1 54px;
+  flex: 0 0 28px;
   display: block;
-  border-radius: 7px 7px 2px 2px;
+  border-radius: 4px 4px 1px 1px;
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.14), transparent 42%),
     linear-gradient(180deg, #5c96b2 0%, #2f6b8a 52%, #173f5b 100%);
@@ -5393,8 +5394,8 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-peer-bar {
-  width: 18px;
-  min-width: 18px;
+  width: 22px;
+  min-width: 22px;
   position: relative;
   display: block;
   box-sizing: border-box;
@@ -5469,10 +5470,11 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-upcoming-bar {
-  width: min(58%, 54px);
+  width: 28px;
+  min-width: 28px;
   height: 76%;
   position: relative;
-  flex: 0 1 54px;
+  flex: 0 0 28px;
   display: grid;
   place-items: center;
   border: 1px dashed #d5dde2;
@@ -5986,8 +5988,8 @@ button.quarter-score-row:disabled {
 
   .v3s-quarter-bars {
     height: 126px;
-    gap: 12px;
-    padding: 6px 8px 0;
+    gap: 14px;
+    padding: 6px 18px 0;
   }
 
   .v3s-bar-stage {

@@ -720,11 +720,19 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.v3s-peer-bar\s*\{[\s\S]*?width: 18px[\s\S]*?min-width: 18px[\s\S]*?animation: v3s-bar-rise 760ms/,
+    /\.v3s-peer-bar\s*\{[\s\S]*?width: 22px[\s\S]*?min-width: 22px[\s\S]*?animation: v3s-bar-rise 760ms/,
   );
   assert.match(
     css,
-    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(98%, 146px\)[\s\S]*?gap: 12px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 64px[\s\S]*?flex: 0 0 64px[\s\S]*?gap: 5px/,
+    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(92%, 120px\)[\s\S]*?gap: 8px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 74px[\s\S]*?flex: 0 0 74px[\s\S]*?gap: 4px/,
+  );
+  assert.match(
+    css,
+    /\.v3s-bar-fill\s*\{[\s\S]*?width: 28px[\s\S]*?min-width: 28px[\s\S]*?flex: 0 0 28px/,
+  );
+  assert.match(
+    css,
+    /\.v3s-quarter-bars\s*\{[\s\S]*?gap: 14px[\s\S]*?padding: 10px 18px 0/,
   );
   assert.match(css, /\.v3s-peer-bar b\s*\{[\s\S]*?font-size: 7px/);
   assert.match(css, /\.legend-peer\.dealer[\s\S]*?\.legend-peer\.region[\s\S]*?\.legend-peer\.size/);
