@@ -519,6 +519,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /label: "Q4"[\s\S]{0,220}?state: "upcoming"/,
   );
+  assert.match(
+    dashboardSource,
+    /className="future-window"[\s\S]{0,500}?Q3 평가 진행 중/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="future-window future-window-upcoming"[\s\S]{0,500}?Q4 평가 예정 중/,
+  );
   assert.doesNotMatch(
     dashboardSource,
     /className="v3s-quarter-label"[\s\S]{0,140}?<span>/,

@@ -997,7 +997,7 @@ function WeeklyTrend({
                   y={chartY(18)}
                   width={activeQuarterEnd - activeQuarterStart}
                   height={chartY(152)}
-                  className="future-window future-window-upcoming"
+                  className="future-window"
                 />
                 <text
                   x={(activeQuarterStart + activeQuarterEnd) / 2}
@@ -1024,7 +1024,7 @@ function WeeklyTrend({
                   y={chartY(18)}
                   width={upcomingQuarterEnd - upcomingQuarterStart}
                   height={chartY(152)}
-                  className="future-window"
+                  className="future-window future-window-upcoming"
                 />
                 <text
                   x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
