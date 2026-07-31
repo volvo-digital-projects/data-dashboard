@@ -5958,6 +5958,159 @@ button.quarter-score-row:disabled {
   }
 }
 
+.score-stack-panel {
+  overflow: hidden;
+}
+
+.score-stack {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.score-tier {
+  min-width: 0;
+  padding: 14px 16px 12px;
+  border: 1px solid rgba(16, 24, 40, 0.07);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff 0%, #f9fbfc 100%);
+  box-shadow: 0 8px 24px rgba(16, 42, 67, 0.035);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.score-tier.active {
+  border-color: rgba(47, 107, 138, 0.2);
+  box-shadow:
+    inset 3px 0 0 var(--blue),
+    0 10px 26px rgba(16, 42, 67, 0.055);
+}
+
+.score-tier-heading {
+  min-height: 28px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 0 2px 8px;
+  border-bottom: 1px solid rgba(152, 162, 179, 0.16);
+}
+
+.score-tier-heading strong {
+  color: var(--navy);
+  font-family: var(--font-latin);
+  font-size: 14px;
+  font-weight: 760;
+  letter-spacing: -0.01em;
+}
+
+.score-tier-heading span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.trend-wrap.compact {
+  margin-top: 8px;
+}
+
+.trend-wrap.compact .quarter-band span {
+  min-height: 27px;
+  padding-inline: 10px;
+}
+
+.trend-wrap.compact .quarter-band strong {
+  font-size: 10px;
+}
+
+.trend-wrap.compact .quarter-band small {
+  font-size: 8px;
+}
+
+.trend-wrap.compact .trend-chart {
+  height: 150px;
+}
+
+.trend-wrap.compact .future-window-label {
+  font-size: 10px;
+}
+
+.trend-wrap.compact .future-window-help {
+  font-size: 8px;
+}
+
+.trend-wrap.compact .week-ruler {
+  margin-top: -16px;
+  margin-bottom: 4px;
+}
+
+.trend-wrap.compact .week-ruler span {
+  min-height: 21px;
+  font-size: 7px;
+}
+
+.trend-wrap.compact .data-coverage {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.trend-wrap.compact .data-coverage button {
+  min-height: 28px;
+}
+
+.v3s-performance.compact {
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.v3s-performance.compact .v3s-quarter-panel,
+.v3s-performance.compact .v3s-history-panel {
+  min-height: 204px;
+  padding: 12px 14px;
+}
+
+.v3s-performance.compact .v3s-subhead {
+  min-height: 36px;
+}
+
+.v3s-performance.compact .v3s-subhead h3 {
+  font-size: 15px;
+}
+
+.v3s-performance.compact .v3s-cumulative strong {
+  font-size: 21px;
+}
+
+.v3s-performance.compact .v3s-quarter-bars {
+  height: 112px;
+  padding-top: 4px;
+}
+
+.v3s-performance.compact .v3s-bar-stage {
+  height: 76px;
+}
+
+.v3s-performance.compact .v3s-quarter-legend {
+  margin-top: 2px;
+  padding-top: 5px;
+}
+
+.v3s-performance.compact .v3s-history-chart svg {
+  height: 88px;
+}
+
+.v3s-performance.compact .v3s-history-empty {
+  min-height: 116px;
+}
+
+.v3s-performance.compact .v3s-history-ghost {
+  height: 100px;
+}
+
+.v3s-performance.compact .v3s-history-summary {
+  margin-top: 4px;
+}
+
 @media (min-width: 1241px) {
   .combat-summary-stack > span {
     margin-bottom: 0;

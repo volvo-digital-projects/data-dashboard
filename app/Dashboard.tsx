@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import dashboardJson from "./data/showrooms.json";
 import weeklyJson from "./data/weekly.json";
 
@@ -123,16 +123,6 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
   voc: "Voice of Customer · 고객 의견 평가",
   cx: "Customer Experience Index · 고객 경험 종합 지수",
 };
-
-const groupMeta: Record<GroupKey, { label: string }> = {
-  all: { label: "전국 39개" },
-  dealer: { label: "소속 딜러사" },
-  region: { label: "동일 권역" },
-  size: { label: "동급 사이즈" },
-};
-
-const valueOf = (item: Showroom, metric: MetricKey) =>
-  item[metric] ?? Number.NEGATIVE_INFINITY;
 
 const quarterValueOf = (
   item: Showroom,
@@ -350,7 +340,13 @@ function MetricCard({
   );
 }
 
-function V3SPerformance({ showroom }: { showroom: Showroom }) {
+function V3SPerformance({
+  showroom,
+  compact = false,
+}: {
+  showroom: Showroom;
+  compact?: boolean;
+}) {
   const peerBenchmarks = (quarter: QuarterKey | null) => [
     {
       key: "dealer",
@@ -458,7 +454,10 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       : null;
 
   return (
-    <div className="v3s-performance" aria-label="V3S 분기 및 5개년 성과">
+    <div
+      className={`v3s-performance ${compact ? "compact" : ""}`}
+      aria-label="V3S 분기 및 5개년 성과"
+    >
       <section className="v3s-quarter-panel">
         <header className="v3s-subhead">
           <div>
@@ -719,9 +718,11 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
 function WeeklyTrend({
   showroom,
   metric,
+  compact = false,
 }: {
   showroom: Showroom;
   metric: TrendMetricKey;
+  compact?: boolean;
 }) {
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
@@ -909,7 +910,7 @@ function WeeklyTrend({
   }, [metric, showroom.cdsid]);
 
   return (
-    <div className="trend-wrap">
+    <div className={`trend-wrap ${compact ? "compact" : ""}`}>
       <div
         ref={trendScrollRef}
         className="trend-scroll"
@@ -1247,102 +1248,6 @@ function WeeklyTrend({
           주간 전국 평균
         </button>
       </div>
-    </div>
-  );
-}
-
-function ComparisonTable({
-  selected,
-  metric,
-  group,
-}: {
-  selected: Showroom;
-  metric: MetricKey;
-  group: GroupKey;
-}) {
-  const members = useMemo(() => {
-    const filtered = dashboard.showrooms.filter((item) => {
-      if (group === "dealer") return item.dealer === selected.dealer;
-      if (group === "region") return item.region === selected.region;
-      if (group === "size") return item.size === selected.size;
-      return true;
-    });
-    return filtered.sort((a, b) => valueOf(b, metric) - valueOf(a, metric));
-  }, [group, metric, selected]);
-
-  const selectedIndex = Math.max(
-    0,
-    members.findIndex((item) => item.cdsid === selected.cdsid),
-  );
-  const windowSize = 3;
-  const windowStart = Math.min(
-    Math.max(0, selectedIndex - 1),
-    Math.max(0, members.length - windowSize),
-  );
-  const visible = members.slice(windowStart, windowStart + windowSize);
-  const max = metricMeta[metric].max;
-  const benchmark =
-    metric === "combat"
-      ? dashboard.meta.combatAverage
-      : dashboard.averages[metric] ?? 0;
-
-  return (
-    <div className="comparison-table">
-      <div className="comparison-head table-row">
-        <span>순위</span>
-        <span>전시장</span>
-        <span>딜러 · 권역 · 사이즈</span>
-        <span>{metricMeta[metric].label}</span>
-        <span>점수 차이</span>
-      </div>
-      {visible.map((item) => {
-        const rank =
-          members.findIndex((member) => valueOf(member, metric) === valueOf(item, metric)) +
-          1;
-        const value = valueOf(item, metric);
-        const delta = value - benchmark;
-        const isSelected = item.cdsid === selected.cdsid;
-        return (
-          <div
-            className={`table-row ${isSelected ? "selected" : ""}`}
-            key={item.cdsid}
-          >
-            <span className="rank-number">
-              {rank}
-              <small>/{members.length}</small>
-            </span>
-            <span className="showroom-name">
-              {displayShowroomName(item.showroom)}
-              {isSelected && <em>내 전시장</em>}
-            </span>
-            <span className="dealer-region">
-              {item.dealer} · {item.region} · {item.size}
-            </span>
-            <span
-              className="comparison-bar"
-              title={`${metricMeta[metric].label} ${displayNumber(
-                value,
-              )}점 · 전국 평균 ${displayNumber(benchmark)}점`}
-            >
-              <i style={{ width: `${Math.min(100, (value / max) * 100)}%` }} />
-              <b
-                aria-hidden="true"
-                style={{ left: `${Math.min(100, (benchmark / max) * 100)}%` }}
-              />
-            </span>
-            <span className="comparison-value">
-              <strong>{displayNumber(value)}</strong>
-              <small>
-                <span>전국 평균 대비</span>
-                <b className={delta >= 0 ? "positive" : "negative"}>
-                  {delta >= 0 ? "▲" : "▼"}
-                  {Math.abs(delta).toFixed(1)}
-                </b>
-              </small>
-            </span>
-          </div>
-        );
-      })}
     </div>
   );
 }
@@ -1701,8 +1606,6 @@ export default function Dashboard({
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
-  const [comparisonMetric, setComparisonMetric] = useState<MetricKey>("combat");
-  const [group, setGroup] = useState<GroupKey>("all");
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
@@ -1748,41 +1651,6 @@ export default function Dashboard({
             Number.NEGATIVE_INFINITY),
       )
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
-  const rankInGroup = (members: Showroom[]) =>
-    [...members]
-      .sort(
-        (a, b) =>
-          (quarterValueOf(b, "combat", selectedQuarter) ??
-            Number.NEGATIVE_INFINITY) -
-          (quarterValueOf(a, "combat", selectedQuarter) ??
-            Number.NEGATIVE_INFINITY),
-      )
-      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
-  const mobileRanks = [
-    {
-      label: "전국",
-      rank: nationalRank,
-      count: dashboard.meta.showroomCount,
-    },
-    {
-      label: selected.dealer,
-      rank: rankInGroup(
-        dashboard.showrooms.filter((item) => item.dealer === selected.dealer),
-      ),
-      count: dashboard.showrooms.filter(
-        (item) => item.dealer === selected.dealer,
-      ).length,
-    },
-    {
-      label: `${selected.size} Size`,
-      rank: rankInGroup(
-        dashboard.showrooms.filter((item) => item.size === selected.size),
-      ),
-      count: dashboard.showrooms.filter((item) => item.size === selected.size)
-        .length,
-    },
-  ];
-
   const kpis = [
     {
       key: "v3s" as const,
@@ -2123,92 +1991,61 @@ export default function Dashboard({
         id="weekly-trend"
         key={`showroom-trend-${selected.cdsid}`}
       >
-        <article className="panel trend-panel">
+        <article className="panel trend-panel score-stack-panel">
           <div className="section-heading">
             <div>
               <h2>{displayShowroomName(selected.showroom)} 스코어</h2>
             </div>
-            <div className="trend-actions">
-              <div
-                className="trend-selector"
-                role="group"
-                aria-label="52주 지표 선택"
-              >
-                {(["v3s", "voc", "cx"] as TrendMetricKey[]).map((metric) => (
-                  <button
-                    key={metric}
-                    type="button"
-                    className={trendMetric === metric ? "active" : ""}
-                    aria-label={`${metricMeta[metric].label} 52주 추이 보기`}
-                    aria-pressed={trendMetric === metric}
-                    onClick={() => setTrendMetric(metric)}
-                  >
-                    {metricMeta[metric].short}
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
-          {trendMetric === "v3s" ? (
-            <V3SPerformance showroom={selected} />
-          ) : (
-            <WeeklyTrend
-              key={`${selected.cdsid}-${trendMetric}`}
-              showroom={selected}
-              metric={trendMetric}
-            />
-          )}
+          <div className="score-stack" aria-label="V3S, VOC, CX Index 스코어">
+            <section
+              id="score-v3s"
+              className={`score-tier score-tier-v3s ${
+                trendMetric === "v3s" ? "active" : ""
+              }`}
+            >
+              <header className="score-tier-heading">
+                <strong>V3S</strong>
+                <span>{metricDescriptions.v3s}</span>
+              </header>
+              <V3SPerformance showroom={selected} compact />
+            </section>
+            <section
+              id="score-voc"
+              className={`score-tier score-tier-weekly ${
+                trendMetric === "voc" ? "active" : ""
+              }`}
+            >
+              <header className="score-tier-heading">
+                <strong>VOC</strong>
+                <span>{metricDescriptions.voc}</span>
+              </header>
+              <WeeklyTrend
+                key={`${selected.cdsid}-voc`}
+                showroom={selected}
+                metric="voc"
+                compact
+              />
+            </section>
+            <section
+              id="score-cx"
+              className={`score-tier score-tier-weekly ${
+                trendMetric === "cx" ? "active" : ""
+              }`}
+            >
+              <header className="score-tier-heading">
+                <strong>CX Index</strong>
+                <span>{metricDescriptions.cx}</span>
+              </header>
+              <WeeklyTrend
+                key={`${selected.cdsid}-cx`}
+                showroom={selected}
+                metric="cx"
+                compact
+              />
+            </section>
+          </div>
         </article>
-      </section>
-
-      <section className="panel comparison-panel">
-        <div className="comparison-title-row">
-            <div className="section-heading">
-              <div>
-                <h2>{displayShowroomName(selected.showroom)} 경쟁력</h2>
-              </div>
-            </div>
-          <div className="comparison-controls">
-            <label>
-              <select
-                aria-label="비교 그룹"
-                value={group}
-                onChange={(event) => setGroup(event.target.value as GroupKey)}
-              >
-                {(Object.keys(groupMeta) as GroupKey[]).map((key) => (
-                  <option key={key} value={key}>
-                    {groupMeta[key].label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              <select
-                aria-label="비교 지표"
-                value={comparisonMetric}
-                onChange={(event) =>
-                  setComparisonMetric(event.target.value as MetricKey)
-                }
-              >
-                {(Object.keys(metricMeta) as MetricKey[]).map((key) => (
-                  <option key={key} value={key}>
-                    {metricMeta[key].label}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-        </div>
-        <div className="mobile-comparison-summary">
-          {mobileRanks.map((item) => (
-            <div key={item.label}>
-              <span>{item.label}</span>
-              <strong>{item.rank}위</strong>
-              <small>{item.count}개 전시장</small>
-            </div>
-          ))}
-        </div>
-        <ComparisonTable selected={selected} metric={comparisonMetric} group={group} />
       </section>
 
       <footer className="dashboard-footer">

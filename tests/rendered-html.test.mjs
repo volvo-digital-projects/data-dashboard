@@ -91,11 +91,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
   assert.match(visibleHtml, /누적 평균[\s\S]*298\.8[\s\S]*Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 지표 보기"/g) ?? []).length, 2);
-  assert.equal((html.match(/aria-label="Q[34] 평가 예정"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q[34] 평가 예정"/g) ?? []).length, 3);
   assert.match(visibleHtml, /Q2 전국 평균 <strong>305\.4/);
   assert.match(visibleHtml, /Q2 전국 평균 대비 <strong>-10\.5/);
   assert.match(visibleHtml, /전시장 경쟁력 전국 순위 <strong>32위 \/ 전체 39/);
-  assert.match(visibleHtml, /종합 경쟁력/);
+  assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);
   assert.doesNotMatch(visibleHtml, /볼보 전체 전시장|VOLVO KOREA/);
   assert.doesNotMatch(html, /class="group-context"/);
@@ -103,7 +103,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="combat-gauge"/);
   assert.doesNotMatch(visibleHtml, /WATCH|집중 관리 레벨|52-WEEK PULSE/);
   assert.doesNotMatch(visibleHtml, /카드를 선택하면 주간 흐름이 바뀝니다/);
-  assert.match(html, /전국 39개/);
+  assert.match(html, /39(?:<!-- -->)?개점/);
   assert.match(html, /6KR6834/);
   assert.equal((html.match(/class="identity-icon /g) ?? []).length, 3);
   assert.match(html, /identity-icon--dealer/);
@@ -122,8 +122,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /href="\/dashboard\/6KR6834\/analysis\?view=size"/,
   );
   assert.doesNotMatch(visibleHtml, /⌂|◎|↔/);
-  assert.equal((html.match(/class="table-row/g) ?? []).length, 3);
-  assert.match(html, /class="comparison-head table-row"/);
+  assert.doesNotMatch(html, /class="comparison-panel|class="comparison-table/);
   assert.match(visibleHtml, /권역별/);
   assert.match(visibleHtml, /<h1>볼보 강남대치<\/h1>/);
   assert.match(visibleHtml, />볼보 강남대치<\/button>/);
@@ -136,18 +135,28 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /볼보 강남대치 스코어/);
   assert.doesNotMatch(visibleHtml, /52주 스코어 추이/);
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
-  assert.match(html, /class="trend-selector"/);
+  assert.doesNotMatch(html, /class="trend-selector"/);
   assert.doesNotMatch(html, /class="trend-selector-icon"/);
+  assert.equal((html.match(/class="score-tier /g) ?? []).length, 3);
+  assert.match(
+    html,
+    /id="score-v3s"[\s\S]*?id="score-voc"[\s\S]*?id="score-cx"/,
+  );
+  assert.match(html, /class="v3s-performance compact"/);
+  assert.equal((html.match(/class="trend-wrap compact"/g) ?? []).length, 2);
   assert.doesNotMatch(html, /show-values-toggle/);
   assert.doesNotMatch(visibleHtml, /모든 값 표시/);
-  assert.match(html, /aria-label="VOC 52주 추이 보기" aria-pressed="true"/);
   assert.doesNotMatch(html, /class="segmented"/);
+  const vocStart = html.indexOf('id="score-voc"');
+  const cxStart = html.indexOf('id="score-cx"');
+  assert.ok(vocStart >= 0 && cxStart > vocStart);
+  const vocHtml = html.slice(vocStart, cxStart);
   for (let week = 1; week <= 52; week += 1) {
-    assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
+    assert.match(vocHtml, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
-  assert.match(html, /r="3.15" class="national-average-point"/);
+  assert.match(vocHtml, /r="3.15" class="national-average-point"/);
   const actualMarkerWeeks = [
-    ...html.matchAll(
+    ...vocHtml.matchAll(
       /width="6.3" height="6.3" data-week="(W\d{2})" class="actual-week-point"/g,
     ),
   ].map((match) => match[1]);
@@ -157,30 +166,23 @@ test("server-renders the selected CDSID dashboard", async () => {
     Array.from({ length: 26 }, (_, index) => `W${String(index + 1).padStart(2, "0")}`)
       .filter((week) => week !== "W22"),
   );
-  const actualLabelCount = (html.match(/class="actual-point-value"/g) ?? []).length;
+  const actualLabelCount = (vocHtml.match(/class="actual-point-value"/g) ?? []).length;
   assert.equal(actualLabelCount, 25);
-  assert.equal((html.match(/class="national-point-value"/g) ?? []).length, 26);
-  assert.match(html, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
-  assert.match(html, /class="future-window"/);
+  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 26);
+  assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
+  assert.match(vocHtml, /class="future-window"/);
   assert.match(visibleHtml, /Q3 평가 진행 중/);
-  assert.match(html, /class="future-window future-window-upcoming"/);
+  assert.match(vocHtml, /class="future-window future-window-upcoming"/);
   assert.match(visibleHtml, /Q4 평가 예정 중/);
   assert.match(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
-  assert.doesNotMatch(html, /class="average-label"|class="point-value"/);
-  assert.match(html, /class="coverage-line actual"/);
-  assert.match(html, /class="coverage-line national"/);
-  assert.doesNotMatch(html, /class="trend-line-base"/);
-  assert.match(html, /class="trend-line"/);
-  assert.equal((html.match(/class="comparison-bar"/g) ?? []).length, 3);
-  assert.equal((html.match(/<b aria-hidden="true" style="left:/g) ?? []).length, 3);
-  assert.match(visibleHtml, /내 전시장/);
-  assert.match(visibleHtml, /딜러 · 권역 · 사이즈/);
-  assert.match(visibleHtml, /점수 차이/);
-  assert.doesNotMatch(visibleHtml, /점수 · 평균 대비/);
-  assert.match(visibleHtml, /class="dealer-region">[^<]+ · [^<]+ · [^<]+<\/span>/);
-  assert.doesNotMatch(visibleHtml, /전국 39개점 기준/);
-  assert.doesNotMatch(visibleHtml, />비교 그룹<|>비교 지표</);
-  assert.match(visibleHtml, /볼보 강남대치 경쟁력/);
+  assert.doesNotMatch(vocHtml, /class="average-label"|class="point-value"/);
+  assert.match(vocHtml, /class="coverage-line actual"/);
+  assert.match(vocHtml, /class="coverage-line national"/);
+  assert.doesNotMatch(vocHtml, /class="trend-line-base"/);
+  assert.match(vocHtml, /class="trend-line"/);
+  assert.doesNotMatch(html, /class="comparison-bar"|class="table-row/);
+  assert.doesNotMatch(visibleHtml, /딜러 · 권역 · 사이즈|점수 차이/);
+  assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력/);
   assert.doesNotMatch(visibleHtml, /COMPETITIVE POSITION/);
   assert.match(html, /aria-label="VOC 분기 평가점수"/);
   assert.match(html, /위험 감지: Q2 전국 평균 대비 5점 이상 미달/);
@@ -478,7 +480,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(dashboardSource, /className="v3s-peer-legend"/);
   assert.match(dashboardSource, /className=\{`legend-peer \$\{benchmark\.key\}`\}/);
-  assert.match(dashboardSource, /trendMetric === "v3s"/);
+  assert.match(
+    dashboardSource,
+    /id="score-v3s"[\s\S]*?id="score-voc"[\s\S]*?id="score-cx"/,
+  );
+  assert.match(dashboardSource, /<V3SPerformance showroom=\{selected\} compact \/>/);
   assert.doesNotMatch(dashboardSource, /analysis\?view=showroom/);
   assert.doesNotMatch(dashboardSource, /2026 PERFORMANCE/);
   assert.doesNotMatch(dashboardSource, /2021–2025 HISTORY/);
@@ -537,7 +543,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /key=\{`\$\{selected\.cdsid\}-\$\{trendMetric\}`\}[\s\S]*?showroom=\{selected\}[\s\S]*?metric=\{trendMetric\}/,
+    /key=\{`\$\{selected\.cdsid\}-voc`\}[\s\S]*?metric="voc"[\s\S]*?compact/,
+  );
+  assert.match(
+    dashboardSource,
+    /key=\{`\$\{selected\.cdsid\}-cx`\}[\s\S]*?metric="cx"[\s\S]*?compact/,
   );
   assert.match(
     dashboardSource,
