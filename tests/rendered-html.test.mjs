@@ -445,6 +445,12 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.dashboard \.comparison-panel\s*\{[\s\S]*?padding: 18px 24px 16px/,
+  );
+  assert.match(css, /\.table-row\s*\{[^}]*min-height: 48px/);
+  assert.match(css, /\.comparison-head\s*\{[^}]*min-height: 24px/);
+  assert.match(
+    css,
     /\.identity-strip dt,[\s\S]*?\.identity-profile-role\s*\{[\s\S]*?width: 100%[\s\S]*?text-align: center/,
   );
   assert.match(

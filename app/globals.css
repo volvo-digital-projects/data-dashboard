@@ -4713,12 +4713,13 @@ input:focus-visible,
   opacity: 0.52;
 }
 
-.comparison-panel {
+.dashboard .comparison-panel {
   margin-top: 24px;
+  padding: 18px 24px 16px;
 }
 
 .comparison-title-row {
-  align-items: flex-end;
+  align-items: center;
 }
 
 .comparison-subtitle {
@@ -4749,10 +4750,10 @@ input:focus-visible,
 
 .comparison-controls select {
   min-width: 142px;
-  height: 44px;
+  height: 38px;
   padding: 0 38px 0 14px;
   border: 1px solid rgba(16, 24, 40, 0.09);
-  border-radius: 12px;
+  border-radius: 10px;
   background-color: white;
   font-size: 13px;
   transition:
@@ -4771,18 +4772,18 @@ input:focus-visible,
 
 .comparison-table {
   display: grid;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 5px;
+  margin-top: 8px;
   border-top: 0;
 }
 
 .table-row {
-  min-height: 56px;
+  min-height: 48px;
   grid-template-columns:
     72px minmax(180px, 1.15fr) minmax(145px, 0.9fr)
     minmax(200px, 1.6fr) 144px;
-  gap: 18px;
-  padding: 0 16px;
+  gap: 16px;
+  padding: 0 14px;
   border: 1px solid transparent;
   border-radius: 12px;
   background: #fafbfc;
@@ -4800,8 +4801,8 @@ input:focus-visible,
 }
 
 .comparison-head {
-  min-height: 30px;
-  padding-inline: 16px;
+  min-height: 24px;
+  padding-inline: 14px;
   color: var(--muted);
   border: 0;
   background: transparent;
@@ -4865,7 +4866,7 @@ input:focus-visible,
 }
 
 .dealer-region small {
-  margin-top: 2px;
+  margin-top: 0;
   font-size: 11px;
 }
 
