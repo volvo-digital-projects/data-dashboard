@@ -3305,6 +3305,51 @@ input:focus-visible {
     linear-gradient(135deg, #fbfcfd, #f7fafb);
 }
 
+.scatter-zone {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.scatter-zone.balanced {
+  top: 0;
+  right: 0;
+  bottom: var(--avg-y);
+  left: var(--avg-x);
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(47, 107, 138, 0.13) 0%,
+      rgba(47, 107, 138, 0.055) 52%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to top right,
+      rgba(47, 107, 138, 0.012) 0%,
+      rgba(47, 107, 138, 0.105) 100%
+    );
+}
+
+.scatter-zone.improve {
+  width: var(--avg-x);
+  height: var(--avg-y);
+  bottom: 0;
+  left: 0;
+  background:
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(194, 70, 62, 0.12) 0%,
+      rgba(194, 70, 62, 0.048) 54%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom left,
+      rgba(194, 70, 62, 0.01) 0%,
+      rgba(194, 70, 62, 0.1) 100%
+    );
+}
+
 .scatter-quadrant {
   position: absolute;
   z-index: 0;

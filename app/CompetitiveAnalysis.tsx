@@ -561,6 +561,8 @@ export default function CompetitiveAnalysis({
               style={scatterStyle}
               ref={scatterRef}
             >
+              <span className="scatter-zone balanced" aria-hidden="true" />
+              <span className="scatter-zone improve" aria-hidden="true" />
               <span className="scatter-quadrant top-left">만족도 우세</span>
               <span className="scatter-quadrant top-right">균형 우수</span>
               <span className="scatter-quadrant bottom-left">개선 집중</span>

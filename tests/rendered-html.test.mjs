@@ -278,6 +278,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);
+  assert.equal((html.match(/class="scatter-zone /g) ?? []).length, 2);
   assert.match(
     html.replaceAll("<!-- -->", ""),
     /class="scatter-average-value vertical"><span>해피콜 이행<\/span><strong>평균 \d+\.\d점<\/strong>/,
@@ -651,6 +652,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--font-korean:[\s\S]*"Pretendard Variable"[\s\S]*"SUIT"/);
   assert.match(css, /--font-latin:[\s\S]*"Inter"/);
   assert.match(css, /--paper: #f6f8fa/);
+  assert.match(
+    css,
+    /\.scatter-zone\.balanced\s*\{[^}]*bottom: var\(--avg-y\)[^}]*left: var\(--avg-x\)[^}]*linear-gradient\(\s*to top right/,
+  );
+  assert.match(
+    css,
+    /\.scatter-zone\.improve\s*\{[^}]*width: var\(--avg-x\)[^}]*height: var\(--avg-y\)[^}]*linear-gradient\(\s*to bottom left/,
+  );
   assert.match(
     css,
     /\.profile-popover select\s*\{[^}]*font-variant-numeric: tabular-nums/,
