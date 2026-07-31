@@ -819,6 +819,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.identity-analysis-entry::after,[\s\S]*?\.identity-profile::after\s*\{[\s\S]*?content: "👆";[\s\S]*?right: 6px;[\s\S]*?bottom: 5px;/,
+  );
+  assert.match(
+    css,
     /\.identity-icon--region::before\s*\{[\s\S]*?border-radius: 50% 50% 50% 2px/,
   );
   assert.match(
