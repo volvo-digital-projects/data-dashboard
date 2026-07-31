@@ -121,10 +121,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   for (let week = 1; week <= 52; week += 1) {
     assert.match(html, new RegExp(`W${String(week).padStart(2, "0")}`));
   }
-  assert.match(html, /r="4.5" class="national-average-point"/);
+  assert.match(html, /r="3.15" class="national-average-point"/);
   const actualMarkerWeeks = [
     ...html.matchAll(
-      /width="9" height="9" data-week="(W\d{2})" class="actual-week-point"/g,
+      /width="6.3" height="6.3" data-week="(W\d{2})" class="actual-week-point"/g,
     ),
   ].map((match) => match[1]);
   assert.equal(actualMarkerWeeks.length, 25);
@@ -286,6 +286,15 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const chartAnimationStart = 1420[\s\S]*?const chartAnimationDuration = 520/,
   );
+  assert.match(
+    dashboardSource,
+    /const markerSize = 6\.3;[\s\S]*?const markerRadius = markerSize \/ 2;/,
+  );
+  assert.match(
+    dashboardSource,
+    /width=\{markerSize\}[\s\S]*?height=\{markerSize\}/,
+  );
+  assert.equal((dashboardSource.match(/r=\{markerRadius\}/g) ?? []).length, 2);
   assert.match(css, /@keyframes showroom-line-draw\s*\{[\s\S]*?stroke-dashoffset: 1[\s\S]*?stroke-dashoffset: 0/);
 });
 

@@ -345,6 +345,8 @@ function WeeklyTrend({
   const activeQuarterEnd = weekBoundaryX(39);
   const chartAnimationStart = 1420;
   const chartAnimationDuration = 520;
+  const markerSize = 6.3;
+  const markerRadius = markerSize / 2;
   const pointAnimationDelay = (week: number) =>
     chartAnimationStart +
     ((week - 1) / Math.max(1, latestWeek - 1)) * chartAnimationDuration;
@@ -557,7 +559,7 @@ function WeeklyTrend({
                     <circle
                       cx={x(point.week)}
                       cy={y(point.value)}
-                      r="4.5"
+                      r={markerRadius}
                       className="national-average-point"
                     >
                       <title>
@@ -606,10 +608,10 @@ function WeeklyTrend({
               <g key={`${point.week}-${point.label}`}>
                 {isWeeklyMetric ? (
                   <rect
-                    x={x(point.week) - 4.5}
-                    y={y(point.value) - 4.5}
-                    width="9"
-                    height="9"
+                    x={x(point.week) - markerRadius}
+                    y={y(point.value) - markerRadius}
+                    width={markerSize}
+                    height={markerSize}
                     data-week={point.label}
                     className="actual-week-point"
                     style={{
@@ -628,7 +630,7 @@ function WeeklyTrend({
                   <circle
                     cx={x(point.week)}
                     cy={y(point.value)}
-                    r="4.5"
+                    r={markerRadius}
                     className="actual-quarter-point"
                     style={{
                       animationDelay: `${pointAnimationDelay(point.week)}ms`,
