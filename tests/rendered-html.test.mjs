@@ -401,7 +401,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /className=\{signal\.delta >= 0 \? "positive" : "negative"\}/,
   );
 
-  assert.match(dashboardSource, /const chartWidth = compact \? 1768 : 1360/);
+  assert.match(
+    dashboardSource,
+    /const chartWidth = compact \? measuredChartWidth : 1360/,
+  );
+  assert.match(
+    dashboardSource,
+    /const resizeObserver = new ResizeObserver\(updateWidth\)/,
+  );
   assert.match(dashboardSource, /const chartHeight = compact \? 150 : 210/);
   assert.match(
     dashboardSource,
@@ -611,7 +618,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.trend-wrap\.compact \.trend-canvas\s*\{[^}]*width: 1768px[^}]*min-width: 1768px/,
+    /\.trend-wrap\.compact \.trend-canvas\s*\{[^}]*width: 100%[^}]*min-width: 0/,
+  );
+  assert.match(
+    css,
+    /\.trend-wrap\.compact \.trend-scroll\s*\{[^}]*overflow-x: hidden[^}]*scrollbar-width: none/,
   );
   assert.match(
     css,

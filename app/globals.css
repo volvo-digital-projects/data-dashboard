@@ -6016,8 +6016,17 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .trend-canvas {
-  width: 1768px;
-  min-width: 1768px;
+  width: 100%;
+  min-width: 0;
+}
+
+.trend-wrap.compact .trend-scroll {
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.trend-wrap.compact .trend-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .trend-wrap.compact .quarter-band span {

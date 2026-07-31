@@ -736,6 +736,7 @@ function WeeklyTrend({
   const [showActual, setShowActual] = useState(true);
   const [showNational, setShowNational] = useState(true);
   const [hoverWeek, setHoverWeek] = useState<number | null>(null);
+  const [measuredChartWidth, setMeasuredChartWidth] = useState(1360);
   const latestWeek =
     metric === "voc"
       ? weeklyDashboard.meta.vocLatestWeek
@@ -779,7 +780,7 @@ function WeeklyTrend({
     Math.max(...chartValues, metricMeta[metric].max * 0.4) + 8,
   );
   const min = Math.max(0, Math.min(...chartValues) - 8);
-  const chartWidth = compact ? 1768 : 1360;
+  const chartWidth = compact ? measuredChartWidth : 1360;
   const chartHeight = compact ? 150 : 210;
   const chartYScale = chartHeight / 200;
   const chartY = (coordinate: number) => coordinate * chartYScale;
@@ -917,6 +918,23 @@ function WeeklyTrend({
       trendScrollRef.current.scrollLeft = 0;
     }
   }, [metric, showroom.cdsid]);
+
+  useEffect(() => {
+    const container = trendScrollRef.current;
+    if (!compact || !container) return;
+
+    const updateWidth = () => {
+      const nextWidth = Math.max(1, Math.round(container.clientWidth));
+      setMeasuredChartWidth((currentWidth) =>
+        currentWidth === nextWidth ? currentWidth : nextWidth,
+      );
+    };
+
+    updateWidth();
+    const resizeObserver = new ResizeObserver(updateWidth);
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
+  }, [compact]);
 
   return (
     <div className={`trend-wrap ${compact ? "compact" : ""}`}>
