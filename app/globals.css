@@ -3379,16 +3379,62 @@ input:focus-visible {
 
 .scatter-point > b {
   position: absolute;
+  padding: 4px 7px;
+  border: 1px solid rgba(102, 112, 133, 0.14);
+  border-radius: 6px;
+  color: #526273;
+  background: rgba(255, 255, 255, 0.93);
+  font-size: 8px;
+  font-weight: 650;
+  white-space: nowrap;
+  box-shadow: 0 3px 9px rgba(16, 42, 67, 0.07);
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.scatter-point.label-left-up > b {
   right: 14px;
   bottom: 8px;
+}
+
+.scatter-point.label-left-down > b {
+  top: 8px;
+  right: 14px;
+}
+
+.scatter-point.label-right-up > b {
+  bottom: 8px;
+  left: 14px;
+}
+
+.scatter-point.label-right-down > b {
+  top: 8px;
+  left: 14px;
+}
+
+.scatter-point.selected > b {
   padding: 5px 8px;
-  border-radius: 6px;
+  border-color: transparent;
   color: white;
   background: var(--navy);
   font-size: 9px;
   font-weight: 700;
-  white-space: nowrap;
   box-shadow: 0 5px 12px rgba(16, 42, 67, 0.16);
+}
+
+.scatter-point.dense:not(.selected) > b {
+  opacity: 0;
+  transform: translateY(2px);
+  pointer-events: none;
+}
+
+.scatter-point.dense:not(.selected):hover > b,
+.scatter-point.dense:not(.selected):focus-visible > b {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(16, 42, 67, 0.14);
 }
 
 .scatter-y-max,

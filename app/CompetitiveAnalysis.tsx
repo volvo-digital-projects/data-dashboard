@@ -23,6 +23,12 @@ type AnalysisPoint = AnalysisShowroom & {
   combined: number;
 };
 
+type ScatterLabelPlacement =
+  | "left-up"
+  | "left-down"
+  | "right-up"
+  | "right-down";
+
 const showrooms = dashboardJson.showrooms as AnalysisShowroom[];
 
 const viewMeta: Record<
@@ -71,6 +77,23 @@ const averageOf = (items: AnalysisPoint[], key: "vocScore" | "happyScore" | "com
     : 0;
 
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
+
+const scatterLabelPlacement = (
+  x: number,
+  y: number,
+  index: number,
+  isSelected: boolean,
+): ScatterLabelPlacement => {
+  if (isSelected) return x >= 72 ? "left-up" : "right-up";
+  if (y >= 92) return x >= 60 ? "left-down" : "right-down";
+  if (y <= 12) return x >= 60 ? "left-up" : "right-up";
+  if (x >= 88) return index % 2 === 0 ? "left-up" : "left-down";
+  if (x <= 12) return index % 2 === 0 ? "right-up" : "right-down";
+
+  return (["right-up", "left-down", "right-down", "left-up"] as const)[
+    index % 4
+  ];
+};
 
 export default function CompetitiveAnalysis({
   initialCdsid,
@@ -121,7 +144,8 @@ export default function CompetitiveAnalysis({
   const selectedRank =
     groupItems.findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const safeSelectedRank = selectedRank || groupItems.length;
-  const rankRows = groupItems.slice(0, 6);
+  const rankRows =
+    groupItems.length <= 8 ? [...groupItems] : groupItems.slice(0, 6);
   if (
     !rankRows.some((item) => item.cdsid === selected.cdsid) &&
     selectedPoint
@@ -140,6 +164,7 @@ export default function CompetitiveAnalysis({
     "--avg-x": `${clamp(((groupHappyAverage - 65) / 35) * 100)}%`,
     "--avg-y": `${clamp(((groupVocAverage - 75) / 25) * 100)}%`,
   } as CSSProperties;
+  const denseScatter = groupItems.length > 12;
 
   const changeView = (nextView: AnalysisView) => {
     setView(nextView);
@@ -283,16 +308,27 @@ export default function CompetitiveAnalysis({
               <span className="scatter-quadrant bottom-right">해피콜 우세</span>
               <i className="scatter-average-line vertical" />
               <i className="scatter-average-line horizontal" />
-              {groupItems.map((item) => {
+              {groupItems.map((item, index) => {
+                const pointX = clamp(
+                  ((item.happyScore - 65) / 35) * 100,
+                );
+                const pointY = clamp(
+                  ((item.vocScore - 75) / 25) * 100,
+                );
                 const pointStyle = {
-                  "--point-x": `${clamp(
-                    ((item.happyScore - 65) / 35) * 100,
-                  )}%`,
-                  "--point-y": `${clamp(
-                    ((item.vocScore - 75) / 25) * 100,
-                  )}%`,
+                  "--point-x": `${pointX}%`,
+                  "--point-y": `${pointY}%`,
                 } as CSSProperties;
                 const isSelected = item.cdsid === selected.cdsid;
+                const labelPlacement = scatterLabelPlacement(
+                  pointX,
+                  pointY,
+                  index,
+                  isSelected,
+                );
+                const pointLabel = `${displayShowroomName(item.showroom)} · 고객만족도 ${displayNumber(
+                  item.vocScore,
+                )} · 해피콜 ${displayNumber(item.happyScore)}`;
                 return (
                   <span
                     key={item.cdsid}
@@ -302,14 +338,22 @@ export default function CompetitiveAnalysis({
                         : item.combined >= groupCombinedAverage
                           ? "above"
                           : "below"
+                    } label-${labelPlacement} ${
+                      denseScatter ? "dense" : ""
                     }`}
                     style={pointStyle}
-                    title={`${displayShowroomName(item.showroom)} · 고객만족도 ${displayNumber(
-                      item.vocScore,
-                    )} · 해피콜 ${displayNumber(item.happyScore)}`}
+                    title={pointLabel}
+                    aria-label={pointLabel}
+                    tabIndex={denseScatter && !isSelected ? 0 : undefined}
                   >
                     <i />
-                    {isSelected && <b>{displayShowroomName(item.showroom)}</b>}
+                    <b
+                      className={`scatter-label ${
+                        isSelected ? "selected" : "comparison"
+                      }`}
+                    >
+                      {displayShowroomName(item.showroom)}
+                    </b>
                   </span>
                 );
               })}

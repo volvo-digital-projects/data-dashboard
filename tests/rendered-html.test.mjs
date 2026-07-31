@@ -226,7 +226,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
-  assert.match(html, /class="scatter-point selected"/);
+  assert.match(html, /class="scatter-point selected\b/);
+  assert.equal(
+    (html.match(/class="scatter-label comparison"/g) ?? []).length,
+    6,
+  );
+  assert.equal((html.match(/class="analysis-rank"/g) ?? []).length, 7);
+  assert.match(visibleHtml, /볼보 분당/);
   assert.match(html, /href="\/dashboard\/6KR6834"/);
 
   const regionResponse = await render(
