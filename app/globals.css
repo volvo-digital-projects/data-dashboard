@@ -5546,7 +5546,11 @@ button.quarter-score-row:disabled {
   left: 0;
   z-index: 2;
   display: block;
-  background: var(--es90-orange);
+  background: repeating-linear-gradient(
+    to right,
+    var(--es90-orange) 0 5px,
+    transparent 5px 9px
+  );
 }
 
 .v3s-average-marker i {

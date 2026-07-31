@@ -652,7 +652,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--es90-orange: #f15a24/);
   assert.match(
     css,
-    /\.v3s-average-marker\s*\{[\s\S]*?background: var\(--es90-orange\)/,
+    /\.v3s-average-marker\s*\{[\s\S]*?background: repeating-linear-gradient\([\s\S]*?var\(--es90-orange\) 0 5px,[\s\S]*?transparent 5px 9px/,
   );
   assert.match(
     css,
