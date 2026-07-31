@@ -5579,7 +5579,11 @@ button.quarter-score-row:disabled {
       rgba(237, 241, 243, 0.72) 5px,
       rgba(249, 251, 252, 0.85) 5px,
       rgba(249, 251, 252, 0.85) 10px
-    );
+  );
+}
+
+.v3s-quarter-column.in-progress .v3s-upcoming-bar {
+  height: 90%;
 }
 
 .v3s-upcoming-bar b {

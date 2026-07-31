@@ -507,6 +507,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
+    /label: "Q3"[\s\S]{0,220}?state: "in-progress"/,
+  );
+  assert.match(
+    dashboardSource,
     /className="v3s-upcoming-bar"[\s\S]*?<b>\{quarter\.statusText\}<\/b>/,
   );
   assert.match(dashboardSource, /const groupQuarterAverageOf/);
@@ -625,6 +629,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     "utf8",
   );
   assert.doesNotMatch(css, /\.score-tier\.active\s*\{/);
+  assert.match(
+    css,
+    /\.v3s-quarter-column\.in-progress \.v3s-upcoming-bar\s*\{[^}]*height: 90%/,
+  );
   assert.doesNotMatch(css, /\.profile-analysis-link/);
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
