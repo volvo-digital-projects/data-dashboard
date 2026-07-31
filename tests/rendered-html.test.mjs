@@ -150,6 +150,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/<b aria-hidden="true" style="left:/g) ?? []).length, 3);
   assert.match(visibleHtml, /내 전시장/);
   assert.match(visibleHtml, /딜러 · 권역 · 사이즈/);
+  assert.match(visibleHtml, /점수 차이/);
+  assert.doesNotMatch(visibleHtml, /점수 · 평균 대비/);
   assert.match(visibleHtml, /class="dealer-region">[^<]+ · [^<]+ · [^<]+<\/span>/);
   assert.match(visibleHtml, /전국 39개점 기준/);
   assert.match(visibleHtml, /볼보 강남대치 경쟁력/);

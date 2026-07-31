@@ -889,7 +889,7 @@ function ComparisonTable({
         <span>전시장</span>
         <span>딜러 · 권역 · 사이즈</span>
         <span>{metricMeta[metric].label}</span>
-        <span>점수 · 평균 대비</span>
+        <span>점수 차이</span>
       </div>
       {visible.map((item) => {
         const rank =
