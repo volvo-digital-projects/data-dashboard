@@ -1009,7 +1009,7 @@ input:focus-visible {
 
 .metric-quarter-strip {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 7px;
   border: 1px solid #e2e6e4;
   background: #f7f8f6;
@@ -4240,8 +4240,8 @@ input:focus-visible,
 }
 
 .combat-card {
-  min-height: 286px;
-  padding: 24px;
+  min-height: 252px;
+  padding: 20px;
   background:
     radial-gradient(circle at 102% 110%, rgba(104, 164, 192, 0.2), transparent 19rem),
     linear-gradient(142deg, #173f5f 0%, #102a43 62%, #0c2337 100%);
@@ -4407,13 +4407,13 @@ input:focus-visible,
 
 .metric-grid {
   height: 100%;
-  min-height: 286px;
+  min-height: 252px;
   gap: 16px;
 }
 
 .metric-card {
-  min-height: 286px;
-  padding: 24px;
+  min-height: 252px;
+  padding: 20px;
   border-color: rgba(16, 24, 40, 0.08);
   background: var(--white);
   overflow: hidden;
@@ -4564,15 +4564,15 @@ input:focus-visible,
 
 .metric-quarter-strip {
   gap: 4px;
-  margin-top: 16px;
+  margin-top: 12px;
   border: 0;
   background: transparent;
 }
 
 .metric-quarter-strip > span {
-  min-height: 34px;
+  min-height: 32px;
   gap: 4px;
-  padding: 7px 4px;
+  padding: 6px 3px;
   border: 0;
   border-radius: 8px;
   background: #f7f9fa;
@@ -4600,7 +4600,7 @@ input:focus-visible,
 }
 
 .metric-card-footer {
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .appeal-badge {
