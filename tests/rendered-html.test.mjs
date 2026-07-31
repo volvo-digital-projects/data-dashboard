@@ -251,7 +251,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);
   assert.match(visibleHtml, /해피콜 평균 \d+\.\d점/);
-  assert.match(visibleHtml, /종합 만족도 평균 \d+\.\d점/);
+  assert.match(
+    html.replaceAll("<!-- -->", ""),
+    /class="scatter-average-value horizontal"><span>종합 만족도<\/span><strong>평균 \d+\.\d점<\/strong>/,
+  );
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.doesNotMatch(html, /scatter-callout-leader/);
   assert.match(html, /class="scatter-point selected\b/);
@@ -591,6 +594,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.scatter-point\.label-right-down > b::before,[\s\S]*?top: calc\(-1 \* var\(--callout-tail-y\)\)[\s\S]*?clip-path: polygon\(0 0, calc\(100% - 7px\) 100%, 100% 100%\)/,
+  );
+  assert.match(
+    css,
+    /\.scatter-average-value\.horizontal\s*\{[^}]*left: 0[^}]*display: flex[^}]*flex-direction: column/,
   );
   assert.match(analysisSource, /--callout-tail-x/);
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);

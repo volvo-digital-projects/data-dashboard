@@ -3331,9 +3331,18 @@ input:focus-visible {
 }
 
 .scatter-average-value.horizontal {
-  left: 10px;
+  left: 0;
   bottom: var(--avg-y);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0;
   transform: translateY(50%);
+}
+
+.scatter-average-value.horizontal strong {
+  font-size: inherit;
+  font-weight: 750;
 }
 
 .scatter-point {

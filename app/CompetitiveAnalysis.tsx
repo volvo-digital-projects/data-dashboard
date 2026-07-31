@@ -561,7 +561,8 @@ export default function CompetitiveAnalysis({
                 해피콜 평균 {displayNumber(groupHappyAverage)}점
               </span>
               <span className="scatter-average-value horizontal">
-                종합 만족도 평균 {displayNumber(groupVocAverage)}점
+                <span>종합 만족도</span>
+                <strong>평균 {displayNumber(groupVocAverage)}점</strong>
               </span>
               {groupItems.map((item) => {
                 const pointX = clamp(
