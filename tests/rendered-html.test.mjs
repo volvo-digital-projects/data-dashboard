@@ -513,16 +513,9 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(css, /\.future-window-help\s*\{[\s\S]*?fill: #8795a7/);
   assert.match(
     css,
-    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: none[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?animation: none/,
+    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: none[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?opacity: 0[\s\S]*?animation: showroom-line-enter 240ms ease-out 1420ms forwards/,
   );
-  assert.match(
-    dashboardSource,
-    /<clipPath id=\{revealClipId\} clipPathUnits="userSpaceOnUse">[\s\S]*?className="trend-line-reveal-mask"/,
-  );
-  assert.match(
-    dashboardSource,
-    /clipPath=\{`url\(#\$\{revealClipId\}\)`\}[\s\S]*?className="trend-line"/,
-  );
+  assert.doesNotMatch(dashboardSource, /revealClipId|trend-line-reveal-mask|clipPath=/);
   const actualTrendPolyline = dashboardSource.match(
     /<polyline\s+points=\{segment[\s\S]*?className="trend-line"\s*\/>/,
   )?.[0];
@@ -534,7 +527,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const revealStartX = x\(firstActualWeek\) - markerRadius - 1[\s\S]*?const revealEndX = x\(lastActualWeek\) \+ markerRadius \+ 1[\s\S]*?const revealWidth = Math\.max\(1, revealEndX - revealStartX\)/,
+    /const actualWeekSpan = Math\.max\(1, lastActualWeek - firstActualWeek\)[\s\S]*?\(\(week - firstActualWeek\) \/ actualWeekSpan\) \* chartAnimationDuration/,
   );
   assert.match(
     dashboardSource,
@@ -551,7 +544,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.equal((dashboardSource.match(/r=\{markerRadius\}/g) ?? []).length, 2);
   assert.match(
     css,
-    /@keyframes showroom-line-reveal\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/,
+    /@keyframes showroom-line-enter\s*\{[\s\S]*?opacity: 0[\s\S]*?opacity: 1/,
   );
 });
 

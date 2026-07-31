@@ -799,14 +799,10 @@ function WeeklyTrend({
     170 - ((value - min) / Math.max(1, max - min)) * 126;
   const firstActualWeek = rawPoints[0]?.week ?? 1;
   const lastActualWeek = rawPoints.at(-1)?.week ?? firstActualWeek;
-  const revealStartX = x(firstActualWeek) - markerRadius - 1;
-  const revealEndX = x(lastActualWeek) + markerRadius + 1;
-  const revealWidth = Math.max(1, revealEndX - revealStartX);
-  const revealClipId = `trend-line-reveal-${showroom.cdsid}-${metric}`;
+  const actualWeekSpan = Math.max(1, lastActualWeek - firstActualWeek);
   const pointAnimationDelay = (week: number) =>
     chartAnimationStart +
-    ((x(week) - revealStartX) / revealWidth) *
-      chartAnimationDuration +
+    ((week - firstActualWeek) / actualWeekSpan) * chartAnimationDuration +
     chartAnimationPointLag;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13, 26, 39];
@@ -946,17 +942,6 @@ function WeeklyTrend({
             }}
             onPointerLeave={() => setHoverWeek(null)}
           >
-            <defs>
-              <clipPath id={revealClipId} clipPathUnits="userSpaceOnUse">
-                <rect
-                  x={revealStartX}
-                  y="0"
-                  width={revealWidth}
-                  height="200"
-                  className="trend-line-reveal-mask"
-                />
-              </clipPath>
-            </defs>
             <line
               x1={plotLeft}
               x2={plotRight}
@@ -1095,7 +1080,6 @@ function WeeklyTrend({
                       points={segment
                         .map((point) => `${x(point.week)},${y(point.value)}`)
                         .join(" ")}
-                      clipPath={`url(#${revealClipId})`}
                       className="trend-line"
                     />
                   </g>
