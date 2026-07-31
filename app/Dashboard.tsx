@@ -1898,18 +1898,8 @@ export default function Dashboard({
         </div>
         {profileOpen && (
           <div className="profile-popover">
-            <Link
-              className="profile-analysis-link"
-              href={`/dashboard/${selected.cdsid}/analysis?view=showroom`}
-            >
-              전시장별 경쟁력 분석 <span aria-hidden="true">→</span>
-            </Link>
             {viewer.isEditor ? (
               <>
-                <div>
-                  <span>CDSID 프로필 전환</span>
-                  <strong>데이터 점검을 위해 전시장을 선택하세요</strong>
-                </div>
                 <label>
                   <span className="sr-only">CDSID 프로필</span>
                   <select

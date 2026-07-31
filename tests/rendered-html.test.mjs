@@ -55,6 +55,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(html, /identity-profile[\s\S]*?지점장[\s\S]*?김길성/);
   assert.match(html, /class="identity-profile-icon"/);
+  assert.doesNotMatch(
+    html,
+    /전시장별 경쟁력 분석|CDSID 프로필 전환|데이터 점검을 위해 전시장을 선택하세요/,
+  );
   assert.doesNotMatch(html, /class="identity-meta-row"/);
   assert.match(html, /class="identity-detail-rail"/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
@@ -469,7 +473,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(dashboardSource, /className="v3s-peer-legend"/);
   assert.match(dashboardSource, /className=\{`legend-peer \$\{benchmark\.key\}`\}/);
   assert.match(dashboardSource, /trendMetric === "v3s"/);
-  assert.match(dashboardSource, /analysis\?view=showroom/);
+  assert.doesNotMatch(dashboardSource, /analysis\?view=showroom/);
   assert.doesNotMatch(dashboardSource, /2026 PERFORMANCE/);
   assert.doesNotMatch(dashboardSource, /2021–2025 HISTORY/);
   assert.match(dashboardSource, /5개년 데이터 연결 예정/);
@@ -556,6 +560,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
     new URL("../app/globals.css", import.meta.url),
     "utf8",
   );
+  assert.doesNotMatch(css, /\.profile-analysis-link/);
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
     "utf8",
