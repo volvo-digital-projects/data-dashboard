@@ -225,6 +225,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
 
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
+  assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /볼보 강남대치 경쟁력 분석/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
   assert.match(visibleHtml, /전국 전시장 내 분석/);

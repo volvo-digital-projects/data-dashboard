@@ -466,7 +466,7 @@ export default function CompetitiveAnalysis({
                   ? selected.region
                   : key === "size"
                     ? selected.size
-                    : "39개점"}
+                    : "전국 39개소"}
             </small>
           </button>
         ))}
