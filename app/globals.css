@@ -3750,7 +3750,7 @@ input:focus-visible,
 }
 
 .chart-tooltip {
-  width: 190px;
+  width: 230px;
   position: absolute;
   top: 46px;
   z-index: 5;
@@ -3779,7 +3779,8 @@ input:focus-visible,
   color: var(--navy);
   font-family: var(--font-latin);
   font-size: 12px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
 }
 
 .chart-tooltip > span {

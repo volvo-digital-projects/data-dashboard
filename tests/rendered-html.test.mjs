@@ -206,6 +206,22 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
 
   assert.equal(weekly.meta.vocLatestWeek, 26);
   assert.equal(weekly.meta.cxLatestWeek, 30);
+  assert.equal(weekly.meta.weekRanges.length, 52);
+  assert.deepEqual(weekly.meta.weekRanges[0], {
+    week: 1,
+    start: "25.12.28",
+    end: "26.01.03",
+  });
+  assert.deepEqual(weekly.meta.weekRanges[19], {
+    week: 20,
+    start: "26.05.10",
+    end: "26.05.16",
+  });
+  assert.deepEqual(weekly.meta.weekRanges[51], {
+    week: 52,
+    start: "26.12.20",
+    end: "26.12.26",
+  });
   assert.equal(Object.keys(weekly.voc.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.cx.byCdsid).length, 39);
   assert.equal(weekly.voc.byCdsid["6KR6834"][0], 100);
@@ -270,6 +286,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.doesNotMatch(dashboardSource, /isMajorWeek/);
   assert.match(dashboardSource, /\{label\}\s*<\/span>/);
+  assert.match(
+    dashboardSource,
+    /W\$\{String\(hoverWeek\)\.padStart\(2, "0"\)\}[\s\S]*?\$\{hoverWeekRange\.start\} ~ \$\{hoverWeekRange\.end\}/,
+  );
   assert.match(
     dashboardSource,
     /<span>\{quarterLabel\} 전국 평균 대비<\/span>/,

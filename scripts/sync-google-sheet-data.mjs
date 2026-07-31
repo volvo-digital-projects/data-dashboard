@@ -4,6 +4,7 @@ const workbookId = "1KZust31kwsHrv0VZEqyPhACza9R3rZibOdf467c6JXA";
 const workbookUrl = `https://docs.google.com/spreadsheets/d/${workbookId}/edit`;
 
 const sheets = {
+  dates: "DB_날짜(참고)",
   voc: "②VOC(결과)",
   delivery: "③-1 신차출고 만족도(결과)",
   testDrive: "③-2시승 만족도(결과)",
@@ -24,6 +25,12 @@ const toNumber = (value) => {
 };
 
 const round1 = (value) => Math.round(value * 10) / 10;
+
+const formatCompactDate = (value) => {
+  const compact = clean(value).match(/\d{6}/)?.[0];
+  if (!compact) return null;
+  return `${compact.slice(0, 2)}.${compact.slice(2, 4)}.${compact.slice(4, 6)}`;
+};
 
 function parseCsv(text) {
   const rows = [];
@@ -75,6 +82,34 @@ async function loadSheet(sheetName) {
   }
 
   return parseCsv(await response.text());
+}
+
+function weekRangesResult(rows) {
+  const headerIndex = rows.findIndex(
+    (row) => clean(row[0]) === "2026년 기준 주간",
+  );
+  if (headerIndex < 0) {
+    throw new Error("DB_날짜(참고)에서 주간 헤더를 찾지 못했습니다.");
+  }
+
+  const ranges = rows
+    .slice(headerIndex + 1)
+    .filter((row) => /^26W\d{2}$/.test(clean(row[0])))
+    .slice(0, 52)
+    .map((row, index) => ({
+      week: index + 1,
+      start: formatCompactDate(row[1]),
+      end: formatCompactDate(row[2]),
+    }));
+
+  if (
+    ranges.length !== 52 ||
+    ranges.some((range) => range.start === null || range.end === null)
+  ) {
+    throw new Error("DB_날짜(참고)의 W01~W52 날짜가 완전하지 않습니다.");
+  }
+
+  return ranges;
 }
 
 function weeklyResult(
@@ -191,6 +226,7 @@ const dealerByCdsid = Object.fromEntries(
   showroomData.showrooms.map((showroom) => [showroom.cdsid, showroom.dealer]),
 );
 
+const weekRanges = weekRangesResult(loaded.dates);
 const voc = weeklyResult(loaded.voc, {
   zeroUsesDealerAverage: true,
   dealerByCdsid,
@@ -249,6 +285,7 @@ const output = {
     syncedAt: new Date().toISOString(),
     vocLatestWeek: voc.latestWeek,
     cxLatestWeek,
+    weekRanges,
     rules: {
       voc:
         "0.0은 동일 딜러사의 해당 주차 비0점 전시장 평균으로 보정하며, 비교 가능한 동료 값이 없을 때만 미응답으로 제외",

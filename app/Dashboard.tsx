@@ -76,6 +76,11 @@ type WeeklyData = {
     syncedAt: string;
     vocLatestWeek: number;
     cxLatestWeek: number;
+    weekRanges: {
+      week: number;
+      start: string;
+      end: string;
+    }[];
     rules: {
       voc: string;
       cx: string;
@@ -485,6 +490,16 @@ function WeeklyTrend({
     hoverActual === null || hoverNational === null
       ? null
       : hoverActual - hoverNational;
+  const hoverWeekRange =
+    hoverWeek === null ? null : weeklyDashboard.meta.weekRanges[hoverWeek - 1];
+  const hoverWeekLabel =
+    hoverWeek === null
+      ? ""
+      : `W${String(hoverWeek).padStart(2, "0")}${
+          hoverWeekRange
+            ? ` (${hoverWeekRange.start} ~ ${hoverWeekRange.end})`
+            : ""
+        }`;
 
   useEffect(() => {
     if (trendScrollRef.current) {
@@ -715,7 +730,7 @@ function WeeklyTrend({
               role="status"
               aria-live="polite"
             >
-              <strong>W{String(hoverWeek).padStart(2, "0")}</strong>
+              <strong>{hoverWeekLabel}</strong>
               {hoverWeek > latestWeek ? (
                 <span className="tooltip-upcoming">집계 예정</span>
               ) : (
