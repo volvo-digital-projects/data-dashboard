@@ -1704,7 +1704,7 @@ export default function Dashboard({
         <article className="panel trend-panel">
           <div className="section-heading">
             <div>
-              <h2>52주 스코어 추이</h2>
+              <h2>{displayShowroomName(selected.showroom)} 스코어</h2>
             </div>
             <div className="trend-actions">
               <div

@@ -112,7 +112,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /<h1>볼보 강남대치<\/h1>/);
   assert.match(visibleHtml, /볼보 강남대치 실제값 · W26 100\.0점 · 입력 25주/);
   assert.match(visibleHtml, /전국 주간 평균 · W26 91\.8점 · 평균 미달 11주/);
-  assert.match(visibleHtml, /52주 스코어 추이/);
+  assert.match(visibleHtml, /볼보 강남대치 스코어/);
+  assert.doesNotMatch(visibleHtml, /52주 스코어 추이/);
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
   assert.match(html, /class="trend-selector"/);
   assert.doesNotMatch(html, /class="trend-selector-icon"/);
