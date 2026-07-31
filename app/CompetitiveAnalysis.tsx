@@ -306,6 +306,9 @@ export default function CompetitiveAnalysis({
     width: 920,
     height: 326,
   });
+  const dealerShowroomCount = showrooms.filter(
+    (item) => item.dealer === selected.dealer,
+  ).length;
 
   const groupItems = useMemo(() => {
     const filtered =
@@ -461,7 +464,7 @@ export default function CompetitiveAnalysis({
             <span>{viewMeta[key].label}</span>
             <small>
               {key === "dealer"
-                ? selected.dealer
+                ? `${selected.dealer} ${dealerShowroomCount}개소`
                 : key === "region"
                   ? selected.region
                   : key === "size"
