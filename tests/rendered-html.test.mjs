@@ -91,7 +91,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
   assert.match(visibleHtml, /누적 평균[\s\S]*298\.8[\s\S]*Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 지표 보기"/g) ?? []).length, 2);
-  assert.equal((html.match(/aria-label="Q[34] 평가 진행"/g) ?? []).length, 4);
+  assert.equal((html.match(/aria-label="Q3 평가 진행"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q4 평가 예정"/g) ?? []).length, 2);
   assert.match(visibleHtml, /Q2 전국 평균 <strong>305\.4/);
   assert.match(visibleHtml, /Q2 전국 평균 대비 <strong>-10\.5/);
   assert.match(visibleHtml, /전시장 경쟁력 전국 순위 <strong>32위 \/ 전체 39/);
@@ -184,8 +185,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
   assert.match(visibleHtml, /Q3 평가 진행 중/);
-  assert.equal((vocHtml.match(/class="future-window"/g) ?? []).length, 2);
-  assert.match(visibleHtml, /Q4 평가 진행 중/);
+  assert.match(vocHtml, /class="future-window future-window-upcoming"/);
+  assert.match(visibleHtml, /Q4 평가 예정 중/);
   assert.match(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
   assert.doesNotMatch(vocHtml, /class="average-label"|class="point-value"/);
   assert.match(vocHtml, /class="coverage-line actual"/);
@@ -512,11 +513,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q4"[\s\S]{0,180}?statusText: "평가 진행"/,
+    /label: "Q4"[\s\S]{0,180}?statusText: "평가 예정"/,
   );
   assert.match(
     dashboardSource,
-    /label: "Q4"[\s\S]{0,220}?state: "in-progress"/,
+    /label: "Q4"[\s\S]{0,220}?state: "upcoming"/,
   );
   assert.doesNotMatch(
     dashboardSource,

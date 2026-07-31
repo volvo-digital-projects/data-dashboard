@@ -403,8 +403,8 @@ function V3SPerformance({
       value: null,
       average: null,
       benchmarks: peerBenchmarks(null),
-      statusText: "평가 진행",
-      state: "in-progress",
+      statusText: "평가 예정",
+      state: "upcoming",
     },
   ];
   const enteredQuarters = quarterScores.filter(
@@ -997,7 +997,7 @@ function WeeklyTrend({
                   y={chartY(18)}
                   width={activeQuarterEnd - activeQuarterStart}
                   height={chartY(152)}
-                  className="future-window"
+                  className="future-window future-window-upcoming"
                 />
                 <text
                   x={(activeQuarterStart + activeQuarterEnd) / 2}
@@ -1032,7 +1032,7 @@ function WeeklyTrend({
                   textAnchor="middle"
                   className="future-window-label"
                 >
-                  Q4 평가 진행 중
+                  Q4 평가 예정 중
                 </text>
                 <text
                   x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
@@ -1899,7 +1899,7 @@ export default function Dashboard({
               className="quarter-score-chart"
               aria-label={`Q1 ${displayNumber(q1Combat)}점, Q2 ${displayNumber(
                 combat,
-              )}점, Q3 및 Q4 평가 진행, 누적 평균 ${displayNumber(
+              )}점, Q3 평가 진행, Q4 평가 예정, 누적 평균 ${displayNumber(
                 cumulativeAverage,
               )}점, ${dashboard.meta.combatMax}점 만점`}
             >
@@ -1923,7 +1923,9 @@ export default function Dashboard({
                   }
                   aria-label={
                     quarter.key === null
-                      ? `${quarter.label} 평가 진행`
+                      ? `${quarter.label} ${
+                          quarter.label === "Q4" ? "평가 예정" : "평가 진행"
+                        }`
                       : `${quarter.label} 지표 보기`
                   }
                   onClick={() => {
