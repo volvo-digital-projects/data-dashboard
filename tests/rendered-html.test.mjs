@@ -235,6 +235,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /균형 경쟁력[\s\S]*93\.8/);
   assert.match(visibleHtml, /고객만족도와 해피콜 합산 평균/);
   assert.doesNotMatch(visibleHtml, /고객만족도와 해피콜 단순 평균/);
+  assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);

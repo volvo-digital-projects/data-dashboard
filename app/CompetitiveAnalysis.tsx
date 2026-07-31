@@ -388,7 +388,7 @@ export default function CompetitiveAnalysis({
             <span>순위 · 전시장</span>
             <span>만족도</span>
             <span>해피콜</span>
-            <span>균형</span>
+            <span>합산 평균</span>
           </div>
           <div className="analysis-ranking-list">
             {rankRows.map((item) => {
