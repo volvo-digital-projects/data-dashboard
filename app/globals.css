@@ -6027,13 +6027,6 @@ button.quarter-score-row:disabled {
     box-shadow 180ms ease;
 }
 
-.score-tier.active {
-  border-color: rgba(47, 107, 138, 0.2);
-  box-shadow:
-    inset 3px 0 0 var(--blue),
-    0 10px 26px rgba(16, 42, 67, 0.055);
-}
-
 .score-tier-heading {
   min-height: 24px;
   display: flex;

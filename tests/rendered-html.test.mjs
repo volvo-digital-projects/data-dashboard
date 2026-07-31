@@ -618,6 +618,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
     new URL("../app/globals.css", import.meta.url),
     "utf8",
   );
+  assert.doesNotMatch(css, /\.score-tier\.active\s*\{/);
   assert.doesNotMatch(css, /\.profile-analysis-link/);
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
