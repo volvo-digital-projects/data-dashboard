@@ -432,6 +432,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(
     css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.identity-detail-rail\s*\{[\s\S]*?grid-template-columns: repeat\(4, 126px\)/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.identity-strip dl\s*\{[\s\S]*?display: contents/,
+  );
+  assert.match(
+    css,
     /\.identity-strip dl div\s*\{[\s\S]*?width: 126px[\s\S]*?min-width: 126px[\s\S]*?justify-items: center/,
   );
   assert.match(

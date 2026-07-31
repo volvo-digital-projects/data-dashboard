@@ -2879,6 +2879,35 @@ input:focus-visible {
   background: #163f5f;
 }
 
+@media (min-width: 761px) {
+  .identity-detail-rail {
+    display: grid;
+    grid-template-columns: repeat(4, 126px);
+    justify-content: end;
+  }
+
+  .identity-strip dl {
+    display: contents;
+  }
+
+  .identity-strip dl div,
+  .identity-profile {
+    width: 126px;
+    min-width: 126px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 10px;
+    padding-inline: 14px;
+  }
+
+  .identity-strip dt,
+  .identity-strip dd,
+  .identity-profile-role,
+  .identity-profile strong {
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
 .competitive-analysis-page {
   min-height: 100vh;
   display: grid;
