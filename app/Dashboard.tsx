@@ -186,7 +186,7 @@ function getSignal(value: number, average: number) {
   const delta = value - average;
   if (delta >= 0) return { label: "평균 이상", tone: "good", delta };
   if (delta >= -3) return { label: "주의", tone: "caution", delta };
-  return { label: "경고", tone: "warning", delta };
+  return { label: "위험 신호", tone: "warning", delta };
 }
 
 function SignalIcon({ tone }: { tone: string }) {
@@ -257,7 +257,7 @@ function MetricCard({
   const fill = Math.min(100, Math.max(0, (value / metricMeta[metric].max) * 100));
   const signalRule =
     signal.tone === "warning"
-      ? `경고: ${quarterLabel} 전국 평균 대비 5점 이상 미달`
+      ? `위험 신호: ${quarterLabel} 전국 평균 대비 5점 이상 미달`
       : signal.tone === "caution"
         ? `주의: ${quarterLabel} 전국 평균 미만, 5점 미만 차이`
         : `정상: ${quarterLabel} 전국 평균 이상`;
