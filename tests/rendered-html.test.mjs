@@ -227,6 +227,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /VOC \+ ONE Voice \/ 상담 및 출고 후 만족도 평가/);
   assert.doesNotMatch(visibleHtml, /VOC · 상담\/시승\/출고 경험/);
   assert.match(visibleHtml, /해피콜 이행[\s\S]*100\.0/);
+  assert.match(
+    visibleHtml,
+    /VOC \+ ONE Voice \/ 상담 및 출고 후 해피콜 시행여부/,
+  );
+  assert.doesNotMatch(visibleHtml, /상담\/출고 사후관리 실행력/);
   assert.match(visibleHtml, /균형 경쟁력[\s\S]*93\.8/);
   assert.match(visibleHtml, /에이치 순위/);
   assert.match(html, /class="analysis-scatter"/);

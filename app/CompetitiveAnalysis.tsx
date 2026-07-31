@@ -251,7 +251,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-summary-card happycall">
           <div>
             <span>해피콜 이행</span>
-            <small>상담/출고 사후관리 실행력</small>
+            <small>VOC + ONE Voice / 상담 및 출고 후 해피콜 시행여부</small>
           </div>
           <strong>
             {displayNumber(selectedPoint.happyScore)}
