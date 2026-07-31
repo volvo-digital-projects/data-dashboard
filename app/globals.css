@@ -5290,7 +5290,7 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-bar-cluster {
-  width: min(96%, 120px);
+  width: min(98%, 146px);
   height: 100%;
   position: absolute;
   bottom: 0;
@@ -5299,17 +5299,17 @@ button.quarter-score-row:disabled {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   transform: translateX(-50%);
 }
 
 .v3s-peer-bar-group {
-  width: 40px;
+  width: 64px;
   height: 100%;
   position: relative;
   z-index: 2;
   display: flex;
-  flex: 0 0 40px;
+  flex: 0 0 64px;
   align-items: flex-end;
   gap: 5px;
 }
@@ -5355,8 +5355,8 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-peer-bar {
-  width: 10px;
-  min-width: 10px;
+  width: 18px;
+  min-width: 18px;
   position: relative;
   display: block;
   box-sizing: border-box;
@@ -5366,6 +5366,21 @@ button.quarter-score-row:disabled {
   transform: scaleY(0);
   transform-origin: bottom;
   animation: v3s-bar-rise 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.v3s-peer-bar b {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  color: white;
+  font-family: var(--font-latin);
+  font-size: 7px;
+  font-weight: 720;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.055em;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(16, 42, 67, 0.28);
+  transform: translateX(-50%);
 }
 
 .v3s-peer-bar.dealer {
@@ -5477,6 +5492,7 @@ button.quarter-score-row:disabled {
 .v3s-quarter-legend {
   min-height: 24px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px 12px;
   margin-top: 4px;
@@ -5523,6 +5539,24 @@ button.quarter-score-row:disabled {
   border-radius: 50%;
   background: inherit;
   transform: translateY(-50%);
+}
+
+.legend-peer {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.legend-peer.dealer {
+  background: linear-gradient(135deg, #a5b3bd, #8395a2);
+}
+
+.legend-peer.region {
+  background: linear-gradient(135deg, #aabcb6, #829c94);
+}
+
+.legend-peer.size {
+  background: linear-gradient(135deg, #bbb1a5, #9e9182);
 }
 
 .v3s-history-panel {

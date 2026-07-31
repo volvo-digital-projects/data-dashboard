@@ -518,7 +518,11 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                             300 + index * 100 + benchmarkIndex * 45
                           }ms`,
                         }}
-                      />
+                      >
+                        {benchmark.value !== null && (
+                          <b>{displayNumber(benchmark.value)}</b>
+                        )}
+                      </span>
                     ))}
                   </span>
                   {quarter.value === null ? (
@@ -559,6 +563,12 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
             <i className="legend-bar" />{" "}
             {displayShowroomName(showroom.showroom)}
           </span>
+          {peerBenchmarks("q2").map((benchmark) => (
+            <span className="v3s-peer-legend" key={benchmark.key}>
+              <i className={`legend-peer ${benchmark.key}`} />
+              {benchmark.label}
+            </span>
+          ))}
           <span>
             <i className="legend-average" /> 분기 전국 평균
           </span>

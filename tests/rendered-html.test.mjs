@@ -440,9 +440,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(dashboardSource, /className=\{`v3s-peer-bar/);
   assert.match(
     dashboardSource,
+    /benchmark\.value !== null[\s\S]*?<b>\{displayNumber\(benchmark\.value\)\}<\/b>/,
+  );
+  assert.match(
+    dashboardSource,
     /className="v3s-bar-cluster"[\s\S]*?quarter\.benchmarks\.map[\s\S]*?className="v3s-bar-fill"/,
   );
-  assert.doesNotMatch(dashboardSource, /className="v3s-peer-legend"/);
+  assert.match(dashboardSource, /className="v3s-peer-legend"/);
+  assert.match(dashboardSource, /className=\{`legend-peer \$\{benchmark\.key\}`\}/);
   assert.match(dashboardSource, /trendMetric === "v3s"/);
   assert.match(dashboardSource, /analysis\?view=showroom/);
   assert.doesNotMatch(dashboardSource, /2026 PERFORMANCE/);
@@ -660,12 +665,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.v3s-peer-bar\s*\{[\s\S]*?width: 10px[\s\S]*?min-width: 10px[\s\S]*?animation: v3s-bar-rise 760ms/,
+    /\.v3s-peer-bar\s*\{[\s\S]*?width: 18px[\s\S]*?min-width: 18px[\s\S]*?animation: v3s-bar-rise 760ms/,
   );
   assert.match(
     css,
-    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(96%, 120px\)[\s\S]*?gap: 14px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 40px[\s\S]*?flex: 0 0 40px[\s\S]*?gap: 5px/,
+    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(98%, 146px\)[\s\S]*?gap: 12px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 64px[\s\S]*?flex: 0 0 64px[\s\S]*?gap: 5px/,
   );
+  assert.match(css, /\.v3s-peer-bar b\s*\{[\s\S]*?font-size: 7px/);
+  assert.match(css, /\.legend-peer\.dealer[\s\S]*?\.legend-peer\.region[\s\S]*?\.legend-peer\.size/);
   assert.match(
     css,
     /\.v3s-peer-bar\.dealer\s*\{[\s\S]*?#8395a2[\s\S]*?\.v3s-peer-bar\.region\s*\{[\s\S]*?#829c94[\s\S]*?\.v3s-peer-bar\.size\s*\{[\s\S]*?#9e9182/,
