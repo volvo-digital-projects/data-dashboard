@@ -2071,8 +2071,11 @@ export default function Dashboard({
             </div>
           <div className="comparison-controls">
             <label>
-              <span>비교 그룹</span>
-              <select value={group} onChange={(event) => setGroup(event.target.value as GroupKey)}>
+              <select
+                aria-label="비교 그룹"
+                value={group}
+                onChange={(event) => setGroup(event.target.value as GroupKey)}
+              >
                 {(Object.keys(groupMeta) as GroupKey[]).map((key) => (
                   <option key={key} value={key}>
                     {groupMeta[key].label}
@@ -2081,8 +2084,8 @@ export default function Dashboard({
               </select>
             </label>
             <label>
-              <span>비교 지표</span>
               <select
+                aria-label="비교 지표"
                 value={comparisonMetric}
                 onChange={(event) =>
                   setComparisonMetric(event.target.value as MetricKey)
