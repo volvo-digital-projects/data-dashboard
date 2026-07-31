@@ -543,11 +543,7 @@ function V3SPerformance({
               </div>
               <div className="v3s-quarter-label">
                 <strong>{quarter.label}</strong>
-                <small>
-                  {quarter.average === null
-                    ? quarter.statusText
-                    : `전국 ${displayNumber(quarter.average)}`}
-                </small>
+                {quarter.average === null && <small>{quarter.statusText}</small>}
               </div>
             </div>
           ))}

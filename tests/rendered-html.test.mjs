@@ -522,6 +522,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /className="v3s-quarter-label"[\s\S]{0,140}?<span>/,
   );
+  assert.doesNotMatch(
+    dashboardSource,
+    /className="v3s-quarter-label"[\s\S]{0,180}?`전국 \$\{displayNumber\(quarter\.average\)\}`/,
+  );
   assert.match(
     dashboardSource,
     /className="v3s-upcoming-bar"[\s\S]*?<b>\{quarter\.statusText\}<\/b>/,
