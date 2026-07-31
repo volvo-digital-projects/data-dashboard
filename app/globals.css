@@ -3352,6 +3352,7 @@ input:focus-visible {
 }
 
 .scatter-point {
+  --callout-color: #7f96a2;
   position: absolute;
   left: var(--point-x);
   bottom: var(--point-y);
@@ -3360,6 +3361,8 @@ input:focus-visible {
 }
 
 .scatter-point > i {
+  position: relative;
+  z-index: 3;
   width: 9px;
   height: 9px;
   display: block;
@@ -3377,9 +3380,17 @@ input:focus-visible {
   background: #e9f3f7;
 }
 
+.scatter-point.above {
+  --callout-color: var(--blue);
+}
+
 .scatter-point.below > i {
   border-color: var(--caution);
   background: #fff7e9;
+}
+
+.scatter-point.below {
+  --callout-color: var(--caution);
 }
 
 .scatter-point:hover {
@@ -3392,6 +3403,7 @@ input:focus-visible {
 }
 
 .scatter-point.selected {
+  --callout-color: var(--navy);
   z-index: 4;
 }
 
@@ -3405,45 +3417,56 @@ input:focus-visible {
     0 7px 14px rgba(16, 42, 67, 0.2);
 }
 
+.scatter-callout-leader {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: var(--leader-length);
+  height: 1px;
+  display: block;
+  background: color-mix(in srgb, var(--callout-color) 68%, white);
+  transform: translateY(-50%) rotate(var(--leader-angle));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+.scatter-callout-leader::before {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-right: 5px solid var(--callout-color);
+  border-bottom: 3px solid transparent;
+  content: "";
+  transform: translate(-100%, -50%);
+}
+
 .scatter-point > b {
   position: absolute;
-  padding: 4px 7px;
-  border: 1px solid rgba(102, 112, 133, 0.14);
-  border-radius: 6px;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--callout-color) 32%, white);
+  border-radius: 5px;
   color: #526273;
-  background: rgba(255, 255, 255, 0.93);
+  background: rgba(255, 255, 255, 0.97);
   font-size: 8px;
   font-weight: 650;
+  line-height: 1.25;
   white-space: nowrap;
-  box-shadow: 0 3px 9px rgba(16, 42, 67, 0.07);
-  transform: translate(
-    var(--label-shift-x, 0),
-    var(--label-shift-y, 0)
-  );
+  box-shadow:
+    0 4px 10px rgba(16, 42, 67, 0.08),
+    0 1px 2px rgba(16, 42, 67, 0.05);
+  transform: translate(-50%, -50%)
+    translate(var(--callout-x), var(--callout-y));
   transition:
     opacity 150ms ease,
     transform 150ms ease,
     box-shadow 150ms ease;
-}
-
-.scatter-point.label-left-up > b {
-  right: 14px;
-  bottom: 8px;
-}
-
-.scatter-point.label-left-down > b {
-  top: 8px;
-  right: 14px;
-}
-
-.scatter-point.label-right-up > b {
-  bottom: 8px;
-  left: 14px;
-}
-
-.scatter-point.label-right-down > b {
-  top: 8px;
-  left: 14px;
 }
 
 .scatter-point.selected > b {
@@ -3457,23 +3480,23 @@ input:focus-visible {
 }
 
 .scatter-point.dense:not(.selected) > b {
-  padding: 3px 5px;
+  padding: 4px 6px;
   opacity: 1;
   visibility: visible;
-  border-color: rgba(102, 112, 133, 0.1);
-  background: rgba(255, 255, 255, 0.84);
-  font-size: 7px;
-  box-shadow: 0 2px 7px rgba(16, 42, 67, 0.055);
+  border-color: color-mix(in srgb, var(--callout-color) 28%, white);
+  background: rgba(255, 255, 255, 0.96);
+  font-size: 7.5px;
+  box-shadow:
+    0 3px 8px rgba(16, 42, 67, 0.075),
+    0 1px 2px rgba(16, 42, 67, 0.04);
   pointer-events: none;
 }
 
 .scatter-point.dense:not(.selected):hover > b,
 .scatter-point.dense:not(.selected):focus-visible > b {
   opacity: 1;
-  transform: translate(
-      var(--label-shift-x, 0),
-      var(--label-shift-y, 0)
-    )
+  transform: translate(-50%, -50%)
+    translate(var(--callout-x), var(--callout-y))
     scale(1.03);
   box-shadow: 0 6px 16px rgba(16, 42, 67, 0.14);
 }

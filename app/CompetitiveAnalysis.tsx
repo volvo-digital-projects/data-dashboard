@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import dashboardJson from "./data/showrooms.json";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
@@ -28,6 +34,21 @@ type ScatterLabelPlacement =
   | "left-down"
   | "right-up"
   | "right-down";
+
+type ScatterCalloutLayout = {
+  offsetX: number;
+  offsetY: number;
+  leaderLength: number;
+  leaderAngle: number;
+  placement: ScatterLabelPlacement;
+};
+
+type ScatterLabelBox = {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+};
 
 const showrooms = dashboardJson.showrooms as AnalysisShowroom[];
 
@@ -95,6 +116,184 @@ const scatterLabelPlacement = (
   ];
 };
 
+const scatterPointPosition = (
+  item: AnalysisPoint,
+  width: number,
+  height: number,
+) => {
+  const x = clamp(((item.happyScore - 65) / 35) * 100);
+  const y = clamp(((item.vocScore - 75) / 25) * 100);
+  return {
+    x: (x / 100) * width,
+    y: ((100 - y) / 100) * height,
+  };
+};
+
+const overlapArea = (first: ScatterLabelBox, second: ScatterLabelBox) =>
+  Math.max(0, Math.min(first.right, second.right) - Math.max(first.left, second.left)) *
+  Math.max(0, Math.min(first.bottom, second.bottom) - Math.max(first.top, second.top));
+
+const buildScatterCalloutLayout = (
+  items: AnalysisPoint[],
+  width: number,
+  height: number,
+  selectedCdsid: string,
+  dense: boolean,
+) => {
+  const safeWidth = Math.max(width, 320);
+  const safeHeight = Math.max(height, 240);
+  const points = items.map((item) => ({
+    item,
+    ...scatterPointPosition(item, safeWidth, safeHeight),
+  }));
+  const densityOf = (point: (typeof points)[number]) =>
+    points.filter(
+      (candidate) =>
+        candidate.item.cdsid !== point.item.cdsid &&
+        Math.abs(candidate.x - point.x) < 78 &&
+        Math.abs(candidate.y - point.y) < 42,
+    ).length;
+  const orderedPoints = [...points].sort((first, second) => {
+    const selectedOrder =
+      Number(second.item.cdsid === selectedCdsid) -
+      Number(first.item.cdsid === selectedCdsid);
+    return selectedOrder || densityOf(second) - densityOf(first);
+  });
+  const placedBoxes: ScatterLabelBox[] = [];
+  const layouts = new Map<string, ScatterCalloutLayout>();
+
+  orderedPoints.forEach((point) => {
+    const isSelected = point.item.cdsid === selectedCdsid;
+    const showroomName = displayShowroomName(point.item.showroom);
+    const fontSize = isSelected ? 9 : dense ? 7.5 : 8;
+    const labelWidth = Math.max(
+      isSelected ? 68 : 48,
+      showroomName.length * fontSize * 0.92 + (isSelected ? 20 : 16),
+    );
+    const labelHeight = isSelected ? 25 : dense ? 19 : 21;
+    const pointXPercent = (point.x / safeWidth) * 100;
+    const pointYPercent = 100 - (point.y / safeHeight) * 100;
+    const preferredPlacement = scatterLabelPlacement(
+      pointXPercent,
+      pointYPercent,
+      items.findIndex((item) => item.cdsid === point.item.cdsid),
+      isSelected,
+    );
+    const directions = [
+      { placement: preferredPlacement, x: preferredPlacement.startsWith("left") ? -1 : 1, y: preferredPlacement.endsWith("up") ? -1 : 1 },
+      { placement: "left-up" as const, x: -1, y: -1 },
+      { placement: "right-up" as const, x: 1, y: -1 },
+      { placement: "left-down" as const, x: -1, y: 1 },
+      { placement: "right-down" as const, x: 1, y: 1 },
+      { placement: point.x > safeWidth / 2 ? "left-up" as const : "right-up" as const, x: point.x > safeWidth / 2 ? -1 : 1, y: 0 },
+      { placement: point.y > safeHeight / 2 ? "right-up" as const : "right-down" as const, x: 0, y: point.y > safeHeight / 2 ? -1 : 1 },
+    ].filter(
+      (direction, index, allDirections) =>
+        allDirections.findIndex(
+          (candidate) =>
+            candidate.x === direction.x && candidate.y === direction.y,
+        ) === index,
+    );
+    const candidates: Array<{
+      box: ScatterLabelBox;
+      offsetX: number;
+      offsetY: number;
+      placement: ScatterLabelPlacement;
+      score: number;
+    }> = [];
+
+    directions.forEach((direction, directionIndex) => {
+      [10, 28, 46, 64, 82].forEach((gap, gapIndex) => {
+        [0, -22, 22, -44, 44].forEach((lane, laneIndex) => {
+          const perpendicularX = -direction.y;
+          const perpendicularY = direction.x;
+          const offsetX =
+            (direction.x === 0
+              ? 0
+              : direction.x * (labelWidth / 2 + gap)) +
+            perpendicularX * lane;
+          const offsetY =
+            (direction.y === 0
+              ? 0
+              : direction.y * (labelHeight / 2 + gap)) +
+            perpendicularY * lane;
+          const centerX = point.x + offsetX;
+          const centerY = point.y + offsetY;
+          const box = {
+            left: centerX - labelWidth / 2,
+            top: centerY - labelHeight / 2,
+            right: centerX + labelWidth / 2,
+            bottom: centerY + labelHeight / 2,
+          };
+          const outside =
+            Math.max(0, 4 - box.left) +
+            Math.max(0, 4 - box.top) +
+            Math.max(0, box.right - safeWidth + 4) +
+            Math.max(0, box.bottom - safeHeight + 4);
+          const collision = placedBoxes.reduce(
+            (sum, placed) => sum + overlapArea(box, placed),
+            0,
+          );
+          const coveredPoints = points.filter(
+            (candidate) =>
+              candidate.item.cdsid !== point.item.cdsid &&
+              candidate.x > box.left - 5 &&
+              candidate.x < box.right + 5 &&
+              candidate.y > box.top - 5 &&
+              candidate.y < box.bottom + 5,
+          ).length;
+          const distance = Math.hypot(offsetX, offsetY);
+          const score =
+            outside * 100000 +
+            collision * 420 +
+            (collision > 0 ? 18000 : 0) +
+            coveredPoints * 4200 +
+            distance * 0.45 +
+            directionIndex * 3 +
+            gapIndex * 0.2 +
+            laneIndex * 0.05;
+          candidates.push({
+            box,
+            offsetX,
+            offsetY,
+            placement: direction.placement,
+            score,
+          });
+        });
+      });
+    });
+
+    const best = candidates.reduce((current, candidate) =>
+      candidate.score < current.score ? candidate : current,
+    );
+    placedBoxes.push(best.box);
+
+    const centerDistance = Math.max(
+      Math.hypot(best.offsetX, best.offsetY),
+      1,
+    );
+    const boundaryScale = Math.min(
+      Math.abs(best.offsetX) > 0
+        ? labelWidth / 2 / Math.abs(best.offsetX)
+        : Number.POSITIVE_INFINITY,
+      Math.abs(best.offsetY) > 0
+        ? labelHeight / 2 / Math.abs(best.offsetY)
+        : Number.POSITIVE_INFINITY,
+    );
+    const leaderLength = Math.max(8, centerDistance * (1 - boundaryScale));
+
+    layouts.set(point.item.cdsid, {
+      offsetX: best.offsetX,
+      offsetY: best.offsetY,
+      leaderLength,
+      leaderAngle: Math.atan2(best.offsetY, best.offsetX) * (180 / Math.PI),
+      placement: best.placement,
+    });
+  });
+
+  return layouts;
+};
+
 export default function CompetitiveAnalysis({
   initialCdsid,
   initialView,
@@ -105,6 +304,11 @@ export default function CompetitiveAnalysis({
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
   const [view, setView] = useState<AnalysisView>(initialView);
+  const scatterRef = useRef<HTMLDivElement>(null);
+  const [scatterSize, setScatterSize] = useState({
+    width: 920,
+    height: 326,
+  });
 
   const groupItems = useMemo(() => {
     const filtered =
@@ -165,6 +369,50 @@ export default function CompetitiveAnalysis({
     "--avg-y": `${clamp(((groupVocAverage - 75) / 25) * 100)}%`,
   } as CSSProperties;
   const denseScatter = groupItems.length > 12;
+  const scatterCallouts = useMemo(
+    () =>
+      buildScatterCalloutLayout(
+        groupItems,
+        scatterSize.width,
+        scatterSize.height,
+        selected.cdsid,
+        denseScatter,
+      ),
+    [
+      denseScatter,
+      groupItems,
+      scatterSize.height,
+      scatterSize.width,
+      selected.cdsid,
+    ],
+  );
+
+  useEffect(() => {
+    const scatter = scatterRef.current;
+    if (!scatter) return;
+
+    const updateSize = () => {
+      const bounds = scatter.getBoundingClientRect();
+      const width = Math.round(bounds.width);
+      const height = Math.round(bounds.height);
+      if (!width || !height) return;
+      setScatterSize((current) =>
+        current.width === width && current.height === height
+          ? current
+          : { width, height },
+      );
+    };
+
+    updateSize();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateSize);
+      return () => window.removeEventListener("resize", updateSize);
+    }
+
+    const observer = new ResizeObserver(updateSize);
+    observer.observe(scatter);
+    return () => observer.disconnect();
+  }, []);
 
   const changeView = (nextView: AnalysisView) => {
     setView(nextView);
@@ -301,7 +549,11 @@ export default function CompetitiveAnalysis({
 
           <div className="analysis-scatter-shell">
             <div className="scatter-y-title">고객만족도</div>
-            <div className="analysis-scatter" style={scatterStyle}>
+            <div
+              className="analysis-scatter"
+              style={scatterStyle}
+              ref={scatterRef}
+            >
               <span className="scatter-quadrant top-left">만족도 우세</span>
               <span className="scatter-quadrant top-right">균형 우수</span>
               <span className="scatter-quadrant bottom-left">개선 집중</span>
@@ -314,7 +566,7 @@ export default function CompetitiveAnalysis({
               <span className="scatter-average-value horizontal">
                 고객만족도 평균 {displayNumber(groupVocAverage)}점
               </span>
-              {groupItems.map((item, index) => {
+              {groupItems.map((item) => {
                 const pointX = clamp(
                   ((item.happyScore - 65) / 35) * 100,
                 );
@@ -322,26 +574,21 @@ export default function CompetitiveAnalysis({
                   ((item.vocScore - 75) / 25) * 100,
                 );
                 const isSelected = item.cdsid === selected.cdsid;
-                const denseLabelShiftX =
-                  denseScatter && !isSelected
-                    ? [-8, 0, 8][index % 3]
-                    : 0;
-                const denseLabelShiftY =
-                  denseScatter && !isSelected
-                    ? [-4, 4][Math.floor(index / 3) % 2]
-                    : 0;
+                const callout = scatterCallouts.get(item.cdsid) ?? {
+                  offsetX: 16,
+                  offsetY: -16,
+                  leaderLength: 8,
+                  leaderAngle: -45,
+                  placement: "right-up" as const,
+                };
                 const pointStyle = {
                   "--point-x": `${pointX}%`,
                   "--point-y": `${pointY}%`,
-                  "--label-shift-x": `${denseLabelShiftX}px`,
-                  "--label-shift-y": `${denseLabelShiftY}px`,
+                  "--callout-x": `${callout.offsetX}px`,
+                  "--callout-y": `${callout.offsetY}px`,
+                  "--leader-length": `${callout.leaderLength}px`,
+                  "--leader-angle": `${callout.leaderAngle}deg`,
                 } as CSSProperties;
-                const labelPlacement = scatterLabelPlacement(
-                  pointX,
-                  pointY,
-                  index,
-                  isSelected,
-                );
                 const pointLabel = `${displayShowroomName(item.showroom)} · 고객만족도 ${displayNumber(
                   item.vocScore,
                 )} · 해피콜 ${displayNumber(item.happyScore)}`;
@@ -354,7 +601,7 @@ export default function CompetitiveAnalysis({
                         : item.combined >= groupCombinedAverage
                           ? "above"
                           : "below"
-                    } label-${labelPlacement} ${
+                    } label-${callout.placement} ${
                       denseScatter ? "dense" : ""
                     }`}
                     style={pointStyle}
@@ -362,6 +609,7 @@ export default function CompetitiveAnalysis({
                     aria-label={pointLabel}
                     tabIndex={denseScatter && !isSelected ? 0 : undefined}
                   >
+                    <span className="scatter-callout-leader" aria-hidden="true" />
                     <i />
                     <b
                       className={`scatter-label ${

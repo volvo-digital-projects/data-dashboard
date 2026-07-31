@@ -241,6 +241,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /해피콜 평균 \d+\.\d점/);
   assert.match(visibleHtml, /고객만족도 평균 \d+\.\d점/);
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
+  assert.equal((html.match(/class="scatter-callout-leader"/g) ?? []).length, 7);
   assert.match(html, /class="scatter-point selected\b/);
   assert.equal(
     (html.match(/class="scatter-label comparison"/g) ?? []).length,
@@ -286,6 +287,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
     (showroomHtml.match(/style="opacity:1;visibility:visible"/g) ?? []).length,
     39,
   );
+  assert.equal(
+    (showroomHtml.match(/class="scatter-callout-leader"/g) ?? []).length,
+    39,
+  );
+  assert.match(showroomHtml, /--leader-angle:[^;"]+deg/);
   assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전시장 25위 \/ 전체 39/);
   assert.doesNotMatch(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 25위 \/ 전체 39/);
 });
@@ -547,6 +553,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.doesNotMatch(
     css,
     /\.scatter-point\.dense:not\(\.selected\)\s*>\s*b\s*\{[^}]*opacity:\s*0\s*;/s,
+  );
+  assert.match(
+    css,
+    /\.scatter-callout-leader::before\s*\{[^}]*border-right:\s*5px solid var\(--callout-color\)/s,
   );
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
   assert.match(
