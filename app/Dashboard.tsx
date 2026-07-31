@@ -354,7 +354,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
   const peerBenchmarks = (quarter: QuarterKey | null) => [
     {
       key: "dealer",
-      label: `동일 소속사 ${showroom.dealer} 평균`,
+      label: `소속사 ${showroom.dealer} 평균`,
       value:
         quarter === null
           ? null
@@ -362,7 +362,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
     },
     {
       key: "region",
-      label: `동일 권역별 ${showroom.region} 평균`,
+      label: `권역별 ${showroom.region} 평균`,
       value:
         quarter === null
           ? null
@@ -370,7 +370,7 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
     },
     {
       key: "size",
-      label: `동일 사이즈 ${showroom.size} 평균`,
+      label: `사이즈 ${showroom.size} 평균`,
       value:
         quarter === null
           ? null
@@ -494,21 +494,6 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                   </span>
                 )}
                 <span className="v3s-bar-cluster">
-                  {quarter.value === null ? (
-                    <span className="v3s-upcoming-bar">
-                      <b>평가 예정</b>
-                    </span>
-                  ) : (
-                    <span
-                      className="v3s-bar-fill"
-                      style={{
-                        height: `${quarter.value}%`,
-                        animationDelay: `${140 + index * 100}ms`,
-                      }}
-                    >
-                      <b>{displayNumber(quarter.value)}</b>
-                    </span>
-                  )}
                   {quarter.benchmarks.map((benchmark, benchmarkIndex) => (
                     <span
                       className={`v3s-peer-bar ${benchmark.key} ${
@@ -531,6 +516,21 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
                       }}
                     />
                   ))}
+                  {quarter.value === null ? (
+                    <span className="v3s-upcoming-bar">
+                      <b>평가 예정</b>
+                    </span>
+                  ) : (
+                    <span
+                      className="v3s-bar-fill"
+                      style={{
+                        height: `${quarter.value}%`,
+                        animationDelay: `${140 + index * 100}ms`,
+                      }}
+                    >
+                      <b>{displayNumber(quarter.value)}</b>
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="v3s-quarter-label">
@@ -557,12 +557,6 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
           <span>
             <i className="legend-average" /> 분기 전국 평균
           </span>
-          {peerBenchmarks("q2").map((benchmark) => (
-            <span className="v3s-peer-legend" key={benchmark.key}>
-              <i className={`legend-peer ${benchmark.key}`} />
-              {benchmark.label}
-            </span>
-          ))}
           <small>100점 만점</small>
         </div>
       </section>
