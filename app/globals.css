@@ -3252,7 +3252,7 @@ input:focus-visible {
   display: grid;
   place-items: center;
   writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  text-orientation: upright;
 }
 
 .scatter-x-title {

@@ -460,6 +460,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.combat-summary-stack strong\s*\{[^}]*font-size: clamp\(60px, 4\.2vw, 68px\)[^}]*white-space: nowrap/,
   );
+  assert.match(
+    css,
+    /\.scatter-y-title\s*\{[^}]*writing-mode: vertical-rl[^}]*text-orientation: upright/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.scatter-y-title\s*\{[^}]*transform: rotate\(180deg\)/,
+  );
   assert.match(css, /\.table-row\s*\{[^}]*min-height: 48px/);
   assert.match(css, /\.comparison-head\s*\{[^}]*min-height: 24px/);
   assert.match(
