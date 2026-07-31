@@ -408,8 +408,8 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.doesNotMatch(dashboardSource, /className="v3s-peer-legend"/);
   assert.match(dashboardSource, /trendMetric === "v3s"/);
   assert.match(dashboardSource, /analysis\?view=showroom/);
-  assert.match(dashboardSource, /2026 PERFORMANCE/);
-  assert.match(dashboardSource, /2021–2025 HISTORY/);
+  assert.doesNotMatch(dashboardSource, /2026 PERFORMANCE/);
+  assert.doesNotMatch(dashboardSource, /2021–2025 HISTORY/);
   assert.match(dashboardSource, /5개년 데이터 연결 예정/);
   assert.match(
     dashboardSource,

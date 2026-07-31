@@ -462,7 +462,6 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       <section className="v3s-quarter-panel">
         <header className="v3s-subhead">
           <div>
-            <span>2026 PERFORMANCE</span>
             <h3>분기 평가 흐름</h3>
           </div>
           <div className="v3s-cumulative">
@@ -568,7 +567,6 @@ function V3SPerformance({ showroom }: { showroom: Showroom }) {
       <section className="v3s-history-panel">
         <header className="v3s-subhead">
           <div>
-            <span>2021–2025 HISTORY</span>
             <h3>5개년 실력 추세</h3>
           </div>
           {historyDelta !== null && (
