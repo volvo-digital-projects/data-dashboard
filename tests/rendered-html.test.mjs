@@ -512,6 +512,18 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 286px[\s\S]*?padding: 24px/);
+  assert.match(
+    css,
+    /\.quarter-score-meta\s*\{[^}]*min-height: 22px[^}]*align-items: center[^}]*line-height: 1/,
+  );
+  assert.match(
+    css,
+    /\.combat-summary-stack > span\s*\{[^}]*min-height: 22px[^}]*display: flex[^}]*align-items: center/,
+  );
+  assert.match(
+    css,
+    /\.metric-card-topline\s*\{[^}]*min-height: 22px[^}]*align-items: center[^}]*line-height: 1/,
+  );
   assert.match(css, /\.metric-card-value\s*\{[\s\S]*?font-size: clamp\(46px, 3\.25vw, 56px\)/);
   assert.match(
     css,

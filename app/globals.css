@@ -4054,9 +4054,12 @@ input:focus-visible,
 }
 
 .quarter-score-meta {
+  min-height: 22px;
+  align-items: center;
   margin-bottom: 10px;
   color: rgba(220, 234, 242, 0.74);
   font-size: 12px;
+  line-height: 1;
 }
 
 .quarter-score-meta small {
@@ -4126,6 +4129,10 @@ input:focus-visible,
 }
 
 .combat-summary-stack > span {
+  width: 100%;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
   color: rgba(220, 234, 242, 0.68);
   font-size: 12px;
@@ -4199,6 +4206,19 @@ input:focus-visible,
     box-shadow 220ms ease,
     border-color 220ms ease;
   animation: metric-enter 360ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.metric-card-topline {
+  min-height: 22px;
+  align-items: center;
+  line-height: 1;
+}
+
+.metric-code,
+.signal-pill {
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .metric-card:nth-child(2) {
