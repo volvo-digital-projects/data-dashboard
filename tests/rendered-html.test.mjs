@@ -268,7 +268,22 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const sizeHtml = await sizeResponse.text();
   assert.match(sizeHtml, /scatter-point [^"]*dense/);
   assert.match(sizeHtml, /scatter-label comparison/);
+  assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
   assert.match(sizeHtml, /볼보 해운대/);
+
+  const showroomResponse = await render(
+    "/dashboard/6KR6842/analysis?view=showroom",
+  );
+  assert.equal(showroomResponse.status, 200);
+  const showroomHtml = await showroomResponse.text();
+  assert.equal(
+    (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,
+    38,
+  );
+  assert.equal(
+    (showroomHtml.match(/style="opacity:1;visibility:visible"/g) ?? []).length,
+    39,
+  );
 });
 
 test("ships project metadata and removes the disposable starter", async () => {

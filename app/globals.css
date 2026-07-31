@@ -3430,7 +3430,8 @@ input:focus-visible {
 
 .scatter-point.dense:not(.selected) > b {
   padding: 3px 5px;
-  opacity: 0.78;
+  opacity: 1;
+  visibility: visible;
   border-color: rgba(102, 112, 133, 0.1);
   background: rgba(255, 255, 255, 0.84);
   font-size: 7px;

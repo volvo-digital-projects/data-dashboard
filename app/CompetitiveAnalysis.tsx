@@ -361,6 +361,7 @@ export default function CompetitiveAnalysis({
                       className={`scatter-label ${
                         isSelected ? "selected" : "comparison"
                       }`}
+                      style={{ opacity: 1, visibility: "visible" }}
                     >
                       {displayShowroomName(item.showroom)}
                     </b>
