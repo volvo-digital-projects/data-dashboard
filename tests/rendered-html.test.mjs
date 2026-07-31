@@ -224,6 +224,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(visibleHtml, /고객만족도 × 해피콜 이행/);
   assert.match(visibleHtml, /고객만족도[\s\S]*87\.5/);
+  assert.match(visibleHtml, /VOC \+ ONE Voice \/ 상담 및 출고 후 만족도 평가/);
+  assert.doesNotMatch(visibleHtml, /VOC · 상담\/시승\/출고 경험/);
   assert.match(visibleHtml, /해피콜 이행[\s\S]*100\.0/);
   assert.match(visibleHtml, /균형 경쟁력[\s\S]*93\.8/);
   assert.match(visibleHtml, /에이치 순위/);

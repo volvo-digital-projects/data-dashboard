@@ -231,7 +231,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-summary-card satisfaction">
           <div>
             <span>고객만족도</span>
-            <small>VOC · 상담/시승/출고 경험</small>
+            <small>VOC + ONE Voice / 상담 및 출고 후 만족도 평가</small>
           </div>
           <strong>
             {displayNumber(selectedPoint.vocScore)}
