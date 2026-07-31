@@ -33,7 +33,7 @@
   "showrooms": [
     {
       "cdsid": "6KR6834",
-      "showroom": "볼보 강남 대치",
+      "showroom": "볼보 강남대치",
       "dealer": "에이치",
       "manager": "김길성",
       "size": "U",
@@ -56,7 +56,7 @@
       "happyCall": 100,
       "q1": {
         "cdsid": "6KR6834",
-        "showroom": "볼보 강남 대치",
+        "showroom": "볼보 강남대치",
         "dealer": "에이치",
         "manager": "김길성",
         "size": "U",

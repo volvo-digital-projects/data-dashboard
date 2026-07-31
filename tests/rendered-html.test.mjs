@@ -47,7 +47,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="identity-tools"|class="identity-tool"/);
   assert.match(
     html,
-    /class="identity-title"><h1>볼보 강남 대치<\/h1><div class="update-status">/,
+    /class="identity-title"><h1>볼보 강남대치<\/h1><div class="update-status">/,
   );
   assert.match(
     html,
@@ -107,8 +107,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="table-row/g) ?? []).length, 3);
   assert.match(html, /class="comparison-head table-row"/);
   assert.match(visibleHtml, /권역별/);
-  assert.match(visibleHtml, /<h1>볼보 강남 대치<\/h1>/);
-  assert.match(visibleHtml, /볼보 강남 대치 실제값 · W26 100\.0점 · 입력 25주/);
+  assert.match(visibleHtml, /<h1>볼보 강남대치<\/h1>/);
+  assert.match(visibleHtml, /볼보 강남대치 실제값 · W26 100\.0점 · 입력 25주/);
   assert.match(visibleHtml, /전국 주간 평균 · W26 91\.8점 · 평균 미달 11주/);
   assert.match(visibleHtml, /52주 스코어 추이/);
   assert.doesNotMatch(visibleHtml, /주간 성과 흐름/);
@@ -147,7 +147,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/<b aria-hidden="true" style="left:/g) ?? []).length, 3);
   assert.match(visibleHtml, /내 전시장/);
   assert.match(visibleHtml, /전국 39개점 기준/);
-  assert.match(visibleHtml, /볼보 강남 대치 경쟁력/);
+  assert.match(visibleHtml, /볼보 강남대치 경쟁력/);
   assert.doesNotMatch(visibleHtml, /COMPETITIVE POSITION/);
   assert.match(html, /aria-label="VOC 분기 평가점수"/);
   assert.match(html, /경고: Q2 전국 평균 대비 5점 이상 미달/);
