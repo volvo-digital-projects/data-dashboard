@@ -84,8 +84,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
   assert.match(visibleHtml, /Q3[\s\S]*Q4/);
-  assert.match(visibleHtml, /Q2 종합 점수[\s\S]*294\.9/);
-  assert.match(visibleHtml, /상반기 누적 평균 298\.8점/);
+  assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
+  assert.match(visibleHtml, /누적 평균[\s\S]*298\.8[\s\S]*Q1·Q2 평가 기준/);
+  assert.equal((html.match(/aria-label="Q[12] 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q[34] 평가 예정"/g) ?? []).length, 2);
   assert.match(visibleHtml, /Q2 전국 평균 <strong>305\.4/);
   assert.match(visibleHtml, /Q2 전국 평균 대비 <strong>-10\.5/);
   assert.match(visibleHtml, /전시장 경쟁력 전국 순위 <strong>32위 \/ 전체 39/);
@@ -268,7 +270,22 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.doesNotMatch(dashboardSource, /isMajorWeek/);
   assert.match(dashboardSource, /\{label\}\s*<\/span>/);
-  assert.match(dashboardSource, /<span>전국 평균 대비<\/span>/);
+  assert.match(
+    dashboardSource,
+    /<span>\{quarterLabel\} 전국 평균 대비<\/span>/,
+  );
+  assert.match(
+    dashboardSource,
+    /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /quarterValueOf\(selected, "v3s", selectedQuarter\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /quarterAverageOf\("v3s", selectedQuarter\)/,
+  );
   assert.match(css, /\.quarter-band\s*\{[\s\S]*?margin: 0 2\.0588235%/);
   assert.match(css, /\.week-ruler\s*\{[\s\S]*?margin: -18px 2\.0588235% 8px/);
   assert.match(css, /\.week-grid\s*\{[\s\S]*?stroke-width: 0\.6/);

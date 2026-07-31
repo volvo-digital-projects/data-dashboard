@@ -8,6 +8,7 @@ import weeklyJson from "./data/weekly.json";
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
 type GroupKey = "all" | "dealer" | "region" | "size";
+type QuarterKey = "q1" | "q2";
 
 type QuarterRecord = {
   cdsid: string;
@@ -119,6 +120,30 @@ const groupMeta: Record<GroupKey, { label: string }> = {
 const valueOf = (item: Showroom, metric: MetricKey) =>
   item[metric] ?? Number.NEGATIVE_INFINITY;
 
+const quarterValueOf = (
+  item: Showroom,
+  metric: MetricKey,
+  quarter: QuarterKey,
+) => {
+  const value = quarter === "q1" ? item.q1?.[metric] : item[metric];
+  return typeof value === "number" ? value : null;
+};
+
+const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
+  if (quarter === "q2") {
+    return metric === "combat"
+      ? dashboard.meta.combatAverage
+      : (dashboard.averages[metric] ?? 0);
+  }
+
+  const values = dashboard.showrooms
+    .map((item) => quarterValueOf(item, metric, quarter))
+    .filter((value): value is number => value !== null);
+  return values.length
+    ? values.reduce((sum, value) => sum + value, 0) / values.length
+    : 0;
+};
+
 const displayNumber = (value: number | null | undefined, digits = 1) =>
   value === null || value === undefined || !Number.isFinite(value)
     ? "—"
@@ -189,7 +214,9 @@ function MetricCard({
   metric,
   value,
   average,
-  previous,
+  q1Value,
+  q2Value,
+  quarter,
   active,
   onSelect,
   appeal,
@@ -197,22 +224,33 @@ function MetricCard({
   metric: TrendMetricKey;
   value: number;
   average: number;
-  previous: number | null;
+  q1Value: number | null;
+  q2Value: number | null;
+  quarter: QuarterKey;
   active: boolean;
   onSelect: () => void;
   appeal: "possible" | "partial" | "locked";
 }) {
   const signal = getSignal(value, average);
+  const quarterLabel = quarter.toUpperCase();
   const fill = Math.min(100, Math.max(0, (value / metricMeta[metric].max) * 100));
   const signalRule =
     signal.tone === "warning"
-      ? "경고: Q2 전국 평균 대비 5점 이상 미달"
+      ? `경고: ${quarterLabel} 전국 평균 대비 5점 이상 미달`
       : signal.tone === "caution"
-        ? "주의: Q2 전국 평균 미만, 5점 미만 차이"
-        : "정상: Q2 전국 평균 이상";
+        ? `주의: ${quarterLabel} 전국 평균 미만, 5점 미만 차이`
+        : `정상: ${quarterLabel} 전국 평균 이상`;
   const quarterScores = [
-    { label: "Q1", value: previous, state: "complete" },
-    { label: "Q2", value, state: "current" },
+    {
+      label: "Q1",
+      value: q1Value,
+      state: quarter === "q1" ? "current" : "complete",
+    },
+    {
+      label: "Q2",
+      value: q2Value,
+      state: quarter === "q2" ? "current" : "complete",
+    },
     { label: "Q3", value: null, state: "planned" },
     { label: "Q4", value: null, state: "planned" },
   ];
@@ -239,9 +277,9 @@ function MetricCard({
       </div>
       <div
         className="metric-benchmark"
-        title={`Q2 전국 평균 ${displayNumber(average)}점`}
+        title={`${quarterLabel} 전국 평균 ${displayNumber(average)}점`}
       >
-        <span>Q2 전국 평균 대비</span>
+        <span>{quarterLabel} 전국 평균 대비</span>
         <strong className={signal.delta >= 0 ? "positive" : "negative"}>
           {signal.delta >= 0 ? "+" : ""}
           {signal.delta.toFixed(1)}점
@@ -1244,6 +1282,7 @@ export default function Dashboard({
 }) {
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
+  const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
   const [comparisonMetric, setComparisonMetric] = useState<MetricKey>("combat");
   const [group, setGroup] = useState<GroupKey>("all");
   const [profileOpen, setProfileOpen] = useState(false);
@@ -1276,14 +1315,30 @@ export default function Dashboard({
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;
   const cumulativeAverage = (q1Combat + combat) / 2;
-  const tier = getTier(combat);
+  const selectedQuarterLabel = selectedQuarter.toUpperCase();
+  const selectedQuarterCombat =
+    quarterValueOf(selected, "combat", selectedQuarter) ?? combat;
+  const selectedCombatAverage = quarterAverageOf("combat", selectedQuarter);
+  const tier = getTier(cumulativeAverage);
   const nationalRank =
     [...dashboard.showrooms]
-      .sort((a, b) => valueOf(b, "combat") - valueOf(a, "combat"))
+      .sort(
+        (a, b) =>
+          (quarterValueOf(b, "combat", selectedQuarter) ??
+            Number.NEGATIVE_INFINITY) -
+          (quarterValueOf(a, "combat", selectedQuarter) ??
+            Number.NEGATIVE_INFINITY),
+      )
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const rankInGroup = (members: Showroom[]) =>
     [...members]
-      .sort((a, b) => valueOf(b, "combat") - valueOf(a, "combat"))
+      .sort(
+        (a, b) =>
+          (quarterValueOf(b, "combat", selectedQuarter) ??
+            Number.NEGATIVE_INFINITY) -
+          (quarterValueOf(a, "combat", selectedQuarter) ??
+            Number.NEGATIVE_INFINITY),
+      )
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const mobileRanks = [
     {
@@ -1313,28 +1368,31 @@ export default function Dashboard({
   const kpis = [
     {
       key: "v3s" as const,
-      value: selected.v3s ?? 0,
-      average: dashboard.averages.v3s ?? 0,
-      previous: selected.q1?.v3s ?? null,
+      value: quarterValueOf(selected, "v3s", selectedQuarter) ?? 0,
+      average: quarterAverageOf("v3s", selectedQuarter),
+      q1Value: selected.q1?.v3s ?? null,
+      q2Value: selected.v3s ?? null,
       appeal: "possible" as const,
     },
     {
       key: "voc" as const,
-      value: selected.voc ?? 0,
-      average: dashboard.averages.voc ?? 0,
-      previous: selected.q1?.voc ?? null,
+      value: quarterValueOf(selected, "voc", selectedQuarter) ?? 0,
+      average: quarterAverageOf("voc", selectedQuarter),
+      q1Value: selected.q1?.voc ?? null,
+      q2Value: selected.voc ?? null,
       appeal: "partial" as const,
     },
     {
       key: "cx" as const,
-      value: selected.cx ?? 0,
-      average: dashboard.averages.cx ?? 0,
-      previous: selected.q1?.cx ?? null,
+      value: quarterValueOf(selected, "cx", selectedQuarter) ?? 0,
+      average: quarterAverageOf("cx", selectedQuarter),
+      q1Value: selected.q1?.cx ?? null,
+      q2Value: selected.cx ?? null,
       appeal: "partial" as const,
     },
   ];
   const warningCount = kpis.filter((item) => item.value < item.average).length;
-  const combatDelta = combat - dashboard.meta.combatAverage;
+  const combatDelta = selectedQuarterCombat - selectedCombatAverage;
 
   return (
     <main className="dashboard">
@@ -1437,10 +1495,10 @@ export default function Dashboard({
       <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
         <div className="mobile-power">
           <div>
-            <strong>{displayNumber(combat)}</strong>
+            <span>누적 평균</span>
+            <strong>{displayNumber(cumulativeAverage)}</strong>
             <small>
-              / {dashboard.meta.combatMax} · 상반기 평균{" "}
-              {displayNumber(cumulativeAverage)}
+              / {dashboard.meta.combatMax} · Q1·Q2 평가 기준
             </small>
           </div>
           <div>
@@ -1449,10 +1507,31 @@ export default function Dashboard({
               <small> / {dashboard.meta.showroomCount}개점</small>
             </strong>
             <span className={combatDelta >= 0 ? "positive" : "negative"}>
-              Q2 전국 평균 대비 {combatDelta >= 0 ? "+" : ""}
+              {selectedQuarterLabel} 전국 평균 대비{" "}
+              {combatDelta >= 0 ? "+" : ""}
               {combatDelta.toFixed(1)}
             </span>
           </div>
+        </div>
+        <div className="mobile-quarter-selector" aria-label="평가 분기 선택">
+          {(["q1", "q2", "q3", "q4"] as const).map((quarter) => {
+            const available = quarter === "q1" || quarter === "q2";
+            return (
+              <button
+                key={quarter}
+                type="button"
+                disabled={!available}
+                className={selectedQuarter === quarter ? "active" : ""}
+                aria-pressed={available ? selectedQuarter === quarter : undefined}
+                onClick={() => {
+                  if (available) setSelectedQuarter(quarter);
+                }}
+              >
+                {quarter.toUpperCase()}
+                {!available && <small>예정</small>}
+              </button>
+            );
+          })}
         </div>
         <div className="mobile-kpis">
           {kpis.map((item) => {
@@ -1467,7 +1546,8 @@ export default function Dashboard({
                 <span>{metricMeta[item.key].short}</span>
                 <strong>{displayNumber(item.value)}</strong>
                 <small>
-                  Q2 평균 대비 {signal.delta >= 0 ? "+" : ""}
+                  {selectedQuarterLabel} 평균 대비{" "}
+                  {signal.delta >= 0 ? "+" : ""}
                   {signal.delta.toFixed(1)}
                 </small>
               </button>
@@ -1502,18 +1582,33 @@ export default function Dashboard({
               )}점, ${dashboard.meta.combatMax}점 만점`}
             >
               <div className="quarter-score-meta">
-                <span>분기 스코어</span>
+                <span>분기 선택</span>
                 <small>{dashboard.meta.combatMax}점 만점</small>
               </div>
               {[
-                { label: "Q1", value: q1Combat, current: false },
-                { label: "Q2", value: combat, current: true },
-                { label: "Q3", value: null, current: false },
-                { label: "Q4", value: null, current: false },
+                { key: "q1" as const, label: "Q1", value: q1Combat },
+                { key: "q2" as const, label: "Q2", value: combat },
+                { key: null, label: "Q3", value: null },
+                { key: null, label: "Q4", value: null },
               ].map((quarter) => (
-                <div
+                <button
+                  type="button"
+                  disabled={quarter.key === null}
+                  aria-pressed={
+                    quarter.key === null
+                      ? undefined
+                      : selectedQuarter === quarter.key
+                  }
+                  aria-label={
+                    quarter.key === null
+                      ? `${quarter.label} 평가 예정`
+                      : `${quarter.label} 지표 보기`
+                  }
+                  onClick={() => {
+                    if (quarter.key) setSelectedQuarter(quarter.key);
+                  }}
                   className={`quarter-score-row ${
-                    quarter.current ? "current" : ""
+                    quarter.key === selectedQuarter ? "current" : ""
                   } ${quarter.value === null ? "planned" : ""}`}
                   key={quarter.label}
                 >
@@ -1537,25 +1632,25 @@ export default function Dashboard({
                       ? "—"
                       : displayNumber(quarter.value)}
                   </strong>
-                </div>
+                </button>
               ))}
             </div>
             <div className="combat-summary-stack">
-              <span>Q2 종합 점수</span>
+              <span>누적 평균</span>
               <strong>
-                {displayNumber(combat)}
+                {displayNumber(cumulativeAverage)}
                 <small>점</small>
               </strong>
-              <em>상반기 누적 평균 {displayNumber(cumulativeAverage)}점</em>
+              <em>Q1·Q2 평가 기준</em>
             </div>
           </div>
           <div className="combat-footer">
             <span>
-              Q2 전국 평균{" "}
-              <strong>{displayNumber(dashboard.meta.combatAverage)}</strong>
+              {selectedQuarterLabel} 전국 평균{" "}
+              <strong>{displayNumber(selectedCombatAverage)}</strong>
             </span>
             <span className={combatDelta >= 0 ? "positive" : "negative"}>
-              Q2 전국 평균 대비{" "}
+              {selectedQuarterLabel} 전국 평균 대비{" "}
               <strong>
                 {combatDelta >= 0 ? "+" : ""}
                 {combatDelta.toFixed(1)}
@@ -1578,7 +1673,9 @@ export default function Dashboard({
                 metric={item.key}
                 value={item.value}
                 average={item.average}
-                previous={item.previous}
+                q1Value={item.q1Value}
+                q2Value={item.q2Value}
+                quarter={selectedQuarter}
                 active={trendMetric === item.key}
                 onSelect={() => setTrendMetric(item.key)}
                 appeal={item.appeal}

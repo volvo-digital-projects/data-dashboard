@@ -4112,6 +4112,50 @@ input:focus-visible,
   color: #e0a33c !important;
 }
 
+button.quarter-score-row {
+  width: 100%;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 7px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+button.quarter-score-row:hover:not(:disabled) {
+  transform: translateX(2px);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+button.quarter-score-row.current {
+  background: rgba(143, 191, 211, 0.1);
+}
+
+button.quarter-score-row:disabled {
+  cursor: default;
+}
+
+.combat-summary-stack > span {
+  color: rgba(186, 220, 234, 0.88);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.combat-summary-stack strong {
+  font-size: 58px;
+  color: #ffffff;
+  text-shadow: 0 10px 24px rgba(99, 181, 216, 0.18);
+}
+
+.combat-summary-stack em {
+  color: rgba(220, 234, 242, 0.68);
+}
+
 .dashboard-footer {
   margin-top: 24px;
 }
@@ -4261,6 +4305,50 @@ input:focus-visible,
   .mobile-command {
     border-radius: 14px;
     box-shadow: var(--surface-shadow);
+  }
+
+  .mobile-power > div:first-child > span {
+    display: block;
+    color: rgba(220, 234, 242, 0.72);
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .mobile-quarter-selector {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    background: var(--line);
+  }
+
+  .mobile-quarter-selector button {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 0;
+    color: var(--secondary);
+    background: #f8fafb;
+    font-family: var(--font-latin);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .mobile-quarter-selector button.active {
+    color: white;
+    background: var(--navy);
+  }
+
+  .mobile-quarter-selector button:disabled {
+    color: var(--muted);
+    cursor: default;
+  }
+
+  .mobile-quarter-selector button small {
+    font-size: 7px;
+    font-weight: 600;
   }
 
   .dashboard .panel {
