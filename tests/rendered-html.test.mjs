@@ -726,7 +726,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.v3s-average-marker b\s*\{[^}]*top: -12px[^}]*color: var\(--es90-orange\)[^}]*font-size: 8px/,
+    /\.v3s-average-marker b\s*\{[^}]*top: 4px[^}]*z-index: 3[^}]*color: var\(--es90-orange\)[^}]*font-size: 9px[^}]*white-space: nowrap/,
   );
   assert.match(
     css,
