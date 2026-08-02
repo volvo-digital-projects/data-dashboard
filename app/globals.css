@@ -5552,7 +5552,7 @@ button.quarter-score-row:disabled {
 
 .v3s-bar-fill b {
   position: absolute;
-  top: 8px;
+  top: 50%;
   left: 50%;
   color: white;
   font-family: var(--font-latin);
@@ -5560,7 +5560,7 @@ button.quarter-score-row:disabled {
   font-weight: 720;
   font-variant-numeric: tabular-nums;
   text-shadow: 0 1px 4px rgba(16, 42, 67, 0.3);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .v3s-peer-bar {
@@ -5579,7 +5579,7 @@ button.quarter-score-row:disabled {
 
 .v3s-peer-bar b {
   position: absolute;
-  top: 7px;
+  top: 50%;
   left: 50%;
   color: white;
   font-family: var(--font-latin);
@@ -5589,7 +5589,7 @@ button.quarter-score-row:disabled {
   letter-spacing: -0.04em;
   line-height: 1;
   text-shadow: 0 1px 3px rgba(16, 42, 67, 0.5);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .v3s-peer-bar.dealer {

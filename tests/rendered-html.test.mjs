@@ -927,7 +927,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.v3s-quarter-bars\s*\{[\s\S]*?gap: 14px[\s\S]*?padding: 10px 18px 0/,
   );
-  assert.match(css, /\.v3s-peer-bar b\s*\{[\s\S]*?font-size: 8px/);
+  assert.match(
+    css,
+    /\.v3s-bar-fill b\s*\{[^}]*top: 50%[^}]*transform: translate\(-50%, -50%\)/,
+  );
+  assert.match(
+    css,
+    /\.v3s-peer-bar b\s*\{[^}]*top: 50%[^}]*font-size: 8px[^}]*transform: translate\(-50%, -50%\)/,
+  );
   assert.match(css, /\.legend-peer\.dealer[\s\S]*?\.legend-peer\.region[\s\S]*?\.legend-peer\.size/);
   assert.match(
     css,
