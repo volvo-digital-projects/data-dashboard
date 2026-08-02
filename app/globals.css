@@ -5660,6 +5660,20 @@ button.quarter-score-row:disabled {
   transform: translateY(-50%);
 }
 
+.v3s-average-marker b {
+  position: absolute;
+  top: -12px;
+  left: 2px;
+  padding: 1px 3px;
+  color: var(--es90-orange);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.94);
+  font-family: var(--font-latin);
+  font-size: 8px;
+  font-weight: 760;
+  line-height: 1;
+}
+
 .v3s-upcoming-bar {
   width: 28px;
   min-width: 28px;

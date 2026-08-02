@@ -489,9 +489,15 @@ function V3SPerformance({
                 {quarter.value !== null && (
                   <span
                     className="v3s-average-marker"
-                    style={{ bottom: `${quarter.average}%` }}
+                    style={{
+                      bottom: `${Math.min(
+                        100,
+                        Math.max(0, quarter.average ?? 0),
+                      )}%`,
+                    }}
                     title={`전국 평균 ${displayNumber(quarter.average)}점`}
                   >
+                    <b>{displayNumber(quarter.average)}</b>
                     <i />
                   </span>
                 )}

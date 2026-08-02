@@ -721,6 +721,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.v3s-average-marker\s*\{[\s\S]*?background: repeating-linear-gradient\([\s\S]*?var\(--es90-orange\) 0 5px,[\s\S]*?transparent 5px 9px/,
   );
   assert.match(
+    dashboardSource,
+    /className="v3s-average-marker"[\s\S]*?Math\.min\([\s\S]*?Math\.max\(0, quarter\.average \?\? 0\)[\s\S]*?<b>\{displayNumber\(quarter\.average\)\}<\/b>/,
+  );
+  assert.match(
+    css,
+    /\.v3s-average-marker b\s*\{[^}]*top: -12px[^}]*color: var\(--es90-orange\)[^}]*font-size: 8px/,
+  );
+  assert.match(
     css,
     /\.legend-average\s*\{[\s\S]*?background: var\(--es90-orange\)/,
   );
