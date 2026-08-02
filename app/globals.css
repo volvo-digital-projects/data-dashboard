@@ -5663,7 +5663,8 @@ button.quarter-score-row:disabled {
 .v3s-average-marker b {
   position: absolute;
   top: 4px;
-  left: 4px;
+  right: 9px;
+  left: auto;
   z-index: 3;
   padding: 2px 4px;
   color: var(--es90-orange);
