@@ -620,22 +620,18 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(css, /\.future-window-help\s*\{[\s\S]*?fill: #8795a7/);
   assert.match(
     css,
-    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: none[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?opacity: 0[\s\S]*?animation: showroom-line-enter 240ms ease-out 1420ms forwards/,
+    /\.trend-line\s*\{[\s\S]*?stroke-width: 1\.8[\s\S]*?stroke-dasharray: none[\s\S]*?stroke-linecap: round[\s\S]*?stroke-linejoin: round[\s\S]*?opacity: 1/,
   );
-  assert.doesNotMatch(dashboardSource, /revealClipId|trend-line-reveal-mask|clipPath=/);
+  assert.match(
+    dashboardSource,
+    /className="actual-series-wipe"[\s\S]*?className="trend-line"[\s\S]*?className="actual-week-point"[\s\S]*?className="actual-point-value"/,
+  );
   const actualTrendPolyline = dashboardSource.match(
     /<polyline\s+points=\{segment[\s\S]*?className="trend-line"\s*\/>/,
   )?.[0];
   assert.ok(actualTrendPolyline);
   assert.doesNotMatch(actualTrendPolyline, /pathLength=/);
-  assert.match(
-    dashboardSource,
-    /const chartAnimationStart = 1420[\s\S]*?const chartAnimationDuration = 520[\s\S]*?const chartAnimationPointLag = 18/,
-  );
-  assert.match(
-    dashboardSource,
-    /const actualWeekSpan = Math\.max\(1, lastActualWeek - firstActualWeek\)[\s\S]*?\(\(week - firstActualWeek\) \/ actualWeekSpan\) \* chartAnimationDuration/,
-  );
+  assert.doesNotMatch(dashboardSource, /pointAnimationDelay|chartAnimationStart/);
   assert.match(
     dashboardSource,
     /key=\{`\$\{selected\.cdsid\}-voc`\}[\s\S]*?metric="voc"[\s\S]*?compact/,
@@ -655,7 +651,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.equal((dashboardSource.match(/r=\{markerRadius\}/g) ?? []).length, 2);
   assert.match(
     css,
-    /@keyframes showroom-line-enter\s*\{[\s\S]*?opacity: 0[\s\S]*?opacity: 1/,
+    /\.actual-series-wipe\s*\{[^}]*clip-path: inset\(0 100% 0 0\)[^}]*animation: actual-series-wipe 1200ms cubic-bezier\(0\.16, 1, 0\.3, 1\) 180ms both/,
+  );
+  assert.match(
+    css,
+    /@keyframes actual-series-wipe\s*\{[\s\S]*?clip-path: inset\(0 100% 0 0\)[\s\S]*?clip-path: inset\(0 0 0 0\)/,
   );
 });
 

@@ -786,21 +786,11 @@ function WeeklyTrend({
   const activeQuarterEnd = weekBoundaryX(39);
   const upcomingQuarterStart = weekBoundaryX(39);
   const upcomingQuarterEnd = weekBoundaryX(52);
-  const chartAnimationStart = 1420;
-  const chartAnimationDuration = 520;
-  const chartAnimationPointLag = 18;
   const markerSize = 6.3;
   const markerRadius = markerSize / 2;
   const y = (value: number) =>
     chartY(170) -
     ((value - min) / Math.max(1, max - min)) * chartY(126);
-  const firstActualWeek = rawPoints[0]?.week ?? 1;
-  const lastActualWeek = rawPoints.at(-1)?.week ?? firstActualWeek;
-  const actualWeekSpan = Math.max(1, lastActualWeek - firstActualWeek);
-  const pointAnimationDelay = (week: number) =>
-    chartAnimationStart +
-    ((week - firstActualWeek) / actualWeekSpan) * chartAnimationDuration +
-    chartAnimationPointLag;
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13, 26, 39];
   const quarterLabels = [
@@ -1091,74 +1081,69 @@ function WeeklyTrend({
                 />
               </>
             ))}
-            {showActual && storeSegments.map(
-              (segment, index) =>
-                segment.length > 1 && (
-                  <g key={`store-${showroom.cdsid}-${metric}-${index}`}>
-                    <polyline
-                      points={segment
-                        .map((point) => `${x(point.week)},${y(point.value)}`)
-                        .join(" ")}
-                      className="trend-line"
-                    />
-                  </g>
-                ),
-            )}
-            {showActual && rawPoints.map((point) => (
-              <g
-                key={`${showroom.cdsid}-${metric}-${point.week}-${point.label}`}
-              >
-                {isWeeklyMetric ? (
-                  <rect
-                    x={x(point.week) - markerRadius}
-                    y={y(point.value) - markerRadius}
-                    width={markerSize}
-                    height={markerSize}
-                    data-week={point.label}
-                    className="actual-week-point"
-                    style={{
-                      animationDelay: `${pointAnimationDelay(point.week)}ms`,
-                    }}
-                  >
-                    <title>
-                      {`${point.label} ${displayShowroomName(
-                        showroom.showroom,
-                      )} 실제값 ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
-                        averageAt(point.week),
-                      )}점`}
-                    </title>
-                  </rect>
-                ) : (
-                  <circle
-                    cx={x(point.week)}
-                    cy={y(point.value)}
-                    r={markerRadius}
-                    className="actual-quarter-point"
-                    style={{
-                      animationDelay: `${pointAnimationDelay(point.week)}ms`,
-                    }}
-                  >
-                    <title>
-                      {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
-                        averageAt(point.week),
-                      )}점`}
-                    </title>
-                  </circle>
+            {showActual && (
+              <g className="actual-series-wipe">
+                {storeSegments.map(
+                  (segment, index) =>
+                    segment.length > 1 && (
+                      <g key={`store-${showroom.cdsid}-${metric}-${index}`}>
+                        <polyline
+                          points={segment
+                            .map((point) => `${x(point.week)},${y(point.value)}`)
+                            .join(" ")}
+                          className="trend-line"
+                        />
+                      </g>
+                    ),
                 )}
-                <text
-                  x={x(point.week)}
-                  y={actualValueLabelY(point)}
-                  textAnchor="middle"
-                  className="actual-point-value"
-                  style={{
-                    animationDelay: `${pointAnimationDelay(point.week) + 55}ms`,
-                  }}
-                  aria-hidden="true"
-                >
-                  {displayNumber(point.value)}
-                </text>
+                {rawPoints.map((point) => (
+                  <g
+                    key={`${showroom.cdsid}-${metric}-${point.week}-${point.label}`}
+                  >
+                    {isWeeklyMetric ? (
+                      <rect
+                        x={x(point.week) - markerRadius}
+                        y={y(point.value) - markerRadius}
+                        width={markerSize}
+                        height={markerSize}
+                        data-week={point.label}
+                        className="actual-week-point"
+                      >
+                        <title>
+                          {`${point.label} ${displayShowroomName(
+                            showroom.showroom,
+                          )} 실제값 ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
+                            averageAt(point.week),
+                          )}점`}
+                        </title>
+                      </rect>
+                    ) : (
+                      <circle
+                        cx={x(point.week)}
+                        cy={y(point.value)}
+                        r={markerRadius}
+                        className="actual-quarter-point"
+                      >
+                        <title>
+                          {`${point.label} ${displayNumber(point.value)}점 · 전국 평균 ${displayNumber(
+                            averageAt(point.week),
+                          )}점`}
+                        </title>
+                      </circle>
+                    )}
+                    <text
+                      x={x(point.week)}
+                      y={actualValueLabelY(point)}
+                      textAnchor="middle"
+                      className="actual-point-value"
+                      aria-hidden="true"
+                    >
+                      {displayNumber(point.value)}
+                    </text>
+                  </g>
+                ))}
               </g>
-            ))}
+            )}
             {hoverWeek !== null && (
               <line
                 x1={x(hoverWeek)}

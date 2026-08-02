@@ -4915,16 +4915,20 @@ input:focus-visible,
   stroke-dasharray: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0;
-  animation: showroom-line-enter 240ms ease-out 1420ms forwards;
+  opacity: 1;
 }
 
 .actual-week-point,
 .actual-quarter-point {
-  opacity: 0;
-  animation: point-enter 180ms ease-out both;
+  opacity: 1;
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.actual-series-wipe {
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+  animation: actual-series-wipe 1200ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
 }
 
 .national-average-point {
@@ -4949,8 +4953,7 @@ input:focus-visible,
 }
 
 .actual-point-value {
-  opacity: 0;
-  animation: actual-value-enter 160ms ease-out both;
+  opacity: 1;
 }
 
 .actual-point-value {
@@ -5979,32 +5982,12 @@ button.quarter-score-row:disabled {
   }
 }
 
-@keyframes showroom-line-enter {
+@keyframes actual-series-wipe {
   from {
-    opacity: 0;
+    clip-path: inset(0 100% 0 0);
   }
   to {
-    opacity: 1;
-  }
-}
-
-@keyframes point-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.65);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes actual-value-enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+    clip-path: inset(0 0 0 0);
   }
 }
 
@@ -6604,6 +6587,7 @@ button.quarter-score-row:disabled {
   .metric-card,
   .average-trend-line,
   .trend-line,
+  .actual-series-wipe,
   .combat-score-number,
   .combat-score-digit,
   .v3s-bar-fill,
@@ -6629,6 +6613,10 @@ button.quarter-score-row:disabled {
   .trend-line {
     stroke-dasharray: none;
     opacity: 1;
+  }
+
+  .actual-series-wipe {
+    clip-path: none;
   }
 
   .actual-week-point,
