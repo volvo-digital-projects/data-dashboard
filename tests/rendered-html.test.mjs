@@ -667,7 +667,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.doesNotMatch(css, /\.score-tier\.active\s*\{/);
   assert.match(
     css,
-    /\.v3s-quarter-column\.in-progress \.v3s-upcoming-bar\s*\{[^}]*height: 90%/,
+    /\.v3s-quarter-column\.in-progress \.v3s-upcoming-bar,\s*\.v3s-quarter-column\.upcoming \.v3s-upcoming-bar\s*\{[^}]*height: 90%/,
   );
   assert.doesNotMatch(css, /\.profile-analysis-link/);
   const dashboardSource = await readFile(

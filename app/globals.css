@@ -5665,7 +5665,8 @@ button.quarter-score-row:disabled {
   );
 }
 
-.v3s-quarter-column.in-progress .v3s-upcoming-bar {
+.v3s-quarter-column.in-progress .v3s-upcoming-bar,
+.v3s-quarter-column.upcoming .v3s-upcoming-bar {
   height: 90%;
 }
 
