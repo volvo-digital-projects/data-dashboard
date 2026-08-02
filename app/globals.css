@@ -5583,12 +5583,12 @@ button.quarter-score-row:disabled {
   left: 50%;
   color: white;
   font-family: var(--font-latin);
-  font-size: 7px;
-  font-weight: 720;
+  font-size: 8px;
+  font-weight: 760;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.04em;
   line-height: 1;
-  text-shadow: 0 1px 3px rgba(16, 42, 67, 0.28);
+  text-shadow: 0 1px 3px rgba(16, 42, 67, 0.5);
   transform: translateX(-50%);
 }
 
