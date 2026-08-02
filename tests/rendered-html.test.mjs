@@ -614,6 +614,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
+    /\.coverage-line::after\s*\{[^}]*width: 6px[^}]*height: 6px[^}]*left: 50%[^}]*border: 1\.5px solid currentColor[^}]*background: white[^}]*translate\(-50%, -50%\)/,
+  );
+  assert.match(
+    css,
+    /\.coverage-line\.national::after\s*\{[^}]*border-radius: 50%/,
+  );
+  assert.match(
+    css,
     /\.future-window\s*\{[\s\S]*?fill: #eef2f5[\s\S]*?opacity: 0\.9/,
   );
   assert.match(css, /\.future-window-label\s*\{[\s\S]*?fill: #596b80/);

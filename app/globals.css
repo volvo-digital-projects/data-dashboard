@@ -1518,8 +1518,22 @@ input:focus-visible {
 .coverage-line {
   width: 28px;
   height: 0;
+  position: relative;
   flex: 0 0 auto;
   border-top: 2.5px solid currentColor;
+}
+
+.coverage-line::after {
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  box-sizing: border-box;
+  border: 1.5px solid currentColor;
+  background: white;
+  transform: translate(-50%, -50%);
+  content: "";
 }
 
 .coverage-line.actual {
@@ -1529,6 +1543,10 @@ input:focus-visible {
 .coverage-line.national {
   color: var(--warning);
   border-top-style: dashed;
+}
+
+.coverage-line.national::after {
+  border-radius: 50%;
 }
 
 .comparison-panel {
