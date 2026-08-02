@@ -876,6 +876,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px/);
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px/);
+  assert.doesNotMatch(css, /\.metric-card\s*\{[^}]*animation:/);
+  assert.doesNotMatch(css, /@keyframes metric-enter/);
   assert.match(
     css,
     /\.metric-quarter-strip\s*\{[^}]*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/,
