@@ -818,11 +818,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     dashboardSource,
-    /className="combat-score-number"[\s\S]*?displayNumber\(cumulativeAverage\)/,
+    /const cumulativeScoreDigits = displayNumber\(cumulativeAverage\)[\s\S]*?character === "\."[\s\S]*?digits\[digits\.length - 1\] \+= character/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="combat-score-digit"[\s\S]*?animationDelay: `\$\{180 \+ index \* 130\}ms`/,
   );
   assert.match(
     css,
-    /\.combat-score-number\s*\{[\s\S]*?animation: combat-score-drop 760ms cubic-bezier\(0\.16, 1, 0\.3, 1\) 180ms both/,
+    /\.combat-score-digit\s*\{[\s\S]*?animation: combat-score-drop 760ms cubic-bezier\(0\.16, 1, 0\.3, 1\) both/,
   );
   assert.match(
     css,

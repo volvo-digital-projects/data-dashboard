@@ -5386,10 +5386,15 @@ button.quarter-score-row:disabled {
 }
 
 .combat-score-number {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.combat-score-digit {
   display: inline-block;
   transform-origin: 50% 100%;
   will-change: opacity, transform, filter;
-  animation: combat-score-drop 760ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+  animation: combat-score-drop 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .combat-summary-stack em {
@@ -6620,6 +6625,7 @@ button.quarter-score-row:disabled {
   .average-trend-line,
   .trend-line,
   .combat-score-number,
+  .combat-score-digit,
   .v3s-bar-fill,
   .v3s-peer-bar,
   .v3s-history-area,

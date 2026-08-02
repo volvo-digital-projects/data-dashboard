@@ -1657,6 +1657,16 @@ export default function Dashboard({
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;
   const cumulativeAverage = (q1Combat + combat) / 2;
+  const cumulativeScoreDigits = displayNumber(cumulativeAverage)
+    .split("")
+    .reduce<string[]>((digits, character) => {
+      if (character === "." && digits.length) {
+        digits[digits.length - 1] += character;
+      } else {
+        digits.push(character);
+      }
+      return digits;
+    }, []);
   const selectedQuarterLabel = selectedQuarter.toUpperCase();
   const selectedQuarterCombat =
     quarterValueOf(selected, "combat", selectedQuarter) ?? combat;
@@ -1961,8 +1971,20 @@ export default function Dashboard({
             <div className="combat-summary-stack">
               <span>누적 평균</span>
               <strong>
-                <span className="combat-score-number">
-                  {displayNumber(cumulativeAverage)}
+                <span
+                  className="combat-score-number"
+                  aria-label={displayNumber(cumulativeAverage)}
+                >
+                  {cumulativeScoreDigits.map((digit, index) => (
+                    <span
+                      className="combat-score-digit"
+                      aria-hidden="true"
+                      style={{ animationDelay: `${180 + index * 130}ms` }}
+                      key={`${digit}-${index}`}
+                    >
+                      {digit}
+                    </span>
+                  ))}
                 </span>
                 <small>점</small>
               </strong>
