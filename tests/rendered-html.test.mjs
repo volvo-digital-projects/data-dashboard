@@ -231,6 +231,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(html, /class="v3s-performance compact"/);
   assert.equal((html.match(/class="trend-wrap compact"/g) ?? []).length, 2);
+  assert.equal((html.match(/class="weekly-score-layout"/g) ?? []).length, 2);
+  assert.match(html, /aria-label="VOC 추가 영역 A"[\s\S]*?<strong>A<\/strong>/);
+  assert.match(html, /aria-label="CX Index 추가 영역 B"[\s\S]*?<strong>B<\/strong>/);
   const v3sStart = html.indexOf('id="score-v3s"');
   const vocStart = html.indexOf('id="score-voc"');
   assert.ok(v3sStart >= 0 && vocStart > v3sStart);
@@ -896,6 +899,18 @@ test("ships the premium neutral design system and Pretendard typography", async 
     "utf8",
   );
   assert.doesNotMatch(css, /\.score-tier\.active\s*\{/);
+  assert.match(
+    css,
+    /\.weekly-score-layout\s*\{[^}]*grid-template-columns: minmax\(0, 3fr\) minmax\(0, 1fr\)[^}]*gap: 10px/,
+  );
+  assert.match(
+    css,
+    /\.weekly-score-placeholder\s*\{[^}]*place-items: center[^}]*border: 1px dashed/,
+  );
+  assert.match(
+    css,
+    /\.weekly-score-layout \.trend-wrap\.compact \.actual-point-value,[\s\S]*?\.weekly-score-layout \.trend-wrap\.compact \.national-point-value\s*\{[^}]*font-size: 8px/,
+  );
   assert.match(
     css,
     /\.v3s-quarter-column\.in-progress \.v3s-upcoming-bar,\s*\.v3s-quarter-column\.upcoming \.v3s-upcoming-bar\s*\{[^}]*height: 90%/,

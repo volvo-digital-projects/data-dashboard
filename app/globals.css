@@ -6523,6 +6523,45 @@ button.quarter-score-row:disabled {
   font-weight: 600;
 }
 
+.weekly-score-layout {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 10px;
+}
+
+.weekly-score-layout > .trend-wrap {
+  min-width: 0;
+}
+
+.weekly-score-placeholder {
+  min-width: 0;
+  margin-top: 5px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(152, 162, 179, 0.34);
+  border-radius: 12px;
+  color: #a5b0b8;
+  background: linear-gradient(145deg, rgba(248, 250, 251, 0.76), rgba(242, 246, 248, 0.92));
+}
+
+.weekly-score-placeholder strong {
+  font-family: var(--font-latin);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.weekly-score-layout .trend-wrap.compact .actual-point-value,
+.weekly-score-layout .trend-wrap.compact .national-point-value {
+  font-size: 8px;
+}
+
+.weekly-score-layout .trend-wrap.compact .quarter-band small {
+  font-size: 7px;
+}
+
 .trend-wrap.compact {
   margin-top: 5px;
 }
@@ -6944,6 +6983,14 @@ button.quarter-score-row:disabled {
 
   .show-values-toggle {
     padding-inline: 12px;
+  }
+
+  .weekly-score-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .weekly-score-placeholder {
+    min-height: 88px;
   }
 
   .v3s-performance {

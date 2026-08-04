@@ -2156,12 +2156,20 @@ export default function Dashboard({
                 <strong>VOC</strong>
                 <span>{metricDescriptions.voc}</span>
               </header>
-              <WeeklyTrend
-                key={`${selected.cdsid}-voc`}
-                showroom={selected}
-                metric="voc"
-                compact
-              />
+              <div className="weekly-score-layout">
+                <WeeklyTrend
+                  key={`${selected.cdsid}-voc`}
+                  showroom={selected}
+                  metric="voc"
+                  compact
+                />
+                <aside
+                  className="weekly-score-placeholder"
+                  aria-label="VOC 추가 영역 A"
+                >
+                  <strong>A</strong>
+                </aside>
+              </div>
             </section>
             <section
               id="score-cx"
@@ -2173,12 +2181,20 @@ export default function Dashboard({
                 <strong>CX Index</strong>
                 <span>{metricDescriptions.cx}</span>
               </header>
-              <WeeklyTrend
-                key={`${selected.cdsid}-cx`}
-                showroom={selected}
-                metric="cx"
-                compact
-              />
+              <div className="weekly-score-layout">
+                <WeeklyTrend
+                  key={`${selected.cdsid}-cx`}
+                  showroom={selected}
+                  metric="cx"
+                  compact
+                />
+                <aside
+                  className="weekly-score-placeholder"
+                  aria-label="CX Index 추가 영역 B"
+                >
+                  <strong>B</strong>
+                </aside>
+              </div>
             </section>
           </div>
         </article>
