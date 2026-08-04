@@ -37,6 +37,12 @@ test("server-renders the selected CDSID dashboard", async () => {
 
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
+  const seoulToday = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Asia/Seoul",
+    dateStyle: "short",
+  })
+    .format(new Date())
+    .replaceAll("-", ".");
   assert.match(html, /DSC COMMAND/);
   assert.doesNotMatch(
     visibleHtml,
@@ -62,7 +68,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="identity-meta-row"/);
   assert.match(html, /class="identity-detail-rail"/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
-  assert.match(html, /최근 업데이트/);
+  assert.match(
+    visibleHtml,
+    new RegExp(`최근 업데이트 ${seoulToday.replaceAll(".", "\\.")}`),
+  );
   assert.match(visibleHtml, /현재 Q3평가 진행중/);
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
@@ -693,6 +702,27 @@ test("ships the premium neutral design system and Pretendard typography", async 
   const analysisSource = await readFile(
     new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
     "utf8",
+  );
+
+  assert.match(
+    dashboardSource,
+    /const seoulDateFormatter = new Intl\.DateTimeFormat\("en-US", \{[\s\S]*?timeZone: "Asia\/Seoul"/,
+  );
+  assert.match(
+    dashboardSource,
+    /const \[accessDate, setAccessDate\] = useState\(\(\) =>[\s\S]*?formatSeoulDate\(new Date\(\)\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /window\.setInterval\(syncAccessDate, 60_000\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?최근 업데이트 \{accessDate\}/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /latestUpdate\.effectiveDate\.replaceAll\("-", "\."\)/,
   );
 
   assert.match(css, /font-family: "Pretendard Variable"/);

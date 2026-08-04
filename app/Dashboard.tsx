@@ -107,6 +107,19 @@ type WeeklyData = {
 
 const dashboard = dashboardJson as DashboardData;
 const weeklyDashboard = weeklyJson as WeeklyData;
+const seoulDateFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Asia/Seoul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+const formatSeoulDate = (date: Date) => {
+  const parts = seoulDateFormatter.formatToParts(date);
+  const part = (type: "year" | "month" | "day") =>
+    parts.find((item) => item.type === type)?.value ?? "";
+  return `${part("year")}.${part("month")}.${part("day")}`;
+};
 
 const metricMeta: Record<
   MetricKey,
@@ -1641,10 +1654,20 @@ export default function Dashboard({
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [accessDate, setAccessDate] = useState(() =>
+    formatSeoulDate(new Date()),
+  );
   const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
     title: "현재 Q3평가 진행중",
     effectiveDate: dashboard.meta.updatedAt,
   });
+
+  useEffect(() => {
+    const syncAccessDate = () => setAccessDate(formatSeoulDate(new Date()));
+    syncAccessDate();
+    const timer = window.setInterval(syncAccessDate, 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -1733,9 +1756,8 @@ export default function Dashboard({
           <h1>{displayShowroomName(selected.showroom)}</h1>
           <div className="update-status">
             <i aria-hidden="true" />
-            <time>
-              최근 업데이트{" "}
-              {latestUpdate.effectiveDate.replaceAll("-", ".")}
+            <time dateTime={accessDate.replaceAll(".", "-")}>
+              최근 업데이트 {accessDate}
             </time>
             <span>{displayUpdateTitle}</span>
           </div>
