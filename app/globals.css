@@ -104,6 +104,10 @@
   --warning-soft: #f8e8e4;
   --caution: #e87561;
   --caution-soft: #fff0ec;
+  --status-danger: #b4232d;
+  --status-danger-soft: #fce8eb;
+  --status-caution: #df7184;
+  --status-caution-soft: #fff0f3;
   --es90-orange: #f15a24;
   --secondary: #66757d;
   --muted: #8a969c;
@@ -887,7 +891,7 @@ input:focus-visible {
 
 .metric-card.warning.active {
   border-color: var(--line);
-  box-shadow: inset 0 3px 0 var(--warning);
+  box-shadow: inset 0 3px 0 var(--status-danger);
 }
 
 .metric-card-topline,
@@ -922,13 +926,13 @@ input:focus-visible {
 }
 
 .signal-pill.warning {
-  background: var(--warning-soft);
-  color: var(--warning);
+  background: var(--status-danger-soft);
+  color: var(--status-danger);
 }
 
 .signal-pill.caution {
-  background: var(--caution-soft);
-  color: var(--caution);
+  background: var(--status-caution-soft);
+  color: var(--status-caution);
 }
 
 .signal-icon {
@@ -945,13 +949,13 @@ input:focus-visible {
 
 .signal-icon.warning {
   background: transparent;
-  color: var(--warning);
+  color: var(--status-danger);
   font-size: 10px;
 }
 
 .signal-icon.caution {
   background: transparent;
-  color: var(--caution);
+  color: var(--status-caution);
   font-size: 10px;
 }
 
@@ -982,11 +986,11 @@ input:focus-visible {
 }
 
 .metric-benchmark strong.warning {
-  color: var(--warning);
+  color: var(--status-danger);
 }
 
 .metric-benchmark strong.caution {
-  color: var(--caution);
+  color: var(--status-caution);
 }
 
 .metric-benchmark strong.positive {
@@ -994,15 +998,15 @@ input:focus-visible {
 }
 
 .metric-benchmark strong.negative {
-  color: var(--warning) !important;
+  color: var(--status-danger) !important;
 }
 
 .metric-benchmark strong.negative.caution {
-  color: var(--caution) !important;
+  color: var(--status-caution) !important;
 }
 
 .metric-benchmark strong.negative.warning {
-  color: var(--warning) !important;
+  color: var(--status-danger) !important;
 }
 
 .metric-track {
@@ -1020,11 +1024,11 @@ input:focus-visible {
 }
 
 .metric-card.warning .metric-track span {
-  background: linear-gradient(90deg, #b83e37 0%, var(--warning) 68%, #df6c64 100%);
+  background: linear-gradient(90deg, #8f1721 0%, var(--status-danger) 68%, #d04c57 100%);
 }
 
 .metric-card.caution .metric-track span {
-  background: linear-gradient(90deg, #d85f50 0%, var(--caution) 68%, #f2a08f 100%);
+  background: linear-gradient(90deg, #f0a0ae 0%, var(--status-caution) 68%, #cc526a 100%);
 }
 
 .metric-track i {
@@ -2562,12 +2566,13 @@ input:focus-visible {
   }
 
   .mobile-kpis button.caution {
-    border-top-color: var(--caution);
+    border-top-color: var(--status-caution);
+    background: var(--status-caution-soft);
   }
 
   .mobile-kpis button.warning {
-    border-top-color: var(--warning);
-    background: var(--warning-soft);
+    border-top-color: var(--status-danger);
+    background: var(--status-danger-soft);
   }
 
   .mobile-kpis button > span,
@@ -4194,6 +4199,10 @@ input:focus-visible {
   --warning-soft: #fbecea;
   --caution: #e87561;
   --caution-soft: #fff0ec;
+  --status-danger: #b4232d;
+  --status-danger-soft: #fce8eb;
+  --status-caution: #df7184;
+  --status-caution-soft: #fff0f3;
   --secondary: #667085;
   --muted: #98a2b3;
   --font-korean:
@@ -4745,11 +4754,11 @@ input:focus-visible,
 }
 
 .metric-card.warning.active::before {
-  background: var(--warning);
+  background: var(--status-danger);
 }
 
 .metric-card.caution.active::before {
-  background: var(--caution);
+  background: var(--status-caution);
 }
 
 .metric-code {

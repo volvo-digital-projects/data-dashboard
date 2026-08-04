@@ -925,13 +925,17 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--blue: #2f6b8a/);
   assert.match(css, /--good: #1f8f6a/);
   assert.match(css, /--warning: #d14b41/);
+  assert.match(css, /--status-danger: #b4232d/);
+  assert.match(css, /--status-danger-soft: #fce8eb/);
+  assert.match(css, /--status-caution: #df7184/);
+  assert.match(css, /--status-caution-soft: #fff0f3/);
   assert.match(
     css,
-    /\.signal-icon\.warning\s*\{[^}]*background: transparent[^}]*color: var\(--warning\)[^}]*font-size: 10px/,
+    /\.signal-icon\.warning\s*\{[^}]*background: transparent[^}]*color: var\(--status-danger\)[^}]*font-size: 10px/,
   );
   assert.match(
     css,
-    /\.signal-icon\.caution\s*\{[^}]*background: transparent[^}]*color: var\(--caution\)[^}]*font-size: 10px/,
+    /\.signal-icon\.caution\s*\{[^}]*background: transparent[^}]*color: var\(--status-caution\)[^}]*font-size: 10px/,
   );
   assert.match(
     css,
@@ -939,15 +943,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.metric-benchmark strong\.negative\s*\{\s*color: var\(--warning\) !important;/,
+    /\.metric-benchmark strong\.negative\s*\{\s*color: var\(--status-danger\) !important;/,
   );
   assert.match(
     css,
-    /\.metric-benchmark strong\.negative\.caution\s*\{\s*color: var\(--caution\) !important;/,
+    /\.metric-benchmark strong\.negative\.caution\s*\{\s*color: var\(--status-caution\) !important;/,
   );
   assert.match(
     css,
-    /\.metric-benchmark strong\.negative\.warning\s*\{\s*color: var\(--warning\) !important;/,
+    /\.metric-benchmark strong\.negative\.warning\s*\{\s*color: var\(--status-danger\) !important;/,
   );
   assert.match(
     css,
@@ -1202,11 +1206,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.metric-card\.warning \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #b83e37 0%, var\(--warning\) 68%, #df6c64 100%\)/,
+    /\.metric-card\.warning \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #8f1721 0%, var\(--status-danger\) 68%, #d04c57 100%\)/,
   );
   assert.match(
     css,
-    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #d85f50 0%, var\(--caution\) 68%, #f2a08f 100%\)/,
+    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #f0a0ae 0%, var\(--status-caution\) 68%, #cc526a 100%\)/,
   );
   assert.match(css, /@keyframes progress-fill\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/);
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);
