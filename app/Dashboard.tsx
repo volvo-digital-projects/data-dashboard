@@ -220,7 +220,7 @@ function getSignal(value: number, average: number) {
 function SignalIcon({ tone }: { tone: string }) {
   return (
     <span className={`signal-icon ${tone}`} aria-hidden="true">
-      {tone === "good" ? "↗" : tone === "caution" ? "!" : "↓"}
+      {tone === "good" ? "↗" : tone === "caution" ? "!" : "▼"}
     </span>
   );
 }

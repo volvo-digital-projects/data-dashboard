@@ -944,7 +944,9 @@ input:focus-visible {
 }
 
 .signal-icon.warning {
-  background: var(--warning);
+  background: transparent;
+  color: var(--warning);
+  font-size: 10px;
 }
 
 .signal-icon.caution {

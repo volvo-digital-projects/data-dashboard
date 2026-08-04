@@ -93,6 +93,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
+  assert.match(
+    visibleHtml,
+    /class="signal-icon warning" aria-hidden="true">▼<\/span>위험 감지/,
+  );
   assert.match(html, /CX Index/);
   assert.equal((visibleHtml.match(/점 \/ 100점 만점/g) ?? []).length, 2);
   assert.equal((visibleHtml.match(/점 \/ 130점 만점/g) ?? []).length, 1);
@@ -895,6 +899,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--blue: #2f6b8a/);
   assert.match(css, /--good: #1f8f6a/);
   assert.match(css, /--warning: #d14b41/);
+  assert.match(
+    css,
+    /\.signal-icon\.warning\s*\{[^}]*background: transparent[^}]*color: var\(--warning\)[^}]*font-size: 10px/,
+  );
   assert.match(
     css,
     /\.metric-benchmark strong\.positive\s*\{\s*color: var\(--blue\) !important;/,
