@@ -2899,7 +2899,8 @@ input:focus-visible {
 }
 
 .identity-analysis-entry::after,
-.identity-profile::after {
+.identity-profile::after,
+.analysis-context-item::after {
   content: "→";
   width: 11px;
   height: 11px;
@@ -2920,6 +2921,10 @@ input:focus-visible {
   font-weight: 800;
   line-height: 1;
   pointer-events: none;
+}
+
+.analysis-context-item::after {
+  content: "←";
 }
 
 .identity-profile {
@@ -3142,6 +3147,7 @@ input:focus-visible {
   column-gap: 10px;
   padding: 0 14px;
   justify-items: center;
+  position: relative;
   background: transparent;
 }
 
