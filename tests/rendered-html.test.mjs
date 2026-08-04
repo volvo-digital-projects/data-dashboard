@@ -640,14 +640,22 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const resizeObserver = new ResizeObserver\(updateWidth\)/,
   );
-  assert.match(dashboardSource, /const chartHeight = compact \? 125 : 210/);
+  assert.match(dashboardSource, /const chartHeight = compact \? 150 : 210/);
   assert.match(
     css,
     /\.v3s-performance\.compact \.v3s-quarter-panel,[\s\S]*?min-height: 172px/,
   );
   assert.match(
     css,
-    /\.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 125px/,
+    /\.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 150px/,
+  );
+  assert.match(
+    css,
+    /\.score-tier-weekly \.trend-wrap\.compact \.data-coverage\s*\{[^}]*position: absolute[^}]*top: 8px[^}]*right: 14px[^}]*border-top: 0/,
+  );
+  assert.match(
+    css,
+    /\.score-tier-weekly \.score-tier-heading\s*\{[^}]*padding-right: 230px/,
   );
   assert.match(
     dashboardSource,

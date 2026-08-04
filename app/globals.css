@@ -6523,6 +6523,14 @@ button.quarter-score-row:disabled {
   font-weight: 600;
 }
 
+.score-tier-weekly {
+  position: relative;
+}
+
+.score-tier-weekly .score-tier-heading {
+  padding-right: 230px;
+}
+
 .weekly-score-layout {
   min-width: 0;
   display: grid;
@@ -6594,7 +6602,7 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .trend-chart {
-  height: 125px;
+  height: 150px;
 }
 
 .trend-wrap.compact .future-window-label {
@@ -6606,7 +6614,7 @@ button.quarter-score-row:disabled {
 }
 
 .trend-wrap.compact .week-ruler {
-  margin-top: -13px;
+  margin-top: -16px;
   margin-bottom: 2px;
 }
 
@@ -6621,13 +6629,22 @@ button.quarter-score-row:disabled {
   letter-spacing: 0;
 }
 
-.trend-wrap.compact .data-coverage {
-  margin-top: 5px;
-  padding-top: 5px;
+.score-tier-weekly .trend-wrap.compact .data-coverage {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  z-index: 3;
+  flex-wrap: nowrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
 }
 
-.trend-wrap.compact .data-coverage button {
-  min-height: 24px;
+.score-tier-weekly .trend-wrap.compact .data-coverage button {
+  min-height: 22px;
+  padding-inline: 8px;
+  font-size: 9px;
 }
 
 .v3s-performance.compact {
@@ -7015,6 +7032,23 @@ button.quarter-score-row:disabled {
 
   .weekly-score-placeholder {
     min-height: 88px;
+  }
+
+  .score-tier-weekly .score-tier-heading {
+    padding-right: 2px;
+  }
+
+  .score-tier-weekly .trend-wrap.compact .data-coverage {
+    position: static;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid #edf0f2;
+  }
+
+  .score-tier-weekly .trend-wrap.compact .data-coverage button {
+    min-height: 24px;
   }
 
   .v3s-performance {
