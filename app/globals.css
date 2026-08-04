@@ -3235,6 +3235,14 @@ input:focus-visible {
   font-weight: 650;
 }
 
+.analysis-summary-card > em.positive {
+  color: var(--blue) !important;
+}
+
+.analysis-summary-card > em.negative {
+  color: var(--warning) !important;
+}
+
 .analysis-workspace {
   min-height: 410px;
   display: grid;

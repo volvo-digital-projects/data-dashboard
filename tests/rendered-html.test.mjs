@@ -863,6 +863,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--blue: #2f6b8a/);
   assert.match(css, /--good: #1f8f6a/);
   assert.match(css, /--warning: #d14b41/);
+  assert.match(
+    css,
+    /\.analysis-summary-card > em\.positive\s*\{\s*color: var\(--blue\) !important;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-summary-card > em\.negative\s*\{\s*color: var\(--warning\) !important;/,
+  );
   assert.match(css, /\.positive\s*\{\s*color: var\(--blue\) !important;/);
   assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
   assert.match(css, /--caution: #c58a1b/);
