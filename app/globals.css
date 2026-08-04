@@ -4372,6 +4372,7 @@ input:focus-visible,
 }
 
 .identity-title {
+  flex: 0 0 auto;
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
@@ -4412,7 +4413,82 @@ input:focus-visible,
   margin-right: 8px;
 }
 
+.identity-insights {
+  min-width: 0;
+  max-width: 650px;
+  flex: 1 1 540px;
+  display: grid;
+  align-content: center;
+  align-self: stretch;
+  overflow: hidden;
+  padding: 6px 12px;
+  border: 1px solid rgba(104, 190, 210, 0.36);
+  border-radius: 9px;
+  background:
+    linear-gradient(108deg, rgba(18, 57, 84, 0.98), rgba(35, 96, 121, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 24px -18px rgba(11, 45, 69, 0.88);
+}
+
+.identity-insight-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 3px 0;
+}
+
+.identity-insight-row + .identity-insight-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.identity-insight-row b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 16px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-family: var(--font-latin);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.identity-insight-row.v3s b {
+  color: #ffe4df;
+  background: rgba(220, 88, 76, 0.3);
+}
+
+.identity-insight-row.voc b {
+  color: #d8f7eb;
+  background: rgba(61, 170, 129, 0.28);
+}
+
+.identity-insight-row.cx b {
+  color: #ffefc7;
+  background: rgba(224, 165, 57, 0.29);
+}
+
+.identity-insight-row span {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(247, 251, 253, 0.94);
+  font-size: clamp(8px, 0.63vw, 10px);
+  font-weight: 570;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .identity-detail-rail {
+  flex: 0 0 auto;
+  margin-left: 0;
   min-height: 52px;
   align-items: stretch;
   overflow: hidden;
@@ -6881,6 +6957,13 @@ button.quarter-score-row:disabled {
     justify-content: flex-end;
   }
 
+  .identity-insights {
+    width: 100%;
+    max-width: none;
+    min-height: 66px;
+    flex: 0 0 auto;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
   }
@@ -6926,6 +7009,19 @@ button.quarter-score-row:disabled {
   .update-status {
     margin-top: 8px;
     font-size: 10px;
+  }
+
+  .identity-insights {
+    padding-inline: 10px;
+  }
+
+  .identity-insight-row {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .identity-insight-row span {
+    font-size: 8px;
   }
 
   .identity-detail-rail {
