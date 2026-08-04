@@ -308,8 +308,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
   assert.match(visibleHtml, /U 7개소/);
-  assert.match(html, /class="analysis-back-icon"/);
-  assert.doesNotMatch(html, /<span aria-hidden="true">←<\/span>/);
+  assert.doesNotMatch(html, /class="analysis-back|class="analysis-back-icon"/);
   const kolonResponse = await render(
     "/dashboard/6KR6861/analysis?view=dealer",
   );
@@ -319,7 +318,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "",
   );
   assert.match(kolonVisibleHtml, /코오롱 9개소/);
-  assert.match(visibleHtml, /볼보 강남대치 경쟁력 분석/);
+  assert.match(
+    visibleHtml,
+    /<header class="analysis-header"><h1>볼보 강남대치<\/h1>/,
+  );
+  assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력 분석|<span>Q2<\/span>/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
   assert.match(visibleHtml, /전국 전시장 내 분석/);
   assert.match(visibleHtml, /동일 권역별 내 분석/);
@@ -375,7 +378,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal((html.match(/class="analysis-rank"/g) ?? []).length, 7);
   assert.match(visibleHtml, /볼보 분당/);
-  assert.match(html, /href="\/dashboard\/6KR6834"/);
+  assert.doesNotMatch(html, /href="\/dashboard\/6KR6834"/);
 
   const regionResponse = await render(
     "/dashboard/6KR6834/analysis?view=region",

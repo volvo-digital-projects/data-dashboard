@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   useEffect,
   useMemo,
@@ -577,16 +576,7 @@ export default function CompetitiveAnalysis({
   return (
     <main className="competitive-analysis-page">
       <header className="analysis-header">
-        <div>
-          <Link href={`/dashboard/${selected.cdsid}`} className="analysis-back">
-            <span className="analysis-back-icon" aria-hidden="true" />
-            <span>메인 대시보드</span>
-          </Link>
-          <div className="analysis-title-row">
-            <h1>{displayShowroomName(selected.showroom)} 경쟁력 분석</h1>
-            <span>Q2</span>
-          </div>
-        </div>
+        <h1>{displayShowroomName(selected.showroom)}</h1>
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <div className="analysis-context-item">
             <span
