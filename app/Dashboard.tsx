@@ -155,6 +155,12 @@ const nationalV3sAnnualAverages = nationalV3sQuarterAverages.map(
     value: values.reduce((sum, value) => sum + value, 0) / values.length,
   }),
 );
+const nationalV3sFiveYearValues = nationalV3sQuarterAverages.flatMap(
+  ({ values }) => values,
+);
+const nationalV3sFiveYearAverage =
+  nationalV3sFiveYearValues.reduce((sum, value) => sum + value, 0) /
+  nationalV3sFiveYearValues.length;
 const seoulDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Seoul",
   year: "numeric",
@@ -566,11 +572,6 @@ function V3SPerformance({
     firstHistory && latestHistory
       ? latestHistory.value - firstHistory.value
       : null;
-  const historyAverage = historyValues.length
-    ? historyValues.reduce((sum, point) => sum + point.value, 0) /
-      historyValues.length
-    : null;
-
   return (
     <div
       className={`v3s-performance ${compact ? "compact" : ""}`}
@@ -711,18 +712,20 @@ function V3SPerformance({
             role="img"
             aria-label={`${displayShowroomName(
               showroom.showroom,
-            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 연평균 비교와 5개년 평균`}
+            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 연평균 비교와 전국 5개년 평균`}
           >
             <div className="v3s-history-bar-stage" aria-hidden="true">
-              {historyAverage !== null && (
-                <span
-                  className="v3s-history-average-marker"
-                  style={{ bottom: `${historyScaleHeight(historyAverage)}%` }}
-                >
-                  <b>5개년 평균 {displayNumber(historyAverage)}</b>
-                  <i />
-                </span>
-              )}
+              <span
+                className="v3s-history-average-marker"
+                style={{
+                  bottom: `${historyScaleHeight(nationalV3sFiveYearAverage)}%`,
+                }}
+              >
+                <b>
+                  전국 5개년 평균 {displayNumber(nationalV3sFiveYearAverage)}
+                </b>
+                <i />
+              </span>
               <div className="v3s-history-bars">
                 {history.map((point, index) => {
                   const nationalAverage = nationalV3sAnnualAverages.find(

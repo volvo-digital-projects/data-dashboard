@@ -214,7 +214,8 @@ test("server-renders the selected CDSID dashboard", async () => {
     /2021년 전국 연평균 94\.7점[\s\S]*?2022년 전국 연평균 93\.9점[\s\S]*?2023년 전국 연평균 95\.9점[\s\S]*?2024년 전국 연평균 95\.6점[\s\S]*?2025년 전국 연평균 95점/,
   );
   assert.match(visibleHtml, /전국 연평균[\s\S]*?볼보 강남대치/);
-  assert.match(visibleHtml, /5개년 평균 94\.2/);
+  assert.match(visibleHtml, /전국 5개년 평균 95\.0/);
+  assert.doesNotMatch(visibleHtml, /5개년 평균 94\.2/);
   assert.doesNotMatch(html, /class="v3s-history-summary"/);
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
   assert.match(
@@ -797,7 +798,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const historyAverage = historyValues\.length[\s\S]*?historyValues\.reduce[\s\S]*?5개년 평균/,
+    /const nationalV3sFiveYearValues = nationalV3sQuarterAverages\.flatMap[\s\S]*?const nationalV3sFiveYearAverage =[\s\S]*?nationalV3sFiveYearValues\.reduce[\s\S]*?nationalV3sFiveYearValues\.length/,
   );
   assert.match(
     dashboardSource,
@@ -1286,6 +1287,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.v3s-history-national-bar-fill\s*\{[\s\S]*?#e9a494[\s\S]*?#cf735f[\s\S]*?#9d463d/,
+  );
+  assert.match(
+    css,
+    /\.v3s-history-average-marker b\s*\{[^}]*bottom: 6px[^}]*right: 9px/,
   );
   assert.match(
     css,
