@@ -186,7 +186,7 @@ const metricMeta: Record<
 };
 
 const metricDescriptions: Record<TrendMetricKey, string> = {
-  v3s: "Volvo Sales Skill Simulation 평가 (VCK)",
+  v3s: "Volvo Sales Skill Simulation 평가(VCK)",
   voc: "Voice of Customer · 고객 의견 평가(VCK)",
   cx: "Customer Experience Index · 고객경험 종합지수(글로벌)",
 };

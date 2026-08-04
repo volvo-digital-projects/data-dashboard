@@ -219,7 +219,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /전국 5개년 평균 95\.0/);
   assert.doesNotMatch(visibleHtml, /5개년 평균 94\.2/);
   assert.doesNotMatch(html, /class="v3s-history-summary"/);
-  assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
+  assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가\(VCK\)/);
   assert.match(
     visibleHtml,
     /Customer Experience Index · 고객경험 종합지수\(글로벌\)/,
