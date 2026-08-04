@@ -3080,12 +3080,6 @@ input:focus-visible {
   font-weight: 750;
 }
 
-.analysis-header p {
-  margin: 8px 0 0;
-  color: var(--secondary);
-  font-size: 12px;
-}
-
 .analysis-context {
   display: grid;
   grid-template-columns: repeat(4, minmax(90px, 1fr));
@@ -4096,10 +4090,6 @@ input:focus-visible {
 
   .analysis-title-row h1 {
     font-size: 30px;
-  }
-
-  .analysis-header p {
-    line-height: 1.5;
   }
 
   .analysis-context {

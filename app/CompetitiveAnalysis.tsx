@@ -163,26 +163,22 @@ const v3sAwardWinnersByPeriod: Record<string, readonly string[]> = {
 
 const viewMeta: Record<
   AnalysisView,
-  { label: string; description: string; short: string }
+  { label: string; short: string }
 > = {
   dealer: {
     label: "소속 딜러사 내 분석",
-    description: "같은 딜러사 소속 전시장의 고객 경험 경쟁력을 비교합니다.",
     short: "소속 딜러사",
   },
   showroom: {
     label: "전국 전시장 내 분석",
-    description: "전국 39개 전시장의 종합 만족도와 해피콜 이행을 비교합니다.",
     short: "전시장",
   },
   region: {
     label: "동일 권역별 내 분석",
-    description: "동일 권역 소재 전시장 안에서 현재 위치와 균형을 확인합니다.",
     short: "권역별",
   },
   size: {
     label: "동일 사이즈 내 분석",
-    description: "동급 사이즈 전시장끼리 운영 품질과 고객 경험을 비교합니다.",
     short: "동급 사이즈",
   },
 };
@@ -590,7 +586,6 @@ export default function CompetitiveAnalysis({
             <h1>{displayShowroomName(selected.showroom)} 경쟁력 분석</h1>
             <span>Q2</span>
           </div>
-          <p>{viewMeta[view].description}</p>
         </div>
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <span>
