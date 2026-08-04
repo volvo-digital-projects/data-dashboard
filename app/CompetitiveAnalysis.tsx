@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   useEffect,
   useMemo,
@@ -628,35 +629,51 @@ export default function CompetitiveAnalysis({
           ))}
         </aside>
         <div className="analysis-context" aria-label="현재 전시장 정보">
-          <div className="analysis-context-item">
+          <Link
+            className="analysis-context-item"
+            href={`/dashboard/${selected.cdsid}`}
+            aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+          >
             <span
               className="identity-icon identity-icon--dealer"
               aria-hidden="true"
             />
             <small>딜러사</small>
             <strong>{selected.dealer}</strong>
-          </div>
-          <div className="analysis-context-item">
+          </Link>
+          <Link
+            className="analysis-context-item"
+            href={`/dashboard/${selected.cdsid}`}
+            aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+          >
             <span
               className="identity-icon identity-icon--region"
               aria-hidden="true"
             />
             <small>권역별</small>
             <strong>{selected.region}</strong>
-          </div>
-          <div className="analysis-context-item">
+          </Link>
+          <Link
+            className="analysis-context-item"
+            href={`/dashboard/${selected.cdsid}`}
+            aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+          >
             <span
               className="identity-icon identity-icon--size"
               aria-hidden="true"
             />
             <small>사이즈</small>
             <strong>{selected.size}</strong>
-          </div>
-          <div className="analysis-context-item">
+          </Link>
+          <Link
+            className="analysis-context-item"
+            href={`/dashboard/${selected.cdsid}`}
+            aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+          >
             <span className="identity-profile-icon" aria-hidden="true" />
             <small>지점장</small>
             <strong>{selected.manager}</strong>
-          </div>
+          </Link>
         </div>
       </header>
 

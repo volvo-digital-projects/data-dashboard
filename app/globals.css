@@ -3131,8 +3131,6 @@ input:focus-visible {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.88),
     0 8px 24px rgba(16, 42, 67, 0.055);
-  pointer-events: none;
-  touch-action: none;
   user-select: none;
 }
 
@@ -3148,7 +3146,22 @@ input:focus-visible {
   padding: 0 14px;
   justify-items: center;
   position: relative;
+  color: inherit;
   background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.analysis-context-item:hover,
+.analysis-context-item:focus-visible {
+  background: var(--blue-soft);
+}
+
+.analysis-context-item:focus-visible {
+  z-index: 5;
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
 }
 
 .analysis-context-item + .analysis-context-item {
