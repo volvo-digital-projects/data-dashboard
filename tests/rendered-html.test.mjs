@@ -70,7 +70,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="identity-tools"|class="identity-tool"/);
   assert.match(
     html,
-    /class="identity-title"><h1>볼보 강남대치<\/h1><div class="update-status">/,
+    /class="identity-title"><h1>볼보 강남대치(?:<!-- -->)? 현황<\/h1><div class="update-status">/,
   );
   assert.match(
     html,
@@ -185,7 +185,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /⌂|◎|↔/);
   assert.doesNotMatch(html, /class="comparison-panel|class="comparison-table/);
   assert.match(visibleHtml, /권역별/);
-  assert.match(visibleHtml, /<h1>볼보 강남대치<\/h1>/);
+  assert.match(visibleHtml, /<h1>볼보 강남대치 현황<\/h1>/);
   assert.match(visibleHtml, />볼보 강남대치<\/button>/);
   assert.match(visibleHtml, />주간 전국 평균<\/button>/);
   assert.doesNotMatch(
@@ -320,7 +320,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(kolonVisibleHtml, /코오롱 9개소/);
   assert.match(
     visibleHtml,
-    /<header class="analysis-header"><div class="analysis-title"><h1>볼보 강남대치<\/h1>/,
+    /<header class="analysis-header"><div class="analysis-title"><a href="\/dashboard\/6KR6834" class="analysis-overview-link"[^>]*>[\s\S]*?<h1>볼보 강남대치 분석<\/h1>/,
+  );
+  assert.match(
+    visibleHtml,
+    /aria-label="볼보 강남대치 현황 화면으로 이동"[^>]*title="현황 화면으로 이동"/,
   );
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력 분석|<span>Q2<\/span>/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
@@ -378,7 +382,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal((html.match(/class="analysis-rank"/g) ?? []).length, 7);
   assert.match(visibleHtml, /볼보 분당/);
-  assert.doesNotMatch(html, /href="\/dashboard\/6KR6834"/);
+  assert.match(
+    html,
+    /href="\/dashboard\/6KR6834" class="analysis-overview-link"/,
+  );
 
   const regionResponse = await render(
     "/dashboard/6KR6834/analysis?view=region",
