@@ -6541,6 +6541,7 @@ button.quarter-score-row:disabled {
 
 .weekly-score-layout > .trend-wrap {
   min-width: 0;
+  position: relative;
 }
 
 .weekly-score-placeholder {
@@ -6636,8 +6637,8 @@ button.quarter-score-row:disabled {
 
 .score-tier-weekly .trend-wrap.compact .data-coverage {
   position: absolute;
-  top: 8px;
-  right: 14px;
+  top: -31px;
+  right: 0;
   z-index: 3;
   flex-wrap: nowrap;
   gap: 6px;

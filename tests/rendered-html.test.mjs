@@ -651,7 +651,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.score-tier-weekly \.trend-wrap\.compact \.data-coverage\s*\{[^}]*position: absolute[^}]*top: 8px[^}]*right: 14px[^}]*border-top: 0/,
+    /\.weekly-score-layout > \.trend-wrap\s*\{[^}]*position: relative/,
+  );
+  assert.match(
+    css,
+    /\.score-tier-weekly \.trend-wrap\.compact \.data-coverage\s*\{[^}]*position: absolute[^}]*top: -31px[^}]*right: 0[^}]*border-top: 0/,
   );
   assert.match(
     css,
