@@ -874,13 +874,11 @@ input:focus-visible {
   text-align: left;
   cursor: pointer;
   transition:
-    transform 160ms ease,
     border-color 160ms ease,
     box-shadow 160ms ease;
 }
 
 .metric-card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(16, 24, 32, 0.08);
 }
 
@@ -4816,7 +4814,6 @@ input:focus-visible,
   overflow: hidden;
   position: relative;
   transition:
-    transform 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
     box-shadow 220ms ease,
     border-color 220ms ease;
 }
@@ -4835,7 +4832,6 @@ input:focus-visible,
 }
 
 .metric-card:hover {
-  transform: translateY(-3px);
   border-color: rgba(47, 107, 138, 0.18);
   box-shadow: var(--surface-shadow-hover);
 }
