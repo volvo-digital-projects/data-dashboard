@@ -196,6 +196,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   const cxStart = html.indexOf('id="score-cx"');
   assert.ok(vocStart >= 0 && cxStart > vocStart);
   const vocHtml = html.slice(vocStart, cxStart);
+  assert.match(vocHtml, /W01–W13\(13주\)/);
+  assert.match(vocHtml, /W14–W26\(13주\)/);
+  assert.match(vocHtml, /W27–W39\(13주\)/);
+  assert.match(vocHtml, /W40–W52\(13주\)/);
   for (let week = 1; week <= 52; week += 1) {
     assert.match(vocHtml, new RegExp(`W${String(week).padStart(2, "0")}`));
   }

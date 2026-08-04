@@ -842,10 +842,10 @@ function WeeklyTrend({
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13, 26, 39];
   const quarterLabels = [
-    { label: "Q1", range: "W01–W13" },
-    { label: "Q2", range: "W14–W26" },
-    { label: "Q3", range: "W27–W39" },
-    { label: "Q4", range: "W40–W52" },
+    { label: "Q1", range: "W01–W13(13주)" },
+    { label: "Q2", range: "W14–W26(13주)" },
+    { label: "Q3", range: "W27–W39(13주)" },
+    { label: "Q4", range: "W40–W52(13주)" },
   ];
   const averageAt = (week: number) =>
     averageSeries?.[week - 1] ?? average;
