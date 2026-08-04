@@ -862,7 +862,9 @@ export default function CompetitiveAnalysis({
         <header className="v3s-award-heading">
           <div>
             <h2>V3S 인센티브 수상기록</h2>
-            <p>2021년 상반기부터 2026년 하반기까지의 반기별 수상 이력</p>
+            <p>
+              상반기(Q1, Q2 모두 97점 이상 시) 하반기(Q3, Q4 모두 97점 이상 시) 지급
+            </p>
           </div>
           <div className="v3s-award-record">
             <span>누적기록</span>

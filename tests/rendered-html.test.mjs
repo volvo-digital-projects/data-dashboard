@@ -417,6 +417,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(regionVisibleHtml, /V3S 인센티브 수상기록/);
   assert.match(
     regionVisibleHtml,
+    /상반기\(Q1, Q2 모두 97점 이상 시\) 하반기\(Q3, Q4 모두 97점 이상 시\) 지급/,
+  );
+  assert.doesNotMatch(
+    regionVisibleHtml,
+    /2021년 상반기부터 2026년 하반기까지의 반기별 수상 이력/,
+  );
+  assert.match(
+    regionVisibleHtml,
     /누적기록<\/span><strong>강남대치 1회 수상<\/strong>/,
   );
   assert.match(
