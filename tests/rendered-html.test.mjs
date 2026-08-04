@@ -854,6 +854,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.v3s-quarter-column\.in-progress \.v3s-upcoming-bar,\s*\.v3s-quarter-column\.upcoming \.v3s-upcoming-bar\s*\{[^}]*height: 90%/,
   );
   assert.doesNotMatch(css, /\.profile-analysis-link/);
+  assert.match(
+    css,
+    /\.analysis-tabs button\s*\{[^}]*min-height: 42px[^}]*padding: 0 14px/,
+  );
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
     "utf8",
