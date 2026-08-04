@@ -720,7 +720,7 @@ function V3SPerformance({
                       {nationalAverage && (
                         <i
                           className="v3s-history-national-bar-fill"
-                          title={`${point.year}년 전국 연평균 ${displayTrendNumber(
+                          title={`${point.year}년 전국 연평균 ${displayNumber(
                             nationalAverage.value,
                           )}점`}
                           style={{
@@ -730,7 +730,7 @@ function V3SPerformance({
                             animationDelay: `${80 + index * 90}ms`,
                           }}
                         >
-                          <b>{displayTrendNumber(nationalAverage.value)}</b>
+                          <b>{displayNumber(nationalAverage.value)}</b>
                         </i>
                       )}
                       {point.value !== null && (
@@ -738,13 +738,13 @@ function V3SPerformance({
                           className="v3s-history-bar-fill"
                           title={`${point.year}년 ${displayShowroomName(
                             showroom.showroom,
-                          )} ${displayTrendNumber(point.value)}점`}
+                          )} ${displayNumber(point.value)}점`}
                           style={{
                             height: `${historyScaleHeight(point.value)}%`,
                             animationDelay: `${120 + index * 90}ms`,
                           }}
                         >
-                          <b>{displayTrendNumber(point.value)}</b>
+                          <b>{displayNumber(point.value)}</b>
                         </i>
                       )}
                     </span>

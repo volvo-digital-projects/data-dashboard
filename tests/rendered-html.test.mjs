@@ -213,7 +213,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /2021년 전국 연평균 94\.7점[\s\S]*?2022년 전국 연평균 93\.9점[\s\S]*?2023년 전국 연평균 95\.9점[\s\S]*?2024년 전국 연평균 95\.6점[\s\S]*?2025년 전국 연평균 95점/,
+    /2021년 전국 연평균 94\.7점[\s\S]*?2022년 전국 연평균 93\.9점[\s\S]*?2023년 전국 연평균 95\.9점[\s\S]*?2024년 전국 연평균 95\.6점[\s\S]*?2025년 전국 연평균 95\.0점/,
   );
   assert.match(visibleHtml, /전국 연평균[\s\S]*?볼보 강남대치/);
   assert.match(visibleHtml, /전국 5개년 평균 95\.0/);
