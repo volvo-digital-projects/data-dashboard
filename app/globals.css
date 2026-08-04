@@ -3871,6 +3871,15 @@ input:focus-visible {
     0 5px 10px -7px rgba(16, 42, 67, 0.2);
 }
 
+.analysis-ranking-list > div:not(.selected):hover {
+  border-color: rgba(74, 119, 137, 0.18);
+  background: #edf4f6;
+  transform: translate(2px, -1px);
+  box-shadow:
+    inset 3px 0 0 #789eac,
+    0 10px 20px -16px rgba(16, 42, 67, 0.34);
+}
+
 .analysis-rank {
   min-width: 0;
   display: grid;
