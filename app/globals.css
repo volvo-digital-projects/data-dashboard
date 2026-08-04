@@ -3015,11 +3015,13 @@ input:focus-visible {
 }
 
 .analysis-title {
+  width: 360px;
   min-width: 0;
   display: flex;
   align-items: center;
   gap: 14px;
-  flex: 0 0 auto;
+  flex: 0 0 360px;
+  overflow: hidden;
 }
 
 .analysis-title-copy {
@@ -3028,6 +3030,13 @@ input:focus-visible {
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
+}
+
+.analysis-title-copy h1 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .analysis-title-copy .update-status {
@@ -4186,9 +4195,15 @@ input:focus-visible {
     width: 100%;
   }
 
+  .analysis-title {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
   .analysis-insights {
     width: 100%;
     max-width: none;
+    height: auto;
     min-height: 66px;
     flex: 0 0 auto;
   }
@@ -4391,19 +4406,25 @@ input:focus-visible,
 }
 
 .identity-title {
-  flex: 0 0 auto;
+  width: 310px;
+  flex: 0 0 310px;
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
+  overflow: hidden;
 }
 
 .identity-strip h1 {
+  width: 100%;
   color: var(--navy);
   font-family: var(--font-korean);
   font-size: clamp(40px, 3.25vw, 44px);
   font-weight: 720;
   line-height: 1.04;
   letter-spacing: -0.045em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .update-status {
@@ -4433,10 +4454,12 @@ input:focus-visible,
 }
 
 .identity-insights {
+  height: 92px;
   min-width: 0;
   max-width: 650px;
   flex: 1 1 540px;
   display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
   align-content: center;
   align-self: stretch;
   overflow: hidden;
@@ -4451,6 +4474,7 @@ input:focus-visible,
 }
 
 .identity-insight-row {
+  min-height: 0;
   min-width: 0;
   display: grid;
   grid-template-columns: 58px minmax(0, 1fr);
@@ -6980,9 +7004,15 @@ button.quarter-score-row:disabled {
     justify-content: flex-end;
   }
 
+  .identity-title {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
   .identity-insights {
     width: 100%;
     max-width: none;
+    height: auto;
     min-height: 66px;
     flex: 0 0 auto;
   }
