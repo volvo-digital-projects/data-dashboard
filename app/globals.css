@@ -4512,22 +4512,12 @@ input:focus-visible,
   white-space: nowrap;
 }
 
-.identity-insight-row.v3s b {
-  color: #80423a;
-  border-color: #efd0cb;
-  background: #faeae7;
-}
-
-.identity-insight-row.voc b {
-  color: #246653;
-  border-color: #c9e3da;
-  background: #e8f4f0;
-}
-
+.identity-insight-row.v3s b,
+.identity-insight-row.voc b,
 .identity-insight-row.cx b {
-  color: #7b5a17;
-  border-color: #ead9aa;
-  background: #faf1da;
+  color: #36566a;
+  border-color: #ccdce4;
+  background: #edf4f7;
 }
 
 .identity-insight-row span {
