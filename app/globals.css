@@ -4440,67 +4440,71 @@ input:focus-visible,
   align-content: center;
   align-self: stretch;
   overflow: hidden;
-  padding: 6px 12px;
-  border: 1px solid rgba(104, 190, 210, 0.36);
+  padding: 7px 13px;
+  border: 1px solid rgba(47, 107, 138, 0.2);
   border-radius: 9px;
   background:
-    linear-gradient(108deg, rgba(18, 57, 84, 0.98), rgba(35, 96, 121, 0.94));
+    linear-gradient(108deg, rgba(255, 255, 255, 0.98), rgba(239, 247, 250, 0.96));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 10px 24px -18px rgba(11, 45, 69, 0.88);
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    0 10px 24px -20px rgba(16, 42, 67, 0.42);
 }
 
 .identity-insight-row {
   min-width: 0;
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
+  grid-template-columns: 58px minmax(0, 1fr);
   align-items: center;
   gap: 8px;
   margin: 0;
-  padding: 3px 0;
+  padding: 4px 0;
 }
 
 .identity-insight-row + .identity-insight-row {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(47, 107, 138, 0.12);
 }
 
 .identity-insight-row b {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 16px;
-  padding: 1px 5px;
+  min-height: 18px;
+  padding: 2px 6px;
+  border: 1px solid transparent;
   border-radius: 999px;
   font-family: var(--font-latin);
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
 .identity-insight-row.v3s b {
-  color: #ffe4df;
-  background: rgba(220, 88, 76, 0.3);
+  color: #80423a;
+  border-color: #efd0cb;
+  background: #faeae7;
 }
 
 .identity-insight-row.voc b {
-  color: #d8f7eb;
-  background: rgba(61, 170, 129, 0.28);
+  color: #246653;
+  border-color: #c9e3da;
+  background: #e8f4f0;
 }
 
 .identity-insight-row.cx b {
-  color: #ffefc7;
-  background: rgba(224, 165, 57, 0.29);
+  color: #7b5a17;
+  border-color: #ead9aa;
+  background: #faf1da;
 }
 
 .identity-insight-row span {
   min-width: 0;
   overflow: hidden;
-  color: rgba(247, 251, 253, 0.94);
-  font-size: clamp(8px, 0.63vw, 10px);
-  font-weight: 570;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  color: #27465a;
+  font-size: clamp(9px, 0.7vw, 11px);
+  font-weight: 620;
+  letter-spacing: -0.018em;
+  line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
