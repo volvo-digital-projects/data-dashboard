@@ -202,6 +202,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /분기 평가/);
   assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);
   assert.match(visibleHtml, /5개년 추이/);
+  assert.doesNotMatch(html, /class="v3s-history-delta/);
+  assert.doesNotMatch(visibleHtml, /5년간 [+-]?\d/);
   assert.doesNotMatch(visibleHtml, /5개년 실력 추세/);
   assert.doesNotMatch(visibleHtml, /5개년 데이터 연결 예정/);
   assert.equal((html.match(/class="v3s-history-bar-fill"/g) ?? []).length, 5);
@@ -790,6 +792,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     [94.3, 94.3, 93.6, 94.3, 94.6],
   );
   assert.doesNotMatch(dashboardSource, /5개년 데이터 연결 예정/);
+  assert.doesNotMatch(dashboardSource, /historyDelta|v3s-history-delta/);
   assert.doesNotMatch(dashboardSource, /const historyPath = history/);
   assert.doesNotMatch(dashboardSource, /v3s-history-summary/);
   assert.match(

@@ -566,12 +566,6 @@ function V3SPerformance({
         ((value - historyMin) / Math.max(1, historyMax - historyMin)) * 100,
       ),
     );
-  const firstHistory = historyValues.at(0) ?? null;
-  const latestHistory = historyValues.at(-1) ?? null;
-  const historyDelta =
-    firstHistory && latestHistory
-      ? latestHistory.value - firstHistory.value
-      : null;
   return (
     <div
       className={`v3s-performance ${compact ? "compact" : ""}`}
@@ -694,16 +688,6 @@ function V3SPerformance({
           <div>
             <h3>5개년 추이</h3>
           </div>
-          {historyDelta !== null && (
-            <strong
-              className={`v3s-history-delta ${
-                historyDelta >= 0 ? "positive" : "negative"
-              }`}
-            >
-              5년간 {historyDelta >= 0 ? "+" : ""}
-              {displayNumber(historyDelta)}점
-            </strong>
-          )}
         </header>
 
         {hasHistory ? (
