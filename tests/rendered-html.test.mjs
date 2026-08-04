@@ -37,6 +37,14 @@ test("server-renders the selected CDSID dashboard", async () => {
 
   const html = await response.text();
   assert.match(html, /Voice of Customer · 고객 의견 평가\(VCK\)/);
+  assert.match(
+    html,
+    /class="(?:national|actual)-point-value"[^>]*>100<\/text>/,
+  );
+  assert.doesNotMatch(
+    html,
+    /class="(?:national|actual)-point-value"[^>]*>100\.0<\/text>/,
+  );
   const visibleHtml = html.replaceAll("<!-- -->", "");
   const seoulToday = new Intl.DateTimeFormat("sv-SE", {
     timeZone: "Asia/Seoul",
