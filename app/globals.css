@@ -985,6 +985,14 @@ input:focus-visible {
   color: var(--caution);
 }
 
+.metric-benchmark strong.positive {
+  color: var(--blue) !important;
+}
+
+.metric-benchmark strong.negative {
+  color: var(--warning) !important;
+}
+
 .metric-track {
   height: 6px;
   position: relative;

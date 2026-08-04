@@ -99,6 +99,30 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.match(
     visibleHtml,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative">▼ \d+\.\d점<\/strong>/,
+  );
+  assert.doesNotMatch(
+    visibleHtml,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive">\+/,
+  );
+  const directionalResponse = await render("/dashboard/6KR6868");
+  assert.equal(directionalResponse.status, 200);
+  const directionalHtml = await directionalResponse.text();
+  const directionalVisibleHtml = directionalHtml.replaceAll("<!-- -->", "");
+  assert.match(
+    directionalVisibleHtml,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive">▲ 3\.1점<\/strong>/,
+  );
+  assert.match(
+    directionalVisibleHtml,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative">▼ 17\.9점<\/strong>/,
+  );
+  assert.match(
+    directionalVisibleHtml,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive">▲ 8\.4점<\/strong>/,
+  );
+  assert.match(
+    visibleHtml,
     /V3S 분기 평가점수[\s\S]*Q1[\s\S]*94\.9[\s\S]*Q2[\s\S]*93\.6[\s\S]*Q3[\s\S]*Q4/,
   );
   assert.match(
@@ -238,7 +262,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /위험 감지/);
   assert.match(html, /주의 필요: Q2 전국 평균 미만, 5점 미만 차이/);
   assert.equal((visibleHtml.match(/>주의 필요<\/span>/g) ?? []).length, 2);
-  assert.match(visibleHtml, /Q2 전국 평균 대비[\s\S]*?-7\.9점/);
+  assert.match(visibleHtml, /Q2 전국 평균 대비[\s\S]*?▼ 7\.9점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -494,7 +518,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   ]);
   assert.match(
     dashboardSource,
-    /className=\{signal\.delta >= 0 \? "positive" : "negative"\}/,
+    /signal\.delta > 0[\s\S]*?"positive"[\s\S]*?signal\.delta < 0[\s\S]*?"negative"/,
+  );
+  assert.match(
+    dashboardSource,
+    /signal\.delta > 0 \? "▲" : signal\.delta < 0 \? "▼" : "―"/,
   );
 
   assert.match(
@@ -867,6 +895,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--blue: #2f6b8a/);
   assert.match(css, /--good: #1f8f6a/);
   assert.match(css, /--warning: #d14b41/);
+  assert.match(
+    css,
+    /\.metric-benchmark strong\.positive\s*\{\s*color: var\(--blue\) !important;/,
+  );
+  assert.match(
+    css,
+    /\.metric-benchmark strong\.negative\s*\{\s*color: var\(--warning\) !important;/,
+  );
   assert.match(
     css,
     /\.analysis-summary-card > em\.positive\s*\{\s*color: var\(--blue\) !important;/,

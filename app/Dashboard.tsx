@@ -329,9 +329,17 @@ function MetricCard({
         title={`${quarterLabel} 전국 평균 ${displayNumber(average)}점`}
       >
         <span>{quarterLabel} 전국 평균 대비</span>
-        <strong className={signal.delta >= 0 ? "positive" : "negative"}>
-          {signal.delta >= 0 ? "+" : ""}
-          {signal.delta.toFixed(1)}점
+        <strong
+          className={
+            signal.delta > 0
+              ? "positive"
+              : signal.delta < 0
+                ? "negative"
+                : "neutral"
+          }
+        >
+          {signal.delta > 0 ? "▲" : signal.delta < 0 ? "▼" : "―"}{" "}
+          {Math.abs(signal.delta).toFixed(1)}점
         </strong>
       </div>
       <div className="metric-track" aria-hidden="true">
