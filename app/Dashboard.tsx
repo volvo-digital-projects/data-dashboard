@@ -486,9 +486,6 @@ function V3SPerformance({
       <section className="v3s-quarter-panel">
         <header className="v3s-subhead">
           <div>
-            <span>
-              {v3sScaleMin}–{v3sScaleMax}점 확대 척도
-            </span>
             <h3>분기 평가</h3>
           </div>
           <div className="v3s-cumulative">

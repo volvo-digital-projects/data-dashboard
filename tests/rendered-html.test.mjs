@@ -736,7 +736,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
     dashboardSource,
     /const v3sScaleHeight = \(value: number\) =>[\s\S]*?\(\(value - v3sScaleMin\) \/ \(v3sScaleMax - v3sScaleMin\)\) \* 100/,
   );
-  assert.match(
+  assert.doesNotMatch(
     dashboardSource,
     /\{v3sScaleMin\}–\{v3sScaleMax\}점 확대 척도/,
   );
