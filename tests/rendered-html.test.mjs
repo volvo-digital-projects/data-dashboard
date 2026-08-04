@@ -412,6 +412,25 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /v3s-award-period awarded[\s\S]*?볼보 강남대치/,
   );
 
+  const wonjuResponse = await render(
+    "/dashboard/6KR6851/analysis?view=size",
+  );
+  assert.equal(wonjuResponse.status, 200);
+  const wonjuHtml = (await wonjuResponse.text()).replaceAll("<!-- -->", "");
+  assert.match(wonjuHtml, /누적기록<\/span><strong>원주 9회 수상<\/strong>/);
+  assert.equal(
+    (wonjuHtml.match(/class="v3s-award-period awarded"/g) ?? []).length,
+    9,
+  );
+  assert.match(
+    wonjuHtml,
+    /2022[\s\S]*?상반기[\s\S]*?원주[\s\S]*?하반기[\s\S]*?원주/,
+  );
+  assert.match(
+    wonjuHtml,
+    /2026[\s\S]*?상반기[\s\S]*?원주[\s\S]*?하반기[\s\S]*?수상 기록 없음/,
+  );
+
   const sizeResponse = await render(
     "/dashboard/6KR6842/analysis?view=size",
   );

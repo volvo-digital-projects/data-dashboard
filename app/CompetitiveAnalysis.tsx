@@ -67,8 +67,98 @@ const v3sAwardPeriods = [
   { id: "2026-H2", year: "2026", half: "하반기" },
 ] as const;
 
-const v3sAwardHistory: Record<string, readonly string[]> = {
-  "6KR6834": ["2021-H2"],
+const v3sAwardWinnersByPeriod: Record<string, readonly string[]> = {
+  "2021-H1": [],
+  "2021-H2": [
+    "6KR6834",
+    "6KR6830",
+    "6KR6858",
+    "6KR6841",
+    "6KR6863",
+    "6KR6859",
+  ],
+  "2022-H1": ["6KR342", "6KR6851", "6KR6857", "6KR6849"],
+  "2022-H2": [
+    "6KR6847",
+    "6KR6852",
+    "6KR6848",
+    "6KR6851",
+    "6KR6841",
+    "6KR6856",
+    "6KR6854",
+  ],
+  "2023-H1": [
+    "6KR342",
+    "6KR6851",
+    "6KR6874",
+    "6KR6846",
+    "6KR6862",
+    "6KR6864",
+    "6KR6854",
+  ],
+  "2023-H2": [
+    "6KR6847",
+    "6KR6858",
+    "6KR6848",
+    "6KR6874",
+    "6KR6851",
+    "6KR6862",
+    "6KR6857",
+    "6KR6842",
+    "6KR6863",
+    "6KR6828",
+    "6KR6840",
+    "6KR6829",
+    "6KR6865",
+    "6KR6854",
+  ],
+  "2024-H1": ["6KR6858", "6KR6851", "6KR6841", "6KR6829"],
+  "2024-H2": [
+    "6KR342",
+    "6KR6847",
+    "6KR6861",
+    "6KR6848",
+    "6KR6851",
+    "6KR6874",
+    "6KR6868",
+    "6KR6869",
+    "6KR6842",
+    "6KR6865",
+  ],
+  "2025-H1": [
+    "6KR342",
+    "6KR6872",
+    "6KR6851",
+    "6KR6868",
+    "6KR6867",
+    "6KR6838",
+    "6KR6874",
+  ],
+  "2025-H2": [
+    "6KR342",
+    "6KR6802",
+    "6KR6833",
+    "6KR6847",
+    "6KR6851",
+    "6KR6868",
+    "6KR6869",
+    "6KR6870",
+    "6KR6857",
+    "6KR6839",
+    "6KR6838",
+    "6KR6874",
+    "6KR6873",
+  ],
+  "2026-H1": [
+    "6KR6851",
+    "6KR6854",
+    "6KR6848",
+    "6KR6865",
+    "6KR6869",
+    "6KR6867",
+    "6KR6871",
+  ],
+  "2026-H2": [],
 };
 
 const viewMeta: Record<
@@ -370,7 +460,11 @@ export default function CompetitiveAnalysis({
       happyScore: selected.happyCall ?? 0,
       combined: ((selected.voc ?? 0) + (selected.happyCall ?? 0)) / 2,
     } satisfies AnalysisPoint);
-  const selectedAwardPeriods = v3sAwardHistory[selected.cdsid] ?? [];
+  const selectedAwardPeriods = v3sAwardPeriods
+    .filter((period) =>
+      v3sAwardWinnersByPeriod[period.id]?.includes(selected.cdsid),
+    )
+    .map((period) => period.id);
   const selectedAwardCount = selectedAwardPeriods.length;
   const selectedAwardName = displayShowroomNameWithoutBrand(selected.showroom);
   const groupVocAverage = averageOf(groupItems, "vocScore");
