@@ -320,7 +320,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(kolonVisibleHtml, /코오롱 9개소/);
   assert.match(
     visibleHtml,
-    /<header class="analysis-header"><h1>볼보 강남대치<\/h1>/,
+    /<header class="analysis-header"><div class="analysis-title"><h1>볼보 강남대치<\/h1>/,
   );
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력 분석|<span>Q2<\/span>/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
@@ -399,6 +399,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal(
     (analysisContextHtml.match(/class="analysis-context-item"/g) ?? []).length,
     4,
+  );
+  assert.match(
+    regionVisibleHtml,
+    /class="analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\s\S]*?최근 업데이트[\s\S]*?현재 Q3평가 진행중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
@@ -869,6 +873,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   const analysisSource = await readFile(
     new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
     "utf8",
+  );
+  assert.match(
+    analysisSource,
+    /const \[accessDate, setAccessDate\] = useState\(\(\) =>[\s\S]*?formatAnalysisDate\(new Date\(\)\)[\s\S]*?window\.setInterval\(syncAccessDate, 60_000\)/,
   );
 
   assert.match(

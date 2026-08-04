@@ -50,6 +50,19 @@ type ScatterLabelBox = {
 };
 
 const showrooms = dashboardJson.showrooms as AnalysisShowroom[];
+const analysisDateFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Asia/Seoul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+const formatAnalysisDate = (date: Date) => {
+  const parts = analysisDateFormatter.formatToParts(date);
+  const part = (type: "year" | "month" | "day") =>
+    parts.find((item) => item.type === type)?.value ?? "";
+  return `${part("year")}.${part("month")}.${part("day")}`;
+};
 
 const v3sAwardPeriods = [
   { id: "2021-H1", year: "2021", half: "상반기" },
@@ -408,6 +421,9 @@ export default function CompetitiveAnalysis({
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
   const [view, setView] = useState<AnalysisView>(initialView);
+  const [accessDate, setAccessDate] = useState(() =>
+    formatAnalysisDate(new Date()),
+  );
   const scatterRef = useRef<HTMLDivElement>(null);
   const [scatterSize, setScatterSize] = useState({
     width: 920,
@@ -422,6 +438,13 @@ export default function CompetitiveAnalysis({
   const sizeShowroomCount = showrooms.filter(
     (item) => item.size === selected.size,
   ).length;
+
+  useEffect(() => {
+    const syncAccessDate = () => setAccessDate(formatAnalysisDate(new Date()));
+    syncAccessDate();
+    const timer = window.setInterval(syncAccessDate, 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   const groupItems = useMemo(() => {
     const filtered =
@@ -576,7 +599,16 @@ export default function CompetitiveAnalysis({
   return (
     <main className="competitive-analysis-page">
       <header className="analysis-header">
-        <h1>{displayShowroomName(selected.showroom)}</h1>
+        <div className="analysis-title">
+          <h1>{displayShowroomName(selected.showroom)}</h1>
+          <div className="update-status">
+            <i aria-hidden="true" />
+            <time dateTime={accessDate.replaceAll(".", "-")}>
+              최근 업데이트 {accessDate}
+            </time>
+            <span>현재 Q3평가 진행중</span>
+          </div>
+        </div>
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <div className="analysis-context-item">
             <span
