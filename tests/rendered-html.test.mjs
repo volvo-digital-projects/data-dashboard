@@ -286,6 +286,7 @@ test("serves score criteria as a separate CDSID page", async () => {
 
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
+  assert.doesNotMatch(visibleHtml, /DUAL METRIC POSITION/);
   assert.match(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(visibleHtml, /V3S · VOC · CX Index의 산정 구조/);
   assert.match(html, /href="\/dashboard\/6KR6834"/);
