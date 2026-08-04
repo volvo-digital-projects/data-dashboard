@@ -882,6 +882,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     analysisSource,
     /const \[accessDate, setAccessDate\] = useState\(\(\) =>[\s\S]*?formatAnalysisDate\(new Date\(\)\)[\s\S]*?window\.setInterval\(syncAccessDate, 60_000\)/,
   );
+  assert.match(
+    analysisSource,
+    /const \[hoveredCdsid, setHoveredCdsid\] = useState<string \| null>\(null\)[\s\S]*?isHovered \? "hovered" : ""[\s\S]*?onMouseEnter=\{\(\) => setHoveredCdsid\(item\.cdsid\)\}[\s\S]*?className=\{isSelected \? "selected" : isHovered \? "hovered" : ""\}/,
+  );
 
   assert.match(
     dashboardSource,
@@ -1296,7 +1300,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.analysis-ranking-list > div:not\(\.selected\):hover\s*\{[^}]*border-color: rgba\(74, 119, 137, 0\.18\)[^}]*background: #edf4f6[^}]*inset 3px 0 0 #789eac/,
+    /\.analysis-ranking-list > div\.hovered:not\(\.selected\),[\s\S]*?\.analysis-ranking-list > div:not\(\.selected\):hover\s*\{[^}]*border-color: rgba\(74, 147, 143, 0\.32\)[^}]*background: #e8f4f3[^}]*inset 3px 0 0 #4a938f/,
+  );
+  assert.match(
+    css,
+    /\.scatter-point\.hovered:not\(\.selected\)\s*\{[^}]*--callout-color: #4a938f[^}]*--callout-fill: #e8f4f3[^}]*z-index: 5/,
   );
   assert.match(
     css,

@@ -3574,6 +3574,35 @@ input:focus-visible {
     0 7px 14px rgba(16, 42, 67, 0.2);
 }
 
+.scatter-point.hovered:not(.selected) {
+  --callout-color: #4a938f;
+  --callout-fill: #e8f4f3;
+  --callout-border: #4a938f;
+  z-index: 5;
+}
+
+.scatter-point.hovered:not(.selected) > i {
+  width: 13px;
+  height: 13px;
+  border: 2px solid white;
+  background: #4a938f;
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 4px rgba(74, 147, 143, 0.18),
+    0 7px 14px rgba(37, 98, 95, 0.2);
+}
+
+.scatter-point.hovered:not(.selected) > b {
+  border-color: #4a938f;
+  color: #245f5c;
+  background: #e8f4f3;
+  font-weight: 700;
+  transform: translate(-50%, -50%)
+    translate(var(--callout-x), var(--callout-y))
+    scale(1.04);
+  box-shadow: 0 6px 15px rgba(37, 98, 95, 0.16);
+}
+
 .scatter-point > b {
   position: absolute;
   z-index: 2;
@@ -3818,13 +3847,14 @@ input:focus-visible {
     0 5px 10px -7px rgba(16, 42, 67, 0.2);
 }
 
+.analysis-ranking-list > div.hovered:not(.selected),
 .analysis-ranking-list > div:not(.selected):hover {
-  border-color: rgba(74, 119, 137, 0.18);
-  background: #edf4f6;
+  border-color: rgba(74, 147, 143, 0.32);
+  background: #e8f4f3;
   transform: translate(2px, -1px);
   box-shadow:
-    inset 3px 0 0 #789eac,
-    0 10px 20px -16px rgba(16, 42, 67, 0.34);
+    inset 3px 0 0 #4a938f,
+    0 10px 20px -16px rgba(37, 98, 95, 0.34);
 }
 
 .analysis-rank {

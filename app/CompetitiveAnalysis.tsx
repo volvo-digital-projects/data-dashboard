@@ -421,6 +421,7 @@ export default function CompetitiveAnalysis({
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
   const [view, setView] = useState<AnalysisView>(initialView);
+  const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
@@ -767,6 +768,8 @@ export default function CompetitiveAnalysis({
                   ((item.vocScore - 75) / 25) * 100,
                 );
                 const isSelected = item.cdsid === selected.cdsid;
+                const isHovered =
+                  !isSelected && hoveredCdsid === item.cdsid;
                 const callout = scatterCallouts.get(item.cdsid) ?? {
                   offsetX: 16,
                   offsetY: -16,
@@ -796,11 +799,15 @@ export default function CompetitiveAnalysis({
                           : "below"
                     } label-${callout.placement} ${
                       denseScatter ? "dense" : ""
-                    }`}
+                    } ${isHovered ? "hovered" : ""}`}
                     style={pointStyle}
                     title={pointLabel}
                     aria-label={pointLabel}
                     tabIndex={denseScatter && !isSelected ? 0 : undefined}
+                    onMouseEnter={() => setHoveredCdsid(item.cdsid)}
+                    onMouseLeave={() => setHoveredCdsid(null)}
+                    onFocus={() => setHoveredCdsid(item.cdsid)}
+                    onBlur={() => setHoveredCdsid(null)}
                   >
                     <i />
                     <b
@@ -842,10 +849,14 @@ export default function CompetitiveAnalysis({
                 groupItems.findIndex((groupItem) => groupItem.cdsid === item.cdsid) +
                 1;
               const isSelected = item.cdsid === selected.cdsid;
+              const isHovered =
+                !isSelected && hoveredCdsid === item.cdsid;
               return (
                 <div
-                  className={isSelected ? "selected" : ""}
+                  className={isSelected ? "selected" : isHovered ? "hovered" : ""}
                   key={item.cdsid}
+                  onMouseEnter={() => setHoveredCdsid(item.cdsid)}
+                  onMouseLeave={() => setHoveredCdsid(null)}
                 >
                   <span className="analysis-rank">
                     <strong>{rank}</strong>
