@@ -6528,7 +6528,7 @@ button.quarter-score-row:disabled {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
   align-items: stretch;
-  gap: 10px;
+  gap: 4px;
 }
 
 .weekly-score-layout > .trend-wrap {
@@ -6631,7 +6631,8 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-performance.compact {
-  gap: 8px;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  gap: 4px;
   margin-top: 5px;
 }
 
@@ -6669,6 +6670,25 @@ button.quarter-score-row:disabled {
 
 .v3s-performance.compact .v3s-history-bar-stage {
   height: 73px;
+}
+
+.v3s-performance.compact .v3s-history-bars,
+.v3s-performance.compact .v3s-history-years {
+  column-gap: 6px;
+  padding-inline: 10px;
+}
+
+.v3s-performance.compact .v3s-history-bar-slot {
+  gap: 3px;
+}
+
+.v3s-performance.compact .v3s-history-bar-fill,
+.v3s-performance.compact .v3s-history-national-bar-fill {
+  width: 21px;
+}
+
+.v3s-performance.compact .v3s-history-years > span {
+  transform: translateX(-12px);
 }
 
 .v3s-performance.compact .v3s-history-empty {
@@ -6848,6 +6868,10 @@ button.quarter-score-row:disabled {
   }
 
   .v3s-performance {
+    grid-template-columns: 1fr;
+  }
+
+  .v3s-performance.compact {
     grid-template-columns: 1fr;
   }
 

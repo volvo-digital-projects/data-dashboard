@@ -901,7 +901,19 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.doesNotMatch(css, /\.score-tier\.active\s*\{/);
   assert.match(
     css,
-    /\.weekly-score-layout\s*\{[^}]*grid-template-columns: minmax\(0, 3fr\) minmax\(0, 1fr\)[^}]*gap: 10px/,
+    /\.weekly-score-layout\s*\{[^}]*grid-template-columns: minmax\(0, 3fr\) minmax\(0, 1fr\)[^}]*gap: 4px/,
+  );
+  assert.match(
+    css,
+    /\.v3s-performance\.compact\s*\{[^}]*grid-template-columns: minmax\(0, 3fr\) minmax\(0, 1fr\)[^}]*gap: 4px/,
+  );
+  assert.match(
+    css,
+    /\.v3s-performance\.compact \.v3s-history-bar-fill,[\s\S]*?\.v3s-performance\.compact \.v3s-history-national-bar-fill\s*\{[^}]*width: 21px/,
+  );
+  assert.match(
+    css,
+    /\.v3s-performance\.compact \.v3s-history-years > span\s*\{[^}]*translateX\(-12px\)/,
   );
   assert.match(
     css,
