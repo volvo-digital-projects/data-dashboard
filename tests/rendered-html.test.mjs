@@ -146,6 +146,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /5개년 추이/);
   assert.doesNotMatch(visibleHtml, /5개년 실력 추세/);
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
+  assert.match(
+    visibleHtml,
+    /Customer Experience Index · 고객경험 종합지수\(글로벌\)/,
+  );
   assert.doesNotMatch(visibleHtml, /Volvo Sales Standard/);
   assert.match(
     html,
