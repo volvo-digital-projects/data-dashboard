@@ -407,6 +407,31 @@ function V3SPerformance({
       state: "upcoming",
     },
   ];
+  const quarterScaleValues = quarterScores
+    .flatMap((quarter) => [
+      quarter.value,
+      quarter.average,
+      ...quarter.benchmarks.map((benchmark) => benchmark.value),
+    ])
+    .filter((value): value is number => value !== null);
+  const v3sScaleMax = 100;
+  const v3sScaleMin = quarterScaleValues.length
+    ? Math.max(
+        0,
+        Math.min(
+          80,
+          Math.floor((Math.min(...quarterScaleValues) - 5) / 5) * 5,
+        ),
+      )
+    : 0;
+  const v3sScaleHeight = (value: number) =>
+    Math.min(
+      100,
+      Math.max(
+        0,
+        ((value - v3sScaleMin) / (v3sScaleMax - v3sScaleMin)) * 100,
+      ),
+    );
   const enteredQuarters = quarterScores.filter(
     (quarter): quarter is (typeof quarterScores)[number] & { value: number } =>
       quarter.value !== null,
@@ -461,6 +486,9 @@ function V3SPerformance({
       <section className="v3s-quarter-panel">
         <header className="v3s-subhead">
           <div>
+            <span>
+              {v3sScaleMin}–{v3sScaleMax}점 확대 척도
+            </span>
             <h3>분기 평가</h3>
           </div>
           <div className="v3s-cumulative">
@@ -490,9 +518,8 @@ function V3SPerformance({
                   <span
                     className="v3s-average-marker"
                     style={{
-                      bottom: `${Math.min(
-                        100,
-                        Math.max(0, quarter.average ?? 0),
+                      bottom: `${v3sScaleHeight(
+                        quarter.average ?? v3sScaleMin,
                       )}%`,
                     }}
                     title={`전국 평균 ${displayNumber(quarter.average)}점`}
@@ -518,7 +545,7 @@ function V3SPerformance({
                           height:
                             benchmark.value === null
                               ? "48%"
-                              : `${benchmark.value}%`,
+                              : `${v3sScaleHeight(benchmark.value)}%`,
                           animationDelay: `${
                             300 + index * 100 + benchmarkIndex * 45
                           }ms`,
@@ -538,7 +565,7 @@ function V3SPerformance({
                     <span
                       className="v3s-bar-fill"
                       style={{
-                        height: `${quarter.value}%`,
+                        height: `${v3sScaleHeight(quarter.value)}%`,
                         animationDelay: `${140 + index * 100}ms`,
                       }}
                     >

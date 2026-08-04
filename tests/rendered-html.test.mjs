@@ -722,7 +722,27 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     dashboardSource,
-    /className="v3s-average-marker"[\s\S]*?Math\.min\([\s\S]*?Math\.max\(0, quarter\.average \?\? 0\)[\s\S]*?<b>\{displayNumber\(quarter\.average\)\}<\/b>/,
+    /className="v3s-average-marker"[\s\S]*?v3sScaleHeight\([\s\S]*?quarter\.average \?\? v3sScaleMin[\s\S]*?<b>\{displayNumber\(quarter\.average\)\}<\/b>/,
+  );
+  assert.match(
+    dashboardSource,
+    /const v3sScaleMax = 100;[\s\S]*?const v3sScaleMin = quarterScaleValues\.length[\s\S]*?Math\.min\([\s\S]*?80,[\s\S]*?Math\.floor\(\(Math\.min\(\.\.\.quarterScaleValues\) - 5\) \/ 5\) \* 5/,
+  );
+  assert.match(
+    dashboardSource,
+    /const v3sScaleHeight = \(value: number\) =>[\s\S]*?\(\(value - v3sScaleMin\) \/ \(v3sScaleMax - v3sScaleMin\)\) \* 100/,
+  );
+  assert.match(
+    dashboardSource,
+    /\{v3sScaleMin\}–\{v3sScaleMax\}점 확대 척도/,
+  );
+  assert.match(
+    dashboardSource,
+    /benchmark\.value === null[\s\S]*?"48%"[\s\S]*?v3sScaleHeight\(benchmark\.value\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="v3s-bar-fill"[\s\S]*?height: `\$\{v3sScaleHeight\(quarter\.value\)\}%`/,
   );
   assert.match(
     css,
