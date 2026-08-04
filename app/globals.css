@@ -6138,7 +6138,7 @@ button.quarter-score-row:disabled {
 .v3s-history-line {
   fill: none;
   stroke: var(--blue);
-  stroke-width: 2;
+  stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 1;
@@ -6150,7 +6150,7 @@ button.quarter-score-row:disabled {
 .v3s-history-point {
   fill: white;
   stroke: var(--blue);
-  stroke-width: 2;
+  stroke-width: 1.5;
   vector-effect: non-scaling-stroke;
 }
 

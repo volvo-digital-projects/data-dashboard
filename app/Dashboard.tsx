@@ -502,10 +502,16 @@ function V3SPerformance({
   const historyMax = hasHistory
     ? Math.min(100, historyValueMax + historyPadding)
     : 100;
+  const historyChartHeight = compact ? 68 : 142;
+  const historyAxisY = compact ? 57 : 126;
+  const historyPlotTop = compact ? 13 : 32;
+  const historyMarkerSize = compact ? 6 : 8;
+  const historyValueOffset = compact ? 7 : 10;
   const historyX = (year: number) => 28 + ((year - 2021) / 4) * 384;
   const historyY = (value: number) =>
-    126 -
-    ((value - historyMin) / Math.max(1, historyMax - historyMin)) * 94;
+    historyAxisY -
+    ((value - historyMin) / Math.max(1, historyMax - historyMin)) *
+      (historyAxisY - historyPlotTop);
   const historyPath = history
     .map((point, index) => {
       if (point.value === null) return "";
@@ -660,8 +666,8 @@ function V3SPerformance({
           <>
             <div className="v3s-history-chart">
               <svg
-                viewBox="0 0 440 150"
-                preserveAspectRatio="none"
+                viewBox={`0 0 440 ${historyChartHeight}`}
+                preserveAspectRatio="xMidYMid meet"
                 role="img"
                 aria-label={`${displayShowroomName(
                   showroom.showroom,
@@ -679,14 +685,20 @@ function V3SPerformance({
                     <stop offset="100%" stopColor="#2f6b8a" stopOpacity="0" />
                   </linearGradient>
                 </defs>
-                <line x1="28" x2="412" y1="126" y2="126" className="v3s-history-axis" />
+                <line
+                  x1="28"
+                  x2="412"
+                  y1={historyAxisY}
+                  y2={historyAxisY}
+                  className="v3s-history-axis"
+                />
                 {history.map((point) => (
                   <line
                     key={point.year}
                     x1={historyX(point.year)}
                     x2={historyX(point.year)}
-                    y1="122"
-                    y2="126"
+                    y1={historyAxisY - 4}
+                    y2={historyAxisY}
                     className="v3s-history-tick"
                   />
                 ))}
@@ -694,9 +706,9 @@ function V3SPerformance({
                   <path
                     d={`${historyPath} L ${historyX(
                       latestHistory?.year ?? 2025,
-                    )} 126 L ${historyX(
+                    )} ${historyAxisY} L ${historyX(
                       firstHistory?.year ?? 2021,
-                    )} 126 Z`}
+                    )} ${historyAxisY} Z`}
                     fill={`url(#v3s-history-fill-${showroom.cdsid})`}
                     className="v3s-history-area"
                   />
@@ -704,15 +716,17 @@ function V3SPerformance({
                 <path d={historyPath} className="v3s-history-line" pathLength="1" />
                 {historyValues.map((point) => (
                   <g key={point.year}>
-                    <circle
-                      cx={historyX(point.year)}
-                      cy={historyY(point.value)}
-                      r="4"
+                    <rect
+                      x={historyX(point.year) - historyMarkerSize / 2}
+                      y={historyY(point.value) - historyMarkerSize / 2}
+                      width={historyMarkerSize}
+                      height={historyMarkerSize}
+                      rx="0.5"
                       className="v3s-history-point"
                     />
                     <text
                       x={historyX(point.year)}
-                      y={historyY(point.value) - 10}
+                      y={Math.max(10, historyY(point.value) - historyValueOffset)}
                       textAnchor="middle"
                       className="v3s-history-value"
                     >
