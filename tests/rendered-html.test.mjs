@@ -1267,6 +1267,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.v3s-history-bar-fill b\s*\{[^}]*font-style: normal[^}]*transform: translate\(-50%, -50%\)/,
+  );
+  assert.match(
+    css,
     /\.v3s-peer-bar b\s*\{[^}]*top: 50%[^}]*font-size: 8px[^}]*transform: translate\(-50%, -50%\)/,
   );
   assert.match(css, /\.legend-peer\.dealer[\s\S]*?\.legend-peer\.region[\s\S]*?\.legend-peer\.size/);
