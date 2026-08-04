@@ -6570,6 +6570,11 @@ button.quarter-score-row:disabled {
   font-size: 7px;
 }
 
+.weekly-score-layout .trend-wrap.compact .quarter-band,
+.weekly-score-layout .trend-wrap.compact .week-ruler {
+  margin-right: 0;
+}
+
 .trend-wrap.compact {
   margin-top: 5px;
 }

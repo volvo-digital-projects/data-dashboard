@@ -867,7 +867,7 @@ function WeeklyTrend({
   const chartYScale = chartHeight / 200;
   const chartY = (coordinate: number) => coordinate * chartYScale;
   const plotLeft = (28 / 1360) * chartWidth;
-  const plotRight = chartWidth - plotLeft;
+  const plotRight = compact ? chartWidth : chartWidth - plotLeft;
   const plotWidth = plotRight - plotLeft;
   const x = (week: number) =>
     plotLeft + ((week - 0.5) / 52) * plotWidth;

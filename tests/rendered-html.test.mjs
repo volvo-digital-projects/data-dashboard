@@ -661,7 +661,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const plotLeft = \(28 \/ 1360\) \* chartWidth/,
   );
-  assert.match(dashboardSource, /const plotRight = chartWidth - plotLeft/);
+  assert.match(
+    dashboardSource,
+    /const plotRight = compact \? chartWidth : chartWidth - plotLeft/,
+  );
   assert.match(
     dashboardSource,
     /plotLeft \+ \(\(week - 0\.5\) \/ 52\) \* plotWidth/,
@@ -930,6 +933,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.weekly-score-layout \.trend-wrap\.compact \.actual-point-value,[\s\S]*?\.weekly-score-layout \.trend-wrap\.compact \.national-point-value\s*\{[^}]*font-size: 8px/,
+  );
+  assert.match(
+    css,
+    /\.weekly-score-layout \.trend-wrap\.compact \.quarter-band,[\s\S]*?\.weekly-score-layout \.trend-wrap\.compact \.week-ruler\s*\{[^}]*margin-right: 0/,
   );
   assert.match(
     css,
