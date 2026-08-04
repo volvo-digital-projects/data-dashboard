@@ -3049,9 +3049,11 @@ input:focus-visible {
   min-height: 50px;
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);
-  align-items: center;
+  grid-template-rows: auto auto;
+  align-content: center;
   column-gap: 10px;
   padding: 0 14px;
+  justify-items: center;
   background: transparent;
 }
 
@@ -3064,34 +3066,32 @@ input:focus-visible {
   width: 22px;
   height: 22px;
   min-height: 22px;
+  grid-row: 1 / span 2;
   align-self: center;
 }
 
-.analysis-context-item > span:last-child {
-  min-width: 0;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  text-align: center;
-}
-
 .analysis-context-item small {
+  width: 100%;
   color: var(--muted);
+  align-self: end;
   font-size: 10px;
   font-weight: 520;
   letter-spacing: 0.02em;
   line-height: 1.1;
+  text-align: center;
 }
 
 .analysis-context-item strong {
+  width: 100%;
+  min-width: 0;
+  margin-top: 2px;
   color: var(--ink);
   overflow: hidden;
+  align-self: start;
   font-size: 13px;
   font-weight: 680;
   line-height: 1.1;
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

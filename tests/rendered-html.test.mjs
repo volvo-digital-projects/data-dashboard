@@ -864,7 +864,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.analysis-context-item > span:last-child\s*\{[^}]*align-self: stretch[^}]*display: flex[^}]*flex-direction: column[^}]*justify-content: center/,
+    /\.analysis-context-item\s*\{[^}]*grid-template-rows: auto auto[^}]*align-content: center[^}]*justify-items: center/,
+  );
+  assert.match(
+    css,
+    /\.analysis-context-item > \.identity-icon,[\s\S]*?\.analysis-context-item > \.identity-profile-icon\s*\{[^}]*grid-row: 1 \/ span 2[^}]*align-self: center/,
   );
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),

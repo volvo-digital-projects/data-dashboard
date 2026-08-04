@@ -615,37 +615,29 @@ export default function CompetitiveAnalysis({
               className="identity-icon identity-icon--dealer"
               aria-hidden="true"
             />
-            <span>
-              <small>딜러사</small>
-              <strong>{selected.dealer}</strong>
-            </span>
+            <small>딜러사</small>
+            <strong>{selected.dealer}</strong>
           </div>
           <div className="analysis-context-item">
             <span
               className="identity-icon identity-icon--region"
               aria-hidden="true"
             />
-            <span>
-              <small>권역별</small>
-              <strong>{selected.region}</strong>
-            </span>
+            <small>권역별</small>
+            <strong>{selected.region}</strong>
           </div>
           <div className="analysis-context-item">
             <span
               className="identity-icon identity-icon--size"
               aria-hidden="true"
             />
-            <span>
-              <small>사이즈</small>
-              <strong>{selected.size}</strong>
-            </span>
+            <small>사이즈</small>
+            <strong>{selected.size}</strong>
           </div>
           <div className="analysis-context-item">
             <span className="identity-profile-icon" aria-hidden="true" />
-            <span>
-              <small>지점장</small>
-              <strong>{selected.manager}</strong>
-            </span>
+            <small>지점장</small>
+            <strong>{selected.manager}</strong>
           </div>
         </div>
       </header>
