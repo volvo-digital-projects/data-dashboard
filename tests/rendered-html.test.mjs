@@ -379,7 +379,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     ...html.matchAll(/--callout-tail-[xy]:(\d+(?:\.\d+)?)px/g),
   ].map((match) => Number(match[1]));
   assert.ok(dealerTailValues.length >= 14);
-  assert.ok(dealerTailValues.every((value) => value >= 3 && value <= 7));
+  assert.ok(dealerTailValues.every((value) => value >= 3 && value <= 14));
   assert.equal(
     (html.match(/class="scatter-label comparison"/g) ?? []).length,
     6,
@@ -1092,6 +1092,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.scatter-average-value\.vertical\s*\{[^}]*left: var\(--avg-x\)[^}]*bottom: 12px[^}]*display: flex[^}]*flex-direction: column/,
   );
   assert.match(analysisSource, /--callout-tail-x/);
+  assert.match(
+    analysisSource,
+    /tailX: Math\.max\(3, Math\.abs\(anchorX\)\)[\s\S]*?tailY: Math\.max\(3, Math\.abs\(anchorY\)\)/,
+  );
+  assert.doesNotMatch(analysisSource, /overlapScale|pointRadius/);
   assert.match(analysisSource, /\[3, 5, 7\]\.forEach\(\(gap, gapIndex\) =>/);
   assert.match(analysisSource, /\[0, -4, 4, -7, 7\]\.forEach\(\(lane, laneIndex\) =>/);
   assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);

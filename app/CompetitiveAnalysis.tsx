@@ -393,18 +393,11 @@ const buildScatterCalloutLayout = (
       best.offsetX + (pointsLeft ? -labelWidth / 2 : labelWidth / 2);
     const anchorY =
       best.offsetY + (pointsUp ? -labelHeight / 2 : labelHeight / 2);
-    const centerDistance = Math.max(1, Math.hypot(anchorX, anchorY));
-    const pointRadius = isSelected ? 6.5 : 4.5;
-    const overlapScale = Math.max(
-      0.2,
-      (centerDistance - pointRadius + 1) / centerDistance,
-    );
-
     layouts.set(point.item.cdsid, {
       offsetX: best.offsetX,
       offsetY: best.offsetY,
-      tailX: Math.max(3, Math.abs(anchorX) * overlapScale),
-      tailY: Math.max(3, Math.abs(anchorY) * overlapScale),
+      tailX: Math.max(3, Math.abs(anchorX)),
+      tailY: Math.max(3, Math.abs(anchorY)),
       placement: best.placement,
     });
   });
