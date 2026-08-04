@@ -364,6 +364,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(showroomResponse.status, 200);
   const showroomHtml = await showroomResponse.text();
+  assert.match(
+    showroomHtml.replaceAll("<!-- -->", ""),
+    /class="analysis-ranking-head"[^>]*>[\s\S]*?종합 만족도[\s\S]*?해피콜[\s\S]*?합산 평균/,
+  );
   const showroomRankingHtml = showroomHtml.match(
     /class="analysis-ranking-list">([\s\S]*?)<\/div><footer>/,
   )?.[1];

@@ -659,7 +659,7 @@ export default function CompetitiveAnalysis({
           </header>
           <div className="analysis-ranking-head" aria-hidden="true">
             <span>순위 · 전시장</span>
-            <span>만족도</span>
+            <span>종합 만족도</span>
             <span>해피콜</span>
             <span>합산 평균</span>
           </div>
