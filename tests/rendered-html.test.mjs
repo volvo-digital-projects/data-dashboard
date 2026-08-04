@@ -1041,8 +1041,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--warning: #d14b41/);
   assert.match(css, /--status-danger: #b4232d/);
   assert.match(css, /--status-danger-soft: #fce8eb/);
-  assert.match(css, /--status-caution: #df7184/);
-  assert.match(css, /--status-caution-soft: #fff0f3/);
+  assert.match(css, /--status-caution: #c58a1b/);
+  assert.match(css, /--status-caution-soft: #fbf2df/);
   assert.match(
     css,
     /\.signal-icon\.warning\s*\{[^}]*background: transparent[^}]*color: var\(--status-danger\)[^}]*font-size: 10px/,
@@ -1077,8 +1077,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /\.positive\s*\{\s*color: var\(--blue\) !important;/);
   assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
-  assert.match(css, /--caution: #e87561/);
-  assert.match(css, /--caution-soft: #fff0ec/);
+  assert.match(css, /--caution: #c58a1b/);
+  assert.match(css, /--caution-soft: #fbf2df/);
   assert.match(
     css,
     /\.v3s-award-period\s*\{[^}]*min-height: 40px[^}]*gap: 3px[^}]*padding: 5px 6px/,
@@ -1353,7 +1353,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #cc526a 0%, var\(--status-caution\) 68%, #f0a0ae 100%\)/,
+    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #a66f13 0%, var\(--status-caution\) 68%, #dda848 100%\)/,
   );
   assert.match(css, /@keyframes progress-fill\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/);
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);
