@@ -347,6 +347,22 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(showroomResponse.status, 200);
   const showroomHtml = await showroomResponse.text();
+  const showroomRankingHtml = showroomHtml.match(
+    /class="analysis-ranking-list">([\s\S]*?)<\/div><footer>/,
+  )?.[1];
+  assert.ok(showroomRankingHtml);
+  assert.deepEqual(
+    [
+      ...showroomRankingHtml.matchAll(
+        /class="analysis-rank"><strong>(\d+)<\/strong>/g,
+      ),
+    ].map((match) => Number(match[1])),
+    [22, 23, 24, 25, 26, 27, 28],
+  );
+  assert.match(
+    showroomRankingHtml,
+    /class="selected"[\s\S]*?class="analysis-rank"><strong>25<\/strong>[\s\S]*?볼보 강남대치/,
+  );
   assert.equal(
     (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,
     38,

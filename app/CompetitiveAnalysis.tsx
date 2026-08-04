@@ -354,8 +354,16 @@ export default function CompetitiveAnalysis({
   const selectedRank =
     groupItems.findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const safeSelectedRank = selectedRank || groupItems.length;
-  const rankRows =
-    groupItems.length <= 8 ? [...groupItems] : groupItems.slice(0, 6);
+  const rankWindowSize = 7;
+  const rankWindowRadius = Math.floor(rankWindowSize / 2);
+  const rankWindowStart = Math.min(
+    Math.max(0, safeSelectedRank - 1 - rankWindowRadius),
+    Math.max(0, groupItems.length - rankWindowSize),
+  );
+  const rankRows = groupItems.slice(
+    rankWindowStart,
+    rankWindowStart + rankWindowSize,
+  );
   if (
     !rankRows.some((item) => item.cdsid === selected.cdsid) &&
     selectedPoint
