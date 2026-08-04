@@ -9,6 +9,7 @@ import {
   type CSSProperties,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
+import { buildShowroomInsights } from "./showroom-insights";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -19,8 +20,14 @@ type AnalysisShowroom = {
   manager: string;
   size: string;
   region: string;
+  v3s: number | null;
   voc: number | null;
+  cx: number | null;
+  delivery: number | null;
+  testDrive: number | null;
+  app: number | null;
   happyCall: number | null;
+  q1?: { v3s: number | null } | null;
 };
 
 type AnalysisPoint = AnalysisShowroom & {
@@ -414,6 +421,10 @@ export default function CompetitiveAnalysis({
 }) {
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
+  const analysisInsights = buildShowroomInsights(
+    selected,
+    dashboardJson.averages,
+  );
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [accessDate, setAccessDate] = useState(() =>
@@ -604,15 +615,28 @@ export default function CompetitiveAnalysis({
             <span className="analysis-overview-icon" aria-hidden="true" />
             <span className="sr-only">현황으로 돌아가기</span>
           </Link>
-          <h1>{displayShowroomName(selected.showroom)} 분석</h1>
-          <div className="update-status">
-            <i aria-hidden="true" />
-            <time dateTime={accessDate.replaceAll(".", "-")}>
-              최근 업데이트 {accessDate}
-            </time>
-            <span>현재 Q3평가 진행중</span>
+          <div className="analysis-title-copy">
+            <h1>{displayShowroomName(selected.showroom)} 분석</h1>
+            <div className="update-status">
+              <i aria-hidden="true" />
+              <time dateTime={accessDate.replaceAll(".", "-")}>
+                최근 업데이트 {accessDate}
+              </time>
+              <span>현재 Q3평가 진행중</span>
+            </div>
           </div>
         </div>
+        <aside
+          className="identity-insights analysis-insights"
+          aria-label={`${displayShowroomName(selected.showroom)} 분석 메시지`}
+        >
+          {analysisInsights.map((insight) => (
+            <p className={`identity-insight-row ${insight.key}`} key={insight.key}>
+              <b>{insight.label}</b>
+              <span title={insight.message}>{insight.message}</span>
+            </p>
+          ))}
+        </aside>
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <div className="analysis-context-item">
             <span

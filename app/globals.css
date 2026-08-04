@@ -2986,7 +2986,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   margin: -6px -10px 0;
   padding: 12px 14px;
   border: 1px solid rgba(16, 42, 67, 0.08);
@@ -3017,9 +3017,21 @@ input:focus-visible {
 .analysis-title {
   min-width: 0;
   display: flex;
-  align-items: flex-end;
-  gap: 16px;
-  flex: 1 1 auto;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+.analysis-title-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.analysis-title-copy .update-status {
+  margin: 0;
 }
 
 .analysis-overview-link {
@@ -3095,7 +3107,7 @@ input:focus-visible {
   grid-template-columns: repeat(4, 126px);
   align-items: stretch;
   overflow: hidden;
-  margin-left: auto;
+  margin-left: 0;
   border: 1px solid rgba(47, 107, 138, 0.11);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.86);
@@ -4172,6 +4184,13 @@ input:focus-visible {
 
   .analysis-context {
     width: 100%;
+  }
+
+  .analysis-insights {
+    width: 100%;
+    max-width: none;
+    min-height: 66px;
+    flex: 0 0 auto;
   }
 
   .analysis-workspace {
