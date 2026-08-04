@@ -1233,7 +1233,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #f0a0ae 0%, var\(--status-caution\) 68%, #cc526a 100%\)/,
+    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #cc526a 0%, var\(--status-caution\) 68%, #f0a0ae 100%\)/,
   );
   assert.match(css, /@keyframes progress-fill\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/);
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);

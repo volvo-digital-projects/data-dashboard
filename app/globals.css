@@ -1028,7 +1028,7 @@ input:focus-visible {
 }
 
 .metric-card.caution .metric-track span {
-  background: linear-gradient(90deg, #f0a0ae 0%, var(--status-caution) 68%, #cc526a 100%);
+  background: linear-gradient(90deg, #cc526a 0%, var(--status-caution) 68%, #f0a0ae 100%);
 }
 
 .metric-track i {
