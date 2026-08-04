@@ -1289,7 +1289,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.v3s-history-national-bar-fill\s*\{[\s\S]*?#e9a494[\s\S]*?#cf735f[\s\S]*?#9d463d/,
+    /\.v3s-history-national-bar-fill\s*\{[^}]*width: 27px[\s\S]*?#e9a494[\s\S]*?#cf735f[\s\S]*?#9d463d/,
+  );
+  assert.match(
+    css,
+    /\.v3s-history-years\s*\{[^}]*grid-template-columns: repeat\(5, 1fr\)[^}]*column-gap: 14px[^}]*padding: 7px 18px 0/,
   );
   assert.match(
     css,

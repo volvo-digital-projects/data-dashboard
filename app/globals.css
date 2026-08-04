@@ -6175,7 +6175,7 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-history-national-bar-fill {
-  width: 21px;
+  width: 27px;
   min-height: 8px;
   position: relative;
   z-index: 2;
@@ -6259,6 +6259,7 @@ button.quarter-score-row:disabled {
 .v3s-history-years {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  column-gap: 14px;
   padding: 7px 18px 0;
   color: var(--muted);
   font-family: var(--font-latin);
