@@ -1297,6 +1297,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.v3s-history-years > span\s*\{[^}]*transform: translateX\(-15\.5px\)/,
+  );
+  assert.match(
+    css,
     /\.v3s-history-average-marker b\s*\{[^}]*bottom: 6px[^}]*right: 9px/,
   );
   assert.match(

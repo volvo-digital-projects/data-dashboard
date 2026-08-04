@@ -6267,6 +6267,10 @@ button.quarter-score-row:disabled {
   text-align: center;
 }
 
+.v3s-history-years > span {
+  transform: translateX(-15.5px);
+}
+
 .v3s-history-years span.missing {
   color: #c1c9cf;
 }
