@@ -6185,7 +6185,7 @@ button.quarter-score-row:disabled {
 
 .v3s-history-summary {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   margin-top: 10px;
   overflow: hidden;

@@ -208,6 +208,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">93\.6<\/text>[\s\S]*?class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">94\.6<\/text>/,
   );
+  assert.match(visibleHtml, /5개년 평균[\s\S]*?94\.2점/);
   assert.match(html, /preserveAspectRatio="xMidYMid meet"/);
   assert.equal((html.match(/class="v3s-history-point"/g) ?? []).length, 5);
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
@@ -790,6 +791,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(
     dashboardSource,
     /const historyChartHeight = compact \? 68 : 142[\s\S]*?preserveAspectRatio="xMidYMid meet"[\s\S]*?<rect/,
+  );
+  assert.match(
+    dashboardSource,
+    /const historyAverage = historyValues\.length[\s\S]*?historyValues\.reduce[\s\S]*?5개년 평균/,
   );
   assert.match(
     dashboardSource,

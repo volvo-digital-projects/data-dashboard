@@ -527,6 +527,10 @@ function V3SPerformance({
     firstHistory && latestHistory
       ? latestHistory.value - firstHistory.value
       : null;
+  const historyAverage = historyValues.length
+    ? historyValues.reduce((sum, point) => sum + point.value, 0) /
+      historyValues.length
+    : null;
 
   return (
     <div
@@ -770,6 +774,10 @@ function V3SPerformance({
                         historyDelta,
                       )}점`}
                 </strong>
+              </span>
+              <span>
+                5개년 평균
+                <strong>{displayNumber(historyAverage)}점</strong>
               </span>
             </div>
           </>
