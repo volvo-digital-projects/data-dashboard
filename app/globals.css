@@ -2986,7 +2986,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 24px;
   margin: -6px -10px 0;
   padding: 12px 14px;
   border: 1px solid rgba(16, 42, 67, 0.08);
@@ -3015,12 +3015,12 @@ input:focus-visible {
 }
 
 .analysis-title {
-  width: 360px;
+  width: 310px;
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex: 0 0 360px;
+  gap: 0;
+  flex: 0 0 310px;
   overflow: hidden;
 }
 
