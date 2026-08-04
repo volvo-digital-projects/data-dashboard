@@ -328,7 +328,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /aria-label="볼보 강남대치 현황 화면으로 이동"[^>]*title="현황 화면으로 이동"/,
+    /aria-label="볼보 강남대치 현황으로 돌아가기"[^>]*title="현황으로 돌아가기"/,
   );
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력 분석|<span>Q2<\/span>/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
@@ -1339,6 +1339,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.scatter-point\.hovered:not\(\.selected\)\s*\{[^}]*--callout-color: #4a938f[^}]*--callout-fill: #e8f4f3[^}]*z-index: 5/,
+  );
+  assert.match(
+    css,
+    /\.analysis-overview-icon::after\s*\{[^}]*border-bottom: 1\.5px solid currentColor[^}]*border-left: 1\.5px solid currentColor[^}]*transform: rotate\(45deg\)/,
   );
   assert.match(
     css,

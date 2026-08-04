@@ -3064,30 +3064,30 @@ input:focus-visible {
   height: 14px;
   position: relative;
   display: block;
-  border: 1.5px solid currentColor;
-  border-radius: 2px;
 }
 
 .analysis-overview-icon::before {
+  width: 13px;
+  height: 1.5px;
   position: absolute;
-  top: 3px;
-  right: 2px;
-  left: 2px;
-  height: 1px;
+  top: 6px;
+  right: 1px;
   background: currentColor;
+  border-radius: 999px;
   content: "";
 }
 
 .analysis-overview-icon::after {
-  width: 3px;
-  height: 3px;
+  width: 7px;
+  height: 7px;
   position: absolute;
-  top: 7px;
-  left: 3px;
-  border-radius: 0.5px;
-  background: currentColor;
-  box-shadow: 6px 0 0 currentColor;
+  top: 3px;
+  left: 1px;
+  border-bottom: 1.5px solid currentColor;
+  border-left: 1.5px solid currentColor;
+  border-radius: 1px;
   content: "";
+  transform: rotate(45deg);
 }
 
 .analysis-context {

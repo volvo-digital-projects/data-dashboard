@@ -605,11 +605,11 @@ export default function CompetitiveAnalysis({
           <Link
             className="analysis-overview-link"
             href={`/dashboard/${selected.cdsid}`}
-            aria-label={`${displayShowroomName(selected.showroom)} 현황 화면으로 이동`}
-            title="현황 화면으로 이동"
+            aria-label={`${displayShowroomName(selected.showroom)} 현황으로 돌아가기`}
+            title="현황으로 돌아가기"
           >
             <span className="analysis-overview-icon" aria-hidden="true" />
-            <span className="sr-only">현황 화면으로 이동</span>
+            <span className="sr-only">현황으로 돌아가기</span>
           </Link>
           <h1>{displayShowroomName(selected.showroom)} 분석</h1>
           <div className="update-status">
