@@ -673,7 +673,6 @@ export default function CompetitiveAnalysis({
         <article className="analysis-ranking-card">
           <header className="analysis-card-heading">
             <div>
-              <span>{viewMeta[view].label}</span>
               <h2>{groupLabel} 순위</h2>
             </div>
             <strong>{groupItems.length}개점</strong>
