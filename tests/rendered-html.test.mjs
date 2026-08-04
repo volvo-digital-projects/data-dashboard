@@ -41,9 +41,17 @@ test("server-renders the selected CDSID dashboard", async () => {
     html,
     /class="(?:national|actual)-point-value"[^>]*>100<\/text>/,
   );
+  assert.match(
+    html,
+    /class="(?:national|actual)-point-value"[^>]*>130<\/text>/,
+  );
+  assert.match(
+    html,
+    /class="(?:national|actual)-point-value"[^>]*>64<\/text>/,
+  );
   assert.doesNotMatch(
     html,
-    /class="(?:national|actual)-point-value"[^>]*>100\.0<\/text>/,
+    /class="(?:national|actual)-point-value"[^>]*>\d+\.0<\/text>/,
   );
   const visibleHtml = html.replaceAll("<!-- -->", "");
   const seoulToday = new Intl.DateTimeFormat("sv-SE", {

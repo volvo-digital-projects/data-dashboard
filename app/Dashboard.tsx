@@ -187,7 +187,9 @@ const displayNumber = (value: number | null | undefined, digits = 1) =>
     : value.toFixed(digits);
 
 const displayTrendNumber = (value: number | null | undefined) =>
-  value === 100 ? "100" : displayNumber(value);
+  value !== null && value !== undefined && Number.isInteger(value)
+    ? value.toFixed(0)
+    : displayNumber(value);
 
 const displayShowroomName = (name: string) => {
   const trimmed = name.trim();
