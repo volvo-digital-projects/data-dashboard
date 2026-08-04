@@ -394,6 +394,23 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
   assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);
+  assert.match(regionVisibleHtml, /V3S 인센티브 수상기록/);
+  assert.match(
+    regionVisibleHtml,
+    /누적기록<\/span><strong>강남대치 1회 수상<\/strong>/,
+  );
+  assert.match(
+    regionVisibleHtml,
+    /2021[\s\S]*?상반기[\s\S]*?수상 기록 없음[\s\S]*?하반기[\s\S]*?강남대치/,
+  );
+  assert.match(
+    regionVisibleHtml,
+    /2026[\s\S]*?상반기[\s\S]*?수상 기록 없음[\s\S]*?하반기[\s\S]*?수상 기록 없음/,
+  );
+  assert.doesNotMatch(
+    regionVisibleHtml,
+    /v3s-award-period awarded[\s\S]*?볼보 강남대치/,
+  );
 
   const sizeResponse = await render(
     "/dashboard/6KR6842/analysis?view=size",

@@ -52,6 +52,25 @@ type ScatterLabelBox = {
 
 const showrooms = dashboardJson.showrooms as AnalysisShowroom[];
 
+const v3sAwardPeriods = [
+  { id: "2021-H1", year: "2021", half: "상반기" },
+  { id: "2021-H2", year: "2021", half: "하반기" },
+  { id: "2022-H1", year: "2022", half: "상반기" },
+  { id: "2022-H2", year: "2022", half: "하반기" },
+  { id: "2023-H1", year: "2023", half: "상반기" },
+  { id: "2023-H2", year: "2023", half: "하반기" },
+  { id: "2024-H1", year: "2024", half: "상반기" },
+  { id: "2024-H2", year: "2024", half: "하반기" },
+  { id: "2025-H1", year: "2025", half: "상반기" },
+  { id: "2025-H2", year: "2025", half: "하반기" },
+  { id: "2026-H1", year: "2026", half: "상반기" },
+  { id: "2026-H2", year: "2026", half: "하반기" },
+] as const;
+
+const v3sAwardHistory: Record<string, readonly string[]> = {
+  "6KR6834": ["2021-H2"],
+};
+
 const viewMeta: Record<
   AnalysisView,
   { label: string; description: string; short: string }
@@ -91,6 +110,9 @@ const displayShowroomName = (name: string) => {
     : showroomName;
   return `볼보 ${normalizedName}`;
 };
+
+const displayShowroomNameWithoutBrand = (name: string) =>
+  displayShowroomName(name).replace(/^볼보\s*/, "");
 
 const averageOf = (items: AnalysisPoint[], key: "vocScore" | "happyScore" | "combined") =>
   items.length
@@ -348,6 +370,9 @@ export default function CompetitiveAnalysis({
       happyScore: selected.happyCall ?? 0,
       combined: ((selected.voc ?? 0) + (selected.happyCall ?? 0)) / 2,
     } satisfies AnalysisPoint);
+  const selectedAwardPeriods = v3sAwardHistory[selected.cdsid] ?? [];
+  const selectedAwardCount = selectedAwardPeriods.length;
+  const selectedAwardName = displayShowroomNameWithoutBrand(selected.showroom);
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
@@ -727,6 +752,53 @@ export default function CompetitiveAnalysis({
             </span>
           </footer>
         </article>
+      </section>
+
+      <section className="v3s-award-card" aria-label="V3S 인센티브 수상기록">
+        <header className="v3s-award-heading">
+          <div>
+            <h2>V3S 인센티브 수상기록</h2>
+            <p>2021년 상반기부터 2026년 하반기까지의 반기별 수상 이력</p>
+          </div>
+          <div className="v3s-award-record">
+            <span>누적기록</span>
+            <strong>
+              {selectedAwardName} {selectedAwardCount}회 수상
+            </strong>
+          </div>
+        </header>
+
+        <div className="v3s-award-timeline">
+          {["2021", "2022", "2023", "2024", "2025", "2026"].map(
+            (year) => (
+              <article className="v3s-award-year" key={year}>
+                <h3>{year}</h3>
+                <div>
+                  {v3sAwardPeriods
+                    .filter((period) => period.year === year)
+                    .map((period) => {
+                      const isAwarded = selectedAwardPeriods.includes(period.id);
+                      return (
+                        <div
+                          className={`v3s-award-period ${
+                            isAwarded ? "awarded" : "empty"
+                          }`}
+                          key={period.id}
+                        >
+                          <span>{period.half}</span>
+                          {isAwarded ? (
+                            <strong>{selectedAwardName}</strong>
+                          ) : (
+                            <i className="sr-only">수상 기록 없음</i>
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
+              </article>
+            ),
+          )}
+        </div>
       </section>
     </main>
   );
