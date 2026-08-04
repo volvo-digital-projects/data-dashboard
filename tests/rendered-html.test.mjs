@@ -205,6 +205,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /5개년 실력 추세/);
   assert.doesNotMatch(visibleHtml, /5개년 데이터 연결 예정/);
   assert.equal((html.match(/class="v3s-history-bar-fill"/g) ?? []).length, 5);
+  assert.equal(
+    (html.match(/class="v3s-history-national-bar-fill"/g) ?? []).length,
+    5,
+  );
+  assert.match(
+    visibleHtml,
+    /2021년 전국 연평균 94\.7점[\s\S]*?2022년 전국 연평균 93\.9점[\s\S]*?2023년 전국 연평균 95\.9점[\s\S]*?2024년 전국 연평균 95\.6점[\s\S]*?2025년 전국 연평균 95점/,
+  );
+  assert.match(visibleHtml, /전국 연평균[\s\S]*?볼보 강남대치/);
   assert.match(visibleHtml, /5개년 평균 94\.2/);
   assert.doesNotMatch(html, /class="v3s-history-summary"/);
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
@@ -1272,7 +1281,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.v3s-history-bar-fill b\s*\{[^}]*font-style: normal[^}]*transform: translate\(-50%, -50%\)/,
+    /\.v3s-history-bar-fill b,[\s\S]*?\.v3s-history-national-bar-fill b\s*\{[^}]*font-style: normal[^}]*transform: translate\(-50%, -50%\)/,
+  );
+  assert.match(
+    css,
+    /\.v3s-history-national-bar-fill\s*\{[\s\S]*?#e9a494[\s\S]*?#cf735f[\s\S]*?#9d463d/,
   );
   assert.match(
     css,

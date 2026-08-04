@@ -112,6 +112,49 @@ const v3sHistoryByCdsid = v3sHistoryJson as Record<
   HistoricalV3sPoint[]
 >;
 const weeklyDashboard = weeklyJson as WeeklyData;
+const nationalV3sQuarterAverages = [
+  {
+    year: 2021,
+    values: [
+      94.35714285714288, 93.30357142857144, 96.88965517241378,
+      94.31724137931033,
+    ],
+  },
+  {
+    year: 2022,
+    values: [
+      88.4033333333333, 95.21000000000001, 96.32903225806453,
+      95.78709677419354,
+    ],
+  },
+  {
+    year: 2023,
+    values: [
+      93.52812499999996, 97.36250000000001, 95.27812499999999,
+      97.39999999999999,
+    ],
+  },
+  {
+    year: 2024,
+    values: [
+      94.96176470588237, 95.72499999999998, 95.94871794871794,
+      95.66923076923078,
+    ],
+  },
+  {
+    year: 2025,
+    values: [
+      93.81025641025641, 95.17435897435898, 95.78974358974361,
+      95.41282051282052,
+    ],
+  },
+] as const;
+const nationalV3sAnnualAverages = nationalV3sQuarterAverages.map(
+  ({ year, values }) => ({
+    year,
+    value: values.reduce((sum, value) => sum + value, 0) / values.length,
+  }),
+);
 const seoulDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Seoul",
   year: "numeric",
@@ -191,10 +234,13 @@ const displayNumber = (value: number | null | undefined, digits = 1) =>
     ? "—"
     : value.toFixed(digits);
 
-const displayTrendNumber = (value: number | null | undefined) =>
-  value !== null && value !== undefined && Number.isInteger(value)
-    ? value.toFixed(0)
-    : displayNumber(value);
+const displayTrendNumber = (value: number | null | undefined) => {
+  if (value === null || value === undefined || !Number.isFinite(value)) {
+    return "—";
+  }
+  const rounded = Number(value.toFixed(1));
+  return Number.isInteger(rounded) ? rounded.toFixed(0) : rounded.toFixed(1);
+};
 
 const displayShowroomName = (name: string) => {
   const trimmed = name.trim();
@@ -486,11 +532,15 @@ function V3SPerformance({
       point.value !== null,
   );
   const hasHistory = historyValues.length > 0;
+  const historyScaleValues = [
+    ...historyValues.map((point) => point.value),
+    ...nationalV3sAnnualAverages.map((point) => point.value),
+  ];
   const historyValueMin = hasHistory
-    ? Math.min(...historyValues.map((point) => point.value))
+    ? Math.min(...historyScaleValues)
     : 0;
   const historyValueMax = hasHistory
-    ? Math.max(...historyValues.map((point) => point.value))
+    ? Math.max(...historyScaleValues)
     : 100;
   const historyPadding = Math.max(
     2,
@@ -661,7 +711,7 @@ function V3SPerformance({
             role="img"
             aria-label={`${displayShowroomName(
               showroom.showroom,
-            )} 2021년부터 2025년까지 V3S 막대 추이와 5개년 평균`}
+            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 연평균 비교와 5개년 평균`}
           >
             <div className="v3s-history-bar-stage" aria-hidden="true">
               {historyAverage !== null && (
@@ -674,21 +724,45 @@ function V3SPerformance({
                 </span>
               )}
               <div className="v3s-history-bars">
-                {history.map((point, index) => (
-                  <span className="v3s-history-bar-slot" key={point.year}>
-                    {point.value !== null && (
-                      <i
-                        className="v3s-history-bar-fill"
-                        style={{
-                          height: `${historyScaleHeight(point.value)}%`,
-                          animationDelay: `${120 + index * 90}ms`,
-                        }}
-                      >
-                        <b>{displayNumber(point.value)}</b>
-                      </i>
-                    )}
-                  </span>
-                ))}
+                {history.map((point, index) => {
+                  const nationalAverage = nationalV3sAnnualAverages.find(
+                    (item) => item.year === point.year,
+                  );
+                  return (
+                    <span className="v3s-history-bar-slot" key={point.year}>
+                      {nationalAverage && (
+                        <i
+                          className="v3s-history-national-bar-fill"
+                          title={`${point.year}년 전국 연평균 ${displayTrendNumber(
+                            nationalAverage.value,
+                          )}점`}
+                          style={{
+                            height: `${historyScaleHeight(
+                              nationalAverage.value,
+                            )}%`,
+                            animationDelay: `${80 + index * 90}ms`,
+                          }}
+                        >
+                          <b>{displayTrendNumber(nationalAverage.value)}</b>
+                        </i>
+                      )}
+                      {point.value !== null && (
+                        <i
+                          className="v3s-history-bar-fill"
+                          title={`${point.year}년 ${displayShowroomName(
+                            showroom.showroom,
+                          )} ${displayTrendNumber(point.value)}점`}
+                          style={{
+                            height: `${historyScaleHeight(point.value)}%`,
+                            animationDelay: `${120 + index * 90}ms`,
+                          }}
+                        >
+                          <b>{displayTrendNumber(point.value)}</b>
+                        </i>
+                      )}
+                    </span>
+                  );
+                })}
               </div>
             </div>
             <div className="v3s-history-years" aria-hidden="true">
@@ -700,6 +774,15 @@ function V3SPerformance({
                   {point.year}
                 </span>
               ))}
+            </div>
+            <div className="v3s-history-legend" aria-hidden="true">
+              <span>
+                <i className="v3s-history-legend-national" /> 전국 연평균
+              </span>
+              <span>
+                <i className="v3s-history-legend-showroom" />
+                {displayShowroomName(showroom.showroom)}
+              </span>
             </div>
           </div>
         ) : (
