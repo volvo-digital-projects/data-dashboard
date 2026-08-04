@@ -984,6 +984,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
   assert.match(css, /--caution: #e87561/);
   assert.match(css, /--caution-soft: #fff0ec/);
+  assert.match(
+    css,
+    /\.v3s-award-period\s*\{[^}]*min-height: 40px[^}]*gap: 3px[^}]*padding: 5px 6px/,
+  );
   assert.doesNotMatch(
     css,
     /\.scatter-point\.dense:not\(\.selected\)\s*>\s*b\s*\{[^}]*opacity:\s*0\s*;/s,

@@ -3936,7 +3936,7 @@ input:focus-visible {
 
 .v3s-award-card {
   min-width: 0;
-  padding: 20px;
+  padding: 16px 20px;
   overflow: hidden;
   border: 1px solid rgba(16, 24, 40, 0.07);
   border-radius: 14px;
@@ -3945,7 +3945,7 @@ input:focus-visible {
 }
 
 .v3s-award-heading {
-  min-height: 48px;
+  min-height: 42px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -3995,7 +3995,7 @@ input:focus-visible {
   display: grid;
   grid-template-columns: repeat(6, minmax(150px, 1fr));
   gap: 7px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .v3s-award-year {
@@ -4007,7 +4007,7 @@ input:focus-visible {
 }
 
 .v3s-award-year h3 {
-  height: 30px;
+  height: 26px;
   display: grid;
   place-items: center;
   margin: 0;
@@ -4025,12 +4025,12 @@ input:focus-visible {
 }
 
 .v3s-award-period {
-  min-height: 62px;
+  min-height: 40px;
   display: grid;
   align-content: center;
   justify-items: center;
-  gap: 8px;
-  padding: 9px 6px;
+  gap: 3px;
+  padding: 5px 6px;
   position: relative;
   background: rgba(255, 255, 255, 0.76);
 }
