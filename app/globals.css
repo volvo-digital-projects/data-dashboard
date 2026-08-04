@@ -102,8 +102,8 @@
   --good-soft: #e5f2ed;
   --warning: #c64e45;
   --warning-soft: #f8e8e4;
-  --caution: #b7791f;
-  --caution-soft: #f7eddc;
+  --caution: #e87561;
+  --caution-soft: #fff0ec;
   --es90-orange: #f15a24;
   --secondary: #66757d;
   --muted: #8a969c;
@@ -950,7 +950,9 @@ input:focus-visible {
 }
 
 .signal-icon.caution {
-  background: var(--caution);
+  background: transparent;
+  color: var(--caution);
+  font-size: 10px;
 }
 
 .metric-card-value {
@@ -995,6 +997,14 @@ input:focus-visible {
   color: var(--warning) !important;
 }
 
+.metric-benchmark strong.negative.caution {
+  color: var(--caution) !important;
+}
+
+.metric-benchmark strong.negative.warning {
+  color: var(--warning) !important;
+}
+
 .metric-track {
   height: 6px;
   position: relative;
@@ -1014,7 +1024,7 @@ input:focus-visible {
 }
 
 .metric-card.caution .metric-track span {
-  background: linear-gradient(90deg, #a66f13 0%, var(--caution) 68%, #dda848 100%);
+  background: linear-gradient(90deg, #d85f50 0%, var(--caution) 68%, #f2a08f 100%);
 }
 
 .metric-track i {
@@ -4032,8 +4042,8 @@ input:focus-visible {
   --good-soft: #e8f5f0;
   --warning: #d14b41;
   --warning-soft: #fbecea;
-  --caution: #c58a1b;
-  --caution-soft: #fbf2df;
+  --caution: #e87561;
+  --caution-soft: #fff0ec;
   --secondary: #667085;
   --muted: #98a2b3;
   --font-korean:

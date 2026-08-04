@@ -97,17 +97,21 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /class="signal-icon warning" aria-hidden="true">▼<\/span>위험 감지/,
   );
+  assert.match(
+    visibleHtml,
+    /class="signal-icon caution" aria-hidden="true">▼<\/span>주의 필요/,
+  );
   assert.match(html, /CX Index/);
   assert.equal((visibleHtml.match(/점 \/ 100점 만점/g) ?? []).length, 2);
   assert.equal((visibleHtml.match(/점 \/ 130점 만점/g) ?? []).length, 1);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.match(
     visibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="negative">▼ \d+\.\d점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative caution">▼ \d+\.\d점<\/strong>/,
   );
   assert.doesNotMatch(
     visibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive">\+/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive good">\+/,
   );
   const directionalResponse = await render("/dashboard/6KR6868");
   assert.equal(directionalResponse.status, 200);
@@ -115,15 +119,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   const directionalVisibleHtml = directionalHtml.replaceAll("<!-- -->", "");
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive">▲ 3\.1점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 3\.1점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="negative">▼ 17\.9점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ 17\.9점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive">▲ 8\.4점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 8\.4점<\/strong>/,
   );
   assert.match(
     visibleHtml,
@@ -905,11 +909,23 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.signal-icon\.caution\s*\{[^}]*background: transparent[^}]*color: var\(--caution\)[^}]*font-size: 10px/,
+  );
+  assert.match(
+    css,
     /\.metric-benchmark strong\.positive\s*\{\s*color: var\(--blue\) !important;/,
   );
   assert.match(
     css,
     /\.metric-benchmark strong\.negative\s*\{\s*color: var\(--warning\) !important;/,
+  );
+  assert.match(
+    css,
+    /\.metric-benchmark strong\.negative\.caution\s*\{\s*color: var\(--caution\) !important;/,
+  );
+  assert.match(
+    css,
+    /\.metric-benchmark strong\.negative\.warning\s*\{\s*color: var\(--warning\) !important;/,
   );
   assert.match(
     css,
@@ -921,7 +937,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /\.positive\s*\{\s*color: var\(--blue\) !important;/);
   assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
-  assert.match(css, /--caution: #c58a1b/);
+  assert.match(css, /--caution: #e87561/);
+  assert.match(css, /--caution-soft: #fff0ec/);
   assert.doesNotMatch(
     css,
     /\.scatter-point\.dense:not\(\.selected\)\s*>\s*b\s*\{[^}]*opacity:\s*0\s*;/s,
@@ -1167,7 +1184,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #a66f13 0%, var\(--caution\) 68%, #dda848 100%\)/,
+    /\.metric-card\.caution \.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #d85f50 0%, var\(--caution\) 68%, #f2a08f 100%\)/,
   );
   assert.match(css, /@keyframes progress-fill\s*\{[\s\S]*?transform: scaleX\(0\)[\s\S]*?transform: scaleX\(1\)/);
   assert.match(css, /\.comparison-controls select\s*\{[\s\S]*?height: 44px/);

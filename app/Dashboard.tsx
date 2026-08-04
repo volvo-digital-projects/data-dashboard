@@ -220,7 +220,7 @@ function getSignal(value: number, average: number) {
 function SignalIcon({ tone }: { tone: string }) {
   return (
     <span className={`signal-icon ${tone}`} aria-hidden="true">
-      {tone === "good" ? "↗" : tone === "caution" ? "!" : "▼"}
+      {tone === "good" ? "▲" : "▼"}
     </span>
   );
 }
@@ -330,13 +330,13 @@ function MetricCard({
       >
         <span>{quarterLabel} 전국 평균 대비</span>
         <strong
-          className={
+          className={`${
             signal.delta > 0
               ? "positive"
               : signal.delta < 0
                 ? "negative"
                 : "neutral"
-          }
+          } ${signal.tone}`}
         >
           {signal.delta > 0 ? "▲" : signal.delta < 0 ? "▼" : "―"}{" "}
           {Math.abs(signal.delta).toFixed(1)}점
