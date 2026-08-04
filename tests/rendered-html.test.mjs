@@ -264,6 +264,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
 
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
+  assert.match(
+    visibleHtml,
+    /<footer><span>에이치 평균<strong>93\.6<\/strong><\/span><span>볼보 강남대치 평균<strong>93\.8<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 0\.2점<\/strong><\/span><\/footer>/,
+  );
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
   assert.match(visibleHtml, /U 7개소/);
@@ -344,6 +348,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "<!-- -->",
     "",
   );
+  assert.match(regionVisibleHtml, /<footer><span>동일 권역별 평균/);
   assert.match(regionVisibleHtml, /권역별 10위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
@@ -354,6 +359,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(sizeResponse.status, 200);
   const sizeHtml = await sizeResponse.text();
+  assert.match(
+    sizeHtml.replaceAll("<!-- -->", ""),
+    /<footer><span>동일 사이즈 평균/,
+  );
   assert.match(sizeHtml, /scatter-point [^"]*dense/);
   assert.match(sizeHtml, /scatter-label comparison/);
   assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
@@ -364,6 +373,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(showroomResponse.status, 200);
   const showroomHtml = await showroomResponse.text();
+  assert.match(
+    showroomHtml.replaceAll("<!-- -->", ""),
+    /<footer><span>전국 전시장 평균<strong>94\.6<\/strong><\/span><span>볼보 강남대치 평균<strong>93\.8<\/strong><\/span><span class="analysis-average-delta delta-negative">평균 대비<strong>▼ 0\.8점<\/strong><\/span><\/footer>/,
+  );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
     /class="analysis-ranking-head"[^>]*>[\s\S]*?종합 만족도[\s\S]*?해피콜 이행[\s\S]*?합산 평균/,

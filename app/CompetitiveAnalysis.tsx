@@ -351,6 +351,28 @@ export default function CompetitiveAnalysis({
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
+  const groupAverageLabel =
+    view === "dealer"
+      ? `${selected.dealer} 평균`
+      : view === "showroom"
+        ? "전국 전시장 평균"
+        : view === "region"
+          ? "동일 권역별 평균"
+          : "동일 사이즈 평균";
+  const selectedAverageLabel = `${displayShowroomName(selected.showroom)} 평균`;
+  const displayedGroupAverage = Number(groupCombinedAverage.toFixed(1));
+  const displayedSelectedAverage = Number(selectedPoint.combined.toFixed(1));
+  const selectedAverageDelta = Number(
+    (displayedSelectedAverage - displayedGroupAverage).toFixed(1),
+  );
+  const selectedAverageDeltaTone =
+    selectedAverageDelta > 0
+      ? "delta-positive"
+      : selectedAverageDelta < 0
+        ? "delta-negative"
+        : "delta-neutral";
+  const selectedAverageDeltaArrow =
+    selectedAverageDelta > 0 ? "▲" : selectedAverageDelta < 0 ? "▼" : "―";
   const selectedRank =
     groupItems.findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const safeSelectedRank = selectedRank || groupItems.length;
@@ -692,12 +714,18 @@ export default function CompetitiveAnalysis({
           </div>
           <footer>
             <span>
-              그룹 평균
+              {groupAverageLabel}
               <strong>{displayNumber(groupCombinedAverage)}</strong>
             </span>
             <span>
-              내 전시장
+              {selectedAverageLabel}
               <strong>{displayNumber(selectedPoint.combined)}</strong>
+            </span>
+            <span className={`analysis-average-delta ${selectedAverageDeltaTone}`}>
+              평균 대비
+              <strong>
+                {selectedAverageDeltaArrow} {displayNumber(Math.abs(selectedAverageDelta))}점
+              </strong>
             </span>
           </footer>
         </article>
