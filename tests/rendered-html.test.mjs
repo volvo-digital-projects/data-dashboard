@@ -389,6 +389,19 @@ test("serves the dual-metric competitive analysis sample", async () => {
     regionVisibleHtml,
     /<article class="analysis-ranking-card"><header class="analysis-card-heading"><div><h2>/,
   );
+  const analysisContextHtml = regionVisibleHtml.match(
+    /<div class="analysis-context"[^>]*>([\s\S]*?)<\/div><\/header>/,
+  )?.[1];
+  assert.ok(analysisContextHtml);
+  assert.equal(
+    (analysisContextHtml.match(/class="analysis-context-item"/g) ?? []).length,
+    4,
+  );
+  assert.match(analysisContextHtml, /identity-icon--dealer/);
+  assert.match(analysisContextHtml, /identity-icon--region/);
+  assert.match(analysisContextHtml, /identity-icon--size/);
+  assert.match(analysisContextHtml, /identity-profile-icon/);
+  assert.doesNotMatch(analysisContextHtml, /<a\b|<button\b|tabindex=|onclick=/i);
   assert.match(regionVisibleHtml, /<footer><span>동일 권역별 평균/);
   assert.match(regionVisibleHtml, /권역별 10위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
