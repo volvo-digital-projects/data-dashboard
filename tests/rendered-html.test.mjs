@@ -204,13 +204,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /5개년 추이/);
   assert.doesNotMatch(visibleHtml, /5개년 실력 추세/);
   assert.doesNotMatch(visibleHtml, /5개년 데이터 연결 예정/);
-  assert.match(
-    visibleHtml,
-    /class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">93\.6<\/text>[\s\S]*?class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">94\.6<\/text>/,
-  );
-  assert.match(visibleHtml, /5개년 평균[\s\S]*?94\.2점/);
-  assert.match(html, /preserveAspectRatio="xMidYMid meet"/);
-  assert.equal((html.match(/class="v3s-history-point"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="v3s-history-bar-fill"/g) ?? []).length, 5);
+  assert.match(visibleHtml, /5개년 평균 94\.2/);
+  assert.doesNotMatch(html, /class="v3s-history-summary"/);
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
   assert.match(
     visibleHtml,
@@ -784,13 +780,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     [94.3, 94.3, 93.6, 94.3, 94.6],
   );
   assert.doesNotMatch(dashboardSource, /5개년 데이터 연결 예정/);
+  assert.doesNotMatch(dashboardSource, /const historyPath = history/);
+  assert.doesNotMatch(dashboardSource, /v3s-history-summary/);
   assert.match(
     dashboardSource,
-    /const historyPath = history[\s\S]*?previousPoint\?\.value === null \? "M" : "L"[\s\S]*?historyIsComplete/,
-  );
-  assert.match(
-    dashboardSource,
-    /const historyChartHeight = compact \? 68 : 142[\s\S]*?preserveAspectRatio="xMidYMid meet"[\s\S]*?<rect/,
+    /const historyScaleHeight[\s\S]*?v3s-history-average-marker[\s\S]*?v3s-history-bar-fill/,
   );
   assert.match(
     dashboardSource,

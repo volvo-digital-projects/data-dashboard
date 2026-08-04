@@ -502,25 +502,14 @@ function V3SPerformance({
   const historyMax = hasHistory
     ? Math.min(100, historyValueMax + historyPadding)
     : 100;
-  const historyChartHeight = compact ? 68 : 142;
-  const historyAxisY = compact ? 57 : 126;
-  const historyPlotTop = compact ? 13 : 32;
-  const historyMarkerSize = compact ? 6 : 8;
-  const historyValueOffset = compact ? 7 : 10;
-  const historyX = (year: number) => 28 + ((year - 2021) / 4) * 384;
-  const historyY = (value: number) =>
-    historyAxisY -
-    ((value - historyMin) / Math.max(1, historyMax - historyMin)) *
-      (historyAxisY - historyPlotTop);
-  const historyPath = history
-    .map((point, index) => {
-      if (point.value === null) return "";
-      const previousPoint = history[index - 1];
-      const command = index === 0 || previousPoint?.value === null ? "M" : "L";
-      return `${command} ${historyX(point.year)} ${historyY(point.value)}`;
-    })
-    .join(" ");
-  const historyIsComplete = historyValues.length === history.length;
+  const historyScaleHeight = (value: number) =>
+    Math.min(
+      100,
+      Math.max(
+        0,
+        ((value - historyMin) / Math.max(1, historyMax - historyMin)) * 100,
+      ),
+    );
   const firstHistory = historyValues.at(0) ?? null;
   const latestHistory = historyValues.at(-1) ?? null;
   const historyDelta =
@@ -667,120 +656,52 @@ function V3SPerformance({
         </header>
 
         {hasHistory ? (
-          <>
-            <div className="v3s-history-chart">
-              <svg
-                viewBox={`0 0 440 ${historyChartHeight}`}
-                preserveAspectRatio="xMidYMid meet"
-                role="img"
-                aria-label={`${displayShowroomName(
-                  showroom.showroom,
-                )} 2021년부터 2025년까지 V3S 추세`}
-              >
-                <defs>
-                  <linearGradient
-                    id={`v3s-history-fill-${showroom.cdsid}`}
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop offset="0%" stopColor="#2f6b8a" stopOpacity="0.18" />
-                    <stop offset="100%" stopColor="#2f6b8a" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <line
-                  x1="28"
-                  x2="412"
-                  y1={historyAxisY}
-                  y2={historyAxisY}
-                  className="v3s-history-axis"
-                />
-                {history.map((point) => (
-                  <line
-                    key={point.year}
-                    x1={historyX(point.year)}
-                    x2={historyX(point.year)}
-                    y1={historyAxisY - 4}
-                    y2={historyAxisY}
-                    className="v3s-history-tick"
-                  />
-                ))}
-                {historyValues.length > 1 && historyIsComplete && (
-                  <path
-                    d={`${historyPath} L ${historyX(
-                      latestHistory?.year ?? 2025,
-                    )} ${historyAxisY} L ${historyX(
-                      firstHistory?.year ?? 2021,
-                    )} ${historyAxisY} Z`}
-                    fill={`url(#v3s-history-fill-${showroom.cdsid})`}
-                    className="v3s-history-area"
-                  />
-                )}
-                <path d={historyPath} className="v3s-history-line" pathLength="1" />
-                {historyValues.map((point) => (
-                  <g key={point.year}>
-                    <rect
-                      x={historyX(point.year) - historyMarkerSize / 2}
-                      y={historyY(point.value) - historyMarkerSize / 2}
-                      width={historyMarkerSize}
-                      height={historyMarkerSize}
-                      rx="0.5"
-                      className="v3s-history-point"
-                    />
-                    <text
-                      x={historyX(point.year)}
-                      y={Math.max(10, historyY(point.value) - historyValueOffset)}
-                      textAnchor="middle"
-                      className="v3s-history-value"
-                    >
-                      {displayNumber(point.value)}
-                    </text>
-                  </g>
-                ))}
-              </svg>
-              <div className="v3s-history-years" aria-hidden="true">
-                {history.map((point) => (
-                  <span
-                    className={point.value === null ? "missing" : ""}
-                    key={point.year}
-                  >
-                    {point.year}
+          <div
+            className="v3s-history-chart"
+            role="img"
+            aria-label={`${displayShowroomName(
+              showroom.showroom,
+            )} 2021년부터 2025년까지 V3S 막대 추이와 5개년 평균`}
+          >
+            <div className="v3s-history-bar-stage" aria-hidden="true">
+              {historyAverage !== null && (
+                <span
+                  className="v3s-history-average-marker"
+                  style={{ bottom: `${historyScaleHeight(historyAverage)}%` }}
+                >
+                  <b>5개년 평균 {displayNumber(historyAverage)}</b>
+                  <i />
+                </span>
+              )}
+              <div className="v3s-history-bars">
+                {history.map((point, index) => (
+                  <span className="v3s-history-bar-slot" key={point.year}>
+                    {point.value !== null && (
+                      <i
+                        className="v3s-history-bar-fill"
+                        style={{
+                          height: `${historyScaleHeight(point.value)}%`,
+                          animationDelay: `${120 + index * 90}ms`,
+                        }}
+                      >
+                        <b>{displayNumber(point.value)}</b>
+                      </i>
+                    )}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="v3s-history-summary">
-              <span>
-                시작점
-                <strong>{displayNumber(firstHistory?.value)}점</strong>
-              </span>
-              <span>
-                최근점
-                <strong>{displayNumber(latestHistory?.value)}점</strong>
-              </span>
-              <span>
-                5년 증감
-                <strong
-                  className={
-                    historyDelta !== null && historyDelta < 0
-                      ? "negative"
-                      : "positive"
-                  }
+            <div className="v3s-history-years" aria-hidden="true">
+              {history.map((point) => (
+                <span
+                  className={point.value === null ? "missing" : ""}
+                  key={point.year}
                 >
-                  {historyDelta === null
-                    ? "—"
-                    : `${historyDelta >= 0 ? "+" : ""}${displayNumber(
-                        historyDelta,
-                      )}점`}
-                </strong>
-              </span>
-              <span>
-                5개년 평균
-                <strong>{displayNumber(historyAverage)}점</strong>
-              </span>
+                  {point.year}
+                </span>
+              ))}
             </div>
-          </>
+          </div>
         ) : (
           <div className="v3s-history-empty">
             <div className="v3s-history-ghost" aria-hidden="true">
