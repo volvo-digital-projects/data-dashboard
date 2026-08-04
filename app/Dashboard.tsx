@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import dashboardJson from "./data/showrooms.json";
+import v3sHistoryJson from "./data/v3s-history.json";
 import weeklyJson from "./data/weekly.json";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
@@ -106,6 +107,10 @@ type WeeklyData = {
 };
 
 const dashboard = dashboardJson as DashboardData;
+const v3sHistoryByCdsid = v3sHistoryJson as Record<
+  string,
+  HistoricalV3sPoint[]
+>;
 const weeklyDashboard = weeklyJson as WeeklyData;
 const seoulDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Seoul",
@@ -466,9 +471,11 @@ function V3SPerformance({
     ? enteredQuarters.reduce((sum, quarter) => sum + quarter.value, 0) /
       enteredQuarters.length
     : null;
+  const showroomHistory =
+    showroom.historicalV3s ?? v3sHistoryByCdsid[showroom.cdsid] ?? [];
   const history = [2021, 2022, 2023, 2024, 2025].map(
     (year) =>
-      showroom.historicalV3s?.find((point) => point.year === year) ?? {
+      showroomHistory.find((point) => point.year === year) ?? {
         year,
         value: null,
         average: null,
@@ -479,24 +486,35 @@ function V3SPerformance({
       point.value !== null,
   );
   const hasHistory = historyValues.length > 0;
+  const historyValueMin = hasHistory
+    ? Math.min(...historyValues.map((point) => point.value))
+    : 0;
+  const historyValueMax = hasHistory
+    ? Math.max(...historyValues.map((point) => point.value))
+    : 100;
+  const historyPadding = Math.max(
+    2,
+    (historyValueMax - historyValueMin) * 0.6,
+  );
   const historyMin = hasHistory
-    ? Math.max(0, Math.min(...historyValues.map((point) => point.value)) - 8)
+    ? Math.max(0, historyValueMin - historyPadding)
     : 0;
   const historyMax = hasHistory
-    ? Math.min(100, Math.max(...historyValues.map((point) => point.value)) + 8)
+    ? Math.min(100, historyValueMax + historyPadding)
     : 100;
   const historyX = (year: number) => 28 + ((year - 2021) / 4) * 384;
   const historyY = (value: number) =>
     126 -
     ((value - historyMin) / Math.max(1, historyMax - historyMin)) * 94;
-  const historyPath = historyValues
-    .map(
-      (point, index) =>
-        `${index === 0 ? "M" : "L"} ${historyX(point.year)} ${historyY(
-          point.value,
-        )}`,
-    )
+  const historyPath = history
+    .map((point, index) => {
+      if (point.value === null) return "";
+      const previousPoint = history[index - 1];
+      const command = index === 0 || previousPoint?.value === null ? "M" : "L";
+      return `${command} ${historyX(point.year)} ${historyY(point.value)}`;
+    })
     .join(" ");
+  const historyIsComplete = historyValues.length === history.length;
   const firstHistory = historyValues.at(0) ?? null;
   const latestHistory = historyValues.at(-1) ?? null;
   const historyDelta =
@@ -672,7 +690,7 @@ function V3SPerformance({
                     className="v3s-history-tick"
                   />
                 ))}
-                {historyValues.length > 1 && (
+                {historyValues.length > 1 && historyIsComplete && (
                   <path
                     d={`${historyPath} L ${historyX(
                       latestHistory?.year ?? 2025,
@@ -705,7 +723,12 @@ function V3SPerformance({
               </svg>
               <div className="v3s-history-years" aria-hidden="true">
                 {history.map((point) => (
-                  <span key={point.year}>{point.year}</span>
+                  <span
+                    className={point.value === null ? "missing" : ""}
+                    key={point.year}
+                  >
+                    {point.year}
+                  </span>
                 ))}
               </div>
             </div>
@@ -747,11 +770,11 @@ function V3SPerformance({
               ))}
             </div>
             <div className="v3s-history-empty-copy">
-              <strong>5개년 데이터 연결 예정</strong>
+              <strong>등록된 점수 없음</strong>
               <span>
-                전시장별 2021–2025 점수가 들어오면
+                원본 데이터가 비어 있는 기간은
                 <br />
-                성장 방향과 5년 증감을 자동 표시합니다.
+                값 없이 표시합니다.
               </span>
             </div>
           </div>

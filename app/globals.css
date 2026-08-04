@@ -6172,6 +6172,17 @@ button.quarter-score-row:disabled {
   text-align: center;
 }
 
+.v3s-history-years span.missing {
+  color: #c1c9cf;
+}
+
+.v3s-history-years span.missing::after {
+  display: block;
+  margin-top: 1px;
+  color: #aab4bc;
+  content: "—";
+}
+
 .v3s-history-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

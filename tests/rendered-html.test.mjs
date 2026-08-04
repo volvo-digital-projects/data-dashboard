@@ -203,6 +203,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);
   assert.match(visibleHtml, /5개년 추이/);
   assert.doesNotMatch(visibleHtml, /5개년 실력 추세/);
+  assert.doesNotMatch(visibleHtml, /5개년 데이터 연결 예정/);
+  assert.match(
+    visibleHtml,
+    /class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">93\.6<\/text>[\s\S]*?class="v3s-history-value">94\.3<\/text>[\s\S]*?class="v3s-history-value">94\.6<\/text>/,
+  );
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가 \(VCK\)/);
   assert.match(
     visibleHtml,
@@ -766,7 +771,20 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.doesNotMatch(dashboardSource, /analysis\?view=showroom/);
   assert.doesNotMatch(dashboardSource, /2026 PERFORMANCE/);
   assert.doesNotMatch(dashboardSource, /2021–2025 HISTORY/);
-  assert.match(dashboardSource, /5개년 데이터 연결 예정/);
+  assert.match(dashboardSource, /import v3sHistoryJson from "\.\/data\/v3s-history\.json"/);
+  const v3sHistoryData = JSON.parse(
+    await readFile(new URL("../app/data/v3s-history.json", import.meta.url), "utf8"),
+  );
+  assert.equal(Object.keys(v3sHistoryData).length, 39);
+  assert.deepEqual(
+    v3sHistoryData["6KR6834"].map((point) => point.value),
+    [94.3, 94.3, 93.6, 94.3, 94.6],
+  );
+  assert.doesNotMatch(dashboardSource, /5개년 데이터 연결 예정/);
+  assert.match(
+    dashboardSource,
+    /const historyPath = history[\s\S]*?previousPoint\?\.value === null \? "M" : "L"[\s\S]*?historyIsComplete/,
+  );
   assert.match(
     dashboardSource,
     /item\.cdsid\.padEnd\(showroomCodeWidth, "\\u2007"\)/,
