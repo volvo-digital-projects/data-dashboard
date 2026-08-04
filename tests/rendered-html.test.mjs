@@ -1326,7 +1326,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.analysis-ranking-list > div\.selected\s*\{[^}]*border-color: rgba\(47, 107, 138, 0\.11\)[^}]*inset 3px 0 0 var\(--blue\)[^}]*0 12px 22px -16px rgba\(16, 42, 67, 0\.42\)/,
+    /\.analysis-ranking-list > div\.selected\s*\{[^}]*background: linear-gradient\(135deg, var\(--navy\)[^}]*inset 3px 0 0 #74aec5[^}]*0 14px 26px -16px rgba\(16, 42, 67, 0\.62\)/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-list > div\.selected \.analysis-rank > strong,[\s\S]*?\.analysis-ranking-list > div\.selected > strong\s*\{[^}]*color: white/,
   );
   assert.match(
     css,
