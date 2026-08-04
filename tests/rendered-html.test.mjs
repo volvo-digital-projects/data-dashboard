@@ -573,6 +573,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(dashboardSource, /className=\{`legend-peer \$\{benchmark\.key\}`\}/);
   assert.match(
     dashboardSource,
+    /className="v3s-quarter-legend"[\s\S]*?peerBenchmarks\("q2"\)\.map[\s\S]*?className=\{`legend-peer \$\{benchmark\.key\}`\}[\s\S]*?className="legend-bar"[\s\S]*?displayShowroomName\(showroom\.showroom\)/,
+  );
+  assert.match(
+    dashboardSource,
     /id="score-v3s"[\s\S]*?id="score-voc"[\s\S]*?id="score-cx"/,
   );
   assert.match(dashboardSource, /<V3SPerformance showroom=\{selected\} compact \/>/);

@@ -581,16 +581,16 @@ function V3SPerformance({
           ))}
         </div>
         <div className="v3s-quarter-legend">
-          <span>
-            <i className="legend-bar" />{" "}
-            {displayShowroomName(showroom.showroom)}
-          </span>
           {peerBenchmarks("q2").map((benchmark) => (
             <span className="v3s-peer-legend" key={benchmark.key}>
               <i className={`legend-peer ${benchmark.key}`} />
               {benchmark.label}
             </span>
           ))}
+          <span>
+            <i className="legend-bar" />{" "}
+            {displayShowroomName(showroom.showroom)}
+          </span>
           <span>
             <i className="legend-average" /> 분기 전국 평균
           </span>
