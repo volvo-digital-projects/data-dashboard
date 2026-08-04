@@ -3061,8 +3061,11 @@ input:focus-visible {
 
 .analysis-context-item > span:last-child {
   min-width: 0;
-  display: grid;
-  align-content: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 2px;
   text-align: center;
 }

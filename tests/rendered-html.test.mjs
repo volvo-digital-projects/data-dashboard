@@ -858,6 +858,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.analysis-tabs button\s*\{[^}]*min-height: 42px[^}]*padding: 0 14px/,
   );
+  assert.match(
+    css,
+    /\.analysis-context-item > span:last-child\s*\{[^}]*align-self: stretch[^}]*display: flex[^}]*flex-direction: column[^}]*justify-content: center/,
+  );
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
     "utf8",
