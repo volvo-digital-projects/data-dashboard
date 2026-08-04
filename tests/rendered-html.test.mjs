@@ -1284,6 +1284,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.v3s-performance\.compact \.v3s-history-bar-stage\s*\{[^}]*height: 73px/,
+  );
+  assert.match(
+    css,
     /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.combat-summary-stack strong,[\s\S]*?\.metric-card-value\s*\{[^}]*min-height: 70px[^}]*display: flex[^}]*align-items: flex-end[^}]*margin-top: 0/,
   );
   assert.match(
