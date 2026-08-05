@@ -4896,6 +4896,7 @@ input:focus-visible,
   .analysis-context {
     width: 21.5847%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-right: -24px;
   }
 
   .identity-strip dl div,
