@@ -634,20 +634,18 @@ export default function CompetitiveAnalysis({
       <div className="analysis-sticky-anchor" ref={stickyAnchorRef}>
       <div className="analysis-sticky-shell" ref={stickyShellRef}>
         <header className="analysis-header">
-        <div className="analysis-title">
-          <div className="analysis-title-copy">
-            <h1>{displayShowroomName(selected.showroom)}</h1>
-            <div className="update-status">
-              <div className="update-status-line">
-                <i aria-hidden="true" />
-                <time dateTime={accessDate.replaceAll(".", "-")}>
-                  최근 업데이트 {accessDate}
-                </time>
-              </div>
-              <div className="update-status-line">
-                <i aria-hidden="true" />
-                <span>현재 Q3평가 진행중</span>
-              </div>
+        <div className="identity-title analysis-title">
+          <h1>{displayShowroomName(selected.showroom)}</h1>
+          <div className="update-status">
+            <div className="update-status-line">
+              <i aria-hidden="true" />
+              <time dateTime={accessDate.replaceAll(".", "-")}>
+                최근 업데이트 {accessDate}
+              </time>
+            </div>
+            <div className="update-status-line">
+              <i aria-hidden="true" />
+              <span>현재 Q3평가 진행중</span>
             </div>
           </div>
         </div>
