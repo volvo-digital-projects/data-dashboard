@@ -4567,8 +4567,8 @@ input:focus-visible,
 }
 
 .update-status time {
-  color: var(--ink-soft);
-  font-weight: 650;
+  color: inherit;
+  font-weight: inherit;
 }
 
 .update-status span::before {
