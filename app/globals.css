@@ -115,6 +115,7 @@
   --font-korean: "Paperlogy 5";
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
+  --header-context-cell: 104px;
   --font-ui:
     var(--font-volvo), var(--font-korean), "Noto Sans KR", "Apple SD Gothic Neo",
     Arial, sans-serif;
@@ -2978,7 +2979,7 @@ input:focus-visible {
 @media (min-width: 761px) {
   .identity-detail-rail {
     display: grid;
-    grid-template-columns: repeat(4, 126px);
+    grid-template-columns: repeat(4, var(--header-context-cell));
     justify-content: end;
   }
 
@@ -2988,8 +2989,8 @@ input:focus-visible {
 
   .identity-strip dl div,
   .identity-profile {
-    width: 126px;
-    min-width: 126px;
+    width: var(--header-context-cell);
+    min-width: var(--header-context-cell);
     grid-template-columns: 36px minmax(0, 1fr);
     column-gap: 10px;
     padding-inline: 14px;
@@ -3175,7 +3176,7 @@ input:focus-visible {
   min-width: 0;
   min-height: 52px;
   display: grid;
-  grid-template-columns: repeat(4, 126px);
+  grid-template-columns: repeat(4, var(--header-context-cell));
   align-items: stretch;
   overflow: hidden;
   margin-left: 0;
@@ -3189,15 +3190,15 @@ input:focus-visible {
 }
 
 .analysis-context-item {
-  width: 126px;
-  min-width: 126px;
+  width: var(--header-context-cell);
+  min-width: var(--header-context-cell);
   min-height: 50px;
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
-  column-gap: 10px;
-  padding: 0 14px;
+  column-gap: 6px;
+  padding: 0 8px;
   justify-items: center;
   position: relative;
   color: inherit;
@@ -4552,7 +4553,7 @@ input:focus-visible,
 .identity-insights {
   height: 92px;
   min-width: 0;
-  max-width: 650px;
+  max-width: 660px;
   flex: 1 1 540px;
   display: grid;
   grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -4634,12 +4635,12 @@ input:focus-visible,
 }
 
 .identity-strip dl div {
-  width: 126px;
-  min-width: 126px;
+  width: var(--header-context-cell);
+  min-width: var(--header-context-cell);
   min-height: 50px;
   grid-template-columns: 22px minmax(0, 1fr);
-  column-gap: 10px;
-  padding: 0 14px;
+  column-gap: 6px;
+  padding: 0 8px;
   justify-items: center;
   transition: background 180ms ease;
 }
@@ -4774,12 +4775,12 @@ input:focus-visible,
 }
 
 .identity-profile {
-  width: 126px;
-  min-width: 126px;
+  width: var(--header-context-cell);
+  min-width: var(--header-context-cell);
   height: 50px;
   grid-template-columns: 22px minmax(0, 1fr);
-  column-gap: 10px;
-  padding: 0 14px;
+  column-gap: 6px;
+  padding: 0 8px;
   justify-items: center;
   transition: background 180ms ease;
 }
