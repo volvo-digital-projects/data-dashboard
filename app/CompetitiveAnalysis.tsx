@@ -604,7 +604,8 @@ export default function CompetitiveAnalysis({
 
   return (
     <main className="competitive-analysis-page">
-      <header className="analysis-header">
+      <div className="analysis-sticky-shell">
+        <header className="analysis-header">
         <div className="analysis-title">
           <div className="analysis-title-copy">
             <h1>{displayShowroomName(selected.showroom)} 분석</h1>
@@ -675,32 +676,32 @@ export default function CompetitiveAnalysis({
             <strong>{selected.manager}</strong>
           </Link>
         </div>
-      </header>
+        </header>
 
-      <nav className="analysis-tabs" aria-label="경쟁력 분석 기준">
-        {(Object.keys(viewMeta) as AnalysisView[]).map((key) => (
-          <button
-            key={key}
-            type="button"
-            className={view === key ? "active" : ""}
-            aria-pressed={view === key}
-            onClick={() => changeView(key)}
-          >
-            <span>{viewMeta[key].label}</span>
-            <small>
-              {key === "dealer"
-                ? `${selected.dealer} ${dealerShowroomCount}개소`
-                : key === "region"
-                  ? `${selected.region} ${regionShowroomCount}개소`
-                  : key === "size"
-                    ? `${selected.size} ${sizeShowroomCount}개소`
-                    : "전국 39개소"}
-            </small>
-          </button>
-        ))}
-      </nav>
+        <nav className="analysis-tabs" aria-label="경쟁력 분석 기준">
+          {(Object.keys(viewMeta) as AnalysisView[]).map((key) => (
+            <button
+              key={key}
+              type="button"
+              className={view === key ? "active" : ""}
+              aria-pressed={view === key}
+              onClick={() => changeView(key)}
+            >
+              <span>{viewMeta[key].label}</span>
+              <small>
+                {key === "dealer"
+                  ? `${selected.dealer} ${dealerShowroomCount}개소`
+                  : key === "region"
+                    ? `${selected.region} ${regionShowroomCount}개소`
+                    : key === "size"
+                      ? `${selected.size} ${sizeShowroomCount}개소`
+                      : "전국 39개소"}
+              </small>
+            </button>
+          ))}
+        </nav>
 
-      <section className="analysis-summary-grid">
+        <section className="analysis-summary-grid">
         <article className="analysis-summary-card satisfaction">
           <div>
             <span>종합 만족도</span>
@@ -756,7 +757,8 @@ export default function CompetitiveAnalysis({
             {viewMeta[view].short} {safeSelectedRank}위 / 전체 {groupItems.length}
           </em>
         </article>
-      </section>
+        </section>
+      </div>
 
       <section className="analysis-workspace">
         <article className="analysis-scatter-card">

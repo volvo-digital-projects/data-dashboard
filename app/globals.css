@@ -2991,6 +2991,18 @@ input:focus-visible {
     var(--paper);
 }
 
+.analysis-sticky-shell {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  gap: 16px;
+  padding: 6px 0 10px;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper) 88%, rgba(242, 246, 248, 0.96) 100%);
+  box-shadow: 0 16px 24px -26px rgba(16, 42, 67, 0.7);
+}
+
 .analysis-header {
   min-height: 82px;
   display: flex;
@@ -4210,6 +4222,10 @@ input:focus-visible {
 }
 
 @media (max-width: 1180px) {
+  .analysis-sticky-shell {
+    position: static;
+  }
+
   .competitive-analysis-page {
     padding-inline: 24px;
   }
