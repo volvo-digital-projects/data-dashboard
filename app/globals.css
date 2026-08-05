@@ -4905,6 +4905,16 @@ input:focus-visible,
     width: 100%;
     min-width: 0;
   }
+
+  .hero-grid,
+  .content-grid,
+  .dashboard-footer,
+  .analysis-tabs,
+  .analysis-summary-grid,
+  .analysis-workspace,
+  .v3s-award-card {
+    margin-inline: -10px;
+  }
 }
 
 .hero-grid {
@@ -7363,6 +7373,24 @@ button.quarter-score-row:disabled {
   .dashboard-footer {
     margin-top: 16px;
   }
+}
+
+.identity-strip,
+.analysis-header,
+.combat-card,
+.panel,
+.metric-card,
+.analysis-summary-card,
+.analysis-scatter-card,
+.analysis-ranking-card,
+.v3s-award-card,
+.v3s-quarter-panel,
+.v3s-history-panel,
+.score-tier,
+.trend-scroll,
+.weekly-score-placeholder,
+.one-voice-contribution {
+  border-radius: 10px;
 }
 
 @media (max-width: 1240px) {
