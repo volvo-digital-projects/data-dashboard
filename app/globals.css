@@ -116,6 +116,7 @@
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
   --dashboard-content-overhang: 10px;
+  --dashboard-sticky-inner-gutter: 10px;
   --header-context-cell: 112px;
   --header-title-width: 310px;
   --header-title-font-size: 36px;
@@ -175,17 +176,23 @@ input:focus-visible {
   position: fixed;
   top: 0;
   right: max(
-    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      var(--dashboard-page-gutter) - var(--dashboard-content-overhang) -
+        var(--dashboard-sticky-inner-gutter)
+    ),
     calc(
       (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
-        var(--dashboard-content-overhang)
+        var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
   left: max(
-    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      var(--dashboard-page-gutter) - var(--dashboard-content-overhang) -
+        var(--dashboard-sticky-inner-gutter)
+    ),
     calc(
       (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
-        var(--dashboard-content-overhang)
+        var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
   z-index: 60;
@@ -3049,17 +3056,23 @@ input:focus-visible {
   position: fixed;
   top: 0;
   right: max(
-    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      var(--dashboard-page-gutter) - var(--dashboard-content-overhang) -
+        var(--dashboard-sticky-inner-gutter)
+    ),
     calc(
       (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
-        var(--dashboard-content-overhang)
+        var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
   left: max(
-    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      var(--dashboard-page-gutter) - var(--dashboard-content-overhang) -
+        var(--dashboard-sticky-inner-gutter)
+    ),
     calc(
       (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
-        var(--dashboard-content-overhang)
+        var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
   z-index: 60;
@@ -4296,8 +4309,8 @@ input:focus-visible {
 
 @media (max-width: 1240px) {
   .analysis-sticky-shell {
-    right: 24px;
-    left: 24px;
+    right: calc(24px - var(--dashboard-sticky-inner-gutter));
+    left: calc(24px - var(--dashboard-sticky-inner-gutter));
   }
 
   .competitive-analysis-page {
@@ -7518,8 +7531,8 @@ button.quarter-score-row:disabled {
 
 @media (max-width: 1240px) {
   .dashboard-sticky-shell {
-    right: 24px;
-    left: 24px;
+    right: calc(24px - var(--dashboard-sticky-inner-gutter));
+    left: calc(24px - var(--dashboard-sticky-inner-gutter));
   }
 
   .dashboard {

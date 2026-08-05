@@ -1031,6 +1031,29 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
   );
 });
 
+test("aligns both sticky shell contents with their lower panels", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--dashboard-sticky-inner-gutter: 10px/);
+  for (const selector of ["dashboard", "analysis"]) {
+    assert.match(
+      css,
+      new RegExp(
+        `\\.${selector}-sticky-shell\\s*\\{[\\s\\S]*?right: max\\([\\s\\S]*?var\\(--dashboard-content-overhang\\) -[\\s\\S]*?var\\(--dashboard-sticky-inner-gutter\\)[\\s\\S]*?left: max\\([\\s\\S]*?var\\(--dashboard-content-overhang\\) -[\\s\\S]*?var\\(--dashboard-sticky-inner-gutter\\)`,
+      ),
+    );
+  }
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px/,
+  );
+  assert.equal(
+    (css.match(/calc\(24px - var\(--dashboard-sticky-inner-gutter\)\)/g) ?? [])
+      .length,
+    4,
+  );
+});
+
 test("compacts the desktop dashboard summary vertically", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
