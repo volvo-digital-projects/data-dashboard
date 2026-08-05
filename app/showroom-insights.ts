@@ -106,7 +106,7 @@ const buildV3sInsight = (
   averages: ShowroomInsightAverages,
 ) => {
   if (!isScore(showroom.v3s)) {
-    return "Q2 V3S 점수가 아직 집계되지 않았습니다—평가 완료 후 분기 변화와 전국 격차를 다시 확인하세요.";
+    return "Q2 V3S 점수가 아직 집계되지 않았습니다 → 평가 완료 후 분기 변화와 전국 격차를 다시 확인하세요.";
   }
 
   const current = showroom.v3s;
@@ -159,7 +159,7 @@ const buildV3sInsight = (
     action = "평균 미달 문항을 우선 선정해 주간 코칭과 재평가를 연결하세요.";
   }
 
-  return `${historyText}, ${quarterText}(${nationalText.replace("·", "")})—${action}`;
+  return `${historyText}, ${quarterText}(${nationalText.replace("·", "")}) → ${action}`;
 };
 
 const buildVocInsight = (
@@ -167,7 +167,7 @@ const buildVocInsight = (
   averages: ShowroomInsightAverages,
 ) => {
   if (!isScore(showroom.voc)) {
-    return "Q2 VOC 점수가 아직 집계되지 않았습니다—유효 관측과 고객 회신 데이터부터 확보하세요.";
+    return "Q2 VOC 점수가 아직 집계되지 않았습니다 → 유효 관측과 고객 회신 데이터부터 확보하세요.";
   }
 
   const current = showroom.voc;
@@ -217,7 +217,7 @@ const buildVocInsight = (
     action = "저점 주차 원인과 담당별 편차를 복기해 변동폭을 줄이세요.";
   }
 
-  return `${scoreText}${nationalText}, ${observationText}${lowText}—${action}`;
+  return `${scoreText}${nationalText}, ${observationText}${lowText} → ${action}`;
 };
 
 const buildCxInsight = (
@@ -225,7 +225,7 @@ const buildCxInsight = (
   averages: ShowroomInsightAverages,
 ) => {
   if (!isScore(showroom.cx)) {
-    return "Q2 CX Index가 아직 집계되지 않았습니다—고객 여정별 세부 항목부터 점검하세요.";
+    return "Q2 CX Index가 아직 집계되지 않았습니다 → 고객 여정별 세부 항목부터 점검하세요.";
   }
 
   const current = showroom.cx;
@@ -303,7 +303,7 @@ const buildCxInsight = (
       ? `·최근 4주 ${formatScore(recentAverage)}점(직전 ${formatDelta(recentDelta)})`
       : "";
 
-  return `${scoreText}${nationalText}, ${strengthText}·${weakText}${recentText}—${weakest?.action ?? "고객 여정별 실행 편차를 점검하세요."}`;
+  return `${scoreText}${nationalText}, ${strengthText}·${weakText}${recentText} → ${weakest?.action ?? "고객 여정별 실행 편차를 점검하세요."}`;
 };
 
 export const buildShowroomInsights = (
