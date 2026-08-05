@@ -580,11 +580,14 @@ test("ships project metadata and removes the disposable starter", async () => {
 });
 
 test("ships Google Sheet weekly VOC and calculated CX series", async () => {
-  const weekly = JSON.parse(
-    await readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
-  );
+  const [weeklyText, syncSource, dashboardSource] = await Promise.all([
+    readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/sync-google-sheet-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+  ]);
+  const weekly = JSON.parse(weeklyText);
 
-  assert.equal(weekly.meta.vocLatestWeek, 26);
+  assert.equal(weekly.meta.vocLatestWeek, 29);
   assert.equal(weekly.meta.cxLatestWeek, 30);
   assert.equal(weekly.meta.weekRanges.length, 52);
   assert.deepEqual(weekly.meta.weekRanges[0], {
@@ -604,15 +607,41 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
   });
   assert.equal(Object.keys(weekly.voc.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.cx.byCdsid).length, 39);
-  assert.equal(weekly.voc.byCdsid["6KR6834"][0], 100);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][0], 0);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][1], 100);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][2], 94);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][3], 90);
   assert.equal(
     weekly.voc.byCdsid["6KR6834"]
-      .slice(0, 26)
+      .slice(0, 29)
       .filter((value) => value !== null).length,
-    25,
+    29,
+  );
+  assert.equal(
+    weekly.voc.byCdsid["6KR6834"]
+      .slice(0, 29)
+      .filter((value) => value === 0).length,
+    15,
   );
   assert.equal(weekly.voc.byCdsid["6KR6834"][13], 64);
   assert.equal(weekly.voc.byCdsid["6KR6834"][16], 64);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][25], 100);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][26], 100);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][27], 96);
+  assert.equal(weekly.voc.byCdsid["6KR6834"][28], 0);
+  assert.equal(
+    weekly.meta.rules.voc,
+    "VOC(결과) 시트의 전시장별 원점수를 사용하며, 0.0도 실제 점수로 표시",
+  );
+  assert.match(
+    syncSource,
+    /const voc = weeklyResult\(loaded\.voc\);/,
+  );
+  assert.doesNotMatch(syncSource, /zeroUsesDealerAverage/);
+  assert.match(
+    dashboardSource,
+    /const storeSegments = \[rawPoints\]/,
+  );
   assert.equal(weekly.cx.byCdsid["6KR6834"][0], 80);
   assert.equal(weekly.cx.byCdsid["6KR6834"][29], 90);
   assert.equal(weekly.cx.byCdsid["6KR6834"][30], null);
@@ -905,6 +934,66 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(
     css,
     /@keyframes actual-series-wipe\s*\{[\s\S]*?clip-path: inset\(0 100% 0 0\)[\s\S]*?clip-path: inset\(0 0 0 0\)/,
+  );
+});
+
+test("matches summary metric label tracking to the detailed score headings", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(
+    css,
+    /\.metric-code\s*\{[^}]*font-family: var\(--font-latin\)[^}]*letter-spacing: -0\.01em/,
+  );
+  assert.match(
+    css,
+    /\.score-tier-heading strong\s*\{[^}]*font-family: var\(--font-latin\)[^}]*letter-spacing: -0\.01em/,
+  );
+});
+
+test("locks dashboard and analysis sticky shells to the lower content edges", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--dashboard-content-overhang: 10px/);
+  for (const selector of ["dashboard", "analysis"]) {
+    assert.match(
+      css,
+      new RegExp(
+        `\\.${selector}-sticky-shell\\s*\\{[\\s\\S]*?right: max\\([\\s\\S]*?var\\(--dashboard-content-overhang\\)[\\s\\S]*?left: max\\([\\s\\S]*?var\\(--dashboard-content-overhang\\)`,
+      ),
+    );
+  }
+  assert.doesNotMatch(
+    css,
+    /\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*margin-inline: -10px/,
+  );
+});
+
+test("compacts the desktop dashboard summary vertically", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding-bottom: 8px/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-sticky-shell \.combat-card,[\s\S]*?\.dashboard-sticky-shell \.metric-card\s*\{[^}]*min-height: 224px/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-sticky-shell \.combat-card,[\s\S]*?\.dashboard-sticky-shell \.metric-card\s*\{[^}]*padding: 16px 18px/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-sticky-shell \.metric-benchmark\s*\{[^}]*margin-top: 10px/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-sticky-shell \.metric-quarter-strip > span\s*\{[^}]*min-height: 28px[^}]*padding: 4px 3px/,
+  );
+  assert.match(
+    css,
+    /\.combat-summary-stack strong,[\s\S]*?\.metric-card-value\s*\{[^}]*min-height: 58px/,
   );
 });
 
@@ -1437,6 +1526,21 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.comparison-value small\s*\{[\s\S]*?display: flex[\s\S]*?white-space: nowrap/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 0 10px[^}]*border: 0[^}]*border-radius: 0 0 10px 10px/,
+  );
+  assert.match(css, /\.dashboard-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
+  assert.match(css, /\.analysis-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
+  assert.match(css, /--dashboard-content-overhang: 10px/);
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: -15px/,
+  );
+  assert.match(
+    css,
+    /\.hero-grid,[\s\S]*?\.analysis-tabs,[\s\S]*?\.analysis-summary-grid\s*\{[^}]*margin-inline: 0/,
   );
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 

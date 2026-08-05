@@ -115,6 +115,7 @@
   --font-korean: "Paperlogy 5";
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
+  --dashboard-content-overhang: 10px;
   --header-context-cell: 112px;
   --header-title-width: 310px;
   --header-title-font-size: 36px;
@@ -172,18 +173,24 @@ input:focus-visible {
 .dashboard-sticky-shell {
   width: auto;
   position: fixed;
-  top: 24px;
+  top: 0;
   right: max(
-    var(--dashboard-page-gutter),
-    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+        var(--dashboard-content-overhang)
+    )
   );
   left: max(
-    var(--dashboard-page-gutter),
-    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+        var(--dashboard-content-overhang)
+    )
   );
   z-index: 60;
   display: grid;
-  padding: 6px 0 10px;
+  padding: 0 0 10px;
   isolation: isolate;
   background:
     linear-gradient(180deg, var(--paper) 0%, var(--paper) 90%, rgba(242, 246, 248, 0.96) 100%);
@@ -3036,19 +3043,25 @@ input:focus-visible {
 .analysis-sticky-shell {
   width: auto;
   position: fixed;
-  top: 24px;
+  top: 0;
   right: max(
-    var(--dashboard-page-gutter),
-    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+        var(--dashboard-content-overhang)
+    )
   );
   left: max(
-    var(--dashboard-page-gutter),
-    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+    calc(var(--dashboard-page-gutter) - var(--dashboard-content-overhang)),
+    calc(
+      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+        var(--dashboard-content-overhang)
+    )
   );
   z-index: 60;
   display: grid;
   gap: 16px;
-  padding: 6px 0 10px;
+  padding: 0 0 10px;
   background:
     linear-gradient(180deg, var(--paper) 0%, var(--paper) 88%, rgba(242, 246, 248, 0.96) 100%);
   box-shadow: 0 16px 24px -26px rgba(16, 42, 67, 0.7);
@@ -4896,7 +4909,7 @@ input:focus-visible,
   .analysis-context {
     width: 21.5847%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-right: -24px;
+    margin-right: -15px;
   }
 
   .identity-strip dl div,
@@ -5160,7 +5173,7 @@ input:focus-visible,
   font-family: var(--font-latin);
   font-size: 15px;
   font-weight: 750;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.01em;
 }
 
 .signal-pill {
@@ -7234,13 +7247,66 @@ button.quarter-score-row:disabled {
 }
 
 @media (min-width: 1241px) {
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-grid,
+  .dashboard-sticky-shell .metric-card {
+    min-height: 224px;
+  }
+
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-card {
+    padding: 16px 18px;
+  }
+
+  .dashboard-sticky-shell .quarter-score-meta,
+  .dashboard-sticky-shell .combat-summary-stack > span {
+    margin-bottom: 6px;
+  }
+
+  .dashboard-sticky-shell .quarter-score-row {
+    min-height: 25px;
+  }
+
+  .dashboard-sticky-shell .combat-summary-stack em {
+    margin-top: 6px;
+  }
+
+  .dashboard-sticky-shell .combat-footer {
+    padding-top: 10px;
+  }
+
+  .dashboard-sticky-shell .combat-footer strong {
+    margin-top: 3px;
+  }
+
+  .dashboard-sticky-shell .metric-benchmark {
+    margin-top: 10px;
+  }
+
+  .dashboard-sticky-shell .metric-track {
+    margin-top: 7px;
+  }
+
+  .dashboard-sticky-shell .metric-quarter-strip {
+    margin-top: 8px;
+  }
+
+  .dashboard-sticky-shell .metric-quarter-strip > span {
+    min-height: 28px;
+    padding: 4px 3px;
+  }
+
+  .dashboard-sticky-shell .metric-card-footer {
+    padding-top: 5px;
+  }
+
   .combat-summary-stack > span {
     margin-bottom: 0;
   }
 
   .combat-summary-stack strong,
   .metric-card-value {
-    min-height: 70px;
+    min-height: 58px;
     display: flex;
     align-items: flex-end;
     margin-top: 0;
@@ -7393,14 +7459,13 @@ button.quarter-score-row:disabled {
   border-radius: 10px;
 }
 
-@media (min-width: 1241px) {
+@media (min-width: 761px) {
   .dashboard-sticky-shell,
   .analysis-sticky-shell {
     gap: 10px;
-    margin-inline: -10px;
-    padding: 10px;
-    border: 1px solid rgba(16, 42, 67, 0.1);
-    border-radius: 10px;
+    padding: 0 0 10px;
+    border: 0;
+    border-radius: 0 0 10px 10px;
     background:
       linear-gradient(
         106deg,
@@ -7409,6 +7474,7 @@ button.quarter-score-row:disabled {
         rgba(235, 243, 246, 0.96) 100%
       );
     box-shadow:
+      inset 0 0 0 1px rgba(16, 42, 67, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.9),
       0 16px 32px -26px rgba(16, 42, 67, 0.58);
   }
@@ -7436,6 +7502,13 @@ button.quarter-score-row:disabled {
   .analysis-sticky-shell .analysis-tabs,
   .analysis-sticky-shell .analysis-summary-card {
     box-shadow: none;
+  }
+}
+
+@media (min-width: 1241px) {
+  .dashboard-sticky-shell {
+    gap: 8px;
+    padding-bottom: 8px;
   }
 }
 

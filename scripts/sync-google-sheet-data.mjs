@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 
 const workbookId = "1KZust31kwsHrv0VZEqyPhACza9R3rZibOdf467c6JXA";
 const workbookUrl = `https://docs.google.com/spreadsheets/d/${workbookId}/edit`;
@@ -112,14 +112,7 @@ function weekRangesResult(rows) {
   return ranges;
 }
 
-function weeklyResult(
-  rows,
-  {
-    zeroIsMissing = false,
-    zeroUsesDealerAverage = false,
-    dealerByCdsid = {},
-  } = {},
-) {
+function weeklyResult(rows, { zeroIsMissing = false } = {}) {
   const headerIndex = rows.findIndex((row) => clean(row[0]) === "RDM코드");
   if (headerIndex < 0) throw new Error("RDM코드 헤더를 찾지 못했습니다.");
 
@@ -135,38 +128,9 @@ function weeklyResult(
     });
 
   const average = normalize(nationalRow);
-  const rawByCdsid = Object.fromEntries(
+  const byCdsid = Object.fromEntries(
     storeRows.map((row) => [clean(row[0]), normalize(row)]),
   );
-  const byCdsid = zeroUsesDealerAverage
-    ? Object.fromEntries(
-        Object.entries(rawByCdsid).map(([cdsid, values]) => [
-          cdsid,
-          values.map((value, index) => {
-            if (value !== 0) return value;
-
-            const dealer = dealerByCdsid[cdsid];
-            if (!dealer) return null;
-
-            const peerValues = Object.entries(rawByCdsid)
-              .filter(
-                ([peerCdsid]) =>
-                  peerCdsid !== cdsid &&
-                  dealerByCdsid[peerCdsid] === dealer,
-              )
-              .map(([, peerSeries]) => peerSeries[index])
-              .filter((peerValue) => peerValue !== null && peerValue > 0);
-
-            return peerValues.length
-              ? round1(
-                  peerValues.reduce((sum, peerValue) => sum + peerValue, 0) /
-                    peerValues.length,
-                )
-              : null;
-          }),
-        ]),
-      )
-    : rawByCdsid;
   const latestWeek =
     average.reduce(
       (latest, value, index) => (value === null ? latest : index + 1),
@@ -219,18 +183,8 @@ const loaded = Object.fromEntries(
   ),
 );
 
-const showroomData = JSON.parse(
-  await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
-);
-const dealerByCdsid = Object.fromEntries(
-  showroomData.showrooms.map((showroom) => [showroom.cdsid, showroom.dealer]),
-);
-
 const weekRanges = weekRangesResult(loaded.dates);
-const voc = weeklyResult(loaded.voc, {
-  zeroUsesDealerAverage: true,
-  dealerByCdsid,
-});
+const voc = weeklyResult(loaded.voc);
 const delivery = weeklyResult(loaded.delivery);
 const testDrive = weeklyResult(loaded.testDrive);
 const emergency = weeklyResult(loaded.emergency);
@@ -288,7 +242,7 @@ const output = {
     weekRanges,
     rules: {
       voc:
-        "0.0은 동일 딜러사의 해당 주차 비0점 전시장 평균으로 보정하며, 비교 가능한 동료 값이 없을 때만 미응답으로 제외",
+        "VOC(결과) 시트의 전시장별 원점수를 사용하며, 0.0도 실제 점수로 표시",
       cx:
         "출고 40/20/0 + 시승 50/40/30(미응답 0) + 긴급경보 10/0 + 조치계획 10/0 + 앱 20/0",
     },
