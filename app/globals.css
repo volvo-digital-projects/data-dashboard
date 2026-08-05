@@ -116,7 +116,7 @@
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
   --header-context-cell: 104px;
-  --header-title-width: 230px;
+  --header-title-width: 300px;
   --header-title-font-size: 34px;
   --font-ui:
     var(--font-volvo), var(--font-korean), "Noto Sans KR", "Apple SD Gothic Neo",

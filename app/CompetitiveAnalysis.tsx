@@ -635,7 +635,7 @@ export default function CompetitiveAnalysis({
       <div className="analysis-sticky-shell" ref={stickyShellRef}>
         <header className="analysis-header">
         <div className="identity-title analysis-title">
-          <h1>{displayShowroomName(selected.showroom)}</h1>
+          <h1>{displayShowroomName(selected.showroom)} 분석</h1>
           <div className="update-status">
             <div className="update-status-line">
               <i aria-hidden="true" />

@@ -1842,7 +1842,7 @@ export default function Dashboard({
       <div className="dashboard-sticky-shell" ref={stickyShellRef}>
         <section className="identity-strip">
         <div className="identity-title">
-          <h1>{displayShowroomName(selected.showroom)}</h1>
+          <h1>{displayShowroomName(selected.showroom)} 현황</h1>
           <div className="update-status">
             <div className="update-status-line">
               <i aria-hidden="true" />
