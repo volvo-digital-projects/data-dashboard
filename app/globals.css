@@ -161,11 +161,14 @@ input:focus-visible {
 }
 
 .dashboard-sticky-shell {
+  position: -webkit-sticky;
   position: sticky;
-  top: 6px;
-  z-index: 40;
+  top: 0;
+  z-index: 60;
+  align-self: start;
   display: grid;
-  padding-bottom: 10px;
+  padding: 6px 0 10px;
+  isolation: isolate;
   background:
     linear-gradient(180deg, var(--paper) 0%, var(--paper) 90%, rgba(242, 246, 248, 0.96) 100%);
   box-shadow: 0 16px 24px -26px rgba(16, 42, 67, 0.7);
@@ -7034,10 +7037,6 @@ button.quarter-score-row:disabled {
 }
 
 @media (max-width: 1240px) {
-  .dashboard-sticky-shell {
-    position: static;
-  }
-
   .dashboard {
     padding-inline: 24px;
   }
@@ -7091,6 +7090,11 @@ button.quarter-score-row:disabled {
 }
 
 @media (max-width: 760px) {
+  .dashboard-sticky-shell {
+    position: static;
+    padding-top: 0;
+  }
+
   .dashboard {
     padding: 12px 14px 24px;
   }
