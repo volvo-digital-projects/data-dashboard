@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Volvo ONE VOICE Existing Tab Sync",
+  "version": "1.0.0",
+  "description": "Reads ONE VOICE scores only from an already-open authenticated Chrome tab.",
+  "permissions": ["alarms", "storage", "tabs", "scripting"],
+  "host_permissions": [
+    "https://volvo.medallia.eu/*",
+    "https://volvo-dsc-pc-test-2026.sosoobi.chatgpt.site/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://volvo.medallia.eu/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "ONE VOICE existing-tab sync"
+  }
+}

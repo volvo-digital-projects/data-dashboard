@@ -2,22 +2,22 @@
 
 ## Operating model
 
-- The local Windows collector is the only component that opens Medallia. It uses a dedicated Chrome profile containing the user's SSO/2FA session.
-- From 09:00 through 17:59 KST on weekdays, Windows Task Scheduler checks every 10 minutes. It opens Chrome only when the current hourly slot is missing.
-- Korean weekends, statutory holidays, and substitute holidays are skipped before Chrome launches. Election or one-off holidays can be added through `ONE_VOICE_EXTRA_HOLIDAYS` as comma-separated ISO dates.
-- If either ONE VOICE score is missing, the collector reloads the page up to three times and uploads the values only after both cards are read.
+- The Chrome extension reads only an already-open `volvo.medallia.eu` tab. It never creates, activates, or navigates to a new browser window or tab.
+- From 09:00 through 17:59 KST on weekdays, a Chrome alarm checks every 10 minutes. If the current hourly slot is already stored, it does nothing.
+- Korean weekends, statutory holidays, and substitute holidays are skipped before the existing tab is accessed. Election or one-off holidays can be added while preparing the extension as comma-separated ISO dates.
+- If either ONE VOICE score is missing, the extension reloads that same existing tab once and retries on the next check. It never opens another tab.
 - Cloudflare D1 is the source of truth for captured snapshots and missing-slot records.
 - GitHub Actions checks each slot at 23 minutes past the hour. It records and alerts on a missing slot, but cannot bypass Medallia SSO or recreate a past score without the local signed-in browser.
 
 ## Security
 
 - The Medallia `alreftoken` query parameter is removed before configuration is saved.
-- The Cloudflare ingest token is stored in Sites as a secret and on Windows as a DPAPI-encrypted value readable only by the current Windows user.
+- The Cloudflare ingest token is stored in Sites as a secret and in the locally generated unpacked extension directory. The generated directory is outside Git and readable by the current Windows user.
 - No Medallia password, cookie, browser profile, or ingest token is committed to Git.
 
-## First-time login
+## Existing-tab extension setup
 
-Run `scripts/one-voice/setup-session.ps1`, complete SSO and 2FA in the opened Chrome window, and keep the `Market - Admin` dashboard visible until the script confirms both score cards.
+Run `scripts/one-voice/prepare-existing-tab-extension.ps1`, then load the printed directory once from `chrome://extensions` using **Load unpacked**. Keep the normal authenticated ONE VOICE tab open. The extension scans existing ONE VOICE tabs without bringing them to the foreground; it does nothing when none is open. The retired dedicated-profile Windows task remains disabled.
 
 ## GitHub activation
 
