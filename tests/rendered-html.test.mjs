@@ -966,6 +966,23 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
     css,
     /\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*margin-inline: -10px/,
   );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px/,
+  );
+  assert.match(
+    css,
+    /\.competitive-analysis-page\s*\{[^}]*gap: 8px[^}]*padding: 0 var\(--dashboard-page-gutter\) 32px/,
+  );
+  assert.match(
+    css,
+    /\.dashboard\s*\{[^}]*width: min\(var\(--dashboard-page-max\), 100%\)[^}]*padding: 0 var\(--dashboard-page-gutter\) 40px/,
+  );
+  assert.match(css, /\.content-grid\s*\{[^}]*margin-top: 8px[^}]*scroll-margin-top: 8px/);
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-insights\s*\{[^}]*margin-left: 0[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: 0/,
+  );
 });
 
 test("compacts the desktop dashboard summary vertically", async () => {
@@ -973,7 +990,7 @@ test("compacts the desktop dashboard summary vertically", async () => {
 
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding-bottom: 8px/,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding: 0 10px 8px/,
   );
   assert.match(
     css,
@@ -1247,7 +1264,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.doesNotMatch(analysisSource, /overlapScale|pointRadius/);
   assert.match(analysisSource, /\[3, 5, 7\]\.forEach\(\(gap, gapIndex\) =>/);
   assert.match(analysisSource, /\[0, -4, 4, -7, 7\]\.forEach\(\(lane, laneIndex\) =>/);
-  assert.match(css, /\.dashboard\s*\{[\s\S]*?padding: 24px 32px 40px/);
+  assert.match(
+    css,
+    /\.dashboard\s*\{[^}]*width: min\(var\(--dashboard-page-max\), 100%\)[^}]*padding: 0 var\(--dashboard-page-gutter\) 40px/,
+  );
   assert.match(
     css,
     /\.identity-strip h1\s*\{[\s\S]*?font-family: var\(--font-korean\)[\s\S]*?font-size: clamp\(40px, 3\.25vw, 44px\)/,
@@ -1529,14 +1549,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 0 10px[^}]*border: 0[^}]*border-radius: 0 0 10px 10px/,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px[^}]*border: 0[^}]*border-radius: 0 0 10px 10px/,
   );
   assert.match(css, /\.dashboard-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
   assert.match(css, /\.analysis-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
   assert.match(css, /--dashboard-content-overhang: 10px/);
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: -15px/,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: 0/,
   );
   assert.match(
     css,
