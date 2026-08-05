@@ -55,6 +55,40 @@ async function appendLog(message, details = {}) {
   await fs.appendFile(path.join(logDir, `one-voice-${date}.jsonl`), `${line}\n`);
 }
 
+async function acquireRunLock() {
+  const lockPath = path.join(
+    process.env.LOCALAPPDATA ?? os.tmpdir(),
+    "VolvoDashboard",
+    "one-voice.lock",
+  );
+  await fs.mkdir(path.dirname(lockPath), { recursive: true });
+  const createLock = async () => {
+    const handle = await fs.open(lockPath, "wx");
+    await handle.writeFile(
+      JSON.stringify({ pid: process.pid, setupMode, startedAt: new Date().toISOString() }),
+    );
+    return async () => {
+      await handle.close().catch(() => {});
+      await fs.unlink(lockPath).catch(() => {});
+    };
+  };
+
+  try {
+    return await createLock();
+  } catch (error) {
+    if (error?.code !== "EEXIST") throw error;
+    const stat = await fs.stat(lockPath).catch(() => null);
+    if (stat && Date.now() - stat.mtimeMs > 12 * 60_000) {
+      await fs.unlink(lockPath).catch(() => {});
+      return createLock();
+    }
+    await appendLog("Collector skipped because another ONE VOICE run is active", {
+      setupMode,
+    });
+    return null;
+  }
+}
+
 async function cloudSnapshot() {
   const response = await fetch(endpoint(), {
     headers: { Accept: "application/json" },
@@ -244,38 +278,44 @@ async function collectFromBrowser() {
 }
 
 async function main() {
-  const now = new Date();
-  if (!setupMode) {
-    const window = collectionWindow(now, extraHolidays());
-    if (!window.allowed) {
-      await appendLog("Collector skipped", { reason: window.reason });
-      return;
-    }
-
-    const slotKst = hourlySlotKst(now);
-    try {
-      const current = await cloudSnapshot();
-      if (current.snapshot?.slotKst === slotKst) {
-        await appendLog("Hourly slot already stored", { slotKst });
+  const releaseLock = await acquireRunLock();
+  if (!releaseLock) return;
+  try {
+    const now = new Date();
+    if (!setupMode) {
+      const window = collectionWindow(now, extraHolidays());
+      if (!window.allowed) {
+        await appendLog("Collector skipped", { reason: window.reason });
         return;
       }
-    } catch (error) {
-      await appendLog("Cloud preflight failed; browser collection will continue", {
-        error: error instanceof Error ? error.message : String(error),
-      });
+
+      const slotKst = hourlySlotKst(now);
+      try {
+        const current = await cloudSnapshot();
+        if (current.snapshot?.slotKst === slotKst) {
+          await appendLog("Hourly slot already stored", { slotKst });
+          return;
+        }
+      } catch (error) {
+        await appendLog("Cloud preflight failed; browser collection will continue", {
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
     }
+
+    const scores = await collectFromBrowser();
+    if (setupMode) return;
+
+    const snapshot = {
+      slotKst: hourlySlotKst(now),
+      capturedAt: new Date().toISOString(),
+      ...scores,
+    };
+    await uploadSnapshot(snapshot);
+    await appendLog("ONE VOICE snapshot stored", snapshot);
+  } finally {
+    await releaseLock();
   }
-
-  const scores = await collectFromBrowser();
-  if (setupMode) return;
-
-  const snapshot = {
-    slotKst: hourlySlotKst(now),
-    capturedAt: new Date().toISOString(),
-    ...scores,
-  };
-  await uploadSnapshot(snapshot);
-  await appendLog("ONE VOICE snapshot stored", snapshot);
 }
 
 main().catch(async (error) => {
