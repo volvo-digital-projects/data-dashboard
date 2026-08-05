@@ -2251,7 +2251,7 @@ export default function Dashboard({
                       <strong>ONE VOICE 기고</strong>
                       <span>Market - Admin</span>
                     </div>
-                    <small>최근 6개월 누적</small>
+                    <small>지난 6개월부터 오늘까지</small>
                   </header>
                   <div className="one-voice-gauge-grid">
                     <article className="one-voice-metric">
