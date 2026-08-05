@@ -12,7 +12,9 @@
     "sync:weekly": "node scripts/sync-google-sheet-data.mjs",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "onevoice:collect": "node scripts/one-voice/collect.mjs",
+    "onevoice:monitor": "node scripts/one-voice/check-cloud.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

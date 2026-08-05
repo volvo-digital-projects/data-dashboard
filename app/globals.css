@@ -6961,13 +6961,13 @@ button.quarter-score-row:disabled {
 
 @keyframes one-voice-fill-handover {
   to {
-    --one-voice-progress: 94.1;
+    --one-voice-progress: var(--one-voice-target);
   }
 }
 
 @keyframes one-voice-fill-test-drive {
   to {
-    --one-voice-progress: 88.7;
+    --one-voice-progress: var(--one-voice-target);
   }
 }
 

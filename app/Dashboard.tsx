@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type CSSProperties,
   type FormEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
@@ -180,6 +181,12 @@ const formatSeoulDate = (date: Date) => {
   const part = (type: "year" | "month" | "day") =>
     parts.find((item) => item.type === type)?.value ?? "";
   return `${part("year")}.${part("month")}.${part("day")}`;
+};
+
+type OneVoiceScores = {
+  carHandoverScore: number;
+  testDriveScore: number;
+  capturedAt: string | null;
 };
 
 const metricMeta: Record<
@@ -1718,6 +1725,11 @@ export default function Dashboard({
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
+  const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
+    carHandoverScore: 94.1,
+    testDriveScore: 88.7,
+    capturedAt: null,
+  });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
   );
@@ -1747,15 +1759,58 @@ export default function Dashboard({
   }, []);
 
   useEffect(() => {
+    let mounted = true;
+    const syncOneVoice = async () => {
+      try {
+        const response = await fetch("/api/one-voice", { cache: "no-store" });
+        const payload = (await response.json()) as {
+          snapshot?: {
+            carHandoverScore?: number;
+            testDriveScore?: number;
+            capturedAt?: string;
+          } | null;
+        };
+        const snapshot = payload.snapshot;
+        if (
+          mounted &&
+          snapshot &&
+          typeof snapshot.carHandoverScore === "number" &&
+          typeof snapshot.testDriveScore === "number"
+        ) {
+          setOneVoiceScores({
+            carHandoverScore: snapshot.carHandoverScore,
+            testDriveScore: snapshot.testDriveScore,
+            capturedAt: snapshot.capturedAt ?? null,
+          });
+        }
+      } catch {
+        // Keep the last verified values when the collection API is unavailable.
+      }
+    };
+
+    void syncOneVoice();
+    const timer = window.setInterval(syncOneVoice, 5 * 60_000);
+    return () => {
+      mounted = false;
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(() => {
     const panel = oneVoiceRef.current;
     if (!panel) return;
 
-    setOneVoiceInView(false);
     const desktop = window.matchMedia("(min-width: 761px)");
     if (!desktop.matches || typeof IntersectionObserver === "undefined") {
-      setOneVoiceInView(true);
-      return;
+      const visibleFrame = window.requestAnimationFrame(() =>
+        setOneVoiceInView(true),
+      );
+      return () => window.cancelAnimationFrame(visibleFrame);
     }
+
+    const resetFrame = window.requestAnimationFrame(() =>
+      setOneVoiceInView(false),
+    );
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -1770,7 +1825,10 @@ export default function Dashboard({
     );
 
     observer.observe(panel);
-    return () => observer.disconnect();
+    return () => {
+      window.cancelAnimationFrame(resetFrame);
+      observer.disconnect();
+    };
   }, [selectedCode]);
 
   useLayoutEffect(() => {
@@ -2288,10 +2346,23 @@ export default function Dashboard({
                       <div
                         className="one-voice-gauge one-voice-gauge-handover"
                         role="img"
-                        aria-label="신차출고 만족도 94.1점"
+                        aria-label={`신차출고 만족도 ${oneVoiceScores.carHandoverScore.toFixed(1)}점`}
+                        title={
+                          oneVoiceScores.capturedAt
+                            ? `최근 수집 ${oneVoiceScores.capturedAt}`
+                            : undefined
+                        }
+                        style={
+                          {
+                            "--one-voice-target":
+                              oneVoiceScores.carHandoverScore,
+                          } as CSSProperties
+                        }
                       >
                         <span className="one-voice-gauge-value">
-                          <strong>94.1</strong>
+                          <strong>
+                            {oneVoiceScores.carHandoverScore.toFixed(1)}
+                          </strong>
                           <small>점</small>
                         </span>
                       </div>
@@ -2304,10 +2375,20 @@ export default function Dashboard({
                       <div
                         className="one-voice-gauge one-voice-gauge-test-drive"
                         role="img"
-                        aria-label="시승종합 만족도 88.7점"
+                        aria-label={`시승종합 만족도 ${oneVoiceScores.testDriveScore.toFixed(1)}점`}
+                        title={
+                          oneVoiceScores.capturedAt
+                            ? `최근 수집 ${oneVoiceScores.capturedAt}`
+                            : undefined
+                        }
+                        style={
+                          {
+                            "--one-voice-target": oneVoiceScores.testDriveScore,
+                          } as CSSProperties
+                        }
                       >
                         <span className="one-voice-gauge-value">
-                          <strong>88.7</strong>
+                          <strong>{oneVoiceScores.testDriveScore.toFixed(1)}</strong>
                           <small>점</small>
                         </span>
                       </div>
