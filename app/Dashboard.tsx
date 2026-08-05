@@ -2191,7 +2191,7 @@ export default function Dashboard({
               )}점, ${dashboard.meta.combatMax}점 만점`}
             >
               <div className="quarter-score-meta">
-                <span>분기 선택</span>
+                <span>분기별</span>
                 <small>{dashboard.meta.combatMax}점 만점</small>
               </div>
               {[
