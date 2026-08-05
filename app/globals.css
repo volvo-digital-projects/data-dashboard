@@ -7393,6 +7393,52 @@ button.quarter-score-row:disabled {
   border-radius: 10px;
 }
 
+@media (min-width: 1241px) {
+  .dashboard-sticky-shell,
+  .analysis-sticky-shell {
+    gap: 10px;
+    margin-inline: -10px;
+    padding: 10px;
+    border: 1px solid rgba(16, 42, 67, 0.1);
+    border-radius: 10px;
+    background:
+      linear-gradient(
+        106deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(247, 250, 251, 0.98) 58%,
+        rgba(235, 243, 246, 0.96) 100%
+      );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 16px 32px -26px rgba(16, 42, 67, 0.58);
+  }
+
+  .identity-strip,
+  .analysis-header {
+    margin: 0;
+    border-color: transparent;
+    border-radius: 8px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .hero-grid,
+  .analysis-tabs,
+  .analysis-summary-grid {
+    margin-inline: 0;
+  }
+
+  .identity-insights,
+  .identity-detail-rail,
+  .analysis-context,
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-card,
+  .analysis-sticky-shell .analysis-tabs,
+  .analysis-sticky-shell .analysis-summary-card {
+    box-shadow: none;
+  }
+}
+
 @media (max-width: 1240px) {
   .dashboard-sticky-shell {
     right: 24px;
