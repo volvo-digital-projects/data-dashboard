@@ -937,6 +937,29 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
 });
 
+test("renders national score labels above the actual trend line", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const actualLayerIndex = dashboardSource.indexOf("className={`actual-series-wipe");
+  const nationalLabelLayerIndex = dashboardSource.indexOf(
+    'className="national-value-label-layer"',
+  );
+
+  assert.ok(actualLayerIndex >= 0);
+  assert.ok(nationalLabelLayerIndex > actualLayerIndex);
+  assert.match(
+    dashboardSource,
+    /className="national-value-label-layer"[\s\S]*?className="national-point-value"/,
+  );
+  assert.match(
+    css,
+    /\.actual-point-value,[\s\S]*?\.national-point-value\s*\{[^}]*stroke: white[^}]*stroke-width: 3px[^}]*paint-order: stroke/,
+  );
+});
+
 test("matches summary metric label tracking to the detailed score headings", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 

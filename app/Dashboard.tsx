@@ -1205,15 +1205,6 @@ function WeeklyTrend({
                         )}점`}
                       </title>
                     </circle>
-                    <text
-                      x={x(point.week)}
-                      y={nationalValueLabelY(point)}
-                      textAnchor="middle"
-                      className="national-point-value"
-                      aria-hidden="true"
-                    >
-                      {displayTrendNumber(point.value)}
-                    </text>
                   </g>
                 ))}
               </>
@@ -1296,6 +1287,21 @@ function WeeklyTrend({
                       {displayTrendNumber(point.value)}
                     </text>
                   </g>
+                ))}
+              </g>
+            )}
+            {showNational && averagePoints.length > 0 && (
+              <g className="national-value-label-layer" aria-hidden="true">
+                {averagePoints.map((point) => (
+                  <text
+                    key={`average-label-${point.week}`}
+                    x={x(point.week)}
+                    y={nationalValueLabelY(point)}
+                    textAnchor="middle"
+                    className="national-point-value"
+                  >
+                    {displayTrendNumber(point.value)}
+                  </text>
                 ))}
               </g>
             )}
