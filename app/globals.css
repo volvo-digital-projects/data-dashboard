@@ -116,6 +116,7 @@
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
   --header-context-cell: 104px;
+  --header-title-width: 280px;
   --font-ui:
     var(--font-volvo), var(--font-korean), "Noto Sans KR", "Apple SD Gothic Neo",
     Arial, sans-serif;
@@ -475,9 +476,9 @@ input:focus-visible {
 }
 
 .update-status {
-  display: flex;
-  align-items: center;
-  gap: 7px;
+  display: grid;
+  align-items: start;
+  gap: 4px;
   margin: 0 0 2px;
   color: var(--muted);
   font-size: 9px;
@@ -499,8 +500,15 @@ input:focus-visible {
 }
 
 .update-status span::before {
-  content: "·";
-  margin-right: 7px;
+  content: none;
+  margin-right: 0;
+}
+
+.update-status-line {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .mobile-command,
@@ -3078,12 +3086,12 @@ input:focus-visible {
 }
 
 .analysis-title {
-  width: 310px;
+  width: var(--header-title-width);
   min-width: 0;
   display: flex;
   align-items: center;
   gap: 0;
-  flex: 0 0 310px;
+  flex: 0 0 var(--header-title-width);
   overflow: hidden;
 }
 
@@ -4503,8 +4511,8 @@ input:focus-visible,
 }
 
 .identity-title {
-  width: 310px;
-  flex: 0 0 310px;
+  width: var(--header-title-width);
+  flex: 0 0 var(--header-title-width);
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
@@ -4546,17 +4554,18 @@ input:focus-visible,
 
 .update-status span::before {
   color: var(--muted);
-  content: "·";
-  margin-right: 8px;
+  content: none;
+  margin-right: 0;
 }
 
 .identity-insights {
-  height: 92px;
+  height: auto;
+  min-height: 92px;
   min-width: 0;
-  max-width: 660px;
-  flex: 1 1 540px;
+  max-width: none;
+  flex: 1 1 auto;
   display: grid;
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto);
   align-content: center;
   align-self: stretch;
   overflow: hidden;
@@ -4610,14 +4619,14 @@ input:focus-visible,
 
 .identity-insight-row span {
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
   color: #27465a;
   font-size: clamp(9px, 0.7vw, 11px);
   font-weight: 620;
   letter-spacing: -0.018em;
   line-height: 1.25;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .identity-detail-rail {

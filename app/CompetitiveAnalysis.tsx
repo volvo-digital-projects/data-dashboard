@@ -636,13 +636,18 @@ export default function CompetitiveAnalysis({
         <header className="analysis-header">
         <div className="analysis-title">
           <div className="analysis-title-copy">
-            <h1>{displayShowroomName(selected.showroom)} 분석</h1>
+            <h1>{displayShowroomName(selected.showroom)}</h1>
             <div className="update-status">
-              <i aria-hidden="true" />
-              <time dateTime={accessDate.replaceAll(".", "-")}>
-                최근 업데이트 {accessDate}
-              </time>
-              <span>현재 Q3평가 진행중</span>
+              <div className="update-status-line">
+                <i aria-hidden="true" />
+                <time dateTime={accessDate.replaceAll(".", "-")}>
+                  최근 업데이트 {accessDate}
+                </time>
+              </div>
+              <div className="update-status-line">
+                <i aria-hidden="true" />
+                <span>현재 Q3평가 진행중</span>
+              </div>
             </div>
           </div>
         </div>

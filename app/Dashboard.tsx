@@ -1842,13 +1842,18 @@ export default function Dashboard({
       <div className="dashboard-sticky-shell" ref={stickyShellRef}>
         <section className="identity-strip">
         <div className="identity-title">
-          <h1>{displayShowroomName(selected.showroom)} 현황</h1>
+          <h1>{displayShowroomName(selected.showroom)}</h1>
           <div className="update-status">
-            <i aria-hidden="true" />
-            <time dateTime={accessDate.replaceAll(".", "-")}>
-              최근 업데이트 {accessDate}
-            </time>
-            <span>{displayUpdateTitle}</span>
+            <div className="update-status-line">
+              <i aria-hidden="true" />
+              <time dateTime={accessDate.replaceAll(".", "-")}>
+                최근 업데이트 {accessDate}
+              </time>
+            </div>
+            <div className="update-status-line">
+              <i aria-hidden="true" />
+              <span>{displayUpdateTitle}</span>
+            </div>
           </div>
         </div>
         <aside
