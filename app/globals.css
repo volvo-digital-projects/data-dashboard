@@ -2978,11 +2978,13 @@ input:focus-visible {
 }
 
 .competitive-analysis-page {
+  width: min(1500px, 100%);
   min-height: 100vh;
   display: grid;
   align-content: start;
   gap: 16px;
-  padding: 24px 32px 32px;
+  margin: 0 auto;
+  padding: 10px 28px 32px;
   color: var(--ink);
   background:
     radial-gradient(circle at 92% 0%, rgba(220, 234, 242, 0.62), transparent 28rem),
@@ -4208,6 +4210,10 @@ input:focus-visible {
 }
 
 @media (max-width: 1180px) {
+  .competitive-analysis-page {
+    padding-inline: 24px;
+  }
+
   .analysis-header {
     align-items: flex-start;
     flex-direction: column;
@@ -4246,7 +4252,7 @@ input:focus-visible {
 @media (max-width: 760px) {
   .competitive-analysis-page {
     gap: 12px;
-    padding: 16px 14px 24px;
+    padding: 12px 14px 24px;
   }
 
   .analysis-header h1 {
