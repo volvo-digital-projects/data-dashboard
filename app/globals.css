@@ -6842,15 +6842,13 @@ button.quarter-score-row:disabled {
   overflow: hidden;
   border: 1px solid rgba(26, 125, 77, 0.15);
   border-radius: 12px;
-  background:
-    radial-gradient(circle at 88% 10%, rgba(119, 205, 151, 0.16), transparent 38%),
-    linear-gradient(145deg, rgba(253, 255, 254, 0.98), rgba(241, 249, 245, 0.98));
+  background: #ffffff;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .one-voice-contribution-heading {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 8px;
   padding-bottom: 9px;
@@ -6880,7 +6878,7 @@ button.quarter-score-row:disabled {
 }
 
 .one-voice-contribution-heading small {
-  padding-top: 2px;
+  padding-bottom: 1px;
   color: #3f795b;
 }
 
