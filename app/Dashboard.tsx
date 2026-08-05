@@ -815,10 +815,12 @@ function WeeklyTrend({
   showroom,
   metric,
   compact = false,
+  synchronizedAnimationInView,
 }: {
   showroom: Showroom;
   metric: TrendMetricKey;
   compact?: boolean;
+  synchronizedAnimationInView?: boolean;
 }) {
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
@@ -1025,7 +1027,7 @@ function WeeklyTrend({
 
   useEffect(() => {
     const container = trendScrollRef.current;
-    if (!container) return;
+    if (!container || synchronizedAnimationInView !== undefined) return;
 
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -1056,7 +1058,10 @@ function WeeklyTrend({
       window.cancelAnimationFrame(resetFrame);
       observer.disconnect();
     };
-  }, [metric, showroom.cdsid]);
+  }, [metric, showroom.cdsid, synchronizedAnimationInView]);
+
+  const actualSeriesVisible =
+    synchronizedAnimationInView ?? actualSeriesInView;
 
   return (
     <div className={`trend-wrap ${compact ? "compact" : ""}`}>
@@ -1226,7 +1231,11 @@ function WeeklyTrend({
             {showActual && (
               <g
                 className={`actual-series-wipe ${
-                  actualSeriesInView ? "is-visible" : ""
+                  synchronizedAnimationInView !== undefined
+                    ? "one-voice-sync"
+                    : ""
+                } ${
+                  actualSeriesVisible ? "is-visible" : ""
                 }`}
               >
                 {storeSegments.map(
@@ -2368,6 +2377,7 @@ export default function Dashboard({
                   showroom={selected}
                   metric="cx"
                   compact
+                  synchronizedAnimationInView={oneVoiceInView}
                 />
                 <aside
                   ref={oneVoiceRef}
