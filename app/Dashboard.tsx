@@ -2248,8 +2248,8 @@ export default function Dashboard({
                 >
                   <header className="one-voice-contribution-heading">
                     <div>
-                      <strong>ONE VOICE 기고</strong>
-                      <span>Market - Admin</span>
+                      <strong>ONE VOICE</strong>
+                      <span>Volvo Korea 전체</span>
                     </div>
                     <small>지난 6개월부터 오늘까지</small>
                   </header>
