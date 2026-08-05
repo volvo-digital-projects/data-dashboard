@@ -113,6 +113,8 @@
   --muted: #8a969c;
   --font-volvo: "Volvo Centum Web";
   --font-korean: "Paperlogy 5";
+  --dashboard-page-max: 1500px;
+  --dashboard-page-gutter: 32px;
   --font-ui:
     var(--font-volvo), var(--font-korean), "Noto Sans KR", "Apple SD Gothic Neo",
     Arial, sans-serif;
@@ -155,7 +157,7 @@ input:focus-visible {
 }
 
 .dashboard {
-  width: min(1500px, 100%);
+  width: min(var(--dashboard-page-max), 100%);
   margin: 0 auto;
   padding: 10px 28px 12px;
 }
@@ -168,8 +170,14 @@ input:focus-visible {
   width: auto;
   position: fixed;
   top: 24px;
-  right: max(32px, calc((100vw - 1640px) / 2 + 32px));
-  left: max(32px, calc((100vw - 1640px) / 2 + 32px));
+  right: max(
+    var(--dashboard-page-gutter),
+    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+  );
+  left: max(
+    var(--dashboard-page-gutter),
+    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+  );
   z-index: 60;
   display: grid;
   padding: 6px 0 10px;
@@ -2997,13 +3005,13 @@ input:focus-visible {
 }
 
 .competitive-analysis-page {
-  width: min(1500px, 100%);
+  width: min(var(--dashboard-page-max), 100%);
   min-height: 100vh;
   display: grid;
   align-content: start;
   gap: 16px;
   margin: 0 auto;
-  padding: 24px 28px 32px;
+  padding: 24px var(--dashboard-page-gutter) 32px;
   color: var(--ink);
   background:
     radial-gradient(circle at 92% 0%, rgba(220, 234, 242, 0.62), transparent 28rem),
@@ -3018,8 +3026,14 @@ input:focus-visible {
   width: auto;
   position: fixed;
   top: 24px;
-  right: max(28px, calc((100vw - 1500px) / 2 + 28px));
-  left: max(28px, calc((100vw - 1500px) / 2 + 28px));
+  right: max(
+    var(--dashboard-page-gutter),
+    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+  );
+  left: max(
+    var(--dashboard-page-gutter),
+    calc((100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter))
+  );
   z-index: 60;
   display: grid;
   gap: 16px;
@@ -4247,7 +4261,7 @@ input:focus-visible {
   letter-spacing: -0.025em;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1240px) {
   .analysis-sticky-shell {
     right: 24px;
     left: 24px;
@@ -4462,8 +4476,8 @@ input:focus-visible,
 }
 
 .dashboard {
-  width: min(1640px, 100%);
-  padding: 24px 32px 40px;
+  width: min(var(--dashboard-page-max), 100%);
+  padding: 24px var(--dashboard-page-gutter) 40px;
 }
 
 .identity-strip {
