@@ -831,6 +831,7 @@ function WeeklyTrend({
   const trendScrollRef = useRef<HTMLDivElement>(null);
   const [showActual, setShowActual] = useState(true);
   const [showNational, setShowNational] = useState(true);
+  const [actualSeriesInView, setActualSeriesInView] = useState(false);
   const [hoverWeek, setHoverWeek] = useState<number | null>(null);
   const [measuredChartWidth, setMeasuredChartWidth] = useState(1360);
   const latestWeek =
@@ -1022,6 +1023,41 @@ function WeeklyTrend({
     return () => resizeObserver.disconnect();
   }, [compact]);
 
+  useEffect(() => {
+    const container = trendScrollRef.current;
+    if (!container) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    if (reduceMotion.matches || typeof IntersectionObserver === "undefined") {
+      const visibleFrame = window.requestAnimationFrame(() =>
+        setActualSeriesInView(true),
+      );
+      return () => window.cancelAnimationFrame(visibleFrame);
+    }
+
+    const resetFrame = window.requestAnimationFrame(() =>
+      setActualSeriesInView(false),
+    );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        window.requestAnimationFrame(() => setActualSeriesInView(true));
+        observer.disconnect();
+      },
+      {
+        threshold: 0.32,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
+    observer.observe(container);
+    return () => {
+      window.cancelAnimationFrame(resetFrame);
+      observer.disconnect();
+    };
+  }, [metric, showroom.cdsid]);
+
   return (
     <div className={`trend-wrap ${compact ? "compact" : ""}`}>
       <div
@@ -1188,7 +1224,11 @@ function WeeklyTrend({
               </>
             ))}
             {showActual && (
-              <g className="actual-series-wipe">
+              <g
+                className={`actual-series-wipe ${
+                  actualSeriesInView ? "is-visible" : ""
+                }`}
+              >
                 {storeSegments.map(
                   (segment, index) =>
                     segment.length > 1 && (

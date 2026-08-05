@@ -5510,7 +5510,10 @@ input:focus-visible,
 .actual-series-wipe {
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
-  animation: actual-series-wipe 1200ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+}
+
+.actual-series-wipe.is-visible {
+  animation: actual-series-wipe 1250ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
 }
 
 .national-average-point {
