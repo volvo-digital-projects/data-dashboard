@@ -1716,6 +1716,8 @@ export default function Dashboard({
   const [adminOpen, setAdminOpen] = useState(false);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
+  const oneVoiceRef = useRef<HTMLElement>(null);
+  const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
   );
@@ -1743,6 +1745,33 @@ export default function Dashboard({
       mounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    const panel = oneVoiceRef.current;
+    if (!panel) return;
+
+    setOneVoiceInView(false);
+    const desktop = window.matchMedia("(min-width: 761px)");
+    if (!desktop.matches || typeof IntersectionObserver === "undefined") {
+      setOneVoiceInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        window.requestAnimationFrame(() => setOneVoiceInView(true));
+        observer.disconnect();
+      },
+      {
+        threshold: 0.45,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    observer.observe(panel);
+    return () => observer.disconnect();
+  }, [selectedCode]);
 
   useLayoutEffect(() => {
     const anchor = stickyAnchorRef.current;
@@ -2243,8 +2272,9 @@ export default function Dashboard({
                   compact
                 />
                 <aside
-                  className="one-voice-contribution"
-                  aria-label="ONE VOICE 기고 만족도"
+                  ref={oneVoiceRef}
+                  className={`one-voice-contribution ${oneVoiceInView ? "is-visible" : ""}`}
+                  aria-label="ONE VOICE 만족도"
                 >
                   <header className="one-voice-contribution-heading">
                     <div>

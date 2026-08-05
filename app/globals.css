@@ -6933,11 +6933,11 @@ button.quarter-score-row:disabled {
     0 0 0 1px rgba(255, 255, 255, 0.82);
 }
 
-.one-voice-gauge-handover {
+.one-voice-contribution.is-visible .one-voice-gauge-handover {
   animation: one-voice-fill-handover 1.35s cubic-bezier(0.22, 0.75, 0.22, 1) 0.08s forwards;
 }
 
-.one-voice-gauge-test-drive {
+.one-voice-contribution.is-visible .one-voice-gauge-test-drive {
   animation: one-voice-fill-test-drive 1.35s cubic-bezier(0.22, 0.75, 0.22, 1) 0.2s forwards;
 }
 
@@ -7003,8 +7003,8 @@ button.quarter-score-row:disabled {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .one-voice-gauge-handover,
-  .one-voice-gauge-test-drive {
+  .one-voice-contribution.is-visible .one-voice-gauge-handover,
+  .one-voice-contribution.is-visible .one-voice-gauge-test-drive {
     animation-duration: 1ms;
     animation-delay: 0s;
   }
