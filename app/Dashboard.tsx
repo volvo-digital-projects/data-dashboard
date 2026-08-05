@@ -2243,10 +2243,50 @@ export default function Dashboard({
                   compact
                 />
                 <aside
-                  className="weekly-score-placeholder"
-                  aria-label="CX Index 추가 영역 B"
+                  className="one-voice-contribution"
+                  aria-label="ONE VOICE 기고 만족도"
                 >
-                  <strong>B</strong>
+                  <header className="one-voice-contribution-heading">
+                    <div>
+                      <strong>ONE VOICE 기고</strong>
+                      <span>Market - Admin</span>
+                    </div>
+                    <small>최근 6개월 누적</small>
+                  </header>
+                  <div className="one-voice-gauge-grid">
+                    <article className="one-voice-metric">
+                      <div
+                        className="one-voice-gauge one-voice-gauge-handover"
+                        role="img"
+                        aria-label="신차출고 만족도 94.1점"
+                      >
+                        <span className="one-voice-gauge-value">
+                          <strong>94.1</strong>
+                          <small>점</small>
+                        </span>
+                      </div>
+                      <div className="one-voice-metric-label">
+                        <strong>신차출고 만족도</strong>
+                        <span>Car Handover · OSAT</span>
+                      </div>
+                    </article>
+                    <article className="one-voice-metric">
+                      <div
+                        className="one-voice-gauge one-voice-gauge-test-drive"
+                        role="img"
+                        aria-label="시승종합 만족도 88.7점"
+                      >
+                        <span className="one-voice-gauge-value">
+                          <strong>88.7</strong>
+                          <small>점</small>
+                        </span>
+                      </div>
+                      <div className="one-voice-metric-label">
+                        <strong>시승종합 만족도</strong>
+                        <span>Test Drive · OSAT</span>
+                      </div>
+                    </article>
+                  </div>
                 </aside>
               </div>
             </section>

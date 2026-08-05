@@ -6829,6 +6829,187 @@ button.quarter-score-row:disabled {
   letter-spacing: 0.12em;
 }
 
+@property --one-voice-progress {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.one-voice-contribution {
+  min-width: 0;
+  margin-top: 5px;
+  padding: 13px 14px 12px;
+  overflow: hidden;
+  border: 1px solid rgba(26, 125, 77, 0.15);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(119, 205, 151, 0.16), transparent 38%),
+    linear-gradient(145deg, rgba(253, 255, 254, 0.98), rgba(241, 249, 245, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.one-voice-contribution-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(28, 113, 72, 0.12);
+}
+
+.one-voice-contribution-heading > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.one-voice-contribution-heading strong {
+  color: #0f3f2a;
+  font-family: var(--font-latin);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.one-voice-contribution-heading span,
+.one-voice-contribution-heading small {
+  color: #71857a;
+  font-size: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.one-voice-contribution-heading small {
+  padding-top: 2px;
+  color: #3f795b;
+}
+
+.one-voice-gauge-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.one-voice-metric {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 7px;
+}
+
+.one-voice-gauge {
+  --one-voice-progress: 0;
+  position: relative;
+  width: clamp(66px, 6.2vw, 90px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -90deg,
+    #08753f 0%,
+    #1aa65a calc(var(--one-voice-progress) * 0.56%),
+    #70d393 calc(var(--one-voice-progress) * 1%),
+    rgba(206, 234, 217, 0.72) 0
+  );
+  box-shadow:
+    0 9px 20px rgba(25, 117, 70, 0.12),
+    inset 0 0 0 1px rgba(13, 119, 64, 0.08);
+}
+
+.one-voice-gauge::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 28%, #ffffff 0, #fbfefc 48%, #edf8f1 100%);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    0 0 0 1px rgba(255, 255, 255, 0.82);
+}
+
+.one-voice-gauge-handover {
+  animation: one-voice-fill-handover 1.35s cubic-bezier(0.22, 0.75, 0.22, 1) 0.08s forwards;
+}
+
+.one-voice-gauge-test-drive {
+  animation: one-voice-fill-test-drive 1.35s cubic-bezier(0.22, 0.75, 0.22, 1) 0.2s forwards;
+}
+
+@keyframes one-voice-fill-handover {
+  to {
+    --one-voice-progress: 94.1;
+  }
+}
+
+@keyframes one-voice-fill-test-drive {
+  to {
+    --one-voice-progress: 88.7;
+  }
+}
+
+.one-voice-gauge-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  color: #102c20;
+  font-family: var(--font-latin);
+  font-variant-numeric: tabular-nums;
+}
+
+.one-voice-gauge-value strong {
+  font-size: clamp(18px, 1.55vw, 24px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.one-voice-gauge-value small {
+  color: #658073;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.one-voice-metric-label {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 0;
+  text-align: center;
+}
+
+.one-voice-metric-label strong {
+  color: #183729;
+  font-size: 9px;
+  line-height: 1.2;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.one-voice-metric-label span {
+  max-width: 100%;
+  overflow: hidden;
+  color: #809087;
+  font-family: var(--font-latin);
+  font-size: 7px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .one-voice-gauge-handover,
+  .one-voice-gauge-test-drive {
+    animation-duration: 1ms;
+    animation-delay: 0s;
+  }
+}
+
 .weekly-score-layout .trend-wrap.compact .actual-point-value,
 .weekly-score-layout .trend-wrap.compact .national-point-value {
   font-size: 8px;
@@ -7368,6 +7549,14 @@ button.quarter-score-row:disabled {
 
   .weekly-score-placeholder {
     min-height: 88px;
+  }
+
+  .one-voice-contribution {
+    min-height: 184px;
+  }
+
+  .one-voice-gauge {
+    width: 84px;
   }
 
   .score-tier-weekly .score-tier-heading {
