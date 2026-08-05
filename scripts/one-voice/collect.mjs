@@ -178,10 +178,18 @@ async function collectFromBrowser() {
   });
   try {
     const page = context.pages()[0] ?? (await context.newPage());
-    await page.goto(safeMedalliaUrl(required("ONE_VOICE_MEDALLIA_URL")), {
-      waitUntil: "domcontentloaded",
-      timeout: 90_000,
-    });
+    try {
+      await page.goto(safeMedalliaUrl(required("ONE_VOICE_MEDALLIA_URL")), {
+        waitUntil: "domcontentloaded",
+        timeout: 90_000,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      if (!/ERR_ABORTED|frame was detached/i.test(message)) throw error;
+      await appendLog("Medallia SSO redirected the login page; continuing", {
+        message,
+      });
+    }
     await page.waitForTimeout(3500);
 
     if (setupMode) {
