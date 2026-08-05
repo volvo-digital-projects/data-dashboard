@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -431,6 +432,8 @@ export default function CompetitiveAnalysis({
     formatAnalysisDate(new Date()),
   );
   const scatterRef = useRef<HTMLDivElement>(null);
+  const stickyAnchorRef = useRef<HTMLDivElement>(null);
+  const stickyShellRef = useRef<HTMLDivElement>(null);
   const [scatterSize, setScatterSize] = useState({
     width: 920,
     height: 326,
@@ -450,6 +453,30 @@ export default function CompetitiveAnalysis({
     syncAccessDate();
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useLayoutEffect(() => {
+    const anchor = stickyAnchorRef.current;
+    const shell = stickyShellRef.current;
+    if (!anchor || !shell) return;
+
+    const syncAnchorHeight = () => {
+      if (window.matchMedia("(max-width: 760px)").matches) {
+        anchor.style.removeProperty("height");
+        return;
+      }
+      anchor.style.height = `${Math.ceil(shell.getBoundingClientRect().height)}px`;
+    };
+
+    syncAnchorHeight();
+    const observer = new ResizeObserver(syncAnchorHeight);
+    observer.observe(shell);
+    window.addEventListener("resize", syncAnchorHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncAnchorHeight);
+    };
   }, []);
 
   const groupItems = useMemo(() => {
@@ -604,7 +631,8 @@ export default function CompetitiveAnalysis({
 
   return (
     <main className="competitive-analysis-page">
-      <div className="analysis-sticky-shell">
+      <div className="analysis-sticky-anchor" ref={stickyAnchorRef}>
+      <div className="analysis-sticky-shell" ref={stickyShellRef}>
         <header className="analysis-header">
         <div className="analysis-title">
           <div className="analysis-title-copy">
@@ -758,6 +786,7 @@ export default function CompetitiveAnalysis({
           </em>
         </article>
         </section>
+      </div>
       </div>
 
       <section className="analysis-workspace">
