@@ -115,7 +115,7 @@
   --font-korean: "Paperlogy 5";
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
-  --header-context-cell: 104px;
+  --header-context-cell: 112px;
   --header-title-width: 310px;
   --header-title-font-size: 36px;
   --font-ui:
@@ -3059,7 +3059,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   margin: -6px -10px 0;
   padding: 12px 14px;
   border: 1px solid rgba(16, 42, 67, 0.08);
@@ -4287,7 +4287,7 @@ input:focus-visible {
     padding-inline: 24px;
   }
 
-  .analysis-header {
+.analysis-header {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -4505,7 +4505,7 @@ input:focus-visible,
 .identity-strip {
   min-height: 82px;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   margin: -6px -10px 16px;
   padding: 12px 14px;
   border: 1px solid rgba(16, 42, 67, 0.08);
