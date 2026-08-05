@@ -10,6 +10,10 @@ const TITLES = {
 };
 const setupMode = process.argv.includes("--setup");
 
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 function required(name) {
   const value = process.env[name]?.trim();
   if (!value) throw new Error(`Missing environment variable: ${name}`);
@@ -177,7 +181,7 @@ async function collectFromBrowser() {
     args: ["--disable-background-timer-throttling"],
   });
   try {
-    const page = context.pages()[0] ?? (await context.newPage());
+    let page = context.pages()[0] ?? (await context.newPage());
     try {
       await page.goto(safeMedalliaUrl(required("ONE_VOICE_MEDALLIA_URL")), {
         waitUntil: "domcontentloaded",
@@ -187,10 +191,18 @@ async function collectFromBrowser() {
       const message = error instanceof Error ? error.message : String(error);
       if (!/ERR_ABORTED|frame was detached/i.test(message)) throw error;
       await appendLog("Medallia SSO redirected the login page; continuing", {
-        message,
+        navigationDetail: message,
       });
     }
-    await page.waitForTimeout(3500);
+    await delay(1500);
+    const redirectedPages = context.pages().filter((candidate) => !candidate.isClosed());
+    if (page.isClosed()) {
+      page = redirectedPages.at(-1) ??
+        (await context.waitForEvent("page", { timeout: 15_000 }));
+    } else if (redirectedPages.length > 1) {
+      page = redirectedPages.at(-1);
+    }
+    await delay(2500);
 
     if (setupMode) {
       await appendLog("Interactive ONE VOICE session setup started");
