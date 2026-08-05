@@ -1806,7 +1806,8 @@ export default function Dashboard({
 
   return (
     <main className="dashboard">
-      <section className="identity-strip">
+      <div className="dashboard-sticky-shell">
+        <section className="identity-strip">
         <div className="identity-title">
           <h1>{displayShowroomName(selected.showroom)} 현황</h1>
           <div className="update-status">
@@ -1921,9 +1922,9 @@ export default function Dashboard({
             )}
           </div>
         )}
-      </section>
+        </section>
 
-      <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
+        <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
         <div className="mobile-power">
           <div>
             <span>누적 평균</span>
@@ -1999,12 +2000,12 @@ export default function Dashboard({
             <Link href={`/dashboard/${selected.cdsid}/criteria`}>평가 기준</Link>
           </nav>
         </div>
-      </section>
+        </section>
 
-      <section
-        className="hero-grid"
-        key={`showroom-score-${selected.cdsid}`}
-      >
+        <section
+          className="hero-grid"
+          key={`showroom-score-${selected.cdsid}`}
+        >
         <article className={`combat-card ${tier.className}`}>
           <div className="combat-main">
             <div
@@ -2133,7 +2134,8 @@ export default function Dashboard({
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      </div>
 
       <section
         className="content-grid"

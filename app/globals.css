@@ -160,6 +160,17 @@ input:focus-visible {
   padding: 10px 28px 12px;
 }
 
+.dashboard-sticky-shell {
+  position: sticky;
+  top: 6px;
+  z-index: 40;
+  display: grid;
+  padding-bottom: 10px;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper) 90%, rgba(242, 246, 248, 0.96) 100%);
+  box-shadow: 0 16px 24px -26px rgba(16, 42, 67, 0.7);
+}
+
 .topbar {
   min-height: 64px;
   display: flex;
@@ -7023,6 +7034,10 @@ button.quarter-score-row:disabled {
 }
 
 @media (max-width: 1240px) {
+  .dashboard-sticky-shell {
+    position: static;
+  }
+
   .dashboard {
     padding-inline: 24px;
   }
