@@ -183,7 +183,7 @@ input:focus-visible {
         var(--dashboard-sticky-inner-gutter)
     ),
     calc(
-      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+      (100% - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
         var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
@@ -193,7 +193,7 @@ input:focus-visible {
         var(--dashboard-sticky-inner-gutter)
     ),
     calc(
-      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+      (100% - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
         var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
@@ -3063,7 +3063,7 @@ input:focus-visible {
         var(--dashboard-sticky-inner-gutter)
     ),
     calc(
-      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+      (100% - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
         var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
@@ -3073,7 +3073,7 @@ input:focus-visible {
         var(--dashboard-sticky-inner-gutter)
     ),
     calc(
-      (100vw - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+      (100% - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
         var(--dashboard-content-overhang) - var(--dashboard-sticky-inner-gutter)
     )
   );
