@@ -117,6 +117,8 @@
   --dashboard-page-gutter: 32px;
   --dashboard-content-overhang: 10px;
   --dashboard-sticky-inner-gutter: 10px;
+  --dashboard-summary-gap: 8px;
+  --dashboard-combat-share: 35%;
   --header-context-cell: 112px;
   --header-title-width: 310px;
   --header-title-font-size: 36px;
@@ -4924,7 +4926,9 @@ input:focus-visible,
 
   .identity-detail-rail,
   .analysis-context {
-    width: 21.5847%;
+    width: calc(
+      (100% - var(--dashboard-combat-share) - 24px) / 3
+    );
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-right: 0;
   }
@@ -4948,9 +4952,10 @@ input:focus-visible,
 }
 
 .hero-grid {
-  grid-template-columns: minmax(380px, 0.86fr) minmax(660px, 1.58fr);
+  grid-template-columns:
+    minmax(380px, var(--dashboard-combat-share)) minmax(660px, 1fr);
   align-items: stretch;
-  gap: 16px;
+  gap: var(--dashboard-summary-gap);
 }
 
 .combat-card,
@@ -5130,7 +5135,7 @@ input:focus-visible,
 .metric-grid {
   height: 100%;
   min-height: 252px;
-  gap: 16px;
+  gap: var(--dashboard-summary-gap);
 }
 
 .metric-card {
@@ -7482,7 +7487,7 @@ button.quarter-score-row:disabled {
     gap: 10px;
     padding: 0 10px 10px;
     border: 0;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0;
     background:
       linear-gradient(
         106deg,
@@ -7499,10 +7504,22 @@ button.quarter-score-row:disabled {
   .identity-strip,
   .analysis-header {
     margin: 0;
-    border-color: transparent;
-    border-radius: 8px;
+    gap: var(--dashboard-summary-gap);
+    padding-inline: 0;
+    border: 0;
+    border-radius: 0;
     background: transparent;
     box-shadow: none;
+  }
+
+  .identity-insights,
+  .identity-detail-rail,
+  .analysis-context,
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-card,
+  .analysis-sticky-shell .analysis-tabs,
+  .analysis-sticky-shell .analysis-summary-card {
+    border-radius: 0;
   }
 
   .hero-grid,
@@ -7519,6 +7536,10 @@ button.quarter-score-row:disabled {
   .analysis-sticky-shell .analysis-tabs,
   .analysis-sticky-shell .analysis-summary-card {
     box-shadow: none;
+  }
+
+  .analysis-summary-grid {
+    gap: var(--dashboard-summary-gap);
   }
 }
 

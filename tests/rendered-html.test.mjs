@@ -1088,6 +1088,33 @@ test("aligns both sticky shell contents with their lower panels", async () => {
   );
 });
 
+test("squares and tightens the desktop summary while matching its right rail", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--dashboard-summary-gap: 8px/);
+  assert.match(css, /--dashboard-combat-share: 35%/);
+  assert.match(
+    css,
+    /\.hero-grid\s*\{[^}]*minmax\(380px, var\(--dashboard-combat-share\)\)[^}]*gap: var\(--dashboard-summary-gap\)/,
+  );
+  assert.match(
+    css,
+    /\.metric-grid\s*\{[^}]*gap: var\(--dashboard-summary-gap\)/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*width: calc\([\s\S]*?100% - var\(--dashboard-combat-share\) - 24px[\s\S]*?\/ 3/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.identity-strip,[\s\S]*?\.analysis-header\s*\{[^}]*padding-inline: 0[^}]*border: 0[^}]*border-radius: 0/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-sticky-shell \.combat-card,[\s\S]*?\.analysis-sticky-shell \.analysis-summary-card\s*\{[^}]*border-radius: 0/,
+  );
+});
+
 test("compacts the desktop dashboard summary vertically", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
@@ -1652,7 +1679,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px[^}]*border: 0[^}]*border-radius: 0 0 10px 10px/,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px[^}]*border: 0[^}]*border-radius: 0/,
   );
   assert.match(css, /\.dashboard-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
   assert.match(css, /\.analysis-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
