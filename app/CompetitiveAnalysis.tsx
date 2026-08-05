@@ -190,10 +190,6 @@ const viewMeta: Record<
     label: "소속 딜러사 내 분석",
     short: "소속 딜러사",
   },
-  showroom: {
-    label: "전국 전시장 내 분석",
-    short: "전시장",
-  },
   region: {
     label: "동일 권역별 내 분석",
     short: "권역별",
@@ -201,6 +197,10 @@ const viewMeta: Record<
   size: {
     label: "동일 사이즈 내 분석",
     short: "동급 사이즈",
+  },
+  showroom: {
+    label: "전국 전시장 내 분석",
+    short: "전시장",
   },
 };
 
