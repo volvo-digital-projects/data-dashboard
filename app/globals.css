@@ -5573,17 +5573,17 @@ input:focus-visible,
 }
 
 .actual-series-wipe.is-visible {
-  animation: actual-series-wipe 1250ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+  animation: actual-series-wipe 1550ms cubic-bezier(0.16, 0.72, 0.2, 1) 80ms both;
 }
 
 #score-cx {
-  --cx-one-voice-animation-duration: 1350ms;
-  --cx-one-voice-animation-delay: 120ms;
+  --cx-one-voice-animation-duration: 1650ms;
+  --cx-one-voice-animation-delay: 100ms;
 }
 
 .actual-series-wipe.one-voice-sync.is-visible {
   animation: actual-series-wipe var(--cx-one-voice-animation-duration)
-    cubic-bezier(0.22, 0.75, 0.22, 1) var(--cx-one-voice-animation-delay) both;
+    cubic-bezier(0.16, 0.72, 0.2, 1) var(--cx-one-voice-animation-delay) both;
 }
 
 .national-average-point {
@@ -7026,12 +7026,12 @@ button.quarter-score-row:disabled {
 
 .one-voice-contribution.is-visible .one-voice-gauge-handover {
   animation: one-voice-fill-handover var(--cx-one-voice-animation-duration)
-    cubic-bezier(0.22, 0.75, 0.22, 1) var(--cx-one-voice-animation-delay) forwards;
+    cubic-bezier(0.16, 0.72, 0.2, 1) var(--cx-one-voice-animation-delay) forwards;
 }
 
 .one-voice-contribution.is-visible .one-voice-gauge-test-drive {
   animation: one-voice-fill-test-drive var(--cx-one-voice-animation-duration)
-    cubic-bezier(0.22, 0.75, 0.22, 1) var(--cx-one-voice-animation-delay) forwards;
+    cubic-bezier(0.16, 0.72, 0.2, 1) var(--cx-one-voice-animation-delay) forwards;
 }
 
 @keyframes one-voice-fill-handover {

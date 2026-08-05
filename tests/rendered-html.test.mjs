@@ -960,6 +960,40 @@ test("renders national score labels above the actual trend line", async () => {
   );
 });
 
+test("shows VOC immediately and reserves scroll-synced animation for CX", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.doesNotMatch(dashboardSource, /\[actualSeriesInView, setActualSeriesInView\]/);
+  assert.match(
+    dashboardSource,
+    /const actualSeriesVisible = synchronizedAnimationInView \?\? true;/,
+  );
+  assert.match(
+    dashboardSource,
+    /data-animation-trigger=\{[\s\S]*?\? "scroll"[\s\S]*?: "immediate"/,
+  );
+  assert.match(
+    dashboardSource,
+    /key=\{`\$\{selected\.cdsid\}-cx`\}[\s\S]*?metric="cx"[\s\S]*?synchronizedAnimationInView=\{oneVoiceInView\}/,
+  );
+  assert.match(
+    css,
+    /\.actual-series-wipe\.is-visible\s*\{[^}]*1550ms cubic-bezier\(0\.16, 0\.72, 0\.2, 1\) 80ms both/,
+  );
+  assert.match(
+    css,
+    /#score-cx\s*\{[^}]*--cx-one-voice-animation-duration: 1650ms[^}]*--cx-one-voice-animation-delay: 100ms/,
+  );
+  assert.match(
+    css,
+    /\.actual-series-wipe\.one-voice-sync\.is-visible\s*\{[^}]*cubic-bezier\(0\.16, 0\.72, 0\.2, 1\)/,
+  );
+});
+
 test("renders the higher weekly score marker above the lower marker", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
