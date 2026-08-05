@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
 import dashboardJson from "./data/showrooms.json";
 import v3sHistoryJson from "./data/v3s-history.json";
 import weeklyJson from "./data/weekly.json";
@@ -1708,6 +1714,8 @@ export default function Dashboard({
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const stickyAnchorRef = useRef<HTMLDivElement>(null);
+  const stickyShellRef = useRef<HTMLDivElement>(null);
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
   );
@@ -1733,6 +1741,30 @@ export default function Dashboard({
       .catch(() => undefined);
     return () => {
       mounted = false;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const anchor = stickyAnchorRef.current;
+    const shell = stickyShellRef.current;
+    if (!anchor || !shell) return;
+
+    const syncAnchorHeight = () => {
+      if (window.matchMedia("(max-width: 760px)").matches) {
+        anchor.style.removeProperty("height");
+        return;
+      }
+      anchor.style.height = `${Math.ceil(shell.getBoundingClientRect().height)}px`;
+    };
+
+    syncAnchorHeight();
+    const observer = new ResizeObserver(syncAnchorHeight);
+    observer.observe(shell);
+    window.addEventListener("resize", syncAnchorHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncAnchorHeight);
     };
   }, []);
 
@@ -1806,7 +1838,8 @@ export default function Dashboard({
 
   return (
     <main className="dashboard">
-      <div className="dashboard-sticky-shell">
+      <div className="dashboard-sticky-anchor" ref={stickyAnchorRef}>
+      <div className="dashboard-sticky-shell" ref={stickyShellRef}>
         <section className="identity-strip">
         <div className="identity-title">
           <h1>{displayShowroomName(selected.showroom)} 현황</h1>
@@ -2135,6 +2168,7 @@ export default function Dashboard({
           </div>
         </div>
         </section>
+      </div>
       </div>
 
       <section
