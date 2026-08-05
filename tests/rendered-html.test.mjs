@@ -960,6 +960,29 @@ test("renders national score labels above the actual trend line", async () => {
   );
 });
 
+test("renders the higher weekly score marker above the lower marker", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const actualLayerIndex = dashboardSource.indexOf("className={`actual-series-wipe");
+  const priorityLayerIndex = dashboardSource.indexOf(
+    'className="national-priority-marker-layer"',
+  );
+
+  assert.ok(actualLayerIndex >= 0);
+  assert.ok(priorityLayerIndex > actualLayerIndex);
+  assert.match(
+    dashboardSource,
+    /const actualValue = actualAt\(point\.week\);[\s\S]*?point\.value <= actualValue[\s\S]*?className="national-average-point national-average-point-priority"/,
+  );
+  assert.match(
+    css,
+    /\.national-priority-marker-layer\s*\{[^}]*pointer-events: none/,
+  );
+});
+
 test("matches summary metric label tracking to the detailed score headings", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 

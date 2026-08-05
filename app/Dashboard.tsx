@@ -1290,6 +1290,26 @@ function WeeklyTrend({
                 ))}
               </g>
             )}
+            {showNational && showActual && averagePoints.length > 0 && (
+              <g className="national-priority-marker-layer" aria-hidden="true">
+                {averagePoints.map((point) => {
+                  const actualValue = actualAt(point.week);
+                  if (actualValue === null || point.value <= actualValue) {
+                    return null;
+                  }
+
+                  return (
+                    <circle
+                      key={`average-priority-${point.week}`}
+                      cx={x(point.week)}
+                      cy={y(point.value)}
+                      r={markerRadius}
+                      className="national-average-point national-average-point-priority"
+                    />
+                  );
+                })}
+              </g>
+            )}
             {showNational && averagePoints.length > 0 && (
               <g className="national-value-label-layer" aria-hidden="true">
                 {averagePoints.map((point) => (
