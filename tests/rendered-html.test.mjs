@@ -1048,7 +1048,7 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px/,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 0 10px/,
   );
   assert.match(
     css,
@@ -1065,10 +1065,18 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
   );
 });
 
-test("aligns both sticky shell contents with their lower panels", async () => {
+test("aligns both sticky shells themselves with their lower panels at every zoom", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const analysisSource = await readFile(
+    new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
+    "utf8",
+  );
 
-  assert.match(css, /--dashboard-sticky-inner-gutter: 10px/);
+  assert.match(css, /--dashboard-sticky-inner-gutter: 0px/);
   for (const selector of ["dashboard", "analysis"]) {
     assert.match(
       css,
@@ -1079,13 +1087,18 @@ test("aligns both sticky shell contents with their lower panels", async () => {
   }
   assert.match(
     css,
-    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px/,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 0 10px/,
   );
   assert.equal(
     (css.match(/calc\(24px - var\(--dashboard-sticky-inner-gutter\)\)/g) ?? [])
       .length,
     4,
   );
+  for (const source of [dashboardSource, analysisSource]) {
+    assert.match(source, /window\.visualViewport\?\.addEventListener\("resize", queueAnchorHeightSync\)/);
+    assert.match(source, /document\.fonts\?\.ready\.then\(queueAnchorHeightSync\)/);
+    assert.match(source, /new ResizeObserver\(queueAnchorHeightSync\)/);
+  }
 });
 
 test("squares and tightens the desktop summary while matching its right rail", async () => {
@@ -1120,7 +1133,7 @@ test("compacts the desktop dashboard summary vertically", async () => {
 
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding: 0 10px 8px/,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding: 0 0 8px/,
   );
   assert.match(
     css,
@@ -1679,7 +1692,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 10px 10px[^}]*border: 0[^}]*border-radius: 0/,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 0 10px[^}]*border: 0[^}]*border-radius: 0/,
   );
   assert.match(css, /\.dashboard-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);
   assert.match(css, /\.analysis-sticky-shell\s*\{[^}]*position: fixed[^}]*top: 0/);

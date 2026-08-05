@@ -116,7 +116,7 @@
   --dashboard-page-max: 1500px;
   --dashboard-page-gutter: 32px;
   --dashboard-content-overhang: 10px;
-  --dashboard-sticky-inner-gutter: 10px;
+  --dashboard-sticky-inner-gutter: 0px;
   --dashboard-summary-gap: 8px;
   --dashboard-combat-share: 35%;
   --header-context-cell: 112px;
@@ -7485,7 +7485,7 @@ button.quarter-score-row:disabled {
   .dashboard-sticky-shell,
   .analysis-sticky-shell {
     gap: 10px;
-    padding: 0 10px 10px;
+    padding: 0 0 10px;
     border: 0;
     border-radius: 0;
     background:
@@ -7546,7 +7546,7 @@ button.quarter-score-row:disabled {
 @media (min-width: 1241px) {
   .dashboard-sticky-shell {
     gap: 8px;
-    padding: 0 10px 8px;
+    padding: 0 0 8px;
   }
 }
 

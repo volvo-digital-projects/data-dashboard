@@ -460,6 +460,8 @@ export default function CompetitiveAnalysis({
     const shell = stickyShellRef.current;
     if (!anchor || !shell) return;
 
+    let resizeFrame = 0;
+
     const syncAnchorHeight = () => {
       if (window.matchMedia("(max-width: 760px)").matches) {
         anchor.style.removeProperty("height");
@@ -468,14 +470,23 @@ export default function CompetitiveAnalysis({
       anchor.style.height = `${Math.ceil(shell.getBoundingClientRect().height)}px`;
     };
 
+    const queueAnchorHeightSync = () => {
+      window.cancelAnimationFrame(resizeFrame);
+      resizeFrame = window.requestAnimationFrame(syncAnchorHeight);
+    };
+
     syncAnchorHeight();
-    const observer = new ResizeObserver(syncAnchorHeight);
+    const observer = new ResizeObserver(queueAnchorHeightSync);
     observer.observe(shell);
-    window.addEventListener("resize", syncAnchorHeight);
+    window.addEventListener("resize", queueAnchorHeightSync);
+    window.visualViewport?.addEventListener("resize", queueAnchorHeightSync);
+    void document.fonts?.ready.then(queueAnchorHeightSync);
 
     return () => {
+      window.cancelAnimationFrame(resizeFrame);
       observer.disconnect();
-      window.removeEventListener("resize", syncAnchorHeight);
+      window.removeEventListener("resize", queueAnchorHeightSync);
+      window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
     };
   }, []);
 
