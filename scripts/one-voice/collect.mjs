@@ -208,13 +208,21 @@ async function collectFromBrowser() {
       await appendLog("Interactive ONE VOICE session setup started");
       const deadline = Date.now() + 10 * 60_000;
       while (Date.now() < deadline) {
+        const livePages = context
+          .pages()
+          .filter((candidate) => !candidate.isClosed());
+        if (!livePages.length) {
+          await delay(1500);
+          continue;
+        }
+        page = livePages.at(-1);
         const scores = await bothScores(page);
         if (scores) {
           await appendLog("Interactive ONE VOICE session setup completed", scores);
           return scores;
         }
         await selectMarketAdmin(page).catch(() => false);
-        await page.waitForTimeout(2000);
+        await delay(2000);
       }
       throw new Error("Login/setup timed out before the ONE VOICE cards appeared");
     }
