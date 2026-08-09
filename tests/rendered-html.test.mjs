@@ -994,6 +994,28 @@ test("shows VOC immediately and reserves scroll-synced animation for CX", async 
   );
 });
 
+test("marks both ONE VOICE gauge endpoints with an animated O", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.equal(
+    (dashboardSource.match(/className="one-voice-gauge-endpoint"/g) ?? [])
+      .length,
+    2,
+  );
+  assert.match(
+    css,
+    /\.one-voice-gauge-endpoint\s*\{[^}]*--one-voice-progress: inherit;[^}]*inset: 4px[^}]*rotate\([\s\S]*?var\(--one-voice-progress\) \* 3\.6deg/,
+  );
+  assert.match(
+    css,
+    /\.one-voice-gauge-endpoint::after\s*\{[^}]*width: 8px[^}]*height: 8px[^}]*border: 2px solid #2fb867[^}]*border-radius: 50%[^}]*background: #ffffff/,
+  );
+});
+
 test("renders the higher weekly score marker above the lower marker", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),

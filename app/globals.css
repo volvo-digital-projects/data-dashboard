@@ -7029,6 +7029,35 @@ button.quarter-score-row:disabled {
     0 0 0 1px rgba(255, 255, 255, 0.82);
 }
 
+.one-voice-gauge-endpoint {
+  --one-voice-progress: inherit;
+  position: absolute;
+  inset: 4px;
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: rotate(
+    calc(-90deg + var(--one-voice-progress) * 3.6deg)
+  );
+  transform-origin: center;
+}
+
+.one-voice-gauge-endpoint::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border: 2px solid #2fb867;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.78),
+    0 2px 5px rgba(8, 92, 48, 0.2);
+  transform: translate(-50%, -50%);
+}
+
 .one-voice-contribution.is-visible .one-voice-gauge-handover {
   animation: one-voice-fill-handover var(--cx-one-voice-animation-duration)
     cubic-bezier(0.16, 0.72, 0.2, 1) var(--cx-one-voice-animation-delay) forwards;

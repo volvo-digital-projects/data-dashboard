@@ -2414,6 +2414,10 @@ export default function Dashboard({
                           } as CSSProperties
                         }
                       >
+                        <span
+                          className="one-voice-gauge-endpoint"
+                          aria-hidden="true"
+                        />
                         <span className="one-voice-gauge-value">
                           <strong>
                             {oneVoiceScores.carHandoverScore.toFixed(1)}
@@ -2442,6 +2446,10 @@ export default function Dashboard({
                           } as CSSProperties
                         }
                       >
+                        <span
+                          className="one-voice-gauge-endpoint"
+                          aria-hidden="true"
+                        />
                         <span className="one-voice-gauge-value">
                           <strong>{oneVoiceScores.testDriveScore.toFixed(1)}</strong>
                           <small>점</small>
