@@ -1189,6 +1189,16 @@ test("compacts the desktop dashboard summary vertically", async () => {
   );
 });
 
+test("matches every rectangular lower dashboard surface to the ES90 radius", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--es90-surface-radius: 6px/);
+  assert.match(
+    css,
+    /\.dashboard \.trend-panel,[\s\S]*?\.dashboard \.trend-panel \.score-tier,[\s\S]*?\.dashboard \.trend-panel \.v3s-quarter-panel,[\s\S]*?\.dashboard \.trend-panel \.v3s-history-panel,[\s\S]*?\.dashboard \.trend-panel \.v3s-bar-stage,[\s\S]*?\.dashboard \.trend-panel \.v3s-history-bar-stage,[\s\S]*?\.dashboard \.trend-panel \.trend-scroll,[\s\S]*?\.dashboard \.trend-panel \.weekly-score-placeholder,[\s\S]*?\.dashboard \.trend-panel \.one-voice-contribution\s*\{[^}]*border-radius: var\(--es90-surface-radius\)/,
+  );
+});
+
 test("ships the premium neutral design system and Pretendard typography", async () => {
   const css = await readFile(
     new URL("../app/globals.css", import.meta.url),

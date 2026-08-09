@@ -109,6 +109,7 @@
   --status-caution: #b7791f;
   --status-caution-soft: #f7eddc;
   --es90-orange: #f15a24;
+  --es90-surface-radius: 6px;
   --secondary: #66757d;
   --muted: #8a969c;
   --font-volvo: "Volvo Centum Web";
@@ -7509,6 +7510,18 @@ button.quarter-score-row:disabled {
 .weekly-score-placeholder,
 .one-voice-contribution {
   border-radius: 10px;
+}
+
+.dashboard .trend-panel,
+.dashboard .trend-panel .score-tier,
+.dashboard .trend-panel .v3s-quarter-panel,
+.dashboard .trend-panel .v3s-history-panel,
+.dashboard .trend-panel .v3s-bar-stage,
+.dashboard .trend-panel .v3s-history-bar-stage,
+.dashboard .trend-panel .trend-scroll,
+.dashboard .trend-panel .weekly-score-placeholder,
+.dashboard .trend-panel .one-voice-contribution {
+  border-radius: var(--es90-surface-radius);
 }
 
 @media (min-width: 761px) {
