@@ -7531,7 +7531,8 @@ button.quarter-score-row:disabled {
       0 16px 32px -26px rgba(16, 42, 67, 0.58);
   }
 
-  .dashboard-sticky-shell {
+  .dashboard-sticky-shell,
+  .analysis-sticky-shell {
     padding-inline: var(--dashboard-sticky-content-gutter);
   }
 
@@ -7578,7 +7579,8 @@ button.quarter-score-row:disabled {
 }
 
 @media (min-width: 1241px) {
-  .dashboard-sticky-shell {
+  .dashboard-sticky-shell,
+  .analysis-sticky-shell {
     gap: 8px;
     padding: 0 var(--dashboard-sticky-content-gutter) 8px;
   }
