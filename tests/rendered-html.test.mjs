@@ -1099,6 +1099,7 @@ test("aligns both sticky shells themselves with their lower panels at every zoom
   );
 
   assert.match(css, /--dashboard-sticky-inner-gutter: 0px/);
+  assert.match(css, /--dashboard-sticky-content-gutter: 21px/);
   assert.doesNotMatch(css, /100vw - var\(--dashboard-page-max\)/);
   assert.equal(
     (css.match(/100% - var\(--dashboard-page-max\)/g) ?? []).length,
@@ -1115,6 +1116,10 @@ test("aligns both sticky shells themselves with their lower panels at every zoom
   assert.match(
     css,
     /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding: 0 0 10px/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\)/,
   );
   assert.equal(
     (css.match(/calc\(24px - var\(--dashboard-sticky-inner-gutter\)\)/g) ?? [])
@@ -1160,7 +1165,7 @@ test("compacts the desktop dashboard summary vertically", async () => {
 
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding: 0 0 8px/,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell\s*\{[^}]*gap: 8px[^}]*padding: 0 var\(--dashboard-sticky-content-gutter\) 8px/,
   );
   assert.match(
     css,

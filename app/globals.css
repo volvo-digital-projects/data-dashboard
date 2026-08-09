@@ -117,6 +117,7 @@
   --dashboard-page-gutter: 32px;
   --dashboard-content-overhang: 10px;
   --dashboard-sticky-inner-gutter: 0px;
+  --dashboard-sticky-content-gutter: 21px;
   --dashboard-summary-gap: 8px;
   --dashboard-combat-share: 35%;
   --header-context-cell: 112px;
@@ -7530,6 +7531,10 @@ button.quarter-score-row:disabled {
       0 16px 32px -26px rgba(16, 42, 67, 0.58);
   }
 
+  .dashboard-sticky-shell {
+    padding-inline: var(--dashboard-sticky-content-gutter);
+  }
+
   .identity-strip,
   .analysis-header {
     margin: 0;
@@ -7575,7 +7580,7 @@ button.quarter-score-row:disabled {
 @media (min-width: 1241px) {
   .dashboard-sticky-shell {
     gap: 8px;
-    padding: 0 0 8px;
+    padding: 0 var(--dashboard-sticky-content-gutter) 8px;
   }
 }
 
