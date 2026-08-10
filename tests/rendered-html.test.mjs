@@ -1087,6 +1087,12 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
   );
 });
 
+test("reserves the root scrollbar gutter across dashboard routes", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /html\s*\{[^}]*scrollbar-gutter: stable/);
+});
+
 test("aligns both sticky shells themselves with their lower panels at every zoom", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   const dashboardSource = await readFile(
