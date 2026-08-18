@@ -3440,7 +3440,7 @@ input:focus-visible {
   margin-left: 4px;
   color: var(--muted);
   font-family: var(--font-korean);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
 }
 
@@ -4590,7 +4590,7 @@ input:focus-visible,
   gap: 8px;
   margin: 0;
   color: var(--secondary);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.1;
 }
 
@@ -5230,7 +5230,7 @@ input:focus-visible,
   display: inline-block;
   margin-left: 10px;
   font-family: var(--font-korean);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: -0.015em;
   word-spacing: -0.02em;
