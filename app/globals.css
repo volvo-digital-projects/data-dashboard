@@ -3422,7 +3422,7 @@ input:focus-visible {
 
 .analysis-summary-card > div > small {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .analysis-summary-card > strong {

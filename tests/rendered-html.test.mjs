@@ -1100,6 +1100,10 @@ test("keeps the shared header status and score units compact", async () => {
   assert.match(css, /\.metric-card-value span\s*\{[^}]*font-size: 11px/);
   assert.match(
     css,
+    /\.analysis-summary-card > div > small\s*\{[^}]*font-size: 10px/,
+  );
+  assert.match(
+    css,
     /\.analysis-summary-card > strong small\s*\{[^}]*font-size: 9px/,
   );
 });
