@@ -42,8 +42,60 @@ async function injectAndCollect(tabId) {
   return chrome.tabs.sendMessage(tabId, { type: "one-voice-collect" });
 }
 
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function waitForTabComplete(tabId, timeoutMilliseconds = 90_000) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const finish = (error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeout);
+      chrome.tabs.onUpdated.removeListener(onUpdated);
+      if (error) reject(error);
+      else resolve();
+    };
+    const timeout = setTimeout(() => {
+      finish(new Error("ONE VOICE refresh timed out"));
+    }, timeoutMilliseconds);
+
+    function onUpdated(updatedTabId, changeInfo) {
+      if (updatedTabId !== tabId || changeInfo.status !== "complete") return;
+      finish();
+    }
+
+    chrome.tabs.onUpdated.addListener(onUpdated);
+    chrome.tabs
+      .get(tabId)
+      .then((tab) => {
+        if (tab.status === "complete") finish();
+      })
+      .catch((error) => finish(error));
+  });
+}
+
+async function reloadAndCollect(tabId) {
+  await chrome.tabs.reload(tabId);
+  await waitForTabComplete(tabId);
+  await delay(4_000);
+  return injectAndCollect(tabId);
+}
+
 async function markMissing(slotKst) {
   await apiRequest("POST", { kind: "monitor", slotKst });
+}
+
+async function storeScores(slotKst, scores) {
+  await apiRequest("POST", {
+    kind: "snapshot",
+    slotKst,
+    capturedAt: new Date().toISOString(),
+    testDriveScore: scores.testDriveScore,
+    carHandoverScore: scores.carHandoverScore,
+  });
+  await chrome.storage.local.remove("lastReloadSlot");
 }
 
 async function captureFromExistingTab() {
@@ -70,14 +122,7 @@ async function captureFromExistingTab() {
     }
 
     if (result?.scores) {
-      await apiRequest("POST", {
-        kind: "snapshot",
-        slotKst,
-        capturedAt: new Date().toISOString(),
-        testDriveScore: result.scores.testDriveScore,
-        carHandoverScore: result.scores.carHandoverScore,
-      });
-      await chrome.storage.local.remove("lastReloadSlot");
+      await storeScores(slotKst, result.scores);
       return;
     }
   }
@@ -85,7 +130,17 @@ async function captureFromExistingTab() {
   const state = await chrome.storage.local.get({ lastReloadSlot: "" });
   if (state.lastReloadSlot !== slotKst) {
     await chrome.storage.local.set({ lastReloadSlot: slotKst });
-    await chrome.tabs.reload(candidates[0].id);
+    let refreshed = null;
+    try {
+      refreshed = await reloadAndCollect(candidates[0].id);
+    } catch {
+      refreshed = null;
+    }
+    if (refreshed?.scores) {
+      await storeScores(slotKst, refreshed.scores);
+      return;
+    }
+    await markMissing(slotKst);
     return;
   }
 

@@ -1,13 +1,13 @@
-# ONE VOICE hourly score sync
+# ONE VOICE daily score sync
 
 ## Operating model
 
 - The Chrome extension reads only an already-open `volvo.medallia.eu` tab. It never creates, activates, or navigates to a new browser window or tab.
-- From 09:00 through 17:59 KST on weekdays, a Chrome alarm checks every 10 minutes. If the current hourly slot is already stored, it does nothing.
+- From 10:00 through 10:59 KST on weekdays, a Chrome alarm checks every 10 minutes. After that day's 10:00 slot is stored, it does nothing for the rest of the day.
 - Korean weekends, statutory holidays, and substitute holidays are skipped before the existing tab is accessed. Election or one-off holidays can be added while preparing the extension as comma-separated ISO dates.
-- If either ONE VOICE score is missing, the extension reloads that same existing tab once and retries on the next check. It never opens another tab.
+- If either ONE VOICE score is missing or the Medallia session-expired screen is visible, the extension reloads that same existing tab, waits for it to finish, and immediately retries both cards. It never opens another tab.
 - Cloudflare D1 is the source of truth for captured snapshots and missing-slot records.
-- GitHub Actions checks each slot at 23 minutes past the hour. It records and alerts on a missing slot, but cannot bypass Medallia SSO or recreate a past score without the local signed-in browser.
+- GitHub Actions checks the daily 10:00 slot at 10:23 KST. It records and alerts on a missing slot, but cannot bypass Medallia SSO or recreate a past score without the local signed-in browser.
 
 ## Security
 

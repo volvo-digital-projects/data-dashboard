@@ -183,6 +183,14 @@ const formatSeoulDate = (date: Date) => {
   return `${part("year")}.${part("month")}.${part("day")}`;
 };
 
+const formatOneVoiceReferenceDate = (value: string | null) => {
+  if (!value) return null;
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return null;
+  const [year, month, day] = formatSeoulDate(date).split(".");
+  return `${year.slice(-2)}${month}${day}`;
+};
+
 type OneVoiceScores = {
   carHandoverScore: number;
   testDriveScore: number;
@@ -1769,12 +1777,15 @@ export default function Dashboard({
   const oneVoiceRef = useRef<HTMLElement>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
-    carHandoverScore: 94.1,
-    testDriveScore: 88.7,
-    capturedAt: null,
+    carHandoverScore: 94.0,
+    testDriveScore: 88.6,
+    capturedAt: "2026-08-19T10:00:00+09:00",
   });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
+  );
+  const oneVoiceReferenceDate = formatOneVoiceReferenceDate(
+    oneVoiceScores.capturedAt,
   );
   const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
     title: "현재 Q3평가 진행중",
@@ -2391,7 +2402,17 @@ export default function Dashboard({
                 >
                   <header className="one-voice-contribution-heading">
                     <div>
-                      <strong>ONE VOICE</strong>
+                      <div className="one-voice-title-row">
+                        <strong>ONE VOICE</strong>
+                        {oneVoiceReferenceDate && (
+                          <time
+                            className="one-voice-reference-date"
+                            dateTime={oneVoiceScores.capturedAt ?? undefined}
+                          >
+                            {oneVoiceReferenceDate} 기준
+                          </time>
+                        )}
+                      </div>
                       <span>Volvo Korea 전체</span>
                     </div>
                     <small>지난 6개월부터 오늘까지</small>

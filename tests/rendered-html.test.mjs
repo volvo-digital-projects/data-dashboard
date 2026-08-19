@@ -1016,6 +1016,25 @@ test("marks both ONE VOICE gauge endpoints with an animated O", async () => {
   );
 });
 
+test("shows the ONE VOICE capture date beside the title", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(dashboardSource, /carHandoverScore: 94\.0/);
+  assert.match(dashboardSource, /testDriveScore: 88\.6/);
+  assert.match(
+    dashboardSource,
+    /className="one-voice-reference-date"[\s\S]*?\{oneVoiceReferenceDate\} 기준/,
+  );
+  assert.match(
+    css,
+    /\.one-voice-title-row\s*\{[^}]*display: flex[^}]*align-items: baseline[^}]*gap: 6px/,
+  );
+});
+
 test("renders the higher weekly score marker above the lower marker", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),

@@ -24,7 +24,7 @@ const response = await fetch(`${siteUrl}/api/one-voice`, {
 if (!response.ok) throw new Error(`Dashboard API GET failed: ${response.status}`);
 const current = await response.json();
 if (current.snapshot?.slotKst === slotKst) {
-  console.log(`ONE VOICE hourly slot is complete: ${slotKst}`);
+  console.log(`ONE VOICE daily slot is complete: ${slotKst}`);
   process.exit(0);
 }
 

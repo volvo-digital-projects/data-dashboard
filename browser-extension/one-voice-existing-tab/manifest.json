@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Volvo ONE VOICE Existing Tab Sync",
-  "version": "1.0.0",
-  "description": "Reads ONE VOICE scores only from an already-open authenticated Chrome tab.",
+  "version": "1.1.0",
+  "description": "Refreshes an existing signed-in ONE VOICE tab and captures the daily 10:00 KST scores.",
   "permissions": ["alarms", "storage", "tabs", "scripting"],
   "host_permissions": [
     "https://volvo.medallia.eu/*",

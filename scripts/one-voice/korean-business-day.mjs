@@ -196,7 +196,7 @@ export function collectionWindow(date = new Date(), extraHolidays = []) {
   if (holiday.holiday) {
     return { allowed: false, reason: holiday.name, parts };
   }
-  if (parts.hour < 9 || parts.hour > 17) {
+  if (parts.hour !== 10) {
     return { allowed: false, reason: "outside collection hours", parts };
   }
   return { allowed: true, reason: null, parts };

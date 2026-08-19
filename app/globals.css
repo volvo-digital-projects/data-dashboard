@@ -6962,6 +6962,13 @@ button.quarter-score-row:disabled {
   min-width: 0;
 }
 
+.one-voice-title-row {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
 .one-voice-contribution-heading strong {
   color: #0f3f2a;
   font-family: var(--font-latin);
@@ -6981,6 +6988,15 @@ button.quarter-score-row:disabled {
 .one-voice-contribution-heading small {
   padding-bottom: 1px;
   color: #3f795b;
+}
+
+.one-voice-contribution-heading .one-voice-reference-date {
+  color: #3f795b;
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .one-voice-gauge-grid {
