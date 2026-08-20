@@ -44,4 +44,8 @@ test("refreshes the existing ONE VOICE tab and immediately retries the cards", a
   assert.match(background, /periodInMinutes: CAPTURE_INTERVAL_MINUTES/);
   assert.match(background, /await recordRun\(trigger, result, null\)/);
   assert.match(workflow, /cron: "23 1 \* \* 1-5"/);
+  assert.match(
+    workflow,
+    /ONE_VOICE_SITE_URL: https:\/\/volvo-dsc-pc-test-2026\.kongboojang\.chatgpt\.site/,
+  );
 });

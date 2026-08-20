@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      ONE_VOICE_SITE_URL: https://volvo-dsc-pc-test-2026.sosoobi.chatgpt.site
+      ONE_VOICE_SITE_URL: https://volvo-dsc-pc-test-2026.kongboojang.chatgpt.site
       ONE_VOICE_INGEST_TOKEN: ${{ secrets.ONE_VOICE_INGEST_TOKEN }}
       ONE_VOICE_EXTRA_HOLIDAYS: ${{ vars.ONE_VOICE_EXTRA_HOLIDAYS }}
     steps:

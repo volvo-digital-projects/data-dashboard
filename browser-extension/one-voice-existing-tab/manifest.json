@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Volvo ONE VOICE Existing Tab Sync",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Captures the daily 10:00 KST ONE VOICE scores and recovers missed weekday syncs.",
   "permissions": ["alarms", "storage", "tabs", "scripting"],
   "host_permissions": [
     "https://volvo.medallia.eu/*",
-    "https://volvo-dsc-pc-test-2026.sosoobi.chatgpt.site/*"
+    "https://volvo-dsc-pc-test-2026.kongboojang.chatgpt.site/*"
   ],
   "background": {
     "service_worker": "background.js",

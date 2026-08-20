@@ -1,5 +1,5 @@
 param(
-  [string]$SiteUrl = "https://volvo-dsc-pc-test-2026.sosoobi.chatgpt.site",
+  [string]$SiteUrl = "https://volvo-dsc-pc-test-2026.kongboojang.chatgpt.site",
   [string]$ExtraHolidays = ""
 )
 
