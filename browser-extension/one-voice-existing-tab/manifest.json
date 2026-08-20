@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Volvo ONE VOICE Existing Tab Sync",
-  "version": "1.1.0",
-  "description": "Refreshes an existing signed-in ONE VOICE tab and captures the daily 10:00 KST scores.",
+  "version": "1.2.0",
+  "description": "Captures the daily 10:00 KST ONE VOICE scores and recovers missed weekday syncs.",
   "permissions": ["alarms", "storage", "tabs", "scripting"],
   "host_permissions": [
     "https://volvo.medallia.eu/*",

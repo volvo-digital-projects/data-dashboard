@@ -196,10 +196,15 @@ export function collectionWindow(date = new Date(), extraHolidays = []) {
   if (holiday.holiday) {
     return { allowed: false, reason: holiday.name, parts };
   }
-  if (parts.hour !== 10) {
+  if (parts.hour < 10 || parts.hour > 17) {
     return { allowed: false, reason: "outside collection hours", parts };
   }
   return { allowed: true, reason: null, parts };
+}
+
+export function dailySlotKst(date = new Date()) {
+  const parts = seoulParts(date);
+  return `${parts.date}T10:00:00+09:00`;
 }
 
 export function hourlySlotKst(date = new Date()) {

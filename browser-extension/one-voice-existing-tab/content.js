@@ -21,12 +21,14 @@ if (!globalThis.__volvoOneVoiceExistingTabSync) {
   }
 
   function exactText(text) {
-    return [...document.querySelectorAll("body *")].find(
-      (element) =>
-        element.children.length === 0 &&
-        element.textContent?.trim() === text &&
-        visible(element),
-    );
+    const normalized = text.replace(/\s+/g, " ").trim();
+    return [...document.querySelectorAll("body *")]
+      .filter((element) => visible(element))
+      .sort((left, right) => left.children.length - right.children.length)
+      .find(
+        (element) =>
+          element.textContent?.replace(/\s+/g, " ").trim() === normalized,
+      );
   }
 
   function scoreFor(title) {

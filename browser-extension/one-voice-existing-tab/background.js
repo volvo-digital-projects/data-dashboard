@@ -1,11 +1,14 @@
 /* global chrome */
 
 import { ONE_VOICE_CONFIG } from "./local-config.js";
-import { collectionWindow, hourlySlotKst } from "./business-day.js";
+import { collectionWindow, dailySlotKst } from "./business-day.js";
 
 const CAPTURE_ALARM = "one-voice-existing-tab-capture";
 const MEDALLIA_PATTERN = "https://volvo.medallia.eu/*";
 const API_URL = `${ONE_VOICE_CONFIG.siteUrl.replace(/\/$/, "")}/api/one-voice`;
+const CAPTURE_INTERVAL_MINUTES = 2;
+const CARD_RETRY_INTERVAL_MS = 2_500;
+const CARD_RETRY_ATTEMPTS = 12;
 
 function extraHolidays() {
   return Array.isArray(ONE_VOICE_CONFIG.extraHolidays)
@@ -40,6 +43,10 @@ async function injectAndCollect(tabId) {
     files: ["content.js"],
   });
   return chrome.tabs.sendMessage(tabId, { type: "one-voice-collect" });
+}
+
+function isMedalliaTab(tab) {
+  return typeof tab?.url === "string" && tab.url.startsWith("https://volvo.medallia.eu/");
 }
 
 function delay(milliseconds) {
@@ -79,8 +86,18 @@ function waitForTabComplete(tabId, timeoutMilliseconds = 90_000) {
 async function reloadAndCollect(tabId) {
   await chrome.tabs.reload(tabId);
   await waitForTabComplete(tabId);
-  await delay(4_000);
-  return injectAndCollect(tabId);
+  await delay(CARD_RETRY_INTERVAL_MS);
+
+  for (let attempt = 0; attempt < CARD_RETRY_ATTEMPTS; attempt += 1) {
+    try {
+      const result = await injectAndCollect(tabId);
+      if (result?.scores) return result;
+    } catch {
+      // Medallia is a client-rendered app; keep waiting for the score cards.
+    }
+    await delay(CARD_RETRY_INTERVAL_MS);
+  }
+  return null;
 }
 
 async function markMissing(slotKst) {
@@ -101,17 +118,21 @@ async function storeScores(slotKst, scores) {
 async function captureFromExistingTab() {
   const now = new Date();
   const window = collectionWindow(now, extraHolidays());
-  if (!window.allowed) return;
+  if (!window.allowed) return { status: "skipped", reason: window.reason };
 
-  const slotKst = hourlySlotKst(now);
+  const slotKst = dailySlotKst(now);
   const current = await apiRequest();
-  if (current.snapshot?.slotKst === slotKst) return;
+  if (current.snapshot?.slotKst === slotKst) {
+    return { status: "current", slotKst };
+  }
 
   const tabs = await chrome.tabs.query({ url: MEDALLIA_PATTERN });
   const candidates = tabs
     .filter((tab) => typeof tab.id === "number")
     .sort((left, right) => Number(right.active) - Number(left.active));
-  if (!candidates.length) return;
+  if (!candidates.length) {
+    return { status: "missing-tab", slotKst };
+  }
 
   for (const tab of candidates) {
     let result = null;
@@ -123,7 +144,7 @@ async function captureFromExistingTab() {
 
     if (result?.scores) {
       await storeScores(slotKst, result.scores);
-      return;
+      return { status: "stored", slotKst, scores: result.scores };
     }
   }
 
@@ -138,39 +159,89 @@ async function captureFromExistingTab() {
     }
     if (refreshed?.scores) {
       await storeScores(slotKst, refreshed.scores);
-      return;
+      return { status: "stored", slotKst, scores: refreshed.scores };
     }
     await markMissing(slotKst);
-    return;
+    return { status: "cards-unavailable", slotKst };
   }
 
   await markMissing(slotKst);
+  return { status: "cards-unavailable", slotKst };
+}
+
+async function recordRun(trigger, result, error) {
+  const failed = Boolean(error);
+  const status = failed ? "failed" : result?.status ?? "unknown";
+  await chrome.storage.local.set({
+    lastRun: {
+      trigger,
+      status,
+      at: new Date().toISOString(),
+      slotKst: result?.slotKst ?? null,
+      message: error instanceof Error ? error.message : null,
+    },
+  });
+
+  const succeeded = status === "stored" || status === "current";
+  await chrome.action.setBadgeBackgroundColor({
+    color: succeeded ? "#138a54" : failed ? "#c92a36" : "#c47d00",
+  });
+  await chrome.action.setBadgeText({
+    text: succeeded ? "OK" : status === "skipped" ? "" : "!",
+  });
+}
+
+async function runCapture(trigger) {
+  try {
+    const result = await captureFromExistingTab();
+    await recordRun(trigger, result, null);
+  } catch (error) {
+    await recordRun(trigger, null, error);
+  }
 }
 
 function scheduleCapture() {
-  const tenMinutes = 10 * 60 * 1000;
-  const nextBoundary = Math.ceil(Date.now() / tenMinutes) * tenMinutes;
+  const interval = CAPTURE_INTERVAL_MINUTES * 60 * 1000;
+  const nextBoundary = Math.ceil(Date.now() / interval) * interval;
   chrome.alarms.create(CAPTURE_ALARM, {
     when: nextBoundary,
-    periodInMinutes: 10,
+    periodInMinutes: CAPTURE_INTERVAL_MINUTES,
   });
 }
 
 chrome.runtime.onInstalled.addListener(() => {
   scheduleCapture();
-  void captureFromExistingTab();
+  void runCapture("installed");
 });
 
 chrome.runtime.onStartup.addListener(() => {
   scheduleCapture();
-  void captureFromExistingTab();
+  void runCapture("browser-startup");
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name !== CAPTURE_ALARM) return;
-  void captureFromExistingTab();
+  void runCapture("alarm");
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status !== "complete" || !isMedalliaTab(tab)) return;
+  void delay(CARD_RETRY_INTERVAL_MS).then(() => runCapture(`tab-updated:${tabId}`));
+});
+
+chrome.tabs.onActivated.addListener(({ tabId }) => {
+  void chrome.tabs
+    .get(tabId)
+    .then((tab) => {
+      if (isMedalliaTab(tab)) return runCapture(`tab-activated:${tabId}`);
+      return undefined;
+    })
+    .catch(() => undefined);
 });
 
 chrome.action.onClicked.addListener(() => {
-  void captureFromExistingTab();
+  scheduleCapture();
+  void runCapture("manual");
 });
+
+scheduleCapture();

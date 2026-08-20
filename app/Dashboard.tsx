@@ -1778,8 +1778,8 @@ export default function Dashboard({
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
     carHandoverScore: 94.0,
-    testDriveScore: 88.6,
-    capturedAt: "2026-08-19T10:00:00+09:00",
+    testDriveScore: 88.5,
+    capturedAt: "2026-08-20T10:00:00+09:00",
   });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
@@ -1843,7 +1843,7 @@ export default function Dashboard({
     };
 
     void syncOneVoice();
-    const timer = window.setInterval(syncOneVoice, 5 * 60_000);
+    const timer = window.setInterval(syncOneVoice, 60_000);
     return () => {
       mounted = false;
       window.clearInterval(timer);
