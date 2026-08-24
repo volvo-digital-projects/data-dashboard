@@ -3596,14 +3596,14 @@ input:focus-visible {
   background:
     radial-gradient(
       circle at 100% 0%,
-      rgba(47, 107, 138, 0.13) 0%,
-      rgba(47, 107, 138, 0.055) 52%,
+      rgba(47, 107, 138, 0.28) 0%,
+      rgba(73, 139, 173, 0.13) 52%,
       transparent 100%
     ),
     linear-gradient(
       to top right,
-      rgba(47, 107, 138, 0.012) 0%,
-      rgba(47, 107, 138, 0.105) 100%
+      rgba(222, 239, 247, 0.16) 0%,
+      rgba(70, 139, 174, 0.22) 100%
     );
 }
 
@@ -3615,14 +3615,14 @@ input:focus-visible {
   background:
     radial-gradient(
       circle at 0% 100%,
-      rgba(91, 143, 171, 0.13) 0%,
-      rgba(91, 143, 171, 0.052) 54%,
+      rgba(197, 74, 62, 0.27) 0%,
+      rgba(205, 102, 91, 0.12) 54%,
       transparent 100%
     ),
     linear-gradient(
       to bottom left,
-      rgba(91, 143, 171, 0.014) 0%,
-      rgba(91, 143, 171, 0.105) 100%
+      rgba(249, 231, 228, 0.14) 0%,
+      rgba(193, 68, 58, 0.2) 100%
     );
 }
 
@@ -3642,13 +3642,13 @@ input:focus-visible {
 .scatter-quadrant.top-right {
   top: 8px;
   right: 10px;
-  color: #245873;
+  color: #1d5877;
 }
 
 .scatter-quadrant.bottom-left {
   bottom: 8px;
   left: 10px;
-  color: #4c748a;
+  color: #9d4a43;
 }
 
 .scatter-quadrant.bottom-right {
