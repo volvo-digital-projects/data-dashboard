@@ -9,6 +9,8 @@ const API_URL = `${ONE_VOICE_CONFIG.siteUrl.replace(/\/$/, "")}/api/one-voice`;
 const CAPTURE_INTERVAL_MINUTES = 2;
 const CARD_RETRY_INTERVAL_MS = 2_500;
 const CARD_RETRY_ATTEMPTS = 12;
+const LAST_MEDALLIA_URL_KEY = "lastMedalliaUrl";
+const AUTO_OPENED_SLOT_KEY = "autoOpenedSlot";
 
 function extraHolidays() {
   return Array.isArray(ONE_VOICE_CONFIG.extraHolidays)
@@ -47,6 +49,51 @@ async function injectAndCollect(tabId) {
 
 function isMedalliaTab(tab) {
   return typeof tab?.url === "string" && tab.url.startsWith("https://volvo.medallia.eu/");
+}
+
+function safeMedalliaUrl(value) {
+  try {
+    const url = new URL(value);
+    if (url.origin !== "https://volvo.medallia.eu") return null;
+    for (const key of [...url.searchParams.keys()]) {
+      if (/token|session|auth/i.test(key)) url.searchParams.delete(key);
+    }
+    return url.toString();
+  } catch {
+    return null;
+  }
+}
+
+async function rememberMedalliaUrl(tabs) {
+  const rememberedUrl = tabs
+    .map((tab) => safeMedalliaUrl(tab.url))
+    .find(Boolean);
+  if (!rememberedUrl) return null;
+  await chrome.storage.local.set({ [LAST_MEDALLIA_URL_KEY]: rememberedUrl });
+  return rememberedUrl;
+}
+
+async function openRememberedMedalliaTab(slotKst) {
+  const state = await chrome.storage.local.get({
+    [LAST_MEDALLIA_URL_KEY]: "",
+    [AUTO_OPENED_SLOT_KEY]: "",
+  });
+  const rememberedUrl = safeMedalliaUrl(state[LAST_MEDALLIA_URL_KEY]);
+  if (!rememberedUrl || state[AUTO_OPENED_SLOT_KEY] === slotKst) return null;
+
+  await chrome.storage.local.set({ [AUTO_OPENED_SLOT_KEY]: slotKst });
+  let tab = null;
+  try {
+    tab = await chrome.tabs.create({ url: rememberedUrl, active: false });
+    await waitForTabComplete(tab.id);
+    await delay(CARD_RETRY_INTERVAL_MS);
+    return tab;
+  } catch {
+    if (!tab?.id) {
+      await chrome.storage.local.remove(AUTO_OPENED_SLOT_KEY);
+    }
+    return tab;
+  }
 }
 
 function delay(milliseconds) {
@@ -112,7 +159,7 @@ async function storeScores(slotKst, scores) {
     testDriveScore: scores.testDriveScore,
     carHandoverScore: scores.carHandoverScore,
   });
-  await chrome.storage.local.remove("lastReloadSlot");
+  await chrome.storage.local.remove(["lastReloadSlot", AUTO_OPENED_SLOT_KEY]);
 }
 
 async function captureFromExistingTab() {
@@ -121,17 +168,27 @@ async function captureFromExistingTab() {
   if (!window.allowed) return { status: "skipped", reason: window.reason };
 
   const slotKst = dailySlotKst(now);
+  const tabs = await chrome.tabs.query({ url: MEDALLIA_PATTERN });
+  let candidates = tabs
+    .filter((tab) => typeof tab.id === "number")
+    .sort((left, right) => Number(right.active) - Number(left.active));
+  if (candidates.length) await rememberMedalliaUrl(candidates);
+
   const current = await apiRequest();
   if (current.snapshot?.slotKst === slotKst) {
     return { status: "current", slotKst };
   }
 
-  const tabs = await chrome.tabs.query({ url: MEDALLIA_PATTERN });
-  const candidates = tabs
-    .filter((tab) => typeof tab.id === "number")
-    .sort((left, right) => Number(right.active) - Number(left.active));
+  let autoCreatedTabId = null;
   if (!candidates.length) {
-    return { status: "missing-tab", slotKst };
+    const autoCreatedTab = await openRememberedMedalliaTab(slotKst);
+    if (typeof autoCreatedTab?.id === "number") {
+      autoCreatedTabId = autoCreatedTab.id;
+      candidates = [autoCreatedTab];
+    } else {
+      await markMissing(slotKst);
+      return { status: "missing-tab", slotKst };
+    }
   }
 
   for (const tab of candidates) {
@@ -144,6 +201,9 @@ async function captureFromExistingTab() {
 
     if (result?.scores) {
       await storeScores(slotKst, result.scores);
+      if (tab.id === autoCreatedTabId) {
+        await chrome.tabs.remove(autoCreatedTabId).catch(() => undefined);
+      }
       return { status: "stored", slotKst, scores: result.scores };
     }
   }
@@ -159,12 +219,25 @@ async function captureFromExistingTab() {
     }
     if (refreshed?.scores) {
       await storeScores(slotKst, refreshed.scores);
+      if (autoCreatedTabId) {
+        await chrome.tabs.remove(autoCreatedTabId).catch(() => undefined);
+      }
       return { status: "stored", slotKst, scores: refreshed.scores };
+    }
+    if (autoCreatedTabId) {
+      await chrome.tabs
+        .update(autoCreatedTabId, { active: true })
+        .catch(() => undefined);
     }
     await markMissing(slotKst);
     return { status: "cards-unavailable", slotKst };
   }
 
+  if (autoCreatedTabId) {
+    await chrome.tabs
+      .update(autoCreatedTabId, { active: true })
+      .catch(() => undefined);
+  }
   await markMissing(slotKst);
   return { status: "cards-unavailable", slotKst };
 }

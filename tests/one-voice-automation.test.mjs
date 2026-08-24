@@ -43,6 +43,20 @@ test("refreshes the existing ONE VOICE tab and immediately retries the cards", a
   assert.match(background, /chrome\.tabs\.onActivated\.addListener/);
   assert.match(background, /periodInMinutes: CAPTURE_INTERVAL_MINUTES/);
   assert.match(background, /await recordRun\(trigger, result, null\)/);
+  assert.match(background, /LAST_MEDALLIA_URL_KEY = "lastMedalliaUrl"/);
+  assert.match(
+    background,
+    /chrome\.tabs\.create\(\{ url: rememberedUrl, active: false \}\)/,
+  );
+  assert.match(
+    background,
+    /chrome\.tabs\.remove\(autoCreatedTabId\)/,
+  );
+  assert.match(
+    background,
+    /chrome\.tabs[\s\S]*?\.update\(autoCreatedTabId, \{ active: true \}\)/,
+  );
+  assert.match(background, /await markMissing\(slotKst\);[\s\S]*?status: "missing-tab"/);
   assert.match(workflow, /cron: "23 1 \* \* 1-5"/);
   assert.match(
     workflow,
