@@ -6942,7 +6942,8 @@ button.quarter-score-row:disabled {
   white-space: nowrap;
 }
 
-.score-tier-heading .voc-component-chip b {
+.score-tier-heading .voc-component-chip b,
+.score-tier-heading .cx-component-chip b {
   color: var(--navy);
   font-family: var(--font-latin);
   font-size: 9px;
