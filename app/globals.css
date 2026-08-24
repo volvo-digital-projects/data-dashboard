@@ -3354,8 +3354,10 @@ input:focus-visible {
 
 .analysis-tabs button.active {
   color: white;
-  background: linear-gradient(135deg, #173f5f, #102a43);
-  box-shadow: 0 7px 18px rgba(16, 42, 67, 0.2);
+  background: linear-gradient(135deg, #4f7f99, #38657e);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 5px 14px rgba(32, 78, 103, 0.16);
 }
 
 .analysis-tabs button span {
@@ -4972,9 +4974,10 @@ input:focus-visible,
 .combat-card {
   min-height: 252px;
   padding: 20px;
+  border-color: rgba(37, 70, 84, 0.18);
   background:
-    radial-gradient(circle at 102% 110%, rgba(104, 164, 192, 0.2), transparent 19rem),
-    linear-gradient(142deg, #173f5f 0%, #102a43 62%, #0c2337 100%);
+    radial-gradient(circle at 74% 42%, rgba(194, 222, 234, 0.14), transparent 15rem),
+    linear-gradient(142deg, #3b5d6d 0%, #2f4d5c 62%, #294553 100%);
 }
 
 .combat-card::after {
@@ -8813,6 +8816,7 @@ body {
     isolation: isolate;
     overflow: hidden;
     border: 1px solid rgba(104, 167, 198, 0.22);
+    border-bottom: 0;
     border-radius: 0;
     color: #ffffff;
     background:
@@ -8859,11 +8863,11 @@ body {
     font-weight: 850;
     line-height: 1;
     letter-spacing: 0.16em;
-    content: "Data Dashboard Status";
+    content: "DATA DASHBOARD STATUS";
   }
 
   .dashboard-identity-header.analysis-header .identity-title h1::before {
-    content: "Data Dashboard Analysis";
+    content: "DATA DASHBOARD ANALYSIS";
   }
 
   .dashboard-identity-header .update-status {

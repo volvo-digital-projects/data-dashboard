@@ -1320,6 +1320,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.analysis-tabs button\.active\s*\{[^}]*background: linear-gradient\(135deg, #4f7f99, #38657e\)[^}]*box-shadow:/,
+  );
+  assert.match(
+    css,
     /\.analysis-context-item\s*\{[^}]*grid-template-rows: auto auto[^}]*align-content: center[^}]*justify-items: center/,
   );
   assert.match(
@@ -1536,15 +1540,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /--header-title-font-size: 32px/);
   assert.match(
     css,
-    /\/\* ES90-inspired shared command banner preview \*\/[\s\S]*?\.dashboard-identity-header\s*\{[^}]*linear-gradient\(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%\)/,
+    /\/\* ES90-inspired shared command banner preview \*\/[\s\S]*?\.dashboard-identity-header\s*\{[^}]*border-bottom: 0[^}]*linear-gradient\(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%\)/,
   );
   assert.match(
     css,
-    /\.dashboard-identity-header \.identity-title h1::before\s*\{[^}]*color: #ff8b52[^}]*content: "Data Dashboard Status"/,
+    /\.dashboard-identity-header \.identity-title h1::before\s*\{[^}]*color: #ff8b52[^}]*content: "DATA DASHBOARD STATUS"/,
   );
   assert.match(
     css,
-    /\.dashboard-identity-header\.analysis-header \.identity-title h1::before\s*\{[^}]*content: "Data Dashboard Analysis"/,
+    /\.dashboard-identity-header\.analysis-header \.identity-title h1::before\s*\{[^}]*content: "DATA DASHBOARD ANALYSIS"/,
   );
   assert.match(
     css,
@@ -1662,7 +1666,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.identity-icon--size::before\s*\{[\s\S]*?border-top: 1px solid currentColor/,
   );
-  assert.match(css, /\.combat-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px/);
+  assert.match(
+    css,
+    /\.combat-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px[\s\S]*?linear-gradient\(142deg, #3b5d6d 0%, #2f4d5c 62%, #294553 100%\)/,
+  );
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px/);
   assert.doesNotMatch(css, /\.metric-card\s*\{[^}]*animation:/);
   assert.doesNotMatch(css, /@keyframes metric-enter/);
