@@ -7141,20 +7141,6 @@ button.quarter-score-row:disabled {
   padding: 7px 12px 5px;
 }
 
-.voc-consultation-chart-head {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.voc-consultation-chart-head > strong {
-  color: #143c58;
-  font-size: 9px;
-  font-weight: 800;
-}
-
 .voc-consultation-legend {
   min-height: 15px;
   min-width: 0;

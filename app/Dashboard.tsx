@@ -982,9 +982,6 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       </header>
 
       <div className="voc-consultation-chart-wrap">
-        <div className="voc-consultation-chart-head">
-          <strong>만족도</strong>
-        </div>
         <div
           className="voc-consultation-chart"
           role="img"
