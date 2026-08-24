@@ -238,7 +238,7 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
 const vocComponents = [
   { code: "01", label: "VOC종합만족도", weight: "60%" },
   { code: "02", label: "VOC첫인상", weight: "20%" },
-  { code: "03", label: "VOC딜링", weight: "10%" },
+  { code: "03", label: "VOC태블릿", weight: "10%" },
   { code: "04", label: "VOC해피콜", weight: "10%" },
 ];
 
