@@ -6905,7 +6905,7 @@ button.quarter-score-row:disabled {
 .weekly-score-layout > .trend-wrap.compact .trend-canvas {
   flex: 0 0 auto;
   display: grid;
-  grid-template-rows: auto 150px auto;
+  grid-template-rows: 150px auto auto;
   align-content: start;
 }
 

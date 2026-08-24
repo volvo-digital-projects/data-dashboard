@@ -1206,14 +1206,6 @@ function WeeklyTrend({
         aria-label="W01부터 시작하는 52주 성과 그래프"
       >
         <div className="trend-canvas">
-          <div className="quarter-band" aria-hidden="true">
-            {quarterLabels.map((quarter) => (
-              <span key={quarter.label}>
-                <strong>{quarter.label}</strong>
-                <small>{quarter.range}</small>
-              </span>
-            ))}
-          </div>
           <svg
             className="trend-chart"
             viewBox={`0 0 ${chartWidth} ${chartHeight}`}
@@ -1552,6 +1544,14 @@ function WeeklyTrend({
                 </span>
               );
             })}
+          </div>
+          <div className="quarter-band" aria-hidden="true">
+            {quarterLabels.map((quarter) => (
+              <span key={quarter.label}>
+                <strong>{quarter.label}</strong>
+                <small>{quarter.range}</small>
+              </span>
+            ))}
           </div>
         </div>
       </div>
