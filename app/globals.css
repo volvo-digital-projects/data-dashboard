@@ -6898,18 +6898,21 @@ button.quarter-score-row:disabled {
 }
 
 .weekly-score-layout > .trend-wrap.compact .trend-scroll {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
 }
 
 .weekly-score-layout > .trend-wrap.compact .trend-canvas {
-  flex: 1;
+  flex: 0 0 auto;
   display: grid;
-  grid-template-rows: auto minmax(150px, 1fr) auto;
+  grid-template-rows: auto 150px auto;
+  align-content: start;
 }
 
 .weekly-score-layout > .trend-wrap.compact .trend-chart {
-  height: 100%;
+  height: 150px;
+  min-height: 150px;
+  max-height: 150px;
 }
 
 .weekly-score-placeholder {
