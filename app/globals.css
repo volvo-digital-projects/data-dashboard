@@ -5514,6 +5514,15 @@ input:focus-visible,
   vector-effect: non-scaling-stroke;
 }
 
+.quarter-boundary-line {
+  stroke: #9fadb6;
+  stroke-width: 0.75;
+  stroke-dasharray: 2 2.5;
+  stroke-linecap: round;
+  opacity: 0.92;
+  vector-effect: non-scaling-stroke;
+}
+
 .week-tick.entered {
   stroke: #c9d3d9;
   stroke-width: 0.65;

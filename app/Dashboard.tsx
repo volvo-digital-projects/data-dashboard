@@ -1342,7 +1342,7 @@ function WeeklyTrend({
                 y1={chartY(18)}
                 y2={chartY(170)}
                 data-week-boundary={completedWeeks}
-                className="week-grid"
+                className="week-grid quarter-boundary-line"
               />
             ))}
             {evaluationProgressWeek < 39 && (
