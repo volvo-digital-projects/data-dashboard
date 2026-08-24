@@ -6879,32 +6879,36 @@ button.quarter-score-row:disabled {
   white-space: nowrap;
 }
 
-.voc-score-heading {
+.voc-score-heading,
+.cx-score-heading {
+  --score-component-chip-width: 142px;
   align-items: center;
 }
 
-.cx-score-heading {
-  align-items: center;
+.voc-score-heading .score-tier-heading-title,
+.cx-score-heading .score-tier-heading-title {
+  width: 72px;
+  flex: 0 0 72px;
 }
 
 .voc-component-tabs {
-  width: min(520px, 43vw);
-  min-width: 440px;
+  width: max-content;
+  min-width: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, var(--score-component-chip-width));
   align-items: stretch;
   gap: 4px;
-  margin-left: 8px;
+  margin-left: 0;
 }
 
 .cx-component-tabs {
-  width: min(720px, 59vw);
-  min-width: 640px;
+  width: max-content;
+  min-width: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(5, var(--score-component-chip-width));
   align-items: stretch;
   gap: 4px;
-  margin-left: 8px;
+  margin-left: 0;
 }
 
 .score-tier-heading .voc-component-chip,
