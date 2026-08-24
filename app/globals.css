@@ -4126,7 +4126,7 @@ input:focus-visible {
 .analysis-ranking-list > div > b,
 .analysis-ranking-list > div > strong {
   font-family: var(--font-latin);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
   text-align: right;
   font-variant-numeric: tabular-nums;
@@ -4142,7 +4142,7 @@ input:focus-visible {
 
 .analysis-ranking-list > div > strong {
   color: var(--navy);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .analysis-ranking-card footer {

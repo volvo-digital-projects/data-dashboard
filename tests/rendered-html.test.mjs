@@ -1783,6 +1783,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.analysis-ranking-list > div > b,[\s\S]*?\.analysis-ranking-list > div > strong\s*\{[^}]*font-size: 11px/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-list > div > strong\s*\{[^}]*font-size: 12px/,
+  );
+  assert.match(
+    css,
     /\.analysis-ranking-list > div\.hovered:not\(\.selected\),[\s\S]*?\.analysis-ranking-list > div:not\(\.selected\):hover\s*\{[^}]*border-color: rgba\(74, 147, 143, 0\.32\)[^}]*background: #e8f4f3[^}]*inset 3px 0 0 #4a938f/,
   );
   assert.match(
