@@ -6883,6 +6883,10 @@ button.quarter-score-row:disabled {
   align-items: center;
 }
 
+.cx-score-heading {
+  align-items: center;
+}
+
 .voc-component-tabs {
   width: min(520px, 43vw);
   min-width: 440px;
@@ -6893,7 +6897,18 @@ button.quarter-score-row:disabled {
   margin-left: 8px;
 }
 
-.score-tier-heading .voc-component-chip {
+.cx-component-tabs {
+  width: min(720px, 59vw);
+  min-width: 640px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.score-tier-heading .voc-component-chip,
+.score-tier-heading .cx-component-chip {
   min-width: 0;
   min-height: 22px;
   display: flex;
@@ -6919,7 +6934,8 @@ button.quarter-score-row:disabled {
   font-weight: 800;
 }
 
-.score-tier-heading .voc-component-chip span {
+.score-tier-heading .voc-component-chip span,
+.score-tier-heading .cx-component-chip span {
   overflow: hidden;
   color: #385468;
   font-size: 9px;
@@ -8228,7 +8244,12 @@ button.quarter-score-row:disabled {
     flex-wrap: wrap;
   }
 
-  .voc-component-tabs {
+  .cx-score-heading {
+    flex-wrap: wrap;
+  }
+
+  .voc-component-tabs,
+  .cx-component-tabs {
     width: 100%;
     min-width: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));

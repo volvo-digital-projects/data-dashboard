@@ -242,6 +242,14 @@ const vocComponents = [
   { code: "04", label: "VOC해피콜", weight: "10%" },
 ];
 
+const cxComponents = [
+  "신차출고 만족도(결과)",
+  "시승 만족도(결과)",
+  "긴급경보 처리여부(결과)",
+  "조치 계획(결과)",
+  "헤이볼보 앱 가입율(결과)",
+];
+
 const quarterValueOf = (
   item: Showroom,
   metric: MetricKey,
@@ -2532,8 +2540,20 @@ export default function Dashboard({
                 trendMetric === "cx" ? "active" : ""
               }`}
             >
-              <header className="score-tier-heading">
-                <strong>CX Index</strong>
+              <header className="score-tier-heading cx-score-heading">
+                <div className="score-tier-heading-title">
+                  <strong>CX Index</strong>
+                </div>
+                <div
+                  className="cx-component-tabs"
+                  aria-label="CX Index 평가 구성 항목"
+                >
+                  {cxComponents.map((component) => (
+                    <span className="cx-component-chip" key={component}>
+                      <span>{component}</span>
+                    </span>
+                  ))}
+                </div>
               </header>
               <div className="weekly-score-layout">
                 <WeeklyTrend
