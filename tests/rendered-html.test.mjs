@@ -1796,6 +1796,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.voc-consultation-year\s*\{[^}]*display: flex;[^}]*flex-direction: column;[^}]*align-items: center;/,
+  );
+  assert.match(
+    css,
+    /\.voc-consultation-pair\s*\{[^}]*width: 45px;[^}]*flex: 1 1 auto;/,
+  );
+  assert.match(
+    css,
     /\.analysis-ranking-list > div\.hovered:not\(\.selected\),[\s\S]*?\.analysis-ranking-list > div:not\(\.selected\):hover\s*\{[^}]*border-color: rgba\(74, 147, 143, 0\.32\)[^}]*background: #e8f4f3[^}]*inset 3px 0 0 #4a938f/,
   );
   assert.match(
