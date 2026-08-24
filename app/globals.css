@@ -8955,6 +8955,10 @@ body {
     background: transparent;
   }
 
+  .dashboard-identity-header .identity-profile {
+    border: 0;
+  }
+
   .dashboard-identity-header .identity-analysis-entry:hover,
   .dashboard-identity-header .identity-profile:hover,
   .dashboard-identity-header .analysis-context-item:hover,
