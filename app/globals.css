@@ -3615,14 +3615,14 @@ input:focus-visible {
   background:
     radial-gradient(
       circle at 0% 100%,
-      rgba(194, 70, 62, 0.12) 0%,
-      rgba(194, 70, 62, 0.048) 54%,
+      rgba(91, 143, 171, 0.13) 0%,
+      rgba(91, 143, 171, 0.052) 54%,
       transparent 100%
     ),
     linear-gradient(
       to bottom left,
-      rgba(194, 70, 62, 0.01) 0%,
-      rgba(194, 70, 62, 0.1) 100%
+      rgba(91, 143, 171, 0.014) 0%,
+      rgba(91, 143, 171, 0.105) 100%
     );
 }
 
@@ -3648,7 +3648,7 @@ input:focus-visible {
 .scatter-quadrant.bottom-left {
   bottom: 8px;
   left: 10px;
-  color: #963f3a;
+  color: #4c748a;
 }
 
 .scatter-quadrant.bottom-right {
