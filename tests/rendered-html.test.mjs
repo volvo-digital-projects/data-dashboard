@@ -422,6 +422,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     regionVisibleHtml,
     /<article class="analysis-ranking-card"><header class="analysis-card-heading"><div><h2>/,
   );
+  assert.match(regionVisibleHtml, /<h2>수도권 내 순위<\/h2>/);
   const analysisContextHtml = regionVisibleHtml.match(
     /<div class="analysis-context"[^>]*>([\s\S]*?)<\/div><\/header>/,
   )?.[1];

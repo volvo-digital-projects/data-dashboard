@@ -587,6 +587,8 @@ export default function CompetitiveAnalysis({
       ? "전국 전시장 내 순위"
       : view === "size"
         ? `${selected.size} 사이즈 내 순위`
+        : view === "region"
+          ? `${selected.region} 내 순위`
         : `${groupLabel} 순위`;
   const scatterStyle = {
     "--avg-x": `${clamp(((groupHappyAverage - 65) / 35) * 100)}%`,
