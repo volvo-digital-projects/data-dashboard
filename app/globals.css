@@ -7383,7 +7383,7 @@ button.quarter-score-row:disabled {
 
 .one-voice-contribution-heading span,
 .one-voice-contribution-heading small {
-  color: #71857a;
+  color: var(--muted);
   font-size: 8px;
   font-weight: 600;
   white-space: nowrap;
@@ -7391,11 +7391,11 @@ button.quarter-score-row:disabled {
 
 .one-voice-contribution-heading small {
   padding-bottom: 1px;
-  color: #3f795b;
+  color: var(--muted);
 }
 
 .one-voice-contribution-heading .one-voice-reference-date {
-  color: #3f795b;
+  color: var(--muted);
   font-family: var(--font-korean);
   font-size: 8px;
   font-weight: 700;
