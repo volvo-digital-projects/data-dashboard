@@ -221,7 +221,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /2021년 전국 평균 94\.7점[\s\S]*?2022년 전국 평균 93\.9점[\s\S]*?2023년 전국 평균 95\.9점[\s\S]*?2024년 전국 평균 95\.6점[\s\S]*?2025년 전국 평균 95\.0점/,
   );
   assert.match(visibleHtml, /전국 평균[\s\S]*?볼보 강남대치/);
-  assert.match(visibleHtml, /전국 5개년 평균 95\.0/);
+  assert.match(visibleHtml, /볼보 5개년 평균 95\.0/);
   assert.doesNotMatch(visibleHtml, /5개년 평균 94\.2/);
   assert.doesNotMatch(html, /class="v3s-history-summary"/);
   assert.match(visibleHtml, /Volvo Sales Skill Simulation 평가\(VCK\)/);

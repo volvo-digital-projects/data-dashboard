@@ -765,7 +765,7 @@ function V3SPerformance({
             role="img"
             aria-label={`${displayShowroomName(
               showroom.showroom,
-            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 평균 비교와 전국 5개년 평균`}
+            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 평균 비교와 볼보 5개년 평균`}
           >
             <div className="v3s-history-bar-stage" aria-hidden="true">
               <span
@@ -775,7 +775,7 @@ function V3SPerformance({
                 }}
               >
                 <b>
-                  전국 5개년 평균 {displayNumber(nationalV3sFiveYearAverage)}
+                  볼보 5개년 평균 {displayNumber(nationalV3sFiveYearAverage)}
                 </b>
                 <i />
               </span>
