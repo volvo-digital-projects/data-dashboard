@@ -525,6 +525,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="analysis-ranking-list">([\s\S]*?)<\/div><footer>/,
   )?.[1];
   assert.ok(showroomRankingHtml);
+  assert.match(showroomHtml, /<h2>전국 전시장 내 순위<\/h2>/);
   assert.deepEqual(
     [
       ...showroomRankingHtml.matchAll(

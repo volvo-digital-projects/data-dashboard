@@ -582,6 +582,8 @@ export default function CompetitiveAnalysis({
         : view === "size"
           ? `${selected.size} 사이즈`
           : "전국 39개 전시장";
+  const rankingTitle =
+    view === "showroom" ? "전국 전시장 내 순위" : `${groupLabel} 순위`;
   const scatterStyle = {
     "--avg-x": `${clamp(((groupHappyAverage - 65) / 35) * 100)}%`,
     "--avg-y": `${clamp(((groupVocAverage - 75) / 25) * 100)}%`,
@@ -895,7 +897,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-ranking-card">
           <header className="analysis-card-heading">
             <div>
-              <h2>{groupLabel} 순위</h2>
+              <h2>{rankingTitle}</h2>
             </div>
             <strong>{groupItems.length}개점</strong>
           </header>
