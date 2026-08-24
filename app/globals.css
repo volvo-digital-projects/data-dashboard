@@ -7135,7 +7135,7 @@ button.quarter-score-row:disabled {
 .voc-consultation-chart-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 6px;
   margin-bottom: 4px;
 }
@@ -7147,14 +7147,17 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-legend {
+  min-height: 15px;
   min-width: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   overflow: hidden;
-  color: #7b8d9b;
+  padding-top: 3px;
+  color: var(--muted);
   font-size: 8px;
-  font-weight: 700;
+  line-height: 1;
   white-space: nowrap;
 }
 

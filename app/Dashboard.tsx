@@ -984,14 +984,6 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       <div className="voc-consultation-chart-wrap">
         <div className="voc-consultation-chart-head">
           <strong>만족도</strong>
-          <div className="voc-consultation-legend" aria-hidden="true">
-            <span>
-              <i className="national" /> 전국 평균
-            </span>
-            <span>
-              <i className="showroom" /> {displayShowroomName(showroom.showroom)}
-            </span>
-          </div>
         </div>
         <div
           className="voc-consultation-chart"
@@ -1027,6 +1019,15 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="voc-consultation-legend" aria-hidden="true">
+          <span>
+            <i className="national" /> 전국 평균
+          </span>
+          <span>
+            <i className="showroom" /> {displayShowroomName(showroom.showroom)}
+          </span>
         </div>
 
         <div className="voc-response-rate-panel">
