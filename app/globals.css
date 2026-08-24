@@ -6881,7 +6881,6 @@ button.quarter-score-row:disabled {
 
 .voc-score-heading,
 .cx-score-heading {
-  --score-component-chip-width: 142px;
   align-items: center;
 }
 
@@ -6891,21 +6890,14 @@ button.quarter-score-row:disabled {
   flex: 0 0 72px;
 }
 
-.voc-component-tabs {
-  width: max-content;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: repeat(4, var(--score-component-chip-width));
-  align-items: stretch;
-  gap: 4px;
-  margin-left: 0;
-}
-
+.voc-component-tabs,
 .cx-component-tabs {
-  width: max-content;
+  width: 100%;
+  max-width: 720px;
   min-width: 0;
+  flex: 1 1 720px;
   display: grid;
-  grid-template-columns: repeat(5, var(--score-component-chip-width));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: stretch;
   gap: 4px;
   margin-left: 0;
