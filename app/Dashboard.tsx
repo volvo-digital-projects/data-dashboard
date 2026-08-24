@@ -2518,7 +2518,6 @@ export default function Dashboard({
             >
               <header className="score-tier-heading">
                 <strong>V3S</strong>
-                <span>{metricDescriptions.v3s}</span>
               </header>
               <V3SPerformance showroom={selected} compact />
             </section>
@@ -2531,7 +2530,6 @@ export default function Dashboard({
               <header className="score-tier-heading voc-score-heading">
                 <div className="score-tier-heading-title">
                   <strong>VOC</strong>
-                  <span>{metricDescriptions.voc}</span>
                 </div>
                 <div
                   className="voc-component-tabs"
@@ -2565,7 +2563,6 @@ export default function Dashboard({
             >
               <header className="score-tier-heading">
                 <strong>CX Index</strong>
-                <span>{metricDescriptions.cx}</span>
               </header>
               <div className="weekly-score-layout">
                 <WeeklyTrend
