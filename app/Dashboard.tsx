@@ -12,6 +12,7 @@ import {
 import dashboardJson from "./data/showrooms.json";
 import v3sHistoryJson from "./data/v3s-history.json";
 import vocConsultationJson from "./data/voc-consultation.json";
+import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
 import { buildShowroomInsights } from "./showroom-insights";
 
@@ -135,6 +136,13 @@ type VocConsultationData = {
   showrooms: Record<string, VocConsultationSeries>;
 };
 
+type VocSentData = {
+  updatedThrough: string;
+  years: number[];
+  national: number[];
+  showrooms: Record<string, number[]>;
+};
+
 const dashboard = dashboardJson as DashboardData;
 const v3sHistoryByCdsid = v3sHistoryJson as Record<
   string,
@@ -142,6 +150,7 @@ const v3sHistoryByCdsid = v3sHistoryJson as Record<
 >;
 const weeklyDashboard = weeklyJson as WeeklyData;
 const vocConsultation = vocConsultationJson as unknown as VocConsultationData;
+const vocSent = vocSentJson as VocSentData;
 const nationalV3sQuarterAverages = [
   {
     year: 2021,
@@ -859,6 +868,8 @@ function V3SPerformance({
 function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
   const national = vocConsultation.national;
   const selected = vocConsultation.showrooms[showroom.cdsid] ?? national;
+  const nationalSent = vocSent.national;
+  const selectedSent = vocSent.showrooms[showroom.cdsid] ?? nationalSent;
   const cumulativeAverage = selected[0];
   const nationalCumulativeAverage = national[0];
   const cumulativeDelta =
@@ -873,12 +884,54 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
         : cumulativeDelta < -0.049
           ? "below"
           : "neutral";
-  const yearly = vocConsultation.years.map((year, index) => ({
-    year,
-    showroomAverage: selected[2 + index * 2] as number | null,
-    showroomResponses: selected[3 + index * 2] as number,
-    nationalAverage: national[2 + index * 2] as number | null,
-  }));
+  const yearly = vocConsultation.years.map((year, index) => {
+    const showroomResponses = selected[3 + index * 2] as number;
+    const nationalResponses = national[3 + index * 2] as number;
+    const showroomSent = selectedSent[index] ?? 0;
+    const nationalSentCount = nationalSent[index] ?? 0;
+
+    return {
+      year,
+      showroomAverage: selected[2 + index * 2] as number | null,
+      showroomResponses,
+      nationalAverage: national[2 + index * 2] as number | null,
+      nationalResponses,
+      showroomSent,
+      nationalSent: nationalSentCount,
+      showroomRate:
+        showroomSent > 0 ? (showroomResponses / showroomSent) * 100 : null,
+      nationalRate:
+        nationalSentCount > 0
+          ? (nationalResponses / nationalSentCount) * 100
+          : null,
+    };
+  });
+  const cumulativeResponses = yearly.reduce(
+    (sum, item) => sum + item.showroomResponses,
+    0,
+  );
+  const cumulativeSent = yearly.reduce(
+    (sum, item) => sum + item.showroomSent,
+    0,
+  );
+  const nationalCumulativeResponses = yearly.reduce(
+    (sum, item) => sum + item.nationalResponses,
+    0,
+  );
+  const nationalCumulativeSent = yearly.reduce(
+    (sum, item) => sum + item.nationalSent,
+    0,
+  );
+  const cumulativeResponseRate =
+    cumulativeSent > 0 ? (cumulativeResponses / cumulativeSent) * 100 : null;
+  const nationalCumulativeResponseRate =
+    nationalCumulativeSent > 0
+      ? (nationalCumulativeResponses / nationalCumulativeSent) * 100
+      : null;
+  const cumulativeRateDelta =
+    cumulativeResponseRate === null || nationalCumulativeResponseRate === null
+      ? null
+      : cumulativeResponseRate - nationalCumulativeResponseRate;
   const scaleHeight = (value: number | null) =>
     value === null ? 0 : Math.min(100, Math.max(0, ((value - 8) / 2) * 100));
   const responseFormatter = new Intl.NumberFormat("ko-KR");
@@ -887,7 +940,11 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       (item) =>
         `${item.year}년 전국 평균 ${displayNumber(item.nationalAverage)}점, ${displayShowroomName(
           showroom.showroom,
-        )} ${displayNumber(item.showroomAverage)}점`,
+        )} ${displayNumber(item.showroomAverage)}점, 회신 ${responseFormatter.format(
+          item.showroomResponses,
+        )}건, 발송 ${responseFormatter.format(item.showroomSent)}건, 회신율 ${
+          item.showroomRate === null ? "산출 불가" : `${item.showroomRate.toFixed(1)}%`
+        }`,
     )
     .join(", ");
 
@@ -899,6 +956,17 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       <header className="voc-consultation-heading">
         <div>
           <strong>상담 만족도 4개년 추이</strong>
+          <span className="voc-consultation-response-summary">
+            회신율 <b>{cumulativeResponseRate?.toFixed(1) ?? "—"}%</b>
+            <em>
+              전국 {nationalCumulativeResponseRate?.toFixed(1) ?? "—"}% ·{" "}
+              {cumulativeRateDelta === null
+                ? "—"
+                : `${cumulativeRateDelta >= 0 ? "▲" : "▼"}${Math.abs(
+                    cumulativeRateDelta,
+                  ).toFixed(1)}%p`}
+            </em>
+          </span>
         </div>
         <div className="voc-consultation-cumulative">
           <small>누적</small>
@@ -915,7 +983,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
 
       <div className="voc-consultation-chart-wrap">
         <div className="voc-consultation-chart-head">
-          <strong>4개년 추이</strong>
+          <strong>만족도</strong>
           <div className="voc-consultation-legend" aria-hidden="true">
             <span>
               <i className="national" /> 전국 평균
@@ -954,17 +1022,54 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
                 </div>
                 <small>
                   {item.year}
-                  <em>
-                    {item.year === 2026 ? "YTD · " : ""}
-                    {responseFormatter.format(item.showroomResponses)}회신
-                  </em>
+                  {item.year === 2026 && <em>YTD</em>}
                 </small>
               </div>
             ))}
           </div>
         </div>
-      </div>
 
+        <div className="voc-response-rate-panel">
+          <div className="voc-response-rate-heading">
+            <strong>연도별 회신율</strong>
+            <span>회신 / 발송</span>
+          </div>
+          <div className="voc-response-rate-grid">
+            {yearly.map((item) => {
+              const rateDelta =
+                item.showroomRate === null || item.nationalRate === null
+                  ? null
+                  : item.showroomRate - item.nationalRate;
+              const rateTone =
+                rateDelta === null
+                  ? "neutral"
+                  : rateDelta > 0.049
+                    ? "above"
+                    : rateDelta < -0.049
+                      ? "below"
+                      : "neutral";
+
+              return (
+                <div className="voc-response-rate-cell" key={item.year}>
+                  <small>{item.year}</small>
+                  <strong>
+                    {item.showroomRate === null
+                      ? "—"
+                      : `${item.showroomRate.toFixed(1)}%`}
+                  </strong>
+                  <span>
+                    {responseFormatter.format(item.showroomResponses)} /{" "}
+                    {responseFormatter.format(item.showroomSent)}
+                  </span>
+                  <em className={rateTone}>
+                    전국 {item.nationalRate?.toFixed(1) ?? "—"}%
+                  </em>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </aside>
   );
 }

@@ -7063,6 +7063,27 @@ button.quarter-score-row:disabled {
   white-space: nowrap;
 }
 
+.voc-consultation-heading .voc-consultation-response-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: #647b8b;
+}
+
+.voc-consultation-response-summary b {
+  color: #245f7d;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.voc-consultation-response-summary em {
+  color: #7b8d9b;
+  font-size: 7.5px;
+  font-style: normal;
+  font-weight: 700;
+}
+
 .voc-consultation-cumulative {
   display: inline-flex;
   align-items: baseline;
@@ -7106,6 +7127,8 @@ button.quarter-score-row:disabled {
 .voc-consultation-chart-wrap {
   min-height: 0;
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 7px 12px 5px;
 }
 
@@ -7161,7 +7184,7 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-chart {
   position: relative;
-  height: 94px;
+  height: 86px;
   padding: 8px 2px 18px 22px;
   border-bottom: 1px solid rgba(47, 107, 138, 0.16);
   border-radius: 8px 8px 3px 3px;
@@ -7185,7 +7208,7 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-axis.middle {
-  top: 39px;
+  top: 35px;
 }
 
 .voc-consultation-axis.base {
@@ -7193,7 +7216,7 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-bars {
-  height: 68px;
+  height: 60px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: end;
@@ -7204,7 +7227,7 @@ button.quarter-score-row:disabled {
   min-width: 0;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 16px;
+  grid-template-rows: 1fr 14px;
   align-items: end;
   gap: 2px;
 }
@@ -7296,6 +7319,96 @@ button.quarter-score-row:disabled {
   font-size: 7px;
   font-style: normal;
   font-weight: 650;
+}
+
+.voc-response-rate-panel {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(47, 107, 138, 0.13);
+}
+
+.voc-response-rate-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.voc-response-rate-heading strong {
+  color: #143c58;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.voc-response-rate-heading span {
+  color: #8a9aa6;
+  font-size: 7px;
+  font-weight: 650;
+}
+
+.voc-response-rate-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.voc-response-rate-cell {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 4px 2px 3px;
+  border: 1px solid rgba(47, 107, 138, 0.1);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #f8fbfc 0%, #f2f7f9 100%);
+  text-align: center;
+}
+
+.voc-response-rate-cell small {
+  color: #8799a6;
+  font-family: var(--font-latin);
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.voc-response-rate-cell strong {
+  color: #173f59;
+  font-family: var(--font-latin);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.voc-response-rate-cell span {
+  overflow: hidden;
+  max-width: 100%;
+  color: #687e8d;
+  font-family: var(--font-latin);
+  font-size: 7px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voc-response-rate-cell em {
+  font-size: 6.5px;
+  font-style: normal;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.voc-response-rate-cell em.above {
+  color: #21748f;
+}
+
+.voc-response-rate-cell em.below {
+  color: #bd3f34;
+}
+
+.voc-response-rate-cell em.neutral {
+  color: #8798a4;
 }
 
 @property --one-voice-progress {
