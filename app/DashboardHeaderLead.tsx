@@ -29,7 +29,7 @@ export default function DashboardHeaderLead({
           <div className="update-status-line">
             <i aria-hidden="true" />
             <time dateTime={accessDate.replaceAll(".", "-")}>
-              최근 업데이트 {accessDate}
+              업데이트 {accessDate} 기준
             </time>
           </div>
           <div className="update-status-line">

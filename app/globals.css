@@ -8805,3 +8805,226 @@ body {
     gap: var(--dashboard-section-gap);
   }
 }
+
+/* ES90-inspired shared command banner preview */
+@media (min-width: 761px) {
+  .dashboard-identity-header {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(104, 167, 198, 0.22);
+    border-radius: 0;
+    color: #ffffff;
+    background:
+      linear-gradient(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 12px 28px -24px rgba(5, 28, 43, 0.9);
+  }
+
+  .dashboard-identity-header::before {
+    width: 460px;
+    height: 460px;
+    position: absolute;
+    top: -300px;
+    right: -82px;
+    z-index: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, transparent 0 47%, rgba(139, 198, 224, 0.12) 47.2% 47.6%, transparent 47.8% 57%, rgba(139, 198, 224, 0.1) 57.2% 57.6%, transparent 57.8% 68%, rgba(139, 198, 224, 0.07) 68.2% 68.7%, transparent 68.9%);
+    content: "";
+    pointer-events: none;
+  }
+
+  .dashboard-identity-header > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dashboard-identity-header .identity-title h1,
+  .dashboard-identity-header.analysis-header h1 {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 760;
+    letter-spacing: -0.045em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .dashboard-identity-header .identity-title h1::before {
+    display: block;
+    margin-bottom: 8px;
+    color: #ff8b52;
+    font-family: var(--font-latin);
+    font-size: 8px;
+    font-weight: 850;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    content: "Data Dashboard Status";
+  }
+
+  .dashboard-identity-header.analysis-header .identity-title h1::before {
+    content: "Data Dashboard Analysis";
+  }
+
+  .dashboard-identity-header .update-status {
+    display: grid;
+    gap: 5px;
+    color: rgba(226, 239, 246, 0.78);
+  }
+
+  .dashboard-identity-header .update-status-line:first-child {
+    width: auto;
+    min-height: 0;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: rgba(226, 239, 246, 0.76);
+    background: transparent;
+    box-shadow: none;
+    font-size: 10px;
+    line-height: 1.1;
+  }
+
+  .dashboard-identity-header .update-status-line:first-child i {
+    width: 4px;
+    height: 4px;
+    border: 0;
+    background: #ff8b52;
+    box-shadow: none;
+  }
+
+  .dashboard-identity-header .update-status time {
+    display: block;
+    color: rgba(226, 239, 246, 0.76);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 620;
+  }
+
+  .dashboard-identity-header .update-status-line:last-child i {
+    width: 4px;
+    height: 4px;
+    background: #ff8b52;
+  }
+
+  .dashboard-identity-header .update-status-line:last-child span {
+    color: rgba(226, 239, 246, 0.76);
+    font-size: 10px;
+    font-weight: 620;
+  }
+
+  .dashboard-identity-header .identity-insights {
+    border-color: rgba(180, 216, 232, 0.2);
+    background:
+      linear-gradient(105deg, rgba(4, 27, 41, 0.32), rgba(24, 75, 101, 0.34));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  }
+
+  .dashboard-identity-header .identity-insight-row + .identity-insight-row {
+    border-top-color: rgba(197, 224, 236, 0.12);
+  }
+
+  .dashboard-identity-header .identity-insight-row.v3s b,
+  .dashboard-identity-header .identity-insight-row.voc b,
+  .dashboard-identity-header .identity-insight-row.cx b {
+    color: #d9edf6;
+    border-color: rgba(185, 220, 235, 0.26);
+    background: rgba(230, 244, 249, 0.08);
+  }
+
+  .dashboard-identity-header .identity-insight-row span {
+    color: rgba(232, 243, 248, 0.88);
+  }
+
+  .dashboard-identity-header .identity-detail-rail,
+  .dashboard-identity-header .analysis-context {
+    border-color: rgba(190, 220, 233, 0.2);
+    background: rgba(5, 28, 42, 0.23);
+  }
+
+  .dashboard-identity-header .identity-analysis-entry,
+  .dashboard-identity-header .identity-profile,
+  .dashboard-identity-header .analysis-context-item {
+    color: #ffffff;
+    border-color: rgba(195, 222, 234, 0.13);
+    background: transparent;
+  }
+
+  .dashboard-identity-header .identity-analysis-entry:hover,
+  .dashboard-identity-header .identity-profile:hover,
+  .dashboard-identity-header .analysis-context-item:hover,
+  .dashboard-identity-header .analysis-context-item:focus-visible,
+  .dashboard-identity-header .identity-analysis-entry:has(.identity-analysis-hit:hover),
+  .dashboard-identity-header .identity-analysis-entry:has(.identity-analysis-hit:focus-visible) {
+    background: rgba(225, 242, 249, 0.1) !important;
+  }
+
+  .dashboard-identity-header dt,
+  .dashboard-identity-header .identity-profile-role,
+  .dashboard-identity-header .analysis-context-item small {
+    color: rgba(208, 229, 238, 0.65);
+  }
+
+  .dashboard-identity-header dd,
+  .dashboard-identity-header .identity-profile strong,
+  .dashboard-identity-header .analysis-context-item strong {
+    color: #ffffff;
+  }
+
+  .dashboard-identity-header .identity-icon,
+  .dashboard-identity-header .identity-profile-icon {
+    color: #75b7d5;
+    border-color: rgba(183, 219, 234, 0.22);
+    background: rgba(235, 247, 251, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+@media (min-width: 1241px) {
+  .dashboard-identity-header {
+    height: 122px;
+    min-height: 122px;
+    max-height: 122px;
+    padding: 14px 18px;
+  }
+
+  .dashboard-identity-header > .identity-title,
+  .dashboard-identity-header > .identity-insights {
+    height: 92px;
+    min-height: 92px;
+    max-height: 92px;
+  }
+
+  .dashboard-identity-header > .identity-detail-rail,
+  .dashboard-identity-header > .analysis-context {
+    height: 92px;
+    min-height: 92px;
+    max-height: 92px;
+    align-self: center;
+    grid-template-rows: repeat(2, 45px);
+  }
+
+  .dashboard-identity-header .identity-analysis-entry,
+  .dashboard-identity-header .identity-profile,
+  .dashboard-identity-header .analysis-context-item {
+    height: 45px;
+  }
+
+  .dashboard-identity-header .identity-title {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3px 0 0;
+  }
+
+  .dashboard-identity-header .update-status {
+    display: grid;
+  }
+
+  .dashboard-identity-header .update-status-line:first-child,
+  .dashboard-identity-header .update-status-line:last-child {
+    position: static;
+  }
+}

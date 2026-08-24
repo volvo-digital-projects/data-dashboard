@@ -87,7 +87,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(
     visibleHtml,
-    new RegExp(`최근 업데이트 ${seoulToday.replaceAll(".", "\\.")}`),
+    new RegExp(`업데이트[\\s\\S]*?${seoulToday.replaceAll(".", "\\.")} 기준`),
   );
   assert.match(visibleHtml, /Q1, Q2 마감, 현재 Q3평가 진행중/);
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
@@ -438,7 +438,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="identity-title analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\s\S]*?최근 업데이트[\s\S]*?Q1, Q2 마감, 현재 Q3평가 진행중/,
+    /class="identity-title analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">업데이트 [\d.]+ 기준<\/time>[\s\S]*?Q1, Q2 마감, 현재 Q3평가 진행중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
@@ -1361,7 +1361,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     sharedHeaderSource,
-    /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?최근 업데이트 \{accessDate\}/,
+    /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?업데이트 \{accessDate\} 기준[\s\S]*?<\/time>/,
   );
   assert.doesNotMatch(
     dashboardSource,
@@ -1534,6 +1534,26 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.dashboard\s*\{[^}]*width: min\(var\(--dashboard-page-max\), 100%\)[^}]*padding: 0 var\(--dashboard-page-gutter\) 40px/,
   );
   assert.match(css, /--header-title-font-size: 32px/);
+  assert.match(
+    css,
+    /\/\* ES90-inspired shared command banner preview \*\/[\s\S]*?\.dashboard-identity-header\s*\{[^}]*linear-gradient\(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%\)/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.identity-title h1::before\s*\{[^}]*color: #ff8b52[^}]*content: "Data Dashboard Status"/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header\.analysis-header \.identity-title h1::before\s*\{[^}]*content: "Data Dashboard Analysis"/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.update-status-line:first-child\s*\{[^}]*border-radius: 0[^}]*background: transparent[^}]*box-shadow: none/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)[\s\S]*?\.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?height: 92px;[\s\S]*?grid-template-rows: repeat\(2, 45px\)/,
+  );
   assert.match(
     css,
     /\.identity-strip h1\s*\{[^}]*font-family: var\(--font-korean\)[^}]*font-size: var\(--header-title-font-size\)/,
