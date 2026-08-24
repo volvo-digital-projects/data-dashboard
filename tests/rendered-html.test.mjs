@@ -380,7 +380,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /종합 만족도와 해피콜 합산 평균/);
   assert.doesNotMatch(visibleHtml, /종합 만족도와 해피콜 단순 평균/);
   assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
-  assert.match(visibleHtml, /에이치 순위/);
+  assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
   assert.match(html, /class="analysis-scatter"/);
   assert.equal((html.match(/class="scatter-zone /g) ?? []).length, 2);
   assert.match(
