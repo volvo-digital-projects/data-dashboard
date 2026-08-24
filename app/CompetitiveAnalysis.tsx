@@ -659,7 +659,7 @@ export default function CompetitiveAnalysis({
           <DashboardHeaderLead
             title={`${displayShowroomName(selected.showroom)} 분석`}
             accessDate={accessDate}
-            status="현재 Q3평가 진행중"
+            status="Q1, Q2 마감, 현재 Q3평가 진행중"
             insights={analysisInsights}
             insightLabel={`${displayShowroomName(selected.showroom)} 분석 메시지`}
             titleClassName="analysis-title"

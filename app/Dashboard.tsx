@@ -2042,7 +2042,7 @@ export default function Dashboard({
     oneVoiceScores.capturedAt,
   );
   const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
-    title: "현재 Q3평가 진행중",
+    title: "Q1, Q2 마감, 현재 Q3평가 진행중",
     effectiveDate: dashboard.meta.updatedAt,
   });
 
@@ -2182,8 +2182,9 @@ export default function Dashboard({
     ...dashboard.showrooms.map((item) => item.cdsid.length),
   );
   const displayUpdateTitle =
-    latestUpdate.effectiveDate.replaceAll(".", "-") === "2026-07-29"
-      ? "현재 Q3평가 진행중"
+    latestUpdate.effectiveDate.replaceAll(".", "-") === "2026-07-29" ||
+    latestUpdate.title === "현재 Q3평가 진행중"
+      ? "Q1, Q2 마감, 현재 Q3평가 진행중"
       : latestUpdate.title;
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;

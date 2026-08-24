@@ -89,7 +89,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     new RegExp(`최근 업데이트 ${seoulToday.replaceAll(".", "\\.")}`),
   );
-  assert.match(visibleHtml, /현재 Q3평가 진행중/);
+  assert.match(visibleHtml, /Q1, Q2 마감, 현재 Q3평가 진행중/);
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
@@ -438,7 +438,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="identity-title analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\s\S]*?최근 업데이트[\s\S]*?현재 Q3평가 진행중/,
+    /class="identity-title analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\s\S]*?최근 업데이트[\s\S]*?Q1, Q2 마감, 현재 Q3평가 진행중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
