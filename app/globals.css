@@ -7186,7 +7186,7 @@ button.quarter-score-row:disabled {
   height: 2px;
   position: relative;
   border-radius: 999px;
-  background: #2f8c7d;
+  background: #7a5cc7;
 }
 
 .voc-consultation-legend i.response-line::after {
@@ -7195,7 +7195,7 @@ button.quarter-score-row:disabled {
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px solid #2f8c7d;
+  border: 1px solid #7a5cc7;
   border-radius: 50%;
   background: #ffffff;
   content: "";
@@ -7249,7 +7249,7 @@ button.quarter-score-row:disabled {
   position: absolute;
   right: 0;
   z-index: 3;
-  color: #2f8c7d;
+  color: #7a5cc7;
   font-family: var(--font-latin);
   font-size: 7px;
   font-weight: 750;
@@ -7279,7 +7279,7 @@ button.quarter-score-row:disabled {
 
 .voc-response-rate-line-layer polyline {
   fill: none;
-  stroke: #2f8c7d;
+  stroke: #7a5cc7;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -7298,10 +7298,10 @@ button.quarter-score-row:disabled {
   position: absolute;
   top: 0;
   left: 0;
-  border: 2px solid #2f8c7d;
+  border: 2px solid #7a5cc7;
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 0 1px 3px rgba(29, 93, 83, 0.18);
+  box-shadow: 0 1px 3px rgba(87, 63, 152, 0.2);
   transform: translate(-50%, -50%);
 }
 
@@ -7311,7 +7311,7 @@ button.quarter-score-row:disabled {
   left: 0;
   padding: 1px 3px;
   border-radius: 3px;
-  color: #217466;
+  color: #6544b5;
   background: rgba(255, 255, 255, 0.9);
   font-family: var(--font-latin);
   font-size: 7px;

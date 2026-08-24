@@ -1860,7 +1860,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.voc-response-rate-line-layer polyline\s*\{[^}]*stroke: #2f8c7d;[^}]*stroke-width: 1\.8;/,
+    /\.voc-response-rate-line-layer polyline\s*\{[^}]*stroke: #7a5cc7;[^}]*stroke-width: 1\.8;/,
   );
   assert.doesNotMatch(css, /\.voc-response-rate-panel\s*\{/);
   assert.match(
