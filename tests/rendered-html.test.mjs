@@ -241,6 +241,11 @@ test("server-renders the selected CDSID dashboard", async () => {
     html,
     /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?상담 만족도 4개년 추이/,
   );
+  assert.match(
+    html,
+    /class="voc-response-rate-line-layer"[\s\S]*?<polyline points="[^"]+"[\s\S]*?class="voc-response-rate-point/,
+  );
+  assert.doesNotMatch(html, /class="voc-response-rate-panel"/);
   assert.match(html, /aria-label="ONE VOICE 만족도"[\s\S]*?ONE VOICE/);
   const v3sStart = html.indexOf('id="score-v3s"');
   const vocStart = html.indexOf('id="score-voc"');
@@ -1849,6 +1854,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.voc-consultation-pair\s*\{[^}]*width: 45px;[^}]*flex: 1 1 auto;/,
   );
+  assert.match(
+    css,
+    /\.voc-response-rate-line-layer\s*\{[^}]*position: absolute;[^}]*inset: 10px 2px 18px 22px;[^}]*pointer-events: none;/,
+  );
+  assert.match(
+    css,
+    /\.voc-response-rate-line-layer polyline\s*\{[^}]*stroke: #2f8c7d;[^}]*stroke-width: 1\.8;/,
+  );
+  assert.doesNotMatch(css, /\.voc-response-rate-panel\s*\{/);
   assert.match(
     css,
     /\.analysis-ranking-list > div\.hovered:not\(\.selected\),[\s\S]*?\.analysis-ranking-list > div:not\(\.selected\):hover\s*\{[^}]*border-color: rgba\(74, 147, 143, 0\.32\)[^}]*background: #e8f4f3[^}]*inset 3px 0 0 #4a938f/,

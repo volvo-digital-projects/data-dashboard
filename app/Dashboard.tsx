@@ -936,6 +936,30 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
   const scaleHeight = (value: number | null) =>
     value === null ? 0 : Math.min(100, Math.max(0, ((value - 8) / 2) * 100));
   const responseFormatter = new Intl.NumberFormat("ko-KR");
+  const responseRateCeiling = Math.max(
+    40,
+    Math.ceil(
+      Math.max(0, ...yearly.map((item) => item.showroomRate ?? 0)) / 10,
+    ) * 10,
+  );
+  const responseRatePoints = yearly.map((item, index) => ({
+    x: 12.5 + index * 25,
+    y:
+      item.showroomRate === null
+        ? null
+        : 90 -
+          Math.min(1, Math.max(0, item.showroomRate / responseRateCeiling)) *
+            78,
+    rate: item.showroomRate,
+    year: item.year,
+  }));
+  const responseRatePolyline = responseRatePoints
+    .filter(
+      (point): point is (typeof responseRatePoints)[number] & { y: number } =>
+        point.y !== null,
+    )
+    .map((point) => `${point.x},${point.y}`)
+    .join(" ");
   const accessibleTrend = yearly
     .map(
       (item) =>
@@ -991,6 +1015,10 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
           <span className="voc-consultation-axis top">10.0</span>
           <span className="voc-consultation-axis middle">9.0</span>
           <span className="voc-consultation-axis base">8.0</span>
+          <span className="voc-response-rate-axis top">
+            {responseRateCeiling}%
+          </span>
+          <span className="voc-response-rate-axis base">0</span>
           <div className="voc-consultation-bars" aria-hidden="true">
             {yearly.map((item) => (
               <div className="voc-consultation-year" key={item.year}>
@@ -1017,6 +1045,25 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
               </div>
             ))}
           </div>
+          <div className="voc-response-rate-line-layer" aria-hidden="true">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+              <polyline points={responseRatePolyline} />
+            </svg>
+            {responseRatePoints.map((point) =>
+              point.y === null ? null : (
+                <span
+                  className={`voc-response-rate-point ${
+                    point.y < 22 ? "label-below" : ""
+                  }`}
+                  style={{ left: `${point.x}%`, top: `${point.y}%` }}
+                  key={point.year}
+                >
+                  <i />
+                  <b>{point.rate?.toFixed(1)}%</b>
+                </span>
+              ),
+            )}
+          </div>
         </div>
 
         <div className="voc-consultation-legend" aria-hidden="true">
@@ -1026,47 +1073,9 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
           <span>
             <i className="showroom" /> {displayShowroomName(showroom.showroom)}
           </span>
-        </div>
-
-        <div className="voc-response-rate-panel">
-          <div className="voc-response-rate-heading">
-            <strong>연도별 회신율</strong>
-            <span>회신 / 발송</span>
-          </div>
-          <div className="voc-response-rate-grid">
-            {yearly.map((item) => {
-              const rateDelta =
-                item.showroomRate === null || item.nationalRate === null
-                  ? null
-                  : item.showroomRate - item.nationalRate;
-              const rateTone =
-                rateDelta === null
-                  ? "neutral"
-                  : rateDelta > 0.049
-                    ? "above"
-                    : rateDelta < -0.049
-                      ? "below"
-                      : "neutral";
-
-              return (
-                <div className="voc-response-rate-cell" key={item.year}>
-                  <small>{item.year}</small>
-                  <strong>
-                    {item.showroomRate === null
-                      ? "—"
-                      : `${item.showroomRate.toFixed(1)}%`}
-                  </strong>
-                  <span>
-                    {responseFormatter.format(item.showroomResponses)} /{" "}
-                    {responseFormatter.format(item.showroomSent)}
-                  </span>
-                  <em className={rateTone}>
-                    전국 {item.nationalRate?.toFixed(1) ?? "—"}%
-                  </em>
-                </div>
-              );
-            })}
-          </div>
+          <span>
+            <i className="response-line" /> 회신율
+          </span>
         </div>
       </div>
     </aside>
