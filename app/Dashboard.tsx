@@ -898,7 +898,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
     >
       <header className="voc-consultation-heading">
         <div>
-          <strong>VOC 상담 만족도</strong>
+          <strong>상담 만족도 4개년 추이</strong>
         </div>
         <div className="voc-consultation-cumulative">
           <small>누적</small>
