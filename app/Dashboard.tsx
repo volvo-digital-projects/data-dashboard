@@ -740,7 +740,7 @@ function V3SPerformance({
             role="img"
             aria-label={`${displayShowroomName(
               showroom.showroom,
-            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 연평균 비교와 전국 5개년 평균`}
+            )} 2021년부터 2025년까지 V3S 막대 추이, 전국 평균 비교와 전국 5개년 평균`}
           >
             <div className="v3s-history-bar-stage" aria-hidden="true">
               <span
@@ -764,7 +764,7 @@ function V3SPerformance({
                       {nationalAverage && (
                         <i
                           className="v3s-history-national-bar-fill"
-                          title={`${point.year}년 전국 연평균 ${displayNumber(
+                          title={`${point.year}년 전국 평균 ${displayNumber(
                             nationalAverage.value,
                           )}점`}
                           style={{
@@ -808,7 +808,7 @@ function V3SPerformance({
             </div>
             <div className="v3s-history-legend" aria-hidden="true">
               <span>
-                <i className="v3s-history-legend-national" /> 전국 연평균
+                <i className="v3s-history-legend-national" /> 전국 평균
               </span>
               <span>
                 <i className="v3s-history-legend-showroom" />
