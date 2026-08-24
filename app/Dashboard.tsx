@@ -2509,7 +2509,6 @@ export default function Dashboard({
                 >
                   {vocComponents.map((component) => (
                     <span className="voc-component-chip" key={component.code}>
-                      <i className="voc-component-lock" aria-hidden="true" />
                       <b>{component.code}</b>
                       <span>{component.label}</span>
                       <em>({component.weight})</em>
