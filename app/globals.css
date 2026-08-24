@@ -8943,7 +8943,7 @@ body {
 
   .dashboard-identity-header .identity-detail-rail,
   .dashboard-identity-header .analysis-context {
-    border-color: rgba(190, 220, 233, 0.2);
+    border: 0;
     background: rgba(5, 28, 42, 0.23);
   }
 

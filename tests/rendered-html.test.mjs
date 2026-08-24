@@ -1552,6 +1552,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.dashboard-identity-header \.identity-detail-rail,\s*\.dashboard-identity-header \.analysis-context\s*\{[^}]*border: 0;[^}]*background: rgba\(5, 28, 42, 0\.23\)/,
+  );
+  assert.match(
+    css,
     /\.dashboard-identity-header \.update-status-line:first-child\s*\{[^}]*border-radius: 0[^}]*background: transparent[^}]*box-shadow: none/,
   );
   assert.match(
