@@ -508,6 +508,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
   assert.match(sizeHtml, /볼보 해운대/);
 
+  const gangnamSizeResponse = await render(
+    "/dashboard/6KR6834/analysis?view=size",
+  );
+  assert.equal(gangnamSizeResponse.status, 200);
+  const gangnamSizeHtml = await gangnamSizeResponse.text();
+  assert.match(gangnamSizeHtml, /<h2>U 사이즈 내 순위<\/h2>/);
+
   const showroomResponse = await render(
     "/dashboard/6KR6834/analysis?view=showroom",
   );

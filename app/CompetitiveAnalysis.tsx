@@ -583,7 +583,11 @@ export default function CompetitiveAnalysis({
           ? `${selected.size} 사이즈`
           : "전국 39개 전시장";
   const rankingTitle =
-    view === "showroom" ? "전국 전시장 내 순위" : `${groupLabel} 순위`;
+    view === "showroom"
+      ? "전국 전시장 내 순위"
+      : view === "size"
+        ? `${selected.size} 사이즈 내 순위`
+        : `${groupLabel} 순위`;
   const scatterStyle = {
     "--avg-x": `${clamp(((groupHappyAverage - 65) / 35) * 100)}%`,
     "--avg-y": `${clamp(((groupVocAverage - 75) / 25) * 100)}%`,
