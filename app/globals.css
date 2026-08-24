@@ -7297,43 +7297,6 @@ button.quarter-score-row:disabled {
   font-weight: 650;
 }
 
-.voc-consultation-footer {
-  display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.5fr);
-  gap: 3px 6px;
-  padding: 7px 10px 8px;
-  background: #f5f9fb;
-  font-size: 7.5px;
-}
-
-.voc-consultation-footer > strong {
-  overflow: hidden;
-  color: #143c58;
-  font-weight: 800;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.voc-consultation-footer > span {
-  color: #738693;
-  font-weight: 650;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.voc-consultation-footer > span b {
-  color: #206c8b;
-  font-weight: 800;
-}
-
-.voc-consultation-footer > small {
-  grid-column: 1 / -1;
-  color: #99a7b1;
-  font-size: 7px;
-  font-weight: 650;
-  text-align: right;
-}
-
 @property --one-voice-progress {
   syntax: "<number>";
   inherits: false;

@@ -852,9 +852,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
   const national = vocConsultation.national;
   const selected = vocConsultation.showrooms[showroom.cdsid] ?? national;
   const cumulativeAverage = selected[0];
-  const cumulativeResponses = selected[1];
   const nationalCumulativeAverage = national[0];
-  const nationalCumulativeResponses = national[1];
   const cumulativeDelta =
     cumulativeAverage === null || nationalCumulativeAverage === null
       ? null
@@ -876,16 +874,10 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
   const scaleHeight = (value: number | null) =>
     value === null ? 0 : Math.min(100, Math.max(0, ((value - 8) / 2) * 100));
   const responseFormatter = new Intl.NumberFormat("ko-KR");
-  const knownDispatch =
-    showroom.cdsid === "6KR6834"
-      ? { dispatches: 1397, responseRate: 27.0 }
-      : null;
-  const updatedParts = vocConsultation.updatedThrough.split("-");
-  const updatedLabel = `${updatedParts[1]}.${updatedParts[2]}`;
   const accessibleTrend = yearly
     .map(
       (item) =>
-        `${item.year}년 전국 ${displayNumber(item.nationalAverage)}점, ${displayShowroomName(
+        `${item.year}년 전국 평균 ${displayNumber(item.nationalAverage)}점, ${displayShowroomName(
           showroom.showroom,
         )} ${displayNumber(item.showroomAverage)}점`,
     )
@@ -918,7 +910,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
           <strong>4개년 추이</strong>
           <div className="voc-consultation-legend" aria-hidden="true">
             <span>
-              <i className="national" /> 전국
+              <i className="national" /> 전국 평균
             </span>
             <span>
               <i className="showroom" /> {displayShowroomName(showroom.showroom)}
@@ -965,26 +957,6 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
         </div>
       </div>
 
-      <footer className="voc-consultation-footer">
-        <strong>{displayShowroomName(showroom.showroom)}</strong>
-        <span>
-          {responseFormatter.format(cumulativeResponses)}회신
-          {knownDispatch ? (
-            <>
-              {" "}· {responseFormatter.format(knownDispatch.dispatches)}발송 ·{" "}
-              <b>{knownDispatch.responseRate.toFixed(1)}%</b>
-            </>
-          ) : (
-            <> · 누적 {displayNumber(cumulativeAverage)}점</>
-          )}
-        </span>
-        <strong>Volvo Korea</strong>
-        <span>
-          {responseFormatter.format(nationalCumulativeResponses)}회신 · 57,972발송 ·{" "}
-          <b>23.9%</b>
-        </span>
-        <small>2026 YTD {updatedLabel} 기준</small>
-      </footer>
     </aside>
   );
 }
