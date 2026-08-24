@@ -7528,8 +7528,13 @@ button.quarter-score-row:disabled {
   font-size: 8px;
 }
 
+.weekly-score-layout .trend-wrap.compact .quarter-band span {
+  justify-content: center;
+  text-align: center;
+}
+
 .weekly-score-layout .trend-wrap.compact .quarter-band small {
-  font-size: 7px;
+  font-size: 9px;
 }
 
 .weekly-score-layout .trend-wrap.compact .quarter-band,
