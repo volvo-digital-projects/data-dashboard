@@ -8488,3 +8488,319 @@ button.quarter-score-row:disabled {
     opacity: 1;
   }
 }
+
+/* Shared Volvo DSC product shell and presentation system */
+:root {
+  --color-page-bg: var(--paper);
+  --color-surface: #ffffff;
+  --color-surface-soft: #f7f9fa;
+  --color-border: rgba(16, 24, 40, 0.08);
+  --color-border-strong: rgba(47, 107, 138, 0.18);
+  --color-text-primary: var(--ink);
+  --color-text-secondary: var(--secondary);
+  --color-text-muted: var(--muted);
+  --color-navy-primary: var(--navy);
+  --color-positive: var(--good);
+  --color-warning: var(--caution);
+  --color-danger: var(--warning);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --dashboard-card-gap: var(--space-2);
+  --dashboard-section-gap: var(--space-4);
+  --dashboard-card-border: 1px solid var(--color-border);
+  --dashboard-card-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.018),
+    0 10px 28px rgba(16, 42, 67, 0.04);
+  --dashboard-header-height: 116px;
+  --dashboard-header-content-height: 92px;
+  --dashboard-summary-gap: var(--dashboard-card-gap);
+  --dashboard-combat-share: 34%;
+  --header-title-width: clamp(280px, 21%, 310px);
+  --header-title-font-size: 32px;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  overflow-x: clip;
+}
+
+.dashboard,
+.competitive-analysis-page {
+  width: min(var(--dashboard-page-max), 100%);
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: var(--dashboard-page-gutter);
+  color: var(--color-text-primary);
+  background: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+.dashboard-sticky-shell,
+.analysis-sticky-shell,
+.dashboard-identity-header,
+.identity-title,
+.identity-insights,
+.identity-detail-rail,
+.analysis-context,
+.hero-grid,
+.kpi-column,
+.metric-grid,
+.content-grid,
+.score-stack,
+.score-tier,
+.weekly-score-layout,
+.trend-wrap,
+.analysis-tabs,
+.analysis-summary-grid,
+.analysis-summary-card,
+.analysis-workspace,
+.analysis-scatter-card,
+.analysis-ranking-card {
+  min-width: 0;
+}
+
+.dashboard img,
+.dashboard svg,
+.dashboard canvas,
+.competitive-analysis-page img,
+.competitive-analysis-page svg,
+.competitive-analysis-page canvas {
+  max-width: 100%;
+}
+
+.panel,
+.analysis-summary-card,
+.analysis-scatter-card,
+.analysis-ranking-card,
+.v3s-award-card,
+.score-tier {
+  border: var(--dashboard-card-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--dashboard-card-shadow);
+}
+
+.dashboard .trend-panel .score-tier,
+.dashboard .trend-panel .v3s-quarter-panel,
+.dashboard .trend-panel .v3s-history-panel,
+.dashboard .trend-panel .trend-scroll,
+.dashboard .trend-panel .voc-consultation-history,
+.dashboard .trend-panel .one-voice-contribution {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.section-heading h2,
+.comparison-title-row h2,
+.analysis-card-heading h2,
+.v3s-award-heading h2 {
+  font-size: 20px;
+  font-weight: 720;
+  letter-spacing: -0.03em;
+}
+
+.content-grid {
+  margin-top: var(--dashboard-section-gap);
+  scroll-margin-top: var(--dashboard-section-gap);
+}
+
+.score-stack {
+  gap: var(--dashboard-section-gap);
+  margin-top: var(--space-3);
+}
+
+.score-tier {
+  padding: 10px 12px;
+}
+
+.score-tier-heading {
+  min-height: 30px;
+  padding: 0 2px 6px;
+}
+
+.weekly-score-layout,
+.v3s-performance.compact {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  gap: var(--dashboard-card-gap);
+}
+
+.weekly-score-layout > *,
+.v3s-performance.compact > * {
+  min-width: 0;
+}
+
+.analysis-workspace {
+  grid-template-columns: minmax(0, 2fr) minmax(360px, 1fr);
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+.analysis-scatter-card,
+.analysis-ranking-card {
+  height: 100%;
+  padding: 20px;
+}
+
+.analysis-card-heading {
+  min-height: 44px;
+}
+
+.analysis-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--dashboard-card-gap);
+}
+
+  .analysis-summary-card {
+  height: 116px;
+  min-height: 116px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 18px 20px;
+}
+
+.analysis-summary-card > strong {
+  min-width: 126px;
+  font-size: 40px;
+  text-align: right;
+}
+
+.analysis-tabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.analysis-tabs button {
+  min-width: 0;
+  transition:
+    color 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.analysis-tabs button:active {
+  transform: none;
+}
+
+.analysis-tabs button span,
+.analysis-tabs button small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 1241px) {
+  .dashboard-sticky-anchor {
+    min-height: 356px;
+  }
+
+  .analysis-sticky-anchor {
+    min-height: 308px;
+  }
+
+  .dashboard-sticky-shell,
+  .analysis-sticky-shell {
+    gap: var(--dashboard-card-gap);
+    padding: 0 var(--dashboard-sticky-content-gutter) var(--dashboard-card-gap);
+  }
+
+  .dashboard-identity-header {
+    width: 100%;
+    height: var(--dashboard-header-height);
+    min-height: var(--dashboard-header-height);
+    max-height: var(--dashboard-header-height);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--dashboard-card-gap);
+    margin: 0;
+    padding: 12px 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .dashboard-identity-header > .identity-title,
+  .dashboard-identity-header > .identity-insights,
+  .dashboard-identity-header > .identity-detail-rail,
+  .dashboard-identity-header > .analysis-context {
+    height: var(--dashboard-header-content-height);
+    min-height: var(--dashboard-header-content-height);
+    max-height: var(--dashboard-header-content-height);
+    align-self: center;
+  }
+
+  .dashboard-identity-header > .identity-title {
+    width: var(--header-title-width);
+    flex: 0 0 var(--header-title-width);
+  }
+
+  .dashboard-identity-header > .identity-insights {
+    flex: 1 1 auto;
+  }
+
+  .dashboard-identity-header > .identity-detail-rail,
+  .dashboard-identity-header > .analysis-context {
+    width: calc((100% - var(--dashboard-combat-share) - 24px) / 3);
+    flex: 0 0 calc((100% - var(--dashboard-combat-share) - 24px) / 3);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 45px);
+  }
+
+  .dashboard-identity-header .identity-analysis-entry,
+  .dashboard-identity-header .identity-profile,
+  .dashboard-identity-header .analysis-context-item {
+    width: 100%;
+    min-width: 0;
+    height: 45px;
+    grid-template-columns: 30px minmax(0, 1fr);
+    column-gap: var(--space-2);
+    padding: 0 10px;
+    transition:
+      background-color 140ms ease,
+      border-color 140ms ease;
+  }
+
+  .dashboard-identity-header .identity-analysis-entry:hover,
+  .dashboard-identity-header .identity-profile:hover,
+  .dashboard-identity-header .analysis-context-item:hover,
+  .dashboard-identity-header .analysis-context-item:focus-visible {
+    background-color: #f0f6f8;
+  }
+
+  .hero-grid {
+    grid-template-columns:
+      minmax(0, var(--dashboard-combat-share)) minmax(0, 1fr);
+    gap: var(--dashboard-card-gap);
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--dashboard-card-gap);
+  }
+
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-card,
+  .analysis-sticky-shell .analysis-tabs,
+  .analysis-sticky-shell .analysis-summary-card,
+  .identity-insights,
+  .identity-detail-rail,
+  .analysis-context {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .competitive-analysis-page {
+    gap: var(--dashboard-section-gap);
+  }
+}

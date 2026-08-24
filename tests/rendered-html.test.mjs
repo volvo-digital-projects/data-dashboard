@@ -213,9 +213,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /2021년 전국 연평균 94\.7점[\s\S]*?2022년 전국 연평균 93\.9점[\s\S]*?2023년 전국 연평균 95\.9점[\s\S]*?2024년 전국 연평균 95\.6점[\s\S]*?2025년 전국 연평균 95\.0점/,
+    /2021년 전국 평균 94\.7점[\s\S]*?2022년 전국 평균 93\.9점[\s\S]*?2023년 전국 평균 95\.9점[\s\S]*?2024년 전국 평균 95\.6점[\s\S]*?2025년 전국 평균 95\.0점/,
   );
-  assert.match(visibleHtml, /전국 연평균[\s\S]*?볼보 강남대치/);
+  assert.match(visibleHtml, /전국 평균[\s\S]*?볼보 강남대치/);
   assert.match(visibleHtml, /전국 5개년 평균 95\.0/);
   assert.doesNotMatch(visibleHtml, /5개년 평균 94\.2/);
   assert.doesNotMatch(html, /class="v3s-history-summary"/);
@@ -232,8 +232,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /class="v3s-performance compact"/);
   assert.equal((html.match(/class="trend-wrap compact"/g) ?? []).length, 2);
   assert.equal((html.match(/class="weekly-score-layout"/g) ?? []).length, 2);
-  assert.match(html, /aria-label="VOC 추가 영역 A"[\s\S]*?<strong>A<\/strong>/);
-  assert.match(html, /aria-label="CX Index 추가 영역 B"[\s\S]*?<strong>B<\/strong>/);
+  assert.match(
+    html,
+    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?상담 만족도 4개년 추이/,
+  );
+  assert.match(html, /aria-label="ONE VOICE 만족도"[\s\S]*?ONE VOICE/);
   const v3sStart = html.indexOf('id="score-v3s"');
   const vocStart = html.indexOf('id="score-voc"');
   assert.ok(v3sStart >= 0 && vocStart > v3sStart);
@@ -260,15 +263,16 @@ test("server-renders the selected CDSID dashboard", async () => {
       /width="6.3" height="6.3" data-week="(W\d{2})" class="actual-week-point"/g,
     ),
   ].map((match) => match[1]);
-  assert.equal(actualMarkerWeeks.length, 25);
+  assert.equal(actualMarkerWeeks.length, 29);
   assert.deepEqual(
     actualMarkerWeeks,
-    Array.from({ length: 26 }, (_, index) => `W${String(index + 1).padStart(2, "0")}`)
-      .filter((week) => week !== "W22"),
+    Array.from({ length: 29 }, (_, index) =>
+      `W${String(index + 1).padStart(2, "0")}`,
+    ),
   );
   const actualLabelCount = (vocHtml.match(/class="actual-point-value"/g) ?? []).length;
-  assert.equal(actualLabelCount, 25);
-  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 26);
+  assert.equal(actualLabelCount, 29);
+  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 29);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
   assert.match(visibleHtml, /Q3 평가 진행 중/);
@@ -339,11 +343,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(kolonVisibleHtml, /코오롱 9개소/);
   assert.match(
     visibleHtml,
-    /<header class="analysis-header"><div class="analysis-title"><a href="\/dashboard\/6KR6834" class="analysis-overview-link"[^>]*>[\s\S]*?<h1>볼보 강남대치 분석<\/h1>/,
+    /<header class="dashboard-identity-header analysis-header"><div class="identity-title analysis-title"><h1>볼보 강남대치 분석<\/h1>/,
   );
   assert.match(
     visibleHtml,
-    /aria-label="볼보 강남대치 현황으로 돌아가기"[^>]*title="현황으로 돌아가기"/,
+    /href="\/dashboard\/6KR6834" class="analysis-context-item" aria-label="볼보 강남대치 현황으로 이동"/,
   );
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력 분석|<span>Q2<\/span>/);
   assert.match(visibleHtml, /소속 딜러사 내 분석/);
@@ -403,7 +407,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /볼보 분당/);
   assert.match(
     html,
-    /href="\/dashboard\/6KR6834" class="analysis-overview-link"/,
+    /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
 
   const regionResponse = await render(
@@ -428,13 +432,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\s\S]*?최근 업데이트[\s\S]*?현재 Q3평가 진행중/,
+    /class="identity-title analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\s\S]*?최근 업데이트[\s\S]*?현재 Q3평가 진행중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
   assert.match(analysisContextHtml, /identity-icon--size/);
   assert.match(analysisContextHtml, /identity-profile-icon/);
-  assert.doesNotMatch(analysisContextHtml, /<a\b|<button\b|tabindex=|onclick=/i);
+  assert.equal((analysisContextHtml.match(/<a\b/g) ?? []).length, 4);
+  assert.doesNotMatch(analysisContextHtml, /<button\b|onclick=/i);
   assert.match(regionVisibleHtml, /<footer><span>동일 권역별 평균/);
   assert.match(regionVisibleHtml, /권역별 10위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
@@ -902,7 +907,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /className="actual-series-wipe"[\s\S]*?className="trend-line"[\s\S]*?className="actual-week-point"[\s\S]*?className="actual-point-value"/,
+    /className=\{`actual-series-wipe[\s\S]*?className="trend-line"[\s\S]*?className="actual-week-point"[\s\S]*?className="actual-point-value"/,
   );
   const actualTrendPolyline = dashboardSource.match(
     /<polyline\s+points=\{segment[\s\S]*?className="trend-line"\s*\/>/,
@@ -926,10 +931,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /width=\{markerSize\}[\s\S]*?height=\{markerSize\}/,
   );
-  assert.equal((dashboardSource.match(/r=\{markerRadius\}/g) ?? []).length, 2);
+  assert.equal((dashboardSource.match(/r=\{markerRadius\}/g) ?? []).length, 3);
   assert.match(
     css,
-    /\.actual-series-wipe\s*\{[^}]*clip-path: inset\(0 100% 0 0\)[^}]*animation: actual-series-wipe 1200ms cubic-bezier\(0\.16, 1, 0\.3, 1\) 180ms both/,
+    /\.actual-series-wipe\s*\{[^}]*clip-path: inset\(0 100% 0 0\)[^}]*will-change: clip-path/,
+  );
+  assert.match(
+    css,
+    /\.actual-series-wipe\.is-visible\s*\{[^}]*animation: actual-series-wipe 1550ms cubic-bezier\(0\.16, 0\.72, 0\.2, 1\) 80ms both/,
   );
   assert.match(
     css,
@@ -1299,6 +1308,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
     "utf8",
   );
+  const sharedHeaderSource = await readFile(
+    new URL("../app/DashboardHeaderLead.tsx", import.meta.url),
+    "utf8",
+  );
   assert.match(
     analysisSource,
     /const \[accessDate, setAccessDate\] = useState\(\(\) =>[\s\S]*?formatAnalysisDate\(new Date\(\)\)[\s\S]*?window\.setInterval\(syncAccessDate, 60_000\)/,
@@ -1321,7 +1334,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /window\.setInterval\(syncAccessDate, 60_000\)/,
   );
   assert.match(
-    dashboardSource,
+    sharedHeaderSource,
     /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?최근 업데이트 \{accessDate\}/,
   );
   assert.doesNotMatch(
@@ -1341,8 +1354,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.scatter-zone\.improve\s*\{[^}]*width: var\(--avg-x\)[^}]*height: var\(--avg-y\)[^}]*linear-gradient\(\s*to bottom left/,
   );
-  assert.match(css, /\.scatter-quadrant\.top-right\s*\{[^}]*color: #245873/);
-  assert.match(css, /\.scatter-quadrant\.bottom-left\s*\{[^}]*color: #963f3a/);
+  assert.match(css, /\.scatter-quadrant\.top-right\s*\{[^}]*color: #1d5877/);
+  assert.match(css, /\.scatter-quadrant\.bottom-left\s*\{[^}]*color: #9d4a43/);
   assert.match(
     css,
     /\.profile-popover select\s*\{[^}]*font-family: "Cascadia Mono", Consolas,[^}]*font-variant-numeric: tabular-nums[^}]*font-feature-settings: "tnum" 1/,
@@ -1494,9 +1507,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
     css,
     /\.dashboard\s*\{[^}]*width: min\(var\(--dashboard-page-max\), 100%\)[^}]*padding: 0 var\(--dashboard-page-gutter\) 40px/,
   );
+  assert.match(css, /--header-title-font-size: 32px/);
   assert.match(
     css,
-    /\.identity-strip h1\s*\{[\s\S]*?font-family: var\(--font-korean\)[\s\S]*?font-size: clamp\(40px, 3\.25vw, 44px\)/,
+    /\.identity-strip h1\s*\{[^}]*font-family: var\(--font-korean\)[^}]*font-size: var\(--header-title-font-size\)/,
   );
   assert.match(
     css,
@@ -1521,7 +1535,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.identity-detail-rail\s*\{[\s\S]*?grid-template-columns: repeat\(4, 126px\)/,
+    /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?\.dashboard-identity-header > \.analysis-context\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)[^}]*grid-template-rows: repeat\(2, 45px\)/,
   );
   assert.match(
     css,
@@ -1529,7 +1543,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.identity-strip dl div\s*\{[\s\S]*?width: 126px[\s\S]*?min-width: 126px[\s\S]*?justify-items: center/,
+    /\.dashboard-identity-header \.identity-analysis-entry,[\s\S]*?\.dashboard-identity-header \.identity-profile,[\s\S]*?\.dashboard-identity-header \.analysis-context-item\s*\{[^}]*width: 100%[^}]*min-width: 0[^}]*height: 45px/,
   );
   assert.match(
     css,
@@ -1575,7 +1589,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.identity-profile\s*\{[\s\S]*?width: 126px[\s\S]*?min-width: 126px[\s\S]*?justify-items: center/,
+    /\.dashboard-identity-header \.identity-profile\s*,[\s\S]*?\.dashboard-identity-header \.analysis-context-item\s*\{[^}]*width: 100%[^}]*min-width: 0/,
   );
   assert.match(
     css,
@@ -1591,8 +1605,9 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.identity-analysis-entry::after,[\s\S]*?\.identity-profile::after\s*\{[\s\S]*?content: "👆";[\s\S]*?right: 6px;[\s\S]*?bottom: 5px;/,
+    /\.identity-analysis-entry::after,[\s\S]*?\.identity-profile::after,[\s\S]*?\.analysis-context-item::after\s*\{[^}]*content: "→";[^}]*right: 6px;[^}]*bottom: 5px;/,
   );
+  assert.match(css, /\.analysis-context-item::after\s*\{[^}]*content: "←";/);
   assert.match(
     css,
     /\.identity-icon--region::before\s*\{[\s\S]*?border-radius: 50% 50% 50% 2px/,
@@ -1707,7 +1722,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.combat-summary-stack strong,[\s\S]*?\.metric-card-value\s*\{[^}]*min-height: 70px[^}]*display: flex[^}]*align-items: flex-end[^}]*margin-top: 0/,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.combat-summary-stack strong,[\s\S]*?\.metric-card-value\s*\{[^}]*min-height: 58px[^}]*display: flex[^}]*align-items: flex-end[^}]*margin-top: 0/,
   );
   assert.match(
     css,

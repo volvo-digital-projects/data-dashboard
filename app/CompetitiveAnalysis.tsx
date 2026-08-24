@@ -10,6 +10,7 @@ import {
   type CSSProperties,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
+import DashboardHeaderLead from "./DashboardHeaderLead";
 import { buildShowroomInsights } from "./showroom-insights";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
@@ -644,33 +645,15 @@ export default function CompetitiveAnalysis({
     <main className="competitive-analysis-page">
       <div className="analysis-sticky-anchor" ref={stickyAnchorRef}>
       <div className="analysis-sticky-shell" ref={stickyShellRef}>
-        <header className="analysis-header">
-        <div className="identity-title analysis-title">
-          <h1>{displayShowroomName(selected.showroom)} 분석</h1>
-          <div className="update-status">
-            <div className="update-status-line">
-              <i aria-hidden="true" />
-              <time dateTime={accessDate.replaceAll(".", "-")}>
-                최근 업데이트 {accessDate}
-              </time>
-            </div>
-            <div className="update-status-line">
-              <i aria-hidden="true" />
-              <span>현재 Q3평가 진행중</span>
-            </div>
-          </div>
-        </div>
-        <aside
-          className="identity-insights analysis-insights"
-          aria-label={`${displayShowroomName(selected.showroom)} 분석 메시지`}
-        >
-          {analysisInsights.map((insight) => (
-            <p className={`identity-insight-row ${insight.key}`} key={insight.key}>
-              <b>{insight.label}</b>
-              <span title={insight.message}>{insight.message}</span>
-            </p>
-          ))}
-        </aside>
+        <header className="dashboard-identity-header analysis-header">
+          <DashboardHeaderLead
+            title={`${displayShowroomName(selected.showroom)} 분석`}
+            accessDate={accessDate}
+            status="현재 Q3평가 진행중"
+            insights={analysisInsights}
+            insightLabel={`${displayShowroomName(selected.showroom)} 분석 메시지`}
+            titleClassName="analysis-title"
+          />
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <Link
             className="analysis-context-item"

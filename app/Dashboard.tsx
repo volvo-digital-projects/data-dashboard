@@ -14,6 +14,7 @@ import v3sHistoryJson from "./data/v3s-history.json";
 import vocConsultationJson from "./data/voc-consultation.json";
 import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
+import DashboardHeaderLead from "./DashboardHeaderLead";
 import { buildShowroomInsights } from "./showroom-insights";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
@@ -2245,33 +2246,14 @@ export default function Dashboard({
     <main className="dashboard">
       <div className="dashboard-sticky-anchor" ref={stickyAnchorRef}>
       <div className="dashboard-sticky-shell" ref={stickyShellRef}>
-        <section className="identity-strip">
-        <div className="identity-title">
-          <h1>{displayShowroomName(selected.showroom)} 현황</h1>
-          <div className="update-status">
-            <div className="update-status-line">
-              <i aria-hidden="true" />
-              <time dateTime={accessDate.replaceAll(".", "-")}>
-                최근 업데이트 {accessDate}
-              </time>
-            </div>
-            <div className="update-status-line">
-              <i aria-hidden="true" />
-              <span>{displayUpdateTitle}</span>
-            </div>
-          </div>
-        </div>
-        <aside
-          className="identity-insights"
-          aria-label={`${displayShowroomName(selected.showroom)} 분석 메시지`}
-        >
-          {identityInsights.map((insight) => (
-            <p className={`identity-insight-row ${insight.key}`} key={insight.key}>
-              <b>{insight.label}</b>
-              <span title={insight.message}>{insight.message}</span>
-            </p>
-          ))}
-        </aside>
+        <section className="dashboard-identity-header identity-strip">
+          <DashboardHeaderLead
+            title={`${displayShowroomName(selected.showroom)} 현황`}
+            accessDate={accessDate}
+            status={displayUpdateTitle}
+            insights={identityInsights}
+            insightLabel={`${displayShowroomName(selected.showroom)} 분석 메시지`}
+          />
         <div className="identity-detail-rail">
           <dl>
             <div className="identity-analysis-entry">
