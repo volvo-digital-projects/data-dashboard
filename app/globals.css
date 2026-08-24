@@ -6948,7 +6948,7 @@ button.quarter-score-row:disabled {
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
-  padding: 10px 11px 8px;
+  padding: 9px 12px 8px;
   border-bottom: 1px solid rgba(47, 107, 138, 0.14);
 }
 
@@ -6960,14 +6960,15 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-heading > div:first-child strong {
   color: #143c58;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 800;
+  letter-spacing: -0.025em;
 }
 
 .voc-consultation-heading > div:first-child span {
   overflow: hidden;
   color: #7b8d9b;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 650;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -6982,7 +6983,7 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-cumulative small {
   color: #7b8d9b;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 700;
 }
 
@@ -6996,7 +6997,7 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-cumulative em {
-  font-size: 7px;
+  font-size: 8px;
   font-style: normal;
   font-weight: 800;
 }
@@ -7016,7 +7017,7 @@ button.quarter-score-row:disabled {
 .voc-consultation-chart-wrap {
   min-height: 0;
   flex: 1;
-  padding: 7px 9px 5px;
+  padding: 7px 12px 5px;
 }
 
 .voc-consultation-chart-head {
@@ -7029,7 +7030,7 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-chart-head > strong {
   color: #143c58;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 800;
 }
 
@@ -7037,10 +7038,10 @@ button.quarter-score-row:disabled {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
   overflow: hidden;
   color: #7b8d9b;
-  font-size: 6px;
+  font-size: 8px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -7049,33 +7050,36 @@ button.quarter-score-row:disabled {
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .voc-consultation-legend i {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   flex: 0 0 auto;
   border-radius: 2px 2px 1px 1px;
 }
 
 .voc-consultation-legend i.national {
-  background: #df6858;
+  background: #bf6253;
 }
 
 .voc-consultation-legend i.showroom {
-  background: #143c58;
+  background: #245f7d;
 }
 
 .voc-consultation-chart {
   position: relative;
-  height: 91px;
-  padding: 7px 2px 17px 20px;
+  height: 94px;
+  padding: 8px 2px 18px 22px;
   border-bottom: 1px solid rgba(47, 107, 138, 0.16);
+  border-radius: 8px 8px 3px 3px;
   background:
-    linear-gradient(to bottom, transparent 49%, rgba(226, 234, 238, 0.7) 49%, rgba(226, 234, 238, 0.7) 50%, transparent 50%);
+    linear-gradient(to top, rgba(229, 233, 238, 0.52) 1px, transparent 1px)
+      0 0 / 100% 25%,
+    linear-gradient(180deg, rgba(246, 248, 250, 0.42), rgba(241, 245, 247, 0.9));
 }
 
 .voc-consultation-axis {
@@ -7083,7 +7087,7 @@ button.quarter-score-row:disabled {
   left: 0;
   color: #8494a1;
   font-family: var(--font-latin);
-  font-size: 6px;
+  font-size: 7.5px;
   font-weight: 650;
 }
 
@@ -7092,26 +7096,26 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-axis.middle {
-  top: 38px;
+  top: 39px;
 }
 
 .voc-consultation-axis.base {
-  bottom: 14px;
+  bottom: 15px;
 }
 
 .voc-consultation-bars {
-  height: 67px;
+  height: 68px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: end;
-  gap: 4px;
+  gap: 6px;
 }
 
 .voc-consultation-year {
   min-width: 0;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 13px;
+  grid-template-rows: 1fr 16px;
   align-items: end;
   gap: 2px;
 }
@@ -7121,23 +7125,33 @@ button.quarter-score-row:disabled {
   display: flex;
   align-items: end;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
 }
 
 .voc-consultation-bar {
-  width: 13px;
-  min-height: 3px;
+  width: 21px;
+  min-height: 8px;
   position: relative;
   display: block;
-  border-radius: 3px 3px 1px 1px;
+  border-radius: 4px 4px 1px 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 9px 18px -10px rgba(47, 107, 138, 0.56);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  animation: v3s-bar-rise 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .voc-consultation-bar.national {
-  background: linear-gradient(180deg, #f0ac9f 0%, #df6858 100%);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 44%),
+    linear-gradient(180deg, #e9a494 0%, #cf735f 50%, #9d463d 100%);
 }
 
 .voc-consultation-bar.showroom {
-  background: linear-gradient(180deg, #5c96b2 0%, #143c58 100%);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2), transparent 44%),
+    linear-gradient(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%);
 }
 
 .voc-consultation-bar.missing {
@@ -7154,21 +7168,27 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-bar b {
   position: absolute;
-  bottom: calc(100% + 1px);
-  color: #173248;
+  top: 50%;
+  left: 50%;
+  color: white;
   font-family: var(--font-latin);
-  font-size: 6px;
+  font-size: 9px;
+  font-style: normal;
   line-height: 1;
-  font-weight: 800;
+  font-weight: 760;
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 4px rgba(16, 42, 67, 0.34);
+  transform: translate(-50%, -50%);
   white-space: nowrap;
 }
 
 .voc-consultation-bar.national b {
-  right: 1px;
+  font-size: 7.5px;
+  letter-spacing: -0.045em;
 }
 
 .voc-consultation-bar.showroom b {
-  left: 1px;
+  font-size: 9px;
 }
 
 .voc-consultation-year > small {
@@ -7176,7 +7196,7 @@ button.quarter-score-row:disabled {
   justify-items: center;
   color: #788b99;
   font-family: var(--font-latin);
-  font-size: 6px;
+  font-size: 9px;
   line-height: 1.05;
   font-weight: 700;
   white-space: nowrap;
@@ -7184,7 +7204,7 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-year > small em {
   color: #99a7b1;
-  font-size: 5.5px;
+  font-size: 7px;
   font-style: normal;
   font-weight: 650;
 }
@@ -7195,7 +7215,7 @@ button.quarter-score-row:disabled {
   gap: 3px 6px;
   padding: 7px 10px 8px;
   background: #f5f9fb;
-  font-size: 6.5px;
+  font-size: 7.5px;
 }
 
 .voc-consultation-footer > strong {
@@ -7221,7 +7241,7 @@ button.quarter-score-row:disabled {
 .voc-consultation-footer > small {
   grid-column: 1 / -1;
   color: #99a7b1;
-  font-size: 5.5px;
+  font-size: 7px;
   font-weight: 650;
   text-align: right;
 }
