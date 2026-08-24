@@ -710,6 +710,18 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /\.score-tier-weekly \.score-tier-heading\s*\{[^}]*padding-right: 230px/,
   );
   assert.match(
+    css,
+    /\.voc-component-tabs,\s*\.cx-component-tabs\s*\{[^}]*width: 100%[^}]*max-width: 556px[^}]*flex: 0 1 556px/,
+  );
+  assert.match(
+    css,
+    /\.voc-component-tabs\s*\{[^}]*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/,
+  );
+  assert.match(
+    css,
+    /\.cx-component-tabs\s*\{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/,
+  );
+  assert.match(
     dashboardSource,
     /const plotLeft = \(28 \/ 1360\) \* chartWidth/,
   );

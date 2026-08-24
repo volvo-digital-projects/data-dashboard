@@ -6902,24 +6902,21 @@ button.quarter-score-row:disabled {
 .voc-component-tabs,
 .cx-component-tabs {
   min-width: 0;
+  width: 100%;
+  max-width: 556px;
   display: grid;
   align-items: stretch;
+  flex: 0 1 556px;
   gap: 4px;
   margin-left: 0;
 }
 
 .voc-component-tabs {
-  width: 100%;
-  max-width: 720px;
-  flex: 1 1 720px;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .cx-component-tabs {
-  width: max-content;
-  max-width: 100%;
-  flex: 0 1 auto;
-  grid-template-columns: repeat(5, 108px);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .score-tier-heading .voc-component-chip,
