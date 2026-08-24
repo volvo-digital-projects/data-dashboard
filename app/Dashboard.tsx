@@ -891,7 +891,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
     >
       <header className="voc-consultation-heading">
         <div>
-          <strong>상담 만족도</strong>
+          <strong>VOC 상담 만족도</strong>
           <span>
             {displayShowroomName(showroom.showroom)} · 2023–2026 누적
           </span>
