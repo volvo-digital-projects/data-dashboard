@@ -235,6 +235,13 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
   cx: "Customer Experience Index · 고객경험 종합지수(글로벌)",
 };
 
+const vocComponents = [
+  { code: "01", label: "VOC종합만족도", weight: "60%" },
+  { code: "02", label: "VOC첫인상", weight: "20%" },
+  { code: "03", label: "VOC딜링", weight: "10%" },
+  { code: "04", label: "VOC해피콜", weight: "10%" },
+];
+
 const quarterValueOf = (
   item: Showroom,
   metric: MetricKey,
@@ -2521,9 +2528,24 @@ export default function Dashboard({
                 trendMetric === "voc" ? "active" : ""
               }`}
             >
-              <header className="score-tier-heading">
-                <strong>VOC</strong>
-                <span>{metricDescriptions.voc}</span>
+              <header className="score-tier-heading voc-score-heading">
+                <div className="score-tier-heading-title">
+                  <strong>VOC</strong>
+                  <span>{metricDescriptions.voc}</span>
+                </div>
+                <div
+                  className="voc-component-tabs"
+                  aria-label="VOC 평가 구성 항목"
+                >
+                  {vocComponents.map((component) => (
+                    <span className="voc-component-chip" key={component.code}>
+                      <i className="voc-component-lock" aria-hidden="true" />
+                      <b>{component.code}</b>
+                      <span>{component.label}</span>
+                      <em>({component.weight})</em>
+                    </span>
+                  ))}
+                </div>
               </header>
               <div className="weekly-score-layout">
                 <WeeklyTrend

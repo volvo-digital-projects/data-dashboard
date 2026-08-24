@@ -6871,6 +6871,91 @@ button.quarter-score-row:disabled {
   font-weight: 600;
 }
 
+.score-tier-heading-title {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.voc-score-heading {
+  align-items: center;
+}
+
+.voc-component-tabs {
+  width: min(520px, 43vw);
+  min-width: 440px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.score-tier-heading .voc-component-chip {
+  min-width: 0;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 3px 6px;
+  border: 1px solid #dbe6eb;
+  border-radius: 5px;
+  color: #385468;
+  background: linear-gradient(180deg, #f8fbfc 0%, #eef5f7 100%);
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.score-tier-heading .voc-component-chip b {
+  color: var(--navy);
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.score-tier-heading .voc-component-chip span {
+  overflow: hidden;
+  color: #385468;
+  font-size: 9px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
+
+.score-tier-heading .voc-component-chip em {
+  color: var(--blue);
+  font-family: var(--font-latin);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.voc-component-lock {
+  width: 7px;
+  height: 6px;
+  flex: 0 0 auto;
+  position: relative;
+  border: 1.5px solid var(--blue);
+  border-radius: 1px;
+}
+
+.voc-component-lock::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  top: -5px;
+  left: 0;
+  border: 1.5px solid var(--blue);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+
 .score-tier-weekly {
   position: relative;
 }
@@ -8190,6 +8275,17 @@ button.quarter-score-row:disabled {
 
   .score-tier-weekly .score-tier-heading {
     padding-right: 2px;
+  }
+
+  .voc-score-heading {
+    flex-wrap: wrap;
+  }
+
+  .voc-component-tabs {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-left: 0;
   }
 
   .score-tier-weekly .trend-wrap.compact .data-coverage {
