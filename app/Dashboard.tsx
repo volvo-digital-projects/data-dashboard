@@ -11,6 +11,7 @@ import {
 } from "react";
 import dashboardJson from "./data/showrooms.json";
 import v3sHistoryJson from "./data/v3s-history.json";
+import vocConsultationJson from "./data/voc-consultation.json";
 import weeklyJson from "./data/weekly.json";
 import { buildShowroomInsights } from "./showroom-insights";
 
@@ -114,12 +115,33 @@ type WeeklyData = {
   };
 };
 
+type VocConsultationSeries = [
+  number | null,
+  number,
+  number | null,
+  number,
+  number | null,
+  number,
+  number | null,
+  number,
+  number | null,
+  number,
+];
+
+type VocConsultationData = {
+  updatedThrough: string;
+  years: number[];
+  national: VocConsultationSeries;
+  showrooms: Record<string, VocConsultationSeries>;
+};
+
 const dashboard = dashboardJson as DashboardData;
 const v3sHistoryByCdsid = v3sHistoryJson as Record<
   string,
   HistoricalV3sPoint[]
 >;
 const weeklyDashboard = weeklyJson as WeeklyData;
+const vocConsultation = vocConsultationJson as unknown as VocConsultationData;
 const nationalV3sQuarterAverages = [
   {
     year: 2021,
@@ -816,6 +838,150 @@ function V3SPerformance({
         )}
       </section>
     </div>
+  );
+}
+
+function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
+  const national = vocConsultation.national;
+  const selected = vocConsultation.showrooms[showroom.cdsid] ?? national;
+  const cumulativeAverage = selected[0];
+  const cumulativeResponses = selected[1];
+  const nationalCumulativeAverage = national[0];
+  const nationalCumulativeResponses = national[1];
+  const cumulativeDelta =
+    cumulativeAverage === null || nationalCumulativeAverage === null
+      ? null
+      : cumulativeAverage - nationalCumulativeAverage;
+  const deltaTone =
+    cumulativeDelta === null
+      ? "neutral"
+      : cumulativeDelta > 0.049
+        ? "above"
+        : cumulativeDelta < -0.049
+          ? "below"
+          : "neutral";
+  const yearly = vocConsultation.years.map((year, index) => ({
+    year,
+    showroomAverage: selected[2 + index * 2] as number | null,
+    showroomResponses: selected[3 + index * 2] as number,
+    nationalAverage: national[2 + index * 2] as number | null,
+  }));
+  const scaleHeight = (value: number | null) =>
+    value === null ? 0 : Math.min(100, Math.max(0, ((value - 8) / 2) * 100));
+  const responseFormatter = new Intl.NumberFormat("ko-KR");
+  const knownDispatch =
+    showroom.cdsid === "6KR6834"
+      ? { dispatches: 1397, responseRate: 27.0 }
+      : null;
+  const updatedParts = vocConsultation.updatedThrough.split("-");
+  const updatedLabel = `${updatedParts[1]}.${updatedParts[2]}`;
+  const accessibleTrend = yearly
+    .map(
+      (item) =>
+        `${item.year}년 전국 ${displayNumber(item.nationalAverage)}점, ${displayShowroomName(
+          showroom.showroom,
+        )} ${displayNumber(item.showroomAverage)}점`,
+    )
+    .join(", ");
+
+  return (
+    <aside
+      className="voc-consultation-history"
+      aria-label={`${displayShowroomName(showroom.showroom)} 상담 만족도 4개년 비교`}
+    >
+      <header className="voc-consultation-heading">
+        <div>
+          <strong>상담 만족도</strong>
+          <span>
+            {displayShowroomName(showroom.showroom)} · 2023–2026 누적
+          </span>
+        </div>
+        <div className="voc-consultation-cumulative">
+          <small>누적</small>
+          <strong>{displayNumber(cumulativeAverage)}</strong>
+          <em className={deltaTone}>
+            {cumulativeDelta === null
+              ? "—"
+              : `${cumulativeDelta > 0.049 ? "▲" : cumulativeDelta < -0.049 ? "▼" : "±"} ${Math.abs(
+                  cumulativeDelta,
+                ).toFixed(1)}`}
+          </em>
+        </div>
+      </header>
+
+      <div className="voc-consultation-chart-wrap">
+        <div className="voc-consultation-chart-head">
+          <strong>4개년 추이</strong>
+          <div className="voc-consultation-legend" aria-hidden="true">
+            <span>
+              <i className="national" /> 전국
+            </span>
+            <span>
+              <i className="showroom" /> {displayShowroomName(showroom.showroom)}
+            </span>
+          </div>
+        </div>
+        <div
+          className="voc-consultation-chart"
+          role="img"
+          aria-label={accessibleTrend}
+        >
+          <span className="voc-consultation-axis top">10.0</span>
+          <span className="voc-consultation-axis middle">9.0</span>
+          <span className="voc-consultation-axis base">8.0</span>
+          <div className="voc-consultation-bars" aria-hidden="true">
+            {yearly.map((item) => (
+              <div className="voc-consultation-year" key={item.year}>
+                <div className="voc-consultation-pair">
+                  <i
+                    className="voc-consultation-bar national"
+                    style={{ height: `${scaleHeight(item.nationalAverage)}%` }}
+                  >
+                    <b>{displayNumber(item.nationalAverage)}</b>
+                  </i>
+                  <i
+                    className={`voc-consultation-bar showroom ${
+                      item.showroomAverage === null ? "missing" : ""
+                    }`}
+                    style={{ height: `${scaleHeight(item.showroomAverage)}%` }}
+                  >
+                    <b>{displayNumber(item.showroomAverage)}</b>
+                  </i>
+                </div>
+                <small>
+                  {item.year}
+                  <em>
+                    {item.year === 2026 ? "YTD · " : ""}
+                    {responseFormatter.format(item.showroomResponses)}회신
+                  </em>
+                </small>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <footer className="voc-consultation-footer">
+        <strong>{displayShowroomName(showroom.showroom)}</strong>
+        <span>
+          {responseFormatter.format(cumulativeResponses)}회신
+          {knownDispatch ? (
+            <>
+              {" "}· {responseFormatter.format(knownDispatch.dispatches)}발송 ·{" "}
+              <b>{knownDispatch.responseRate.toFixed(1)}%</b>
+            </>
+          ) : (
+            <> · 누적 {displayNumber(cumulativeAverage)}점</>
+          )}
+        </span>
+        <strong>Volvo Korea</strong>
+        <span>
+          {responseFormatter.format(nationalCumulativeResponses)}회신 · 57,972발송 ·{" "}
+          <b>23.9%</b>
+        </span>
+        <small>2026 YTD {updatedLabel} 기준</small>
+      </footer>
+    </aside>
   );
 }
 
@@ -2369,12 +2535,7 @@ export default function Dashboard({
                   metric="voc"
                   compact
                 />
-                <aside
-                  className="weekly-score-placeholder"
-                  aria-label="VOC 추가 영역 A"
-                >
-                  <strong>A</strong>
-                </aside>
+                <ConsultationSatisfactionHistory showroom={selected} />
               </div>
             </section>
             <section

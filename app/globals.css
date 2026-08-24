@@ -6930,6 +6930,302 @@ button.quarter-score-row:disabled {
   letter-spacing: 0.12em;
 }
 
+.voc-consultation-history {
+  min-width: 0;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(47, 107, 138, 0.16);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.voc-consultation-heading {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 11px 8px;
+  border-bottom: 1px solid rgba(47, 107, 138, 0.14);
+}
+
+.voc-consultation-heading > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.voc-consultation-heading > div:first-child strong {
+  color: #143c58;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.voc-consultation-heading > div:first-child span {
+  overflow: hidden;
+  color: #7b8d9b;
+  font-size: 7px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voc-consultation-cumulative {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.voc-consultation-cumulative small {
+  color: #7b8d9b;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.voc-consultation-cumulative strong {
+  color: #102f47;
+  font-family: var(--font-latin);
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.voc-consultation-cumulative em {
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.voc-consultation-cumulative em.above {
+  color: #21748f;
+}
+
+.voc-consultation-cumulative em.below {
+  color: #bd3f34;
+}
+
+.voc-consultation-cumulative em.neutral {
+  color: #758794;
+}
+
+.voc-consultation-chart-wrap {
+  min-height: 0;
+  flex: 1;
+  padding: 7px 9px 5px;
+}
+
+.voc-consultation-chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.voc-consultation-chart-head > strong {
+  color: #143c58;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.voc-consultation-legend {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  color: #7b8d9b;
+  font-size: 6px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.voc-consultation-legend span {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voc-consultation-legend i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 2px 2px 1px 1px;
+}
+
+.voc-consultation-legend i.national {
+  background: #df6858;
+}
+
+.voc-consultation-legend i.showroom {
+  background: #143c58;
+}
+
+.voc-consultation-chart {
+  position: relative;
+  height: 91px;
+  padding: 7px 2px 17px 20px;
+  border-bottom: 1px solid rgba(47, 107, 138, 0.16);
+  background:
+    linear-gradient(to bottom, transparent 49%, rgba(226, 234, 238, 0.7) 49%, rgba(226, 234, 238, 0.7) 50%, transparent 50%);
+}
+
+.voc-consultation-axis {
+  position: absolute;
+  left: 0;
+  color: #8494a1;
+  font-family: var(--font-latin);
+  font-size: 6px;
+  font-weight: 650;
+}
+
+.voc-consultation-axis.top {
+  top: 1px;
+}
+
+.voc-consultation-axis.middle {
+  top: 38px;
+}
+
+.voc-consultation-axis.base {
+  bottom: 14px;
+}
+
+.voc-consultation-bars {
+  height: 67px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+}
+
+.voc-consultation-year {
+  min-width: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 13px;
+  align-items: end;
+  gap: 2px;
+}
+
+.voc-consultation-pair {
+  height: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 2px;
+}
+
+.voc-consultation-bar {
+  width: 13px;
+  min-height: 3px;
+  position: relative;
+  display: block;
+  border-radius: 3px 3px 1px 1px;
+}
+
+.voc-consultation-bar.national {
+  background: linear-gradient(180deg, #f0ac9f 0%, #df6858 100%);
+}
+
+.voc-consultation-bar.showroom {
+  background: linear-gradient(180deg, #5c96b2 0%, #143c58 100%);
+}
+
+.voc-consultation-bar.missing {
+  height: 24% !important;
+  border: 1px dashed rgba(47, 107, 138, 0.32);
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(220, 232, 238, 0.78),
+    rgba(220, 232, 238, 0.78) 3px,
+    rgba(246, 249, 250, 0.86) 3px,
+    rgba(246, 249, 250, 0.86) 6px
+  );
+}
+
+.voc-consultation-bar b {
+  position: absolute;
+  bottom: calc(100% + 1px);
+  color: #173248;
+  font-family: var(--font-latin);
+  font-size: 6px;
+  line-height: 1;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.voc-consultation-bar.national b {
+  right: 1px;
+}
+
+.voc-consultation-bar.showroom b {
+  left: 1px;
+}
+
+.voc-consultation-year > small {
+  display: grid;
+  justify-items: center;
+  color: #788b99;
+  font-family: var(--font-latin);
+  font-size: 6px;
+  line-height: 1.05;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.voc-consultation-year > small em {
+  color: #99a7b1;
+  font-size: 5.5px;
+  font-style: normal;
+  font-weight: 650;
+}
+
+.voc-consultation-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.5fr);
+  gap: 3px 6px;
+  padding: 7px 10px 8px;
+  background: #f5f9fb;
+  font-size: 6.5px;
+}
+
+.voc-consultation-footer > strong {
+  overflow: hidden;
+  color: #143c58;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voc-consultation-footer > span {
+  color: #738693;
+  font-weight: 650;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.voc-consultation-footer > span b {
+  color: #206c8b;
+  font-weight: 800;
+}
+
+.voc-consultation-footer > small {
+  grid-column: 1 / -1;
+  color: #99a7b1;
+  font-size: 5.5px;
+  font-weight: 650;
+  text-align: right;
+}
+
 @property --one-voice-progress {
   syntax: "<number>";
   inherits: false;
@@ -7525,6 +7821,7 @@ button.quarter-score-row:disabled {
 .score-tier,
 .trend-scroll,
 .weekly-score-placeholder,
+.voc-consultation-history,
 .one-voice-contribution {
   border-radius: 10px;
 }
@@ -7537,6 +7834,7 @@ button.quarter-score-row:disabled {
 .dashboard .trend-panel .v3s-history-bar-stage,
 .dashboard .trend-panel .trend-scroll,
 .dashboard .trend-panel .weekly-score-placeholder,
+.dashboard .trend-panel .voc-consultation-history,
 .dashboard .trend-panel .one-voice-contribution {
   border-radius: var(--es90-surface-radius);
 }
@@ -7853,6 +8151,10 @@ button.quarter-score-row:disabled {
 
   .weekly-score-placeholder {
     min-height: 88px;
+  }
+
+  .voc-consultation-history {
+    min-height: 218px;
   }
 
   .one-voice-contribution {
