@@ -1,0 +1,92 @@
+"use client";
+
+import type { FormEvent } from "react";
+import { useState } from "react";
+
+export default function LoginHome({
+  knownCdsids,
+}: {
+  knownCdsids: string[];
+}) {
+  const [error, setError] = useState("");
+
+  function openDashboard(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const cdsid = String(formData.get("cdsid") ?? "").trim().toUpperCase();
+
+    if (!knownCdsids.includes(cdsid)) {
+      setError("등록된 CDSID를 다시 확인해 주세요.");
+      return;
+    }
+
+    window.location.assign(`/dashboard/${encodeURIComponent(cdsid)}`);
+  }
+
+  return (
+    <main className="login-home">
+      <div className="login-photo" aria-hidden="true" />
+
+      <section className="login-panel" aria-labelledby="login-title">
+        <div className="login-copy">
+          <h1 id="login-title">
+            Volvo Data
+            <br />
+            Dashboard
+          </h1>
+          <span className="login-rule" aria-hidden="true" />
+          <p className="login-description">
+            데이터 분석을 통해
+            <br />
+            정확한 인사이트와 더 나은 의사결정을 지원합니다.
+          </p>
+
+          <form className="cdsid-form" onSubmit={openDashboard} noValidate>
+            <label className="cdsid-field">
+              <span className="cdsid-person-icon" aria-hidden="true">
+                <i />
+                <b />
+              </span>
+              <span className="sr-only">CDSID</span>
+              <input
+                name="cdsid"
+                type="text"
+                inputMode="text"
+                autoCapitalize="characters"
+                autoComplete="off"
+                spellCheck="false"
+                minLength={4}
+                maxLength={16}
+                pattern="[A-Za-z0-9-]+"
+                placeholder="CDSID를 입력해 주세요"
+                aria-describedby={error ? "cdsid-error" : undefined}
+                aria-invalid={Boolean(error)}
+                onChange={() => error && setError("")}
+                required
+              />
+            </label>
+
+            {error ? (
+              <p className="cdsid-error" id="cdsid-error" role="alert">
+                {error}
+              </p>
+            ) : null}
+
+            <button type="submit">
+              <span className="login-mouse-icon" aria-hidden="true">
+                <i />
+              </span>
+              <strong>Data Dashboard 시작</strong>
+              <span aria-hidden="true" />
+            </button>
+          </form>
+        </div>
+
+        <footer>
+          <span>Copyright (C) Volvo Car Korea. All rights reserved.</span>
+          <span>Since 260801</span>
+        </footer>
+      </section>
+    </main>
+  );
+}

@@ -25,10 +25,14 @@ async function render(pathname = "/") {
   );
 }
 
-test("redirects the removed login route to the sample dashboard", async () => {
+test("server-renders the CDSID login route", async () => {
   const response = await render();
-  assert.ok([307, 308].includes(response.status));
-  assert.match(response.headers.get("location") ?? "", /\/dashboard\/6KR6834$/);
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Volvo Data/);
+  assert.match(html, /Dashboard/);
+  assert.match(html, /CDSID를 입력해 주세요/);
+  assert.match(html, /Data Dashboard 시작/);
 });
 
 test("server-renders the selected CDSID dashboard", async () => {
@@ -597,8 +601,8 @@ test("ships project metadata and removes the disposable starter", async () => {
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /redirect\("\/dashboard\/6KR6834"\)/);
-  assert.doesNotMatch(page, /LoginHome/);
+  assert.match(page, /LoginHome/);
+  assert.match(page, /knownCdsids/);
   assert.match(dashboardPage, /import Dashboard/);
   assert.match(dashboardPage, /isEditorEmail/);
   assert.match(criteriaPage, /CriteriaGuide/);

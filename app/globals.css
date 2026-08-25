@@ -5081,6 +5081,337 @@ input:focus-visible,
   }
 }
 
+/* Volvo Data Dashboard login */
+.login-home {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  background: #07141d;
+}
+
+.login-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("/volvo-dashboard-cover.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.login-panel {
+  width: min(790px, 48vw);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  padding: clamp(52px, 5vw, 84px) clamp(44px, 5.2vw, 88px);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 17, 25, 0.99) 0%,
+    rgba(7, 20, 29, 0.98) 69%,
+    rgba(7, 20, 29, 0.78) 84%,
+    rgba(7, 20, 29, 0) 100%
+  );
+}
+
+.login-copy {
+  width: min(100%, 390px);
+  margin-top: clamp(36px, 7vh, 70px);
+}
+
+.login-copy h1 {
+  margin: 0;
+  font-family: var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(52px, 4.35vw, 74px);
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  line-height: 1.13;
+}
+
+.login-rule {
+  width: min(330px, 86%);
+  height: 2px;
+  display: block;
+  margin: 28px 0 37px;
+  background: #f15a24;
+}
+
+.login-description {
+  margin: 0 0 66px;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-korean), var(--font-volvo), sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.85;
+}
+
+.cdsid-form {
+  display: grid;
+  gap: 22px;
+}
+
+.cdsid-field {
+  min-height: 68px;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 9px;
+  background: rgba(5, 17, 25, 0.42);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.cdsid-field:focus-within {
+  border-color: rgba(255, 255, 255, 0.82);
+  background: rgba(5, 17, 25, 0.76);
+  box-shadow: 0 0 0 3px rgba(115, 169, 193, 0.12);
+}
+
+.cdsid-person-icon {
+  width: 26px;
+  height: 30px;
+  display: block;
+  position: relative;
+  justify-self: center;
+  color: #c8d4da;
+}
+
+.cdsid-person-icon i {
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  border: 1.4px solid currentColor;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.cdsid-person-icon b {
+  width: 23px;
+  height: 15px;
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  border: 1.4px solid currentColor;
+  border-radius: 12px 12px 3px 3px;
+  border-top-color: transparent;
+}
+
+.cdsid-field input {
+  min-width: 0;
+  height: 66px;
+  padding: 0 20px 0 4px;
+  border: 0;
+  outline: 0;
+  color: #ffffff;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.cdsid-field input::placeholder {
+  color: rgba(255, 255, 255, 0.61);
+  text-transform: none;
+}
+
+.cdsid-form button {
+  min-height: 68px;
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) 50px;
+  align-items: center;
+  padding: 0 18px;
+  color: #12364a;
+  border: 0;
+  border-radius: 9px;
+  background: #f7f7f5;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.cdsid-form button:hover {
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.cdsid-form button:active {
+  transform: translateY(0);
+}
+
+.cdsid-form button strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.login-mouse-icon {
+  width: 17px;
+  height: 25px;
+  position: relative;
+  justify-self: start;
+  border: 1.7px solid currentColor;
+  border-radius: 9px;
+}
+
+.login-mouse-icon i {
+  width: 1.5px;
+  height: 7px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+.cdsid-error {
+  margin: -12px 0 -8px 4px;
+  color: #ffb29b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.login-panel footer {
+  width: min(100%, 430px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  position: absolute;
+  bottom: clamp(34px, 7vh, 70px);
+  left: clamp(44px, 5.2vw, 88px);
+  color: rgba(255, 255, 255, 0.73);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.login-panel footer span + span::before {
+  content: "\00b7";
+  margin-right: 12px;
+}
+
+@media (max-width: 1050px) {
+  .login-panel {
+    width: 56vw;
+    padding-inline: 48px;
+  }
+
+  .login-copy {
+    width: min(100%, 360px);
+  }
+
+  .login-copy h1 {
+    font-size: clamp(47px, 5.7vw, 64px);
+  }
+
+  .login-description {
+    margin-bottom: 42px;
+  }
+
+  .login-panel footer {
+    left: 48px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 760px) {
+  .login-home {
+    min-height: 100svh;
+    padding-top: 37svh;
+    overflow: visible;
+  }
+
+  .login-photo {
+    height: 43svh;
+    bottom: auto;
+    background-position: 69% top;
+    background-size: auto 43svh;
+  }
+
+  .login-photo::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 48%;
+    background: linear-gradient(0deg, #07141d 0%, rgba(7, 20, 29, 0) 100%);
+  }
+
+  .login-panel {
+    width: 100%;
+    min-height: 63svh;
+    justify-content: flex-start;
+    padding: 30px 22px 92px;
+    background: #07141d;
+  }
+
+  .login-copy {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .login-copy h1 {
+    font-size: clamp(42px, 13vw, 58px);
+    line-height: 1.04;
+  }
+
+  .login-rule {
+    margin: 20px 0 20px;
+  }
+
+  .login-description {
+    margin-bottom: 25px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .cdsid-form {
+    gap: 14px;
+  }
+
+  .cdsid-field,
+  .cdsid-form button {
+    min-height: 58px;
+  }
+
+  .cdsid-field {
+    grid-template-columns: 60px minmax(0, 1fr);
+  }
+
+  .cdsid-field input {
+    height: 56px;
+    font-size: 15px;
+  }
+
+  .cdsid-form button {
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+  }
+
+  .cdsid-form button strong {
+    font-size: 16px;
+  }
+
+  .login-panel footer {
+    right: 22px;
+    bottom: 24px;
+    left: 22px;
+    width: auto;
+    justify-content: center;
+    font-size: 9px;
+    text-align: center;
+  }
+}
+
 .hero-grid {
   grid-template-columns:
     minmax(380px, var(--dashboard-combat-share)) minmax(660px, 1fr);

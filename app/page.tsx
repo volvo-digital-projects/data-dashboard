@@ -1,7 +1,12 @@
-import { redirect } from "next/navigation";
+import LoginHome from "./LoginHome";
+import dashboardJson from "./data/showrooms.json";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  redirect("/dashboard/6KR6834");
+  const knownCdsids = (dashboardJson.showrooms as { cdsid: string }[]).map(
+    (showroom) => showroom.cdsid.toUpperCase(),
+  );
+
+  return <LoginHome knownCdsids={knownCdsids} />;
 }
