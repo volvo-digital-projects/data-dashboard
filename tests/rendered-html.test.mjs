@@ -60,6 +60,28 @@ async function login(cdsid) {
   );
 }
 
+async function logout() {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `logout-${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  return worker.fetch(
+    new Request("http://localhost/api/logout", {
+      method: "POST",
+      headers: { cookie: loginCookie, host: "localhost" },
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+}
+
 test("server-renders the CDSID login route", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -136,7 +158,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 10);
+  assert.equal(release.items.length, 11);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -184,6 +206,15 @@ test("accepts manager and VCK-ES90 logins while rejecting other CDSIDs", async (
   const denied = await login("6KR6834");
   assert.equal(denied.status, 401);
   assert.doesNotMatch(denied.headers.get("set-cookie") ?? "", /volvo-dashboard-access=/);
+});
+
+test("logs out to the login screen and clears the manager session", async () => {
+  const response = await logout();
+  assert.equal(response.status, 303);
+  assert.equal(response.headers.get("location"), "http://localhost/");
+  const setCookie = response.headers.get("set-cookie") ?? "";
+  assert.match(setCookie, /volvo-dashboard-access=/);
+  assert.match(setCookie, /Max-Age=0/i);
 });
 
 test("server-renders the selected CDSID dashboard", async () => {
@@ -245,6 +276,10 @@ test("server-renders the selected CDSID dashboard", async () => {
     new RegExp(`업데이트[\\s\\S]*?${seoulToday.replaceAll(".", "\\.")} 기준`),
   );
   assert.match(visibleHtml, /Q1, Q2 마감, 현재 Q3평가 진행중/);
+  assert.match(
+    visibleHtml,
+    /Q1, Q2 마감, 현재 Q3평가 진행중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
+  );
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);

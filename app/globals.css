@@ -531,6 +531,51 @@ input:focus-visible {
   gap: 8px;
 }
 
+.update-status-line:last-child {
+  width: 100%;
+}
+
+.dashboard-logout-form {
+  flex: 0 0 auto;
+  margin: 0 0 0 auto;
+}
+
+.dashboard-logout-button {
+  min-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 3px 8px;
+  border: 1px solid rgba(205, 229, 239, 0.34);
+  border-radius: 999px;
+  color: rgba(239, 248, 251, 0.92);
+  background: rgba(5, 27, 41, 0.24);
+  font-family: var(--font-korean);
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dashboard-logout-button::after {
+  content: "↪";
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dashboard-logout-button:hover,
+.dashboard-logout-button:focus-visible {
+  border-color: rgba(225, 242, 249, 0.58);
+  color: #ffffff;
+  background: rgba(225, 242, 249, 0.12);
+}
+
 .mobile-command,
 .mobile-comparison-summary {
   display: none;

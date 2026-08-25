@@ -35,6 +35,11 @@ export default function DashboardHeaderLead({
           <div className="update-status-line">
             <i aria-hidden="true" />
             <span>{status}</span>
+            <form className="dashboard-logout-form" action="/api/logout" method="post">
+              <button className="dashboard-logout-button" type="submit">
+                로그아웃
+              </button>
+            </form>
           </div>
         </div>
       </div>
