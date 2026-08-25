@@ -15,6 +15,7 @@ import vocConsultationJson from "./data/voc-consultation.json";
 import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
 import combatSummaryStyles from "./CombatSummary.module.css";
+import v3sQuarterSummaryStyles from "./V3SQuarterSummary.module.css";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import {
@@ -676,20 +677,33 @@ function V3SPerformance({
       aria-label="V3S 분기 및 5개년 성과"
     >
       <section className="v3s-quarter-panel">
-        <header className="v3s-subhead">
+        <header
+          className={`v3s-subhead ${
+            compact ? v3sQuarterSummaryStyles.compactSubhead : ""
+          }`}
+        >
           <div>
             <h3>분기 평가</h3>
           </div>
-          <div className="v3s-cumulative">
+          <div
+            className={`v3s-cumulative ${v3sQuarterSummaryStyles.inlineCumulative} ${
+              compact ? v3sQuarterSummaryStyles.compactCumulative : ""
+            }`}
+            aria-label={`2026 누적 평균 ${displayNumber(cumulativeAverage)}점`}
+          >
             <span>2026 누적 평균</span>
-            <strong>
+            <strong className={v3sQuarterSummaryStyles.value}>
               {displayNumber(cumulativeAverage)}
-              <small>점</small>
             </strong>
+            <small className={v3sQuarterSummaryStyles.unit}>점</small>
           </div>
         </header>
 
-        <div className="v3s-quarter-bars">
+        <div
+          className={`v3s-quarter-bars ${
+            compact ? v3sQuarterSummaryStyles.compactBars : ""
+          }`}
+        >
           {quarterScores.map((quarter, index) => (
             <div
               className={`v3s-quarter-column ${quarter.state} ${
@@ -700,7 +714,9 @@ function V3SPerformance({
               key={quarter.label}
             >
               <div
-                className="v3s-bar-stage"
+                className={`v3s-bar-stage ${
+                  compact ? v3sQuarterSummaryStyles.compactStage : ""
+                }`}
                 aria-label={`${quarter.label} ${
                   quarter.value === null
                     ? quarter.statusText

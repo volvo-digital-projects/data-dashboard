@@ -135,7 +135,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 3);
+  assert.equal(release.items.length, 4);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2362,6 +2362,38 @@ test("matches the requested dashboard headings to the ES90 waitlist title typogr
   assert.match(englishRule[1], /font-weight: 800;/);
   assert.match(englishRule[1], /letter-spacing: 0\.02em;/);
   assert.doesNotMatch(englishRule[1], /font-size:/);
+});
+
+test("keeps the V3S cumulative average on one line and gives the bars the recovered height", async () => {
+  const [dashboardSource, summaryCss] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/V3SQuarterSummary.module.css", import.meta.url),
+      "utf8",
+    ),
+  ]);
+
+  assert.match(
+    dashboardSource,
+    /aria-label=\{`2026 누적 평균 \$\{displayNumber\(cumulativeAverage\)\}점`\}/,
+  );
+  assert.match(
+    dashboardSource,
+    /<span>2026 누적 평균<\/span>[\s\S]*?className=\{v3sQuarterSummaryStyles\.value\}[\s\S]*?className=\{v3sQuarterSummaryStyles\.unit\}>점<\/small>/,
+  );
+  assert.match(
+    summaryCss,
+    /\.inlineCumulative\s*\{[^}]*display: inline-flex[^}]*white-space: nowrap/,
+  );
+  assert.match(
+    summaryCss,
+    /\.compactCumulative > \.value\s*\{[^}]*font-size: 16px !important/,
+  );
+  assert.match(summaryCss, /\.compactBars\s*\{[^}]*height: 98px !important/);
+  assert.match(
+    summaryCss,
+    /\.compactBars \.compactStage\s*\{[^}]*height: 66px !important/,
+  );
 });
 
 test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam Daechi Q2 photos", async () => {
