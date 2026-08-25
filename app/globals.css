@@ -8880,7 +8880,7 @@ body {
   .dashboard-identity-header {
     position: relative;
     isolation: isolate;
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid rgba(104, 167, 198, 0.22);
     border-bottom: 0;
     border-radius: 0;

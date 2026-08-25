@@ -998,6 +998,30 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
 });
 
+test("restores the profile showroom switcher for all viewers", async () => {
+  const [dashboardSource, css] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(
+    dashboardSource,
+    /aria-label=\{`현재 전시장을 제외한 \$\{dashboard\.showrooms\.length - 1\}개 전시장`\}/,
+  );
+  assert.match(
+    dashboardSource,
+    /dashboard\.showrooms[\s\S]*?\.filter\(\(item\) => item\.cdsid !== selected\.cdsid\)[\s\S]*?\.map/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /\{viewer\.isEditor \? \([\s\S]*?<select/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header\s*\{[^}]*position: relative;[^}]*isolation: isolate;[^}]*overflow: visible;/,
+  );
+});
+
 test("renders national score labels above the actual trend line", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),

@@ -2363,7 +2363,9 @@ export default function Dashboard({
             type="button"
             onClick={() => setProfileOpen((open) => !open)}
             aria-expanded={profileOpen}
-            aria-label={`${selected.manager} 지점장 프로필`}
+            aria-haspopup="listbox"
+            aria-controls="showroom-switcher"
+            aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
           >
             <span className="identity-profile-icon" aria-hidden="true" />
             <span className="identity-profile-role">지점장</span>
@@ -2371,42 +2373,31 @@ export default function Dashboard({
           </button>
         </div>
         {profileOpen && (
-          <div className="profile-popover">
-            {viewer.isEditor ? (
-              <>
-                <label>
-                  <span className="sr-only">CDSID 프로필</span>
-                  <select
-                    value={selectedCode}
-                    onChange={(event) => {
-                      setSelectedCode(event.target.value);
-                      setProfileOpen(false);
-                    }}
-                  >
-                    {dashboard.showrooms.map((item) => (
-                      <option key={item.cdsid} value={item.cdsid}>
-                        {item.cdsid.padEnd(showroomCodeWidth, "\u2007")} ·{" "}
-                        {displayShowroomName(item.showroom)} ·{" "}
-                        {item.manager}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </>
-            ) : (
-              <>
-                <div>
-                  <span>MY CDSID</span>
-                  <strong>
-                    {selected.cdsid} · {displayShowroomName(selected.showroom)}
-                  </strong>
-                </div>
-                <Link className="profile-home-link" href="/">
-                  CDSID 다시 입력
-                </Link>
-                <small>VIEW ONLY 계정은 선택한 전시장 데이터를 조회합니다.</small>
-              </>
-            )}
+          <div className="profile-popover" id="showroom-switcher">
+            <label>
+              <span className="sr-only">다른 전시장 선택</span>
+              <select
+                value=""
+                aria-label={`현재 전시장을 제외한 ${dashboard.showrooms.length - 1}개 전시장`}
+                onChange={(event) => {
+                  if (!event.target.value) return;
+                  setSelectedCode(event.target.value);
+                  setProfileOpen(false);
+                }}
+              >
+                <option value="" disabled>
+                  다른 전시장 선택 ({dashboard.showrooms.length - 1}개)
+                </option>
+                {dashboard.showrooms
+                  .filter((item) => item.cdsid !== selected.cdsid)
+                  .map((item) => (
+                    <option key={item.cdsid} value={item.cdsid}>
+                      {item.cdsid.padEnd(showroomCodeWidth, "\u2007")} ·{" "}
+                      {displayShowroomName(item.showroom)} · {item.manager}
+                    </option>
+                  ))}
+              </select>
+            </label>
           </div>
         )}
         </section>
