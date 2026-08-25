@@ -383,6 +383,13 @@ function AppealBadge({
       description: "확정된 항목으로 사후 보정 대상이 아닙니다.",
     },
   }[type];
+  const emphasizedPrefix =
+    labelOverride?.startsWith("VOC해피콜")
+      ? "VOC해피콜"
+      : labelOverride?.startsWith("신차해피콜")
+        ? "신차해피콜"
+        : null;
+  const displayLabel = labelOverride ?? content.label;
 
   return (
     <span
@@ -390,7 +397,16 @@ function AppealBadge({
       title={`${labelOverride ?? content.label}: ${content.description}`}
     >
       <span aria-hidden="true">{content.icon}</span>
-      {labelOverride ?? content.label}
+      <span className="appeal-badge-label">
+        {emphasizedPrefix ? (
+          <>
+            <span className="appeal-badge-key">{emphasizedPrefix}</span>
+            {displayLabel.slice(emphasizedPrefix.length)}
+          </>
+        ) : (
+          displayLabel
+        )}
+      </span>
     </span>
   );
 }
@@ -2361,7 +2377,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
-      appealLabel: "보정기간 내 교차검증",
+      appealLabel: "V3S 보정기간(최초발표 후, 영업일 2일내) 내 교차검증 진행",
     },
     {
       key: "voc" as const,
@@ -2369,7 +2385,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
       average: quarterAverageOf("voc", metricQuarters.voc),
       appeal: "partial" as const,
-      appealLabel: "VOC해피콜만 교차검증 가능",
+      appealLabel: "VOC해피콜만 교차검증 후 사후보정 가능",
     },
     {
       key: "cx" as const,
@@ -2377,7 +2393,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
       average: quarterAverageOf("cx", metricQuarters.cx),
       appeal: "partial" as const,
-      appealLabel: "신차해피콜 사후보정 가능",
+      appealLabel: "신차해피콜만 교차검증 후 사후보정 가능",
     },
   ];
   const warningCount = kpis.filter((item) => item.value < item.average).length;

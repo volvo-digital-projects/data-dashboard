@@ -158,7 +158,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 12);
+  assert.equal(release.items.length, 13);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -304,9 +304,20 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="signal-icon caution" aria-hidden="true">▼<\/span>주의 필요/,
   );
   assert.match(html, /CX Index/);
-  assert.match(visibleHtml, /VOC해피콜만 교차검증 가능<\/span>/);
-  assert.match(visibleHtml, /신차해피콜 사후보정 가능<\/span>/);
-  assert.match(visibleHtml, /보정기간 내 교차검증<\/span>/);
+  assert.match(visibleHtml, /VOC해피콜<\/span>만 교차검증 후 사후보정 가능/);
+  assert.match(visibleHtml, /신차해피콜<\/span>만 교차검증 후 사후보정 가능/);
+  assert.match(
+    visibleHtml,
+    /V3S 보정기간\(최초발표 후, 영업일 2일내\) 내 교차검증 진행/,
+  );
+  assert.match(
+    visibleHtml,
+    /class="appeal-badge-key">VOC해피콜<\/span>/,
+  );
+  assert.match(
+    visibleHtml,
+    /class="appeal-badge-key">신차해피콜<\/span>/,
+  );
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);
   assert.equal((visibleHtml.match(/<span>\/ 100점 만점<\/span>/g) ?? []).length, 2);
