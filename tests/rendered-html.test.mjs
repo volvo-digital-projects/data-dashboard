@@ -92,6 +92,8 @@ test("server-renders the CDSID login route", async () => {
   const html = await response.text();
   assert.match(html, /Volvo Data/);
   assert.match(html, /Dashboard/);
+  assert.doesNotMatch(html, /데이터 분석을 통해/);
+  assert.match(html, /정확한 인사이트와 더 나은 의사결정을 지원합니다\./);
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
   assert.match(html, /접속 현황/);
@@ -190,7 +192,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 20);
+  assert.equal(release.items.length, 21);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

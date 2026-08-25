@@ -99,8 +99,6 @@ export default function LoginHome() {
           </h1>
           <span className="login-rule" aria-hidden="true" />
           <p className="login-description">
-            데이터 분석을 통해
-            <br />
             정확한 인사이트와 더 나은 의사결정을 지원합니다.
           </p>
 
