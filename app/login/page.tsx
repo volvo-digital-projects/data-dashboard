@@ -1,7 +1,9 @@
 import LoginHome from "../LoginHome";
+import { getLoginStats } from "../login-stats";
 
 export const dynamic = "force-dynamic";
 
-export default function LoginPage() {
-  return <LoginHome />;
+export default async function LoginPage() {
+  const initialStats = await getLoginStats();
+  return <LoginHome initialStats={initialStats} />;
 }

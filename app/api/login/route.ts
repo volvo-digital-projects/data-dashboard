@@ -4,6 +4,7 @@ import {
   LOGIN_COOKIE_NAME,
   LOGIN_COOKIE_VALUE,
 } from "../../login-session";
+import { recordLoginVisit } from "../../login-stats";
 
 type LoginAccount = {
   cdsid: string;
@@ -15,6 +16,10 @@ const loginTargets = new Map(
     account.cdsid.toUpperCase(),
     account.dashboardCdsid.toUpperCase(),
   ]),
+);
+
+const countedCdsids = new Set(
+  (loginAccessJson.countedCdsids as string[]).map((cdsid) => cdsid.toUpperCase()),
 );
 
 export async function POST(request: Request) {
@@ -32,6 +37,10 @@ export async function POST(request: Request) {
       { message: "로그인 권한이 등록된 CDSID를 다시 확인해 주세요." },
       { status: 401 },
     );
+  }
+
+  if (countedCdsids.has(cdsid)) {
+    await recordLoginVisit(cdsid);
   }
 
   const response = NextResponse.json({

@@ -46,3 +46,9 @@ export const oneVoiceSyncGaps = sqliteTable("one_voice_sync_gaps", {
     .default(sql`CURRENT_TIMESTAMP`),
   resolvedAt: text("resolved_at"),
 });
+
+export const dashboardLoginVisitors = sqliteTable("dashboard_login_visitors", {
+  visitorHash: text("visitor_hash").primaryKey(),
+  firstSeenAt: text("first_seen_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  lastSeenAt: text("last_seen_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});

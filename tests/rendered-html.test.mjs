@@ -108,9 +108,9 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /Data Dashboard 시작/);
   assert.match(html, /접속 현황/);
   assert.match(html, /오늘/);
-  assert.match(html, /86(?:<!-- -->)?명/);
+  assert.match(html, /0(?:<!-- -->)?명/);
   assert.match(html, /누적/);
-  assert.match(html, /1,265(?:<!-- -->)?명/);
+  assert.doesNotMatch(html, /86(?:<!-- -->)?명|1,265(?:<!-- -->)?명/);
   assert.match(html, /UPDATE/);
   assert.match(html, /Since 260831/);
   assert.match(
@@ -245,7 +245,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 36);
+  assert.equal(release.items.length, 37);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -268,6 +268,18 @@ test("ships the blue-row manager allowlist and administrator accounts", async ()
   );
   assert.equal(loginAccess.accounts.length, 47);
   assert.equal(new Set(loginAccess.accounts.map((account) => account.cdsid)).size, 47);
+  assert.equal(loginAccess.countedCdsids.length, 46);
+  assert.equal(new Set(loginAccess.countedCdsids).size, 46);
+  assert.deepEqual(
+    new Set(loginAccess.countedCdsids),
+    new Set(
+      loginAccess.accounts
+        .map((account) => account.cdsid)
+        .filter((cdsid) => cdsid !== "VCK-ES90"),
+    ),
+  );
+  assert.ok(loginAccess.countedCdsids.includes("S-YUN7"));
+  assert.ok(!loginAccess.countedCdsids.includes("VCK-ES90"));
   assert.deepEqual(
     loginAccess.accounts.find((account) => account.cdsid === "K-KIM16"),
     { cdsid: "K-KIM16", dashboardCdsid: "6KR6834" },
@@ -280,6 +292,36 @@ test("ships the blue-row manager allowlist and administrator accounts", async ()
     loginAccess.accounts.find((account) => account.cdsid === "S-YUN7"),
     { cdsid: "S-YUN7", dashboardCdsid: "6KR6834" },
   );
+});
+
+test("counts only manager logins through privacy-safe Supabase and D1 sync", async () => {
+  const [loginRoute, loginStats, statsRoute, pageSource, loginSource, schema, migration] =
+    await Promise.all([
+      readFile(new URL("../app/api/login/route.ts", import.meta.url), "utf8"),
+      readFile(new URL("../app/login-stats.ts", import.meta.url), "utf8"),
+      readFile(new URL("../app/api/login-stats/route.ts", import.meta.url), "utf8"),
+      readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/LoginHome.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../db/schema.ts", import.meta.url), "utf8"),
+      readFile(
+        new URL("../supabase/volvo-dashboard-login-stats.sql", import.meta.url),
+        "utf8",
+      ),
+    ]);
+
+  assert.match(loginRoute, /countedCdsids\.has\(cdsid\)[\s\S]*?recordLoginVisit\(cdsid\)/);
+  assert.match(loginStats, /LOGIN_STATS_HASH_SALT/);
+  assert.match(loginStats, /crypto\.subtle\.digest\("SHA-256"/);
+  assert.match(loginStats, /record_volvo_dashboard_visit/);
+  assert.match(loginStats, /get_volvo_dashboard_visit_stats/);
+  assert.match(loginStats, /dashboard_login_visitors/);
+  assert.match(statsRoute, /Cache-Control/);
+  assert.match(pageSource, /getLoginStats\(\)/);
+  assert.match(loginSource, /\/api\/login-stats\?t=/);
+  assert.match(schema, /dashboardLoginVisitors/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /timezone\('Asia\/Seoul'/);
+  assert.doesNotMatch(migration, /\bcdsid\s+text/i);
 });
 
 test("accepts manager and administrator logins while rejecting other CDSIDs", async () => {

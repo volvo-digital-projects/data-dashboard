@@ -3,13 +3,11 @@
 import type { FormEvent } from "react";
 import { useEffect, useState } from "react";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
+import type { LoginStats } from "./login-stats";
 
 const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid";
 const VALID_CDSID_PATTERN = /^[A-Z0-9-]{4,16}$/;
-const LOGIN_ACCESS_STATS = {
-  today: 86,
-  cumulative: 1_265,
-} as const;
+const LOGIN_STATS_REFRESH_INTERVAL = 60_000;
 
 function formatSeoulTimestamp(date: Date) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -25,12 +23,17 @@ function formatSeoulTimestamp(date: Date) {
   return `${value.year}-${value.month}-${value.day} ${value.hour}:${value.minute}`;
 }
 
-export default function LoginHome() {
+export default function LoginHome({
+  initialStats = { today: 0, cumulative: 0 },
+}: {
+  initialStats?: LoginStats;
+}) {
   const [cdsid, setCdsid] = useState("");
   const [rememberedCdsid, setRememberedCdsid] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loginStats, setLoginStats] = useState(initialStats);
 
   useEffect(() => {
     try {
@@ -44,6 +47,52 @@ export default function LoginHome() {
     } catch {
       // The login remains fully usable when browser storage is unavailable.
     }
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const refreshLoginStats = async () => {
+      try {
+        const response = await fetch(`/api/login-stats?t=${Date.now()}`, {
+          cache: "no-store",
+          headers: { accept: "application/json" },
+        });
+        if (!response.ok) return;
+        const nextStats = (await response.json()) as Partial<LoginStats>;
+        if (
+          mounted &&
+          Number.isFinite(nextStats.today) &&
+          Number.isFinite(nextStats.cumulative)
+        ) {
+          setLoginStats({
+            today: Math.max(0, Math.trunc(Number(nextStats.today))),
+            cumulative: Math.max(0, Math.trunc(Number(nextStats.cumulative))),
+          });
+        }
+      } catch {
+        // Keep the last verified counts during a temporary network failure.
+      }
+    };
+
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") void refreshLoginStats();
+    };
+
+    void refreshLoginStats();
+    const timer = window.setInterval(
+      refreshLoginStats,
+      LOGIN_STATS_REFRESH_INTERVAL,
+    );
+    window.addEventListener("pageshow", refreshLoginStats);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(timer);
+      window.removeEventListener("pageshow", refreshLoginStats);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
   }, []);
 
   useEffect(() => {
@@ -163,10 +212,10 @@ export default function LoginHome() {
             <span className="login-access-stats">
               <small>접속 현황</small>
               <span>
-                오늘 <strong>{LOGIN_ACCESS_STATS.today.toLocaleString("ko-KR")}명</strong>
+                오늘 <strong>{loginStats.today.toLocaleString("ko-KR")}명</strong>
               </span>
               <span>
-                누적 <strong>{LOGIN_ACCESS_STATS.cumulative.toLocaleString("ko-KR")}명</strong>
+                누적 <strong>{loginStats.cumulative.toLocaleString("ko-KR")}명</strong>
               </span>
             </span>
             <time dateTime={updatedAt ? updatedAt.replace(" ", "T") : undefined}>
