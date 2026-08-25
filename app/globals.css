@@ -7188,8 +7188,7 @@ button.quarter-score-row:disabled {
   width: 14px;
   height: 2px;
   position: relative;
-  border-radius: 999px;
-  background: #7a5cc7;
+  background: var(--es90-orange);
 }
 
 .voc-consultation-legend i.response-line::after {
@@ -7198,11 +7197,10 @@ button.quarter-score-row:disabled {
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px solid #7a5cc7;
-  border-radius: 50%;
+  border: 1px solid var(--es90-orange);
   background: #ffffff;
   content: "";
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .voc-consultation-chart {
@@ -7267,7 +7265,7 @@ button.quarter-score-row:disabled {
   position: absolute;
   right: 0;
   z-index: 3;
-  color: #7a5cc7;
+  color: var(--es90-orange);
   font-family: var(--font-latin);
   font-size: 7px;
   line-height: 1;
@@ -7299,10 +7297,11 @@ button.quarter-score-row:disabled {
 
 .voc-response-rate-line-layer polyline {
   fill: none;
-  stroke: #7a5cc7;
+  stroke: var(--es90-orange);
   stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 4;
   vector-effect: non-scaling-stroke;
 }
 
@@ -7313,16 +7312,15 @@ button.quarter-score-row:disabled {
 }
 
 .voc-response-rate-point i {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   position: absolute;
   top: 0;
   left: 0;
-  border: 2px solid #7a5cc7;
-  border-radius: 50%;
+  border: 1.5px solid var(--es90-orange);
   background: #ffffff;
-  box-shadow: 0 1px 3px rgba(87, 63, 152, 0.2);
-  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 3px rgba(183, 67, 21, 0.2);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .voc-response-rate-point b {
@@ -7331,7 +7329,7 @@ button.quarter-score-row:disabled {
   left: 0;
   padding: 1px 3px;
   border-radius: 3px;
-  color: #6544b5;
+  color: #c64518;
   background: rgba(255, 255, 255, 0.9);
   font-family: var(--font-latin);
   font-size: 7px;

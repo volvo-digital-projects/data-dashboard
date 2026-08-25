@@ -1877,7 +1877,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.voc-response-rate-line-layer polyline\s*\{[^}]*stroke: #7a5cc7;[^}]*stroke-width: 1\.8;/,
+    /\.voc-response-rate-line-layer polyline\s*\{[^}]*stroke: var\(--es90-orange\);[^}]*stroke-width: 1\.8;[^}]*stroke-linecap: butt;[^}]*stroke-linejoin: miter;[^}]*stroke-miterlimit: 4;/,
+  );
+  assert.match(
+    css,
+    /\.voc-response-rate-point i\s*\{[^}]*width: 6px;[^}]*height: 6px;[^}]*border: 1\.5px solid var\(--es90-orange\);[^}]*transform: translate\(-50%, -50%\) rotate\(45deg\);/,
   );
   assert.doesNotMatch(css, /\.voc-response-rate-panel\s*\{/);
   assert.match(
