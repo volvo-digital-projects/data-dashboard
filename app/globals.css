@@ -7207,7 +7207,7 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-chart {
   position: relative;
-  height: 104px;
+  height: 110px;
   padding: 10px 2px 18px 22px;
   border-bottom: 1px solid rgba(47, 107, 138, 0.16);
   border-radius: 8px 8px 3px 3px;
@@ -7285,7 +7285,7 @@ button.quarter-score-row:disabled {
 
 .voc-response-rate-line-layer {
   position: absolute;
-  inset: 10px 2px 18px 22px;
+  inset: 10px 2px 24px 22px;
   z-index: 2;
   pointer-events: none;
 }
@@ -7431,23 +7431,24 @@ button.quarter-score-row:disabled {
   width: 45px;
   min-height: 14px;
   position: absolute;
-  top: calc(100% + 2px);
+  top: calc(100% + 7px);
   left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  color: #788b99;
+  color: var(--muted);
   font-family: var(--font-latin);
   font-size: 9px;
-  line-height: 1.05;
-  font-weight: 700;
+  line-height: normal;
+  font-weight: 400;
   text-align: center;
   transform: translateX(-50%);
   white-space: nowrap;
 }
 
 .voc-consultation-year > small em {
+  margin-top: 1px;
   color: #99a7b1;
   font-size: 7px;
   font-style: normal;

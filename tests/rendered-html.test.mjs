@@ -1869,7 +1869,11 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.voc-response-rate-line-layer\s*\{[^}]*position: absolute;[^}]*inset: 10px 2px 18px 22px;[^}]*pointer-events: none;/,
+    /\.voc-consultation-year > small\s*\{[^}]*top: calc\(100% \+ 7px\);[^}]*color: var\(--muted\);[^}]*font-family: var\(--font-latin\);[^}]*font-size: 9px;[^}]*font-weight: 400;/,
+  );
+  assert.match(
+    css,
+    /\.voc-response-rate-line-layer\s*\{[^}]*position: absolute;[^}]*inset: 10px 2px 24px 22px;[^}]*pointer-events: none;/,
   );
   assert.match(
     css,
