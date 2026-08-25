@@ -5162,8 +5162,25 @@ input:focus-visible,
 }
 
 /* Volvo Data Dashboard login */
+html:has(.login-home) {
+  scrollbar-gutter: auto;
+  background: #07141d;
+}
+
+body:has(.login-home) {
+  min-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: #07141d;
+}
+
 .login-home {
+  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
   position: relative;
   overflow: hidden;
   color: #ffffff;

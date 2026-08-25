@@ -109,6 +109,18 @@ test("server-renders the CDSID login route", async () => {
     css,
     /\.login-mouse-icon\s*\{[^}]*top: 50%;[^}]*height: 22px;[^}]*transform: translateY\(-50%\);/,
   );
+  assert.match(
+    css,
+    /html:has\(\.login-home\)\s*\{[^}]*scrollbar-gutter: auto;[^}]*background: #07141d;/,
+  );
+  assert.match(
+    css,
+    /body:has\(\.login-home\)\s*\{[^}]*min-width: 100%;[^}]*min-height: 100dvh;[^}]*overflow-x: hidden;[^}]*background: #07141d;/,
+  );
+  assert.match(
+    css,
+    /\.login-home\s*\{[^}]*width: 100%;[^}]*min-height: 100dvh;/,
+  );
 
   const explicitLoginResponse = await render("/login");
   assert.equal(explicitLoginResponse.status, 200);
@@ -170,7 +182,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 18);
+  assert.equal(release.items.length, 19);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -839,6 +851,9 @@ test("ships project metadata and removes the disposable starter", async () => {
   assert.match(criteriaPage, /CriteriaGuide/);
   assert.match(analysisPage, /CompetitiveAnalysis/);
   assert.match(layout, /generateMetadata/);
+  assert.match(layout, /viewportFit: "cover"/);
+  assert.match(layout, /themeColor: "#07141d"/);
+  assert.match(layout, /statusBarStyle: "black-translucent"/);
   assert.match(layout, /볼보 관리자 전용/);
   assert.match(layout, /og\.png/);
   assert.match(layout, /lang="ko"/);
