@@ -214,7 +214,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 32);
+  assert.equal(release.items.length, 33);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -231,12 +231,12 @@ test("protects dashboard routes behind the manager CDSID login", async () => {
   assert.equal(staleSessionResponse.headers.get("location"), "http://localhost/");
 });
 
-test("ships the blue-row manager allowlist and VCK-ES90 account", async () => {
+test("ships the blue-row manager allowlist and administrator accounts", async () => {
   const loginAccess = JSON.parse(
     await readFile(new URL("../app/data/login-access.json", import.meta.url), "utf8"),
   );
-  assert.equal(loginAccess.accounts.length, 46);
-  assert.equal(new Set(loginAccess.accounts.map((account) => account.cdsid)).size, 46);
+  assert.equal(loginAccess.accounts.length, 47);
+  assert.equal(new Set(loginAccess.accounts.map((account) => account.cdsid)).size, 47);
   assert.deepEqual(
     loginAccess.accounts.find((account) => account.cdsid === "K-KIM16"),
     { cdsid: "K-KIM16", dashboardCdsid: "6KR6834" },
@@ -245,10 +245,14 @@ test("ships the blue-row manager allowlist and VCK-ES90 account", async () => {
     loginAccess.accounts.find((account) => account.cdsid === "VCK-ES90"),
     { cdsid: "VCK-ES90", dashboardCdsid: "6KR6834" },
   );
+  assert.deepEqual(
+    loginAccess.accounts.find((account) => account.cdsid === "S-YUN7"),
+    { cdsid: "S-YUN7", dashboardCdsid: "6KR6834" },
+  );
 });
 
-test("accepts manager and VCK-ES90 logins while rejecting other CDSIDs", async () => {
-  for (const cdsid of ["K-KIM16", "vck-es90"]) {
+test("accepts manager and administrator logins while rejecting other CDSIDs", async () => {
+  for (const cdsid of ["K-KIM16", "vck-es90", "s-yun7"]) {
     const response = await login(cdsid);
     assert.equal(response.status, 200);
     const setCookie = response.headers.get("set-cookie") ?? "";
