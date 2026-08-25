@@ -5143,6 +5143,23 @@ input:focus-visible,
 html:has(.login-home) {
   scrollbar-gutter: auto;
   background: #07141d;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(5, 17, 25, 0.97) 0%,
+      rgba(6, 19, 28, 0.94) 22%,
+      rgba(7, 20, 29, 0.88) 38%,
+      rgba(7, 20, 29, 0.76) 52%,
+      rgba(7, 20, 29, 0.61) 64%,
+      rgba(7, 20, 29, 0.43) 75%,
+      rgba(7, 20, 29, 0.25) 85%,
+      rgba(7, 20, 29, 0.1) 93%,
+      rgba(7, 20, 29, 0) 100%
+    ),
+    url("/volvo-dashboard-cover-logo-small.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 body:has(.login-home) {
@@ -5170,6 +5187,29 @@ body:has(.login-home) {
   overflow: hidden;
   color: #ffffff;
   background: #07141d;
+}
+
+.login-home::before {
+  content: "";
+  position: fixed;
+  z-index: 1;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  bottom: calc(-1 * max(32px, env(safe-area-inset-bottom, 0px)));
+  left: calc(-1 * env(safe-area-inset-left, 0px));
+  width: calc(min(790px, 48vw) + env(safe-area-inset-left, 0px));
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 17, 25, 0.97) 0%,
+    rgba(6, 19, 28, 0.94) 22%,
+    rgba(7, 20, 29, 0.88) 38%,
+    rgba(7, 20, 29, 0.76) 52%,
+    rgba(7, 20, 29, 0.61) 64%,
+    rgba(7, 20, 29, 0.43) 75%,
+    rgba(7, 20, 29, 0.25) 85%,
+    rgba(7, 20, 29, 0.1) 93%,
+    rgba(7, 20, 29, 0) 100%
+  );
 }
 
 .login-photo {
@@ -5206,7 +5246,9 @@ body:has(.login-home) {
 
 .login-panel {
   width: min(790px, 48vw);
+  min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -5506,6 +5548,10 @@ body:has(.login-home) {
 }
 
 @media (max-width: 1050px) {
+  .login-home::before {
+    width: calc(56vw + env(safe-area-inset-left, 0px));
+  }
+
   .login-panel {
     width: 56vw;
     padding-inline: 48px;
@@ -5529,6 +5575,10 @@ body:has(.login-home) {
 }
 
 @media (max-width: 760px) {
+  .login-home::before {
+    display: none;
+  }
+
   .login-volvo-wordmark {
     top: max(18px, calc(env(safe-area-inset-top, 0px) + 12px));
     font-size: 18px;

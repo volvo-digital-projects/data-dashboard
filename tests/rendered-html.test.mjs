@@ -124,11 +124,23 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
+    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.97\) 0%[\s\S]*?volvo-dashboard-cover-logo-small\.png[^}]*background-size: cover;/,
+  );
+  assert.match(
+    css,
     /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover-logo-small\.png[^}]*cover no-repeat/,
   );
   assert.match(
     css,
     /\.login-home\s*\{[^}]*width: 100%;[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*isolation: isolate/,
+  );
+  assert.match(
+    css,
+    /\.login-home::before\s*\{[^}]*position: fixed;[^}]*bottom: calc\(-1 \* max\(32px, env\(safe-area-inset-bottom, 0px\)\)\);[^}]*width: calc\(min\(790px, 48vw\) \+ env\(safe-area-inset-left, 0px\)\);/,
+  );
+  assert.match(
+    css,
+    /\.login-panel\s*\{[^}]*min-height: 100vh;[^}]*min-height: 100svh;[^}]*min-height: 100dvh;/,
   );
   assert.match(
     css,
@@ -214,7 +226,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 33);
+  assert.equal(release.items.length, 34);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
