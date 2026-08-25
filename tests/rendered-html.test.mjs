@@ -1472,7 +1472,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(css, /--ink: #111827/);
   assert.match(css, /--secondary: #667085/);
-  assert.match(css, /--muted: #98a2b3/);
+  assert.match(css, /--muted: #7b8796/);
   assert.match(css, /--navy: #102a43/);
   assert.match(css, /--blue: #2f6b8a/);
   assert.match(css, /--good: #1f8f6a/);

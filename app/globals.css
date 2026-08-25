@@ -111,7 +111,7 @@
   --es90-orange: #f15a24;
   --es90-surface-radius: 6px;
   --secondary: #66757d;
-  --muted: #8a969c;
+  --muted: #7b8796;
   --font-volvo: "Volvo Centum Web";
   --font-korean: "Paperlogy 5";
   --dashboard-page-max: 1500px;
@@ -4493,7 +4493,7 @@ input:focus-visible {
   --status-caution: #c58a1b;
   --status-caution-soft: #fbf2df;
   --secondary: #667085;
-  --muted: #98a2b3;
+  --muted: #7b8796;
   --font-korean:
     "Pretendard Variable", "SUIT Variable", "Pretendard", "SUIT",
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
