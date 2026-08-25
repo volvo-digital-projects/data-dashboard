@@ -110,6 +110,11 @@ test("server-renders the selected CDSID dashboard", async () => {
     6,
   );
   assert.equal((html.match(/평가 미완료/g) ?? []).length, 6);
+  const quarterStrips = [
+    ...html.matchAll(/class="metric-quarter-strip"[^>]*>([\s\S]*?)<\/div>/g),
+  ];
+  assert.equal(quarterStrips.length, 3);
+  quarterStrips.forEach(([, strip]) => assert.doesNotMatch(strip, /<strong/));
   assert.match(
     visibleHtml,
     /class="metric-benchmark"[\s\S]*?<strong class="negative caution">▼ \d+\.\d점<\/strong>/,
@@ -135,16 +140,16 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 8\.4점<\/strong>/,
   );
   assert.match(
-    visibleHtml,
-    /V3S 분기 평가점수[\s\S]*Q1[\s\S]*94\.9[\s\S]*Q2[\s\S]*93\.6[\s\S]*Q3[\s\S]*Q4/,
+    html,
+    /aria-label="V3S 분기 평가점수"/,
   );
   assert.match(
-    visibleHtml,
-    /VOC 분기 평가점수[\s\S]*Q1[\s\S]*93\.1[\s\S]*Q2[\s\S]*87\.5[\s\S]*Q3[\s\S]*Q4/,
+    html,
+    /aria-label="VOC 분기 평가점수"/,
   );
   assert.match(
-    visibleHtml,
-    /CX Index 분기 평가점수[\s\S]*Q1[\s\S]*114\.7[\s\S]*Q2[\s\S]*113\.8[\s\S]*Q3[\s\S]*Q4/,
+    html,
+    /aria-label="CX Index 분기 평가점수"/,
   );
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
   assert.match(visibleHtml, /330점 만점/);

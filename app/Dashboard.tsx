@@ -389,8 +389,6 @@ function MetricCard({
   metric,
   value,
   average,
-  q1Value,
-  q2Value,
   quarter,
   active,
   onSelect,
@@ -400,8 +398,6 @@ function MetricCard({
   metric: TrendMetricKey;
   value: number;
   average: number;
-  q1Value: number | null;
-  q2Value: number | null;
   quarter: QuarterKey;
   active: boolean;
   onSelect: () => void;
@@ -421,19 +417,17 @@ function MetricCard({
     {
       key: "q1" as const,
       label: "Q1",
-      value: q1Value,
       state: quarter === "q1" ? "current" : "complete",
       available: true,
     },
     {
       key: "q2" as const,
       label: "Q2",
-      value: q2Value,
       state: quarter === "q2" ? "current" : "complete",
       available: true,
     },
-    { key: null, label: "Q3", value: null, state: "planned", available: false },
-    { key: null, label: "Q4", value: null, state: "planned", available: false },
+    { key: null, label: "Q3", state: "planned", available: false },
+    { key: null, label: "Q4", state: "planned", available: false },
   ];
 
   return (
@@ -500,11 +494,6 @@ function MetricCard({
             }}
           >
             <small>{quarterItem.label}</small>
-            <strong>
-              {quarterItem.value === null
-                ? "—"
-                : displayNumber(quarterItem.value)}
-            </strong>
           </button>
         ))}
       </div>
@@ -2297,24 +2286,18 @@ export default function Dashboard({
       key: "v3s" as const,
       value: quarterValueOf(selected, "v3s", selectedQuarter) ?? 0,
       average: quarterAverageOf("v3s", selectedQuarter),
-      q1Value: selected.q1?.v3s ?? null,
-      q2Value: selected.v3s ?? null,
       appeal: "possible" as const,
     },
     {
       key: "voc" as const,
       value: quarterValueOf(selected, "voc", selectedQuarter) ?? 0,
       average: quarterAverageOf("voc", selectedQuarter),
-      q1Value: selected.q1?.voc ?? null,
-      q2Value: selected.voc ?? null,
       appeal: "partial" as const,
     },
     {
       key: "cx" as const,
       value: quarterValueOf(selected, "cx", selectedQuarter) ?? 0,
       average: quarterAverageOf("cx", selectedQuarter),
-      q1Value: selected.q1?.cx ?? null,
-      q2Value: selected.cx ?? null,
       appeal: "partial" as const,
     },
   ];
@@ -2628,8 +2611,6 @@ export default function Dashboard({
                 metric={item.key}
                 value={item.value}
                 average={item.average}
-                q1Value={item.q1Value}
-                q2Value={item.q2Value}
                 quarter={selectedQuarter}
                 active={trendMetric === item.key}
                 onSelect={() => setTrendMetric(item.key)}
