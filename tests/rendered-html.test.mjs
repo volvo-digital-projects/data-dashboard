@@ -135,7 +135,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 2);
+  assert.equal(release.items.length, 3);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -315,14 +315,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
-  assert.equal((visibleHtml.match(/<small>330점 만점<\/small>/g) ?? []).length, 2);
+  assert.equal((visibleHtml.match(/<small[^>]*>330점 만점<\/small>/g) ?? []).length, 2);
   assert.match(visibleHtml, /2026 누적 평균/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
   assert.match(visibleHtml, /Q3[\s\S]*Q4/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /누적 평균[\s\S]*298\.8[\s\S]*Q1·Q2 평가 기준/);
+  assert.match(visibleHtml, /누적 평균[\s\S]*298\.8/);
+  assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 지표 보기"/g) ?? []).length, 2);
   assert.equal((html.match(/aria-label="Q3 평가 진행"/g) ?? []).length, 2);
   assert.equal((html.match(/aria-label="Q4 평가 예정"/g) ?? []).length, 2);
@@ -1182,9 +1183,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
 });
 
 test("right-aligns the combat maximum label with the quarter scores", async () => {
-  const [dashboardSource, css] = await Promise.all([
+  const [dashboardSource, css, combatSummaryCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/CombatSummary.module.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(
@@ -1197,15 +1199,20 @@ test("right-aligns the combat maximum label with the quarter scores", async () =
   );
   assert.match(
     dashboardSource,
-    /<b>누적 평균<\/b>[\s\S]*?<small>\{dashboard\.meta\.combatMax\}점 만점<\/small>/,
+    /<b>누적 평균<\/b>[\s\S]*?<small className=\{combatSummaryStyles\.maximum\}>[\s\S]*?\{dashboard\.meta\.combatMax\}점 만점/,
   );
-  assert.doesNotMatch(
-    dashboardSource,
-    /<\/span>\s*<small>점<\/small>\s*<\/strong>\s*<em>Q1·Q2 평가 기준/,
-  );
+  assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
   assert.match(
     css,
     /\.combat-summary-stack strong\s*\{[^}]*width: 100%;[^}]*text-align: right;/,
+  );
+  assert.match(
+    combatSummaryCss,
+    /\.summary > \.score\s*\{[^}]*justify-content: flex-end[^}]*font-size: clamp\(72px, 4\.8vw, 78px\)/,
+  );
+  assert.match(
+    combatSummaryCss,
+    /\.summary > \.heading \.maximum\s*\{[^}]*margin-left: auto[^}]*text-align: right/,
   );
 });
 

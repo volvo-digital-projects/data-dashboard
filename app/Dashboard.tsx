@@ -14,6 +14,7 @@ import v3sHistoryJson from "./data/v3s-history.json";
 import vocConsultationJson from "./data/voc-consultation.json";
 import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
+import combatSummaryStyles from "./CombatSummary.module.css";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import {
@@ -2480,9 +2481,7 @@ export default function Dashboard({
           <div>
             <span>누적 평균</span>
             <strong>{displayNumber(cumulativeAverage)}</strong>
-            <small>
-              / {dashboard.meta.combatMax} · Q1·Q2 평가 기준
-            </small>
+            <small>/ {dashboard.meta.combatMax}</small>
           </div>
           <div>
             <strong>
@@ -2635,14 +2634,16 @@ export default function Dashboard({
                 </button>
               ))}
             </div>
-            <div className="combat-summary-stack">
-              <span>
+            <div className={`combat-summary-stack ${combatSummaryStyles.summary}`}>
+              <span className={combatSummaryStyles.heading}>
                 <b>누적 평균</b>
-                <small>{dashboard.meta.combatMax}점 만점</small>
+                <small className={combatSummaryStyles.maximum}>
+                  {dashboard.meta.combatMax}점 만점
+                </small>
               </span>
-              <strong>
+              <strong className={combatSummaryStyles.score}>
                 <span
-                  className="combat-score-number"
+                  className={`combat-score-number ${combatSummaryStyles.number}`}
                   aria-label={displayNumber(cumulativeAverage)}
                 >
                   {cumulativeScoreDigits.map((digit, index) => (
@@ -2657,7 +2658,6 @@ export default function Dashboard({
                   ))}
                 </span>
               </strong>
-              <em>Q1·Q2 평가 기준</em>
             </div>
           </div>
           <div className="combat-footer">

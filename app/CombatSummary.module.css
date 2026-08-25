@@ -1,0 +1,39 @@
+.summary > .heading {
+  margin-bottom: 7px;
+}
+
+.summary > .heading .maximum {
+  margin-left: auto;
+  text-align: right;
+}
+
+.summary > .score {
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0;
+  font-size: clamp(72px, 4.8vw, 78px);
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+  text-align: right;
+}
+
+.summary .number {
+  margin-left: auto;
+}
+
+.summary .number > span {
+  animation: none;
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+@media (max-width: 1240px) {
+  .summary > .score {
+    min-height: 66px;
+    font-size: clamp(68px, 6vw, 72px);
+  }
+}
