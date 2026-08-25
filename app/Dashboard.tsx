@@ -380,7 +380,7 @@ function AppealBadge({
   return (
     <span
       className={`appeal-badge ${type}`}
-      title={`${content.label}: ${content.description}`}
+      title={`${labelOverride ?? content.label}: ${content.description}`}
     >
       <span aria-hidden="true">{content.icon}</span>
       {labelOverride ?? content.label}
@@ -2345,6 +2345,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
       average: quarterAverageOf("cx", metricQuarters.cx),
       appeal: "partial" as const,
+      appealLabel: "신차해피콜 사후보정 가능",
     },
   ];
   const warningCount = kpis.filter((item) => item.value < item.average).length;
