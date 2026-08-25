@@ -3,24 +3,38 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 
-export default function LoginHome({
-  knownCdsids,
-}: {
-  knownCdsids: string[];
-}) {
+export default function LoginHome() {
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function openDashboard(event: FormEvent<HTMLFormElement>) {
+  async function openDashboard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const cdsid = String(formData.get("cdsid") ?? "").trim().toUpperCase();
 
-    if (!knownCdsids.includes(cdsid)) {
-      setError("등록된 CDSID를 다시 확인해 주세요.");
-      return;
-    }
+    setError("");
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ cdsid }),
+      });
+      const payload = (await response.json()) as {
+        message?: string;
+        redirectPath?: string;
+      };
+      if (!response.ok || !payload.redirectPath) {
+        setError(payload.message ?? "등록된 CDSID를 다시 확인해 주세요.");
+        return;
+      }
 
-    window.location.assign(`/dashboard/${encodeURIComponent(cdsid)}`);
+      window.location.assign(payload.redirectPath);
+    } catch {
+      setError("로그인 연결을 확인한 뒤 다시 시도해 주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -72,11 +86,11 @@ export default function LoginHome({
               </p>
             ) : null}
 
-            <button type="submit">
+            <button type="submit" disabled={isSubmitting}>
               <span className="login-mouse-icon" aria-hidden="true">
                 <i />
               </span>
-              <strong>Data Dashboard 시작</strong>
+              <strong>{isSubmitting ? "로그인 확인 중" : "Data Dashboard 시작"}</strong>
               <span aria-hidden="true" />
             </button>
           </form>

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import CompetitiveAnalysis from "../../../CompetitiveAnalysis";
 import dashboardJson from "../../../data/showrooms.json";
+import { requireDashboardLogin } from "../../../login-session";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +27,8 @@ export default async function CompetitiveAnalysisPage({
   if (!cdsid || !knownCdsids.has(cdsid)) {
     redirect("/");
   }
+
+  await requireDashboardLogin();
 
   const initialView = views.has(query.view ?? "")
     ? (query.view as "dealer" | "showroom" | "region" | "size")

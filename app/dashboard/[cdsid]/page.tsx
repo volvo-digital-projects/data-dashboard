@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Dashboard from "../../Dashboard";
 import { getChatGPTUser } from "../../chatgpt-auth";
 import dashboardJson from "../../data/showrooms.json";
+import { requireDashboardLogin } from "../../login-session";
 import { isEditorEmail } from "../../permissions";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +24,8 @@ export default async function DashboardPage({
   if (!cdsid || !knownCdsids.has(cdsid)) {
     redirect("/");
   }
+
+  await requireDashboardLogin();
 
   const user = await getChatGPTUser();
   const isLocalPreview = !user;

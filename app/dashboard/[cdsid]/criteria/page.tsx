@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { CriteriaGuide } from "../../../Dashboard";
 import dashboardJson from "../../../data/showrooms.json";
+import { requireDashboardLogin } from "../../../login-session";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,8 @@ export default async function CriteriaPage({
   if (!cdsid || !knownCdsids.has(cdsid)) {
     redirect("/");
   }
+
+  await requireDashboardLogin();
 
   return <CriteriaGuide cdsid={cdsid} />;
 }

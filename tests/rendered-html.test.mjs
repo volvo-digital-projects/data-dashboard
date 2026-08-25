@@ -4,14 +4,43 @@ import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
 
-async function render(pathname = "/") {
+const loginCookie = "volvo-dashboard-access=vck-manager-260825-6c2488";
+
+async function render(pathname = "/", { authenticated = true } = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
     new Request(new URL(pathname, "http://localhost/"), {
-      headers: { accept: "text/html", host: "localhost" },
+      headers: {
+        accept: "text/html",
+        host: "localhost",
+        ...(authenticated ? { cookie: loginCookie } : {}),
+      },
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+}
+
+async function login(cdsid) {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `login-${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  return worker.fetch(
+    new Request("http://localhost/api/login", {
+      method: "POST",
+      headers: { "content-type": "application/json", host: "localhost" },
+      body: JSON.stringify({ cdsid }),
     }),
     {
       ASSETS: {
@@ -33,6 +62,43 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /Dashboard/);
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
+});
+
+test("protects dashboard routes behind the manager CDSID login", async () => {
+  const response = await render("/dashboard/6KR6834", { authenticated: false });
+  assert.equal(response.status, 307);
+  assert.equal(response.headers.get("location"), "http://localhost/");
+});
+
+test("ships the blue-row manager allowlist and VCK-ES90 account", async () => {
+  const loginAccess = JSON.parse(
+    await readFile(new URL("../app/data/login-access.json", import.meta.url), "utf8"),
+  );
+  assert.equal(loginAccess.accounts.length, 46);
+  assert.equal(new Set(loginAccess.accounts.map((account) => account.cdsid)).size, 46);
+  assert.deepEqual(
+    loginAccess.accounts.find((account) => account.cdsid === "K-KIM16"),
+    { cdsid: "K-KIM16", dashboardCdsid: "6KR6834" },
+  );
+  assert.deepEqual(
+    loginAccess.accounts.find((account) => account.cdsid === "VCK-ES90"),
+    { cdsid: "VCK-ES90", dashboardCdsid: "6KR6834" },
+  );
+});
+
+test("accepts manager and VCK-ES90 logins while rejecting other CDSIDs", async () => {
+  for (const cdsid of ["K-KIM16", "vck-es90"]) {
+    const response = await login(cdsid);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("set-cookie") ?? "", /volvo-dashboard-access=/);
+    assert.deepEqual(await response.json(), {
+      redirectPath: "/dashboard/6KR6834",
+    });
+  }
+
+  const denied = await login("6KR6834");
+  assert.equal(denied.status, 401);
+  assert.doesNotMatch(denied.headers.get("set-cookie") ?? "", /volvo-dashboard-access=/);
 });
 
 test("server-renders the selected CDSID dashboard", async () => {
@@ -602,7 +668,7 @@ test("ships project metadata and removes the disposable starter", async () => {
   ]);
 
   assert.match(page, /LoginHome/);
-  assert.match(page, /knownCdsids/);
+  assert.doesNotMatch(page, /knownCdsids/);
   assert.match(dashboardPage, /import Dashboard/);
   assert.match(dashboardPage, /isEditorEmail/);
   assert.match(criteriaPage, /CriteriaGuide/);
