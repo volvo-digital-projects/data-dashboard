@@ -292,7 +292,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /aria-label="CX Index 분기 평가점수"/,
   );
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
-  assert.match(visibleHtml, /330점 만점/);
+  assert.equal((visibleHtml.match(/<small>330점 만점<\/small>/g) ?? []).length, 2);
   assert.match(visibleHtml, /2026 누적 평균/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
@@ -1155,10 +1155,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
 });
 
 test("right-aligns the combat maximum label with the quarter scores", async () => {
-  const css = await readFile(
-    new URL("../app/globals.css", import.meta.url),
-    "utf8",
-  );
+  const [dashboardSource, css] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
 
   assert.match(
     css,
@@ -1167,6 +1167,18 @@ test("right-aligns the combat maximum label with the quarter scores", async () =
   assert.match(
     css,
     /\.quarter-score-meta small\s*\{[^}]*grid-column: 3;[^}]*justify-self: end;[^}]*text-align: right;[^}]*white-space: nowrap;/,
+  );
+  assert.match(
+    dashboardSource,
+    /<b>누적 평균<\/b>[\s\S]*?<small>\{dashboard\.meta\.combatMax\}점 만점<\/small>/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /<\/span>\s*<small>점<\/small>\s*<\/strong>\s*<em>Q1·Q2 평가 기준/,
+  );
+  assert.match(
+    css,
+    /\.combat-summary-stack strong\s*\{[^}]*width: 100%;[^}]*text-align: right;/,
   );
 });
 

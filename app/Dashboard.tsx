@@ -2590,7 +2590,10 @@ export default function Dashboard({
               ))}
             </div>
             <div className="combat-summary-stack">
-              <span>누적 평균</span>
+              <span>
+                <b>누적 평균</b>
+                <small>{dashboard.meta.combatMax}점 만점</small>
+              </span>
               <strong>
                 <span
                   className="combat-score-number"
@@ -2607,7 +2610,6 @@ export default function Dashboard({
                     </span>
                   ))}
                 </span>
-                <small>점</small>
               </strong>
               <em>Q1·Q2 평가 기준</em>
             </div>
