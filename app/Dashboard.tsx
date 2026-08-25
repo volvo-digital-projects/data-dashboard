@@ -354,8 +354,10 @@ function SignalIcon({ tone }: { tone: string }) {
 
 function AppealBadge({
   type,
+  labelOverride,
 }: {
   type: "possible" | "partial" | "locked";
+  labelOverride?: string;
 }) {
   const content = {
     possible: {
@@ -381,7 +383,7 @@ function AppealBadge({
       title={`${content.label}: ${content.description}`}
     >
       <span aria-hidden="true">{content.icon}</span>
-      {content.label}
+      {labelOverride ?? content.label}
     </span>
   );
 }
@@ -395,6 +397,7 @@ function MetricCard({
   onSelect,
   onQuarterSelect,
   appeal,
+  appealLabel,
 }: {
   metric: TrendMetricKey;
   value: number;
@@ -404,6 +407,7 @@ function MetricCard({
   onSelect: () => void;
   onQuarterSelect: (quarter: QuarterKey) => void;
   appeal: "possible" | "partial" | "locked";
+  appealLabel?: string;
 }) {
   const signal = getSignal(value, average);
   const quarterLabel = quarter.toUpperCase();
@@ -509,7 +513,7 @@ function MetricCard({
         ))}
       </div>
       <div className="metric-card-footer">
-        <AppealBadge type={appeal} />
+        <AppealBadge type={appeal} labelOverride={appealLabel} />
       </div>
     </article>
   );
@@ -2333,6 +2337,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
       average: quarterAverageOf("voc", metricQuarters.voc),
       appeal: "partial" as const,
+      appealLabel: "VOC해피콜만 교차검증 가능",
     },
     {
       key: "cx" as const,
@@ -2676,6 +2681,7 @@ export default function Dashboard({
                   selectQuarterAndNavigate(item.key, quarter)
                 }
                 appeal={item.appeal}
+                appealLabel={item.appealLabel}
               />
             ))}
           </div>

@@ -256,6 +256,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="signal-icon caution" aria-hidden="true">▼<\/span>주의 필요/,
   );
   assert.match(html, /CX Index/);
+  assert.equal((visibleHtml.match(/VOC해피콜만 교차검증 가능/g) ?? []).length, 1);
   assert.equal((visibleHtml.match(/<span>\/ 100점 만점<\/span>/g) ?? []).length, 2);
   assert.equal((visibleHtml.match(/<span>\/ 130점 만점<\/span>/g) ?? []).length, 1);
   assert.equal((visibleHtml.match(/<span>점 \/ (?:100|130)점 만점<\/span>/g) ?? []).length, 0);
