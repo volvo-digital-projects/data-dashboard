@@ -105,6 +105,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((visibleHtml.match(/점 \/ 100점 만점/g) ?? []).length, 2);
   assert.equal((visibleHtml.match(/점 \/ 130점 만점/g) ?? []).length, 1);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
+  assert.equal(
+    (html.match(/상세 영역으로 이동/g) ?? []).length,
+    6,
+  );
+  assert.equal((html.match(/평가 미완료/g) ?? []).length, 6);
   assert.match(
     visibleHtml,
     /class="metric-benchmark"[\s\S]*?<strong class="negative caution">▼ \d+\.\d점<\/strong>/,
@@ -869,7 +874,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /id="score-v3s"[\s\S]*?id="score-voc"[\s\S]*?id="score-cx"/,
   );
-  assert.match(dashboardSource, /<V3SPerformance showroom=\{selected\} compact \/>/);
+  assert.match(
+    dashboardSource,
+    /<V3SPerformance[\s\S]*?showroom=\{selected\}[\s\S]*?compact[\s\S]*?highlightQuarter=/,
+  );
   assert.doesNotMatch(dashboardSource, /analysis\?view=showroom/);
   assert.doesNotMatch(dashboardSource, /2026 PERFORMANCE/);
   assert.doesNotMatch(dashboardSource, /2021–2025 HISTORY/);
@@ -1274,7 +1282,7 @@ test("compacts the desktop dashboard summary vertically", async () => {
   );
   assert.match(
     css,
-    /\.dashboard-sticky-shell \.metric-quarter-strip > span\s*\{[^}]*min-height: 28px[^}]*padding: 4px 3px/,
+    /\.dashboard-sticky-shell \.metric-quarter-strip > button\s*\{[^}]*min-height: 28px[^}]*padding: 4px 3px/,
   );
   assert.match(
     css,

@@ -1101,17 +1101,21 @@ input:focus-visible {
   background: #f7f8f6;
 }
 
-.metric-quarter-strip > span {
+.metric-quarter-strip > button {
   min-width: 0;
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 3px;
   padding: 5px 2px 4px;
+  border: 0;
   color: #586770;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
 }
 
-.metric-quarter-strip > span + span {
+.metric-quarter-strip > button + button {
   border-left: 1px solid #e2e6e4;
 }
 
@@ -1132,18 +1136,31 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.metric-quarter-strip > span.current {
+.metric-quarter-strip > button.current {
   background: #edf4f7;
 }
 
-.metric-quarter-strip > span.current small,
-.metric-quarter-strip > span.current strong {
+.metric-quarter-strip > button.current small,
+.metric-quarter-strip > button.current strong {
   color: var(--blue);
 }
 
-.metric-quarter-strip > span.planned small,
-.metric-quarter-strip > span.planned strong {
+.metric-quarter-strip > button.planned small,
+.metric-quarter-strip > button.planned strong {
   color: #a8b0b4;
+}
+
+.metric-quarter-strip > button:not(:disabled):hover,
+.metric-quarter-strip > button:not(:disabled):focus-visible {
+  color: var(--blue);
+  background: #e8f1f5;
+  outline: 2px solid rgba(47, 107, 138, 0.26);
+  outline-offset: -2px;
+}
+
+.metric-quarter-strip > button:disabled {
+  opacity: 0.68;
+  cursor: not-allowed;
 }
 
 .metric-card-footer {
@@ -1329,6 +1346,22 @@ input:focus-visible {
   border-right: 1px solid #dfe4e1;
 }
 
+.quarter-band span.is-quarter-highlighted {
+  color: var(--blue);
+  background: linear-gradient(
+    180deg,
+    rgba(221, 238, 246, 0.82),
+    rgba(239, 247, 250, 0.52)
+  );
+  box-shadow: inset 0 -2px 0 var(--blue);
+  animation: quarter-focus-in 520ms ease-out both;
+}
+
+.quarter-band span.is-quarter-highlighted strong,
+.quarter-band span.is-quarter-highlighted small {
+  color: var(--blue);
+}
+
 .quarter-band strong {
   color: var(--navy);
   font-size: 11px;
@@ -1345,6 +1378,24 @@ input:focus-visible {
   height: 164px;
   display: block;
   overflow: visible;
+}
+
+.selected-quarter-window {
+  fill: rgba(47, 107, 138, 0.075);
+  stroke: rgba(47, 107, 138, 0.42);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  animation: quarter-focus-in 520ms ease-out both;
+}
+
+@keyframes quarter-focus-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .week-grid {
@@ -5285,7 +5336,7 @@ input:focus-visible,
   background: transparent;
 }
 
-.metric-quarter-strip > span {
+.metric-quarter-strip > button {
   min-height: 32px;
   gap: 4px;
   padding: 6px 3px;
@@ -5294,11 +5345,11 @@ input:focus-visible,
   background: #f7f9fa;
 }
 
-.metric-quarter-strip > span + span {
+.metric-quarter-strip > button + button {
   border: 0;
 }
 
-.metric-quarter-strip > span.current {
+.metric-quarter-strip > button.current {
   background: #eaf3f7;
 }
 
@@ -6151,6 +6202,24 @@ button.quarter-score-row:disabled {
 
 .v3s-quarter-column {
   min-width: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+.v3s-quarter-column.is-quarter-highlighted::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -7px -8px -6px;
+  border: 1px solid rgba(47, 107, 138, 0.42);
+  border-radius: 9px;
+  background: linear-gradient(
+    180deg,
+    rgba(224, 239, 246, 0.7),
+    rgba(239, 247, 250, 0.38)
+  );
+  box-shadow: 0 0 0 3px rgba(47, 107, 138, 0.06);
+  animation: quarter-focus-in 520ms ease-out both;
 }
 
 .v3s-bar-stage {
@@ -7870,7 +7939,7 @@ button.quarter-score-row:disabled {
     margin-top: 8px;
   }
 
-  .dashboard-sticky-shell .metric-quarter-strip > span {
+  .dashboard-sticky-shell .metric-quarter-strip > button {
     min-height: 28px;
     padding: 4px 3px;
   }

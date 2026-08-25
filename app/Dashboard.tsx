@@ -394,6 +394,7 @@ function MetricCard({
   quarter,
   active,
   onSelect,
+  onQuarterSelect,
   appeal,
 }: {
   metric: TrendMetricKey;
@@ -404,6 +405,7 @@ function MetricCard({
   quarter: QuarterKey;
   active: boolean;
   onSelect: () => void;
+  onQuarterSelect: (quarter: QuarterKey) => void;
   appeal: "possible" | "partial" | "locked";
 }) {
   const signal = getSignal(value, average);
@@ -417,25 +419,27 @@ function MetricCard({
         : `정상: ${quarterLabel} 전국 평균 이상`;
   const quarterScores = [
     {
+      key: "q1" as const,
       label: "Q1",
       value: q1Value,
       state: quarter === "q1" ? "current" : "complete",
+      available: true,
     },
     {
+      key: "q2" as const,
       label: "Q2",
       value: q2Value,
       state: quarter === "q2" ? "current" : "complete",
+      available: true,
     },
-    { label: "Q3", value: null, state: "planned" },
-    { label: "Q4", value: null, state: "planned" },
+    { key: null, label: "Q3", value: null, state: "planned", available: false },
+    { key: null, label: "Q4", value: null, state: "planned", available: false },
   ];
 
   return (
-    <button
+    <article
       className={`metric-card ${signal.tone} ${active ? "active" : ""}`}
       onClick={onSelect}
-      type="button"
-      aria-pressed={active}
     >
       <div className="metric-card-topline">
         <span className="metric-code" title={metricDescriptions[metric]}>
@@ -476,28 +480,49 @@ function MetricCard({
         className="metric-quarter-strip"
         aria-label={`${metricMeta[metric].short} 분기 평가점수`}
       >
-        {quarterScores.map((quarter) => (
-          <span className={quarter.state} key={quarter.label}>
-            <small>{quarter.label}</small>
+        {quarterScores.map((quarterItem) => (
+          <button
+            type="button"
+            className={quarterItem.state}
+            key={quarterItem.label}
+            disabled={!quarterItem.available}
+            aria-pressed={
+              quarterItem.available
+                ? quarterItem.key === quarter
+                : undefined
+            }
+            aria-label={`${metricMeta[metric].short} ${quarterItem.label} ${
+              quarterItem.available ? "상세 영역으로 이동" : "평가 미완료"
+            }`}
+            onClick={(event) => {
+              event.stopPropagation();
+              if (quarterItem.key) onQuarterSelect(quarterItem.key);
+            }}
+          >
+            <small>{quarterItem.label}</small>
             <strong>
-              {quarter.value === null ? "—" : displayNumber(quarter.value)}
+              {quarterItem.value === null
+                ? "—"
+                : displayNumber(quarterItem.value)}
             </strong>
-          </span>
+          </button>
         ))}
       </div>
       <div className="metric-card-footer">
         <AppealBadge type={appeal} />
       </div>
-    </button>
+    </article>
   );
 }
 
 function V3SPerformance({
   showroom,
   compact = false,
+  highlightQuarter = null,
 }: {
   showroom: Showroom;
   compact?: boolean;
+  highlightQuarter?: QuarterKey | null;
 }) {
   const peerBenchmarks = (quarter: QuarterKey | null) => [
     {
@@ -657,7 +682,11 @@ function V3SPerformance({
         <div className="v3s-quarter-bars">
           {quarterScores.map((quarter, index) => (
             <div
-              className={`v3s-quarter-column ${quarter.state}`}
+              className={`v3s-quarter-column ${quarter.state} ${
+                quarter.label.toLowerCase() === highlightQuarter
+                  ? "is-quarter-highlighted"
+                  : ""
+              }`}
               key={quarter.label}
             >
               <div
@@ -1087,11 +1116,13 @@ function WeeklyTrend({
   metric,
   compact = false,
   synchronizedAnimationInView,
+  highlightQuarter = null,
 }: {
   showroom: Showroom;
   metric: TrendMetricKey;
   compact?: boolean;
   synchronizedAnimationInView?: boolean;
+  highlightQuarter?: QuarterKey | null;
 }) {
   const current = showroom[metric] ?? 0;
   const previous = showroom.q1?.[metric] ?? null;
@@ -1324,6 +1355,19 @@ function WeeklyTrend({
             }}
             onPointerLeave={() => setHoverWeek(null)}
           >
+            {highlightQuarter && (
+              <rect
+                x={weekBoundaryX(highlightQuarter === "q1" ? 0 : 13)}
+                y={chartY(18)}
+                width={
+                  weekBoundaryX(highlightQuarter === "q1" ? 13 : 26) -
+                  weekBoundaryX(highlightQuarter === "q1" ? 0 : 13)
+                }
+                height={chartY(152)}
+                className="selected-quarter-window"
+                aria-hidden="true"
+              />
+            )}
             <line
               x1={plotLeft}
               x2={plotRight}
@@ -1646,10 +1690,17 @@ function WeeklyTrend({
             })}
           </div>
           <div className="quarter-band" aria-hidden="true">
-            {quarterLabels.map((quarter) => (
-              <span key={quarter.label}>
-                <strong>{quarter.label}</strong>
-                <small>{quarter.range}</small>
+            {quarterLabels.map((quarterItem) => (
+              <span
+                key={quarterItem.label}
+                className={
+                  quarterItem.label.toLowerCase() === highlightQuarter
+                    ? "is-quarter-highlighted"
+                    : ""
+                }
+              >
+                <strong>{quarterItem.label}</strong>
+                <small>{quarterItem.range}</small>
               </span>
             ))}
           </div>
@@ -2033,6 +2084,10 @@ export default function Dashboard({
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
+  const [quarterFocus, setQuarterFocus] = useState<{
+    metric: TrendMetricKey;
+    quarter: QuarterKey;
+  } | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
@@ -2186,6 +2241,20 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
+  const selectQuarterAndNavigate = (
+    metric: TrendMetricKey,
+    quarter: QuarterKey,
+  ) => {
+    setSelectedQuarter(quarter);
+    setTrendMetric(metric);
+    setQuarterFocus({ metric, quarter });
+    window.requestAnimationFrame(() => {
+      document.getElementById(`score-${metric}`)?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    });
+  };
   const identityInsights = buildShowroomInsights(selected, dashboard.averages);
   const showroomCodeWidth = Math.max(
     ...dashboard.showrooms.map((item) => item.cdsid.length),
@@ -2564,6 +2633,9 @@ export default function Dashboard({
                 quarter={selectedQuarter}
                 active={trendMetric === item.key}
                 onSelect={() => setTrendMetric(item.key)}
+                onQuarterSelect={(quarter) =>
+                  selectQuarterAndNavigate(item.key, quarter)
+                }
                 appeal={item.appeal}
               />
             ))}
@@ -2594,7 +2666,15 @@ export default function Dashboard({
               <header className="score-tier-heading">
                 <strong>V3S</strong>
               </header>
-              <V3SPerformance showroom={selected} compact />
+              <V3SPerformance
+                showroom={selected}
+                compact
+                highlightQuarter={
+                  quarterFocus?.metric === "v3s"
+                    ? quarterFocus.quarter
+                    : null
+                }
+              />
             </section>
             <section
               id="score-voc"
@@ -2625,6 +2705,11 @@ export default function Dashboard({
                   showroom={selected}
                   metric="voc"
                   compact
+                  highlightQuarter={
+                    quarterFocus?.metric === "voc"
+                      ? quarterFocus.quarter
+                      : null
+                  }
                 />
                 <ConsultationSatisfactionHistory showroom={selected} />
               </div>
@@ -2658,6 +2743,11 @@ export default function Dashboard({
                   metric="cx"
                   compact
                   synchronizedAnimationInView={oneVoiceInView}
+                  highlightQuarter={
+                    quarterFocus?.metric === "cx"
+                      ? quarterFocus.quarter
+                      : null
+                  }
                 />
                 <aside
                   ref={oneVoiceRef}
