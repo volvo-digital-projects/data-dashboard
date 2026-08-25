@@ -21,7 +21,7 @@ import { buildShowroomInsights } from "./showroom-insights";
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
 type GroupKey = "all" | "dealer" | "region" | "size";
-type QuarterKey = "q1" | "q2";
+type QuarterKey = "q1" | "q2" | "q3";
 
 type QuarterRecord = {
   cdsid: string;
@@ -427,7 +427,17 @@ function MetricCard({
       state: quarter === "q2" ? "current" : "complete",
       available: true,
     },
-    { key: null, label: "Q3", state: "planned", available: false },
+    {
+      key: metric === "v3s" ? null : ("q3" as const),
+      label: "Q3",
+      state:
+        metric === "v3s"
+          ? "planned"
+          : quarter === "q3"
+            ? "current"
+            : "complete",
+      available: metric !== "v3s",
+    },
     { key: null, label: "Q4", state: "planned", available: false },
   ];
 
@@ -2076,10 +2086,9 @@ export default function Dashboard({
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
-  const [quarterFocus, setQuarterFocus] = useState<{
-    metric: TrendMetricKey;
-    quarter: QuarterKey;
-  } | null>(null);
+  const [metricQuarters, setMetricQuarters] = useState<
+    Record<TrendMetricKey, QuarterKey>
+  >({ v3s: "q2", voc: "q3", cx: "q3" });
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const dashboardRootRef = useRef<HTMLElement>(null);
@@ -2246,9 +2255,9 @@ export default function Dashboard({
     metric: TrendMetricKey,
     quarter: QuarterKey,
   ) => {
-    setSelectedQuarter(quarter);
+    setMetricQuarters((current) => ({ ...current, [metric]: quarter }));
+    if (metric === "v3s") setSelectedQuarter(quarter);
     setTrendMetric(metric);
-    setQuarterFocus({ metric, quarter });
     if (metric === "v3s") return;
 
     window.requestAnimationFrame(() => {
@@ -2313,20 +2322,23 @@ export default function Dashboard({
   const kpis = [
     {
       key: "v3s" as const,
-      value: quarterValueOf(selected, "v3s", selectedQuarter) ?? 0,
-      average: quarterAverageOf("v3s", selectedQuarter),
+      quarter: metricQuarters.v3s,
+      value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
+      average: quarterAverageOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
     },
     {
       key: "voc" as const,
-      value: quarterValueOf(selected, "voc", selectedQuarter) ?? 0,
-      average: quarterAverageOf("voc", selectedQuarter),
+      quarter: metricQuarters.voc,
+      value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
+      average: quarterAverageOf("voc", metricQuarters.voc),
       appeal: "partial" as const,
     },
     {
       key: "cx" as const,
-      value: quarterValueOf(selected, "cx", selectedQuarter) ?? 0,
-      average: quarterAverageOf("cx", selectedQuarter),
+      quarter: metricQuarters.cx,
+      value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
+      average: quarterAverageOf("cx", metricQuarters.cx),
       appeal: "partial" as const,
     },
   ];
@@ -2475,7 +2487,13 @@ export default function Dashboard({
                 className={selectedQuarter === quarter ? "active" : ""}
                 aria-pressed={available ? selectedQuarter === quarter : undefined}
                 onClick={() => {
-                  if (available) setSelectedQuarter(quarter);
+                  if (available) {
+                    setSelectedQuarter(quarter);
+                    setMetricQuarters((current) => ({
+                      ...current,
+                      v3s: quarter,
+                    }));
+                  }
                 }}
               >
                 {quarter.toUpperCase()}
@@ -2497,7 +2515,7 @@ export default function Dashboard({
                 <span>{metricMeta[item.key].short}</span>
                 <strong>{displayNumber(item.value)}</strong>
                 <small>
-                  {selectedQuarterLabel} 평균 대비{" "}
+                  {item.quarter.toUpperCase()} 평균 대비{" "}
                   {signal.delta >= 0 ? "+" : ""}
                   {signal.delta.toFixed(1)}
                 </small>
@@ -2561,7 +2579,13 @@ export default function Dashboard({
                       : `${quarter.label} 지표 보기`
                   }
                   onClick={() => {
-                    if (quarter.key) setSelectedQuarter(quarter.key);
+                    if (quarter.key) {
+                      setSelectedQuarter(quarter.key);
+                      setMetricQuarters((current) => ({
+                        ...current,
+                        v3s: quarter.key as QuarterKey,
+                      }));
+                    }
                   }}
                   className={`quarter-score-row ${
                     quarter.key === selectedQuarter ? "current" : ""
@@ -2645,7 +2669,7 @@ export default function Dashboard({
                 metric={item.key}
                 value={item.value}
                 average={item.average}
-                quarter={selectedQuarter}
+                quarter={item.quarter}
                 active={trendMetric === item.key}
                 onSelect={() => setTrendMetric(item.key)}
                 onQuarterSelect={(quarter) =>
@@ -2685,9 +2709,7 @@ export default function Dashboard({
                 showroom={selected}
                 compact
                 highlightQuarter={
-                  quarterFocus?.metric === "v3s"
-                    ? quarterFocus.quarter
-                    : null
+                  metricQuarters.v3s
                 }
               />
             </section>
@@ -2721,9 +2743,7 @@ export default function Dashboard({
                   metric="voc"
                   compact
                   highlightQuarter={
-                    quarterFocus?.metric === "voc"
-                      ? quarterFocus.quarter
-                      : null
+                    metricQuarters.voc
                   }
                 />
                 <ConsultationSatisfactionHistory showroom={selected} />
@@ -2759,9 +2779,7 @@ export default function Dashboard({
                   compact
                   synchronizedAnimationInView={oneVoiceInView}
                   highlightQuarter={
-                    quarterFocus?.metric === "cx"
-                      ? quarterFocus.quarter
-                      : null
+                    metricQuarters.cx
                   }
                 />
                 <aside

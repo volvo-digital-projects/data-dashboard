@@ -261,9 +261,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.equal(
     (html.match(/상세 영역으로 이동/g) ?? []).length,
-    6,
+    8,
   );
-  assert.equal((html.match(/평가 미완료/g) ?? []).length, 6);
+  assert.equal((html.match(/평가 미완료/g) ?? []).length, 4);
   const quarterStrips = [
     ...html.matchAll(/class="metric-quarter-strip"[^>]*>([\s\S]*?)<\/div>/g),
   ];
@@ -287,7 +287,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ 17\.9점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ 18\.7점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
@@ -305,6 +305,9 @@ test("server-renders the selected CDSID dashboard", async () => {
     html,
     /aria-label="CX Index 분기 평가점수"/,
   );
+  assert.match(html, /aria-pressed="true" aria-label="V3S Q2 상세 영역으로 이동"/);
+  assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
+  assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
   assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
   assert.equal((visibleHtml.match(/<small>330점 만점<\/small>/g) ?? []).length, 2);
   assert.match(visibleHtml, /2026 누적 평균/);
@@ -463,11 +466,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력/);
   assert.doesNotMatch(visibleHtml, /COMPETITIVE POSITION/);
   assert.match(html, /aria-label="VOC 분기 평가점수"/);
-  assert.match(html, /위험 감지: Q2 전국 평균 대비 5점 이상 미달/);
+  assert.match(html, /위험 감지: Q3 전국 평균 대비 5점 이상 미달/);
   assert.match(visibleHtml, /위험 감지/);
   assert.match(html, /주의 필요: Q2 전국 평균 미만, 5점 미만 차이/);
   assert.equal((visibleHtml.match(/>주의 필요<\/span>/g) ?? []).length, 2);
-  assert.match(visibleHtml, /Q2 전국 평균 대비[\s\S]*?▼ 7\.9점/);
+  assert.match(visibleHtml, /Q3 전국 평균 대비[\s\S]*?▼ 8\.7점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -956,7 +959,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /setQuarterFocus\(\{ metric, quarter \}\);[\s\S]*?if \(metric === "v3s"\) return;[\s\S]*?window\.scrollTo\(\{[\s\S]*?behavior: "smooth"/,
+    /Record<TrendMetricKey, QuarterKey>[\s\S]*?\{ v3s: "q2", voc: "q3", cx: "q3" \}/,
+  );
+  assert.match(
+    dashboardSource,
+    /setMetricQuarters\(\(current\) => \(\{ \.\.\.current, \[metric\]: quarter \}\)\);[\s\S]*?if \(metric === "v3s"\) return;[\s\S]*?window\.scrollTo\(\{[\s\S]*?behavior: "smooth"/,
   );
   assert.doesNotMatch(
     dashboardSource,
@@ -1087,11 +1094,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /quarterValueOf\(selected, "v3s", selectedQuarter\)/,
+    /quarterValueOf\(selected, "v3s", metricQuarters\.v3s\)/,
   );
   assert.match(
     dashboardSource,
-    /quarterAverageOf\("v3s", selectedQuarter\)/,
+    /quarterAverageOf\("v3s", metricQuarters\.v3s\)/,
   );
   assert.match(
     dashboardSource,
