@@ -1516,7 +1516,7 @@ test("matches every rectangular lower dashboard surface to the ES90 radius", asy
   );
 });
 
-test("ships the premium neutral design system and Pretendard typography", async () => {
+test("ships the premium neutral design system and Paperlogy typography", async () => {
   const css = await readFile(
     new URL("../app/globals.css", import.meta.url),
     "utf8",
@@ -1613,9 +1613,24 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /latestUpdate\.effectiveDate\.replaceAll\("-", "\."\)/,
   );
 
-  assert.match(css, /font-family: "Pretendard Variable"/);
-  assert.match(css, /--font-korean:[\s\S]*"Pretendard Variable"[\s\S]*"SUIT"/);
-  assert.match(css, /--font-latin:[\s\S]*"Inter"/);
+  assert.match(
+    css,
+    /font-family: "Paperlogy";[\s\S]*paperlogy-5-medium\.ttf[\s\S]*font-weight: 100 800/,
+  );
+  assert.match(
+    css,
+    /font-family: "Paperlogy";[\s\S]*paperlogy-9-black\.ttf[\s\S]*font-weight: 900/,
+  );
+  assert.match(
+    css,
+    /--font-korean:[\s\S]*"Paperlogy"[\s\S]*"Pretendard Variable"/,
+  );
+  assert.match(
+    css,
+    /--font-latin:[\s\S]*"Volvo Centum Web"[\s\S]*"Paperlogy"/,
+  );
+  assert.doesNotMatch(css, /--font-korean:\s*"Pretendard Variable"/);
+  assert.doesNotMatch(css, /font-family:\s*"Paperlogy [59]"/);
   assert.match(css, /--paper: #f6f8fa/);
   assert.match(
     css,
@@ -2174,6 +2189,8 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 
   await Promise.all([
+    access(new URL("public/fonts/paperlogy-5-medium.ttf", templateRoot)),
+    access(new URL("public/fonts/paperlogy-9-black.ttf", templateRoot)),
     access(new URL("public/fonts/pretendard-variable.ttf", templateRoot)),
   ]);
 });
