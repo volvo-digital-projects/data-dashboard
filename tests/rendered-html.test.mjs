@@ -2263,3 +2263,17 @@ test("ships the premium neutral design system and Paperlogy typography", async (
     access(new URL("public/fonts/pretendard-variable.ttf", templateRoot)),
   ]);
 });
+
+test("matches the requested dashboard headings to the ES90 waitlist title typography without resizing", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const titleRule = css.match(
+    /\/\* ES90 waitlist title typography \*\/[\s\S]*?\.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong,[\s\S]*?\.one-voice-title-row > strong\s*\{([^}]*)\}/,
+  );
+
+  assert.ok(titleRule);
+  assert.match(titleRule[1], /color: #11283d;/);
+  assert.match(titleRule[1], /font-family: var\(--font-ui\);/);
+  assert.match(titleRule[1], /font-weight: 600;/);
+  assert.match(titleRule[1], /letter-spacing: -0\.25px;/);
+  assert.doesNotMatch(titleRule[1], /font-size:/);
+});

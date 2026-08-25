@@ -9665,6 +9665,18 @@ body {
   }
 }
 
+/* ES90 waitlist title typography */
+.score-stack-heading h2,
+.v3s-performance.compact .v3s-subhead h3,
+.voc-consultation-heading > div:first-child > strong,
+.one-voice-title-row > strong {
+  color: #11283d;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: -0.25px;
+  -webkit-font-smoothing: antialiased;
+}
+
 .release-update-notice {
   width: min(560px, calc(100vw - 28px));
   min-height: 82px;
