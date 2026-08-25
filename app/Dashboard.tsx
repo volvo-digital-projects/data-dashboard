@@ -682,9 +682,7 @@ function V3SPerformance({
             compact ? v3sQuarterSummaryStyles.compactSubhead : ""
           }`}
         >
-          <div>
-            <h3>분기 평가</h3>
-          </div>
+          <div aria-hidden="true" />
           <div
             className={`v3s-cumulative ${v3sQuarterSummaryStyles.inlineCumulative} ${
               compact ? v3sQuarterSummaryStyles.compactCumulative : ""

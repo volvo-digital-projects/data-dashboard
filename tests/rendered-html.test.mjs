@@ -136,7 +136,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 8);
+  assert.equal(release.items.length, 9);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -379,7 +379,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     html,
     /aria-label="CX Index 평가 구성 항목"[\s\S]*?<b>01<\/b><span>신차출고 만족도<\/span>[\s\S]*?<b>02<\/b><span>시승 만족도<\/span>[\s\S]*?<b>03<\/b><span>긴급경보 처리여부<\/span>[\s\S]*?<b>04<\/b><span>조치 계획<\/span>[\s\S]*?<b>05<\/b><span>헤이볼보 앱 가입율<\/span>/,
   );
-  assert.match(visibleHtml, /분기 평가/);
+  assert.doesNotMatch(html, /<h3>분기 평가<\/h3>/);
   assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);
   assert.match(visibleHtml, /5개년 추이/);
   assert.doesNotMatch(html, /class="v3s-history-delta/);
