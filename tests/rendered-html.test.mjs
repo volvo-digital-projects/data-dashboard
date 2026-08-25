@@ -196,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 28);
+  assert.equal(release.items.length, 29);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2480,7 +2480,7 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
   const titleRule = css.match(
-    /\/\* ES90 performance-comparison title typography for dashboard score headings \*\/[\s\S]*?\.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong\s*\{([^}]*)\}/,
+    /\/\* ES90 performance-comparison title typography for dashboard score headings \*\/[\s\S]*?\.trend-panel \.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong\s*\{([^}]*)\}/,
   );
 
   assert.ok(titleRule);

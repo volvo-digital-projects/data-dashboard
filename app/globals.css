@@ -9809,7 +9809,7 @@ body {
 }
 
 /* ES90 performance-comparison title typography for dashboard score headings */
-.score-stack-heading h2,
+.trend-panel .score-stack-heading h2,
 .v3s-performance.compact .v3s-subhead h3,
 .voc-consultation-heading > div:first-child > strong {
   color: #11283d;
