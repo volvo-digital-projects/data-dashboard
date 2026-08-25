@@ -15,6 +15,7 @@ import vocConsultationJson from "./data/voc-consultation.json";
 import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
+import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import { buildShowroomInsights } from "./showroom-insights";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
@@ -2869,6 +2870,7 @@ export default function Dashboard({
           setAdminOpen(false);
         }}
       />
+      <ReleaseUpdateNotice />
     </main>
   );
 }

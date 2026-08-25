@@ -95,6 +95,39 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
 });
 
+test("automatically detects, announces, and applies new dashboard releases", async () => {
+  const [loginSource, dashboardSource, noticeSource, css, releaseAsset] =
+    await Promise.all([
+      readFile(new URL("../app/LoginHome.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+      readFile(
+        new URL("../app/ReleaseUpdateNotice.tsx", import.meta.url),
+        "utf8",
+      ),
+      readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+      readFile(
+        new URL("../public/dashboard-release.json", import.meta.url),
+        "utf8",
+      ),
+    ]);
+  const release = JSON.parse(releaseAsset);
+
+  assert.match(loginSource, /<ReleaseUpdateNotice \/>/);
+  assert.match(dashboardSource, /<ReleaseUpdateNotice \/>/);
+  assert.match(noticeSource, /\/dashboard-release\.json/);
+  assert.match(noticeSource, /cache: "no-store"/);
+  assert.match(noticeSource, /window\.setInterval\([\s\S]*?RELEASE_CHECK_INTERVAL/);
+  assert.match(noticeSource, /window\.addEventListener\("pageshow"/);
+  assert.match(noticeSource, /document\.addEventListener\("visibilitychange"/);
+  assert.match(noticeSource, /currentId !== nextRelease\.id[\s\S]*?reloadForRelease/);
+  assert.match(noticeSource, /window\.location\.reload\(\)/);
+  assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
+  assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
+  assert.equal(release.title, "최신내용 업데이트");
+  assert.equal(release.items.length, 2);
+  assert.match(release.id, /^[a-f0-9]{16}$/);
+});
+
 test("protects dashboard routes behind the manager CDSID login", async () => {
   const response = await render("/dashboard/6KR6834", { authenticated: false });
   assert.equal(response.status, 307);
