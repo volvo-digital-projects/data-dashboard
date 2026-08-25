@@ -196,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 27);
+  assert.equal(release.items.length, 28);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -324,7 +324,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
-    /\.dashboard-identity-header \.update-status\s*\{[\s\S]*?width: 100%/,
+    /\.dashboard-identity-header \.update-status\s*\{[^}]*width: 100%[^}]*display: grid[^}]*gap: 2px/,
   );
   assert.match(
     dashboardCss,
