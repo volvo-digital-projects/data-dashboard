@@ -9459,9 +9459,9 @@ body {
   .dashboard-identity-header .identity-title h1,
   .dashboard-identity-header.analysis-header h1 {
     color: #ffffff;
-    font-family: var(--font-korean);
+    font-family: "Pretendard Variable", var(--font-korean), sans-serif;
     font-size: 30px;
-    font-weight: 900;
+    font-weight: 760;
     letter-spacing: -0.045em;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
   }

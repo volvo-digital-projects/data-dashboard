@@ -1817,6 +1817,10 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
+    /\.dashboard-identity-header \.identity-title h1,[\s\S]*?\.dashboard-identity-header\.analysis-header h1\s*\{[^}]*font-family: "Pretendard Variable", var\(--font-korean\), sans-serif[^}]*font-weight: 760/,
+  );
+  assert.match(
+    css,
     /\.dashboard-identity-header \.identity-detail-rail,\s*\.dashboard-identity-header \.analysis-context\s*\{[^}]*border: 0;[^}]*background: rgba\(5, 28, 42, 0\.23\)/,
   );
   assert.match(
