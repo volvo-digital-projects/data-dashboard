@@ -1220,10 +1220,13 @@ function WeeklyTrend({
   const weekBoundaryX = (completedWeeks: number) =>
     plotLeft + (completedWeeks / 52) * plotWidth;
   const evaluationProgressWeek = Math.max(26, Math.min(latestWeek, 39));
-  const activeQuarterStart = weekBoundaryX(evaluationProgressWeek);
+  const activeQuarterStart = weekBoundaryX(26);
   const activeQuarterEnd = weekBoundaryX(39);
   const upcomingQuarterStart = weekBoundaryX(39);
   const upcomingQuarterEnd = weekBoundaryX(52);
+  const highlightedQuarterStartWeek =
+    highlightQuarter === "q1" ? 0 : highlightQuarter === "q2" ? 13 : 26;
+  const highlightedQuarterEndWeek = highlightedQuarterStartWeek + 13;
   const markerSize = 6.3;
   const markerRadius = markerSize / 2;
   const y = (value: number) =>
@@ -1385,11 +1388,11 @@ function WeeklyTrend({
           >
             {highlightQuarter && (
               <rect
-                x={weekBoundaryX(highlightQuarter === "q1" ? 0 : 13)}
+                x={weekBoundaryX(highlightedQuarterStartWeek)}
                 y={chartY(18)}
                 width={
-                  weekBoundaryX(highlightQuarter === "q1" ? 13 : 26) -
-                  weekBoundaryX(highlightQuarter === "q1" ? 0 : 13)
+                  weekBoundaryX(highlightedQuarterEndWeek) -
+                  weekBoundaryX(highlightedQuarterStartWeek)
                 }
                 height={chartY(152)}
                 className="selected-quarter-window"

@@ -135,7 +135,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 4);
+  assert.equal(release.items.length, 5);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -932,11 +932,20 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const evaluationProgressWeek = Math\.max\(26, Math\.min\(latestWeek, 39\)\)/,
   );
+  assert.match(dashboardSource, /const activeQuarterStart = weekBoundaryX\(26\)/);
+  assert.match(dashboardSource, /const activeQuarterEnd = weekBoundaryX\(39\)/);
   assert.match(
     dashboardSource,
-    /const activeQuarterStart = weekBoundaryX\(evaluationProgressWeek\)/,
+    /const highlightedQuarterStartWeek =\s*highlightQuarter === "q1" \? 0 : highlightQuarter === "q2" \? 13 : 26/,
   );
-  assert.match(dashboardSource, /const activeQuarterEnd = weekBoundaryX\(39\)/);
+  assert.match(
+    dashboardSource,
+    /const highlightedQuarterEndWeek = highlightedQuarterStartWeek \+ 13/,
+  );
+  assert.match(
+    dashboardSource,
+    /x=\{weekBoundaryX\(highlightedQuarterStartWeek\)\}[\s\S]*?weekBoundaryX\(highlightedQuarterEndWeek\) -\s*weekBoundaryX\(highlightedQuarterStartWeek\)/,
+  );
   assert.match(
     dashboardSource,
     /x1=\{weekBoundaryX\(completedWeeks\)\}[\s\S]*?data-week-boundary=\{completedWeeks\}/,
