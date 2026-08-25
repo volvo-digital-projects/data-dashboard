@@ -1116,10 +1116,18 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
 });
 
 test("restores the profile showroom switcher for all viewers", async () => {
-  const [dashboardSource, css] = await Promise.all([
+  const [dashboardSource, css, showroomsJson] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
   ]);
+  const gimhae = JSON.parse(showroomsJson).showrooms.find(
+    (showroom) => showroom.cdsid === "6KR6863",
+  );
+
+  assert.equal(gimhae.showroom, "볼보 김해");
+  assert.equal(gimhae.manager, "김희종");
+  assert.equal(gimhae.q1.manager, "김희종");
 
   assert.match(
     dashboardSource,
