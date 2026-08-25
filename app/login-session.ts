@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const LOGIN_COOKIE_NAME = "volvo-dashboard-access";
-export const LOGIN_COOKIE_VALUE = "vck-manager-260825-6c2488";
+export const LOGIN_COOKIE_VALUE = "vck-manager-session-260825-b8f41d";
 
 export async function requireDashboardLogin(): Promise<void> {
   const cookieStore = await cookies();

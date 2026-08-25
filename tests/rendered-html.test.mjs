@@ -4,9 +4,14 @@ import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
 
-const loginCookie = "volvo-dashboard-access=vck-manager-260825-6c2488";
+const staleLoginCookie = "volvo-dashboard-access=vck-manager-260825-6c2488";
+const loginCookie =
+  "volvo-dashboard-access=vck-manager-session-260825-b8f41d";
 
-async function render(pathname = "/", { authenticated = true } = {}) {
+async function render(
+  pathname = "/",
+  { authenticated = true, cookie = null } = {},
+) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -16,7 +21,7 @@ async function render(pathname = "/", { authenticated = true } = {}) {
       headers: {
         accept: "text/html",
         host: "localhost",
-        ...(authenticated ? { cookie: loginCookie } : {}),
+        ...(cookie || authenticated ? { cookie: cookie ?? loginCookie } : {}),
       },
     }),
     {
@@ -138,6 +143,13 @@ test("protects dashboard routes behind the manager CDSID login", async () => {
   const response = await render("/dashboard/6KR6834", { authenticated: false });
   assert.equal(response.status, 307);
   assert.equal(response.headers.get("location"), "http://localhost/");
+
+  const staleSessionResponse = await render("/dashboard/6KR6834", {
+    authenticated: false,
+    cookie: staleLoginCookie,
+  });
+  assert.equal(staleSessionResponse.status, 307);
+  assert.equal(staleSessionResponse.headers.get("location"), "http://localhost/");
 });
 
 test("ships the blue-row manager allowlist and VCK-ES90 account", async () => {
@@ -160,7 +172,9 @@ test("accepts manager and VCK-ES90 logins while rejecting other CDSIDs", async (
   for (const cdsid of ["K-KIM16", "vck-es90"]) {
     const response = await login(cdsid);
     assert.equal(response.status, 200);
-    assert.match(response.headers.get("set-cookie") ?? "", /volvo-dashboard-access=/);
+    const setCookie = response.headers.get("set-cookie") ?? "";
+    assert.match(setCookie, /volvo-dashboard-access=/);
+    assert.doesNotMatch(setCookie, /Max-Age=/i);
     assert.deepEqual(await response.json(), {
       redirectPath: "/dashboard/6KR6834",
     });
