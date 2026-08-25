@@ -69,6 +69,12 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /1,265(?:<!-- -->)?명/);
   assert.match(html, /UPDATE/);
   assert.match(html, /Since 260831/);
+
+  const explicitLoginResponse = await render("/login");
+  assert.equal(explicitLoginResponse.status, 200);
+  const explicitLoginHtml = await explicitLoginResponse.text();
+  assert.match(explicitLoginHtml, /Volvo Data/);
+  assert.match(explicitLoginHtml, /CDSID를 입력해 주세요/);
 });
 
 test("remembers only the last successfully authenticated CDSID", async () => {
