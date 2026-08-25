@@ -1261,6 +1261,19 @@ test("keeps the four header context cells free of internal cross dividers", asyn
   );
 });
 
+test("stretches the manager control across the same header grid column as the other context cells", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.identity-profile-menu\s*\{[^}]*width: 100%;[^}]*min-width: 0;/,
+  );
+  assert.match(
+    css,
+    /\.identity-profile-menu \.identity-profile\s*\{[^}]*width: 100%;[^}]*min-width: 0;/,
+  );
+});
+
 test("renders national score labels above the actual trend line", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),
