@@ -9696,12 +9696,21 @@ body {
 /* ES90 waitlist title typography */
 .score-stack-heading h2,
 .v3s-performance.compact .v3s-subhead h3,
-.voc-consultation-heading > div:first-child > strong,
-.one-voice-title-row > strong {
+.voc-consultation-heading > div:first-child > strong {
   color: #11283d;
   font-family: var(--font-ui);
   font-weight: 600;
   letter-spacing: -0.25px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Shared Volvo English title typography */
+.v3s-subhead .english-title,
+.score-tier-heading .english-title,
+.one-voice-title-row > .english-title {
+  font-family: var(--font-latin);
+  font-weight: 800;
+  letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
 }
 

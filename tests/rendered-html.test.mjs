@@ -2293,9 +2293,12 @@ test("ships the premium neutral design system and Paperlogy typography", async (
 });
 
 test("matches the requested dashboard headings to the ES90 waitlist title typography without resizing", async () => {
-  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const [dashboardSource, css] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
   const titleRule = css.match(
-    /\/\* ES90 waitlist title typography \*\/[\s\S]*?\.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong,[\s\S]*?\.one-voice-title-row > strong\s*\{([^}]*)\}/,
+    /\/\* ES90 waitlist title typography \*\/[\s\S]*?\.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong\s*\{([^}]*)\}/,
   );
 
   assert.ok(titleRule);
@@ -2304,4 +2307,25 @@ test("matches the requested dashboard headings to the ES90 waitlist title typogr
   assert.match(titleRule[1], /font-weight: 600;/);
   assert.match(titleRule[1], /letter-spacing: -0\.25px;/);
   assert.doesNotMatch(titleRule[1], /font-size:/);
+
+  assert.equal(
+    (dashboardSource.match(/className="english-title"/g) ?? []).length,
+    5,
+  );
+  assert.match(
+    dashboardSource,
+    /<span className="english-title">V3S<\/span> 5개년 추이/,
+  );
+  assert.match(
+    css,
+    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.v3s-subhead \.english-title,[\s\S]*?\.score-tier-heading \.english-title,[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
+  );
+  const englishRule = css.match(
+    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
+  );
+  assert.ok(englishRule);
+  assert.match(englishRule[1], /font-family: var\(--font-latin\);/);
+  assert.match(englishRule[1], /font-weight: 800;/);
+  assert.match(englishRule[1], /letter-spacing: 0\.02em;/);
+  assert.doesNotMatch(englishRule[1], /font-size:/);
 });

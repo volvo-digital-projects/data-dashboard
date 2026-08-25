@@ -774,7 +774,9 @@ function V3SPerformance({
       <section className="v3s-history-panel">
         <header className="v3s-subhead">
           <div>
-            <h3>V3S 5개년 추이</h3>
+            <h3>
+              <span className="english-title">V3S</span> 5개년 추이
+            </h3>
           </div>
         </header>
 
@@ -2677,7 +2679,7 @@ export default function Dashboard({
               }`}
             >
               <header className="score-tier-heading">
-                <strong>V3S</strong>
+                <strong className="english-title">V3S</strong>
               </header>
               <V3SPerformance
                 showroom={selected}
@@ -2697,7 +2699,7 @@ export default function Dashboard({
             >
               <header className="score-tier-heading voc-score-heading">
                 <div className="score-tier-heading-title">
-                  <strong>VOC</strong>
+                  <strong className="english-title">VOC</strong>
                 </div>
                 <div
                   className="voc-component-tabs"
@@ -2735,7 +2737,7 @@ export default function Dashboard({
             >
               <header className="score-tier-heading cx-score-heading">
                 <div className="score-tier-heading-title">
-                  <strong>CX Index</strong>
+                  <strong className="english-title">CX Index</strong>
                 </div>
                 <div
                   className="cx-component-tabs"
@@ -2770,7 +2772,7 @@ export default function Dashboard({
                   <header className="one-voice-contribution-heading">
                     <div>
                       <div className="one-voice-title-row">
-                        <strong>ONE VOICE</strong>
+                        <strong className="english-title">ONE VOICE</strong>
                         {oneVoiceReferenceDate && (
                           <time
                             className="one-voice-reference-date"
