@@ -256,8 +256,9 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="signal-icon caution" aria-hidden="true">▼<\/span>주의 필요/,
   );
   assert.match(html, /CX Index/);
-  assert.equal((visibleHtml.match(/점 \/ 100점 만점/g) ?? []).length, 2);
-  assert.equal((visibleHtml.match(/점 \/ 130점 만점/g) ?? []).length, 1);
+  assert.equal((visibleHtml.match(/<span>\/ 100점 만점<\/span>/g) ?? []).length, 2);
+  assert.equal((visibleHtml.match(/<span>\/ 130점 만점<\/span>/g) ?? []).length, 1);
+  assert.equal((visibleHtml.match(/<span>점 \/ (?:100|130)점 만점<\/span>/g) ?? []).length, 0);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.equal(
     (html.match(/상세 영역으로 이동/g) ?? []).length,
