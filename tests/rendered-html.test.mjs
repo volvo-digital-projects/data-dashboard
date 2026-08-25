@@ -1057,6 +1057,21 @@ test("limits header hover feedback to pointer devices", async () => {
   );
 });
 
+test("keeps the four header context cells free of internal cross dividers", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.doesNotMatch(css, /\.analysis-context-item:nth-child\(even\)\s*\{[^}]*border-left/);
+  assert.doesNotMatch(css, /\.analysis-context-item:nth-child\(n \+ 3\)\s*\{[^}]*border-top/);
+  assert.doesNotMatch(
+    css,
+    /\.identity-strip dl div:nth-child\(even\),\s*\.identity-profile\s*\{[^}]*border-left/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.identity-strip dl div:nth-child\(n \+ 3\),\s*\.identity-profile\s*\{[^}]*border-top/,
+  );
+});
+
 test("renders national score labels above the actual trend line", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),

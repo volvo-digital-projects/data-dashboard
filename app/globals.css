@@ -3316,14 +3316,6 @@ input:focus-visible {
   outline-offset: -2px;
 }
 
-.analysis-context-item:nth-child(even) {
-  border-left: 1px solid rgba(16, 24, 40, 0.07);
-}
-
-.analysis-context-item:nth-child(n + 3) {
-  border-top: 1px solid rgba(16, 24, 40, 0.07);
-}
-
 .analysis-context-item > .identity-icon,
 .analysis-context-item > .identity-profile-icon {
   width: 22px;
@@ -4798,16 +4790,6 @@ input:focus-visible,
 .identity-strip dl div + div,
 .identity-profile {
   border-left: 0;
-}
-
-.identity-strip dl div:nth-child(even),
-.identity-profile {
-  border-left: 1px solid rgba(16, 24, 40, 0.07);
-}
-
-.identity-strip dl div:nth-child(n + 3),
-.identity-profile {
-  border-top: 1px solid rgba(16, 24, 40, 0.07);
 }
 
 .identity-icon {
