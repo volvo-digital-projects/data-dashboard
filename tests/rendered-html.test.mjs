@@ -245,7 +245,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 37);
+  assert.equal(release.items.length, 38);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
