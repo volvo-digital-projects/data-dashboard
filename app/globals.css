@@ -5140,7 +5140,7 @@ input:focus-visible,
 }
 
 .login-copy {
-  width: min(100%, 390px);
+  width: min(100%, 360px);
   margin-top: clamp(36px, 7vh, 70px);
 }
 
@@ -5162,7 +5162,7 @@ input:focus-visible,
 }
 
 .login-description {
-  margin: 0 0 66px;
+  margin: 0 0 38px;
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-korean), var(--font-volvo), sans-serif;
   font-size: 16px;
@@ -5172,18 +5172,18 @@ input:focus-visible,
 
 .cdsid-form {
   display: grid;
-  gap: 22px;
+  gap: 8px;
 }
 
 .cdsid-field {
-  min-height: 68px;
+  min-height: 42px;
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: 46px minmax(0, 1fr);
   align-items: center;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.38);
-  border-radius: 9px;
-  background: rgba(5, 17, 25, 0.42);
+  border-radius: 6px;
+  background: rgba(8, 43, 65, 0.78);
   transition:
     border-color 180ms ease,
     background 180ms ease,
@@ -5197,8 +5197,8 @@ input:focus-visible,
 }
 
 .cdsid-person-icon {
-  width: 26px;
-  height: 30px;
+  width: 18px;
+  height: 22px;
   display: block;
   position: relative;
   justify-self: center;
@@ -5206,8 +5206,8 @@ input:focus-visible,
 }
 
 .cdsid-person-icon i {
-  width: 9px;
-  height: 9px;
+  width: 7px;
+  height: 7px;
   position: absolute;
   top: 1px;
   left: 50%;
@@ -5217,8 +5217,8 @@ input:focus-visible,
 }
 
 .cdsid-person-icon b {
-  width: 23px;
-  height: 15px;
+  width: 17px;
+  height: 12px;
   position: absolute;
   right: 0;
   bottom: 1px;
@@ -5230,13 +5230,13 @@ input:focus-visible,
 
 .cdsid-field input {
   min-width: 0;
-  height: 66px;
-  padding: 0 20px 0 4px;
+  height: 40px;
+  padding: 0 14px 0 4px;
   border: 0;
   outline: 0;
   color: #ffffff;
   background: transparent;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -5247,15 +5247,15 @@ input:focus-visible,
 }
 
 .cdsid-form button {
-  min-height: 68px;
+  min-height: 42px;
   display: grid;
-  grid-template-columns: 50px minmax(0, 1fr) 50px;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
   align-items: center;
-  padding: 0 18px;
+  padding: 0 14px;
   color: #12364a;
   border: 0;
-  border-radius: 9px;
-  background: #f7f7f5;
+  border-radius: 6px;
+  background: #f2f4f4;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   transition:
@@ -5275,13 +5275,13 @@ input:focus-visible,
 }
 
 .cdsid-form button strong {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .login-mouse-icon {
-  width: 17px;
-  height: 25px;
+  width: 12px;
+  height: 18px;
   position: relative;
   justify-self: start;
   border: 1.7px solid currentColor;
@@ -5290,7 +5290,7 @@ input:focus-visible,
 
 .login-mouse-icon i {
   width: 1.5px;
-  height: 7px;
+  height: 5px;
   position: absolute;
   top: 0;
   left: 50%;
@@ -5299,20 +5299,111 @@ input:focus-visible,
 }
 
 .cdsid-error {
-  margin: -12px 0 -8px 4px;
+  margin: 2px 0 1px 4px;
   color: #ffb29b;
   font-size: 12px;
   line-height: 1.45;
 }
 
+.login-session-meta {
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-ui);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.login-last-access {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.login-last-access small {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+}
+
+.login-last-access strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+}
+
+.login-session-meta time {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 3px 8px 3px 5px;
+  overflow: hidden;
+  border: 1px solid rgba(152, 205, 228, 0.42);
+  border-radius: 999px;
+  color: rgba(240, 248, 251, 0.92);
+  background: rgba(12, 57, 82, 0.72);
+  text-overflow: ellipsis;
+}
+
+.login-session-meta time i {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  flex: 0 0 auto;
+  border: 1px solid #a9d5e8;
+  border-radius: 50%;
+}
+
+.login-session-meta time i::before,
+.login-session-meta time i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 1px;
+  background: #a9d5e8;
+  transform-origin: 0 0;
+}
+
+.login-session-meta time i::before {
+  width: 1px;
+  height: 3px;
+  transform: translate(-0.5px, -3px);
+}
+
+.login-session-meta time i::after {
+  width: 3px;
+  height: 1px;
+  transform: translate(0, -0.5px) rotate(20deg);
+}
+
+.login-session-meta time b {
+  color: #ff8b52;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.login-session-meta time span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .login-panel footer {
-  width: min(100%, 430px);
+  width: min(100%, 360px);
   display: flex;
   flex-wrap: wrap;
   gap: 5px 12px;
-  position: absolute;
-  bottom: clamp(34px, 7vh, 70px);
-  left: clamp(44px, 5.2vw, 88px);
+  position: static;
+  margin-top: 8px;
   color: rgba(255, 255, 255, 0.73);
   font-size: 13px;
   line-height: 1.5;
@@ -5342,7 +5433,6 @@ input:focus-visible,
   }
 
   .login-panel footer {
-    left: 48px;
     font-size: 11px;
   }
 }
@@ -5399,36 +5489,42 @@ input:focus-visible,
   }
 
   .cdsid-form {
-    gap: 14px;
+    gap: 8px;
   }
 
   .cdsid-field,
   .cdsid-form button {
-    min-height: 58px;
+    min-height: 46px;
   }
 
   .cdsid-field {
-    grid-template-columns: 60px minmax(0, 1fr);
+    grid-template-columns: 48px minmax(0, 1fr);
   }
 
   .cdsid-field input {
-    height: 56px;
-    font-size: 15px;
+    height: 44px;
+    font-size: 14px;
   }
 
   .cdsid-form button {
-    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
   }
 
   .cdsid-form button strong {
-    font-size: 16px;
+    font-size: 14px;
+  }
+
+  .login-session-meta {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .login-session-meta time {
+    margin-left: 0;
   }
 
   .login-panel footer {
-    right: 22px;
-    bottom: 24px;
-    left: 22px;
-    width: auto;
+    width: 100%;
     justify-content: center;
     font-size: 9px;
     text-align: center;

@@ -62,6 +62,8 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /Dashboard/);
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
+  assert.match(html, /LAST ACCESS/);
+  assert.match(html, /UPDATE/);
 });
 
 test("remembers only the last successfully authenticated CDSID", async () => {
@@ -81,6 +83,10 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   assert.match(
     loginSource,
     /if \(!response\.ok \|\| !payload\.redirectPath\)[\s\S]*?return;[\s\S]*?localStorage\.setItem\(LAST_LOGIN_CDSID_KEY, normalizedCdsid\)[\s\S]*?window\.location\.assign/,
+  );
+  assert.match(
+    loginSource,
+    /timeZone: "Asia\/Seoul"[\s\S]*?setInterval\(refreshTimestamp, 60_000\)/,
   );
 });
 

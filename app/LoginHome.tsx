@@ -6,8 +6,24 @@ import { useEffect, useState } from "react";
 const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid";
 const VALID_CDSID_PATTERN = /^[A-Z0-9-]{4,16}$/;
 
+function formatSeoulTimestamp(date: Date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${value.year}-${value.month}-${value.day} ${value.hour}:${value.minute}`;
+}
+
 export default function LoginHome() {
   const [cdsid, setCdsid] = useState("");
+  const [lastSuccessfulCdsid, setLastSuccessfulCdsid] = useState("");
+  const [updatedAt, setUpdatedAt] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -19,10 +35,18 @@ export default function LoginHome() {
         .toUpperCase();
       if (rememberedCdsid && VALID_CDSID_PATTERN.test(rememberedCdsid)) {
         setCdsid(rememberedCdsid);
+        setLastSuccessfulCdsid(rememberedCdsid);
       }
     } catch {
       // The login remains fully usable when browser storage is unavailable.
     }
+  }, []);
+
+  useEffect(() => {
+    const refreshTimestamp = () => setUpdatedAt(formatSeoulTimestamp(new Date()));
+    refreshTimestamp();
+    const timer = window.setInterval(refreshTimestamp, 60_000);
+    return () => window.clearInterval(timer);
   }, []);
 
   async function openDashboard(event: FormEvent<HTMLFormElement>) {
@@ -48,6 +72,7 @@ export default function LoginHome() {
 
       try {
         window.localStorage.setItem(LAST_LOGIN_CDSID_KEY, normalizedCdsid);
+        setLastSuccessfulCdsid(normalizedCdsid);
       } catch {
         // A successful login must not be blocked by a storage restriction.
       }
@@ -120,6 +145,18 @@ export default function LoginHome() {
               <span aria-hidden="true" />
             </button>
           </form>
+
+          <div className="login-session-meta" aria-label="최근 접속 및 업데이트 정보">
+            <span className="login-last-access">
+              <small>LAST ACCESS</small>
+              <strong>{lastSuccessfulCdsid || "—"}</strong>
+            </span>
+            <time dateTime={updatedAt ? updatedAt.replace(" ", "T") : undefined}>
+              <i aria-hidden="true" />
+              <b>UPDATE</b>
+              <span>{updatedAt || "—"} 기준</span>
+            </time>
+          </div>
         </div>
 
         <footer>
