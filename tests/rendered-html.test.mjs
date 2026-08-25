@@ -136,7 +136,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 6);
+  assert.equal(release.items.length, 7);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2430,7 +2430,7 @@ test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam 
   assert.match(gallerySource, /aria-modal="true"/);
   assert.match(gallerySource, /aria-label="증빙사진 닫기"/);
   assert.match(gallerySource, /event\.key === "Escape"/);
-  assert.match(gallerySource, /얼굴 익명화 완료/);
+  assert.doesNotMatch(gallerySource, /얼굴 익명화 완료/);
   assert.match(galleryCss, /grid-template-columns: repeat\(auto-fit,/);
   assert.match(galleryCss, /object-fit: contain/);
 

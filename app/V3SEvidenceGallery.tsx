@@ -113,7 +113,6 @@ export function V3SEvidenceGallery({
                 </div>
                 <figcaption className={styles.caption}>
                   <strong>{photo.caption}</strong>
-                  <span className={styles.privacy}>얼굴 익명화 완료</span>
                 </figcaption>
               </figure>
             ))}
