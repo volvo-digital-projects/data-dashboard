@@ -1022,6 +1022,41 @@ test("restores the profile showroom switcher for all viewers", async () => {
   );
 });
 
+test("limits header hover feedback to pointer devices", async () => {
+  const [css, dashboardSource, analysisSource] = await Promise.all([
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(
+    css,
+    /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.identity-analysis-entry:has\(\.identity-analysis-hit:hover\)/,
+  );
+  assert.match(
+    css,
+    /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.analysis-context-item:hover/,
+  );
+  assert.match(
+    css,
+    /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.identity-profile:hover/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.dashboard-identity-header \.identity-analysis-entry:hover/,
+  );
+  assert.equal(
+    (dashboardSource.match(/onClick=\{\(event\) => event\.currentTarget\.blur\(\)\}/g) ?? [])
+      .length,
+    3,
+  );
+  assert.equal(
+    (analysisSource.match(/onClick=\{\(event\) => event\.currentTarget\.blur\(\)\}/g) ?? [])
+      .length,
+    4,
+  );
+});
+
 test("renders national score labels above the actual trend line", async () => {
   const dashboardSource = await readFile(
     new URL("../app/Dashboard.tsx", import.meta.url),

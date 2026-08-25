@@ -669,6 +669,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+            onClick={(event) => event.currentTarget.blur()}
           >
             <span
               className="identity-icon identity-icon--dealer"
@@ -681,6 +682,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+            onClick={(event) => event.currentTarget.blur()}
           >
             <span
               className="identity-icon identity-icon--region"
@@ -693,6 +695,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+            onClick={(event) => event.currentTarget.blur()}
           >
             <span
               className="identity-icon identity-icon--size"
@@ -705,6 +708,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
+            onClick={(event) => event.currentTarget.blur()}
           >
             <span className="identity-profile-icon" aria-hidden="true" />
             <small>지점장</small>

@@ -619,8 +619,10 @@ input:focus-visible {
   text-align: left;
 }
 
-.identity-profile:hover {
-  background: var(--blue-soft);
+@media (hover: hover) and (pointer: fine) {
+  .identity-profile:hover {
+    background: var(--blue-soft);
+  }
 }
 
 .identity-profile-icon {
@@ -3042,9 +3044,14 @@ input:focus-visible {
   outline-offset: -3px;
 }
 
-.identity-analysis-entry:has(.identity-analysis-hit:hover),
 .identity-analysis-entry:has(.identity-analysis-hit:focus-visible) {
   background: #eef5f8 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .identity-analysis-entry:has(.identity-analysis-hit:hover) {
+    background: #eef5f8 !important;
+  }
 }
 
 @media (min-width: 761px) {
@@ -3293,9 +3300,14 @@ input:focus-visible {
   transition: background 160ms ease;
 }
 
-.analysis-context-item:hover,
 .analysis-context-item:focus-visible {
   background: var(--blue-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .analysis-context-item:hover {
+    background: var(--blue-soft);
+  }
 }
 
 .analysis-context-item:focus-visible {
@@ -4770,9 +4782,11 @@ input:focus-visible,
   transition: background 180ms ease;
 }
 
-.identity-strip dl div:hover,
-.identity-profile:hover {
-  background: #f4f8fa;
+@media (hover: hover) and (pointer: fine) {
+  .identity-strip dl div:hover,
+  .identity-profile:hover {
+    background: #f4f8fa;
+  }
 }
 
 .identity-strip dl div + div,
@@ -8841,9 +8855,6 @@ body {
       border-color 140ms ease;
   }
 
-  .dashboard-identity-header .identity-analysis-entry:hover,
-  .dashboard-identity-header .identity-profile:hover,
-  .dashboard-identity-header .analysis-context-item:hover,
   .dashboard-identity-header .analysis-context-item:focus-visible {
     background-color: #f0f6f8;
   }
@@ -9022,11 +9033,7 @@ body {
     border: 0;
   }
 
-  .dashboard-identity-header .identity-analysis-entry:hover,
-  .dashboard-identity-header .identity-profile:hover,
-  .dashboard-identity-header .analysis-context-item:hover,
   .dashboard-identity-header .analysis-context-item:focus-visible,
-  .dashboard-identity-header .identity-analysis-entry:has(.identity-analysis-hit:hover),
   .dashboard-identity-header .identity-analysis-entry:has(.identity-analysis-hit:focus-visible) {
     background: rgba(225, 242, 249, 0.1) !important;
   }
@@ -9049,6 +9056,15 @@ body {
     border-color: rgba(183, 219, 234, 0.22);
     background: rgba(235, 247, 251, 0.08);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+@media (min-width: 761px) and (hover: hover) and (pointer: fine) {
+  .dashboard-identity-header .identity-analysis-entry:hover,
+  .dashboard-identity-header .identity-profile:hover,
+  .dashboard-identity-header .analysis-context-item:hover,
+  .dashboard-identity-header .identity-analysis-entry:has(.identity-analysis-hit:hover) {
+    background: rgba(225, 242, 249, 0.1) !important;
   }
 }
 
