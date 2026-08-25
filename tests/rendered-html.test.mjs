@@ -258,6 +258,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /CX Index/);
   assert.match(visibleHtml, /VOC해피콜만 교차검증 가능<\/span>/);
   assert.match(visibleHtml, /신차해피콜 사후보정 가능<\/span>/);
+  assert.match(visibleHtml, /보정기간 내 교차검증<\/span>/);
+  assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);
   assert.equal((visibleHtml.match(/<span>\/ 100점 만점<\/span>/g) ?? []).length, 2);
   assert.equal((visibleHtml.match(/<span>\/ 130점 만점<\/span>/g) ?? []).length, 1);

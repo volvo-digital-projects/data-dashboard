@@ -2330,6 +2330,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
+      appealLabel: "보정기간 내 교차검증",
     },
     {
       key: "voc" as const,
