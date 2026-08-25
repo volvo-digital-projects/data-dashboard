@@ -27,6 +27,7 @@ function formatSeoulTimestamp(date: Date) {
 
 export default function LoginHome() {
   const [cdsid, setCdsid] = useState("");
+  const [rememberedCdsid, setRememberedCdsid] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +39,7 @@ export default function LoginHome() {
         ?.trim()
         .toUpperCase();
       if (rememberedCdsid && VALID_CDSID_PATTERN.test(rememberedCdsid)) {
-        setCdsid(rememberedCdsid);
+        setRememberedCdsid(rememberedCdsid);
       }
     } catch {
       // The login remains fully usable when browser storage is unavailable.
@@ -125,6 +126,9 @@ export default function LoginHome() {
                 value={cdsid}
                 aria-describedby={error ? "cdsid-error" : undefined}
                 aria-invalid={Boolean(error)}
+                onFocus={() => {
+                  if (!cdsid && rememberedCdsid) setCdsid(rememberedCdsid);
+                }}
                 onChange={(event) => {
                   setCdsid(event.currentTarget.value.toUpperCase());
                   if (error) setError("");

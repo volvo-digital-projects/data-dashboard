@@ -151,7 +151,11 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
   assert.match(
     loginSource,
-    /localStorage[\s\S]*?\.getItem\(LAST_LOGIN_CDSID_KEY\)[\s\S]*?setCdsid\(rememberedCdsid\)/,
+    /localStorage[\s\S]*?\.getItem\(LAST_LOGIN_CDSID_KEY\)[\s\S]*?setRememberedCdsid\(rememberedCdsid\)/,
+  );
+  assert.match(
+    loginSource,
+    /onFocus=\{\(\) => \{[\s\S]*?if \(!cdsid && rememberedCdsid\) setCdsid\(rememberedCdsid\);/,
   );
   assert.match(
     loginSource,
@@ -192,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 21);
+  assert.equal(release.items.length, 22);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
