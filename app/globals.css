@@ -1205,17 +1205,18 @@ input:focus-visible {
 
 .appeal-badge {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 4px;
   color: var(--good);
   font-size: 8px;
   font-weight: 800;
   line-height: 1.25;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .appeal-badge-label {
   min-width: 0;
+  width: auto;
 }
 
 .appeal-badge-key {
@@ -1232,9 +1233,10 @@ input:focus-visible {
   color: var(--muted);
 }
 
-.appeal-badge > span {
+.appeal-badge > span[aria-hidden="true"] {
   width: 17px;
   height: 17px;
+  flex: 0 0 17px;
   display: grid;
   place-items: center;
   border: 1px solid currentColor;
@@ -5994,9 +5996,10 @@ body:has(.login-home) {
   font-weight: 650;
 }
 
-.appeal-badge > span {
+.appeal-badge > span[aria-hidden="true"] {
   width: 18px;
   height: 18px;
+  flex-basis: 18px;
 }
 
 .content-grid {

@@ -196,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 25);
+  assert.equal(release.items.length, 26);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -329,6 +329,18 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(
     dashboardCss,
     /\.dashboard-logout-form\s*\{[\s\S]*?margin: 0 0 0 auto/,
+  );
+  assert.match(
+    dashboardCss,
+    /\.appeal-badge\s*\{[^}]*align-items: center[^}]*white-space: nowrap/,
+  );
+  assert.match(
+    dashboardCss,
+    /\.appeal-badge > span\[aria-hidden="true"\]\s*\{[^}]*width: 17px[^}]*flex: 0 0 17px/,
+  );
+  assert.doesNotMatch(
+    dashboardCss,
+    /\.appeal-badge > span\s*\{[^}]*width:/,
   );
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
