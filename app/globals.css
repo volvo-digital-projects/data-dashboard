@@ -8442,7 +8442,15 @@ button.quarter-score-row:disabled {
 .score-tier-weekly .trend-wrap.compact .data-coverage button {
   min-height: 22px;
   padding-inline: 8px;
+  background: transparent;
+  box-shadow: none;
   font-size: 9px;
+}
+
+.score-tier-weekly .trend-wrap.compact .data-coverage button:hover,
+.score-tier-weekly .trend-wrap.compact .data-coverage button:focus-visible {
+  background: transparent;
+  box-shadow: none;
 }
 
 .v3s-performance.compact {
