@@ -196,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 23);
+  assert.equal(release.items.length, 24);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1912,6 +1912,10 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(css, /--line: #e5e9ee/);
   assert.match(css, /--es90-orange: #f15a24/);
   assert.match(css, /\.login-rule\s*\{[^}]*background: #f47b3f/);
+  assert.match(
+    css,
+    /\.login-panel\s*\{[\s\S]*?rgba\(5, 17, 25, 0\.97\) 0%[\s\S]*?rgba\(7, 20, 29, 0\.61\) 64%[\s\S]*?rgba\(7, 20, 29, 0\.1\) 93%[\s\S]*?rgba\(7, 20, 29, 0\) 100%/,
+  );
   assert.match(
     css,
     /\.v3s-average-marker\s*\{[\s\S]*?background: repeating-linear-gradient\([\s\S]*?var\(--es90-orange\) 0 5px,[\s\S]*?transparent 5px 9px/,

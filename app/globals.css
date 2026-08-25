@@ -5206,9 +5206,14 @@ body:has(.login-home) {
   padding: clamp(52px, 5vw, 84px) clamp(44px, 5.2vw, 88px);
   background: linear-gradient(
     90deg,
-    rgba(5, 17, 25, 0.99) 0%,
-    rgba(7, 20, 29, 0.98) 69%,
-    rgba(7, 20, 29, 0.78) 84%,
+    rgba(5, 17, 25, 0.97) 0%,
+    rgba(6, 19, 28, 0.94) 22%,
+    rgba(7, 20, 29, 0.88) 38%,
+    rgba(7, 20, 29, 0.76) 52%,
+    rgba(7, 20, 29, 0.61) 64%,
+    rgba(7, 20, 29, 0.43) 75%,
+    rgba(7, 20, 29, 0.25) 85%,
+    rgba(7, 20, 29, 0.1) 93%,
     rgba(7, 20, 29, 0) 100%
   );
 }
