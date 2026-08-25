@@ -151,7 +151,6 @@ export default function LoginHome() {
                 </svg>
               </span>
               <strong>{isSubmitting ? "로그인 확인 중" : "Data Dashboard 시작"}</strong>
-              <span aria-hidden="true" />
             </button>
           </form>
 
