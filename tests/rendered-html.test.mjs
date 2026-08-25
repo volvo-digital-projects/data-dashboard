@@ -196,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 24);
+  assert.equal(release.items.length, 25);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -335,11 +335,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /VOC/);
   assert.match(
     visibleHtml,
-    /class="signal-icon warning" aria-hidden="true">▼<\/span>위험 감지/,
+    /class="signal-icon warning" aria-hidden="true">▼<\/span>위험해요/,
   );
   assert.match(
     visibleHtml,
-    /class="signal-icon caution" aria-hidden="true">▼<\/span>주의 필요/,
+    /class="signal-icon caution" aria-hidden="true">▼<\/span>힘내세요/,
   );
   assert.match(html, /CX Index/);
   assert.match(visibleHtml, /VOC해피콜<\/span>만 교차검증 후 사후보정 가능/);
@@ -570,10 +570,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력/);
   assert.doesNotMatch(visibleHtml, /COMPETITIVE POSITION/);
   assert.match(html, /aria-label="VOC 분기 평가점수"/);
-  assert.match(html, /위험 감지: Q3 전국 평균 대비 5점 이상 미달/);
-  assert.match(visibleHtml, /위험 감지/);
-  assert.match(html, /주의 필요: Q2 전국 평균 미만, 5점 미만 차이/);
-  assert.equal((visibleHtml.match(/>주의 필요<\/span>/g) ?? []).length, 2);
+  assert.match(html, /위험해요: Q3 전국 평균 대비 5점 이상 미달/);
+  assert.match(visibleHtml, /위험해요/);
+  assert.match(html, /힘내세요: Q2 전국 평균 미만, 5점 미만 차이/);
+  assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 2);
   assert.match(visibleHtml, /Q3 전국 평균 대비[\s\S]*?▼ 8\.7점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);

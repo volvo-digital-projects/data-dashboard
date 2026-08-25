@@ -346,9 +346,10 @@ function getTier(score: number) {
 
 function getSignal(value: number, average: number) {
   const delta = value - average;
-  if (delta >= 0) return { label: "평균 이상", tone: "good", delta };
-  if (delta >= -3) return { label: "주의 필요", tone: "caution", delta };
-  return { label: "위험 감지", tone: "warning", delta };
+  if (delta >= 5) return { label: "대단해요", tone: "good", delta };
+  if (delta >= 0) return { label: "잘했어요", tone: "good", delta };
+  if (delta >= -3) return { label: "힘내세요", tone: "caution", delta };
+  return { label: "위험해요", tone: "warning", delta };
 }
 
 function SignalIcon({ tone }: { tone: string }) {
@@ -437,10 +438,12 @@ function MetricCard({
   const fill = Math.min(100, Math.max(0, (value / metricMeta[metric].max) * 100));
   const signalRule =
     signal.tone === "warning"
-      ? `위험 감지: ${quarterLabel} 전국 평균 대비 5점 이상 미달`
+      ? `위험해요: ${quarterLabel} 전국 평균 대비 5점 이상 미달`
       : signal.tone === "caution"
-        ? `주의 필요: ${quarterLabel} 전국 평균 미만, 5점 미만 차이`
-        : `정상: ${quarterLabel} 전국 평균 이상`;
+        ? `힘내세요: ${quarterLabel} 전국 평균 미만, 5점 미만 차이`
+        : signal.delta >= 5
+          ? `대단해요: ${quarterLabel} 전국 평균 대비 5점 이상 우수`
+          : `잘했어요: ${quarterLabel} 전국 평균 이상`;
   const quarterScores = [
     {
       key: "q1" as const,
