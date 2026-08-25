@@ -7212,8 +7212,21 @@ button.quarter-score-row:disabled {
   border-bottom: 1px solid rgba(47, 107, 138, 0.16);
   border-radius: 8px 8px 3px 3px;
   background:
-    linear-gradient(to top, rgba(229, 233, 238, 0.52) 1px, transparent 1px)
-      0 0 / 100% 25%,
+    linear-gradient(
+      to bottom,
+      transparent 9px,
+      rgba(229, 233, 238, 0.58) 9px,
+      rgba(229, 233, 238, 0.58) 10px,
+      transparent 10px,
+      transparent 47px,
+      rgba(229, 233, 238, 0.58) 47px,
+      rgba(229, 233, 238, 0.58) 48px,
+      transparent 48px,
+      transparent 85px,
+      rgba(229, 233, 238, 0.58) 85px,
+      rgba(229, 233, 238, 0.58) 86px,
+      transparent 86px
+    ),
     linear-gradient(180deg, rgba(246, 248, 250, 0.42), rgba(241, 245, 247, 0.9));
 }
 
@@ -7223,19 +7236,21 @@ button.quarter-score-row:disabled {
   color: #8494a1;
   font-family: var(--font-latin);
   font-size: 7.5px;
+  line-height: 1;
   font-weight: 650;
+  transform: translateY(-50%);
 }
 
 .voc-consultation-axis.top {
-  top: 1px;
+  top: 10px;
 }
 
 .voc-consultation-axis.middle {
-  top: 44px;
+  top: 48px;
 }
 
 .voc-consultation-axis.base {
-  bottom: 15px;
+  top: 86px;
 }
 
 .voc-consultation-bars {
@@ -7255,15 +7270,17 @@ button.quarter-score-row:disabled {
   color: #7a5cc7;
   font-family: var(--font-latin);
   font-size: 7px;
+  line-height: 1;
   font-weight: 750;
+  transform: translateY(-50%);
 }
 
 .voc-response-rate-axis.top {
-  top: 1px;
+  top: 10px;
 }
 
 .voc-response-rate-axis.base {
-  bottom: 15px;
+  top: 86px;
 }
 
 .voc-response-rate-line-layer {
@@ -7331,21 +7348,20 @@ button.quarter-score-row:disabled {
 .voc-consultation-year {
   min-width: 0;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 2px;
+  position: relative;
 }
 
 .voc-consultation-pair {
   width: 45px;
-  min-height: 0;
-  flex: 1 1 auto;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
   display: flex;
   align-items: end;
   justify-content: center;
   gap: 3px;
+  transform: translateX(-50%);
 }
 
 .voc-consultation-bar {
@@ -7413,7 +7429,10 @@ button.quarter-score-row:disabled {
 
 .voc-consultation-year > small {
   width: 45px;
-  flex: 0 0 14px;
+  min-height: 14px;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7424,6 +7443,7 @@ button.quarter-score-row:disabled {
   line-height: 1.05;
   font-weight: 700;
   text-align: center;
+  transform: translateX(-50%);
   white-space: nowrap;
 }
 

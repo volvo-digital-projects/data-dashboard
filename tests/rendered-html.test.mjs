@@ -1852,11 +1852,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.voc-consultation-year\s*\{[^}]*display: flex;[^}]*flex-direction: column;[^}]*align-items: center;/,
+    /\.voc-consultation-axis\.top\s*\{[^}]*top: 10px;[^}]*\}[\s\S]*?\.voc-consultation-axis\.middle\s*\{[^}]*top: 48px;[^}]*\}[\s\S]*?\.voc-consultation-axis\.base\s*\{[^}]*top: 86px;/,
   );
   assert.match(
     css,
-    /\.voc-consultation-pair\s*\{[^}]*width: 45px;[^}]*flex: 1 1 auto;/,
+    /\.voc-consultation-year\s*\{[^}]*height: 100%;[^}]*position: relative;/,
+  );
+  assert.match(
+    css,
+    /\.voc-consultation-pair\s*\{[^}]*width: 45px;[^}]*height: 100%;[^}]*position: absolute;[^}]*bottom: 0;[^}]*transform: translateX\(-50%\);/,
   );
   assert.match(
     css,
