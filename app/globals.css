@@ -5465,14 +5465,21 @@ body:has(.login-home) {
 
 .login-panel footer {
   width: min(100%, 360px);
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
   gap: 5px 12px;
   position: static;
   margin-top: 4px;
   color: rgba(255, 255, 255, 0.73);
   font-size: 10px;
   line-height: 1.5;
+}
+
+.login-panel footer span:last-child {
+  justify-self: end;
+  white-space: nowrap;
+  text-align: right;
 }
 
 .login-panel footer span + span::before {
@@ -5591,9 +5598,8 @@ body:has(.login-home) {
 
   .login-panel footer {
     width: 100%;
-    justify-content: center;
     font-size: 9px;
-    text-align: center;
+    text-align: left;
   }
 }
 

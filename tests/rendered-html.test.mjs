@@ -121,6 +121,14 @@ test("server-renders the CDSID login route", async () => {
     css,
     /\.login-home\s*\{[^}]*width: 100%;[^}]*min-height: 100dvh;/,
   );
+  assert.match(
+    css,
+    /\.login-panel footer\s*\{[^}]*display: grid;[^}]*grid-template-columns: minmax\(0, 1fr\) auto;/,
+  );
+  assert.match(
+    css,
+    /\.login-panel footer span:last-child\s*\{[^}]*justify-self: end;[^}]*white-space: nowrap;[^}]*text-align: right;/,
+  );
 
   const explicitLoginResponse = await render("/login");
   assert.equal(explicitLoginResponse.status, 200);
@@ -182,7 +190,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 19);
+  assert.equal(release.items.length, 20);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
