@@ -5238,7 +5238,7 @@ body:has(.login-home) {
   width: min(330px, 86%);
   height: 2px;
   display: block;
-  margin: 28px 0 10px;
+  margin: 14px 0 10px;
   background: #f47b3f;
 }
 
@@ -5559,7 +5559,7 @@ body:has(.login-home) {
   }
 
   .login-rule {
-    margin: 20px 0 8px;
+    margin: 14px 0 8px;
   }
 
   .login-description {
