@@ -700,6 +700,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
+    /\.v3s-history-panel\s*\{[^}]*position: relative;[^}]*overflow: hidden;[^}]*background: #ffffff;/,
+  );
+  assert.match(
+    css,
+    /\.v3s-history-panel::after\s*\{[^}]*content: none;/,
+  );
+  assert.match(
+    css,
     /\.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 150px/,
   );
   assert.match(
