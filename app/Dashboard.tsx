@@ -352,14 +352,6 @@ function getSignal(value: number, average: number) {
   return { label: "위험해요", tone: "warning", delta };
 }
 
-function SignalIcon({ tone }: { tone: string }) {
-  return (
-    <span className={`signal-icon ${tone}`} aria-hidden="true">
-      {tone === "good" ? "▲" : "▼"}
-    </span>
-  );
-}
-
 function AppealBadge({
   type,
   labelOverride,
@@ -481,7 +473,6 @@ function MetricCard({
           {metricMeta[metric].short}
         </span>
         <span className={`signal-pill ${signal.tone}`} title={signalRule}>
-          <SignalIcon tone={signal.tone} />
           {signal.label}
         </span>
       </div>

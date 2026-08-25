@@ -1036,30 +1036,6 @@ input:focus-visible {
   color: var(--status-caution);
 }
 
-.signal-icon {
-  width: 14px;
-  height: 14px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--good);
-  color: white;
-  font-size: 9px;
-  font-weight: 900;
-}
-
-.signal-icon.warning {
-  background: transparent;
-  color: var(--status-danger);
-  font-size: 10px;
-}
-
-.signal-icon.caution {
-  background: transparent;
-  color: var(--status-caution);
-  font-size: 10px;
-}
-
 .metric-card-value {
   margin-top: 5px;
   font-family: var(--font-ui);
@@ -5884,12 +5860,6 @@ body:has(.login-home) {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
-}
-
-.signal-icon {
-  width: 14px;
-  height: 14px;
-  font-size: 8px;
 }
 
 .metric-card-value {

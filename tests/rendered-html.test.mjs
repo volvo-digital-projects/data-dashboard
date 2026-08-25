@@ -196,7 +196,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 29);
+  assert.equal(release.items.length, 30);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -345,14 +345,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
-  assert.match(
-    visibleHtml,
-    /class="signal-icon warning" aria-hidden="true">▼<\/span>위험해요/,
-  );
-  assert.match(
-    visibleHtml,
-    /class="signal-icon caution" aria-hidden="true">▼<\/span>힘내세요/,
-  );
+  assert.doesNotMatch(visibleHtml, /class="signal-icon/);
+  assert.doesNotMatch(visibleHtml, /<span class="signal-pill[^>]*>\s*[▲▼]/);
+  assert.match(visibleHtml, /class="signal-pill warning"[^>]*>위험해요<\/span>/);
+  assert.match(visibleHtml, /class="signal-pill caution"[^>]*>힘내세요<\/span>/);
   assert.match(html, /CX Index/);
   assert.match(visibleHtml, /VOC해피콜<\/span>만 교차검증 후 사후보정 가능/);
   assert.match(visibleHtml, /신차해피콜<\/span>만 교차검증 후 사후보정 가능/);
@@ -1995,14 +1991,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(css, /--status-danger-soft: #fce8eb/);
   assert.match(css, /--status-caution: #c58a1b/);
   assert.match(css, /--status-caution-soft: #fbf2df/);
-  assert.match(
-    css,
-    /\.signal-icon\.warning\s*\{[^}]*background: transparent[^}]*color: var\(--status-danger\)[^}]*font-size: 10px/,
-  );
-  assert.match(
-    css,
-    /\.signal-icon\.caution\s*\{[^}]*background: transparent[^}]*color: var\(--status-caution\)[^}]*font-size: 10px/,
-  );
+  assert.doesNotMatch(css, /\.signal-icon(?:\.|\s*\{)/);
   assert.match(
     css,
     /\.metric-benchmark strong\.positive\s*\{\s*color: var\(--blue\) !important;/,
