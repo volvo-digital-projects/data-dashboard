@@ -1698,7 +1698,15 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.combat-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px[\s\S]*?linear-gradient\(142deg, #3b5d6d 0%, #2f4d5c 62%, #294553 100%\)/,
+    /\.combat-card\s*\{[^}]*min-height: 252px;[^}]*padding: 20px;[^}]*background: #2f4d5c;/,
+  );
+  assert.match(
+    css,
+    /\.combat-card::after\s*\{[^}]*content: none;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /radial-gradient\(circle at 74% 42%, rgba\(194, 222, 234, 0\.14\)/,
   );
   assert.match(css, /\.metric-card\s*\{[\s\S]*?min-height: 252px[\s\S]*?padding: 20px/);
   assert.doesNotMatch(css, /\.metric-card\s*\{[^}]*animation:/);

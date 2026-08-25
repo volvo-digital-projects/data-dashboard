@@ -4978,20 +4978,11 @@ input:focus-visible,
   min-height: 252px;
   padding: 20px;
   border-color: rgba(37, 70, 84, 0.18);
-  background:
-    radial-gradient(circle at 74% 42%, rgba(194, 222, 234, 0.14), transparent 15rem),
-    linear-gradient(142deg, #3b5d6d 0%, #2f4d5c 62%, #294553 100%);
+  background: #2f4d5c;
 }
 
 .combat-card::after {
-  width: 260px;
-  height: 260px;
-  right: -150px;
-  bottom: -175px;
-  border-color: rgba(255, 255, 255, 0.065);
-  box-shadow:
-    0 0 0 38px rgba(255, 255, 255, 0.014),
-    0 0 0 78px rgba(255, 255, 255, 0.009);
+  content: none;
 }
 
 .combat-main {
