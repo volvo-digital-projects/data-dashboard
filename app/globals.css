@@ -5147,28 +5147,40 @@ html:has(.login-home) {
 
 body:has(.login-home) {
   min-width: 100%;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
+  overflow: hidden;
   overflow-x: hidden;
-  background: #07141d;
+  overscroll-behavior: none;
+  background: #07141d url("/volvo-dashboard-cover.png") center / cover no-repeat;
 }
 
 .login-home {
   width: 100%;
   min-width: 100%;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
   min-height: 100svh;
   min-height: 100dvh;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   color: #ffffff;
   background: #07141d;
 }
 
 .login-photo {
-  position: absolute;
-  inset: 0;
+  position: fixed;
+  z-index: 0;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  right: calc(-1 * env(safe-area-inset-right, 0px));
+  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+  left: calc(-1 * env(safe-area-inset-left, 0px));
   background-image: url("/volvo-dashboard-cover.png");
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
@@ -5181,7 +5193,11 @@ body:has(.login-home) {
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: clamp(52px, 5vw, 84px) clamp(44px, 5.2vw, 88px);
+  padding:
+    max(clamp(52px, 5vw, 84px), env(safe-area-inset-top, 0px))
+    max(clamp(44px, 5.2vw, 88px), env(safe-area-inset-right, 0px))
+    max(clamp(52px, 5vw, 84px), env(safe-area-inset-bottom, 0px))
+    max(clamp(44px, 5.2vw, 88px), env(safe-area-inset-left, 0px));
   background: linear-gradient(
     90deg,
     rgba(5, 17, 25, 0.97) 0%,
@@ -5495,6 +5511,7 @@ body:has(.login-home) {
 
 @media (max-width: 760px) {
   .login-home {
+    height: auto;
     min-height: 100svh;
     padding-top: 37svh;
     overflow: visible;
@@ -5519,7 +5536,11 @@ body:has(.login-home) {
     width: 100%;
     min-height: 63svh;
     justify-content: flex-start;
-    padding: 30px 22px 92px;
+    padding:
+      30px
+      max(22px, env(safe-area-inset-right, 0px))
+      max(92px, env(safe-area-inset-bottom, 0px))
+      max(22px, env(safe-area-inset-left, 0px));
     background: #07141d;
   }
 

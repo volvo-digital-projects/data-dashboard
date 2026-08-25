@@ -83,10 +83,10 @@ async function logout() {
 }
 
 test("server-renders the CDSID login route", async () => {
-  const css = await readFile(
-    new URL("../app/globals.css", import.meta.url),
-    "utf8",
-  );
+  const [css, manifest] = await Promise.all([
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/manifest.ts", import.meta.url), "utf8"),
+  ]);
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
@@ -117,12 +117,18 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /body:has\(\.login-home\)\s*\{[^}]*min-width: 100%;[^}]*min-height: 100dvh;[^}]*overflow-x: hidden;[^}]*background: #07141d;/,
+    /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover\.png[^}]*cover no-repeat/,
   );
   assert.match(
     css,
-    /\.login-home\s*\{[^}]*width: 100%;[^}]*min-height: 100dvh;/,
+    /\.login-home\s*\{[^}]*width: 100%;[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*isolation: isolate/,
   );
+  assert.match(
+    css,
+    /\.login-photo\s*\{[^}]*position: fixed;[^}]*top: calc\(-1 \* env\(safe-area-inset-top, 0px\)\);[^}]*bottom: calc\(-1 \* env\(safe-area-inset-bottom, 0px\)\);/,
+  );
+  assert.match(manifest, /display: "standalone"/);
+  assert.match(manifest, /background_color: "#07141d"/);
   assert.match(
     css,
     /\.login-panel footer\s*\{[^}]*display: grid;[^}]*grid-template-columns: minmax\(0, 1fr\) auto;/,
@@ -196,7 +202,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 30);
+  assert.equal(release.items.length, 31);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
