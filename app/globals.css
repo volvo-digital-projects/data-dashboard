@@ -8562,7 +8562,7 @@ button.quarter-score-row:disabled {
   --dashboard-header-content-height: 92px;
   --dashboard-summary-gap: var(--dashboard-card-gap);
   --dashboard-combat-share: 34%;
-  --header-title-width: clamp(280px, 21%, 310px);
+  --header-title-width: clamp(270px, 19%, 288px);
   --header-title-font-size: 32px;
 }
 
@@ -8760,7 +8760,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: var(--dashboard-card-gap);
+    gap: 12px;
     margin: 0;
     padding: 12px 0;
     overflow: visible;

@@ -1547,6 +1547,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
     /\.dashboard\s*\{[^}]*width: min\(var\(--dashboard-page-max\), 100%\)[^}]*padding: 0 var\(--dashboard-page-gutter\) 40px/,
   );
   assert.match(css, /--header-title-font-size: 32px/);
+  assert.match(css, /--header-title-width: clamp\(270px, 19%, 288px\)/);
   assert.match(
     css,
     /\/\* ES90-inspired shared command banner preview \*\/[\s\S]*?\.dashboard-identity-header\s*\{[^}]*border-bottom: 0[^}]*linear-gradient\(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%\)/,
@@ -1574,6 +1575,10 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /@media \(min-width: 1241px\)[\s\S]*?\.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?height: 92px;[\s\S]*?grid-template-rows: repeat\(2, 45px\)/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)[\s\S]*?\.dashboard-identity-header\s*\{[^}]*gap: 12px;/,
   );
   assert.match(
     css,
