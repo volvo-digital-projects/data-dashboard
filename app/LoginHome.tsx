@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 
 const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid";
 const VALID_CDSID_PATTERN = /^[A-Z0-9-]{4,16}$/;
+const LOGIN_ACCESS_STATS = {
+  today: 86,
+  cumulative: 1_265,
+} as const;
 
 function formatSeoulTimestamp(date: Date) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -22,7 +26,6 @@ function formatSeoulTimestamp(date: Date) {
 
 export default function LoginHome() {
   const [cdsid, setCdsid] = useState("");
-  const [lastSuccessfulCdsid, setLastSuccessfulCdsid] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,7 +38,6 @@ export default function LoginHome() {
         .toUpperCase();
       if (rememberedCdsid && VALID_CDSID_PATTERN.test(rememberedCdsid)) {
         setCdsid(rememberedCdsid);
-        setLastSuccessfulCdsid(rememberedCdsid);
       }
     } catch {
       // The login remains fully usable when browser storage is unavailable.
@@ -72,7 +74,6 @@ export default function LoginHome() {
 
       try {
         window.localStorage.setItem(LAST_LOGIN_CDSID_KEY, normalizedCdsid);
-        setLastSuccessfulCdsid(normalizedCdsid);
       } catch {
         // A successful login must not be blocked by a storage restriction.
       }
@@ -147,9 +148,14 @@ export default function LoginHome() {
           </form>
 
           <div className="login-session-meta" aria-label="최근 접속 및 업데이트 정보">
-            <span className="login-last-access">
-              <small>LAST ACCESS</small>
-              <strong>{lastSuccessfulCdsid || "—"}</strong>
+            <span className="login-access-stats">
+              <small>접속 현황</small>
+              <span>
+                오늘 <strong>{LOGIN_ACCESS_STATS.today.toLocaleString("ko-KR")}명</strong>
+              </span>
+              <span>
+                누적 <strong>{LOGIN_ACCESS_STATS.cumulative.toLocaleString("ko-KR")}명</strong>
+              </span>
             </span>
             <time dateTime={updatedAt ? updatedAt.replace(" ", "T") : undefined}>
               <i aria-hidden="true" />
@@ -161,7 +167,7 @@ export default function LoginHome() {
 
         <footer>
           <span>Copyright (C) Volvo Car Korea. All rights reserved.</span>
-          <span>Since 260801</span>
+          <span>Since 260831</span>
         </footer>
       </section>
     </main>

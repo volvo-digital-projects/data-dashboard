@@ -5158,7 +5158,7 @@ input:focus-visible,
   width: min(330px, 86%);
   height: 2px;
   display: block;
-  margin: 28px 0 37px;
+  margin: 28px 0 10px;
   background: #f15a24;
 }
 
@@ -5310,7 +5310,7 @@ input:focus-visible,
   min-height: 22px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 12px;
   color: rgba(255, 255, 255, 0.78);
   font-family: var(--font-ui);
@@ -5318,26 +5318,24 @@ input:focus-visible,
   white-space: nowrap;
 }
 
-.login-last-access {
+.login-access-stats {
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 
-.login-last-access small {
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 8px;
-  font-weight: 750;
-  letter-spacing: 0.07em;
+.login-access-stats small,
+.login-access-stats span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 9px;
+  font-weight: 500;
 }
 
-.login-last-access strong {
-  overflow: hidden;
+.login-access-stats strong {
   color: #ffffff;
   font-size: 9px;
-  font-weight: 750;
-  text-overflow: ellipsis;
+  font-weight: 800;
 }
 
 .login-session-meta time {
@@ -5404,9 +5402,9 @@ input:focus-visible,
   flex-wrap: wrap;
   gap: 5px 12px;
   position: static;
-  margin-top: 8px;
+  margin-top: 4px;
   color: rgba(255, 255, 255, 0.73);
-  font-size: 13px;
+  font-size: 10px;
   line-height: 1.5;
 }
 
@@ -5480,7 +5478,7 @@ input:focus-visible,
   }
 
   .login-rule {
-    margin: 20px 0 20px;
+    margin: 20px 0 8px;
   }
 
   .login-description {

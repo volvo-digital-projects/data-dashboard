@@ -62,8 +62,13 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /Dashboard/);
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
-  assert.match(html, /LAST ACCESS/);
+  assert.match(html, /접속 현황/);
+  assert.match(html, /오늘/);
+  assert.match(html, /86(?:<!-- -->)?명/);
+  assert.match(html, /누적/);
+  assert.match(html, /1,265(?:<!-- -->)?명/);
   assert.match(html, /UPDATE/);
+  assert.match(html, /Since 260831/);
 });
 
 test("remembers only the last successfully authenticated CDSID", async () => {
