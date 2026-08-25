@@ -144,7 +144,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     html,
-    /class="identity-detail-rail"[\s\S]*?<\/dl><button class="identity-profile"/,
+    /class="identity-detail-rail"[\s\S]*?<\/dl><div class="identity-profile-menu"><button class="identity-profile"/,
   );
   assert.match(html, /identity-profile[\s\S]*?지점장[\s\S]*?김길성/);
   assert.match(html, /class="identity-profile-icon"/);
@@ -1086,6 +1086,10 @@ test("restores the profile showroom switcher for all viewers", async () => {
     dashboardSource,
     /role="menu"[\s\S]*?className="profile-showroom-list"[\s\S]*?role="menuitem"/,
   );
+  assert.match(
+    dashboardSource,
+    /className="identity-profile-menu"[\s\S]*?className="identity-profile"[\s\S]*?className="profile-popover"/,
+  );
   assert.doesNotMatch(dashboardSource, /<select[\s\S]*?다른 전시장 선택/);
   assert.doesNotMatch(
     dashboardSource,
@@ -1097,7 +1101,19 @@ test("restores the profile showroom switcher for all viewers", async () => {
   );
   assert.match(
     css,
-    /\.dashboard-identity-header\s*\{[^}]*position: relative;[^}]*isolation: isolate;[^}]*overflow: visible;/,
+    /\.dashboard-identity-header\s*\{[^}]*position: relative;[^}]*z-index: 50;[^}]*isolation: isolate;[^}]*overflow: visible;/,
+  );
+  assert.match(
+    css,
+    /\.identity-profile-menu\s*\{[^}]*position: relative;[^}]*z-index: 200;/,
+  );
+  assert.match(
+    css,
+    /\.identity-profile-menu \.profile-popover\s*\{[^}]*top: calc\(100% \+ 8px\);[^}]*right: 0;[^}]*z-index: 1000;/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.identity-detail-rail,[\s\S]*?\.dashboard-identity-header \.analysis-context\s*\{[^}]*overflow: visible;/,
   );
 });
 

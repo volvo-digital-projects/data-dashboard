@@ -2361,55 +2361,57 @@ export default function Dashboard({
               <dd>{selected.size}</dd>
             </div>
           </dl>
-          <button
-            className="identity-profile"
-            type="button"
-            onClick={() => setProfileOpen((open) => !open)}
-            aria-expanded={profileOpen}
-            aria-haspopup="menu"
-            aria-controls="showroom-switcher"
-            aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
-          >
-            <span className="identity-profile-icon" aria-hidden="true" />
-            <span className="identity-profile-role">지점장</span>
-            <strong>{selected.manager}</strong>
-          </button>
-        </div>
-        {profileOpen && (
-          <div
-            className="profile-popover"
-            id="showroom-switcher"
-            role="menu"
-            aria-label={`현재 전시장을 제외한 ${dashboard.showrooms.length - 1}개 전시장`}
-          >
-            <div className="profile-popover-heading">
-              <strong>다른 전시장 선택</strong>
-              <span>{dashboard.showrooms.length - 1}개 전시장</span>
-            </div>
-            <div className="profile-showroom-list">
-              {dashboard.showrooms
-                .filter((item) => item.cdsid !== selected.cdsid)
-                .map((item) => (
-                  <button
-                    key={item.cdsid}
-                    type="button"
-                    role="menuitem"
-                    className="profile-showroom-option"
-                    onClick={() => {
-                      setSelectedCode(item.cdsid);
-                      setProfileOpen(false);
-                    }}
-                  >
-                    <span className="profile-showroom-code">
-                      {item.cdsid.padEnd(showroomCodeWidth, "\u2007")}
-                    </span>
-                    <strong>{displayShowroomName(item.showroom)}</strong>
-                    <small>{item.manager} 지점장</small>
-                  </button>
-                ))}
-            </div>
+          <div className="identity-profile-menu">
+            <button
+              className="identity-profile"
+              type="button"
+              onClick={() => setProfileOpen((open) => !open)}
+              aria-expanded={profileOpen}
+              aria-haspopup="menu"
+              aria-controls="showroom-switcher"
+              aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
+            >
+              <span className="identity-profile-icon" aria-hidden="true" />
+              <span className="identity-profile-role">지점장</span>
+              <strong>{selected.manager}</strong>
+            </button>
+            {profileOpen && (
+              <div
+                className="profile-popover"
+                id="showroom-switcher"
+                role="menu"
+                aria-label={`현재 전시장을 제외한 ${dashboard.showrooms.length - 1}개 전시장`}
+              >
+                <div className="profile-popover-heading">
+                  <strong>다른 전시장 선택</strong>
+                  <span>{dashboard.showrooms.length - 1}개 전시장</span>
+                </div>
+                <div className="profile-showroom-list">
+                  {dashboard.showrooms
+                    .filter((item) => item.cdsid !== selected.cdsid)
+                    .map((item) => (
+                      <button
+                        key={item.cdsid}
+                        type="button"
+                        role="menuitem"
+                        className="profile-showroom-option"
+                        onClick={() => {
+                          setSelectedCode(item.cdsid);
+                          setProfileOpen(false);
+                        }}
+                      >
+                        <span className="profile-showroom-code">
+                          {item.cdsid.padEnd(showroomCodeWidth, "\u2007")}
+                        </span>
+                        <strong>{displayShowroomName(item.showroom)}</strong>
+                        <small>{item.manager} 지점장</small>
+                      </button>
+                    ))}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
         </section>
 
         <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>

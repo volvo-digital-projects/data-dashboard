@@ -3032,6 +3032,23 @@ input:focus-visible {
   position: relative;
 }
 
+.identity-profile-menu {
+  min-width: 0;
+  position: relative;
+  z-index: 200;
+}
+
+.identity-profile-menu .identity-profile {
+  width: 100%;
+  min-width: 0;
+}
+
+.identity-profile-menu .profile-popover {
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1000;
+}
+
 .identity-analysis-hit {
   position: absolute;
   inset: 0;
@@ -3060,6 +3077,12 @@ input:focus-visible {
     grid-template-columns: repeat(2, var(--header-context-cell));
     grid-template-rows: repeat(2, minmax(0, 1fr));
     justify-content: end;
+  }
+
+  .identity-profile-menu {
+    width: var(--header-context-cell);
+    min-width: var(--header-context-cell);
+    height: 100%;
   }
 
   .identity-strip dl {
@@ -9290,6 +9313,7 @@ body {
 @media (min-width: 761px) {
   .dashboard-identity-header {
     position: relative;
+    z-index: 50;
     isolation: isolate;
     overflow: visible;
     border: 1px solid rgba(104, 167, 198, 0.22);
@@ -9417,6 +9441,7 @@ body {
 
   .dashboard-identity-header .identity-detail-rail,
   .dashboard-identity-header .analysis-context {
+    overflow: visible;
     border: 0;
     background: rgba(5, 28, 42, 0.23);
   }
@@ -9493,6 +9518,7 @@ body {
   }
 
   .dashboard-identity-header .identity-analysis-entry,
+  .dashboard-identity-header .identity-profile-menu,
   .dashboard-identity-header .identity-profile,
   .dashboard-identity-header .analysis-context-item {
     height: 45px;
