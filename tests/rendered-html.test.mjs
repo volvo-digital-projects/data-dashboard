@@ -83,6 +83,10 @@ async function logout() {
 }
 
 test("server-renders the CDSID login route", async () => {
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
@@ -97,6 +101,14 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /1,265(?:<!-- -->)?명/);
   assert.match(html, /UPDATE/);
   assert.match(html, /Since 260831/);
+  assert.match(
+    css,
+    /\.cdsid-form button strong\s*\{[^}]*display: inline-flex;[^}]*align-items: center;[^}]*min-height: 22px;[^}]*line-height: 22px;/,
+  );
+  assert.match(
+    css,
+    /\.login-mouse-icon\s*\{[^}]*top: 50%;[^}]*height: 22px;[^}]*transform: translateY\(-50%\);/,
+  );
 
   const explicitLoginResponse = await render("/login");
   assert.equal(explicitLoginResponse.status, 200);
@@ -158,7 +170,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 17);
+  assert.equal(release.items.length, 18);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

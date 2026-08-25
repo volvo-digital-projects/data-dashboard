@@ -5320,11 +5320,15 @@ input:focus-visible,
 }
 
 .cdsid-form button strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
   font-family: var(--font-ui);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0;
-  line-height: 1;
+  line-height: 22px;
   transform: scaleX(0.905);
   transform-origin: center;
 }
