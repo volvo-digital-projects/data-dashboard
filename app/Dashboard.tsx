@@ -2366,7 +2366,7 @@ export default function Dashboard({
             type="button"
             onClick={() => setProfileOpen((open) => !open)}
             aria-expanded={profileOpen}
-            aria-haspopup="listbox"
+            aria-haspopup="menu"
             aria-controls="showroom-switcher"
             aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
           >
@@ -2376,31 +2376,38 @@ export default function Dashboard({
           </button>
         </div>
         {profileOpen && (
-          <div className="profile-popover" id="showroom-switcher">
-            <label>
-              <span className="sr-only">다른 전시장 선택</span>
-              <select
-                value=""
-                aria-label={`현재 전시장을 제외한 ${dashboard.showrooms.length - 1}개 전시장`}
-                onChange={(event) => {
-                  if (!event.target.value) return;
-                  setSelectedCode(event.target.value);
-                  setProfileOpen(false);
-                }}
-              >
-                <option value="" disabled>
-                  다른 전시장 선택 ({dashboard.showrooms.length - 1}개)
-                </option>
-                {dashboard.showrooms
-                  .filter((item) => item.cdsid !== selected.cdsid)
-                  .map((item) => (
-                    <option key={item.cdsid} value={item.cdsid}>
-                      {item.cdsid.padEnd(showroomCodeWidth, "\u2007")} ·{" "}
-                      {displayShowroomName(item.showroom)} · {item.manager}
-                    </option>
-                  ))}
-              </select>
-            </label>
+          <div
+            className="profile-popover"
+            id="showroom-switcher"
+            role="menu"
+            aria-label={`현재 전시장을 제외한 ${dashboard.showrooms.length - 1}개 전시장`}
+          >
+            <div className="profile-popover-heading">
+              <strong>다른 전시장 선택</strong>
+              <span>{dashboard.showrooms.length - 1}개 전시장</span>
+            </div>
+            <div className="profile-showroom-list">
+              {dashboard.showrooms
+                .filter((item) => item.cdsid !== selected.cdsid)
+                .map((item) => (
+                  <button
+                    key={item.cdsid}
+                    type="button"
+                    role="menuitem"
+                    className="profile-showroom-option"
+                    onClick={() => {
+                      setSelectedCode(item.cdsid);
+                      setProfileOpen(false);
+                    }}
+                  >
+                    <span className="profile-showroom-code">
+                      {item.cdsid.padEnd(showroomCodeWidth, "\u2007")}
+                    </span>
+                    <strong>{displayShowroomName(item.showroom)}</strong>
+                    <small>{item.manager} 지점장</small>
+                  </button>
+                ))}
+            </div>
           </div>
         )}
         </section>

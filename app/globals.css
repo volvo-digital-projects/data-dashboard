@@ -4956,16 +4956,97 @@ input:focus-visible,
 }
 
 .profile-popover {
-  width: min(320px, calc(100vw - 28px));
-  top: 74px;
+  width: min(390px, calc(100vw - 28px));
+  top: calc(100% + 8px);
   padding: 10px;
   border-color: rgba(16, 24, 40, 0.08);
   border-radius: 10px;
   box-shadow: var(--surface-shadow-hover);
 }
 
-.profile-popover label {
-  display: block;
+.profile-popover-heading {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 7px 8px;
+  border-bottom: 1px solid rgba(47, 107, 138, 0.12);
+}
+
+.profile-popover-heading strong {
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--font-korean);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.profile-popover-heading span {
+  color: var(--blue);
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.profile-showroom-list {
+  max-height: min(430px, calc(100vh - 180px));
+  display: grid;
+  gap: 3px;
+  margin-top: 7px;
+  padding-right: 3px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #9eb6c2 #edf3f6;
+  scrollbar-width: thin;
+}
+
+.profile-showroom-option {
+  width: 100%;
+  min-height: 34px;
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--ink);
+  background: #f7fafb;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-showroom-option:hover,
+.profile-showroom-option:focus-visible {
+  border-color: rgba(47, 107, 138, 0.2);
+  background: #eaf3f7;
+}
+
+.profile-showroom-option .profile-showroom-code {
+  color: var(--blue);
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.profile-showroom-option strong {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--navy);
+  font-family: var(--font-korean);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-showroom-option small {
+  color: #526575;
+  font-size: 9px;
+  white-space: nowrap;
 }
 
 @media (min-width: 1241px) {

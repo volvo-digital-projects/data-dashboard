@@ -1012,9 +1012,18 @@ test("restores the profile showroom switcher for all viewers", async () => {
     dashboardSource,
     /dashboard\.showrooms[\s\S]*?\.filter\(\(item\) => item\.cdsid !== selected\.cdsid\)[\s\S]*?\.map/,
   );
+  assert.match(
+    dashboardSource,
+    /role="menu"[\s\S]*?className="profile-showroom-list"[\s\S]*?role="menuitem"/,
+  );
+  assert.doesNotMatch(dashboardSource, /<select[\s\S]*?다른 전시장 선택/);
   assert.doesNotMatch(
     dashboardSource,
     /\{viewer\.isEditor \? \([\s\S]*?<select/,
+  );
+  assert.match(
+    css,
+    /\.profile-showroom-list\s*\{[^}]*max-height:[^}]*overflow-y: auto/,
   );
   assert.match(
     css,
@@ -1698,7 +1707,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(css, /\.identity-detail-rail\s*\{[\s\S]*?border-radius: 8px/);
   assert.match(
     css,
-    /\.profile-popover\s*\{[\s\S]*?width: min\(320px, calc\(100vw - 28px\)\)[\s\S]*?padding: 10px[\s\S]*?border-radius: 10px/,
+    /\.profile-popover\s*\{[\s\S]*?width: min\(390px, calc\(100vw - 28px\)\)[\s\S]*?padding: 10px[\s\S]*?border-radius: 10px/,
   );
   assert.match(
     css,
