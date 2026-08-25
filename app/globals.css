@@ -5154,7 +5154,7 @@ body:has(.login-home) {
   overflow: hidden;
   overflow-x: hidden;
   overscroll-behavior: none;
-  background: #07141d url("/volvo-dashboard-cover.png") center / cover no-repeat;
+  background: #07141d url("/volvo-dashboard-cover-logo-small.png") center / cover no-repeat;
 }
 
 .login-home {
@@ -5179,10 +5179,29 @@ body:has(.login-home) {
   right: calc(-1 * env(safe-area-inset-right, 0px));
   bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
   left: calc(-1 * env(safe-area-inset-left, 0px));
-  background-image: url("/volvo-dashboard-cover.png");
+  background-image: url("/volvo-dashboard-cover-logo-small.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.login-volvo-wordmark {
+  position: fixed;
+  z-index: 2;
+  top: max(24px, calc(env(safe-area-inset-top, 0px) + 18px));
+  left: 50%;
+  color: rgba(255, 255, 255, 0.96);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(18px, 1.4vw, 22px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.58em;
+  text-indent: 0.58em;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(35, 21, 12, 0.45);
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
 }
 
 .login-panel {
@@ -5510,6 +5529,11 @@ body:has(.login-home) {
 }
 
 @media (max-width: 760px) {
+  .login-volvo-wordmark {
+    top: max(18px, calc(env(safe-area-inset-top, 0px) + 12px));
+    font-size: 18px;
+  }
+
   .login-home {
     height: auto;
     min-height: 100svh;

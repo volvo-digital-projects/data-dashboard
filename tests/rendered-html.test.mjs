@@ -83,15 +83,22 @@ async function logout() {
 }
 
 test("server-renders the CDSID login route", async () => {
-  const [css, manifest] = await Promise.all([
+  const [css, manifest, loginCover] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/manifest.ts", import.meta.url), "utf8"),
+    readFile(
+      new URL(
+        "../public/volvo-dashboard-cover-logo-small.png",
+        import.meta.url,
+      ),
+    ),
   ]);
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Volvo Data/);
   assert.match(html, /Dashboard/);
+  assert.match(html, /class="login-volvo-wordmark"[^>]*>\s*VOLVO\s*<\/div>/);
   assert.doesNotMatch(html, /데이터 분석을 통해/);
   assert.match(html, /정확한 인사이트와 더 나은 의사결정을 지원합니다\./);
   assert.match(html, /CDSID를 입력해 주세요/);
@@ -117,7 +124,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover\.png[^}]*cover no-repeat/,
+    /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover-logo-small\.png[^}]*cover no-repeat/,
   );
   assert.match(
     css,
@@ -127,6 +134,11 @@ test("server-renders the CDSID login route", async () => {
     css,
     /\.login-photo\s*\{[^}]*position: fixed;[^}]*top: calc\(-1 \* env\(safe-area-inset-top, 0px\)\);[^}]*bottom: calc\(-1 \* env\(safe-area-inset-bottom, 0px\)\);/,
   );
+  assert.match(
+    css,
+    /\.login-volvo-wordmark\s*\{[^}]*top: max\(24px, calc\(env\(safe-area-inset-top, 0px\) \+ 18px\)\);[^}]*left: 50%;[^}]*font-size: clamp\(18px, 1\.4vw, 22px\);[^}]*letter-spacing: 0\.58em/,
+  );
+  assert.ok(loginCover.byteLength > 1_000_000);
   assert.match(manifest, /display: "standalone"/);
   assert.match(manifest, /background_color: "#07141d"/);
   assert.match(
@@ -202,7 +214,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 31);
+  assert.equal(release.items.length, 32);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
