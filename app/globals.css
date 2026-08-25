@@ -8862,16 +8862,13 @@ body {
   }
 
   .dashboard-identity-header::before {
-    width: 460px;
-    height: 460px;
-    position: absolute;
-    top: -300px;
-    right: -82px;
-    z-index: 0;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle, transparent 0 47%, rgba(139, 198, 224, 0.12) 47.2% 47.6%, transparent 47.8% 57%, rgba(139, 198, 224, 0.1) 57.2% 57.6%, transparent 57.8% 68%, rgba(139, 198, 224, 0.07) 68.2% 68.7%, transparent 68.9%);
     content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(118deg, transparent 0%, transparent 56%, rgba(152, 205, 228, 0.025) 68%, rgba(152, 205, 228, 0.085) 100%),
+      linear-gradient(166deg, transparent 0%, transparent 70%, rgba(3, 25, 39, 0.14) 100%);
     pointer-events: none;
   }
 

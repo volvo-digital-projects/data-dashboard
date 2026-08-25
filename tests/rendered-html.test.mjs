@@ -1554,6 +1554,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
+    /\.dashboard-identity-header::before\s*\{[^}]*inset: 0;[^}]*linear-gradient\(118deg, transparent 0%, transparent 56%, rgba\(152, 205, 228, 0\.025\) 68%, rgba\(152, 205, 228, 0\.085\) 100%\)[^}]*linear-gradient\(166deg, transparent 0%, transparent 70%, rgba\(3, 25, 39, 0\.14\) 100%\)/,
+  );
+  assert.doesNotMatch(
+    css,
+    /radial-gradient\(circle, transparent 0 47%, rgba\(139, 198, 224, 0\.12\)/,
+  );
+  assert.match(
+    css,
     /\.dashboard-identity-header \.identity-title h1::before\s*\{[^}]*color: #ff8b52[^}]*content: "DATA DASHBOARD STATUS"/,
   );
   assert.match(
