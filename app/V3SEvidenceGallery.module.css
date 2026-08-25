@@ -152,15 +152,6 @@
   line-height: 1.4;
 }
 
-.footer {
-  padding: 10px 20px 12px;
-  border-top: 1px solid #d7e1e8;
-  background: #eef4f7;
-  color: #526d7c;
-  font-size: 11px;
-  text-align: right;
-}
-
 @media (max-width: 760px) {
   .backdrop {
     padding: 0;

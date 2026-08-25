@@ -118,10 +118,6 @@ export function V3SEvidenceGallery({
             ))}
           </div>
         </div>
-
-        <footer className={styles.footer}>
-          X 버튼·바깥 영역·Esc 키로 닫을 수 있습니다.
-        </footer>
       </section>
     </div>
   );
