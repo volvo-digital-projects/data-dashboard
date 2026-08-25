@@ -280,6 +280,18 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /Q1, Q2 마감, 현재 Q3평가 진행중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
   );
+  const dashboardCss = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    dashboardCss,
+    /\.dashboard-identity-header \.update-status\s*\{[\s\S]*?width: 100%/,
+  );
+  assert.match(
+    dashboardCss,
+    /\.dashboard-logout-form\s*\{[\s\S]*?margin: 0 0 0 auto/,
+  );
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);

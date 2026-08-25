@@ -9557,6 +9557,7 @@ body {
   }
 
   .dashboard-identity-header .update-status {
+    width: 100%;
     display: grid;
     gap: 5px;
     color: rgba(226, 239, 246, 0.78);
