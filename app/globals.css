@@ -4677,18 +4677,21 @@ input:focus-visible,
 
 .identity-insight-row span {
   min-width: 0;
-  display: block;
+  display: -webkit-box;
   align-self: center;
-  overflow: visible;
+  max-height: 2.24em;
+  overflow: hidden;
   color: #27465a;
-  font-size: clamp(7.5px, 0.58vw, 9px);
+  font-size: clamp(8.5px, 0.64vw, 10px);
   font-weight: 620;
-  letter-spacing: -0.028em;
-  line-height: 1.16;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
   overflow-wrap: anywhere;
   word-break: keep-all;
   text-overflow: clip;
   white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .identity-detail-rail {
@@ -8241,8 +8244,8 @@ button.quarter-score-row:disabled {
   }
 
   .identity-insight-row span {
-    font-size: 7.5px;
-    line-height: 1.15;
+    font-size: 8.5px;
+    line-height: 1.1;
   }
 
   .identity-detail-rail {

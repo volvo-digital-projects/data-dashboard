@@ -1145,6 +1145,10 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
     css,
     /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-insights\s*\{[^}]*margin-left: 0[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: 0/,
   );
+  assert.match(
+    css,
+    /\.identity-insight-row span\s*\{[^}]*display: -webkit-box;[^}]*max-height: 2\.24em;[^}]*overflow: hidden;[^}]*font-size: clamp\(8\.5px, 0\.64vw, 10px\);[^}]*-webkit-line-clamp: 2;/,
+  );
 });
 
 test("reserves the root scrollbar gutter across dashboard routes", async () => {
