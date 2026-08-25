@@ -1937,7 +1937,7 @@ test("ships the premium neutral design system and Pretendard typography", async 
   );
   assert.match(
     css,
-    /\.analysis-ranking-list > div\.selected\s*\{[^}]*background: linear-gradient\(135deg, var\(--navy\)[^}]*inset 3px 0 0 #74aec5[^}]*0 14px 26px -16px rgba\(16, 42, 67, 0\.62\)/,
+    /\.analysis-ranking-list > div\.selected\s*\{[^}]*background: linear-gradient\(135deg, #4f7f99 0%, #38657e 100%\)[^}]*inset 3px 0 0 #a8d4e6[^}]*0 14px 26px -16px rgba\(32, 78, 103, 0\.48\)/,
   );
   assert.match(
     css,
@@ -1950,6 +1950,14 @@ test("ships the premium neutral design system and Pretendard typography", async 
   assert.match(
     css,
     /\.analysis-ranking-list > div > strong\s*\{[^}]*font-size: 12px/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-list > div\.selected > b:first-of-type\s*\{[^}]*color: #c5ecfb[^}]*text-shadow:/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-list > div\.selected > b:last-of-type\s*\{[^}]*color: #baf4df[^}]*text-shadow:/,
   );
   assert.match(
     css,
