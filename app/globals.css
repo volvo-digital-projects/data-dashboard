@@ -7406,7 +7406,23 @@ button.quarter-score-row:disabled {
 }
 
 .score-stack-panel {
-  overflow: hidden;
+  overflow: visible;
+}
+
+.score-stack-heading {
+  position: sticky;
+  top: var(--dashboard-sticky-offset, 356px);
+  z-index: 18;
+  margin: -2px -4px 0;
+  padding: 8px 4px 11px;
+  border-bottom: 1px solid rgba(16, 42, 67, 0.1);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 12px 18px -20px rgba(16, 42, 67, 0.58);
+  backdrop-filter: blur(10px);
+}
+
+.score-tier {
+  scroll-margin-top: calc(var(--dashboard-sticky-offset, 356px) + 62px);
 }
 
 .score-stack {
@@ -9634,6 +9650,12 @@ body {
 
   .dashboard-identity-header .update-status-line:first-child,
   .dashboard-identity-header .update-status-line:last-child {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .score-stack-heading {
     position: static;
   }
 }

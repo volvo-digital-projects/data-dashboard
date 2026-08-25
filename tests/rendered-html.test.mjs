@@ -896,6 +896,22 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
   );
+  assert.match(
+    dashboardSource,
+    /setQuarterFocus\(\{ metric, quarter \}\);[\s\S]*?if \(metric === "v3s"\) return;[\s\S]*?window\.scrollTo\(\{[\s\S]*?behavior: "smooth"/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /document\.getElementById\(`score-\$\{metric\}`\)\?\.scrollIntoView/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="section-heading score-stack-heading"/,
+  );
+  assert.match(
+    css,
+    /\.score-stack-heading\s*\{[^}]*position: sticky[^}]*top: var\(--dashboard-sticky-offset, 356px\)/,
+  );
   assert.match(dashboardSource, /function V3SPerformance/);
   assert.doesNotMatch(
     dashboardSource,

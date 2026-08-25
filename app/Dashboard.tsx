@@ -2079,6 +2079,7 @@ export default function Dashboard({
   } | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const dashboardRootRef = useRef<HTMLElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
@@ -2193,18 +2194,25 @@ export default function Dashboard({
   }, [selectedCode]);
 
   useLayoutEffect(() => {
+    const dashboardRoot = dashboardRootRef.current;
     const anchor = stickyAnchorRef.current;
     const shell = stickyShellRef.current;
-    if (!anchor || !shell) return;
+    if (!dashboardRoot || !anchor || !shell) return;
 
     let resizeFrame = 0;
 
     const syncAnchorHeight = () => {
       if (window.matchMedia("(max-width: 760px)").matches) {
         anchor.style.removeProperty("height");
+        dashboardRoot.style.setProperty("--dashboard-sticky-offset", "0px");
         return;
       }
-      anchor.style.height = `${Math.ceil(shell.getBoundingClientRect().height)}px`;
+      const shellHeight = Math.ceil(shell.getBoundingClientRect().height);
+      anchor.style.height = `${shellHeight}px`;
+      dashboardRoot.style.setProperty(
+        "--dashboard-sticky-offset",
+        `${shellHeight}px`,
+      );
     };
 
     const queueAnchorHeightSync = () => {
@@ -2224,6 +2232,7 @@ export default function Dashboard({
       observer.disconnect();
       window.removeEventListener("resize", queueAnchorHeightSync);
       window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
+      dashboardRoot.style.removeProperty("--dashboard-sticky-offset");
     };
   }, []);
 
@@ -2237,10 +2246,27 @@ export default function Dashboard({
     setSelectedQuarter(quarter);
     setTrendMetric(metric);
     setQuarterFocus({ metric, quarter });
+    if (metric === "v3s") return;
+
     window.requestAnimationFrame(() => {
-      document.getElementById(`score-${metric}`)?.scrollIntoView({
+      const target = document.getElementById(`score-${metric}`);
+      if (!target) return;
+      const mobile = window.matchMedia("(max-width: 760px)").matches;
+      const stickyHeight = mobile
+        ? 0
+        : stickyShellRef.current?.getBoundingClientRect().height ?? 0;
+      const scoreHeadingHeight = document
+        .querySelector<HTMLElement>(".score-stack-heading")
+        ?.getBoundingClientRect().height ?? 52;
+      const targetTop =
+        window.scrollY +
+        target.getBoundingClientRect().top -
+        stickyHeight -
+        scoreHeadingHeight -
+        10;
+      window.scrollTo({
+        top: Math.max(0, targetTop),
         behavior: "smooth",
-        block: "center",
       });
     });
   };
@@ -2305,7 +2331,7 @@ export default function Dashboard({
   const combatDelta = selectedQuarterCombat - selectedCombatAverage;
 
   return (
-    <main className="dashboard">
+    <main className="dashboard" ref={dashboardRootRef}>
       <div className="dashboard-sticky-anchor" ref={stickyAnchorRef}>
       <div className="dashboard-sticky-shell" ref={stickyShellRef}>
         <section className="dashboard-identity-header identity-strip">
@@ -2635,7 +2661,7 @@ export default function Dashboard({
         key={`showroom-trend-${selected.cdsid}`}
       >
         <article className="panel trend-panel score-stack-panel">
-          <div className="section-heading">
+          <div className="section-heading score-stack-heading">
             <div>
               <h2>{displayShowroomName(selected.showroom)} 스코어</h2>
             </div>
