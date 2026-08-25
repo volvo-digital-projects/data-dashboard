@@ -5278,6 +5278,11 @@ body:has(.login-home) {
   margin-top: clamp(36px, 7vh, 70px);
 }
 
+.login-copy,
+.login-panel footer {
+  transform: translateX(clamp(14px, 1.25vw, 20px));
+}
+
 .login-copy h1 {
   margin: 0;
   font-family: var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
@@ -5622,6 +5627,11 @@ body:has(.login-home) {
     width: 100%;
     max-width: 440px;
     margin: 0 auto;
+  }
+
+  .login-copy,
+  .login-panel footer {
+    transform: translateX(10px);
   }
 
   .login-copy h1 {
