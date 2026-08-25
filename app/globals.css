@@ -5173,18 +5173,18 @@ input:focus-visible,
 
 .cdsid-form {
   display: grid;
-  gap: 8px;
+  gap: 0;
 }
 
 .cdsid-field {
-  min-height: 42px;
+  min-height: 48px;
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 52px minmax(0, 1fr);
   align-items: center;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  border-radius: 6px;
-  background: rgba(8, 43, 65, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 7px;
+  background: rgba(18, 48, 70, 0.72);
   transition:
     border-color 180ms ease,
     background 180ms ease,
@@ -5192,72 +5192,60 @@ input:focus-visible,
 }
 
 .cdsid-field:focus-within {
-  border-color: rgba(255, 255, 255, 0.82);
-  background: rgba(5, 17, 25, 0.76);
-  box-shadow: 0 0 0 3px rgba(115, 169, 193, 0.12);
+  border-color: #f28a58;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(242, 138, 88, 0.12);
 }
 
 .cdsid-person-icon {
-  width: 18px;
-  height: 22px;
-  display: block;
-  position: relative;
-  justify-self: center;
-  color: #c8d4da;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  color: rgba(255, 255, 255, 0.84);
 }
 
-.cdsid-person-icon i {
-  width: 7px;
-  height: 7px;
-  position: absolute;
-  top: 1px;
-  left: 50%;
-  border: 1.4px solid currentColor;
-  border-radius: 50%;
-  transform: translateX(-50%);
-}
-
-.cdsid-person-icon b {
-  width: 17px;
-  height: 12px;
-  position: absolute;
-  right: 0;
-  bottom: 1px;
-  left: 0;
-  border: 1.4px solid currentColor;
-  border-radius: 12px 12px 3px 3px;
-  border-top-color: transparent;
+.cdsid-person-icon svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
 }
 
 .cdsid-field input {
   min-width: 0;
-  height: 40px;
-  padding: 0 14px 0 4px;
+  height: 46px;
+  padding: 0 52px 0 0;
   border: 0;
   outline: 0;
   color: #ffffff;
   background: transparent;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .cdsid-field input::placeholder {
-  color: rgba(255, 255, 255, 0.61);
+  color: rgba(255, 255, 255, 0.76);
+  font-weight: 500;
   text-transform: none;
 }
 
 .cdsid-form button {
-  min-height: 42px;
+  position: relative;
+  min-height: 48px;
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 34px;
-  align-items: center;
-  padding: 0 14px;
+  place-items: center;
+  margin-top: 9px;
+  padding: 0;
   color: #12364a;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
-  background: #f2f4f4;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  background: #edf0f1;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
   cursor: pointer;
   transition:
     background 180ms ease,
@@ -5267,7 +5255,7 @@ input:focus-visible,
 
 .cdsid-form button:hover {
   background: #ffffff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
   transform: translateY(-1px);
 }
 
@@ -5276,27 +5264,35 @@ input:focus-visible,
 }
 
 .cdsid-form button strong {
-  font-size: 14px;
+  font-family: var(--font-ui);
+  font-size: 15px;
   font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  transform: scaleX(0.905);
+  transform-origin: center;
 }
 
 .login-mouse-icon {
-  width: 12px;
-  height: 18px;
-  position: relative;
-  justify-self: start;
-  border: 1.7px solid currentColor;
-  border-radius: 9px;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: #102f47;
+  transform: translateY(-50%);
 }
 
-.login-mouse-icon i {
-  width: 1.5px;
-  height: 5px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  background: currentColor;
-  transform: translateX(-50%);
+.login-mouse-icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .cdsid-error {
@@ -5343,52 +5339,46 @@ input:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  height: 21px;
   margin-left: auto;
-  padding: 3px 8px 3px 5px;
+  padding: 0 9px 0 7px;
   overflow: hidden;
-  border: 1px solid rgba(152, 205, 228, 0.42);
+  border: 1px solid rgba(173, 202, 221, 0.34);
   border-radius: 999px;
-  color: rgba(240, 248, 251, 0.92);
-  background: rgba(12, 57, 82, 0.72);
+  color: rgba(229, 239, 245, 0.84);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.08px;
+  background: linear-gradient(180deg, rgba(30, 67, 93, 0.82) 0%, rgba(14, 44, 66, 0.88) 100%);
+  box-shadow: 0 2px 8px rgba(3, 18, 29, 0.18);
   text-overflow: ellipsis;
 }
 
 .login-session-meta time i {
   width: 12px;
   height: 12px;
-  position: relative;
+  display: grid;
+  place-items: center;
   flex: 0 0 auto;
-  border: 1px solid #a9d5e8;
-  border-radius: 50%;
+  color: #a9c7d9;
 }
 
-.login-session-meta time i::before,
-.login-session-meta time i::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 1px;
-  background: #a9d5e8;
-  transform-origin: 0 0;
-}
-
-.login-session-meta time i::before {
-  width: 1px;
-  height: 3px;
-  transform: translate(-0.5px, -3px);
-}
-
-.login-session-meta time i::after {
-  width: 3px;
-  height: 1px;
-  transform: translate(0, -0.5px) rotate(20deg);
+.login-session-meta time i svg {
+  display: block;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .login-session-meta time b {
-  color: #ff8b52;
+  color: #9ec2d7;
   font-size: 8px;
-  letter-spacing: 0.08em;
+  font-weight: 850;
+  letter-spacing: 0.28px;
 }
 
 .login-session-meta time span {
@@ -5488,29 +5478,29 @@ input:focus-visible,
   }
 
   .cdsid-form {
-    gap: 8px;
+    gap: 0;
   }
 
   .cdsid-field,
   .cdsid-form button {
-    min-height: 46px;
+    min-height: 48px;
   }
 
   .cdsid-field {
-    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-columns: 52px minmax(0, 1fr);
   }
 
   .cdsid-field input {
-    height: 44px;
-    font-size: 14px;
+    height: 46px;
+    font-size: 15px;
   }
 
   .cdsid-form button {
-    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    grid-template-columns: none;
   }
 
   .cdsid-form button strong {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .login-session-meta {

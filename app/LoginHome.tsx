@@ -107,8 +107,10 @@ export default function LoginHome() {
           <form className="cdsid-form" onSubmit={openDashboard} noValidate>
             <label className="cdsid-field">
               <span className="cdsid-person-icon" aria-hidden="true">
-                <i />
-                <b />
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="8" r="3.5" />
+                  <path d="M5.5 19c.7-3.2 3-5 6.5-5s5.8 1.8 6.5 5" />
+                </svg>
               </span>
               <span className="sr-only">CDSID</span>
               <input
@@ -141,7 +143,12 @@ export default function LoginHome() {
 
             <button type="submit" disabled={isSubmitting}>
               <span className="login-mouse-icon" aria-hidden="true">
-                <i />
+                <svg viewBox="0 0 24 24">
+                  <rect x="6.5" y="2.5" width="11" height="19" rx="5.5" />
+                  <path d="M12 2.8V9" />
+                  <path d="M6.8 10h10.4" />
+                  <path d="M12 5.2v1.6" />
+                </svg>
               </span>
               <strong>{isSubmitting ? "로그인 확인 중" : "Data Dashboard 시작"}</strong>
               <span aria-hidden="true" />
@@ -159,7 +166,12 @@ export default function LoginHome() {
               </span>
             </span>
             <time dateTime={updatedAt ? updatedAt.replace(" ", "T") : undefined}>
-              <i aria-hidden="true" />
+              <i aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 7.5V12l3.2 2" />
+                </svg>
+              </i>
               <b>UPDATE</b>
               <span>{updatedAt || "—"} 기준</span>
             </time>

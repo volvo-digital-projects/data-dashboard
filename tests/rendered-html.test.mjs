@@ -4,9 +4,10 @@ import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
 
-const staleLoginCookie = "volvo-dashboard-access=vck-manager-260825-6c2488";
-const loginCookie =
+const staleLoginCookie =
   "volvo-dashboard-access=vck-manager-session-260825-b8f41d";
+const loginCookie =
+  "volvo-dashboard-access=vck-manager-session-260825-login-reset-f31a72";
 
 async function render(
   pathname = "/",
@@ -135,7 +136,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 5);
+  assert.equal(release.items.length, 6);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
