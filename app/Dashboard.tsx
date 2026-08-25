@@ -2296,7 +2296,7 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
-  const selectQuarterAndNavigate = (
+  const selectMetricQuarter = (
     metric: TrendMetricKey,
     quarter: QuarterKey,
   ) => {
@@ -2309,29 +2309,6 @@ export default function Dashboard({
     ) {
       setEvidenceQuarter(quarter);
     }
-    if (metric === "v3s") return;
-
-    window.requestAnimationFrame(() => {
-      const target = document.getElementById(`score-${metric}`);
-      if (!target) return;
-      const mobile = window.matchMedia("(max-width: 760px)").matches;
-      const stickyHeight = mobile
-        ? 0
-        : stickyShellRef.current?.getBoundingClientRect().height ?? 0;
-      const scoreHeadingHeight = document
-        .querySelector<HTMLElement>(".score-stack-heading")
-        ?.getBoundingClientRect().height ?? 52;
-      const targetTop =
-        window.scrollY +
-        target.getBoundingClientRect().top -
-        stickyHeight -
-        scoreHeadingHeight -
-        10;
-      window.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: "smooth",
-      });
-    });
   };
   const identityInsights = buildShowroomInsights(selected, dashboard.averages);
   const showroomCodeWidth = Math.max(
@@ -2726,7 +2703,7 @@ export default function Dashboard({
                 active={trendMetric === item.key}
                 onSelect={() => setTrendMetric(item.key)}
                 onQuarterSelect={(quarter) =>
-                  selectQuarterAndNavigate(item.key, quarter)
+                  selectMetricQuarter(item.key, quarter)
                 }
                 appeal={item.appeal}
                 appealLabel={item.appealLabel}

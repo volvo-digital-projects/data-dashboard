@@ -158,7 +158,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 13);
+  assert.equal(release.items.length, 14);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1038,7 +1038,12 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /setMetricQuarters\(\(current\) => \(\{ \.\.\.current, \[metric\]: quarter \}\)\);[\s\S]*?if \(metric === "v3s"\) return;[\s\S]*?window\.scrollTo\(\{[\s\S]*?behavior: "smooth"/,
+    /const selectMetricQuarter = \([\s\S]*?setMetricQuarters\(\(current\) => \(\{ \.\.\.current, \[metric\]: quarter \}\)\);/,
+  );
+  assert.doesNotMatch(dashboardSource, /window\.scrollTo\(/);
+  assert.doesNotMatch(
+    dashboardSource,
+    /document\.getElementById\(`score-\$\{metric\}`\)/,
   );
   assert.doesNotMatch(
     dashboardSource,
