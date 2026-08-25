@@ -90,8 +90,8 @@ export default function LoginHome() {
   return (
     <main className="login-home">
       <div className="login-photo" aria-hidden="true" />
-      <div className="login-volvo-wordmark" aria-label="VOLVO">
-        VOLVO
+      <div className="login-volvo-wordmark">
+        <img src="/volvo-wordmark-white.png" alt="VOLVO" />
       </div>
 
       <section className="login-panel" aria-labelledby="login-title">

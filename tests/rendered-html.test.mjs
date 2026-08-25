@@ -98,7 +98,10 @@ test("server-renders the CDSID login route", async () => {
   const html = await response.text();
   assert.match(html, /Volvo Data/);
   assert.match(html, /Dashboard/);
-  assert.match(html, /class="login-volvo-wordmark"[^>]*>\s*VOLVO\s*<\/div>/);
+  assert.match(
+    html,
+    /class="login-volvo-wordmark"[^>]*>[\s\S]*?src="\/volvo-wordmark-white\.png"[^>]*alt="VOLVO"/,
+  );
   assert.doesNotMatch(html, /데이터 분석을 통해/);
   assert.match(html, /정확한 인사이트와 더 나은 의사결정을 지원합니다\./);
   assert.match(html, /CDSID를 입력해 주세요/);
@@ -148,7 +151,15 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /\.login-volvo-wordmark\s*\{[^}]*top: max\(24px, calc\(env\(safe-area-inset-top, 0px\) \+ 18px\)\);[^}]*left: 50%;[^}]*font-size: clamp\(18px, 1\.4vw, 22px\);[^}]*letter-spacing: 0\.58em/,
+    /\.login-volvo-wordmark\s*\{[^}]*top: max\(27px, calc\(env\(safe-area-inset-top, 0px\) \+ 22px\)\);[^}]*left: 50%;[^}]*width: 154px;[^}]*transform: translateX\(-50%\)/,
+  );
+  assert.match(
+    css,
+    /\.login-volvo-wordmark img\s*\{[^}]*display: block;[^}]*width: 100%;[^}]*height: auto;[^}]*object-fit: contain;/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-volvo-wordmark\s*\{[^}]*top: max\(22px, calc\(env\(safe-area-inset-top, 0px\) \+ 16px\)\);[^}]*width: 140px;/,
   );
   assert.ok(loginCover.byteLength > 1_000_000);
   assert.match(manifest, /display: "standalone"/);
@@ -234,7 +245,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 35);
+  assert.equal(release.items.length, 36);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

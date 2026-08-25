@@ -5228,20 +5228,20 @@ body:has(.login-home) {
 .login-volvo-wordmark {
   position: fixed;
   z-index: 2;
-  top: max(24px, calc(env(safe-area-inset-top, 0px) + 18px));
+  top: max(27px, calc(env(safe-area-inset-top, 0px) + 22px));
   left: 50%;
-  color: rgba(255, 255, 255, 0.96);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(18px, 1.4vw, 22px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.58em;
-  text-indent: 0.58em;
-  white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(35, 21, 12, 0.45);
+  width: 154px;
   transform: translateX(-50%);
+  transform-origin: center;
   pointer-events: none;
   user-select: none;
+}
+
+.login-volvo-wordmark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .login-panel {
@@ -5585,8 +5585,8 @@ body:has(.login-home) {
   }
 
   .login-volvo-wordmark {
-    top: max(18px, calc(env(safe-area-inset-top, 0px) + 12px));
-    font-size: 18px;
+    top: max(22px, calc(env(safe-area-inset-top, 0px) + 16px));
+    width: 140px;
   }
 
   .login-home {
