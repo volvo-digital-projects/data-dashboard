@@ -1,16 +1,33 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid";
+const VALID_CDSID_PATTERN = /^[A-Z0-9-]{4,16}$/;
 
 export default function LoginHome() {
+  const [cdsid, setCdsid] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  useEffect(() => {
+    try {
+      const rememberedCdsid = window.localStorage
+        .getItem(LAST_LOGIN_CDSID_KEY)
+        ?.trim()
+        .toUpperCase();
+      if (rememberedCdsid && VALID_CDSID_PATTERN.test(rememberedCdsid)) {
+        setCdsid(rememberedCdsid);
+      }
+    } catch {
+      // The login remains fully usable when browser storage is unavailable.
+    }
+  }, []);
+
   async function openDashboard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const cdsid = String(formData.get("cdsid") ?? "").trim().toUpperCase();
+    const normalizedCdsid = cdsid.trim().toUpperCase();
 
     setError("");
     setIsSubmitting(true);
@@ -18,7 +35,7 @@ export default function LoginHome() {
       const response = await fetch("/api/login", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ cdsid }),
+        body: JSON.stringify({ cdsid: normalizedCdsid }),
       });
       const payload = (await response.json()) as {
         message?: string;
@@ -29,6 +46,11 @@ export default function LoginHome() {
         return;
       }
 
+      try {
+        window.localStorage.setItem(LAST_LOGIN_CDSID_KEY, normalizedCdsid);
+      } catch {
+        // A successful login must not be blocked by a storage restriction.
+      }
       window.location.assign(payload.redirectPath);
     } catch {
       setError("로그인 연결을 확인한 뒤 다시 시도해 주세요.");
@@ -73,9 +95,13 @@ export default function LoginHome() {
                 maxLength={16}
                 pattern="[A-Za-z0-9-]+"
                 placeholder="CDSID를 입력해 주세요"
+                value={cdsid}
                 aria-describedby={error ? "cdsid-error" : undefined}
                 aria-invalid={Boolean(error)}
-                onChange={() => error && setError("")}
+                onChange={(event) => {
+                  setCdsid(event.currentTarget.value.toUpperCase());
+                  if (error) setError("");
+                }}
                 required
               />
             </label>

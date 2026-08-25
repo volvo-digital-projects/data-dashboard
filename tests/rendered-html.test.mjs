@@ -64,6 +64,26 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /Data Dashboard 시작/);
 });
 
+test("remembers only the last successfully authenticated CDSID", async () => {
+  const loginSource = await readFile(
+    new URL("../app/LoginHome.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(
+    loginSource,
+    /const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid"/,
+  );
+  assert.match(
+    loginSource,
+    /localStorage[\s\S]*?\.getItem\(LAST_LOGIN_CDSID_KEY\)[\s\S]*?setCdsid\(rememberedCdsid\)/,
+  );
+  assert.match(
+    loginSource,
+    /if \(!response\.ok \|\| !payload\.redirectPath\)[\s\S]*?return;[\s\S]*?localStorage\.setItem\(LAST_LOGIN_CDSID_KEY, normalizedCdsid\)[\s\S]*?window\.location\.assign/,
+  );
+});
+
 test("protects dashboard routes behind the manager CDSID login", async () => {
   const response = await render("/dashboard/6KR6834", { authenticated: false });
   assert.equal(response.status, 307);
