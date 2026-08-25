@@ -9237,12 +9237,20 @@ body {
 }
 
 .section-heading h2,
-.comparison-title-row h2,
-.analysis-card-heading h2,
-.v3s-award-heading h2 {
+.comparison-title-row h2 {
   font-size: 20px;
   font-weight: 720;
   letter-spacing: -0.03em;
+}
+
+/* ES90 performance-comparison title typography at 70% of the prior size */
+.analysis-card-heading h2,
+.v3s-award-heading h2 {
+  font-family: var(--font-korean);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.25px;
 }
 
 .content-grid {

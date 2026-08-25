@@ -136,7 +136,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 9);
+  assert.equal(release.items.length, 10);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2372,6 +2372,22 @@ test("matches the requested dashboard headings to the ES90 waitlist title typogr
   assert.match(englishRule[1], /font-weight: 800;/);
   assert.match(englishRule[1], /letter-spacing: 0\.02em;/);
   assert.doesNotMatch(englishRule[1], /font-size:/);
+});
+
+test("matches analysis headings to the ES90 performance-comparison title at 70 percent size", async () => {
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+  const titleRule = css.match(
+    /\/\* ES90 performance-comparison title typography at 70% of the prior size \*\/[\s\S]*?\.analysis-card-heading h2,[\s\S]*?\.v3s-award-heading h2\s*\{([^}]*)\}/,
+  );
+
+  assert.ok(titleRule);
+  assert.match(titleRule[1], /font-family: var\(--font-korean\);/);
+  assert.match(titleRule[1], /font-size: 14px;/);
+  assert.match(titleRule[1], /font-weight: 600;/);
+  assert.match(titleRule[1], /letter-spacing: -0\.25px;/);
 });
 
 test("keeps the V3S cumulative average on one line and gives the bars the recovered height", async () => {
