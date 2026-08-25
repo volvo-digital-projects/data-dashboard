@@ -8225,14 +8225,13 @@ button.quarter-score-row:disabled {
 }
 
 .one-voice-gauge-endpoint {
-  --one-voice-progress: inherit;
   position: absolute;
   inset: 4px;
   z-index: 2;
   border-radius: 50%;
   pointer-events: none;
   transform: rotate(
-    calc(-90deg + var(--one-voice-progress) * 3.6deg)
+    calc(-90deg + var(--one-voice-target) * 3.6deg)
   );
   transform-origin: center;
 }
@@ -8263,6 +8262,11 @@ button.quarter-score-row:disabled {
     cubic-bezier(0.16, 0.72, 0.2, 1) var(--cx-one-voice-animation-delay) forwards;
 }
 
+.one-voice-contribution.is-visible .one-voice-gauge-endpoint {
+  animation: one-voice-endpoint-sweep var(--cx-one-voice-animation-duration)
+    cubic-bezier(0.16, 0.72, 0.2, 1) var(--cx-one-voice-animation-delay) both;
+}
+
 @keyframes one-voice-fill-handover {
   to {
     --one-voice-progress: var(--one-voice-target);
@@ -8272,6 +8276,18 @@ button.quarter-score-row:disabled {
 @keyframes one-voice-fill-test-drive {
   to {
     --one-voice-progress: var(--one-voice-target);
+  }
+}
+
+@keyframes one-voice-endpoint-sweep {
+  from {
+    transform: rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(
+      calc(-90deg + var(--one-voice-target) * 3.6deg)
+    );
   }
 }
 
@@ -8326,7 +8342,8 @@ button.quarter-score-row:disabled {
 
 @media (prefers-reduced-motion: reduce) {
   .one-voice-contribution.is-visible .one-voice-gauge-handover,
-  .one-voice-contribution.is-visible .one-voice-gauge-test-drive {
+  .one-voice-contribution.is-visible .one-voice-gauge-test-drive,
+  .one-voice-contribution.is-visible .one-voice-gauge-endpoint {
     animation-duration: 1ms;
     animation-delay: 0s;
   }

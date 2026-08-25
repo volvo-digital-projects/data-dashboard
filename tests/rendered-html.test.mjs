@@ -158,7 +158,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 14);
+  assert.equal(release.items.length, 15);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1480,7 +1480,16 @@ test("marks both ONE VOICE gauge endpoints with an animated O", async () => {
   );
   assert.match(
     css,
-    /\.one-voice-gauge-endpoint\s*\{[^}]*--one-voice-progress: inherit;[^}]*inset: 4px[^}]*rotate\([\s\S]*?var\(--one-voice-progress\) \* 3\.6deg/,
+    /\.one-voice-gauge-endpoint\s*\{[^}]*inset: 4px[^}]*rotate\([\s\S]*?var\(--one-voice-target\) \* 3\.6deg/,
+  );
+  assert.doesNotMatch(css, /--one-voice-progress: inherit/);
+  assert.match(
+    css,
+    /\.one-voice-contribution\.is-visible \.one-voice-gauge-endpoint\s*\{[^}]*animation: one-voice-endpoint-sweep[\s\S]*?both/,
+  );
+  assert.match(
+    css,
+    /@keyframes one-voice-endpoint-sweep\s*\{[\s\S]*?from\s*\{[^}]*rotate\(-90deg\)[\s\S]*?to\s*\{[\s\S]*?var\(--one-voice-target\) \* 3\.6deg/,
   );
   assert.match(
     css,
