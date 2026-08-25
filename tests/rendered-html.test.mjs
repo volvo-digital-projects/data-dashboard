@@ -2356,3 +2356,47 @@ test("matches the requested dashboard headings to the ES90 waitlist title typogr
   assert.match(englishRule[1], /letter-spacing: 0\.02em;/);
   assert.doesNotMatch(englishRule[1], /font-size:/);
 });
+
+test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam Daechi Q2 photos", async () => {
+  const [dashboardSource, gallerySource, galleryCss] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/V3SEvidenceGallery.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/V3SEvidenceGallery.module.css", import.meta.url),
+      "utf8",
+    ),
+  ]);
+
+  assert.match(dashboardSource, /getV3sEvidence\(selected\.cdsid, quarter\)/);
+  assert.match(dashboardSource, /<V3SEvidenceGallery/);
+  assert.match(gallerySource, /"6KR6834"[\s\S]*?q2:/);
+  assert.match(
+    gallerySource,
+    /\/evidence\/6KR6834\/v3s\/2026-q2\/valet-name-tag-mosaic\.png/,
+  );
+  assert.match(
+    gallerySource,
+    /\/evidence\/6KR6834\/v3s\/2026-q2\/brand-manager-badge-mosaic\.png/,
+  );
+  assert.match(gallerySource, /aria-modal="true"/);
+  assert.match(gallerySource, /aria-label="증빙사진 닫기"/);
+  assert.match(gallerySource, /event\.key === "Escape"/);
+  assert.match(gallerySource, /얼굴 익명화 완료/);
+  assert.match(galleryCss, /grid-template-columns: repeat\(auto-fit,/);
+  assert.match(galleryCss, /object-fit: contain/);
+
+  await Promise.all([
+    access(
+      new URL(
+        "../public/evidence/6KR6834/v3s/2026-q2/valet-name-tag-mosaic.png",
+        import.meta.url,
+      ),
+    ),
+    access(
+      new URL(
+        "../public/evidence/6KR6834/v3s/2026-q2/brand-manager-badge-mosaic.png",
+        import.meta.url,
+      ),
+    ),
+  ]);
+});

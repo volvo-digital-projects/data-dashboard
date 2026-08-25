@@ -16,6 +16,11 @@ import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
+import {
+  getV3sEvidence,
+  V3SEvidenceGallery,
+  type EvidenceQuarter,
+} from "./V3SEvidenceGallery";
 import { buildShowroomInsights } from "./showroom-insights";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
@@ -2095,6 +2100,8 @@ export default function Dashboard({
   >({ v3s: "q2", voc: "q3", cx: "q3" });
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [evidenceQuarter, setEvidenceQuarter] =
+    useState<EvidenceQuarter | null>(null);
   const dashboardRootRef = useRef<HTMLElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
@@ -2262,6 +2269,12 @@ export default function Dashboard({
     setMetricQuarters((current) => ({ ...current, [metric]: quarter }));
     if (metric === "v3s") setSelectedQuarter(quarter);
     setTrendMetric(metric);
+    if (
+      metric === "v3s" &&
+      getV3sEvidence(selected.cdsid, quarter).length > 0
+    ) {
+      setEvidenceQuarter(quarter);
+    }
     if (metric === "v3s") return;
 
     window.requestAnimationFrame(() => {
@@ -2901,6 +2914,14 @@ export default function Dashboard({
         }}
       />
       <ReleaseUpdateNotice />
+      {evidenceQuarter && (
+        <V3SEvidenceGallery
+          cdsid={selected.cdsid}
+          showroomName={displayShowroomName(selected.showroom)}
+          quarter={evidenceQuarter}
+          onClose={() => setEvidenceQuarter(null)}
+        />
+      )}
     </main>
   );
 }
