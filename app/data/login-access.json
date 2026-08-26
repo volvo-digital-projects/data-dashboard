@@ -95,5 +95,15 @@
     "H-CHOI4",
     "S-KIM122",
     "S-YUN7"
+  ],
+  "masterCdsids": ["VCK-ES90"],
+  "dealerHeadAccounts": [
+    { "cdsid": "Y-HAN30", "dealer": "아주" },
+    { "cdsid": "J-JANG2", "dealer": "천하" },
+    { "cdsid": "J-YE9", "dealer": "에이치" },
+    { "cdsid": "H-SHIN", "dealer": "아이언" },
+    { "cdsid": "Y-SON", "dealer": "아이비" },
+    { "cdsid": "H-CHOI4", "dealer": "코오롱" },
+    { "cdsid": "S-KIM122", "dealer": "태영" }
   ]
 }

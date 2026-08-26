@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Dashboard from "../../Dashboard";
 import { getChatGPTUser } from "../../chatgpt-auth";
 import dashboardJson from "../../data/showrooms.json";
+import { canAccessDashboard } from "../../dashboard-access";
 import { requireDashboardLogin } from "../../login-session";
 import { isEditorEmail } from "../../permissions";
 
@@ -25,7 +26,10 @@ export default async function DashboardPage({
     redirect("/");
   }
 
-  await requireDashboardLogin();
+  const access = await requireDashboardLogin();
+  if (!canAccessDashboard(access, cdsid)) {
+    redirect(`/dashboard/${access.dashboardCdsid}`);
+  }
 
   const user = await getChatGPTUser();
   const isLocalPreview = !user;
@@ -33,6 +37,10 @@ export default async function DashboardPage({
   return (
     <Dashboard
       initialCdsid={cdsid}
+      showroomAccess={{
+        role: access.role,
+        allowedCdsids: access.allowedCdsids,
+      }}
       viewer={{
         displayName: user?.displayName ?? "관리자 미리보기",
         email: user?.email ?? null,

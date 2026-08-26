@@ -91,6 +91,11 @@ type Viewer = {
   isEditor: boolean;
 };
 
+type ShowroomAccess = {
+  role: "master" | "dealerHead" | "manager";
+  allowedCdsids: string[];
+};
+
 type LatestUpdate = {
   title: string;
   note?: string;
@@ -2135,9 +2140,11 @@ function AdminDrawer({
 export default function Dashboard({
   viewer,
   initialCdsid,
+  showroomAccess,
 }: {
   viewer: Viewer;
   initialCdsid: string;
+  showroomAccess: ShowroomAccess;
 }) {
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
@@ -2341,6 +2348,13 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
+  const switchableShowrooms = dashboard.showrooms.filter(
+    (item) =>
+      showroomAccess.allowedCdsids.includes(item.cdsid) &&
+      item.cdsid !== selected.cdsid,
+  );
+  const canSwitchShowrooms =
+    showroomAccess.role !== "manager" && switchableShowrooms.length > 0;
   const scrollMetricQuarterToSection = (metric: "v3s" | "voc") => {
     const target = document.getElementById(`score-${metric}`);
     if (!target) return;
@@ -2548,33 +2562,42 @@ export default function Dashboard({
             </div>
           </dl>
           <div className="identity-profile-menu" ref={profileMenuRef}>
-            <button
-              className="identity-profile"
-              type="button"
-              onClick={() => setProfileOpen((open) => !open)}
-              aria-expanded={profileOpen}
-              aria-haspopup="menu"
-              aria-controls="showroom-switcher"
-              aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
-            >
-              <span className="identity-profile-icon" aria-hidden="true" />
-              <span className="identity-profile-role">지점장</span>
-              <strong>{selected.manager}</strong>
-            </button>
-            {profileOpen && (
+            {canSwitchShowrooms ? (
+              <button
+                className="identity-profile"
+                type="button"
+                onClick={() => setProfileOpen((open) => !open)}
+                aria-expanded={profileOpen}
+                aria-haspopup="menu"
+                aria-controls="showroom-switcher"
+                aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
+              >
+                <span className="identity-profile-icon" aria-hidden="true" />
+                <span className="identity-profile-role">지점장</span>
+                <strong>{selected.manager}</strong>
+              </button>
+            ) : (
+              <div
+                className="identity-profile identity-profile--static"
+                aria-label={`${selected.manager} 지점장`}
+              >
+                <span className="identity-profile-icon" aria-hidden="true" />
+                <span className="identity-profile-role">지점장</span>
+                <strong>{selected.manager}</strong>
+              </div>
+            )}
+            {canSwitchShowrooms && profileOpen && (
               <div
                 className="profile-popover"
                 id="showroom-switcher"
                 role="menu"
-                aria-label={`현재 전시장을 제외한 ${dashboard.showrooms.length - 1}개 전시장`}
+                aria-label={`현재 전시장을 제외한 ${switchableShowrooms.length}개 전시장`}
               >
                 <div className="profile-popover-heading">
                   <strong>다른 전시장 선택</strong>
                 </div>
                 <div className="profile-showroom-list">
-                  {dashboard.showrooms
-                    .filter((item) => item.cdsid !== selected.cdsid)
-                    .map((item) => (
+                  {switchableShowrooms.map((item) => (
                       <button
                         key={item.cdsid}
                         type="button"

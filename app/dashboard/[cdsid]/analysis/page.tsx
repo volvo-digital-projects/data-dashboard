@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import CompetitiveAnalysis from "../../../CompetitiveAnalysis";
+import { canAccessDashboard } from "../../../dashboard-access";
 import dashboardJson from "../../../data/showrooms.json";
 import { requireDashboardLogin } from "../../../login-session";
 
@@ -28,7 +29,10 @@ export default async function CompetitiveAnalysisPage({
     redirect("/");
   }
 
-  await requireDashboardLogin();
+  const access = await requireDashboardLogin();
+  if (!canAccessDashboard(access, cdsid)) {
+    redirect(`/dashboard/${access.dashboardCdsid}`);
+  }
 
   const initialView = views.has(query.view ?? "")
     ? (query.view as "dealer" | "showroom" | "region" | "size")

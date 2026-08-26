@@ -3103,6 +3103,15 @@ input:focus-visible {
   pointer-events: none;
 }
 
+.identity-profile.identity-profile--static {
+  cursor: default;
+  pointer-events: none;
+}
+
+.identity-profile.identity-profile--static::after {
+  content: none;
+}
+
 .analysis-context-item::after {
   content: "←";
 }

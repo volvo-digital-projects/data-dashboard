@@ -6,8 +6,10 @@ const templateRoot = new URL("../", import.meta.url);
 
 const staleLoginCookie =
   "volvo-dashboard-access=vck-manager-session-260825-b8f41d";
-const loginCookie =
-  "volvo-dashboard-access=vck-manager-session-260825-login-reset-f31a72";
+const loginCookieBase = "vck-manager-session-260826-role-scope-c83d42";
+const cookieFor = (cdsid) =>
+  `volvo-dashboard-access=${loginCookieBase}--${cdsid.toUpperCase()}`;
+const loginCookie = cookieFor("VCK-ES90");
 
 async function render(
   pathname = "/",
@@ -284,7 +286,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 58);
+  assert.equal(release.items.length, 59);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -299,6 +301,47 @@ test("protects dashboard routes behind the manager CDSID login", async () => {
   });
   assert.equal(staleSessionResponse.status, 307);
   assert.equal(staleSessionResponse.headers.get("location"), "http://localhost/");
+});
+
+test("scopes dashboard routes to master, dealer-head, and manager access", async () => {
+  const managerHome = await render("/dashboard/6KR6834", {
+    cookie: cookieFor("K-KIM16"),
+  });
+  assert.equal(managerHome.status, 200);
+  const managerHtml = await managerHome.text();
+  assert.match(managerHtml, /identity-profile identity-profile--static/);
+  assert.doesNotMatch(managerHtml, /aria-controls="showroom-switcher"/);
+
+  const managerCrossShowroom = await render("/dashboard/6KR6802", {
+    cookie: cookieFor("K-KIM16"),
+  });
+  assert.equal(managerCrossShowroom.status, 307);
+  assert.equal(
+    managerCrossShowroom.headers.get("location"),
+    "http://localhost/dashboard/6KR6834",
+  );
+
+  const hDealerHeadShowroom = await render("/dashboard/6KR6834", {
+    cookie: cookieFor("J-YE9"),
+  });
+  assert.equal(hDealerHeadShowroom.status, 200);
+  const hDealerHeadHtml = await hDealerHeadShowroom.text();
+  assert.match(hDealerHeadHtml, /aria-controls="showroom-switcher"/);
+  assert.doesNotMatch(hDealerHeadHtml, /identity-profile--static/);
+
+  const hDealerHeadCrossDealer = await render("/dashboard/6KR6828", {
+    cookie: cookieFor("J-YE9"),
+  });
+  assert.equal(hDealerHeadCrossDealer.status, 307);
+  assert.equal(
+    hDealerHeadCrossDealer.headers.get("location"),
+    "http://localhost/dashboard/6KR6802",
+  );
+
+  const masterCrossDealer = await render("/dashboard/6KR6828", {
+    cookie: cookieFor("VCK-ES90"),
+  });
+  assert.equal(masterCrossDealer.status, 200);
 });
 
 test("uses the blue exceptional state only from ten points above average", async () => {
@@ -347,6 +390,19 @@ test("ships the blue-row manager allowlist and administrator accounts", async ()
   );
   assert.ok(loginAccess.countedCdsids.includes("S-YUN7"));
   assert.ok(!loginAccess.countedCdsids.includes("VCK-ES90"));
+  assert.deepEqual(loginAccess.masterCdsids, ["VCK-ES90"]);
+  assert.deepEqual(
+    loginAccess.dealerHeadAccounts,
+    [
+      { cdsid: "Y-HAN30", dealer: "아주" },
+      { cdsid: "J-JANG2", dealer: "천하" },
+      { cdsid: "J-YE9", dealer: "에이치" },
+      { cdsid: "H-SHIN", dealer: "아이언" },
+      { cdsid: "Y-SON", dealer: "아이비" },
+      { cdsid: "H-CHOI4", dealer: "코오롱" },
+      { cdsid: "S-KIM122", dealer: "태영" },
+    ],
+  );
   assert.deepEqual(
     loginAccess.accounts.find((account) => account.cdsid === "K-KIM16"),
     { cdsid: "K-KIM16", dashboardCdsid: "6KR6834" },
@@ -397,6 +453,7 @@ test("accepts manager and administrator logins while rejecting other CDSIDs", as
     assert.equal(response.status, 200);
     const setCookie = response.headers.get("set-cookie") ?? "";
     assert.match(setCookie, /volvo-dashboard-access=/);
+    assert.match(setCookie, new RegExp(`--${cdsid.toUpperCase()}`));
     assert.doesNotMatch(setCookie, /Max-Age=/i);
     assert.deepEqual(await response.json(), {
       redirectPath: "/dashboard/6KR6834",
@@ -1566,7 +1623,7 @@ test("right-aligns the combat maximum label with the quarter scores", async () =
   );
 });
 
-test("restores the profile showroom switcher for all viewers", async () => {
+test("shows the showroom switcher only within the authenticated scope", async () => {
   const [dashboardSource, css, showroomsJson] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -1582,11 +1639,19 @@ test("restores the profile showroom switcher for all viewers", async () => {
 
   assert.match(
     dashboardSource,
-    /aria-label=\{`현재 전시장을 제외한 \$\{dashboard\.showrooms\.length - 1\}개 전시장`\}/,
+    /showroomAccess\.allowedCdsids\.includes\(item\.cdsid\)[\s\S]*?item\.cdsid !== selected\.cdsid/,
   );
   assert.match(
     dashboardSource,
-    /dashboard\.showrooms[\s\S]*?\.filter\(\(item\) => item\.cdsid !== selected\.cdsid\)[\s\S]*?\.map/,
+    /showroomAccess\.role !== "manager" && switchableShowrooms\.length > 0/,
+  );
+  assert.match(
+    dashboardSource,
+    /canSwitchShowrooms \? \([\s\S]*?className="identity-profile"[\s\S]*?identity-profile--static/,
+  );
+  assert.match(
+    dashboardSource,
+    /aria-label=\{`현재 전시장을 제외한 \$\{switchableShowrooms\.length\}개 전시장`\}/,
   );
   assert.match(
     dashboardSource,
@@ -1594,7 +1659,7 @@ test("restores the profile showroom switcher for all viewers", async () => {
   );
   assert.match(
     dashboardSource,
-    /className="identity-profile-menu"[\s\S]*?className="identity-profile"[\s\S]*?className="profile-popover"/,
+    /className="identity-profile-menu"[\s\S]*?canSwitchShowrooms && profileOpen[\s\S]*?className="profile-popover"/,
   );
   assert.match(
     dashboardSource,
@@ -1617,6 +1682,10 @@ test("restores the profile showroom switcher for all viewers", async () => {
   assert.doesNotMatch(
     dashboardSource,
     /\{viewer\.isEditor \? \([\s\S]*?<select/,
+  );
+  assert.match(
+    css,
+    /\.identity-profile\.identity-profile--static::after\s*\{[^}]*content: none;/,
   );
   assert.match(
     css,

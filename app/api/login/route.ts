@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import loginAccessJson from "../../data/login-access.json";
 import {
+  createLoginCookieValue,
   LOGIN_COOKIE_NAME,
-  LOGIN_COOKIE_VALUE,
 } from "../../login-session";
 import { recordLoginVisit } from "../../login-stats";
 
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
   const response = NextResponse.json({
     redirectPath: `/dashboard/${encodeURIComponent(dashboardCdsid)}`,
   });
-  response.cookies.set(LOGIN_COOKIE_NAME, LOGIN_COOKIE_VALUE, {
+  response.cookies.set(LOGIN_COOKIE_NAME, createLoginCookieValue(cdsid), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
