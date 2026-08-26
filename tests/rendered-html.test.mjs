@@ -1675,6 +1675,10 @@ test("right-aligns the combat maximum label with the quarter scores", async () =
   );
   assert.match(
     combatSummaryCss,
+    /\.summary \.number\s*\{[^}]*margin-left: auto[^}]*transform: translateY\(3px\)/,
+  );
+  assert.match(
+    combatSummaryCss,
     /\.summary > \.heading \.maximum\s*\{[^}]*margin-left: auto[^}]*text-align: right/,
   );
 });
