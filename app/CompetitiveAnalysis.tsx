@@ -909,7 +909,15 @@ export default function CompetitiveAnalysis({
         <article className="analysis-ranking-card">
           <header className="analysis-card-heading">
             <div>
-              <h2>{rankingTitle}</h2>
+              <h2>
+                {view === "size" ? (
+                  <>
+                    <span className="english-title">{selected.size}</span> 사이즈 내 순위
+                  </>
+                ) : (
+                  rankingTitle
+                )}
+              </h2>
             </div>
             <strong>{groupItems.length}개점</strong>
           </header>
@@ -972,7 +980,9 @@ export default function CompetitiveAnalysis({
       <section className="v3s-award-card" aria-label="V3S 인센티브 수상기록">
         <header className="v3s-award-heading">
           <div>
-            <h2>V3S 인센티브 수상기록</h2>
+            <h2>
+              <span className="english-title">V3S</span> 인센티브 수상기록
+            </h2>
             <p>
               상반기(Q1, Q2 모두 97점 이상 시) 하반기(Q3, Q4 모두 97점 이상 시) 지급
             </p>

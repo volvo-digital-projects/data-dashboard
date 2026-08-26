@@ -9546,6 +9546,15 @@ body {
   letter-spacing: -0.25px;
 }
 
+/* Volvo Centum for English inside mixed Korean analysis titles */
+.analysis-card-heading .english-title,
+.v3s-award-heading .english-title {
+  font-family: var(--font-latin);
+  font-weight: inherit;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
 .content-grid {
   margin-top: var(--dashboard-section-gap);
   scroll-margin-top: var(--dashboard-section-gap);

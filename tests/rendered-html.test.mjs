@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 51);
+  assert.equal(release.items.length, 52);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -941,7 +941,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(gangnamSizeResponse.status, 200);
   const gangnamSizeHtml = await gangnamSizeResponse.text();
-  assert.match(gangnamSizeHtml, /<h2>U 사이즈 내 순위<\/h2>/);
+  assert.match(
+    gangnamSizeHtml,
+    /<h2><span class="english-title">U<\/span> 사이즈 내 순위<\/h2>/,
+  );
 
   const showroomResponse = await render(
     "/dashboard/6KR6834/analysis?view=showroom",
@@ -2686,10 +2689,10 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
 });
 
 test("matches analysis headings to the ES90 performance-comparison title at 70 percent size", async () => {
-  const css = await readFile(
-    new URL("../app/globals.css", import.meta.url),
-    "utf8",
-  );
+  const [analysisSource, css] = await Promise.all([
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
   const titleRule = css.match(
     /\/\* ES90 performance-comparison title typography at 70% of the prior size \*\/[\s\S]*?\.analysis-card-heading h2,[\s\S]*?\.v3s-award-heading h2\s*\{([^}]*)\}/,
   );
@@ -2699,6 +2702,21 @@ test("matches analysis headings to the ES90 performance-comparison title at 70 p
   assert.match(titleRule[1], /font-size: 14px;/);
   assert.match(titleRule[1], /font-weight: 600;/);
   assert.match(titleRule[1], /letter-spacing: -0\.25px;/);
+
+  assert.match(
+    analysisSource,
+    /<span className="english-title">V3S<\/span> 인센티브 수상기록/,
+  );
+  assert.match(
+    analysisSource,
+    /<span className="english-title">\{selected\.size\}<\/span> 사이즈 내 순위/,
+  );
+  const mixedEnglishRule = css.match(
+    /\/\* Volvo Centum for English inside mixed Korean analysis titles \*\/[\s\S]*?\.analysis-card-heading \.english-title,[\s\S]*?\.v3s-award-heading \.english-title\s*\{([^}]*)\}/,
+  );
+  assert.ok(mixedEnglishRule);
+  assert.match(mixedEnglishRule[1], /font-family: var\(--font-latin\);/);
+  assert.doesNotMatch(mixedEnglishRule[1], /font-size:/);
 });
 
 test("keeps the V3S cumulative average on one line and gives the bars the recovered height", async () => {
