@@ -7986,7 +7986,7 @@ button.quarter-score-row:disabled {
   letter-spacing: -0.025em;
 }
 
-.voc-consultation-heading > div:first-child span {
+.voc-consultation-heading > div:first-child span:not(.english-title) {
   overflow: hidden;
   color: #7b8d9b;
   font-size: 8px;

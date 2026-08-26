@@ -290,7 +290,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 67);
+  assert.equal(release.items.length, 68);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2865,6 +2865,10 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
   assert.match(englishRule[1], /font-weight: 800;/);
   assert.match(englishRule[1], /letter-spacing: 0\.02em;/);
   assert.doesNotMatch(englishRule[1], /font-size:/);
+  assert.match(
+    css,
+    /\.voc-consultation-heading > div:first-child span:not\(\.english-title\)\s*\{[^}]*font-size: 8px;/,
+  );
 });
 
 test("matches analysis headings to the ES90 performance-comparison title at 70 percent size", async () => {
