@@ -1224,6 +1224,93 @@ input:focus-visible {
   padding-top: 5px;
 }
 
+.metric-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  margin-top: auto;
+  padding-top: 5px;
+}
+
+.metric-resource-group {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.metric-resource-button {
+  width: 24px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #b9cbd4;
+  border-radius: 5px;
+  color: #3f7089;
+  background: #f3f7f9;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.metric-resource-button.available:hover,
+.metric-resource-button.available:focus-visible {
+  color: #0d4967;
+  border-color: #5a92aa;
+  background: #e7f1f5;
+  outline: 2px solid rgba(47, 107, 138, 0.2);
+  outline-offset: 1px;
+}
+
+.metric-resource-button:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.metric-resource-pdf {
+  font-family: var(--font-latin);
+  font-size: 7px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.metric-resource-photo {
+  width: 13px;
+  height: 11px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.metric-resource-photo::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.metric-resource-photo::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  left: 1px;
+  bottom: -5px;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
 .appeal-badge {
   display: inline-flex;
   align-items: center;
@@ -6273,6 +6360,10 @@ body:has(.login-home) {
   padding-top: 8px;
 }
 
+.metric-resource-grid {
+  padding-top: 8px;
+}
+
 .appeal-badge {
   font-size: 10px;
   font-weight: 650;
@@ -8890,6 +8981,10 @@ button.quarter-score-row:disabled {
   }
 
   .dashboard-sticky-shell .metric-card-footer {
+    padding-top: 5px;
+  }
+
+  .dashboard-sticky-shell .metric-resource-grid {
     padding-top: 5px;
   }
 

@@ -417,6 +417,8 @@ function MetricCard({
   active,
   onSelect,
   onQuarterSelect,
+  evidenceQuarters = [],
+  onEvidenceOpen,
   appeal,
   appealLabel,
 }: {
@@ -427,6 +429,8 @@ function MetricCard({
   active: boolean;
   onSelect: () => void;
   onQuarterSelect: (quarter: QuarterKey) => void;
+  evidenceQuarters?: QuarterKey[];
+  onEvidenceOpen?: (quarter: QuarterKey) => void;
   appeal: "possible" | "partial" | "locked";
   appealLabel?: string;
 }) {
@@ -477,6 +481,7 @@ function MetricCard({
       available: metric === "cx",
     },
   ];
+  const resourceQuarters: QuarterKey[] = ["q1", "q2", "q3", "q4"];
 
   return (
     <article
@@ -547,9 +552,50 @@ function MetricCard({
           </button>
         ))}
       </div>
-      <div className="metric-card-footer">
-        <AppealBadge type={appeal} labelOverride={appealLabel} />
-      </div>
+      {metric === "v3s" ? (
+        <div className="metric-resource-grid" aria-label="V3S 분기별 자료">
+          {resourceQuarters.map((resourceQuarter) => {
+            const resourceLabel = resourceQuarter.toUpperCase();
+            const hasEvidence = evidenceQuarters.includes(resourceQuarter);
+
+            return (
+              <div className="metric-resource-group" key={resourceQuarter}>
+                <button
+                  type="button"
+                  className="metric-resource-button"
+                  aria-label={`V3S ${resourceLabel} PDF 보고서 준비 중`}
+                  title={`${resourceLabel} PDF 보고서 준비 중`}
+                  disabled
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <span className="metric-resource-pdf" aria-hidden="true">
+                    PDF
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  className={`metric-resource-button ${hasEvidence ? "available" : ""}`}
+                  aria-label={`V3S ${resourceLabel} 증빙사진 ${
+                    hasEvidence ? "보기" : "준비 중"
+                  }`}
+                  title={`${resourceLabel} 증빙사진 ${hasEvidence ? "보기" : "준비 중"}`}
+                  disabled={!hasEvidence}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    if (hasEvidence) onEvidenceOpen?.(resourceQuarter);
+                  }}
+                >
+                  <span className="metric-resource-photo" aria-hidden="true" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="metric-card-footer">
+          <AppealBadge type={appeal} labelOverride={appealLabel} />
+        </div>
+      )}
     </article>
   );
 }
@@ -2435,12 +2481,6 @@ export default function Dashboard({
     setMetricQuarters((current) => ({ ...current, [metric]: quarter }));
     if (metric === "v3s") setSelectedQuarter(quarter);
     setTrendMetric(metric);
-    if (
-      metric === "v3s" &&
-      getV3sEvidence(selected.cdsid, quarter).length > 0
-    ) {
-      setEvidenceQuarter(quarter);
-    }
     if (metric === "v3s") {
       scrollMetricQuarterToSection("v3s");
     }
@@ -2492,7 +2532,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
-      appealLabel: "교차검증 후, 사후보정 가능",
+      appealLabel: undefined,
     },
     {
       key: "voc" as const,
@@ -2850,6 +2890,19 @@ export default function Dashboard({
                 onSelect={() => setTrendMetric(item.key)}
                 onQuarterSelect={(quarter) =>
                   selectMetricQuarter(item.key, quarter)
+                }
+                evidenceQuarters={
+                  item.key === "v3s"
+                    ? (["q1", "q2", "q3", "q4"] as QuarterKey[]).filter(
+                        (quarter) =>
+                          getV3sEvidence(selected.cdsid, quarter).length > 0,
+                      )
+                    : undefined
+                }
+                onEvidenceOpen={
+                  item.key === "v3s"
+                    ? (quarter) => setEvidenceQuarter(quarter)
+                    : undefined
                 }
                 appeal={item.appeal}
                 appealLabel={item.appealLabel}

@@ -639,10 +639,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /신차해피콜<\/span>만 사후보정 가능/);
   assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
-  assert.match(
-    visibleHtml,
-    /교차검증 후, 사후보정 가능/,
-  );
+  assert.doesNotMatch(visibleHtml, /교차검증 후, 사후보정 가능/);
   assert.match(
     visibleHtml,
     /class="appeal-badge-key">VOC해피콜<\/span>/,
@@ -657,6 +654,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((visibleHtml.match(/<span>\/ 130점 만점<\/span>/g) ?? []).length, 1);
   assert.equal((visibleHtml.match(/<span>점 \/ (?:100|130)점 만점<\/span>/g) ?? []).length, 0);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
+  assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
+  assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
+  assert.equal((html.match(/class="metric-resource-photo"/g) ?? []).length, 4);
   assert.equal(
     (html.match(/상세 영역으로 이동/g) ?? []).length,
     9,
@@ -2965,7 +2965,13 @@ test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam 
     ),
   ]);
 
-  assert.match(dashboardSource, /getV3sEvidence\(selected\.cdsid, quarter\)/);
+  assert.match(
+    dashboardSource,
+    /getV3sEvidence\(selected\.cdsid, quarter\)\.length > 0/,
+  );
+  assert.match(dashboardSource, /V3S \$\{resourceLabel\} 증빙사진/);
+  assert.match(dashboardSource, /onEvidenceOpen\?\.\(resourceQuarter\)/);
+  assert.doesNotMatch(dashboardSource, /교차검증 후, 사후보정 가능/);
   assert.match(dashboardSource, /<V3SEvidenceGallery/);
   assert.match(gallerySource, /"6KR6834"[\s\S]*?q2:/);
   assert.match(
