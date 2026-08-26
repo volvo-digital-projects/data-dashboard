@@ -5367,7 +5367,7 @@ body:has(.login-home) {
   margin: 0 0 7px;
   color: rgba(255, 255, 255, 0.94);
   font-family: var(--font-korean), var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 750;
   letter-spacing: 1.65px;
   line-height: normal;
