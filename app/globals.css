@@ -3783,6 +3783,7 @@ input:focus-visible {
 }
 
 .analysis-scatter-shell {
+  position: relative;
   height: calc(100% - 44px);
   min-height: 326px;
   display: grid;
@@ -3801,19 +3802,31 @@ input:focus-visible {
 }
 
 .scatter-y-title {
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  bottom: 26px;
+  left: 4px;
+  width: 22px;
   display: grid;
   place-items: center;
+  contain: layout paint;
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
 
 .scatter-x-title {
+  grid-row: 2;
   grid-column: 2;
   text-align: center;
 }
 
 .analysis-scatter {
   position: relative;
+  grid-row: 1;
+  grid-column: 2;
+  min-width: 0;
+  min-height: 0;
   border-left: 1px solid #d5dde2;
   border-bottom: 1px solid #d5dde2;
   background:

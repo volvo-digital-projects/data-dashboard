@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 80);
+  assert.equal(release.items.length, 81);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2607,6 +2607,14 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(
     css,
     /\.scatter-y-title\s*\{[^}]*writing-mode: vertical-rl[^}]*text-orientation: upright/,
+  );
+  assert.match(
+    css,
+    /\.scatter-y-title\s*\{[^}]*position: absolute[^}]*top: 10px[^}]*bottom: 26px[^}]*left: 4px[^}]*width: 22px[^}]*contain: layout paint/,
+  );
+  assert.match(
+    css,
+    /\.analysis-scatter\s*\{[^}]*grid-row: 1[^}]*grid-column: 2[^}]*min-width: 0[^}]*min-height: 0/,
   );
   assert.doesNotMatch(
     css,
