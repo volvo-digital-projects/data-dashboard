@@ -85,7 +85,7 @@ async function logout() {
 }
 
 test("server-renders the CDSID login route", async () => {
-  const [css, manifest, loginCover] = await Promise.all([
+  const [css, manifest, loginCover, loginSource] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/manifest.ts", import.meta.url), "utf8"),
     readFile(
@@ -94,6 +94,7 @@ test("server-renders the CDSID login route", async () => {
         import.meta.url,
       ),
     ),
+    readFile(new URL("../app/LoginHome.tsx", import.meta.url), "utf8"),
   ]);
   const response = await render();
   assert.equal(response.status, 200);
@@ -117,6 +118,21 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
+  assert.match(loginSource, /"checking-user": "접속자 정보 확인 중"/);
+  assert.match(
+    loginSource,
+    /"scanning-security": "보안패치 프로그램 스캐닝 중"/,
+  );
+  assert.match(loginSource, /LOGIN_IDENTITY_MIN_MS = 700/);
+  assert.match(loginSource, /LOGIN_SECURITY_SCAN_MS = 650/);
+  assert.match(
+    loginSource,
+    /setLoginPhase\("checking-user"\)[\s\S]*?await wait\(identityRemaining\)[\s\S]*?setLoginPhase\("scanning-security"\)[\s\S]*?await wait\(LOGIN_SECURITY_SCAN_MS\)[\s\S]*?window\.location\.assign/,
+  );
+  assert.match(
+    loginSource,
+    /<strong aria-live="polite" aria-atomic="true">[\s\S]*?LOGIN_PHASE_LABELS\[loginPhase\]/,
+  );
   assert.match(html, /접속 현황/);
   assert.match(html, /오늘/);
   assert.match(html, /0(?:<!-- -->)?명/);

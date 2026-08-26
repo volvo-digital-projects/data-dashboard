@@ -8,6 +8,20 @@ import type { LoginStats } from "./login-stats";
 const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid";
 const VALID_CDSID_PATTERN = /^[A-Z0-9-]{4,16}$/;
 const LOGIN_STATS_REFRESH_INTERVAL = 60_000;
+const LOGIN_IDENTITY_MIN_MS = 700;
+const LOGIN_SECURITY_SCAN_MS = 650;
+
+type LoginPhase = "idle" | "checking-user" | "scanning-security";
+
+const LOGIN_PHASE_LABELS: Record<LoginPhase, string> = {
+  idle: "Data Dashboard 시작",
+  "checking-user": "접속자 정보 확인 중",
+  "scanning-security": "보안패치 프로그램 스캐닝 중",
+};
+
+function wait(milliseconds: number) {
+  return new Promise<void>((resolve) => window.setTimeout(resolve, milliseconds));
+}
 
 function formatSeoulTimestamp(date: Date) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -33,10 +47,11 @@ export default function LoginHome({
   const [recentCdsidOpen, setRecentCdsidOpen] = useState(false);
   const [updatedAt, setUpdatedAt] = useState("");
   const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loginPhase, setLoginPhase] = useState<LoginPhase>("idle");
   const [loginStats, setLoginStats] = useState(initialStats);
   const cdsidInputRef = useRef<HTMLInputElement>(null);
   const recentCdsidOptionRef = useRef<HTMLButtonElement>(null);
+  const isSubmitting = loginPhase !== "idle";
 
   function handleCdsidKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Escape") {
@@ -131,9 +146,10 @@ export default function LoginHome({
   async function openDashboard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const normalizedCdsid = cdsid.trim().toUpperCase();
+    const phaseStartedAt = performance.now();
 
     setError("");
-    setIsSubmitting(true);
+    setLoginPhase("checking-user");
     try {
       const response = await fetch("/api/login", {
         method: "POST",
@@ -146,8 +162,17 @@ export default function LoginHome({
       };
       if (!response.ok || !payload.redirectPath) {
         setError(payload.message ?? "등록된 CDSID를 다시 확인해 주세요.");
+        setLoginPhase("idle");
         return;
       }
+
+      const identityRemaining = Math.max(
+        0,
+        LOGIN_IDENTITY_MIN_MS - (performance.now() - phaseStartedAt),
+      );
+      await wait(identityRemaining);
+      setLoginPhase("scanning-security");
+      await wait(LOGIN_SECURITY_SCAN_MS);
 
       try {
         window.localStorage.setItem(LAST_LOGIN_CDSID_KEY, normalizedCdsid);
@@ -157,8 +182,7 @@ export default function LoginHome({
       window.location.assign(payload.redirectPath);
     } catch {
       setError("로그인 연결을 확인한 뒤 다시 시도해 주세요.");
-    } finally {
-      setIsSubmitting(false);
+      setLoginPhase("idle");
     }
   }
 
@@ -289,7 +313,9 @@ export default function LoginHome({
                   <path d="M12 5.2v1.6" />
                 </svg>
               </span>
-              <strong>{isSubmitting ? "로그인 확인 중" : "Data Dashboard 시작"}</strong>
+              <strong aria-live="polite" aria-atomic="true">
+                {LOGIN_PHASE_LABELS[loginPhase]}
+              </strong>
             </button>
           </form>
 
