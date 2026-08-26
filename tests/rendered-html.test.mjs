@@ -194,7 +194,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(clamp\(42px, 3vw, 52px\)\);/,
+    /\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(clamp\(58px, 4vw, 68px\)\);/,
   );
   assert.match(
     css,
@@ -207,7 +207,7 @@ test("server-renders the CDSID login route", async () => {
   assert.match(css, /\.login-copy h1\s*\{[^}]*font-weight: 600;[^}]*line-height: 1\.06;/);
   assert.match(
     css,
-    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(28px\);[\s\S]*?\.login-copy h1\s*\{[^}]*line-height: 0\.98;/,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(38px\);[\s\S]*?\.login-copy h1\s*\{[^}]*line-height: 0\.98;/,
   );
 
   const explicitLoginResponse = await render("/login");

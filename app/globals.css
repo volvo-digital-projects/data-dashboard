@@ -5356,7 +5356,7 @@ body:has(.login-home) {
 
 .login-copy,
 .login-panel footer {
-  transform: translateX(clamp(42px, 3vw, 52px));
+  transform: translateX(clamp(58px, 4vw, 68px));
 }
 
 .login-intro {
@@ -5784,7 +5784,7 @@ body:has(.login-home) {
 
   .login-copy,
   .login-panel footer {
-    transform: translateX(28px);
+    transform: translateX(38px);
   }
 
   .login-copy h1 {
