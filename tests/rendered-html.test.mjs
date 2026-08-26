@@ -242,10 +242,10 @@ test("server-renders the CDSID login route", async () => {
 });
 
 test("remembers only the last successfully authenticated CDSID", async () => {
-  const loginSource = await readFile(
-    new URL("../app/LoginHome.tsx", import.meta.url),
-    "utf8",
-  );
+  const [loginSource, css] = await Promise.all([
+    readFile(new URL("../app/LoginHome.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
 
   assert.match(
     loginSource,
@@ -282,6 +282,14 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   assert.match(
     loginSource,
     /timeZone: "Asia\/Seoul"[\s\S]*?setInterval\(refreshTimestamp, 60_000\)/,
+  );
+  assert.match(
+    css,
+    /\.cdsid-entry\s*\{[^}]*position: relative;[^}]*z-index: 5;[^}]*overflow: visible;/,
+  );
+  assert.match(
+    css,
+    /\.recent-cdsid-menu\s*\{[^}]*position: absolute;[^}]*top: calc\(100% \+ 4px\);[^}]*z-index: 20;[^}]*animation: recent-cdsid-menu-in 150ms/,
   );
 });
 
@@ -324,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 76);
+  assert.equal(release.items.length, 77);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
