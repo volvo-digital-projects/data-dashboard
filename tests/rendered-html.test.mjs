@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 52);
+  assert.equal(release.items.length, 53);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -751,6 +751,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
 
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
   assert.match(
     visibleHtml,
     /<footer><span>에이치 평균<strong>93\.6<\/strong><\/span><span>볼보 강남대치 평균<strong>93\.8<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 0\.2점<\/strong><\/span><\/footer>/,
@@ -821,6 +825,18 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.doesNotMatch(html, /scatter-callout-leader/);
   assert.match(html, /class="scatter-point selected\b/);
+  assert.match(
+    css,
+    /\.scatter-point\.selected > i\s*\{[^}]*animation: selected-scatter-point-blink 1\.8s ease-in-out infinite;/,
+  );
+  assert.match(
+    css,
+    /@keyframes selected-scatter-point-blink\s*\{[\s\S]*?opacity: 1;[\s\S]*?opacity: 0\.48;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.scatter-point\.selected > b\s*\{[^}]*animation:/,
+  );
   const dealerTailValues = [
     ...html.matchAll(/--callout-tail-[xy]:(\d+(?:\.\d+)?)px/g),
   ].map((match) => Number(match[1]));

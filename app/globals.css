@@ -3919,9 +3919,27 @@ input:focus-visible {
   height: 13px;
   border: 2px solid white;
   background: var(--navy);
+  animation: selected-scatter-point-blink 1.8s ease-in-out infinite;
   box-shadow:
     0 0 0 4px rgba(47, 107, 138, 0.18),
     0 7px 14px rgba(16, 42, 67, 0.2);
+}
+
+@keyframes selected-scatter-point-blink {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 4px rgba(47, 107, 138, 0.18),
+      0 7px 14px rgba(16, 42, 67, 0.2);
+  }
+
+  50% {
+    opacity: 0.48;
+    box-shadow:
+      0 0 0 2px rgba(47, 107, 138, 0.1),
+      0 3px 8px rgba(16, 42, 67, 0.12);
+  }
 }
 
 .scatter-point.hovered:not(.selected) {
@@ -4610,6 +4628,10 @@ input:focus-visible {
   .scatter-point > i,
   .analysis-ranking-list > div {
     transition: none;
+  }
+
+  .scatter-point.selected > i {
+    animation: none;
   }
 }
 
