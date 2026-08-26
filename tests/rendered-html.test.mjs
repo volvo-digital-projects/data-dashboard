@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 78);
+  assert.equal(release.items.length, 79);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2488,15 +2488,15 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(css, /--header-title-width: clamp\(270px, 19%, 288px\)/);
   assert.match(
     css,
-    /\/\* ES90-inspired shared command banner preview \*\/[\s\S]*?\.dashboard-identity-header\s*\{[^}]*border-bottom: 0[^}]*linear-gradient\(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%\)/,
+    /\/\* ES90-inspired shared command banner preview \*\/[\s\S]*?\.dashboard-identity-header\s*\{[^}]*border-bottom: 0[^}]*#0b2b3d 0%[^}]*#10364b 42%[^}]*#18465f 72%[^}]*#1f5871 100%/,
   );
   assert.match(
     css,
-    /\.dashboard-identity-header::before\s*\{[^}]*inset: 0;[^}]*linear-gradient\(118deg, transparent 0%, transparent 56%, rgba\(152, 205, 228, 0\.025\) 68%, rgba\(152, 205, 228, 0\.085\) 100%\)[^}]*linear-gradient\(166deg, transparent 0%, transparent 70%, rgba\(3, 25, 39, 0\.14\) 100%\)/,
+    /\.dashboard-identity-header::before\s*\{[^}]*inset: 0;[^}]*transparent 48%[^}]*rgba\(152, 205, 228, 0\.016\) 62%[^}]*rgba\(152, 205, 228, 0\.04\) 82%[^}]*rgba\(152, 205, 228, 0\.065\) 100%[^}]*rgba\(3, 25, 39, 0\.1\) 100%/,
   );
   assert.match(
     css,
-    /\.dashboard-identity-header::after\s*\{[^}]*radial-gradient\([\s\S]*?circle at 91% -38%/,
+    /\.dashboard-identity-header::after\s*\{[^}]*opacity: 0\.72[^}]*radial-gradient\([\s\S]*?circle at 92% -46%[\s\S]*?219px 220px/,
   );
   assert.match(
     css,

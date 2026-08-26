@@ -10047,7 +10047,13 @@ body {
     border-radius: 0;
     color: #ffffff;
     background:
-      linear-gradient(104deg, #0b2b3d 0%, #123b53 62%, #245f7c 100%);
+      linear-gradient(
+        104deg,
+        #0b2b3d 0%,
+        #10364b 42%,
+        #18465f 72%,
+        #1f5871 100%
+      );
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.06),
       0 12px 28px -24px rgba(5, 28, 43, 0.9);
@@ -10059,8 +10065,20 @@ body {
     inset: 0;
     z-index: 0;
     background:
-      linear-gradient(118deg, transparent 0%, transparent 56%, rgba(152, 205, 228, 0.025) 68%, rgba(152, 205, 228, 0.085) 100%),
-      linear-gradient(166deg, transparent 0%, transparent 70%, rgba(3, 25, 39, 0.14) 100%);
+      linear-gradient(
+        118deg,
+        transparent 0%,
+        transparent 48%,
+        rgba(152, 205, 228, 0.016) 62%,
+        rgba(152, 205, 228, 0.04) 82%,
+        rgba(152, 205, 228, 0.065) 100%
+      ),
+      linear-gradient(
+        166deg,
+        transparent 0%,
+        transparent 68%,
+        rgba(3, 25, 39, 0.1) 100%
+      );
     pointer-events: none;
   }
 
@@ -10377,23 +10395,23 @@ body {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.86;
+    opacity: 0.72;
     background:
       radial-gradient(
-        circle at 91% -38%,
-        transparent 0 78px,
-        rgba(173, 218, 237, 0.16) 79px 80px,
-        transparent 81px 120px,
-        rgba(173, 218, 237, 0.12) 121px 122px,
-        transparent 123px 164px,
-        rgba(173, 218, 237, 0.075) 165px 166px,
-        transparent 167px
+        circle at 92% -46%,
+        transparent 0 102px,
+        rgba(173, 218, 237, 0.13) 103px 104px,
+        transparent 105px 158px,
+        rgba(173, 218, 237, 0.09) 159px 160px,
+        transparent 161px 218px,
+        rgba(173, 218, 237, 0.052) 219px 220px,
+        transparent 221px
       ),
       radial-gradient(
-        circle at 91% -38%,
-        rgba(123, 188, 217, 0.045) 0,
-        rgba(123, 188, 217, 0.018) 118px,
-        transparent 206px
+        circle at 92% -46%,
+        rgba(123, 188, 217, 0.038) 0,
+        rgba(123, 188, 217, 0.014) 160px,
+        transparent 278px
       );
   }
 
