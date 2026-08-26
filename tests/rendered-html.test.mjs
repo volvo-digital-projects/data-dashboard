@@ -2007,12 +2007,20 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
   assert.match(css, /\.content-grid\s*\{[^}]*margin-top: 8px[^}]*scroll-margin-top: 8px/);
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-insights\s*\{[^}]*margin-left: 0[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: 0/,
+    /\.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?\.dashboard-identity-header > \.analysis-context\s*\{[^}]*margin-left: auto/,
   );
-  assert.match(
-    css,
-    /\.identity-insight-row span\s*\{[^}]*display: -webkit-box;[^}]*max-height: 2\.24em;[^}]*overflow: hidden;[^}]*font-size: clamp\(8\.5px, 0\.64vw, 10px\);[^}]*-webkit-line-clamp: 2;/,
-  );
+});
+
+test("removes the score insight panel from both dashboard headers", async () => {
+  const [headerSource, dashboardSource, analysisSource] = await Promise.all([
+    readFile(new URL("../app/DashboardHeaderLead.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.doesNotMatch(headerSource, /identity-insights|identity-insight-row/);
+  assert.doesNotMatch(dashboardSource, /insights=|insightLabel=|buildShowroomInsights/);
+  assert.doesNotMatch(analysisSource, /insights=|insightLabel=|buildShowroomInsights/);
 });
 
 test("reserves the root scrollbar gutter across dashboard routes", async () => {

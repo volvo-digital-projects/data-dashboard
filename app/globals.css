@@ -9950,6 +9950,7 @@ body {
   .dashboard-identity-header > .analysis-context {
     width: calc((100% - var(--dashboard-combat-share) - 24px) / 3);
     flex: 0 0 calc((100% - var(--dashboard-combat-share) - 24px) / 3);
+    margin-left: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(2, 45px);
   }

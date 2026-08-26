@@ -1,15 +1,7 @@
-type DashboardInsight = {
-  key: string;
-  label: string;
-  message: string;
-};
-
 type DashboardHeaderLeadProps = {
   title: string;
   accessDate: string;
   status: string;
-  insights: readonly DashboardInsight[];
-  insightLabel: string;
   titleClassName?: string;
 };
 
@@ -17,8 +9,6 @@ export default function DashboardHeaderLead({
   title,
   accessDate,
   status,
-  insights,
-  insightLabel,
   titleClassName = "",
 }: DashboardHeaderLeadProps) {
   return (
@@ -46,14 +36,6 @@ export default function DashboardHeaderLead({
           </div>
         </div>
       </div>
-      <aside className="identity-insights" aria-label={insightLabel}>
-        {insights.map((insight) => (
-          <p className={`identity-insight-row ${insight.key}`} key={insight.key}>
-            <b>{insight.label}</b>
-            <span title={insight.message}>{insight.message}</span>
-          </p>
-        ))}
-      </aside>
     </>
   );
 }

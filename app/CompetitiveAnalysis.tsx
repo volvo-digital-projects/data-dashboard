@@ -11,7 +11,6 @@ import {
 } from "react";
 import dashboardJson from "./data/showrooms.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
-import { buildShowroomInsights } from "./showroom-insights";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -423,10 +422,6 @@ export default function CompetitiveAnalysis({
 }) {
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
-  const analysisInsights = buildShowroomInsights(
-    selected,
-    dashboardJson.averages,
-  );
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [accessDate, setAccessDate] = useState(() =>
@@ -660,8 +655,6 @@ export default function CompetitiveAnalysis({
             title={`${displayShowroomName(selected.showroom)} 분석`}
             accessDate={accessDate}
             status="Q1, Q2 마감, 현재 Q3평가 진행중"
-            insights={analysisInsights}
-            insightLabel={`${displayShowroomName(selected.showroom)} 분석 메시지`}
             titleClassName="analysis-title"
           />
         <div className="analysis-context" aria-label="현재 전시장 정보">

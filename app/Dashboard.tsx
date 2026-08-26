@@ -23,7 +23,6 @@ import {
   V3SEvidenceGallery,
   type EvidenceQuarter,
 } from "./V3SEvidenceGallery";
-import { buildShowroomInsights } from "./showroom-insights";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
@@ -2488,7 +2487,6 @@ export default function Dashboard({
       scrollMetricQuarterToSection("voc");
     }
   };
-  const identityInsights = buildShowroomInsights(selected, dashboard.averages);
   const showroomCodeWidth = Math.max(
     ...dashboard.showrooms.map((item) => item.cdsid.length),
   );
@@ -2563,8 +2561,6 @@ export default function Dashboard({
             title={`${displayShowroomName(selected.showroom)} 현황`}
             accessDate={accessDate}
             status={displayUpdateTitle}
-            insights={identityInsights}
-            insightLabel={`${displayShowroomName(selected.showroom)} 분석 메시지`}
           />
         <div className="identity-detail-rail">
           <dl>
