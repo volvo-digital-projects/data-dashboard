@@ -190,7 +190,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /\.login-session-meta time\s*\{[^}]*margin-left: auto;[^}]*margin-right: 12px;/,
+    /\.login-session-meta time\s*\{[^}]*margin-left: auto;[^}]*margin-right: 0;/,
   );
   assert.match(
     css,

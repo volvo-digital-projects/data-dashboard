@@ -5635,7 +5635,7 @@ body:has(.login-home) {
   gap: 4px;
   height: 21px;
   margin-left: auto;
-  margin-right: 12px;
+  margin-right: 0;
   padding: 0 9px 0 7px;
   overflow: hidden;
   border: 1px solid rgba(173, 202, 221, 0.34);
