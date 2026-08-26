@@ -324,7 +324,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 75);
+  assert.equal(release.items.length, 76);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -585,7 +585,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="identity-tools"|class="identity-tool"/);
   assert.match(
     html,
-    /class="identity-title"><h1>볼보 강남대치(?:<!-- -->)? 현황<\/h1><div class="update-status">/,
+    /class="identity-title"><h1>볼보 강남대치(?:<!-- -->)? 현황<\/h1><div class="header-status-row"/,
   );
   assert.match(
     html,
@@ -602,12 +602,13 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(
     visibleHtml,
-    new RegExp(`업데이트[\\s\\S]*?${seoulToday.replaceAll(".", "\\.")} 기준`),
+    new RegExp(`업데이트[\\s\\S]*?${seoulToday.replaceAll(".", "\\.")}`),
   );
-  assert.match(visibleHtml, /Q1, Q2 마감, 현재 Q3평가 진행중/);
+  assert.match(visibleHtml, /Q1 \/ Q2 마감/);
+  assert.match(visibleHtml, /Q3 평가·집계중/);
   assert.match(
     visibleHtml,
-    /Q1, Q2 마감, 현재 Q3평가 진행중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
+    /Q3 평가·집계중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
   );
   assert.match(visibleHtml, /class="dashboard-logout-icon" aria-hidden="true"/);
   const dashboardCss = await readFile(
@@ -616,11 +617,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
-    /\.dashboard-identity-header \.update-status\s*\{[^}]*width: 100%[^}]*display: grid[^}]*gap: 2px/,
+    /\.header-status-row\s*\{[^}]*width: 100%[^}]*display: flex[^}]*gap: 5px/,
   );
   assert.match(
     dashboardCss,
-    /\.dashboard-logout-form\s*\{[\s\S]*?margin: 0 0 0 auto/,
+    /\.header-status-row \.dashboard-logout-form\s*\{[^}]*margin: 0/,
   );
   assert.doesNotMatch(dashboardCss, /\.dashboard-logout-button::after/);
   assert.match(
@@ -1077,7 +1078,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="identity-title analysis-title"[\s\S]*?class="update-status"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">업데이트 [\d.]+ 기준<\/time>[\s\S]*?Q1, Q2 마감, 현재 Q3평가 진행중/,
+    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\d.]+<\/time>[\s\S]*?Q1 \/ Q2 마감[\s\S]*?Q3 평가·집계중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
@@ -2065,10 +2066,10 @@ test("reserves the root scrollbar gutter across dashboard routes", async () => {
   assert.match(css, /html\s*\{[^}]*scrollbar-gutter: stable/);
 });
 
-test("keeps the shared header status and score units compact", async () => {
+test("keeps the shared header icon row and score units compact", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  assert.match(css, /\.update-status\s*\{[^}]*font-size: 11px/);
+  assert.match(css, /\.header-status-row\s*\{[^}]*font-size: 9px/);
   assert.match(css, /\.metric-card-value span\s*\{[^}]*font-size: 11px/);
   assert.match(
     css,
@@ -2282,7 +2283,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     sharedHeaderSource,
-    /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?업데이트 \{accessDate\} 기준[\s\S]*?<\/time>/,
+    /업데이트 <time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>\{accessDate\}<\/time>/,
   );
   assert.doesNotMatch(
     dashboardSource,
@@ -2484,9 +2485,9 @@ test("ships the premium neutral design system and Paperlogy typography", async (
     css,
     /\.dashboard-identity-header::before\s*\{[^}]*inset: 0;[^}]*linear-gradient\(118deg, transparent 0%, transparent 56%, rgba\(152, 205, 228, 0\.025\) 68%, rgba\(152, 205, 228, 0\.085\) 100%\)[^}]*linear-gradient\(166deg, transparent 0%, transparent 70%, rgba\(3, 25, 39, 0\.14\) 100%\)/,
   );
-  assert.doesNotMatch(
+  assert.match(
     css,
-    /radial-gradient\(circle, transparent 0 47%, rgba\(139, 198, 224, 0\.12\)/,
+    /\.dashboard-identity-header::after\s*\{[^}]*radial-gradient\([\s\S]*?circle at 91% -38%/,
   );
   assert.match(
     css,
@@ -2499,6 +2500,10 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(
     css,
     /\.dashboard-identity-header \.identity-title h1,[\s\S]*?\.dashboard-identity-header\.analysis-header h1\s*\{[^}]*font-family: "Pretendard Variable", var\(--font-korean\), sans-serif[^}]*font-weight: 760/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.identity-title h1,[\s\S]*?\.dashboard-identity-header\.analysis-header h1\s*\{[^}]*font-size: clamp\(38px, 3vw, 43px\)[^}]*font-weight: 780/,
   );
   assert.match(
     css,
