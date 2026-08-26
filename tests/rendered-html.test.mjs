@@ -105,6 +105,14 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.doesNotMatch(html, /데이터 분석을 통해/);
   assert.match(html, /정확한 인사이트와 더 나은 의사결정을 지원합니다\./);
+  assert.match(
+    css,
+    /\.login-description\s*\{[^}]*font-size: 15px;/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-description\s*\{[^}]*font-size: 12px;/,
+  );
   assert.match(html, /CDSID를 입력해 주세요/);
   assert.match(html, /Data Dashboard 시작/);
   assert.match(html, /접속 현황/);
@@ -276,7 +284,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 57);
+  assert.equal(release.items.length, 58);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

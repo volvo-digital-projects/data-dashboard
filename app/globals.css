@@ -5382,7 +5382,7 @@ body:has(.login-home) {
   margin: 0 0 38px;
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-korean), var(--font-volvo), sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: -0.02em;
   line-height: 1.85;
 }
@@ -5778,7 +5778,7 @@ body:has(.login-home) {
 
   .login-description {
     margin-bottom: 25px;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.7;
   }
 
