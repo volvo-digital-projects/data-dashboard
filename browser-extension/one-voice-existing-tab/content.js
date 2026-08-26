@@ -69,6 +69,38 @@ if (!globalThis.__volvoOneVoiceExistingTabSync) {
     return { testDriveScore, carHandoverScore };
   }
 
+  let readyScanTimer = null;
+  let lastReadySignature = "";
+
+  function announceScoresReady() {
+    readyScanTimer = null;
+    const scores = collectScores();
+    if (!scores) return;
+
+    const signature = `${location.href}|${scores.testDriveScore}|${scores.carHandoverScore}`;
+    if (signature === lastReadySignature) return;
+    lastReadySignature = signature;
+
+    try {
+      const pending = chrome.runtime.sendMessage({
+        type: "one-voice-scores-ready",
+        scores,
+        pageTitle: document.title,
+        pageUrl: location.href,
+      });
+      if (pending && typeof pending.catch === "function") {
+        void pending.catch(() => undefined);
+      }
+    } catch {
+      // The unpacked extension may be reloading while the Medallia tab stays open.
+    }
+  }
+
+  function scheduleReadyScan(delay = 450) {
+    if (readyScanTimer !== null) clearTimeout(readyScanTimer);
+    readyScanTimer = setTimeout(announceScoresReady, delay);
+  }
+
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (message?.type !== "one-voice-collect") return false;
     sendResponse({
@@ -78,4 +110,17 @@ if (!globalThis.__volvoOneVoiceExistingTabSync) {
     });
     return true;
   });
+
+  const cardObserver = new MutationObserver(() => scheduleReadyScan());
+  cardObserver.observe(document.documentElement, {
+    childList: true,
+    characterData: true,
+    subtree: true,
+  });
+
+  window.addEventListener("pageshow", () => scheduleReadyScan(0));
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") scheduleReadyScan(0);
+  });
+  scheduleReadyScan(0);
 }

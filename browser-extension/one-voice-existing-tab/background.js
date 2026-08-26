@@ -312,6 +312,14 @@ chrome.tabs.onActivated.addListener(({ tabId }) => {
     .catch(() => undefined);
 });
 
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message?.type !== "one-voice-scores-ready") return false;
+  const tab = sender.tab;
+  if (!isMedalliaTab(tab) || typeof tab.id !== "number") return false;
+  void runCapture(`scores-ready:${tab.id}`);
+  return false;
+});
+
 chrome.action.onClicked.addListener(() => {
   scheduleCapture();
   void runCapture("manual");

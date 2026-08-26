@@ -63,3 +63,29 @@ test("refreshes the existing ONE VOICE tab and immediately retries the cards", a
     /ONE_VOICE_SITE_URL: https:\/\/volvo-dsc-pc-test-2026\.kongboojang\.chatgpt\.site/,
   );
 });
+
+test("captures immediately when the client-rendered ONE VOICE cards become ready", async () => {
+  const content = await readFile(
+    new URL("../browser-extension/one-voice-existing-tab/content.js", import.meta.url),
+    "utf8",
+  );
+  const background = await readFile(
+    new URL("../browser-extension/one-voice-existing-tab/background.js", import.meta.url),
+    "utf8",
+  );
+  const manifest = JSON.parse(
+    await readFile(
+      new URL("../browser-extension/one-voice-existing-tab/manifest.json", import.meta.url),
+      "utf8",
+    ),
+  );
+
+  assert.match(content, /new MutationObserver\(\(\) => scheduleReadyScan\(\)\)/);
+  assert.match(content, /type: "one-voice-scores-ready"/);
+  assert.match(content, /scheduleReadyScan\(0\)/);
+  assert.match(
+    background,
+    /message\?\.type !== "one-voice-scores-ready"[\s\S]*?runCapture\(`scores-ready:\$\{tab\.id\}`\)/,
+  );
+  assert.equal(manifest.version, "1.4.0");
+});
