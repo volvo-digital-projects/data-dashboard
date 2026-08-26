@@ -28,7 +28,7 @@ import { buildShowroomInsights } from "./showroom-insights";
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
 type GroupKey = "all" | "dealer" | "region" | "size";
-type QuarterKey = "q1" | "q2" | "q3";
+type QuarterKey = "q1" | "q2" | "q3" | "q4";
 
 type QuarterRecord = {
   cdsid: string;
@@ -460,7 +460,17 @@ function MetricCard({
             : "complete",
       available: metric !== "v3s",
     },
-    { key: null, label: "Q4", state: "planned", available: false },
+    {
+      key: metric === "cx" ? ("q4" as const) : null,
+      label: "Q4",
+      state:
+        metric === "cx"
+          ? quarter === "q4"
+            ? "current"
+            : "complete"
+          : "planned",
+      available: metric === "cx",
+    },
   ];
 
   return (
@@ -1233,7 +1243,13 @@ function WeeklyTrend({
   const upcomingQuarterStart = weekBoundaryX(39);
   const upcomingQuarterEnd = weekBoundaryX(52);
   const highlightedQuarterStartWeek =
-    highlightQuarter === "q1" ? 0 : highlightQuarter === "q2" ? 13 : 26;
+    highlightQuarter === "q1"
+      ? 0
+      : highlightQuarter === "q2"
+        ? 13
+        : highlightQuarter === "q4"
+          ? 39
+          : 26;
   const highlightedQuarterEndWeek = highlightedQuarterStartWeek + 13;
   const markerSize = 6.3;
   const markerRadius = markerSize / 2;
@@ -2135,6 +2151,7 @@ export default function Dashboard({
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
+  const cxQuarterScrollFrameRef = useRef<number | null>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
     carHandoverScore: 94.0,
@@ -2179,6 +2196,15 @@ export default function Dashboard({
       document.removeEventListener("keydown", closeProfileOnEscape);
     };
   }, [profileOpen]);
+
+  useEffect(
+    () => () => {
+      if (cxQuarterScrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(cxQuarterScrollFrameRef.current);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     let mounted = true;
@@ -2312,6 +2338,73 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
+  const scrollCxQuarterToVoc = () => {
+    const target = document.getElementById("score-voc");
+    if (!target) return;
+
+    if (cxQuarterScrollFrameRef.current !== null) {
+      window.cancelAnimationFrame(cxQuarterScrollFrameRef.current);
+    }
+
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    const stickyHeight = mobile
+      ? 0
+      : stickyShellRef.current?.getBoundingClientRect().height ?? 0;
+    const scoreHeadingHeight = mobile
+      ? 0
+      : document
+          .querySelector<HTMLElement>(".score-stack-heading")
+          ?.getBoundingClientRect().height ?? 52;
+    const startTop = window.scrollY;
+    const targetTop = Math.max(
+      0,
+      startTop +
+        target.getBoundingClientRect().top -
+        stickyHeight -
+        scoreHeadingHeight -
+        10,
+    );
+    const distance = targetTop - startTop;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion || Math.abs(distance) < 2) {
+      window.scrollTo({
+        top: targetTop,
+        left: window.scrollX,
+        behavior: "auto",
+      });
+      cxQuarterScrollFrameRef.current = null;
+      return;
+    }
+
+    const duration = 1200;
+    const startedAt = performance.now();
+    const animateScroll = (now: number) => {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      const eased =
+        progress *
+        progress *
+        progress *
+        (progress * (progress * 6 - 15) + 10);
+      window.scrollTo({
+        top: startTop + distance * eased,
+        left: window.scrollX,
+        behavior: "auto",
+      });
+
+      if (progress < 1) {
+        cxQuarterScrollFrameRef.current =
+          window.requestAnimationFrame(animateScroll);
+      } else {
+        cxQuarterScrollFrameRef.current = null;
+      }
+    };
+
+    cxQuarterScrollFrameRef.current =
+      window.requestAnimationFrame(animateScroll);
+  };
   const selectMetricQuarter = (
     metric: TrendMetricKey,
     quarter: QuarterKey,
@@ -2324,6 +2417,9 @@ export default function Dashboard({
       getV3sEvidence(selected.cdsid, quarter).length > 0
     ) {
       setEvidenceQuarter(quarter);
+    }
+    if (metric === "cx" && quarter !== "q3") {
+      scrollCxQuarterToVoc();
     }
   };
   const identityInsights = buildShowroomInsights(selected, dashboard.averages);

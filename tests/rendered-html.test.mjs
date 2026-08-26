@@ -253,7 +253,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 44);
+  assert.equal(release.items.length, 45);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -487,9 +487,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.equal(
     (html.match(/상세 영역으로 이동/g) ?? []).length,
-    8,
+    9,
   );
-  assert.equal((html.match(/평가 미완료/g) ?? []).length, 4);
+  assert.equal((html.match(/평가 미완료/g) ?? []).length, 3);
   const quarterStrips = [
     ...html.matchAll(/class="metric-quarter-strip"[^>]*>([\s\S]*?)<\/div>/g),
   ];
@@ -1163,7 +1163,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(dashboardSource, /const activeQuarterEnd = weekBoundaryX\(39\)/);
   assert.match(
     dashboardSource,
-    /const highlightedQuarterStartWeek =\s*highlightQuarter === "q1" \? 0 : highlightQuarter === "q2" \? 13 : 26/,
+    /const highlightedQuarterStartWeek =[\s\S]*?highlightQuarter === "q1"[\s\S]*?\? 0[\s\S]*?highlightQuarter === "q2"[\s\S]*?\? 13[\s\S]*?highlightQuarter === "q4"[\s\S]*?\? 39[\s\S]*?: 26/,
   );
   assert.match(
     dashboardSource,
@@ -1208,7 +1208,22 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const selectMetricQuarter = \([\s\S]*?setMetricQuarters\(\(current\) => \(\{ \.\.\.current, \[metric\]: quarter \}\)\);/,
   );
-  assert.doesNotMatch(dashboardSource, /window\.scrollTo\(/);
+  assert.match(
+    dashboardSource,
+    /const scrollCxQuarterToVoc = \(\) => \{[\s\S]*?document\.getElementById\("score-voc"\)[\s\S]*?const duration = 1200;[\s\S]*?window\.scrollTo\(\{/,
+  );
+  assert.match(
+    dashboardSource,
+    /metric === "cx" && quarter !== "q3"[\s\S]*?scrollCxQuarterToVoc\(\);/,
+  );
+  assert.match(
+    dashboardSource,
+    /key: metric === "cx" \? \("q4" as const\) : null,[\s\S]*?available: metric === "cx"/,
+  );
+  assert.match(
+    dashboardSource,
+    /highlightQuarter === "q4"[\s\S]*?\? 39[\s\S]*?: 26/,
+  );
   assert.doesNotMatch(
     dashboardSource,
     /document\.getElementById\(`score-\$\{metric\}`\)/,
