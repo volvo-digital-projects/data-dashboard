@@ -5232,7 +5232,7 @@ html:has(.login-home) {
       rgba(7, 20, 29, 0.05) 93%,
       rgba(7, 20, 29, 0) 100%
     ),
-    url("/volvo-dashboard-cover-logo-small.png");
+    url("/volvo-dashboard-cover-clean.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -5247,7 +5247,7 @@ body:has(.login-home) {
   overflow: hidden;
   overflow-x: hidden;
   overscroll-behavior: none;
-  background: #07141d url("/volvo-dashboard-cover-logo-small.png") center / cover no-repeat;
+  background: #07141d url("/volvo-dashboard-cover-clean.png") center / cover no-repeat;
 }
 
 .login-home {
@@ -5295,7 +5295,7 @@ body:has(.login-home) {
   right: calc(-1 * env(safe-area-inset-right, 0px));
   bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
   left: calc(-1 * env(safe-area-inset-left, 0px));
-  background-image: url("/volvo-dashboard-cover-logo-small.png");
+  background-image: url("/volvo-dashboard-cover-clean.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

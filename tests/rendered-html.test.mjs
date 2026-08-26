@@ -90,7 +90,7 @@ test("server-renders the CDSID login route", async () => {
     readFile(new URL("../app/manifest.ts", import.meta.url), "utf8"),
     readFile(
       new URL(
-        "../public/volvo-dashboard-cover-logo-small.png",
+        "../public/volvo-dashboard-cover-clean.png",
         import.meta.url,
       ),
     ),
@@ -138,11 +138,11 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.86\) 0%[\s\S]*?volvo-dashboard-cover-logo-small\.png[^}]*background-size: cover;/,
+    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.86\) 0%[\s\S]*?volvo-dashboard-cover-clean\.png[^}]*background-size: cover;/,
   );
   assert.match(
     css,
-    /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover-logo-small\.png[^}]*cover no-repeat/,
+    /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover-clean\.png[^}]*cover no-repeat/,
   );
   assert.match(
     css,
