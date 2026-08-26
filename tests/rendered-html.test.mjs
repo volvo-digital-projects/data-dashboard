@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 55);
+  assert.equal(release.items.length, 56);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -513,6 +513,19 @@ test("server-renders the selected CDSID dashboard", async () => {
     9,
   );
   assert.equal((html.match(/평가 미완료/g) ?? []).length, 3);
+  assert.equal(
+    (visibleHtml.match(/class="metric-benchmark-quarter">Q[23]<\/span>/g) ?? [])
+      .length,
+    3,
+  );
+  assert.match(
+    dashboardCss,
+    /\.metric-benchmark > span\s*\{[^}]*font-size: 12px;/,
+  );
+  assert.match(
+    dashboardCss,
+    /\.metric-benchmark-quarter\s*\{[^}]*font-family: var\(--font-latin\);[^}]*font-weight: 600;/,
+  );
   const quarterStrips = [
     ...html.matchAll(/class="metric-quarter-strip"[^>]*>([\s\S]*?)<\/div>/g),
   ];
@@ -1239,7 +1252,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /<span>\{quarterLabel\} 전국 평균 대비<\/span>/,
+    /<span className="metric-benchmark-quarter">\{quarterLabel\}<\/span>\{" "\}\s*전국 평균 대비/,
   );
   assert.match(
     dashboardSource,

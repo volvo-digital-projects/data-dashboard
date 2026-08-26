@@ -6119,6 +6119,16 @@ body:has(.login-home) {
   font-size: 13px;
 }
 
+.metric-benchmark > span {
+  font-size: 12px;
+}
+
+.metric-benchmark-quarter {
+  font-family: var(--font-latin);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
 .metric-benchmark strong {
   font-family: var(--font-latin);
   font-size: 13px;

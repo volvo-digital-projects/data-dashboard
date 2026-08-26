@@ -494,7 +494,10 @@ function MetricCard({
         className="metric-benchmark"
         title={`${quarterLabel} 전국 평균 ${displayNumber(average)}점`}
       >
-        <span>{quarterLabel} 전국 평균 대비</span>
+        <span>
+          <span className="metric-benchmark-quarter">{quarterLabel}</span>{" "}
+          전국 평균 대비
+        </span>
         <strong
           className={`${
             signal.delta > 0
