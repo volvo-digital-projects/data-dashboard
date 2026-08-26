@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 79);
+  assert.equal(release.items.length, 80);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -577,6 +577,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="(?:national|actual)-point-value"[^>]*>\d+\.0<\/text>/,
   );
   const visibleHtml = html.replaceAll("<!-- -->", "");
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   const seoulToday = new Intl.DateTimeFormat("sv-SE", {
     timeZone: "Asia/Seoul",
     dateStyle: "short",
@@ -821,6 +822,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="trend-selector-icon"/);
   assert.equal((html.match(/class="score-tier /g) ?? []).length, 3);
   assert.equal((html.match(/class="cx-component-chip"/g) ?? []).length, 5);
+  assert.match(
+    css,
+    /\.score-tier-heading \.voc-component-chip,[\s\S]*?\.score-tier-heading \.cx-component-chip\s*\{[^}]*linear-gradient\([^}]*135deg[^}]*rgba\(255, 255, 255, 0\.98\) 0%[^}]*rgba\(245, 250, 252, 0\.96\) 52%[^}]*rgba\(228, 239, 244, 0\.92\) 100%/,
+  );
   assert.match(
     visibleHtml,
     /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(100점\)<\/em>/,
