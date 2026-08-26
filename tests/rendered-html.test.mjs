@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 50);
+  assert.equal(release.items.length, 51);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2619,6 +2619,18 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(
     css,
     /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.identity-detail-rail,[\s\S]*?\.analysis-context\s*\{[^}]*margin-right: 0/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\) and \(max-width: 1240px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 515px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 489px[^}]*min-height: 489px[^}]*contain: layout/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 314px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 480px[^}]*min-height: 480px[^}]*contain: layout/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-list\s*\{[^}]*min-height: 0[^}]*overflow-y: auto[^}]*scrollbar-gutter: stable/,
   );
   assert.match(
     css,

@@ -9634,13 +9634,64 @@ body {
   white-space: nowrap;
 }
 
+/* Keep page 2 stationary while the four comparison scopes are switched. */
+@media (min-width: 761px) and (max-width: 1240px) {
+  .analysis-sticky-anchor {
+    min-height: 515px;
+  }
+
+  .analysis-workspace {
+    height: 489px;
+    min-height: 489px;
+    grid-auto-rows: minmax(0, 1fr);
+    contain: layout;
+  }
+
+  .analysis-scatter-card,
+  .analysis-ranking-card {
+    height: 489px;
+    min-height: 489px;
+    max-height: 489px;
+    overflow: hidden;
+  }
+
+  .analysis-ranking-list {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+}
+
 @media (min-width: 1241px) {
   .dashboard-sticky-anchor {
     min-height: 356px;
   }
 
   .analysis-sticky-anchor {
-    min-height: 308px;
+    min-height: 314px;
+  }
+
+  .analysis-workspace {
+    height: 480px;
+    min-height: 480px;
+    grid-auto-rows: minmax(0, 1fr);
+    contain: layout;
+  }
+
+  .analysis-scatter-card,
+  .analysis-ranking-card {
+    height: 480px;
+    min-height: 480px;
+    max-height: 480px;
+    overflow: hidden;
+  }
+
+  .analysis-ranking-list {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
   }
 
   .dashboard-sticky-shell,
