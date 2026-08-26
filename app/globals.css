@@ -5401,6 +5401,7 @@ body:has(.login-home) {
 }
 
 .cdsid-form {
+  width: min(100%, 340px);
   display: grid;
   gap: 0;
 }
@@ -5675,11 +5676,11 @@ body:has(.login-home) {
 }
 
 .login-panel footer {
-  width: min(100%, 360px);
+  width: min(100%, 340px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 5px 12px;
+  gap: 5px 6px;
   position: static;
   margin-top: 4px;
   color: rgba(255, 255, 255, 0.73);
@@ -5695,7 +5696,7 @@ body:has(.login-home) {
 
 .login-panel footer span + span::before {
   content: "\00b7";
-  margin-right: 12px;
+  margin-right: 6px;
 }
 
 @media (max-width: 1050px) {
@@ -5796,6 +5797,7 @@ body:has(.login-home) {
   }
 
   .cdsid-form {
+    width: 100%;
     gap: 0;
   }
 

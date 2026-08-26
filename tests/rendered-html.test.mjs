@@ -177,7 +177,12 @@ test("server-renders the CDSID login route", async () => {
   assert.match(manifest, /background_color: "#07141d"/);
   assert.match(
     css,
-    /\.login-panel footer\s*\{[^}]*display: grid;[^}]*grid-template-columns: minmax\(0, 1fr\) auto;/,
+    /\.login-panel footer\s*\{[^}]*width: min\(100%, 340px\);[^}]*display: grid;[^}]*grid-template-columns: minmax\(0, 1fr\) auto;[^}]*gap: 5px 6px;/,
+  );
+  assert.match(css, /\.cdsid-form\s*\{[^}]*width: min\(100%, 340px\);/);
+  assert.match(
+    css,
+    /\.login-panel footer span \+ span::before\s*\{[^}]*margin-right: 6px;/,
   );
   assert.match(
     css,
@@ -291,7 +296,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 69);
+  assert.equal(release.items.length, 70);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
