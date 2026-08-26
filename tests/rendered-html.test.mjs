@@ -2279,11 +2279,11 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(css, /--es90-orange: #f15a24/);
   assert.match(
     css,
-    /\.login-rule\s*\{[^}]*margin: 14px 0 10px;[^}]*linear-gradient\(90deg, #f47b3f[^}]*clip-path: polygon\(0 16%, 0 84%, 100% 50%\)/,
+    /\.login-rule\s*\{[^}]*width: min\(290px, 100%\);[^}]*height: 5px;[^}]*margin: 14px 0 10px;[^}]*linear-gradient\(90deg, #f47b3f[^}]*clip-path: polygon\(0 4%, 0 96%, 100% 50%\)/,
   );
   assert.match(
     css,
-    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-rule\s*\{[^}]*margin: 14px 0 8px;/,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-rule\s*\{[^}]*width: min\(232px, 100%\);[^}]*margin: 14px 0 8px;/,
   );
   assert.match(
     css,

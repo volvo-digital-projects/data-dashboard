@@ -5384,15 +5384,15 @@ body:has(.login-home) {
 }
 
 .login-rule {
-  width: min(330px, 86%);
-  height: 4px;
+  width: min(290px, 100%);
+  height: 5px;
   display: block;
   margin: 14px 0 10px;
   background:
-    linear-gradient(180deg, rgba(255, 188, 139, 0.56) 0%, rgba(244, 123, 63, 0) 46%),
-    linear-gradient(90deg, #f47b3f 0%, rgba(244, 123, 63, 0.94) 62%, rgba(244, 123, 63, 0) 100%);
-  clip-path: polygon(0 16%, 0 84%, 100% 50%);
-  filter: drop-shadow(0 1px 1px rgba(105, 36, 8, 0.2));
+    linear-gradient(180deg, rgba(255, 211, 177, 0.72) 0%, rgba(244, 123, 63, 0.92) 42%, rgba(198, 62, 17, 0.76) 86%, rgba(198, 62, 17, 0) 100%),
+    linear-gradient(90deg, #f47b3f 0%, rgba(244, 123, 63, 0.96) 54%, rgba(244, 123, 63, 0.58) 78%, rgba(244, 123, 63, 0) 100%);
+  clip-path: polygon(0 4%, 0 96%, 100% 50%);
+  filter: drop-shadow(0 1px 1px rgba(105, 36, 8, 0.24));
 }
 
 .login-description {
@@ -5793,6 +5793,7 @@ body:has(.login-home) {
   }
 
   .login-rule {
+    width: min(232px, 100%);
     margin: 14px 0 8px;
   }
 
