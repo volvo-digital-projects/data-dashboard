@@ -263,10 +263,20 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeSource, /document\.addEventListener\("visibilitychange"/);
   assert.match(noticeSource, /currentId !== nextRelease\.id[\s\S]*?reloadForRelease/);
   assert.match(noticeSource, /window\.location\.reload\(\)/);
-  assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
-  assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
+  assert.match(noticeSource, /최신내역이 업데이트 되었습니다\./);
+  assert.doesNotMatch(noticeSource, /release\.items\.map/);
+  assert.match(noticeSource, /const NOTICE_DURATION = 3_200/);
+  assert.match(
+    noticeSource,
+    /if \(!seenRelease\)[\s\S]*?localStorage\.setItem\(RELEASE_STORAGE_KEY, nextRelease\.id\)[\s\S]*?else if \(seenRelease !== nextRelease\.id\)/,
+  );
+  assert.match(
+    css,
+    /\.release-update-notice\s*\{[^}]*width: max-content;[^}]*min-height: 36px;[^}]*position: fixed;[^}]*bottom: max\(16px, env\(safe-area-inset-bottom\)\);[^}]*border-radius: 999px;/,
+  );
+  assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 47);
+  assert.equal(release.items.length, 48);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const RELEASE_URL = "/dashboard-release.json";
 const RELEASE_STORAGE_KEY = "volvo-dashboard-seen-release";
 const RELEASE_CHECK_INTERVAL = 30_000;
-const NOTICE_DURATION = 9_000;
+const NOTICE_DURATION = 3_200;
 
 type ReleaseInfo = {
   id: string;
@@ -96,7 +96,15 @@ export default function ReleaseUpdateNotice() {
           } catch {
             // Treat storage-restricted sessions as unseen.
           }
-          if (seenRelease !== nextRelease.id) showCurrentRelease(nextRelease);
+          if (!seenRelease) {
+            try {
+              window.localStorage.setItem(RELEASE_STORAGE_KEY, nextRelease.id);
+            } catch {
+              // First visits do not need an update-complete notice.
+            }
+          } else if (seenRelease !== nextRelease.id) {
+            showCurrentRelease(nextRelease);
+          }
         }
       } catch {
         // A temporary version-check failure must never block the dashboard.
@@ -134,30 +142,11 @@ export default function ReleaseUpdateNotice() {
       aria-live="polite"
       aria-atomic="true"
     >
-      <span className="release-update-icon" aria-hidden="true">
-        <i />
-      </span>
-      <div className="release-update-copy">
-        <div className="release-update-heading">
-          <strong>{refreshing ? "최신 버전 자동 반영 중" : release.title}</strong>
-          <time dateTime={release.publishedAt}>{release.publishedAtKst}</time>
-        </div>
-        <ul>
-          {release.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        {refreshing ? <span className="release-update-progress" /> : null}
-      </div>
-      {!refreshing ? (
-        <button
-          type="button"
-          aria-label="업데이트 안내 닫기"
-          onClick={() => setRelease(null)}
-        >
-          ×
-        </button>
-      ) : null}
+      <strong>
+        {refreshing
+          ? "최신 버전을 반영하고 있습니다."
+          : "최신내역이 업데이트 되었습니다."}
+      </strong>
     </aside>
   );
 }
