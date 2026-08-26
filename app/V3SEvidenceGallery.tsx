@@ -29,6 +29,133 @@ const evidenceByShowroom: Record<
       },
     ],
   },
+  "6KR6841": {
+    q2: [
+      {
+        src: "/evidence/6KR6841/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
+        alt: "얼굴이 익명화된 동대문 Q2 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (하복·춘추복)",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q2/laptop-left-unattended-mosaic.png",
+        alt: "얼굴이 익명화된 동대문 Q2 노트북 방치 증빙사진",
+        caption: "노트북 방치",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q2/valet-black-round-shirt-mosaic.png",
+        alt: "얼굴이 익명화된 동대문 Q2 발레파커 검정색 라운드 티 착용 증빙사진",
+        caption: "발레파커 검정색 라운드 티 착용",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q2/unnecessary-items-left.jpg",
+        alt: "동대문 Q2 불필요 물품 방치 증빙사진",
+        caption: "불필요 물품 방치",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q2/consultation-shoes-mosaic.png",
+        alt: "얼굴이 익명화된 동대문 Q2 상담 영업 직원 구두 착용 미흡 증빙사진",
+        caption: "상담 영업 직원 구두 착용 미흡",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q2/uniform-guide-noncompliance-mosaic.png",
+        alt: "얼굴이 익명화된 동대문 Q2 영업 직원 복장 착용 가이드 미준수 증빙사진",
+        caption: "영업 직원 복장 착용 가이드 미준수",
+      },
+    ],
+  },
+  "6KR6842": {
+    q2: [
+      {
+        src: "/evidence/6KR6842/v3s/2026-q2/employee-name-tag-mosaic.png",
+        alt: "얼굴이 익명화된 해운대 Q2 근무 직원 네임택 미착용 증빙사진",
+        caption: "근무 직원 네임택 미착용",
+      },
+    ],
+  },
+  "6KR6846": {
+    q2: [
+      {
+        src: "/evidence/6KR6846/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
+        alt: "얼굴이 익명화된 목동 Q2 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (하복·춘추복)",
+      },
+      {
+        src: "/evidence/6KR6846/v3s/2026-q2/brand-manager-name-tag-mosaic.png",
+        alt: "얼굴이 익명화된 목동 Q2 브랜드매니저 네임택 미착용 증빙사진",
+        caption: "브랜드매니저 네임택 미착용",
+      },
+    ],
+  },
+  "6KR6847": {
+    q2: [
+      {
+        src: "/evidence/6KR6847/v3s/2026-q2/brand-manager-long-hair-phone-mosaic.png",
+        alt: "얼굴이 익명화된 송파 Q2 브랜드매니저 긴 머리와 핸드폰 사용 증빙사진",
+        caption: "브랜드매니저 긴 머리·핸드폰 사용",
+      },
+      {
+        src: "/evidence/6KR6847/v3s/2026-q2/phone-use-mosaic.png",
+        alt: "얼굴이 익명화된 송파 Q2 핸드폰 사용 증빙사진",
+        caption: "핸드폰 사용",
+      },
+    ],
+  },
+  "6KR6852": {
+    q2: [
+      {
+        src: "/evidence/6KR6852/v3s/2026-q2/valet-name-tag-mosaic.png",
+        alt: "얼굴이 익명화된 서초 Q2 발레파커 네임택 미착용 증빙사진",
+        caption: "발레파커 네임택 미착용",
+      },
+    ],
+  },
+  "6KR6863": {
+    q2: [
+      {
+        src: "/evidence/6KR6863/v3s/2026-q2/waiting-posture-1-mosaic.png",
+        alt: "얼굴이 익명화된 김해 Q2 대기 영업 직원 부적절한 대기 자세 첫 번째 증빙사진",
+        caption: "대기 영업 직원 부적절한 대기 자세 (팔짱) 1",
+      },
+      {
+        src: "/evidence/6KR6863/v3s/2026-q2/waiting-posture-2.jpg",
+        alt: "김해 Q2 대기 영업 직원 부적절한 대기 자세 두 번째 증빙사진",
+        caption: "대기 영업 직원 부적절한 대기 자세 (팔짱) 2",
+      },
+      {
+        src: "/evidence/6KR6863/v3s/2026-q2/info-desk-personal-cup.jpg",
+        alt: "김해 Q2 인포데스크 내 개인 컵 방치 증빙사진",
+        caption: "인포데스크 내 개인 컵 방치",
+      },
+      {
+        src: "/evidence/6KR6863/v3s/2026-q2/podium-personal-tumbler.jpg",
+        alt: "김해 Q2 포디움 내 개인 텀블러 방치 증빙사진",
+        caption: "포디움 내 개인 텀블러 방치",
+      },
+    ],
+  },
+  "6KR6870": {
+    q2: [
+      {
+        src: "/evidence/6KR6870/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
+        alt: "얼굴이 익명화된 서수원 Q2 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (하복·춘추복)",
+      },
+      {
+        src: "/evidence/6KR6870/v3s/2026-q2/specialist-bottoms-mosaic.png",
+        alt: "얼굴이 익명화된 서수원 Q2 스페셜리스트 하의 착용 증빙사진",
+        caption: "스페셜리스트 착용 하의",
+      },
+    ],
+  },
+  "6KR6874": {
+    q2: [
+      {
+        src: "/evidence/6KR6874/v3s/2026-q2/brand-manager-volvo-badge-mosaic.png",
+        alt: "얼굴이 익명화된 울산 Q2 브랜드매니저 볼보 배지 미착용 증빙사진",
+        caption: "브랜드매니저 볼보 배지 미착용",
+      },
+    ],
+  },
 };
 
 export const getV3sEvidence = (

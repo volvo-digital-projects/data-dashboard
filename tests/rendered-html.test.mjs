@@ -2955,7 +2955,7 @@ test("keeps the V3S cumulative average on one line and gives the bars the recove
   );
 });
 
-test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam Daechi Q2 photos", async () => {
+test("provides accessible, privacy-safe V3S Q2 evidence galleries for every mapped showroom", async () => {
   const [dashboardSource, gallerySource, galleryCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/V3SEvidenceGallery.tsx", import.meta.url), "utf8"),
@@ -2973,15 +2973,47 @@ test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam 
   assert.match(dashboardSource, /onEvidenceOpen\?\.\(resourceQuarter\)/);
   assert.doesNotMatch(dashboardSource, /교차검증 후, 사후보정 가능/);
   assert.match(dashboardSource, /<V3SEvidenceGallery/);
-  assert.match(gallerySource, /"6KR6834"[\s\S]*?q2:/);
-  assert.match(
-    gallerySource,
-    /\/evidence\/6KR6834\/v3s\/2026-q2\/valet-name-tag-mosaic\.png/,
-  );
-  assert.match(
-    gallerySource,
-    /\/evidence\/6KR6834\/v3s\/2026-q2\/brand-manager-badge-mosaic\.png/,
-  );
+  const showroomIds = [
+    "6KR6834",
+    "6KR6841",
+    "6KR6842",
+    "6KR6846",
+    "6KR6847",
+    "6KR6852",
+    "6KR6863",
+    "6KR6870",
+    "6KR6874",
+  ];
+  showroomIds.forEach((cdsid) => {
+    assert.match(gallerySource, new RegExp(`"${cdsid}"[\\s\\S]*?q2:`));
+  });
+  const evidenceAssets = [
+    "6KR6834/v3s/2026-q2/valet-name-tag-mosaic.png",
+    "6KR6834/v3s/2026-q2/brand-manager-badge-mosaic.png",
+    "6KR6841/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
+    "6KR6841/v3s/2026-q2/laptop-left-unattended-mosaic.png",
+    "6KR6841/v3s/2026-q2/valet-black-round-shirt-mosaic.png",
+    "6KR6841/v3s/2026-q2/unnecessary-items-left.jpg",
+    "6KR6841/v3s/2026-q2/consultation-shoes-mosaic.png",
+    "6KR6841/v3s/2026-q2/uniform-guide-noncompliance-mosaic.png",
+    "6KR6842/v3s/2026-q2/employee-name-tag-mosaic.png",
+    "6KR6846/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
+    "6KR6846/v3s/2026-q2/brand-manager-name-tag-mosaic.png",
+    "6KR6847/v3s/2026-q2/brand-manager-long-hair-phone-mosaic.png",
+    "6KR6847/v3s/2026-q2/phone-use-mosaic.png",
+    "6KR6852/v3s/2026-q2/valet-name-tag-mosaic.png",
+    "6KR6863/v3s/2026-q2/waiting-posture-1-mosaic.png",
+    "6KR6863/v3s/2026-q2/waiting-posture-2.jpg",
+    "6KR6863/v3s/2026-q2/info-desk-personal-cup.jpg",
+    "6KR6863/v3s/2026-q2/podium-personal-tumbler.jpg",
+    "6KR6870/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
+    "6KR6870/v3s/2026-q2/specialist-bottoms-mosaic.png",
+    "6KR6874/v3s/2026-q2/brand-manager-volvo-badge-mosaic.png",
+  ];
+  assert.equal(evidenceAssets.length, 21);
+  evidenceAssets.forEach((asset) => {
+    assert.match(gallerySource, new RegExp(asset.replaceAll(".", "\\.")));
+  });
   assert.match(gallerySource, /aria-modal="true"/);
   assert.match(
     gallerySource,
@@ -2998,18 +3030,9 @@ test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam 
   assert.match(galleryCss, /grid-template-columns: repeat\(auto-fit,/);
   assert.match(galleryCss, /object-fit: contain/);
 
-  await Promise.all([
-    access(
-      new URL(
-        "../public/evidence/6KR6834/v3s/2026-q2/valet-name-tag-mosaic.png",
-        import.meta.url,
-      ),
+  await Promise.all(
+    evidenceAssets.map((asset) =>
+      access(new URL(`../public/evidence/${asset}`, import.meta.url)),
     ),
-    access(
-      new URL(
-        "../public/evidence/6KR6834/v3s/2026-q2/brand-manager-badge-mosaic.png",
-        import.meta.url,
-      ),
-    ),
-  ]);
+  );
 });
