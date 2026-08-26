@@ -2396,13 +2396,23 @@ export default function Dashboard({
       return;
     }
 
-    const duration = 720;
+    const launchDistance =
+      Math.sign(distance) * Math.min(Math.abs(distance) * 0.12, 96);
+    const animationStartTop = startTop + launchDistance;
+    const remainingDistance = targetTop - animationStartTop;
+    window.scrollTo({
+      top: animationStartTop,
+      left: window.scrollX,
+      behavior: "auto",
+    });
+
+    const duration = 360;
     const startedAt = performance.now();
     const animateScroll = (now: number) => {
       const progress = Math.min(1, (now - startedAt) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - Math.pow(1 - progress, 4);
       window.scrollTo({
-        top: startTop + distance * eased,
+        top: animationStartTop + remainingDistance * eased,
         left: window.scrollX,
         behavior: "auto",
       });
