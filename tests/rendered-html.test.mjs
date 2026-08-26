@@ -185,7 +185,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(clamp\(24px, 2vw, 32px\)\);/,
+    /\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(clamp\(42px, 3vw, 52px\)\);/,
   );
   assert.match(
     css,
@@ -193,7 +193,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(18px\);/,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(28px\);/,
   );
 
   const explicitLoginResponse = await render("/login");
@@ -286,7 +286,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 60);
+  assert.equal(release.items.length, 61);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
