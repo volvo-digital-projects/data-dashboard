@@ -296,7 +296,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 71);
+  assert.equal(release.items.length, 72);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

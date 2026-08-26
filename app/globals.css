@@ -5592,6 +5592,7 @@ body:has(.login-home) {
 }
 
 .login-session-meta {
+  width: min(100%, 340px);
   min-height: 22px;
   display: flex;
   align-items: center;
@@ -5824,6 +5825,7 @@ body:has(.login-home) {
   }
 
   .login-session-meta {
+    width: 100%;
     flex-wrap: wrap;
     white-space: normal;
   }
