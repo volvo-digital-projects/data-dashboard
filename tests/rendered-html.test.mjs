@@ -193,6 +193,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(html, /class="login-intro"/);
   assert.match(css, /\.login-intro\s*\{[^}]*transform: translateY\(-12px\);/);
+  assert.match(css, /\.login-copy\s*\{[^}]*margin-top: 0;/);
   assert.match(css, /\.login-description\s*\{[^}]*margin: 0 0 38px;/);
   assert.match(css, /\.login-copy h1\s*\{[^}]*line-height: 1\.06;/);
   assert.match(
@@ -290,7 +291,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 68);
+  assert.equal(release.items.length, 69);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

@@ -5351,7 +5351,7 @@ body:has(.login-home) {
 
 .login-copy {
   width: min(100%, 360px);
-  margin-top: clamp(36px, 7vh, 70px);
+  margin-top: 0;
 }
 
 .login-copy,
