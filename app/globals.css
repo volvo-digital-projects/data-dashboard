@@ -5360,13 +5360,13 @@ body:has(.login-home) {
 }
 
 .login-audience {
-  margin: 0 0 9px;
+  margin: 0 0 7px;
   color: rgba(255, 255, 255, 0.94);
-  font-family: var(--font-ui), var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-korean), var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1;
+  font-weight: 750;
+  letter-spacing: 1.65px;
+  line-height: normal;
   text-transform: uppercase;
 }
 
