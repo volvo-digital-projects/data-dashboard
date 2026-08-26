@@ -245,7 +245,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 38);
+  assert.equal(release.items.length, 39);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -413,6 +413,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /Q1, Q2 마감, 현재 Q3평가 진행중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
   );
+  assert.match(visibleHtml, /class="dashboard-logout-icon" aria-hidden="true"/);
   const dashboardCss = await readFile(
     new URL("../app/globals.css", import.meta.url),
     "utf8",
@@ -424,6 +425,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(
     dashboardCss,
     /\.dashboard-logout-form\s*\{[\s\S]*?margin: 0 0 0 auto/,
+  );
+  assert.doesNotMatch(dashboardCss, /\.dashboard-logout-button::after/);
+  assert.match(
+    dashboardCss,
+    /\.dashboard-logout-icon::before\s*\{[^}]*border: 1px solid currentColor[^}]*border-right: 0/,
+  );
+  assert.match(
+    dashboardCss,
+    /\.dashboard-logout-icon i\s*\{[^}]*border-top: 1px solid currentColor[^}]*border-right: 1px solid currentColor[^}]*rotate\(45deg\)/,
   );
   assert.match(
     dashboardCss,

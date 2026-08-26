@@ -561,12 +561,48 @@ input:focus-visible {
   cursor: pointer;
 }
 
-.dashboard-logout-button::after {
-  content: "↪";
-  font-family: Arial, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
+.dashboard-logout-icon {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+}
+
+.dashboard-logout-icon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 5px;
+  height: 8px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-right: 0;
+  border-radius: 1px 0 0 1px;
+  opacity: 0.9;
+}
+
+.dashboard-logout-icon::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  width: 6px;
+  height: 1px;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+.dashboard-logout-icon i {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  box-sizing: border-box;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .dashboard-logout-button:hover,

@@ -38,6 +38,9 @@ export default function DashboardHeaderLead({
             <form className="dashboard-logout-form" action="/api/logout" method="post">
               <button className="dashboard-logout-button" type="submit">
                 로그아웃
+                <span className="dashboard-logout-icon" aria-hidden="true">
+                  <i />
+                </span>
               </button>
             </form>
           </div>
