@@ -253,7 +253,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 41);
+  assert.equal(release.items.length, 42);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1484,6 +1484,18 @@ test("restores the profile showroom switcher for all viewers", async () => {
   assert.match(
     dashboardSource,
     /className="identity-profile-menu"[\s\S]*?className="identity-profile"[\s\S]*?className="profile-popover"/,
+  );
+  assert.match(
+    dashboardSource,
+    /const profileMenuRef = useRef<HTMLDivElement>\(null\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /if \(!profileOpen\) return;[\s\S]*?profileMenuRef\.current\?\.contains\(target\)[\s\S]*?setProfileOpen\(false\)[\s\S]*?document\.addEventListener\("pointerdown", closeProfileOnOutsidePointer\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="identity-profile-menu" ref=\{profileMenuRef\}/,
   );
   assert.doesNotMatch(dashboardSource, /<select[\s\S]*?다른 전시장 선택/);
   assert.match(dashboardSource, /<strong>다른 전시장 선택<\/strong>/);

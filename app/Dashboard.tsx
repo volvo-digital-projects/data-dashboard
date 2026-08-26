@@ -2133,6 +2133,7 @@ export default function Dashboard({
   const dashboardRootRef = useRef<HTMLElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
@@ -2157,6 +2158,27 @@ export default function Dashboard({
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!profileOpen) return;
+
+    const closeProfileOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target;
+      if (target instanceof Node && !profileMenuRef.current?.contains(target)) {
+        setProfileOpen(false);
+      }
+    };
+    const closeProfileOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setProfileOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeProfileOnOutsidePointer);
+    document.addEventListener("keydown", closeProfileOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeProfileOnOutsidePointer);
+      document.removeEventListener("keydown", closeProfileOnEscape);
+    };
+  }, [profileOpen]);
 
   useEffect(() => {
     let mounted = true;
@@ -2427,7 +2449,7 @@ export default function Dashboard({
               <dd>{selected.size}</dd>
             </div>
           </dl>
-          <div className="identity-profile-menu">
+          <div className="identity-profile-menu" ref={profileMenuRef}>
             <button
               className="identity-profile"
               type="button"
