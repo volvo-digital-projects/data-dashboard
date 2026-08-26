@@ -290,7 +290,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 66);
+  assert.equal(release.items.length, 67);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -339,7 +339,7 @@ test("scopes dashboard routes to master, dealer-head, and manager access", async
   assert.equal(hDealerHeadCrossDealer.status, 307);
   assert.equal(
     hDealerHeadCrossDealer.headers.get("location"),
-    "http://localhost/dashboard/6KR6802",
+    "http://localhost/dashboard/6KR6834",
   );
 
   const masterCrossDealer = await render("/dashboard/6KR6828", {
@@ -408,6 +408,24 @@ test("ships the blue-row manager allowlist and administrator accounts", async ()
     ],
   );
   assert.deepEqual(
+    Object.fromEntries(
+      loginAccess.dealerHeadAccounts.map(({ cdsid, dealer }) => [
+        dealer,
+        loginAccess.accounts.find((account) => account.cdsid === cdsid)
+          ?.dashboardCdsid,
+      ]),
+    ),
+    {
+      아주: "6KR6845",
+      천하: "6KR6841",
+      에이치: "6KR6834",
+      아이언: "6KR6842",
+      아이비: "6KR6828",
+      코오롱: "6KR6847",
+      태영: "6KR6865",
+    },
+  );
+  assert.deepEqual(
     loginAccess.accounts.find((account) => account.cdsid === "K-KIM16"),
     { cdsid: "K-KIM16", dashboardCdsid: "6KR6834" },
   );
@@ -461,6 +479,22 @@ test("accepts manager and administrator logins while rejecting other CDSIDs", as
     assert.doesNotMatch(setCookie, /Max-Age=/i);
     assert.deepEqual(await response.json(), {
       redirectPath: "/dashboard/6KR6834",
+    });
+  }
+
+  for (const [cdsid, dashboardCdsid] of Object.entries({
+    "H-CHOI4": "6KR6847",
+    "Y-HAN30": "6KR6845",
+    "H-SHIN": "6KR6842",
+    "Y-SON": "6KR6828",
+    "S-KIM122": "6KR6865",
+    "J-JANG2": "6KR6841",
+    "J-YE9": "6KR6834",
+  })) {
+    const response = await login(cdsid);
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), {
+      redirectPath: `/dashboard/${dashboardCdsid}`,
     });
   }
 
