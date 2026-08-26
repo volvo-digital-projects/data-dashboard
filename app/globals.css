@@ -5376,7 +5376,7 @@ body:has(.login-home) {
   font-size: clamp(52px, 4.35vw, 74px);
   font-weight: 300;
   letter-spacing: -0.045em;
-  line-height: 1.13;
+  line-height: 1.06;
 }
 
 .login-rule {
@@ -5778,7 +5778,7 @@ body:has(.login-home) {
 
   .login-copy h1 {
     font-size: clamp(42px, 13vw, 58px);
-    line-height: 1.04;
+    line-height: 0.98;
   }
 
   .login-rule {
