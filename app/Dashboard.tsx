@@ -258,10 +258,10 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
 };
 
 const vocComponents = [
-  { code: "01", label: "VOC종합만족도", weight: "60%" },
-  { code: "02", label: "VOC첫인상", weight: "20%" },
-  { code: "03", label: "VOC태블릿", weight: "10%" },
-  { code: "04", label: "VOC해피콜", weight: "10%" },
+  { label: "VOC종합만족도", weight: "60점" },
+  { label: "VOC첫인상", weight: "20점" },
+  { label: "VOC태블릿", weight: "10점" },
+  { label: "VOC해피콜", weight: "10점" },
 ];
 
 const cxComponents = [
@@ -2954,8 +2954,7 @@ export default function Dashboard({
                   aria-label="VOC 평가 구성 항목"
                 >
                   {vocComponents.map((component) => (
-                    <span className="voc-component-chip" key={component.code}>
-                      <b>{component.code}</b>
+                    <span className="voc-component-chip" key={component.label}>
                       <span>{component.label}</span>
                       <em>({component.weight})</em>
                     </span>

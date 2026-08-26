@@ -646,6 +646,22 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /Q2 원본 데이터 반영/);
   assert.match(html, /V3S/);
   assert.match(html, /VOC/);
+  assert.match(
+    visibleHtml,
+    /class="voc-component-chip"><span>VOC종합만족도<\/span><em>\(60점\)<\/em>/,
+  );
+  assert.match(
+    visibleHtml,
+    /class="voc-component-chip"><span>VOC첫인상<\/span><em>\(20점\)<\/em>/,
+  );
+  assert.equal(
+    (visibleHtml.match(/class="voc-component-chip"><span>VOC(?:태블릿|해피콜)<\/span><em>\(10점\)<\/em>/g) ?? []).length,
+    2,
+  );
+  assert.doesNotMatch(
+    visibleHtml,
+    /class="voc-component-chip"><b>0[1-4]<\/b>|VOC(?:종합만족도|첫인상|태블릿|해피콜)<\/span><em>\(\d+%\)<\/em>/,
+  );
   assert.doesNotMatch(visibleHtml, /class="signal-icon/);
   assert.doesNotMatch(visibleHtml, /<span class="signal-pill[^>]*>\s*[▲▼]/);
   assert.match(visibleHtml, /class="signal-pill warning"[^>]*>위험해요<\/span>/);
