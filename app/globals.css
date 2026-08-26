@@ -5378,7 +5378,7 @@ body:has(.login-home) {
   margin: 0;
   font-family: var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(52px, 4.35vw, 74px);
-  font-weight: 300;
+  font-weight: 600;
   letter-spacing: -0.045em;
   line-height: 1.06;
 }
