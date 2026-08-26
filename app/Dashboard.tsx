@@ -2379,15 +2379,11 @@ export default function Dashboard({
       return;
     }
 
-    const duration = 1200;
+    const duration = 720;
     const startedAt = performance.now();
     const animateScroll = (now: number) => {
       const progress = Math.min(1, (now - startedAt) / duration);
-      const eased =
-        progress *
-        progress *
-        progress *
-        (progress * (progress * 6 - 15) + 10);
+      const eased = 1 - Math.pow(1 - progress, 3);
       window.scrollTo({
         top: startTop + distance * eased,
         left: window.scrollX,
