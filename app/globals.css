@@ -1072,6 +1072,11 @@ input:focus-visible {
   color: var(--status-caution);
 }
 
+.signal-pill.great {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
 .metric-card-value {
   margin-top: 5px;
   font-family: var(--font-ui);
@@ -1142,6 +1147,10 @@ input:focus-visible {
 
 .metric-card.caution .metric-track span {
   background: linear-gradient(90deg, #a66f13 0%, var(--status-caution) 68%, #dda848 100%);
+}
+
+.metric-card.great .metric-track span {
+  background: linear-gradient(90deg, #285f7d 0%, var(--blue) 68%, #6fa8c2 100%);
 }
 
 .metric-track i {

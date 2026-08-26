@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 56);
+  assert.equal(release.items.length, 57);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -291,6 +291,34 @@ test("protects dashboard routes behind the manager CDSID login", async () => {
   });
   assert.equal(staleSessionResponse.status, 307);
   assert.equal(staleSessionResponse.headers.get("location"), "http://localhost/");
+});
+
+test("uses the blue exceptional state only from ten points above average", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(
+    dashboardSource,
+    /if \(delta >= 10\) return \{ label: "대단해요", tone: "great", delta \};/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /if \(delta >= 5\) return \{ label: "대단해요"/,
+  );
+  assert.match(
+    css,
+    /\.signal-pill\.great\s*\{[^}]*background: var\(--blue-soft\);[^}]*color: var\(--blue\);/,
+  );
+  assert.match(
+    css,
+    /\.metric-card\.great \.metric-track span\s*\{[^}]*linear-gradient\(90deg, #285f7d 0%, var\(--blue\) 68%, #6fa8c2 100%\)/,
+  );
 });
 
 test("ships the blue-row manager allowlist and administrator accounts", async () => {
