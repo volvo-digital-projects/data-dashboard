@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 53);
+  assert.equal(release.items.length, 54);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -492,7 +492,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
   assert.match(
     visibleHtml,
-    /V3S 보정기간\(최초발표 후, 영업일 2일내\) 내 교차검증 진행/,
+    /교차검증 후, 사후보정 가능/,
   );
   assert.match(
     visibleHtml,

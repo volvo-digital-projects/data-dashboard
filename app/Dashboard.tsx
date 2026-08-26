@@ -2465,7 +2465,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
-      appealLabel: "V3S 보정기간(최초발표 후, 영업일 2일내) 내 교차검증 진행",
+      appealLabel: "교차검증 후, 사후보정 가능",
     },
     {
       key: "voc" as const,
