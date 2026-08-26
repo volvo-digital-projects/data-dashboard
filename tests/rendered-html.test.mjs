@@ -138,7 +138,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.92\) 0%[\s\S]*?volvo-dashboard-cover-logo-small\.png[^}]*background-size: cover;/,
+    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.86\) 0%[\s\S]*?volvo-dashboard-cover-logo-small\.png[^}]*background-size: cover;/,
   );
   assert.match(
     css,
@@ -2283,7 +2283,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.login-panel\s*\{[\s\S]*?rgba\(5, 17, 25, 0\.92\) 0%[\s\S]*?rgba\(7, 20, 29, 0\.54\) 64%[\s\S]*?rgba\(7, 20, 29, 0\.06\) 93%[\s\S]*?rgba\(7, 20, 29, 0\) 100%/,
+    /\.login-panel\s*\{[\s\S]*?rgba\(5, 17, 25, 0\.86\) 0%[\s\S]*?rgba\(7, 20, 29, 0\.5\) 64%[\s\S]*?rgba\(7, 20, 29, 0\.05\) 93%[\s\S]*?rgba\(7, 20, 29, 0\) 100%/,
   );
   assert.match(
     css,
