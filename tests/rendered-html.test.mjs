@@ -201,13 +201,13 @@ test("server-renders the CDSID login route", async () => {
     /\.login-audience\s*\{[^}]*margin: 0 0 7px;[^}]*font-family: var\(--font-korean\)[^}]*font-size: 9px;[^}]*font-weight: 750;[^}]*letter-spacing: 1\.65px;[^}]*line-height: normal;[^}]*text-transform: uppercase;/,
   );
   assert.match(html, /class="login-intro"/);
-  assert.match(css, /\.login-intro\s*\{[^}]*transform: translateY\(-12px\);/);
+  assert.match(css, /\.login-intro\s*\{[^}]*transform: translateY\(-22px\);/);
   assert.match(css, /\.login-copy\s*\{[^}]*margin-top: 0;/);
-  assert.match(css, /\.login-description\s*\{[^}]*margin: 0 0 38px;/);
-  assert.match(css, /\.login-copy h1\s*\{[^}]*font-weight: 600;[^}]*line-height: 1\.06;/);
+  assert.match(css, /\.login-description\s*\{[^}]*margin: 0 0 52px;/);
+  assert.match(css, /\.login-copy h1\s*\{[^}]*font-weight: 600;[^}]*line-height: 0\.95;/);
   assert.match(
     css,
-    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(38px\);[\s\S]*?\.login-copy h1\s*\{[^}]*line-height: 0\.98;/,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(38px\);[\s\S]*?\.login-copy h1\s*\{[^}]*line-height: 0\.92;/,
   );
 
   const explicitLoginResponse = await render("/login");
