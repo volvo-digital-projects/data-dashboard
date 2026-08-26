@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 82);
+  assert.equal(release.items.length, 83);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1639,7 +1639,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.coverage-line::after\s*\{[^}]*width: 6px[^}]*height: 6px[^}]*left: 50%[^}]*border: 1\.5px solid currentColor[^}]*background: white[^}]*translate\(-50%, -50%\)/,
+    /\.coverage-line::after\s*\{[^}]*width: 6px[^}]*height: 6px[^}]*top: -1\.25px[^}]*left: 50%[^}]*border: 1\.5px solid currentColor[^}]*background: white[^}]*translate\(-50%, -50%\)/,
   );
   assert.match(
     css,

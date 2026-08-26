@@ -1816,7 +1816,7 @@ input:focus-visible {
   width: 6px;
   height: 6px;
   position: absolute;
-  top: 0;
+  top: -1.25px;
   left: 50%;
   box-sizing: border-box;
   border: 1.5px solid currentColor;
