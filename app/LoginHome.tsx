@@ -52,6 +52,13 @@ export default function LoginHome({
     }
   }
 
+  function selectRememberedCdsid() {
+    if (!rememberedCdsid) return;
+    setCdsid(rememberedCdsid);
+    setRecentCdsidOpen(false);
+    if (error) setError("");
+  }
+
   useEffect(() => {
     try {
       const rememberedCdsid = window.localStorage
@@ -209,6 +216,9 @@ export default function LoginHome({
                     rememberedCdsid ? "recent-cdsid-options" : undefined
                   }
                   aria-autocomplete="list"
+                  onPointerDown={() => {
+                    if (!cdsid && rememberedCdsid) setRecentCdsidOpen(true);
+                  }}
                   onFocus={() => {
                     if (!cdsid && rememberedCdsid) setRecentCdsidOpen(true);
                   }}
@@ -242,11 +252,11 @@ export default function LoginHome({
                         setRecentCdsidOpen(false);
                       }
                     }}
-                    onClick={() => {
-                      setCdsid(rememberedCdsid);
-                      setRecentCdsidOpen(false);
-                      if (error) setError("");
+                    onPointerDown={(event) => {
+                      event.preventDefault();
+                      selectRememberedCdsid();
                     }}
+                    onClick={selectRememberedCdsid}
                   >
                     <strong>{rememberedCdsid}</strong>
                     <small>선택</small>

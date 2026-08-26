@@ -213,7 +213,15 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
   assert.match(
     loginSource,
-    /recentCdsidOpen && rememberedCdsid[\s\S]*?최근 로그인 CDSID[\s\S]*?role="option"[\s\S]*?setCdsid\(rememberedCdsid\)/,
+    /function selectRememberedCdsid\(\)[\s\S]*?setCdsid\(rememberedCdsid\)[\s\S]*?setRecentCdsidOpen\(false\)/,
+  );
+  assert.match(
+    loginSource,
+    /recentCdsidOpen && rememberedCdsid[\s\S]*?role="option"[\s\S]*?onPointerDown=\{\(event\) => \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?selectRememberedCdsid\(\);[\s\S]*?onClick=\{selectRememberedCdsid\}/,
+  );
+  assert.match(
+    loginSource,
+    /onPointerDown=\{\(\) => \{[\s\S]*?if \(!cdsid && rememberedCdsid\) setRecentCdsidOpen\(true\);[\s\S]*?onFocus=/,
   );
   assert.match(
     loginSource,
@@ -258,7 +266,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 46);
+  assert.equal(release.items.length, 47);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
