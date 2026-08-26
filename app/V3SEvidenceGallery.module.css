@@ -50,6 +50,13 @@
   letter-spacing: -0.02em;
 }
 
+.latinTitle {
+  font-family: var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
 .count {
   display: inline-flex;
   min-width: 38px;

@@ -87,7 +87,9 @@ export function V3SEvidenceGallery({
           <div className={styles.titleGroup}>
             <div className={styles.titleRow}>
               <h2 id="v3s-evidence-title">
-                {showroomName} V3S {quarterLabel} 증빙사진
+                {showroomName}{" "}
+                <span className={styles.latinTitle}>V3S {quarterLabel}</span>{" "}
+                증빙사진
               </h2>
               <span className={styles.count}>{photos.length}장</span>
             </div>

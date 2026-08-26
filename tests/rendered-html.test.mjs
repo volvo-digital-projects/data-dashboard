@@ -2983,6 +2983,14 @@ test("provides an accessible, privacy-safe V3S evidence gallery for the Gangnam 
     /\/evidence\/6KR6834\/v3s\/2026-q2\/brand-manager-badge-mosaic\.png/,
   );
   assert.match(gallerySource, /aria-modal="true"/);
+  assert.match(
+    gallerySource,
+    /className=\{styles\.latinTitle\}>V3S \{quarterLabel\}<\/span>/,
+  );
+  assert.match(
+    galleryCss,
+    /\.latinTitle\s*\{[^}]*font-family: var\(--font-volvo\)/,
+  );
   assert.match(gallerySource, /aria-label="증빙사진 닫기"/);
   assert.match(gallerySource, /event\.key === "Escape"/);
   assert.doesNotMatch(gallerySource, /얼굴 익명화 완료/);
