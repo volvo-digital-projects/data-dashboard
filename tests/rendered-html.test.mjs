@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 54);
+  assert.equal(release.items.length, 55);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -623,7 +623,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.doesNotMatch(html, /<h3>분기 평가<\/h3>/);
   assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);
-  assert.match(visibleHtml, /5개년 추이/);
+  assert.match(
+    visibleHtml,
+    /<span class="english-title">5<\/span>개년 추이/,
+  );
   assert.doesNotMatch(html, /class="v3s-history-delta/);
   assert.doesNotMatch(visibleHtml, /5년간 [+-]?\d/);
   assert.doesNotMatch(visibleHtml, /5개년 실력 추세/);
@@ -656,7 +659,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="weekly-score-layout"/g) ?? []).length, 2);
   assert.match(
     html,
-    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?>4개년 추이<\/strong>/,
+    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?<strong><span class="english-title">4<\/span>개년 추이<\/strong>/,
   );
   assert.match(
     html,
@@ -2683,16 +2686,20 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
 
   assert.equal(
     (dashboardSource.match(/className="english-title"/g) ?? []).length,
-    4,
+    6,
   );
   assert.match(
     dashboardSource,
-    /<h3>\s*5개년 추이\s*<\/h3>/,
+    /<h3>\s*<span className="english-title">5<\/span>개년 추이\s*<\/h3>/,
+  );
+  assert.match(
+    dashboardSource,
+    /<strong><span className="english-title">4<\/span>개년 추이<\/strong>/,
   );
   assert.doesNotMatch(dashboardSource, /<span className="english-title">V3S<\/span> 5개년 추이/);
   assert.match(
     css,
-    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.v3s-subhead \.english-title,[\s\S]*?\.score-tier-heading \.english-title,[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
+    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.v3s-subhead \.english-title,[\s\S]*?\.voc-consultation-heading \.english-title,[\s\S]*?\.score-tier-heading \.english-title,[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
   );
   const englishRule = css.match(
     /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,

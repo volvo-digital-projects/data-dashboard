@@ -10082,6 +10082,7 @@ body {
 
 /* Shared Volvo English title typography */
 .v3s-subhead .english-title,
+.voc-consultation-heading .english-title,
 .score-tier-heading .english-title,
 .one-voice-title-row > .english-title {
   font-family: var(--font-latin);
