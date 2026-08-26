@@ -812,8 +812,12 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="score-tier /g) ?? []).length, 3);
   assert.equal((html.match(/class="cx-component-chip"/g) ?? []).length, 5);
   assert.match(
-    html,
-    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<b>01<\/b><span>신차출고 만족도<\/span>[\s\S]*?<b>02<\/b><span>시승 만족도<\/span>[\s\S]*?<b>03<\/b><span>긴급경보 처리여부<\/span>[\s\S]*?<b>04<\/b><span>조치 계획<\/span>[\s\S]*?<b>05<\/b><span>헤이볼보 앱 가입율<\/span>/,
+    visibleHtml,
+    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(100점\)<\/em>/,
+  );
+  assert.doesNotMatch(
+    visibleHtml,
+    /class="cx-component-chip"><b>0[1-5]<\/b>/,
   );
   assert.doesNotMatch(html, /<h3>분기 평가<\/h3>/);
   assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);

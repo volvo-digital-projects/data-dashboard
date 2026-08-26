@@ -265,11 +265,11 @@ const vocComponents = [
 ];
 
 const cxComponents = [
-  { code: "01", label: "신차출고 만족도" },
-  { code: "02", label: "시승 만족도" },
-  { code: "03", label: "긴급경보 처리여부" },
-  { code: "04", label: "조치 계획" },
-  { code: "05", label: "헤이볼보 앱 가입율" },
+  { label: "신차출고 만족도", score: "100점" },
+  { label: "시승 만족도", score: "100점" },
+  { label: "긴급경보 처리여부", score: "10점" },
+  { label: "조치 계획", score: "10점" },
+  { label: "헤이볼보 앱 가입율", score: "100점" },
 ];
 
 const quarterValueOf = (
@@ -2989,9 +2989,9 @@ export default function Dashboard({
                   aria-label="CX Index 평가 구성 항목"
                 >
                   {cxComponents.map((component) => (
-                    <span className="cx-component-chip" key={component.code}>
-                      <b>{component.code}</b>
+                    <span className="cx-component-chip" key={component.label}>
                       <span>{component.label}</span>
+                      <em>({component.score})</em>
                     </span>
                   ))}
                 </div>

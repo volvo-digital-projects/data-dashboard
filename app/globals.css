@@ -8023,7 +8023,8 @@ button.quarter-score-row:disabled {
   text-overflow: ellipsis;
 }
 
-.score-tier-heading .voc-component-chip em {
+.score-tier-heading .voc-component-chip em,
+.score-tier-heading .cx-component-chip em {
   color: var(--blue);
   font-family: var(--font-latin);
   font-size: 8px;
