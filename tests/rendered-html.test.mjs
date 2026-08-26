@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 81);
+  assert.equal(release.items.length, 82);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -611,7 +611,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(
     visibleHtml,
-    new RegExp(`업데이트[\\s\\S]*?${seoulToday.replaceAll(".", "\\.")}`),
+    new RegExp(`${seoulToday.replaceAll(".", "\\.")}[\\s\\S]*?기준`),
   );
   assert.match(visibleHtml, /Q1 \/ Q2 마감/);
   assert.match(visibleHtml, /Q3 평가·집계중/);
@@ -626,7 +626,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
-    /\.header-status-row\s*\{[^}]*width: 100%[^}]*display: flex[^}]*gap: 5px/,
+    /\.header-status-row\s*\{[^}]*--header-status-item-width: 100px[^}]*width: max-content[^}]*display: grid[^}]*grid-template-columns: repeat\(4, var\(--header-status-item-width\)\)[^}]*gap: 5px/,
   );
   assert.match(
     dashboardCss,
@@ -2297,7 +2297,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     sharedHeaderSource,
-    /업데이트 <time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>\{accessDate\}<\/time>/,
+    /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>\{accessDate\}<\/time> 기준/,
   );
   assert.doesNotMatch(
     dashboardSource,

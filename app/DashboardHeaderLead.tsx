@@ -17,7 +17,7 @@ export default function DashboardHeaderLead({
         <h1>{title}</h1>
         <div
           className="header-status-row"
-          aria-label={`업데이트 ${accessDate} 기준, ${status}, 로그아웃`}
+          aria-label={`${accessDate} 기준, ${status}, 로그아웃`}
         >
           <div className="header-status-item header-status-item--update">
             <span
@@ -25,7 +25,7 @@ export default function DashboardHeaderLead({
               aria-hidden="true"
             />
             <span>
-              업데이트 <time dateTime={accessDate.replaceAll(".", "-")}>{accessDate}</time>
+              <time dateTime={accessDate.replaceAll(".", "-")}>{accessDate}</time> 기준
             </span>
           </div>
           <div className="header-status-item header-status-item--closed">
