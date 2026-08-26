@@ -5222,14 +5222,14 @@ html:has(.login-home) {
   background-image:
     linear-gradient(
       90deg,
-      rgba(5, 17, 25, 0.84) 0%,
-      rgba(6, 19, 28, 0.79) 22%,
-      rgba(7, 20, 29, 0.72) 38%,
-      rgba(7, 20, 29, 0.58) 52%,
-      rgba(7, 20, 29, 0.43) 64%,
-      rgba(7, 20, 29, 0.27) 75%,
-      rgba(7, 20, 29, 0.13) 85%,
-      rgba(7, 20, 29, 0.04) 93%,
+      rgba(5, 17, 25, 0.92) 0%,
+      rgba(6, 19, 28, 0.89) 22%,
+      rgba(7, 20, 29, 0.82) 38%,
+      rgba(7, 20, 29, 0.69) 52%,
+      rgba(7, 20, 29, 0.54) 64%,
+      rgba(7, 20, 29, 0.36) 75%,
+      rgba(7, 20, 29, 0.19) 85%,
+      rgba(7, 20, 29, 0.06) 93%,
       rgba(7, 20, 29, 0) 100%
     ),
     url("/volvo-dashboard-cover-logo-small.png");
@@ -5276,14 +5276,14 @@ body:has(.login-home) {
   pointer-events: none;
   background: linear-gradient(
     90deg,
-    rgba(5, 17, 25, 0.84) 0%,
-    rgba(6, 19, 28, 0.79) 22%,
-    rgba(7, 20, 29, 0.72) 38%,
-    rgba(7, 20, 29, 0.58) 52%,
-    rgba(7, 20, 29, 0.43) 64%,
-    rgba(7, 20, 29, 0.27) 75%,
-    rgba(7, 20, 29, 0.13) 85%,
-    rgba(7, 20, 29, 0.04) 93%,
+    rgba(5, 17, 25, 0.92) 0%,
+    rgba(6, 19, 28, 0.89) 22%,
+    rgba(7, 20, 29, 0.82) 38%,
+    rgba(7, 20, 29, 0.69) 52%,
+    rgba(7, 20, 29, 0.54) 64%,
+    rgba(7, 20, 29, 0.36) 75%,
+    rgba(7, 20, 29, 0.19) 85%,
+    rgba(7, 20, 29, 0.06) 93%,
     rgba(7, 20, 29, 0) 100%
   );
 }
@@ -5335,7 +5335,18 @@ body:has(.login-home) {
     max(clamp(44px, 5.2vw, 88px), env(safe-area-inset-right, 0px))
     max(clamp(52px, 5vw, 84px), env(safe-area-inset-bottom, 0px))
     max(clamp(44px, 5.2vw, 88px), env(safe-area-inset-left, 0px));
-  background: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 17, 25, 0.92) 0%,
+    rgba(6, 19, 28, 0.89) 22%,
+    rgba(7, 20, 29, 0.82) 38%,
+    rgba(7, 20, 29, 0.69) 52%,
+    rgba(7, 20, 29, 0.54) 64%,
+    rgba(7, 20, 29, 0.36) 75%,
+    rgba(7, 20, 29, 0.19) 85%,
+    rgba(7, 20, 29, 0.06) 93%,
+    rgba(7, 20, 29, 0) 100%
+  );
 }
 
 .login-copy {
