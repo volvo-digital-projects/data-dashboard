@@ -276,7 +276,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 48);
+  assert.equal(release.items.length, 49);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1233,11 +1233,15 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const scrollCxQuarterToVoc = \(\) => \{[\s\S]*?document\.getElementById\("score-voc"\)[\s\S]*?const duration = 1200;[\s\S]*?window\.scrollTo\(\{/,
+    /const scrollMetricQuarterToSection = \(metric: "v3s" \| "voc"\) => \{[\s\S]*?document\.getElementById\(`score-\$\{metric\}`\)[\s\S]*?const duration = 1200;[\s\S]*?window\.scrollTo\(\{/,
   );
   assert.match(
     dashboardSource,
-    /metric === "cx" && quarter !== "q3"[\s\S]*?scrollCxQuarterToVoc\(\);/,
+    /metric === "v3s"[\s\S]*?scrollMetricQuarterToSection\("v3s"\);/,
+  );
+  assert.match(
+    dashboardSource,
+    /metric === "cx" && quarter !== "q3"[\s\S]*?scrollMetricQuarterToSection\("voc"\);/,
   );
   assert.match(
     dashboardSource,
@@ -1246,10 +1250,6 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(
     dashboardSource,
     /highlightQuarter === "q4"[\s\S]*?\? 39[\s\S]*?: 26/,
-  );
-  assert.doesNotMatch(
-    dashboardSource,
-    /document\.getElementById\(`score-\$\{metric\}`\)/,
   );
   assert.doesNotMatch(
     dashboardSource,

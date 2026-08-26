@@ -2151,7 +2151,7 @@ export default function Dashboard({
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
-  const cxQuarterScrollFrameRef = useRef<number | null>(null);
+  const quarterScrollFrameRef = useRef<number | null>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
     carHandoverScore: 94.0,
@@ -2199,8 +2199,8 @@ export default function Dashboard({
 
   useEffect(
     () => () => {
-      if (cxQuarterScrollFrameRef.current !== null) {
-        window.cancelAnimationFrame(cxQuarterScrollFrameRef.current);
+      if (quarterScrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(quarterScrollFrameRef.current);
       }
     },
     [],
@@ -2338,12 +2338,12 @@ export default function Dashboard({
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
-  const scrollCxQuarterToVoc = () => {
-    const target = document.getElementById("score-voc");
+  const scrollMetricQuarterToSection = (metric: "v3s" | "voc") => {
+    const target = document.getElementById(`score-${metric}`);
     if (!target) return;
 
-    if (cxQuarterScrollFrameRef.current !== null) {
-      window.cancelAnimationFrame(cxQuarterScrollFrameRef.current);
+    if (quarterScrollFrameRef.current !== null) {
+      window.cancelAnimationFrame(quarterScrollFrameRef.current);
     }
 
     const mobile = window.matchMedia("(max-width: 760px)").matches;
@@ -2375,7 +2375,7 @@ export default function Dashboard({
         left: window.scrollX,
         behavior: "auto",
       });
-      cxQuarterScrollFrameRef.current = null;
+      quarterScrollFrameRef.current = null;
       return;
     }
 
@@ -2395,14 +2395,14 @@ export default function Dashboard({
       });
 
       if (progress < 1) {
-        cxQuarterScrollFrameRef.current =
+        quarterScrollFrameRef.current =
           window.requestAnimationFrame(animateScroll);
       } else {
-        cxQuarterScrollFrameRef.current = null;
+        quarterScrollFrameRef.current = null;
       }
     };
 
-    cxQuarterScrollFrameRef.current =
+    quarterScrollFrameRef.current =
       window.requestAnimationFrame(animateScroll);
   };
   const selectMetricQuarter = (
@@ -2418,8 +2418,11 @@ export default function Dashboard({
     ) {
       setEvidenceQuarter(quarter);
     }
+    if (metric === "v3s") {
+      scrollMetricQuarterToSection("v3s");
+    }
     if (metric === "cx" && quarter !== "q3") {
-      scrollCxQuarterToVoc();
+      scrollMetricQuarterToSection("voc");
     }
   };
   const identityInsights = buildShowroomInsights(selected, dashboard.averages);
