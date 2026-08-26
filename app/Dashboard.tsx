@@ -819,7 +819,7 @@ function V3SPerformance({
         <header className="v3s-subhead">
           <div>
             <h3>
-              <span className="english-title">V3S</span> 5개년 추이
+              5개년 추이
             </h3>
           </div>
         </header>
@@ -1045,7 +1045,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
     >
       <header className="voc-consultation-heading">
         <div>
-          <strong>상담 만족도 4개년 추이</strong>
+          <strong>4개년 추이</strong>
           <span className="voc-consultation-response-summary">
             회신율 <b>{cumulativeResponseRate?.toFixed(1) ?? "—"}%</b>
             <em>

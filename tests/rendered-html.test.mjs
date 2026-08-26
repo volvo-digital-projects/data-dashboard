@@ -253,7 +253,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 43);
+  assert.equal(release.items.length, 44);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -633,7 +633,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="weekly-score-layout"/g) ?? []).length, 2);
   assert.match(
     html,
-    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?상담 만족도 4개년 추이/,
+    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?>4개년 추이<\/strong>/,
   );
   assert.match(
     html,
@@ -2614,12 +2614,13 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
 
   assert.equal(
     (dashboardSource.match(/className="english-title"/g) ?? []).length,
-    5,
+    4,
   );
   assert.match(
     dashboardSource,
-    /<span className="english-title">V3S<\/span> 5개년 추이/,
+    /<h3>\s*5개년 추이\s*<\/h3>/,
   );
+  assert.doesNotMatch(dashboardSource, /<span className="english-title">V3S<\/span> 5개년 추이/);
   assert.match(
     css,
     /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.v3s-subhead \.english-title,[\s\S]*?\.score-tier-heading \.english-title,[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
