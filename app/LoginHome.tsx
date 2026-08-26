@@ -35,6 +35,7 @@ export default function LoginHome({
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginStats, setLoginStats] = useState(initialStats);
+  const cdsidInputRef = useRef<HTMLInputElement>(null);
   const recentCdsidOptionRef = useRef<HTMLButtonElement>(null);
 
   function handleCdsidKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -56,6 +57,7 @@ export default function LoginHome({
     if (!rememberedCdsid) return;
     setCdsid(rememberedCdsid);
     setRecentCdsidOpen(false);
+    cdsidInputRef.current?.blur();
     if (error) setError("");
   }
 
@@ -200,6 +202,7 @@ export default function LoginHome({
                 </span>
                 <span className="sr-only">CDSID</span>
                 <input
+                  ref={cdsidInputRef}
                   name="cdsid"
                   type="text"
                   inputMode="text"
@@ -218,8 +221,12 @@ export default function LoginHome({
                     rememberedCdsid ? "recent-cdsid-options" : undefined
                   }
                   aria-autocomplete="list"
-                  onPointerDown={() => {
-                    if (!cdsid && rememberedCdsid) setRecentCdsidOpen(true);
+                  onPointerDown={(event) => {
+                    if (!cdsid && rememberedCdsid && !recentCdsidOpen) {
+                      event.preventDefault();
+                      setRecentCdsidOpen(true);
+                      cdsidInputRef.current?.blur();
+                    }
                   }}
                   onFocus={() => {
                     if (!cdsid && rememberedCdsid) setRecentCdsidOpen(true);

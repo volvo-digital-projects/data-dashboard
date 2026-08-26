@@ -245,7 +245,7 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
   assert.match(
     loginSource,
-    /function selectRememberedCdsid\(\)[\s\S]*?setCdsid\(rememberedCdsid\)[\s\S]*?setRecentCdsidOpen\(false\)/,
+    /function selectRememberedCdsid\(\)[\s\S]*?setCdsid\(rememberedCdsid\)[\s\S]*?setRecentCdsidOpen\(false\)[\s\S]*?cdsidInputRef\.current\?\.blur\(\)/,
   );
   assert.match(
     loginSource,
@@ -253,7 +253,7 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
   assert.match(
     loginSource,
-    /onPointerDown=\{\(\) => \{[\s\S]*?if \(!cdsid && rememberedCdsid\) setRecentCdsidOpen\(true\);[\s\S]*?onFocus=/,
+    /ref=\{cdsidInputRef\}[\s\S]*?onPointerDown=\{\(event\) => \{[\s\S]*?if \(!cdsid && rememberedCdsid && !recentCdsidOpen\) \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?setRecentCdsidOpen\(true\);[\s\S]*?cdsidInputRef\.current\?\.blur\(\);[\s\S]*?onFocus=/,
   );
   assert.match(
     loginSource,
