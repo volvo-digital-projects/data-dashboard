@@ -138,7 +138,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.92\) 0%[\s\S]*?volvo-dashboard-cover-logo-small\.png[^}]*background-size: cover;/,
+    /html:has\(\.login-home\)\s*\{[^}]*background-image:[\s\S]*?rgba\(5, 17, 25, 0\.84\) 0%[\s\S]*?volvo-dashboard-cover-logo-small\.png[^}]*background-size: cover;/,
   );
   assert.match(
     css,
@@ -296,7 +296,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 70);
+  assert.equal(release.items.length, 71);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -2280,8 +2280,9 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.login-panel\s*\{[\s\S]*?rgba\(5, 17, 25, 0\.92\) 0%[\s\S]*?rgba\(7, 20, 29, 0\.54\) 64%[\s\S]*?rgba\(7, 20, 29, 0\.06\) 93%[\s\S]*?rgba\(7, 20, 29, 0\) 100%/,
+    /\.login-home::before\s*\{[\s\S]*?rgba\(5, 17, 25, 0\.84\) 0%[\s\S]*?rgba\(7, 20, 29, 0\.43\) 64%[\s\S]*?rgba\(7, 20, 29, 0\.04\) 93%[\s\S]*?rgba\(7, 20, 29, 0\) 100%/,
   );
+  assert.match(css, /\.login-panel\s*\{[^}]*background: transparent;/);
   assert.match(
     css,
     /\.v3s-average-marker\s*\{[\s\S]*?background: repeating-linear-gradient\([\s\S]*?var\(--es90-orange\) 0 5px,[\s\S]*?transparent 5px 9px/,
