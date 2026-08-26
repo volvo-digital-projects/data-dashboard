@@ -874,7 +874,6 @@ function V3SPerformance({
           <span>
             <i className="legend-average" /> 분기 전국 평균
           </span>
-          <small>100점 만점</small>
         </div>
       </section>
 
