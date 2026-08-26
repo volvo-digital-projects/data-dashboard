@@ -169,16 +169,18 @@ export default function LoginHome({
 
       <section className="login-panel" aria-labelledby="login-title">
         <div className="login-copy">
-          <p className="login-audience">VOLVO SALES MANAGER ONLY</p>
-          <h1 id="login-title">
-            Volvo Data
-            <br />
-            Dashboard
-          </h1>
-          <span className="login-rule" aria-hidden="true" />
-          <p className="login-description">
-            정확한 인사이트와 더 나은 의사결정을 지원합니다.
-          </p>
+          <div className="login-intro">
+            <p className="login-audience">VOLVO SALES MANAGER ONLY</p>
+            <h1 id="login-title">
+              Volvo Data
+              <br />
+              Dashboard
+            </h1>
+            <span className="login-rule" aria-hidden="true" />
+            <p className="login-description">
+              정확한 인사이트와 더 나은 의사결정을 지원합니다.
+            </p>
+          </div>
 
           <form className="cdsid-form" onSubmit={openDashboard} noValidate>
             <div

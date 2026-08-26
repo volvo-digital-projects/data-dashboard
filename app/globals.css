@@ -5359,6 +5359,10 @@ body:has(.login-home) {
   transform: translateX(clamp(42px, 3vw, 52px));
 }
 
+.login-intro {
+  transform: translateY(-12px);
+}
+
 .login-audience {
   margin: 0 0 7px;
   color: rgba(255, 255, 255, 0.94);
