@@ -115,7 +115,7 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /Since 260831/);
   assert.match(
     css,
-    /\.cdsid-form button strong\s*\{[^}]*display: inline-flex;[^}]*align-items: center;[^}]*min-height: 22px;[^}]*line-height: 22px;/,
+    /\.cdsid-form > button\[type="submit"\] strong\s*\{[^}]*display: inline-flex;[^}]*align-items: center;[^}]*min-height: 22px;[^}]*line-height: 22px;/,
   );
   assert.match(
     css,
@@ -204,7 +204,15 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
   assert.match(
     loginSource,
-    /onFocus=\{\(\) => \{[\s\S]*?if \(!cdsid && rememberedCdsid\) setCdsid\(rememberedCdsid\);/,
+    /onFocus=\{\(\) => \{[\s\S]*?if \(!cdsid && rememberedCdsid\) setRecentCdsidOpen\(true\);/,
+  );
+  assert.match(
+    loginSource,
+    /recentCdsidOpen && rememberedCdsid[\s\S]*?최근 로그인 CDSID[\s\S]*?role="option"[\s\S]*?setCdsid\(rememberedCdsid\)/,
+  );
+  assert.match(
+    loginSource,
+    /aria-expanded=\{recentCdsidOpen && Boolean\(rememberedCdsid\)\}[\s\S]*?aria-autocomplete="list"/,
   );
   assert.match(
     loginSource,
@@ -245,7 +253,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 40);
+  assert.equal(release.items.length, 41);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

@@ -1,7 +1,7 @@
 "use client";
 
-import type { FormEvent } from "react";
-import { useEffect, useState } from "react";
+import type { FormEvent, KeyboardEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import type { LoginStats } from "./login-stats";
 
@@ -30,10 +30,27 @@ export default function LoginHome({
 }) {
   const [cdsid, setCdsid] = useState("");
   const [rememberedCdsid, setRememberedCdsid] = useState("");
+  const [recentCdsidOpen, setRecentCdsidOpen] = useState(false);
   const [updatedAt, setUpdatedAt] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginStats, setLoginStats] = useState(initialStats);
+  const recentCdsidOptionRef = useRef<HTMLButtonElement>(null);
+
+  function handleCdsidKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Escape") {
+      setRecentCdsidOpen(false);
+      return;
+    }
+    if (
+      event.key === "ArrowDown" &&
+      recentCdsidOpen &&
+      rememberedCdsid
+    ) {
+      event.preventDefault();
+      recentCdsidOptionRef.current?.focus();
+    }
+  }
 
   useEffect(() => {
     try {
@@ -156,38 +173,86 @@ export default function LoginHome({
           </p>
 
           <form className="cdsid-form" onSubmit={openDashboard} noValidate>
-            <label className="cdsid-field">
-              <span className="cdsid-person-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="8" r="3.5" />
-                  <path d="M5.5 19c.7-3.2 3-5 6.5-5s5.8 1.8 6.5 5" />
-                </svg>
-              </span>
-              <span className="sr-only">CDSID</span>
-              <input
-                name="cdsid"
-                type="text"
-                inputMode="text"
-                autoCapitalize="characters"
-                autoComplete="off"
-                spellCheck="false"
-                minLength={4}
-                maxLength={16}
-                pattern="[A-Za-z0-9-]+"
-                placeholder="CDSID를 입력해 주세요"
-                value={cdsid}
-                aria-describedby={error ? "cdsid-error" : undefined}
-                aria-invalid={Boolean(error)}
-                onFocus={() => {
-                  if (!cdsid && rememberedCdsid) setCdsid(rememberedCdsid);
-                }}
-                onChange={(event) => {
-                  setCdsid(event.currentTarget.value.toUpperCase());
-                  if (error) setError("");
-                }}
-                required
-              />
-            </label>
+            <div
+              className="cdsid-entry"
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setRecentCdsidOpen(false);
+                }
+              }}
+            >
+              <label className="cdsid-field">
+                <span className="cdsid-person-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="3.5" />
+                    <path d="M5.5 19c.7-3.2 3-5 6.5-5s5.8 1.8 6.5 5" />
+                  </svg>
+                </span>
+                <span className="sr-only">CDSID</span>
+                <input
+                  name="cdsid"
+                  type="text"
+                  inputMode="text"
+                  autoCapitalize="characters"
+                  autoComplete="off"
+                  spellCheck="false"
+                  minLength={4}
+                  maxLength={16}
+                  pattern="[A-Za-z0-9-]+"
+                  placeholder="CDSID를 입력해 주세요"
+                  value={cdsid}
+                  aria-describedby={error ? "cdsid-error" : undefined}
+                  aria-invalid={Boolean(error)}
+                  aria-expanded={recentCdsidOpen && Boolean(rememberedCdsid)}
+                  aria-controls={
+                    rememberedCdsid ? "recent-cdsid-options" : undefined
+                  }
+                  aria-autocomplete="list"
+                  onFocus={() => {
+                    if (!cdsid && rememberedCdsid) setRecentCdsidOpen(true);
+                  }}
+                  onKeyDown={handleCdsidKeyDown}
+                  onChange={(event) => {
+                    const nextCdsid = event.currentTarget.value.toUpperCase();
+                    setCdsid(nextCdsid);
+                    setRecentCdsidOpen(!nextCdsid && Boolean(rememberedCdsid));
+                    if (error) setError("");
+                  }}
+                  required
+                />
+              </label>
+
+              {recentCdsidOpen && rememberedCdsid ? (
+                <div
+                  className="recent-cdsid-menu"
+                  id="recent-cdsid-options"
+                  role="listbox"
+                  aria-label="최근 로그인 CDSID"
+                >
+                  <span>최근 로그인 CDSID</span>
+                  <button
+                    ref={recentCdsidOptionRef}
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape") {
+                        event.preventDefault();
+                        setRecentCdsidOpen(false);
+                      }
+                    }}
+                    onClick={() => {
+                      setCdsid(rememberedCdsid);
+                      setRecentCdsidOpen(false);
+                      if (error) setError("");
+                    }}
+                  >
+                    <strong>{rememberedCdsid}</strong>
+                    <small>선택</small>
+                  </button>
+                </div>
+              ) : null}
+            </div>
 
             {error ? (
               <p className="cdsid-error" id="cdsid-error" role="alert">

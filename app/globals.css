@@ -5350,6 +5350,11 @@ body:has(.login-home) {
   gap: 0;
 }
 
+.cdsid-entry {
+  display: grid;
+  gap: 4px;
+}
+
 .cdsid-field {
   min-height: 48px;
   display: grid;
@@ -5408,7 +5413,57 @@ body:has(.login-home) {
   text-transform: none;
 }
 
-.cdsid-form button {
+.recent-cdsid-menu {
+  display: grid;
+  gap: 2px;
+  padding: 7px 10px 8px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+  background: rgba(18, 48, 70, 0.92);
+  box-shadow: 0 8px 20px rgba(2, 12, 20, 0.22);
+}
+
+.recent-cdsid-menu > span {
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.recent-cdsid-menu button {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  color: #ffffff;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.recent-cdsid-menu button strong {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.recent-cdsid-menu button small {
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.recent-cdsid-menu button:focus-visible {
+  outline: 1px solid #f28a58;
+  outline-offset: 3px;
+}
+
+.cdsid-form > button[type="submit"] {
   position: relative;
   min-height: 48px;
   display: grid;
@@ -5427,17 +5482,17 @@ body:has(.login-home) {
     box-shadow 180ms ease;
 }
 
-.cdsid-form button:hover {
+.cdsid-form > button[type="submit"]:hover {
   background: #ffffff;
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
   transform: translateY(-1px);
 }
 
-.cdsid-form button:active {
+.cdsid-form > button[type="submit"]:active {
   transform: translateY(0);
 }
 
-.cdsid-form button strong {
+.cdsid-form > button[type="submit"] strong {
   display: inline-flex;
   align-items: center;
   justify-content: center;
