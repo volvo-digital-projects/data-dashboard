@@ -96,6 +96,7 @@ test("server-renders the CDSID login route", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
+  assert.match(html, /VOLVO SALES MANAGER ONLY/);
   assert.match(html, /Volvo Data/);
   assert.match(html, /Dashboard/);
   assert.match(
@@ -174,11 +175,15 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(clamp\(14px, 1\.25vw, 20px\)\);/,
+    /\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(clamp\(24px, 2vw, 32px\)\);/,
   );
   assert.match(
     css,
-    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(10px\);/,
+    /\.login-audience\s*\{[^}]*font-family: var\(--font-ui\)[^}]*font-size: 10px;[^}]*font-weight: 800;[^}]*letter-spacing: 0\.08em;[^}]*text-transform: uppercase;/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(18px\);/,
   );
 
   const explicitLoginResponse = await render("/login");
@@ -253,7 +258,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 45);
+  assert.equal(release.items.length, 46);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 

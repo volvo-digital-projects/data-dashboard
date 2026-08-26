@@ -5316,7 +5316,18 @@ body:has(.login-home) {
 
 .login-copy,
 .login-panel footer {
-  transform: translateX(clamp(14px, 1.25vw, 20px));
+  transform: translateX(clamp(24px, 2vw, 32px));
+}
+
+.login-audience {
+  margin: 0 0 9px;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: var(--font-ui), var(--font-volvo), "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .login-copy h1 {
@@ -5722,7 +5733,7 @@ body:has(.login-home) {
 
   .login-copy,
   .login-panel footer {
-    transform: translateX(10px);
+    transform: translateX(18px);
   }
 
   .login-copy h1 {

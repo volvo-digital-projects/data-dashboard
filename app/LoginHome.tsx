@@ -162,6 +162,7 @@ export default function LoginHome({
 
       <section className="login-panel" aria-labelledby="login-title">
         <div className="login-copy">
+          <p className="login-audience">VOLVO SALES MANAGER ONLY</p>
           <h1 id="login-title">
             Volvo Data
             <br />
