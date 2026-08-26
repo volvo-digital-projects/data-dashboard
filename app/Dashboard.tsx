@@ -2378,7 +2378,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
       average: quarterAverageOf("voc", metricQuarters.voc),
       appeal: "partial" as const,
-      appealLabel: "VOC해피콜만 교차검증 후 사후보정 가능",
+      appealLabel: "VOC해피콜만 사후보정 가능",
     },
     {
       key: "cx" as const,
@@ -2386,7 +2386,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
       average: quarterAverageOf("cx", metricQuarters.cx),
       appeal: "partial" as const,
-      appealLabel: "신차해피콜만 교차검증 후 사후보정 가능",
+      appealLabel: "신차해피콜만 사후보정 가능",
     },
   ];
   const warningCount = kpis.filter((item) => item.value < item.average).length;

@@ -253,7 +253,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(css, /\.release-update-notice\s*\{[\s\S]*?position: fixed/);
   assert.match(css, /bottom: max\(18px, env\(safe-area-inset-bottom\)\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 42);
+  assert.equal(release.items.length, 43);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -463,8 +463,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /class="signal-pill warning"[^>]*>위험해요<\/span>/);
   assert.match(visibleHtml, /class="signal-pill caution"[^>]*>힘내세요<\/span>/);
   assert.match(html, /CX Index/);
-  assert.match(visibleHtml, /VOC해피콜<\/span>만 교차검증 후 사후보정 가능/);
-  assert.match(visibleHtml, /신차해피콜<\/span>만 교차검증 후 사후보정 가능/);
+  assert.match(visibleHtml, /VOC해피콜<\/span>만 사후보정 가능/);
+  assert.match(visibleHtml, /신차해피콜<\/span>만 사후보정 가능/);
+  assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 교차검증 후/);
+  assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
   assert.match(
     visibleHtml,
     /V3S 보정기간\(최초발표 후, 영업일 2일내\) 내 교차검증 진행/,
