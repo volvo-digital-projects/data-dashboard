@@ -134,7 +134,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /html:has\(\.login-home\)\s*\{[^}]*scrollbar-gutter: auto;[^}]*background: #07141d;/,
+    /html:has\(\.login-home\)\s*\{[^}]*height: 100%;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*scrollbar-gutter: auto;[^}]*background: #07141d;/,
   );
   assert.match(
     css,
@@ -142,7 +142,7 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
-    /body:has\(\.login-home\)\s*\{[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*volvo-dashboard-cover-clean\.png[^}]*cover no-repeat/,
+    /body:has\(\.login-home\)\s*\{[^}]*position: fixed;[^}]*inset: 0;[^}]*height: 100dvh;[^}]*min-height: 100dvh;[^}]*overflow: hidden;[^}]*overscroll-behavior: none;[^}]*touch-action: manipulation;[^}]*volvo-dashboard-cover-clean\.png[^}]*cover no-repeat/,
   );
   assert.match(
     css,
@@ -208,6 +208,14 @@ test("server-renders the CDSID login route", async () => {
   assert.match(
     css,
     /@media \(max-width: 760px\)\s*\{[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: translateX\(38px\);[\s\S]*?\.login-copy h1\s*\{[^}]*line-height: 0\.92;/,
+  );
+  assert.match(
+    css,
+    /@media \(hover: none\) and \(pointer: coarse\) and \(min-width: 761px\)\s*\{[\s\S]*?\.login-home,\s*\.login-panel\s*\{[^}]*height: 100svh;[^}]*max-height: 100svh;[\s\S]*?\.login-home\s*\{[^}]*position: fixed;[^}]*inset: 0;[^}]*touch-action: manipulation;/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?html:has\(\.login-home\)\s*\{[^}]*overflow-y: auto;[\s\S]*?body:has\(\.login-home\)\s*\{[^}]*position: static;[^}]*touch-action: pan-y;/,
   );
 
   const explicitLoginResponse = await render("/login");

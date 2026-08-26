@@ -5217,6 +5217,10 @@ input:focus-visible,
 
 /* Volvo Data Dashboard login */
 html:has(.login-home) {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
   scrollbar-gutter: auto;
   background: #07141d;
   background-image:
@@ -5239,6 +5243,10 @@ html:has(.login-home) {
 }
 
 body:has(.login-home) {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
   min-width: 100%;
   height: 100vh;
   height: 100dvh;
@@ -5247,6 +5255,7 @@ body:has(.login-home) {
   overflow: hidden;
   overflow-x: hidden;
   overscroll-behavior: none;
+  touch-action: manipulation;
   background: #07141d url("/volvo-dashboard-cover-clean.png") center / cover no-repeat;
 }
 
@@ -5732,7 +5741,38 @@ body:has(.login-home) {
   }
 }
 
+@media (hover: none) and (pointer: coarse) and (min-width: 761px) {
+  .login-home,
+  .login-panel {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+  }
+
+  .login-home {
+    position: fixed;
+    inset: 0;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+  }
+}
+
 @media (max-width: 760px) {
+  html:has(.login-home) {
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+  }
+
+  body:has(.login-home) {
+    position: static;
+    inset: auto;
+    height: auto;
+    min-height: 100svh;
+    overflow-y: auto;
+    touch-action: pan-y;
+  }
+
   .login-home::before {
     display: none;
   }
