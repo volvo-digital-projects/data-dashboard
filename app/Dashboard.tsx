@@ -2450,7 +2450,6 @@ export default function Dashboard({
               >
                 <div className="profile-popover-heading">
                   <strong>다른 전시장 선택</strong>
-                  <span>{dashboard.showrooms.length - 1}개 전시장</span>
                 </div>
                 <div className="profile-showroom-list">
                   {dashboard.showrooms
