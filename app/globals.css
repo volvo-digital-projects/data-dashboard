@@ -11252,6 +11252,29 @@ button.header-status-item {
   animation: rtc-siren-glow 1.8s ease-in-out infinite;
 }
 
+.rtc-alert-siren::after {
+  content: "";
+  width: 27px;
+  height: 27px;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -38deg,
+    transparent 0deg 24deg,
+    rgba(230, 66, 49, 0.34) 32deg 48deg,
+    transparent 57deg 153deg,
+    rgba(255, 116, 76, 0.2) 161deg 174deg,
+    transparent 183deg 360deg
+  );
+  filter: blur(0.65px);
+  opacity: 0.18;
+  transform-origin: 50% 50%;
+  animation: rtc-siren-beacon 1.55s ease-in-out infinite;
+}
+
 .rtc-alert-siren__dome {
   width: 10px;
   height: 9px;
@@ -11268,6 +11291,7 @@ button.header-status-item {
     inset -2px -2px 3px rgba(100, 14, 22, 0.34),
     inset 2px 1px 2px rgba(255, 218, 197, 0.72),
     0 0 0 1px rgba(255, 255, 255, 0.82);
+  animation: rtc-siren-dome-pulse 1.55s ease-in-out infinite;
 }
 
 .rtc-alert-siren__base {
@@ -11296,10 +11320,57 @@ button.header-status-item {
   }
 }
 
+@keyframes rtc-siren-beacon {
+  0%,
+  70%,
+  100% {
+    opacity: 0.16;
+    transform: rotate(-11deg) scale(0.92);
+  }
+
+  16% {
+    opacity: 0.72;
+    transform: rotate(4deg) scale(1.04);
+  }
+
+  34% {
+    opacity: 0.24;
+    transform: rotate(11deg) scale(0.96);
+  }
+
+  52% {
+    opacity: 0.58;
+    transform: rotate(-3deg) scale(1);
+  }
+}
+
+@keyframes rtc-siren-dome-pulse {
+  0%,
+  34%,
+  70%,
+  100% {
+    filter: brightness(0.96) saturate(0.96);
+  }
+
+  16%,
+  52% {
+    filter: brightness(1.18) saturate(1.12) drop-shadow(0 0 3px rgba(224, 57, 43, 0.48));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .rtc-alert-siren::before {
+  .rtc-alert-siren::before,
+  .rtc-alert-siren::after,
+  .rtc-alert-siren__dome {
     animation: none;
+  }
+
+  .rtc-alert-siren::before {
     opacity: 0.7;
+  }
+
+  .rtc-alert-siren::after {
+    opacity: 0.28;
   }
 }
 

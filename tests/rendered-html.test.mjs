@@ -839,6 +839,16 @@ test("server-renders the selected CDSID dashboard", async () => {
     css,
     /\.rtc-alert-siren\s*\{[^}]*top: -10px;[^}]*right: -9px;[\s\S]*?\.rtc-alert-siren__dome[\s\S]*?linear-gradient\(145deg, #ff8b69 0%, #e14835 54%, #a92227 100%\)/,
   );
+  assert.match(
+    css,
+    /\.rtc-alert-siren::after\s*\{[^}]*width: 27px;[^}]*height: 27px;[^}]*conic-gradient\([^}]*animation: rtc-siren-beacon 1\.55s ease-in-out infinite;/,
+  );
+  assert.match(
+    css,
+    /\.rtc-alert-siren__dome\s*\{[^}]*animation: rtc-siren-dome-pulse 1\.55s ease-in-out infinite;/,
+  );
+  assert.match(css, /@keyframes rtc-siren-beacon\s*\{/);
+  assert.match(css, /@keyframes rtc-siren-dome-pulse\s*\{/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
