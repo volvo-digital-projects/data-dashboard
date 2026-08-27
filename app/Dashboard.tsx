@@ -391,6 +391,36 @@ const metricRtcIncentiveRateOf = (
   return value >= 100 ? 0.2 : 0.1;
 };
 
+const metricDscScoreOf = (
+  item: Showroom,
+  metric: TrendMetricKey,
+  quarter: QuarterKey,
+): number | null => {
+  if (metric !== "cx") return quarterValueOf(item, metric, quarter);
+
+  const finalizedScore =
+    quarter === "q1" ? item.q1?.cx : quarter === "q2" ? item.cx : null;
+  if (typeof finalizedScore === "number") return finalizedScore;
+
+  const rawScore = quarterValueOf(item, "cx", quarter);
+  return rawScore === null
+    ? null
+    : Number(((rawScore / metricMeta.cx.max) * 130).toFixed(1));
+};
+
+const quarterRtcIncentiveRateOf = (
+  item: Showroom,
+  quarter: QuarterKey,
+): number | null => {
+  const rates = (["v3s", "voc", "cx"] as const).map((metric) =>
+    metricRtcIncentiveRateOf(item, metric, quarter),
+  );
+
+  return rates.every((rate): rate is number => typeof rate === "number")
+    ? Number(rates.reduce((sum, rate) => sum + rate, 0).toFixed(1))
+    : null;
+};
+
 const groupQuarterAverageOf = (
   showroom: Showroom,
   metric: MetricKey,
@@ -500,6 +530,7 @@ function MetricCard({
   metric,
   value,
   average,
+  dscScore,
   rtcRate,
   rank,
   quarter,
@@ -515,6 +546,7 @@ function MetricCard({
   metric: TrendMetricKey;
   value: number;
   average: number;
+  dscScore: number | null;
   rtcRate: number | null;
   rank: number;
   quarter: QuarterKey;
@@ -589,7 +621,13 @@ function MetricCard({
             / 전국 <strong>{rank}위</strong>
           </span>
         </div>
-        <div className="metric-stat-chips" aria-label="RTC 인센티브율">
+        <div
+          className="metric-stat-chips"
+          aria-label="DSC 스코어 및 RTC 인센티브율"
+        >
+          <span>
+            DSC 스코어 <strong>{displayNumber(dscScore)}점</strong>
+          </span>
           <span>
             RTC 인센티브 <strong>{displayNumber(rtcRate)}%</strong>
           </span>
@@ -2643,6 +2681,12 @@ export default function Dashboard({
   const q1IntegratedScore = integratedQuarterScoreOf(selected, "q1") ?? 0;
   const q2IntegratedScore = integratedQuarterScoreOf(selected, "q2") ?? 0;
   const cumulativeAverage = (q1IntegratedScore + q2IntegratedScore) / 2;
+  const q1DscScore = selected.q1?.combat ?? selected.combat ?? 0;
+  const q2DscScore = selected.combat ?? 0;
+  const cumulativeDscScore = (q1DscScore + q2DscScore) / 2;
+  const q1RtcRate = quarterRtcIncentiveRateOf(selected, "q1") ?? 0;
+  const q2RtcRate = quarterRtcIncentiveRateOf(selected, "q2") ?? 0;
+  const cumulativeRtcRate = (q1RtcRate + q2RtcRate) / 2;
   const q1IntegratedAverage = quarterIntegratedAverageOf("q1");
   const q2IntegratedAverage = quarterIntegratedAverageOf("q2");
   const cumulativeNationalAverage =
@@ -2690,6 +2734,7 @@ export default function Dashboard({
       quarter: metricQuarters.v3s,
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
+      dscScore: metricDscScoreOf(selected, "v3s", metricQuarters.v3s),
       rtcRate: metricRtcIncentiveRateOf(selected, "v3s", metricQuarters.v3s),
       rank: metricRankOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
@@ -2700,6 +2745,7 @@ export default function Dashboard({
       quarter: metricQuarters.voc,
       value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
       average: quarterAverageOf("voc", metricQuarters.voc),
+      dscScore: metricDscScoreOf(selected, "voc", metricQuarters.voc),
       rtcRate: metricRtcIncentiveRateOf(selected, "voc", metricQuarters.voc),
       rank: metricRankOf("voc", metricQuarters.voc),
       appeal: "partial" as const,
@@ -2710,6 +2756,7 @@ export default function Dashboard({
       quarter: metricQuarters.cx,
       value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
       average: quarterAverageOf("cx", metricQuarters.cx),
+      dscScore: metricDscScoreOf(selected, "cx", metricQuarters.cx),
       rtcRate: metricRtcIncentiveRateOf(selected, "cx", metricQuarters.cx),
       rank: metricRankOf("cx", metricQuarters.cx),
       appeal: "partial" as const,
@@ -2930,6 +2977,7 @@ export default function Dashboard({
                 metric={item.key}
                 value={item.value}
                 average={item.average}
+                dscScore={item.dscScore}
                 rtcRate={item.rtcRate}
                 rank={item.rank}
                 quarter={item.quarter}
@@ -2978,9 +3026,15 @@ export default function Dashboard({
                 / 전국 <strong>{cumulativeRank}위</strong>
               </span>
             </div>
-            <div className="metric-stat-chips scoreboard-stat-chips" aria-label="볼보 평균">
+            <div
+              className="metric-stat-chips scoreboard-stat-chips"
+              aria-label="DSC 스코어 및 RTC 인센티브율"
+            >
               <span>
-                볼보 평균 <strong>{displayNumber(cumulativeNationalAverage)}</strong>
+                DSC 스코어 <strong>{displayNumber(cumulativeDscScore)}점</strong>
+              </span>
+              <span>
+                RTC 인센티브 <strong>{displayNumber(cumulativeRtcRate)}%</strong>
               </span>
             </div>
           </div>

@@ -11112,13 +11112,15 @@ body {
 }
 
 .metric-stat-chips {
-  min-width: 76px;
+  width: 92px;
+  min-width: 92px;
   display: grid;
   align-content: end;
   gap: 5px;
 }
 
 .metric-stat-chips > span {
+  width: 100%;
   min-height: 23px;
   display: flex;
   align-items: baseline;
@@ -11302,7 +11304,8 @@ body {
   }
 
   .metric-stat-chips {
-    min-width: 68px;
+    width: 82px;
+    min-width: 82px;
   }
 
   .metric-stat-chips > span {
