@@ -11083,6 +11083,10 @@ body {
   white-space: nowrap;
 }
 
+.combat-scoreboard .scoreboard-heading .metric-max-note {
+  color: #ffffff;
+}
+
 .metric-value-row {
   min-width: 0;
   display: grid;
