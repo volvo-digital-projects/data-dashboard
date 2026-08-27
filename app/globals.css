@@ -10938,37 +10938,75 @@ body {
   }
 }
 
-/* Equal-weight score card overrides */
+/* DSC score group + integrated competitiveness rail */
 @media (min-width: 900px) {
-  :root {
-    --dashboard-combat-share: 24.6%;
-  }
-
   .hero-grid {
-    grid-template-columns:
-      minmax(0, var(--dashboard-combat-share)) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 3fr) minmax(236px, 1fr);
     gap: var(--dashboard-card-gap);
   }
 
-  .metric-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--dashboard-card-gap);
-  }
-
-  .dashboard-sticky-shell .combat-card,
-  .dashboard-sticky-shell .metric-grid,
-  .dashboard-sticky-shell .metric-card {
+  .dsc-score-group {
+    min-width: 0;
     min-height: 224px;
+    position: relative;
+    padding: 7px;
+    border: 1px solid rgba(43, 91, 112, 0.13);
+    border-radius: 12px;
+    background:
+      linear-gradient(145deg, rgba(244, 248, 250, 0.92), rgba(237, 244, 247, 0.74));
+    box-shadow:
+      inset 0 3px 0 #315f75,
+      0 7px 20px rgba(21, 50, 64, 0.055);
   }
+
+  .dsc-score-group::after {
+    content: "DSC 종합평가";
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: rgba(52, 89, 106, 0.5);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+  }
+
+  .dsc-score-group .metric-grid {
+    height: 100%;
+    min-height: 208px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .dsc-score-group .metric-card,
+  .dashboard-sticky-shell .combat-scoreboard {
+    min-height: 208px;
+  }
+}
+
+.dsc-score-group .metric-card {
+  padding: 15px 14px 12px;
+  border-color: rgba(38, 76, 94, 0.1);
+  border-radius: 8px;
+  background: linear-gradient(148deg, #ffffff 0%, #fbfcfd 68%, #f5f8f9 100%);
+  box-shadow: 0 4px 12px rgba(27, 53, 65, 0.045);
+}
+
+.dsc-score-group .metric-card.active::before,
+.dsc-score-group .metric-card.warning.active::before,
+.dsc-score-group .metric-card.caution.active::before {
+  content: none;
 }
 
 .combat-card.combat-scoreboard {
   min-width: 0;
+  padding: 22px 14px 12px;
   color: var(--ink);
-  border-color: rgba(47, 107, 138, 0.11);
+  border-color: rgba(56, 112, 137, 0.16);
+  border-radius: 12px;
   background:
-    radial-gradient(circle at 100% 0%, rgba(91, 136, 155, 0.07), transparent 48%),
-    linear-gradient(145deg, #f4f7f8 0%, #f1f5f6 58%, #edf3f5 100%);
+    radial-gradient(circle at 100% 0%, rgba(91, 146, 169, 0.12), transparent 48%),
+    linear-gradient(145deg, #eef5f7 0%, #e9f1f4 58%, #e3edf1 100%);
   box-shadow: var(--surface-shadow);
 }
 
@@ -10977,13 +11015,14 @@ body {
   height: 3px;
   position: absolute;
   inset: 0 0 auto;
-  background: linear-gradient(90deg, #4c7d94 0%, #799cac 72%, #a9bec7 100%);
+  background: linear-gradient(90deg, #2f6680 0%, #6592a5 68%, #a7c0ca 100%);
 }
 
 .combat-card.combat-scoreboard::after {
   content: none;
 }
 
+.metric-card-topline,
 .combat-scoreboard .scoreboard-heading {
   min-height: 22px;
   display: flex;
@@ -10992,84 +11031,170 @@ body {
   border: 0;
 }
 
+.metric-titleline,
 .combat-scoreboard .scoreboard-heading .metric-titleline {
+  min-width: 0;
   display: flex;
   align-items: baseline;
   gap: 5px;
+}
+
+.metric-code,
+.combat-scoreboard .scoreboard-heading .metric-code {
+  color: var(--navy);
+  font-family: var(--font-latin);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 .combat-scoreboard .scoreboard-heading .metric-code {
-  color: var(--navy);
   font-family: var(--font-korean);
-  font-size: 15px;
-  font-weight: 750;
   letter-spacing: -0.025em;
 }
 
+.metric-max-note,
 .combat-scoreboard .scoreboard-heading .metric-max-note {
   color: var(--muted);
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
+.metric-value-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.metric-value-row .metric-card-value,
 .scoreboard-main-value {
-  min-height: 58px;
+  min-width: 0;
+  min-height: 49px;
   display: flex;
   align-items: flex-end;
-  margin-top: 0;
+  margin: 0;
   color: var(--ink);
-  font-size: clamp(46px, 3.25vw, 56px);
+  font-family: var(--font-latin);
+  font-size: clamp(44px, 3.05vw, 56px);
+  font-weight: 650;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
 }
 
-.scoreboard-score-context > span:last-child {
-  border-color: #d9e4e8;
-  background: rgba(255, 255, 255, 0.62);
-}
-
-.scoreboard-benchmark {
+.metric-stat-chips {
+  min-width: 76px;
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
-  align-items: baseline;
+  align-content: end;
   gap: 5px;
 }
 
+.metric-stat-chips > span {
+  min-height: 23px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px 7px;
+  overflow: hidden;
+  color: #607581;
+  border: 1px solid #dde8ec;
+  border-radius: 999px;
+  background: rgba(244, 248, 250, 0.9);
+  font-size: 7.5px;
+  font-weight: 650;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric-stat-chips strong {
+  color: #244f64;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.scoreboard-stat-chips > span {
+  border-color: rgba(104, 148, 166, 0.2);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.metric-benchmark,
+.scoreboard-benchmark {
+  min-height: 19px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 7px;
+  margin-top: 10px;
+  color: var(--secondary);
+  font-size: 11px;
+}
+
+.metric-benchmark > span,
+.scoreboard-benchmark > span {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric-benchmark strong,
 .scoreboard-benchmark > strong {
-  font-size: 13px;
+  flex: 0 0 auto;
+  font-family: var(--font-latin);
+  font-size: 12px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
 }
 
 .scoreboard-benchmark > strong.positive {
   color: #26765f !important;
 }
 
-.scoreboard-rank {
-  min-width: 0;
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: flex-end;
+.metric-quarter-strip,
+.scoreboard-quarter-strip {
   gap: 4px;
-  color: var(--secondary);
-  font-size: 9px !important;
-  white-space: nowrap;
+  margin-top: 8px;
+  border: 0;
+  background: transparent;
 }
 
-.scoreboard-rank b {
-  color: var(--navy);
-  font-family: var(--font-latin);
-  font-size: 11px;
-  font-weight: 750;
-}
-
-.scoreboard-track span {
-  background: linear-gradient(90deg, #4c7d94 0%, #799cac 72%, #a9bec7 100%);
-}
-
+.metric-quarter-strip > button,
 .scoreboard-quarter-strip > button {
   min-width: 0;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 31px;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 3px;
-  padding-inline: 5px;
+  padding: 6px 4px;
+  border: 1px solid #e4ebee;
+  border-radius: 7px;
+  background: #f7f9fa;
 }
 
+.metric-quarter-strip > button + button,
+.scoreboard-quarter-strip > button + button {
+  border-left: 1px solid #e4ebee;
+}
+
+.metric-quarter-strip > button.current,
+.scoreboard-quarter-strip > button.current {
+  border-color: #cfe1e8;
+  background: #eaf3f7;
+}
+
+.metric-quarter-strip small,
 .scoreboard-quarter-strip > button small,
 .scoreboard-quarter-strip > button strong {
   min-width: 0;
@@ -11080,10 +11205,17 @@ body {
   white-space: nowrap;
 }
 
+.scoreboard-quarter-strip > button {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 3px;
+}
+
 .scoreboard-quarter-strip > button strong {
   overflow: hidden;
   color: #4c6270;
-  text-align: right;
+  font-size: 8px;
+  text-align: center;
   text-overflow: ellipsis;
 }
 
@@ -11094,27 +11226,63 @@ body {
 .scoreboard-quarter-strip > button.planned strong {
   color: #a8b1b8;
   font-family: var(--font-korean);
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 600;
 }
 
+.metric-card-footer,
+.metric-resource-grid,
 .scoreboard-card-footer {
-  min-height: 18px;
+  min-height: 26px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.scoreboard-card-footer {
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: 5px;
-  color: #86929d;
-  font-size: 9px;
+  color: #7d919c;
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: -0.02em;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.metric-resource-group {
+  position: relative;
+}
+
+.metric-resource-new {
+  position: absolute;
+  z-index: 2;
+  top: -8px;
+  right: -1px;
+  padding: 2px 4px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 999px;
+  background: #216b8a;
+  box-shadow: 0 2px 5px rgba(18, 61, 80, 0.18);
+  font-family: var(--font-latin);
+  font-size: 6px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
 @media (min-width: 900px) and (max-width: 1240px) {
-  .dashboard-sticky-shell .combat-card,
-  .dashboard-sticky-shell .metric-card {
-    padding: 16px 14px;
+  .dsc-score-group .metric-card,
+  .dashboard-sticky-shell .combat-scoreboard {
+    padding-inline: 10px;
+  }
+
+  .metric-stat-chips {
+    min-width: 68px;
+  }
+
+  .metric-stat-chips > span {
+    padding-inline: 5px;
   }
 }

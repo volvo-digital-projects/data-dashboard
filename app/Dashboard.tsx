@@ -28,6 +28,8 @@ type TrendMetricKey = Exclude<MetricKey, "combat">;
 type GroupKey = "all" | "dealer" | "region" | "size";
 type QuarterKey = "q1" | "q2" | "q3" | "q4";
 
+const V3S_EVIDENCE_SEEN_KEY = "volvo-dashboard-v3s-evidence-seen-v1";
+
 type QuarterRecord = {
   cdsid: string;
   showroom: string;
@@ -499,11 +501,13 @@ function MetricCard({
   value,
   average,
   rtcRate,
+  rank,
   quarter,
   active,
   onSelect,
   onQuarterSelect,
   evidenceQuarters = [],
+  unseenEvidenceQuarters = [],
   onEvidenceOpen,
   appeal,
   appealLabel,
@@ -512,26 +516,19 @@ function MetricCard({
   value: number;
   average: number;
   rtcRate: number | null;
+  rank: number;
   quarter: QuarterKey;
   active: boolean;
   onSelect: () => void;
   onQuarterSelect: (quarter: QuarterKey) => void;
   evidenceQuarters?: QuarterKey[];
+  unseenEvidenceQuarters?: QuarterKey[];
   onEvidenceOpen?: (quarter: QuarterKey) => void;
   appeal: "possible" | "partial" | "locked";
   appealLabel?: string;
 }) {
   const signal = getSignal(value, average);
   const quarterLabel = quarter.toUpperCase();
-  const fill = Math.min(100, Math.max(0, (value / metricMeta[metric].max) * 100));
-  const signalRule =
-    signal.tone === "warning"
-      ? `위험해요: ${quarterLabel} 전국 평균 대비 5점 이상 미달`
-      : signal.tone === "caution"
-        ? `힘내세요: ${quarterLabel} 전국 평균 미만, 5점 미만 차이`
-        : signal.tone === "great"
-          ? `대단해요: ${quarterLabel} 전국 평균 대비 10점 이상 우수`
-          : `잘했어요: ${quarterLabel} 전국 평균 이상`;
   const quarterScores = [
     {
       key: "q1" as const,
@@ -584,17 +581,17 @@ function MetricCard({
             ({metricMeta[metric].max}점 만점)
           </small>
         </div>
-        <span className={`signal-pill ${signal.tone}`} title={signalRule}>
-          {signal.label}
-        </span>
       </div>
-      <div className="metric-card-value">{displayNumber(value)}</div>
-      <div className="metric-score-context" aria-label="DSC 평가점수와 RTC 인센티브율">
-        <span>DSC 평가점수</span>
-        <span>
-          RTC 인센티브율
-          <strong>{displayNumber(rtcRate)}%</strong>
-        </span>
+      <div className="metric-value-row">
+        <div className="metric-card-value">{displayNumber(value)}</div>
+        <div className="metric-stat-chips" aria-label="전국 순위와 RTC 인센티브율">
+          <span>
+            전국 <strong>{rank}위</strong>
+          </span>
+          <span>
+            RTC 인센티브 <strong>{displayNumber(rtcRate)}%</strong>
+          </span>
+        </div>
       </div>
       <div
         className="metric-benchmark"
@@ -616,10 +613,6 @@ function MetricCard({
           {signal.delta > 0 ? "▲" : signal.delta < 0 ? "▼" : "―"}{" "}
           {Math.abs(signal.delta).toFixed(1)}점
         </strong>
-      </div>
-      <div className="metric-track" aria-hidden="true">
-        <span style={{ width: `${fill}%` }} />
-        <i style={{ left: `${(average / metricMeta[metric].max) * 100}%` }} />
       </div>
       <div
         className="metric-quarter-strip"
@@ -653,9 +646,15 @@ function MetricCard({
           {resourceQuarters.map((resourceQuarter) => {
             const resourceLabel = resourceQuarter.toUpperCase();
             const hasEvidence = evidenceQuarters.includes(resourceQuarter);
+            const isUnseen = unseenEvidenceQuarters.includes(resourceQuarter);
 
             return (
               <div className="metric-resource-group" key={resourceQuarter}>
+                {isUnseen && (
+                  <span className="metric-resource-new" aria-label={`${resourceLabel} 새 자료`}>
+                    NEW
+                  </span>
+                )}
                 <button
                   type="button"
                   className="metric-resource-button"
@@ -2304,6 +2303,7 @@ export default function Dashboard({
   const [adminOpen, setAdminOpen] = useState(false);
   const [evidenceQuarter, setEvidenceQuarter] =
     useState<EvidenceQuarter | null>(null);
+  const [seenEvidenceKeys, setSeenEvidenceKeys] = useState<string[]>([]);
   const dashboardRootRef = useRef<HTMLElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
@@ -2322,7 +2322,7 @@ export default function Dashboard({
   const oneVoiceReferenceDate = formatOneVoiceReferenceDate(
     oneVoiceScores.capturedAt,
   );
-  const [latestUpdate, setLatestUpdate] = useState<LatestUpdate>({
+  const [, setLatestUpdate] = useState<LatestUpdate>({
     title: "Q1, Q2 마감, 현재 Q3평가 진행중",
     effectiveDate: dashboard.meta.updatedAt,
   });
@@ -2332,6 +2332,26 @@ export default function Dashboard({
     syncAccessDate();
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    let restored: string[] = [];
+    try {
+      const saved = window.localStorage.getItem(V3S_EVIDENCE_SEEN_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        restored = Array.isArray(parsed)
+          ? parsed.filter((item): item is string => typeof item === "string")
+          : [];
+      }
+    } catch {
+      restored = [];
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setSeenEvidenceKeys(restored);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -2503,6 +2523,30 @@ export default function Dashboard({
   );
   const canSwitchShowrooms =
     showroomAccess.role !== "manager" && switchableShowrooms.length > 0;
+  const evidenceSeenKey = (quarter: QuarterKey) =>
+    `${selected.cdsid}:${quarter}`;
+  const availableEvidenceQuarters = (
+    ["q1", "q2", "q3", "q4"] as QuarterKey[]
+  ).filter(
+    (quarter) => getV3sEvidence(selected.cdsid, quarter).length > 0,
+  );
+  const unseenEvidenceQuarters = availableEvidenceQuarters.filter(
+    (quarter) => !seenEvidenceKeys.includes(evidenceSeenKey(quarter)),
+  );
+  const openEvidenceGallery = (quarter: QuarterKey) => {
+    const key = evidenceSeenKey(quarter);
+    setSeenEvidenceKeys((current) => {
+      if (current.includes(key)) return current;
+      const next = [...current, key];
+      try {
+        window.localStorage.setItem(V3S_EVIDENCE_SEEN_KEY, JSON.stringify(next));
+      } catch {
+        // The gallery still opens when privacy settings block local storage.
+      }
+      return next;
+    });
+    setEvidenceQuarter(quarter);
+  };
   const scrollMetricQuarterToSection = (metric: "v3s" | "voc") => {
     const target = document.getElementById(`score-${metric}`);
     if (!target) return;
@@ -2555,8 +2599,9 @@ export default function Dashboard({
     });
 
     const duration = 360;
-    const startedAt = performance.now();
+    let startedAt: number | null = null;
     const animateScroll = (now: number) => {
+      if (startedAt === null) startedAt = now;
       const progress = Math.min(1, (now - startedAt) / duration);
       const eased = 1 - Math.pow(1 - progress, 4);
       window.scrollTo({
@@ -2629,6 +2674,14 @@ export default function Dashboard({
             Number.NEGATIVE_INFINITY),
       )
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
+  const metricRankOf = (metric: TrendMetricKey, quarter: QuarterKey) =>
+    [...dashboard.showrooms]
+      .sort(
+        (a, b) =>
+          (quarterValueOf(b, metric, quarter) ?? Number.NEGATIVE_INFINITY) -
+          (quarterValueOf(a, metric, quarter) ?? Number.NEGATIVE_INFINITY),
+      )
+      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const kpis = [
     {
       key: "v3s" as const,
@@ -2636,6 +2689,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
       rtcRate: metricRtcIncentiveRateOf(selected, "v3s", metricQuarters.v3s),
+      rank: metricRankOf("v3s", metricQuarters.v3s),
       appeal: "possible" as const,
       appealLabel: undefined,
     },
@@ -2645,6 +2699,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
       average: quarterAverageOf("voc", metricQuarters.voc),
       rtcRate: metricRtcIncentiveRateOf(selected, "voc", metricQuarters.voc),
+      rank: metricRankOf("voc", metricQuarters.voc),
       appeal: "partial" as const,
       appealLabel: "VOC해피콜만 사후보정 가능",
     },
@@ -2654,6 +2709,7 @@ export default function Dashboard({
       value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
       average: quarterAverageOf("cx", metricQuarters.cx),
       rtcRate: metricRtcIncentiveRateOf(selected, "cx", metricQuarters.cx),
+      rank: metricRankOf("cx", metricQuarters.cx),
       appeal: "partial" as const,
       appealLabel: "신차해피콜만 사후보정 가능",
     },
@@ -2864,48 +2920,73 @@ export default function Dashboard({
           className="hero-grid"
           key={`showroom-score-${selected.cdsid}`}
         >
+        <div className="kpi-column dsc-score-group" aria-label="DSC 종합평가">
+          <div className="metric-grid">
+            {kpis.map((item) => (
+              <MetricCard
+                key={item.key}
+                metric={item.key}
+                value={item.value}
+                average={item.average}
+                rtcRate={item.rtcRate}
+                rank={item.rank}
+                quarter={item.quarter}
+                active={trendMetric === item.key}
+                onSelect={() => setTrendMetric(item.key)}
+                onQuarterSelect={(quarter) =>
+                  selectMetricQuarter(item.key, quarter)
+                }
+                evidenceQuarters={
+                  item.key === "v3s"
+                    ? availableEvidenceQuarters
+                    : undefined
+                }
+                unseenEvidenceQuarters={
+                  item.key === "v3s" ? unseenEvidenceQuarters : undefined
+                }
+                onEvidenceOpen={
+                  item.key === "v3s" ? openEvidenceGallery : undefined
+                }
+                appeal={item.appeal}
+                appealLabel={item.appealLabel}
+              />
+            ))}
+          </div>
+        </div>
+
         <article className="combat-card combat-scoreboard">
           <div className="metric-card-topline scoreboard-heading">
             <div className="metric-titleline">
-              <span className="metric-code">통합 종합점수</span>
+              <span className="metric-code">통합 경쟁력 지수</span>
               <small className="metric-max-note">
                 ({integratedScoreMax}점 만점)
               </small>
             </div>
           </div>
 
-          <div className="metric-card-value scoreboard-main-value">
-            {displayNumber(cumulativeAverage)}
-          </div>
-          <div className="metric-score-context scoreboard-score-context">
-            <span>{displayShowroomName(selected.showroom)}</span>
-            <span>
-              볼보 전체 평균
-              <strong>{displayNumber(cumulativeNationalAverage)}</strong>
-            </span>
+          <div className="metric-value-row">
+            <div className="metric-card-value scoreboard-main-value">
+              {displayNumber(cumulativeAverage)}
+            </div>
+            <div className="metric-stat-chips scoreboard-stat-chips" aria-label="전국 순위와 볼보 전체 평균">
+              <span>
+                전국 <strong>{cumulativeRank}위</strong>
+              </span>
+              <span>
+                전국 평균 <strong>{displayNumber(cumulativeNationalAverage)}</strong>
+              </span>
+            </div>
           </div>
           <div className="metric-benchmark scoreboard-benchmark">
             <span>평균 대비</span>
             <strong className={cumulativeDelta >= 0 ? "positive" : "negative"}>
               {cumulativeDelta >= 0 ? "▲" : "▼"} {Math.abs(cumulativeDelta).toFixed(1)}점
             </strong>
-            <span className="scoreboard-rank">
-              전국 순위
-              <b>{cumulativeRank}위 / {dashboard.meta.showroomCount}</b>
-            </span>
-          </div>
-          <div className="metric-track scoreboard-track" aria-hidden="true">
-            <span style={{ width: `${(cumulativeAverage / integratedScoreMax) * 100}%` }} />
-            <i
-              style={{
-                left: `${(cumulativeNationalAverage / integratedScoreMax) * 100}%`,
-              }}
-            />
           </div>
           <div
             className="metric-quarter-strip scoreboard-quarter-strip"
             role="group"
-            aria-label={`분기별 통합 종합점수 ${integratedScoreMax}점 기준`}
+            aria-label={`분기별 통합 경쟁력 지수 ${integratedScoreMax}점 기준`}
           >
             {[
               {
@@ -2944,7 +3025,7 @@ export default function Dashboard({
                 aria-label={
                   quarter.key === null
                     ? `${quarter.label} ${quarter.status}`
-                    : `${quarter.label} 통합 종합점수 ${displayNumber(quarter.integratedScore)}점 지표 보기`
+                    : `${quarter.label} 통합 경쟁력 지수 ${displayNumber(quarter.integratedScore)}점 지표 보기`
                 }
                 onClick={() => {
                   if (quarter.key) {
@@ -2974,41 +3055,6 @@ export default function Dashboard({
             분기 점수를 선택하면 하단 지표가 함께 변경됩니다
           </div>
         </article>
-
-        <div className="kpi-column">
-          <div className="metric-grid">
-            {kpis.map((item) => (
-              <MetricCard
-                key={item.key}
-                metric={item.key}
-                value={item.value}
-                average={item.average}
-                rtcRate={item.rtcRate}
-                quarter={item.quarter}
-                active={trendMetric === item.key}
-                onSelect={() => setTrendMetric(item.key)}
-                onQuarterSelect={(quarter) =>
-                  selectMetricQuarter(item.key, quarter)
-                }
-                evidenceQuarters={
-                  item.key === "v3s"
-                    ? (["q1", "q2", "q3", "q4"] as QuarterKey[]).filter(
-                        (quarter) =>
-                          getV3sEvidence(selected.cdsid, quarter).length > 0,
-                      )
-                    : undefined
-                }
-                onEvidenceOpen={
-                  item.key === "v3s"
-                    ? (quarter) => setEvidenceQuarter(quarter)
-                    : undefined
-                }
-                appeal={item.appeal}
-                appealLabel={item.appealLabel}
-              />
-            ))}
-          </div>
-        </div>
         </section>
       </div>
       </div>

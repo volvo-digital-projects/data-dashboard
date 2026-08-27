@@ -674,9 +674,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="voc-component-chip"><b>0[1-4]<\/b>|VOC(?:종합만족도|첫인상|태블릿|해피콜)<\/span><em>\(\d+%\)<\/em>/,
   );
   assert.doesNotMatch(visibleHtml, /class="signal-icon/);
-  assert.doesNotMatch(visibleHtml, /<span class="signal-pill[^>]*>\s*[▲▼]/);
-  assert.match(visibleHtml, /class="signal-pill warning"[^>]*>위험해요<\/span>/);
-  assert.match(visibleHtml, /class="signal-pill caution"[^>]*>힘내세요<\/span>/);
+  assert.doesNotMatch(visibleHtml, /class="signal-pill/);
   assert.match(html, /CX Index/);
   assert.match(visibleHtml, /VOC해피콜<\/span>만 사후보정 가능/);
   assert.match(visibleHtml, /신차해피콜<\/span>만 사후보정 가능/);
@@ -769,30 +767,32 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
   assert.equal(
-    (html.match(/aria-label="Q[12] 통합 종합점수 [^"]+점 지표 보기"/g) ?? [])
+    (html.match(/aria-label="Q[12] 통합 경쟁력 지수 [^"]+점 지표 보기"/g) ?? [])
       .length,
     2,
   );
   assert.match(
     visibleHtml,
-    /aria-label="분기별 통합 종합점수 520점 기준"/,
+    /aria-label="분기별 통합 경쟁력 지수 520점 기준"/,
   );
-  assert.match(visibleHtml, /통합 종합점수/);
+  assert.match(visibleHtml, /통합 경쟁력 지수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
   assert.match(visibleHtml, /Q1[\s\S]*494\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*485\.7/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /통합 종합점수[\s\S]*\(520점 만점\)[\s\S]*490\.2/);
+  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*490\.2/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
-  assert.equal((html.match(/aria-label="Q[12] 통합 종합점수 [^"]+ 지표 보기"/g) ?? []).length, 2);
-  assert.equal((html.match(/aria-label="DSC 평가점수와 RTC 인센티브율"/g) ?? []).length, 3);
-  assert.match(visibleHtml, /DSC 평가점수[\s\S]*RTC 인센티브율[\s\S]*0\.2%/);
+  assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 [^"]+ 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="전국 순위와 RTC 인센티브율"/g) ?? []).length, 3);
+  assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
+  assert.doesNotMatch(visibleHtml, /DSC 평가점수/);
+  assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
-  assert.match(visibleHtml, /볼보 전체 평균[\s\S]*485\.9/);
+  assert.match(visibleHtml, /전국 평균[\s\S]*485\.9/);
   assert.match(visibleHtml, /평균 대비[\s\S]*▲ 4\.3점/);
-  assert.match(visibleHtml, /전국 순위[\s\S]*16위[\s\S]*\/ 39/);
+  assert.match(visibleHtml, /전국[\s\S]*\d+위/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);
   assert.doesNotMatch(visibleHtml, /볼보 전체 전시장|VOLVO KOREA/);
@@ -947,11 +947,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /볼보 강남대치 경쟁력/);
   assert.doesNotMatch(visibleHtml, /COMPETITIVE POSITION/);
   assert.match(html, /aria-label="VOC 분기 평가점수"/);
-  assert.match(html, /위험해요: Q3 전국 평균 대비 5점 이상 미달/);
-  assert.match(visibleHtml, /위험해요/);
-  assert.match(html, /힘내세요: Q2 전국 평균 미만, 5점 미만 차이/);
-  assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 1);
-  assert.match(visibleHtml, /Q3 전국 평균 대비[\s\S]*?▼ 8\.7점/);
+  assert.doesNotMatch(html, /위험해요: Q3 전국 평균 대비 5점 이상 미달/);
+  assert.doesNotMatch(visibleHtml, /위험해요/);
+  assert.doesNotMatch(html, /힘내세요: Q2 전국 평균 미만, 5점 미만 차이/);
+  assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 0);
+  assert.match(visibleHtml, /Q3<\/span> 전국 평균 대비[\s\S]*?▼ 8\.7점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -1721,7 +1721,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
 });
 
-test("aligns the integrated score card with the metric card hierarchy", async () => {
+test("aligns the DSC score group with the integrated competitiveness rail", async () => {
   const [dashboardSource, css] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -1729,11 +1729,15 @@ test("aligns the integrated score card with the metric card hierarchy", async ()
 
   assert.match(
     dashboardSource,
-    /className="metric-card-topline scoreboard-heading"[\s\S]*?통합 종합점수[\s\S]*?className="metric-card-value scoreboard-main-value"/,
+    /className="kpi-column dsc-score-group"[\s\S]*?className="combat-card combat-scoreboard"/,
   );
   assert.match(
     dashboardSource,
-    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-score-context scoreboard-score-context"[\s\S]*?볼보 전체 평균[\s\S]*?className="metric-benchmark scoreboard-benchmark"[\s\S]*?전국 순위/,
+    /className="metric-card-topline scoreboard-heading"[\s\S]*?통합 경쟁력 지수[\s\S]*?className="metric-card-value scoreboard-main-value"/,
+  );
+  assert.match(
+    dashboardSource,
+    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?전국 평균[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
   );
   assert.match(
     dashboardSource,
@@ -1745,24 +1749,26 @@ test("aligns the integrated score card with the metric card hierarchy", async ()
   );
   assert.match(
     css,
-    /\/\* Equal-weight score card overrides \*\/[\s\S]*?--dashboard-combat-share: 24\.6%;/,
+    /\/\* DSC score group \+ integrated competitiveness rail \*\/[\s\S]*?grid-template-columns: minmax\(0, 3fr\) minmax\(236px, 1fr\)/,
   );
   assert.match(
     css,
-    /\/\* Equal-weight score card overrides \*\/[\s\S]*?\.scoreboard-main-value\s*\{[^}]*font-size: clamp\(46px, 3\.25vw, 56px\)/,
+    /\.metric-value-row \.metric-card-value,[\s\S]*?\.scoreboard-main-value\s*\{[^}]*font-size: clamp\(44px, 3\.05vw, 56px\)/,
   );
   assert.match(
     dashboardSource,
-    /className="metric-score-context"[\s\S]*?DSC 평가점수[\s\S]*?RTC 인센티브율[\s\S]*?displayNumber\(rtcRate\)/,
+    /className="metric-stat-chips"[\s\S]*?전국[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
   );
   assert.match(
     css,
-    /\/\* Equal-weight score card overrides \*\/[\s\S]*?\.scoreboard-quarter-strip > button\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\)/,
+    /\.metric-quarter-strip > button,[\s\S]*?\.scoreboard-quarter-strip > button\s*\{[^}]*min-height: 31px/,
   );
   assert.match(
     css,
-    /\/\* Equal-weight score card overrides \*\/[\s\S]*?linear-gradient\(145deg, #f4f7f8 0%, #f1f5f6 58%, #edf3f5 100%\)/,
+    /linear-gradient\(145deg, #eef5f7 0%, #e9f1f4 58%, #e3edf1 100%\)/,
   );
+  assert.doesNotMatch(dashboardSource, /signal-pill|className="metric-track"|DSC 평가점수/);
+  assert.match(dashboardSource, /V3S_EVIDENCE_SEEN_KEY[\s\S]*?metric-resource-new/);
   assert.doesNotMatch(dashboardSource, /2026 SCORE BOARD|scoreboard-quarter-table|scoreboard-summary/);
   assert.doesNotMatch(dashboardSource, /combatSummaryStyles/);
   assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
