@@ -1912,7 +1912,11 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /className="metric-score-lockup"[\s\S]*?className="metric-rank-note"[\s\S]*?\/ 전체[\s\S]*?dashboard\.meta\.showroomCount[\s\S]*?className="metric-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?displayNumber\(dscScore, metric === "v3s" \? 0 : 1\)[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
+    /className="metric-score-lockup"[\s\S]*?className="metric-rank-note"[\s\S]*?\/ 전체[\s\S]*?dashboard\.meta\.showroomCount[\s\S]*?className="metric-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?displayNumber\(dscScore, 0\)[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /DSC 스코어 <strong>\{displayNumber\(selectedMetricDscScore, 0\)\}점<\/strong>/,
   );
   assert.match(
     css,

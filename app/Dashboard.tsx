@@ -697,7 +697,7 @@ function MetricCard({
         >
           <span>
             DSC 스코어{" "}
-            <strong>{displayNumber(dscScore, metric === "v3s" ? 0 : 1)}점</strong>
+            <strong>{displayNumber(dscScore, 0)}점</strong>
           </span>
           <span className={`rtc-chip ${rtcRate < 0.2 ? "has-alert" : ""}`}>
             RTC 인센티브 <strong>{displayNumber(rtcRate)}%</strong>
@@ -3194,7 +3194,7 @@ export default function Dashboard({
               aria-label="DSC 스코어 및 RTC 인센티브율"
             >
               <span>
-                DSC 스코어 <strong>{displayNumber(selectedMetricDscScore)}점</strong>
+                DSC 스코어 <strong>{displayNumber(selectedMetricDscScore, 0)}점</strong>
               </span>
               <span>
                 RTC 인센티브 <strong>{displayNumber(selectedMetricRtcRate)}%</strong>
