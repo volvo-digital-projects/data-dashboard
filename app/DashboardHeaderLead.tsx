@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import DscGuideViewer from "./DscGuideViewer";
+
 type DashboardHeaderLeadProps = {
   title: string;
   accessDate: string;
@@ -9,7 +14,7 @@ export default function DashboardHeaderLead({
   accessDate,
   titleClassName = "",
 }: DashboardHeaderLeadProps) {
-  const compactAccessDate = accessDate.replaceAll(".", "").slice(-6);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
 
   return (
     <>
@@ -17,20 +22,22 @@ export default function DashboardHeaderLead({
         <h1>{title}</h1>
         <div
           className="header-status-row"
-          aria-label={`${compactAccessDate} 기준, Q3 평가·집계중, 로그아웃`}
+          aria-label="DSC 가이드, Q3 평가·집계중, 로그아웃"
         >
-          <div className="header-status-item header-status-item--update">
+          <button
+            type="button"
+            className="header-status-item header-status-item--guide"
+            data-access-date={accessDate}
+            aria-haspopup="dialog"
+            aria-expanded={isGuideOpen}
+            onClick={() => setIsGuideOpen(true)}
+          >
             <span
-              className="header-status-icon header-status-icon--update"
+              className="header-status-icon header-status-icon--guide"
               aria-hidden="true"
             />
-            <span>
-              <time dateTime={accessDate.replaceAll(".", "-")}>
-                {compactAccessDate}
-              </time>{" "}
-              기준
-            </span>
-          </div>
+            <span>DSC 가이드</span>
+          </button>
           <div className="header-status-item header-status-item--progress">
             <span
               className="header-status-icon header-status-icon--progress"
@@ -53,6 +60,9 @@ export default function DashboardHeaderLead({
           </form>
         </div>
       </div>
+      {isGuideOpen ? (
+        <DscGuideViewer onClose={() => setIsGuideOpen(false)} />
+      ) : null}
     </>
   );
 }

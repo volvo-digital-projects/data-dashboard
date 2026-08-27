@@ -614,7 +614,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="identity-meta-row"/);
   assert.match(html, /class="identity-detail-rail"/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
-  assert.match(
+  assert.match(visibleHtml, /DSC 가이드/);
+  assert.doesNotMatch(
     visibleHtml,
     new RegExp(`${compactSeoulToday}[\\s\\S]*?기준`),
   );
@@ -622,8 +623,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q3 평가·집계중/);
   assert.match(
     visibleHtml,
-    /Q3 평가·집계중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
+    /DSC 가이드[\s\S]*?Q3 평가·집계중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
   );
+  assert.match(visibleHtml, /aria-haspopup="dialog" aria-expanded="false"/);
   assert.match(visibleHtml, /class="dashboard-logout-icon" aria-hidden="true"/);
   const dashboardCss = await readFile(
     new URL("../app/globals.css", import.meta.url),
@@ -1174,7 +1176,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">\d{6}<\/time>[\s\S]*?Q3 평가·집계중/,
+    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?DSC 가이드[\s\S]*?Q3 평가·집계중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
@@ -2546,7 +2548,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     sharedHeaderSource,
-    /const compactAccessDate = accessDate\.replaceAll\("\."[,]? ""\)\.slice\(-6\)[\s\S]*?<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?\{compactAccessDate\}[\s\S]*?<\/time>\{" "\}[\s\S]*?기준/,
+    /header-status-item--guide[\s\S]*?aria-haspopup="dialog"[\s\S]*?DSC 가이드[\s\S]*?<DscGuideViewer/,
   );
   assert.doesNotMatch(
     dashboardSource,
@@ -3481,4 +3483,40 @@ test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape v
     viewerCss,
     /@media \(orientation: landscape\) and \(max-height: 900px\)/,
   );
+});
+
+test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
+  const [headerSource, viewerSource, viewerCss] = await Promise.all([
+    readFile(new URL("../app/DashboardHeaderLead.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/DscGuideViewer.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/DscGuideViewer.module.css", import.meta.url), "utf8"),
+  ]);
+
+  await access(
+    new URL(
+      "../public/guides/dsc-competence-2026/2026-rtc-dsc-competence-guide.pdf",
+      import.meta.url,
+    ),
+  );
+  await Promise.all(
+    Array.from({ length: 13 }, (_, index) =>
+      access(
+        new URL(
+          `../public/guides/dsc-competence-2026/pages/page-${String(index + 1).padStart(2, "0")}.jpg`,
+          import.meta.url,
+        ),
+      ),
+    ),
+  );
+
+  assert.match(headerSource, /header-status-icon--guide[\s\S]*?DSC 가이드/);
+  assert.match(headerSource, /aria-haspopup="dialog"/);
+  assert.match(viewerSource, /const PAGE_COUNT = 13/);
+  assert.match(viewerSource, /aria-label="DSC 가이드 닫기"/);
+  assert.match(viewerSource, /event\.key === "Escape"/);
+  assert.match(viewerSource, /IntersectionObserver/);
+  assert.match(viewerCss, /\.backdrop[\s\S]*?position: fixed;[\s\S]*?z-index: 12000/);
+  assert.match(viewerCss, /\.pages\s*\{[^}]*scroll-snap-type: y mandatory/);
+  assert.match(viewerCss, /\.page\s*\{[^}]*height: 100dvh[^}]*scroll-snap-stop: always/);
+  assert.match(viewerCss, /\.closeButton\s*\{[^}]*justify-self: end/);
 });
