@@ -11234,25 +11234,56 @@ body {
   display: grid;
   grid-template-rows: auto auto;
   gap: 3px;
+  min-height: 58px;
+  padding: 4px;
+  border-color: #7f8a90;
 }
 
+.metric-quarter-strip--status > button {
+  min-height: 58px;
+  display: grid;
+  grid-template-rows: auto minmax(25px, 1fr);
+  gap: 4px;
+  padding: 4px;
+  border-color: #7f8a90;
+  background: #f7f9fa;
+}
+
+.metric-quarter-strip--status > button strong,
 .scoreboard-quarter-strip > button strong {
+  width: 100%;
+  min-height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  color: #4c6270;
+  padding: 5px 3px;
+  color: #ffffff;
+  border: 1px solid #164b63;
+  border-radius: 7px;
+  background: #176584;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  font-family: var(--font-korean);
   font-size: 8px;
+  font-weight: 650;
   text-align: center;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+.metric-quarter-strip--status > button.current strong,
 .scoreboard-quarter-strip > button.current strong {
-  color: #245a73;
+  color: #ffffff;
+  background: #135873;
 }
 
+.metric-quarter-strip--status > button.planned strong,
 .scoreboard-quarter-strip > button.planned strong {
-  color: #a8b1b8;
+  color: #ffffff;
   font-family: var(--font-korean);
-  font-size: 7px;
-  font-weight: 600;
+  font-size: 8px;
+  font-weight: 650;
+  opacity: 0.9;
 }
 
 .metric-card-footer,

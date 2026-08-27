@@ -527,8 +527,6 @@ function MetricCard({
   evidenceQuarters = [],
   unseenEvidenceQuarters = [],
   onEvidenceOpen,
-  appeal,
-  appealLabel,
 }: {
   metric: TrendMetricKey;
   value: number;
@@ -543,8 +541,6 @@ function MetricCard({
   evidenceQuarters?: QuarterKey[];
   unseenEvidenceQuarters?: QuarterKey[];
   onEvidenceOpen?: (quarter: QuarterKey) => void;
-  appeal: "possible" | "partial" | "locked";
-  appealLabel?: string;
 }) {
   const signal = getSignal(value, average);
   const quarterLabel = quarter.toUpperCase();
@@ -554,12 +550,14 @@ function MetricCard({
       label: "Q1",
       state: quarter === "q1" ? "current" : "complete",
       available: true,
+      status: "검증완료",
     },
     {
       key: "q2" as const,
       label: "Q2",
       state: quarter === "q2" ? "current" : "complete",
       available: true,
+      status: "검증완료",
     },
     {
       key: metric === "v3s" ? null : ("q3" as const),
@@ -571,17 +569,15 @@ function MetricCard({
             ? "current"
             : "complete",
       available: metric !== "v3s",
+      status: metric === "v3s" ? "평가 전" : "평가 중",
     },
     {
       key: metric === "cx" ? ("q4" as const) : null,
       label: "Q4",
       state:
-        metric === "cx"
-          ? quarter === "q4"
-            ? "current"
-            : "complete"
-          : "planned",
+        metric === "cx" && quarter === "q4" ? "current" : "planned",
       available: metric === "cx",
+      status: "평가 전",
     },
   ];
   const resourceQuarters: QuarterKey[] = ["q1", "q2", "q3", "q4"];
@@ -642,7 +638,9 @@ function MetricCard({
         </strong>
       </div>
       <div
-        className="metric-quarter-strip"
+        className={`metric-quarter-strip ${
+          metric === "v3s" ? "" : "metric-quarter-strip--status"
+        }`}
         aria-label={`${metricMeta[metric].short} 분기 평가점수`}
       >
         {quarterScores.map((quarterItem) => (
@@ -665,6 +663,7 @@ function MetricCard({
             }}
           >
             <small>{quarterItem.label}</small>
+            {metric !== "v3s" && <strong>{quarterItem.status}</strong>}
           </button>
         ))}
       </div>
@@ -713,11 +712,7 @@ function MetricCard({
             );
           })}
         </div>
-      ) : (
-        <div className="metric-card-footer">
-          <AppealBadge type={appeal} labelOverride={appealLabel} />
-        </div>
-      )}
+      ) : null}
     </article>
   );
 }
@@ -2691,16 +2686,19 @@ export default function Dashboard({
     integratedQuarterScoreOf(selected, selectedQuarter) ?? q2IntegratedScore;
   const selectedIntegratedAverage =
     quarterIntegratedAverageOf(selectedQuarter);
-  const nationalRank =
+  const integratedRankOf = (quarter: QuarterKey) =>
     [...dashboard.showrooms]
       .sort(
         (a, b) =>
-          (integratedQuarterScoreOf(b, selectedQuarter) ??
+          (integratedQuarterScoreOf(b, quarter) ??
             Number.NEGATIVE_INFINITY) -
-          (integratedQuarterScoreOf(a, selectedQuarter) ??
+          (integratedQuarterScoreOf(a, quarter) ??
             Number.NEGATIVE_INFINITY),
       )
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
+  const nationalRank = integratedRankOf(selectedQuarter);
+  const q1IntegratedRank = integratedRankOf("q1");
+  const q2IntegratedRank = integratedRankOf("q2");
   const metricRankOf = (metric: TrendMetricKey, quarter: QuarterKey) =>
     [...dashboard.showrooms]
       .sort(
@@ -2996,8 +2994,6 @@ export default function Dashboard({
                 onEvidenceOpen={
                   item.key === "v3s" ? openEvidenceGallery : undefined
                 }
-                appeal={item.appeal}
-                appealLabel={item.appealLabel}
               />
             ))}
           </div>
@@ -3053,24 +3049,28 @@ export default function Dashboard({
                 key: "q1" as const,
                 label: "Q1",
                 integratedScore: q1IntegratedScore,
+                rank: q1IntegratedRank,
                 status: "마감",
               },
               {
                 key: "q2" as const,
                 label: "Q2",
                 integratedScore: q2IntegratedScore,
+                rank: q2IntegratedRank,
                 status: "마감",
               },
               {
                 key: null,
                 label: "Q3",
                 integratedScore: null,
+                rank: null,
                 status: "평가 중",
               },
               {
                 key: null,
                 label: "Q4",
                 integratedScore: null,
+                rank: null,
                 status: "평가 전",
               },
             ].map((quarter) => (
@@ -3085,7 +3085,7 @@ export default function Dashboard({
                 aria-label={
                   quarter.key === null
                     ? `${quarter.label} ${quarter.status}`
-                    : `${quarter.label} 통합 경쟁력 지수 ${displayNumber(quarter.integratedScore)}점 지표 보기`
+                    : `${quarter.label} 통합 경쟁력 지수 전국 ${quarter.rank}위 지표 보기`
                 }
                 onClick={() => {
                   if (quarter.key) {
@@ -3106,7 +3106,7 @@ export default function Dashboard({
                 <strong>
                   {quarter.integratedScore === null
                     ? quarter.status
-                    : displayNumber(quarter.integratedScore)}
+                    : `${quarter.rank}위`}
                 </strong>
               </button>
             ))}

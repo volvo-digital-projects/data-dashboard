@@ -676,19 +676,13 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /class="signal-icon/);
   assert.doesNotMatch(visibleHtml, /class="signal-pill/);
   assert.match(html, /CX Index/);
-  assert.match(visibleHtml, /VOC해피콜<\/span>만 사후보정 가능/);
-  assert.match(visibleHtml, /신차해피콜<\/span>만 사후보정 가능/);
+  assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 사후보정 가능/);
+  assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 사후보정 가능/);
   assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /교차검증 후, 사후보정 가능/);
-  assert.match(
-    visibleHtml,
-    /class="appeal-badge-key">VOC해피콜<\/span>/,
-  );
-  assert.match(
-    visibleHtml,
-    /class="appeal-badge-key">신차해피콜<\/span>/,
-  );
+  assert.equal((visibleHtml.match(/<strong>검증완료<\/strong>/g) ?? []).length, 4);
+  assert.equal((html.match(/metric-quarter-strip--status/g) ?? []).length, 2);
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);
   assert.equal(
@@ -700,7 +694,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     1,
   );
   assert.doesNotMatch(visibleHtml, /<span>\/ (?:100|320)점 만점<\/span>/);
-  assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
+  assert.equal((html.match(/class="metric-quarter-strip(?: |")/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
   assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-resource-photo"/g) ?? []).length, 4);
@@ -722,11 +716,18 @@ test("server-renders the selected CDSID dashboard", async () => {
     dashboardCss,
     /\.metric-benchmark-quarter\s*\{[^}]*font-family: var\(--font-latin\);[^}]*font-weight: 600;/,
   );
-  const quarterStrips = [
-    ...html.matchAll(/class="metric-quarter-strip"[^>]*>([\s\S]*?)<\/div>/g),
+  const v3sQuarterStrip = html.match(
+    /class="metric-quarter-strip " aria-label="V3S[^>]*>([\s\S]*?)<\/div>/,
+  );
+  assert.ok(v3sQuarterStrip);
+  assert.doesNotMatch(v3sQuarterStrip[1], /<strong/);
+  const statusQuarterStrips = [
+    ...html.matchAll(
+      /class="metric-quarter-strip metric-quarter-strip--status"[^>]*>([\s\S]*?)<\/div>/g,
+    ),
   ];
-  assert.equal(quarterStrips.length, 3);
-  quarterStrips.forEach(([, strip]) => assert.doesNotMatch(strip, /<strong/));
+  assert.equal(statusQuarterStrips.length, 2);
+  statusQuarterStrips.forEach(([, strip]) => assert.match(strip, /<strong/));
   assert.match(
     visibleHtml,
     /class="metric-benchmark"[\s\S]*?<strong class="negative caution">▼ \d+\.\d점<\/strong>/,
@@ -767,7 +768,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
   assert.equal(
-    (html.match(/aria-label="Q[12] 통합 경쟁력 지수 [^"]+점 지표 보기"/g) ?? [])
+    (html.match(/aria-label="Q[12] 통합 경쟁력 지수 전국 \d+위 지표 보기"/g) ?? [])
       .length,
     2,
   );
@@ -777,13 +778,13 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(visibleHtml, /통합 경쟁력 지수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
-  assert.match(visibleHtml, /Q1[\s\S]*494\.7/);
-  assert.match(visibleHtml, /Q2[\s\S]*485\.7/);
+  assert.match(visibleHtml, /Q1[\s\S]*8위/);
+  assert.match(visibleHtml, /Q2[\s\S]*25위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
   assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*490\.2/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
-  assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 [^"]+ 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전국 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
     (html.match(/aria-label="DSC 스코어 및 RTC 인센티브율"/g) ?? []).length,
     4,
@@ -1779,6 +1780,10 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.match(
     css,
     /\.metric-quarter-strip > button,[\s\S]*?\.scoreboard-quarter-strip > button\s*\{[^}]*min-height: 31px/,
+  );
+  assert.match(
+    css,
+    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 58px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*background: #176584/,
   );
   assert.match(
     css,
