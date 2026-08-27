@@ -2595,11 +2595,6 @@ export default function Dashboard({
   const showroomCodeWidth = Math.max(
     ...dashboard.showrooms.map((item) => item.cdsid.length),
   );
-  const displayUpdateTitle =
-    latestUpdate.effectiveDate.replaceAll(".", "-") === "2026-07-29" ||
-    latestUpdate.title === "현재 Q3평가 진행중"
-      ? "Q1, Q2 마감, 현재 Q3평가 진행중"
-      : latestUpdate.title;
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;
   const cumulativeDscAverage = (q1Combat + combat) / 2;
@@ -2678,7 +2673,6 @@ export default function Dashboard({
           <DashboardHeaderLead
             title={`${displayShowroomName(selected.showroom)} 현황`}
             accessDate={accessDate}
-            status={displayUpdateTitle}
           />
         <div className="identity-detail-rail">
           <dl>

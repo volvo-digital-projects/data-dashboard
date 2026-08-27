@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 86);
+  assert.equal(release.items.length, 87);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -584,6 +584,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   })
     .format(new Date())
     .replaceAll("-", ".");
+  const compactSeoulToday = seoulToday.replaceAll(".", "").slice(-6);
   assert.match(html, /DSC COMMAND/);
   assert.doesNotMatch(
     visibleHtml,
@@ -611,9 +612,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(
     visibleHtml,
-    new RegExp(`${seoulToday.replaceAll(".", "\\.")}[\\s\\S]*?기준`),
+    new RegExp(`${compactSeoulToday}[\\s\\S]*?기준`),
   );
-  assert.match(visibleHtml, /Q1 \/ Q2 마감/);
+  assert.doesNotMatch(visibleHtml, /Q1 \/ Q2 마감/);
   assert.match(visibleHtml, /Q3 평가·집계중/);
   assert.match(
     visibleHtml,
@@ -626,7 +627,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
-    /\.header-status-row\s*\{[^}]*--header-status-item-width: 100px[^}]*width: max-content[^}]*display: grid[^}]*grid-template-columns: repeat\(4, var\(--header-status-item-width\)\)[^}]*gap: 5px/,
+    /\.header-status-row\s*\{[^}]*--header-status-item-width: 100px[^}]*width: max-content[^}]*display: grid[^}]*grid-template-columns: repeat\(3, var\(--header-status-item-width\)\)[^}]*gap: 5px/,
   );
   assert.match(
     dashboardCss,
@@ -1100,7 +1101,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">[\d.]+<\/time>[\s\S]*?Q1 \/ Q2 마감[\s\S]*?Q3 평가·집계중/,
+    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?<time dateTime="\d{4}-\d{2}-\d{2}">\d{6}<\/time>[\s\S]*?Q3 평가·집계중/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);
@@ -2316,7 +2317,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     sharedHeaderSource,
-    /<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>\{accessDate\}<\/time> 기준/,
+    /const compactAccessDate = accessDate\.replaceAll\("\."[,]? ""\)\.slice\(-6\)[\s\S]*?<time dateTime=\{accessDate\.replaceAll\("\."[,]? "-"\)\}>[\s\S]*?\{compactAccessDate\}[\s\S]*?<\/time>\{" "\}[\s\S]*?기준/,
   );
   assert.doesNotMatch(
     dashboardSource,

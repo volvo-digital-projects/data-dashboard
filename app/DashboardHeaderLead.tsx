@@ -1,23 +1,23 @@
 type DashboardHeaderLeadProps = {
   title: string;
   accessDate: string;
-  status: string;
   titleClassName?: string;
 };
 
 export default function DashboardHeaderLead({
   title,
   accessDate,
-  status,
   titleClassName = "",
 }: DashboardHeaderLeadProps) {
+  const compactAccessDate = accessDate.replaceAll(".", "").slice(-6);
+
   return (
     <>
       <div className={`identity-title ${titleClassName}`.trim()}>
         <h1>{title}</h1>
         <div
           className="header-status-row"
-          aria-label={`${accessDate} 기준, ${status}, 로그아웃`}
+          aria-label={`${compactAccessDate} 기준, Q3 평가·집계중, 로그아웃`}
         >
           <div className="header-status-item header-status-item--update">
             <span
@@ -25,15 +25,11 @@ export default function DashboardHeaderLead({
               aria-hidden="true"
             />
             <span>
-              <time dateTime={accessDate.replaceAll(".", "-")}>{accessDate}</time> 기준
+              <time dateTime={accessDate.replaceAll(".", "-")}>
+                {compactAccessDate}
+              </time>{" "}
+              기준
             </span>
-          </div>
-          <div className="header-status-item header-status-item--closed">
-            <span
-              className="header-status-icon header-status-icon--closed"
-              aria-hidden="true"
-            />
-            <span>Q1 / Q2 마감</span>
           </div>
           <div className="header-status-item header-status-item--progress">
             <span

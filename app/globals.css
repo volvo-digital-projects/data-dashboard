@@ -10734,7 +10734,7 @@ body {
   min-width: 0;
   min-height: 24px;
   display: grid;
-  grid-template-columns: repeat(4, var(--header-status-item-width));
+  grid-template-columns: repeat(3, var(--header-status-item-width));
   align-items: center;
   gap: 5px;
   color: rgba(232, 243, 248, 0.9);
@@ -10806,23 +10806,6 @@ body {
   border-top: 1px solid currentColor;
   border-right: 1px solid currentColor;
   transform: rotate(20deg);
-}
-
-.header-status-icon--closed {
-  border: 1px solid currentColor;
-  border-radius: 50%;
-}
-
-.header-status-icon--closed::after {
-  content: "";
-  width: 6px;
-  height: 3px;
-  position: absolute;
-  left: 4px;
-  top: 4px;
-  border-left: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(-45deg);
 }
 
 .header-status-icon--progress {

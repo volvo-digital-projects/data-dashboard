@@ -654,7 +654,6 @@ export default function CompetitiveAnalysis({
           <DashboardHeaderLead
             title={`${displayShowroomName(selected.showroom)} 분석`}
             accessDate={accessDate}
-            status="Q1, Q2 마감, 현재 Q3평가 진행중"
             titleClassName="analysis-title"
           />
         <div className="analysis-context" aria-label="현재 전시장 정보">
