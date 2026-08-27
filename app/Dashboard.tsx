@@ -583,11 +583,13 @@ function MetricCard({
         </div>
       </div>
       <div className="metric-value-row">
-        <div className="metric-card-value">{displayNumber(value)}</div>
-        <div className="metric-stat-chips" aria-label="전국 순위와 RTC 인센티브율">
-          <span>
-            전국 <strong>{rank}위</strong>
+        <div className="metric-score-lockup">
+          <div className="metric-card-value">{displayNumber(value)}</div>
+          <span className="metric-rank-note" aria-label={`전국 순위 ${rank}위`}>
+            / 전국 <strong>{rank}위</strong>
           </span>
+        </div>
+        <div className="metric-stat-chips" aria-label="RTC 인센티브율">
           <span>
             RTC 인센티브 <strong>{displayNumber(rtcRate)}%</strong>
           </span>
@@ -2965,13 +2967,18 @@ export default function Dashboard({
           </div>
 
           <div className="metric-value-row">
-            <div className="metric-card-value scoreboard-main-value">
-              {displayNumber(cumulativeAverage)}
-            </div>
-            <div className="metric-stat-chips scoreboard-stat-chips" aria-label="전국 순위와 볼보 평균">
-              <span>
-                전국 <strong>{cumulativeRank}위</strong>
+            <div className="metric-score-lockup">
+              <div className="metric-card-value scoreboard-main-value">
+                {displayNumber(cumulativeAverage)}
+              </div>
+              <span
+                className="metric-rank-note"
+                aria-label={`전국 순위 ${cumulativeRank}위`}
+              >
+                / 전국 <strong>{cumulativeRank}위</strong>
               </span>
+            </div>
+            <div className="metric-stat-chips scoreboard-stat-chips" aria-label="볼보 평균">
               <span>
                 볼보 평균 <strong>{displayNumber(cumulativeNationalAverage)}</strong>
               </span>

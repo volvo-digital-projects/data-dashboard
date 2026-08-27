@@ -11061,8 +11061,16 @@ body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
-  gap: 8px;
+  gap: 6px;
   margin-top: 10px;
+}
+
+.metric-score-lockup {
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .metric-value-row .metric-card-value,
@@ -11078,6 +11086,28 @@ body {
   font-weight: 650;
   line-height: 0.9;
   letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-rank-note {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 3px;
+  color: #71838e;
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.metric-rank-note strong {
+  color: #425b69;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 650;
   font-variant-numeric: tabular-nums;
 }
 
