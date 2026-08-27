@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 87);
+  assert.equal(release.items.length, 88);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -771,17 +771,19 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="scoreboard-quarter-row/g) ?? []).length, 4);
   assert.match(
     visibleHtml,
-    /aria-label="분기별 통합 종합점수 520점, DSC 평가점수 330점, RTC 인센티브율 0\.6% 기준"/,
+    /aria-label="분기별 통합 종합점수 520점 기준"/,
   );
   assert.match(visibleHtml, /2026 누적 통합 종합점수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
-  assert.match(visibleHtml, /Q1[\s\S]*494\.7[\s\S]*302\.7[\s\S]*0\.6%/);
-  assert.match(visibleHtml, /Q2[\s\S]*485\.7[\s\S]*294\.9[\s\S]*0\.6%/);
+  assert.match(visibleHtml, /Q1[\s\S]*494\.7/);
+  assert.match(visibleHtml, /Q2[\s\S]*485\.7/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
   assert.match(visibleHtml, /누적 통합 종합점수[\s\S]*490\.2[\s\S]*\/ 520점/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
-  assert.equal((html.match(/aria-label="Q[12] 통합 [^"]+ 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q[12] 통합 종합점수 [^"]+ 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="DSC 평가점수와 RTC 인센티브율"/g) ?? []).length, 3);
+  assert.match(visibleHtml, /DSC 평가점수[\s\S]*RTC 인센티브율[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(visibleHtml, /볼보 전체 평균[\s\S]*485\.9/);
@@ -1723,7 +1725,7 @@ test("separates the quarterly scoreboard from the cumulative summary", async () 
 
   assert.match(
     dashboardSource,
-    /className="scoreboard-quarter-table"[\s\S]*?분기별 통합 종합점수 \$\{integratedScoreMax\}점, DSC 평가점수 \$\{dashboard\.meta\.combatMax\}점, RTC 인센티브율 \$\{rtcIncentiveMax\}% 기준/,
+    /className="scoreboard-quarter-table"[\s\S]*?분기별 통합 종합점수 \$\{integratedScoreMax\}점 기준/,
   );
   assert.match(
     dashboardSource,
@@ -1735,15 +1737,19 @@ test("separates the quarterly scoreboard from the cumulative summary", async () 
   );
   assert.match(
     dashboardSource,
-    /const rtcIncentiveRateOf =[\s\S]*?v3s >= 90 \? 0\.2 : v3s >= 85 \? 0\.1 : 0[\s\S]*?voc >= 85 \? 0\.2 : 0\.1[\s\S]*?cx >= 100 \? 0\.2 : 0\.1/,
+    /const metricRtcIncentiveRateOf =[\s\S]*?metric === "v3s"[\s\S]*?value >= 90 \? 0\.2 : value >= 85 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?value >= 100 \? 0\.2 : 0\.1/,
   );
   assert.match(
     css,
-    /\.scoreboard-layout\s*\{[^}]*grid-template-columns: minmax\(285px, 1\.42fr\) minmax\(180px, 0\.9fr\)/,
+    /\.scoreboard-layout\s*\{[^}]*grid-template-columns: minmax\(230px, 1\.08fr\) minmax\(210px, 1fr\)/,
   );
   assert.match(
     css,
-    /\.scoreboard-quarter-row\s*\{[^}]*grid-template-columns:[^}]*34px minmax\(76px, 1\.18fr\) minmax\(68px, 1fr\) minmax\(72px, 1fr\)/,
+    /\.scoreboard-quarter-row\s*\{[^}]*grid-template-columns: 54px minmax\(130px, 1fr\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="metric-score-context"[\s\S]*?DSC 평가점수[\s\S]*?RTC 인센티브율[\s\S]*?displayNumber\(rtcRate\)/,
   );
   assert.match(
     css,
@@ -2618,7 +2624,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.scoreboard-primary-score > strong\s*\{[^}]*font-size: clamp\(36px, 2\.7vw, 43px\)/,
+    /\.scoreboard-primary-score > strong\s*\{[^}]*font-size: clamp\(42px, 3vw, 49px\)/,
   );
   assert.match(
     css,

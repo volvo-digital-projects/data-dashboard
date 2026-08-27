@@ -357,8 +357,6 @@ const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
 
 const integratedScoreMax =
   metricMeta.v3s.max + metricMeta.voc.max + metricMeta.cx.max;
-const rtcIncentiveMax = 0.6;
-
 const integratedQuarterScoreOf = (
   item: Showroom,
   quarter: QuarterKey,
@@ -378,19 +376,17 @@ const quarterIntegratedAverageOf = (quarter: QuarterKey) =>
     0,
   );
 
-const rtcIncentiveRateOf = (
+const metricRtcIncentiveRateOf = (
   item: Showroom,
+  metric: TrendMetricKey,
   quarter: QuarterKey,
 ): number | null => {
-  const v3s = quarterValueOf(item, "v3s", quarter);
-  const voc = quarterValueOf(item, "voc", quarter);
-  const cx = quarterValueOf(item, "cx", quarter);
-  if (v3s === null || voc === null || cx === null) return null;
+  const value = quarterValueOf(item, metric, quarter);
+  if (value === null) return null;
 
-  const v3sRate = v3s >= 90 ? 0.2 : v3s >= 85 ? 0.1 : 0;
-  const vocRate = voc >= 85 ? 0.2 : 0.1;
-  const cxRate = cx >= 100 ? 0.2 : 0.1;
-  return Number((v3sRate + vocRate + cxRate).toFixed(1));
+  if (metric === "v3s") return value >= 90 ? 0.2 : value >= 85 ? 0.1 : 0;
+  if (metric === "voc") return value >= 85 ? 0.2 : 0.1;
+  return value >= 100 ? 0.2 : 0.1;
 };
 
 const groupQuarterAverageOf = (
@@ -437,13 +433,6 @@ const displayShowroomName = (name: string) => {
     : showroomName;
   return `볼보 ${normalizedName}`;
 };
-
-function getTier(score: number) {
-  if (score >= 320) return { className: "diamond" };
-  if (score >= 310) return { className: "platinum" };
-  if (score >= 300) return { className: "gold" };
-  return { className: "watch" };
-}
 
 function getSignal(value: number, average: number) {
   const delta = value - average;
@@ -509,6 +498,7 @@ function MetricCard({
   metric,
   value,
   average,
+  rtcRate,
   quarter,
   active,
   onSelect,
@@ -521,6 +511,7 @@ function MetricCard({
   metric: TrendMetricKey;
   value: number;
   average: number;
+  rtcRate: number | null;
   quarter: QuarterKey;
   active: boolean;
   onSelect: () => void;
@@ -598,6 +589,13 @@ function MetricCard({
         </span>
       </div>
       <div className="metric-card-value">{displayNumber(value)}</div>
+      <div className="metric-score-context" aria-label="DSC 평가점수와 RTC 인센티브율">
+        <span>DSC 평가점수</span>
+        <span>
+          RTC 인센티브율
+          <strong>{displayNumber(rtcRate)}%</strong>
+        </span>
+      </div>
       <div
         className="metric-benchmark"
         title={`${quarterLabel} 전국 평균 ${displayNumber(average)}점`}
@@ -2595,9 +2593,6 @@ export default function Dashboard({
   const showroomCodeWidth = Math.max(
     ...dashboard.showrooms.map((item) => item.cdsid.length),
   );
-  const combat = selected.combat ?? 0;
-  const q1Combat = selected.q1?.combat ?? combat;
-  const cumulativeDscAverage = (q1Combat + combat) / 2;
   const q1IntegratedScore = integratedQuarterScoreOf(selected, "q1") ?? 0;
   const q2IntegratedScore = integratedQuarterScoreOf(selected, "q2") ?? 0;
   const cumulativeAverage = (q1IntegratedScore + q2IntegratedScore) / 2;
@@ -2624,7 +2619,6 @@ export default function Dashboard({
     integratedQuarterScoreOf(selected, selectedQuarter) ?? q2IntegratedScore;
   const selectedIntegratedAverage =
     quarterIntegratedAverageOf(selectedQuarter);
-  const tier = getTier(cumulativeDscAverage);
   const nationalRank =
     [...dashboard.showrooms]
       .sort(
@@ -2641,6 +2635,7 @@ export default function Dashboard({
       quarter: metricQuarters.v3s,
       value: quarterValueOf(selected, "v3s", metricQuarters.v3s) ?? 0,
       average: quarterAverageOf("v3s", metricQuarters.v3s),
+      rtcRate: metricRtcIncentiveRateOf(selected, "v3s", metricQuarters.v3s),
       appeal: "possible" as const,
       appealLabel: undefined,
     },
@@ -2649,6 +2644,7 @@ export default function Dashboard({
       quarter: metricQuarters.voc,
       value: quarterValueOf(selected, "voc", metricQuarters.voc) ?? 0,
       average: quarterAverageOf("voc", metricQuarters.voc),
+      rtcRate: metricRtcIncentiveRateOf(selected, "voc", metricQuarters.voc),
       appeal: "partial" as const,
       appealLabel: "VOC해피콜만 사후보정 가능",
     },
@@ -2657,6 +2653,7 @@ export default function Dashboard({
       quarter: metricQuarters.cx,
       value: quarterValueOf(selected, "cx", metricQuarters.cx) ?? 0,
       average: quarterAverageOf("cx", metricQuarters.cx),
+      rtcRate: metricRtcIncentiveRateOf(selected, "cx", metricQuarters.cx),
       appeal: "partial" as const,
       appealLabel: "신차해피콜만 사후보정 가능",
     },
@@ -2867,7 +2864,7 @@ export default function Dashboard({
           className="hero-grid"
           key={`showroom-score-${selected.cdsid}`}
         >
-        <article className={`combat-card combat-scoreboard ${tier.className}`}>
+        <article className="combat-card combat-scoreboard">
           <header className="scoreboard-heading">
             <div>
               <span className="english-title">2026 SCORE BOARD</span>
@@ -2880,18 +2877,12 @@ export default function Dashboard({
             <div
               className="scoreboard-quarter-table"
               role="table"
-              aria-label={`분기별 통합 종합점수 ${integratedScoreMax}점, DSC 평가점수 ${dashboard.meta.combatMax}점, RTC 인센티브율 ${rtcIncentiveMax}% 기준`}
+              aria-label={`분기별 통합 종합점수 ${integratedScoreMax}점 기준`}
             >
               <div className="scoreboard-table-head" role="row">
                 <span role="columnheader">분기</span>
                 <span role="columnheader">
                   통합 종합점수<small>{integratedScoreMax}점</small>
-                </span>
-                <span role="columnheader">
-                  DSC 평가점수<small>{dashboard.meta.combatMax}점</small>
-                </span>
-                <span role="columnheader">
-                  RTC 인센티브율<small>{rtcIncentiveMax}%</small>
                 </span>
               </div>
               {[
@@ -2899,32 +2890,24 @@ export default function Dashboard({
                   key: "q1" as const,
                   label: "Q1",
                   integratedScore: q1IntegratedScore,
-                  dscScore: q1Combat,
-                  rtcRate: rtcIncentiveRateOf(selected, "q1"),
                   status: "마감",
                 },
                 {
                   key: "q2" as const,
                   label: "Q2",
                   integratedScore: q2IntegratedScore,
-                  dscScore: combat,
-                  rtcRate: rtcIncentiveRateOf(selected, "q2"),
                   status: "마감",
                 },
                 {
                   key: null,
                   label: "Q3",
                   integratedScore: null,
-                  dscScore: null,
-                  rtcRate: null,
                   status: "평가 중",
                 },
                 {
                   key: null,
                   label: "Q4",
                   integratedScore: null,
-                  dscScore: null,
-                  rtcRate: null,
                   status: "평가 전",
                 },
               ].map((quarter) => (
@@ -2940,7 +2923,7 @@ export default function Dashboard({
                     aria-label={
                       quarter.key === null
                         ? `${quarter.label} ${quarter.status}`
-                        : `${quarter.label} 통합 ${displayNumber(quarter.integratedScore)}점, DSC ${displayNumber(quarter.dscScore)}점, RTC ${displayNumber(quarter.rtcRate)}% 지표 보기`
+                        : `${quarter.label} 통합 종합점수 ${displayNumber(quarter.integratedScore)}점 지표 보기`
                     }
                     onClick={() => {
                       if (quarter.key) {
@@ -2963,11 +2946,7 @@ export default function Dashboard({
                         {quarter.status}
                       </span>
                     ) : (
-                      <>
-                        <span role="cell">{displayNumber(quarter.integratedScore)}</span>
-                        <span role="cell">{displayNumber(quarter.dscScore)}</span>
-                        <span role="cell">{displayNumber(quarter.rtcRate)}%</span>
-                      </>
+                      <span role="cell">{displayNumber(quarter.integratedScore)}</span>
                     )}
                 </button>
               ))}
@@ -3016,6 +2995,7 @@ export default function Dashboard({
                 metric={item.key}
                 value={item.value}
                 average={item.average}
+                rtcRate={item.rtcRate}
                 quarter={item.quarter}
                 active={trendMetric === item.key}
                 onSelect={() => setTrendMetric(item.key)}
