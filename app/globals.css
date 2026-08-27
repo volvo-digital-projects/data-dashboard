@@ -4476,6 +4476,274 @@ input:focus-visible {
   color: var(--muted);
 }
 
+.analysis-staff-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px 24px;
+  border: 1px solid rgba(44, 91, 116, 0.16);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 16px 34px -30px rgba(12, 45, 62, 0.6);
+}
+
+.analysis-staff-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(44, 91, 116, 0.12);
+}
+
+.analysis-staff-kicker {
+  display: block;
+  margin-bottom: 5px;
+  color: #ef743e;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.analysis-staff-heading h2 {
+  margin: 0;
+  color: #102d40;
+  font-size: 19px;
+  font-weight: 760;
+}
+
+.analysis-staff-heading p {
+  margin: 7px 0 0;
+  color: #708493;
+  font-size: 11px;
+}
+
+.analysis-staff-source {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.analysis-staff-source span {
+  min-height: 27px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid #d6e4eb;
+  border-radius: 999px;
+  background: #f7fafb;
+  color: #486779;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.analysis-staff-quarters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 86px));
+  gap: 7px;
+}
+
+.analysis-staff-quarters button {
+  min-height: 34px;
+  border: 1px solid #d6e2e8;
+  border-radius: 6px;
+  background: #f6f9fa;
+  color: #718694;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.analysis-staff-quarters button.active {
+  border-color: #6fabc2;
+  background: #e5f2f7;
+  color: #17617f;
+  box-shadow: inset 0 0 0 1px rgba(91, 158, 184, 0.24);
+}
+
+.analysis-staff-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.analysis-staff-summary article {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 13px 15px;
+  border: 1px solid #dbe6eb;
+  border-radius: 7px;
+  background: #f7fafb;
+}
+
+.analysis-staff-summary article.audit {
+  border-color: #f0dfd6;
+  background: #fff9f6;
+}
+
+.analysis-staff-summary span {
+  color: #657c8b;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.analysis-staff-summary strong {
+  color: #102d40;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.analysis-staff-summary strong small {
+  margin-left: 4px;
+  color: #718694;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.analysis-staff-table {
+  overflow: hidden;
+  border: 1px solid #dde7ec;
+  border-radius: 7px;
+}
+
+.analysis-staff-table-head,
+.analysis-staff-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 1.3fr) minmax(92px, 0.9fr) minmax(86px, 0.8fr) minmax(100px, 0.9fr) minmax(120px, 1fr);
+  align-items: center;
+  column-gap: 12px;
+  min-height: 42px;
+  padding: 0 16px;
+}
+
+.analysis-staff-table-head {
+  background: #edf3f6;
+  color: #617988;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.analysis-staff-row {
+  border-top: 1px solid #edf2f4;
+  background: #fff;
+  color: #607684;
+  font-size: 11px;
+}
+
+.analysis-staff-row:nth-child(odd) {
+  background: #fbfcfd;
+}
+
+.analysis-staff-row strong {
+  color: #173a4f;
+  font-size: 12px;
+}
+
+.analysis-staff-row b {
+  color: #0d607d;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 13px;
+}
+
+.analysis-staff-row em {
+  justify-self: start;
+  min-width: 64px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eef5f7;
+  color: #527080;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+}
+
+.analysis-staff-row em.positive {
+  background: #e8f6f0;
+  color: #18775c;
+}
+
+.analysis-staff-row em.negative {
+  background: #fff0ef;
+  color: #bd3c45;
+}
+
+.analysis-staff-row.empty {
+  color: #a0adb5;
+}
+
+.analysis-staff-row.empty strong,
+.analysis-staff-row.empty b {
+  color: #81929c;
+}
+
+.analysis-staff-audit {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 13px;
+  border: 1px solid #f0dfd6;
+  border-radius: 6px;
+  background: #fff9f6;
+  color: #7d6a60;
+  font-size: 10px;
+}
+
+.analysis-staff-audit strong {
+  color: #b25331;
+}
+
+.analysis-staff-audit p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.analysis-staff-audit span {
+  white-space: nowrap;
+  color: #8b776c;
+}
+
+@media (max-width: 900px) {
+  .analysis-staff-card {
+    padding: 18px;
+  }
+
+  .analysis-staff-heading {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .analysis-staff-source {
+    justify-content: flex-start;
+  }
+
+  .analysis-staff-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .analysis-staff-table {
+    overflow-x: auto;
+  }
+
+  .analysis-staff-table-head,
+  .analysis-staff-row {
+    min-width: 680px;
+  }
+
+  .analysis-staff-audit {
+    grid-template-columns: 1fr;
+  }
+}
+
 .v3s-award-card {
   min-width: 0;
   padding: 16px 20px;

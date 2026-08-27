@@ -10,6 +10,7 @@ import {
   type CSSProperties,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
+import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
@@ -36,6 +37,27 @@ type AnalysisPoint = AnalysisShowroom & {
   happyScore: number;
   combined: number;
 };
+
+type StaffQuarter = "Q1" | "Q2" | "Q3" | "YTD";
+type StaffQuarterMetric = { responses: number; scoreSum: number };
+type StaffEmployee = {
+  name: string;
+  role: string;
+  quarters: Partial<Record<Exclude<StaffQuarter, "YTD">, StaffQuarterMetric>>;
+};
+type StaffAnalysisShowroom = {
+  showroom: string;
+  dealer: string;
+  dmsShowroom: string;
+  employees: StaffEmployee[];
+  excludedRawNames: Array<{ name: string; responses: number; reason: string }>;
+};
+
+const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
+  string,
+  StaffAnalysisShowroom
+>;
+const staffAnalysisSource = vocStaffAnalysisJson.source;
 
 type ScatterLabelPlacement =
   | "left-up"
@@ -424,6 +446,7 @@ export default function CompetitiveAnalysis({
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
+  const [staffQuarter, setStaffQuarter] = useState<StaffQuarter>("Q3");
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
@@ -525,6 +548,54 @@ export default function CompetitiveAnalysis({
     .map((period) => period.id);
   const selectedAwardCount = selectedAwardPeriods.length;
   const selectedAwardName = displayShowroomNameWithoutBrand(selected.showroom);
+  const selectedStaffAnalysis = staffAnalysisByCdsid[selected.cdsid];
+  const selectedStaffRows = useMemo(() => {
+    if (!selectedStaffAnalysis) return [];
+
+    return selectedStaffAnalysis.employees
+      .map((employee) => {
+        const metrics =
+          staffQuarter === "YTD"
+            ? Object.values(employee.quarters).reduce<StaffQuarterMetric>(
+                (total, current) => ({
+                  responses: total.responses + (current?.responses ?? 0),
+                  scoreSum: total.scoreSum + (current?.scoreSum ?? 0),
+                }),
+                { responses: 0, scoreSum: 0 },
+              )
+            : employee.quarters[staffQuarter] ?? { responses: 0, scoreSum: 0 };
+        return {
+          ...employee,
+          responses: metrics.responses,
+          scoreSum: metrics.scoreSum,
+          average:
+            metrics.responses > 0 ? metrics.scoreSum / metrics.responses : null,
+        };
+      })
+      .sort((a, b) => {
+        if (a.average === null && b.average !== null) return 1;
+        if (a.average !== null && b.average === null) return -1;
+        if (a.average !== null && b.average !== null && a.average !== b.average) {
+          return b.average - a.average;
+        }
+        if (a.responses !== b.responses) return b.responses - a.responses;
+        return a.name.localeCompare(b.name, "ko-KR");
+      });
+  }, [selectedStaffAnalysis, staffQuarter]);
+  const selectedStaffResponses = selectedStaffRows.reduce(
+    (sum, employee) => sum + employee.responses,
+    0,
+  );
+  const selectedStaffScoreSum = selectedStaffRows.reduce(
+    (sum, employee) => sum + employee.scoreSum,
+    0,
+  );
+  const selectedStaffAverage = selectedStaffResponses
+    ? selectedStaffScoreSum / selectedStaffResponses
+    : null;
+  const selectedStaffRespondents = selectedStaffRows.filter(
+    (employee) => employee.responses > 0,
+  ).length;
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
@@ -975,6 +1046,141 @@ export default function CompetitiveAnalysis({
           </footer>
         </article>
       </section>
+
+      {selectedStaffAnalysis ? (
+        <section
+          className="analysis-staff-card"
+          aria-label={`${displayShowroomName(selected.showroom)} 현직 영업 인력 상담 만족도`}
+        >
+          <header className="analysis-staff-heading">
+            <div>
+              <span className="analysis-staff-kicker">VOC STAFF QUALITY</span>
+              <h2>현직 영업 인력 상담 만족도</h2>
+              <p>
+                Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터와
+                교차검증합니다.
+              </p>
+            </div>
+            <div className="analysis-staff-source">
+              <span>DMS 명단 {selectedStaffAnalysis.employees.length}명</span>
+              <span>VOC {staffAnalysisSource.vocThrough.replaceAll("-", ".")} 기준</span>
+            </div>
+          </header>
+
+          <nav className="analysis-staff-quarters" aria-label="직원 상담 만족도 기간">
+            {(["Q1", "Q2", "Q3", "YTD"] as StaffQuarter[]).map((quarter) => (
+              <button
+                type="button"
+                className={staffQuarter === quarter ? "active" : ""}
+                aria-pressed={staffQuarter === quarter}
+                onClick={() => setStaffQuarter(quarter)}
+                key={quarter}
+              >
+                {quarter === "YTD" ? "누적" : quarter}
+              </button>
+            ))}
+          </nav>
+
+          <div className="analysis-staff-summary">
+            <article>
+              <span>상담 만족도</span>
+              <strong>
+                {selectedStaffAverage === null
+                  ? "―"
+                  : selectedStaffAverage.toFixed(1)}
+                <small>/ 10점</small>
+              </strong>
+            </article>
+            <article>
+              <span>VOC 회신</span>
+              <strong>
+                {selectedStaffResponses}
+                <small>건</small>
+              </strong>
+            </article>
+            <article>
+              <span>응답 보유 직원</span>
+              <strong>
+                {selectedStaffRespondents}
+                <small>/ {selectedStaffAnalysis.employees.length}명</small>
+              </strong>
+            </article>
+            <article className="audit">
+              <span>교차검증 제외</span>
+              <strong>
+                {selectedStaffAnalysis.excludedRawNames.length}
+                <small>명</small>
+              </strong>
+            </article>
+          </div>
+
+          <div className="analysis-staff-table" role="table" aria-label="직원별 상담 만족도">
+            <div className="analysis-staff-table-head" role="row">
+              <span role="columnheader">직원</span>
+              <span role="columnheader">직무</span>
+              <span role="columnheader">VOC 회신</span>
+              <span role="columnheader">상담 만족도</span>
+              <span role="columnheader">전시장 평균 대비</span>
+            </div>
+            {selectedStaffRows.map((employee) => {
+              const delta =
+                employee.average !== null && selectedStaffAverage !== null
+                  ? employee.average - selectedStaffAverage
+                  : null;
+              return (
+                <div
+                  className={`analysis-staff-row ${
+                    employee.average === null ? "empty" : ""
+                  }`}
+                  role="row"
+                  key={employee.name}
+                >
+                  <strong role="cell">{employee.name}</strong>
+                  <span role="cell">{employee.role}</span>
+                  <span role="cell">
+                    {employee.responses ? `${employee.responses}건` : "회신 없음"}
+                  </span>
+                  <b role="cell">
+                    {employee.average === null ? "―" : employee.average.toFixed(1)}
+                  </b>
+                  <em
+                    role="cell"
+                    className={
+                      delta === null
+                        ? "neutral"
+                        : delta > 0
+                          ? "positive"
+                          : delta < 0
+                            ? "negative"
+                            : "neutral"
+                    }
+                  >
+                    {delta === null
+                      ? "표본 없음"
+                      : `${delta > 0 ? "▲" : delta < 0 ? "▼" : "―"} ${Math.abs(
+                          delta,
+                        ).toFixed(1)}점`}
+                  </em>
+                </div>
+              );
+            })}
+          </div>
+
+          <footer className="analysis-staff-audit">
+            <strong>교차검증 메모</strong>
+            <p>
+              현재 DMS 명단과 일치하지 않는 VOC 원데이터의 {" "}
+              {selectedStaffAnalysis.excludedRawNames
+                .map((item) => `${item.name} ${item.responses}건`)
+                .join(" · ")}은 합산에서 제외했습니다. 이름 불일치는 임의 병합하지
+              않습니다.
+            </p>
+            <span>
+              명단 확인 {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} · 주 1회 갱신
+            </span>
+          </footer>
+        </section>
+      ) : null}
 
       <section className="v3s-award-card" aria-label="V3S 인센티브 수상기록">
         <header className="v3s-award-heading">

@@ -1,0 +1,33 @@
+{
+  "source": {
+    "workbook": "2026 Volvo Car Korea_VOC Raw Data_회신 건수 포함 260824.xlsx",
+    "vocThrough": "2026-08-24",
+    "rosterCheckedAt": "2026-08-28",
+    "rosterSource": "Volvo Car Korea Sales DMS",
+    "rosterRule": "재직자 · 영업직원/영업팀장"
+  },
+  "showrooms": {
+    "6KR6834": {
+      "showroom": "볼보 강남대치",
+      "dealer": "에이치",
+      "dmsShowroom": "H Motors Gangnam Daechi",
+      "employees": [
+        { "name": "김대준", "role": "영업직원", "quarters": { "Q2": { "responses": 4, "scoreSum": 39 } } },
+        { "name": "김성경", "role": "영업직원", "quarters": { "Q1": { "responses": 1, "scoreSum": 10 } } },
+        { "name": "박영환", "role": "영업직원", "quarters": { "Q1": { "responses": 1, "scoreSum": 9 }, "Q3": { "responses": 1, "scoreSum": 10 } } },
+        { "name": "박준수", "role": "영업직원", "quarters": { "Q3": { "responses": 1, "scoreSum": 8 } } },
+        { "name": "송용주", "role": "영업직원", "quarters": { "Q2": { "responses": 1, "scoreSum": 7 } } },
+        { "name": "이민하", "role": "영업직원", "quarters": { "Q1": { "responses": 1, "scoreSum": 10 } } },
+        { "name": "이진용", "role": "영업직원", "quarters": { "Q1": { "responses": 1, "scoreSum": 10 } } },
+        { "name": "정지만", "role": "영업직원", "quarters": {} },
+        { "name": "정한영", "role": "영업직원", "quarters": { "Q2": { "responses": 2, "scoreSum": 16 }, "Q3": { "responses": 1, "scoreSum": 10 } } },
+        { "name": "조동호", "role": "영업직원", "quarters": {} }
+      ],
+      "excludedRawNames": [
+        { "name": "강석", "responses": 4, "reason": "현재 DMS 재직 명단 미확인" },
+        { "name": "변수민", "responses": 4, "reason": "현재 DMS 재직 명단 미확인" },
+        { "name": "조동조", "responses": 3, "reason": "DMS 조동호와 이름 불일치 · 확인 필요" }
+      ]
+    }
+  }
+}

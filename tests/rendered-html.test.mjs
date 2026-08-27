@@ -1165,6 +1165,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
     html,
     /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
+  assert.match(visibleHtml, /현직 영업 인력 상담 만족도/);
+  assert.match(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장/);
+  assert.match(visibleHtml, /김대준/);
+  assert.match(visibleHtml, /조동호/);
+  assert.match(visibleHtml, /조동조 3건/);
 
   const regionResponse = await render(
     "/dashboard/6KR6834/analysis?view=region",
