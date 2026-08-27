@@ -3101,7 +3101,7 @@ test("matches analysis headings to the ES90 performance-comparison title at 70 p
   assert.doesNotMatch(mixedEnglishRule[1], /font-size:/);
 });
 
-test("keeps the V3S cumulative average on one line and gives the bars the recovered height", async () => {
+test("removes the V3S cumulative average label and preserves the recovered bar height", async () => {
   const [dashboardSource, summaryCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(
@@ -3110,21 +3110,14 @@ test("keeps the V3S cumulative average on one line and gives the bars the recove
     ),
   ]);
 
-  assert.match(
+  assert.doesNotMatch(dashboardSource, /2026 누적 평균/);
+  assert.doesNotMatch(
     dashboardSource,
-    /aria-label=\{`2026 누적 평균 \$\{displayNumber\(cumulativeAverage\)\}점`\}/,
+    /v3sQuarterSummaryStyles\.(?:inlineCumulative|compactSubhead|compactCumulative|value|unit)/,
   );
-  assert.match(
-    dashboardSource,
-    /<span>2026 누적 평균<\/span>[\s\S]*?className=\{v3sQuarterSummaryStyles\.value\}[\s\S]*?className=\{v3sQuarterSummaryStyles\.unit\}>점<\/small>/,
-  );
-  assert.match(
+  assert.doesNotMatch(
     summaryCss,
-    /\.inlineCumulative\s*\{[^}]*display: inline-flex[^}]*white-space: nowrap/,
-  );
-  assert.match(
-    summaryCss,
-    /\.compactCumulative > \.value\s*\{[^}]*font-size: 16px !important/,
+    /\.(?:inlineCumulative|compactSubhead|compactCumulative)/,
   );
   assert.match(summaryCss, /\.compactBars\s*\{[^}]*height: 98px !important/);
   assert.match(

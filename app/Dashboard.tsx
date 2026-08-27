@@ -817,14 +817,6 @@ function V3SPerformance({
         ((value - v3sScaleMin) / (v3sScaleMax - v3sScaleMin)) * 100,
       ),
     );
-  const enteredQuarters = quarterScores.filter(
-    (quarter): quarter is (typeof quarterScores)[number] & { value: number } =>
-      quarter.value !== null,
-  );
-  const cumulativeAverage = enteredQuarters.length
-    ? enteredQuarters.reduce((sum, quarter) => sum + quarter.value, 0) /
-      enteredQuarters.length
-    : null;
   const showroomHistory =
     showroom.historicalV3s ?? v3sHistoryByCdsid[showroom.cdsid] ?? [];
   const history = [2021, 2022, 2023, 2024, 2025].map(
@@ -874,26 +866,6 @@ function V3SPerformance({
       aria-label="V3S 분기 및 5개년 성과"
     >
       <section className="v3s-quarter-panel">
-        <header
-          className={`v3s-subhead ${
-            compact ? v3sQuarterSummaryStyles.compactSubhead : ""
-          }`}
-        >
-          <div aria-hidden="true" />
-          <div
-            className={`v3s-cumulative ${v3sQuarterSummaryStyles.inlineCumulative} ${
-              compact ? v3sQuarterSummaryStyles.compactCumulative : ""
-            }`}
-            aria-label={`2026 누적 평균 ${displayNumber(cumulativeAverage)}점`}
-          >
-            <span>2026 누적 평균</span>
-            <strong className={v3sQuarterSummaryStyles.value}>
-              {displayNumber(cumulativeAverage)}
-            </strong>
-            <small className={v3sQuarterSummaryStyles.unit}>점</small>
-          </div>
-        </header>
-
         <div
           className={`v3s-quarter-bars ${
             compact ? v3sQuarterSummaryStyles.compactBars : ""
