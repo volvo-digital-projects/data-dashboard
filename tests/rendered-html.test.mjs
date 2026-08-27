@@ -3143,7 +3143,7 @@ test("removes the V3S cumulative average label and preserves the recovered bar h
   );
 });
 
-test("provides accessible, privacy-safe V3S Q2 evidence galleries for every mapped showroom", async () => {
+test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for every mapped showroom", async () => {
   const [dashboardSource, gallerySource, galleryCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/V3SEvidenceGallery.tsx", import.meta.url), "utf8"),
@@ -3161,7 +3161,22 @@ test("provides accessible, privacy-safe V3S Q2 evidence galleries for every mapp
   assert.match(dashboardSource, /onEvidenceOpen\?\.\(resourceQuarter\)/);
   assert.doesNotMatch(dashboardSource, /교차검증 후, 사후보정 가능/);
   assert.match(dashboardSource, /<V3SEvidenceGallery/);
-  const showroomIds = [
+  const q1ShowroomIds = [
+    "6KR6802",
+    "6KR6830",
+    "6KR6833",
+    "6KR6838",
+    "6KR6839",
+    "6KR6841",
+    "6KR6845",
+    "6KR6851",
+    "6KR6852",
+    "6KR6863",
+  ];
+  q1ShowroomIds.forEach((cdsid) => {
+    assert.match(gallerySource, new RegExp(`"${cdsid}"[\\s\\S]*?q1:`));
+  });
+  const q2ShowroomIds = [
     "6KR6834",
     "6KR6841",
     "6KR6842",
@@ -3172,10 +3187,32 @@ test("provides accessible, privacy-safe V3S Q2 evidence galleries for every mapp
     "6KR6870",
     "6KR6874",
   ];
-  showroomIds.forEach((cdsid) => {
+  q2ShowroomIds.forEach((cdsid) => {
     assert.match(gallerySource, new RegExp(`"${cdsid}"[\\s\\S]*?q2:`));
   });
-  const evidenceAssets = [
+  const q1EvidenceAssets = [
+    "6KR6802/v3s/2026-q1/uniform-brand-manager-spring-fall.jpg",
+    "6KR6802/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
+    "6KR6802/v3s/2026-q1/brand-manager-nails-mosaic.jpg",
+    "6KR6830/v3s/2026-q1/uniform-brand-manager-spring-fall-mosaic.jpg",
+    "6KR6830/v3s/2026-q1/uniform-sales-winter-name-tag-mosaic.jpg",
+    "6KR6830/v3s/2026-q1/valet-name-tag-white-shoes-mosaic.jpg",
+    "6KR6830/v3s/2026-q1/valet-name-tag-mosaic.jpg",
+    "6KR6833/v3s/2026-q1/valet-sports-shoes-mosaic.jpg",
+    "6KR6838/v3s/2026-q1/uniform-brand-manager-spring-fall-mosaic.jpg",
+    "6KR6838/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
+    "6KR6839/v3s/2026-q1/brand-manager-nails.jpg",
+    "6KR6841/v3s/2026-q1/waiting-area-break-mosaic.jpg",
+    "6KR6841/v3s/2026-q1/brand-manager-volvo-badge-mosaic.jpg",
+    "6KR6841/v3s/2026-q1/sales-name-tag-mosaic.jpg",
+    "6KR6841/v3s/2026-q1/info-desk-takeout-cup-mosaic.jpg",
+    "6KR6845/v3s/2026-q1/brand-manager-phone-use-mosaic.jpg",
+    "6KR6851/v3s/2026-q1/vehicle-customer-trace-hair.jpg",
+    "6KR6852/v3s/2026-q1/vehicle-dust-debris.jpg",
+    "6KR6863/v3s/2026-q1/uniform-brand-manager-spring-fall-mosaic.jpg",
+    "6KR6863/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
+  ];
+  const q2EvidenceAssets = [
     "6KR6834/v3s/2026-q2/valet-name-tag-mosaic.png",
     "6KR6834/v3s/2026-q2/brand-manager-badge-mosaic.png",
     "6KR6841/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
@@ -3198,7 +3235,10 @@ test("provides accessible, privacy-safe V3S Q2 evidence galleries for every mapp
     "6KR6870/v3s/2026-q2/specialist-bottoms-mosaic.png",
     "6KR6874/v3s/2026-q2/brand-manager-volvo-badge-mosaic.png",
   ];
-  assert.equal(evidenceAssets.length, 21);
+  const evidenceAssets = [...q1EvidenceAssets, ...q2EvidenceAssets];
+  assert.equal(q1EvidenceAssets.length, 20);
+  assert.equal(q2EvidenceAssets.length, 21);
+  assert.equal(evidenceAssets.length, 41);
   evidenceAssets.forEach((asset) => {
     assert.match(gallerySource, new RegExp(asset.replaceAll(".", "\\.")));
   });

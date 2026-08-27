@@ -15,6 +15,59 @@ const evidenceByShowroom: Record<
   string,
   Partial<Record<EvidenceQuarter, EvidencePhoto[]>>
 > = {
+  "6KR6802": {
+    q1: [
+      {
+        src: "/evidence/6KR6802/v3s/2026-q1/uniform-brand-manager-spring-fall.jpg",
+        alt: "볼보 수원 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (브랜드매니저 춘추복)",
+      },
+      {
+        src: "/evidence/6KR6802/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 수원 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (상담 영업 직원 동계복)",
+      },
+      {
+        src: "/evidence/6KR6802/v3s/2026-q1/brand-manager-nails-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 수원 Q1 브랜드매니저 손톱 증빙사진",
+        caption: "브랜드매니저 손톱 (길고 화려함)",
+      },
+    ],
+  },
+  "6KR6830": {
+    q1: [
+      {
+        src: "/evidence/6KR6830/v3s/2026-q1/uniform-brand-manager-spring-fall-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 분당 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (브랜드매니저 춘추복)",
+      },
+      {
+        src: "/evidence/6KR6830/v3s/2026-q1/uniform-sales-winter-name-tag-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 분당 Q1 근무 직원 복장과 네임택 증빙사진",
+        caption:
+          "근무 직원 간 복장 착용 기준 상이 (상담 영업 직원 동계복) 및 네임택 미착용",
+      },
+      {
+        src: "/evidence/6KR6830/v3s/2026-q1/valet-name-tag-white-shoes-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 분당 Q1 발레파커 네임택과 흰 운동화 증빙사진",
+        caption: "발레파커 네임택 미착용·흰 운동화",
+      },
+      {
+        src: "/evidence/6KR6830/v3s/2026-q1/valet-name-tag-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 분당 Q1 발레파커 네임택 미착용 증빙사진",
+        caption: "발레파커 네임택 미착용",
+      },
+    ],
+  },
+  "6KR6833": {
+    q1: [
+      {
+        src: "/evidence/6KR6833/v3s/2026-q1/valet-sports-shoes-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 대전 Q1 발레파커 스포츠 운동화 착용 증빙사진",
+        caption: "발레파커 스포츠 운동화 착용",
+      },
+    ],
+  },
   "6KR6834": {
     q2: [
       {
@@ -29,7 +82,53 @@ const evidenceByShowroom: Record<
       },
     ],
   },
+  "6KR6838": {
+    q1: [
+      {
+        src: "/evidence/6KR6838/v3s/2026-q1/uniform-brand-manager-spring-fall-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 창원 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (브랜드매니저 춘추복)",
+      },
+      {
+        src: "/evidence/6KR6838/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 창원 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (상담 영업 직원 동계복)",
+      },
+    ],
+  },
+  "6KR6839": {
+    q1: [
+      {
+        src: "/evidence/6KR6839/v3s/2026-q1/brand-manager-nails.jpg",
+        alt: "볼보 용산 Q1 브랜드매니저 손톱 증빙사진",
+        caption: "브랜드매니저 손톱 (길고 화려함)",
+      },
+    ],
+  },
   "6KR6841": {
+    q1: [
+      {
+        src: "/evidence/6KR6841/v3s/2026-q1/waiting-area-break-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 동대문 Q1 대기 영업 직원 휴식 증빙사진",
+        caption:
+          "대기 영업 직원 고객 시야 노출 공간 휴식 (테이크아웃 음료·휴대폰)",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q1/brand-manager-volvo-badge-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 동대문 Q1 브랜드매니저 볼보 배지 미착용 증빙사진",
+        caption: "브랜드매니저 볼보 배지 미착용",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q1/sales-name-tag-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 동대문 Q1 영업 직원 네임택 미착용 증빙사진",
+        caption: "영업 직원 네임택 미착용",
+      },
+      {
+        src: "/evidence/6KR6841/v3s/2026-q1/info-desk-takeout-cup-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 동대문 Q1 인포데스크 불필요 물품 증빙사진",
+        caption: "인포데스크 위 불필요 물품 (테이크아웃 음료컵)",
+      },
+    ],
     q2: [
       {
         src: "/evidence/6KR6841/v3s/2026-q2/uniform-season-mismatch-mosaic.png",
@@ -60,6 +159,15 @@ const evidenceByShowroom: Record<
         src: "/evidence/6KR6841/v3s/2026-q2/uniform-guide-noncompliance-mosaic.png",
         alt: "얼굴이 익명화된 동대문 Q2 영업 직원 복장 착용 가이드 미준수 증빙사진",
         caption: "영업 직원 복장 착용 가이드 미준수",
+      },
+    ],
+  },
+  "6KR6845": {
+    q1: [
+      {
+        src: "/evidence/6KR6845/v3s/2026-q1/brand-manager-phone-use-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 일산 Q1 브랜드매니저 핸드폰 사용 증빙사진",
+        caption: "브랜드매니저 핸드폰 사용",
       },
     ],
   },
@@ -101,6 +209,13 @@ const evidenceByShowroom: Record<
     ],
   },
   "6KR6852": {
+    q1: [
+      {
+        src: "/evidence/6KR6852/v3s/2026-q1/vehicle-dust-debris.jpg",
+        alt: "볼보 서초 Q1 전시 차량 인근 먼지와 이물질 증빙사진",
+        caption: "전시 차량 인근 먼지와 이물질",
+      },
+    ],
     q2: [
       {
         src: "/evidence/6KR6852/v3s/2026-q2/valet-name-tag-mosaic.png",
@@ -109,7 +224,28 @@ const evidenceByShowroom: Record<
       },
     ],
   },
+  "6KR6851": {
+    q1: [
+      {
+        src: "/evidence/6KR6851/v3s/2026-q1/vehicle-customer-trace-hair.jpg",
+        alt: "볼보 원주 Q1 전시 차량 고객 체험 흔적 증빙사진",
+        caption: "전시 차량 고객 체험 흔적 (머리카락)",
+      },
+    ],
+  },
   "6KR6863": {
+    q1: [
+      {
+        src: "/evidence/6KR6863/v3s/2026-q1/uniform-brand-manager-spring-fall-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 김해 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (브랜드매니저 춘추복)",
+      },
+      {
+        src: "/evidence/6KR6863/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
+        alt: "얼굴이 익명화된 볼보 김해 Q1 근무 직원 복장 착용 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (상담 영업 직원 동계복)",
+      },
+    ],
     q2: [
       {
         src: "/evidence/6KR6863/v3s/2026-q2/waiting-posture-1-mosaic.png",
