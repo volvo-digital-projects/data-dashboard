@@ -10937,3 +10937,184 @@ body {
     --dashboard-combat-share: 43%;
   }
 }
+
+/* Equal-weight score card overrides */
+@media (min-width: 900px) {
+  :root {
+    --dashboard-combat-share: 24.6%;
+  }
+
+  .hero-grid {
+    grid-template-columns:
+      minmax(0, var(--dashboard-combat-share)) minmax(0, 1fr);
+    gap: var(--dashboard-card-gap);
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--dashboard-card-gap);
+  }
+
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-grid,
+  .dashboard-sticky-shell .metric-card {
+    min-height: 224px;
+  }
+}
+
+.combat-card.combat-scoreboard {
+  min-width: 0;
+  color: var(--ink);
+  border-color: rgba(47, 107, 138, 0.11);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(91, 136, 155, 0.07), transparent 48%),
+    linear-gradient(145deg, #f4f7f8 0%, #f1f5f6 58%, #edf3f5 100%);
+  box-shadow: var(--surface-shadow);
+}
+
+.combat-card.combat-scoreboard::before {
+  content: "";
+  height: 3px;
+  position: absolute;
+  inset: 0 0 auto;
+  background: linear-gradient(90deg, #4c7d94 0%, #799cac 72%, #a9bec7 100%);
+}
+
+.combat-card.combat-scoreboard::after {
+  content: none;
+}
+
+.combat-scoreboard .scoreboard-heading {
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+}
+
+.combat-scoreboard .scoreboard-heading .metric-titleline {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.combat-scoreboard .scoreboard-heading .metric-code {
+  color: var(--navy);
+  font-family: var(--font-korean);
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.combat-scoreboard .scoreboard-heading .metric-max-note {
+  color: var(--muted);
+}
+
+.scoreboard-main-value {
+  min-height: 58px;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 0;
+  color: var(--ink);
+  font-size: clamp(46px, 3.25vw, 56px);
+}
+
+.scoreboard-score-context > span:last-child {
+  border-color: #d9e4e8;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.scoreboard-benchmark {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 5px;
+}
+
+.scoreboard-benchmark > strong {
+  font-size: 13px;
+}
+
+.scoreboard-benchmark > strong.positive {
+  color: #26765f !important;
+}
+
+.scoreboard-rank {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 4px;
+  color: var(--secondary);
+  font-size: 9px !important;
+  white-space: nowrap;
+}
+
+.scoreboard-rank b {
+  color: var(--navy);
+  font-family: var(--font-latin);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.scoreboard-track span {
+  background: linear-gradient(90deg, #4c7d94 0%, #799cac 72%, #a9bec7 100%);
+}
+
+.scoreboard-quarter-strip > button {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 3px;
+  padding-inline: 5px;
+}
+
+.scoreboard-quarter-strip > button small,
+.scoreboard-quarter-strip > button strong {
+  min-width: 0;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.scoreboard-quarter-strip > button strong {
+  overflow: hidden;
+  color: #4c6270;
+  text-align: right;
+  text-overflow: ellipsis;
+}
+
+.scoreboard-quarter-strip > button.current strong {
+  color: #245a73;
+}
+
+.scoreboard-quarter-strip > button.planned strong {
+  color: #a8b1b8;
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.scoreboard-card-footer {
+  min-height: 18px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 5px;
+  color: #86929d;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) and (max-width: 1240px) {
+  .dashboard-sticky-shell .combat-card,
+  .dashboard-sticky-shell .metric-card {
+    padding: 16px 14px;
+  }
+}

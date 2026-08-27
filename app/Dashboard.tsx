@@ -2865,125 +2865,113 @@ export default function Dashboard({
           key={`showroom-score-${selected.cdsid}`}
         >
         <article className="combat-card combat-scoreboard">
-          <header className="scoreboard-heading">
-            <div>
-              <span className="english-title">2026 SCORE BOARD</span>
-              <strong>분기별 점수 현황</strong>
+          <div className="metric-card-topline scoreboard-heading">
+            <div className="metric-titleline">
+              <span className="metric-code">통합 종합점수</span>
+              <small className="metric-max-note">
+                ({integratedScoreMax}점 만점)
+              </small>
             </div>
-            <small>점수를 선택하면 하단 지표가 바뀝니다</small>
-          </header>
+          </div>
 
-          <div className="scoreboard-layout">
-            <div
-              className="scoreboard-quarter-table"
-              role="table"
-              aria-label={`분기별 통합 종합점수 ${integratedScoreMax}점 기준`}
-            >
-              <div className="scoreboard-table-head" role="row">
-                <span role="columnheader">분기</span>
-                <span role="columnheader">
-                  통합 종합점수<small>{integratedScoreMax}점</small>
-                </span>
-              </div>
-              {[
-                {
-                  key: "q1" as const,
-                  label: "Q1",
-                  integratedScore: q1IntegratedScore,
-                  status: "마감",
-                },
-                {
-                  key: "q2" as const,
-                  label: "Q2",
-                  integratedScore: q2IntegratedScore,
-                  status: "마감",
-                },
-                {
-                  key: null,
-                  label: "Q3",
-                  integratedScore: null,
-                  status: "평가 중",
-                },
-                {
-                  key: null,
-                  label: "Q4",
-                  integratedScore: null,
-                  status: "평가 전",
-                },
-              ].map((quarter) => (
-                <button
-                    type="button"
-                    role="row"
-                    disabled={quarter.key === null}
-                    aria-pressed={
-                      quarter.key === null
-                        ? undefined
-                        : selectedQuarter === quarter.key
-                    }
-                    aria-label={
-                      quarter.key === null
-                        ? `${quarter.label} ${quarter.status}`
-                        : `${quarter.label} 통합 종합점수 ${displayNumber(quarter.integratedScore)}점 지표 보기`
-                    }
-                    onClick={() => {
-                      if (quarter.key) {
-                        setSelectedQuarter(quarter.key);
-                        setMetricQuarters({
-                          v3s: quarter.key as QuarterKey,
-                          voc: quarter.key as QuarterKey,
-                          cx: quarter.key as QuarterKey,
-                        });
-                      }
-                    }}
-                    className={`scoreboard-quarter-row ${
-                      quarter.key === selectedQuarter ? "current" : ""
-                    } ${quarter.integratedScore === null ? "planned" : ""}`}
-                    key={quarter.label}
-                  >
-                    <strong role="cell">{quarter.label}</strong>
-                    {quarter.integratedScore === null ? (
-                      <span className="scoreboard-quarter-status" role="cell">
-                        {quarter.status}
-                      </span>
-                    ) : (
-                      <span role="cell">{displayNumber(quarter.integratedScore)}</span>
-                    )}
-                </button>
-              ))}
-            </div>
-
-            <div className="scoreboard-summary">
-              <div className="scoreboard-primary-score">
-                <span>2026 누적 통합 종합점수</span>
-                <strong>{displayNumber(cumulativeAverage)}</strong>
-                <small>/ {integratedScoreMax}점</small>
-              </div>
-              <div className="scoreboard-comparison" aria-label="누적점수 비교">
-                <span>
-                  <small>{displayShowroomName(selected.showroom)}</small>
-                  <b>{displayNumber(cumulativeAverage)}</b>
-                </span>
-                <span>
-                  <small>볼보 전체 평균</small>
-                  <b>{displayNumber(cumulativeNationalAverage)}</b>
-                </span>
-              </div>
-              <div className="scoreboard-summary-footer">
-                <span className={cumulativeDelta >= 0 ? "positive" : "negative"}>
-                  평균 대비
-                  <strong>
-                    {cumulativeDelta >= 0 ? "+" : ""}
-                    {displayNumber(cumulativeDelta)}점
-                  </strong>
-                </span>
-                <span>
-                  전국 순위
-                  <strong>
-                    {cumulativeRank}위 <small>/ {dashboard.meta.showroomCount}</small>
-                  </strong>
-                </span>
-              </div>
-            </div>
+          <div className="metric-card-value scoreboard-main-value">
+            {displayNumber(cumulativeAverage)}
+          </div>
+          <div className="metric-score-context scoreboard-score-context">
+            <span>{displayShowroomName(selected.showroom)}</span>
+            <span>
+              볼보 전체 평균
+              <strong>{displayNumber(cumulativeNationalAverage)}</strong>
+            </span>
+          </div>
+          <div className="metric-benchmark scoreboard-benchmark">
+            <span>평균 대비</span>
+            <strong className={cumulativeDelta >= 0 ? "positive" : "negative"}>
+              {cumulativeDelta >= 0 ? "▲" : "▼"} {Math.abs(cumulativeDelta).toFixed(1)}점
+            </strong>
+            <span className="scoreboard-rank">
+              전국 순위
+              <b>{cumulativeRank}위 / {dashboard.meta.showroomCount}</b>
+            </span>
+          </div>
+          <div className="metric-track scoreboard-track" aria-hidden="true">
+            <span style={{ width: `${(cumulativeAverage / integratedScoreMax) * 100}%` }} />
+            <i
+              style={{
+                left: `${(cumulativeNationalAverage / integratedScoreMax) * 100}%`,
+              }}
+            />
+          </div>
+          <div
+            className="metric-quarter-strip scoreboard-quarter-strip"
+            role="group"
+            aria-label={`분기별 통합 종합점수 ${integratedScoreMax}점 기준`}
+          >
+            {[
+              {
+                key: "q1" as const,
+                label: "Q1",
+                integratedScore: q1IntegratedScore,
+                status: "마감",
+              },
+              {
+                key: "q2" as const,
+                label: "Q2",
+                integratedScore: q2IntegratedScore,
+                status: "마감",
+              },
+              {
+                key: null,
+                label: "Q3",
+                integratedScore: null,
+                status: "평가 중",
+              },
+              {
+                key: null,
+                label: "Q4",
+                integratedScore: null,
+                status: "평가 전",
+              },
+            ].map((quarter) => (
+              <button
+                type="button"
+                disabled={quarter.key === null}
+                aria-pressed={
+                  quarter.key === null
+                    ? undefined
+                    : selectedQuarter === quarter.key
+                }
+                aria-label={
+                  quarter.key === null
+                    ? `${quarter.label} ${quarter.status}`
+                    : `${quarter.label} 통합 종합점수 ${displayNumber(quarter.integratedScore)}점 지표 보기`
+                }
+                onClick={() => {
+                  if (quarter.key) {
+                    setSelectedQuarter(quarter.key);
+                    setMetricQuarters({
+                      v3s: quarter.key as QuarterKey,
+                      voc: quarter.key as QuarterKey,
+                      cx: quarter.key as QuarterKey,
+                    });
+                  }
+                }}
+                className={`${
+                  quarter.key === selectedQuarter ? "current" : ""
+                } ${quarter.integratedScore === null ? "planned" : ""}`}
+                key={quarter.label}
+              >
+                <small>{quarter.label}</small>
+                <strong>
+                  {quarter.integratedScore === null
+                    ? quarter.status
+                    : displayNumber(quarter.integratedScore)}
+                </strong>
+              </button>
+            ))}
+          </div>
+          <div className="scoreboard-card-footer">
+            분기 점수를 선택하면 하단 지표가 함께 변경됩니다
           </div>
         </article>
 
