@@ -1373,11 +1373,11 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
                   >
                     <b>{displayNumber(item.showroomAverage)}</b>
                   </i>
+                  <small>
+                    {item.year}
+                    {item.year === 2026 && <em>YTD</em>}
+                  </small>
                 </div>
-                <small>
-                  {item.year}
-                  {item.year === 2026 && <em>YTD</em>}
-                </small>
               </div>
             ))}
           </div>

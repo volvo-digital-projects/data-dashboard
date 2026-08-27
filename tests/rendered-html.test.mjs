@@ -3001,11 +3001,11 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.v3s-history-years,\s*\.voc-consultation-year > small\s*\{[^}]*color: var\(--muted\);[^}]*font-family: var\(--font-latin\);[^}]*font-size: 9px;[^}]*font-weight: 400;[^}]*font-variant-numeric: tabular-nums;[^}]*line-height: 1;[^}]*text-align: center;/,
+    /\.v3s-history-years,\s*\.voc-consultation-pair > small\s*\{[^}]*color: var\(--muted\);[^}]*font-family: var\(--font-latin\);[^}]*font-size: 9px;[^}]*font-weight: 400;[^}]*font-variant-numeric: tabular-nums;[^}]*line-height: 1;[^}]*text-align: center;/,
   );
   assert.match(
     css,
-    /\.voc-consultation-year > small\s*\{[^}]*width: 45px;[^}]*top: calc\(100% \+ 7px\);[^}]*left: 50%;[^}]*align-items: center;[^}]*transform: translateX\(-50%\);/,
+    /\.voc-consultation-pair > small\s*\{[^}]*width: 100%;[^}]*top: calc\(100% \+ 7px\);[^}]*left: 0;[^}]*align-items: center;[^}]*transform: none;/,
   );
   assert.match(
     css,
@@ -3110,7 +3110,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.voc-consultation-year > small\s*\{[^}]*width: 45px;[^}]*top: calc\(100% \+ 7px\);[^}]*left: 50%;[^}]*align-items: center;[^}]*transform: translateX\(-50%\);/,
+    /\.voc-consultation-pair > small\s*\{[^}]*width: 100%;[^}]*top: calc\(100% \+ 7px\);[^}]*left: 0;[^}]*align-items: center;[^}]*transform: none;/,
   );
   assert.match(
     css,

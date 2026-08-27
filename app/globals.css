@@ -7981,7 +7981,7 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-history-years,
-.voc-consultation-year > small {
+.voc-consultation-pair > small {
   color: var(--muted);
   font-family: var(--font-latin);
   font-size: 9px;
@@ -8811,21 +8811,21 @@ button.quarter-score-row:disabled {
   font-size: 9px;
 }
 
-.voc-consultation-year > small {
-  width: 45px;
+.voc-consultation-pair > small {
+  width: 100%;
   min-height: 14px;
   position: absolute;
   top: calc(100% + 7px);
-  left: 50%;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  transform: translateX(-50%);
+  transform: none;
   white-space: nowrap;
 }
 
-.voc-consultation-year > small em {
+.voc-consultation-pair > small em {
   margin-top: 1px;
   color: #99a7b1;
   font-size: 7px;
