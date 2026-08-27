@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 92);
+  assert.equal(release.items.length, 93);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1815,6 +1815,10 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.match(
     css,
     /\.metric-quarter-strip--status > button\.complete\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.3\);[^}]*box-shadow: none;[\s\S]*?button\.complete:not\(:disabled\):focus-visible\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.3\);[^}]*outline: none;[^}]*box-shadow: none;/,
+  );
+  assert.match(
+    css,
+    /\.metric-quarter-strip--status > button\.current\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.3\);[^}]*box-shadow: none;[\s\S]*?\.scoreboard-quarter-strip > button\.current\s*\{[^}]*border-color: rgba\(219, 235, 242, 0\.7\);[^}]*box-shadow: none;/,
   );
   assert.match(
     css,

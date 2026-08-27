@@ -11362,6 +11362,16 @@ body {
   box-shadow: none;
 }
 
+.metric-quarter-strip--status > button.current {
+  border-color: rgba(112, 137, 148, 0.3);
+  box-shadow: none;
+}
+
+.scoreboard-quarter-strip > button.current {
+  border-color: rgba(219, 235, 242, 0.7);
+  box-shadow: none;
+}
+
 .metric-quarter-strip--status > button.complete:not(:disabled):hover,
 .metric-quarter-strip--status > button.complete:not(:disabled):focus-visible {
   color: inherit;
