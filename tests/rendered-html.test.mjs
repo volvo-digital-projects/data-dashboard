@@ -1810,7 +1810,11 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 48px;[^}]*grid-template-rows: auto 18px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 46px;[^}]*min-width: 46px;[^}]*max-width: 46px;[^}]*height: 18px;[^}]*color: #315a6c;[^}]*border: 1px solid #bfd4dc;[^}]*border-radius: 999px;[^}]*background: #dbe9ee/,
+    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 58px;[^}]*height: 58px;[^}]*grid-template-rows: 24px 18px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 46px;[^}]*min-width: 46px;[^}]*max-width: 46px;[^}]*height: 18px;[^}]*color: #315a6c;[^}]*border: 1px solid #bfd4dc;[^}]*border-radius: 999px;[^}]*background: #dbe9ee/,
+  );
+  assert.match(
+    css,
+    /\.scoreboard-quarter-strip > button\s*\{[^}]*grid-template-rows: 24px 18px;[^}]*min-height: 58px;[^}]*height: 58px;/,
   );
   assert.match(
     css,
@@ -1819,7 +1823,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.match(dashboardSource, /metric-quarter-strip--resources/);
   assert.match(
     css,
-    /\.metric-quarter-strip--resources > button\s*\{[^}]*min-height: 25px;[^}]*height: 25px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid\s*\{[^}]*min-height: 20px;[^}]*height: 20px;[^}]*margin-top: 3px;[^}]*padding-top: 0;/,
+    /\.metric-quarter-strip--resources > button\s*\{[^}]*min-height: 30px;[^}]*height: 30px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid\s*\{[^}]*min-height: 23px;[^}]*height: 23px;[^}]*margin-top: 5px;[^}]*padding-top: 0;/,
   );
   assert.match(
     css,
