@@ -384,6 +384,9 @@ const quarterIntegratedAverageOf = (quarter: QuarterKey) =>
     0,
   );
 
+const v3sDscScoreOf = (value: number) =>
+  value >= 89.5 ? 100 : value >= 84.5 ? 90 : 80;
+
 const metricRtcIncentiveRateOf = (
   item: Showroom,
   metric: TrendMetricKey,
@@ -392,7 +395,10 @@ const metricRtcIncentiveRateOf = (
   const value = quarterValueOf(item, metric, quarter);
   if (value === null) return null;
 
-  if (metric === "v3s") return value >= 90 ? 0.2 : value >= 85 ? 0.1 : 0;
+  if (metric === "v3s") {
+    const dscScore = v3sDscScoreOf(value);
+    return dscScore === 100 ? 0.2 : dscScore === 90 ? 0.1 : 0;
+  }
   if (metric === "voc") return value >= 85 ? 0.2 : 0.1;
   return value >= 100 ? 0.2 : 0.1;
 };
@@ -402,16 +408,16 @@ const metricDscScoreOf = (
   metric: TrendMetricKey,
   quarter: QuarterKey,
 ): number | null => {
-  if (metric !== "cx") return quarterValueOf(item, metric, quarter);
+  const value = quarterValueOf(item, metric, quarter);
+  if (value === null) return null;
+  if (metric === "v3s") return v3sDscScoreOf(value);
+  if (metric !== "cx") return value;
 
   const finalizedScore =
     quarter === "q1" ? item.q1?.cx : quarter === "q2" ? item.cx : null;
   if (typeof finalizedScore === "number") return finalizedScore;
 
-  const rawScore = quarterValueOf(item, "cx", quarter);
-  return rawScore === null
-    ? null
-    : Number(((rawScore / metricMeta.cx.max) * 130).toFixed(1));
+  return Number(((value / metricMeta.cx.max) * 130).toFixed(1));
 };
 
 const groupQuarterAverageOf = (
@@ -650,7 +656,8 @@ function MetricCard({
           aria-label="DSC 스코어 및 RTC 인센티브율"
         >
           <span>
-            DSC 스코어 <strong>{displayNumber(dscScore)}점</strong>
+            DSC 스코어{" "}
+            <strong>{displayNumber(dscScore, metric === "v3s" ? 0 : 1)}점</strong>
           </span>
           <span>
             RTC 인센티브 <strong>{displayNumber(rtcRate)}%</strong>
@@ -2096,17 +2103,17 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           </div>
           <div className="criteria-ladder three">
             <div className="good">
-              <span>V3S 90점 이상</span>
+              <span>원점수 89.5점 이상</span>
               <strong>DSC 100점</strong>
               <small>RTC 0.2%</small>
             </div>
             <div className="caution">
-              <span>85점 이상</span>
+              <span>원점수 84.5~89.4점</span>
               <strong>DSC 90점</strong>
               <small>RTC 0.1%</small>
             </div>
             <div className="warning">
-              <span>85점 미만</span>
+              <span>원점수 84.4점 이하</span>
               <strong>DSC 80점</strong>
               <small>RTC 0%</small>
             </div>

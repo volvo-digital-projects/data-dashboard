@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 93);
+  assert.equal(release.items.length, 94);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -812,8 +812,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.equal((html.match(/class="metric-rank-note" aria-label="전국 순위 \d+위"/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
-  assert.match(visibleHtml, /DSC 스코어[\s\S]*93\.6점/);
-  assert.match(visibleHtml, /DSC 스코어[\s\S]*270\.5점/);
+  assert.match(visibleHtml, /DSC 스코어[\s\S]*100점/);
+  assert.match(visibleHtml, /DSC 스코어[\s\S]*276\.9점/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.6%/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
@@ -1782,7 +1782,15 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const metricRtcIncentiveRateOf =[\s\S]*?metric === "v3s"[\s\S]*?value >= 90 \? 0\.2 : value >= 85 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?value >= 100 \? 0\.2 : 0\.1/,
+    /const v3sDscScoreOf =[\s\S]*?value >= 89\.5 \? 100 : value >= 84\.5 \? 90 : 80[\s\S]*?const metricRtcIncentiveRateOf =[\s\S]*?dscScore === 100 \? 0\.2 : dscScore === 90 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?value >= 100 \? 0\.2 : 0\.1/,
+  );
+  assert.match(
+    dashboardSource,
+    /const metricDscScoreOf =[\s\S]*?metric === "v3s"\) return v3sDscScoreOf\(value\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /원점수 89\.5점 이상[\s\S]*?DSC 100점[\s\S]*?RTC 0\.2%[\s\S]*?원점수 84\.5~89\.4점[\s\S]*?DSC 90점[\s\S]*?RTC 0\.1%[\s\S]*?원점수 84\.4점 이하[\s\S]*?DSC 80점[\s\S]*?RTC 0%/,
   );
   assert.match(
     css,
@@ -1794,7 +1802,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /className="metric-score-lockup"[\s\S]*?className="metric-rank-note"[\s\S]*?\/ 전국[\s\S]*?className="metric-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?displayNumber\(dscScore\)[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
+    /className="metric-score-lockup"[\s\S]*?className="metric-rank-note"[\s\S]*?\/ 전국[\s\S]*?className="metric-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?displayNumber\(dscScore, metric === "v3s" \? 0 : 1\)[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
   );
   assert.match(
     css,
