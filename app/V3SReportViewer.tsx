@@ -5,7 +5,7 @@ import styles from "./V3SReportViewer.module.css";
 
 export type ReportQuarter = "q1" | "q2" | "q3" | "q4";
 
-const q1ReportShowrooms = new Set([
+const reportShowrooms = new Set([
   "6KR342",
   "6KR6802",
   "6KR6828",
@@ -48,8 +48,9 @@ const q1ReportShowrooms = new Set([
 ]);
 
 export const getV3sReport = (cdsid: string, quarter: ReportQuarter) => {
-  if (quarter !== "q1" || !q1ReportShowrooms.has(cdsid)) return null;
-  return `/reports/${encodeURIComponent(cdsid)}/v3s/2026-q1.pdf`;
+  if (!(["q1", "q2"] as ReportQuarter[]).includes(quarter)) return null;
+  if (!reportShowrooms.has(cdsid)) return null;
+  return `/reports/${encodeURIComponent(cdsid)}/v3s/2026-${quarter}.pdf`;
 };
 
 export function V3SReportViewer({

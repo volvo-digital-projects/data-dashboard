@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 89);
+  assert.equal(release.items.length, 91);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -3276,7 +3276,7 @@ test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for eve
   );
 });
 
-test("maps all 39 V3S Q1 reports and presents them in an iPad landscape viewer", async () => {
+test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape viewer", async () => {
   const [dashboardSource, viewerSource, viewerCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/V3SReportViewer.tsx", import.meta.url), "utf8"),
@@ -3287,7 +3287,7 @@ test("maps all 39 V3S Q1 reports and presents them in an iPad landscape viewer",
   ]);
 
   const showroomSet = viewerSource.match(
-    /const q1ReportShowrooms = new Set\(\[([\s\S]*?)\]\);/,
+    /const reportShowrooms = new Set\(\[([\s\S]*?)\]\);/,
   );
   assert.ok(showroomSet);
   const reportCdsids = [
@@ -3297,11 +3297,13 @@ test("maps all 39 V3S Q1 reports and presents them in an iPad landscape viewer",
   assert.equal(new Set(reportCdsids).size, 39);
 
   await Promise.all(
-    reportCdsids.map((cdsid) =>
-      access(
-        new URL(
-          `../public/reports/${cdsid}/v3s/2026-q1.pdf`,
-          import.meta.url,
+    reportCdsids.flatMap((cdsid) =>
+      ["q1", "q2"].map((quarter) =>
+        access(
+          new URL(
+            `../public/reports/${cdsid}/v3s/2026-${quarter}.pdf`,
+            import.meta.url,
+          ),
         ),
       ),
     ),
@@ -3310,6 +3312,8 @@ test("maps all 39 V3S Q1 reports and presents them in an iPad landscape viewer",
   assert.match(dashboardSource, /getV3sReport\(selected\.cdsid, quarter\) !== null/);
   assert.match(dashboardSource, /onReportOpen\?\.\(resourceQuarter\)/);
   assert.match(dashboardSource, /<V3SReportViewer/);
+  assert.match(viewerSource, /\["q1", "q2"\]/);
+  assert.match(viewerSource, /2026-\$\{quarter\}\.pdf/);
   assert.match(viewerSource, /#view=FitH&toolbar=1&navpanes=0/);
   assert.match(viewerSource, /aria-label="V3S 결과 보고서 닫기"/);
   assert.match(viewerSource, /event\.key === "Escape"/);
