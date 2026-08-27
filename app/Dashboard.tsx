@@ -2423,6 +2423,8 @@ export default function Dashboard({
   const dashboardRootRef = useRef<HTMLElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
+  const scoreHeadingRef = useRef<HTMLDivElement>(null);
+  const scoreHeadingInsetRef = useRef<number | null>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
   const quarterScrollFrameRef = useRef<number | null>(null);
@@ -2626,6 +2628,20 @@ export default function Dashboard({
         "--dashboard-sticky-offset",
         `${shellHeight}px`,
       );
+
+      const scoreHeading = scoreHeadingRef.current;
+      if (scoreHeading && scoreHeadingInsetRef.current === null) {
+        scoreHeadingInsetRef.current = Math.max(
+          0,
+          Math.round(scoreHeading.getBoundingClientRect().top - shellHeight),
+        );
+      }
+      if (scoreHeadingInsetRef.current !== null) {
+        dashboardRoot.style.setProperty(
+          "--score-heading-sticky-top",
+          `${shellHeight + scoreHeadingInsetRef.current}px`,
+        );
+      }
     };
 
     const queueAnchorHeightSync = () => {
@@ -2646,6 +2662,7 @@ export default function Dashboard({
       window.removeEventListener("resize", queueAnchorHeightSync);
       window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
       dashboardRoot.style.removeProperty("--dashboard-sticky-offset");
+      dashboardRoot.style.removeProperty("--score-heading-sticky-top");
     };
   }, []);
 
@@ -2714,22 +2731,24 @@ export default function Dashboard({
     }
 
     const mobile = window.matchMedia("(max-width: 760px)").matches;
-    const stickyHeight = mobile
+    const scoreHeading = scoreHeadingRef.current;
+    const scoreHeadingRect = scoreHeading?.getBoundingClientRect();
+    const scoreStack = scoreHeading?.nextElementSibling as HTMLElement | null;
+    const scoreStackGap = mobile
       ? 0
-      : stickyShellRef.current?.getBoundingClientRect().height ?? 0;
-    const scoreHeadingHeight = mobile
-      ? 0
-      : document
-          .querySelector<HTMLElement>(".score-stack-heading")
-          ?.getBoundingClientRect().height ?? 52;
+      : Number.parseFloat(
+          scoreStack ? window.getComputedStyle(scoreStack).marginTop : "",
+        ) || 10;
+    const scoreHeadingTop = mobile ? 0 : scoreHeadingRect?.top ?? 0;
+    const scoreHeadingHeight = mobile ? 0 : scoreHeadingRect?.height ?? 52;
     const startTop = window.scrollY;
     const targetTop = Math.max(
       0,
       startTop +
         target.getBoundingClientRect().top -
-        stickyHeight -
+        scoreHeadingTop -
         scoreHeadingHeight -
-        10,
+        scoreStackGap,
     );
     const distance = targetTop - startTop;
     const reducedMotion = window.matchMedia(
@@ -2789,7 +2808,7 @@ export default function Dashboard({
     if (metric === "v3s") {
       scrollMetricQuarterToSection("v3s");
     }
-    if (metric === "cx" && quarter !== "q3") {
+    if (metric === "cx") {
       scrollMetricQuarterToSection("voc");
     }
   };
@@ -3277,7 +3296,10 @@ export default function Dashboard({
         key={`showroom-trend-${selected.cdsid}`}
       >
         <article className="panel trend-panel score-stack-panel">
-          <div className="section-heading score-stack-heading">
+          <div
+            className="section-heading score-stack-heading"
+            ref={scoreHeadingRef}
+          >
             <div>
               <h2>{displayShowroomName(selected.showroom)} 스코어</h2>
             </div>

@@ -1632,7 +1632,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const scrollMetricQuarterToSection = \(metric: "v3s" \| "voc"\) => \{[\s\S]*?const launchDistance =[\s\S]*?Math\.min\(Math\.abs\(distance\) \* 0\.12, 96\)[\s\S]*?top: animationStartTop[\s\S]*?const duration = 360;[\s\S]*?const eased = 1 - Math\.pow\(1 - progress, 4\);[\s\S]*?top: animationStartTop \+ remainingDistance \* eased/,
+    /const scrollMetricQuarterToSection = \(metric: "v3s" \| "voc"\) => \{[\s\S]*?const scoreHeadingRect = scoreHeading\?\.getBoundingClientRect\(\);[\s\S]*?const scoreStackGap =[\s\S]*?getComputedStyle\(scoreStack\)\.marginTop[\s\S]*?const scoreHeadingTop =[\s\S]*?target\.getBoundingClientRect\(\)\.top -[\s\S]*?scoreHeadingTop -[\s\S]*?scoreHeadingHeight -[\s\S]*?scoreStackGap[\s\S]*?const launchDistance =[\s\S]*?Math\.min\(Math\.abs\(distance\) \* 0\.12, 96\)[\s\S]*?top: animationStartTop[\s\S]*?const duration = 360;[\s\S]*?const eased = 1 - Math\.pow\(1 - progress, 4\);[\s\S]*?top: animationStartTop \+ remainingDistance \* eased/,
   );
   assert.match(
     dashboardSource,
@@ -1640,7 +1640,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /metric === "cx" && quarter !== "q3"[\s\S]*?scrollMetricQuarterToSection\("voc"\);/,
+    /metric === "cx"[\s\S]*?scrollMetricQuarterToSection\("voc"\);/,
   );
   assert.match(
     dashboardSource,
@@ -1660,7 +1660,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.score-stack-heading\s*\{[^}]*position: sticky[^}]*top: var\(--dashboard-sticky-offset, 356px\)/,
+    /\.score-stack-heading\s*\{[^}]*position: sticky[^}]*--score-heading-sticky-top,[^}]*var\(--dashboard-sticky-offset, 356px\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /const scoreHeadingRef = useRef<HTMLDivElement>\(null\);[\s\S]*?--score-heading-sticky-top[\s\S]*?ref=\{scoreHeadingRef\}/,
   );
   assert.match(dashboardSource, /function V3SPerformance/);
   assert.doesNotMatch(

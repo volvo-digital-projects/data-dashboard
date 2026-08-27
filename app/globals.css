@@ -8196,7 +8196,10 @@ button.quarter-score-row:disabled {
 
 .score-stack-heading {
   position: sticky;
-  top: var(--dashboard-sticky-offset, 356px);
+  top: var(
+    --score-heading-sticky-top,
+    var(--dashboard-sticky-offset, 356px)
+  );
   z-index: 18;
   margin: -2px -4px 0;
   padding: 8px 4px 11px;
