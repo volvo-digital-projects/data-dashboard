@@ -685,7 +685,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /교차검증 후, 사후보정 가능/);
-  assert.equal((visibleHtml.match(/<strong>검증완료<\/strong>/g) ?? []).length, 4);
+  assert.equal((visibleHtml.match(/<strong>평가완료<\/strong>/g) ?? []).length, 4);
+  assert.doesNotMatch(visibleHtml, /검증완료/);
   assert.equal((html.match(/metric-quarter-strip--status/g) ?? []).length, 2);
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);

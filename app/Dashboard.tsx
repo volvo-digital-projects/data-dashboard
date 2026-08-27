@@ -633,14 +633,14 @@ function MetricCard({
       label: "Q1",
       state: quarter === "q1" ? "current" : "complete",
       available: true,
-      status: "검증완료",
+      status: "평가완료",
     },
     {
       key: "q2" as const,
       label: "Q2",
       state: quarter === "q2" ? "current" : "complete",
       available: true,
-      status: "검증완료",
+      status: "평가완료",
     },
     {
       key: metric === "v3s" ? null : ("q3" as const),
