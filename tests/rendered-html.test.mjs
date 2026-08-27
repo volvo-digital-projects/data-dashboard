@@ -3499,7 +3499,7 @@ test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape v
   );
   assert.match(
     viewerCss,
-    /\.page img\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: contain;/,
+    /\.page img\s*\{[^}]*position: absolute;[^}]*inset: 0;[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: contain;/,
   );
   assert.match(
     viewerCss,
