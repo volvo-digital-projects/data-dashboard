@@ -145,6 +145,20 @@ type WeeklyData = {
   };
 };
 
+function RtcAlertSiren({ rate }: { rate: number }) {
+  return (
+    <span
+      className="rtc-alert-siren"
+      role="img"
+      aria-label={`RTC 인센티브 ${displayNumber(rate)}% 경고`}
+      title={`RTC 인센티브 ${displayNumber(rate)}% — 기준 미달`}
+    >
+      <span className="rtc-alert-siren__dome" />
+      <span className="rtc-alert-siren__base" />
+    </span>
+  );
+}
+
 type VocConsultationSeries = [
   number | null,
   number,
@@ -685,8 +699,9 @@ function MetricCard({
             DSC 스코어{" "}
             <strong>{displayNumber(dscScore, metric === "v3s" ? 0 : 1)}점</strong>
           </span>
-          <span>
+          <span className={`rtc-chip ${rtcRate < 0.2 ? "has-alert" : ""}`}>
             RTC 인센티브 <strong>{displayNumber(rtcRate)}%</strong>
+            {rtcRate < 0.2 ? <RtcAlertSiren rate={rtcRate} /> : null}
           </span>
         </div>
       </div>

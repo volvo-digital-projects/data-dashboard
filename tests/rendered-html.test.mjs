@@ -578,6 +578,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   const visibleHtml = html.replaceAll("<!-- -->", "");
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
   const seoulToday = new Intl.DateTimeFormat("sv-SE", {
     timeZone: "Asia/Seoul",
     dateStyle: "short",
@@ -820,6 +824,18 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /DSC 스코어[\s\S]*330점/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.6%/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
+  assert.match(
+    dashboardSource,
+    /className=\{`rtc-chip \$\{rtcRate < 0\.2 \? "has-alert" : ""\}`\}[\s\S]*?<RtcAlertSiren rate=\{rtcRate\}/,
+  );
+  assert.match(
+    dashboardSource,
+    /function RtcAlertSiren[\s\S]*?RTC 인센티브 \$\{displayNumber\(rate\)\}% 경고/,
+  );
+  assert.match(
+    css,
+    /\.rtc-alert-siren\s*\{[^}]*top: -10px;[^}]*right: -9px;[\s\S]*?\.rtc-alert-siren__dome[\s\S]*?linear-gradient\(145deg, #ff8b69 0%, #e14835 54%, #a92227 100%\)/,
+  );
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
@@ -1000,6 +1016,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /EDIT 권한|PRIVATE · 관리자 전용/);
   assert.doesNotMatch(visibleHtml, /MY SHOWROOM|전시장의 현재 위상/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+});
+
+test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
+  const response = await render("/dashboard/6KR6841");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /aria-label="RTC 인센티브 0\.1% 경고"/);
+  assert.doesNotMatch(html, /aria-label="RTC 인센티브 0\.2% 경고"/);
 });
 
 test("serves score criteria as a separate CDSID page", async () => {

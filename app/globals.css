@@ -11195,6 +11195,90 @@ body {
   white-space: nowrap;
 }
 
+.metric-stat-chips .rtc-chip {
+  position: relative;
+  overflow: visible;
+}
+
+.rtc-alert-siren {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  top: -10px;
+  right: -9px;
+  z-index: 3;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(99, 35, 26, 0.2));
+}
+
+.rtc-alert-siren::before {
+  content: "";
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 116, 76, 0.34) 0 34%,
+    rgba(255, 116, 76, 0.1) 48%,
+    transparent 70%
+  );
+  animation: rtc-siren-glow 1.8s ease-in-out infinite;
+}
+
+.rtc-alert-siren__dome {
+  width: 10px;
+  height: 9px;
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  z-index: 1;
+  border: 1px solid rgba(163, 43, 31, 0.72);
+  border-radius: 7px 7px 3px 3px;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.92) 0 10%, transparent 24%),
+    linear-gradient(145deg, #ff8b69 0%, #e14835 54%, #a92227 100%);
+  box-shadow:
+    inset -2px -2px 3px rgba(100, 14, 22, 0.34),
+    inset 2px 1px 2px rgba(255, 218, 197, 0.72),
+    0 0 0 1px rgba(255, 255, 255, 0.82);
+}
+
+.rtc-alert-siren__base {
+  width: 13px;
+  height: 4px;
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+  z-index: 2;
+  border: 1px solid rgba(50, 73, 84, 0.42);
+  border-radius: 2px 2px 3px 3px;
+  background: linear-gradient(180deg, #f8fbfc 0%, #92a7b1 48%, #536d78 100%);
+  box-shadow: 0 1px 1px rgba(21, 46, 58, 0.2);
+}
+
+@keyframes rtc-siren-glow {
+  0%,
+  100% {
+    opacity: 0.46;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rtc-alert-siren::before {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
 .metric-stat-chips strong {
   color: #244f64;
   font-family: var(--font-latin);
