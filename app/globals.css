@@ -11329,6 +11329,20 @@ body {
   background: #f7f9fa;
 }
 
+.metric-quarter-strip--status > button.complete {
+  border-color: rgba(112, 137, 148, 0.3);
+  box-shadow: none;
+}
+
+.metric-quarter-strip--status > button.complete:not(:disabled):hover,
+.metric-quarter-strip--status > button.complete:not(:disabled):focus-visible {
+  color: inherit;
+  border-color: rgba(112, 137, 148, 0.3);
+  background: #f7f9fa;
+  outline: none;
+  box-shadow: none;
+}
+
 .metric-quarter-strip--resources > button {
   min-height: 30px;
   height: 30px;
