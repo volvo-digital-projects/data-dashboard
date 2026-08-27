@@ -4741,6 +4741,277 @@ input:focus-visible {
   }
 }
 
+/* 2026 top score board: quarterly facts on the left, cumulative result on the right */
+@media (min-width: 1241px) {
+  :root {
+    --dashboard-combat-share: 43%;
+  }
+}
+
+.combat-card.combat-scoreboard {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(105, 175, 203, 0.18), transparent 44%),
+    linear-gradient(118deg, #294a5a 0%, #254756 54%, #1d4051 100%);
+}
+
+.scoreboard-heading {
+  min-height: 27px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(222, 239, 246, 0.13);
+}
+
+.scoreboard-heading > div {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.scoreboard-heading .english-title {
+  color: #8fc4d9;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.scoreboard-heading strong {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.scoreboard-heading > small {
+  color: rgba(216, 234, 241, 0.56);
+  font-size: 9px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.scoreboard-layout {
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(285px, 1.42fr) minmax(180px, 0.9fr);
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  padding-top: 9px;
+}
+
+.scoreboard-quarter-table {
+  min-width: 0;
+}
+
+.scoreboard-table-head,
+.scoreboard-quarter-row {
+  display: grid;
+  grid-template-columns: 38px repeat(3, minmax(58px, 1fr));
+  align-items: center;
+  column-gap: 6px;
+}
+
+.scoreboard-table-head {
+  min-height: 20px;
+  padding: 0 7px 4px;
+  color: rgba(211, 231, 239, 0.56);
+  font-size: 8.5px;
+  line-height: 1;
+  text-align: right;
+}
+
+.scoreboard-table-head span:first-child {
+  text-align: left;
+}
+
+.scoreboard-quarter-row {
+  width: 100%;
+  min-height: 28px;
+  margin: 0 0 3px;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #e9f2f6;
+  background: rgba(255, 255, 255, 0.035);
+  font: inherit;
+  text-align: right;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.scoreboard-quarter-row:hover:not(:disabled),
+.scoreboard-quarter-row:focus-visible {
+  border-color: rgba(166, 211, 229, 0.3);
+  background: rgba(166, 211, 229, 0.1);
+  outline: none;
+}
+
+.scoreboard-quarter-row.current {
+  border-color: rgba(183, 224, 239, 0.42);
+  background: linear-gradient(105deg, rgba(142, 199, 222, 0.2), rgba(142, 199, 222, 0.08));
+  box-shadow: inset 3px 0 0 #a6d2e3;
+}
+
+.scoreboard-quarter-row > strong,
+.scoreboard-quarter-row > span {
+  min-width: 0;
+  font-family: var(--font-latin);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.scoreboard-quarter-row > strong {
+  color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+}
+
+.scoreboard-quarter-row > span {
+  color: rgba(233, 242, 246, 0.82);
+  font-weight: 600;
+}
+
+.scoreboard-quarter-row.planned {
+  cursor: default;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.scoreboard-quarter-row.planned > strong {
+  color: rgba(211, 231, 239, 0.5);
+}
+
+.scoreboard-quarter-status {
+  grid-column: 2 / 5;
+  color: rgba(211, 231, 239, 0.48) !important;
+  font-family: var(--font-korean) !important;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+}
+
+.scoreboard-summary {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  border-left: 1px solid rgba(222, 239, 246, 0.15);
+}
+
+.scoreboard-primary-score {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+}
+
+.scoreboard-primary-score > span {
+  grid-column: 1 / -1;
+  color: rgba(211, 231, 239, 0.66);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.scoreboard-primary-score > strong {
+  color: #ffffff;
+  font-family: var(--font-latin);
+  font-size: clamp(36px, 2.7vw, 43px);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.scoreboard-primary-score > small {
+  margin: 0 0 5px 5px;
+  color: rgba(211, 231, 239, 0.6);
+  font-family: var(--font-latin);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.scoreboard-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.scoreboard-comparison > span {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 6px 7px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.scoreboard-comparison small {
+  overflow: hidden;
+  color: rgba(211, 231, 239, 0.58);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scoreboard-comparison b {
+  color: #ffffff;
+  font-family: var(--font-latin);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.scoreboard-summary-footer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid rgba(222, 239, 246, 0.13);
+}
+
+.scoreboard-summary-footer > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: rgba(211, 231, 239, 0.56);
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.scoreboard-summary-footer strong {
+  color: #ffffff;
+  font-family: var(--font-latin);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.scoreboard-summary-footer strong small {
+  color: rgba(211, 231, 239, 0.56);
+  font-size: 9px;
+}
+
+@media (max-width: 1240px) and (min-width: 761px) {
+  .scoreboard-layout {
+    grid-template-columns: minmax(360px, 1.5fr) minmax(230px, 0.8fr);
+  }
+
+  .scoreboard-primary-score > strong {
+    font-size: 48px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .analysis-tabs button,
   .scatter-point > i,
@@ -10660,5 +10931,11 @@ body {
     flex: 0 0 auto;
     padding-inline: 6px;
     font-size: 8px;
+  }
+}
+
+@media (min-width: 1241px) {
+  :root {
+    --dashboard-combat-share: 43%;
   }
 }

@@ -762,22 +762,23 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /aria-pressed="true" aria-label="V3S Q2 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
-  assert.equal((html.match(/class="quarter-score-row/g) ?? []).length, 4);
-  assert.equal((visibleHtml.match(/<small[^>]*>330점 만점<\/small>/g) ?? []).length, 2);
-  assert.match(visibleHtml, /2026 누적 평균/);
+  assert.equal((html.match(/class="scoreboard-quarter-row/g) ?? []).length, 4);
+  assert.match(visibleHtml, /aria-label="분기별 종합점수, 330점 만점"/);
+  assert.match(visibleHtml, /2026 누적 종합점수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
   assert.match(visibleHtml, /Q1[\s\S]*302\.7/);
   assert.match(visibleHtml, /Q2[\s\S]*294\.9/);
-  assert.match(visibleHtml, /Q3[\s\S]*Q4/);
+  assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /누적 평균[\s\S]*298\.8/);
+  assert.match(visibleHtml, /누적 종합점수[\s\S]*298\.8/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 지표 보기"/g) ?? []).length, 2);
-  assert.equal((html.match(/aria-label="Q3 평가 진행"/g) ?? []).length, 2);
-  assert.equal((html.match(/aria-label="Q4 평가 예정"/g) ?? []).length, 2);
-  assert.match(visibleHtml, /Q2 전국 평균 <strong>305\.4/);
-  assert.match(visibleHtml, /Q2 전국 평균 대비 <strong>-10\.5/);
-  assert.match(visibleHtml, /전시장 경쟁력 전국 순위 <strong>32위 \/ 전체 39/);
+  assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
+  assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
+  assert.match(visibleHtml, /Q2[\s\S]*294\.9[\s\S]*305\.4[\s\S]*-10\.5/);
+  assert.match(visibleHtml, /볼보 전체 평균[\s\S]*300\.5/);
+  assert.match(visibleHtml, /평균 대비[\s\S]*-1\.7점/);
+  assert.match(visibleHtml, /전국 순위[\s\S]*23위[\s\S]*\/ 39/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);
   assert.doesNotMatch(visibleHtml, /볼보 전체 전시장|VOLVO KOREA/);
@@ -1696,42 +1697,34 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
 });
 
-test("right-aligns the combat maximum label with the quarter scores", async () => {
-  const [dashboardSource, css, combatSummaryCss] = await Promise.all([
+test("separates the quarterly scoreboard from the cumulative summary", async () => {
+  const [dashboardSource, css] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
-    readFile(new URL("../app/CombatSummary.module.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(
-    css,
-    /\.quarter-score-meta\s*\{[^}]*display: grid;[^}]*grid-template-columns: 28px minmax\(80px, 1fr\) 52px;[^}]*padding: 2px 4px;/,
-  );
-  assert.match(
-    css,
-    /\.quarter-score-meta small\s*\{[^}]*grid-column: 3;[^}]*justify-self: end;[^}]*text-align: right;[^}]*white-space: nowrap;/,
+    dashboardSource,
+    /className="scoreboard-quarter-table"[\s\S]*?분기별 종합점수, \$\{dashboard\.meta\.combatMax\}점 만점/,
   );
   assert.match(
     dashboardSource,
-    /<b>누적 평균<\/b>[\s\S]*?<small className=\{combatSummaryStyles\.maximum\}>[\s\S]*?\{dashboard\.meta\.combatMax\}점 만점/,
+    /2026 누적 종합점수[\s\S]*?displayNumber\(cumulativeAverage\)[\s\S]*?dashboard\.meta\.combatMax[\s\S]*?볼보 전체 평균[\s\S]*?전국 순위/,
   );
-  assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
   assert.match(
     css,
-    /\.combat-summary-stack strong\s*\{[^}]*width: 100%;[^}]*text-align: right;/,
+    /\.scoreboard-layout\s*\{[^}]*grid-template-columns: minmax\(285px, 1\.42fr\) minmax\(180px, 0\.9fr\)/,
   );
   assert.match(
-    combatSummaryCss,
-    /\.summary > \.score\s*\{[^}]*justify-content: flex-end[^}]*font-size: clamp\(72px, 4\.8vw, 78px\)/,
+    css,
+    /\.scoreboard-quarter-row\s*\{[^}]*grid-template-columns: 38px repeat\(3, minmax\(58px, 1fr\)\)/,
   );
   assert.match(
-    combatSummaryCss,
-    /\.summary \.number\s*\{[^}]*margin-left: auto[^}]*transform: translateY\(3px\)/,
+    css,
+    /\.scoreboard-summary\s*\{[^}]*border-left: 1px solid rgba\(222, 239, 246, 0\.15\)/,
   );
-  assert.match(
-    combatSummaryCss,
-    /\.summary > \.heading \.maximum\s*\{[^}]*margin-left: auto[^}]*text-align: right/,
-  );
+  assert.doesNotMatch(dashboardSource, /combatSummaryStyles/);
+  assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
 });
 
 test("shows the showroom switcher only within the authenticated scope", async () => {
@@ -2590,19 +2583,15 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     dashboardSource,
-    /const cumulativeScoreDigits = displayNumber\(cumulativeAverage\)[\s\S]*?character === "\."[\s\S]*?digits\[digits\.length - 1\] \+= character/,
+    /const cumulativeNationalAverage = \(q1CombatAverage \+ q2CombatAverage\) \/ 2/,
   );
   assert.match(
     dashboardSource,
-    /className="combat-score-digit"[\s\S]*?animationDelay: `\$\{180 \+ index \* 130\}ms`/,
+    /const cumulativeRank =[\s\S]*?sort\(\(a, b\) => cumulativeCombatOf\(b\) - cumulativeCombatOf\(a\)\)/,
   );
   assert.match(
     css,
-    /\.combat-score-digit\s*\{[\s\S]*?animation: combat-score-drop 760ms cubic-bezier\(0\.16, 1, 0\.3, 1\) both/,
-  );
-  assert.match(
-    css,
-    /@keyframes combat-score-drop\s*\{[\s\S]*?translateY\(-24px\) scale\(0\.985\)[\s\S]*?translateY\(2px\) scale\(1\)[\s\S]*?translateY\(0\) scale\(1\)/,
+    /\.scoreboard-primary-score > strong\s*\{[^}]*font-size: clamp\(36px, 2\.7vw, 43px\)/,
   );
   assert.match(
     css,
@@ -2938,7 +2927,7 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
 
   assert.equal(
     (dashboardSource.match(/className="english-title"/g) ?? []).length,
-    6,
+    7,
   );
   assert.match(
     dashboardSource,

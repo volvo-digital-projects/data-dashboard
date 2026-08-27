@@ -14,7 +14,6 @@ import v3sHistoryJson from "./data/v3s-history.json";
 import vocConsultationJson from "./data/voc-consultation.json";
 import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
-import combatSummaryStyles from "./CombatSummary.module.css";
 import v3sQuarterSummaryStyles from "./V3SQuarterSummary.module.css";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
@@ -2497,16 +2496,22 @@ export default function Dashboard({
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;
   const cumulativeAverage = (q1Combat + combat) / 2;
-  const cumulativeScoreDigits = displayNumber(cumulativeAverage)
-    .split("")
-    .reduce<string[]>((digits, character) => {
-      if (character === "." && digits.length) {
-        digits[digits.length - 1] += character;
-      } else {
-        digits.push(character);
-      }
-      return digits;
-    }, []);
+  const q1CombatAverage = quarterAverageOf("combat", "q1");
+  const q2CombatAverage = quarterAverageOf("combat", "q2");
+  const cumulativeNationalAverage = (q1CombatAverage + q2CombatAverage) / 2;
+  const cumulativeDelta = cumulativeAverage - cumulativeNationalAverage;
+  const cumulativeCombatOf = (item: Showroom) => {
+    const values = [item.q1?.combat, item.combat].filter(
+      (value): value is number => typeof value === "number",
+    );
+    return values.length
+      ? values.reduce((sum, value) => sum + value, 0) / values.length
+      : Number.NEGATIVE_INFINITY;
+  };
+  const cumulativeRank =
+    [...dashboard.showrooms]
+      .sort((a, b) => cumulativeCombatOf(b) - cumulativeCombatOf(a))
+      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const selectedQuarterLabel = selectedQuarter.toUpperCase();
   const selectedQuarterCombat =
     quarterValueOf(selected, "combat", selectedQuarter) ?? combat;
@@ -2753,122 +2758,145 @@ export default function Dashboard({
           className="hero-grid"
           key={`showroom-score-${selected.cdsid}`}
         >
-        <article className={`combat-card ${tier.className}`}>
-          <div className="combat-main">
+        <article className={`combat-card combat-scoreboard ${tier.className}`}>
+          <header className="scoreboard-heading">
+            <div>
+              <span className="english-title">2026 SCORE BOARD</span>
+              <strong>분기별 종합점수</strong>
+            </div>
+            <small>점수를 선택하면 하단 지표가 바뀝니다</small>
+          </header>
+
+          <div className="scoreboard-layout">
             <div
-              className="quarter-score-chart"
-              aria-label={`Q1 ${displayNumber(q1Combat)}점, Q2 ${displayNumber(
-                combat,
-              )}점, Q3 평가 진행, Q4 평가 예정, 누적 평균 ${displayNumber(
-                cumulativeAverage,
-              )}점, ${dashboard.meta.combatMax}점 만점`}
+              className="scoreboard-quarter-table"
+              role="table"
+              aria-label={`분기별 종합점수, ${dashboard.meta.combatMax}점 만점`}
             >
-              <div className="quarter-score-meta">
-                <span>분기별</span>
-                <small>{dashboard.meta.combatMax}점 만점</small>
+              <div className="scoreboard-table-head" role="row">
+                <span role="columnheader">분기</span>
+                <span role="columnheader">내 점수</span>
+                <span role="columnheader">전국 평균</span>
+                <span role="columnheader">차이</span>
               </div>
               {[
-                { key: "q1" as const, label: "Q1", value: q1Combat },
-                { key: "q2" as const, label: "Q2", value: combat },
-                { key: null, label: "Q3", value: null },
-                { key: null, label: "Q4", value: null },
-              ].map((quarter) => (
-                <button
-                  type="button"
-                  disabled={quarter.key === null}
-                  aria-pressed={
-                    quarter.key === null
-                      ? undefined
-                      : selectedQuarter === quarter.key
-                  }
-                  aria-label={
-                    quarter.key === null
-                      ? `${quarter.label} ${
-                          quarter.label === "Q4" ? "평가 예정" : "평가 진행"
-                        }`
-                      : `${quarter.label} 지표 보기`
-                  }
-                  onClick={() => {
-                    if (quarter.key) {
-                      setSelectedQuarter(quarter.key);
-                      setMetricQuarters((current) => ({
-                        ...current,
-                        v3s: quarter.key as QuarterKey,
-                      }));
+                {
+                  key: "q1" as const,
+                  label: "Q1",
+                  value: q1Combat,
+                  average: q1CombatAverage,
+                  status: "마감",
+                },
+                {
+                  key: "q2" as const,
+                  label: "Q2",
+                  value: combat,
+                  average: q2CombatAverage,
+                  status: "마감",
+                },
+                {
+                  key: null,
+                  label: "Q3",
+                  value: null,
+                  average: null,
+                  status: "평가 중",
+                },
+                {
+                  key: null,
+                  label: "Q4",
+                  value: null,
+                  average: null,
+                  status: "평가 전",
+                },
+              ].map((quarter) => {
+                const delta =
+                  quarter.value === null || quarter.average === null
+                    ? null
+                    : quarter.value - quarter.average;
+                return (
+                  <button
+                    type="button"
+                    role="row"
+                    disabled={quarter.key === null}
+                    aria-pressed={
+                      quarter.key === null
+                        ? undefined
+                        : selectedQuarter === quarter.key
                     }
-                  }}
-                  className={`quarter-score-row ${
-                    quarter.key === selectedQuarter ? "current" : ""
-                  } ${quarter.value === null ? "planned" : ""}`}
-                  key={quarter.label}
-                >
-                  <span>{quarter.label}</span>
-                  <i aria-hidden="true">
-                    <b
-                      style={{
-                        width:
-                          quarter.value === null
-                            ? "0%"
-                            : `${Math.min(
-                                100,
-                                (quarter.value / dashboard.meta.combatMax) *
-                                  100,
-                              )}%`,
-                      }}
-                    />
-                  </i>
-                  <strong>
-                    {quarter.value === null
-                      ? "—"
-                      : displayNumber(quarter.value)}
-                  </strong>
-                </button>
-              ))}
+                    aria-label={
+                      quarter.key === null
+                        ? `${quarter.label} ${quarter.status}`
+                        : `${quarter.label} 지표 보기`
+                    }
+                    onClick={() => {
+                      if (quarter.key) {
+                        setSelectedQuarter(quarter.key);
+                        setMetricQuarters((current) => ({
+                          ...current,
+                          v3s: quarter.key as QuarterKey,
+                        }));
+                      }
+                    }}
+                    className={`scoreboard-quarter-row ${
+                      quarter.key === selectedQuarter ? "current" : ""
+                    } ${quarter.value === null ? "planned" : ""}`}
+                    key={quarter.label}
+                  >
+                    <strong role="cell">{quarter.label}</strong>
+                    {quarter.value === null ? (
+                      <span className="scoreboard-quarter-status" role="cell">
+                        {quarter.status}
+                      </span>
+                    ) : (
+                      <>
+                        <span role="cell">{displayNumber(quarter.value)}</span>
+                        <span role="cell">{displayNumber(quarter.average)}</span>
+                        <span
+                          role="cell"
+                          className={delta !== null && delta >= 0 ? "positive" : "negative"}
+                        >
+                          {delta !== null && delta >= 0 ? "+" : ""}
+                          {displayNumber(delta)}
+                        </span>
+                      </>
+                    )}
+                  </button>
+                );
+              })}
             </div>
-            <div className={`combat-summary-stack ${combatSummaryStyles.summary}`}>
-              <span className={combatSummaryStyles.heading}>
-                <b>누적 평균</b>
-                <small className={combatSummaryStyles.maximum}>
-                  {dashboard.meta.combatMax}점 만점
-                </small>
-              </span>
-              <strong className={combatSummaryStyles.score}>
-                <span
-                  className={`combat-score-number ${combatSummaryStyles.number}`}
-                  aria-label={displayNumber(cumulativeAverage)}
-                >
-                  {cumulativeScoreDigits.map((digit, index) => (
-                    <span
-                      className="combat-score-digit"
-                      aria-hidden="true"
-                      style={{ animationDelay: `${180 + index * 130}ms` }}
-                      key={`${digit}-${index}`}
-                    >
-                      {digit}
-                    </span>
-                  ))}
+
+            <div className="scoreboard-summary">
+              <div className="scoreboard-primary-score">
+                <span>2026 누적 종합점수</span>
+                <strong>{displayNumber(cumulativeAverage)}</strong>
+                <small>/ {dashboard.meta.combatMax}점</small>
+              </div>
+              <div className="scoreboard-comparison" aria-label="누적점수 비교">
+                <span>
+                  <small>{displayShowroomName(selected.showroom)}</small>
+                  <b>{displayNumber(cumulativeAverage)}</b>
                 </span>
-              </strong>
+                <span>
+                  <small>볼보 전체 평균</small>
+                  <b>{displayNumber(cumulativeNationalAverage)}</b>
+                </span>
+              </div>
+              <div className="scoreboard-summary-footer">
+                <span className={cumulativeDelta >= 0 ? "positive" : "negative"}>
+                  평균 대비
+                  <strong>
+                    {cumulativeDelta >= 0 ? "+" : ""}
+                    {displayNumber(cumulativeDelta)}점
+                  </strong>
+                </span>
+                <span>
+                  전국 순위
+                  <strong>
+                    {cumulativeRank}위 <small>/ {dashboard.meta.showroomCount}</small>
+                  </strong>
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="combat-footer">
-            <span>
-              {selectedQuarterLabel} 전국 평균{" "}
-              <strong>{displayNumber(selectedCombatAverage)}</strong>
-            </span>
-            <span className={combatDelta >= 0 ? "positive" : "negative"}>
-              {selectedQuarterLabel} 전국 평균 대비{" "}
-              <strong>
-                {combatDelta >= 0 ? "+" : ""}
-                {combatDelta.toFixed(1)}
-              </strong>
-            </span>
-            <span>
-              전시장 경쟁력 전국 순위{" "}
-              <strong>
-                {nationalRank}위 / 전체 {dashboard.meta.showroomCount}
-              </strong>
-            </span>
           </div>
         </article>
 
