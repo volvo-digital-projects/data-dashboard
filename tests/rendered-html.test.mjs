@@ -839,7 +839,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="cx-component-chip"/g) ?? []).length, 5);
   assert.match(
     css,
-    /\.score-tier-heading \.voc-component-chip,[\s\S]*?\.score-tier-heading \.cx-component-chip\s*\{[^}]*linear-gradient\([^}]*135deg[^}]*rgba\(255, 255, 255, 0\.98\) 0%[^}]*rgba\(245, 250, 252, 0\.96\) 52%[^}]*rgba\(228, 239, 244, 0\.92\) 100%/,
+    /\.score-tier-heading \.voc-component-chip,[\s\S]*?\.score-tier-heading \.cx-component-chip\s*\{[^}]*background: #f4f8fa;[^}]*box-shadow: none;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.score-tier-heading \.voc-component-chip,[\s\S]*?\.score-tier-heading \.cx-component-chip\s*\{[^}]*linear-gradient/,
   );
   assert.match(
     visibleHtml,
