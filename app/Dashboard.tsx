@@ -408,19 +408,6 @@ const metricDscScoreOf = (
     : Number(((rawScore / metricMeta.cx.max) * 130).toFixed(1));
 };
 
-const quarterRtcIncentiveRateOf = (
-  item: Showroom,
-  quarter: QuarterKey,
-): number | null => {
-  const rates = (["v3s", "voc", "cx"] as const).map((metric) =>
-    metricRtcIncentiveRateOf(item, metric, quarter),
-  );
-
-  return rates.every((rate): rate is number => typeof rate === "number")
-    ? Number(rates.reduce((sum, rate) => sum + rate, 0).toFixed(1))
-    : null;
-};
-
 const groupQuarterAverageOf = (
   showroom: Showroom,
   metric: MetricKey,
@@ -2681,12 +2668,6 @@ export default function Dashboard({
   const q1IntegratedScore = integratedQuarterScoreOf(selected, "q1") ?? 0;
   const q2IntegratedScore = integratedQuarterScoreOf(selected, "q2") ?? 0;
   const cumulativeAverage = (q1IntegratedScore + q2IntegratedScore) / 2;
-  const q1DscScore = selected.q1?.combat ?? selected.combat ?? 0;
-  const q2DscScore = selected.combat ?? 0;
-  const cumulativeDscScore = (q1DscScore + q2DscScore) / 2;
-  const q1RtcRate = quarterRtcIncentiveRateOf(selected, "q1") ?? 0;
-  const q2RtcRate = quarterRtcIncentiveRateOf(selected, "q2") ?? 0;
-  const cumulativeRtcRate = (q1RtcRate + q2RtcRate) / 2;
   const q1IntegratedAverage = quarterIntegratedAverageOf("q1");
   const q2IntegratedAverage = quarterIntegratedAverageOf("q2");
   const cumulativeNationalAverage =
@@ -2763,6 +2744,24 @@ export default function Dashboard({
       appealLabel: "신차해피콜만 사후보정 가능",
     },
   ];
+  const selectedMetricDscScore = kpis.every(
+    (item) => typeof item.dscScore === "number",
+  )
+    ? Number(
+        kpis
+          .reduce((sum, item) => sum + (item.dscScore ?? 0), 0)
+          .toFixed(1),
+      )
+    : null;
+  const selectedMetricRtcRate = kpis.every(
+    (item) => typeof item.rtcRate === "number",
+  )
+    ? Number(
+        kpis
+          .reduce((sum, item) => sum + (item.rtcRate ?? 0), 0)
+          .toFixed(1),
+      )
+    : null;
   const warningCount = kpis.filter((item) => item.value < item.average).length;
   const integratedDelta =
     selectedQuarterIntegrated - selectedIntegratedAverage;
@@ -3031,10 +3030,10 @@ export default function Dashboard({
               aria-label="DSC 스코어 및 RTC 인센티브율"
             >
               <span>
-                DSC 스코어 <strong>{displayNumber(cumulativeDscScore)}점</strong>
+                DSC 스코어 <strong>{displayNumber(selectedMetricDscScore)}점</strong>
               </span>
               <span>
-                RTC 인센티브 <strong>{displayNumber(cumulativeRtcRate)}%</strong>
+                RTC 인센티브 <strong>{displayNumber(selectedMetricRtcRate)}%</strong>
               </span>
             </div>
           </div>

@@ -791,7 +791,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-rank-note" aria-label="전국 순위 \d+위"/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
   assert.match(visibleHtml, /DSC 스코어[\s\S]*93\.6점/);
-  assert.match(visibleHtml, /DSC 스코어[\s\S]*298\.8점/);
+  assert.match(visibleHtml, /DSC 스코어[\s\S]*270\.5점/);
+  assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.6%/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
@@ -1745,7 +1746,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-rank-note"[\s\S]*?cumulativeRank[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?cumulativeDscScore[\s\S]*?RTC 인센티브[\s\S]*?cumulativeRtcRate[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
+    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-rank-note"[\s\S]*?cumulativeRank[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?selectedMetricDscScore[\s\S]*?RTC 인센티브[\s\S]*?selectedMetricRtcRate[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
   );
   assert.match(
     dashboardSource,
