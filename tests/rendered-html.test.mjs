@@ -3491,11 +3491,11 @@ test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape v
   );
   assert.match(
     viewerCss,
-    /\.pages\s*\{[^}]*height: 100dvh;[^}]*scroll-snap-type: y mandatory;[^}]*touch-action: none;/,
+    /\.pages\s*\{[^}]*height: 100%;[^}]*scroll-snap-type: y mandatory;[^}]*touch-action: none;/,
   );
   assert.match(
     viewerCss,
-    /\.page\s*\{[^}]*height: 100dvh;[^}]*scroll-snap-align: start;[^}]*scroll-snap-stop: always;/,
+    /\.page\s*\{[^}]*height: 100%;[^}]*min-height: 100%;[^}]*scroll-snap-align: start;[^}]*scroll-snap-stop: always;/,
   );
   assert.match(
     viewerCss,
