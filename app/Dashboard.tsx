@@ -452,23 +452,16 @@ function AnimatedScore({
 
   return (
     <div
+      key={displayValue}
       className={`metric-card-value animated-score ${className}`.trim()}
       aria-label={displayValue}
+      style={
+        {
+          "--score-value-delay": `${120 + sequence * 180}ms`,
+        } as CSSProperties
+      }
     >
-      {Array.from(displayValue).map((character, index) => (
-        <span
-          aria-hidden="true"
-          className="animated-score-digit"
-          key={`${displayValue}-${index}`}
-          style={
-            {
-              "--score-digit-delay": `${120 + sequence * 180 + index * 65}ms`,
-            } as CSSProperties
-          }
-        >
-          {character}
-        </span>
-      ))}
+      {displayValue}
     </div>
   );
 }

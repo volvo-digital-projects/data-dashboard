@@ -3109,21 +3109,22 @@ test("drops the four headline scores in ES90-style sequential timing", async () 
   assert.match(dashboardSource, /function AnimatedScore\(/);
   assert.match(
     dashboardSource,
-    /120 \+ sequence \* 180 \+ index \* 65/,
+    /120 \+ sequence \* 180/,
   );
+  assert.doesNotMatch(dashboardSource, /animated-score-digit/);
   assert.match(dashboardSource, /animationSequence=\{index\}/);
   assert.match(dashboardSource, /sequence=\{3\}/);
   assert.match(
     css,
-    /\.animated-score-digit\s*\{[^}]*animation: metric-score-digit-drop 1\.7s cubic-bezier\(0\.22, 1, 0\.36, 1\)/,
+    /\.animated-score\s*\{[^}]*animation: metric-score-drop 1\.45s cubic-bezier\(0\.22, 1, 0\.36, 1\)/,
   );
   assert.match(
     css,
-    /@keyframes metric-score-digit-drop\s*\{[\s\S]*?translateY\(-20px\)[\s\S]*?translateY\(0\)/,
+    /@keyframes metric-score-drop\s*\{[\s\S]*?translateY\(-18px\)[\s\S]*?translateY\(1px\)[\s\S]*?translateY\(0\)/,
   );
   assert.match(
     css,
-    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.animated-score-digit,[\s\S]*?animation: none/,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.animated-score,[\s\S]*?animation: none/,
   );
 });
 
