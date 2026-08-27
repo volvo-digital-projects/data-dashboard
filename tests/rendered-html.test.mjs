@@ -2730,7 +2730,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.scatter-average-value\.horizontal\s*\{[^}]*left: 0[^}]*display: flex[^}]*flex-direction: column/,
+    /\.scatter-average-value\.horizontal\s*\{[^}]*left: 12px[^}]*display: flex[^}]*flex-direction: column/,
   );
   assert.match(
     css,

@@ -3955,7 +3955,7 @@ input:focus-visible {
 }
 
 .scatter-average-value.horizontal {
-  left: 0;
+  left: 12px;
   bottom: var(--avg-y);
   display: flex;
   align-items: flex-start;
