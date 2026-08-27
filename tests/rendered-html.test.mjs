@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 95);
+  assert.equal(release.items.length, 96);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -813,7 +813,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-rank-note" aria-label="전국 순위 \d+위"/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
   assert.match(visibleHtml, /DSC 스코어[\s\S]*100점/);
-  assert.match(visibleHtml, /DSC 스코어[\s\S]*276\.9점/);
+  assert.match(visibleHtml, /DSC 스코어[\s\S]*289\.4점/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.6%/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
@@ -1008,7 +1008,7 @@ test("serves score criteria as a separate CDSID page", async () => {
   assert.match(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(visibleHtml, /V3S · VOC · CX Index의 산정 구조/);
   assert.match(html, /href="\/dashboard\/6KR6834"/);
-  assert.match(visibleHtml, /500점을 100점으로 환산/);
+  assert.match(visibleHtml, /반올림한 V3S 평가 총점 기준/);
 });
 
 test("serves the dual-metric competitive analysis sample", async () => {
@@ -1786,11 +1786,15 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const metricDscScoreOf =[\s\S]*?metric === "v3s"\) return v3sDscScoreOf\(value\)/,
+    /const vocDscScoreOf =[\s\S]*?Math\.round\(value\) >= 85 \? 100 : 90[\s\S]*?const metricDscScoreOf =[\s\S]*?metric === "v3s"\) return v3sDscScoreOf\(value\)[\s\S]*?metric === "voc"\) return vocDscScoreOf\(value\)/,
   );
   assert.match(
     dashboardSource,
     /반올림한 V3S 평가 총점 기준[\s\S]*?미스터리 쇼퍼[\s\S]*?ONE Voice 시승 종합 만족도[\s\S]*?ONE Voice 신차[\s\S]*?출고 해피콜 이행률[\s\S]*?V3S 평가 총점 90점 이상[\s\S]*?DSC 100점[\s\S]*?RTC 0\.2%[\s\S]*?V3S 평가 총점 85점 이상[\s\S]*?DSC 90점[\s\S]*?RTC 0\.1%[\s\S]*?V3S 평가 총점 85점 미만[\s\S]*?DSC 80점[\s\S]*?RTC 0%/,
+  );
+  assert.match(
+    dashboardSource,
+    /분기별 VOC 최종점수 기준[\s\S]*?상·하반기 각 2회[\s\S]*?소수점 첫째 자리까지 반올림 없이 표시[\s\S]*?반올림 평가점수 85점 이상[\s\S]*?DSC 100점[\s\S]*?RTC 0\.2%[\s\S]*?반올림 평가점수 85점 미만[\s\S]*?DSC 90점[\s\S]*?RTC 0\.1%/,
   );
   assert.match(
     css,

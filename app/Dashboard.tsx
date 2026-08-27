@@ -389,6 +389,9 @@ const v3sDscScoreOf = (value: number) => {
   return roundedScore >= 90 ? 100 : roundedScore >= 85 ? 90 : 80;
 };
 
+const vocDscScoreOf = (value: number) =>
+  Math.round(value) >= 85 ? 100 : 90;
+
 const metricRtcIncentiveRateOf = (
   item: Showroom,
   metric: TrendMetricKey,
@@ -413,6 +416,7 @@ const metricDscScoreOf = (
   const value = quarterValueOf(item, metric, quarter);
   if (value === null) return null;
   if (metric === "v3s") return v3sDscScoreOf(value);
+  if (metric === "voc") return vocDscScoreOf(value);
   if (metric !== "cx") return value;
 
   const finalizedScore =
@@ -2128,10 +2132,10 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           <div className="criteria-summary">
             <span className="criteria-number">02</span>
             <div>
-              <strong>고객 만족도와 프로세스의 가중 합</strong>
+              <strong>분기별 VOC 최종점수 기준</strong>
               <p>
-                방문 후 7일 이내 설문을 보내고, 네 항목의 점수와 이행률을
-                중요도에 따라 합산합니다.
+                상·하반기 각 2회의 VOC Report를 확인하고, 최종점수는
+                소수점 첫째 자리까지 반올림 없이 표시합니다.
               </p>
             </div>
             <div className="criteria-tags">
@@ -2163,12 +2167,12 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           </div>
           <div className="criteria-ladder two">
             <div className="good">
-              <span>VOC 85점 이상</span>
+              <span>반올림 평가점수 85점 이상</span>
               <strong>DSC 100점</strong>
               <small>RTC 0.2%</small>
             </div>
             <div className="warning">
-              <span>85점 미만</span>
+              <span>반올림 평가점수 85점 미만</span>
               <strong>DSC 90점</strong>
               <small>RTC 0.1%</small>
             </div>
