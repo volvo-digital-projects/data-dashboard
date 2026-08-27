@@ -790,8 +790,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
-  assert.match(visibleHtml, /전국 평균[\s\S]*485\.9/);
-  assert.match(visibleHtml, /평균 대비[\s\S]*▲ 4\.3점/);
+  assert.match(visibleHtml, /볼보 평균[\s\S]*485\.9/);
+  assert.match(visibleHtml, /볼보 평균 대비[\s\S]*▲ 4\.3점/);
   assert.match(visibleHtml, /전국[\s\S]*\d+위/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);
@@ -955,7 +955,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /위험해요/);
   assert.doesNotMatch(html, /힘내세요: Q2 전국 평균 미만, 5점 미만 차이/);
   assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 0);
-  assert.match(visibleHtml, /Q3<\/span> 전국 평균 대비[\s\S]*?▼ 8\.7점/);
+  assert.match(visibleHtml, /Q3<\/span> 볼보 평균 대비[\s\S]*?▼ 8\.7점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -1481,7 +1481,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /<span className="metric-benchmark-quarter">\{quarterLabel\}<\/span>\{" "\}\s*전국 평균 대비/,
+    /<span className="metric-benchmark-quarter">\{quarterLabel\}<\/span>\{" "\}\s*볼보 평균 대비/,
   );
   assert.match(
     dashboardSource,
@@ -1741,7 +1741,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?전국 평균[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
+    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?볼보 평균[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
   );
   assert.match(
     dashboardSource,

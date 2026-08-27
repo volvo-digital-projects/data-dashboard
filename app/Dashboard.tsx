@@ -595,11 +595,11 @@ function MetricCard({
       </div>
       <div
         className="metric-benchmark"
-        title={`${quarterLabel} 전국 평균 ${displayNumber(average)}점`}
+        title={`${quarterLabel} 볼보 평균 ${displayNumber(average)}점`}
       >
         <span>
           <span className="metric-benchmark-quarter">{quarterLabel}</span>{" "}
-          전국 평균 대비
+          볼보 평균 대비
         </span>
         <strong
           className={`${
@@ -2846,7 +2846,7 @@ export default function Dashboard({
               <small> / {dashboard.meta.showroomCount}개점</small>
             </strong>
             <span className={integratedDelta >= 0 ? "positive" : "negative"}>
-              {selectedQuarterLabel} 전국 평균 대비{" "}
+              {selectedQuarterLabel} 볼보 평균 대비{" "}
               {integratedDelta >= 0 ? "+" : ""}
               {integratedDelta.toFixed(1)}
             </span>
@@ -2968,17 +2968,17 @@ export default function Dashboard({
             <div className="metric-card-value scoreboard-main-value">
               {displayNumber(cumulativeAverage)}
             </div>
-            <div className="metric-stat-chips scoreboard-stat-chips" aria-label="전국 순위와 볼보 전체 평균">
+            <div className="metric-stat-chips scoreboard-stat-chips" aria-label="전국 순위와 볼보 평균">
               <span>
                 전국 <strong>{cumulativeRank}위</strong>
               </span>
               <span>
-                전국 평균 <strong>{displayNumber(cumulativeNationalAverage)}</strong>
+                볼보 평균 <strong>{displayNumber(cumulativeNationalAverage)}</strong>
               </span>
             </div>
           </div>
           <div className="metric-benchmark scoreboard-benchmark">
-            <span>평균 대비</span>
+            <span>볼보 평균 대비</span>
             <strong className={cumulativeDelta >= 0 ? "positive" : "negative"}>
               {cumulativeDelta >= 0 ? "▲" : "▼"} {Math.abs(cumulativeDelta).toFixed(1)}점
             </strong>
