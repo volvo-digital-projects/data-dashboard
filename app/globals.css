@@ -1028,6 +1028,23 @@ input:focus-visible {
   cursor: help;
 }
 
+.metric-titleline {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.metric-max-note {
+  color: var(--muted);
+  font-family: var(--font-korean);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
 .signal-pill {
   display: inline-flex;
   align-items: center;

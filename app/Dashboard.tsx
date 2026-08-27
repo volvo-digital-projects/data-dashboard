@@ -585,17 +585,19 @@ function MetricCard({
       onClick={onSelect}
     >
       <div className="metric-card-topline">
-        <span className="metric-code" title={metricDescriptions[metric]}>
-          {metricMeta[metric].short}
-        </span>
+        <div className="metric-titleline">
+          <span className="metric-code" title={metricDescriptions[metric]}>
+            {metricMeta[metric].short}
+          </span>
+          <small className="metric-max-note">
+            ({metricMeta[metric].max}점 만점)
+          </small>
+        </div>
         <span className={`signal-pill ${signal.tone}`} title={signalRule}>
           {signal.label}
         </span>
       </div>
-      <div className="metric-card-value">
-        {displayNumber(value)}
-        <span>/ {metricMeta[metric].max}점 만점</span>
-      </div>
+      <div className="metric-card-value">{displayNumber(value)}</div>
       <div
         className="metric-benchmark"
         title={`${quarterLabel} 전국 평균 ${displayNumber(average)}점`}

@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 85);
+  assert.equal(release.items.length, 86);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -692,10 +692,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);
-  assert.doesNotMatch(visibleHtml, /<small>100점 만점<\/small>/);
-  assert.equal((visibleHtml.match(/<span>\/ 100점 만점<\/span>/g) ?? []).length, 2);
-  assert.equal((visibleHtml.match(/<span>\/ 320점 만점<\/span>/g) ?? []).length, 1);
-  assert.equal((visibleHtml.match(/<span>점 \/ (?:100|320)점 만점<\/span>/g) ?? []).length, 0);
+  assert.equal(
+    (visibleHtml.match(/<small class="metric-max-note">\(100점 만점\)<\/small>/g) ?? []).length,
+    2,
+  );
+  assert.equal(
+    (visibleHtml.match(/<small class="metric-max-note">\(320점 만점\)<\/small>/g) ?? []).length,
+    1,
+  );
+  assert.doesNotMatch(visibleHtml, /<span>\/ (?:100|320)점 만점<\/span>/);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
   assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
