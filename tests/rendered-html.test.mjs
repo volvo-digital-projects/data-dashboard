@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 91);
+  assert.equal(release.items.length, 92);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1770,11 +1770,11 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /className="metric-card-topline scoreboard-heading"[\s\S]*?통합 경쟁력 지수[\s\S]*?className="metric-card-value scoreboard-main-value"/,
+    /className="metric-card-topline scoreboard-heading"[\s\S]*?통합 경쟁력 지수[\s\S]*?<AnimatedScore[\s\S]*?className="scoreboard-main-value"/,
   );
   assert.match(
     dashboardSource,
-    /displayNumber\(cumulativeAverage\)[\s\S]*?className="metric-rank-note"[\s\S]*?cumulativeRank[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?selectedMetricDscScore[\s\S]*?RTC 인센티브[\s\S]*?selectedMetricRtcRate[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
+    /value=\{cumulativeAverage\}[\s\S]*?className="metric-rank-note"[\s\S]*?cumulativeRank[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?selectedMetricDscScore[\s\S]*?RTC 인센티브[\s\S]*?selectedMetricRtcRate[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
   );
   assert.match(
     dashboardSource,
@@ -3093,6 +3093,33 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
   assert.match(
     css,
     /\.voc-consultation-heading > div:first-child span:not\(\.english-title\)\s*\{[^}]*font-size: 8px;/,
+  );
+});
+
+test("drops the four headline scores in ES90-style sequential timing", async () => {
+  const [dashboardSource, css] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(dashboardSource, /function AnimatedScore\(/);
+  assert.match(
+    dashboardSource,
+    /120 \+ sequence \* 180 \+ index \* 65/,
+  );
+  assert.match(dashboardSource, /animationSequence=\{index\}/);
+  assert.match(dashboardSource, /sequence=\{3\}/);
+  assert.match(
+    css,
+    /\.animated-score-digit\s*\{[^}]*animation: metric-score-digit-drop 1\.7s cubic-bezier\(0\.22, 1, 0\.36, 1\)/,
+  );
+  assert.match(
+    css,
+    /@keyframes metric-score-digit-drop\s*\{[\s\S]*?translateY\(-20px\)[\s\S]*?translateY\(0\)/,
+  );
+  assert.match(
+    css,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.animated-score-digit,[\s\S]*?animation: none/,
   );
 });
 

@@ -9914,6 +9914,7 @@ button.quarter-score-row:disabled {
   .actual-series-wipe,
   .combat-score-number,
   .combat-score-digit,
+  .animated-score-digit,
   .v3s-bar-fill,
   .v3s-peer-bar,
   .v3s-history-area,
@@ -11107,6 +11108,33 @@ body {
   line-height: 0.9;
   letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
+}
+
+.animated-score-digit {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: opacity, transform, filter;
+  animation: metric-score-digit-drop 1.7s cubic-bezier(0.22, 1, 0.36, 1)
+    var(--score-digit-delay, 0ms) both;
+}
+
+@keyframes metric-score-digit-drop {
+  0% {
+    opacity: 0;
+    filter: blur(2.5px);
+    transform: translateY(-20px);
+  }
+
+  64% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }
 
 .metric-rank-note {

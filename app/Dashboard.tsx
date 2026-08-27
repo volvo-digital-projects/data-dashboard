@@ -439,6 +439,40 @@ const displayNumber = (value: number | null | undefined, digits = 1) =>
     ? "—"
     : value.toFixed(digits);
 
+function AnimatedScore({
+  value,
+  sequence,
+  className = "",
+}: {
+  value: number | null | undefined;
+  sequence: number;
+  className?: string;
+}) {
+  const displayValue = displayNumber(value);
+
+  return (
+    <div
+      className={`metric-card-value animated-score ${className}`.trim()}
+      aria-label={displayValue}
+    >
+      {Array.from(displayValue).map((character, index) => (
+        <span
+          aria-hidden="true"
+          className="animated-score-digit"
+          key={`${displayValue}-${index}`}
+          style={
+            {
+              "--score-digit-delay": `${120 + sequence * 180 + index * 65}ms`,
+            } as CSSProperties
+          }
+        >
+          {character}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 const displayTrendNumber = (value: number | null | undefined) => {
   if (value === null || value === undefined || !Number.isFinite(value)) {
     return "—";
@@ -536,6 +570,7 @@ function MetricCard({
   evidenceQuarters = [],
   unseenEvidenceQuarters = [],
   onEvidenceOpen,
+  animationSequence,
 }: {
   metric: TrendMetricKey;
   value: number;
@@ -553,6 +588,7 @@ function MetricCard({
   evidenceQuarters?: QuarterKey[];
   unseenEvidenceQuarters?: QuarterKey[];
   onEvidenceOpen?: (quarter: QuarterKey) => void;
+  animationSequence: number;
 }) {
   const signal = getSignal(value, average);
   const quarterLabel = quarter.toUpperCase();
@@ -611,7 +647,7 @@ function MetricCard({
       </div>
       <div className="metric-value-row">
         <div className="metric-score-lockup">
-          <div className="metric-card-value">{displayNumber(value)}</div>
+          <AnimatedScore value={value} sequence={animationSequence} />
           <span className="metric-rank-note" aria-label={`전국 순위 ${rank}위`}>
             / 전국 <strong>{rank}위</strong>
           </span>
@@ -3027,7 +3063,7 @@ export default function Dashboard({
         >
         <div className="kpi-column dsc-score-group" aria-label="DSC 종합평가">
           <div className="metric-grid">
-            {kpis.map((item) => (
+            {kpis.map((item, index) => (
               <MetricCard
                 key={item.key}
                 metric={item.key}
@@ -3062,6 +3098,7 @@ export default function Dashboard({
                 onEvidenceOpen={
                   item.key === "v3s" ? openEvidenceGallery : undefined
                 }
+                animationSequence={index}
               />
             ))}
           </div>
@@ -3079,9 +3116,11 @@ export default function Dashboard({
 
           <div className="metric-value-row">
             <div className="metric-score-lockup">
-              <div className="metric-card-value scoreboard-main-value">
-                {displayNumber(cumulativeAverage)}
-              </div>
+              <AnimatedScore
+                value={cumulativeAverage}
+                sequence={3}
+                className="scoreboard-main-value"
+              />
               <span
                 className="metric-rank-note"
                 aria-label={`전국 순위 ${cumulativeRank}위`}
