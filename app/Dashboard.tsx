@@ -622,7 +622,11 @@ function MetricCard({
       >
         <span>
           <span className="metric-benchmark-quarter">{quarterLabel}</span>{" "}
-          볼보 평균 대비
+          볼보 평균{" "}
+          <span className="metric-benchmark-average">
+            {displayNumber(average)}점
+          </span>{" "}
+          대비
         </span>
         <strong
           className={`${
@@ -3036,7 +3040,10 @@ export default function Dashboard({
           <div className="metric-benchmark scoreboard-benchmark">
             <span>
               {selectedQuarterLabel} 볼보 평균{" "}
-              {displayNumber(cumulativeNationalAverage)}점 대비
+              <span className="metric-benchmark-average">
+                {displayNumber(cumulativeNationalAverage)}점
+              </span>{" "}
+              대비
             </span>
             <strong className={cumulativeDelta >= 0 ? "positive" : "negative"}>
               {cumulativeDelta >= 0 ? "▲" : "▼"} {Math.abs(cumulativeDelta).toFixed(1)}점

@@ -708,6 +708,11 @@ test("server-renders the selected CDSID dashboard", async () => {
       .length,
     3,
   );
+  assert.equal(
+    (visibleHtml.match(/class="metric-benchmark-average">[\d.]+점<\/span>/g) ?? [])
+      .length,
+    4,
+  );
   assert.match(
     dashboardCss,
     /\.metric-benchmark > span\s*\{[^}]*font-size: 12px;/,
@@ -715,6 +720,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(
     dashboardCss,
     /\.metric-benchmark::before\s*\{[^}]*content: "";[^}]*flex: 1 1 auto;[^}]*height: 1px;[^}]*background: rgba\(101, 130, 143, 0\.28\);/,
+  );
+  assert.match(
+    dashboardCss,
+    /\.metric-benchmark-average\s*\{[^}]*color: #0d5e7a;[^}]*font-size: 11px;[^}]*font-weight: 800;/,
   );
   assert.match(
     dashboardCss,
@@ -805,7 +814,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
-  assert.match(visibleHtml, /Q2 볼보 평균 485\.9점 대비[\s\S]*▲ 4\.3점/);
+  assert.match(
+    visibleHtml,
+    /Q2 볼보 평균 <span class="metric-benchmark-average">485\.9점<\/span> 대비[\s\S]*▲ 4\.3점/,
+  );
   assert.match(visibleHtml, /전국[\s\S]*\d+위/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);
@@ -969,7 +981,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /위험해요/);
   assert.doesNotMatch(html, /힘내세요: Q2 전국 평균 미만, 5점 미만 차이/);
   assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 0);
-  assert.match(visibleHtml, /Q3<\/span> 볼보 평균 대비[\s\S]*?▼ 8\.7점/);
+  assert.match(
+    visibleHtml,
+    /Q3<\/span> 볼보 평균 <span class="metric-benchmark-average">96\.2점<\/span> 대비[\s\S]*?▼ 8\.7점/,
+  );
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
   assert.doesNotMatch(visibleHtml, /보정 검토 센터|ACTION CENTER|Outlook으로 보정 요청/);
@@ -1495,7 +1510,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /<span className="metric-benchmark-quarter">\{quarterLabel\}<\/span>\{" "\}\s*볼보 평균 대비/,
+    /<span className="metric-benchmark-quarter">\{quarterLabel\}<\/span>\{" "\}\s*볼보 평균\{" "\}[\s\S]*?className="metric-benchmark-average"[\s\S]*?displayNumber\(average\)[\s\S]*?대비/,
   );
   assert.match(
     dashboardSource,
