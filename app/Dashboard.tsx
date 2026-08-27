@@ -22,6 +22,11 @@ import {
   V3SEvidenceGallery,
   type EvidenceQuarter,
 } from "./V3SEvidenceGallery";
+import {
+  getV3sReport,
+  V3SReportViewer,
+  type ReportQuarter,
+} from "./V3SReportViewer";
 
 type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
@@ -29,6 +34,7 @@ type GroupKey = "all" | "dealer" | "region" | "size";
 type QuarterKey = "q1" | "q2" | "q3" | "q4";
 
 const V3S_EVIDENCE_SEEN_KEY = "volvo-dashboard-v3s-evidence-seen-v1";
+const V3S_REPORT_SEEN_KEY = "volvo-dashboard-v3s-report-seen-v1";
 
 type QuarterRecord = {
   cdsid: string;
@@ -524,6 +530,9 @@ function MetricCard({
   active,
   onSelect,
   onQuarterSelect,
+  reportQuarters = [],
+  unseenReportQuarters = [],
+  onReportOpen,
   evidenceQuarters = [],
   unseenEvidenceQuarters = [],
   onEvidenceOpen,
@@ -538,6 +547,9 @@ function MetricCard({
   active: boolean;
   onSelect: () => void;
   onQuarterSelect: (quarter: QuarterKey) => void;
+  reportQuarters?: QuarterKey[];
+  unseenReportQuarters?: QuarterKey[];
+  onReportOpen?: (quarter: QuarterKey) => void;
   evidenceQuarters?: QuarterKey[];
   unseenEvidenceQuarters?: QuarterKey[];
   onEvidenceOpen?: (quarter: QuarterKey) => void;
@@ -677,43 +689,67 @@ function MetricCard({
         <div className="metric-resource-grid" aria-label="V3S 분기별 자료">
           {resourceQuarters.map((resourceQuarter) => {
             const resourceLabel = resourceQuarter.toUpperCase();
+            const hasReport = reportQuarters.includes(resourceQuarter);
             const hasEvidence = evidenceQuarters.includes(resourceQuarter);
-            const isUnseen = unseenEvidenceQuarters.includes(resourceQuarter);
+            const isReportUnseen =
+              unseenReportQuarters.includes(resourceQuarter);
+            const isEvidenceUnseen =
+              unseenEvidenceQuarters.includes(resourceQuarter);
 
             return (
               <div className="metric-resource-group" key={resourceQuarter}>
-                {isUnseen && (
-                  <span className="metric-resource-new" aria-label={`${resourceLabel} 새 자료`}>
-                    NEW
-                  </span>
-                )}
-                <button
-                  type="button"
-                  className="metric-resource-button"
-                  aria-label={`V3S ${resourceLabel} PDF 보고서 준비 중`}
-                  title={`${resourceLabel} PDF 보고서 준비 중`}
-                  disabled
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  <span className="metric-resource-pdf" aria-hidden="true">
-                    PDF
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  className={`metric-resource-button ${hasEvidence ? "available" : ""}`}
-                  aria-label={`V3S ${resourceLabel} 증빙사진 ${
-                    hasEvidence ? "보기" : "준비 중"
-                  }`}
-                  title={`${resourceLabel} 증빙사진 ${hasEvidence ? "보기" : "준비 중"}`}
-                  disabled={!hasEvidence}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    if (hasEvidence) onEvidenceOpen?.(resourceQuarter);
-                  }}
-                >
-                  <span className="metric-resource-photo" aria-hidden="true" />
-                </button>
+                <div className="metric-resource-control">
+                  {isReportUnseen && (
+                    <span
+                      className="metric-resource-new"
+                      aria-label={`${resourceLabel} 새 PDF 보고서`}
+                    >
+                      NEW
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    className={`metric-resource-button ${hasReport ? "available" : ""}`}
+                    aria-label={`V3S ${resourceLabel} PDF 보고서 ${
+                      hasReport ? "보기" : "준비 중"
+                    }`}
+                    title={`${resourceLabel} PDF 보고서 ${hasReport ? "보기" : "준비 중"}`}
+                    disabled={!hasReport}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      if (hasReport) onReportOpen?.(resourceQuarter);
+                    }}
+                  >
+                    <span className="metric-resource-pdf" aria-hidden="true">
+                      PDF
+                    </span>
+                  </button>
+                </div>
+                <div className="metric-resource-control">
+                  {isEvidenceUnseen && (
+                    <span
+                      className="metric-resource-new"
+                      aria-label={`${resourceLabel} 새 증빙사진`}
+                    >
+                      NEW
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    className={`metric-resource-button ${hasEvidence ? "available" : ""}`}
+                    aria-label={`V3S ${resourceLabel} 증빙사진 ${
+                      hasEvidence ? "보기" : "준비 중"
+                    }`}
+                    title={`${resourceLabel} 증빙사진 ${hasEvidence ? "보기" : "준비 중"}`}
+                    disabled={!hasEvidence}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      if (hasEvidence) onEvidenceOpen?.(resourceQuarter);
+                    }}
+                  >
+                    <span className="metric-resource-photo" aria-hidden="true" />
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -2301,6 +2337,9 @@ export default function Dashboard({
   >({ v3s: "q2", voc: "q3", cx: "q3" });
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [reportQuarter, setReportQuarter] =
+    useState<ReportQuarter | null>(null);
+  const [seenReportKeys, setSeenReportKeys] = useState<string[]>([]);
   const [evidenceQuarter, setEvidenceQuarter] =
     useState<EvidenceQuarter | null>(null);
   const [seenEvidenceKeys, setSeenEvidenceKeys] = useState<string[]>([]);
@@ -2332,6 +2371,26 @@ export default function Dashboard({
     syncAccessDate();
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    let restored: string[] = [];
+    try {
+      const saved = window.localStorage.getItem(V3S_REPORT_SEEN_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        restored = Array.isArray(parsed)
+          ? parsed.filter((item): item is string => typeof item === "string")
+          : [];
+      }
+    } catch {
+      restored = [];
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setSeenReportKeys(restored);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -2523,6 +2582,28 @@ export default function Dashboard({
   );
   const canSwitchShowrooms =
     showroomAccess.role !== "manager" && switchableShowrooms.length > 0;
+  const reportSeenKey = (quarter: QuarterKey) =>
+    `${selected.cdsid}:${quarter}`;
+  const availableReportQuarters = (
+    ["q1", "q2", "q3", "q4"] as QuarterKey[]
+  ).filter((quarter) => getV3sReport(selected.cdsid, quarter) !== null);
+  const unseenReportQuarters = availableReportQuarters.filter(
+    (quarter) => !seenReportKeys.includes(reportSeenKey(quarter)),
+  );
+  const openReportViewer = (quarter: QuarterKey) => {
+    const key = reportSeenKey(quarter);
+    setSeenReportKeys((current) => {
+      if (current.includes(key)) return current;
+      const next = [...current, key];
+      try {
+        window.localStorage.setItem(V3S_REPORT_SEEN_KEY, JSON.stringify(next));
+      } catch {
+        // The report still opens when privacy settings block local storage.
+      }
+      return next;
+    });
+    setReportQuarter(quarter);
+  };
   const evidenceSeenKey = (quarter: QuarterKey) =>
     `${selected.cdsid}:${quarter}`;
   const availableEvidenceQuarters = (
@@ -2961,6 +3042,15 @@ export default function Dashboard({
                 onQuarterSelect={(quarter) =>
                   selectMetricQuarter(item.key, quarter)
                 }
+                reportQuarters={
+                  item.key === "v3s" ? availableReportQuarters : undefined
+                }
+                unseenReportQuarters={
+                  item.key === "v3s" ? unseenReportQuarters : undefined
+                }
+                onReportOpen={
+                  item.key === "v3s" ? openReportViewer : undefined
+                }
                 evidenceQuarters={
                   item.key === "v3s"
                     ? availableEvidenceQuarters
@@ -3308,6 +3398,14 @@ export default function Dashboard({
         }}
       />
       <ReleaseUpdateNotice />
+      {reportQuarter && (
+        <V3SReportViewer
+          cdsid={selected.cdsid}
+          showroomName={displayShowroomName(selected.showroom)}
+          quarter={reportQuarter}
+          onClose={() => setReportQuarter(null)}
+        />
+      )}
       {evidenceQuarter && (
         <V3SEvidenceGallery
           cdsid={selected.cdsid}

@@ -1831,7 +1831,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--resources \+ \.metric-resource-grid\s*\{[^}]*gap: 4px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid \.metric-resource-group\s*\{[^}]*width: 100%;[^}]*gap: 4px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid \.metric-resource-button\s*\{[^}]*width: auto;[^}]*min-width: 0;[^}]*flex: 1 1 0;/,
+    /\.metric-quarter-strip--resources \+ \.metric-resource-grid\s*\{[^}]*gap: 4px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid \.metric-resource-group\s*\{[^}]*width: 100%;[^}]*gap: 4px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid \.metric-resource-control\s*\{[^}]*min-width: 0;[^}]*flex: 1 1 0;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid \.metric-resource-button\s*\{[^}]*width: 100%;[^}]*min-width: 0;[^}]*flex: 1 1 0;/,
   );
   assert.match(
     css,
@@ -1850,6 +1850,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
     /\.combat-scoreboard \.scoreboard-main-value,[\s\S]*?\.combat-scoreboard \.scoreboard-stat-chips strong\s*\{[^}]*color: #ffffff;/,
   );
   assert.doesNotMatch(dashboardSource, /signal-pill|className="metric-track"|DSC 평가점수/);
+  assert.match(dashboardSource, /V3S_REPORT_SEEN_KEY/);
   assert.match(dashboardSource, /V3S_EVIDENCE_SEEN_KEY[\s\S]*?metric-resource-new/);
   assert.doesNotMatch(dashboardSource, /2026 SCORE BOARD|scoreboard-quarter-table|scoreboard-summary/);
   assert.doesNotMatch(dashboardSource, /combatSummaryStyles/);
@@ -3272,5 +3273,64 @@ test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for eve
     evidenceAssets.map((asset) =>
       access(new URL(`../public/evidence/${asset}`, import.meta.url)),
     ),
+  );
+});
+
+test("maps all 39 V3S Q1 reports and presents them in an iPad landscape viewer", async () => {
+  const [dashboardSource, viewerSource, viewerCss] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/V3SReportViewer.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/V3SReportViewer.module.css", import.meta.url),
+      "utf8",
+    ),
+  ]);
+
+  const showroomSet = viewerSource.match(
+    /const q1ReportShowrooms = new Set\(\[([\s\S]*?)\]\);/,
+  );
+  assert.ok(showroomSet);
+  const reportCdsids = [
+    ...showroomSet[1].matchAll(/"(6KR\d+)"/g),
+  ].map((match) => match[1]);
+  assert.equal(reportCdsids.length, 39);
+  assert.equal(new Set(reportCdsids).size, 39);
+
+  await Promise.all(
+    reportCdsids.map((cdsid) =>
+      access(
+        new URL(
+          `../public/reports/${cdsid}/v3s/2026-q1.pdf`,
+          import.meta.url,
+        ),
+      ),
+    ),
+  );
+
+  assert.match(dashboardSource, /getV3sReport\(selected\.cdsid, quarter\) !== null/);
+  assert.match(dashboardSource, /onReportOpen\?\.\(resourceQuarter\)/);
+  assert.match(dashboardSource, /<V3SReportViewer/);
+  assert.match(viewerSource, /#view=FitH&toolbar=1&navpanes=0/);
+  assert.match(viewerSource, /aria-label="V3S 결과 보고서 닫기"/);
+  assert.match(viewerSource, /event\.key === "Escape"/);
+  assert.match(
+    viewerSource,
+    /document\.documentElement\.style\.scrollbarGutter = "auto"/,
+  );
+  assert.match(
+    viewerCss,
+    /\.backdrop\s*\{[^}]*position: fixed;[^}]*inset: 0;/,
+  );
+  assert.match(
+    viewerCss,
+    /\.dialog\s*\{[^}]*position: fixed;[^}]*inset: 0;/,
+  );
+  assert.match(
+    viewerCss,
+    /\.frame\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*border: 0;/,
+  );
+  assert.match(
+    viewerCss,
+    /@media \(orientation: landscape\) and \(max-height: 900px\)/,
   );
 });

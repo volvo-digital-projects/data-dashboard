@@ -11419,11 +11419,19 @@ body {
   overflow: visible;
 }
 
+.metric-resource-control {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0;
+  overflow: visible;
+}
+
 .metric-resource-new {
   position: absolute;
   z-index: 3;
   top: -7px;
-  right: 2px;
+  right: -1px;
   display: inline-flex;
   align-items: center;
   height: 12px;
@@ -11454,8 +11462,13 @@ body {
   gap: 4px;
 }
 
+.metric-quarter-strip--resources + .metric-resource-grid .metric-resource-control {
+  min-width: 0;
+  flex: 1 1 0;
+}
+
 .metric-quarter-strip--resources + .metric-resource-grid .metric-resource-button {
-  width: auto;
+  width: 100%;
   min-width: 0;
   flex: 1 1 0;
   height: 20px;
