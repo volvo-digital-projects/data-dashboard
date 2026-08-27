@@ -1810,7 +1810,15 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     css,
-    /linear-gradient\(145deg, #eef5f7 0%, #e9f1f4 58%, #e3edf1 100%\)/,
+    /\.combat-card\.combat-scoreboard\s*\{[^}]*color: #f7fbfd;[^}]*linear-gradient\(135deg, #2b5265 0%, #3a6679 56%, #527e8f 100%\)/,
+  );
+  assert.match(
+    css,
+    /\.combat-card\.combat-scoreboard::after\s*\{[^}]*opacity: 0\.58;[^}]*radial-gradient/,
+  );
+  assert.match(
+    css,
+    /\.combat-scoreboard \.scoreboard-main-value,[\s\S]*?\.combat-scoreboard \.scoreboard-stat-chips strong\s*\{[^}]*color: #ffffff;/,
   );
   assert.doesNotMatch(dashboardSource, /signal-pill|className="metric-track"|DSC 평가점수/);
   assert.match(dashboardSource, /V3S_EVIDENCE_SEEN_KEY[\s\S]*?metric-resource-new/);
