@@ -11166,6 +11166,7 @@ body {
 
 .metric-benchmark > span,
 .scoreboard-benchmark > span {
+  order: 0;
   min-width: 0;
   overflow: hidden;
   font-size: 10px;
@@ -11173,8 +11174,19 @@ body {
   white-space: nowrap;
 }
 
+.metric-benchmark::before {
+  content: "";
+  order: 1;
+  flex: 1 1 auto;
+  min-width: 10px;
+  height: 1px;
+  align-self: center;
+  background: rgba(101, 130, 143, 0.28);
+}
+
 .metric-benchmark strong,
 .scoreboard-benchmark > strong {
+  order: 2;
   flex: 0 0 auto;
   font-family: var(--font-latin);
   font-size: 12px;

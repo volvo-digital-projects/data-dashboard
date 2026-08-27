@@ -714,6 +714,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
+    /\.metric-benchmark::before\s*\{[^}]*content: "";[^}]*flex: 1 1 auto;[^}]*height: 1px;[^}]*background: rgba\(101, 130, 143, 0\.28\);/,
+  );
+  assert.match(
+    dashboardCss,
     /\.metric-benchmark-quarter\s*\{[^}]*font-family: var\(--font-latin\);[^}]*font-weight: 600;/,
   );
   const v3sQuarterStrip = html.match(
