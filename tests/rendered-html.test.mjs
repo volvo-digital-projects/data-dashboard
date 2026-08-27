@@ -3257,6 +3257,8 @@ test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for eve
   );
   assert.match(gallerySource, /aria-label="증빙사진 닫기"/);
   assert.match(gallerySource, /event\.key === "Escape"/);
+  assert.match(gallerySource, /모든 얼굴은 모자이크 처리했습니다\./);
+  assert.doesNotMatch(gallerySource, /모든 얼굴은 익명화했습니다\./);
   assert.doesNotMatch(gallerySource, /얼굴 익명화 완료/);
   assert.doesNotMatch(gallerySource, /X 버튼·바깥 영역·Esc 키/);
   assert.match(galleryCss, /grid-template-columns: repeat\(auto-fit,/);

@@ -356,7 +356,7 @@ export function V3SEvidenceGallery({
               </h2>
               <span className={styles.count}>{photos.length}장</span>
             </div>
-            <p>가로·세로 사진을 원본 비율로 표시하며 모든 얼굴은 익명화했습니다.</p>
+            <p>가로·세로 사진을 원본 비율로 표시하며 모든 얼굴은 모자이크 처리했습니다.</p>
           </div>
           <button
             ref={closeButtonRef}
