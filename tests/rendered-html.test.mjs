@@ -1107,7 +1107,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /VOC \+ ONE Voice \/ 상담 및 출고 후 해피콜 시행여부/,
+    /해피콜 이행률[\s\S]*VOC 상담 후 해피콜\(24시간 이내\)[\s\S]*ONE VOICE 출고 후 해피콜\(24시간 이내\)/,
   );
   assert.doesNotMatch(visibleHtml, /상담\/출고 사후관리 실행력/);
   assert.match(visibleHtml, /균형 경쟁력[\s\S]*93\.8/);
