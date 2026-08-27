@@ -1846,6 +1846,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.doesNotMatch(dashboardSource, /2026 SCORE BOARD|scoreboard-quarter-table|scoreboard-summary/);
   assert.doesNotMatch(dashboardSource, /combatSummaryStyles/);
   assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
+  assert.doesNotMatch(css, /\.dsc-score-group::after[\s\S]*?DSC 종합평가/);
   assert.doesNotMatch(css, /\.quarter-score-row > i(?:\s|\{| b)/);
 });
 

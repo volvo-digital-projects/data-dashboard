@@ -10952,18 +10952,6 @@ body {
       0 7px 20px rgba(21, 50, 64, 0.055);
   }
 
-  .dsc-score-group::after {
-    content: "DSC 종합평가";
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    color: rgba(52, 89, 106, 0.5);
-    font-size: 7px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    pointer-events: none;
-  }
-
   .dsc-score-group .metric-grid {
     height: 100%;
     min-height: 208px;
