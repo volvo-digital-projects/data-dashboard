@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 94);
+  assert.equal(release.items.length, 95);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -1782,7 +1782,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const v3sDscScoreOf =[\s\S]*?value >= 89\.5 \? 100 : value >= 84\.5 \? 90 : 80[\s\S]*?const metricRtcIncentiveRateOf =[\s\S]*?dscScore === 100 \? 0\.2 : dscScore === 90 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?value >= 100 \? 0\.2 : 0\.1/,
+    /const v3sDscScoreOf =[\s\S]*?Math\.round\(value\)[\s\S]*?roundedScore >= 90 \? 100 : roundedScore >= 85 \? 90 : 80[\s\S]*?const metricRtcIncentiveRateOf =[\s\S]*?dscScore === 100 \? 0\.2 : dscScore === 90 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?value >= 100 \? 0\.2 : 0\.1/,
   );
   assert.match(
     dashboardSource,
@@ -1790,7 +1790,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /원점수 89\.5점 이상[\s\S]*?DSC 100점[\s\S]*?RTC 0\.2%[\s\S]*?원점수 84\.5~89\.4점[\s\S]*?DSC 90점[\s\S]*?RTC 0\.1%[\s\S]*?원점수 84\.4점 이하[\s\S]*?DSC 80점[\s\S]*?RTC 0%/,
+    /반올림한 V3S 평가 총점 기준[\s\S]*?미스터리 쇼퍼[\s\S]*?ONE Voice 시승 종합 만족도[\s\S]*?ONE Voice 신차[\s\S]*?출고 해피콜 이행률[\s\S]*?V3S 평가 총점 90점 이상[\s\S]*?DSC 100점[\s\S]*?RTC 0\.2%[\s\S]*?V3S 평가 총점 85점 이상[\s\S]*?DSC 90점[\s\S]*?RTC 0\.1%[\s\S]*?V3S 평가 총점 85점 미만[\s\S]*?DSC 80점[\s\S]*?RTC 0%/,
   );
   assert.match(
     css,

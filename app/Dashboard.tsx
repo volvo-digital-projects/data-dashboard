@@ -384,8 +384,10 @@ const quarterIntegratedAverageOf = (quarter: QuarterKey) =>
     0,
   );
 
-const v3sDscScoreOf = (value: number) =>
-  value >= 89.5 ? 100 : value >= 84.5 ? 90 : 80;
+const v3sDscScoreOf = (value: number) => {
+  const roundedScore = Math.round(value);
+  return roundedScore >= 90 ? 100 : roundedScore >= 85 ? 90 : 80;
+};
 
 const metricRtcIncentiveRateOf = (
   item: Showroom,
@@ -2070,10 +2072,10 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           <div className="criteria-summary">
             <span className="criteria-number">01</span>
             <div>
-              <strong>500점을 100점으로 환산</strong>
+              <strong>반올림한 V3S 평가 총점 기준</strong>
               <p>
-                미스터리 쇼퍼 400점과 ONE Voice 100점을 합산해 전시장별
-                분기 점수를 만듭니다.
+                미스터리 쇼퍼, ONE Voice 시승 종합 만족도, ONE Voice 신차
+                출고 해피콜 이행률을 함께 반영합니다.
               </p>
             </div>
             <div className="criteria-tags">
@@ -2103,17 +2105,17 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           </div>
           <div className="criteria-ladder three">
             <div className="good">
-              <span>원점수 89.5점 이상</span>
+              <span>V3S 평가 총점 90점 이상</span>
               <strong>DSC 100점</strong>
               <small>RTC 0.2%</small>
             </div>
             <div className="caution">
-              <span>원점수 84.5~89.4점</span>
+              <span>V3S 평가 총점 85점 이상</span>
               <strong>DSC 90점</strong>
               <small>RTC 0.1%</small>
             </div>
             <div className="warning">
-              <span>원점수 84.4점 이하</span>
+              <span>V3S 평가 총점 85점 미만</span>
               <strong>DSC 80점</strong>
               <small>RTC 0%</small>
             </div>
