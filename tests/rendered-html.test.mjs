@@ -690,14 +690,14 @@ test("server-renders the selected CDSID dashboard", async () => {
     2,
   );
   assert.equal(
-    (visibleHtml.match(/<small class="metric-max-note">\(320점 만점\)<\/small>/g) ?? []).length,
+    (visibleHtml.match(/<small class="metric-max-note">\(130점 만점\)<\/small>/g) ?? []).length,
     1,
   );
   assert.match(
     dashboardCss,
     /\.combat-scoreboard \.scoreboard-heading \.metric-max-note\s*\{[^}]*color: #ffffff;/,
   );
-  assert.doesNotMatch(visibleHtml, /<span>\/ (?:100|320)점 만점<\/span>/);
+  assert.doesNotMatch(visibleHtml, /<span>\/ (?:100|130)점 만점<\/span>/);
   assert.equal((html.match(/class="metric-quarter-strip(?: |")/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
   assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
@@ -813,7 +813,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-rank-note" aria-label="전국 순위 \d+위"/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
   assert.match(visibleHtml, /DSC 스코어[\s\S]*100점/);
-  assert.match(visibleHtml, /DSC 스코어[\s\S]*289\.4점/);
+  assert.match(visibleHtml, /DSC 스코어[\s\S]*330점/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.6%/);
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
@@ -1310,7 +1310,7 @@ test("ships project metadata and removes the disposable starter", async () => {
   );
 });
 
-test("matches all 39 finalized CX Index Q2 results and RTC bands", async () => {
+test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1-Q4", async () => {
   const [showroomsText, cxQ2DscText, dashboardSource] = await Promise.all([
     readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
     readFile(new URL("../app/data/cx-q2-dsc.json", import.meta.url), "utf8"),
@@ -1347,6 +1347,11 @@ test("matches all 39 finalized CX Index Q2 results and RTC bands", async () => {
   for (const [cdsid, rawScore, dscScore] of expectedRows) {
     assert.equal(byCdsid[cdsid].cx, rawScore, `${cdsid} Q2 원점수`);
     assert.equal(cxQ2Dsc.scores[cdsid], dscScore, `${cdsid} Q2 DSC 스코어`);
+    assert.equal(
+      Math.min(130, Math.ceil((rawScore + 2) / 10) * 10),
+      dscScore,
+      `${cdsid} 공통 CX 환산식`,
+    );
   }
   assert.equal(
     Number((expectedRows.reduce((sum, [, raw]) => sum + raw, 0) / 39).toFixed(1)),
@@ -1358,6 +1363,7 @@ test("matches all 39 finalized CX Index Q2 results and RTC bands", async () => {
   );
   assert.equal(expectedRows.filter(([, raw]) => raw < 100).length, 3);
   assert.equal(expectedRows.filter(([, raw]) => raw >= 100).length, 36);
+  assert.equal(expectedRows.filter(([, , dsc]) => dsc >= 100).length, 39);
   assert.equal(cxQ2Dsc.maxScore, 130);
   assert.equal(cxQ2Dsc.rtcThreshold, 100);
   assert.match(
@@ -1366,11 +1372,11 @@ test("matches all 39 finalized CX Index Q2 results and RTC bands", async () => {
   );
   assert.match(
     dashboardSource,
-    /return value >= 100 \? 0\.2 : 0\.1;[\s\S]*?quarter === "q2"\) return cxQ2Dsc\.scores\[item\.cdsid\] \?\? null/,
+    /const cxDscScoreOf = \(value: number\) =>[\s\S]*?Math\.ceil\(\(value \+ 2\) \/ 10\) \* 10[\s\S]*?cxDscScoreOf\(value\) >= cxQ2Dsc\.rtcThreshold \? 0\.2 : 0\.1[\s\S]*?metric === "cx" \? cxDscScoreOf\(value\) : value/,
   );
   assert.match(
     dashboardSource,
-    /5개 CX Management 항목의 DSC 스코어 합산, 총 130점[\s\S]*?CX Management 130점 구성[\s\S]*?합산 100점 이상[\s\S]*?RTC 0\.2%[\s\S]*?합산 100점 미만[\s\S]*?RTC 0\.1%/,
+    /Q1~Q4 공통 · 5개 CX Management 항목의 DSC 스코어 합산, 총 130점[\s\S]*?CX Management 130점 구성[\s\S]*?합산 100점 이상[\s\S]*?RTC 0\.2%[\s\S]*?합산 100점 미만[\s\S]*?RTC 0\.1%/,
   );
 });
 
@@ -1846,7 +1852,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const v3sDscScoreOf =[\s\S]*?Math\.round\(value\)[\s\S]*?roundedScore >= 90 \? 100 : roundedScore >= 85 \? 90 : 80[\s\S]*?const metricRtcIncentiveRateOf =[\s\S]*?dscScore === 100 \? 0\.2 : dscScore === 90 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?value >= 100 \? 0\.2 : 0\.1/,
+    /const v3sDscScoreOf =[\s\S]*?Math\.round\(value\)[\s\S]*?roundedScore >= 90 \? 100 : roundedScore >= 85 \? 90 : 80[\s\S]*?const cxDscScoreOf =[\s\S]*?Math\.ceil\(\(value \+ 2\) \/ 10\) \* 10[\s\S]*?const metricRtcIncentiveRateOf =[\s\S]*?dscScore === 100 \? 0\.2 : dscScore === 90 \? 0\.1 : 0[\s\S]*?metric === "voc"[\s\S]*?value >= 85 \? 0\.2 : 0\.1[\s\S]*?cxDscScoreOf\(value\) >= cxQ2Dsc\.rtcThreshold \? 0\.2 : 0\.1/,
   );
   assert.match(
     dashboardSource,

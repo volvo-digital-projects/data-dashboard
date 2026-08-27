@@ -264,7 +264,7 @@ const metricMeta: Record<
   combat: { label: "종합 경쟁력", short: "TOTAL", max: 330, unit: "점" },
   v3s: { label: "V3S", short: "V3S", max: 100, unit: "점" },
   voc: { label: "VOC", short: "VOC", max: 100, unit: "점" },
-  cx: { label: "CX Index", short: "CX Index", max: 320, unit: "점" },
+  cx: { label: "CX Index", short: "CX Index", max: 130, unit: "점" },
 };
 
 const metricDescriptions: Record<TrendMetricKey, string> = {
@@ -290,10 +290,8 @@ const cxComponents = [
 
 const cxQ2Dsc = cxQ2DscJson as CxQ2DscData;
 
-const metricMaxOf = (metric: MetricKey, quarter: QuarterKey) =>
-  metric === "cx" && (quarter === "q1" || quarter === "q2")
-    ? cxQ2Dsc.maxScore
-    : metricMeta[metric].max;
+const metricMaxOf = (metric: MetricKey, _quarter: QuarterKey) =>
+  metricMeta[metric].max;
 
 type CxComponentRecord = Pick<
   QuarterRecord,
@@ -408,6 +406,12 @@ const v3sDscScoreOf = (value: number) => {
 const vocDscScoreOf = (value: number) =>
   Math.round(value) >= 85 ? 100 : 90;
 
+const cxDscScoreOf = (value: number) =>
+  Math.max(
+    0,
+    Math.min(cxQ2Dsc.maxScore, Math.ceil((value + 2) / 10) * 10),
+  );
+
 const metricRtcIncentiveRateOf = (
   item: Showroom,
   metric: TrendMetricKey,
@@ -421,7 +425,7 @@ const metricRtcIncentiveRateOf = (
     return dscScore === 100 ? 0.2 : dscScore === 90 ? 0.1 : 0;
   }
   if (metric === "voc") return value >= 85 ? 0.2 : 0.1;
-  return value >= 100 ? 0.2 : 0.1;
+  return cxDscScoreOf(value) >= cxQ2Dsc.rtcThreshold ? 0.2 : 0.1;
 };
 
 const metricDscScoreOf = (
@@ -433,14 +437,7 @@ const metricDscScoreOf = (
   if (value === null) return null;
   if (metric === "v3s") return v3sDscScoreOf(value);
   if (metric === "voc") return vocDscScoreOf(value);
-  if (metric !== "cx") return value;
-
-  if (quarter === "q2") return cxQ2Dsc.scores[item.cdsid] ?? null;
-
-  const finalizedScore = quarter === "q1" ? item.q1?.cx : null;
-  if (typeof finalizedScore === "number") return finalizedScore;
-
-  return Number(((value / metricMaxOf(metric, quarter)) * 130).toFixed(1));
+  return metric === "cx" ? cxDscScoreOf(value) : value;
 };
 
 const groupQuarterAverageOf = (
@@ -2202,7 +2199,7 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           <div className="criteria-summary">
             <span className="criteria-number">03</span>
             <div>
-              <strong>5개 CX Management 항목의 DSC 스코어 합산, 총 130점</strong>
+              <strong>Q1~Q4 공통 · 5개 CX Management 항목의 DSC 스코어 합산, 총 130점</strong>
               <p>
                 만족도뿐 아니라 긴급경보 처리, 조치계획, 앱 가입까지 운영
                 행동을 함께 평가합니다.
