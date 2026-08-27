@@ -1095,7 +1095,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     visibleHtml,
     /에이치 평균 93\.4점 대비 -5\.9점/,
   );
-  assert.match(visibleHtml, /VOC \+ ONE Voice \/ 상담 및 출고 후 만족도 평가/);
+  assert.match(
+    visibleHtml,
+    /종합 만족도 평균[\s\S]*VOC 상담 만족도[\s\S]*ONE Voice 시승 만족도[\s\S]*ONE Voice 출고 만족도/,
+  );
   assert.doesNotMatch(visibleHtml, /VOC · 상담\/시승\/출고 경험/);
   assert.match(visibleHtml, /해피콜 이행[\s\S]*100\.0/);
   assert.match(

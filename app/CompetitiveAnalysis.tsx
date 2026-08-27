@@ -735,8 +735,12 @@ export default function CompetitiveAnalysis({
         <section className="analysis-summary-grid">
         <article className="analysis-summary-card satisfaction">
           <div>
-            <span>종합 만족도</span>
-            <small>VOC + ONE Voice / 상담 및 출고 후 만족도 평가</small>
+            <span>종합 만족도 평균</span>
+            <ul className="analysis-summary-breakdown">
+              <li>VOC 상담 만족도</li>
+              <li>ONE Voice 시승 만족도</li>
+              <li>ONE Voice 출고 만족도</li>
+            </ul>
           </div>
           <strong>
             {displayNumber(selectedPoint.vocScore)}
