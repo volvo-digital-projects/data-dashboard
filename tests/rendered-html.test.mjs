@@ -778,6 +778,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(visibleHtml, /통합 경쟁력 지수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
+  assert.doesNotMatch(
+    visibleHtml,
+    /분기 점수를 선택하면 하단 지표가 함께 변경됩니다/,
+  );
   assert.match(visibleHtml, /Q1[\s\S]*8위/);
   assert.match(visibleHtml, /Q2[\s\S]*25위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);

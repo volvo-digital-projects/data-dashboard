@@ -3114,9 +3114,6 @@ export default function Dashboard({
               </button>
             ))}
           </div>
-          <div className="scoreboard-card-footer">
-            분기 점수를 선택하면 하단 지표가 함께 변경됩니다
-          </div>
         </article>
         </section>
       </div>
