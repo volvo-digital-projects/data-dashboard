@@ -785,7 +785,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
   assert.equal(
-    (html.match(/aria-label="Q[12] 통합 경쟁력 지수 전국 \d+위 지표 보기"/g) ?? [])
+    (html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? [])
       .length,
     2,
   );
@@ -805,12 +805,16 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
   assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(330점 만점\)[\s\S]*298\.8/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
-  assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전국 \d+위 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
     (html.match(/aria-label="DSC 스코어 및 RTC 인센티브율"/g) ?? []).length,
     4,
   );
-  assert.equal((html.match(/class="metric-rank-note" aria-label="전국 순위 \d+위"/g) ?? []).length, 4);
+  assert.equal((html.match(/class="metric-rank-note" aria-label="전체 39개 전시장 중 \d+위"/g) ?? []).length, 4);
+  assert.match(
+    visibleHtml,
+    /CX Index[\s\S]*?220\.0[\s\S]*?\/ 전체[\s\S]*?2위[\s\S]*?\/ 39/,
+  );
   assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
   assert.match(visibleHtml, /DSC 스코어[\s\S]*100점/);
   assert.match(visibleHtml, /DSC 스코어[\s\S]*330점/);
@@ -822,7 +826,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">300\.1점<\/span> 대비[\s\S]*?▼ 1\.3점/,
   );
-  assert.match(visibleHtml, /전국[\s\S]*\d+위/);
+  assert.match(visibleHtml, /전체[\s\S]*\d+위[\s\S]*39/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);
   assert.doesNotMatch(visibleHtml, /볼보 전체 전시장|VOLVO KOREA/);
@@ -1876,7 +1880,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /className="metric-score-lockup"[\s\S]*?className="metric-rank-note"[\s\S]*?\/ 전국[\s\S]*?className="metric-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?displayNumber\(dscScore, metric === "v3s" \? 0 : 1\)[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
+    /className="metric-score-lockup"[\s\S]*?className="metric-rank-note"[\s\S]*?\/ 전체[\s\S]*?dashboard\.meta\.showroomCount[\s\S]*?className="metric-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?displayNumber\(dscScore, metric === "v3s" \? 0 : 1\)[\s\S]*?RTC 인센티브[\s\S]*?displayNumber\(rtcRate\)/,
   );
   assert.match(
     css,
@@ -2813,7 +2817,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     dashboardSource,
-    /const cumulativeRank =[\s\S]*?sort\(\(a, b\) => cumulativeIntegratedOf\(b\) - cumulativeIntegratedOf\(a\)\)/,
+    /const competitionRankOf =[\s\S]*?score > selectedScore[\s\S]*?const cumulativeRank = competitionRankOf\(cumulativeIntegratedOf\)/,
   );
   assert.match(
     css,

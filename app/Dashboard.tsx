@@ -669,8 +669,12 @@ function MetricCard({
       <div className="metric-value-row">
         <div className="metric-score-lockup">
           <AnimatedScore value={value} sequence={animationSequence} />
-          <span className="metric-rank-note" aria-label={`전국 순위 ${rank}위`}>
-            / 전국 <strong>{rank}위</strong>
+          <span
+            className="metric-rank-note"
+            aria-label={`전체 ${dashboard.meta.showroomCount}개 전시장 중 ${rank}위`}
+          >
+            / 전체 <strong>{rank}위</strong>
+            <small>/ {dashboard.meta.showroomCount}</small>
           </span>
         </div>
         <div
@@ -2794,36 +2798,36 @@ export default function Dashboard({
       ? values.reduce((sum, value) => sum + value, 0) / values.length
       : Number.NEGATIVE_INFINITY;
   };
-  const cumulativeRank =
-    [...dashboard.showrooms]
-      .sort((a, b) => cumulativeIntegratedOf(b) - cumulativeIntegratedOf(a))
-      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
+  const competitionRankOf = (scoreOf: (item: Showroom) => number) => {
+    const selectedScore = scoreOf(selected);
+    if (!Number.isFinite(selectedScore)) return dashboard.meta.showroomCount;
+
+    return (
+      dashboard.showrooms.filter((item) => {
+        const score = scoreOf(item);
+        return Number.isFinite(score) && score > selectedScore;
+      }).length + 1
+    );
+  };
+  const cumulativeRank = competitionRankOf(cumulativeIntegratedOf);
   const selectedQuarterLabel = selectedQuarter.toUpperCase();
   const selectedQuarterIntegrated =
     integratedQuarterScoreOf(selected, selectedQuarter) ?? q2IntegratedScore;
   const selectedIntegratedAverage =
     quarterIntegratedAverageOf(selectedQuarter);
   const integratedRankOf = (quarter: QuarterKey) =>
-    [...dashboard.showrooms]
-      .sort(
-        (a, b) =>
-          (integratedQuarterScoreOf(b, quarter) ??
-            Number.NEGATIVE_INFINITY) -
-          (integratedQuarterScoreOf(a, quarter) ??
-            Number.NEGATIVE_INFINITY),
-      )
-      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
+    competitionRankOf(
+      (item) =>
+        integratedQuarterScoreOf(item, quarter) ?? Number.NEGATIVE_INFINITY,
+    );
   const nationalRank = integratedRankOf(selectedQuarter);
   const q1IntegratedRank = integratedRankOf("q1");
   const q2IntegratedRank = integratedRankOf("q2");
   const metricRankOf = (metric: TrendMetricKey, quarter: QuarterKey) =>
-    [...dashboard.showrooms]
-      .sort(
-        (a, b) =>
-          (quarterValueOf(b, metric, quarter) ?? Number.NEGATIVE_INFINITY) -
-          (quarterValueOf(a, metric, quarter) ?? Number.NEGATIVE_INFINITY),
-      )
-      .findIndex((item) => item.cdsid === selected.cdsid) + 1;
+    competitionRankOf(
+      (item) =>
+        quarterValueOf(item, metric, quarter) ?? Number.NEGATIVE_INFINITY,
+    );
   const kpis = [
     {
       key: "v3s" as const,
@@ -3005,7 +3009,7 @@ export default function Dashboard({
           </div>
           <div>
             <strong>
-              전국 {nationalRank}위
+              전체 {nationalRank}위
               <small> / {dashboard.meta.showroomCount}개점</small>
             </strong>
             <span className={integratedDelta >= 0 ? "positive" : "negative"}>
@@ -3145,9 +3149,10 @@ export default function Dashboard({
               />
               <span
                 className="metric-rank-note"
-                aria-label={`전국 순위 ${cumulativeRank}위`}
+                aria-label={`전체 ${dashboard.meta.showroomCount}개 전시장 중 ${cumulativeRank}위`}
               >
-                / 전국 <strong>{cumulativeRank}위</strong>
+                / 전체 <strong>{cumulativeRank}위</strong>
+                <small>/ {dashboard.meta.showroomCount}</small>
               </span>
             </div>
             <div
@@ -3220,7 +3225,7 @@ export default function Dashboard({
                 aria-label={
                   quarter.key === null
                     ? `${quarter.label} ${quarter.status}`
-                    : `${quarter.label} 통합 경쟁력 지수 전국 ${quarter.rank}위 지표 보기`
+                    : `${quarter.label} 통합 경쟁력 지수 전체 ${dashboard.meta.showroomCount}개 중 ${quarter.rank}위 지표 보기`
                 }
                 onClick={() => {
                   if (quarter.key) {

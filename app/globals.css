@@ -11159,6 +11159,14 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+.metric-rank-note small {
+  color: inherit;
+  font-family: var(--font-latin);
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
 .metric-stat-chips {
   width: 92px;
   min-width: 92px;
