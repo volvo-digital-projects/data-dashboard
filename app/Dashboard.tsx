@@ -264,7 +264,7 @@ const metricMeta: Record<
   combat: { label: "종합 경쟁력", short: "TOTAL", max: 330, unit: "점" },
   v3s: { label: "V3S", short: "V3S", max: 100, unit: "점" },
   voc: { label: "VOC", short: "VOC", max: 100, unit: "점" },
-  cx: { label: "CX Index", short: "CX Index", max: 130, unit: "점" },
+  cx: { label: "CX Index", short: "CX Index", max: 320, unit: "점" },
 };
 
 const metricDescriptions: Record<TrendMetricKey, string> = {
@@ -290,8 +290,10 @@ const cxComponents = [
 
 const cxQ2Dsc = cxQ2DscJson as CxQ2DscData;
 
-const metricMaxOf = (metric: MetricKey, _quarter: QuarterKey) =>
-  metricMeta[metric].max;
+const metricMaxOf = (metric: MetricKey, quarter: QuarterKey) =>
+  metric === "cx" && (quarter === "q1" || quarter === "q2")
+    ? cxQ2Dsc.maxScore
+    : metricMeta[metric].max;
 
 type CxComponentRecord = Pick<
   QuarterRecord,
