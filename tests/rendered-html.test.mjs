@@ -797,7 +797,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /RTC 인센티브[\s\S]*0\.2%/);
   assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
-  assert.match(visibleHtml, /볼보 평균 대비[\s\S]*▲ 4\.3점/);
+  assert.match(visibleHtml, /Q2 볼보 평균 485\.9점 대비[\s\S]*▲ 4\.3점/);
   assert.match(visibleHtml, /전국[\s\S]*\d+위/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
   assert.doesNotMatch(visibleHtml, /종합 전투력/);

@@ -3034,7 +3034,10 @@ export default function Dashboard({
             </div>
           </div>
           <div className="metric-benchmark scoreboard-benchmark">
-            <span>볼보 평균 대비</span>
+            <span>
+              {selectedQuarterLabel} 볼보 평균{" "}
+              {displayNumber(cumulativeNationalAverage)}점 대비
+            </span>
             <strong className={cumulativeDelta >= 0 ? "positive" : "negative"}>
               {cumulativeDelta >= 0 ? "▲" : "▼"} {Math.abs(cumulativeDelta).toFixed(1)}점
             </strong>
