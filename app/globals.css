@@ -11339,11 +11339,11 @@ body {
   justify-content: center;
   overflow: hidden;
   padding: 2px 4px;
-  color: #ffffff;
-  border: 1px solid #164b63;
+  color: #315a6c;
+  border: 1px solid #bfd4dc;
   border-radius: 999px;
-  background: #176584;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  background: #dbe9ee;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
   font-family: var(--font-korean);
   font-size: 7.5px;
   font-weight: 650;
@@ -11354,17 +11354,20 @@ body {
 
 .metric-quarter-strip--status > button.current strong,
 .scoreboard-quarter-strip > button.current strong {
-  color: #ffffff;
-  background: #135873;
+  color: #174e64;
+  border-color: #97bdcc;
+  background: #c4dde7;
 }
 
 .metric-quarter-strip--status > button.planned strong,
 .scoreboard-quarter-strip > button.planned strong {
-  color: #ffffff;
+  color: #6a7f88;
+  border-color: #d3e0e5;
+  background: #e6eef1;
   font-family: var(--font-korean);
   font-size: 7.5px;
   font-weight: 650;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .metric-card-footer,
