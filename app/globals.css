@@ -4791,22 +4791,38 @@ input:focus-visible {
 .scoreboard-table-head,
 .scoreboard-quarter-row {
   display: grid;
-  grid-template-columns: 38px repeat(3, minmax(58px, 1fr));
+  grid-template-columns:
+    34px minmax(76px, 1.18fr) minmax(68px, 1fr) minmax(72px, 1fr);
   align-items: center;
   column-gap: 6px;
 }
 
 .scoreboard-table-head {
-  min-height: 20px;
+  min-height: 29px;
   padding: 0 7px 4px;
   color: rgba(211, 231, 239, 0.56);
   font-size: 8.5px;
-  line-height: 1;
-  text-align: right;
+  line-height: 1.05;
+  text-align: center;
 }
 
 .scoreboard-table-head span:first-child {
   text-align: left;
+}
+
+.scoreboard-table-head span:not(:first-child) {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.scoreboard-table-head small {
+  color: rgba(143, 196, 217, 0.9);
+  font-family: var(--font-latin);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .scoreboard-quarter-row {
@@ -4819,7 +4835,7 @@ input:focus-visible {
   color: #e9f2f6;
   background: rgba(255, 255, 255, 0.035);
   font: inherit;
-  text-align: right;
+  text-align: center;
   cursor: pointer;
   transition:
     border-color 150ms ease,

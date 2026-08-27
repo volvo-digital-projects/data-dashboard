@@ -355,6 +355,44 @@ const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
     : 0;
 };
 
+const integratedScoreMax =
+  metricMeta.v3s.max + metricMeta.voc.max + metricMeta.cx.max;
+const rtcIncentiveMax = 0.6;
+
+const integratedQuarterScoreOf = (
+  item: Showroom,
+  quarter: QuarterKey,
+): number | null => {
+  const values = (["v3s", "voc", "cx"] as const).map((metric) =>
+    quarterValueOf(item, metric, quarter),
+  );
+
+  return values.every((value): value is number => typeof value === "number")
+    ? values.reduce((sum, value) => sum + value, 0)
+    : null;
+};
+
+const quarterIntegratedAverageOf = (quarter: QuarterKey) =>
+  (["v3s", "voc", "cx"] as const).reduce(
+    (sum, metric) => sum + quarterAverageOf(metric, quarter),
+    0,
+  );
+
+const rtcIncentiveRateOf = (
+  item: Showroom,
+  quarter: QuarterKey,
+): number | null => {
+  const v3s = quarterValueOf(item, "v3s", quarter);
+  const voc = quarterValueOf(item, "voc", quarter);
+  const cx = quarterValueOf(item, "cx", quarter);
+  if (v3s === null || voc === null || cx === null) return null;
+
+  const v3sRate = v3s >= 90 ? 0.2 : v3s >= 85 ? 0.1 : 0;
+  const vocRate = voc >= 85 ? 0.2 : 0.1;
+  const cxRate = cx >= 100 ? 0.2 : 0.1;
+  return Number((v3sRate + vocRate + cxRate).toFixed(1));
+};
+
 const groupQuarterAverageOf = (
   showroom: Showroom,
   metric: MetricKey,
@@ -2562,35 +2600,41 @@ export default function Dashboard({
       : latestUpdate.title;
   const combat = selected.combat ?? 0;
   const q1Combat = selected.q1?.combat ?? combat;
-  const cumulativeAverage = (q1Combat + combat) / 2;
-  const q1CombatAverage = quarterAverageOf("combat", "q1");
-  const q2CombatAverage = quarterAverageOf("combat", "q2");
-  const cumulativeNationalAverage = (q1CombatAverage + q2CombatAverage) / 2;
+  const cumulativeDscAverage = (q1Combat + combat) / 2;
+  const q1IntegratedScore = integratedQuarterScoreOf(selected, "q1") ?? 0;
+  const q2IntegratedScore = integratedQuarterScoreOf(selected, "q2") ?? 0;
+  const cumulativeAverage = (q1IntegratedScore + q2IntegratedScore) / 2;
+  const q1IntegratedAverage = quarterIntegratedAverageOf("q1");
+  const q2IntegratedAverage = quarterIntegratedAverageOf("q2");
+  const cumulativeNationalAverage =
+    (q1IntegratedAverage + q2IntegratedAverage) / 2;
   const cumulativeDelta = cumulativeAverage - cumulativeNationalAverage;
-  const cumulativeCombatOf = (item: Showroom) => {
-    const values = [item.q1?.combat, item.combat].filter(
-      (value): value is number => typeof value === "number",
-    );
+  const cumulativeIntegratedOf = (item: Showroom) => {
+    const values = [
+      integratedQuarterScoreOf(item, "q1"),
+      integratedQuarterScoreOf(item, "q2"),
+    ].filter((value): value is number => typeof value === "number");
     return values.length
       ? values.reduce((sum, value) => sum + value, 0) / values.length
       : Number.NEGATIVE_INFINITY;
   };
   const cumulativeRank =
     [...dashboard.showrooms]
-      .sort((a, b) => cumulativeCombatOf(b) - cumulativeCombatOf(a))
+      .sort((a, b) => cumulativeIntegratedOf(b) - cumulativeIntegratedOf(a))
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const selectedQuarterLabel = selectedQuarter.toUpperCase();
-  const selectedQuarterCombat =
-    quarterValueOf(selected, "combat", selectedQuarter) ?? combat;
-  const selectedCombatAverage = quarterAverageOf("combat", selectedQuarter);
-  const tier = getTier(cumulativeAverage);
+  const selectedQuarterIntegrated =
+    integratedQuarterScoreOf(selected, selectedQuarter) ?? q2IntegratedScore;
+  const selectedIntegratedAverage =
+    quarterIntegratedAverageOf(selectedQuarter);
+  const tier = getTier(cumulativeDscAverage);
   const nationalRank =
     [...dashboard.showrooms]
       .sort(
         (a, b) =>
-          (quarterValueOf(b, "combat", selectedQuarter) ??
+          (integratedQuarterScoreOf(b, selectedQuarter) ??
             Number.NEGATIVE_INFINITY) -
-          (quarterValueOf(a, "combat", selectedQuarter) ??
+          (integratedQuarterScoreOf(a, selectedQuarter) ??
             Number.NEGATIVE_INFINITY),
       )
       .findIndex((item) => item.cdsid === selected.cdsid) + 1;
@@ -2621,7 +2665,8 @@ export default function Dashboard({
     },
   ];
   const warningCount = kpis.filter((item) => item.value < item.average).length;
-  const combatDelta = selectedQuarterCombat - selectedCombatAverage;
+  const integratedDelta =
+    selectedQuarterIntegrated - selectedIntegratedAverage;
 
   return (
     <main className="dashboard" ref={dashboardRootRef}>
@@ -2742,19 +2787,19 @@ export default function Dashboard({
         <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
         <div className="mobile-power">
           <div>
-            <span>누적 평균</span>
+            <span>통합 누적 평균</span>
             <strong>{displayNumber(cumulativeAverage)}</strong>
-            <small>/ {dashboard.meta.combatMax}</small>
+            <small>/ {integratedScoreMax}</small>
           </div>
           <div>
             <strong>
               전국 {nationalRank}위
               <small> / {dashboard.meta.showroomCount}개점</small>
             </strong>
-            <span className={combatDelta >= 0 ? "positive" : "negative"}>
+            <span className={integratedDelta >= 0 ? "positive" : "negative"}>
               {selectedQuarterLabel} 전국 평균 대비{" "}
-              {combatDelta >= 0 ? "+" : ""}
-              {combatDelta.toFixed(1)}
+              {integratedDelta >= 0 ? "+" : ""}
+              {integratedDelta.toFixed(1)}
             </span>
           </div>
         </div>
@@ -2771,10 +2816,11 @@ export default function Dashboard({
                 onClick={() => {
                   if (available) {
                     setSelectedQuarter(quarter);
-                    setMetricQuarters((current) => ({
-                      ...current,
+                    setMetricQuarters({
                       v3s: quarter,
-                    }));
+                      voc: quarter,
+                      cx: quarter,
+                    });
                   }
                 }}
               >
@@ -2829,7 +2875,7 @@ export default function Dashboard({
           <header className="scoreboard-heading">
             <div>
               <span className="english-title">2026 SCORE BOARD</span>
-              <strong>분기별 종합점수</strong>
+              <strong>분기별 점수 현황</strong>
             </div>
             <small>점수를 선택하면 하단 지표가 바뀝니다</small>
           </header>
@@ -2838,50 +2884,55 @@ export default function Dashboard({
             <div
               className="scoreboard-quarter-table"
               role="table"
-              aria-label={`분기별 종합점수, ${dashboard.meta.combatMax}점 만점`}
+              aria-label={`분기별 통합 종합점수 ${integratedScoreMax}점, DSC 평가점수 ${dashboard.meta.combatMax}점, RTC 인센티브율 ${rtcIncentiveMax}% 기준`}
             >
               <div className="scoreboard-table-head" role="row">
                 <span role="columnheader">분기</span>
-                <span role="columnheader">내 점수</span>
-                <span role="columnheader">전국 평균</span>
-                <span role="columnheader">차이</span>
+                <span role="columnheader">
+                  통합 종합점수<small>{integratedScoreMax}점</small>
+                </span>
+                <span role="columnheader">
+                  DSC 평가점수<small>{dashboard.meta.combatMax}점</small>
+                </span>
+                <span role="columnheader">
+                  RTC 인센티브율<small>{rtcIncentiveMax}%</small>
+                </span>
               </div>
               {[
                 {
                   key: "q1" as const,
                   label: "Q1",
-                  value: q1Combat,
-                  average: q1CombatAverage,
+                  integratedScore: q1IntegratedScore,
+                  dscScore: q1Combat,
+                  rtcRate: rtcIncentiveRateOf(selected, "q1"),
                   status: "마감",
                 },
                 {
                   key: "q2" as const,
                   label: "Q2",
-                  value: combat,
-                  average: q2CombatAverage,
+                  integratedScore: q2IntegratedScore,
+                  dscScore: combat,
+                  rtcRate: rtcIncentiveRateOf(selected, "q2"),
                   status: "마감",
                 },
                 {
                   key: null,
                   label: "Q3",
-                  value: null,
-                  average: null,
+                  integratedScore: null,
+                  dscScore: null,
+                  rtcRate: null,
                   status: "평가 중",
                 },
                 {
                   key: null,
                   label: "Q4",
-                  value: null,
-                  average: null,
+                  integratedScore: null,
+                  dscScore: null,
+                  rtcRate: null,
                   status: "평가 전",
                 },
-              ].map((quarter) => {
-                const delta =
-                  quarter.value === null || quarter.average === null
-                    ? null
-                    : quarter.value - quarter.average;
-                return (
-                  <button
+              ].map((quarter) => (
+                <button
                     type="button"
                     role="row"
                     disabled={quarter.key === null}
@@ -2893,50 +2944,44 @@ export default function Dashboard({
                     aria-label={
                       quarter.key === null
                         ? `${quarter.label} ${quarter.status}`
-                        : `${quarter.label} 지표 보기`
+                        : `${quarter.label} 통합 ${displayNumber(quarter.integratedScore)}점, DSC ${displayNumber(quarter.dscScore)}점, RTC ${displayNumber(quarter.rtcRate)}% 지표 보기`
                     }
                     onClick={() => {
                       if (quarter.key) {
                         setSelectedQuarter(quarter.key);
-                        setMetricQuarters((current) => ({
-                          ...current,
+                        setMetricQuarters({
                           v3s: quarter.key as QuarterKey,
-                        }));
+                          voc: quarter.key as QuarterKey,
+                          cx: quarter.key as QuarterKey,
+                        });
                       }
                     }}
                     className={`scoreboard-quarter-row ${
                       quarter.key === selectedQuarter ? "current" : ""
-                    } ${quarter.value === null ? "planned" : ""}`}
+                    } ${quarter.integratedScore === null ? "planned" : ""}`}
                     key={quarter.label}
                   >
                     <strong role="cell">{quarter.label}</strong>
-                    {quarter.value === null ? (
+                    {quarter.integratedScore === null ? (
                       <span className="scoreboard-quarter-status" role="cell">
                         {quarter.status}
                       </span>
                     ) : (
                       <>
-                        <span role="cell">{displayNumber(quarter.value)}</span>
-                        <span role="cell">{displayNumber(quarter.average)}</span>
-                        <span
-                          role="cell"
-                          className={delta !== null && delta >= 0 ? "positive" : "negative"}
-                        >
-                          {delta !== null && delta >= 0 ? "+" : ""}
-                          {displayNumber(delta)}
-                        </span>
+                        <span role="cell">{displayNumber(quarter.integratedScore)}</span>
+                        <span role="cell">{displayNumber(quarter.dscScore)}</span>
+                        <span role="cell">{displayNumber(quarter.rtcRate)}%</span>
                       </>
                     )}
-                  </button>
-                );
-              })}
+                </button>
+              ))}
             </div>
 
             <div className="scoreboard-summary">
               <div className="scoreboard-primary-score">
-                <span>2026 누적 종합점수</span>
+                <span>2026 누적 통합 종합점수</span>
                 <strong>{displayNumber(cumulativeAverage)}</strong>
-                <small>/ {dashboard.meta.combatMax}점</small>
+                <small>/ {integratedScoreMax}점</small>
               </div>
               <div className="scoreboard-comparison" aria-label="누적점수 비교">
                 <span>
