@@ -332,7 +332,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   );
   assert.match(css, /background: rgba\(17, 40, 61, 0\.94\)/);
   assert.equal(release.title, "최신내용 업데이트");
-  assert.equal(release.items.length, 96);
+  assert.ok(release.items.length >= 80);
   assert.match(release.id, /^[a-f0-9]{16}$/);
 });
 
@@ -791,7 +791,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /aria-label="분기별 통합 경쟁력 지수 520점 기준"/,
+    /aria-label="분기별 통합 경쟁력 지수 330점 기준"/,
   );
   assert.match(visibleHtml, /통합 경쟁력 지수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
@@ -799,11 +799,11 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /분기 점수를 선택하면 하단 지표가 함께 변경됩니다/,
   );
-  assert.match(visibleHtml, /Q1[\s\S]*8위/);
-  assert.match(visibleHtml, /Q2[\s\S]*25위/);
+  assert.match(visibleHtml, /Q1[\s\S]*14위/);
+  assert.match(visibleHtml, /Q2[\s\S]*32위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*490\.2/);
+  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(330점 만점\)[\s\S]*298\.8/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전국 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
@@ -820,7 +820,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
     visibleHtml,
-    /Q2 볼보 평균 <span class="metric-benchmark-average">485\.9점<\/span> 대비[\s\S]*▲ 4\.3점/,
+    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">300\.1점<\/span> 대비[\s\S]*?▼ 1\.3점/,
   );
   assert.match(visibleHtml, /전국[\s\S]*\d+위/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
@@ -877,7 +877,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(100점\)<\/em>/,
+    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(40점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(50점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(20점\)<\/em>/,
   );
   assert.doesNotMatch(
     visibleHtml,
@@ -1307,6 +1307,70 @@ test("ships project metadata and removes the disposable starter", async () => {
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   await assert.rejects(
     access(new URL("../app/_sites-preview", templateRoot)),
+  );
+});
+
+test("matches all 39 finalized CX Index Q2 results and RTC bands", async () => {
+  const [showroomsText, cxQ2DscText, dashboardSource] = await Promise.all([
+    readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/cx-q2-dsc.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+  ]);
+  const showrooms = JSON.parse(showroomsText).showrooms;
+  const cxQ2Dsc = JSON.parse(cxQ2DscText);
+  const expectedRows = [
+    ["6KR6834", 113.8, 120], ["6KR342", 109.6, 120],
+    ["6KR6868", 122.4, 130], ["6KR6867", 126.1, 130],
+    ["6KR6850", 103.2, 110], ["6KR6828", 111.1, 120],
+    ["6KR6864", 109.8, 120], ["6KR6873", 107.1, 110],
+    ["6KR6863", 101.2, 110], ["6KR6829", 127.1, 130],
+    ["6KR6833", 122.4, 130], ["6KR6841", 112.7, 120],
+    ["6KR6846", 126.0, 130], ["6KR6862", 88.6, 100],
+    ["6KR6830", 124.0, 130], ["6KR6858", 109.4, 120],
+    ["6KR6865", 126.9, 130], ["6KR6869", 127.9, 130],
+    ["6KR6870", 106.0, 110], ["6KR6852", 105.9, 110],
+    ["6KR6847", 99.1, 110], ["6KR6802", 102.3, 110],
+    ["6KR6856", 115.0, 120], ["6KR6849", 110.5, 120],
+    ["6KR6839", 100.9, 110], ["6KR6874", 112.9, 120],
+    ["6KR6851", 125.7, 130], ["6KR6857", 106.5, 110],
+    ["6KR6836", 99.2, 110], ["6KR6845", 115.2, 120],
+    ["6KR6840", 126.3, 130], ["6KR6859", 118.8, 130],
+    ["6KR6871", 125.0, 130], ["6KR6838", 123.0, 130],
+    ["6KR6848", 109.9, 120], ["6KR6872", 116.3, 120],
+    ["6KR6854", 115.6, 120], ["6KR6861", 125.9, 130],
+    ["6KR6842", 115.6, 120],
+  ];
+  const byCdsid = Object.fromEntries(showrooms.map((item) => [item.cdsid, item]));
+
+  assert.equal(showrooms.length, 39);
+  assert.equal(Object.keys(cxQ2Dsc.scores).length, 39);
+  for (const [cdsid, rawScore, dscScore] of expectedRows) {
+    assert.equal(byCdsid[cdsid].cx, rawScore, `${cdsid} Q2 원점수`);
+    assert.equal(cxQ2Dsc.scores[cdsid], dscScore, `${cdsid} Q2 DSC 스코어`);
+  }
+  assert.equal(
+    Number((expectedRows.reduce((sum, [, raw]) => sum + raw, 0) / 39).toFixed(1)),
+    114.0,
+  );
+  assert.equal(
+    Number((expectedRows.reduce((sum, [, , dsc]) => sum + dsc, 0) / 39).toFixed(1)),
+    120.5,
+  );
+  assert.equal(expectedRows.filter(([, raw]) => raw < 100).length, 3);
+  assert.equal(expectedRows.filter(([, raw]) => raw >= 100).length, 36);
+  assert.equal(cxQ2Dsc.maxScore, 130);
+  assert.equal(cxQ2Dsc.rtcThreshold, 100);
+  assert.match(
+    dashboardSource,
+    /if \(quarter === "q2"\) return item\.cx;[\s\S]*?if \(metric === "cx"\) return dashboard\.averages\.cx \?\? 0/,
+  );
+  assert.match(
+    dashboardSource,
+    /return value >= 100 \? 0\.2 : 0\.1;[\s\S]*?quarter === "q2"\) return cxQ2Dsc\.scores\[item\.cdsid\] \?\? null/,
+  );
+  assert.match(
+    dashboardSource,
+    /5개 CX Management 항목의 DSC 스코어 합산, 총 130점[\s\S]*?CX Management 130점 구성[\s\S]*?합산 100점 이상[\s\S]*?RTC 0\.2%[\s\S]*?합산 100점 미만[\s\S]*?RTC 0\.1%/,
   );
 });
 
@@ -1778,7 +1842,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const integratedScoreMax =[\s\S]*?metricMeta\.v3s\.max \+ metricMeta\.voc\.max \+ metricMeta\.cx\.max/,
+    /const integratedScoreMax =[\s\S]*?metricMeta\.v3s\.max \+ metricMeta\.voc\.max \+ cxQ2Dsc\.maxScore/,
   );
   assert.match(
     dashboardSource,

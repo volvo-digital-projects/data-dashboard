@@ -10,6 +10,7 @@ import {
   type FormEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
+import cxQ2DscJson from "./data/cx-q2-dsc.json";
 import v3sHistoryJson from "./data/v3s-history.json";
 import vocConsultationJson from "./data/voc-consultation.json";
 import vocSentJson from "./data/voc-sent.json";
@@ -32,6 +33,14 @@ type MetricKey = "combat" | "v3s" | "voc" | "cx";
 type TrendMetricKey = Exclude<MetricKey, "combat">;
 type GroupKey = "all" | "dealer" | "region" | "size";
 type QuarterKey = "q1" | "q2" | "q3" | "q4";
+
+type CxQ2DscData = {
+  quarter: "Q2";
+  maxScore: number;
+  average: number;
+  rtcThreshold: number;
+  scores: Record<string, number>;
+};
 
 const V3S_EVIDENCE_SEEN_KEY = "volvo-dashboard-v3s-evidence-seen-v1";
 const V3S_REPORT_SEEN_KEY = "volvo-dashboard-v3s-report-seen-v1";
@@ -272,12 +281,19 @@ const vocComponents = [
 ];
 
 const cxComponents = [
-  { label: "신차출고 만족도", score: "100점" },
-  { label: "시승 만족도", score: "100점" },
+  { label: "신차출고 만족도", score: "40점" },
+  { label: "시승 만족도", score: "50점" },
   { label: "긴급경보 처리여부", score: "10점" },
   { label: "조치 계획", score: "10점" },
-  { label: "헤이볼보 앱 가입율", score: "100점" },
+  { label: "헤이볼보 앱 가입율", score: "20점" },
 ];
+
+const cxQ2Dsc = cxQ2DscJson as CxQ2DscData;
+
+const metricMaxOf = (metric: MetricKey, quarter: QuarterKey) =>
+  metric === "cx" && (quarter === "q1" || quarter === "q2")
+    ? cxQ2Dsc.maxScore
+    : metricMeta[metric].max;
 
 type CxComponentRecord = Pick<
   QuarterRecord,
@@ -333,8 +349,8 @@ const quarterValueOf = (
   quarter: QuarterKey,
 ) => {
   if (metric === "cx") {
-    if (quarter === "q1") return cxRawTotalOf(item.q1);
-    if (quarter === "q2") return cxRawTotalOf(item);
+    if (quarter === "q1") return item.q1?.cx ?? null;
+    if (quarter === "q2") return item.cx;
     return latestCxWeeklyValueOf(item.cdsid, quarter);
   }
 
@@ -344,7 +360,7 @@ const quarterValueOf = (
 
 const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
   if (quarter === "q2") {
-    if (metric === "cx") return cxRawTotalOf(dashboard.averages) ?? 0;
+    if (metric === "cx") return dashboard.averages.cx ?? 0;
 
     return metric === "combat"
       ? dashboard.meta.combatAverage
@@ -364,7 +380,7 @@ const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
 };
 
 const integratedScoreMax =
-  metricMeta.v3s.max + metricMeta.voc.max + metricMeta.cx.max;
+  metricMeta.v3s.max + metricMeta.voc.max + cxQ2Dsc.maxScore;
 const integratedQuarterScoreOf = (
   item: Showroom,
   quarter: QuarterKey,
@@ -419,11 +435,12 @@ const metricDscScoreOf = (
   if (metric === "voc") return vocDscScoreOf(value);
   if (metric !== "cx") return value;
 
-  const finalizedScore =
-    quarter === "q1" ? item.q1?.cx : quarter === "q2" ? item.cx : null;
+  if (quarter === "q2") return cxQ2Dsc.scores[item.cdsid] ?? null;
+
+  const finalizedScore = quarter === "q1" ? item.q1?.cx : null;
   if (typeof finalizedScore === "number") return finalizedScore;
 
-  return Number(((value / metricMeta.cx.max) * 130).toFixed(1));
+  return Number(((value / metricMaxOf(metric, quarter)) * 130).toFixed(1));
 };
 
 const groupQuarterAverageOf = (
@@ -646,7 +663,7 @@ function MetricCard({
             {metricMeta[metric].short}
           </span>
           <small className="metric-max-note">
-            ({metricMeta[metric].max}점 만점)
+            ({metricMaxOf(metric, quarter)}점 만점)
           </small>
         </div>
       </div>
@@ -2185,7 +2202,7 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           <div className="criteria-summary">
             <span className="criteria-number">03</span>
             <div>
-              <strong>5개 고객경험 항목 원점수 합산, 총 320점</strong>
+              <strong>5개 CX Management 항목의 DSC 스코어 합산, 총 130점</strong>
               <p>
                 만족도뿐 아니라 긴급경보 처리, 조치계획, 앱 가입까지 운영
                 행동을 함께 평가합니다.
@@ -2197,13 +2214,13 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
               <span className="locked">항목별 보정 상이</span>
             </div>
           </div>
-          <div className="cx-stack" aria-label="CX Management 320점 구성">
+          <div className="cx-stack" aria-label="CX Management 130점 구성">
             {[
-              ["신차 출고 만족도", "원점수", 100],
-              ["시승 만족도", "원점수", 100],
+              ["신차 출고 만족도", "DSC 환산", 40],
+              ["시승 만족도", "DSC 환산", 50],
               ["긴급경보", "2일 이내 처리", 10],
               ["조치계획", "분기 내 제출", 10],
-              ["Hej Volvo 앱", "가입률 원점수", 100],
+              ["Hej Volvo 앱", "가입률 환산", 20],
             ].map(([label, threshold, score]) => (
               <div key={String(label)}>
                 <span>{label}</span>
@@ -2216,12 +2233,12 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
             <div className="good">
               <span>합산 100점 이상</span>
               <strong>RTC 0.2%</strong>
-              <small>월 마감 · 분기 지급</small>
+              <small>월 마감 후 DSC 반영 · 분기 마감 후 지급</small>
             </div>
             <div className="warning">
               <span>합산 100점 미만</span>
               <strong>RTC 0.1%</strong>
-              <small>월 마감 · 분기 지급</small>
+              <small>월 마감 후 DSC 반영 · 분기 마감 후 지급</small>
             </div>
           </div>
         </div>
