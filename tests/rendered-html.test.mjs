@@ -1787,7 +1787,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 58px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*border-radius: 4px;[^}]*background: #176584/,
+    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 48px;[^}]*grid-template-rows: auto 18px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 100%;[^}]*height: 18px;[^}]*border-radius: 999px;[^}]*background: #176584/,
   );
   assert.match(
     css,
