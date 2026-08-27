@@ -2855,6 +2855,14 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
+    /\.v3s-history-years,\s*\.voc-consultation-year > small\s*\{[^}]*color: var\(--muted\);[^}]*font-family: var\(--font-latin\);[^}]*font-size: 9px;[^}]*font-weight: 400;[^}]*font-variant-numeric: tabular-nums;[^}]*line-height: 1;[^}]*text-align: center;/,
+  );
+  assert.match(
+    css,
+    /\.voc-consultation-year > small\s*\{[^}]*width: 45px;[^}]*top: calc\(100% \+ 7px\);[^}]*left: 50%;[^}]*align-items: center;[^}]*transform: translateX\(-50%\);/,
+  );
+  assert.match(
+    css,
     /\.v3s-history-years > span\s*\{[^}]*transform: translateX\(-15\.5px\)/,
   );
   assert.match(
@@ -2956,7 +2964,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.voc-consultation-year > small\s*\{[^}]*top: calc\(100% \+ 7px\);[^}]*color: var\(--muted\);[^}]*font-family: var\(--font-latin\);[^}]*font-size: 9px;[^}]*font-weight: 400;/,
+    /\.voc-consultation-year > small\s*\{[^}]*width: 45px;[^}]*top: calc\(100% \+ 7px\);[^}]*left: 50%;[^}]*align-items: center;[^}]*transform: translateX\(-50%\);/,
   );
   assert.match(
     css,
