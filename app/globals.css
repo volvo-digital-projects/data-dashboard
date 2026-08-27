@@ -11286,8 +11286,17 @@ body {
 
 .metric-quarter-strip > button.current,
 .scoreboard-quarter-strip > button.current {
-  border-color: #cfe1e8;
-  background: #eaf3f7;
+  border-color: #76a5b8;
+  background: #deedf3;
+  box-shadow:
+    inset 0 2px 0 #4f89a1,
+    0 0 0 1px rgba(79, 137, 161, 0.08);
+}
+
+.metric-quarter-strip > button.current small,
+.scoreboard-quarter-strip > button.current small {
+  color: #0d5e7a;
+  font-weight: 800;
 }
 
 .metric-quarter-strip small,
@@ -11312,8 +11321,11 @@ body {
 }
 
 .scoreboard-quarter-strip > button.current {
-  border-color: rgba(193, 226, 239, 0.94);
-  background: #e4f2f7;
+  border-color: rgba(145, 202, 224, 0.96);
+  background: #dbeaf0;
+  box-shadow:
+    inset 0 2px 0 #4f89a1,
+    0 0 0 1px rgba(166, 215, 233, 0.14);
 }
 
 .metric-quarter-strip--status > button {

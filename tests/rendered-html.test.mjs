@@ -1812,6 +1812,10 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
     css,
     /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 48px;[^}]*grid-template-rows: auto 18px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 46px;[^}]*min-width: 46px;[^}]*max-width: 46px;[^}]*height: 18px;[^}]*color: #315a6c;[^}]*border: 1px solid #bfd4dc;[^}]*border-radius: 999px;[^}]*background: #dbe9ee/,
   );
+  assert.match(
+    css,
+    /\.metric-quarter-strip > button\.current,[\s\S]*?\.scoreboard-quarter-strip > button\.current\s*\{[^}]*border-color: #76a5b8;[^}]*background: #deedf3;[^}]*inset 0 2px 0 #4f89a1,/,
+  );
   assert.match(dashboardSource, /metric-quarter-strip--resources/);
   assert.match(
     css,
