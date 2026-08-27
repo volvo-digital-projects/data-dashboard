@@ -3432,56 +3432,82 @@ test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape v
     ),
   ]);
 
-  const showroomSet = viewerSource.match(
-    /const reportShowrooms = new Set\(\[([\s\S]*?)\]\);/,
+  const reportPageCounts = [
+    ...viewerSource.matchAll(/"(6KR\d+):(q[12])": (\d+)/g),
+  ].map((match) => ({
+    cdsid: match[1],
+    quarter: match[2],
+    pageCount: Number(match[3]),
+  }));
+  assert.equal(reportPageCounts.length, 78);
+  assert.equal(
+    reportPageCounts.reduce((total, report) => total + report.pageCount, 0),
+    284,
   );
-  assert.ok(showroomSet);
-  const reportCdsids = [
-    ...showroomSet[1].matchAll(/"(6KR\d+)"/g),
-  ].map((match) => match[1]);
-  assert.equal(reportCdsids.length, 39);
+  const reportCdsids = [...new Set(reportPageCounts.map((report) => report.cdsid))];
   assert.equal(new Set(reportCdsids).size, 39);
 
   await Promise.all(
-    reportCdsids.flatMap((cdsid) =>
-      ["q1", "q2"].map((quarter) =>
+    reportPageCounts.flatMap(({ cdsid, quarter, pageCount }) => [
+      access(
+        new URL(
+          `../public/reports/${cdsid}/v3s/2026-${quarter}.pdf`,
+          import.meta.url,
+        ),
+      ),
+      ...Array.from({ length: pageCount }, (_, index) =>
         access(
           new URL(
-            `../public/reports/${cdsid}/v3s/2026-${quarter}.pdf`,
+            `../public/reports/${cdsid}/v3s/2026-${quarter}/page-${String(index + 1).padStart(2, "0")}.jpg`,
             import.meta.url,
           ),
         ),
       ),
-    ),
+    ]),
   );
 
   assert.match(dashboardSource, /getV3sReport\(selected\.cdsid, quarter\) !== null/);
   assert.match(dashboardSource, /onReportOpen\?\.\(resourceQuarter\)/);
   assert.match(dashboardSource, /<V3SReportViewer/);
-  assert.match(viewerSource, /\["q1", "q2"\]/);
+  assert.match(viewerSource, /getV3sReportPageCount/);
   assert.match(viewerSource, /2026-\$\{quarter\}\.pdf/);
-  assert.match(viewerSource, /#view=FitH&toolbar=1&navpanes=0/);
+  assert.doesNotMatch(viewerSource, /<iframe/);
+  assert.doesNotMatch(viewerSource, /새 창/);
+  assert.doesNotMatch(viewerSource, /#view=/);
   assert.match(viewerSource, /aria-label="V3S 결과 보고서 닫기"/);
   assert.match(viewerSource, /event\.key === "Escape"/);
+  assert.match(viewerSource, /moveOnePageOnWheel/);
+  assert.match(viewerSource, /moveOnePageOnTouch/);
+  assert.match(viewerSource, /addEventListener\("wheel"[\s\S]*?passive: false/);
+  assert.match(viewerSource, /pages\.scrollTo\(/);
+  assert.match(viewerSource, /page-\$\{String\(pageNumber\)\.padStart\(2, "0"\)\}\.jpg/);
   assert.match(
     viewerSource,
     /document\.documentElement\.style\.scrollbarGutter = "auto"/,
   );
   assert.match(
     viewerCss,
-    /\.backdrop\s*\{[^}]*position: fixed;[^}]*inset: 0;/,
+    /\.backdrop,\s*\.dialog\s*\{[^}]*position: fixed;[^}]*inset: 0;/,
   );
   assert.match(
     viewerCss,
-    /\.dialog\s*\{[^}]*position: fixed;[^}]*inset: 0;/,
+    /\.pages\s*\{[^}]*height: 100dvh;[^}]*scroll-snap-type: y mandatory;[^}]*touch-action: none;/,
   );
   assert.match(
     viewerCss,
-    /\.frame\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*border: 0;/,
+    /\.page\s*\{[^}]*height: 100dvh;[^}]*scroll-snap-align: start;[^}]*scroll-snap-stop: always;/,
   );
   assert.match(
     viewerCss,
-    /@media \(orientation: landscape\) and \(max-height: 900px\)/,
+    /\.page img\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: contain;/,
+  );
+  assert.match(
+    viewerCss,
+    /\.header\s*\{[^}]*position: absolute;[^}]*z-index: 5;/,
+  );
+  assert.match(
+    viewerCss,
+    /\.close\s*\{[^}]*width: 43px;[^}]*height: 43px;[^}]*border-radius: 50%;/,
   );
 });
 
