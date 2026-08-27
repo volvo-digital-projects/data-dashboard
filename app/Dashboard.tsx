@@ -264,11 +264,11 @@ const vocComponents = [
 ];
 
 const cxComponents = [
-  { label: "신차출고 만족도", score: "100점" },
-  { label: "시승 만족도", score: "100점" },
+  { label: "신차출고 만족도", score: "40점" },
+  { label: "시승 만족도", score: "50점" },
   { label: "긴급경보 처리여부", score: "10점" },
   { label: "조치 계획", score: "10점" },
-  { label: "헤이볼보 앱 가입율", score: "100점" },
+  { label: "헤이볼보 앱 가입율", score: "20점" },
 ];
 
 const quarterValueOf = (
