@@ -566,7 +566,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     html,
-    /class="(?:national|actual)-point-value"[^>]*>130<\/text>/,
+    /class="(?:national|actual)-point-value"[^>]*>320<\/text>/,
   );
   assert.match(
     html,
@@ -694,8 +694,8 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);
   assert.doesNotMatch(visibleHtml, /<small>100점 만점<\/small>/);
   assert.equal((visibleHtml.match(/<span>\/ 100점 만점<\/span>/g) ?? []).length, 2);
-  assert.equal((visibleHtml.match(/<span>\/ 130점 만점<\/span>/g) ?? []).length, 1);
-  assert.equal((visibleHtml.match(/<span>점 \/ (?:100|130)점 만점<\/span>/g) ?? []).length, 0);
+  assert.equal((visibleHtml.match(/<span>\/ 320점 만점<\/span>/g) ?? []).length, 1);
+  assert.equal((visibleHtml.match(/<span>점 \/ (?:100|320)점 만점<\/span>/g) ?? []).length, 0);
   assert.equal((html.match(/class="metric-quarter-strip"/g) ?? []).length, 3);
   assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
   assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
@@ -745,7 +745,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 8\.4점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ 158\.7점<\/strong>/,
   );
   assert.match(
     html,
@@ -829,7 +829,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(40점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(50점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(20점\)<\/em>/,
+    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(100점\)<\/em>/,
   );
   assert.doesNotMatch(
     visibleHtml,
@@ -907,16 +907,16 @@ test("server-renders the selected CDSID dashboard", async () => {
       /width="6.3" height="6.3" data-week="(W\d{2})" class="actual-week-point"/g,
     ),
   ].map((match) => match[1]);
-  assert.equal(actualMarkerWeeks.length, 29);
+  assert.equal(actualMarkerWeeks.length, 32);
   assert.deepEqual(
     actualMarkerWeeks,
-    Array.from({ length: 29 }, (_, index) =>
+    Array.from({ length: 32 }, (_, index) =>
       `W${String(index + 1).padStart(2, "0")}`,
     ),
   );
   const actualLabelCount = (vocHtml.match(/class="actual-point-value"/g) ?? []).length;
-  assert.equal(actualLabelCount, 29);
-  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 29);
+  assert.equal(actualLabelCount, 32);
+  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 32);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
   assert.match(visibleHtml, /Q3 평가 진행 중/);
@@ -936,7 +936,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /위험해요: Q3 전국 평균 대비 5점 이상 미달/);
   assert.match(visibleHtml, /위험해요/);
   assert.match(html, /힘내세요: Q2 전국 평균 미만, 5점 미만 차이/);
-  assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 2);
+  assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 1);
   assert.match(visibleHtml, /Q3 전국 평균 대비[\s\S]*?▼ 8\.7점/);
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
@@ -1267,7 +1267,7 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
   ]);
   const weekly = JSON.parse(weeklyText);
 
-  assert.equal(weekly.meta.vocLatestWeek, 29);
+  assert.equal(weekly.meta.vocLatestWeek, 32);
   assert.equal(weekly.meta.cxLatestWeek, 30);
   assert.equal(weekly.meta.weekRanges.length, 52);
   assert.deepEqual(weekly.meta.weekRanges[0], {
@@ -1322,9 +1322,19 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
     dashboardSource,
     /const storeSegments = \[rawPoints\]/,
   );
-  assert.equal(weekly.cx.byCdsid["6KR6834"][0], 80);
-  assert.equal(weekly.cx.byCdsid["6KR6834"][29], 90);
+  assert.equal(weekly.cx.byCdsid["6KR6834"][0], 220);
+  assert.equal(weekly.cx.byCdsid["6KR6834"][29], 220);
   assert.equal(weekly.cx.byCdsid["6KR6834"][30], null);
+  assert.equal(weekly.cx.average[29], 268.7);
+  assert.equal(
+    weekly.meta.rules.cx,
+    "신차출고 100점 + 시승 100점 + 긴급경보 10점 + 조치계획 10점 + 앱 가입율 100점의 원점수 합산(총 320점)",
+  );
+  assert.doesNotMatch(syncSource, /deliveryScore|testDriveScore|appScore/);
+  assert.match(
+    dashboardSource,
+    /cxRawTotalOf[\s\S]*?record\.delivery[\s\S]*?record\.testDrive[\s\S]*?record\.emergency[\s\S]*?record\.actionPlan[\s\S]*?record\.app/,
+  );
 });
 
 test("aligns every quarter boundary to the same 52-week grid", async () => {

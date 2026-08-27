@@ -147,31 +147,20 @@ function weeklyResult(rows, { zeroIsMissing = false } = {}) {
 function quarterlyResult(rows) {
   const headerIndex = rows.findIndex((row) => clean(row[0]) === "RDM코드");
   if (headerIndex < 0) throw new Error("RDM코드 헤더를 찾지 못했습니다.");
+  const nationalRow = rows[headerIndex + 1];
   const storeRows = rows
     .slice(headerIndex + 2)
     .filter((row) => clean(row[0]).startsWith("6KR"))
     .slice(0, 39);
-  return Object.fromEntries(
-    storeRows.map((row) => [
-      clean(row[0]),
-      Array.from({ length: 4 }, (_, index) => toNumber(row[index + 5])),
-    ]),
-  );
-}
+  const normalize = (row) =>
+    Array.from({ length: 4 }, (_, index) => toNumber(row[index + 5]));
 
-function deliveryScore(value) {
-  if (value === null || value === 0 || value < 80) return 0;
-  return value >= 90 ? 40 : 20;
-}
-
-function testDriveScore(value) {
-  if (value === null || value === 0) return 0;
-  if (value >= 90) return 50;
-  return value >= 80 ? 40 : 30;
-}
-
-function appScore(value) {
-  return value !== null && value >= 90 ? 20 : 0;
+  return {
+    average: normalize(nationalRow),
+    byCdsid: Object.fromEntries(
+      storeRows.map((row) => [clean(row[0]), normalize(row)]),
+    ),
+  };
 }
 
 const loaded = Object.fromEntries(
@@ -207,15 +196,15 @@ const cxByCdsid = Object.fromEntries(
 
       const quarterIndex =
         week <= 13 ? 0 : week <= 26 ? 1 : week <= 39 ? 2 : 3;
-      const actionScore = actionPlan[cdsid]?.[quarterIndex] ?? 0;
+      const actionScore = actionPlan.byCdsid[cdsid]?.[quarterIndex] ?? 0;
       const alertScore = emergency.byCdsid[cdsid]?.[index] ?? 0;
 
-      return (
-        deliveryScore(delivery.byCdsid[cdsid]?.[index] ?? null) +
-        testDriveScore(testDrive.byCdsid[cdsid]?.[index] ?? null) +
+      return round1(
+        (delivery.byCdsid[cdsid]?.[index] ?? 0) +
+        (testDrive.byCdsid[cdsid]?.[index] ?? 0) +
         alertScore +
         actionScore +
-        appScore(app.byCdsid[cdsid]?.[index] ?? null)
+        (app.byCdsid[cdsid]?.[index] ?? 0)
       );
     });
 
@@ -225,12 +214,17 @@ const cxByCdsid = Object.fromEntries(
 
 const cxAverage = Array.from({ length: 52 }, (_, index) => {
   if (index >= cxLatestWeek) return null;
-  const values = cdsids
-    .map((cdsid) => cxByCdsid[cdsid][index])
-    .filter((value) => value !== null);
-  return values.length
-    ? round1(values.reduce((sum, value) => sum + value, 0) / values.length)
-    : null;
+  const week = index + 1;
+  const quarterIndex =
+    week <= 13 ? 0 : week <= 26 ? 1 : week <= 39 ? 2 : 3;
+
+  return round1(
+    (delivery.average[index] ?? 0) +
+      (testDrive.average[index] ?? 0) +
+      (emergency.average[index] ?? 0) +
+      (actionPlan.average[quarterIndex] ?? 0) +
+      (app.average[index] ?? 0),
+  );
 });
 
 const output = {
@@ -244,7 +238,7 @@ const output = {
       voc:
         "VOC(결과) 시트의 전시장별 원점수를 사용하며, 0.0도 실제 점수로 표시",
       cx:
-        "출고 40/20/0 + 시승 50/40/30(미응답 0) + 긴급경보 10/0 + 조치계획 10/0 + 앱 20/0",
+        "신차출고 100점 + 시승 100점 + 긴급경보 10점 + 조치계획 10점 + 앱 가입율 100점의 원점수 합산(총 320점)",
     },
   },
   voc: {

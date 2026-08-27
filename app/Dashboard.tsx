@@ -247,7 +247,7 @@ const metricMeta: Record<
   combat: { label: "종합 경쟁력", short: "TOTAL", max: 330, unit: "점" },
   v3s: { label: "V3S", short: "V3S", max: 100, unit: "점" },
   voc: { label: "VOC", short: "VOC", max: 100, unit: "점" },
-  cx: { label: "CX Index", short: "CX Index", max: 130, unit: "점" },
+  cx: { label: "CX Index", short: "CX Index", max: 320, unit: "점" },
 };
 
 const metricDescriptions: Record<TrendMetricKey, string> = {
@@ -264,27 +264,87 @@ const vocComponents = [
 ];
 
 const cxComponents = [
-  { label: "신차출고 만족도", score: "40점" },
-  { label: "시승 만족도", score: "50점" },
+  { label: "신차출고 만족도", score: "100점" },
+  { label: "시승 만족도", score: "100점" },
   { label: "긴급경보 처리여부", score: "10점" },
   { label: "조치 계획", score: "10점" },
-  { label: "헤이볼보 앱 가입율", score: "20점" },
+  { label: "헤이볼보 앱 가입율", score: "100점" },
 ];
+
+type CxComponentRecord = Pick<
+  QuarterRecord,
+  "delivery" | "testDrive" | "emergency" | "actionPlan" | "app"
+>;
+
+const cxRawTotalOf = (
+  record: CxComponentRecord | null | undefined,
+): number | null => {
+  if (!record) return null;
+
+  const components = [
+    record.delivery,
+    record.testDrive,
+    record.emergency,
+    record.actionPlan,
+    record.app,
+  ];
+
+  return components.every((value): value is number => typeof value === "number")
+    ? components.reduce((sum, value) => sum + value, 0)
+    : null;
+};
+
+const latestCxWeeklyValueOf = (
+  cdsid: string,
+  quarter: QuarterKey,
+): number | null => {
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+  const start = quarterIndex * 13;
+  const end = start + 13;
+  const series = weeklyDashboard.cx.byCdsid[cdsid]?.slice(start, end) ?? [];
+
+  return [...series]
+    .reverse()
+    .find((value): value is number => typeof value === "number") ?? null;
+};
+
+const latestCxWeeklyAverageOf = (quarter: QuarterKey): number | null => {
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+  const start = quarterIndex * 13;
+  const end = start + 13;
+  const series = weeklyDashboard.cx.average.slice(start, end);
+
+  return [...series]
+    .reverse()
+    .find((value): value is number => typeof value === "number") ?? null;
+};
 
 const quarterValueOf = (
   item: Showroom,
   metric: MetricKey,
   quarter: QuarterKey,
 ) => {
+  if (metric === "cx") {
+    if (quarter === "q1") return cxRawTotalOf(item.q1);
+    if (quarter === "q2") return cxRawTotalOf(item);
+    return latestCxWeeklyValueOf(item.cdsid, quarter);
+  }
+
   const value = quarter === "q1" ? item.q1?.[metric] : item[metric];
   return typeof value === "number" ? value : null;
 };
 
 const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
   if (quarter === "q2") {
+    if (metric === "cx") return cxRawTotalOf(dashboard.averages) ?? 0;
+
     return metric === "combat"
       ? dashboard.meta.combatAverage
       : (dashboard.averages[metric] ?? 0);
+  }
+
+  if (metric === "cx" && (quarter === "q3" || quarter === "q4")) {
+    return latestCxWeeklyAverageOf(quarter) ?? 0;
   }
 
   const values = dashboard.showrooms
@@ -1221,9 +1281,16 @@ function WeeklyTrend({
   synchronizedAnimationInView?: boolean;
   highlightQuarter?: QuarterKey | null;
 }) {
-  const current = showroom[metric] ?? 0;
-  const previous = showroom.q1?.[metric] ?? null;
-  const average = dashboard.averages[metric] ?? 0;
+  const current =
+    metric === "cx" ? (cxRawTotalOf(showroom) ?? 0) : (showroom[metric] ?? 0);
+  const previous =
+    metric === "cx"
+      ? cxRawTotalOf(showroom.q1)
+      : (showroom.q1?.[metric] ?? null);
+  const average =
+    metric === "cx"
+      ? (cxRawTotalOf(dashboard.averages) ?? 0)
+      : (dashboard.averages[metric] ?? 0);
   const isWeeklyMetric = metric === "voc" || metric === "cx";
   const nativeWeekly =
     metric === "voc" || metric === "cx" ? weeklyDashboard[metric] : null;
@@ -2003,7 +2070,7 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           <div className="criteria-summary">
             <span className="criteria-number">03</span>
             <div>
-              <strong>5개 고객경험 항목, 총 130점</strong>
+              <strong>5개 고객경험 항목 원점수 합산, 총 320점</strong>
               <p>
                 만족도뿐 아니라 긴급경보 처리, 조치계획, 앱 가입까지 운영
                 행동을 함께 평가합니다.
@@ -2015,13 +2082,13 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
               <span className="locked">항목별 보정 상이</span>
             </div>
           </div>
-          <div className="cx-stack" aria-label="CX Management 130점 구성">
+          <div className="cx-stack" aria-label="CX Management 320점 구성">
             {[
-              ["신차 출고 만족도", "90점 이상", 40],
-              ["시승 만족도", "90점 이상", 50],
+              ["신차 출고 만족도", "원점수", 100],
+              ["시승 만족도", "원점수", 100],
               ["긴급경보", "2일 이내 처리", 10],
               ["조치계획", "분기 내 제출", 10],
-              ["Hej Volvo 앱", "가입률 90% 이상", 20],
+              ["Hej Volvo 앱", "가입률 원점수", 100],
             ].map(([label, threshold, score]) => (
               <div key={String(label)}>
                 <span>{label}</span>
