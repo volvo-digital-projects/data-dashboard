@@ -643,7 +643,9 @@ function MetricCard({
       </div>
       <div
         className={`metric-quarter-strip ${
-          metric === "v3s" ? "" : "metric-quarter-strip--status"
+          metric === "v3s"
+            ? "metric-quarter-strip--resources"
+            : "metric-quarter-strip--status"
         }`}
         aria-label={`${metricMeta[metric].short} 분기 평가점수`}
       >

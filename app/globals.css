@@ -11322,6 +11322,12 @@ body {
   background: #f7f9fa;
 }
 
+.metric-quarter-strip--resources > button {
+  min-height: 25px;
+  height: 25px;
+  padding: 4px;
+}
+
 .metric-quarter-strip--status > button strong,
 .scoreboard-quarter-strip > button strong {
   box-sizing: border-box;
@@ -11383,24 +11389,42 @@ body {
 
 .metric-resource-group {
   position: relative;
+  overflow: visible;
 }
 
 .metric-resource-new {
   position: absolute;
-  z-index: 2;
-  top: -8px;
-  right: -1px;
-  padding: 2px 4px;
+  z-index: 3;
+  top: -9px;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  padding: 0 6px;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.84);
+  border: 1px solid #f36b37;
   border-radius: 999px;
-  background: #216b8a;
-  box-shadow: 0 2px 5px rgba(18, 61, 80, 0.18);
+  background: #f36b37;
+  box-shadow: 0 2px 5px rgba(202, 76, 28, 0.2);
   font-family: var(--font-latin);
-  font-size: 6px;
-  font-weight: 750;
+  font-size: 6.5px;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.metric-quarter-strip--resources + .metric-resource-grid {
+  min-height: 20px;
+  height: 20px;
+  margin-top: 3px;
+  padding-top: 0;
+}
+
+.metric-quarter-strip--resources + .metric-resource-grid .metric-resource-button {
+  width: 20px;
+  height: 18px;
+  border-radius: 4px;
 }
 
 @media (min-width: 900px) and (max-width: 1240px) {
