@@ -1725,6 +1725,7 @@ test("separates the quarterly scoreboard from the cumulative summary", async () 
   );
   assert.doesNotMatch(dashboardSource, /combatSummaryStyles/);
   assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
+  assert.doesNotMatch(css, /\.quarter-score-row > i(?:\s|\{| b)/);
 });
 
 test("shows the showroom switcher only within the authenticated scope", async () => {
@@ -2774,14 +2775,6 @@ test("ships the premium neutral design system and Paperlogy typography", async (
     /\.chart-tooltip\s*\{[\s\S]*?width: 206px[\s\S]*?gap: 6px[\s\S]*?padding: 11px 12px[\s\S]*?border-radius: 12px[\s\S]*?letter-spacing: -0\.015em/,
   );
   assert.match(css, /\.hover-guide\s*\{[\s\S]*?stroke-dasharray: 3 4/);
-  assert.match(
-    css,
-    /\.quarter-score-row > i b\s*\{[\s\S]*?linear-gradient\(90deg, #688fa3 0%, #82aebf 66%, #a4c8d6 100%\)[\s\S]*?animation: progress-fill 1100ms cubic-bezier\(0\.16, 1, 0\.3, 1\) both/,
-  );
-  assert.match(
-    css,
-    /\.quarter-score-row\.current > i b\s*\{[\s\S]*?linear-gradient\(90deg, #84b6ca 0%, #abd1e0 68%, #d2e9f2 100%\)/,
-  );
   assert.match(
     css,
     /\.metric-track span\s*\{[\s\S]*?linear-gradient\(90deg, #197557 0%, var\(--good\) 68%, #57b18f 100%\)[\s\S]*?animation: progress-fill 1100ms cubic-bezier\(0\.16, 1, 0\.3, 1\) 130ms both/,
