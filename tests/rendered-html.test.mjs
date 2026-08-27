@@ -1827,7 +1827,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     css,
-    /\.metric-resource-new\s*\{[^}]*top: -9px;[^}]*height: 16px;[^}]*border: 1px solid #f36b37;[^}]*background: #f36b37;[^}]*font-weight: 500;/,
+    /\.metric-resource-new\s*\{[^}]*top: -7px;[^}]*height: 12px;[^}]*color: #d9572b;[^}]*border: 1px solid #f36b37;[^}]*background: #fff7f3;[^}]*font-size: 5px;[^}]*font-weight: 400;/,
   );
   assert.match(
     css,
