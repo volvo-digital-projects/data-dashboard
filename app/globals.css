@@ -10945,7 +10945,7 @@ body {
     position: relative;
     padding: 7px;
     border: 1px solid rgba(43, 91, 112, 0.13);
-    border-radius: 12px;
+    border-radius: var(--es90-surface-radius);
     background:
       linear-gradient(145deg, rgba(244, 248, 250, 0.92), rgba(237, 244, 247, 0.74));
     box-shadow:
@@ -10985,7 +10985,7 @@ body {
   padding: 22px 14px 12px;
   color: #f7fbfd;
   border-color: rgba(159, 202, 219, 0.34);
-  border-radius: 12px;
+  border-radius: var(--es90-surface-radius);
   background:
     linear-gradient(118deg, rgba(255, 255, 255, 0.07) 0%, transparent 42%, rgba(171, 216, 234, 0.08) 100%),
     radial-gradient(circle at 100% 0%, rgba(174, 218, 235, 0.15), transparent 47%),
