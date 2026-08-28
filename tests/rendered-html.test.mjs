@@ -1180,6 +1180,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /aria-haspopup="listbox"/);
   assert.match(staffSectionHtml, /id="analysis-staff-options"/);
   assert.match(staffSectionHtml, /김대준 · 영업직원/);
+  assert.match(
+    staffSectionHtml,
+    /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
+  );
+  assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
+  assert.match(staffSectionHtml, /에이치모터스 공식 프로필/);
   assert.match(staffSectionHtml, /2023/);
   assert.match(staffSectionHtml, /2024/);
   assert.match(staffSectionHtml, /2025/);
@@ -1201,6 +1207,22 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /명단 확인 2026\.08\.28/);
   assert.doesNotMatch(staffSectionHtml, /DMS 명단 10명/);
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-quarters/);
+
+  await access(
+    new URL(
+      "../public/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.jpg",
+      import.meta.url,
+    ),
+  );
+  const staffPhotoData = await readFile(
+    new URL("../app/data/staff-profile-photos.json", import.meta.url),
+    "utf8",
+  );
+  assert.doesNotMatch(staffPhotoData, /@hvolvo\.com|010-\d{4}-\d{4}/);
+  assert.equal(
+    Object.keys(JSON.parse(staffPhotoData).showrooms["6KR6834"].employees).length,
+    14,
+  );
 
   const regionResponse = await render(
     "/dashboard/6KR6834/analysis?view=region",

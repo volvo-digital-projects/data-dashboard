@@ -11,6 +11,7 @@ import {
 } from "react";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
+import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
@@ -73,6 +74,17 @@ type StaffAnalysisShowroom = {
   excludedRawNames: Array<{ name: string; responses: number; reason: string }>;
 };
 
+type StaffProfilePhoto = {
+  image: string;
+};
+
+type StaffProfileShowroom = {
+  dealer: string;
+  showroom: string;
+  sourcePage: string;
+  employees: Record<string, StaffProfilePhoto>;
+};
+
 const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   string,
   StaffAnalysisShowroom
@@ -83,6 +95,10 @@ const staffNationalYears = vocStaffAnalysisJson.nationalYears as Record<
   StaffNationalYear
 >;
 const staffTenureCohorts = vocStaffAnalysisJson.tenureCohorts as StaffTenureCohort[];
+const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
+  string,
+  StaffProfileShowroom
+>;
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
 
 type ScatterLabelPlacement =
@@ -621,6 +637,11 @@ export default function CompetitiveAnalysis({
   const selectedStaffEmployee =
     currentSalesStaff.find((employee) => employee.name === selectedStaffName) ??
     currentSalesStaff[0];
+  const selectedStaffProfileShowroom = staffProfilePhotosByCdsid[selected.cdsid];
+  const selectedStaffProfile = selectedStaffEmployee
+    ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
+    : undefined;
+  const selectedStaffInitials = selectedStaffEmployee?.name.slice(-2) ?? "SC";
   const selectedStaffYearRows = staffYears.map((year) => {
     const metrics = selectedStaffEmployee?.years[year] ?? {
       responses: 0,
@@ -1176,12 +1197,29 @@ export default function CompetitiveAnalysis({
           </div>
 
           <div className="analysis-staff-summary">
-            <article>
-              <span>선택 직원</span>
-              <strong className="name">
-                {selectedStaffEmployee?.name ?? "―"}
-                <small>{selectedStaffEmployee?.role ?? ""}</small>
-              </strong>
+            <article className="analysis-staff-profile-card">
+              <div className="analysis-staff-profile-photo">
+                {selectedStaffProfile ? (
+                  <img
+                    src={selectedStaffProfile.image}
+                    alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
+                  />
+                ) : (
+                  <span aria-hidden="true">{selectedStaffInitials}</span>
+                )}
+              </div>
+              <div>
+                <span>선택 직원</span>
+                <strong className="name">
+                  {selectedStaffEmployee?.name ?? "―"}
+                  <small>{selectedStaffEmployee?.role ?? ""}</small>
+                </strong>
+                <em>
+                  {selectedStaffProfile
+                    ? `${selectedStaffProfileShowroom?.dealer ?? "딜러사"} 공식 프로필`
+                    : "공식 프로필 사진 미등록"}
+                </em>
+              </div>
             </article>
             <article>
               <span>근무기간</span>
