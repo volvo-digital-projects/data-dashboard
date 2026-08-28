@@ -1387,7 +1387,6 @@ export default function CompetitiveAnalysis({
               <div>
                 <strong className="name">
                   {selectedStaffEmployee?.name ?? "―"}
-                  <small>{selectedStaffEmployee?.role ?? ""}</small>
                 </strong>
               </div>
             </article>
