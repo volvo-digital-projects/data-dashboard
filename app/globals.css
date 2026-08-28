@@ -5036,7 +5036,7 @@ input:focus-visible {
 .analysis-staff-year-axis span {
   color: #718694;
   font-family: "Volvo Centum", var(--font-latin), sans-serif;
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 650;
 }
 

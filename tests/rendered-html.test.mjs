@@ -1399,7 +1399,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-year-axis span\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*7px;/,
+    /\.analysis-staff-year-axis span\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*9px;/,
   );
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-history-legend"/g) ?? []).length,
