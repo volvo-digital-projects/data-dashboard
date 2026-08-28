@@ -1264,7 +1264,7 @@ export default function CompetitiveAnalysis({
                   <span className="analysis-rank">
                     <strong>{rank}</strong>
                     <span>
-                      {displayShowroomName(item.showroom)}
+                      <em>{displayShowroomName(item.showroom)}</em>
                       <small>
                         {item.dealer} · {item.region} · {item.size}
                       </small>

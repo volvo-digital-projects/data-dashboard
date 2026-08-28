@@ -1177,6 +1177,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     6,
   );
   assert.equal((html.match(/class="analysis-rank"/g) ?? []).length, 7);
+  assert.match(
+    html.replaceAll("<!-- -->", ""),
+    /class="analysis-rank"><strong>\d+<\/strong><span><em>볼보 [^<]+<\/em><small>[^<]+ · [^<]+ · [^<]+<\/small><\/span>/,
+  );
+  assert.match(
+    css,
+    /\.analysis-rank > span\s*\{[\s\S]*?display:\s*flex;[\s\S]*?align-items:\s*baseline;[\s\S]*?white-space:\s*nowrap;[\s\S]*?\.analysis-rank > span > em\s*\{[\s\S]*?font-size:\s*11px;[\s\S]*?\.analysis-rank small\s*\{[\s\S]*?font-size:\s*8px;/,
+  );
   assert.match(visibleHtml, /볼보 분당/);
   assert.match(
     html,

@@ -4419,19 +4419,29 @@ input:focus-visible {
 
 .analysis-rank > span {
   min-width: 0;
-  display: grid;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  overflow: hidden;
   color: var(--ink);
-  font-size: 10px;
   font-weight: 700;
+  white-space: nowrap;
+}
+
+.analysis-rank > span > em {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 11px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .analysis-rank small {
-  margin-top: 2px;
-  overflow: hidden;
+  flex: 0 0 auto;
   color: var(--muted);
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 500;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
