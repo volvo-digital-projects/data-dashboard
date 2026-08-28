@@ -1081,10 +1081,10 @@ function V3SPerformance({
           ))}
           <span>
             <i className="legend-bar" />{" "}
-            {displayShowroomName(showroom.showroom)}
+            {displayShowroomNameWithoutBrand(showroom.showroom)}
           </span>
           <span>
-            <i className="legend-average" /> 분기 전국 평균
+            <i className="legend-average" /> 전국 평균
           </span>
         </div>
       </section>
@@ -1176,7 +1176,7 @@ function V3SPerformance({
               </span>
               <span>
                 <i className="v3s-history-legend-showroom" />
-                {displayShowroomName(showroom.showroom)}
+                {displayShowroomNameWithoutBrand(showroom.showroom)}
               </span>
             </div>
           </div>

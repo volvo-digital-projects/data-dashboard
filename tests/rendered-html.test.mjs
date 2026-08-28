@@ -2006,7 +2006,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.v3s-performance\.compact \.v3s-quarter-panel,[\s\S]*?min-height: 172px/,
+    /\.v3s-performance\.compact \.v3s-quarter-panel,[\s\S]*?min-height: 196px/,
   );
   assert.match(
     css,
@@ -2230,7 +2230,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   assert.match(dashboardSource, /className=\{`legend-peer \$\{benchmark\.key\}`\}/);
   assert.match(
     dashboardSource,
-    /className="v3s-quarter-legend"[\s\S]*?peerBenchmarks\("q2"\)\.map[\s\S]*?className=\{`legend-peer \$\{benchmark\.key\}`\}[\s\S]*?className="legend-bar"[\s\S]*?displayShowroomName\(showroom\.showroom\)/,
+    /className="v3s-quarter-legend"[\s\S]*?peerBenchmarks\("q2"\)\.map[\s\S]*?className=\{`legend-peer \$\{benchmark\.key\}`\}[\s\S]*?className="legend-bar"[\s\S]*?displayShowroomNameWithoutBrand\(showroom\.showroom\)/,
   );
   assert.match(
     dashboardSource,
@@ -3795,7 +3795,7 @@ test("matches analysis headings to the ES90 performance-comparison title at 70 p
   assert.doesNotMatch(mixedEnglishRule[1], /font-size:/);
 });
 
-test("removes the V3S cumulative average label and preserves the recovered bar height", async () => {
+test("removes the V3S cumulative average label and aligns the expanded quarter chart", async () => {
   const [dashboardSource, summaryCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(
@@ -3813,10 +3813,14 @@ test("removes the V3S cumulative average label and preserves the recovered bar h
     summaryCss,
     /\.(?:inlineCumulative|compactSubhead|compactCumulative)/,
   );
-  assert.match(summaryCss, /\.compactBars\s*\{[^}]*height: 98px !important/);
+  assert.match(summaryCss, /\.compactBars\s*\{[^}]*height: 126px !important/);
   assert.match(
     summaryCss,
-    /\.compactBars \.compactStage\s*\{[^}]*height: 66px !important/,
+    /\.compactBars \.compactStage\s*\{[^}]*height: 92px !important/,
+  );
+  assert.match(
+    dashboardSource,
+    /className="v3s-quarter-legend"[\s\S]*?displayShowroomNameWithoutBrand\(showroom\.showroom\)[\s\S]*?legend-average" \/> 전국 평균/,
   );
 });
 
