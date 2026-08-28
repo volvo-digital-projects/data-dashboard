@@ -1376,7 +1376,6 @@ export default function CompetitiveAnalysis({
                 <div>
                   <span>MANAGER COACHING VIEW</span>
                 </div>
-                <p>4개년 추이 · 전국/근무연령대 비교 · 고객 코멘트</p>
               </header>
 
           <div className="analysis-staff-summary">

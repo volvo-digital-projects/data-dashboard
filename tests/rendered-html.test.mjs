@@ -1374,6 +1374,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-cohorts"/);
   assert.match(staffSectionHtml, /13년 6개월/);
   assert.match(staffSectionHtml, /MANAGER COACHING VIEW/);
+  assert.doesNotMatch(staffSectionHtml, /4개년 추이 · 전국\/근무연령대 비교 · 고객 코멘트/);
   assert.doesNotMatch(visibleHtml, />4개년 VOC 영업지원 핵심 분석</);
   assert.doesNotMatch(visibleHtml, /2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다/);
   assert.equal(
