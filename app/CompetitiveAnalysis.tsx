@@ -1372,12 +1372,6 @@ export default function CompetitiveAnalysis({
             </aside>
 
             <div className="analysis-staff-detail">
-              <header className="analysis-staff-detail-heading">
-                <div>
-                  <span>MANAGER COACHING VIEW</span>
-                </div>
-              </header>
-
           <div className="analysis-staff-summary">
             <article className="analysis-staff-profile-card">
               <div className="analysis-staff-profile-photo">

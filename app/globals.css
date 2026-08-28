@@ -4599,20 +4599,6 @@ input:focus-visible {
   background: #edf4f7;
 }
 
-.analysis-staff-detail-heading h3 {
-  margin: 0;
-  color: #14384c;
-  font-size: 13px;
-  font-weight: 760;
-}
-
-.analysis-staff-detail-heading p {
-  margin: 3px 0 0;
-  color: #738896;
-  font-size: 9px;
-  font-weight: 620;
-}
-
 .analysis-staff-roster > header > span {
   min-width: 0;
   height: 22px;
@@ -4765,31 +4751,6 @@ input:focus-visible {
   gap: 10px;
   padding: 10px;
   background: #fff;
-}
-
-.analysis-staff-detail-heading {
-  min-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 2px 4px 6px;
-  border-bottom: 1px solid #e1eaee;
-}
-
-.analysis-staff-detail-heading span {
-  display: block;
-  margin-bottom: 0;
-  color: #e96b38;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 7px;
-  font-weight: 760;
-  letter-spacing: 0.12em;
-}
-
-.analysis-staff-detail-heading p {
-  margin: 0;
-  text-align: right;
 }
 
 .analysis-staff-summary {
@@ -5785,14 +5746,9 @@ input:focus-visible {
   }
 
   .analysis-staff-tenure > header,
-  .analysis-staff-insights > header,
-  .analysis-staff-detail-heading {
+  .analysis-staff-insights > header {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .analysis-staff-detail-heading p {
-    text-align: left;
   }
 }
 
