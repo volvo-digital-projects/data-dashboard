@@ -1408,7 +1408,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*200px;/);
   assert.doesNotMatch(staffSectionHtml, /김대준 SC 좌표/);
-  assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.28점 · 25건/);
+  assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.3점 · 25건/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
   assert.doesNotMatch(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
   assert.doesNotMatch(staffSectionHtml, /소속구간/);

@@ -1355,7 +1355,7 @@ export default function CompetitiveAnalysis({
                       className={isSelected ? "selected" : ""}
                       aria-pressed={isSelected}
                       aria-label={`${employee.name}, 상담 만족도 ${
-                        average === null ? "표본 없음" : `${average.toFixed(2)}점`
+                        average === null ? "표본 없음" : `${average.toFixed(1)}점`
                       }, ${responses ? `${responses}건` : "표본 없음"}`}
                       onClick={() => {
                         setSelectedStaffName(employee.name);
@@ -1374,7 +1374,7 @@ export default function CompetitiveAnalysis({
                         </small>
                       </span>
                       <span className="analysis-staff-roster-average">
-                        {average === null ? "―" : average.toFixed(2)}
+                        {average === null ? "―" : average.toFixed(1)}
                       </span>
                       <span className="analysis-staff-roster-responses">
                         {String(responses).padStart(2, "0")}건
@@ -1455,7 +1455,7 @@ export default function CompetitiveAnalysis({
               <strong>
                 {selectedStaffAverage === null
                   ? "―"
-                  : selectedStaffAverage.toFixed(2)}
+                  : selectedStaffAverage.toFixed(1)}
                 <small>/ 10점</small>
               </strong>
             </article>
@@ -1542,7 +1542,7 @@ export default function CompetitiveAnalysis({
                           aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
                             year.average === null
                               ? "회신 없음"
-                              : `평균 ${year.average.toFixed(2)}점, ${year.responses}건`
+                              : `평균 ${year.average.toFixed(1)}점, ${year.responses}건`
                           }`}
                         >
                           <div className="analysis-staff-year-bars">
@@ -1552,7 +1552,7 @@ export default function CompetitiveAnalysis({
                                 { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
                               }
                             >
-                              <b>{year.nationalAverage?.toFixed(2) ?? "―"}</b>
+                              <b>{year.nationalAverage?.toFixed(1) ?? "―"}</b>
                               <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
                             </div>
                             <div
@@ -1561,7 +1561,7 @@ export default function CompetitiveAnalysis({
                                 { "--staff-bar-height": `${barHeight}%` } as CSSProperties
                               }
                             >
-                              <b>{year.average === null ? "―" : year.average.toFixed(2)}</b>
+                              <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
                               <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
                             </div>
                           </div>
@@ -1590,7 +1590,7 @@ export default function CompetitiveAnalysis({
               <article className="analysis-staff-national-benchmark">
                 <div>
                   <span>전국 영업직원</span>
-                  <strong>{staffNationalAverage?.toFixed(2) ?? "―"}<small>점</small></strong>
+                  <strong>{staffNationalAverage?.toFixed(1) ?? "―"}<small>점</small></strong>
                 </div>
                 <div>
                   <b>{staffNationalResponses.toLocaleString("ko-KR")}건</b>
@@ -1660,7 +1660,7 @@ export default function CompetitiveAnalysis({
                           y={staffScatterY(staffNationalAverage) - 5}
                           textAnchor="end"
                         >
-                          전국 평균 {staffNationalAverage.toFixed(2)}
+                          전국 평균 {staffNationalAverage.toFixed(1)}
                         </text>
                       </g>
                     ) : null}
@@ -1705,7 +1705,7 @@ export default function CompetitiveAnalysis({
                 <span className="selected">
                   <i />
                   {selectedStaffScatterPoint
-                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} SC · ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · ${selectedStaffScatterPoint.average.toFixed(2)}점 · ${selectedStaffScatterPoint.responses}건`
+                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} SC · ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · ${selectedStaffScatterPoint.average.toFixed(1)}점 · ${selectedStaffScatterPoint.responses}건`
                     : `${selectedStaffEmployee?.name ?? "선택 직원"} SC`}
                 </span>
                 <em>원 크기 = 누적 회신 건수</em>
