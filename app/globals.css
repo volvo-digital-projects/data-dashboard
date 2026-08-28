@@ -4529,130 +4529,191 @@ input:focus-visible {
   font-weight: 650;
 }
 
-.analysis-staff-picker {
+.analysis-staff-workspace {
   display: grid;
-  grid-template-columns: minmax(180px, 0.7fr) minmax(260px, 1.3fr);
-  align-items: center;
-  gap: 16px;
-  padding: 12px 14px;
-  border: 1px solid #dce7ec;
-  border-radius: 7px;
-  background: #f7fafb;
+  grid-template-columns: minmax(220px, 252px) minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
 }
 
-.analysis-staff-picker label {
-  color: #486779;
-  font-size: 11px;
-  font-weight: 720;
-}
-
-.analysis-staff-picker > div {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto;
-  align-items: center;
-  gap: 10px;
-}
-
-.analysis-staff-dropdown {
-  position: relative;
+.analysis-staff-roster,
+.analysis-staff-detail {
   min-width: 0;
-}
-
-.analysis-staff-dropdown-trigger {
-  width: 100%;
-  min-height: 38px;
-  padding: 0 38px 0 13px;
-  border: 1px solid #bcd2dd;
-  border-radius: 6px;
-  background: #fff;
-  color: #15394e;
-  font-family: var(--font-korean), sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-}
-
-.analysis-staff-dropdown-trigger i {
-  position: absolute;
-  top: 50%;
-  right: 14px;
-  width: 8px;
-  height: 8px;
-  border-right: 1.5px solid #365f75;
-  border-bottom: 1.5px solid #365f75;
-  transform: translateY(-70%) rotate(45deg);
-  transition: transform 160ms ease;
-}
-
-.analysis-staff-dropdown-trigger[aria-expanded="true"] i {
-  transform: translateY(-20%) rotate(225deg);
-}
-
-.analysis-staff-dropdown-menu {
-  position: absolute;
-  z-index: 80;
-  top: calc(100% + 6px);
-  right: 0;
-  left: 0;
-  max-height: min(360px, 44vh);
-  padding: 5px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  border: 1px solid #bcd2dd;
+  border: 1px solid #dbe6eb;
   border-radius: 7px;
-  background: #fff;
-  box-shadow: 0 18px 38px -20px rgba(10, 46, 65, 0.58);
-  -webkit-overflow-scrolling: touch;
+  background: #f8fbfc;
 }
 
-.analysis-staff-dropdown-menu[hidden] {
-  display: none;
+.analysis-staff-roster {
+  overflow: hidden;
+  background: #f4f8fa;
 }
 
-.analysis-staff-dropdown-menu button {
-  width: 100%;
-  min-height: 38px;
+.analysis-staff-roster > header {
+  min-height: 62px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 0 11px;
-  border: 0;
-  border-radius: 5px;
+  gap: 10px;
+  padding: 11px 12px;
+  border-bottom: 1px solid #dbe6eb;
+  background: #edf4f7;
+}
+
+.analysis-staff-roster > header h3,
+.analysis-staff-detail-heading h3 {
+  margin: 0;
+  color: #14384c;
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.analysis-staff-roster > header p,
+.analysis-staff-detail-heading p {
+  margin: 3px 0 0;
+  color: #738896;
+  font-size: 9px;
+  font-weight: 620;
+}
+
+.analysis-staff-roster > header > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 23px;
+  padding: 0 8px;
+  border: 1px solid #c9dce5;
+  border-radius: 999px;
+  background: #fff;
+  color: #315d73;
+  font-size: 9px;
+  font-weight: 720;
+}
+
+.analysis-staff-roster-list {
+  padding: 6px;
+}
+
+.analysis-staff-roster-list button {
+  width: 100%;
+  min-height: 53px;
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
   background: transparent;
-  color: #15394e;
+  color: #17384b;
   font-family: var(--font-korean), sans-serif;
   text-align: left;
   cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
 }
 
-.analysis-staff-dropdown-menu button:hover,
-.analysis-staff-dropdown-menu button:focus-visible {
-  background: #eff6f9;
+.analysis-staff-roster-list button + button {
+  margin-top: 3px;
+}
+
+.analysis-staff-roster-list button:hover,
+.analysis-staff-roster-list button:focus-visible {
+  border-color: #bdd5df;
+  background: #fff;
   outline: 0;
 }
 
-.analysis-staff-dropdown-menu button.selected {
-  background: #dfeef4;
-  color: #0c5575;
+.analysis-staff-roster-list button.selected {
+  border-color: #87b6c8;
+  background: #fff;
+  box-shadow: inset 3px 0 #16769a, 0 8px 20px -18px rgba(16, 70, 94, 0.78);
 }
 
-.analysis-staff-dropdown-menu button span {
-  font-size: 12px;
-  font-weight: 750;
+.analysis-staff-roster-rank {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dfeaf0;
+  color: #476c7e;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 9px;
+  font-weight: 760;
 }
 
-.analysis-staff-dropdown-menu button small {
-  color: #718694;
-  font-size: 10px;
-  font-weight: 650;
+.analysis-staff-roster-list button.selected .analysis-staff-roster-rank {
+  background: #126886;
+  color: #fff;
 }
 
-.analysis-staff-picker > div > span {
-  color: #718694;
-  font-size: 10px;
+.analysis-staff-roster-identity,
+.analysis-staff-roster-score {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.analysis-staff-roster-identity strong {
+  overflow: hidden;
+  color: #17384b;
+  font-size: 11px;
+  font-weight: 760;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.analysis-staff-roster-identity small,
+.analysis-staff-roster-score small {
+  margin-top: 3px;
+  color: #83949e;
+  font-size: 7px;
+  font-weight: 620;
+  white-space: nowrap;
+}
+
+.analysis-staff-roster-score {
+  align-items: flex-end;
+}
+
+.analysis-staff-roster-score strong {
+  color: #0d5f7d;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.analysis-staff-detail {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  background: #fff;
+}
+
+.analysis-staff-detail-heading {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 4px 10px;
+  border-bottom: 1px solid #e1eaee;
+}
+
+.analysis-staff-detail-heading span {
+  display: block;
+  margin-bottom: 3px;
+  color: #e96b38;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 7px;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+}
+
+.analysis-staff-detail-heading p {
+  margin: 0;
+  text-align: right;
 }
 
 .analysis-staff-summary {
@@ -5303,11 +5364,6 @@ input:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .analysis-staff-picker {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
   .analysis-staff-history {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -5319,16 +5375,14 @@ input:focus-visible {
 }
 
 @media (max-width: 650px) {
+  .analysis-staff-workspace,
   .analysis-staff-comparison-layout {
     grid-template-columns: 1fr;
   }
+
 }
 
 @media (max-width: 560px) {
-  .analysis-staff-picker > div {
-    grid-template-columns: 1fr;
-  }
-
   .analysis-staff-summary,
   .analysis-staff-history {
     grid-template-columns: 1fr;
@@ -5340,9 +5394,14 @@ input:focus-visible {
   }
 
   .analysis-staff-tenure > header,
-  .analysis-staff-insights > header {
+  .analysis-staff-insights > header,
+  .analysis-staff-detail-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .analysis-staff-detail-heading p {
+    text-align: left;
   }
 }
 

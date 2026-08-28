@@ -502,12 +502,10 @@ export default function CompetitiveAnalysis({
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState("김대준");
-  const [isStaffPickerOpen, setIsStaffPickerOpen] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
   const scatterRef = useRef<HTMLDivElement>(null);
-  const staffPickerRef = useRef<HTMLDivElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const [scatterSize, setScatterSize] = useState({
@@ -530,26 +528,6 @@ export default function CompetitiveAnalysis({
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
   }, []);
-
-  useEffect(() => {
-    if (!isStaffPickerOpen) return;
-
-    const closeOnOutsidePress = (event: PointerEvent) => {
-      if (!staffPickerRef.current?.contains(event.target as Node)) {
-        setIsStaffPickerOpen(false);
-      }
-    };
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsStaffPickerOpen(false);
-    };
-
-    document.addEventListener("pointerdown", closeOnOutsidePress);
-    document.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.removeEventListener("pointerdown", closeOnOutsidePress);
-      document.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [isStaffPickerOpen]);
 
   useLayoutEffect(() => {
     const anchor = stickyAnchorRef.current;
@@ -634,9 +612,40 @@ export default function CompetitiveAnalysis({
       ),
     [selectedStaffAnalysis],
   );
+  const rankedSalesStaff = useMemo(
+    () =>
+      currentSalesStaff
+        .map((employee) => {
+          const totals = staffYears.reduce(
+            (summary, year) => {
+              const metrics = employee.years[year];
+              summary.responses += metrics?.responses ?? 0;
+              summary.scoreSum += metrics?.scoreSum ?? 0;
+              return summary;
+            },
+            { responses: 0, scoreSum: 0 },
+          );
+          return {
+            employee,
+            responses: totals.responses,
+            average: totals.responses ? totals.scoreSum / totals.responses : null,
+          };
+        })
+        .sort((a, b) => {
+          if (a.average === null && b.average === null) {
+            return a.employee.name.localeCompare(b.employee.name, "ko");
+          }
+          if (a.average === null) return 1;
+          if (b.average === null) return -1;
+          if (b.average !== a.average) return b.average - a.average;
+          if (b.responses !== a.responses) return b.responses - a.responses;
+          return a.employee.name.localeCompare(b.employee.name, "ko");
+        }),
+    [currentSalesStaff],
+  );
   const selectedStaffEmployee =
-    currentSalesStaff.find((employee) => employee.name === selectedStaffName) ??
-    currentSalesStaff[0];
+    rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
+      ?.employee ?? rankedSalesStaff[0]?.employee;
   const selectedStaffProfileShowroom = staffProfilePhotosByCdsid[selected.cdsid];
   const selectedStaffProfile = selectedStaffEmployee
     ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
@@ -1159,57 +1168,56 @@ export default function CompetitiveAnalysis({
             </div>
           </header>
 
-          <div className="analysis-staff-picker">
-            <label id="analysis-staff-picker-label">
-              현재 소속 영업직원 / 영업팀장
-            </label>
-            <div>
-              <div className="analysis-staff-dropdown" ref={staffPickerRef}>
-                <button
-                  type="button"
-                  className="analysis-staff-dropdown-trigger"
-                  aria-labelledby="analysis-staff-picker-label analysis-staff-picker-value"
-                  aria-haspopup="listbox"
-                  aria-expanded={isStaffPickerOpen}
-                  aria-controls="analysis-staff-options"
-                  onClick={() => setIsStaffPickerOpen((open) => !open)}
-                >
-                  <span id="analysis-staff-picker-value">
-                    {selectedStaffEmployee?.name ?? "―"} · {selectedStaffEmployee?.role ?? ""}
-                  </span>
-                  <i aria-hidden="true" />
-                </button>
-                <div
-                  id="analysis-staff-options"
-                  className="analysis-staff-dropdown-menu"
-                  role="listbox"
-                  aria-label="현재 재직 영업직원 및 영업팀장"
-                  hidden={!isStaffPickerOpen}
-                >
-                  {currentSalesStaff.map((employee) => {
-                    const isSelected = employee.name === selectedStaffEmployee?.name;
-                    return (
-                      <button
-                        type="button"
-                        role="option"
-                        aria-selected={isSelected}
-                        className={isSelected ? "selected" : ""}
-                        onClick={() => {
-                          setSelectedStaffName(employee.name);
-                          setIsStaffPickerOpen(false);
-                        }}
-                        key={employee.name}
-                      >
-                        <span>{employee.name}</span>
-                        <small>{employee.role}</small>
-                      </button>
-                    );
-                  })}
+          <div className="analysis-staff-workspace">
+            <aside
+              className="analysis-staff-roster"
+              aria-label="전체 기간 상담 만족도 순위별 소속 직원"
+            >
+              <header>
+                <div>
+                  <h3>소속 직원 순위</h3>
+                  <p>전체 기간 상담 만족도</p>
                 </div>
+                <span>{currentSalesStaff.length}명</span>
+              </header>
+              <div className="analysis-staff-roster-list">
+                {rankedSalesStaff.map(({ employee, average, responses }, index) => {
+                  const isSelected = employee.name === selectedStaffEmployee?.name;
+                  return (
+                    <button
+                      type="button"
+                      className={isSelected ? "selected" : ""}
+                      aria-pressed={isSelected}
+                      onClick={() => setSelectedStaffName(employee.name)}
+                      key={employee.name}
+                    >
+                      <span className="analysis-staff-roster-rank">
+                        {average === null ? "―" : index + 1}
+                      </span>
+                      <span className="analysis-staff-roster-identity">
+                        <strong>{employee.name}</strong>
+                        <small>
+                          {employee.role} · {formatStaffTenure(employee.tenureMonths)}
+                        </small>
+                      </span>
+                      <span className="analysis-staff-roster-score">
+                        <strong>{average === null ? "―" : average.toFixed(1)}</strong>
+                        <small>{responses ? `${responses}건` : "표본 없음"}</small>
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
-              <span>{currentSalesStaff.length}명 재직 확인</span>
-            </div>
-          </div>
+            </aside>
+
+            <div className="analysis-staff-detail">
+              <header className="analysis-staff-detail-heading">
+                <div>
+                  <span>MANAGER COACHING VIEW</span>
+                  <h3>{selectedStaffEmployee?.name ?? "선택 직원"} SC 종합 분석</h3>
+                </div>
+                <p>4개년 추이 · 전국/근무연령대 비교 · 고객 코멘트</p>
+              </header>
 
           <div className="analysis-staff-summary">
             <article className="analysis-staff-profile-card">
@@ -1437,6 +1445,9 @@ export default function CompetitiveAnalysis({
               </article>
             </div>
           </section>
+
+            </div>
+          </div>
 
         </section>
       ) : null}

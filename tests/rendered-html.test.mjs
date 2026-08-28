@@ -1176,10 +1176,17 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /<section class="analysis-staff-card"[\s\S]*?<\/section>/,
   )?.[0];
   assert.ok(staffSectionHtml);
-  assert.match(staffSectionHtml, /class="analysis-staff-dropdown-trigger"/);
-  assert.match(staffSectionHtml, /aria-haspopup="listbox"/);
-  assert.match(staffSectionHtml, /id="analysis-staff-options"/);
-  assert.match(staffSectionHtml, /김대준 · 영업직원/);
+  assert.match(staffSectionHtml, /class="analysis-staff-workspace"/);
+  assert.match(staffSectionHtml, /class="analysis-staff-roster"/);
+  assert.match(staffSectionHtml, /전체 기간 상담 만족도 순위별 소속 직원/);
+  assert.match(staffSectionHtml, /class="analysis-staff-roster-list"/);
+  assert.doesNotMatch(staffSectionHtml, /analysis-staff-dropdown/);
+  assert.doesNotMatch(staffSectionHtml, /aria-haspopup="listbox"/);
+  assert.match(staffSectionHtml, /김대준/);
+  assert.match(staffSectionHtml, /영업직원 · 13년 6개월/);
+  assert.ok(staffSectionHtml.indexOf("문정환") < staffSectionHtml.indexOf("박영환"));
+  assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("김대준"));
+  assert.ok(staffSectionHtml.indexOf("김대준") < staffSectionHtml.indexOf("정지만"));
   assert.match(
     staffSectionHtml,
     /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
@@ -1203,7 +1210,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /근무연령대 비교/);
   assert.match(staffSectionHtml, /13년 6개월/);
   assert.match(staffSectionHtml, /10년 이상/);
-  assert.match(staffSectionHtml, /14명 재직 확인/);
+  assert.match(staffSectionHtml, /14명/);
+  assert.match(staffSectionHtml, /MANAGER COACHING VIEW/);
   assert.match(visibleHtml, /4개년 VOC 영업지원 핵심 분석/);
   assert.match(visibleHtml, /친절한 응대/);
   assert.match(visibleHtml, /진행상황 선제 안내/);
