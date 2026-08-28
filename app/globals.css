@@ -4580,7 +4580,7 @@ input:focus-visible {
 }
 
 .analysis-staff-roster > header {
-  min-height: 62px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -4695,15 +4695,22 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-score small {
-  margin-left: 4px;
   color: #83949e;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
   font-size: 7.5px;
   font-weight: 620;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  text-align: left;
   white-space: nowrap;
 }
 
 .analysis-staff-roster-score {
+  display: grid;
+  grid-template-columns: 40px 7px 24px;
   justify-content: flex-end;
+  align-items: baseline;
+  column-gap: 0;
   white-space: nowrap;
 }
 
@@ -4711,7 +4718,20 @@ input:focus-visible {
   color: #0d5f7d;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
   font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
   line-height: 1;
+  text-align: right;
+}
+
+.analysis-staff-roster-score > i {
+  color: #83949e;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 7.5px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: center;
 }
 
 .analysis-staff-detail {
@@ -4722,18 +4742,18 @@ input:focus-visible {
 }
 
 .analysis-staff-detail-heading {
-  min-height: 50px;
+  min-height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 4px 4px 10px;
+  padding: 2px 4px 6px;
   border-bottom: 1px solid #e1eaee;
 }
 
 .analysis-staff-detail-heading span {
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 0;
   color: #e96b38;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
   font-size: 7px;

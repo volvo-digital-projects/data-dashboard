@@ -1265,7 +1265,6 @@ export default function CompetitiveAnalysis({
               <header>
                 <div>
                   <h3>소속 직원 순위</h3>
-                  <p>전체 기간 상담 만족도</p>
                 </div>
                 <span>{currentSalesStaff.length}명</span>
               </header>
@@ -1291,7 +1290,8 @@ export default function CompetitiveAnalysis({
                       </span>
                       <span className="analysis-staff-roster-score">
                         <strong>{average === null ? "―" : average.toFixed(2)}</strong>
-                        <small>/ {responses ? `${responses}건` : "표본 없음"}</small>
+                        <i aria-hidden="true">/</i>
+                        <small>{String(responses).padStart(2, "0")}건</small>
                       </span>
                     </button>
                   );
@@ -1303,7 +1303,6 @@ export default function CompetitiveAnalysis({
               <header className="analysis-staff-detail-heading">
                 <div>
                   <span>MANAGER COACHING VIEW</span>
-                  <h3>{selectedStaffEmployee?.name ?? "선택 직원"} SC 종합 분석</h3>
                 </div>
                 <p>4개년 추이 · 전국/근무연령대 비교 · 고객 코멘트</p>
               </header>
