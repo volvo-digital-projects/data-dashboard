@@ -1377,9 +1377,9 @@ export default function CompetitiveAnalysis({
                   </div>
                 </div>
                 <footer className="analysis-staff-history-legend">
-                  <span aria-label="전국 영업직원 평균"><i className="national" />전국 평균</span>
-                  <span aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 고객상담 만족도`}><i className="employee" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
-                  <em>선택 직원 4개년 추이</em>
+                  <span className="national" aria-label="전국 영업직원 평균"><i />전국 평균</span>
+                  <span className="employee" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 고객상담 만족도`}><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
+                  <em>{selectedStaffEmployee?.name ?? "선택 직원"} 4개년 추이</em>
                 </footer>
               </article>
             </div>

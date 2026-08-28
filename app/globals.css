@@ -4915,6 +4915,7 @@ input:focus-visible {
 }
 
 .analysis-staff-chart-bar.national {
+  /* 좌→우 읽기 순서: 전국 평균(주황) → 선택 직원(파랑) */
   left: calc(50% - 56px);
   background: linear-gradient(180deg, #efab84 0%, #c9604e 100%);
   box-shadow: 0 8px 18px -12px rgba(182, 81, 62, 0.72);
@@ -5009,15 +5010,24 @@ input:focus-visible {
   border-radius: 2px;
 }
 
-.analysis-staff-history-legend i.national {
+.analysis-staff-history-legend span.national {
+  order: 1;
+}
+
+.analysis-staff-history-legend span.employee {
+  order: 2;
+}
+
+.analysis-staff-history-legend span.national i {
   background: #d4705c;
 }
 
-.analysis-staff-history-legend i.employee {
+.analysis-staff-history-legend span.employee i {
   background: #267b9c;
 }
 
 .analysis-staff-history-legend em {
+  order: 3;
   color: #90a1aa;
   font-size: 8px;
   font-style: normal;

@@ -1216,6 +1216,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     (staffSectionHtml.match(/class="analysis-staff-history-legend"/g) ?? []).length,
     1,
   );
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*김대준[\s\S]*김대준 4개년 추이/,
+  );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(
