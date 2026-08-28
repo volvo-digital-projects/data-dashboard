@@ -3994,6 +3994,29 @@ input:focus-visible {
   bottom: var(--point-y);
   z-index: 2;
   transform: translate(-50%, 50%);
+  animation: scatter-point-view-flow 280ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: left, bottom, transform, opacity;
+}
+
+@keyframes scatter-point-view-flow {
+  0% {
+    left: var(--avg-x);
+    bottom: var(--avg-y);
+    opacity: 0.28;
+    transform: translate(-50%, 50%) scale(0.86);
+  }
+
+  58% {
+    opacity: 0.94;
+  }
+
+  100% {
+    left: var(--point-x);
+    bottom: var(--point-y);
+    opacity: 1;
+    transform: translate(-50%, 50%) scale(1);
+  }
 }
 
 .scatter-point > i {
@@ -4120,9 +4143,16 @@ input:focus-visible {
   transform: translate(-50%, -50%)
     translate(var(--callout-x), var(--callout-y));
   transition:
-    opacity 150ms ease,
-    transform 150ms ease,
-    box-shadow 150ms ease;
+    opacity 220ms ease-out,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scatter-point {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .scatter-point > b::before,

@@ -1120,7 +1120,7 @@ export default function CompetitiveAnalysis({
                 )} · 해피콜 ${displayNumber(item.happyScore)}`;
                 return (
                   <span
-                    key={item.cdsid}
+                    key={`${view}-${item.cdsid}`}
                     className={`scatter-point ${
                       isSelected
                         ? "selected"

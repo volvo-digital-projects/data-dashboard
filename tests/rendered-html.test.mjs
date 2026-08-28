@@ -401,7 +401,6 @@ test("uses the blue exceptional state only from ten points above average", async
     new URL("../app/globals.css", import.meta.url),
     "utf8",
   );
-
   assert.match(
     dashboardSource,
     /if \(delta >= 10\) return \{ label: "대단해요", tone: "great", delta \};/,
@@ -1067,6 +1066,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     new URL("../app/globals.css", import.meta.url),
     "utf8",
   );
+  const analysisSource = await readFile(
+    new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
+    "utf8",
+  );
   assert.match(
     visibleHtml,
     /<footer><span>에이치 평균<strong>93\.6<\/strong><\/span><span>볼보 강남대치 평균<strong>93\.8<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 0\.2점<\/strong><\/span><\/footer>/,
@@ -1140,6 +1143,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.doesNotMatch(html, /scatter-callout-leader/);
   assert.match(html, /class="scatter-point selected\b/);
+  assert.match(analysisSource, /key=\{`\$\{view\}-\$\{item\.cdsid\}`\}/);
+  assert.match(
+    css,
+    /\.scatter-point\s*\{[^}]*animation: scatter-point-view-flow 280ms\s*cubic-bezier\(0\.22, 1, 0\.36, 1\) both;/,
+  );
+  assert.match(
+    css,
+    /@keyframes scatter-point-view-flow\s*\{[\s\S]*?left: var\(--avg-x\);[\s\S]*?bottom: var\(--avg-y\);[\s\S]*?left: var\(--point-x\);[\s\S]*?bottom: var\(--point-y\);/,
+  );
   assert.match(
     css,
     /\.scatter-point\.selected > i\s*\{[^}]*animation: selected-scatter-point-blink 1\.8s ease-in-out infinite;/,
