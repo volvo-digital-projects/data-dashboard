@@ -1227,7 +1227,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-scatter-card">
           <header className="analysis-card-heading">
             <div>
-              <h2>종합 만족도 × 해피콜 이행</h2>
+              <h2>종합 만족도 × 해피콜 이행률</h2>
             </div>
             <div className="analysis-legend" aria-label="차트 범례">
               <span className="selected">

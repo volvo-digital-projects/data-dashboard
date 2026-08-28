@@ -1152,7 +1152,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     html,
     /aria-pressed="true"[\s\S]*?소속 딜러사 내 분석/,
   );
-  assert.match(visibleHtml, /종합 만족도 × 해피콜 이행/);
+  assert.match(visibleHtml, /종합 만족도 × 해피콜 이행률/);
   assert.match(
     visibleHtml,
     /class="analysis-legend" aria-label="차트 범례"><span class="selected">강남대치<\/span><span>비교 전시장<\/span><span class="average">그룹 평균<\/span>/,
