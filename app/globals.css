@@ -10357,6 +10357,7 @@ body {
 
 /* ES90 performance-comparison title typography at 70% of the prior size */
 .analysis-card-heading h2,
+.analysis-staff-heading h2,
 .v3s-award-heading h2 {
   font-family: var(--font-korean);
   font-size: 14px;

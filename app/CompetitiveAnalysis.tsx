@@ -1050,11 +1050,11 @@ export default function CompetitiveAnalysis({
       {selectedStaffAnalysis ? (
         <section
           className="analysis-staff-card"
-          aria-label={`${displayShowroomName(selected.showroom)} 현직 영업 인력 상담 만족도`}
+          aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 상담만족도 결과`}
         >
           <header className="analysis-staff-heading">
             <div>
-              <h2>현직 영업 인력 상담 만족도</h2>
+              <h2>소속 영업직원 상담만족도 결과</h2>
               <p>
                 Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터와
                 교차검증합니다.

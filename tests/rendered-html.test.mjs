@@ -1167,7 +1167,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     html,
     /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
-  assert.match(visibleHtml, /현직 영업 인력 상담 만족도/);
+  assert.match(visibleHtml, /소속 영업직원 상담만족도 결과/);
   assert.match(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장/);
   assert.match(visibleHtml, /김대준/);
   assert.match(visibleHtml, /조동호/);
