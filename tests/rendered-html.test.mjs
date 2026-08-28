@@ -1237,6 +1237,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-dropdown/);
   assert.doesNotMatch(staffSectionHtml, /aria-haspopup="listbox"/);
   assert.match(staffSectionHtml, /김대준/);
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.analysis-workspace,[\s\S]*?\.analysis-staff-card,[\s\S]*?margin-inline:\s*-10px/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-card,[\s\S]*?\.analysis-staff-card,[\s\S]*?border-radius:\s*var\(--radius-md\)/,
+  );
   assert.doesNotMatch(staffSectionHtml, /영업직원 · 13년 6개월/);
   assert.match(staffSectionHtml, /9\.28/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">25건<\/span>/);

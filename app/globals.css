@@ -6989,6 +6989,7 @@ input:focus-visible,
   .analysis-tabs,
   .analysis-summary-grid,
   .analysis-workspace,
+  .analysis-staff-card,
   .v3s-award-card {
     margin-inline: -10px;
   }
@@ -11444,6 +11445,7 @@ body {
 .analysis-summary-card,
 .analysis-scatter-card,
 .analysis-ranking-card,
+.analysis-staff-card,
 .v3s-award-card,
 .score-tier {
   border: var(--dashboard-card-border);
