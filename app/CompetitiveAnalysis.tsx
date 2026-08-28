@@ -1347,7 +1347,7 @@ export default function CompetitiveAnalysis({
               </strong>
             </article>
             <article>
-              <span>VOC 회신</span>
+              <span>VOC 고객회신 건수</span>
               <strong>
                 {selectedStaffResponses}
                 <small>건</small>

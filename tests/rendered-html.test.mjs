@@ -1238,6 +1238,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*김대준[\s\S]*김대준 4개년 추이/,
   );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
+  assert.match(staffSectionHtml, />VOC 고객회신 건수</);
+  assert.doesNotMatch(staffSectionHtml, />VOC 회신</);
   assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);[\s\S]*?font-weight:\s*600;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*var\(--font-korean\), sans-serif;/);
