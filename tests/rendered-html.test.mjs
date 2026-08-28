@@ -1396,10 +1396,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, />VOC 고객회신 건수<[\s\S]*class="analysis-staff-certification-card"/);
   assert.match(css, /\.analysis-staff-summary\s*\{[\s\S]*?grid-template-columns:\s*minmax\(160px, 0\.76fr\) repeat\(4, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;[\s\S]*?align-items:\s*center;[\s\S]*?align-content:\s*center;/);
-  assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);[\s\S]*?font-weight:\s*600;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
-  assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*var\(--font-korean\), sans-serif;/);
+  assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?color:\s*#255b72;[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*18px;[\s\S]*?font-weight:\s*700;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
+  assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*18px;[\s\S]*?font-weight:\s*700;/);
   assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
-  assert.match(css, /\.analysis-staff-certification-card strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*14px;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
+  assert.match(css, /\.analysis-staff-certification-card strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*18px;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmark-legend"/);
   assert.match(
