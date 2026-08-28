@@ -4722,33 +4722,6 @@ input:focus-visible {
   transform: translateY(-50%);
 }
 
-.analysis-staff-audit {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 13px;
-  border: 1px solid #f0dfd6;
-  border-radius: 6px;
-  background: #fff9f6;
-  color: #7d6a60;
-  font-size: 10px;
-}
-
-.analysis-staff-audit strong {
-  color: #b25331;
-}
-
-.analysis-staff-audit p {
-  margin: 0;
-  line-height: 1.45;
-}
-
-.analysis-staff-audit span {
-  white-space: nowrap;
-  color: #8b776c;
-}
-
 @media (max-width: 900px) {
   .analysis-staff-card {
     padding: 18px;
@@ -4776,9 +4749,6 @@ input:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .analysis-staff-audit {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 560px) {

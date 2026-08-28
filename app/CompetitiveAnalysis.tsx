@@ -1145,19 +1145,6 @@ export default function CompetitiveAnalysis({
             })}
           </div>
 
-          <footer className="analysis-staff-audit">
-            <strong>교차검증 메모</strong>
-            <p>
-              현재 DMS 명단과 일치하지 않는 VOC 원데이터의 {" "}
-              {selectedStaffAnalysis.excludedRawNames
-                .map((item) => `${item.name} ${item.responses}건`)
-                .join(" · ")}은 합산에서 제외했습니다. 이름 불일치는 임의 병합하지
-              않습니다.
-            </p>
-            <span>
-              명단 확인 {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} · {staffAnalysisSource.rosterUpdateSchedule}
-            </span>
-          </footer>
         </section>
       ) : null}
 

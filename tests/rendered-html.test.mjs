@@ -1172,7 +1172,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(visibleHtml, /영업직원·영업팀장만 VOC 원데이터와 교차검증/);
   assert.match(visibleHtml, /김대준/);
   assert.match(visibleHtml, /조동호/);
-  assert.match(visibleHtml, /조동조 36건/);
+  assert.doesNotMatch(visibleHtml, /조동조 36건/);
   const staffSectionHtml = visibleHtml.match(
     /<section class="analysis-staff-card"[\s\S]*?<\/section>/,
   )?.[0];
@@ -1187,7 +1187,9 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /4개년 상담 만족도/);
   assert.match(staffSectionHtml, /\d{6} Sales-DMS 재직인원 기준/);
   assert.doesNotMatch(staffSectionHtml, /VOC 2026\.08\.24 기준/);
-  assert.match(staffSectionHtml, /매일 06:00 KST · 1일 1회/);
+  assert.doesNotMatch(staffSectionHtml, /교차검증 메모/);
+  assert.doesNotMatch(staffSectionHtml, /이름 불일치는 임의 병합하지 않습니다/);
+  assert.doesNotMatch(staffSectionHtml, /명단 확인 2026\.08\.28/);
   assert.doesNotMatch(staffSectionHtml, /DMS 명단 10명/);
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-quarters/);
 
