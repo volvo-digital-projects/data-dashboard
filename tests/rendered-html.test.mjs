@@ -1318,6 +1318,20 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="analysis-staff-chart-bar national"[\s\S]*class="analysis-staff-chart-bar employee"/,
   );
   assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-trend-line"[\s\S]*<polyline pathLength="1"/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-year-bars\s*\{[\s\S]*?display:\s*flex;[\s\S]*?justify-content:\s*center;[\s\S]*?gap:\s*4px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-trend-line polyline\s*\{[\s\S]*?stroke-width:\s*2\.5;[\s\S]*?animation:\s*analysis-staff-line-draw/,
+  );
+  assert.match(css, /@keyframes analysis-staff-bar-rise/);
+  assert.match(css, /@keyframes analysis-staff-line-draw/);
+  assert.match(
     css,
     /\.analysis-staff-chart-bar b\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*13px;/,
   );

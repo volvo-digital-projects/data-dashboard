@@ -783,6 +783,7 @@ export default function CompetitiveAnalysis({
       : [
           {
             key: year.year,
+            index,
             x: 12.5 + index * 25,
             y: 100 - staffHistoryChartHeight(year.average),
             height: staffHistoryChartHeight(year.average),
@@ -1440,7 +1441,10 @@ export default function CompetitiveAnalysis({
               role="img"
               aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2023년부터 2026년 YTD까지 상담 만족도`}
             >
-              <article className="analysis-staff-history-chart">
+              <article
+                className="analysis-staff-history-chart"
+                key={selectedStaffEmployee?.name ?? "staff-history"}
+              >
                 <div className="analysis-staff-trend-plot">
                   {selectedStaffTrendPoints.length > 1 ? (
                     <svg
@@ -1450,7 +1454,7 @@ export default function CompetitiveAnalysis({
                       aria-hidden="true"
                       focusable="false"
                     >
-                      <polyline points={selectedStaffTrendPolyline} />
+                      <polyline pathLength="1" points={selectedStaffTrendPolyline} />
                     </svg>
                   ) : null}
                   <div className="analysis-staff-trend-markers" aria-hidden="true">
@@ -1462,13 +1466,14 @@ export default function CompetitiveAnalysis({
                           {
                             "--staff-trend-x": `${point.x}%`,
                             "--staff-trend-height": `${point.height}%`,
+                            "--staff-history-index": point.index,
                           } as CSSProperties
                         }
                       />
                     ))}
                   </div>
                   <div className="analysis-staff-year-groups">
-                    {selectedStaffYearRows.map((year) => {
+                    {selectedStaffYearRows.map((year, yearIndex) => {
                       const barHeight =
                         year.average === null ? 0 : staffHistoryChartHeight(year.average);
                       const nationalBarHeight = staffHistoryChartHeight(
@@ -1486,6 +1491,9 @@ export default function CompetitiveAnalysis({
                         <div
                           className={year.average === null ? "empty" : ""}
                           key={year.year}
+                          style={
+                            { "--staff-history-index": yearIndex } as CSSProperties
+                          }
                           aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
                             year.average === null
                               ? "회신 없음"
