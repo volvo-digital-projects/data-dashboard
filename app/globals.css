@@ -4719,16 +4719,16 @@ input:focus-visible {
 .analysis-staff-summary {
   display: grid;
   grid-template-columns: minmax(220px, 1.3fr) repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .analysis-staff-summary article {
-  min-height: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  padding: 13px 15px;
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 3px 10px;
+  padding: 7px 12px;
   border: 1px solid #dbe6eb;
   border-radius: 7px;
   background: #f7fafb;
@@ -4736,14 +4736,15 @@ input:focus-visible {
 
 .analysis-staff-summary span {
   color: #657c8b;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 650;
 }
 
 .analysis-staff-summary strong {
+  justify-self: end;
   color: #102d40;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 25px;
+  font-size: 22px;
   line-height: 1;
 }
 
@@ -4764,27 +4765,29 @@ input:focus-visible {
 }
 
 .analysis-staff-summary article > em {
+  grid-column: 1 / -1;
   color: #8798a2;
-  font-size: 9px;
+  font-size: 7px;
   font-style: normal;
   font-weight: 600;
+  line-height: 1.1;
 }
 
 .analysis-staff-summary article.analysis-staff-profile-card {
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
+  grid-template-columns: 42px minmax(0, 1fr);
   align-items: center;
   justify-content: stretch;
-  gap: 12px;
-  padding: 8px 12px 8px 8px;
+  gap: 9px;
+  padding: 5px 10px 5px 5px;
   background:
     linear-gradient(110deg, rgba(219, 235, 242, 0.72), rgba(247, 250, 251, 0.96) 48%),
     #f7fafb;
 }
 
 .analysis-staff-profile-photo {
-  width: 62px;
-  height: 72px;
+  width: 42px;
+  height: 44px;
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -4809,13 +4812,13 @@ input:focus-visible {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
 }
 
 .analysis-staff-profile-card > div:last-child > em {
   overflow: hidden;
   color: #78909d;
-  font-size: 8px;
+  font-size: 7px;
   font-style: normal;
   font-weight: 650;
   text-overflow: ellipsis;

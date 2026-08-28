@@ -1221,6 +1221,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*김대준[\s\S]*김대준 4개년 추이/,
   );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
+  assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;/);
+  assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(
     staffSectionHtml,
