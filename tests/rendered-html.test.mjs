@@ -1245,6 +1245,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     css,
     /\.analysis-ranking-card,[\s\S]*?\.analysis-staff-card,[\s\S]*?border-radius:\s*var\(--radius-md\)/,
   );
+  assert.match(
+    css,
+    /\.weekly-score-layout > \.trend-wrap\.compact \.trend-scroll\s*\{[\s\S]*?flex:\s*1 1 auto/,
+  );
+  assert.match(
+    css,
+    /\.weekly-score-layout > \.trend-wrap\.compact \.trend-canvas\s*\{[\s\S]*?grid-template-rows:\s*minmax\(150px, 1fr\) auto auto/,
+  );
   assert.doesNotMatch(staffSectionHtml, /영업직원 · 13년 6개월/);
   assert.match(staffSectionHtml, /9\.28/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">25건<\/span>/);
