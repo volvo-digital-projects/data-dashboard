@@ -1223,6 +1223,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
   assert.match(staffSectionHtml, /인증직원 선정/);
+  assert.doesNotMatch(
+    staffSectionHtml,
+    /class="analysis-staff-profile-card"[\s\S]*?<div><span>선택 직원<\/span>/,
+  );
   assert.match(
     staffSectionHtml,
     /class="analysis-staff-certification-card"[\s\S]*?G-1[\s\S]*?A-0[\s\S]*?C-0/,
