@@ -1402,6 +1402,17 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(css, /@keyframes analysis-staff-bar-rise/);
   assert.match(css, /@keyframes analysis-staff-line-wipe/);
+  assert.match(analysisSource, /IntersectionObserver/);
+  assert.match(analysisSource, /staffAnalysisCardRef/);
+  assert.match(analysisSource, /staffAnalysisInView \? " is-motion-visible"/);
+  assert.match(
+    css,
+    /\.analysis-staff-card\.is-motion-visible \.analysis-staff-chart-bar\s*\{[\s\S]*?animation:\s*analysis-staff-bar-rise/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-card\.is-motion-visible \.analysis-staff-trend-line\s*\{[\s\S]*?animation:\s*analysis-staff-line-wipe/,
+  );
   assert.match(
     css,
     /\.analysis-staff-chart-bar b\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*13px;/,
@@ -1487,6 +1498,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
   assert.match(css, /\.analysis-staff-scatter-population circle\s*\{[\s\S]*?fill:\s*rgba\(222, 104, 62, 0\.62\)/);
   assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#16708f/);
+  assert.match(css, /@keyframes analysis-staff-selected-halo/);
+  assert.match(css, /@keyframes analysis-staff-selected-point/);
+  assert.match(
+    css,
+    /\.analysis-staff-card\.is-motion-visible \.analysis-staff-scatter-selected \.halo\s*\{[\s\S]*?infinite;/,
+  );
   assert.match(css, /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*rgba\(131, 102, 167, 0\.82\)/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
   assert.doesNotMatch(staffSectionHtml, /aria-label="문정환 공식 프로필 사진"/);

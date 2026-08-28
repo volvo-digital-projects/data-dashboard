@@ -583,12 +583,14 @@ export default function CompetitiveAnalysis({
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState<string | null>(null);
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
+  const [staffAnalysisInView, setStaffAnalysisInView] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
   const scatterRef = useRef<HTMLDivElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
+  const staffAnalysisCardRef = useRef<HTMLElement>(null);
   const scatterMotionTimersRef = useRef<number[]>([]);
   const [scatterSize, setScatterSize] = useState({
     width: 920,
@@ -620,6 +622,33 @@ export default function CompetitiveAnalysis({
     resetStaffSelection();
     window.addEventListener("pageshow", resetStaffSelection);
     return () => window.removeEventListener("pageshow", resetStaffSelection);
+  }, [initialCdsid]);
+
+  useEffect(() => {
+    const card = staffAnalysisCardRef.current;
+    if (!card) return;
+
+    setStaffAnalysisInView(false);
+
+    if (typeof IntersectionObserver === "undefined") {
+      setStaffAnalysisInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setStaffAnalysisInView(true);
+        observer.disconnect();
+      },
+      {
+        threshold: 0.22,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    observer.observe(card);
+    return () => observer.disconnect();
   }, [initialCdsid]);
 
   useEffect(
@@ -1379,7 +1408,10 @@ export default function CompetitiveAnalysis({
 
       {selectedStaffAnalysis ? (
         <section
-          className="analysis-staff-card"
+          ref={staffAnalysisCardRef}
+          className={`analysis-staff-card${
+            staffAnalysisInView ? " is-motion-visible" : ""
+          }`}
           aria-label={`${displayShowroomName(selected.showroom)} 고객상담 만족도 분석결과`}
         >
           <header className="analysis-staff-heading">

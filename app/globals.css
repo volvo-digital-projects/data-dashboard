@@ -5076,8 +5076,13 @@ input:focus-visible {
   min-height: 0;
   border-radius: 5px 5px 0 0;
   transform-origin: center bottom;
-  animation: analysis-staff-bar-rise 560ms cubic-bezier(0.22, 0.78, 0.24, 1) both;
-  animation-delay: calc(var(--staff-history-index, 0) * 70ms);
+  clip-path: inset(100% 0 0);
+  opacity: 0.45;
+}
+
+.analysis-staff-card.is-motion-visible .analysis-staff-chart-bar {
+  animation: analysis-staff-bar-rise 520ms cubic-bezier(0.22, 0.78, 0.24, 1) both;
+  animation-delay: calc(var(--staff-history-index, 0) * 55ms);
 }
 
 .analysis-staff-chart-bar.national {
@@ -5138,7 +5143,10 @@ input:focus-visible {
 
 .analysis-staff-trend-line {
   clip-path: inset(0 100% 0 0);
-  animation: analysis-staff-line-wipe 720ms cubic-bezier(0.22, 0.78, 0.24, 1) 800ms forwards;
+}
+
+.analysis-staff-card.is-motion-visible .analysis-staff-trend-line {
+  animation: analysis-staff-line-wipe 640ms cubic-bezier(0.22, 0.78, 0.24, 1) 620ms forwards;
 }
 
 .analysis-staff-trend-marker {
@@ -5153,8 +5161,11 @@ input:focus-visible {
   box-shadow: 0 0 0 3px rgba(38, 123, 156, 0.12);
   opacity: 0;
   transform: translate(-50%, 50%) scale(0.72);
+}
+
+.analysis-staff-card.is-motion-visible .analysis-staff-trend-marker {
   animation: analysis-staff-marker-in 220ms ease-out forwards;
-  animation-delay: calc(800ms + var(--staff-history-index, 0) * 200ms);
+  animation-delay: calc(660ms + var(--staff-history-index, 0) * 130ms);
 }
 
 @keyframes analysis-staff-bar-rise {
@@ -5187,6 +5198,11 @@ input:focus-visible {
   .analysis-staff-trend-line,
   .analysis-staff-trend-marker {
     animation: none;
+  }
+
+  .analysis-staff-chart-bar {
+    clip-path: inset(0 0 0);
+    opacity: 1;
   }
 
   .analysis-staff-trend-line {
@@ -5728,6 +5744,51 @@ input:focus-visible {
   stroke: #fff;
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-card.is-motion-visible .analysis-staff-scatter-selected .halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: analysis-staff-selected-halo 1.55s cubic-bezier(0.22, 0.72, 0.24, 1) 250ms infinite;
+}
+
+.analysis-staff-card.is-motion-visible .analysis-staff-scatter-selected .point {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: analysis-staff-selected-point 1.55s ease-in-out 250ms infinite;
+}
+
+@keyframes analysis-staff-selected-halo {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.86);
+  }
+
+  62% {
+    opacity: 0.08;
+    transform: scale(1.62);
+  }
+}
+
+@keyframes analysis-staff-selected-point {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(22, 112, 143, 0));
+    transform: scale(1);
+  }
+
+  42% {
+    filter: drop-shadow(0 0 5px rgba(22, 112, 143, 0.7));
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .analysis-staff-scatter-selected .halo,
+  .analysis-staff-scatter-selected .point {
+    animation: none;
+  }
 }
 
 .analysis-staff-scatter-selected .label rect {
