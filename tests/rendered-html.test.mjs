@@ -1143,23 +1143,26 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((html.match(/class="scatter-point /g) ?? []).length, 7);
   assert.doesNotMatch(html, /scatter-callout-leader/);
   assert.match(html, /class="scatter-point selected\b/);
-  assert.match(analysisSource, /key=\{`\$\{view\}-\$\{item\.cdsid\}`\}/);
+  assert.match(analysisSource, /key=\{item\.cdsid\}/);
+  assert.doesNotMatch(analysisSource, /key=\{`\$\{view\}-\$\{item\.cdsid\}`\}/);
   assert.match(
     css,
-    /\.scatter-point\s*\{[^}]*animation: scatter-point-view-flow 280ms\s*cubic-bezier\(0\.22, 1, 0\.36, 1\) both;/,
+    /\.scatter-point\s*\{[^}]*left 240ms cubic-bezier\(0\.22, 1, 0\.36, 1\)[^}]*bottom 240ms cubic-bezier\(0\.22, 1, 0\.36, 1\)[^}]*animation: scatter-point-enter 140ms ease-out both;/,
+  );
+  assert.doesNotMatch(css, /scatter-point-view-flow/);
+  assert.match(
+    css,
+    /@keyframes scatter-point-enter\s*\{[\s\S]*?opacity: 0;[\s\S]*?opacity: 1;/,
   );
   assert.match(
     css,
-    /@keyframes scatter-point-view-flow\s*\{[\s\S]*?left: var\(--avg-x\);[\s\S]*?bottom: var\(--avg-y\);[\s\S]*?left: var\(--point-x\);[\s\S]*?bottom: var\(--point-y\);/,
+    /\.scatter-point\.selected > i\s*\{[^}]*animation: selected-scatter-point-halo 1\.8s ease-in-out infinite;/,
   );
   assert.match(
     css,
-    /\.scatter-point\.selected > i\s*\{[^}]*animation: selected-scatter-point-blink 1\.8s ease-in-out infinite;/,
+    /@keyframes selected-scatter-point-halo\s*\{[\s\S]*?box-shadow:[\s\S]*?box-shadow:/,
   );
-  assert.match(
-    css,
-    /@keyframes selected-scatter-point-blink\s*\{[\s\S]*?opacity: 1;[\s\S]*?opacity: 0\.48;/,
-  );
+  assert.doesNotMatch(css, /selected-scatter-point-blink/);
   assert.doesNotMatch(
     css,
     /\.scatter-point\.selected > b\s*\{[^}]*animation:/,
@@ -2972,7 +2975,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(analysisSource, /--callout-tail-x/);
   assert.match(
     analysisSource,
-    /tailX: Math\.max\(3, Math\.abs\(anchorX\)\)[\s\S]*?tailY: Math\.max\(3, Math\.abs\(anchorY\)\)/,
+    /tailX: Math\.round\(Math\.max\(3, Math\.abs\(anchorX\)\)\)[\s\S]*?tailY: Math\.round\(Math\.max\(3, Math\.abs\(anchorY\)\)\)/,
   );
   assert.doesNotMatch(analysisSource, /overlapScale|pointRadius/);
   assert.match(analysisSource, /\[3, 5, 7\]\.forEach\(\(gap, gapIndex\) =>/);

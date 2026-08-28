@@ -515,10 +515,10 @@ const buildScatterCalloutLayout = (
     const anchorY =
       best.offsetY + (pointsUp ? -labelHeight / 2 : labelHeight / 2);
     layouts.set(point.item.cdsid, {
-      offsetX: best.offsetX,
-      offsetY: best.offsetY,
-      tailX: Math.max(3, Math.abs(anchorX)),
-      tailY: Math.max(3, Math.abs(anchorY)),
+      offsetX: Math.round(best.offsetX),
+      offsetY: Math.round(best.offsetY),
+      tailX: Math.round(Math.max(3, Math.abs(anchorX))),
+      tailY: Math.round(Math.max(3, Math.abs(anchorY))),
       placement: best.placement,
     });
   });
@@ -1130,7 +1130,7 @@ export default function CompetitiveAnalysis({
                 )} · 해피콜 ${displayNumber(item.happyScore)}`;
                 return (
                   <span
-                    key={`${view}-${item.cdsid}`}
+                    key={item.cdsid}
                     className={`scatter-point ${
                       isSelected
                         ? "selected"

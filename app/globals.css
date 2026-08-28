@@ -3994,38 +3994,29 @@ input:focus-visible {
   bottom: var(--point-y);
   z-index: 2;
   transform: translate(-50%, 50%);
-  animation: scatter-point-view-flow 280ms
-    cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: left, bottom, transform, opacity;
+  transition:
+    left 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    bottom 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: scatter-point-enter 140ms ease-out both;
 }
 
-@keyframes scatter-point-view-flow {
-  0% {
-    left: var(--avg-x);
-    bottom: var(--avg-y);
-    opacity: 0.28;
-    transform: translate(-50%, 50%) scale(0.86);
+@keyframes scatter-point-enter {
+  from {
+    opacity: 0;
   }
 
-  58% {
-    opacity: 0.94;
-  }
-
-  100% {
-    left: var(--point-x);
-    bottom: var(--point-y);
+  to {
     opacity: 1;
-    transform: translate(-50%, 50%) scale(1);
   }
 }
 
 .scatter-point > i {
   position: relative;
   z-index: 3;
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   display: block;
-  border: 1.5px solid #7f96a2;
+  border: 2px solid #7f96a2;
   border-radius: 50%;
   background: white;
   box-shadow: 0 2px 5px rgba(16, 42, 67, 0.08);
@@ -4067,30 +4058,28 @@ input:focus-visible {
 }
 
 .scatter-point.selected > i {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border: 2px solid white;
   background: var(--navy);
-  animation: selected-scatter-point-blink 1.8s ease-in-out infinite;
+  animation: selected-scatter-point-halo 1.8s ease-in-out infinite;
   box-shadow:
     0 0 0 4px rgba(47, 107, 138, 0.18),
     0 7px 14px rgba(16, 42, 67, 0.2);
 }
 
-@keyframes selected-scatter-point-blink {
+@keyframes selected-scatter-point-halo {
   0%,
   100% {
-    opacity: 1;
     box-shadow:
       0 0 0 4px rgba(47, 107, 138, 0.18),
       0 7px 14px rgba(16, 42, 67, 0.2);
   }
 
   50% {
-    opacity: 0.48;
     box-shadow:
-      0 0 0 2px rgba(47, 107, 138, 0.1),
-      0 3px 8px rgba(16, 42, 67, 0.12);
+      0 0 0 6px rgba(47, 107, 138, 0.1),
+      0 5px 11px rgba(16, 42, 67, 0.15);
   }
 }
 
@@ -4131,10 +4120,10 @@ input:focus-visible {
   padding: 4px 8px;
   border: 1px solid var(--callout-border);
   border-radius: 5px;
-  color: #526273;
-  background: var(--callout-fill);
+  color: #385064;
+  background: #fff;
   font-size: 8px;
-  font-weight: 650;
+  font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
   box-shadow:
@@ -4151,7 +4140,7 @@ input:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .scatter-point {
     animation: none;
-    will-change: auto;
+    transition: none;
   }
 }
 
@@ -4240,9 +4229,11 @@ input:focus-visible {
   padding: 4px 6px;
   opacity: 1;
   visibility: visible;
-  border-color: color-mix(in srgb, var(--callout-color) 28%, white);
-  background: rgba(255, 255, 255, 0.96);
-  font-size: 7.5px;
+  border-color: color-mix(in srgb, var(--callout-color) 40%, white);
+  color: #385064;
+  background: #fff;
+  font-size: 8px;
+  font-weight: 700;
   box-shadow:
     0 3px 8px rgba(16, 42, 67, 0.075),
     0 1px 2px rgba(16, 42, 67, 0.04);
