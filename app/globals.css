@@ -4817,16 +4817,6 @@ input:focus-visible {
   gap: 2px;
 }
 
-.analysis-staff-profile-card > div:last-child > em {
-  overflow: hidden;
-  color: #78909d;
-  font-size: 7px;
-  font-style: normal;
-  font-weight: 650;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .analysis-staff-comparison-layout {
   display: grid;
   grid-template-columns: minmax(0, 3.2fr) minmax(270px, 0.92fr);

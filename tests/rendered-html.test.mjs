@@ -1194,7 +1194,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
   );
   assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
-  assert.match(staffSectionHtml, /에이치모터스 공식 프로필/);
+  assert.doesNotMatch(staffSectionHtml, /에이치모터스 공식 프로필/);
   assert.match(staffSectionHtml, /2023/);
   assert.match(staffSectionHtml, /2024/);
   assert.match(staffSectionHtml, /2025/);

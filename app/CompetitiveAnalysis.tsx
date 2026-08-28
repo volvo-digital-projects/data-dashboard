@@ -1316,11 +1316,6 @@ export default function CompetitiveAnalysis({
                   {selectedStaffEmployee?.name ?? "―"}
                   <small>{selectedStaffEmployee?.role ?? ""}</small>
                 </strong>
-                <em>
-                  {selectedStaffProfile
-                    ? `${selectedStaffProfileShowroom?.dealer ?? "딜러사"} 공식 프로필`
-                    : "공식 프로필 사진 미등록"}
-                </em>
               </div>
             </article>
             <article>
