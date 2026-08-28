@@ -10047,6 +10047,10 @@ button.quarter-score-row:disabled {
   top: 10px;
 }
 
+.voc-response-rate-axis.middle {
+  top: 48px;
+}
+
 .voc-response-rate-axis.base {
   top: 86px;
 }

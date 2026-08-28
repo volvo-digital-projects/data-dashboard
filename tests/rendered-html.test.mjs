@@ -617,6 +617,11 @@ test("server-renders the selected CDSID dashboard", async () => {
     .format(new Date())
     .replaceAll("-", ".");
   const compactSeoulToday = seoulToday.replaceAll(".", "").slice(-6);
+  assert.match(
+    visibleHtml,
+    /class="voc-response-rate-axis middle">20%<\/span>/,
+  );
+  assert.match(css, /\.voc-response-rate-axis\.middle\s*\{\s*top:\s*48px/);
   assert.match(html, /DSC COMMAND/);
   assert.doesNotMatch(
     visibleHtml,

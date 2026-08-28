@@ -1354,6 +1354,9 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
           <span className="voc-response-rate-axis top">
             {responseRateCeiling}%
           </span>
+          <span className="voc-response-rate-axis middle">
+            {responseRateCeiling / 2}%
+          </span>
           <span className="voc-response-rate-axis base">0</span>
           <div className="voc-consultation-bars" aria-hidden="true">
             {yearly.map((item) => (
