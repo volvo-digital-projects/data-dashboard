@@ -1574,7 +1574,7 @@ export default function CompetitiveAnalysis({
                         <g className="analysis-staff-scatter-grid" key={`x-${tick}`}>
                           <line x1={x} x2={x} y1={staffScatterPlot.top} y2={staffScatterPlot.bottom} />
                           <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">
-                            {tick.toFixed(0)}
+                            {tick.toFixed(0).padStart(2, "0")}
                           </text>
                         </g>
                       );
