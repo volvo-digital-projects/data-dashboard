@@ -7,6 +7,8 @@ const RELEASE_STORAGE_KEY = "volvo-dashboard-seen-release";
 const RELEASE_CHECK_INTERVAL = 30_000;
 const NOTICE_DURATION = 3_200;
 
+declare const __DASHBOARD_RELEASE_ID__: string;
+
 type ReleaseInfo = {
   id: string;
   title: string;
@@ -66,7 +68,9 @@ export default function ReleaseUpdateNotice() {
       setRefreshing(true);
       if (reloadTimer.current !== null) window.clearTimeout(reloadTimer.current);
       reloadTimer.current = window.setTimeout(() => {
-        window.location.reload();
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.set("release", nextRelease.id);
+        window.location.replace(nextUrl.toString());
       }, 2_400);
     };
 
@@ -79,6 +83,12 @@ export default function ReleaseUpdateNotice() {
         if (!response.ok) return;
         const nextRelease = (await response.json()) as unknown;
         if (!mounted || !isReleaseInfo(nextRelease)) return;
+
+        if (nextRelease.id !== __DASHBOARD_RELEASE_ID__) {
+          activeReleaseId.current = nextRelease.id;
+          reloadForRelease(nextRelease);
+          return;
+        }
 
         const currentId = activeReleaseId.current;
         if (currentId && currentId !== nextRelease.id) {

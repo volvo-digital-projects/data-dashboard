@@ -35,7 +35,7 @@ const localBindingConfig = {
 };
 
 export default defineConfig(async () => {
-  await prepareDashboardRelease();
+  const dashboardReleaseId = await prepareDashboardRelease();
 
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
@@ -47,6 +47,9 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    define: {
+      __DASHBOARD_RELEASE_ID__: JSON.stringify(dashboardReleaseId),
+    },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,

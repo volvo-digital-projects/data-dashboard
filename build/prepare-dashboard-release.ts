@@ -47,4 +47,6 @@ export async function prepareDashboardRelease() {
     )}\n`,
     "utf8",
   );
+
+  return id;
 }

@@ -318,7 +318,9 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeSource, /window\.addEventListener\("pageshow"/);
   assert.match(noticeSource, /document\.addEventListener\("visibilitychange"/);
   assert.match(noticeSource, /currentId !== nextRelease\.id[\s\S]*?reloadForRelease/);
-  assert.match(noticeSource, /window\.location\.reload\(\)/);
+  assert.match(noticeSource, /nextRelease\.id !== __DASHBOARD_RELEASE_ID__/);
+  assert.match(noticeSource, /searchParams\.set\("release", nextRelease\.id\)/);
+  assert.match(noticeSource, /window\.location\.replace\(nextUrl\.toString\(\)\)/);
   assert.match(noticeSource, /최신내역이 업데이트 되었습니다\./);
   assert.doesNotMatch(noticeSource, /release\.items\.map/);
   assert.match(noticeSource, /const NOTICE_DURATION = 3_200/);
