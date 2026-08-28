@@ -1650,7 +1650,7 @@ export default function CompetitiveAnalysis({
                       );
                     })}
                     <text className="analysis-staff-scatter-y-label" x="12" y="116" textAnchor="middle">
-                      만족도
+                      상담 만족도
                     </text>
                     <text className="analysis-staff-scatter-x-label" x="245" y="235" textAnchor="middle">
                       근속기간(년)

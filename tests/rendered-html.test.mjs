@@ -1439,6 +1439,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, />강남대치 SC</);
   assert.doesNotMatch(staffSectionHtml, /김대준 SC 좌표/);
   assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.3점 · 25건/);
+  assert.match(staffSectionHtml, />상담 만족도</);
   assert.match(staffSectionHtml, /볼보 모든 영업 직원/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
   assert.match(css, /\.analysis-staff-scatter-population circle\s*\{[\s\S]*?fill:\s*rgba\(222, 104, 62, 0\.62\)/);
