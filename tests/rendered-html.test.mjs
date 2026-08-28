@@ -923,8 +923,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="comparison-panel|class="comparison-table/);
   assert.match(visibleHtml, /권역별/);
   assert.match(visibleHtml, /<h1>볼보 강남대치 현황<\/h1>/);
-  assert.match(visibleHtml, />볼보 강남대치<\/button>/);
-  assert.match(visibleHtml, />주간 전국 평균<\/button>/);
+  assert.match(visibleHtml, />강남대치<\/button>/);
+  assert.match(visibleHtml, />전국 평균<\/button>/);
+  assert.doesNotMatch(visibleHtml, />주간 전국 평균<\/button>/);
   assert.doesNotMatch(
     visibleHtml,
     /실제값 · W26|입력 25주|직전 입력주 대비|미응답은 제외|공백은 응답 대기/,

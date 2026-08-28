@@ -2043,7 +2043,7 @@ function WeeklyTrend({
           onClick={() => setShowActual((visible) => !visible)}
         >
           <i className="coverage-line actual" />
-          {displayShowroomName(showroom.showroom)}
+          {displayShowroomNameWithoutBrand(showroom.showroom)}
         </button>
         <button
           type="button"
@@ -2052,7 +2052,7 @@ function WeeklyTrend({
           onClick={() => setShowNational((visible) => !visible)}
         >
           <i className="coverage-line national" />
-          주간 전국 평균
+          전국 평균
         </button>
       </div>
     </div>
