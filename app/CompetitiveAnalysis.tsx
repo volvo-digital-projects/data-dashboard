@@ -1136,7 +1136,7 @@ export default function CompetitiveAnalysis({
 
         <article className="analysis-summary-card happycall">
           <div>
-            <span>해피콜 이행률</span>
+            <span>해피콜 이행률 평균</span>
             <ul className="analysis-summary-breakdown">
               <li>VOC 상담 후 해피콜(24시간 이내)</li>
               <li>ONE VOICE 출고 후 해피콜(24시간 이내)</li>
