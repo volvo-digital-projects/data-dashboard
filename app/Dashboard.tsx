@@ -679,7 +679,7 @@ function MetricCard({
             {metricMeta[metric].short}
           </span>
           <small className="metric-max-note">
-            ({metricMaxOf(metric, quarter)}점 만점)
+            / {metricMaxOf(metric, quarter)}점 만점
           </small>
         </div>
       </div>

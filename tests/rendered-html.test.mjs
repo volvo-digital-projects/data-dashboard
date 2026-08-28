@@ -730,18 +730,17 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
   assert.doesNotMatch(visibleHtml, /일부 평가 불가/);
   assert.equal(
-    (visibleHtml.match(/<small class="metric-max-note">\(100점 만점\)<\/small>/g) ?? []).length,
+    (visibleHtml.match(/<small class="metric-max-note">\/ 100점 만점<\/small>/g) ?? []).length,
     2,
   );
   assert.equal(
-    (visibleHtml.match(/<small class="metric-max-note">\(320점 만점\)<\/small>/g) ?? []).length,
+    (visibleHtml.match(/<small class="metric-max-note">\/ 320점 만점<\/small>/g) ?? []).length,
     1,
   );
   assert.match(
     dashboardCss,
     /\.combat-scoreboard \.scoreboard-heading \.metric-max-note\s*\{[^}]*color: #ffffff;/,
   );
-  assert.doesNotMatch(visibleHtml, /<span>\/ (?:100|320)점 만점<\/span>/);
   assert.equal((html.match(/class="metric-quarter-strip(?: |")/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
   assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
