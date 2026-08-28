@@ -1321,27 +1321,28 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     /class="analysis-staff-trend-line"[\s\S]*<polyline pathLength="1"/,
   );
+  assert.match(staffSectionHtml, /--staff-trend-x:18\.75%/);
   assert.match(
     css,
-    /\.analysis-staff-year-bars\s*\{[\s\S]*?display:\s*flex;[\s\S]*?justify-content:\s*center;[\s\S]*?gap:\s*4px;/,
+    /\.analysis-staff-year-bars\s*\{[\s\S]*?display:\s*grid;[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*?gap:\s*0;/,
   );
   assert.match(
     css,
-    /\.analysis-staff-trend-line polyline\s*\{[\s\S]*?stroke-width:\s*2\.5;[\s\S]*?animation:\s*analysis-staff-line-draw/,
+    /\.analysis-staff-trend-line polyline\s*\{[\s\S]*?stroke-width:\s*2\.5;/,
   );
   assert.match(css, /@keyframes analysis-staff-bar-rise/);
-  assert.match(css, /@keyframes analysis-staff-line-draw/);
+  assert.match(css, /@keyframes analysis-staff-line-wipe/);
   assert.match(
     css,
     /\.analysis-staff-chart-bar b\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*13px;/,
   );
   assert.match(
     css,
-    /\.analysis-staff-year-axis strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*8px;/,
+    /\.analysis-staff-year-axis strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*9px;[\s\S]*?font-weight:\s*500;/,
   );
   assert.match(
     css,
-    /\.analysis-staff-year-axis span\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*6px;/,
+    /\.analysis-staff-year-axis span\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*7px;/,
   );
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-history-legend"/g) ?? []).length,

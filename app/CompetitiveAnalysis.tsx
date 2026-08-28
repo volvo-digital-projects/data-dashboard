@@ -784,7 +784,7 @@ export default function CompetitiveAnalysis({
           {
             key: year.year,
             index,
-            x: 12.5 + index * 25,
+            x: 18.75 + index * 25,
             y: 100 - staffHistoryChartHeight(year.average),
             height: staffHistoryChartHeight(year.average),
             average: year.average,
