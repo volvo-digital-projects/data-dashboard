@@ -848,10 +848,17 @@ function V3SPerformance({
   compact?: boolean;
   highlightQuarter?: QuarterKey | null;
 }) {
+  const sizeFullName =
+    ({
+      U: "Urban",
+      C: "Compact",
+      MS: "Medium small",
+      ML: "Medium large",
+    } as Record<string, string>)[showroom.size] ?? showroom.size;
   const peerBenchmarks = (quarter: QuarterKey | null) => [
     {
       key: "dealer",
-      label: `소속사 ${showroom.dealer} 평균`,
+      label: `${showroom.dealer} 평균`,
       value:
         quarter === null
           ? null
@@ -859,7 +866,7 @@ function V3SPerformance({
     },
     {
       key: "region",
-      label: `권역별 ${showroom.region} 평균`,
+      label: `${showroom.region} 평균`,
       value:
         quarter === null
           ? null
@@ -867,7 +874,7 @@ function V3SPerformance({
     },
     {
       key: "size",
-      label: `사이즈 ${showroom.size} 평균`,
+      label: `${sizeFullName} 평균`,
       value:
         quarter === null
           ? null
@@ -1327,7 +1334,7 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
             <b>
               {displayShowroomNameWithoutBrand(showroom.showroom)} {displayNumber(cumulativeAverage)}점
             </b>
-            <em>볼보 전체 {displayNumber(nationalCumulativeAverage)}점</em>
+            <em>전국 {displayNumber(nationalCumulativeAverage)}점</em>
             <strong className={deltaTone}>
               {cumulativeDelta === null
                 ? "—"
@@ -1759,15 +1766,7 @@ function WeeklyTrend({
                   textAnchor="middle"
                   className="future-window-label"
                 >
-                  Q3 평가 진행 중
-                </text>
-                <text
-                  x={(activeQuarterStart + activeQuarterEnd) / 2}
-                  y={chartY(104)}
-                  textAnchor="middle"
-                  className="future-window-help"
-                >
-                  데이터 집계 후 자동 반영됩니다.
+                  Q3 평가 중
                 </text>
               </g>
             )}
@@ -1786,15 +1785,7 @@ function WeeklyTrend({
                   textAnchor="middle"
                   className="future-window-label"
                 >
-                  Q4 평가 예정 중
-                </text>
-                <text
-                  x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
-                  y={chartY(104)}
-                  textAnchor="middle"
-                  className="future-window-help"
-                >
-                  데이터 집계 후 자동 반영됩니다.
+                  Q4 평가 전
                 </text>
               </g>
             )}
