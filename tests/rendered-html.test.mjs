@@ -1366,6 +1366,23 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
   assert.match(css, /\.analysis-staff-certification-card strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*14px;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
+  assert.match(staffSectionHtml, /class="analysis-staff-benchmark-legend"/);
+  assert.match(
+    css,
+    /\.analysis-staff-comparison-layout\s*\{[\s\S]*?--analysis-staff-comparison-legend-height:\s*36px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-history-legend\s*\{[\s\S]*?height:\s*var\(--analysis-staff-comparison-legend-height\);/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-benchmarks\s*\{[\s\S]*?grid-template-rows:\s*auto minmax\(0, 1fr\) var\(--analysis-staff-comparison-legend-height\);/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-benchmark-legend\s*\{[\s\S]*?height:\s*var\(--analysis-staff-comparison-legend-height\);/,
+  );
   assert.match(
     staffSectionHtml,
     /class="analysis-staff-comparison-layout"[\s\S]*class="analysis-staff-history"[\s\S]*class="analysis-staff-benchmarks"/,

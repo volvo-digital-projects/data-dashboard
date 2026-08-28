@@ -4891,6 +4891,7 @@ input:focus-visible {
 }
 
 .analysis-staff-comparison-layout {
+  --analysis-staff-comparison-legend-height: 36px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
@@ -5113,7 +5114,7 @@ input:focus-visible {
 }
 
 .analysis-staff-history-legend {
-  min-height: 36px;
+  height: var(--analysis-staff-comparison-legend-height);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5179,10 +5180,10 @@ input:focus-visible {
 
 .analysis-staff-benchmarks {
   min-width: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) var(--analysis-staff-comparison-legend-height);
   gap: 8px;
-  padding: 10px 12px 12px;
+  padding: 10px 12px 0;
   border: 1px solid #cddfe7;
   border-radius: 8px;
   background: linear-gradient(145deg, #f5f9fb 0%, #edf5f8 100%);
@@ -5725,37 +5726,38 @@ input:focus-visible {
   opacity: 1;
 }
 
-.analysis-staff-tenure-scatter-chart > footer {
-  min-height: 30px;
+.analysis-staff-benchmark-legend {
+  height: var(--analysis-staff-comparison-legend-height);
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 8px;
+  margin: 0 -12px;
+  padding: 0 12px;
   border-top: 1px solid #e3ecef;
   color: #708691;
   font-size: 8px;
 }
 
-.analysis-staff-tenure-scatter-chart > footer span {
+.analysis-staff-benchmark-legend span {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   white-space: nowrap;
 }
 
-.analysis-staff-tenure-scatter-chart > footer i {
+.analysis-staff-benchmark-legend i {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: rgba(69, 139, 165, 0.65);
 }
 
-.analysis-staff-tenure-scatter-chart > footer span.selected i {
+.analysis-staff-benchmark-legend span.selected i {
   background: #ec7045;
   box-shadow: 0 0 0 2px rgba(236, 112, 69, 0.14);
 }
 
-.analysis-staff-tenure-scatter-chart > footer em {
+.analysis-staff-benchmark-legend em {
   margin-left: auto;
   color: #8a9ba4;
   font-style: normal;

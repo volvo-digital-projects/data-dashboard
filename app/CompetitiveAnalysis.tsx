@@ -1563,8 +1563,9 @@ export default function CompetitiveAnalysis({
                 </div>
               </article>
 
-              <section
+              <div
                 className="analysis-staff-tenure-scatter"
+                role="group"
                 aria-label="근속기간별 상담 만족도 산포도"
               >
                 <div className="analysis-staff-tenure-scatter-chart">
@@ -1652,18 +1653,18 @@ export default function CompetitiveAnalysis({
                       </g>
                     ) : null}
                   </svg>
-                  <footer>
-                    <span><i />Sales-DMS 재직자 분포</span>
-                    <span className="selected">
-                      <i />
-                      {selectedStaffScatterPoint
-                        ? `${selectedStaffEmployee?.name ?? "선택 직원"} SC · ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · ${selectedStaffScatterPoint.average.toFixed(2)}점 · ${selectedStaffScatterPoint.responses}건`
-                        : `${selectedStaffEmployee?.name ?? "선택 직원"} SC`}
-                    </span>
-                    <em>원 크기 = 누적 회신 건수</em>
-                  </footer>
                 </div>
-              </section>
+              </div>
+              <footer className="analysis-staff-benchmark-legend">
+                <span><i />Sales-DMS 재직자 분포</span>
+                <span className="selected">
+                  <i />
+                  {selectedStaffScatterPoint
+                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} SC · ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · ${selectedStaffScatterPoint.average.toFixed(2)}점 · ${selectedStaffScatterPoint.responses}건`
+                    : `${selectedStaffEmployee?.name ?? "선택 직원"} SC`}
+                </span>
+                <em>원 크기 = 누적 회신 건수</em>
+              </footer>
             </aside>
           </div>
 
