@@ -1646,7 +1646,6 @@ export default function CompetitiveAnalysis({
                           <small>{keyword.mentions}회</small>
                         </div>
                         <p>
-                          <b>코칭 실행</b>
                           {staffImprovementActionByLabel[keyword.label] ?? staffImprovementFallback}
                         </p>
                       </div>

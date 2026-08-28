@@ -5439,15 +5439,6 @@ input:focus-visible {
   line-height: 1.5;
 }
 
-.analysis-staff-improvement-item p b {
-  display: inline-block;
-  margin-right: 6px;
-  color: #b45f37;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-}
-
 .analysis-staff-insights article > div > em {
   color: #91a0a8;
   font-size: 9px;
