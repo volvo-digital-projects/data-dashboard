@@ -4834,11 +4834,13 @@ input:focus-visible {
 .analysis-staff-summary strong {
   justify-self: end;
   color: #255b72;
-  font-family: "Volvo Centum", var(--font-korean), sans-serif;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
   font-size: 18px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 .analysis-staff-summary strong small {
@@ -4871,7 +4873,7 @@ input:focus-visible {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  font-family: "Volvo Centum", var(--font-korean), sans-serif;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
   font-size: 18px;
   font-weight: 700;
 }
@@ -4953,7 +4955,7 @@ input:focus-visible {
   gap: 4px;
   min-width: 0;
   color: #46687a;
-  font-family: "Volvo Centum", var(--font-latin), sans-serif;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
   font-size: 18px;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
