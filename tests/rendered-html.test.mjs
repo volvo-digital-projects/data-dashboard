@@ -1463,16 +1463,21 @@ test("serves the dual-metric competitive analysis sample", async () => {
     (visibleHtml.match(/class="analysis-staff-insight-count"/g) ?? []).length,
     2,
   );
-  assert.equal((visibleHtml.match(/aria-label="25건 분석"/g) ?? []).length, 2);
+  assert.equal((visibleHtml.match(/aria-label="25"/g) ?? []).length, 2);
   assert.match(css, /\.analysis-staff-insight-count\s*\{[\s\S]*?width:\s*20px;[\s\S]*?height:\s*20px;[\s\S]*?border-radius:\s*50%;/);
   assert.match(visibleHtml, /친절한 응대/);
-  assert.match(visibleHtml, /진행상황 선제 안내/);
+  assert.doesNotMatch(visibleHtml, /진행상황 선제 안내/);
   assert.match(visibleHtml, /개선·보강/);
   assert.doesNotMatch(visibleHtml, /개선 기회/);
   assert.doesNotMatch(visibleHtml, /코칭 실행/);
-  assert.match(visibleHtml, /고객이 재문의하기 전에 계약·출고 진행상황, 지연 사유와 다음 안내 일정을 먼저 공유/);
-  assert.match(visibleHtml, /보증·정비·소모품 등 포함·제외 항목과 이용 시점을 상담 중 체크리스트로 안내/);
-  assert.match(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능과 경쟁 차종 대비 장점을 실제 사용 예시로 설명/);
+  assert.match(visibleHtml, /보증·정비 안내/);
+  assert.match(visibleHtml, /제품 강점 설명/);
+  assert.doesNotMatch(visibleHtml, /고객이 재문의하기 전에 계약·출고 진행상황/);
+  assert.doesNotMatch(visibleHtml, /보증·정비·소모품 등 포함·제외 항목/);
+  assert.doesNotMatch(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능/);
+  assert.match(css, /\.analysis-staff-detail\s*\{[\s\S]*?grid-template-rows:\s*54px 232px 112px;/);
+  assert.match(css, /\.analysis-staff-insights\s*\{[\s\S]*?height:\s*112px;[\s\S]*?min-height:\s*112px;/);
+  assert.doesNotMatch(css, /\.analysis-staff-improvement-item\s*\{/);
   assert.match(staffSectionHtml, /Sales-DMS 기준/);
   assert.match(staffSectionHtml, /\d{6} 기준/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직인원 기준/);

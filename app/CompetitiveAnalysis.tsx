@@ -134,16 +134,11 @@ const staffHistoryChartHeight = (score: number) =>
         100,
     ),
   );
-const staffImprovementActionByLabel: Record<string, string> = {
-  "진행상황 선제 안내":
-    "고객이 재문의하기 전에 계약·출고 진행상황, 지연 사유와 다음 안내 일정을 먼저 공유",
-  "서비스 품목 안내":
-    "보증·정비·소모품 등 포함·제외 항목과 이용 시점을 상담 중 체크리스트로 안내",
-  "제품 강점 설명 확장":
-    "고객의 사용 목적을 먼저 확인하고 관련 기능과 경쟁 차종 대비 장점을 실제 사용 예시로 설명",
+const staffImprovementKeywordLabel: Record<string, string | null> = {
+  "진행상황 선제 안내": null,
+  "서비스 품목 안내": "보증·정비 안내",
+  "제품 강점 설명 확장": "제품 강점 설명",
 };
-const staffImprovementFallback =
-  "해당 고객 의견을 실제 상담 사례와 함께 확인하고, 다음 상담에서 사용할 안내 문장을 구체화";
 const staffTenureScatterPopulation: StaffTenureScatterPoint[] = Object.entries(
   staffAnalysisByCdsid,
 ).flatMap(([cdsid, showroom]) =>
@@ -748,6 +743,19 @@ export default function CompetitiveAnalysis({
   const selectedStaffEmployee =
     rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
       ?.employee ?? rankedSalesStaff[0]?.employee;
+  const selectedStaffImprovementKeywords = Array.from(
+    (selectedStaffEmployee?.improvementKeywords ?? []).reduce(
+      (keywords, keyword) => {
+        const mappedLabel = staffImprovementKeywordLabel[keyword.label];
+        const label = mappedLabel === undefined ? keyword.label : mappedLabel;
+        if (!label) return keywords;
+        keywords.set(label, (keywords.get(label) ?? 0) + keyword.mentions);
+        return keywords;
+      },
+      new Map<string, number>(),
+    ),
+    ([label, mentions]) => ({ label, mentions }),
+  );
   const selectedStaffProfileShowroom = staffProfilePhotosByCdsid[selected.cdsid];
   const selectedStaffProfile = selectedStaffEmployee
     ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
@@ -1739,7 +1747,7 @@ export default function CompetitiveAnalysis({
                   유지·강화
                   <span
                     className="analysis-staff-insight-count"
-                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}건 분석`}
+                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}`}
                   >
                     {selectedStaffEmployee?.commentResponses ?? 0}
                   </span>
@@ -1761,23 +1769,17 @@ export default function CompetitiveAnalysis({
                   개선·보강
                   <span
                     className="analysis-staff-insight-count"
-                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}건 분석`}
+                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}`}
                   >
                     {selectedStaffEmployee?.commentResponses ?? 0}
                   </span>
                 </h4>
                 <div className="analysis-staff-improvement-list">
-                  {(selectedStaffEmployee?.improvementKeywords ?? []).length ? (
-                    selectedStaffEmployee?.improvementKeywords.map((keyword) => (
-                      <div className="analysis-staff-improvement-item" key={keyword.label}>
-                        <div>
-                          <strong>{keyword.label}</strong>
-                          <small>{keyword.mentions}회</small>
-                        </div>
-                        <p>
-                          {staffImprovementActionByLabel[keyword.label] ?? staffImprovementFallback}
-                        </p>
-                      </div>
+                  {selectedStaffImprovementKeywords.length ? (
+                    selectedStaffImprovementKeywords.map((keyword) => (
+                      <span key={keyword.label}>
+                        {keyword.label}<small>{keyword.mentions}회</small>
+                      </span>
                     ))
                   ) : (
                     <em>반복 확인된 개선·보강 키워드 없음</em>
