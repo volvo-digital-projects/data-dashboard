@@ -89,6 +89,7 @@ type StaffProfileShowroom = {
 
 type StaffCertificationLevel = "Grand" | "Advanced" | "Certified";
 type StaffCertificationRecord = {
+  year: number;
   rank: number;
   name: string;
   showroom: string;
@@ -1423,7 +1424,7 @@ export default function CompetitiveAnalysis({
             <article className="analysis-staff-certification-card">
               <span>인증직원 선정</span>
               <strong
-                aria-label={`2021 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
+                aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
               >
                 <b>G-{selectedStaffCertificationCounts.Grand}</b>
                 <i aria-hidden="true">/</i>

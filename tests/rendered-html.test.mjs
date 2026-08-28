@@ -11,6 +11,33 @@ const cookieFor = (cdsid) =>
   `volvo-dashboard-access=${loginCookieBase}--${cdsid.toUpperCase()}`;
 const loginCookie = cookieFor("VCK-ES90");
 
+test("keeps the 2021-2026 certification results complete and cumulative", async () => {
+  const certifications = JSON.parse(
+    await readFile(new URL("../app/data/staff-certifications.json", import.meta.url), "utf8"),
+  );
+  assert.deepEqual(certifications.sourceYears, [2021, 2022, 2023, 2024, 2025, 2026]);
+  assert.equal(certifications.records.length, 180);
+  for (const year of certifications.sourceYears) {
+    const yearly = certifications.records.filter((record) => record.year === year);
+    assert.equal(yearly.length, 30, `${year} 인증 결과는 30명이어야 합니다.`);
+    assert.equal(
+      new Set(yearly.map((record) => `${record.name}|${record.showroom}`)).size,
+      30,
+      `${year} 인증 결과에 중복 직원이 없어야 합니다.`,
+    );
+  }
+  const kimDaeJun = certifications.records.filter((record) => record.name === "김대준");
+  assert.deepEqual(
+    Object.fromEntries(
+      ["Grand", "Advanced", "Certified"].map((level) => [
+        level,
+        kimDaeJun.filter((record) => record.level === level).length,
+      ]),
+    ),
+    { Grand: 3, Advanced: 1, Certified: 0 },
+  );
+});
+
 async function render(
   pathname = "/",
   { authenticated = true, cookie = null } = {},
@@ -1247,11 +1274,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     staffSectionHtml,
-    /class="analysis-staff-certification-card"[\s\S]*?G-1[\s\S]*?A-0[\s\S]*?C-0/,
+    /class="analysis-staff-certification-card"[\s\S]*?G-3[\s\S]*?A-1[\s\S]*?C-0/,
   );
   assert.match(
     staffSectionHtml,
-    /aria-label="2021 인증 기록 Grand 1회, Advanced 0회, Certified 0회"/,
+    /aria-label="누적 인증 기록 Grand 3회, Advanced 1회, Certified 0회"/,
   );
   assert.doesNotMatch(staffSectionHtml, /에이치모터스 공식 프로필/);
   assert.match(staffSectionHtml, /2023/);
