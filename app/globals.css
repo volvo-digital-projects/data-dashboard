@@ -4858,6 +4858,39 @@ input:focus-visible {
   gap: 2px;
 }
 
+.analysis-staff-certification {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  color: #46687a;
+  font-family: "Volvo Centum", var(--font-latin), sans-serif;
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.analysis-staff-certification small {
+  margin-right: 2px;
+  color: #7d929e;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 7px;
+  font-weight: 650;
+}
+
+.analysis-staff-certification b {
+  color: #255b72;
+  font-weight: 700;
+}
+
+.analysis-staff-certification span {
+  color: #a6b5bc;
+  font-size: 7px;
+  font-weight: 500;
+}
+
 .analysis-staff-comparison-layout {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

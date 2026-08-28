@@ -1214,6 +1214,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
   );
   assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
+  assert.match(staffSectionHtml, /2021 인증/);
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-certification"[\s\S]*?G-1[\s\S]*?A-0[\s\S]*?C-0/,
+  );
+  assert.match(
+    staffSectionHtml,
+    /aria-label="2021 인증 기록 Grand 1회, Advanced 0회, Certified 0회"/,
+  );
   assert.doesNotMatch(staffSectionHtml, /에이치모터스 공식 프로필/);
   assert.match(staffSectionHtml, /2023/);
   assert.match(staffSectionHtml, /2024/);
@@ -1251,6 +1260,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);[\s\S]*?font-weight:\s*600;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*var\(--font-korean\), sans-serif;/);
   assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
+  assert.match(css, /\.analysis-staff-certification\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(
     staffSectionHtml,

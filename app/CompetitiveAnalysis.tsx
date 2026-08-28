@@ -12,6 +12,7 @@ import {
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
+import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
@@ -86,6 +87,14 @@ type StaffProfileShowroom = {
   employees: Record<string, StaffProfilePhoto>;
 };
 
+type StaffCertificationLevel = "Grand" | "Advanced" | "Certified";
+type StaffCertificationRecord = {
+  rank: number;
+  name: string;
+  showroom: string;
+  level: StaffCertificationLevel;
+};
+
 const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   string,
   StaffAnalysisShowroom
@@ -99,6 +108,17 @@ const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
   string,
   StaffProfileShowroom
 >;
+const staffCertificationRecords =
+  staffCertificationsJson.records as StaffCertificationRecord[];
+const staffCurrentNameFrequency = Object.values(staffAnalysisByCdsid).reduce(
+  (frequency, showroom) => {
+    showroom.employees.forEach((employee) => {
+      frequency.set(employee.name, (frequency.get(employee.name) ?? 0) + 1);
+    });
+    return frequency;
+  },
+  new Map<string, number>(),
+);
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
 const staffImprovementActionByLabel: Record<string, string> = {
   "진행상황 선제 안내":
@@ -333,6 +353,19 @@ const displayShowroomName = (name: string) => {
 
 const displayShowroomNameWithoutBrand = (name: string) =>
   displayShowroomName(name).replace(/^볼보\s*/, "");
+
+const normalizeStaffCertificationShowroom = (name: string) => {
+  const compact = name
+    .replace(/^볼보\s*/, "")
+    .replace(/전시장/g, "")
+    .replace(/\s+/g, "");
+  const aliases: Record<string, string> = {
+    강남대치: "대치",
+    강남신사: "신사",
+    분당: "분당서현",
+  };
+  return aliases[compact] ?? compact;
+};
 
 const averageOf = (items: AnalysisPoint[], key: "vocScore" | "happyScore" | "combined") =>
   items.length
@@ -687,6 +720,28 @@ export default function CompetitiveAnalysis({
     ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
     : undefined;
   const selectedStaffInitials = selectedStaffEmployee?.name.slice(-2) ?? "SC";
+  const selectedStaffCertificationCounts = {
+    Grand: 0,
+    Advanced: 0,
+    Certified: 0,
+  } satisfies Record<StaffCertificationLevel, number>;
+  if (selectedStaffEmployee) {
+    const nameFrequency =
+      staffCurrentNameFrequency.get(selectedStaffEmployee.name) ?? 0;
+    const currentShowroom = normalizeStaffCertificationShowroom(
+      displayShowroomNameWithoutBrand(selected.showroom),
+    );
+    staffCertificationRecords.forEach((record) => {
+      if (record.name !== selectedStaffEmployee.name) return;
+      if (
+        nameFrequency > 1 &&
+        normalizeStaffCertificationShowroom(record.showroom) !== currentShowroom
+      ) {
+        return;
+      }
+      selectedStaffCertificationCounts[record.level] += 1;
+    });
+  }
   const selectedStaffYearRows = staffYears.map((year) => {
     const metrics = selectedStaffEmployee?.years[year] ?? {
       responses: 0,
@@ -1325,6 +1380,17 @@ export default function CompetitiveAnalysis({
                   {selectedStaffEmployee?.name ?? "―"}
                   <small>{selectedStaffEmployee?.role ?? ""}</small>
                 </strong>
+                <div
+                  className="analysis-staff-certification"
+                  aria-label={`2021 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
+                >
+                  <small>2021 인증</small>
+                  <b>G-{selectedStaffCertificationCounts.Grand}</b>
+                  <span aria-hidden="true">/</span>
+                  <b>A-{selectedStaffCertificationCounts.Advanced}</b>
+                  <span aria-hidden="true">/</span>
+                  <b>C-{selectedStaffCertificationCounts.Certified}</b>
+                </div>
               </div>
             </article>
             <article>
