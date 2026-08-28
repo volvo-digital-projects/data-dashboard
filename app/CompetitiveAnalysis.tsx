@@ -1409,7 +1409,7 @@ export default function CompetitiveAnalysis({
               </strong>
             </article>
             <article className="analysis-staff-certification-card">
-              <span>2021 인증기록</span>
+              <span>인증직원 선정</span>
               <strong
                 aria-label={`2021 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
               >
