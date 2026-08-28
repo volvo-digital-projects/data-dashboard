@@ -1241,6 +1241,18 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     /class="analysis-staff-chart-bar national"[\s\S]*class="analysis-staff-chart-bar employee"/,
   );
+  assert.match(
+    css,
+    /\.analysis-staff-chart-bar b\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*13px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-year-axis strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*8px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-year-axis span\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*6px;/,
+  );
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-history-legend"/g) ?? []).length,
     1,
