@@ -1505,8 +1505,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /4개년 추이 · 전국\/근무연령대 비교 · 고객 코멘트/);
   assert.doesNotMatch(visibleHtml, />4개년 VOC 영업지원 핵심 분석</);
   assert.doesNotMatch(visibleHtml, /2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다/);
-  assert.match(analysisSource, /analysis-staff-insight-count/);
-  assert.match(css, /\.analysis-staff-insight-count\s*\{[\s\S]*?width:\s*20px;[\s\S]*?height:\s*20px;[\s\S]*?border-radius:\s*50%;/);
+  assert.doesNotMatch(analysisSource, /analysis-staff-insight-count/);
+  assert.match(analysisSource, /analysis-staff-insight-bars/);
+  assert.match(analysisSource, /--insight-bar-ratio/);
+  assert.match(css, /\.analysis-staff-insight-bar\s*\{[\s\S]*?grid-template-columns:\s*92px minmax\(50px, 1fr\) 32px;/);
+  assert.match(css, /@keyframes analysis-insight-bar-enter/);
+  assert.match(css, /linear-gradient\(90deg, #b8ddd1 0%, #58aa8e 58%, #1f7e65 100%\)/);
+  assert.match(css, /linear-gradient\(90deg, #f6cdb7 0%, #ea9665 58%, #cb6037 100%\)/);
   assert.doesNotMatch(visibleHtml, /진행상황 선제 안내/);
   assert.doesNotMatch(visibleHtml, /개선 기회/);
   assert.doesNotMatch(visibleHtml, /코칭 실행/);
@@ -1514,7 +1519,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(visibleHtml, /보증·정비·소모품 등 포함·제외 항목/);
   assert.doesNotMatch(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능/);
   assert.doesNotMatch(css, /\.analysis-staff-detail\s*\{[\s\S]*?grid-template-rows:\s*54px 232px 112px;/);
-  assert.match(css, /\.analysis-staff-insights\s*\{[\s\S]*?height:\s*112px;[\s\S]*?min-height:\s*112px;/);
+  assert.match(css, /\.analysis-staff-insights\s*\{[\s\S]*?height:\s*156px;[\s\S]*?min-height:\s*156px;/);
   assert.doesNotMatch(css, /\.analysis-staff-improvement-item\s*\{/);
   assert.match(staffSectionHtml, /Sales-DMS 기준/);
   assert.match(staffSectionHtml, /<strong>\d{6}<\/strong>기준/);

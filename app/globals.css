@@ -5287,8 +5287,8 @@ input:focus-visible {
 }
 
 .analysis-staff-insights {
-  height: 112px;
-  min-height: 112px;
+  height: 156px;
+  min-height: 156px;
   padding: 10px;
   overflow: hidden;
 }
@@ -5442,88 +5442,108 @@ input:focus-visible {
 }
 
 .analysis-staff-insights h4 {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 8px;
+  margin: 0 0 7px;
   color: #264c60;
   font-size: 11px;
 }
 
-.analysis-staff-insight-count {
-  display: inline-flex;
+.analysis-staff-insight-bars {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+}
+
+.analysis-staff-insight-bar {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 92px minmax(50px, 1fr) 32px;
   align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #c9dce4;
-  border-radius: 50%;
-  background: #f4f8fa;
-  color: #315f73;
+  gap: 7px;
+}
+
+.analysis-staff-insight-bar > span {
+  overflow: hidden;
+  color: #315c5a;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.analysis-staff-insights article.improvement .analysis-staff-insight-bar > span {
+  color: #9a593d;
+}
+
+.analysis-staff-insight-bar > i {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid #dbe9e5;
+  border-radius: 3px;
+  background: #f2f7f5;
+}
+
+.analysis-staff-insights article.improvement .analysis-staff-insight-bar > i {
+  border-color: #f0dfd5;
+  background: #fcf5f1;
+}
+
+.analysis-staff-insight-bar > i > b {
+  width: var(--insight-bar-ratio);
+  height: 100%;
+  display: block;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #b8ddd1 0%, #58aa8e 58%, #1f7e65 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46);
+  transform-origin: left center;
+  animation: analysis-insight-bar-enter 440ms cubic-bezier(0.22, 0.72, 0.22, 1) both;
+  animation-delay: calc(var(--insight-bar-index) * 55ms);
+  transition: width 360ms cubic-bezier(0.22, 0.72, 0.22, 1);
+}
+
+.analysis-staff-insights article.improvement .analysis-staff-insight-bar > i > b {
+  background: linear-gradient(90deg, #f6cdb7 0%, #ea9665 58%, #cb6037 100%);
+}
+
+.analysis-staff-insight-bar > small {
+  color: #51796f;
   font-family: var(--font-latin);
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 750;
   font-variant-numeric: tabular-nums;
   line-height: 1;
+  text-align: left;
+  white-space: nowrap;
 }
 
-.analysis-staff-insights article.strength .analysis-staff-insight-count {
-  border-color: #bcded5;
-  background: #eef8f5;
-  color: #25705e;
+.analysis-staff-insights article.improvement .analysis-staff-insight-bar > small {
+  color: #a86546;
 }
 
-.analysis-staff-insights article.improvement .analysis-staff-insight-count {
-  border-color: #efd8cc;
-  background: #fcf2ed;
-  color: #a45d3c;
-}
-
-.analysis-staff-insights article > div {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 7px;
-}
-
-.analysis-staff-insights article > div > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 29px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: #edf6f3;
-  color: #236957;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.analysis-staff-insights article.improvement > div > span {
-  background: #fbf1eb;
-  color: #9b5939;
-}
-
-.analysis-staff-insights article > div small {
-  color: #7a9690;
-  font-size: 8px;
-}
-
-.analysis-staff-insights article.improvement > div small {
-  color: #b58973;
-}
-
-.analysis-staff-insights article.improvement > .analysis-staff-improvement-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 7px;
+@keyframes analysis-insight-bar-enter {
+  from {
+    opacity: 0.45;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 .analysis-staff-insights article > div > em {
   color: #91a0a8;
   font-size: 9px;
   font-style: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .analysis-staff-insight-bar > i > b {
+    animation: none;
+    transition: none;
+  }
 }
 
 .analysis-staff-benchmarks .analysis-staff-tenure {
@@ -5815,7 +5835,7 @@ input:focus-visible {
 
   .analysis-staff-insights {
     height: auto;
-    min-height: 112px;
+    min-height: 156px;
     overflow: visible;
   }
 

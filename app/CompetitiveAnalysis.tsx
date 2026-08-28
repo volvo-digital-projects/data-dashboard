@@ -761,6 +761,16 @@ export default function CompetitiveAnalysis({
     ),
     ([label, mentions]) => ({ label, mentions }),
   );
+  const selectedStaffStrengthKeywords =
+    selectedStaffEmployee?.strengthKeywords ?? [];
+  const selectedStaffStrengthMax = Math.max(
+    1,
+    ...selectedStaffStrengthKeywords.map((keyword) => keyword.mentions),
+  );
+  const selectedStaffImprovementMax = Math.max(
+    1,
+    ...selectedStaffImprovementKeywords.map((keyword) => keyword.mentions),
+  );
   const selectedStaffProfileShowroom = staffProfilePhotosByCdsid[selected.cdsid];
   const selectedStaffProfile = selectedStaffEmployee
     ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
@@ -1765,21 +1775,22 @@ export default function CompetitiveAnalysis({
           <section className="analysis-staff-insights" aria-label="4개년 VOC 영업지원 핵심 분석">
             <div>
               <article className="strength">
-                <h4>
-                  유지·강화
-                  <span
-                    className="analysis-staff-insight-count"
-                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}`}
-                  >
-                    {selectedStaffEmployee?.commentResponses ?? 0}
-                  </span>
-                </h4>
-                <div>
-                  {(selectedStaffEmployee?.strengthKeywords ?? []).length ? (
-                    selectedStaffEmployee?.strengthKeywords.map((keyword) => (
-                      <span key={keyword.label}>
-                        {keyword.label}<small>{keyword.mentions}회</small>
-                      </span>
+                <h4>유지·강화</h4>
+                <div className="analysis-staff-insight-bars">
+                  {selectedStaffStrengthKeywords.length ? (
+                    selectedStaffStrengthKeywords.map((keyword, index) => (
+                      <div
+                        className="analysis-staff-insight-bar"
+                        key={keyword.label}
+                        style={{
+                          "--insight-bar-ratio": `${(keyword.mentions / selectedStaffStrengthMax) * 100}%`,
+                          "--insight-bar-index": index,
+                        } as CSSProperties}
+                      >
+                        <span>{keyword.label}</span>
+                        <i aria-hidden="true"><b /></i>
+                        <small>{keyword.mentions}회</small>
+                      </div>
                     ))
                   ) : (
                     <em>분석 가능한 긍정 코멘트 없음</em>
@@ -1787,21 +1798,22 @@ export default function CompetitiveAnalysis({
                 </div>
               </article>
               <article className="improvement">
-                <h4>
-                  개선·보강
-                  <span
-                    className="analysis-staff-insight-count"
-                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}`}
-                  >
-                    {selectedStaffEmployee?.commentResponses ?? 0}
-                  </span>
-                </h4>
-                <div className="analysis-staff-improvement-list">
+                <h4>개선·보강</h4>
+                <div className="analysis-staff-insight-bars">
                   {selectedStaffImprovementKeywords.length ? (
-                    selectedStaffImprovementKeywords.map((keyword) => (
-                      <span key={keyword.label}>
-                        {keyword.label}<small>{keyword.mentions}회</small>
-                      </span>
+                    selectedStaffImprovementKeywords.map((keyword, index) => (
+                      <div
+                        className="analysis-staff-insight-bar"
+                        key={keyword.label}
+                        style={{
+                          "--insight-bar-ratio": `${(keyword.mentions / selectedStaffImprovementMax) * 100}%`,
+                          "--insight-bar-index": index,
+                        } as CSSProperties}
+                      >
+                        <span>{keyword.label}</span>
+                        <i aria-hidden="true"><b /></i>
+                        <small>{keyword.mentions}회</small>
+                      </div>
                     ))
                   ) : (
                     <em>반복 확인된 개선·보강 키워드 없음</em>
