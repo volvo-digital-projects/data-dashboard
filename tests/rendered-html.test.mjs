@@ -1319,7 +1319,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
     css,
     /\.analysis-staff-profile-photo\.smiling img\.smile\s*\{[\s\S]*?opacity:\s*1;/,
   );
-  assert.match(staffSectionHtml, /인증직원 선정/);
+  assert.match(staffSectionHtml, /<span>인증직원<\/span>/);
+  assert.doesNotMatch(staffSectionHtml, /인증직원 선정/);
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-tenure-value"><b>2<\/b><small>년<\/small><b>6<\/b><small>개월<\/small>/,
+  );
   assert.doesNotMatch(
     staffSectionHtml,
     /<span>근무기간<\/span><strong>13년 6개월<small>10년 이상<\/small><\/strong>/,
@@ -1422,6 +1427,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;[\s\S]*?align-items:\s*center;[\s\S]*?align-content:\s*center;/);
   assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?color:\s*#255b72;[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*18px;[\s\S]*?font-weight:\s*700;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*18px;[\s\S]*?font-weight:\s*700;/);
+  assert.match(css, /\.analysis-staff-summary strong\.analysis-staff-tenure-value\s*\{[\s\S]*?display:\s*inline-flex;[\s\S]*?align-items:\s*baseline;/);
+  assert.match(css, /\.analysis-staff-summary strong\.analysis-staff-tenure-value small\s*\{[\s\S]*?margin-left:\s*0;/);
   assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
   assert.match(css, /\.analysis-staff-certification-card strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*18px;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
@@ -1481,7 +1488,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     1,
   );
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-cohorts"/);
-  assert.match(staffSectionHtml, /2년 6개월/);
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-tenure-value"><b>2<\/b><small>년<\/small><b>6<\/b><small>개월<\/small>/,
+  );
   assert.doesNotMatch(staffSectionHtml, /MANAGER COACHING VIEW/);
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-detail-heading/);
   assert.doesNotMatch(staffSectionHtml, /4개년 추이 · 전국\/근무연령대 비교 · 고객 코멘트/);

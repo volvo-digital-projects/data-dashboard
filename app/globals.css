@@ -4849,6 +4849,24 @@ input:focus-visible {
   font-weight: 600;
 }
 
+.analysis-staff-summary strong.analysis-staff-tenure-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.analysis-staff-summary strong.analysis-staff-tenure-value b {
+  font: inherit;
+}
+
+.analysis-staff-summary strong.analysis-staff-tenure-value small {
+  margin-left: 0;
+}
+
+.analysis-staff-summary strong.analysis-staff-tenure-value small + b {
+  margin-left: 4px;
+}
+
 .analysis-staff-summary strong.name {
   display: flex;
   align-items: baseline;

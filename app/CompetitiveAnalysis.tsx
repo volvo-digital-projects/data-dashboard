@@ -338,12 +338,6 @@ const viewMeta: Record<
 const displayNumber = (value: number) =>
   Math.abs(value - 100) < Number.EPSILON ? "100" : value.toFixed(1);
 
-const formatStaffTenure = (months: number) => {
-  const years = Math.floor(months / 12);
-  const remainingMonths = months % 12;
-  return `${years}년 ${remainingMonths}개월`;
-};
-
 const formatStaffShortDate = (value: string) => value.replaceAll("-", "").slice(2);
 
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
@@ -840,9 +834,12 @@ export default function CompetitiveAnalysis({
   const staffNationalAverage = staffNationalResponses
     ? staffNationalScoreSum / staffNationalResponses
     : null;
-  const selectedStaffTenure = selectedStaffEmployee
-    ? formatStaffTenure(selectedStaffEmployee.tenureMonths)
-    : "―";
+  const selectedStaffTenureYears = selectedStaffEmployee
+    ? Math.floor(selectedStaffEmployee.tenureMonths / 12)
+    : null;
+  const selectedStaffTenureMonths = selectedStaffEmployee
+    ? selectedStaffEmployee.tenureMonths % 12
+    : null;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1488,8 +1485,15 @@ export default function CompetitiveAnalysis({
             </article>
             <article>
               <span>근무기간</span>
-              <strong>
-                {selectedStaffTenure}
+              <strong className="analysis-staff-tenure-value">
+                {selectedStaffTenureYears === null || selectedStaffTenureMonths === null ? (
+                  "―"
+                ) : (
+                  <>
+                    <b>{selectedStaffTenureYears}</b><small>년</small>
+                    <b>{selectedStaffTenureMonths}</b><small>개월</small>
+                  </>
+                )}
               </strong>
             </article>
             <article>
@@ -1509,7 +1513,7 @@ export default function CompetitiveAnalysis({
               </strong>
             </article>
             <article className="analysis-staff-certification-card">
-              <span>인증직원 선정</span>
+              <span>인증직원</span>
               <strong
                 aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
               >
