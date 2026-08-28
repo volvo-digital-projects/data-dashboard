@@ -1329,7 +1329,7 @@ export default function CompetitiveAnalysis({
               </em>
             </article>
             <article>
-              <span>4개년 상담 만족도</span>
+              <span>고객상담 만족도 평균(2023 ~ 2026 YTD)</span>
               <strong>
                 {selectedStaffAverage === null
                   ? "―"
