@@ -1213,9 +1213,17 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">25건<\/span>/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">08건<\/span>/);
   assert.match(staffSectionHtml, /번호[\s\S]*?영업직원[\s\S]*?누적평균[\s\S]*?회신건수/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*28px minmax\(68px, 1fr\) 52px 42px;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*28px minmax\(104px, 1fr\) 52px 42px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
   assert.match(css, /\.analysis-staff-roster-average\s*\{[\s\S]*?font-size:\s*12px;/);
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-roster-identity"><strong>김대준<\/strong><small><em>입사일<\/em><b>130201<\/b><\/small><\/span>/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-roster-identity small\s*\{[\s\S]*?width:\s*58px;[\s\S]*?grid-template-columns:\s*24px 30px;/,
+  );
   assert.ok(staffSectionHtml.indexOf("문정환") < staffSectionHtml.indexOf("박영환"));
   assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("김대준"));
   assert.ok(staffSectionHtml.indexOf("김대준") < staffSectionHtml.indexOf("정지만"));

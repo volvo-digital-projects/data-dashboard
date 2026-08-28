@@ -4583,7 +4583,7 @@ input:focus-visible {
 .analysis-staff-roster > header {
   min-height: 44px;
   display: grid;
-  grid-template-columns: 28px minmax(68px, 1fr) 52px 42px;
+  grid-template-columns: 28px minmax(104px, 1fr) 52px 42px;
   align-items: center;
   padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
@@ -4629,7 +4629,7 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 28px minmax(68px, 1fr) 52px 42px;
+  grid-template-columns: 28px minmax(104px, 1fr) 52px 42px;
   align-items: center;
   gap: 0;
   padding: 4px 0;
@@ -4680,8 +4680,10 @@ input:focus-visible {
 
 .analysis-staff-roster-identity {
   min-width: 0;
-  display: flex;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: minmax(30px, 1fr) 58px;
+  align-items: center;
+  gap: 4px;
   padding: 0 7px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
@@ -4693,6 +4695,34 @@ input:focus-visible {
   font-weight: 760;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.analysis-staff-roster-identity small {
+  width: 58px;
+  display: grid;
+  grid-template-columns: 24px 30px;
+  align-items: center;
+  justify-content: end;
+  column-gap: 4px;
+  color: #78909e;
+  font-size: 7px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.analysis-staff-roster-identity small em {
+  font-style: normal;
+  font-weight: 620;
+  text-align: right;
+}
+
+.analysis-staff-roster-identity small b {
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  font-weight: 560;
+  letter-spacing: 0.02em;
+  text-align: right;
 }
 
 .analysis-staff-roster-average,

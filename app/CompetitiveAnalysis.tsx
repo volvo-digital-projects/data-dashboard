@@ -334,6 +334,8 @@ const formatStaffTenure = (months: number) => {
 
 const formatStaffDate = (value: string) => value.replaceAll("-", ".");
 
+const formatStaffShortDate = (value: string) => value.replaceAll("-", "").slice(2);
+
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
   value === null || benchmark === null || benchmark === 0
     ? null
@@ -1342,6 +1344,10 @@ export default function CompetitiveAnalysis({
                       </span>
                       <span className="analysis-staff-roster-identity">
                         <strong>{employee.name}</strong>
+                        <small>
+                          <em>입사일</em>
+                          <b>{formatStaffShortDate(employee.hireDate)}</b>
+                        </small>
                       </span>
                       <span className="analysis-staff-roster-average">
                         {average === null ? "―" : average.toFixed(2)}
