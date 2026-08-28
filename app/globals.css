@@ -4717,7 +4717,7 @@ input:focus-visible {
 .analysis-staff-roster-score strong {
   color: #0d5f7d;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
   line-height: 1;
