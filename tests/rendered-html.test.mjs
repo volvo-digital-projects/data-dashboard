@@ -1171,13 +1171,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터/);
   assert.doesNotMatch(visibleHtml, /영업직원·영업팀장만 VOC 원데이터와 교차검증/);
   assert.match(visibleHtml, /김대준/);
-  assert.match(visibleHtml, /조동호/);
-  assert.doesNotMatch(visibleHtml, /조동조 36건/);
+  assert.match(visibleHtml, /조동조/);
   const staffSectionHtml = visibleHtml.match(
     /<section class="analysis-staff-card"[\s\S]*?<\/section>/,
   )?.[0];
   assert.ok(staffSectionHtml);
-  assert.match(staffSectionHtml, /id="analysis-staff-select"/);
+  assert.match(staffSectionHtml, /class="analysis-staff-dropdown-trigger"/);
+  assert.match(staffSectionHtml, /aria-haspopup="listbox"/);
+  assert.match(staffSectionHtml, /id="analysis-staff-options"/);
   assert.match(staffSectionHtml, /김대준 · 영업직원/);
   assert.match(staffSectionHtml, /2023/);
   assert.match(staffSectionHtml, /2024/);
@@ -1185,6 +1186,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /2026 YTD/);
   assert.match(staffSectionHtml, /13건/);
   assert.match(staffSectionHtml, /4개년 상담 만족도/);
+  assert.match(staffSectionHtml, /전국 영업직원 평균/);
+  assert.match(staffSectionHtml, /근속기간별 상담 만족도 비교/);
+  assert.match(staffSectionHtml, /13년 6개월/);
+  assert.match(staffSectionHtml, /10년 이상/);
+  assert.match(staffSectionHtml, /14명 재직 확인/);
+  assert.match(visibleHtml, /4개년 VOC 영업지원 핵심 분석/);
+  assert.match(visibleHtml, /친절한 응대/);
+  assert.match(visibleHtml, /진행상황 선제 안내/);
   assert.match(staffSectionHtml, /\d{6} Sales-DMS 재직인원 기준/);
   assert.doesNotMatch(staffSectionHtml, /VOC 2026\.08\.24 기준/);
   assert.doesNotMatch(staffSectionHtml, /교차검증 메모/);

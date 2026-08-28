@@ -40,10 +40,30 @@ type AnalysisPoint = AnalysisShowroom & {
 
 type StaffYear = "2023" | "2024" | "2025" | "2026";
 type StaffYearMetric = { responses: number; scoreSum: number };
+type StaffKeyword = { label: string; mentions: number };
 type StaffEmployee = {
   name: string;
   role: "영업직원" | "영업팀장";
+  hireDate: string;
+  tenureMonths: number;
+  tenureBucket: string;
+  tenureBucketLabel: string;
   years: Partial<Record<StaffYear, StaffYearMetric>>;
+  commentResponses: number;
+  strengthKeywords: StaffKeyword[];
+  improvementKeywords: StaffKeyword[];
+};
+type StaffNationalYear = StaffYearMetric & {
+  average: number | null;
+  respondingEmployees: number;
+  averageResponsesPerEmployee: number | null;
+};
+type StaffTenureCohort = StaffYearMetric & {
+  id: string;
+  label: string;
+  employeeCount: number;
+  respondingEmployees: number;
+  average: number | null;
 };
 type StaffAnalysisShowroom = {
   showroom: string;
@@ -58,6 +78,11 @@ const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   StaffAnalysisShowroom
 >;
 const staffAnalysisSource = vocStaffAnalysisJson.source;
+const staffNationalYears = vocStaffAnalysisJson.nationalYears as Record<
+  StaffYear,
+  StaffNationalYear
+>;
+const staffTenureCohorts = vocStaffAnalysisJson.tenureCohorts as StaffTenureCohort[];
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
 
 type ScatterLabelPlacement =
@@ -228,6 +253,19 @@ const viewMeta: Record<
 };
 
 const displayNumber = (value: number) => value.toFixed(1);
+
+const formatStaffTenure = (months: number) => {
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  return `${years}년 ${remainingMonths}개월`;
+};
+
+const formatStaffDate = (value: string) => value.replaceAll("-", ".");
+
+const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
+  value === null || benchmark === null || benchmark === 0
+    ? null
+    : ((value - benchmark) / benchmark) * 100;
 
 const displayShowroomName = (name: string) => {
   const trimmed = name.trim();
@@ -448,10 +486,12 @@ export default function CompetitiveAnalysis({
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState("김대준");
+  const [isStaffPickerOpen, setIsStaffPickerOpen] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
   const scatterRef = useRef<HTMLDivElement>(null);
+  const staffPickerRef = useRef<HTMLDivElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const [scatterSize, setScatterSize] = useState({
@@ -474,6 +514,26 @@ export default function CompetitiveAnalysis({
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!isStaffPickerOpen) return;
+
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (!staffPickerRef.current?.contains(event.target as Node)) {
+        setIsStaffPickerOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsStaffPickerOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isStaffPickerOpen]);
 
   useLayoutEffect(() => {
     const anchor = stickyAnchorRef.current;
@@ -566,12 +626,17 @@ export default function CompetitiveAnalysis({
       responses: 0,
       scoreSum: 0,
     };
+    const national = staffNationalYears[year];
+    const average =
+      metrics.responses > 0 ? metrics.scoreSum / metrics.responses : null;
     return {
       year,
       responses: metrics.responses,
       scoreSum: metrics.scoreSum,
-      average:
-        metrics.responses > 0 ? metrics.scoreSum / metrics.responses : null,
+      average,
+      nationalAverage: national.average,
+      nationalResponses: national.responses,
+      deltaPercent: staffDeltaPercent(average, national.average),
     };
   });
   const selectedStaffResponses = selectedStaffYearRows.reduce(
@@ -585,9 +650,12 @@ export default function CompetitiveAnalysis({
   const selectedStaffAverage = selectedStaffResponses
     ? selectedStaffScoreSum / selectedStaffResponses
     : null;
-  const selectedStaffResponseYears = selectedStaffYearRows.filter(
-    (year) => year.responses > 0,
-  ).length;
+  const selectedStaffTenure = selectedStaffEmployee
+    ? formatStaffTenure(selectedStaffEmployee.tenureMonths)
+    : "―";
+  const selectedStaffCohort = staffTenureCohorts.find(
+    (cohort) => cohort.id === selectedStaffEmployee?.tenureBucket,
+  );
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
@@ -1056,21 +1124,53 @@ export default function CompetitiveAnalysis({
           </header>
 
           <div className="analysis-staff-picker">
-            <label htmlFor="analysis-staff-select">
+            <label id="analysis-staff-picker-label">
               현재 소속 영업직원 / 영업팀장
             </label>
             <div>
-              <select
-                id="analysis-staff-select"
-                value={selectedStaffEmployee?.name ?? ""}
-                onChange={(event) => setSelectedStaffName(event.target.value)}
-              >
-                {currentSalesStaff.map((employee) => (
-                  <option value={employee.name} key={employee.name}>
-                    {employee.name} · {employee.role}
-                  </option>
-                ))}
-              </select>
+              <div className="analysis-staff-dropdown" ref={staffPickerRef}>
+                <button
+                  type="button"
+                  className="analysis-staff-dropdown-trigger"
+                  aria-labelledby="analysis-staff-picker-label analysis-staff-picker-value"
+                  aria-haspopup="listbox"
+                  aria-expanded={isStaffPickerOpen}
+                  aria-controls="analysis-staff-options"
+                  onClick={() => setIsStaffPickerOpen((open) => !open)}
+                >
+                  <span id="analysis-staff-picker-value">
+                    {selectedStaffEmployee?.name ?? "―"} · {selectedStaffEmployee?.role ?? ""}
+                  </span>
+                  <i aria-hidden="true" />
+                </button>
+                <div
+                  id="analysis-staff-options"
+                  className="analysis-staff-dropdown-menu"
+                  role="listbox"
+                  aria-label="현재 재직 영업직원 및 영업팀장"
+                  hidden={!isStaffPickerOpen}
+                >
+                  {currentSalesStaff.map((employee) => {
+                    const isSelected = employee.name === selectedStaffEmployee?.name;
+                    return (
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={isSelected}
+                        className={isSelected ? "selected" : ""}
+                        onClick={() => {
+                          setSelectedStaffName(employee.name);
+                          setIsStaffPickerOpen(false);
+                        }}
+                        key={employee.name}
+                      >
+                        <span>{employee.name}</span>
+                        <small>{employee.role}</small>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
               <span>{currentSalesStaff.length}명 재직 확인</span>
             </div>
           </div>
@@ -1082,6 +1182,16 @@ export default function CompetitiveAnalysis({
                 {selectedStaffEmployee?.name ?? "―"}
                 <small>{selectedStaffEmployee?.role ?? ""}</small>
               </strong>
+            </article>
+            <article>
+              <span>근무기간</span>
+              <strong>
+                {selectedStaffTenure}
+                <small>{selectedStaffEmployee?.tenureBucketLabel ?? ""}</small>
+              </strong>
+              <em>
+                입사일 {selectedStaffEmployee ? formatStaffDate(selectedStaffEmployee.hireDate) : "―"}
+              </em>
             </article>
             <article>
               <span>4개년 상담 만족도</span>
@@ -1099,13 +1209,6 @@ export default function CompetitiveAnalysis({
                 <small>건</small>
               </strong>
             </article>
-            <article>
-              <span>응답 연도</span>
-              <strong>
-                {selectedStaffResponseYears}
-                <small>/ 4개년</small>
-              </strong>
-            </article>
           </div>
 
           <div
@@ -1115,6 +1218,15 @@ export default function CompetitiveAnalysis({
           >
             {selectedStaffYearRows.map((year) => {
               const barHeight = year.average === null ? 0 : year.average * 10;
+              const nationalBarHeight = (year.nationalAverage ?? 0) * 10;
+              const deltaTone =
+                year.deltaPercent === null
+                  ? "neutral"
+                  : year.deltaPercent > 0
+                    ? "positive"
+                    : year.deltaPercent < 0
+                      ? "negative"
+                      : "neutral";
               return (
                 <article
                   className={year.average === null ? "empty" : ""}
@@ -1127,23 +1239,121 @@ export default function CompetitiveAnalysis({
                 >
                   <header>
                     <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
-                    <span>{year.responses ? `${year.responses}건` : "회신 없음"}</span>
+                    <span className={`delta-${deltaTone}`}>
+                      {year.deltaPercent === null
+                        ? "비교 없음"
+                        : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
+                    </span>
                   </header>
                   <div className="analysis-staff-chart-track">
-                    <div
-                      className="analysis-staff-chart-bar"
-                      style={
-                        { "--staff-bar-height": `${barHeight}%` } as CSSProperties
-                      }
-                    >
-                      <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
+                    <div className="analysis-staff-chart-bars">
+                      <div
+                        className="analysis-staff-chart-bar employee"
+                        style={
+                          { "--staff-bar-height": `${barHeight}%` } as CSSProperties
+                        }
+                      >
+                        <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
+                        <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
+                      </div>
+                      <div
+                        className="analysis-staff-chart-bar national"
+                        style={
+                          { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
+                        }
+                      >
+                        <b>{year.nationalAverage?.toFixed(1) ?? "―"}</b>
+                        <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
+                      </div>
                     </div>
                   </div>
-                  <footer>고객만족도 평균</footer>
+                  <footer>
+                    <span><i className="employee" />선택 직원</span>
+                    <span><i className="national" />전국 영업직원 평균</span>
+                  </footer>
                 </article>
               );
             })}
           </div>
+
+          <section className="analysis-staff-tenure" aria-label="근속기간별 상담 만족도 비교">
+            <header>
+              <div>
+                <h3>근속기간별 상담 만족도 비교</h3>
+                <p>현재 Sales-DMS 재직 영업직원·영업팀장 기준</p>
+              </div>
+              <strong>
+                {selectedStaffEmployee?.name ?? "선택 직원"} SC
+                <span>{selectedStaffTenure} · {selectedStaffEmployee?.tenureBucketLabel ?? "―"}</span>
+              </strong>
+            </header>
+            <div className="analysis-staff-cohorts">
+              {staffTenureCohorts.map((cohort) => {
+                const isSelected = cohort.id === selectedStaffCohort?.id;
+                return (
+                  <article className={isSelected ? "selected" : ""} key={cohort.id}>
+                    <header>
+                      <strong>{cohort.label}</strong>
+                      {isSelected ? <span>{selectedStaffEmployee?.name} SC</span> : null}
+                    </header>
+                    <div className="analysis-staff-cohort-track">
+                      <i
+                        style={
+                          {
+                            "--staff-cohort-width": `${(cohort.average ?? 0) * 10}%`,
+                          } as CSSProperties
+                        }
+                      />
+                    </div>
+                    <footer>
+                      <b>{cohort.average === null ? "―" : cohort.average.toFixed(2)}점</b>
+                      <span>{cohort.responses.toLocaleString("ko-KR")}건 · 재직 {cohort.employeeCount}명</span>
+                    </footer>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="analysis-staff-insights" aria-label="4개년 VOC 영업지원 핵심 분석">
+            <header>
+              <div>
+                <h3>4개년 VOC 영업지원 핵심 분석</h3>
+                <p>2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다.</p>
+              </div>
+              <span>{selectedStaffEmployee?.commentResponses ?? 0}건 분석</span>
+            </header>
+            <div>
+              <article className="strength">
+                <h4>유지·강화</h4>
+                <div>
+                  {(selectedStaffEmployee?.strengthKeywords ?? []).length ? (
+                    selectedStaffEmployee?.strengthKeywords.map((keyword) => (
+                      <span key={keyword.label}>
+                        {keyword.label}<small>{keyword.mentions}회</small>
+                      </span>
+                    ))
+                  ) : (
+                    <em>분석 가능한 긍정 코멘트 없음</em>
+                  )}
+                </div>
+              </article>
+              <article className="improvement">
+                <h4>개선 기회</h4>
+                <div>
+                  {(selectedStaffEmployee?.improvementKeywords ?? []).length ? (
+                    selectedStaffEmployee?.improvementKeywords.map((keyword) => (
+                      <span key={keyword.label}>
+                        {keyword.label}<small>{keyword.mentions}회</small>
+                      </span>
+                    ))
+                  ) : (
+                    <em>반복 확인된 개선 키워드 없음</em>
+                  )}
+                </div>
+              </article>
+            </div>
+          </section>
 
         </section>
       ) : null}
