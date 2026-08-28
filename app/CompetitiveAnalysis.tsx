@@ -338,6 +338,32 @@ const viewMeta: Record<
 const displayNumber = (value: number) =>
   Math.abs(value - 100) < Number.EPSILON ? "100" : value.toFixed(1);
 
+function AnimatedAnalysisScore({
+  value,
+  sequence,
+}: {
+  value: number;
+  sequence: number;
+}) {
+  const displayValue = displayNumber(value);
+
+  return (
+    <strong
+      key={displayValue}
+      className="animated-score"
+      aria-label={`${displayValue}점`}
+      style={
+        {
+          "--score-value-delay": `${120 + sequence * 180}ms`,
+        } as CSSProperties
+      }
+    >
+      {displayValue}
+      <small>점</small>
+    </strong>
+  );
+}
+
 const formatStaffShortDate = (value: string) => value.replaceAll("-", "").slice(2);
 
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
@@ -1166,10 +1192,7 @@ export default function CompetitiveAnalysis({
               <li>ONE Voice 출고 만족도</li>
             </ul>
           </div>
-          <strong>
-            {displayNumber(selectedPoint.vocScore)}
-            <small>점</small>
-          </strong>
+          <AnimatedAnalysisScore value={selectedPoint.vocScore} sequence={0} />
           <em
             className={
               selectedPoint.vocScore >= groupVocAverage ? "positive" : "negative"
@@ -1189,10 +1212,7 @@ export default function CompetitiveAnalysis({
               <li>ONE VOICE 출고 후 해피콜(24시간 이내)</li>
             </ul>
           </div>
-          <strong>
-            {displayNumber(selectedPoint.happyScore)}
-            <small>점</small>
-          </strong>
+          <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
           <em
             className={
               selectedPoint.happyScore >= groupHappyAverage
@@ -1211,10 +1231,7 @@ export default function CompetitiveAnalysis({
             <span>균형 경쟁력</span>
             <small>종합 만족도와 해피콜 합산 평균</small>
           </div>
-          <strong>
-            {displayNumber(selectedPoint.combined)}
-            <small>점</small>
-          </strong>
+          <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
           <em>
             {viewMeta[view].short} {safeSelectedRank}위 / 전체 {groupItems.length}
           </em>
