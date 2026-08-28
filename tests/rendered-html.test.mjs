@@ -1398,8 +1398,9 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     staffSectionHtml,
-    /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*문정환[\s\S]*문정환 4개년 추이/,
+    /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*문정환/,
   );
+  assert.doesNotMatch(staffSectionHtml, /문정환 4개년 추이/);
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
   assert.match(
     css,
@@ -1450,11 +1451,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-national-benchmark"/);
   assert.match(staffSectionHtml, /class="analysis-staff-scatter-average"/);
   assert.match(staffSectionHtml, /class="analysis-staff-scatter-showroom"/);
-  assert.match(staffSectionHtml, />강남대치 SC</);
+  assert.match(staffSectionHtml, />강남대치</);
   assert.doesNotMatch(staffSectionHtml, /문정환 SC 좌표/);
-  assert.match(staffSectionHtml, /문정환 SC/);
+  assert.match(staffSectionHtml, /문정환 \/ 2\.5년 \/ 9\.9점 \/ 8건/);
   assert.match(staffSectionHtml, />상담 만족도</);
-  assert.match(staffSectionHtml, /볼보 모든 영업 직원/);
+  assert.match(staffSectionHtml, />볼보 SC</);
+  assert.doesNotMatch(staffSectionHtml, /4개년 추이<\/em>/);
+  assert.match(css, /\.analysis-staff-benchmark-legend\s*\{[\s\S]*?justify-content:\s*center;/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
   assert.match(css, /\.analysis-staff-scatter-population circle\s*\{[\s\S]*?fill:\s*rgba\(222, 104, 62, 0\.62\)/);
   assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#16708f/);

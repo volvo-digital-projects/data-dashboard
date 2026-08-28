@@ -1623,7 +1623,6 @@ export default function CompetitiveAnalysis({
                 <footer className="analysis-staff-history-legend">
                   <span className="national" aria-label="전국 영업직원 평균"><i />전국 평균</span>
                   <span className="employee" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 고객상담 만족도`}><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
-                  <em>{selectedStaffEmployee?.name ?? "선택 직원"} 4개년 추이</em>
                 </footer>
               </article>
             </div>
@@ -1732,13 +1731,13 @@ export default function CompetitiveAnalysis({
                 </div>
               </div>
               <footer className="analysis-staff-benchmark-legend">
-                <span><i />볼보 모든 영업 직원</span>
-                <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
+                <span><i />볼보 SC</span>
+                <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
                 <span className="selected">
                   <i />
                   {selectedStaffScatterPoint
-                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} SC · ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · ${selectedStaffScatterPoint.average.toFixed(1)}점 · ${selectedStaffScatterPoint.responses}건`
-                    : `${selectedStaffEmployee?.name ?? "선택 직원"} SC`}
+                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} / ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 / ${selectedStaffScatterPoint.average.toFixed(1)}점 / ${selectedStaffScatterPoint.responses}건`
+                    : `${selectedStaffEmployee?.name ?? "선택 직원"}`}
                 </span>
                 <em>원 크기 = 누적 회신 건수</em>
               </footer>

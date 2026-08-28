@@ -5727,6 +5727,7 @@ input:focus-visible {
   height: var(--analysis-staff-comparison-legend-height);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin: 0 -12px;
   padding: 0 12px;
@@ -5760,7 +5761,7 @@ input:focus-visible {
 }
 
 .analysis-staff-benchmark-legend em {
-  margin-left: auto;
+  margin-left: 0;
   color: #8a9ba4;
   font-style: normal;
   white-space: nowrap;
