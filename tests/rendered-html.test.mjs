@@ -1235,9 +1235,21 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "utf8",
   );
   assert.doesNotMatch(staffPhotoData, /@hvolvo\.com|010-\d{4}-\d{4}/);
-  assert.equal(
-    Object.keys(JSON.parse(staffPhotoData).showrooms["6KR6834"].employees).length,
-    14,
+  const staffPhotoJson = JSON.parse(staffPhotoData);
+  assert.equal(staffPhotoJson.showroomCount, 39);
+  assert.equal(Object.keys(staffPhotoJson.showrooms).length, 39);
+  assert.ok(staffPhotoJson.consultantCount > 39);
+  assert.ok(
+    Object.keys(staffPhotoJson.showrooms["6KR6834"].employees).length > 0,
+  );
+  const staffPortraits = Object.values(staffPhotoJson.showrooms).flatMap(
+    (showroom) => Object.values(showroom.employees),
+  );
+  assert.equal(staffPortraits.length, staffPhotoJson.consultantCount);
+  await Promise.all(
+    staffPortraits.map((profile) =>
+      access(new URL(`../public${profile.image}`, import.meta.url)),
+    ),
   );
 
   const regionResponse = await render(
