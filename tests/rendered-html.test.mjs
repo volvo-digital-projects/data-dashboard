@@ -1217,7 +1217,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     html,
     /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
-  assert.match(visibleHtml, /소속 영업직원 상담만족도 결과/);
+  assert.match(visibleHtml, /고객상담 만족도 분석결과/);
+  assert.doesNotMatch(visibleHtml, /소속 영업직원 상담만족도 결과/);
   assert.doesNotMatch(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터/);
   assert.doesNotMatch(visibleHtml, /영업직원·영업팀장만 VOC 원데이터와 교차검증/);
   assert.match(visibleHtml, /김대준/);
@@ -1580,7 +1581,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(sizeHtml, /scatter-label comparison/);
   assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
   assert.match(sizeHtml, /볼보 해운대/);
-  assert.match(sizeVisibleHtml, /소속 영업직원 상담만족도 결과/);
+  assert.match(sizeVisibleHtml, /고객상담 만족도 분석결과/);
   assert.match(
     sizeVisibleHtml,
     new RegExp(staffAnalysisShowrooms["6KR6842"].employees[0].name),
@@ -1595,7 +1596,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "",
   );
   assert.match(gunsanVisibleHtml, /볼보 군산 분석/);
-  assert.match(gunsanVisibleHtml, /소속 영업직원 상담만족도 결과/);
+  assert.match(gunsanVisibleHtml, /고객상담 만족도 분석결과/);
   for (const employee of staffAnalysisShowrooms["6KR6873"].employees) {
     assert.match(gunsanVisibleHtml, new RegExp(employee.name));
   }

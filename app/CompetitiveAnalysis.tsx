@@ -1312,11 +1312,11 @@ export default function CompetitiveAnalysis({
       {selectedStaffAnalysis ? (
         <section
           className="analysis-staff-card"
-          aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 상담만족도 결과`}
+          aria-label={`${displayShowroomName(selected.showroom)} 고객상담 만족도 분석결과`}
         >
           <header className="analysis-staff-heading">
             <div>
-              <h2>소속 영업직원 상담만족도 결과</h2>
+              <h2>고객상담 만족도 분석결과</h2>
             </div>
             <div className="analysis-staff-source" aria-label="영업직원 분석 기준">
               <span>Sales-DMS 기준</span>
