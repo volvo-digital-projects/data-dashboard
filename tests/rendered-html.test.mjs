@@ -3072,12 +3072,14 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.doesNotMatch(css, /\.scatter-callout-leader|--leader-length|--leader-angle/);
   assert.match(
     css,
-    /\.scatter-point\.label-right-up > b::before,[\s\S]*?left: calc\(-1 \* var\(--callout-tail-x\)\)[\s\S]*?clip-path: polygon\(calc\(100% - 5px\) 0, 100% 0, 0 100%\)/,
+    /\.scatter-point\.label-right-up > b::before,[\s\S]*?left: calc\(-1 \* var\(--callout-tail-x\)\)[\s\S]*?clip-path: polygon\(calc\(100% - 7px\) 0, 100% 0, 0 100%\)/,
   );
   assert.match(
     css,
-    /\.scatter-point\.label-right-down > b::before,[\s\S]*?top: calc\(-1 \* var\(--callout-tail-y\)\)[\s\S]*?clip-path: polygon\(0 0, calc\(100% - 5px\) 100%, 100% 100%\)/,
+    /\.scatter-point\.label-right-down > b::before,[\s\S]*?top: calc\(-1 \* var\(--callout-tail-y\)\)[\s\S]*?clip-path: polygon\(0 0, calc\(100% - 7px\) 100%, 100% 100%\)/,
   );
+  assert.match(css, /--callout-border: color-mix\(in srgb, var\(--callout-color\) 58%, white\)/);
+  assert.match(css, /\.scatter-point > b\s*\{[\s\S]*?width:\s*var\(--callout-width\);[\s\S]*?height:\s*var\(--callout-height\);/);
   assert.match(
     css,
     /\.scatter-average-value\.horizontal\s*\{[^}]*left: 12px[^}]*display: flex[^}]*flex-direction: column/,
@@ -3087,6 +3089,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
     /\.scatter-average-value\.vertical\s*\{[^}]*left: var\(--avg-x\)[^}]*bottom: 12px[^}]*display: flex[^}]*flex-direction: column/,
   );
   assert.match(analysisSource, /--callout-tail-x/);
+  assert.match(analysisSource, /--callout-width/);
   assert.match(
     analysisSource,
     /tailX: Math\.round\(Math\.max\(3, Math\.abs\(anchorX\)\)\)[\s\S]*?tailY: Math\.round\(Math\.max\(3, Math\.abs\(anchorY\)\)\)/,

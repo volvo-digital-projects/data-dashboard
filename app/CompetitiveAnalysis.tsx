@@ -181,6 +181,8 @@ type ScatterCalloutLayout = {
   offsetY: number;
   tailX: number;
   tailY: number;
+  labelWidth: number;
+  labelHeight: number;
   placement: ScatterLabelPlacement;
 };
 
@@ -565,6 +567,8 @@ const buildScatterCalloutLayout = (
       offsetY: Math.round(best.offsetY),
       tailX: Math.round(Math.max(3, Math.abs(anchorX))),
       tailY: Math.round(Math.max(3, Math.abs(anchorY))),
+      labelWidth: Math.round(labelWidth),
+      labelHeight: Math.round(labelHeight),
       placement: best.placement,
     });
   });
@@ -1183,6 +1187,8 @@ export default function CompetitiveAnalysis({
                   offsetY: -16,
                   tailX: 5,
                   tailY: 5,
+                  labelWidth: 52,
+                  labelHeight: 21,
                   placement: "right-up" as const,
                 };
                 const pointStyle = {
@@ -1192,6 +1198,8 @@ export default function CompetitiveAnalysis({
                   "--callout-y": `${callout.offsetY}px`,
                   "--callout-tail-x": `${callout.tailX}px`,
                   "--callout-tail-y": `${callout.tailY}px`,
+                  "--callout-width": `${callout.labelWidth}px`,
+                  "--callout-height": `${callout.labelHeight}px`,
                 } as CSSProperties;
                 const pointLabel = `${displayShowroomName(item.showroom)} · 종합 만족도 ${displayNumber(
                   item.vocScore,
