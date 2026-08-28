@@ -1386,7 +1386,6 @@ export default function CompetitiveAnalysis({
               <span>근무기간</span>
               <strong>
                 {selectedStaffTenure}
-                <small>{selectedStaffEmployee?.tenureBucketLabel ?? ""}</small>
               </strong>
               <em>
                 입사일 {selectedStaffEmployee ? formatStaffDate(selectedStaffEmployee.hireDate) : "―"}

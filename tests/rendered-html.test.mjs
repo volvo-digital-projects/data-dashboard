@@ -1227,6 +1227,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /인증직원 선정/);
   assert.doesNotMatch(
     staffSectionHtml,
+    /<span>근무기간<\/span><strong>13년 6개월<small>10년 이상<\/small><\/strong>/,
+  );
+  assert.doesNotMatch(
+    staffSectionHtml,
     /class="analysis-staff-profile-card"[\s\S]*?<div><span>선택 직원<\/span>/,
   );
   assert.match(
@@ -1317,7 +1321,6 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-cohorts"/);
   assert.match(staffSectionHtml, /13년 6개월/);
-  assert.match(staffSectionHtml, /10년 이상/);
   assert.match(staffSectionHtml, /MANAGER COACHING VIEW/);
   assert.doesNotMatch(visibleHtml, />4개년 VOC 영업지원 핵심 분석</);
   assert.doesNotMatch(visibleHtml, /2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다/);
