@@ -120,6 +120,18 @@ const staffCurrentNameFrequency = Object.values(staffAnalysisByCdsid).reduce(
   new Map<string, number>(),
 );
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
+const staffHistoryChartMinScore = 7;
+const staffHistoryChartMaxScore = 10;
+const staffHistoryChartHeight = (score: number) =>
+  Math.max(
+    6,
+    Math.min(
+      100,
+      ((score - staffHistoryChartMinScore) /
+        (staffHistoryChartMaxScore - staffHistoryChartMinScore)) *
+        100,
+    ),
+  );
 const staffImprovementActionByLabel: Record<string, string> = {
   "진행상황 선제 안내":
     "고객이 재문의하기 전에 계약·출고 진행상황, 지연 사유와 다음 안내 일정을 먼저 공유",
@@ -767,8 +779,8 @@ export default function CompetitiveAnalysis({
           {
             key: year.year,
             x: 12.5 + index * 25,
-            y: 100 - year.average * 10,
-            height: year.average * 10,
+            y: 100 - staffHistoryChartHeight(year.average),
+            height: staffHistoryChartHeight(year.average),
             average: year.average,
           },
         ],
@@ -1457,8 +1469,11 @@ export default function CompetitiveAnalysis({
                   </div>
                   <div className="analysis-staff-year-groups">
                     {selectedStaffYearRows.map((year) => {
-                      const barHeight = year.average === null ? 0 : year.average * 10;
-                      const nationalBarHeight = (year.nationalAverage ?? 0) * 10;
+                      const barHeight =
+                        year.average === null ? 0 : staffHistoryChartHeight(year.average);
+                      const nationalBarHeight = staffHistoryChartHeight(
+                        year.nationalAverage ?? staffHistoryChartMinScore,
+                      );
                       const deltaTone =
                         year.deltaPercent === null
                           ? "neutral"
