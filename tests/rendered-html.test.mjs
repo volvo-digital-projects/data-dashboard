@@ -1193,7 +1193,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /13건/);
   assert.match(staffSectionHtml, /4개년 상담 만족도/);
   assert.match(staffSectionHtml, /전국 영업직원 평균/);
-  assert.match(staffSectionHtml, /근속기간별 상담 만족도 비교/);
+  assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
+  assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-comparison-layout"[\s\S]*class="analysis-staff-history"[\s\S]*class="analysis-staff-benchmarks"/,
+  );
+  assert.match(staffSectionHtml, /전국 및 근무연령대/);
+  assert.match(staffSectionHtml, /근무연령대 비교/);
   assert.match(staffSectionHtml, /13년 6개월/);
   assert.match(staffSectionHtml, /10년 이상/);
   assert.match(staffSectionHtml, /14명 재직 확인/);

@@ -4761,6 +4761,13 @@ input:focus-visible {
   white-space: nowrap;
 }
 
+.analysis-staff-comparison-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3.2fr) minmax(270px, 0.92fr);
+  align-items: stretch;
+  gap: 10px;
+}
+
 .analysis-staff-history {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4912,6 +4919,113 @@ input:focus-visible {
 
 .analysis-staff-history article.empty .analysis-staff-chart-bar.employee {
   display: none;
+}
+
+.analysis-staff-benchmarks {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 13px;
+  border: 1px solid #cddfe7;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #f5f9fb 0%, #edf5f8 100%);
+}
+
+.analysis-staff-benchmarks > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.analysis-staff-benchmarks > header h3 {
+  margin: 0;
+  color: #15394e;
+  font-size: 13px;
+  font-weight: 780;
+}
+
+.analysis-staff-benchmarks > header p {
+  margin: 3px 0 0;
+  color: #78909d;
+  font-size: 8px;
+}
+
+.analysis-staff-benchmarks > header > span {
+  padding: 4px 7px;
+  border: 1px solid #d3e3e9;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  color: #567487;
+  font-size: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.analysis-staff-national-benchmark {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 11px;
+  border: 1px solid #d6e4ea;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.analysis-staff-national-benchmark > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.analysis-staff-national-benchmark > div:last-child {
+  align-items: flex-end;
+}
+
+.analysis-staff-national-benchmark span {
+  color: #587487;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.analysis-staff-national-benchmark strong {
+  color: #133c52;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.analysis-staff-national-benchmark strong small {
+  margin-left: 2px;
+  color: #718694;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 8px;
+}
+
+.analysis-staff-national-benchmark b {
+  color: #526f7f;
+  font-size: 9px;
+}
+
+.analysis-staff-national-benchmark em {
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.analysis-staff-national-benchmark em.positive {
+  color: #0d8068;
+}
+
+.analysis-staff-national-benchmark em.negative {
+  color: #cf493f;
+}
+
+.analysis-staff-national-benchmark em.neutral {
+  color: #718694;
 }
 
 .analysis-staff-tenure,
@@ -5110,6 +5224,67 @@ input:focus-visible {
   font-style: normal;
 }
 
+.analysis-staff-benchmarks .analysis-staff-tenure {
+  flex: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.analysis-staff-benchmarks .analysis-staff-tenure > header {
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-tenure h3 {
+  font-size: 11px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-tenure p {
+  margin-top: 2px;
+  font-size: 7px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-tenure > header > strong {
+  min-width: 0;
+  padding: 5px 7px;
+  border-radius: 999px;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohorts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohorts article {
+  padding: 7px 8px;
+  border-radius: 6px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohorts article > header strong {
+  font-size: 8px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohorts article > header span {
+  padding: 2px 4px;
+  font-size: 6px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohort-track {
+  height: 4px;
+  margin: 6px 0;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohorts article > footer b {
+  font-size: 9px;
+}
+
+.analysis-staff-benchmarks .analysis-staff-cohorts article > footer span {
+  font-size: 6px;
+}
+
 @media (max-width: 900px) {
   .analysis-staff-card {
     padding: 18px;
@@ -5141,6 +5316,12 @@ input:focus-visible {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+}
+
+@media (max-width: 650px) {
+  .analysis-staff-comparison-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {

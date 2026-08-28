@@ -671,6 +671,21 @@ export default function CompetitiveAnalysis({
   const selectedStaffAverage = selectedStaffResponses
     ? selectedStaffScoreSum / selectedStaffResponses
     : null;
+  const staffNationalResponses = selectedStaffYearRows.reduce(
+    (sum, year) => sum + year.nationalResponses,
+    0,
+  );
+  const staffNationalScoreSum = staffYears.reduce(
+    (sum, year) => sum + staffNationalYears[year].scoreSum,
+    0,
+  );
+  const staffNationalAverage = staffNationalResponses
+    ? staffNationalScoreSum / staffNationalResponses
+    : null;
+  const selectedStaffNationalDelta = staffDeltaPercent(
+    selectedStaffAverage,
+    staffNationalAverage,
+  );
   const selectedStaffTenure = selectedStaffEmployee
     ? formatStaffTenure(selectedStaffEmployee.tenureMonths)
     : "―";
@@ -1249,109 +1264,139 @@ export default function CompetitiveAnalysis({
             </article>
           </div>
 
-          <div
-            className="analysis-staff-history"
-            role="img"
-            aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2023년부터 2026년 YTD까지 상담 만족도`}
-          >
-            {selectedStaffYearRows.map((year) => {
-              const barHeight = year.average === null ? 0 : year.average * 10;
-              const nationalBarHeight = (year.nationalAverage ?? 0) * 10;
-              const deltaTone =
-                year.deltaPercent === null
-                  ? "neutral"
-                  : year.deltaPercent > 0
-                    ? "positive"
-                    : year.deltaPercent < 0
-                      ? "negative"
-                      : "neutral";
-              return (
-                <article
-                  className={year.average === null ? "empty" : ""}
-                  key={year.year}
-                  aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
-                    year.average === null
-                      ? "회신 없음"
-                      : `평균 ${year.average.toFixed(1)}점, ${year.responses}건`
-                  }`}
-                >
-                  <header>
-                    <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
-                    <span className={`delta-${deltaTone}`}>
-                      {year.deltaPercent === null
-                        ? "비교 없음"
-                        : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
-                    </span>
-                  </header>
-                  <div className="analysis-staff-chart-track">
-                    <div className="analysis-staff-chart-bars">
-                      <div
-                        className="analysis-staff-chart-bar employee"
-                        style={
-                          { "--staff-bar-height": `${barHeight}%` } as CSSProperties
-                        }
-                      >
-                        <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
-                        <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
-                      </div>
-                      <div
-                        className="analysis-staff-chart-bar national"
-                        style={
-                          { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
-                        }
-                      >
-                        <b>{year.nationalAverage?.toFixed(1) ?? "―"}</b>
-                        <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
-                      </div>
-                    </div>
-                  </div>
-                  <footer>
-                    <span><i className="employee" />선택 직원</span>
-                    <span><i className="national" />전국 영업직원 평균</span>
-                  </footer>
-                </article>
-              );
-            })}
-          </div>
-
-          <section className="analysis-staff-tenure" aria-label="근속기간별 상담 만족도 비교">
-            <header>
-              <div>
-                <h3>근속기간별 상담 만족도 비교</h3>
-                <p>현재 Sales-DMS 재직 영업직원·영업팀장 기준</p>
-              </div>
-              <strong>
-                {selectedStaffEmployee?.name ?? "선택 직원"} SC
-                <span>{selectedStaffTenure} · {selectedStaffEmployee?.tenureBucketLabel ?? "―"}</span>
-              </strong>
-            </header>
-            <div className="analysis-staff-cohorts">
-              {staffTenureCohorts.map((cohort) => {
-                const isSelected = cohort.id === selectedStaffCohort?.id;
+          <div className="analysis-staff-comparison-layout">
+            <div
+              className="analysis-staff-history"
+              role="img"
+              aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2023년부터 2026년 YTD까지 상담 만족도`}
+            >
+              {selectedStaffYearRows.map((year) => {
+                const barHeight = year.average === null ? 0 : year.average * 10;
+                const nationalBarHeight = (year.nationalAverage ?? 0) * 10;
+                const deltaTone =
+                  year.deltaPercent === null
+                    ? "neutral"
+                    : year.deltaPercent > 0
+                      ? "positive"
+                      : year.deltaPercent < 0
+                        ? "negative"
+                        : "neutral";
                 return (
-                  <article className={isSelected ? "selected" : ""} key={cohort.id}>
+                  <article
+                    className={year.average === null ? "empty" : ""}
+                    key={year.year}
+                    aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
+                      year.average === null
+                        ? "회신 없음"
+                        : `평균 ${year.average.toFixed(1)}점, ${year.responses}건`
+                    }`}
+                  >
                     <header>
-                      <strong>{cohort.label}</strong>
-                      {isSelected ? <span>{selectedStaffEmployee?.name} SC</span> : null}
+                      <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
+                      <span className={`delta-${deltaTone}`}>
+                        {year.deltaPercent === null
+                          ? "비교 없음"
+                          : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
+                      </span>
                     </header>
-                    <div className="analysis-staff-cohort-track">
-                      <i
-                        style={
-                          {
-                            "--staff-cohort-width": `${(cohort.average ?? 0) * 10}%`,
-                          } as CSSProperties
-                        }
-                      />
+                    <div className="analysis-staff-chart-track">
+                      <div className="analysis-staff-chart-bars">
+                        <div
+                          className="analysis-staff-chart-bar employee"
+                          style={
+                            { "--staff-bar-height": `${barHeight}%` } as CSSProperties
+                          }
+                        >
+                          <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
+                          <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
+                        </div>
+                        <div
+                          className="analysis-staff-chart-bar national"
+                          style={
+                            { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
+                          }
+                        >
+                          <b>{year.nationalAverage?.toFixed(1) ?? "―"}</b>
+                          <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
+                        </div>
+                      </div>
                     </div>
                     <footer>
-                      <b>{cohort.average === null ? "―" : cohort.average.toFixed(2)}점</b>
-                      <span>{cohort.responses.toLocaleString("ko-KR")}건 · 재직 {cohort.employeeCount}명</span>
+                      <span><i className="employee" />선택 직원</span>
+                      <span><i className="national" />전국 영업직원 평균</span>
                     </footer>
                   </article>
                 );
               })}
             </div>
-          </section>
+
+            <aside className="analysis-staff-benchmarks" aria-label="전국 및 근무연령대 비교대조군">
+              <header>
+                <div>
+                  <h3>비교대조군</h3>
+                  <p>전국 및 근무연령대</p>
+                </div>
+                <span>4개년 누적</span>
+              </header>
+
+              <article className="analysis-staff-national-benchmark">
+                <div>
+                  <span>전국 영업직원</span>
+                  <strong>{staffNationalAverage?.toFixed(2) ?? "―"}<small>점</small></strong>
+                </div>
+                <div>
+                  <b>{staffNationalResponses.toLocaleString("ko-KR")}건</b>
+                  <em className={
+                    selectedStaffNationalDelta === null
+                      ? "neutral"
+                      : selectedStaffNationalDelta >= 0
+                        ? "positive"
+                        : "negative"
+                  }>
+                    {selectedStaffNationalDelta === null
+                      ? "비교 없음"
+                      : `${selectedStaffNationalDelta >= 0 ? "▲" : "▼"} ${Math.abs(selectedStaffNationalDelta).toFixed(1)}%`}
+                  </em>
+                </div>
+              </article>
+
+              <section className="analysis-staff-tenure" aria-label="근무연령대별 상담 만족도 비교">
+                <header>
+                  <div>
+                    <h3>근무연령대 비교</h3>
+                    <p>{selectedStaffEmployee?.name ?? "선택 직원"} SC · {selectedStaffTenure}</p>
+                  </div>
+                  <strong>{selectedStaffEmployee?.tenureBucketLabel ?? "―"}</strong>
+                </header>
+                <div className="analysis-staff-cohorts">
+                  {staffTenureCohorts.map((cohort) => {
+                    const isSelected = cohort.id === selectedStaffCohort?.id;
+                    return (
+                      <article className={isSelected ? "selected" : ""} key={cohort.id}>
+                        <header>
+                          <strong>{cohort.label}</strong>
+                          {isSelected ? <span>소속 구간</span> : null}
+                        </header>
+                        <div className="analysis-staff-cohort-track">
+                          <i
+                            style={
+                              {
+                                "--staff-cohort-width": `${(cohort.average ?? 0) * 10}%`,
+                              } as CSSProperties
+                            }
+                          />
+                        </div>
+                        <footer>
+                          <b>{cohort.average === null ? "―" : cohort.average.toFixed(2)}점</b>
+                          <span>{cohort.responses.toLocaleString("ko-KR")}건 · {cohort.employeeCount}명</span>
+                        </footer>
+                      </article>
+                    );
+                  })}
+                </div>
+              </section>
+            </aside>
+          </div>
 
           <section className="analysis-staff-insights" aria-label="4개년 VOC 영업지원 핵심 분석">
             <header>
