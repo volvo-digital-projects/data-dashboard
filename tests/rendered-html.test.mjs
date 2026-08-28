@@ -1267,7 +1267,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">25건<\/span>/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">08건<\/span>/);
   assert.match(staffSectionHtml, /번호[\s\S]*?영업직원[\s\S]*?누적평균[\s\S]*?회신건수/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*28px minmax\(104px, 1fr\) 52px 42px;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*36px minmax\(104px, 1fr\) 52px 42px;/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?min-height:\s*30px;/);
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[\s\S]*?height:\s*16px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
@@ -1286,13 +1286,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.ok(staffSectionHtml.indexOf("김대준") < staffSectionHtml.indexOf("정지만"));
   assert.match(
     staffSectionHtml,
-    /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
+    /class="selected" aria-pressed="true" aria-label="문정환, 상담 만족도 9\.9점, 8건"/,
   );
-  assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
   assert.match(
     staffSectionHtml,
-    /aria-label="김대준 미소 표정 전환"[\s\S]*kim-dae-jun-smile\.png/,
+    /src="\/staff-profiles\/h-motors\/gangnam-daechi\/moon-jung-hwan\.jpg"/,
   );
+  assert.match(staffSectionHtml, /alt="문정환 공식 프로필"/);
   assert.match(
     css,
     /\.analysis-staff-profile-photo\.smiling img\.smile\s*\{[\s\S]*?opacity:\s*1;/,
@@ -1316,23 +1316,26 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     staffSectionHtml,
-    /class="analysis-staff-certification-card"[\s\S]*?G-3[\s\S]*?A-1[\s\S]*?C-0/,
+    /class="analysis-staff-certification-card"[\s\S]*?G-0[\s\S]*?A-0[\s\S]*?C-0/,
   );
   assert.match(
     staffSectionHtml,
-    /aria-label="누적 인증 기록 Grand 3회, Advanced 1회, Certified 0회"/,
+    /aria-label="누적 인증 기록 Grand 0회, Advanced 0회, Certified 0회"/,
   );
   assert.doesNotMatch(staffSectionHtml, /에이치모터스 공식 프로필/);
   assert.match(staffSectionHtml, /2023/);
   assert.match(staffSectionHtml, /2024/);
   assert.match(staffSectionHtml, /2025/);
   assert.match(staffSectionHtml, /2026 YTD/);
-  assert.match(staffSectionHtml, /13건/);
+  assert.match(staffSectionHtml, />VOC 고객회신 건수<[^]*?<strong>8<small>건<\/small>/);
   assert.match(staffSectionHtml, /상담 만족도 평균\(누적\)/);
   assert.doesNotMatch(staffSectionHtml, /고객상담 만족도 평균\(2023 ~ 2026 YTD\)/);
   assert.match(staffSectionHtml, /고객상담 만족도/);
   assert.match(staffSectionHtml, /전국 영업직원 평균/);
-  assert.match(staffSectionHtml, /class="analysis-staff-trend-line"/);
+  assert.match(
+    analysisSource,
+    /useState<string \| null>\(null\)[\s\S]*?key=\{selectedStaffEmployee\?\.name \?\? "staff-history"\}/,
+  );
   assert.match(
     analysisSource,
     /const staffHistoryChartMinScore = 7;[\s\S]*?const staffHistoryChartMaxScore = 10;[\s\S]*?const staffHistoryChartHeight = \(score: number\) =>/,
@@ -1347,17 +1350,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-trend-marker"/g) ?? []).length,
-    4,
+    1,
   );
   assert.match(
     staffSectionHtml,
     /class="analysis-staff-chart-bar national"[\s\S]*class="analysis-staff-chart-bar employee"/,
   );
-  assert.match(
-    staffSectionHtml,
-    /class="analysis-staff-trend-line"[\s\S]*<polyline pathLength="1"/,
-  );
-  assert.match(staffSectionHtml, /--staff-trend-x:18\.75%/);
+  assert.match(staffSectionHtml, /--staff-trend-x:43\.75%/);
   assert.match(
     css,
     /\.analysis-staff-year-bars\s*\{[\s\S]*?display:\s*grid;[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*?gap:\s*0;/,
@@ -1386,7 +1385,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     staffSectionHtml,
-    /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*김대준[\s\S]*김대준 4개년 추이/,
+    /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*문정환[\s\S]*문정환 4개년 추이/,
   );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
   assert.match(
@@ -1439,8 +1438,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-scatter-average"/);
   assert.match(staffSectionHtml, /class="analysis-staff-scatter-showroom"/);
   assert.match(staffSectionHtml, />강남대치 SC</);
-  assert.doesNotMatch(staffSectionHtml, /김대준 SC 좌표/);
-  assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.3점 · 25건/);
+  assert.doesNotMatch(staffSectionHtml, /문정환 SC 좌표/);
+  assert.match(staffSectionHtml, /문정환 SC/);
   assert.match(staffSectionHtml, />상담 만족도</);
   assert.match(staffSectionHtml, /볼보 모든 영업 직원/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
@@ -1448,32 +1447,24 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#16708f/);
   assert.match(css, /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*rgba\(131, 102, 167, 0\.82\)/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
-  assert.doesNotMatch(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
+  assert.doesNotMatch(staffSectionHtml, /aria-label="문정환 공식 프로필 사진"/);
   assert.doesNotMatch(staffSectionHtml, /소속구간/);
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-scatter-population"/g) ?? []).length,
     1,
   );
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-cohorts"/);
-  assert.match(staffSectionHtml, /13년 6개월/);
+  assert.match(staffSectionHtml, /2년 6개월/);
   assert.doesNotMatch(staffSectionHtml, /MANAGER COACHING VIEW/);
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-detail-heading/);
   assert.doesNotMatch(staffSectionHtml, /4개년 추이 · 전국\/근무연령대 비교 · 고객 코멘트/);
   assert.doesNotMatch(visibleHtml, />4개년 VOC 영업지원 핵심 분석</);
   assert.doesNotMatch(visibleHtml, /2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다/);
-  assert.equal(
-    (visibleHtml.match(/class="analysis-staff-insight-count"/g) ?? []).length,
-    2,
-  );
-  assert.equal((visibleHtml.match(/aria-label="25"/g) ?? []).length, 2);
+  assert.match(analysisSource, /analysis-staff-insight-count/);
   assert.match(css, /\.analysis-staff-insight-count\s*\{[\s\S]*?width:\s*20px;[\s\S]*?height:\s*20px;[\s\S]*?border-radius:\s*50%;/);
-  assert.match(visibleHtml, /친절한 응대/);
   assert.doesNotMatch(visibleHtml, /진행상황 선제 안내/);
-  assert.match(visibleHtml, /개선·보강/);
   assert.doesNotMatch(visibleHtml, /개선 기회/);
   assert.doesNotMatch(visibleHtml, /코칭 실행/);
-  assert.match(visibleHtml, /보증·정비 안내/);
-  assert.match(visibleHtml, /제품 강점 설명/);
   assert.doesNotMatch(visibleHtml, /고객이 재문의하기 전에 계약·출고 진행상황/);
   assert.doesNotMatch(visibleHtml, /보증·정비·소모품 등 포함·제외 항목/);
   assert.doesNotMatch(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능/);

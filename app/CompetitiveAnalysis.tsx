@@ -587,7 +587,7 @@ export default function CompetitiveAnalysis({
     "settled" | "guides" | "zones" | "points"
   >("settled");
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
-  const [selectedStaffName, setSelectedStaffName] = useState("김대준");
+  const [selectedStaffName, setSelectedStaffName] = useState<string | null>(null);
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),

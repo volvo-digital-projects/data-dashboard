@@ -4630,7 +4630,7 @@ input:focus-visible {
 .analysis-staff-roster > header {
   min-height: 30px;
   display: grid;
-  grid-template-columns: 28px minmax(104px, 1fr) 52px 42px;
+  grid-template-columns: 36px minmax(104px, 1fr) 52px 42px;
   align-items: center;
   padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
@@ -4662,7 +4662,7 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 28px minmax(104px, 1fr) 52px 42px;
+  grid-template-columns: 36px minmax(104px, 1fr) 52px 42px;
   align-items: center;
   gap: 0;
   padding: 4px 0;
@@ -4717,7 +4717,7 @@ input:focus-visible {
   grid-template-columns: minmax(30px, 1fr) 58px;
   align-items: center;
   gap: 4px;
-  padding: 0 7px;
+  padding: 0 7px 0 11px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
 
