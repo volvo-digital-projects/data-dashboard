@@ -1267,6 +1267,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /4개년 VOC 영업지원 핵심 분석/);
   assert.match(visibleHtml, /친절한 응대/);
   assert.match(visibleHtml, /진행상황 선제 안내/);
+  assert.match(visibleHtml, /개선·보강/);
+  assert.doesNotMatch(visibleHtml, /개선 기회/);
+  assert.match(visibleHtml, /코칭 실행/);
+  assert.match(visibleHtml, /고객이 재문의하기 전에 계약·출고 진행상황, 지연 사유와 다음 안내 일정을 먼저 공유/);
+  assert.match(visibleHtml, /보증·정비·소모품 등 포함·제외 항목과 이용 시점을 상담 중 체크리스트로 안내/);
+  assert.match(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능과 경쟁 차종 대비 장점을 실제 사용 예시로 설명/);
   assert.match(staffSectionHtml, /\d{6} Sales-DMS 재직인원 기준/);
   assert.doesNotMatch(staffSectionHtml, /VOC 2026\.08\.24 기준/);
   assert.doesNotMatch(staffSectionHtml, /교차검증 메모/);

@@ -5370,6 +5370,63 @@ input:focus-visible {
   color: #b58973;
 }
 
+.analysis-staff-insights article.improvement > .analysis-staff-improvement-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+}
+
+.analysis-staff-improvement-item {
+  display: grid;
+  grid-template-columns: minmax(118px, 0.38fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 7px 9px;
+  border: 1px solid #efddd3;
+  border-radius: 6px;
+  background: #fcf5f1;
+}
+
+.analysis-staff-improvement-item > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.analysis-staff-improvement-item strong {
+  color: #8d4f32;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.analysis-staff-improvement-item small {
+  flex: 0 0 auto;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: #f5e5dc;
+  color: #ae7256;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.analysis-staff-improvement-item p {
+  margin: 0;
+  color: #5d6f79;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.analysis-staff-improvement-item p b {
+  display: inline-block;
+  margin-right: 6px;
+  color: #b45f37;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
 .analysis-staff-insights article > div > em {
   color: #91a0a8;
   font-size: 9px;
@@ -5684,6 +5741,11 @@ input:focus-visible {
   .analysis-staff-workspace,
   .analysis-staff-comparison-layout {
     grid-template-columns: 1fr;
+  }
+
+  .analysis-staff-improvement-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
 }

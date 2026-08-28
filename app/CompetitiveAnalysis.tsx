@@ -100,6 +100,16 @@ const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
   StaffProfileShowroom
 >;
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
+const staffImprovementActionByLabel: Record<string, string> = {
+  "진행상황 선제 안내":
+    "고객이 재문의하기 전에 계약·출고 진행상황, 지연 사유와 다음 안내 일정을 먼저 공유",
+  "서비스 품목 안내":
+    "보증·정비·소모품 등 포함·제외 항목과 이용 시점을 상담 중 체크리스트로 안내",
+  "제품 강점 설명 확장":
+    "고객의 사용 목적을 먼저 확인하고 관련 기능과 경쟁 차종 대비 장점을 실제 사용 예시로 설명",
+};
+const staffImprovementFallback =
+  "해당 고객 의견을 실제 상담 사례와 함께 확인하고, 다음 상담에서 사용할 안내 문장을 구체화";
 const staffTenureScatterPopulation: StaffTenureScatterPoint[] = Object.entries(
   staffAnalysisByCdsid,
 ).flatMap(([cdsid, showroom]) =>
@@ -1636,16 +1646,23 @@ export default function CompetitiveAnalysis({
                 </div>
               </article>
               <article className="improvement">
-                <h4>개선 기회</h4>
-                <div>
+                <h4>개선·보강</h4>
+                <div className="analysis-staff-improvement-list">
                   {(selectedStaffEmployee?.improvementKeywords ?? []).length ? (
                     selectedStaffEmployee?.improvementKeywords.map((keyword) => (
-                      <span key={keyword.label}>
-                        {keyword.label}<small>{keyword.mentions}회</small>
-                      </span>
+                      <div className="analysis-staff-improvement-item" key={keyword.label}>
+                        <div>
+                          <strong>{keyword.label}</strong>
+                          <small>{keyword.mentions}회</small>
+                        </div>
+                        <p>
+                          <b>코칭 실행</b>
+                          {staffImprovementActionByLabel[keyword.label] ?? staffImprovementFallback}
+                        </p>
+                      </div>
                     ))
                   ) : (
-                    <em>반복 확인된 개선 키워드 없음</em>
+                    <em>반복 확인된 개선·보강 키워드 없음</em>
                   )}
                 </div>
               </article>
