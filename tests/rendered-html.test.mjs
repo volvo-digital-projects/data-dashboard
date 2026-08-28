@@ -1210,10 +1210,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /김대준/);
   assert.doesNotMatch(staffSectionHtml, /영업직원 · 13년 6개월/);
   assert.match(staffSectionHtml, /9\.28/);
-  assert.match(staffSectionHtml, /<i aria-hidden="true">\/<\/i><small>25건<\/small>/);
-  assert.match(staffSectionHtml, /<i aria-hidden="true">\/<\/i><small>08건<\/small>/);
-  assert.match(css, /\.analysis-staff-roster-score\s*\{[\s\S]*?grid-template-columns:\s*40px 7px 24px;[\s\S]*?column-gap:\s*0;/);
-  assert.match(css, /\.analysis-staff-roster-score strong\s*\{[\s\S]*?font-size:\s*12px;[\s\S]*?font-variant-numeric:\s*tabular-nums;[\s\S]*?text-align:\s*right;/);
+  assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">25건<\/span>/);
+  assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">08건<\/span>/);
+  assert.match(staffSectionHtml, /번호[\s\S]*?영업직원[\s\S]*?누적평균[\s\S]*?회신건수/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*28px minmax\(68px, 1fr\) 52px 42px;/);
+  assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
+  assert.match(css, /\.analysis-staff-roster-average\s*\{[\s\S]*?font-size:\s*12px;/);
   assert.ok(staffSectionHtml.indexOf("문정환") < staffSectionHtml.indexOf("박영환"));
   assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("김대준"));
   assert.ok(staffSectionHtml.indexOf("김대준") < staffSectionHtml.indexOf("정지만"));
@@ -1316,7 +1318,6 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-cohorts"/);
   assert.match(staffSectionHtml, /13년 6개월/);
   assert.match(staffSectionHtml, /10년 이상/);
-  assert.match(staffSectionHtml, /14명/);
   assert.match(staffSectionHtml, /MANAGER COACHING VIEW/);
   assert.doesNotMatch(visibleHtml, />4개년 VOC 영업지원 핵심 분석</);
   assert.doesNotMatch(visibleHtml, /2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다/);

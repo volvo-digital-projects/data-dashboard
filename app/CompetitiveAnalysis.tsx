@@ -1317,11 +1317,11 @@ export default function CompetitiveAnalysis({
               className="analysis-staff-roster"
               aria-label="전체 기간 상담 만족도 순위별 소속 직원"
             >
-              <header>
-                <div>
-                  <h3>소속 직원 순위</h3>
-                </div>
-                <span>{currentSalesStaff.length}명</span>
+              <header className="analysis-staff-roster-columns" aria-hidden="true">
+                <span>번호</span>
+                <span>영업직원</span>
+                <span>누적평균</span>
+                <span>회신건수</span>
               </header>
               <div className="analysis-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, responses }, index) => {
@@ -1343,10 +1343,11 @@ export default function CompetitiveAnalysis({
                       <span className="analysis-staff-roster-identity">
                         <strong>{employee.name}</strong>
                       </span>
-                      <span className="analysis-staff-roster-score">
-                        <strong>{average === null ? "―" : average.toFixed(2)}</strong>
-                        <i aria-hidden="true">/</i>
-                        <small>{String(responses).padStart(2, "0")}건</small>
+                      <span className="analysis-staff-roster-average">
+                        {average === null ? "―" : average.toFixed(2)}
+                      </span>
+                      <span className="analysis-staff-roster-responses">
+                        {String(responses).padStart(2, "0")}건
                       </span>
                     </button>
                   );

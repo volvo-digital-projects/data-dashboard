@@ -4582,16 +4582,14 @@ input:focus-visible {
 
 .analysis-staff-roster > header {
   min-height: 44px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 28px minmax(68px, 1fr) 52px 42px;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 11px 12px;
+  padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
   background: #edf4f7;
 }
 
-.analysis-staff-roster > header h3,
 .analysis-staff-detail-heading h3 {
   margin: 0;
   color: #14384c;
@@ -4599,7 +4597,6 @@ input:focus-visible {
   font-weight: 760;
 }
 
-.analysis-staff-roster > header p,
 .analysis-staff-detail-heading p {
   margin: 3px 0 0;
   color: #738896;
@@ -4608,18 +4605,20 @@ input:focus-visible {
 }
 
 .analysis-staff-roster > header > span {
-  display: inline-flex;
+  min-width: 0;
+  height: 22px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
-  min-height: 23px;
-  padding: 0 8px;
-  border: 1px solid #c9dce5;
-  border-radius: 999px;
-  background: #fff;
-  color: #315d73;
+  padding: 0 4px;
+  color: #587383;
   font-size: 9px;
   font-weight: 720;
+  white-space: nowrap;
+}
+
+.analysis-staff-roster > header > span + span {
+  border-left: 1px solid rgba(137, 166, 180, 0.25);
 }
 
 .analysis-staff-roster-list {
@@ -4630,10 +4629,10 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 25px minmax(0, 1fr) auto;
+  grid-template-columns: 28px minmax(68px, 1fr) 52px 42px;
   align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
+  gap: 0;
+  padding: 4px 0;
   border: 1px solid transparent;
   border-radius: 6px;
   background: transparent;
@@ -4679,11 +4678,12 @@ input:focus-visible {
   color: #fff;
 }
 
-.analysis-staff-roster-identity,
-.analysis-staff-roster-score {
+.analysis-staff-roster-identity {
   min-width: 0;
   display: flex;
   align-items: baseline;
+  padding: 0 7px;
+  border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
 
 .analysis-staff-roster-identity strong {
@@ -4695,44 +4695,30 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.analysis-staff-roster-score small {
-  color: #83949e;
+.analysis-staff-roster-average,
+.analysis-staff-roster-responses {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 5px;
+  border-left: 1px solid rgba(137, 166, 180, 0.18);
   font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  white-space: nowrap;
+}
+
+.analysis-staff-roster-average {
+  color: #0d5f7d;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.analysis-staff-roster-responses {
+  color: #83949e;
   font-size: 7.5px;
   font-weight: 620;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.analysis-staff-roster-score {
-  display: grid;
-  grid-template-columns: 40px 7px 24px;
-  justify-content: flex-end;
-  align-items: baseline;
-  column-gap: 0;
-  white-space: nowrap;
-}
-
-.analysis-staff-roster-score strong {
-  color: #0d5f7d;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-  line-height: 1;
-  text-align: right;
-}
-
-.analysis-staff-roster-score > i {
-  color: #83949e;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 7.5px;
-  font-style: normal;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-  text-align: center;
 }
 
 .analysis-staff-detail {
