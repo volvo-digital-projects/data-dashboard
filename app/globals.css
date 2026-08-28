@@ -4834,15 +4834,6 @@ input:focus-visible {
   font-size: 20px;
 }
 
-.analysis-staff-summary article > em {
-  grid-column: 1 / -1;
-  color: #8798a2;
-  font-size: 7px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.1;
-}
-
 .analysis-staff-summary article.analysis-staff-profile-card {
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);

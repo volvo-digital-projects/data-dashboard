@@ -332,8 +332,6 @@ const formatStaffTenure = (months: number) => {
   return `${years}년 ${remainingMonths}개월`;
 };
 
-const formatStaffDate = (value: string) => value.replaceAll("-", ".");
-
 const formatStaffShortDate = (value: string) => value.replaceAll("-", "").slice(2);
 
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
@@ -1393,9 +1391,6 @@ export default function CompetitiveAnalysis({
               <strong>
                 {selectedStaffTenure}
               </strong>
-              <em>
-                입사일 {selectedStaffEmployee ? formatStaffDate(selectedStaffEmployee.hireDate) : "―"}
-              </em>
             </article>
             <article>
               <span>상담 만족도 평균(누적)</span>

@@ -1239,6 +1239,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.doesNotMatch(
     staffSectionHtml,
+    /<span>근무기간<\/span><strong>13년 6개월<\/strong><em>입사일 2013\.02\.01<\/em>/,
+  );
+  assert.doesNotMatch(
+    staffSectionHtml,
     /class="analysis-staff-profile-card"[\s\S]*?<div><span>선택 직원<\/span>/,
   );
   assert.match(
