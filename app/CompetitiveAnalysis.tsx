@@ -611,6 +611,17 @@ export default function CompetitiveAnalysis({
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const resetStaffSelection = () => {
+      setSelectedStaffName(null);
+      setSmilingStaffName(null);
+    };
+
+    resetStaffSelection();
+    window.addEventListener("pageshow", resetStaffSelection);
+    return () => window.removeEventListener("pageshow", resetStaffSelection);
+  }, [initialCdsid]);
+
   useEffect(
     () => () => {
       scatterMotionTimersRef.current.forEach((timer) =>

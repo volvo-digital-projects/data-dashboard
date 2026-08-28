@@ -1311,6 +1311,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="selected" aria-pressed="true" aria-label="문정환, 상담 만족도 9\.9점, 8건"/,
   );
   assert.match(
+    analysisSource,
+    /window\.addEventListener\("pageshow", resetStaffSelection\)/,
+  );
+  assert.match(
+    analysisSource,
+    /const resetStaffSelection = \(\) => \{[\s\S]*?setSelectedStaffName\(null\);[\s\S]*?setSmilingStaffName\(null\);[\s\S]*?\};[\s\S]*?resetStaffSelection\(\);/,
+  );
+  assert.match(
     staffSectionHtml,
     /src="\/staff-profiles\/h-motors\/gangnam-daechi\/moon-jung-hwan\.jpg"/,
   );
