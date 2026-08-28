@@ -1222,6 +1222,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
   assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;/);
+  assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);[\s\S]*?font-weight:\s*600;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
+  assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*var\(--font-korean\), sans-serif;/);
   assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(

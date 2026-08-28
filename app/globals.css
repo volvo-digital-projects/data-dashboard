@@ -4743,8 +4743,10 @@ input:focus-visible {
 .analysis-staff-summary strong {
   justify-self: end;
   color: #102d40;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-family: var(--font-latin);
   font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
