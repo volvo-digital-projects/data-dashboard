@@ -4786,7 +4786,6 @@ input:focus-visible {
 
 .analysis-staff-detail {
   display: grid;
-  grid-template-rows: 54px 232px 112px;
   gap: 10px;
   padding: 10px;
   background: #fff;

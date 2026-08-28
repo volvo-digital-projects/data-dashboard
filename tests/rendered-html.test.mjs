@@ -1477,7 +1477,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(visibleHtml, /고객이 재문의하기 전에 계약·출고 진행상황/);
   assert.doesNotMatch(visibleHtml, /보증·정비·소모품 등 포함·제외 항목/);
   assert.doesNotMatch(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능/);
-  assert.match(css, /\.analysis-staff-detail\s*\{[\s\S]*?grid-template-rows:\s*54px 232px 112px;/);
+  assert.doesNotMatch(css, /\.analysis-staff-detail\s*\{[\s\S]*?grid-template-rows:\s*54px 232px 112px;/);
   assert.match(css, /\.analysis-staff-insights\s*\{[\s\S]*?height:\s*112px;[\s\S]*?min-height:\s*112px;/);
   assert.doesNotMatch(css, /\.analysis-staff-improvement-item\s*\{/);
   assert.match(staffSectionHtml, /Sales-DMS 기준/);
