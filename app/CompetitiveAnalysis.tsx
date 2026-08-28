@@ -1050,9 +1050,8 @@ export default function CompetitiveAnalysis({
             </div>
             <div className="analysis-staff-source">
               <span>
-                DMS {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} 기준
+                {staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)} Sales-DMS 재직인원 기준
               </span>
-              <span>VOC {staffAnalysisSource.vocThrough.replaceAll("-", ".")} 기준</span>
             </div>
           </header>
 

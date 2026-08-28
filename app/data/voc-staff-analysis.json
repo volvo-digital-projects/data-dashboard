@@ -5,7 +5,7 @@
     "rosterCheckedAt": "2026-08-28",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "현재 재직자 · 영업직원/영업팀장",
-    "rosterUpdateSchedule": "매월 1일 06:00 KST",
+    "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD"
   },
   "showrooms": {
