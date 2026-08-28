@@ -1168,10 +1168,25 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
   assert.match(visibleHtml, /소속 영업직원 상담만족도 결과/);
-  assert.match(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장/);
+  assert.match(visibleHtml, /현재 볼보 강남대치 소속으로 확인된/);
+  assert.match(visibleHtml, /영업직원·영업팀장만 VOC 원데이터/);
   assert.match(visibleHtml, /김대준/);
   assert.match(visibleHtml, /조동호/);
-  assert.match(visibleHtml, /조동조 3건/);
+  assert.match(visibleHtml, /조동조 36건/);
+  const staffSectionHtml = visibleHtml.match(
+    /<section class="analysis-staff-card"[\s\S]*?<\/section>/,
+  )?.[0];
+  assert.ok(staffSectionHtml);
+  assert.match(staffSectionHtml, /id="analysis-staff-select"/);
+  assert.match(staffSectionHtml, /김대준 · 영업직원/);
+  assert.match(staffSectionHtml, /2023/);
+  assert.match(staffSectionHtml, /2024/);
+  assert.match(staffSectionHtml, /2025/);
+  assert.match(staffSectionHtml, /2026 YTD/);
+  assert.match(staffSectionHtml, /13건/);
+  assert.match(staffSectionHtml, /4개년 상담 만족도/);
+  assert.match(staffSectionHtml, /매월 1일 06:00 KST/);
+  assert.doesNotMatch(staffSectionHtml, /analysis-staff-quarters/);
 
   const regionResponse = await render(
     "/dashboard/6KR6834/analysis?view=region",

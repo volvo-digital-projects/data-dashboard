@@ -38,12 +38,12 @@ type AnalysisPoint = AnalysisShowroom & {
   combined: number;
 };
 
-type StaffQuarter = "Q1" | "Q2" | "Q3" | "YTD";
-type StaffQuarterMetric = { responses: number; scoreSum: number };
+type StaffYear = "2023" | "2024" | "2025" | "2026";
+type StaffYearMetric = { responses: number; scoreSum: number };
 type StaffEmployee = {
   name: string;
-  role: string;
-  quarters: Partial<Record<Exclude<StaffQuarter, "YTD">, StaffQuarterMetric>>;
+  role: "영업직원" | "영업팀장";
+  years: Partial<Record<StaffYear, StaffYearMetric>>;
 };
 type StaffAnalysisShowroom = {
   showroom: string;
@@ -58,6 +58,7 @@ const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   StaffAnalysisShowroom
 >;
 const staffAnalysisSource = vocStaffAnalysisJson.source;
+const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
 
 type ScatterLabelPlacement =
   | "left-up"
@@ -446,7 +447,7 @@ export default function CompetitiveAnalysis({
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
-  const [staffQuarter, setStaffQuarter] = useState<StaffQuarter>("Q3");
+  const [selectedStaffName, setSelectedStaffName] = useState("김대준");
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
@@ -549,52 +550,43 @@ export default function CompetitiveAnalysis({
   const selectedAwardCount = selectedAwardPeriods.length;
   const selectedAwardName = displayShowroomNameWithoutBrand(selected.showroom);
   const selectedStaffAnalysis = staffAnalysisByCdsid[selected.cdsid];
-  const selectedStaffRows = useMemo(() => {
-    if (!selectedStaffAnalysis) return [];
-
-    return selectedStaffAnalysis.employees
-      .map((employee) => {
-        const metrics =
-          staffQuarter === "YTD"
-            ? Object.values(employee.quarters).reduce<StaffQuarterMetric>(
-                (total, current) => ({
-                  responses: total.responses + (current?.responses ?? 0),
-                  scoreSum: total.scoreSum + (current?.scoreSum ?? 0),
-                }),
-                { responses: 0, scoreSum: 0 },
-              )
-            : employee.quarters[staffQuarter] ?? { responses: 0, scoreSum: 0 };
-        return {
-          ...employee,
-          responses: metrics.responses,
-          scoreSum: metrics.scoreSum,
-          average:
-            metrics.responses > 0 ? metrics.scoreSum / metrics.responses : null,
-        };
-      })
-      .sort((a, b) => {
-        if (a.average === null && b.average !== null) return 1;
-        if (a.average !== null && b.average === null) return -1;
-        if (a.average !== null && b.average !== null && a.average !== b.average) {
-          return b.average - a.average;
-        }
-        if (a.responses !== b.responses) return b.responses - a.responses;
-        return a.name.localeCompare(b.name, "ko-KR");
-      });
-  }, [selectedStaffAnalysis, staffQuarter]);
-  const selectedStaffResponses = selectedStaffRows.reduce(
-    (sum, employee) => sum + employee.responses,
+  const currentSalesStaff = useMemo(
+    () =>
+      (selectedStaffAnalysis?.employees ?? []).filter(
+        (employee) =>
+          employee.role === "영업직원" || employee.role === "영업팀장",
+      ),
+    [selectedStaffAnalysis],
+  );
+  const selectedStaffEmployee =
+    currentSalesStaff.find((employee) => employee.name === selectedStaffName) ??
+    currentSalesStaff[0];
+  const selectedStaffYearRows = staffYears.map((year) => {
+    const metrics = selectedStaffEmployee?.years[year] ?? {
+      responses: 0,
+      scoreSum: 0,
+    };
+    return {
+      year,
+      responses: metrics.responses,
+      scoreSum: metrics.scoreSum,
+      average:
+        metrics.responses > 0 ? metrics.scoreSum / metrics.responses : null,
+    };
+  });
+  const selectedStaffResponses = selectedStaffYearRows.reduce(
+    (sum, year) => sum + year.responses,
     0,
   );
-  const selectedStaffScoreSum = selectedStaffRows.reduce(
-    (sum, employee) => sum + employee.scoreSum,
+  const selectedStaffScoreSum = selectedStaffYearRows.reduce(
+    (sum, year) => sum + year.scoreSum,
     0,
   );
   const selectedStaffAverage = selectedStaffResponses
     ? selectedStaffScoreSum / selectedStaffResponses
     : null;
-  const selectedStaffRespondents = selectedStaffRows.filter(
-    (employee) => employee.responses > 0,
+  const selectedStaffResponseYears = selectedStaffYearRows.filter(
+    (year) => year.responses > 0,
   ).length;
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
@@ -1056,33 +1048,49 @@ export default function CompetitiveAnalysis({
             <div>
               <h2>소속 영업직원 상담만족도 결과</h2>
               <p>
-                Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터와
-                교차검증합니다.
+                현재 {displayShowroomName(selected.showroom)} 소속으로 확인된
+                영업직원·영업팀장만 VOC 원데이터와 교차검증합니다.
               </p>
             </div>
             <div className="analysis-staff-source">
-              <span>DMS 명단 {selectedStaffAnalysis.employees.length}명</span>
+              <span>DMS 명단 {currentSalesStaff.length}명</span>
+              <span>
+                DMS {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} 기준
+              </span>
               <span>VOC {staffAnalysisSource.vocThrough.replaceAll("-", ".")} 기준</span>
             </div>
           </header>
 
-          <nav className="analysis-staff-quarters" aria-label="직원 상담 만족도 기간">
-            {(["Q1", "Q2", "Q3", "YTD"] as StaffQuarter[]).map((quarter) => (
-              <button
-                type="button"
-                className={staffQuarter === quarter ? "active" : ""}
-                aria-pressed={staffQuarter === quarter}
-                onClick={() => setStaffQuarter(quarter)}
-                key={quarter}
+          <div className="analysis-staff-picker">
+            <label htmlFor="analysis-staff-select">
+              현재 소속 영업직원 / 영업팀장
+            </label>
+            <div>
+              <select
+                id="analysis-staff-select"
+                value={selectedStaffEmployee?.name ?? ""}
+                onChange={(event) => setSelectedStaffName(event.target.value)}
               >
-                {quarter === "YTD" ? "누적" : quarter}
-              </button>
-            ))}
-          </nav>
+                {currentSalesStaff.map((employee) => (
+                  <option value={employee.name} key={employee.name}>
+                    {employee.name} · {employee.role}
+                  </option>
+                ))}
+              </select>
+              <span>{currentSalesStaff.length}명 재직 확인</span>
+            </div>
+          </div>
 
           <div className="analysis-staff-summary">
             <article>
-              <span>상담 만족도</span>
+              <span>선택 직원</span>
+              <strong className="name">
+                {selectedStaffEmployee?.name ?? "―"}
+                <small>{selectedStaffEmployee?.role ?? ""}</small>
+              </strong>
+            </article>
+            <article>
+              <span>4개년 상담 만족도</span>
               <strong>
                 {selectedStaffAverage === null
                   ? "―"
@@ -1098,69 +1106,47 @@ export default function CompetitiveAnalysis({
               </strong>
             </article>
             <article>
-              <span>응답 보유 직원</span>
+              <span>응답 연도</span>
               <strong>
-                {selectedStaffRespondents}
-                <small>/ {selectedStaffAnalysis.employees.length}명</small>
-              </strong>
-            </article>
-            <article className="audit">
-              <span>교차검증 제외</span>
-              <strong>
-                {selectedStaffAnalysis.excludedRawNames.length}
-                <small>명</small>
+                {selectedStaffResponseYears}
+                <small>/ 4개년</small>
               </strong>
             </article>
           </div>
 
-          <div className="analysis-staff-table" role="table" aria-label="직원별 상담 만족도">
-            <div className="analysis-staff-table-head" role="row">
-              <span role="columnheader">직원</span>
-              <span role="columnheader">직무</span>
-              <span role="columnheader">VOC 회신</span>
-              <span role="columnheader">상담 만족도</span>
-              <span role="columnheader">전시장 평균 대비</span>
-            </div>
-            {selectedStaffRows.map((employee) => {
-              const delta =
-                employee.average !== null && selectedStaffAverage !== null
-                  ? employee.average - selectedStaffAverage
-                  : null;
+          <div
+            className="analysis-staff-history"
+            role="img"
+            aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2023년부터 2026년 YTD까지 상담 만족도`}
+          >
+            {selectedStaffYearRows.map((year) => {
+              const barHeight = year.average === null ? 0 : year.average * 10;
               return (
-                <div
-                  className={`analysis-staff-row ${
-                    employee.average === null ? "empty" : ""
+                <article
+                  className={year.average === null ? "empty" : ""}
+                  key={year.year}
+                  aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
+                    year.average === null
+                      ? "회신 없음"
+                      : `평균 ${year.average.toFixed(1)}점, ${year.responses}건`
                   }`}
-                  role="row"
-                  key={employee.name}
                 >
-                  <strong role="cell">{employee.name}</strong>
-                  <span role="cell">{employee.role}</span>
-                  <span role="cell">
-                    {employee.responses ? `${employee.responses}건` : "회신 없음"}
-                  </span>
-                  <b role="cell">
-                    {employee.average === null ? "―" : employee.average.toFixed(1)}
-                  </b>
-                  <em
-                    role="cell"
-                    className={
-                      delta === null
-                        ? "neutral"
-                        : delta > 0
-                          ? "positive"
-                          : delta < 0
-                            ? "negative"
-                            : "neutral"
-                    }
-                  >
-                    {delta === null
-                      ? "표본 없음"
-                      : `${delta > 0 ? "▲" : delta < 0 ? "▼" : "―"} ${Math.abs(
-                          delta,
-                        ).toFixed(1)}점`}
-                  </em>
-                </div>
+                  <header>
+                    <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
+                    <span>{year.responses ? `${year.responses}건` : "회신 없음"}</span>
+                  </header>
+                  <div className="analysis-staff-chart-track">
+                    <div
+                      className="analysis-staff-chart-bar"
+                      style={
+                        { "--staff-bar-height": `${barHeight}%` } as CSSProperties
+                      }
+                    >
+                      <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
+                    </div>
+                  </div>
+                  <footer>고객만족도 평균</footer>
+                </article>
               );
             })}
           </div>
@@ -1175,7 +1161,7 @@ export default function CompetitiveAnalysis({
               않습니다.
             </p>
             <span>
-              명단 확인 {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} · 주 1회 갱신
+              명단 확인 {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} · {staffAnalysisSource.rosterUpdateSchedule}
             </span>
           </footer>
         </section>

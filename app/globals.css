@@ -4495,16 +4495,6 @@ input:focus-visible {
   border-bottom: 1px solid rgba(44, 91, 116, 0.12);
 }
 
-.analysis-staff-kicker {
-  display: block;
-  margin-bottom: 5px;
-  color: #ef743e;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
 .analysis-staff-heading h2 {
   margin: 0;
   color: #102d40;
@@ -4539,29 +4529,48 @@ input:focus-visible {
   font-weight: 650;
 }
 
-.analysis-staff-quarters {
+.analysis-staff-picker {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 86px));
-  gap: 7px;
+  grid-template-columns: minmax(180px, 0.7fr) minmax(260px, 1.3fr);
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  border: 1px solid #dce7ec;
+  border-radius: 7px;
+  background: #f7fafb;
 }
 
-.analysis-staff-quarters button {
-  min-height: 34px;
-  border: 1px solid #d6e2e8;
-  border-radius: 6px;
-  background: #f6f9fa;
-  color: #718694;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
+.analysis-staff-picker label {
+  color: #486779;
   font-size: 11px;
-  font-weight: 650;
+  font-weight: 720;
+}
+
+.analysis-staff-picker > div {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.analysis-staff-picker select {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 38px 0 13px;
+  border: 1px solid #bcd2dd;
+  border-radius: 6px;
+  background: #fff;
+  color: #15394e;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.analysis-staff-quarters button.active {
-  border-color: #6fabc2;
-  background: #e5f2f7;
-  color: #17617f;
-  box-shadow: inset 0 0 0 1px rgba(91, 158, 184, 0.24);
+.analysis-staff-picker > div > span {
+  color: #718694;
+  font-size: 10px;
+  white-space: nowrap;
 }
 
 .analysis-staff-summary {
@@ -4580,11 +4589,6 @@ input:focus-visible {
   border: 1px solid #dbe6eb;
   border-radius: 7px;
   background: #f7fafb;
-}
-
-.analysis-staff-summary article.audit {
-  border-color: #f0dfd6;
-  background: #fff9f6;
 }
 
 .analysis-staff-summary span {
@@ -4608,81 +4612,114 @@ input:focus-visible {
   font-weight: 600;
 }
 
-.analysis-staff-table {
-  overflow: hidden;
-  border: 1px solid #dde7ec;
-  border-radius: 7px;
+.analysis-staff-summary strong.name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 20px;
 }
 
-.analysis-staff-table-head,
-.analysis-staff-row {
+.analysis-staff-history {
   display: grid;
-  grid-template-columns: minmax(110px, 1.3fr) minmax(92px, 0.9fr) minmax(86px, 0.8fr) minmax(100px, 0.9fr) minmax(120px, 1fr);
-  align-items: center;
-  column-gap: 12px;
-  min-height: 42px;
-  padding: 0 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.analysis-staff-table-head {
-  background: #edf3f6;
-  color: #617988;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.analysis-staff-row {
-  border-top: 1px solid #edf2f4;
-  background: #fff;
-  color: #607684;
-  font-size: 11px;
-}
-
-.analysis-staff-row:nth-child(odd) {
+.analysis-staff-history article {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dbe7ec;
+  border-radius: 7px;
   background: #fbfcfd;
 }
 
-.analysis-staff-row strong {
-  color: #173a4f;
-  font-size: 12px;
+.analysis-staff-history article > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-bottom: 1px solid #e4ecef;
+  background: #f2f6f8;
 }
 
-.analysis-staff-row b {
-  color: #0d607d;
+.analysis-staff-history article > header strong {
+  color: #183d52;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
   font-size: 13px;
 }
 
-.analysis-staff-row em {
-  justify-self: start;
-  min-width: 64px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #eef5f7;
-  color: #527080;
+.analysis-staff-history article > header span {
+  color: #657c8b;
   font-size: 10px;
-  font-style: normal;
   font-weight: 700;
+}
+
+.analysis-staff-chart-track {
+  position: relative;
+  height: 142px;
+  margin: 16px 16px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #b9ccd5;
+  background:
+    linear-gradient(to top, rgba(99, 139, 160, 0.1) 1px, transparent 1px) 0 0 / 100% 25%,
+    linear-gradient(180deg, #fbfdfe, #f3f7f9);
+}
+
+.analysis-staff-chart-bar {
+  position: absolute;
+  right: 22%;
+  bottom: 0;
+  left: 22%;
+  height: var(--staff-bar-height);
+  min-height: 0;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, #78b3c7 0%, #17617f 100%);
+  box-shadow: 0 8px 18px -12px rgba(13, 96, 125, 0.8);
+}
+
+.analysis-staff-chart-bar b {
+  position: absolute;
+  inset: 9px 0 auto;
+  color: #fff;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 19px;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(9, 48, 67, 0.22);
+}
+
+.analysis-staff-history article > footer {
+  padding: 9px 12px 11px;
+  color: #718694;
+  font-size: 9px;
   text-align: center;
 }
 
-.analysis-staff-row em.positive {
-  background: #e8f6f0;
-  color: #18775c;
+.analysis-staff-history article.empty .analysis-staff-chart-track {
+  background: repeating-linear-gradient(
+    -45deg,
+    #f5f8f9,
+    #f5f8f9 6px,
+    #eef3f5 6px,
+    #eef3f5 12px
+  );
 }
 
-.analysis-staff-row em.negative {
-  background: #fff0ef;
-  color: #bd3c45;
+.analysis-staff-history article.empty .analysis-staff-chart-bar {
+  display: none;
 }
 
-.analysis-staff-row.empty {
-  color: #a0adb5;
-}
-
-.analysis-staff-row.empty strong,
-.analysis-staff-row.empty b {
-  color: #81929c;
+.analysis-staff-history article.empty .analysis-staff-chart-track::after {
+  content: "회신 없음";
+  position: absolute;
+  inset: 50% 0 auto;
+  color: #91a2ac;
+  font-size: 10px;
+  text-align: center;
+  transform: translateY(-50%);
 }
 
 .analysis-staff-audit {
@@ -4730,16 +4767,27 @@ input:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .analysis-staff-table {
-    overflow-x: auto;
+  .analysis-staff-picker {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
-  .analysis-staff-table-head,
-  .analysis-staff-row {
-    min-width: 680px;
+  .analysis-staff-history {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .analysis-staff-audit {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .analysis-staff-picker > div {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-staff-summary,
+  .analysis-staff-history {
     grid-template-columns: 1fr;
   }
 }
