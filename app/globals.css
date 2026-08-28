@@ -5211,78 +5211,12 @@ input:focus-visible {
 .analysis-staff-benchmarks {
   min-width: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) var(--analysis-staff-comparison-legend-height);
-  gap: 8px;
+  grid-template-rows: minmax(0, 1fr) var(--analysis-staff-comparison-legend-height);
+  gap: 0;
   padding: 10px 12px 0;
   border: 1px solid #cddfe7;
   border-radius: 8px;
   background: linear-gradient(145deg, #f5f9fb 0%, #edf5f8 100%);
-}
-
-.analysis-staff-national-benchmark {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 54px;
-  padding: 8px 12px;
-  border: 1px solid #d6e4ea;
-  border-radius: 7px;
-  background: #fff;
-}
-
-.analysis-staff-national-benchmark > div {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.analysis-staff-national-benchmark > div:last-child {
-  align-items: flex-end;
-}
-
-.analysis-staff-national-benchmark span {
-  color: #587487;
-  font-size: 9px;
-  font-weight: 700;
-}
-
-.analysis-staff-national-benchmark strong {
-  color: #133c52;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 21px;
-  line-height: 1;
-}
-
-.analysis-staff-national-benchmark strong small {
-  margin-left: 2px;
-  color: #718694;
-  font-family: var(--font-korean), sans-serif;
-  font-size: 8px;
-}
-
-.analysis-staff-national-benchmark b {
-  color: #526f7f;
-  font-size: 9px;
-}
-
-.analysis-staff-national-benchmark em {
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 750;
-}
-
-.analysis-staff-national-benchmark em.positive {
-  color: #0d8068;
-}
-
-.analysis-staff-national-benchmark em.negative {
-  color: #cf493f;
-}
-
-.analysis-staff-national-benchmark em.neutral {
-  color: #718694;
 }
 
 .analysis-staff-tenure,
@@ -5623,7 +5557,7 @@ input:focus-visible {
 }
 
 .analysis-staff-tenure-scatter {
-  min-height: 226px;
+  min-height: 256px;
   flex: 1;
   display: grid;
   grid-template-rows: minmax(0, 1fr);
@@ -5636,8 +5570,8 @@ input:focus-visible {
 
 .analysis-staff-tenure-scatter-chart {
   min-width: 0;
-  min-height: 210px;
-  overflow: hidden;
+  min-height: 240px;
+  overflow: visible;
   border: 1px solid #dce8ed;
   border-radius: 6px;
   background: #fff;
@@ -5645,7 +5579,7 @@ input:focus-visible {
 
 .analysis-staff-tenure-scatter-chart svg {
   width: 100%;
-  height: 200px;
+  height: 230px;
   display: block;
   overflow: visible;
 }
@@ -5674,20 +5608,32 @@ input:focus-visible {
 
 .analysis-staff-scatter-y-label {
   transform: rotate(-90deg);
-  transform-origin: 12px 101px;
+  transform-origin: 12px 116px;
 }
 
 .analysis-staff-scatter-average line {
-  stroke: #df916b;
-  stroke-width: 1;
-  stroke-dasharray: 4 4;
+  stroke: #c94743;
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
   vector-effect: non-scaling-stroke;
 }
 
-.analysis-staff-scatter-average text {
-  fill: #bd6948;
+.analysis-staff-scatter-average .label rect {
+  fill: rgba(255, 255, 255, 0.96);
+  stroke: rgba(201, 71, 67, 0.42);
+  stroke-width: 1;
+  filter: drop-shadow(0 1px 2px rgba(84, 42, 38, 0.12));
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-average .label circle {
+  fill: #c94743;
+}
+
+.analysis-staff-scatter-average .label text {
+  fill: #b63d39;
   font-family: var(--font-korean), sans-serif;
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 700;
 }
 
@@ -5695,6 +5641,14 @@ input:focus-visible {
   fill: rgba(222, 104, 62, 0.62);
   stroke: rgba(255, 255, 255, 0.94);
   stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-showroom circle {
+  fill: rgba(131, 102, 167, 0.82);
+  stroke: rgba(255, 255, 255, 0.96);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 1px 2px rgba(75, 53, 101, 0.2));
   vector-effect: non-scaling-stroke;
 }
 
@@ -5785,6 +5739,11 @@ input:focus-visible {
 .analysis-staff-benchmark-legend span.selected i {
   background: #16708f;
   box-shadow: 0 0 0 2px rgba(22, 112, 143, 0.14);
+}
+
+.analysis-staff-benchmark-legend span.showroom i {
+  background: #8366a7;
+  box-shadow: 0 0 0 2px rgba(131, 102, 167, 0.13);
 }
 
 .analysis-staff-benchmark-legend em {

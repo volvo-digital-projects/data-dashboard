@@ -819,16 +819,19 @@ export default function CompetitiveAnalysis({
   const staffNationalAverage = staffNationalResponses
     ? staffNationalScoreSum / staffNationalResponses
     : null;
-  const selectedStaffNationalDelta = staffDeltaPercent(
-    selectedStaffAverage,
-    staffNationalAverage,
-  );
   const selectedStaffTenure = selectedStaffEmployee
     ? formatStaffTenure(selectedStaffEmployee.tenureMonths)
     : "―";
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
+  );
+  const sameShowroomStaffScatterPoints = staffTenureScatterPopulation.filter(
+    (point) =>
+      point.cdsid === selected.cdsid && point.name !== selectedStaffEmployee?.name,
+  );
+  const otherStaffScatterPoints = staffTenureScatterPopulation.filter(
+    (point) => point.cdsid !== selected.cdsid,
   );
   const staffScatterMaxYears = Math.max(
     15,
@@ -848,7 +851,7 @@ export default function CompetitiveAnalysis({
       ) * 2,
     ) / 2,
   );
-  const staffScatterPlot = { left: 42, right: 448, top: 18, bottom: 174 };
+  const staffScatterPlot = { left: 42, right: 448, top: 20, bottom: 204 };
   const staffScatterX = (tenureYears: number) =>
     staffScatterPlot.left +
     (tenureYears / staffScatterMaxYears) *
@@ -1588,27 +1591,6 @@ export default function CompetitiveAnalysis({
             </div>
 
             <aside className="analysis-staff-benchmarks" aria-label="전국 및 근속기간 분포 비교대조군">
-              <article className="analysis-staff-national-benchmark">
-                <div>
-                  <span>전국 영업직원</span>
-                  <strong>{staffNationalAverage?.toFixed(1) ?? "―"}<small>점</small></strong>
-                </div>
-                <div>
-                  <b>{staffNationalResponses.toLocaleString("ko-KR")}건</b>
-                  <em className={
-                    selectedStaffNationalDelta === null
-                      ? "neutral"
-                      : selectedStaffNationalDelta >= 0
-                        ? "positive"
-                        : "negative"
-                  }>
-                    {selectedStaffNationalDelta === null
-                      ? "비교 없음"
-                      : `${selectedStaffNationalDelta >= 0 ? "▲" : "▼"} ${Math.abs(selectedStaffNationalDelta).toFixed(1)}%`}
-                  </em>
-                </div>
-              </article>
-
               <div
                 className="analysis-staff-tenure-scatter"
                 role="group"
@@ -1616,7 +1598,7 @@ export default function CompetitiveAnalysis({
               >
                 <div className="analysis-staff-tenure-scatter-chart">
                   <svg
-                    viewBox="0 0 470 210"
+                    viewBox="0 0 470 240"
                     role="img"
                     aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"}의 근속기간과 상담 만족도 좌표`}
                   >
@@ -1642,37 +1624,47 @@ export default function CompetitiveAnalysis({
                         </g>
                       );
                     })}
-                    <text className="analysis-staff-scatter-y-label" x="12" y="101" textAnchor="middle">
+                    <text className="analysis-staff-scatter-y-label" x="12" y="116" textAnchor="middle">
                       만족도
                     </text>
-                    <text className="analysis-staff-scatter-x-label" x="245" y="205" textAnchor="middle">
+                    <text className="analysis-staff-scatter-x-label" x="245" y="235" textAnchor="middle">
                       근속기간(년)
                     </text>
                     {staffNationalAverage !== null ? (
                       <g className="analysis-staff-scatter-average">
                         <line
-                          x1={staffScatterPlot.left}
-                          x2={staffScatterPlot.right}
+                          x1={staffScatterPlot.left - 10}
+                          x2={staffScatterPlot.right + 10}
                           y1={staffScatterY(staffNationalAverage)}
                           y2={staffScatterY(staffNationalAverage)}
                         />
-                        <text
-                          x={staffScatterPlot.right - 2}
-                          y={staffScatterY(staffNationalAverage) - 5}
-                          textAnchor="end"
-                        >
-                          전국 평균 {staffNationalAverage.toFixed(1)}
-                        </text>
+                        <g className="label" transform={`translate(${staffScatterPlot.right - 93} ${staffScatterY(staffNationalAverage) - 22})`}>
+                          <rect width="92" height="18" rx="9" />
+                          <circle cx="10" cy="9" r="3" />
+                          <text x="18" y="12">전국 평균 {staffNationalAverage.toFixed(1)}</text>
+                        </g>
                       </g>
                     ) : null}
                     <g className="analysis-staff-scatter-population">
-                      {staffTenureScatterPopulation.map((point) => (
+                      {otherStaffScatterPoints.map((point) => (
                         <circle
                           cx={staffScatterX(point.tenureYears)}
                           cy={staffScatterY(point.average)}
                           key={point.key}
                           r={Math.min(5.2, 2.7 + Math.sqrt(point.responses) / 3.2)}
                         />
+                      ))}
+                    </g>
+                    <g className="analysis-staff-scatter-showroom">
+                      {sameShowroomStaffScatterPoints.map((point) => (
+                        <circle
+                          cx={staffScatterX(point.tenureYears)}
+                          cy={staffScatterY(point.average)}
+                          key={point.key}
+                          r={Math.min(5.8, 3.2 + Math.sqrt(point.responses) / 3.2)}
+                        >
+                          <title>{`${point.name} SC · ${point.tenureYears.toFixed(1)}년 · ${point.average.toFixed(1)}점 · ${point.responses}건`}</title>
+                        </circle>
                       ))}
                     </g>
                     {selectedStaffScatterPoint ? (
@@ -1703,6 +1695,7 @@ export default function CompetitiveAnalysis({
               </div>
               <footer className="analysis-staff-benchmark-legend">
                 <span><i />볼보 모든 영업 직원</span>
+                <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
                 <span className="selected">
                   <i />
                   {selectedStaffScatterPoint

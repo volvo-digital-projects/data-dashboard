@@ -1408,7 +1408,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-benchmarks\s*\{[\s\S]*?grid-template-rows:\s*auto minmax\(0, 1fr\) var\(--analysis-staff-comparison-legend-height\);/,
+    /\.analysis-staff-benchmarks\s*\{[\s\S]*?grid-template-rows:\s*minmax\(0, 1fr\) var\(--analysis-staff-comparison-legend-height\);/,
   );
   assert.match(
     css,
@@ -1428,13 +1428,18 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     />00<[\s\S]*>03<[\s\S]*>06<[\s\S]*>09<[\s\S]*>12<[\s\S]*>15</,
   );
-  assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*200px;/);
+  assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*230px;/);
+  assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-national-benchmark"/);
+  assert.match(staffSectionHtml, /class="analysis-staff-scatter-average"/);
+  assert.match(staffSectionHtml, /class="analysis-staff-scatter-showroom"/);
+  assert.match(staffSectionHtml, />강남대치 SC</);
   assert.doesNotMatch(staffSectionHtml, /김대준 SC 좌표/);
   assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.3점 · 25건/);
   assert.match(staffSectionHtml, /볼보 모든 영업 직원/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
   assert.match(css, /\.analysis-staff-scatter-population circle\s*\{[\s\S]*?fill:\s*rgba\(222, 104, 62, 0\.62\)/);
   assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#16708f/);
+  assert.match(css, /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*rgba\(131, 102, 167, 0\.82\)/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
   assert.doesNotMatch(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
   assert.doesNotMatch(staffSectionHtml, /소속구간/);
