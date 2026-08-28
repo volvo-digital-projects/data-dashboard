@@ -4830,12 +4830,11 @@ input:focus-visible {
 }
 
 .analysis-staff-history {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  min-width: 0;
+  display: block;
 }
 
-.analysis-staff-history article {
+.analysis-staff-history-chart {
   min-width: 0;
   overflow: hidden;
   border: 1px solid #dbe7ec;
@@ -4843,73 +4842,88 @@ input:focus-visible {
   background: #fbfcfd;
 }
 
-.analysis-staff-history article > header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  min-height: 38px;
-  padding: 0 12px;
-  border-bottom: 1px solid #e4ecef;
-  background: #f2f6f8;
-}
-
-.analysis-staff-history article > header strong {
-  color: #183d52;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 13px;
-}
-
-.analysis-staff-history article > header span {
-  color: #657c8b;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.analysis-staff-history article > header span.delta-positive {
-  color: #0d8068;
-}
-
-.analysis-staff-history article > header span.delta-negative {
-  color: #cf493f;
-}
-
-.analysis-staff-chart-track {
+.analysis-staff-trend-plot {
   position: relative;
-  height: 142px;
-  margin: 16px 16px 0;
-  overflow: hidden;
+  height: 194px;
+  margin: 14px 14px 0;
+}
+
+.analysis-staff-year-groups {
+  position: absolute;
+  inset: 14px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.analysis-staff-year-groups > div {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 36px;
+  border-left: 1px solid rgba(166, 190, 201, 0.28);
+}
+
+.analysis-staff-year-groups > div:first-child {
+  border-left: 0;
+}
+
+.analysis-staff-year-bars {
+  position: relative;
+  overflow: visible;
   border-bottom: 1px solid #b9ccd5;
   background:
-    linear-gradient(to top, rgba(99, 139, 160, 0.1) 1px, transparent 1px) 0 0 / 100% 25%,
+    linear-gradient(to top, rgba(99, 139, 160, 0.09) 1px, transparent 1px) 0 0 / 100% 25%,
     linear-gradient(180deg, #fbfdfe, #f3f7f9);
 }
 
-.analysis-staff-chart-bars {
-  position: absolute;
-  inset: 0;
+.analysis-staff-year-axis {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  gap: 12%;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.analysis-staff-year-axis strong {
+  color: #6f8290;
+  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.analysis-staff-year-axis span {
+  color: #718694;
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.analysis-staff-year-axis span.delta-positive {
+  color: #0d8068;
+}
+
+.analysis-staff-year-axis span.delta-negative {
+  color: #cf493f;
 }
 
 .analysis-staff-chart-bar {
-  position: relative;
-  width: 29%;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 36px;
   height: var(--staff-bar-height);
   min-height: 0;
   border-radius: 5px 5px 0 0;
 }
 
-.analysis-staff-chart-bar.employee {
-  background: linear-gradient(180deg, #78b3c7 0%, #17617f 100%);
-  box-shadow: 0 8px 18px -12px rgba(13, 96, 125, 0.8);
-}
-
 .analysis-staff-chart-bar.national {
+  left: calc(50% - 56px);
   background: linear-gradient(180deg, #efab84 0%, #c9604e 100%);
   box-shadow: 0 8px 18px -12px rgba(182, 81, 62, 0.72);
+}
+
+.analysis-staff-chart-bar.employee {
+  left: calc(50% - 18px);
+  background: linear-gradient(180deg, #78b3c7 0%, #17617f 100%);
+  box-shadow: 0 8px 18px -12px rgba(13, 96, 125, 0.8);
 }
 
 .analysis-staff-chart-bar b {
@@ -4934,41 +4948,83 @@ input:focus-visible {
   text-align: center;
 }
 
-.analysis-staff-history article > footer {
-  min-height: 38px;
+.analysis-staff-trend-line,
+.analysis-staff-trend-markers {
+  position: absolute;
+  z-index: 4;
+  inset: 14px 0 auto;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.analysis-staff-trend-line polyline {
+  fill: none;
+  stroke: #17617f;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 2px 2px rgba(17, 78, 103, 0.16));
+}
+
+.analysis-staff-trend-marker {
+  position: absolute;
+  left: var(--staff-trend-x);
+  bottom: var(--staff-trend-height);
+  width: 10px;
+  height: 10px;
+  border: 2px solid #17617f;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(38, 123, 156, 0.12);
+  transform: translate(-50%, 50%);
+}
+
+.analysis-staff-history-legend {
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 9px 12px 11px;
+  gap: 14px;
+  padding: 8px 12px 10px;
+  border-top: 1px solid #e8eef1;
   color: #718694;
   font-size: 9px;
   text-align: center;
 }
 
-.analysis-staff-history article > footer span {
+.analysis-staff-history-legend span {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   white-space: nowrap;
 }
 
-.analysis-staff-history article > footer i {
+.analysis-staff-history-legend i {
   width: 7px;
   height: 7px;
   display: inline-block;
   border-radius: 2px;
 }
 
-.analysis-staff-history article > footer i.employee {
-  background: #267b9c;
-}
-
-.analysis-staff-history article > footer i.national {
+.analysis-staff-history-legend i.national {
   background: #d4705c;
 }
 
-.analysis-staff-history article.empty .analysis-staff-chart-track {
+.analysis-staff-history-legend i.employee {
+  background: #267b9c;
+}
+
+.analysis-staff-history-legend em {
+  color: #90a1aa;
+  font-size: 8px;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.analysis-staff-year-groups > div.empty .analysis-staff-year-bars {
   background: repeating-linear-gradient(
     -45deg,
     #f5f8f9,
@@ -4978,7 +5034,7 @@ input:focus-visible {
   );
 }
 
-.analysis-staff-history article.empty .analysis-staff-chart-bar.employee {
+.analysis-staff-year-groups > div.empty .analysis-staff-chart-bar.employee {
   display: none;
 }
 

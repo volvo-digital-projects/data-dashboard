@@ -669,6 +669,22 @@ export default function CompetitiveAnalysis({
       deltaPercent: staffDeltaPercent(average, national.average),
     };
   });
+  const selectedStaffTrendPoints = selectedStaffYearRows.flatMap((year, index) =>
+    year.average === null
+      ? []
+      : [
+          {
+            key: year.year,
+            x: 12.5 + index * 25,
+            y: 100 - year.average * 10,
+            height: year.average * 10,
+            average: year.average,
+          },
+        ],
+  );
+  const selectedStaffTrendPolyline = selectedStaffTrendPoints
+    .map((point) => `${point.x},${point.y}`)
+    .join(" ");
   const selectedStaffResponses = selectedStaffYearRows.reduce(
     (sum, year) => sum + year.responses,
     0,
@@ -1278,64 +1294,94 @@ export default function CompetitiveAnalysis({
               role="img"
               aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2023년부터 2026년 YTD까지 상담 만족도`}
             >
-              {selectedStaffYearRows.map((year) => {
-                const barHeight = year.average === null ? 0 : year.average * 10;
-                const nationalBarHeight = (year.nationalAverage ?? 0) * 10;
-                const deltaTone =
-                  year.deltaPercent === null
-                    ? "neutral"
-                    : year.deltaPercent > 0
-                      ? "positive"
-                      : year.deltaPercent < 0
-                        ? "negative"
-                        : "neutral";
-                return (
-                  <article
-                    className={year.average === null ? "empty" : ""}
-                    key={year.year}
-                    aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
-                      year.average === null
-                        ? "회신 없음"
-                        : `평균 ${year.average.toFixed(2)}점, ${year.responses}건`
-                    }`}
-                  >
-                    <header>
-                      <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
-                      <span className={`delta-${deltaTone}`}>
-                        {year.deltaPercent === null
-                          ? "비교 없음"
-                          : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
-                      </span>
-                    </header>
-                    <div className="analysis-staff-chart-track">
-                      <div className="analysis-staff-chart-bars">
+              <article className="analysis-staff-history-chart">
+                <div className="analysis-staff-trend-plot">
+                  {selectedStaffTrendPoints.length > 1 ? (
+                    <svg
+                      className="analysis-staff-trend-line"
+                      viewBox="0 0 100 100"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <polyline points={selectedStaffTrendPolyline} />
+                    </svg>
+                  ) : null}
+                  <div className="analysis-staff-trend-markers" aria-hidden="true">
+                    {selectedStaffTrendPoints.map((point) => (
+                      <span
+                        className="analysis-staff-trend-marker"
+                        key={point.key}
+                        style={
+                          {
+                            "--staff-trend-x": `${point.x}%`,
+                            "--staff-trend-height": `${point.height}%`,
+                          } as CSSProperties
+                        }
+                      />
+                    ))}
+                  </div>
+                  <div className="analysis-staff-year-groups">
+                    {selectedStaffYearRows.map((year) => {
+                      const barHeight = year.average === null ? 0 : year.average * 10;
+                      const nationalBarHeight = (year.nationalAverage ?? 0) * 10;
+                      const deltaTone =
+                        year.deltaPercent === null
+                          ? "neutral"
+                          : year.deltaPercent > 0
+                            ? "positive"
+                            : year.deltaPercent < 0
+                              ? "negative"
+                              : "neutral";
+                      return (
                         <div
-                          className="analysis-staff-chart-bar employee"
-                          style={
-                            { "--staff-bar-height": `${barHeight}%` } as CSSProperties
-                          }
+                          className={year.average === null ? "empty" : ""}
+                          key={year.year}
+                          aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
+                            year.average === null
+                              ? "회신 없음"
+                              : `평균 ${year.average.toFixed(2)}점, ${year.responses}건`
+                          }`}
                         >
-                          <b>{year.average === null ? "―" : year.average.toFixed(2)}</b>
-                          <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
+                          <div className="analysis-staff-year-bars">
+                            <div
+                              className="analysis-staff-chart-bar national"
+                              style={
+                                { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
+                              }
+                            >
+                              <b>{year.nationalAverage?.toFixed(2) ?? "―"}</b>
+                              <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
+                            </div>
+                            <div
+                              className="analysis-staff-chart-bar employee"
+                              style={
+                                { "--staff-bar-height": `${barHeight}%` } as CSSProperties
+                              }
+                            >
+                              <b>{year.average === null ? "―" : year.average.toFixed(2)}</b>
+                              <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
+                            </div>
+                          </div>
+                          <div className="analysis-staff-year-axis">
+                            <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
+                            <span className={`delta-${deltaTone}`}>
+                              {year.deltaPercent === null
+                                ? "비교 없음"
+                                : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
+                            </span>
+                          </div>
                         </div>
-                        <div
-                          className="analysis-staff-chart-bar national"
-                          style={
-                            { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
-                          }
-                        >
-                          <b>{year.nationalAverage?.toFixed(2) ?? "―"}</b>
-                          <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
-                        </div>
-                      </div>
-                    </div>
-                    <footer>
-                      <span><i className="employee" />고객상담 만족도</span>
-                      <span><i className="national" />전국 영업직원 평균</span>
-                    </footer>
-                  </article>
-                );
-              })}
+                      );
+                    })}
+                  </div>
+                </div>
+                <footer className="analysis-staff-history-legend">
+                  <span aria-label="전국 영업직원 평균"><i className="national" />전국 평균</span>
+                  <span aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 고객상담 만족도`}><i className="employee" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
+                  <em>선택 직원 4개년 추이</em>
+                </footer>
+              </article>
             </div>
 
             <aside className="analysis-staff-benchmarks" aria-label="전국 및 근무연령대 비교대조군">

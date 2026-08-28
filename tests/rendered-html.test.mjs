@@ -1203,6 +1203,19 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /4개년 상담 만족도/);
   assert.match(staffSectionHtml, /고객상담 만족도/);
   assert.match(staffSectionHtml, /전국 영업직원 평균/);
+  assert.match(staffSectionHtml, /class="analysis-staff-trend-line"/);
+  assert.equal(
+    (staffSectionHtml.match(/class="analysis-staff-trend-marker"/g) ?? []).length,
+    4,
+  );
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-chart-bar national"[\s\S]*class="analysis-staff-chart-bar employee"/,
+  );
+  assert.equal(
+    (staffSectionHtml.match(/class="analysis-staff-history-legend"/g) ?? []).length,
+    1,
+  );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(
