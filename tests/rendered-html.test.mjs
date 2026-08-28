@@ -1168,8 +1168,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
   assert.match(visibleHtml, /소속 영업직원 상담만족도 결과/);
-  assert.match(visibleHtml, /현재 볼보 강남대치 소속으로 확인된/);
-  assert.match(visibleHtml, /영업직원·영업팀장만 VOC 원데이터/);
+  assert.doesNotMatch(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터/);
+  assert.doesNotMatch(visibleHtml, /영업직원·영업팀장만 VOC 원데이터와 교차검증/);
   assert.match(visibleHtml, /김대준/);
   assert.match(visibleHtml, /조동호/);
   assert.match(visibleHtml, /조동조 36건/);

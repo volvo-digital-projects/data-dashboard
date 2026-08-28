@@ -1047,10 +1047,6 @@ export default function CompetitiveAnalysis({
           <header className="analysis-staff-heading">
             <div>
               <h2>소속 영업직원 상담만족도 결과</h2>
-              <p>
-                현재 {displayShowroomName(selected.showroom)} 소속으로 확인된
-                영업직원·영업팀장만 VOC 원데이터와 교차검증합니다.
-              </p>
             </div>
             <div className="analysis-staff-source">
               <span>
