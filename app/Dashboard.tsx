@@ -295,11 +295,11 @@ const vocComponents = [
 ];
 
 const cxComponents = [
-  { label: "신차출고 만족도", score: "40점" },
-  { label: "시승 만족도", score: "50점" },
+  { label: "신차출고 만족도", score: "100점" },
+  { label: "시승 만족도", score: "100점" },
   { label: "긴급경보 처리여부", score: "10점" },
   { label: "조치 계획", score: "10점" },
-  { label: "헤이볼보 앱 가입율", score: "20점" },
+  { label: "헤이볼보 앱 가입율", score: "100점" },
 ];
 
 const cxQ2Dsc = cxQ2DscJson as CxQ2DscData;
@@ -2223,7 +2223,7 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
           <div className="criteria-summary">
             <span className="criteria-number">03</span>
             <div>
-              <strong>Q1~Q4 공통 · 5개 CX Management 항목의 DSC 스코어 합산, 총 130점</strong>
+              <strong>Q1~Q4 공통 · 5개 CX Management 항목의 DSC 스코어 합산, 총 320점</strong>
               <p>
                 만족도뿐 아니라 긴급경보 처리, 조치계획, 앱 가입까지 운영
                 행동을 함께 평가합니다.
@@ -2235,13 +2235,13 @@ export function CriteriaGuide({ cdsid }: { cdsid: string }) {
               <span className="locked">항목별 보정 상이</span>
             </div>
           </div>
-          <div className="cx-stack" aria-label="CX Management 130점 구성">
+          <div className="cx-stack" aria-label="CX Management 320점 구성">
             {[
-              ["신차 출고 만족도", "DSC 환산", 40],
-              ["시승 만족도", "DSC 환산", 50],
+              ["신차 출고 만족도", "DSC 환산", 100],
+              ["시승 만족도", "DSC 환산", 100],
               ["긴급경보", "2일 이내 처리", 10],
               ["조치계획", "분기 내 제출", 10],
-              ["Hej Volvo 앱", "가입률 환산", 20],
+              ["Hej Volvo 앱", "가입률 환산", 100],
             ].map(([label, threshold, score]) => (
               <div key={String(label)}>
                 <span>{label}</span>

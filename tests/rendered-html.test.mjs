@@ -943,7 +943,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(40점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(50점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(20점\)<\/em>/,
+    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(100점\)<\/em>/,
   );
   assert.doesNotMatch(
     visibleHtml,
@@ -1819,7 +1819,7 @@ test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1
   );
   assert.match(
     dashboardSource,
-    /Q1~Q4 공통 · 5개 CX Management 항목의 DSC 스코어 합산, 총 130점[\s\S]*?CX Management 130점 구성[\s\S]*?합산 100점 이상[\s\S]*?RTC 0\.2%[\s\S]*?합산 100점 미만[\s\S]*?RTC 0\.1%/,
+    /Q1~Q4 공통 · 5개 CX Management 항목의 DSC 스코어 합산, 총 320점[\s\S]*?CX Management 320점 구성[\s\S]*?합산 100점 이상[\s\S]*?RTC 0\.2%[\s\S]*?합산 100점 미만[\s\S]*?RTC 0\.1%/,
   );
 });
 
