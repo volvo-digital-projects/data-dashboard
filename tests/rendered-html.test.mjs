@@ -1331,6 +1331,41 @@ test("serves the dual-metric competitive analysis sample", async () => {
     ),
   );
 
+  const staffAnalysisData = await readFile(
+    new URL("../app/data/voc-staff-analysis.json", import.meta.url),
+    "utf8",
+  );
+  const staffAnalysisJson = JSON.parse(staffAnalysisData);
+  const staffAnalysisShowrooms = staffAnalysisJson.showrooms;
+  assert.equal(Object.keys(staffAnalysisShowrooms).length, 39);
+  assert.deepEqual(
+    new Set(Object.keys(staffAnalysisShowrooms)),
+    new Set(Object.keys(staffPhotoJson.showrooms)),
+  );
+  assert.equal(
+    Object.values(staffAnalysisShowrooms).reduce(
+      (total, showroom) => total + showroom.employees.length,
+      0,
+    ),
+    366,
+  );
+  assert.ok(
+    Object.values(staffAnalysisShowrooms).every(
+      (showroom) => showroom.employees.length > 0,
+    ),
+  );
+  assert.equal(staffAnalysisShowrooms["6KR6834"].employees.length, 14);
+  assert.equal(staffAnalysisShowrooms["6KR6802"].employees.length, 19);
+  assert.equal(staffAnalysisShowrooms["6KR6873"].employees.length, 2);
+  assert.ok(
+    Object.values(staffAnalysisShowrooms).every((showroom) =>
+      showroom.employees.every(
+        (employee) =>
+          employee.role === "영업직원" || employee.role === "영업팀장",
+      ),
+    ),
+  );
+
   const regionResponse = await render(
     "/dashboard/6KR6834/analysis?view=region",
   );
@@ -1421,14 +1456,34 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(sizeResponse.status, 200);
   const sizeHtml = await sizeResponse.text();
+  const sizeVisibleHtml = sizeHtml.replaceAll("<!-- -->", "");
   assert.match(
-    sizeHtml.replaceAll("<!-- -->", ""),
+    sizeVisibleHtml,
     /<footer><span>동일 사이즈 평균/,
   );
   assert.match(sizeHtml, /scatter-point [^"]*dense/);
   assert.match(sizeHtml, /scatter-label comparison/);
   assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
   assert.match(sizeHtml, /볼보 해운대/);
+  assert.match(sizeVisibleHtml, /소속 영업직원 상담만족도 결과/);
+  assert.match(
+    sizeVisibleHtml,
+    new RegExp(staffAnalysisShowrooms["6KR6842"].employees[0].name),
+  );
+
+  const gunsanResponse = await render(
+    "/dashboard/6KR6873/analysis?view=size",
+  );
+  assert.equal(gunsanResponse.status, 200);
+  const gunsanVisibleHtml = (await gunsanResponse.text()).replaceAll(
+    "<!-- -->",
+    "",
+  );
+  assert.match(gunsanVisibleHtml, /볼보 군산 분석/);
+  assert.match(gunsanVisibleHtml, /소속 영업직원 상담만족도 결과/);
+  for (const employee of staffAnalysisShowrooms["6KR6873"].employees) {
+    assert.match(gunsanVisibleHtml, new RegExp(employee.name));
+  }
 
   const gangnamSizeResponse = await render(
     "/dashboard/6KR6834/analysis?view=size",

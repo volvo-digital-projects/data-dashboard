@@ -12,8 +12,48 @@ import openpyxl
 
 STAFF_ROLES = {"영업직원", "영업팀장"}
 YEARS = ("2023", "2024", "2025", "2026")
-TARGET_DMS_SHOWROOM = "H Motors Gangnam Daechi"
-TARGET_VOC_SHOWROOM = "강남대치"
+
+DMS_TO_VOC_SHOWROOM = {
+    "AJU Autorium Anyang": "안양",
+    "AJU Autorium Bucheon": "부천",
+    "AJU Autorium Goyang": "고양",
+    "AJU Autorium Ilsan": "일산",
+    "AJU Autorium Mokdong": "목동",
+    "Cheonha Auto Dongdaemun": "동대문",
+    "Cheonha Auto Guri": "구리",
+    "Cheonha Auto Uijeongbu": "의정부",
+    "Cheonha Auto Yongsan": "용산",
+    "H Motors Bundang Seohyeon": "분당",
+    "H Motors Cheongju": "청주",
+    "H Motors Daejeon": "대전",
+    "H Motors Gangnam Daechi": "강남대치",
+    "H Motors Gangnam Sinsa": "강남신사",
+    "H Motors Incheon": "인천",
+    "H Motors Suwon": "수원",
+    "IVY Motors Gunsan": "군산",
+    "IVY Motors Gwangju": "광주",
+    "IVY Motors Jeju": "제주",
+    "IVY Motors Suncheon": "순천",
+    "IVY Motors Jeonju": "전주",
+    "Iron Motors Changwon": "창원",
+    "Iron Motors Gimhae": "김해",
+    "Iron Motors Gwangan": "광안",
+    "Iron Motors Haeundae": "해운대",
+    "Iron Motors Jinju": "진주",
+    "Iron Motors Ulsan": "울산",
+    "Kolon Automotive Bundang Pangyo": "분당판교",
+    "Kolon Automotive Cheonan": "천안",
+    "Kolon Automotive Gangneung": "강릉",
+    "Kolon Automotive Hanam": "하남",
+    "Kolon Automotive Seosan": "서산",
+    "Kolon Automotive Seocho": "서초",
+    "Kolon Automotive Seosuwon": "서수원",
+    "Kolon Automotive Songpa": "송파",
+    "Kolon Automotive Wonju": "원주",
+    "Taeyoung Motors Daegu": "대구",
+    "Taeyoung Motors Pohang": "포항",
+    "Taeyoung Motors Seodaegu": "서대구",
+}
 
 STRENGTH_PATTERNS = (
     ("친절한 응대", ("친절", "젠틀")),
@@ -34,6 +74,10 @@ IMPROVEMENT_PATTERNS = (
 
 def normalise_header(value: Any) -> str:
     return str(value or "").strip().replace("\n", "")
+
+
+def normalise_showroom_name(value: Any) -> str:
+    return str(value or "").strip().removeprefix("볼보 ").replace(" ", "")
 
 
 def header_map(row: tuple[Any, ...]) -> dict[str, int]:
@@ -96,6 +140,7 @@ def load_roster(path: Path, as_of: date) -> list[dict[str, Any]]:
     worksheet = workbook[workbook.sheetnames[0]]
     headers = header_map(next(worksheet.iter_rows(min_row=3, max_row=3, values_only=True)))
     roster: list[dict[str, Any]] = []
+    seen_rows: set[tuple[str, str, str, date]] = set()
     for row in worksheet.iter_rows(min_row=4, values_only=True):
         role = row[headers["직원권한"]]
         status = row[headers["자동배정 여부"]]
@@ -103,6 +148,15 @@ def load_roster(path: Path, as_of: date) -> list[dict[str, Any]]:
         if role not in STAFF_ROLES or status != "활성" or not isinstance(hire_value, datetime):
             continue
         hire_date = hire_value.date()
+        roster_key = (
+            str(row[headers["전시장명"]]),
+            str(role),
+            str(row[headers["직원명"]]),
+            hire_date,
+        )
+        if roster_key in seen_rows:
+            continue
+        seen_rows.add(roster_key)
         months = full_months(hire_date, as_of)
         bucket_id, bucket_label = tenure_bucket(months)
         roster.append(
@@ -173,15 +227,54 @@ def load_voc(path: Path) -> tuple[
     return national, staff_metrics, staff_comments
 
 
-def build_payload(voc_path: Path, roster_path: Path, as_of: date) -> dict[str, Any]:
+def build_payload(
+    voc_path: Path,
+    roster_path: Path,
+    showrooms_path: Path,
+    as_of: date,
+) -> dict[str, Any]:
     roster = load_roster(roster_path, as_of)
     national, staff_metrics, staff_comments = load_voc(voc_path)
-    current_names = Counter(str(item["name"]) for item in roster)
-    roster_by_unique_name = {
-        str(item["name"]): item
-        for item in roster
-        if current_names[str(item["name"])] == 1
+    dashboard = json.loads(showrooms_path.read_text(encoding="utf-8"))
+    dashboard_showrooms = dashboard["showrooms"]
+    showroom_by_voc_name = {
+        normalise_showroom_name(item["showroom"]): item
+        for item in dashboard_showrooms
     }
+    dms_showrooms = {str(item["dmsShowroom"]) for item in roster}
+    voc_showrooms = {str(showroom) for showroom, _ in staff_metrics}
+    dashboard_names = set(showroom_by_voc_name)
+    mapped_dms = set(DMS_TO_VOC_SHOWROOM)
+    mapped_voc = set(DMS_TO_VOC_SHOWROOM.values())
+    mapped_dashboard_names = {normalise_showroom_name(name) for name in mapped_voc}
+    validation_errors: list[str] = []
+    if len(dashboard_showrooms) != 39:
+        validation_errors.append(f"대시보드 전시장 {len(dashboard_showrooms)}개")
+    if dms_showrooms != mapped_dms:
+        validation_errors.append(
+            f"DMS 매핑 불일치(누락={sorted(dms_showrooms - mapped_dms)}, 초과={sorted(mapped_dms - dms_showrooms)})"
+        )
+    if voc_showrooms != mapped_voc:
+        validation_errors.append(
+            f"VOC 매핑 불일치(누락={sorted(voc_showrooms - mapped_voc)}, 초과={sorted(mapped_voc - voc_showrooms)})"
+        )
+    if dashboard_names != mapped_dashboard_names:
+        validation_errors.append(
+            f"CDSID 매핑 불일치(누락={sorted(dashboard_names - mapped_dashboard_names)}, 초과={sorted(mapped_dashboard_names - dashboard_names)})"
+        )
+    if validation_errors:
+        raise ValueError("; ".join(validation_errors))
+
+    roster_by_key: dict[tuple[str, str], dict[str, Any]] = {}
+    duplicate_roster_keys: set[tuple[str, str]] = set()
+    for person in roster:
+        voc_showroom = DMS_TO_VOC_SHOWROOM[str(person["dmsShowroom"])]
+        key = (voc_showroom, str(person["name"]))
+        if key in roster_by_key:
+            duplicate_roster_keys.add(key)
+        roster_by_key[key] = person
+    if duplicate_roster_keys:
+        raise ValueError(f"DMS 전시장·이름 중복: {sorted(duplicate_roster_keys)}")
 
     responding_by_year: dict[str, set[tuple[str, str]]] = {year: set() for year in YEARS}
     for key, by_year in staff_metrics.items():
@@ -226,7 +319,7 @@ def build_payload(voc_path: Path, roster_path: Path, as_of: date) -> dict[str, A
     for person in roster:
         cohort_totals[str(person["tenureBucket"])]["employeeCount"] += 1
     for (showroom, name), by_year in staff_metrics.items():
-        person = roster_by_unique_name.get(name)
+        person = roster_by_key.get((showroom, name))
         if not person:
             continue
         responses = sum(int(values["responses"]) for values in by_year.values())
@@ -255,38 +348,64 @@ def build_payload(voc_path: Path, roster_path: Path, as_of: date) -> dict[str, A
             }
         )
 
-    target_roster = [item for item in roster if item["dmsShowroom"] == TARGET_DMS_SHOWROOM]
-    employees: list[dict[str, Any]] = []
-    for person in target_roster:
-        key = (TARGET_VOC_SHOWROOM, str(person["name"]))
-        years = {
-            year: values
-            for year, values in staff_metrics.get(key, {}).items()
-            if values["responses"]
-        }
-        comments = staff_comments.get(key, [])
-        employees.append(
-            {
-                "name": person["name"],
-                "role": person["role"],
-                "hireDate": person["hireDate"],
-                "tenureMonths": person["tenureMonths"],
-                "tenureBucket": person["tenureBucket"],
-                "tenureBucketLabel": person["tenureBucketLabel"],
-                "years": years,
-                "commentResponses": len(comments),
-                "strengthKeywords": keyword_summary(comments, STRENGTH_PATTERNS, 5),
-                "improvementKeywords": keyword_summary(comments, IMPROVEMENT_PATTERNS, 5),
+    showrooms_payload: dict[str, Any] = {}
+    for dms_showroom, voc_showroom in DMS_TO_VOC_SHOWROOM.items():
+        dashboard_showroom = showroom_by_voc_name[normalise_showroom_name(voc_showroom)]
+        target_roster = [
+            item for item in roster if item["dmsShowroom"] == dms_showroom
+        ]
+        employees: list[dict[str, Any]] = []
+        for person in target_roster:
+            key = (voc_showroom, str(person["name"]))
+            years = {
+                year: values
+                for year, values in staff_metrics.get(key, {}).items()
+                if values["responses"]
             }
+            comments = staff_comments.get(key, [])
+            employees.append(
+                {
+                    "name": person["name"],
+                    "role": person["role"],
+                    "hireDate": person["hireDate"],
+                    "tenureMonths": person["tenureMonths"],
+                    "tenureBucket": person["tenureBucket"],
+                    "tenureBucketLabel": person["tenureBucketLabel"],
+                    "years": years,
+                    "commentResponses": len(comments),
+                    "strengthKeywords": keyword_summary(comments, STRENGTH_PATTERNS, 5),
+                    "improvementKeywords": keyword_summary(
+                        comments, IMPROVEMENT_PATTERNS, 5
+                    ),
+                }
+            )
+        employees.sort(
+            key=lambda item: (item["role"] != "영업직원", item["name"])
         )
-    employees.sort(key=lambda item: (item["role"] != "영업직원", item["name"]))
 
-    target_name_set = {str(item["name"]) for item in target_roster}
-    excluded_counts: Counter[str] = Counter()
-    for (showroom, name), by_year in staff_metrics.items():
-        if showroom != TARGET_VOC_SHOWROOM or name in target_name_set:
-            continue
-        excluded_counts[name] += sum(int(values["responses"]) for values in by_year.values())
+        target_name_set = {str(item["name"]) for item in target_roster}
+        excluded_counts: Counter[str] = Counter()
+        for (raw_showroom, name), by_year in staff_metrics.items():
+            if raw_showroom != voc_showroom or name in target_name_set:
+                continue
+            excluded_counts[name] += sum(
+                int(values["responses"]) for values in by_year.values()
+            )
+
+        showrooms_payload[str(dashboard_showroom["cdsid"])] = {
+            "showroom": dashboard_showroom["showroom"],
+            "dealer": dashboard_showroom["dealer"],
+            "dmsShowroom": dms_showroom,
+            "employees": employees,
+            "excludedRawNames": [
+                {
+                    "name": name,
+                    "responses": responses,
+                    "reason": "현재 DMS 재직 명단 미확인",
+                }
+                for name, responses in excluded_counts.most_common()
+            ],
+        }
 
     return {
         "source": {
@@ -300,22 +419,7 @@ def build_payload(voc_path: Path, roster_path: Path, as_of: date) -> dict[str, A
         },
         "nationalYears": national_years,
         "tenureCohorts": tenure_cohorts,
-        "showrooms": {
-            "6KR6834": {
-                "showroom": "볼보 강남대치",
-                "dealer": "에이치",
-                "dmsShowroom": TARGET_DMS_SHOWROOM,
-                "employees": employees,
-                "excludedRawNames": [
-                    {
-                        "name": name,
-                        "responses": responses,
-                        "reason": "현재 DMS 재직 명단 미확인",
-                    }
-                    for name, responses in excluded_counts.most_common()
-                ],
-            }
-        },
+        "showrooms": showrooms_payload,
     }
 
 
@@ -323,10 +427,16 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--voc", required=True, type=Path)
     parser.add_argument("--roster", required=True, type=Path)
+    parser.add_argument("--showrooms", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--as-of", default=date.today().isoformat())
     args = parser.parse_args()
-    payload = build_payload(args.voc, args.roster, date.fromisoformat(args.as_of))
+    payload = build_payload(
+        args.voc,
+        args.roster,
+        args.showrooms,
+        date.fromisoformat(args.as_of),
+    )
     args.output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
