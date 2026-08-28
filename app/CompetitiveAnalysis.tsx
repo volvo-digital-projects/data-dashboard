@@ -59,12 +59,13 @@ type StaffNationalYear = StaffYearMetric & {
   respondingEmployees: number;
   averageResponsesPerEmployee: number | null;
 };
-type StaffTenureCohort = StaffYearMetric & {
-  id: string;
-  label: string;
-  employeeCount: number;
-  respondingEmployees: number;
-  average: number | null;
+type StaffTenureScatterPoint = {
+  key: string;
+  cdsid: string;
+  name: string;
+  tenureYears: number;
+  average: number;
+  responses: number;
 };
 type StaffAnalysisShowroom = {
   showroom: string;
@@ -94,12 +95,37 @@ const staffNationalYears = vocStaffAnalysisJson.nationalYears as Record<
   StaffYear,
   StaffNationalYear
 >;
-const staffTenureCohorts = vocStaffAnalysisJson.tenureCohorts as StaffTenureCohort[];
 const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
   string,
   StaffProfileShowroom
 >;
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
+const staffTenureScatterPopulation: StaffTenureScatterPoint[] = Object.entries(
+  staffAnalysisByCdsid,
+).flatMap(([cdsid, showroom]) =>
+  showroom.employees.flatMap((employee) => {
+    if (employee.role !== "영업직원" && employee.role !== "영업팀장") return [];
+    const totals = staffYears.reduce(
+      (summary, year) => {
+        summary.responses += employee.years[year]?.responses ?? 0;
+        summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
+        return summary;
+      },
+      { responses: 0, scoreSum: 0 },
+    );
+    if (!totals.responses) return [];
+    return [
+      {
+        key: `${cdsid}-${employee.name}`,
+        cdsid,
+        name: employee.name,
+        tenureYears: employee.tenureMonths / 12,
+        average: totals.scoreSum / totals.responses,
+        responses: totals.responses,
+      },
+    ];
+  }),
+);
 
 type ScatterLabelPlacement =
   | "left-up"
@@ -714,8 +740,45 @@ export default function CompetitiveAnalysis({
   const selectedStaffTenure = selectedStaffEmployee
     ? formatStaffTenure(selectedStaffEmployee.tenureMonths)
     : "―";
-  const selectedStaffCohort = staffTenureCohorts.find(
-    (cohort) => cohort.id === selectedStaffEmployee?.tenureBucket,
+  const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
+    (point) =>
+      point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
+  );
+  const staffScatterMaxYears = Math.max(
+    15,
+    Math.ceil(
+      Math.max(
+        ...staffTenureScatterPopulation.map((point) => point.tenureYears),
+        selectedStaffScatterPoint?.tenureYears ?? 0,
+      ) / 5,
+    ) * 5,
+  );
+  const staffScatterMinScore = Math.max(
+    0,
+    Math.floor(
+      Math.min(
+        ...staffTenureScatterPopulation.map((point) => point.average),
+        selectedStaffScatterPoint?.average ?? 10,
+      ) * 2,
+    ) / 2,
+  );
+  const staffScatterPlot = { left: 42, right: 448, top: 18, bottom: 174 };
+  const staffScatterX = (tenureYears: number) =>
+    staffScatterPlot.left +
+    (tenureYears / staffScatterMaxYears) *
+      (staffScatterPlot.right - staffScatterPlot.left);
+  const staffScatterY = (average: number) =>
+    staffScatterPlot.bottom -
+    ((average - staffScatterMinScore) / (10 - staffScatterMinScore || 1)) *
+      (staffScatterPlot.bottom - staffScatterPlot.top);
+  const staffScatterXTicks = Array.from(
+    { length: 6 },
+    (_, index) => (staffScatterMaxYears / 5) * index,
+  );
+  const staffScatterYTicks = Array.from(
+    { length: 4 },
+    (_, index) =>
+      staffScatterMinScore + ((10 - staffScatterMinScore) / 3) * index,
   );
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
@@ -1384,11 +1447,11 @@ export default function CompetitiveAnalysis({
               </article>
             </div>
 
-            <aside className="analysis-staff-benchmarks" aria-label="전국 및 근무연령대 비교대조군">
+            <aside className="analysis-staff-benchmarks" aria-label="전국 및 근속기간 분포 비교대조군">
               <header>
                 <div>
                   <h3>비교대조군</h3>
-                  <p>전국 및 근무연령대</p>
+                  <p>전국 및 근속기간 분포</p>
                 </div>
                 <span>4개년 누적</span>
               </header>
@@ -1414,39 +1477,120 @@ export default function CompetitiveAnalysis({
                 </div>
               </article>
 
-              <section className="analysis-staff-tenure" aria-label="근무연령대별 상담 만족도 비교">
+              <section
+                className="analysis-staff-tenure-scatter"
+                aria-label="근속기간별 상담 만족도 산포도"
+              >
                 <header>
                   <div>
-                    <h3>근무연령대 비교</h3>
-                    <p>{selectedStaffEmployee?.name ?? "선택 직원"} SC · {selectedStaffTenure}</p>
+                    <h3>근속기간별 상담 만족도 분포</h3>
+                    <p>Sales-DMS 재직자 중 누적 VOC 회신 보유 직원</p>
                   </div>
-                  <strong>{selectedStaffEmployee?.tenureBucketLabel ?? "―"}</strong>
+                  <strong>
+                    <span>{selectedStaffEmployee?.name ?? "선택 직원"} SC</span>
+                    {selectedStaffTenure}
+                  </strong>
                 </header>
-                <div className="analysis-staff-cohorts">
-                  {staffTenureCohorts.map((cohort) => {
-                    const isSelected = cohort.id === selectedStaffCohort?.id;
-                    return (
-                      <article className={isSelected ? "selected" : ""} key={cohort.id}>
-                        <header>
-                          <strong>{cohort.label}</strong>
-                          {isSelected ? <span>소속 구간</span> : null}
-                        </header>
-                        <div className="analysis-staff-cohort-track">
-                          <i
-                            style={
-                              {
-                                "--staff-cohort-width": `${(cohort.average ?? 0) * 10}%`,
-                              } as CSSProperties
-                            }
-                          />
-                        </div>
-                        <footer>
-                          <b>{cohort.average === null ? "―" : cohort.average.toFixed(2)}점</b>
-                          <span>{cohort.responses.toLocaleString("ko-KR")}건 · {cohort.employeeCount}명</span>
-                        </footer>
-                      </article>
-                    );
-                  })}
+                <div className="analysis-staff-tenure-scatter-chart">
+                  <svg
+                    viewBox="0 0 470 210"
+                    role="img"
+                    aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"}의 근속기간과 상담 만족도 좌표`}
+                  >
+                    {staffScatterYTicks.map((tick) => {
+                      const y = staffScatterY(tick);
+                      return (
+                        <g className="analysis-staff-scatter-grid" key={`y-${tick}`}>
+                          <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={y} y2={y} />
+                          <text x={staffScatterPlot.left - 8} y={y + 3} textAnchor="end">
+                            {tick.toFixed(1)}
+                          </text>
+                        </g>
+                      );
+                    })}
+                    {staffScatterXTicks.map((tick) => {
+                      const x = staffScatterX(tick);
+                      return (
+                        <g className="analysis-staff-scatter-grid" key={`x-${tick}`}>
+                          <line x1={x} x2={x} y1={staffScatterPlot.top} y2={staffScatterPlot.bottom} />
+                          <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">
+                            {tick.toFixed(0)}
+                          </text>
+                        </g>
+                      );
+                    })}
+                    <text className="analysis-staff-scatter-y-label" x="12" y="101" textAnchor="middle">
+                      만족도
+                    </text>
+                    <text className="analysis-staff-scatter-x-label" x="245" y="205" textAnchor="middle">
+                      근속기간(년)
+                    </text>
+                    {staffNationalAverage !== null ? (
+                      <g className="analysis-staff-scatter-average">
+                        <line
+                          x1={staffScatterPlot.left}
+                          x2={staffScatterPlot.right}
+                          y1={staffScatterY(staffNationalAverage)}
+                          y2={staffScatterY(staffNationalAverage)}
+                        />
+                        <text
+                          x={staffScatterPlot.right - 2}
+                          y={staffScatterY(staffNationalAverage) - 5}
+                          textAnchor="end"
+                        >
+                          전국 평균 {staffNationalAverage.toFixed(2)}
+                        </text>
+                      </g>
+                    ) : null}
+                    <g className="analysis-staff-scatter-population">
+                      {staffTenureScatterPopulation.map((point) => (
+                        <circle
+                          cx={staffScatterX(point.tenureYears)}
+                          cy={staffScatterY(point.average)}
+                          key={point.key}
+                          r={Math.min(5.2, 2.7 + Math.sqrt(point.responses) / 3.2)}
+                        />
+                      ))}
+                    </g>
+                    {selectedStaffScatterPoint ? (
+                      <g
+                        className="analysis-staff-scatter-selected"
+                        transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.average)})`}
+                      >
+                        <line
+                          className="axis-x"
+                          x1={0}
+                          x2={0}
+                          y1={0}
+                          y2={staffScatterPlot.bottom - staffScatterY(selectedStaffScatterPoint.average)}
+                        />
+                        <line
+                          className="axis-y"
+                          x1={staffScatterPlot.left - staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                          x2={0}
+                          y1={0}
+                          y2={0}
+                        />
+                        <circle className="halo" r="10" />
+                        <circle className="point" r="6" />
+                        <g
+                          className="label"
+                          transform={staffScatterX(selectedStaffScatterPoint.tenureYears) > 330 ? "translate(-124 -39)" : "translate(14 -39)"}
+                        >
+                          <rect width="112" height="34" rx="6" />
+                          <text x="8" y="13">{selectedStaffEmployee?.name} SC</text>
+                          <text className="coordinate" x="8" y="26">
+                            {selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · {selectedStaffScatterPoint.average.toFixed(2)}점 / {selectedStaffScatterPoint.responses}건
+                          </text>
+                        </g>
+                      </g>
+                    ) : null}
+                  </svg>
+                  <footer>
+                    <span><i />Sales-DMS 재직자 분포</span>
+                    <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"} SC 좌표</span>
+                    <em>원 크기 = 누적 회신 건수</em>
+                  </footer>
                 </div>
               </section>
             </aside>

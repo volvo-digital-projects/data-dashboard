@@ -5417,6 +5417,205 @@ input:focus-visible {
   font-size: 6px;
 }
 
+.analysis-staff-tenure-scatter {
+  min-height: 238px;
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid #d5e4ea;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.analysis-staff-tenure-scatter > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.analysis-staff-tenure-scatter > header h3 {
+  margin: 0;
+  color: #15394e;
+  font-size: 11px;
+  font-weight: 780;
+}
+
+.analysis-staff-tenure-scatter > header p {
+  margin: 2px 0 0;
+  color: #78909d;
+  font-size: 7px;
+}
+
+.analysis-staff-tenure-scatter > header > strong {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 5px 7px;
+  border: 1px solid #b9d6e2;
+  border-radius: 6px;
+  background: #e9f4f7;
+  color: #315f75;
+  font-family: var(--font-latin);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.analysis-staff-tenure-scatter > header > strong span {
+  color: #0d5f7f;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.analysis-staff-tenure-scatter-chart {
+  min-width: 0;
+  min-height: 184px;
+  overflow: hidden;
+  border: 1px solid #dce8ed;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.analysis-staff-tenure-scatter-chart svg {
+  width: 100%;
+  height: 172px;
+  display: block;
+  overflow: visible;
+}
+
+.analysis-staff-scatter-grid line {
+  stroke: #e5edf1;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-grid text,
+.analysis-staff-scatter-x-label,
+.analysis-staff-scatter-y-label {
+  fill: #80939e;
+  font-family: var(--font-latin);
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.analysis-staff-scatter-x-label,
+.analysis-staff-scatter-y-label {
+  font-family: var(--font-korean), sans-serif;
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.analysis-staff-scatter-y-label {
+  transform: rotate(-90deg);
+  transform-origin: 12px 101px;
+}
+
+.analysis-staff-scatter-average line {
+  stroke: #df916b;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-average text {
+  fill: #bd6948;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.analysis-staff-scatter-population circle {
+  fill: rgba(69, 139, 165, 0.54);
+  stroke: rgba(255, 255, 255, 0.94);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-selected > line {
+  stroke: rgba(222, 104, 62, 0.5);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-selected .halo {
+  fill: rgba(238, 116, 70, 0.15);
+  stroke: rgba(238, 116, 70, 0.34);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-selected .point {
+  fill: #ec7045;
+  stroke: #fff;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-selected .label rect {
+  fill: #123f56;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-selected .label text {
+  fill: #fff;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.analysis-staff-scatter-selected .label text.coordinate {
+  fill: #cfe4ec;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.analysis-staff-tenure-scatter-chart > footer {
+  min-height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px;
+  border-top: 1px solid #e3ecef;
+  color: #708691;
+  font-size: 7px;
+}
+
+.analysis-staff-tenure-scatter-chart > footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.analysis-staff-tenure-scatter-chart > footer i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(69, 139, 165, 0.65);
+}
+
+.analysis-staff-tenure-scatter-chart > footer span.selected i {
+  background: #ec7045;
+  box-shadow: 0 0 0 2px rgba(236, 112, 69, 0.14);
+}
+
+.analysis-staff-tenure-scatter-chart > footer em {
+  margin-left: auto;
+  color: #8a9ba4;
+  font-style: normal;
+  white-space: nowrap;
+}
+
 @media (max-width: 900px) {
   .analysis-staff-card {
     padding: 18px;
