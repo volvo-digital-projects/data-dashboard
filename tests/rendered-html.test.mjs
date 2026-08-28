@@ -1244,6 +1244,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*28px minmax\(104px, 1fr\) 52px 42px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
   assert.match(css, /\.analysis-staff-roster-average\s*\{[\s\S]*?font-size:\s*12px;/);
+  assert.match(css, /\.analysis-staff-roster-rank\s*\{[\s\S]*?font-size:\s*8px;[\s\S]*?font-weight:\s*700;/);
   assert.match(
     staffSectionHtml,
     /class="analysis-staff-roster-identity"><strong>김대준<\/strong><small><em>입사일<\/em><b>130201<\/b><\/small><\/span>/,

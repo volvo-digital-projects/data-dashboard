@@ -4664,8 +4664,8 @@ input:focus-visible {
   background: #dfeaf0;
   color: #476c7e;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 9px;
-  font-weight: 760;
+  font-size: 8px;
+  font-weight: 700;
 }
 
 .analysis-staff-roster-list button.selected .analysis-staff-roster-rank {
