@@ -12279,11 +12279,12 @@ body {
 /* Compact ES90-style header command row and circular line ornament. */
 @media (min-width: 761px) {
   .dashboard-identity-header {
+    --header-context-width: calc((100% - var(--dashboard-card-gap)) / 4);
     height: 122px;
     min-height: 122px;
     max-height: 122px;
     align-items: center;
-    padding: 14px 18px;
+    padding: 14px 0;
   }
 
   .dashboard-identity-header::after {
@@ -12353,9 +12354,11 @@ body {
     grid-template-rows: repeat(2, 45px);
   }
 
-  .dashboard-identity-header > .identity-detail-rail {
-    width: calc((100% - var(--dashboard-card-gap)) / 4);
-    flex: 0 0 calc((100% - var(--dashboard-card-gap)) / 4);
+  .dashboard-identity-header > .identity-detail-rail,
+  .dashboard-identity-header > .analysis-context {
+    width: var(--header-context-width);
+    flex: 0 0 var(--header-context-width);
+    margin-left: auto;
   }
 
   .dashboard-identity-header > .identity-title:not(.analysis-title) {
