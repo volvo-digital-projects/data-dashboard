@@ -1186,6 +1186,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /13건/);
   assert.match(staffSectionHtml, /4개년 상담 만족도/);
   assert.match(staffSectionHtml, /매월 1일 06:00 KST/);
+  assert.doesNotMatch(staffSectionHtml, /DMS 명단 10명/);
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-quarters/);
 
   const regionResponse = await render(

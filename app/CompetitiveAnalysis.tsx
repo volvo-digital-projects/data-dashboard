@@ -1053,7 +1053,6 @@ export default function CompetitiveAnalysis({
               </p>
             </div>
             <div className="analysis-staff-source">
-              <span>DMS 명단 {currentSalesStaff.length}명</span>
               <span>
                 DMS {staffAnalysisSource.rosterCheckedAt.replaceAll("-", ".")} 기준
               </span>
