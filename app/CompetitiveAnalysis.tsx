@@ -1572,11 +1572,32 @@ export default function CompetitiveAnalysis({
                           className="label"
                           transform={staffScatterX(selectedStaffScatterPoint.tenureYears) > 330 ? "translate(-124 -39)" : "translate(14 -39)"}
                         >
+                          {selectedStaffProfile ? (
+                            <defs>
+                              <clipPath id="selected-staff-scatter-photo-clip">
+                                <circle cx="98" cy="5" r="9" />
+                              </clipPath>
+                            </defs>
+                          ) : null}
                           <rect width="112" height="34" rx="6" />
                           <text x="8" y="13">{selectedStaffEmployee?.name} SC</text>
                           <text className="coordinate" x="8" y="26">
                             {selectedStaffScatterPoint.tenureYears.toFixed(1)}년 · {selectedStaffScatterPoint.average.toFixed(2)}점 / {selectedStaffScatterPoint.responses}건
                           </text>
+                          {selectedStaffProfile ? (
+                            <g className="analysis-staff-scatter-profile" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필 사진`}>
+                              <circle className="photo-ring" cx="98" cy="5" r="10" />
+                              <image
+                                href={selectedStaffProfile.image}
+                                x="89"
+                                y="-4"
+                                width="18"
+                                height="18"
+                                preserveAspectRatio="xMidYMin slice"
+                                clipPath="url(#selected-staff-scatter-photo-clip)"
+                              />
+                            </g>
+                          ) : null}
                         </g>
                       </g>
                     ) : null}

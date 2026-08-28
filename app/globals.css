@@ -5599,6 +5599,22 @@ input:focus-visible {
   font-weight: 500;
 }
 
+.analysis-staff-scatter-profile {
+  pointer-events: none;
+}
+
+.analysis-staff-scatter-profile .photo-ring {
+  fill: #fff;
+  stroke: rgba(22, 112, 143, 0.48);
+  stroke-width: 1;
+  filter: drop-shadow(0 2px 3px rgba(9, 47, 66, 0.22));
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-profile image {
+  opacity: 1;
+}
+
 .analysis-staff-tenure-scatter-chart > footer {
   min-height: 26px;
   display: flex;

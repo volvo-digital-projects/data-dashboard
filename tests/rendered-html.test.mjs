@@ -1247,6 +1247,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-tenure-scatter-chart"/);
   assert.match(staffSectionHtml, /김대준 SC 좌표/);
   assert.match(staffSectionHtml, /13\.5년 · 9\.28점 \/ 25건/);
+  assert.match(
+    staffSectionHtml,
+    /class="analysis-staff-scatter-profile"/,
+  );
+  assert.match(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
+  assert.match(staffSectionHtml, /href="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/);
+  assert.doesNotMatch(staffSectionHtml, /소속구간/);
+  assert.match(css, /\.analysis-staff-scatter-profile \.photo-ring\s*\{[\s\S]*?filter:\s*drop-shadow/);
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-scatter-population"/g) ?? []).length,
     1,
