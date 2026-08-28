@@ -1193,7 +1193,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.scatter-point\.selected > i\s*\{[^}]*animation: selected-scatter-point-halo 1\.8s ease-in-out infinite;/,
+    /\.scatter-point\.selected > i\s*\{[^}]*background: #075b7c;[^}]*animation: selected-scatter-point-halo 1\.45s ease-in-out infinite;/,
   );
   assert.match(
     css,
