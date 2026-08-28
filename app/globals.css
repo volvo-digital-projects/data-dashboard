@@ -4578,7 +4578,7 @@ input:focus-visible {
 }
 
 .analysis-staff-source {
-  --analysis-staff-source-width: 100px;
+  --analysis-staff-source-width: 92px;
   display: grid;
   grid-template-columns: repeat(2, var(--analysis-staff-source-width));
   align-items: center;
@@ -4588,23 +4588,32 @@ input:focus-visible {
 
 .analysis-staff-source span {
   width: 100%;
-  height: 24px;
-  min-height: 24px;
+  height: 23px;
+  min-height: 23px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 6px;
-  border: 1px solid rgba(52, 109, 137, 0.22);
-  border-radius: 5px;
-  background: rgba(231, 242, 247, 0.46);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  color: #355e73;
-  font-family: var(--font-ui);
-  font-size: 9px;
-  font-weight: 620;
-  letter-spacing: -0.015em;
+  gap: 3px;
+  padding: 5px 7px;
+  border: 1px solid #dde8ec;
+  border-radius: 999px;
+  background: rgba(244, 248, 250, 0.9);
+  box-shadow: none;
+  color: #607581;
+  font-family: var(--font-latin);
+  font-size: 7.5px;
+  font-weight: 650;
+  letter-spacing: 0;
   line-height: 1;
   white-space: nowrap;
+}
+
+.analysis-staff-source strong {
+  color: #244f64;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
 }
 
 .analysis-staff-workspace {

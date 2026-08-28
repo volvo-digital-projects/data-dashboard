@@ -1472,7 +1472,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-insights\s*\{[\s\S]*?height:\s*112px;[\s\S]*?min-height:\s*112px;/);
   assert.doesNotMatch(css, /\.analysis-staff-improvement-item\s*\{/);
   assert.match(staffSectionHtml, /Sales-DMS 기준/);
-  assert.match(staffSectionHtml, /\d{6} 기준/);
+  assert.match(staffSectionHtml, /<strong>\d{6}<\/strong>기준/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직인원 기준/);
   assert.match(
     css,
@@ -1480,8 +1480,9 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-source span\s*\{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*24px;[\s\S]*?border-radius:\s*5px;/,
+    /\.analysis-staff-source span\s*\{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*23px;[\s\S]*?border-radius:\s*999px;/,
   );
+  assert.match(css, /\.analysis-staff-source strong\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);[\s\S]*?font-size:\s*9px;/);
   assert.doesNotMatch(staffSectionHtml, /VOC 2026\.08\.24 기준/);
   assert.doesNotMatch(staffSectionHtml, /교차검증 메모/);
   assert.doesNotMatch(staffSectionHtml, /이름 불일치는 임의 병합하지 않습니다/);
