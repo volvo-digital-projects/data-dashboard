@@ -653,10 +653,10 @@ test("server-renders the selected CDSID dashboard", async () => {
     new RegExp(`${compactSeoulToday}[\\s\\S]*?기준`),
   );
   assert.doesNotMatch(visibleHtml, /Q1 \/ Q2 마감/);
-  assert.match(visibleHtml, /Q3 평가·집계중/);
+  assert.doesNotMatch(visibleHtml, /Q3 평가·집계중/);
   assert.match(
     visibleHtml,
-    /DSC 가이드[\s\S]*?Q3 평가·집계중[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
+    /DSC 가이드[\s\S]*?class="dashboard-logout-form" action="\/api\/logout" method="post"[\s\S]*?로그아웃/,
   );
   assert.match(visibleHtml, /aria-haspopup="dialog" aria-expanded="false"/);
   assert.match(visibleHtml, /class="dashboard-logout-icon" aria-hidden="true"/);
@@ -666,7 +666,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
-    /\.header-status-row\s*\{[^}]*--header-status-item-width: 100px[^}]*width: max-content[^}]*display: grid[^}]*grid-template-columns: repeat\(3, var\(--header-status-item-width\)\)[^}]*gap: 5px/,
+    /\.header-status-row\s*\{[^}]*--header-status-item-width: 100px[^}]*width: max-content[^}]*display: grid[^}]*grid-template-columns: repeat\(2, var\(--header-status-item-width\)\)[^}]*gap: 5px/,
   );
   assert.match(
     dashboardCss,
@@ -674,7 +674,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     dashboardCss,
-    /\.dashboard-identity-header > \.identity-title:not\(\.analysis-title\)\s*\{[^}]*flex: 1 1 auto;[^}]*flex-direction: row;[^}]*align-items: flex-end;[^}]*gap: 18px;[\s\S]*?\.dashboard-identity-header \.identity-title:not\(\.analysis-title\) h1\s*\{[^}]*font-size: clamp\(49px, 3\.9vw, 56px\);[^}]*line-height: 0\.92;[\s\S]*?\.dashboard-identity-header \.identity-title:not\(\.analysis-title\) \.header-status-row\s*\{[^}]*align-self: flex-end;/,
+    /\.dashboard-identity-header > \.identity-title:not\(\.analysis-title\)\s*\{[^}]*flex: 1 1 auto;[^}]*flex-direction: row;[^}]*align-items: flex-end;[^}]*gap: 18px;[\s\S]*?\.dashboard-identity-header \.identity-title:not\(\.analysis-title\) h1\s*\{[^}]*font-size: clamp\(56px, 4\.4vw, 64px\);[^}]*line-height: 0\.9;[\s\S]*?\.dashboard-identity-header \.identity-title:not\(\.analysis-title\) \.header-status-row\s*\{[^}]*align-self: flex-end;/,
   );
   assert.doesNotMatch(dashboardCss, /\.dashboard-logout-button::after/);
   assert.match(
@@ -1589,7 +1589,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?DSC 가이드[\s\S]*?Q3 평가·집계중/,
+    /class="identity-title analysis-title"[\s\S]*?class="header-status-row"[\s\S]*?DSC 가이드[\s\S]*?로그아웃/,
   );
   assert.match(analysisContextHtml, /identity-icon--dealer/);
   assert.match(analysisContextHtml, /identity-icon--region/);

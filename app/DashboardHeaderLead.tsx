@@ -22,7 +22,7 @@ export default function DashboardHeaderLead({
         <h1>{title}</h1>
         <div
           className="header-status-row"
-          aria-label="DSC 가이드, Q3 평가·집계중, 로그아웃"
+          aria-label="DSC 가이드, 로그아웃"
         >
           <button
             type="button"
@@ -38,13 +38,6 @@ export default function DashboardHeaderLead({
             />
             <span>DSC 가이드</span>
           </button>
-          <div className="header-status-item header-status-item--progress">
-            <span
-              className="header-status-icon header-status-icon--progress"
-              aria-hidden="true"
-            />
-            <span>Q3 평가·집계중</span>
-          </div>
           <form className="dashboard-logout-form" action="/api/logout" method="post">
             <button
               className="dashboard-logout-button"
