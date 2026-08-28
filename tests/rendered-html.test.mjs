@@ -1477,6 +1477,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /\.analysis-staff-benchmark-legend\s*\{[\s\S]*?height:\s*var\(--analysis-staff-comparison-legend-height\);/,
   );
   assert.match(
+    css,
+    /\.analysis-staff-history-legend,\s*\.analysis-staff-benchmark-legend\s*\{[\s\S]*?box-sizing:\s*border-box;[\s\S]*?font-size:\s*9px;[\s\S]*?line-height:\s*1;/,
+  );
+  assert.match(
     staffSectionHtml,
     /class="analysis-staff-comparison-layout"[\s\S]*class="analysis-staff-history"[\s\S]*class="analysis-staff-benchmarks"/,
   );

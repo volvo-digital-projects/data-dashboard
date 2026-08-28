@@ -5900,6 +5900,24 @@ input:focus-visible {
   white-space: nowrap;
 }
 
+.analysis-staff-history-legend,
+.analysis-staff-benchmark-legend {
+  box-sizing: border-box;
+  height: var(--analysis-staff-comparison-legend-height);
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-family: var(--font-korean), var(--font-latin), sans-serif;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.analysis-staff-history-legend span,
+.analysis-staff-benchmark-legend span,
+.analysis-staff-benchmark-legend em {
+  line-height: 1;
+}
+
 @media (max-width: 900px) {
   .analysis-staff-card {
     padding: 18px;
