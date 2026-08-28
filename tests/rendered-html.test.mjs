@@ -3490,7 +3490,11 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.v3s-performance\.compact \.v3s-history-bar-stage\s*\{[^}]*height: 73px/,
+    /\.v3s-performance\.compact \.v3s-history-bar-stage\s*\{[^}]*height: 92px/,
+  );
+  assert.match(
+    css,
+    /\.v3s-performance\.compact \.v3s-history-bars\s*\{[^}]*padding-top: 3px/,
   );
   assert.match(
     css,

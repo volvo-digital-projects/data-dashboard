@@ -10643,7 +10643,11 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-performance.compact .v3s-history-bar-stage {
-  height: 73px;
+  height: 92px;
+}
+
+.v3s-performance.compact .v3s-history-bars {
+  padding-top: 3px;
 }
 
 .v3s-performance.compact .v3s-history-bars,
