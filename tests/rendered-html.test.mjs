@@ -1238,6 +1238,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="analysis-staff-history-legend"[\s\S]*class="national"[\s\S]*전국 평균[\s\S]*class="employee"[\s\S]*김대준[\s\S]*김대준 4개년 추이/,
   );
   assert.match(staffSectionHtml, /class="analysis-staff-comparison-layout"/);
+  assert.match(
+    css,
+    /\.analysis-staff-comparison-layout\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*?gap:\s*12px;/,
+  );
   assert.match(staffSectionHtml, />VOC 고객회신 건수</);
   assert.doesNotMatch(staffSectionHtml, />VOC 회신</);
   assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;/);
@@ -1255,6 +1259,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /근속기간별 상담 만족도 분포/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 중 누적 VOC 회신 보유 직원/);
   assert.match(staffSectionHtml, /class="analysis-staff-tenure-scatter-chart"/);
+  assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*200px;/);
   assert.match(staffSectionHtml, /김대준 SC 좌표/);
   assert.match(staffSectionHtml, /13\.5년 · 9\.28점 \/ 25건/);
   assert.match(
