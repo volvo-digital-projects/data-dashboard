@@ -4471,10 +4471,12 @@ input:focus-visible {
 
 .analysis-rank > span > em {
   min-width: 0;
+  flex: 0 0 56px;
   overflow: hidden;
   font-size: 11px;
   font-style: normal;
   text-overflow: ellipsis;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -4483,6 +4485,7 @@ input:focus-visible {
   color: var(--muted);
   font-size: 8px;
   font-weight: 500;
+  text-align: left;
   white-space: nowrap;
 }
 

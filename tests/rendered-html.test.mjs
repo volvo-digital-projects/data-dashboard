@@ -968,7 +968,10 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /2021년 전국 평균 94\.7점[\s\S]*?2022년 전국 평균 93\.9점[\s\S]*?2023년 전국 평균 95\.9점[\s\S]*?2024년 전국 평균 95\.6점[\s\S]*?2025년 전국 평균 95\.0점/,
   );
-  assert.match(visibleHtml, /전국 평균[\s\S]*?볼보 강남대치/);
+  assert.match(
+    visibleHtml,
+    /전국 평균[\s\S]*?강남대치[\s\S]*?강남대치 회신율/,
+  );
   assert.match(visibleHtml, /볼보 5개년 평균 95\.0/);
   assert.doesNotMatch(visibleHtml, /5개년 평균 94\.2/);
   assert.doesNotMatch(html, /class="v3s-history-summary"/);
@@ -1137,6 +1140,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /aria-pressed="true"[\s\S]*?소속 딜러사 내 분석/,
   );
   assert.match(visibleHtml, /종합 만족도 × 해피콜 이행/);
+  assert.match(
+    visibleHtml,
+    /class="analysis-legend" aria-label="차트 범례"><span class="selected">강남대치<\/span><span>비교 전시장<\/span><span class="average">그룹 평균<\/span>/,
+  );
+  assert.doesNotMatch(visibleHtml, />내 전시장<\/span>/);
+  assert.match(visibleHtml, /<strong>7개소<\/strong>/);
   assert.match(visibleHtml, /종합 만족도[\s\S]*87\.5/);
   assert.match(
     visibleHtml,
@@ -1216,11 +1225,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((html.match(/class="analysis-rank"/g) ?? []).length, 7);
   assert.match(
     html.replaceAll("<!-- -->", ""),
-    /class="analysis-rank"><strong>\d+<\/strong><span><em>볼보 [^<]+<\/em><small>[^<]+ · [^<]+ · [^<]+<\/small><\/span>/,
+    /class="analysis-rank"><strong>\d+<\/strong><span><em>(?!볼보 )[^<]+<\/em><small>[^<]+ · [^<]+ · [^<]+<\/small><\/span>/,
   );
   assert.match(
     css,
-    /\.analysis-rank > span\s*\{[\s\S]*?display:\s*flex;[\s\S]*?align-items:\s*baseline;[\s\S]*?white-space:\s*nowrap;[\s\S]*?\.analysis-rank > span > em\s*\{[\s\S]*?font-size:\s*11px;[\s\S]*?\.analysis-rank small\s*\{[\s\S]*?font-size:\s*8px;/,
+    /\.analysis-rank > span\s*\{[\s\S]*?display:\s*flex;[\s\S]*?align-items:\s*baseline;[\s\S]*?white-space:\s*nowrap;[\s\S]*?\.analysis-rank > span > em\s*\{[^}]*flex:\s*0 0 56px;[^}]*font-size:\s*11px;[^}]*text-align:\s*left;[\s\S]*?\.analysis-rank small\s*\{[^}]*font-size:\s*8px;[^}]*text-align:\s*left;/,
   );
   assert.match(visibleHtml, /볼보 분당/);
   assert.match(
@@ -1710,7 +1719,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     showroomRankingHtml,
-    /class="selected"[\s\S]*?class="analysis-rank"><strong>25<\/strong>[\s\S]*?볼보 강남대치/,
+    /class="selected"[\s\S]*?class="analysis-rank"><strong>25<\/strong>[\s\S]*?<em>강남대치<\/em>/,
   );
   assert.equal(
     (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,

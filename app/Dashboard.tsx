@@ -528,6 +528,9 @@ const displayShowroomName = (name: string) => {
   return `볼보 ${normalizedName}`;
 };
 
+const displayShowroomNameWithoutBrand = (name: string) =>
+  displayShowroomName(name).replace(/^볼보\s*/, "");
+
 function getSignal(value: number, average: number) {
   const delta = value - average;
   if (delta >= 10) return { label: "대단해요", tone: "great", delta };
@@ -1410,10 +1413,10 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
             <i className="national" /> 전국 평균
           </span>
           <span>
-            <i className="showroom" /> {displayShowroomName(showroom.showroom)}
+            <i className="showroom" /> {displayShowroomNameWithoutBrand(showroom.showroom)}
           </span>
           <span>
-            <i className="response-line" /> 회신율
+            <i className="response-line" /> {displayShowroomNameWithoutBrand(showroom.showroom)} 회신율
           </span>
         </div>
       </div>

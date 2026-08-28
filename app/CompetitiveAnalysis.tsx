@@ -1183,7 +1183,9 @@ export default function CompetitiveAnalysis({
               <h2>종합 만족도 × 해피콜 이행</h2>
             </div>
             <div className="analysis-legend" aria-label="차트 범례">
-              <span className="selected">내 전시장</span>
+              <span className="selected">
+                {displayShowroomNameWithoutBrand(selected.showroom)}
+              </span>
               <span>비교 전시장</span>
               <span className="average">그룹 평균</span>
             </div>
@@ -1299,7 +1301,7 @@ export default function CompetitiveAnalysis({
                 )}
               </h2>
             </div>
-            <strong>{groupItems.length}개점</strong>
+            <strong>{groupItems.length}개소</strong>
           </header>
           <div className="analysis-ranking-head" aria-hidden="true">
             <span>순위 · 전시장</span>
@@ -1325,7 +1327,7 @@ export default function CompetitiveAnalysis({
                   <span className="analysis-rank">
                     <strong>{rank}</strong>
                     <span>
-                      <em>{displayShowroomName(item.showroom)}</em>
+                      <em>{displayShowroomNameWithoutBrand(item.showroom)}</em>
                       <small>
                         {item.dealer} · {item.region} · {item.size}
                       </small>
