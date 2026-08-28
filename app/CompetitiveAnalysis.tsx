@@ -1701,7 +1701,7 @@ export default function CompetitiveAnalysis({
                 </div>
               </div>
               <footer className="analysis-staff-benchmark-legend">
-                <span><i />Sales-DMS 재직자 분포</span>
+                <span><i />볼보 모든 영업 직원</span>
                 <span className="selected">
                   <i />
                   {selectedStaffScatterPoint

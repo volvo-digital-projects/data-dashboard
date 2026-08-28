@@ -1409,6 +1409,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*200px;/);
   assert.doesNotMatch(staffSectionHtml, /김대준 SC 좌표/);
   assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.3점 · 25건/);
+  assert.match(staffSectionHtml, /볼보 모든 영업 직원/);
+  assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
+  assert.match(css, /\.analysis-staff-scatter-population circle\s*\{[\s\S]*?fill:\s*rgba\(222, 104, 62, 0\.62\)/);
+  assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#16708f/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
   assert.doesNotMatch(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
   assert.doesNotMatch(staffSectionHtml, /소속구간/);

@@ -5692,28 +5692,28 @@ input:focus-visible {
 }
 
 .analysis-staff-scatter-population circle {
-  fill: rgba(69, 139, 165, 0.66);
+  fill: rgba(222, 104, 62, 0.62);
   stroke: rgba(255, 255, 255, 0.94);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
 .analysis-staff-scatter-selected > line {
-  stroke: rgba(222, 104, 62, 0.5);
+  stroke: rgba(22, 112, 143, 0.5);
   stroke-width: 1;
   stroke-dasharray: 3 3;
   vector-effect: non-scaling-stroke;
 }
 
 .analysis-staff-scatter-selected .halo {
-  fill: rgba(238, 116, 70, 0.15);
-  stroke: rgba(238, 116, 70, 0.34);
+  fill: rgba(22, 112, 143, 0.15);
+  stroke: rgba(22, 112, 143, 0.36);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
 .analysis-staff-scatter-selected .point {
-  fill: #ec7045;
+  fill: #16708f;
   stroke: #fff;
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
@@ -5779,12 +5779,12 @@ input:focus-visible {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(69, 139, 165, 0.65);
+  background: rgba(222, 104, 62, 0.68);
 }
 
 .analysis-staff-benchmark-legend span.selected i {
-  background: #ec7045;
-  box-shadow: 0 0 0 2px rgba(236, 112, 69, 0.14);
+  background: #16708f;
+  box-shadow: 0 0 0 2px rgba(22, 112, 143, 0.14);
 }
 
 .analysis-staff-benchmark-legend em {
