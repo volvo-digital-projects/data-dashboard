@@ -5650,6 +5650,12 @@ input:focus-visible {
   font-weight: 700;
 }
 
+.analysis-staff-scatter-average .label text.score {
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-size: 9px;
+  font-weight: 760;
+}
+
 .analysis-staff-scatter-population circle {
   fill: rgba(222, 104, 62, 0.62);
   stroke: rgba(255, 255, 255, 0.94);

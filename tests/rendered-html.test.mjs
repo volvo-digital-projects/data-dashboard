@@ -1450,6 +1450,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*230px;/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-national-benchmark"/);
   assert.match(staffSectionHtml, /class="analysis-staff-scatter-average"/);
+  assert.match(staffSectionHtml, />전국 평균<\/text>/);
+  assert.match(staffSectionHtml, /class="score"[^>]*>\s*9\.3점\s*<\/text>/);
   assert.match(staffSectionHtml, /class="analysis-staff-scatter-showroom"/);
   assert.match(staffSectionHtml, />강남대치</);
   assert.doesNotMatch(staffSectionHtml, /문정환 SC 좌표/);
