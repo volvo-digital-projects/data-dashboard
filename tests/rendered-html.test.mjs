@@ -1242,8 +1242,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     /class="analysis-staff-comparison-layout"[\s\S]*class="analysis-staff-history"[\s\S]*class="analysis-staff-benchmarks"/,
   );
-  assert.match(staffSectionHtml, /전국 및 근속기간 분포/);
-  assert.match(staffSectionHtml, /근속기간별 상담 만족도 분포/);
+  assert.doesNotMatch(staffSectionHtml, />비교대조군</);
+  assert.doesNotMatch(staffSectionHtml, />전국 및 근속기간 분포</);
+  assert.doesNotMatch(staffSectionHtml, /4개년 누적/);
+  assert.doesNotMatch(staffSectionHtml, /근속기간별 상담 만족도 분포/);
+  assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 중 누적 VOC 회신 보유 직원/);
   assert.match(staffSectionHtml, /class="analysis-staff-tenure-scatter-chart"/);
   assert.match(staffSectionHtml, /김대준 SC 좌표/);
   assert.match(staffSectionHtml, /13\.5년 · 9\.28점 \/ 25건/);

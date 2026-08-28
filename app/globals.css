@@ -5077,42 +5077,11 @@ input:focus-visible {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 13px;
+  gap: 6px;
+  padding: 8px 10px 10px;
   border: 1px solid #cddfe7;
   border-radius: 8px;
   background: linear-gradient(145deg, #f5f9fb 0%, #edf5f8 100%);
-}
-
-.analysis-staff-benchmarks > header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.analysis-staff-benchmarks > header h3 {
-  margin: 0;
-  color: #15394e;
-  font-size: 13px;
-  font-weight: 780;
-}
-
-.analysis-staff-benchmarks > header p {
-  margin: 3px 0 0;
-  color: #78909d;
-  font-size: 8px;
-}
-
-.analysis-staff-benchmarks > header > span {
-  padding: 4px 7px;
-  border: 1px solid #d3e3e9;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  color: #567487;
-  font-size: 8px;
-  font-weight: 700;
-  white-space: nowrap;
 }
 
 .analysis-staff-national-benchmark {
@@ -5495,59 +5464,15 @@ input:focus-visible {
 }
 
 .analysis-staff-tenure-scatter {
-  min-height: 238px;
+  min-height: 198px;
   flex: 1;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 8px;
-  padding: 9px;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  padding: 6px;
   border: 1px solid #d5e4ea;
   border-radius: 7px;
   background: rgba(255, 255, 255, 0.72);
-}
-
-.analysis-staff-tenure-scatter > header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.analysis-staff-tenure-scatter > header h3 {
-  margin: 0;
-  color: #15394e;
-  font-size: 11px;
-  font-weight: 780;
-}
-
-.analysis-staff-tenure-scatter > header p {
-  margin: 2px 0 0;
-  color: #78909d;
-  font-size: 7px;
-}
-
-.analysis-staff-tenure-scatter > header > strong {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  padding: 5px 7px;
-  border: 1px solid #b9d6e2;
-  border-radius: 6px;
-  background: #e9f4f7;
-  color: #315f75;
-  font-family: var(--font-latin);
-  font-size: 8px;
-  font-weight: 600;
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-.analysis-staff-tenure-scatter > header > strong span {
-  color: #0d5f7f;
-  font-family: var(--font-korean), sans-serif;
-  font-size: 8px;
-  font-weight: 750;
 }
 
 .analysis-staff-tenure-scatter-chart {

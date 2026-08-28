@@ -1453,14 +1453,6 @@ export default function CompetitiveAnalysis({
             </div>
 
             <aside className="analysis-staff-benchmarks" aria-label="전국 및 근속기간 분포 비교대조군">
-              <header>
-                <div>
-                  <h3>비교대조군</h3>
-                  <p>전국 및 근속기간 분포</p>
-                </div>
-                <span>4개년 누적</span>
-              </header>
-
               <article className="analysis-staff-national-benchmark">
                 <div>
                   <span>전국 영업직원</span>
@@ -1486,16 +1478,6 @@ export default function CompetitiveAnalysis({
                 className="analysis-staff-tenure-scatter"
                 aria-label="근속기간별 상담 만족도 산포도"
               >
-                <header>
-                  <div>
-                    <h3>근속기간별 상담 만족도 분포</h3>
-                    <p>Sales-DMS 재직자 중 누적 VOC 회신 보유 직원</p>
-                  </div>
-                  <strong>
-                    <span>{selectedStaffEmployee?.name ?? "선택 직원"} SC</span>
-                    {selectedStaffTenure}
-                  </strong>
-                </header>
                 <div className="analysis-staff-tenure-scatter-chart">
                   <svg
                     viewBox="0 0 470 210"
