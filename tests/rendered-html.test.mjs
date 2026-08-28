@@ -1505,12 +1505,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-benchmark-legend\s*\{[\s\S]*?justify-content:\s*center;/);
   assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직자 분포/);
   assert.match(css, /\.analysis-staff-scatter-population circle\s*\{[\s\S]*?fill:\s*rgba\(222, 104, 62, 0\.62\)/);
-  assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#16708f/);
+  assert.match(css, /\.analysis-staff-scatter-selected \.point\s*\{[\s\S]*?fill:\s*#075b7c/);
+  assert.match(css, /\.analysis-staff-scatter-selected \.ring\s*\{[\s\S]*?fill:\s*rgba\(22, 121, 162, 0\.42\)/);
   assert.match(css, /@keyframes analysis-staff-selected-halo/);
   assert.match(css, /@keyframes analysis-staff-selected-point/);
   assert.match(
     css,
-    /\.analysis-staff-card\.is-motion-visible \.analysis-staff-scatter-selected \.halo\s*\{[\s\S]*?infinite;/,
+    /\.analysis-staff-scatter-selected \.halo\s*\{[\s\S]*?animation:\s*analysis-staff-selected-halo 1\.45s ease-in-out infinite;/,
   );
   assert.match(css, /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*rgba\(131, 102, 167, 0\.82\)/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);

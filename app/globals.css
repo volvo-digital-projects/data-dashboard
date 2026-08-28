@@ -5735,41 +5735,66 @@ input:focus-visible {
 }
 
 .analysis-staff-scatter-selected .halo {
-  fill: rgba(22, 112, 143, 0.15);
-  stroke: rgba(22, 112, 143, 0.36);
-  stroke-width: 1;
+  fill: rgba(22, 121, 162, 0.12);
+  stroke: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-selected .ring {
+  fill: rgba(22, 121, 162, 0.42);
+  stroke: none;
   vector-effect: non-scaling-stroke;
 }
 
 .analysis-staff-scatter-selected .point {
-  fill: #16708f;
+  fill: #075b7c;
   stroke: #fff;
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
 }
 
-.analysis-staff-card.is-motion-visible .analysis-staff-scatter-selected .halo {
+.analysis-staff-scatter-selected .halo,
+.analysis-staff-scatter-selected .ring,
+.analysis-staff-scatter-selected .point {
   transform-box: fill-box;
   transform-origin: center;
-  animation: analysis-staff-selected-halo 1.55s cubic-bezier(0.22, 0.72, 0.24, 1) 250ms infinite;
 }
 
-.analysis-staff-card.is-motion-visible .analysis-staff-scatter-selected .point {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: analysis-staff-selected-point 1.55s ease-in-out 250ms infinite;
+.analysis-staff-scatter-selected .halo {
+  animation: analysis-staff-selected-halo 1.45s ease-in-out infinite;
+}
+
+.analysis-staff-scatter-selected .ring {
+  animation: analysis-staff-selected-ring 1.45s ease-in-out infinite;
+}
+
+.analysis-staff-scatter-selected .point {
+  animation: analysis-staff-selected-point 1.45s ease-in-out infinite;
 }
 
 @keyframes analysis-staff-selected-halo {
   0%,
   100% {
-    opacity: 0.72;
-    transform: scale(0.86);
+    opacity: 1;
+    transform: scale(1);
   }
 
-  62% {
-    opacity: 0.08;
-    transform: scale(1.62);
+  50% {
+    opacity: 0.34;
+    transform: scale(1.26);
+  }
+}
+
+@keyframes analysis-staff-selected-ring {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.56;
+    transform: scale(1.16);
   }
 }
 
@@ -5781,13 +5806,14 @@ input:focus-visible {
   }
 
   42% {
-    filter: drop-shadow(0 0 5px rgba(22, 112, 143, 0.7));
-    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(22, 121, 162, 0.72));
+    transform: scale(1.06);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .analysis-staff-scatter-selected .halo,
+  .analysis-staff-scatter-selected .ring,
   .analysis-staff-scatter-selected .point {
     animation: none;
   }

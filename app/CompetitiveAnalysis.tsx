@@ -1783,8 +1783,9 @@ export default function CompetitiveAnalysis({
                           y1={0}
                           y2={0}
                         />
-                        <circle className="halo" r="10" />
-                        <circle className="point" r="6" />
+                        <circle className="halo" r="15" />
+                        <circle className="ring" r="11" />
+                        <circle className="point" r="7" />
                       </g>
                     ) : null}
                   </svg>
