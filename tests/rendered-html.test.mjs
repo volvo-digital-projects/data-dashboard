@@ -1268,6 +1268,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-roster-responses">08건<\/span>/);
   assert.match(staffSectionHtml, /번호[\s\S]*?영업직원[\s\S]*?누적평균[\s\S]*?회신건수/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*28px minmax\(104px, 1fr\) 52px 42px;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?min-height:\s*30px;/);
+  assert.match(css, /\.analysis-staff-roster > header > span\s*\{[\s\S]*?height:\s*16px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
   assert.match(css, /\.analysis-staff-roster-average\s*\{[\s\S]*?font-size:\s*12px;/);
   assert.match(css, /\.analysis-staff-roster-rank\s*\{[\s\S]*?font-size:\s*8px;[\s\S]*?font-weight:\s*700;/);

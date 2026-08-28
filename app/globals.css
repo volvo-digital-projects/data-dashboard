@@ -4628,7 +4628,7 @@ input:focus-visible {
 }
 
 .analysis-staff-roster > header {
-  min-height: 44px;
+  min-height: 30px;
   display: grid;
   grid-template-columns: 28px minmax(104px, 1fr) 52px 42px;
   align-items: center;
@@ -4639,7 +4639,7 @@ input:focus-visible {
 
 .analysis-staff-roster > header > span {
   min-width: 0;
-  height: 22px;
+  height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
