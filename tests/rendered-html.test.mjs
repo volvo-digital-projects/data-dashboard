@@ -1367,16 +1367,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
     />00<[\s\S]*>03<[\s\S]*>06<[\s\S]*>09<[\s\S]*>12<[\s\S]*>15</,
   );
   assert.match(css, /\.analysis-staff-tenure-scatter-chart svg\s*\{[\s\S]*?height:\s*200px;/);
-  assert.match(staffSectionHtml, /김대준 SC 좌표/);
-  assert.match(staffSectionHtml, /13\.5년 · 9\.28점 \/ 25건/);
-  assert.match(
-    staffSectionHtml,
-    /class="analysis-staff-scatter-profile"/,
-  );
-  assert.match(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
-  assert.match(staffSectionHtml, /href="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/);
+  assert.doesNotMatch(staffSectionHtml, /김대준 SC 좌표/);
+  assert.match(staffSectionHtml, /김대준 SC · 13\.5년 · 9\.28점 · 25건/);
+  assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
+  assert.doesNotMatch(staffSectionHtml, /aria-label="김대준 공식 프로필 사진"/);
   assert.doesNotMatch(staffSectionHtml, /소속구간/);
-  assert.match(css, /\.analysis-staff-scatter-profile \.photo-ring\s*\{[\s\S]*?filter:\s*drop-shadow/);
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-scatter-population"/g) ?? []).length,
     1,
