@@ -2011,7 +2011,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     dashboardSource,
     /const resizeObserver = new ResizeObserver\(updateWidth\)/,
   );
-  assert.match(dashboardSource, /const chartHeight = compact \? 150 : 210/);
+  assert.match(
+    dashboardSource,
+    /const usesTabletCompactChart = compact && measuredChartWidth <= 900/,
+  );
+  assert.match(
+    dashboardSource,
+    /const chartHeight = usesTabletCompactChart \? 184 : compact \? 150 : 210/,
+  );
   assert.match(
     dashboardSource,
     /preserveAspectRatio=\{compact \? "xMidYMax meet" : "none"\}/,
@@ -3005,7 +3012,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\) and \(max-width: 1240px\)[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 150px;[^}]*min-height: 150px;[^}]*max-height: 150px;[^}]*align-self: end/,
+    /@media \(min-width: 761px\) and \(max-width: 1240px\)[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-canvas\s*\{[^}]*grid-template-rows: 184px auto auto;[^}]*\}[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 184px;[^}]*min-height: 184px;[^}]*max-height: 184px;[^}]*align-self: stretch/,
   );
   assert.match(
     css,

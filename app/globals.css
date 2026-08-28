@@ -10629,14 +10629,19 @@ button.quarter-score-row:disabled {
   font-size: 8px;
 }
 
-/* Keep iPad weekly-score SVG text at its native aspect ratio. The chart row can
-   grow to align with the companion card, but the SVG itself must not stretch. */
+/* Give the iPad weekly chart its own full-height drawing row. The SVG viewBox
+   uses the same height in Dashboard.tsx, so labels keep their native shape and
+   the week/quarter rows stay in normal flow below the plot. */
 @media (min-width: 761px) and (max-width: 1240px) {
+  .weekly-score-layout > .trend-wrap.compact .trend-canvas {
+    grid-template-rows: 184px auto auto;
+  }
+
   .weekly-score-layout > .trend-wrap.compact .trend-chart {
-    height: 150px;
-    min-height: 150px;
-    max-height: 150px;
-    align-self: end;
+    height: 184px;
+    min-height: 184px;
+    max-height: 184px;
+    align-self: stretch;
   }
 
   .weekly-score-layout .trend-wrap.compact .actual-point-value,
