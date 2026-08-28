@@ -3037,6 +3037,10 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
+    /\.analysis-tabs button \+ button::before\s*\{[^}]*left: -3px;[^}]*width: 1px;[^}]*height: 22px;[^}]*background: rgba\(64, 91, 108, 0\.2\);/,
+  );
+  assert.match(
+    css,
     /\.analysis-context-item\s*\{[^}]*grid-template-rows: auto auto[^}]*align-content: center[^}]*justify-items: center/,
   );
   assert.match(
