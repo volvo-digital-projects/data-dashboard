@@ -10483,6 +10483,24 @@ button.quarter-score-row:disabled {
   font-size: 8px;
 }
 
+/* Keep iPad weekly-score SVG text at its native aspect ratio. The chart row can
+   grow to align with the companion card, but the SVG itself must not stretch. */
+@media (min-width: 761px) and (max-width: 1240px) {
+  .weekly-score-layout > .trend-wrap.compact .trend-chart {
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+    align-self: end;
+  }
+
+  .weekly-score-layout .trend-wrap.compact .actual-point-value,
+  .weekly-score-layout .trend-wrap.compact .national-point-value {
+    font-stretch: normal;
+    font-synthesis: none;
+    letter-spacing: 0;
+  }
+}
+
 .weekly-score-layout .trend-wrap.compact .quarter-band span {
   justify-content: center;
   text-align: center;

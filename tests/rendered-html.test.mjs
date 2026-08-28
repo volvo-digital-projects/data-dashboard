@@ -1934,6 +1934,10 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(dashboardSource, /const chartHeight = compact \? 150 : 210/);
   assert.match(
+    dashboardSource,
+    /preserveAspectRatio=\{compact \? "xMidYMax meet" : "none"\}/,
+  );
+  assert.match(
     css,
     /\.v3s-performance\.compact \.v3s-quarter-panel,[\s\S]*?min-height: 172px/,
   );
@@ -2919,6 +2923,14 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.match(
     css,
     /\.weekly-score-layout \.trend-wrap\.compact \.actual-point-value,[\s\S]*?\.weekly-score-layout \.trend-wrap\.compact \.national-point-value\s*\{[^}]*font-size: 8px/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\) and \(max-width: 1240px\)[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 150px;[^}]*min-height: 150px;[^}]*max-height: 150px;[^}]*align-self: end/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\) and \(max-width: 1240px\)[\s\S]*?\.weekly-score-layout \.trend-wrap\.compact \.actual-point-value,[\s\S]*?\.weekly-score-layout \.trend-wrap\.compact \.national-point-value\s*\{[^}]*font-stretch: normal;[^}]*font-synthesis: none;/,
   );
   assert.match(
     css,
