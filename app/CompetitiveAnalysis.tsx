@@ -1054,7 +1054,6 @@ export default function CompetitiveAnalysis({
         >
           <header className="analysis-staff-heading">
             <div>
-              <span className="analysis-staff-kicker">VOC STAFF QUALITY</span>
               <h2>현직 영업 인력 상담 만족도</h2>
               <p>
                 Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터와
