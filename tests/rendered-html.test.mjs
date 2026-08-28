@@ -1299,6 +1299,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.ok(staffSectionHtml.indexOf("김대준") < staffSectionHtml.indexOf("정지만"));
   assert.match(
     staffSectionHtml,
+    /class="analysis-staff-roster-rank">14<\/span><span class="analysis-staff-roster-identity"><strong>정지만<\/strong>[\s\S]*?class="analysis-staff-roster-average">―<\/span><span class="analysis-staff-roster-responses">00건<\/span>/,
+  );
+  assert.match(
+    analysisSource,
+    /className="analysis-staff-roster-rank">\s*\{index \+ 1\}/,
+  );
+  assert.match(
+    staffSectionHtml,
     /class="selected" aria-pressed="true" aria-label="문정환, 상담 만족도 9\.9점, 8건"/,
   );
   assert.match(

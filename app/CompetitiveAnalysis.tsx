@@ -1406,7 +1406,7 @@ export default function CompetitiveAnalysis({
                       key={employee.name}
                     >
                       <span className="analysis-staff-roster-rank">
-                        {average === null ? "―" : index + 1}
+                        {index + 1}
                       </span>
                       <span className="analysis-staff-roster-identity">
                         <strong>{employee.name}</strong>
