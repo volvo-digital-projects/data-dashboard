@@ -1261,6 +1261,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
   );
   assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
+  assert.match(
+    staffSectionHtml,
+    /aria-label="김대준 미소 표정 전환"[\s\S]*kim-dae-jun-smile\.png/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-profile-photo\.smiling img\.smile\s*\{[\s\S]*?opacity:\s*1;/,
+  );
   assert.match(staffSectionHtml, /인증직원 선정/);
   assert.doesNotMatch(
     staffSectionHtml,

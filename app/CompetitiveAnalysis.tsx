@@ -78,6 +78,7 @@ type StaffAnalysisShowroom = {
 
 type StaffProfilePhoto = {
   image: string;
+  smileImage?: string;
 };
 
 type StaffProfileShowroom = {
@@ -588,6 +589,7 @@ export default function CompetitiveAnalysis({
   const [view, setView] = useState<AnalysisView>(initialView);
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState("김대준");
+  const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
@@ -1355,7 +1357,10 @@ export default function CompetitiveAnalysis({
                       aria-label={`${employee.name}, 상담 만족도 ${
                         average === null ? "표본 없음" : `${average.toFixed(2)}점`
                       }, ${responses ? `${responses}건` : "표본 없음"}`}
-                      onClick={() => setSelectedStaffName(employee.name)}
+                      onClick={() => {
+                        setSelectedStaffName(employee.name);
+                        setSmilingStaffName(null);
+                      }}
                       key={employee.name}
                     >
                       <span className="analysis-staff-roster-rank">
@@ -1383,16 +1388,56 @@ export default function CompetitiveAnalysis({
             <div className="analysis-staff-detail">
           <div className="analysis-staff-summary">
             <article className="analysis-staff-profile-card">
-              <div className="analysis-staff-profile-photo">
+              <button
+                type="button"
+                className={`analysis-staff-profile-photo${
+                  selectedStaffProfile?.smileImage ? " interactive" : ""
+                }${
+                  selectedStaffEmployee?.name === smilingStaffName
+                    ? " smiling"
+                    : ""
+                }`}
+                disabled={!selectedStaffProfile?.smileImage}
+                aria-label={
+                  selectedStaffProfile?.smileImage
+                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} 미소 표정 전환`
+                    : undefined
+                }
+                aria-pressed={
+                  selectedStaffProfile?.smileImage
+                    ? selectedStaffEmployee?.name === smilingStaffName
+                    : undefined
+                }
+                onClick={() =>
+                  setSmilingStaffName((current) =>
+                    current === selectedStaffEmployee?.name
+                      ? null
+                      : selectedStaffEmployee?.name ?? null,
+                  )
+                }
+              >
                 {selectedStaffProfile ? (
-                  <img
-                    src={selectedStaffProfile.image}
-                    alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
-                  />
+                  <>
+                    <img
+                      className="base"
+                      src={selectedStaffProfile.image}
+                      alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
+                      draggable={false}
+                    />
+                    {selectedStaffProfile.smileImage ? (
+                      <img
+                        className="smile"
+                        src={selectedStaffProfile.smileImage}
+                        alt=""
+                        aria-hidden="true"
+                        draggable={false}
+                      />
+                    ) : null}
+                  </>
                 ) : (
                   <span aria-hidden="true">{selectedStaffInitials}</span>
                 )}
-              </div>
+              </button>
               <div>
                 <strong className="name">
                   {selectedStaffEmployee?.name ?? "―"}

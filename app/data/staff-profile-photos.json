@@ -310,7 +310,8 @@
           "image": "/staff-profiles/h-motors/gangnam-daechi/kang-suk.jpg"
         },
         "김대준": {
-          "image": "/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.jpg"
+          "image": "/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.jpg",
+          "smileImage": "/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun-smile.png"
         },
         "김성경": {
           "image": "/staff-profiles/h-motors/gangnam-daechi/kim-sung-kyung.jpg"

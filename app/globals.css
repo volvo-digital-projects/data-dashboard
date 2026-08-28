@@ -4845,14 +4845,41 @@ input:focus-visible {
   font-family: "Volvo Centum", var(--font-korean), sans-serif;
   font-size: 18px;
   font-weight: 700;
+  padding: 0;
+  appearance: none;
+  cursor: default;
 }
 
 .analysis-staff-profile-photo img {
+  grid-area: 1 / 1;
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
   object-position: center top;
+  transition: opacity 160ms ease-out;
+  user-select: none;
+}
+
+.analysis-staff-profile-photo.interactive {
+  cursor: pointer;
+}
+
+.analysis-staff-profile-photo.interactive:focus-visible {
+  outline: 2px solid #ea7d45;
+  outline-offset: 2px;
+}
+
+.analysis-staff-profile-photo img.smile {
+  opacity: 0;
+}
+
+.analysis-staff-profile-photo.smiling img.base {
+  opacity: 0;
+}
+
+.analysis-staff-profile-photo.smiling img.smile {
+  opacity: 1;
 }
 
 .analysis-staff-profile-card > div:last-child {
