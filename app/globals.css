@@ -12169,6 +12169,29 @@ body {
     align-self: center;
     grid-template-rows: repeat(2, 45px);
   }
+
+  .dashboard-identity-header > .identity-title:not(.analysis-title) {
+    width: auto;
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .dashboard-identity-header .identity-title:not(.analysis-title) h1 {
+    width: auto;
+    flex: 0 0 auto;
+    font-size: clamp(49px, 3.9vw, 56px);
+    line-height: 0.92;
+  }
+
+  .dashboard-identity-header .identity-title:not(.analysis-title) .header-status-row {
+    flex: 0 0 auto;
+    align-self: flex-end;
+  }
 }
 
 .header-status-row {

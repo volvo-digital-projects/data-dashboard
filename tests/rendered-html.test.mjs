@@ -672,6 +672,10 @@ test("server-renders the selected CDSID dashboard", async () => {
     dashboardCss,
     /\.header-status-row \.dashboard-logout-form\s*\{[^}]*margin: 0/,
   );
+  assert.match(
+    dashboardCss,
+    /\.dashboard-identity-header > \.identity-title:not\(\.analysis-title\)\s*\{[^}]*flex: 1 1 auto;[^}]*flex-direction: row;[^}]*align-items: flex-end;[^}]*gap: 18px;[\s\S]*?\.dashboard-identity-header \.identity-title:not\(\.analysis-title\) h1\s*\{[^}]*font-size: clamp\(49px, 3\.9vw, 56px\);[^}]*line-height: 0\.92;[\s\S]*?\.dashboard-identity-header \.identity-title:not\(\.analysis-title\) \.header-status-row\s*\{[^}]*align-self: flex-end;/,
+  );
   assert.doesNotMatch(dashboardCss, /\.dashboard-logout-button::after/);
   assert.match(
     dashboardCss,
