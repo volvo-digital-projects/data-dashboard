@@ -148,7 +148,7 @@ test("server-renders the CDSID login route", async () => {
   assert.match(loginSource, /"checking-user": "접속자 정보 확인 중"/);
   assert.match(
     loginSource,
-    /"scanning-security": "보안패치 프로그램 스캐닝 중"/,
+    /"scanning-security": "보안패치 프로그램 스캔 중"/,
   );
   assert.match(loginSource, /LOGIN_IDENTITY_MIN_MS = 700/);
   assert.match(loginSource, /LOGIN_SECURITY_SCAN_MS = 650/);

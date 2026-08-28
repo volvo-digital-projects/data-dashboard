@@ -16,7 +16,7 @@ type LoginPhase = "idle" | "checking-user" | "scanning-security";
 const LOGIN_PHASE_LABELS: Record<LoginPhase, string> = {
   idle: "Data Dashboard 시작",
   "checking-user": "접속자 정보 확인 중",
-  "scanning-security": "보안패치 프로그램 스캐닝 중",
+  "scanning-security": "보안패치 프로그램 스캔 중",
 };
 
 function wait(milliseconds: number) {
