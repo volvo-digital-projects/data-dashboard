@@ -340,7 +340,8 @@ const viewMeta: Record<
   },
 };
 
-const displayNumber = (value: number) => value.toFixed(1);
+const displayNumber = (value: number) =>
+  Math.abs(value - 100) < Number.EPSILON ? "100" : value.toFixed(1);
 
 const formatStaffTenure = (months: number) => {
   const years = Math.floor(months / 12);
