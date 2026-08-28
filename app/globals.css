@@ -12170,6 +12170,11 @@ body {
     grid-template-rows: repeat(2, 45px);
   }
 
+  .dashboard-identity-header > .identity-detail-rail {
+    width: calc((100% - var(--dashboard-card-gap)) / 4);
+    flex: 0 0 calc((100% - var(--dashboard-card-gap)) / 4);
+  }
+
   .dashboard-identity-header > .identity-title:not(.analysis-title) {
     width: auto;
     flex: 1 1 auto;

@@ -3248,6 +3248,10 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
+    /@media \(min-width: 761px\)[\s\S]*?\.dashboard-identity-header > \.identity-detail-rail\s*\{[^}]*width: calc\(\(100% - var\(--dashboard-card-gap\)\) \/ 4\)[^}]*flex: 0 0 calc\(\(100% - var\(--dashboard-card-gap\)\) \/ 4\)/,
+  );
+  assert.match(
+    css,
     /@media \(min-width: 1241px\)[\s\S]*?\.dashboard-identity-header\s*\{[^}]*gap: 12px;/,
   );
   assert.match(
