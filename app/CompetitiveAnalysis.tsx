@@ -1330,7 +1330,7 @@ export default function CompetitiveAnalysis({
                       </div>
                     </div>
                     <footer>
-                      <span><i className="employee" />선택 직원</span>
+                      <span><i className="employee" />고객상담 만족도</span>
                       <span><i className="national" />전국 영업직원 평균</span>
                     </footer>
                   </article>
