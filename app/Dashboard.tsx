@@ -1318,30 +1318,48 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       aria-label={`${displayShowroomName(showroom.showroom)} 상담 만족도 4개년 비교`}
     >
       <header className="voc-consultation-heading">
-        <div>
+        <div className="voc-consultation-heading-title">
           <strong><span className="english-title">4</span>개년 추이</strong>
-          <span className="voc-consultation-response-summary">
-            회신율 <b>{cumulativeResponseRate?.toFixed(1) ?? "—"}%</b>
-            <em>
-              전국 {nationalCumulativeResponseRate?.toFixed(1) ?? "—"}% ·{" "}
+        </div>
+        <div className="voc-consultation-comparisons">
+          <div className="voc-consultation-comparison satisfaction">
+            <span>상담 만족도</span>
+            <b>
+              {displayShowroomNameWithoutBrand(showroom.showroom)} {displayNumber(cumulativeAverage)}점
+            </b>
+            <em>볼보 전체 {displayNumber(nationalCumulativeAverage)}점</em>
+            <strong className={deltaTone}>
+              {cumulativeDelta === null
+                ? "—"
+                : `${cumulativeDelta > 0.049 ? "▲" : cumulativeDelta < -0.049 ? "▼" : "±"}${Math.abs(
+                    cumulativeDelta,
+                  ).toFixed(1)}점`}
+            </strong>
+          </div>
+          <div className="voc-consultation-comparison response">
+            <span>회신율</span>
+            <b>
+              {displayShowroomNameWithoutBrand(showroom.showroom)} {cumulativeResponseRate?.toFixed(1) ?? "—"}%
+            </b>
+            <em>전국 {nationalCumulativeResponseRate?.toFixed(1) ?? "—"}%</em>
+            <strong
+              className={
+                cumulativeRateDelta === null
+                  ? "neutral"
+                  : cumulativeRateDelta > 0.049
+                    ? "above"
+                    : cumulativeRateDelta < -0.049
+                      ? "below"
+                      : "neutral"
+              }
+            >
               {cumulativeRateDelta === null
                 ? "—"
-                : `${cumulativeRateDelta >= 0 ? "▲" : "▼"}${Math.abs(
+                : `${cumulativeRateDelta > 0.049 ? "▲" : cumulativeRateDelta < -0.049 ? "▼" : "±"}${Math.abs(
                     cumulativeRateDelta,
                   ).toFixed(1)}%p`}
-            </em>
-          </span>
-        </div>
-        <div className="voc-consultation-cumulative">
-          <small>누적</small>
-          <strong>{displayNumber(cumulativeAverage)}</strong>
-          <em className={deltaTone}>
-            {cumulativeDelta === null
-              ? "—"
-              : `${cumulativeDelta > 0.049 ? "▲" : cumulativeDelta < -0.049 ? "▼" : "±"} ${Math.abs(
-                  cumulativeDelta,
-                ).toFixed(1)}`}
-          </em>
+            </strong>
+          </div>
         </div>
       </header>
 

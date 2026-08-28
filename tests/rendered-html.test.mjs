@@ -998,6 +998,14 @@ test("server-renders the selected CDSID dashboard", async () => {
     /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?<strong><span class="english-title">4<\/span>개년 추이<\/strong>/,
   );
   assert.match(
+    visibleHtml,
+    /상담 만족도[\s\S]*?강남대치 [\d.]+점[\s\S]*?볼보 전체 [\d.]+점[\s\S]*?[▲▼±][\d.]+점/,
+  );
+  assert.match(
+    visibleHtml,
+    /회신율[\s\S]*?강남대치 [\d.]+%[\s\S]*?전국 [\d.]+%[\s\S]*?[▲▼±][\d.]+%p/,
+  );
+  assert.match(
     html,
     /class="voc-response-rate-line-layer"[\s\S]*?<polyline points="[^"]+"[\s\S]*?class="voc-response-rate-point/,
   );
@@ -3732,7 +3740,7 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
   assert.doesNotMatch(englishRule[1], /font-size:/);
   assert.match(
     css,
-    /\.voc-consultation-heading > div:first-child span:not\(\.english-title\)\s*\{[^}]*font-size: 8px;/,
+    /\.voc-consultation-comparison > b\s*\{[^}]*font-size: 8\.5px;/,
   );
 });
 
