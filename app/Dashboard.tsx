@@ -394,7 +394,7 @@ const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
 };
 
 const integratedScoreMax =
-  metricMeta.v3s.max + metricMeta.voc.max + cxQ2Dsc.maxScore;
+  metricMeta.v3s.max + metricMeta.voc.max + metricMeta.cx.max;
 const integratedQuarterScoreOf = (
   item: Showroom,
   quarter: QuarterKey,

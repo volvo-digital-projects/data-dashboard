@@ -826,7 +826,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     visibleHtml,
-    /aria-label="분기별 통합 경쟁력 지수 330점 기준"/,
+    /aria-label="분기별 통합 경쟁력 지수 520점 기준"/,
   );
   assert.match(visibleHtml, /통합 경쟁력 지수/);
   assert.doesNotMatch(visibleHtml, /상반기 누적 평균/);
@@ -838,7 +838,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q2[\s\S]*32위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(330점 만점\)[\s\S]*298\.8/);
+  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*298\.8/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
@@ -2228,7 +2228,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const integratedScoreMax =[\s\S]*?metricMeta\.v3s\.max \+ metricMeta\.voc\.max \+ cxQ2Dsc\.maxScore/,
+    /const integratedScoreMax =[\s\S]*?metricMeta\.v3s\.max \+ metricMeta\.voc\.max \+ metricMeta\.cx\.max/,
   );
   assert.match(
     dashboardSource,
