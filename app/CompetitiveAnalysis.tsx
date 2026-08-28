@@ -1380,17 +1380,6 @@ export default function CompetitiveAnalysis({
                   {selectedStaffEmployee?.name ?? "―"}
                   <small>{selectedStaffEmployee?.role ?? ""}</small>
                 </strong>
-                <div
-                  className="analysis-staff-certification"
-                  aria-label={`2021 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
-                >
-                  <small>2021 인증</small>
-                  <b>G-{selectedStaffCertificationCounts.Grand}</b>
-                  <span aria-hidden="true">/</span>
-                  <b>A-{selectedStaffCertificationCounts.Advanced}</b>
-                  <span aria-hidden="true">/</span>
-                  <b>C-{selectedStaffCertificationCounts.Certified}</b>
-                </div>
               </div>
             </article>
             <article>
@@ -1417,6 +1406,18 @@ export default function CompetitiveAnalysis({
               <strong>
                 {selectedStaffResponses}
                 <small>건</small>
+              </strong>
+            </article>
+            <article className="analysis-staff-certification-card">
+              <span>2021 인증기록</span>
+              <strong
+                aria-label={`2021 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
+              >
+                <b>G-{selectedStaffCertificationCounts.Grand}</b>
+                <i aria-hidden="true">/</i>
+                <b>A-{selectedStaffCertificationCounts.Advanced}</b>
+                <i aria-hidden="true">/</i>
+                <b>C-{selectedStaffCertificationCounts.Certified}</b>
               </strong>
             </article>
           </div>

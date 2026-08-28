@@ -1214,10 +1214,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /src="\/staff-profiles\/h-motors\/gangnam-daechi\/kim-dae-jun\.jpg"/,
   );
   assert.match(staffSectionHtml, /alt="김대준 공식 프로필"/);
-  assert.match(staffSectionHtml, /2021 인증/);
+  assert.match(staffSectionHtml, /2021 인증기록/);
   assert.match(
     staffSectionHtml,
-    /class="analysis-staff-certification"[\s\S]*?G-1[\s\S]*?A-0[\s\S]*?C-0/,
+    /class="analysis-staff-certification-card"[\s\S]*?G-1[\s\S]*?A-0[\s\S]*?C-0/,
   );
   assert.match(
     staffSectionHtml,
@@ -1268,11 +1268,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(staffSectionHtml, />VOC 고객회신 건수</);
   assert.doesNotMatch(staffSectionHtml, />VOC 회신</);
-  assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;/);
+  assert.match(staffSectionHtml, />VOC 고객회신 건수<[\s\S]*class="analysis-staff-certification-card"/);
+  assert.match(css, /\.analysis-staff-summary\s*\{[\s\S]*?grid-template-columns:\s*minmax\(160px, 0\.76fr\) repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.analysis-staff-summary article\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto;[\s\S]*?align-items:\s*center;[\s\S]*?align-content:\s*center;/);
   assert.match(css, /\.analysis-staff-summary strong\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);[\s\S]*?font-weight:\s*600;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(css, /\.analysis-staff-summary strong\.name\s*\{[\s\S]*?font-family:\s*var\(--font-korean\), sans-serif;/);
   assert.match(css, /\.analysis-staff-profile-photo\s*\{[\s\S]*?width:\s*42px;[\s\S]*?height:\s*44px;/);
-  assert.match(css, /\.analysis-staff-certification\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
+  assert.match(css, /\.analysis-staff-certification-card strong\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*14px;[\s\S]*?font-variant-numeric:\s*tabular-nums;/);
   assert.match(staffSectionHtml, /class="analysis-staff-benchmarks"/);
   assert.match(
     staffSectionHtml,

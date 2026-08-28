@@ -4759,7 +4759,7 @@ input:focus-visible {
 
 .analysis-staff-summary {
   display: grid;
-  grid-template-columns: minmax(220px, 1.3fr) repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(160px, 0.76fr) repeat(4, minmax(0, 1fr));
   gap: 6px;
 }
 
@@ -4768,6 +4768,7 @@ input:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
+  align-content: center;
   gap: 3px 10px;
   padding: 7px 12px;
   border: 1px solid #dbe6eb;
@@ -4855,39 +4856,34 @@ input:focus-visible {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
 }
 
-.analysis-staff-certification {
+.analysis-staff-certification-card strong {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 4px;
   min-width: 0;
   color: #46687a;
   font-family: "Volvo Centum", var(--font-latin), sans-serif;
-  font-size: 8px;
+  font-size: 14px;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
 }
 
-.analysis-staff-certification small {
-  margin-right: 2px;
-  color: #7d929e;
-  font-family: var(--font-korean), sans-serif;
-  font-size: 7px;
-  font-weight: 650;
-}
-
-.analysis-staff-certification b {
+.analysis-staff-certification-card strong b {
   color: #255b72;
   font-weight: 700;
 }
 
-.analysis-staff-certification span {
+.analysis-staff-certification-card strong i {
   color: #a6b5bc;
-  font-size: 7px;
+  font-size: 10px;
+  font-style: normal;
   font-weight: 500;
 }
 
