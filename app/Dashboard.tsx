@@ -2820,21 +2820,6 @@ export default function Dashboard({
   );
   const q1IntegratedScore = integratedQuarterScoreOf(selected, "q1") ?? 0;
   const q2IntegratedScore = integratedQuarterScoreOf(selected, "q2") ?? 0;
-  const cumulativeAverage = (q1IntegratedScore + q2IntegratedScore) / 2;
-  const q1IntegratedAverage = quarterIntegratedAverageOf("q1");
-  const q2IntegratedAverage = quarterIntegratedAverageOf("q2");
-  const cumulativeNationalAverage =
-    (q1IntegratedAverage + q2IntegratedAverage) / 2;
-  const cumulativeDelta = cumulativeAverage - cumulativeNationalAverage;
-  const cumulativeIntegratedOf = (item: Showroom) => {
-    const values = [
-      integratedQuarterScoreOf(item, "q1"),
-      integratedQuarterScoreOf(item, "q2"),
-    ].filter((value): value is number => typeof value === "number");
-    return values.length
-      ? values.reduce((sum, value) => sum + value, 0) / values.length
-      : Number.NEGATIVE_INFINITY;
-  };
   const competitionRankOf = (scoreOf: (item: Showroom) => number) => {
     const selectedScore = scoreOf(selected);
     if (!Number.isFinite(selectedScore)) return dashboard.meta.showroomCount;
@@ -2846,12 +2831,7 @@ export default function Dashboard({
       }).length + 1
     );
   };
-  const cumulativeRank = competitionRankOf(cumulativeIntegratedOf);
   const selectedQuarterLabel = selectedQuarter.toUpperCase();
-  const selectedQuarterIntegrated =
-    integratedQuarterScoreOf(selected, selectedQuarter) ?? q2IntegratedScore;
-  const selectedIntegratedAverage =
-    quarterIntegratedAverageOf(selectedQuarter);
   const integratedRankOf = (quarter: QuarterKey) =>
     competitionRankOf(
       (item) =>
@@ -2900,6 +2880,22 @@ export default function Dashboard({
       appealLabel: "신차해피콜만 사후보정 가능",
     },
   ];
+  const selectedIntegratedScore = Number(
+    kpis.reduce((sum, item) => sum + item.value, 0).toFixed(1),
+  );
+  const selectedIntegratedAverage = Number(
+    kpis.reduce((sum, item) => sum + item.average, 0).toFixed(1),
+  );
+  const selectedIntegratedScoreOf = (item: Showroom) => {
+    const values = (["v3s", "voc", "cx"] as const).map((metric) =>
+      quarterValueOf(item, metric, metricQuarters[metric]),
+    );
+
+    return values.every((value): value is number => typeof value === "number")
+      ? values.reduce((sum, value) => sum + value, 0)
+      : Number.NEGATIVE_INFINITY;
+  };
+  const selectedIntegratedRank = competitionRankOf(selectedIntegratedScoreOf);
   const selectedMetricDscScore = kpis.every(
     (item) => typeof item.dscScore === "number",
   )
@@ -2919,8 +2915,7 @@ export default function Dashboard({
       )
     : null;
   const warningCount = kpis.filter((item) => item.value < item.average).length;
-  const integratedDelta =
-    selectedQuarterIntegrated - selectedIntegratedAverage;
+  const integratedDelta = selectedIntegratedScore - selectedIntegratedAverage;
 
   return (
     <main className="dashboard" ref={dashboardRootRef}>
@@ -3040,13 +3035,13 @@ export default function Dashboard({
         <section className={`mobile-command ${warningCount ? "has-warning" : ""}`}>
         <div className="mobile-power">
           <div>
-            <span>통합 누적 평균</span>
-            <strong>{displayNumber(cumulativeAverage)}</strong>
+            <span>통합 경쟁력 지수</span>
+            <strong>{displayNumber(selectedIntegratedScore)}</strong>
             <small>/ {integratedScoreMax}</small>
           </div>
           <div>
             <strong>
-              전체 {nationalRank}위
+              전체 {selectedIntegratedRank}위
               <small> / {dashboard.meta.showroomCount}개점</small>
             </strong>
             <span className={integratedDelta >= 0 ? "positive" : "negative"}>
@@ -3180,15 +3175,15 @@ export default function Dashboard({
           <div className="metric-value-row">
             <div className="metric-score-lockup">
               <AnimatedScore
-                value={cumulativeAverage}
+                value={selectedIntegratedScore}
                 sequence={3}
                 className="scoreboard-main-value"
               />
               <span
                 className="metric-rank-note"
-                aria-label={`전체 ${dashboard.meta.showroomCount}개 전시장 중 ${cumulativeRank}위`}
+                aria-label={`전체 ${dashboard.meta.showroomCount}개 전시장 중 ${selectedIntegratedRank}위`}
               >
-                / 전체 <strong>{cumulativeRank}위</strong>
+                / 전체 <strong>{selectedIntegratedRank}위</strong>
                 <small>/ {dashboard.meta.showroomCount}</small>
               </span>
             </div>
@@ -3208,12 +3203,12 @@ export default function Dashboard({
             <span>
               {selectedQuarterLabel} 볼보 평균{" "}
               <span className="metric-benchmark-average">
-                {displayNumber(cumulativeNationalAverage)}점
+                {displayNumber(selectedIntegratedAverage)}점
               </span>{" "}
               대비
             </span>
-            <strong className={cumulativeDelta >= 0 ? "positive" : "negative"}>
-              {cumulativeDelta >= 0 ? "▲" : "▼"} {Math.abs(cumulativeDelta).toFixed(1)}점
+            <strong className={integratedDelta >= 0 ? "positive" : "negative"}>
+              {integratedDelta >= 0 ? "▲" : "▼"} {Math.abs(integratedDelta).toFixed(1)}점
             </strong>
           </div>
           <div

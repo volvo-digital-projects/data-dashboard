@@ -843,7 +843,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q2[\s\S]*32위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*298\.8/);
+  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*401\.1/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
@@ -886,7 +886,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
     visibleHtml,
-    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">300\.1점<\/span> 대비[\s\S]*?▼ 1\.3점/,
+    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">460\.2점<\/span> 대비[\s\S]*?▼ 59\.1점/,
   );
   assert.match(visibleHtml, /전체[\s\S]*\d+위[\s\S]*39/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
@@ -2300,7 +2300,11 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /value=\{cumulativeAverage\}[\s\S]*?className="metric-rank-note"[\s\S]*?cumulativeRank[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?selectedMetricDscScore[\s\S]*?RTC 인센티브[\s\S]*?selectedMetricRtcRate[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
+    /value=\{selectedIntegratedScore\}[\s\S]*?className="metric-rank-note"[\s\S]*?selectedIntegratedRank[\s\S]*?className="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어[\s\S]*?selectedMetricDscScore[\s\S]*?RTC 인센티브[\s\S]*?selectedMetricRtcRate[\s\S]*?className="metric-benchmark scoreboard-benchmark"/,
+  );
+  assert.match(
+    dashboardSource,
+    /const selectedIntegratedScore = Number\([\s\S]*?kpis\.reduce\(\(sum, item\) => sum \+ item\.value, 0\)\.toFixed\(1\)/,
   );
   assert.match(
     dashboardSource,
@@ -3272,11 +3276,11 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     dashboardSource,
-    /const cumulativeNationalAverage =[\s\S]*?\(q1IntegratedAverage \+ q2IntegratedAverage\) \/ 2/,
+    /const selectedIntegratedAverage = Number\([\s\S]*?kpis\.reduce\(\(sum, item\) => sum \+ item\.average, 0\)\.toFixed\(1\)/,
   );
   assert.match(
     dashboardSource,
-    /const competitionRankOf =[\s\S]*?score > selectedScore[\s\S]*?const cumulativeRank = competitionRankOf\(cumulativeIntegratedOf\)/,
+    /const competitionRankOf =[\s\S]*?score > selectedScore[\s\S]*?const selectedIntegratedRank = competitionRankOf\(selectedIntegratedScoreOf\)/,
   );
   assert.match(
     css,
