@@ -1163,7 +1163,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(visibleHtml, /종합 만족도와 해피콜 단순 평균/);
   assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
-  assert.match(html, /class="analysis-scatter"/);
+  assert.match(html, /class="analysis-scatter scatter-motion-settled"/);
   assert.equal((html.match(/class="scatter-zone /g) ?? []).length, 2);
   assert.match(
     html.replaceAll("<!-- -->", ""),
@@ -1180,9 +1180,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(analysisSource, /key=\{`\$\{view\}-\$\{item\.cdsid\}`\}/);
   assert.match(
     css,
-    /\.scatter-point\s*\{[^}]*left 240ms cubic-bezier\(0\.22, 1, 0\.36, 1\)[^}]*bottom 240ms cubic-bezier\(0\.22, 1, 0\.36, 1\)[^}]*animation: scatter-point-enter 140ms ease-out both;/,
+    /\.scatter-point\s*\{[^}]*left 285ms cubic-bezier\(0\.22, 1, 0\.36, 1\) 145ms[^}]*bottom 285ms cubic-bezier\(0\.22, 1, 0\.36, 1\) 145ms[^}]*animation: scatter-point-enter 205ms ease-out 175ms both;/,
   );
   assert.doesNotMatch(css, /scatter-point-view-flow/);
+  assert.match(html, /scatter-motion-settled/);
+  assert.match(css, /\.analysis-scatter\.scatter-motion-guides \.scatter-zone\s*\{[^}]*opacity: 0;/);
+  assert.match(css, /\.scatter-average-line\.vertical\s*\{[^}]*transition: left 300ms cubic-bezier\(0\.2, 0\.82, 0\.22, 1\);/);
+  assert.match(css, /\.scatter-average-line\.horizontal\s*\{[^}]*transition: bottom 300ms cubic-bezier\(0\.2, 0\.82, 0\.22, 1\);/);
   assert.match(
     css,
     /@keyframes scatter-point-enter\s*\{[\s\S]*?opacity: 0;[\s\S]*?opacity: 1;/,

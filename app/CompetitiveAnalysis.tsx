@@ -588,6 +588,9 @@ export default function CompetitiveAnalysis({
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
   const [view, setView] = useState<AnalysisView>(initialView);
+  const [scatterMotionStage, setScatterMotionStage] = useState<
+    "settled" | "guides" | "zones" | "points"
+  >("settled");
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState("김대준");
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
@@ -597,6 +600,7 @@ export default function CompetitiveAnalysis({
   const scatterRef = useRef<HTMLDivElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
+  const scatterMotionTimersRef = useRef<number[]>([]);
   const [scatterSize, setScatterSize] = useState({
     width: 920,
     height: 326,
@@ -617,6 +621,15 @@ export default function CompetitiveAnalysis({
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(
+    () => () => {
+      scatterMotionTimersRef.current.forEach((timer) =>
+        window.clearTimeout(timer),
+      );
+    },
+    [],
+  );
 
   useLayoutEffect(() => {
     const anchor = stickyAnchorRef.current;
@@ -982,7 +995,19 @@ export default function CompetitiveAnalysis({
   }, []);
 
   const changeView = (nextView: AnalysisView) => {
+    if (nextView === view) return;
+    scatterMotionTimersRef.current.forEach((timer) =>
+      window.clearTimeout(timer),
+    );
+    scatterMotionTimersRef.current = [];
+    setHoveredCdsid(null);
+    setScatterMotionStage("guides");
     setView(nextView);
+    scatterMotionTimersRef.current.push(
+      window.setTimeout(() => setScatterMotionStage("zones"), 105),
+      window.setTimeout(() => setScatterMotionStage("points"), 185),
+      window.setTimeout(() => setScatterMotionStage("settled"), 470),
+    );
     window.history.replaceState(
       null,
       "",
@@ -1159,7 +1184,7 @@ export default function CompetitiveAnalysis({
           <div className="analysis-scatter-shell">
             <div className="scatter-y-title">종합 만족도</div>
             <div
-              className="analysis-scatter"
+              className={`analysis-scatter scatter-motion-${scatterMotionStage}`}
               style={scatterStyle}
               ref={scatterRef}
             >
