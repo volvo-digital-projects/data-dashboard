@@ -1274,7 +1274,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /10년 이상/);
   assert.match(staffSectionHtml, /14명/);
   assert.match(staffSectionHtml, /MANAGER COACHING VIEW/);
-  assert.match(visibleHtml, /4개년 VOC 영업지원 핵심 분석/);
+  assert.doesNotMatch(visibleHtml, />4개년 VOC 영업지원 핵심 분석</);
+  assert.doesNotMatch(visibleHtml, /2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다/);
+  assert.equal(
+    (visibleHtml.match(/class="analysis-staff-insight-count"/g) ?? []).length,
+    2,
+  );
+  assert.equal((visibleHtml.match(/aria-label="25건 분석"/g) ?? []).length, 2);
+  assert.match(css, /\.analysis-staff-insight-count\s*\{[\s\S]*?width:\s*20px;[\s\S]*?height:\s*20px;[\s\S]*?border-radius:\s*50%;/);
   assert.match(visibleHtml, /친절한 응대/);
   assert.match(visibleHtml, /진행상황 선제 안내/);
   assert.match(visibleHtml, /개선·보강/);

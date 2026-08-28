@@ -1604,16 +1604,17 @@ export default function CompetitiveAnalysis({
           </div>
 
           <section className="analysis-staff-insights" aria-label="4개년 VOC 영업지원 핵심 분석">
-            <header>
-              <div>
-                <h3>4개년 VOC 영업지원 핵심 분석</h3>
-                <p>2023~2026 YTD 고객 코멘트의 반복 표현을 분류했습니다.</p>
-              </div>
-              <span>{selectedStaffEmployee?.commentResponses ?? 0}건 분석</span>
-            </header>
             <div>
               <article className="strength">
-                <h4>유지·강화</h4>
+                <h4>
+                  유지·강화
+                  <span
+                    className="analysis-staff-insight-count"
+                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}건 분석`}
+                  >
+                    {selectedStaffEmployee?.commentResponses ?? 0}
+                  </span>
+                </h4>
                 <div>
                   {(selectedStaffEmployee?.strengthKeywords ?? []).length ? (
                     selectedStaffEmployee?.strengthKeywords.map((keyword) => (
@@ -1627,7 +1628,15 @@ export default function CompetitiveAnalysis({
                 </div>
               </article>
               <article className="improvement">
-                <h4>개선·보강</h4>
+                <h4>
+                  개선·보강
+                  <span
+                    className="analysis-staff-insight-count"
+                    aria-label={`${selectedStaffEmployee?.commentResponses ?? 0}건 분석`}
+                  >
+                    {selectedStaffEmployee?.commentResponses ?? 0}
+                  </span>
+                </h4>
                 <div className="analysis-staff-improvement-list">
                   {(selectedStaffEmployee?.improvementKeywords ?? []).length ? (
                     selectedStaffEmployee?.improvementKeywords.map((keyword) => (
