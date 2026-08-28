@@ -4540,24 +4540,33 @@ input:focus-visible {
 }
 
 .analysis-staff-source {
-  display: flex;
+  --analysis-staff-source-width: 100px;
+  display: grid;
+  grid-template-columns: repeat(2, var(--analysis-staff-source-width));
   align-items: center;
-  gap: 7px;
-  flex-wrap: wrap;
+  gap: 5px;
   justify-content: flex-end;
 }
 
 .analysis-staff-source span {
-  min-height: 27px;
+  width: 100%;
+  height: 24px;
+  min-height: 24px;
   display: inline-flex;
   align-items: center;
-  padding: 0 11px;
-  border: 1px solid #d6e4eb;
-  border-radius: 999px;
-  background: #f7fafb;
-  color: #486779;
-  font-size: 10px;
-  font-weight: 650;
+  justify-content: center;
+  padding: 0 6px;
+  border: 1px solid rgba(52, 109, 137, 0.22);
+  border-radius: 5px;
+  background: rgba(231, 242, 247, 0.46);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  color: #355e73;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .analysis-staff-workspace {

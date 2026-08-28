@@ -1390,7 +1390,17 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /고객이 재문의하기 전에 계약·출고 진행상황, 지연 사유와 다음 안내 일정을 먼저 공유/);
   assert.match(visibleHtml, /보증·정비·소모품 등 포함·제외 항목과 이용 시점을 상담 중 체크리스트로 안내/);
   assert.match(visibleHtml, /고객의 사용 목적을 먼저 확인하고 관련 기능과 경쟁 차종 대비 장점을 실제 사용 예시로 설명/);
-  assert.match(staffSectionHtml, /\d{6} Sales-DMS 재직인원 기준/);
+  assert.match(staffSectionHtml, /Sales-DMS 기준/);
+  assert.match(staffSectionHtml, /\d{6} 기준/);
+  assert.doesNotMatch(staffSectionHtml, /Sales-DMS 재직인원 기준/);
+  assert.match(
+    css,
+    /\.analysis-staff-source\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, var\(--analysis-staff-source-width\)\);[\s\S]*?gap:\s*5px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-source span\s*\{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*24px;[\s\S]*?border-radius:\s*5px;/,
+  );
   assert.doesNotMatch(staffSectionHtml, /VOC 2026\.08\.24 기준/);
   assert.doesNotMatch(staffSectionHtml, /교차검증 메모/);
   assert.doesNotMatch(staffSectionHtml, /이름 불일치는 임의 병합하지 않습니다/);

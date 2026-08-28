@@ -1318,10 +1318,9 @@ export default function CompetitiveAnalysis({
             <div>
               <h2>소속 영업직원 상담만족도 결과</h2>
             </div>
-            <div className="analysis-staff-source">
-              <span>
-                {staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)} Sales-DMS 재직인원 기준
-              </span>
+            <div className="analysis-staff-source" aria-label="영업직원 분석 기준">
+              <span>Sales-DMS 기준</span>
+              <span>{staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)} 기준</span>
             </div>
           </header>
 
