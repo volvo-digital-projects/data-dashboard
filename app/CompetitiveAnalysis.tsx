@@ -14,7 +14,6 @@ import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
-import { formatSizeFullName } from "./sizeLabels";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1179,7 +1178,7 @@ export default function CompetitiveAnalysis({
               aria-hidden="true"
             />
             <small>사이즈</small>
-            <strong>{formatSizeFullName(selected.size)}</strong>
+            <strong>{selected.size}</strong>
           </Link>
           <Link
             className="analysis-context-item"

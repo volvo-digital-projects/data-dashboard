@@ -2978,7 +2978,7 @@ export default function Dashboard({
                 aria-hidden="true"
               />
               <dt>사이즈</dt>
-              <dd>{formatSizeFullName(selected.size)}</dd>
+              <dd>{selected.size}</dd>
             </div>
           </dl>
           <div className="identity-profile-menu" ref={profileMenuRef}>
