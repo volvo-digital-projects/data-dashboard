@@ -5709,8 +5709,12 @@ input:focus-visible {
   vector-effect: non-scaling-stroke;
 }
 
-.analysis-staff-scatter-average .label circle {
-  fill: #c94743;
+.analysis-staff-scatter-average .label .pointer {
+  fill: rgba(255, 255, 255, 0.96);
+  stroke: rgba(201, 71, 67, 0.42);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
 .analysis-staff-scatter-average .label text {

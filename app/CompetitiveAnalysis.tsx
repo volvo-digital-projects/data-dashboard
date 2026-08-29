@@ -1760,10 +1760,10 @@ export default function CompetitiveAnalysis({
                           y1={staffScatterY(staffNationalAverage)}
                           y2={staffScatterY(staffNationalAverage)}
                         />
-                        <g className="label" transform={`translate(${staffScatterPlot.right - 58} ${staffScatterY(staffNationalAverage) - 34})`}>
+                        <g className="label" transform={`translate(${staffScatterPlot.right - 48} ${staffScatterY(staffNationalAverage) - 34})`}>
+                          <path className="pointer" d="M 40 29 L 46 34 L 50 29 Z" />
                           <rect width="56" height="30" rx="6" />
-                          <circle cx="9" cy="9" r="2.5" />
-                          <text x="16" y="11">전국 평균</text>
+                          <text x="28" y="11" textAnchor="middle">전국 평균</text>
                           <text className="score" x="28" y="23" textAnchor="middle">
                             {staffNationalAverage.toFixed(1)}점
                           </text>
