@@ -13338,14 +13338,14 @@ button.header-status-item {
   .dashboard-identity-header > .identity-title,
   .dashboard-identity-header > .identity-title:not(.analysis-title) {
     box-sizing: border-box;
-    padding-left: 14px;
+    padding-left: 23px;
   }
 
   .dashboard-identity-header > .identity-detail-rail,
   .dashboard-identity-header > .analysis-context {
-    width: calc(var(--header-context-width) - 14px);
-    flex-basis: calc(var(--header-context-width) - 14px);
-    margin-right: 14px;
+    width: calc(var(--header-context-width) - 23px);
+    flex-basis: calc(var(--header-context-width) - 23px);
+    margin-right: 23px;
   }
 
   .dashboard-identity-header .identity-title h1::before {
