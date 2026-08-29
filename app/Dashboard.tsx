@@ -18,6 +18,7 @@ import weeklyJson from "./data/weekly.json";
 import v3sQuarterSummaryStyles from "./V3SQuarterSummary.module.css";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
+import { formatSizeFullName } from "./sizeLabels";
 import {
   getV3sEvidence,
   V3SEvidenceGallery,
@@ -2981,7 +2982,7 @@ export default function Dashboard({
                 aria-hidden="true"
               />
               <dt>사이즈</dt>
-              <dd>{selected.size}</dd>
+              <dd>{formatSizeFullName(selected.size)}</dd>
             </div>
           </dl>
           <div className="identity-profile-menu" ref={profileMenuRef}>
