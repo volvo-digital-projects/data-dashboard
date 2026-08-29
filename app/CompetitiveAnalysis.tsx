@@ -1823,9 +1823,7 @@ export default function CompetitiveAnalysis({
                 <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
                 <span className="selected">
                   <i />
-                  {selectedStaffScatterPoint
-                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} / ${selectedStaffScatterPoint.tenureYears.toFixed(1)}년 / ${selectedStaffScatterPoint.average.toFixed(1)}점 / ${selectedStaffScatterPoint.responses}건`
-                    : `${selectedStaffEmployee?.name ?? "선택 직원"}`}
+                  {selectedStaffEmployee?.name ?? "선택 직원"}
                 </span>
                 <em>원 크기 = 누적 회신 건수</em>
               </footer>
