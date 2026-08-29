@@ -1199,6 +1199,11 @@ export default function CompetitiveAnalysis({
             }
           >
             {groupLabel} 평균 {displayNumber(groupVocAverage)}점 대비{" "}
+            {selectedPoint.vocScore > groupVocAverage
+              ? "▲ "
+              : selectedPoint.vocScore < groupVocAverage
+                ? "▼ "
+                : "― "}
             {selectedPoint.vocScore >= groupVocAverage ? "+" : ""}
             {displayNumber(selectedPoint.vocScore - groupVocAverage)}점
           </em>
@@ -1221,6 +1226,11 @@ export default function CompetitiveAnalysis({
             }
           >
             {groupLabel} 평균 {displayNumber(groupHappyAverage)}점 대비{" "}
+            {selectedPoint.happyScore > groupHappyAverage
+              ? "▲ "
+              : selectedPoint.happyScore < groupHappyAverage
+                ? "▼ "
+                : "― "}
             {selectedPoint.happyScore >= groupHappyAverage ? "+" : ""}
             {displayNumber(selectedPoint.happyScore - groupHappyAverage)}점
           </em>
