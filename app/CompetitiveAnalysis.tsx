@@ -1239,8 +1239,7 @@ export default function CompetitiveAnalysis({
               : selectedPoint.vocScore < groupVocAverage
                 ? "▼ "
                 : "― "}
-            {selectedPoint.vocScore >= groupVocAverage ? "+" : ""}
-            {displayNumber(selectedPoint.vocScore - groupVocAverage)}점
+            {displayNumber(Math.abs(selectedPoint.vocScore - groupVocAverage))}점
           </em>
         </article>
 
@@ -1266,8 +1265,7 @@ export default function CompetitiveAnalysis({
               : selectedPoint.happyScore < groupHappyAverage
                 ? "▼ "
                 : "― "}
-            {selectedPoint.happyScore >= groupHappyAverage ? "+" : ""}
-            {displayNumber(selectedPoint.happyScore - groupHappyAverage)}점
+            {displayNumber(Math.abs(selectedPoint.happyScore - groupHappyAverage))}점
           </em>
         </article>
 
