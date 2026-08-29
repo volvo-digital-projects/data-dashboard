@@ -849,13 +849,7 @@ function V3SPerformance({
   compact?: boolean;
   highlightQuarter?: QuarterKey | null;
 }) {
-  const sizeFullName =
-    ({
-      U: "Urban",
-      C: "Compact",
-      MS: "Medium small",
-      ML: "Medium large",
-    } as Record<string, string>)[showroom.size] ?? showroom.size;
+  const sizeFullName = formatSizeFullName(showroom.size);
   const peerBenchmarks = (quarter: QuarterKey | null) => [
     {
       key: "dealer",
