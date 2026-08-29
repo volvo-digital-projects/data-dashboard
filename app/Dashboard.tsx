@@ -1763,7 +1763,7 @@ function WeeklyTrend({
                   textAnchor="middle"
                   className="future-window-label"
                 >
-                  Q3 평가 중
+                  평가 중
                 </text>
               </g>
             )}
@@ -1782,7 +1782,7 @@ function WeeklyTrend({
                   textAnchor="middle"
                   className="future-window-label"
                 >
-                  Q4 평가 전
+                  평가 전
                 </text>
               </g>
             )}
