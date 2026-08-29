@@ -13350,17 +13350,17 @@ button.header-status-item {
 
   .dashboard-identity-header .identity-title h1::before {
     margin-bottom: 11px;
-    font-size: 20px;
+    font-size: 10px;
     line-height: 0.9;
   }
 
   .dashboard-identity-header .identity-title:not(.analysis-title) h1 {
-    font-size: clamp(62px, 4.84vw, 70px);
-    line-height: 0.84;
+    font-size: clamp(56px, 4.4vw, 64px);
+    line-height: 0.9;
   }
 
   .dashboard-identity-header .identity-title.analysis-title h1,
   .dashboard-identity-header.analysis-header h1 {
-    font-size: clamp(42px, 3.3vw, 47px);
+    font-size: clamp(38px, 3vw, 43px);
   }
 }
