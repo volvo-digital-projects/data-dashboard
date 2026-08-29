@@ -13611,31 +13611,33 @@ button.header-status-item {
   .dashboard-identity-header > .identity-title.analysis-title {
     width: auto;
     flex: 1 1 auto;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-start;
-    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
     padding: 0 0 0 23px;
     overflow: visible;
   }
 
   .dashboard-identity-header .identity-title.analysis-title h1 {
     width: max-content;
-    max-width: calc(100% - 181px);
-    height: 92px;
-    flex: 0 1 auto;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    align-items: end;
+    max-width: 100%;
+    height: auto;
+    flex: 0 0 auto;
+    display: block;
     overflow: visible;
-    font-size: clamp(56px, 4.6vw, 66px);
-    line-height: 0.9;
+    font-size: clamp(49px, 4vw, 58px);
+    line-height: 0.92;
+  }
+
+  .dashboard-identity-header .identity-title.analysis-title h1::before {
+    margin-bottom: 4px;
   }
 
   .dashboard-identity-header .identity-title.analysis-title .header-status-row {
     --header-status-item-width: 82px;
     flex: 0 0 auto;
-    align-self: flex-end;
+    align-self: flex-start;
   }
 }
 
