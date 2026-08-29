@@ -13550,9 +13550,46 @@ button.header-status-item {
 
   .dashboard-identity-header > .identity-detail-rail,
   .dashboard-identity-header > .analysis-context {
-    width: calc(var(--header-context-width) - 23px);
-    flex-basis: calc(var(--header-context-width) - 23px);
-    margin-right: 23px;
+    width: var(--header-context-width);
+    flex-basis: var(--header-context-width);
+    margin-right: 0;
+    position: relative;
+  }
+
+  .dashboard-identity-header > .identity-detail-rail::before,
+  .dashboard-identity-header > .analysis-context::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    left: 12px;
+    z-index: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(195, 222, 234, 0.15) 0 calc(50% - 5px),
+      transparent calc(50% - 5px) calc(50% + 5px),
+      rgba(195, 222, 234, 0.15) calc(50% + 5px) 100%
+    );
+    pointer-events: none;
+  }
+
+  .dashboard-identity-header > .identity-detail-rail::after,
+  .dashboard-identity-header > .analysis-context::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 50%;
+    z-index: 0;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(195, 222, 234, 0.15) 0 calc(50% - 5px),
+      transparent calc(50% - 5px) calc(50% + 5px),
+      rgba(195, 222, 234, 0.15) calc(50% + 5px) 100%
+    );
+    pointer-events: none;
   }
 
   .dashboard-identity-header .identity-title h1::before {
