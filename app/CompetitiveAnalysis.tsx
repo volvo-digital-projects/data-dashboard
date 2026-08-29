@@ -1282,7 +1282,7 @@ export default function CompetitiveAnalysis({
               <i className="scatter-average-line vertical" />
               <i className="scatter-average-line horizontal" />
               <span className="scatter-average-value vertical">
-                <span>해피콜 이행</span>
+                <span>해피콜 이행률</span>
                 <strong>평균 {displayNumber(groupHappyAverage)}점</strong>
               </span>
               <span className="scatter-average-value horizontal">
@@ -1359,7 +1359,7 @@ export default function CompetitiveAnalysis({
               <span className="scatter-x-min">65</span>
               <span className="scatter-x-max">100</span>
             </div>
-            <div className="scatter-x-title">해피콜 이행</div>
+            <div className="scatter-x-title">해피콜 이행률</div>
           </div>
         </article>
 
@@ -1381,7 +1381,7 @@ export default function CompetitiveAnalysis({
           <div className="analysis-ranking-head" aria-hidden="true">
             <span>순위 · 전시장</span>
             <span>종합 만족도</span>
-            <span>해피콜 이행</span>
+            <span>해피콜 이행률</span>
             <span>합산 평균</span>
           </div>
           <div className="analysis-ranking-list">
