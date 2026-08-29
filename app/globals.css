@@ -13607,6 +13607,36 @@ button.header-status-item {
   .dashboard-identity-header.analysis-header h1 {
     font-size: clamp(38px, 3vw, 43px);
   }
+
+  .dashboard-identity-header > .identity-title.analysis-title {
+    width: auto;
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 0 0 23px;
+    overflow: visible;
+  }
+
+  .dashboard-identity-header .identity-title.analysis-title h1 {
+    width: max-content;
+    max-width: calc(100% - 181px);
+    height: 92px;
+    flex: 0 1 auto;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: end;
+    overflow: visible;
+    font-size: clamp(56px, 4.6vw, 66px);
+    line-height: 0.9;
+  }
+
+  .dashboard-identity-header .identity-title.analysis-title .header-status-row {
+    --header-status-item-width: 82px;
+    flex: 0 0 auto;
+    align-self: flex-end;
+  }
 }
 
 /* Keep the iPad VOC plot, week ruler, and quarter band in separate rows. */
