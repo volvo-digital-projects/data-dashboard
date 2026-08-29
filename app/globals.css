@@ -13355,7 +13355,7 @@ button.header-status-item {
   }
 
   .dashboard-identity-header .identity-title:not(.analysis-title) h1 {
-    font-size: clamp(56px, 4.4vw, 64px);
+    font-size: clamp(45px, 3.52vw, 51px);
     line-height: 0.9;
   }
 
