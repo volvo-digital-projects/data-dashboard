@@ -13331,3 +13331,36 @@ button.header-status-item {
     padding-inline: 5px;
   }
 }
+
+/* Keep the command-banner copy aligned with the score-card content while
+   preserving the established outer rail alignment on both dashboard pages. */
+@media (min-width: 761px) {
+  .dashboard-identity-header > .identity-title,
+  .dashboard-identity-header > .identity-title:not(.analysis-title) {
+    box-sizing: border-box;
+    padding-left: 14px;
+  }
+
+  .dashboard-identity-header > .identity-detail-rail,
+  .dashboard-identity-header > .analysis-context {
+    width: calc(var(--header-context-width) - 14px);
+    flex-basis: calc(var(--header-context-width) - 14px);
+    margin-right: 14px;
+  }
+
+  .dashboard-identity-header .identity-title h1::before {
+    margin-bottom: 11px;
+    font-size: 20px;
+    line-height: 0.9;
+  }
+
+  .dashboard-identity-header .identity-title:not(.analysis-title) h1 {
+    font-size: clamp(62px, 4.84vw, 70px);
+    line-height: 0.84;
+  }
+
+  .dashboard-identity-header .identity-title.analysis-title h1,
+  .dashboard-identity-header.analysis-header h1 {
+    font-size: clamp(42px, 3.3vw, 47px);
+  }
+}
