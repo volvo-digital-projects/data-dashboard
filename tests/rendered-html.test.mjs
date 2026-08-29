@@ -26,6 +26,26 @@ test("keeps the 2021-2026 certification results complete and cumulative", async 
       `${year} 인증 결과에 중복 직원이 없어야 합니다.`,
     );
   }
+  assert.deepEqual(
+    Object.fromEntries(
+      ["Grand", "Advanced", "Certified"].map((level) => [
+        level,
+        certifications.records.filter((record) => record.level === level).length,
+      ]),
+    ),
+    { Grand: 40, Advanced: 60, Certified: 80 },
+  );
+  assert.equal(
+    certifications.records.filter(
+      (record) =>
+        record.year === 2026 &&
+        record.name === "원효" &&
+        record.showroom === "광주" &&
+        record.level === "Advanced",
+    ).length,
+    1,
+  );
+  assert.equal(certifications.records.some((record) => record.name === "원호"), false);
   const kimDaeJun = certifications.records.filter((record) => record.name === "김대준");
   assert.deepEqual(
     Object.fromEntries(
