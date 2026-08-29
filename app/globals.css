@@ -13550,9 +13550,9 @@ button.header-status-item {
 
   .dashboard-identity-header > .identity-detail-rail,
   .dashboard-identity-header > .analysis-context {
-    width: var(--header-context-width);
-    flex-basis: var(--header-context-width);
-    margin-right: 0;
+    width: calc(var(--header-context-width) - 14px);
+    flex-basis: calc(var(--header-context-width) - 14px);
+    margin-right: 14px;
     position: relative;
   }
 
