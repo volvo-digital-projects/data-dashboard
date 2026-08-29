@@ -13578,3 +13578,97 @@ button.header-status-item {
     margin-top: 0;
   }
 }
+
+/* Expand the right-side V3S, VOC, and CX insight panels to their tier headings. */
+@media (min-width: 761px) {
+  .dashboard #score-v3s .v3s-history-panel,
+  .dashboard #score-voc .voc-consultation-history,
+  .dashboard #score-cx .one-voice-contribution {
+    position: relative;
+    z-index: 2;
+    margin-bottom: -35px;
+    transform: translateY(-35px);
+  }
+
+  .dashboard #score-v3s .v3s-history-panel {
+    min-height: 231px;
+  }
+
+  .dashboard #score-v3s .v3s-history-bar-stage {
+    height: 127px;
+  }
+
+  .dashboard #score-voc .voc-consultation-chart {
+    height: 140px;
+    background:
+      linear-gradient(
+        to bottom,
+        transparent 9px,
+        rgba(229, 233, 238, 0.58) 9px,
+        rgba(229, 233, 238, 0.58) 10px,
+        transparent 10px,
+        transparent 62px,
+        rgba(229, 233, 238, 0.58) 62px,
+        rgba(229, 233, 238, 0.58) 63px,
+        transparent 63px,
+        transparent 115px,
+        rgba(229, 233, 238, 0.58) 115px,
+        rgba(229, 233, 238, 0.58) 116px,
+        transparent 116px
+      ),
+      linear-gradient(180deg, rgba(246, 248, 250, 0.42), rgba(241, 245, 247, 0.9));
+  }
+
+  .dashboard #score-voc .voc-consultation-bars {
+    height: 106px;
+  }
+
+  .dashboard #score-voc .voc-consultation-axis.middle,
+  .dashboard #score-voc .voc-response-rate-axis.middle {
+    top: 63px;
+  }
+
+  .dashboard #score-voc .voc-consultation-axis.base,
+  .dashboard #score-voc .voc-response-rate-axis.base {
+    top: 116px;
+  }
+
+  .dashboard #score-cx .one-voice-contribution {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashboard #score-cx .one-voice-gauge-grid {
+    flex: 1;
+    align-items: center;
+    padding-top: 14px;
+  }
+
+  .dashboard #score-cx .one-voice-metric {
+    align-content: center;
+  }
+
+  .dashboard #score-cx .one-voice-gauge {
+    width: clamp(82px, 7vw, 108px);
+  }
+}
+
+@media (min-width: 1241px) {
+  .dashboard #score-voc .voc-consultation-history {
+    min-height: 220px;
+  }
+
+  .dashboard #score-cx .one-voice-contribution {
+    min-height: 234px;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1240px) {
+  .dashboard #score-voc .voc-consultation-history {
+    min-height: 270px;
+  }
+
+  .dashboard #score-cx .one-voice-contribution {
+    min-height: 254px;
+  }
+}
