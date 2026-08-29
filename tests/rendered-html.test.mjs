@@ -1048,9 +1048,9 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 32);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
-  assert.match(visibleHtml, /Q3 평가 진행 중/);
+  assert.match(visibleHtml, /Q3 평가 중/);
   assert.match(vocHtml, /class="future-window future-window-upcoming"/);
-  assert.match(visibleHtml, /Q4 평가 예정 중/);
+  assert.match(visibleHtml, /Q4 평가 전/);
   assert.match(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
   assert.doesNotMatch(vocHtml, /class="average-label"|class="point-value"/);
   assert.match(vocHtml, /class="coverage-line actual"/);
@@ -2183,7 +2183,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q3"[\s\S]{0,180}?statusText: "평가 진행"/,
+    /label: "Q3"[\s\S]{0,180}?statusText: "평가 중"/,
   );
   assert.match(
     dashboardSource,
@@ -2191,7 +2191,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q4"[\s\S]{0,180}?statusText: "평가 예정"/,
+    /label: "Q4"[\s\S]{0,180}?statusText: "평가 전"/,
   );
   assert.match(
     dashboardSource,
@@ -2199,11 +2199,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /className="future-window"[\s\S]{0,500}?Q3 평가 진행 중/,
+    /className="future-window"[\s\S]{0,500}?Q3 평가 중/,
   );
   assert.match(
     dashboardSource,
-    /className="future-window future-window-upcoming"[\s\S]{0,500}?Q4 평가 예정 중/,
+    /className="future-window future-window-upcoming"[\s\S]{0,500}?Q4 평가 전/,
   );
   assert.doesNotMatch(
     dashboardSource,

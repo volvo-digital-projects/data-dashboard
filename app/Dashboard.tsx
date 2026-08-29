@@ -904,7 +904,7 @@ function V3SPerformance({
       value: null,
       average: null,
       benchmarks: peerBenchmarks(null),
-      statusText: "평가 진행",
+      statusText: "평가 중",
       state: "in-progress",
     },
     {
@@ -912,7 +912,7 @@ function V3SPerformance({
       value: null,
       average: null,
       benchmarks: peerBenchmarks(null),
-      statusText: "평가 예정",
+      statusText: "평가 전",
       state: "upcoming",
     },
   ];
@@ -2458,7 +2458,7 @@ export default function Dashboard({
     oneVoiceScores.capturedAt,
   );
   const [, setLatestUpdate] = useState<LatestUpdate>({
-    title: "Q1, Q2 마감, 현재 Q3평가 진행중",
+    title: "Q1, Q2 마감, 현재 Q3 평가 중",
     effectiveDate: dashboard.meta.updatedAt,
   });
 
