@@ -1925,7 +1925,16 @@ export default function CompetitiveAnalysis({
                         >
                           <span>{period.half}</span>
                           {isAwarded ? (
-                            <strong>{selectedAwardName}</strong>
+                            <>
+                              <span
+                                className="v3s-award-prize-icon"
+                                aria-hidden="true"
+                              >
+                                <b>₩</b>
+                                <i />
+                              </span>
+                              <strong>{selectedAwardName}</strong>
+                            </>
                           ) : (
                             <i className="sr-only">수상 기록 없음</i>
                           )}

@@ -6137,6 +6137,81 @@ input:focus-visible {
   letter-spacing: -0.025em;
 }
 
+.v3s-award-prize-icon {
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  z-index: 1;
+  overflow: visible;
+  border: 1px solid rgba(197, 126, 13, 0.68);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff9c9 0%, #f6c759 52%, #d88f13 100%);
+  box-shadow:
+    0 1px 2px rgba(116, 72, 5, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  color: #704206;
+  animation: v3s-prize-pulse 2.6s ease-in-out infinite;
+}
+
+.v3s-award-prize-icon b {
+  font-family: var(--font-latin);
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.v3s-award-prize-icon i {
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(255, 184, 44, 0.48),
+    0 0 6px 2px rgba(255, 193, 64, 0.78);
+  animation: v3s-prize-glint 2.6s ease-in-out infinite;
+}
+
+@keyframes v3s-prize-pulse {
+  0%,
+  62%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  72% {
+    transform: scale(1.08);
+    filter: brightness(1.12);
+  }
+}
+
+@keyframes v3s-prize-glint {
+  0%,
+  58%,
+  82%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  68% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3s-award-prize-icon,
+  .v3s-award-prize-icon i {
+    animation: none;
+  }
+}
+
 @media (max-width: 1240px) {
   .analysis-sticky-shell {
     right: calc(24px - var(--dashboard-sticky-inner-gutter));
