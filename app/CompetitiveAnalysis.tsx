@@ -166,6 +166,21 @@ const staffTenureScatterPopulation: StaffTenureScatterPoint[] = Object.entries(
     ];
   }),
 );
+const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap(
+  ([cdsid, showroom]) =>
+    showroom.employees
+      .filter(
+        (employee) =>
+          employee.role === "영업직원" || employee.role === "영업팀장",
+      )
+      .map((employee) => ({ cdsid, employee })),
+);
+const staffNationalScoreRanking = [...staffTenureScatterPopulation].sort(
+  (a, b) =>
+    b.average - a.average ||
+    b.responses - a.responses ||
+    a.name.localeCompare(b.name, "ko"),
+);
 
 type ScatterLabelPlacement =
   | "left-up"
@@ -917,6 +932,25 @@ export default function CompetitiveAnalysis({
   const selectedStaffTenureMonths = selectedStaffEmployee
     ? selectedStaffEmployee.tenureMonths % 12
     : null;
+  const selectedStaffTenureRank = selectedStaffEmployee
+    ? staffCurrentSalesPopulation.filter(
+        ({ employee }) =>
+          employee.tenureMonths > selectedStaffEmployee.tenureMonths,
+      ).length + 1
+    : null;
+  const selectedStaffTenureTopPercent = selectedStaffTenureRank
+    ? (selectedStaffTenureRank / staffCurrentSalesPopulation.length) * 100
+    : null;
+  const selectedStaffScoreRank = selectedStaffEmployee
+    ? staffNationalScoreRanking.findIndex(
+        (point) =>
+          point.cdsid === selected.cdsid &&
+          point.name === selectedStaffEmployee.name,
+      ) + 1
+    : 0;
+  const selectedStaffResponseShare = staffNationalResponses
+    ? (selectedStaffResponses / staffNationalResponses) * 100
+    : null;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1564,45 +1598,69 @@ export default function CompetitiveAnalysis({
                 </strong>
               </div>
             </article>
-            <article>
+            <article className="analysis-staff-metric-card">
               <span>근무기간</span>
-              <strong className="analysis-staff-tenure-value">
-                {selectedStaffTenureYears === null || selectedStaffTenureMonths === null ? (
-                  "―"
-                ) : (
-                  <>
-                    <b>{selectedStaffTenureYears}</b><small>년</small>
-                    <b>{selectedStaffTenureMonths}</b><small>개월</small>
-                  </>
+              <div className="analysis-staff-metric-value">
+                <strong className="analysis-staff-tenure-value">
+                  {selectedStaffTenureYears === null || selectedStaffTenureMonths === null ? (
+                    "―"
+                  ) : (
+                    <>
+                      <b>{selectedStaffTenureYears}</b><small>년</small>
+                      <b>{selectedStaffTenureMonths}</b><small>개월</small>
+                    </>
+                  )}
+                </strong>
+                {selectedStaffTenureTopPercent === null ? null : (
+                  <small className="analysis-staff-metric-comparison">
+                    <i aria-hidden="true">/</i>
+                    전국 상위 {selectedStaffTenureTopPercent.toFixed(1)}%
+                  </small>
                 )}
-              </strong>
+              </div>
             </article>
-            <article>
+            <article className="analysis-staff-metric-card">
               <span>상담 만족도 평균(누적)</span>
-              <strong>
-                {selectedStaffAverage === null
-                  ? "―"
-                  : selectedStaffAverage.toFixed(1)}
-                <small>점</small>
-              </strong>
+              <div className="analysis-staff-metric-value">
+                <strong>
+                  {selectedStaffAverage === null
+                    ? "―"
+                    : selectedStaffAverage.toFixed(1)}
+                  <small>점</small>
+                </strong>
+                {selectedStaffScoreRank > 0 ? (
+                  <small className="analysis-staff-metric-comparison">
+                    <i aria-hidden="true">/</i>
+                    전체 {staffNationalScoreRanking.length}명 중 {selectedStaffScoreRank}위
+                  </small>
+                ) : null}
+              </div>
             </article>
-            <article>
+            <article className="analysis-staff-metric-card">
               <span>VOC 고객회신 건수</span>
-              <strong>
-                {selectedStaffResponses}
-                <small>건</small>
-              </strong>
+              <div className="analysis-staff-metric-value">
+                <strong>
+                  {selectedStaffResponses}
+                  <small>건</small>
+                </strong>
+                {selectedStaffResponseShare === null ? null : (
+                  <small className="analysis-staff-metric-comparison">
+                    <i aria-hidden="true">/</i>
+                    전체 {staffNationalResponses.toLocaleString("ko-KR")}건 중 {selectedStaffResponseShare.toFixed(1)}%
+                  </small>
+                )}
+              </div>
             </article>
             <article className="analysis-staff-certification-card">
               <span>인증직원</span>
               <strong
                 aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
               >
-                <b>G-{selectedStaffCertificationCounts.Grand}</b>
-                <i aria-hidden="true">/</i>
-                <b>A-{selectedStaffCertificationCounts.Advanced}</b>
-                <i aria-hidden="true">/</i>
-                <b>C-{selectedStaffCertificationCounts.Certified}</b>
+                <b>G<i className="analysis-staff-medal medal-grand" aria-hidden="true">★</i>{selectedStaffCertificationCounts.Grand}</b>
+                <em aria-hidden="true">/</em>
+                <b>A<i className="analysis-staff-medal medal-advanced" aria-hidden="true">★</i>{selectedStaffCertificationCounts.Advanced}</b>
+                <em aria-hidden="true">/</em>
+                <b>C<i className="analysis-staff-medal medal-certified" aria-hidden="true">★</i>{selectedStaffCertificationCounts.Certified}</b>
               </strong>
             </article>
           </div>
