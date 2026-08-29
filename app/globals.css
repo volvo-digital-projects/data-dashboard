@@ -5084,7 +5084,7 @@ input:focus-visible {
 
 .analysis-staff-chart-bar {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   width: 36px;
   height: var(--staff-bar-height);
   justify-self: center;
@@ -5114,6 +5114,7 @@ input:focus-visible {
 
 .analysis-staff-chart-bar b {
   position: absolute;
+  z-index: 1;
   inset: 9px 0 auto;
   color: #fff;
   font-family: "Volvo Centum", var(--font-latin), sans-serif;
@@ -5122,6 +5123,8 @@ input:focus-visible {
   line-height: 1;
   text-align: center;
   text-shadow: 0 1px 2px rgba(9, 48, 67, 0.22);
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.94);
+  paint-order: stroke fill;
 }
 
 .analysis-staff-chart-bar small {
@@ -5139,12 +5142,19 @@ input:focus-visible {
 .analysis-staff-trend-line,
 .analysis-staff-trend-markers {
   position: absolute;
-  z-index: 4;
   inset: 14px 0 auto;
   width: 100%;
   height: calc(100% - 50px);
   overflow: visible;
   pointer-events: none;
+}
+
+.analysis-staff-trend-line {
+  z-index: 2;
+}
+
+.analysis-staff-trend-markers {
+  z-index: 4;
 }
 
 .analysis-staff-trend-line polyline {
@@ -13366,5 +13376,12 @@ button.header-status-item {
   .dashboard-identity-header .identity-title.analysis-title h1,
   .dashboard-identity-header.analysis-header h1 {
     font-size: clamp(38px, 3vw, 43px);
+  }
+}
+
+/* Keep the iPad VOC plot, week ruler, and quarter band in separate rows. */
+@media (min-width: 761px) and (max-width: 1366px) {
+  .weekly-score-layout .trend-wrap.compact.metric-voc .week-ruler {
+    margin-top: 0;
   }
 }

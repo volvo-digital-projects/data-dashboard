@@ -1557,6 +1557,8 @@ function WeeklyTrend({
   const y = (value: number) =>
     chartY(170) -
     ((value - min) / Math.max(1, max - min)) * chartY(126);
+  const actualY = (value: number) =>
+    value === 0 ? y(value) - markerRadius - 1 : y(value);
   const weeks = Array.from({ length: 52 }, (_, index) => index + 1);
   const quarterDividers = [13, 26, 39];
   const quarterLabels = [
@@ -1596,7 +1598,7 @@ function WeeklyTrend({
     );
   };
   const actualValueLabelY = (point: { week: number; value: number }) => {
-    const pointY = y(point.value);
+    const pointY = actualY(point.value);
     const pairedPointY = y(averageAt(point.week));
     return labelBaselineY(
       pointY,
@@ -1685,7 +1687,7 @@ function WeeklyTrend({
   const actualSeriesVisible = synchronizedAnimationInView ?? true;
 
   return (
-    <div className={`trend-wrap ${compact ? "compact" : ""}`}>
+    <div className={`trend-wrap metric-${metric} ${compact ? "compact" : ""}`}>
       <div
         ref={trendScrollRef}
         className="trend-scroll"
@@ -1850,7 +1852,7 @@ function WeeklyTrend({
                       <g key={`store-${showroom.cdsid}-${metric}-${index}`}>
                         <polyline
                           points={segment
-                            .map((point) => `${x(point.week)},${y(point.value)}`)
+                            .map((point) => `${x(point.week)},${actualY(point.value)}`)
                             .join(" ")}
                           className="trend-line"
                         />
@@ -1864,7 +1866,7 @@ function WeeklyTrend({
                     {isWeeklyMetric ? (
                       <rect
                         x={x(point.week) - markerRadius}
-                        y={y(point.value) - markerRadius}
+                        y={actualY(point.value) - markerRadius}
                         width={markerSize}
                         height={markerSize}
                         data-week={point.label}
