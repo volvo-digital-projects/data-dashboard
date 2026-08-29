@@ -1582,7 +1582,7 @@ export default function CompetitiveAnalysis({
                 {selectedStaffAverage === null
                   ? "―"
                   : selectedStaffAverage.toFixed(1)}
-                <small>/ 10점</small>
+                <small>점</small>
               </strong>
             </article>
             <article>
