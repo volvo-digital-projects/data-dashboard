@@ -10864,19 +10864,19 @@ button.quarter-score-row:disabled {
   font-size: 8px;
 }
 
-/* Give the iPad weekly chart its own full-height drawing row. The SVG viewBox
-   uses the same height in Dashboard.tsx, so labels keep their native shape and
-   the week/quarter rows stay in normal flow below the plot. */
+/* Keep the iPad plot, week ruler, and quarter band as three independent rows.
+   The compact SVG now shares the same 150px coordinate system on every device. */
 @media (min-width: 761px) and (max-width: 1240px) {
   .weekly-score-layout > .trend-wrap.compact .trend-canvas {
-    grid-template-rows: 184px auto auto;
+    grid-template-rows: 150px auto auto;
   }
 
   .weekly-score-layout > .trend-wrap.compact .trend-chart {
-    height: 184px;
-    min-height: 184px;
-    max-height: 184px;
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
     align-self: stretch;
+    overflow: hidden;
   }
 
   .weekly-score-layout .trend-wrap.compact .actual-point-value,
@@ -13724,10 +13724,14 @@ button.header-status-item {
   }
 }
 
-/* Keep the iPad VOC plot, week ruler, and quarter band in separate rows. */
+/* Keep the iPad plot, week ruler, and quarter band in separate rows. */
 @media (min-width: 761px) and (max-width: 1366px) {
-  .weekly-score-layout .trend-wrap.compact.metric-voc .week-ruler {
+  .weekly-score-layout .trend-wrap.compact .week-ruler {
     margin-top: 0;
+  }
+
+  .weekly-score-layout .trend-wrap.compact .trend-chart {
+    overflow: hidden;
   }
 }
 

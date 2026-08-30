@@ -1521,8 +1521,10 @@ function WeeklyTrend({
   );
   const min = Math.max(0, Math.min(...chartValues) - 8);
   const chartWidth = compact ? measuredChartWidth : 1360;
-  const usesTabletCompactChart = compact && measuredChartWidth <= 900;
-  const chartHeight = usesTabletCompactChart ? 184 : compact ? 150 : 210;
+  // Compact score charts use one coordinate system on PC and iPad. Keeping the
+  // viewBox equal to the rendered 150px row prevents zero-value markers from
+  // scaling past the plot boundary into the W01-W52 ruler on narrow iPads.
+  const chartHeight = compact ? 150 : 210;
   const chartYScale = chartHeight / 200;
   const chartY = (coordinate: number) => coordinate * chartYScale;
   const plotLeft = (28 / 1360) * chartWidth;
