@@ -4907,6 +4907,7 @@ input:focus-visible {
 
 .analysis-staff-profile-value {
   min-width: 0;
+  height: 100%;
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);
   align-items: center;
@@ -4969,27 +4970,32 @@ input:focus-visible {
 
 .analysis-staff-metric-value {
   min-width: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: baseline;
-  justify-content: flex-end;
-  gap: 4px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   white-space: nowrap;
 }
 
 .analysis-staff-metric-value > strong {
   display: inline-flex;
   align-items: baseline;
+  justify-content: flex-start;
   justify-self: auto;
   flex: 0 0 auto;
+  text-align: left;
 }
 
 .analysis-staff-metric-value > small.analysis-staff-metric-comparison {
-  margin: 0;
+  margin: 0 0 0 auto;
   color: #718694;
   font-family: var(--font-korean), sans-serif;
   font-size: 10px;
   font-weight: 600;
   line-height: 1;
+  text-align: right;
 }
 
 .analysis-staff-metric-comparison i {
@@ -5044,14 +5050,10 @@ input:focus-visible {
 
   .analysis-staff-metric-value {
     width: 100%;
-    align-items: flex-end;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3px;
-  }
-
-  .analysis-staff-metric-comparison i {
-    display: none;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 6px;
   }
 
   .analysis-staff-metric-value > small.analysis-staff-metric-comparison {
