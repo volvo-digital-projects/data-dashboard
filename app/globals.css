@@ -11898,8 +11898,8 @@ body {
 }
 
 .content-grid {
-  margin-top: var(--dashboard-section-gap);
-  scroll-margin-top: var(--dashboard-section-gap);
+  margin-top: var(--dashboard-card-gap);
+  scroll-margin-top: var(--dashboard-card-gap);
 }
 
 .score-stack {
