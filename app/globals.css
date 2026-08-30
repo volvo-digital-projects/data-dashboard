@@ -14074,12 +14074,14 @@ button.header-status-item {
     pointer-events: none;
   }
 
-  /* Page 2 header content follows the same left/right rails as the tab and
-     summary rows below it. The navy background overhang remains unchanged. */
+  /* Page 1 and page 2 header content share the exact same left/right rails.
+     The navy background overhang remains unchanged. */
+  .dashboard-identity-header.identity-strip > .identity-title,
   .dashboard-identity-header.analysis-header > .identity-title.analysis-title {
     padding-left: 0;
   }
 
+  .dashboard-identity-header.identity-strip > .identity-detail-rail,
   .dashboard-identity-header.analysis-header > .analysis-context {
     width: var(--header-context-width);
     flex-basis: var(--header-context-width);
