@@ -12896,7 +12896,10 @@ button.header-status-item {
 
 .combat-card.combat-scoreboard {
   min-width: 0;
-  padding: 12px 14px 10px;
+  /* The three metric cards sit inside the 7px DSC rail. Give the integrated
+     card the same effective top inset so every internal horizontal line and
+     quarter row shares one baseline across all four cards. */
+  padding: 19px 14px 10px;
   color: #f7fbfd;
   border-color: rgba(159, 202, 219, 0.34);
   border-radius: var(--es90-surface-radius);
