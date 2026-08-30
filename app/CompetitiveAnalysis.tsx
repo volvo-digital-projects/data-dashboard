@@ -14,6 +14,7 @@ import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
+import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -2002,6 +2003,7 @@ export default function CompetitiveAnalysis({
           )}
         </div>
       </section>
+      <ReleaseUpdateNotice />
     </main>
   );
 }

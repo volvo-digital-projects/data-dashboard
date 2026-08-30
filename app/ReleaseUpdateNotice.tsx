@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const RELEASE_URL = "/dashboard-release.json";
 const RELEASE_STORAGE_KEY = "volvo-dashboard-seen-release";
-const RELEASE_CHECK_INTERVAL = 30_000;
+const RELEASE_CHECK_INTERVAL = 15_000;
 const NOTICE_DURATION = 3_200;
 
 declare const __DASHBOARD_RELEASE_ID__: string;
