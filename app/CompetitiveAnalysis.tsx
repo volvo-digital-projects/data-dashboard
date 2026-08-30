@@ -2063,12 +2063,12 @@ export default function CompetitiveAnalysis({
                                 className="v3s-award-prize-icon"
                                 aria-hidden="true"
                               >
-                                <svg viewBox="0 0 28 22" focusable="false">
-                                  <path className="back-note" d="M8 2.5h16v11H8z" />
-                                  <path className="middle-note" d="M5 5h17v11H5z" />
-                                  <rect className="front-note" x="2" y="8" width="18" height="11.5" rx="2" />
-                                  <circle cx="11" cy="13.75" r="2.8" />
-                                  <text x="11" y="15.4" textAnchor="middle">₩</text>
+                                <svg viewBox="0 0 24 24" focusable="false">
+                                  <path className="trophy-cup" d="M7 3.5h10v3.8c0 3.2-2.2 5.7-5 5.7S7 10.5 7 7.3V3.5Z" />
+                                  <path className="trophy-handle" d="M7 5H4.5v1.8c0 2 1.3 3.5 3.2 3.7M17 5h2.5v1.8c0 2-1.3 3.5-3.2 3.7" />
+                                  <path className="trophy-stand" d="M12 13v4m-3 3h6m-5.2-3h4.4" />
+                                  <path className="trophy-sparkle sparkle-one" d="m4 1 .6 1.4L6 3l-1.4.6L4 5l-.6-1.4L2 3l1.4-.6L4 1Z" />
+                                  <path className="trophy-sparkle sparkle-two" d="m20 10 .45 1.05 1.05.45-1.05.45L20 13l-.45-1.05-1.05-.45 1.05-.45L20 10Z" />
                                 </svg>
                               </span>
                               <strong>{selectedAwardName}</strong>

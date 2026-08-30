@@ -6298,47 +6298,30 @@ input:focus-visible {
 }
 
 .v3s-award-prize-icon {
-  width: 28px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: grid;
   place-items: center;
   position: absolute;
-  right: -14px;
-  bottom: -12px;
+  top: 2px;
+  right: 3px;
   z-index: 5;
   overflow: visible;
-  filter: drop-shadow(0 2px 2px rgba(34, 83, 72, 0.2));
+  filter: drop-shadow(0 1px 2px rgba(132, 82, 4, 0.24));
 }
 
 .v3s-award-prize-icon::before {
   content: "";
-  width: 8px;
-  height: 6px;
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  z-index: 2;
-  border: 1px solid #a96814;
-  border-radius: 6px 6px 2px 2px;
-  background: linear-gradient(180deg, #fff4a9 0%, #ffc43d 46%, #e88918 100%);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
-  transform: translateX(-50%);
-  animation: v3s-award-beacon-body 760ms steps(2, end) infinite;
-}
-
-.v3s-award-prize-icon::after {
-  content: "";
   width: 24px;
-  height: 18px;
+  height: 24px;
   position: absolute;
-  top: -11px;
+  top: -2px;
   left: 50%;
   z-index: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 212, 74, 0.82) 0 18%, rgba(255, 180, 37, 0.32) 38%, transparent 68%);
-  transform: translateX(-50%) scale(0.72);
-  transform-origin: center bottom;
-  animation: v3s-award-beacon-flash 760ms ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255, 222, 92, 0.5) 0 22%, rgba(255, 205, 54, 0.18) 44%, transparent 70%);
+  transform: translateX(-50%) scale(0.82);
+  animation: v3s-award-prize-glow 1.25s ease-in-out infinite;
 }
 
 .v3s-award-prize-icon svg {
@@ -6350,65 +6333,63 @@ input:focus-visible {
   overflow: visible;
 }
 
-.v3s-award-prize-icon .back-note {
-  fill: #b8d4c7;
-  stroke: #3b7865;
-  stroke-width: 1.2;
-}
-
-.v3s-award-prize-icon .middle-note {
-  fill: #d7e8df;
-  stroke: #367762;
+.v3s-award-prize-icon .trophy-cup {
+  fill: #ffc83d;
+  stroke: #b97808;
   stroke-width: 1.15;
 }
 
-.v3s-award-prize-icon .front-note {
-  fill: #eaf4ee;
-  stroke: #2d6f5a;
-  stroke-width: 1.3;
+.v3s-award-prize-icon .trophy-handle,
+.v3s-award-prize-icon .trophy-stand {
+  fill: none;
+  stroke: #b97808;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.v3s-award-prize-icon circle {
-  fill: #f0c35e;
-  stroke: #b27a18;
-  stroke-width: 0.8;
+.v3s-award-prize-icon .trophy-sparkle {
+  fill: #ffe98a;
+  stroke: #d99b12;
+  stroke-width: 0.45;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: v3s-award-prize-sparkle 1.25s ease-in-out infinite;
 }
 
-.v3s-award-prize-icon text {
-  fill: #6f4807;
-  font-family: var(--font-latin), sans-serif;
-  font-size: 4px;
-  font-weight: 800;
+.v3s-award-prize-icon .sparkle-two {
+  animation-delay: 0.45s;
 }
 
-@keyframes v3s-award-beacon-body {
-  0%,
-  42% {
-    filter: brightness(1.35) saturate(1.2);
-  }
-
-  43%,
-  100% {
-    filter: brightness(0.82) saturate(0.9);
-  }
-}
-
-@keyframes v3s-award-beacon-flash {
+@keyframes v3s-award-prize-glow {
   0%,
   100% {
-    opacity: 0.18;
-    transform: translateX(-50%) scale(0.72);
+    opacity: 0.3;
+    transform: translateX(-50%) scale(0.82);
   }
 
-  45% {
+  50% {
+    opacity: 0.9;
+    transform: translateX(-50%) scale(1.12);
+  }
+}
+
+@keyframes v3s-award-prize-sparkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.72) rotate(0deg);
+  }
+
+  50% {
     opacity: 1;
-    transform: translateX(-50%) scale(1.18);
+    transform: scale(1.18) rotate(18deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .v3s-award-prize-icon::before,
-  .v3s-award-prize-icon::after {
+  .v3s-award-prize-icon .trophy-sparkle {
     animation: none;
   }
 }
