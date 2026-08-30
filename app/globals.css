@@ -5790,9 +5790,9 @@ input:focus-visible {
 }
 
 .analysis-staff-scatter-average .label .pointer {
-  fill: rgba(255, 255, 255, 0.96);
-  stroke: rgba(201, 71, 67, 0.42);
-  stroke-width: 1;
+  fill: #c94743;
+  stroke: #c94743;
+  stroke-width: 1.2;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
