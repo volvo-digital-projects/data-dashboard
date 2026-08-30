@@ -4753,15 +4753,16 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-rank {
-  width: 23px;
-  height: 23px;
+  width: 16px;
+  height: 16px;
   display: grid;
+  justify-self: center;
   place-items: center;
   border-radius: 50%;
   background: #dfeaf0;
   color: #476c7e;
   font-family: "Volvo Centum", var(--font-english), sans-serif;
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 700;
 }
 
