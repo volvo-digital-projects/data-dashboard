@@ -1327,9 +1327,19 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
           <div className="voc-consultation-comparison satisfaction">
             <span>상담 만족도</span>
             <b>
-              {displayShowroomNameWithoutBrand(showroom.showroom)} {displayNumber(cumulativeAverage)}점
+              <span className="comparison-name">
+                {displayShowroomNameWithoutBrand(showroom.showroom)}
+              </span>
+              <span className="comparison-value">
+                {displayNumber(cumulativeAverage)}점
+              </span>
             </b>
-            <em>전국 {displayNumber(nationalCumulativeAverage)}점</em>
+            <em>
+              <span className="comparison-name">전국</span>
+              <span className="comparison-value">
+                {displayNumber(nationalCumulativeAverage)}점
+              </span>
+            </em>
             <strong className={deltaTone}>
               {cumulativeDelta === null
                 ? "—"
@@ -1339,11 +1349,21 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
             </strong>
           </div>
           <div className="voc-consultation-comparison response">
-            <span>회신율</span>
+            <span>고객 회신율</span>
             <b>
-              {displayShowroomNameWithoutBrand(showroom.showroom)} {cumulativeResponseRate?.toFixed(1) ?? "—"}%
+              <span className="comparison-name">
+                {displayShowroomNameWithoutBrand(showroom.showroom)}
+              </span>
+              <span className="comparison-value">
+                {cumulativeResponseRate?.toFixed(1) ?? "—"}%
+              </span>
             </b>
-            <em>전국 {nationalCumulativeResponseRate?.toFixed(1) ?? "—"}%</em>
+            <em>
+              <span className="comparison-name">전국</span>
+              <span className="comparison-value">
+                {nationalCumulativeResponseRate?.toFixed(1) ?? "—"}%
+              </span>
+            </em>
             <strong
               className={
                 cumulativeRateDelta === null

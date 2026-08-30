@@ -10229,6 +10229,11 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-comparison > b {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 3px;
   overflow: hidden;
   color: #143c58;
   font-size: 8.5px;
@@ -10237,11 +10242,27 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-comparison > em {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 3px;
   overflow: hidden;
   color: #728694;
   font-style: normal;
   font-weight: 700;
   text-overflow: ellipsis;
+}
+
+.voc-consultation-comparison .comparison-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voc-consultation-comparison .comparison-value {
+  justify-self: end;
+  font-family: var(--font-latin);
 }
 
 .voc-consultation-comparison > strong {
