@@ -1899,7 +1899,7 @@ export default function CompetitiveAnalysis({
                   <i />
                   {selectedStaffEmployee?.name ?? "선택 직원"}
                 </span>
-                <em>원 크기 = 누적 회신 건수</em>
+                <em>※ 원 크기 = 누적 회신 건수</em>
               </footer>
             </aside>
           </div>

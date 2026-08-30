@@ -5975,6 +5975,7 @@ input:focus-visible {
 .analysis-staff-benchmark-legend {
   height: var(--analysis-staff-comparison-legend-height);
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -6010,9 +6011,11 @@ input:focus-visible {
 }
 
 .analysis-staff-benchmark-legend em {
-  margin-left: 0;
+  position: absolute;
+  right: 12px;
   color: #8a9ba4;
   font-style: normal;
+  text-align: right;
   white-space: nowrap;
 }
 
