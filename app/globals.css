@@ -9282,7 +9282,7 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-bar-cluster {
-  width: min(92%, 120px);
+  width: min(96%, 124px);
   height: 100%;
   position: absolute;
   bottom: 0;
@@ -9296,12 +9296,12 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-peer-bar-group {
-  width: 74px;
+  width: 92px;
   height: 100%;
   position: relative;
   z-index: 2;
   display: flex;
-  flex: 0 0 74px;
+  flex: 0 0 92px;
   align-items: flex-end;
   gap: 4px;
 }
@@ -9346,15 +9346,15 @@ button.quarter-score-row:disabled {
   color: white;
   font-family: var(--font-latin);
   font-size: 11px;
-  font-weight: 720;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-shadow: 0 1px 4px rgba(16, 42, 67, 0.3);
   transform: translate(-50%, -50%);
 }
 
 .v3s-peer-bar {
-  width: 22px;
-  min-width: 22px;
+  width: 28px;
+  min-width: 28px;
   position: relative;
   display: block;
   box-sizing: border-box;
@@ -9377,7 +9377,7 @@ button.quarter-score-row:disabled {
   color: white;
   font-family: var(--font-latin);
   font-size: 11px;
-  font-weight: 720;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
   line-height: 1;
