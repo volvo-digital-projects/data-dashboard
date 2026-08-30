@@ -10276,16 +10276,19 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-legend {
-  min-height: 15px;
+  min-height: 24px;
   min-width: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px 12px;
   overflow: hidden;
-  padding-top: 3px;
+  margin-top: auto;
+  padding: 5px 8px 0;
+  border-top: 1px solid rgba(229, 233, 238, 0.82);
   color: var(--muted);
-  font-size: 8px;
+  font-size: 9px;
   line-height: 1;
   white-space: nowrap;
 }
@@ -10294,14 +10297,14 @@ button.quarter-score-row:disabled {
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .voc-consultation-legend i {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   flex: 0 0 auto;
   border-radius: 2px 2px 1px 1px;
 }
@@ -13734,8 +13737,29 @@ button.header-status-item {
   .dashboard #score-cx .one-voice-contribution {
     position: relative;
     z-index: 2;
-    margin-bottom: -35px;
-    transform: translateY(-35px);
+    height: 196px;
+    min-height: 196px;
+    margin-bottom: 0;
+    transform: none;
+  }
+
+  .dashboard #score-v3s,
+  .dashboard #score-voc,
+  .dashboard #score-cx {
+    height: 253px;
+    min-height: 253px;
+    max-height: 253px;
+    overflow: hidden;
+  }
+
+  .dashboard .weekly-score-layout > .trend-wrap.compact .trend-canvas {
+    grid-template-rows: 150px auto auto;
+  }
+
+  .dashboard .weekly-score-layout > .trend-wrap.compact .trend-chart {
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
   }
 
   .dashboard #score-v3s .v3s-history-panel {
@@ -13749,7 +13773,7 @@ button.header-status-item {
   }
 
   .dashboard #score-voc .voc-consultation-chart {
-    height: 140px;
+    height: 92px;
     background:
       linear-gradient(
         to bottom,
@@ -13757,30 +13781,30 @@ button.header-status-item {
         rgba(229, 233, 238, 0.58) 9px,
         rgba(229, 233, 238, 0.58) 10px,
         transparent 10px,
-        transparent 62px,
-        rgba(229, 233, 238, 0.58) 62px,
-        rgba(229, 233, 238, 0.58) 63px,
-        transparent 63px,
-        transparent 115px,
-        rgba(229, 233, 238, 0.58) 115px,
-        rgba(229, 233, 238, 0.58) 116px,
-        transparent 116px
+        transparent 47px,
+        rgba(229, 233, 238, 0.58) 47px,
+        rgba(229, 233, 238, 0.58) 48px,
+        transparent 48px,
+        transparent 85px,
+        rgba(229, 233, 238, 0.58) 85px,
+        rgba(229, 233, 238, 0.58) 86px,
+        transparent 86px
       ),
       linear-gradient(180deg, rgba(246, 248, 250, 0.42), rgba(241, 245, 247, 0.9));
   }
 
   .dashboard #score-voc .voc-consultation-bars {
-    height: 106px;
+    height: 76px;
   }
 
   .dashboard #score-voc .voc-consultation-axis.middle,
   .dashboard #score-voc .voc-response-rate-axis.middle {
-    top: 63px;
+    top: 48px;
   }
 
   .dashboard #score-voc .voc-consultation-axis.base,
   .dashboard #score-voc .voc-response-rate-axis.base {
-    top: 116px;
+    top: 86px;
   }
 
   .dashboard #score-cx .one-voice-contribution {
@@ -13799,26 +13823,26 @@ button.header-status-item {
   }
 
   .dashboard #score-cx .one-voice-gauge {
-    width: clamp(82px, 7vw, 108px);
+    width: clamp(66px, 6.2vw, 90px);
   }
 }
 
 @media (min-width: 1241px) {
   .dashboard #score-voc .voc-consultation-history {
-    min-height: 220px;
+    min-height: 196px;
   }
 
   .dashboard #score-cx .one-voice-contribution {
-    min-height: 234px;
+    min-height: 196px;
   }
 }
 
 @media (min-width: 761px) and (max-width: 1240px) {
   .dashboard #score-voc .voc-consultation-history {
-    min-height: 270px;
+    min-height: 196px;
   }
 
   .dashboard #score-cx .one-voice-contribution {
-    min-height: 254px;
+    min-height: 196px;
   }
 }
