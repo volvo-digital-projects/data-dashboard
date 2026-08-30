@@ -9667,7 +9667,7 @@ button.quarter-score-row:disabled {
   font-family: var(--font-latin);
   font-size: 9px;
   font-style: normal;
-  font-weight: 760;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -9676,8 +9676,8 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-history-national-bar-fill b {
-  font-size: 7.5px;
-  letter-spacing: -0.045em;
+  font-size: 9px;
+  letter-spacing: -0.03em;
 }
 
 .v3s-history-average-marker {
@@ -9756,26 +9756,29 @@ button.quarter-score-row:disabled {
 }
 
 .v3s-history-legend {
-  min-height: 15px;
+  min-height: 24px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding-top: 3px;
+  gap: 8px 12px;
+  margin-top: auto;
+  padding: 5px 8px 0;
+  border-top: 1px solid rgba(229, 233, 238, 0.82);
   color: var(--muted);
-  font-size: 8px;
+  font-size: 9px;
   line-height: 1;
 }
 
 .v3s-history-legend span {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .v3s-history-legend i {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   display: block;
   border-radius: 2px 2px 1px 1px;
 }
@@ -13727,7 +13730,6 @@ button.header-status-item {
 
 /* Expand the right-side V3S, VOC, and CX insight panels to their tier headings. */
 @media (min-width: 761px) {
-  .dashboard #score-v3s .v3s-history-panel,
   .dashboard #score-voc .voc-consultation-history,
   .dashboard #score-cx .one-voice-contribution {
     position: relative;
@@ -13737,11 +13739,13 @@ button.header-status-item {
   }
 
   .dashboard #score-v3s .v3s-history-panel {
-    min-height: 231px;
+    min-height: 196px;
+    margin-bottom: 0;
+    transform: none;
   }
 
   .dashboard #score-v3s .v3s-history-bar-stage {
-    height: 127px;
+    height: 92px;
   }
 
   .dashboard #score-voc .voc-consultation-chart {
