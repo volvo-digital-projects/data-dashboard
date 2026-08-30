@@ -14085,4 +14085,37 @@ button.header-status-item {
     flex-basis: var(--header-context-width);
     margin-right: 0;
   }
+
+  /* VOC comparison header: tighten each related pair and separate the
+     showroom metrics from the national metrics on one shared vertical rail. */
+  .dashboard #score-voc .voc-consultation-comparison {
+    grid-template-columns: 51px 66px 57px 39px;
+    column-gap: 3px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > b {
+    grid-template-columns: 30px 33px;
+    column-gap: 3px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > b .comparison-name {
+    text-align: left;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > b .comparison-value {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > em {
+    grid-template-columns: 16px 31px;
+    column-gap: 2px;
+    padding-left: 7px;
+    border-left: 1px solid rgba(112, 139, 153, 0.32);
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > em .comparison-value {
+    justify-self: end;
+    text-align: right;
+  }
 }
