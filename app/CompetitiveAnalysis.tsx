@@ -821,6 +821,12 @@ export default function CompetitiveAnalysis({
   const selectedStaffEmployee =
     rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
       ?.employee ?? rankedSalesStaff[0]?.employee;
+  const selectedStaffRosterIndex = Math.max(
+    0,
+    rankedSalesStaff.findIndex(
+      ({ employee }) => employee.name === selectedStaffEmployee?.name,
+    ),
+  );
   const selectedStaffImprovementKeywords = Array.from(
     (selectedStaffEmployee?.improvementKeywords ?? []).reduce(
       (keywords, keyword) => {
@@ -1501,6 +1507,17 @@ export default function CompetitiveAnalysis({
                 <span>회신건수</span>
               </header>
               <div className="analysis-staff-roster-list">
+                {selectedStaffEmployee ? (
+                  <span
+                    className="analysis-staff-roster-selection"
+                    aria-hidden="true"
+                    style={
+                      {
+                        "--staff-roster-selection-index": selectedStaffRosterIndex,
+                      } as CSSProperties
+                    }
+                  />
+                ) : null}
                 {rankedSalesStaff.map(({ employee, average, responses }, index) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
                   return (

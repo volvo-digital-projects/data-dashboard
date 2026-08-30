@@ -4694,7 +4694,25 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-list {
+  position: relative;
   padding: 4px 6px;
+}
+
+.analysis-staff-roster-selection {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  left: 6px;
+  z-index: 0;
+  height: 36px;
+  border: 1px solid #87b6c8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 8px 20px -18px rgba(16, 70, 94, 0.78);
+  pointer-events: none;
+  transform: translateY(calc(var(--staff-roster-selection-index, 0) * 37px));
+  transition: transform 300ms cubic-bezier(0.22, 0.72, 0.24, 1);
+  will-change: transform;
 }
 
 .analysis-staff-roster-list button {
@@ -4712,6 +4730,8 @@ input:focus-visible {
   font-family: var(--font-korean), sans-serif;
   text-align: left;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
   transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
 }
 
@@ -4727,9 +4747,9 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-list button.selected {
-  border-color: #87b6c8;
-  background: #fff;
-  box-shadow: inset 3px 0 #16769a, 0 8px 20px -18px rgba(16, 70, 94, 0.78);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
 }
 
 .analysis-staff-roster-rank {
@@ -5318,10 +5338,15 @@ input:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .analysis-staff-roster-selection,
   .analysis-staff-chart-bar,
   .analysis-staff-trend-line,
   .analysis-staff-trend-marker {
     animation: none;
+  }
+
+  .analysis-staff-roster-selection {
+    transition: none;
   }
 
   .analysis-staff-chart-bar {
