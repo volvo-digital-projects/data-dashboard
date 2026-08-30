@@ -354,6 +354,8 @@ const viewMeta: Record<
 const displayNumber = (value: number) =>
   Math.abs(value - 100) < Number.EPSILON ? "100" : value.toFixed(1);
 
+const displayRankingNumber = (value: number) => value.toFixed(1);
+
 function AnimatedAnalysisScore({
   value,
   sequence,
@@ -1440,9 +1442,9 @@ export default function CompetitiveAnalysis({
                       </small>
                     </span>
                   </span>
-                  <b>{displayNumber(item.vocScore)}</b>
-                  <b>{displayNumber(item.happyScore)}</b>
-                  <strong>{displayNumber(item.combined)}</strong>
+                  <b>{displayRankingNumber(item.vocScore)}</b>
+                  <b>{displayRankingNumber(item.happyScore)}</b>
+                  <strong>{displayRankingNumber(item.combined)}</strong>
                 </div>
               );
             })}
@@ -1450,16 +1452,16 @@ export default function CompetitiveAnalysis({
           <footer>
             <span>
               {groupAverageLabel}
-              <strong>{displayNumber(groupCombinedAverage)}</strong>
+              <strong>{displayRankingNumber(groupCombinedAverage)}</strong>
             </span>
             <span>
               {selectedAverageLabel}
-              <strong>{displayNumber(selectedPoint.combined)}</strong>
+              <strong>{displayRankingNumber(selectedPoint.combined)}</strong>
             </span>
             <span className={`analysis-average-delta ${selectedAverageDeltaTone}`}>
               평균 대비
               <strong>
-                {selectedAverageDeltaArrow} {displayNumber(Math.abs(selectedAverageDelta))}점
+                {selectedAverageDeltaArrow} {displayRankingNumber(Math.abs(selectedAverageDelta))}점
               </strong>
             </span>
           </footer>
