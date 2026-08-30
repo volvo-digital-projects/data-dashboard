@@ -1952,11 +1952,12 @@ export default function CompetitiveAnalysis({
                 </div>
               </div>
               <footer className="analysis-staff-benchmark-legend">
-                <span><i />볼보 SC</span>
-                <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
+                <span><i />전체 볼보 SC</span>
+                <span className="average"><i />전국 평균</span>
+                <span className="showroom"><i />동일 전시장 SC</span>
                 <span className="selected">
                   <i />
-                  {selectedStaffEmployee?.name ?? "선택 직원"}
+                  선택 SC
                 </span>
                 <em>※ 원 크기 = 누적 회신 건수</em>
               </footer>
