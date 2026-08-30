@@ -10293,7 +10293,7 @@ button.quarter-score-row:disabled {
   align-items: baseline;
   column-gap: 6px;
   color: #6f8493;
-  font-size: 7.5px;
+  font-size: 8.5px;
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -10310,7 +10310,7 @@ button.quarter-score-row:disabled {
   align-items: baseline;
   column-gap: 3px;
   overflow: hidden;
-  color: #c65322;
+  color: #728694;
   font-size: 8.5px;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -10344,7 +10344,7 @@ button.quarter-score-row:disabled {
 .voc-consultation-comparison > strong {
   justify-self: end;
   font-family: var(--font-latin);
-  font-size: 8px;
+  font-size: 8.5px;
   font-weight: 800;
 }
 
