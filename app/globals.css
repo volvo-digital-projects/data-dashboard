@@ -6039,7 +6039,7 @@ input:focus-visible {
   display: flex;
   position: relative;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 8px;
   margin: 0 -12px;
   padding: 0 12px;
@@ -6082,7 +6082,7 @@ input:focus-visible {
 
 .analysis-staff-benchmark-legend em {
   position: static;
-  margin-left: auto;
+  margin-left: 0;
   color: #8a9ba4;
   font-style: normal;
   text-align: right;
