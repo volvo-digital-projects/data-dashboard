@@ -1542,7 +1542,7 @@ export default function CompetitiveAnalysis({
             <div className="analysis-staff-detail">
           <div className="analysis-staff-summary">
             <article className="analysis-staff-profile-card">
-              <span>SC이름</span>
+              <span>소속 영업직원</span>
               <div className="analysis-staff-profile-value">
                 <button
                   type="button"
@@ -1600,7 +1600,7 @@ export default function CompetitiveAnalysis({
               </div>
             </article>
             <article className="analysis-staff-metric-card">
-              <span>근무기간</span>
+              <span>총 근무기간</span>
               <div className="analysis-staff-metric-value">
                 <strong className="analysis-staff-tenure-value">
                   {selectedStaffTenureYears === null || selectedStaffTenureMonths === null ? (
@@ -1638,7 +1638,7 @@ export default function CompetitiveAnalysis({
               </div>
             </article>
             <article className="analysis-staff-metric-card">
-              <span>회신건수</span>
+              <span>누적 회신건수</span>
               <div className="analysis-staff-metric-value">
                 <strong>
                   {selectedStaffResponses}
@@ -1653,7 +1653,7 @@ export default function CompetitiveAnalysis({
               </div>
             </article>
             <article className="analysis-staff-certification-card">
-              <span>인증직원</span>
+              <span>인증직원 선발</span>
               <strong
                 aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
               >
