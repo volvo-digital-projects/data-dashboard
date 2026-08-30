@@ -13620,15 +13620,15 @@ button.header-status-item {
   }
 
   .dashboard-identity-header .identity-title h1::before {
-    margin-bottom: 9px;
+    margin-bottom: 14px;
     font-size: 9px;
     font-weight: 400;
     line-height: 1;
   }
 
   .dashboard-identity-header .identity-title:not(.analysis-title) h1 {
-    font-size: clamp(34px, 2.68vw, 38px);
-    line-height: 0.9;
+    font-size: clamp(37px, 2.98vw, 43px);
+    line-height: 0.92;
   }
 
   .dashboard-identity-header .identity-title.analysis-title h1,
@@ -13659,11 +13659,38 @@ button.header-status-item {
   }
 
   .dashboard-identity-header .identity-title.analysis-title h1::before {
-    margin-bottom: 9px;
+    margin-bottom: 14px;
     font-weight: 400;
   }
 
   .dashboard-identity-header .identity-title.analysis-title .header-status-row {
+    --header-status-item-width: 82px;
+    flex: 0 0 auto;
+    align-self: flex-start;
+  }
+
+  .dashboard-identity-header > .identity-title:not(.analysis-title) {
+    width: auto;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+    padding: 0 0 0 23px;
+    overflow: visible;
+  }
+
+  .dashboard-identity-header .identity-title:not(.analysis-title) h1 {
+    width: max-content;
+    max-width: 100%;
+    height: auto;
+    flex: 0 0 auto;
+    display: block;
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  .dashboard-identity-header .identity-title:not(.analysis-title) .header-status-row {
     --header-status-item-width: 82px;
     flex: 0 0 auto;
     align-self: flex-start;
