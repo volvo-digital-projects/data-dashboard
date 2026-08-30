@@ -632,6 +632,7 @@ export default function CompetitiveAnalysis({
     formatAnalysisDate(new Date()),
   );
   const scatterRef = useRef<HTMLDivElement>(null);
+  const staffTrendPlotRef = useRef<HTMLDivElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const staffAnalysisCardRef = useRef<HTMLElement>(null);
@@ -640,6 +641,7 @@ export default function CompetitiveAnalysis({
     width: 920,
     height: 326,
   });
+  const [staffTrendPlotWidth, setStaffTrendPlotWidth] = useState(520);
   const dealerShowroomCount = showrooms.filter(
     (item) => item.dealer === selected.dealer,
   ).length;
@@ -736,6 +738,30 @@ export default function CompetitiveAnalysis({
       observer.disconnect();
       window.removeEventListener("resize", queueAnchorHeightSync);
       window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const plot = staffTrendPlotRef.current;
+    if (!plot) return;
+
+    const syncPlotWidth = () => {
+      const nextWidth = Math.max(1, Math.round(plot.getBoundingClientRect().width));
+      setStaffTrendPlotWidth((currentWidth) =>
+        currentWidth === nextWidth ? currentWidth : nextWidth,
+      );
+    };
+
+    syncPlotWidth();
+    const observer = new ResizeObserver(syncPlotWidth);
+    observer.observe(plot);
+    window.addEventListener("resize", syncPlotWidth);
+    window.visualViewport?.addEventListener("resize", syncPlotWidth);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncPlotWidth);
+      window.visualViewport?.removeEventListener("resize", syncPlotWidth);
     };
   }, []);
 
@@ -902,7 +928,8 @@ export default function CompetitiveAnalysis({
           {
             key: year.year,
             index,
-            x: 18.75 + index * 25,
+            x: staffTrendPlotWidth * ((index + 0.5) / 4) + 20,
+            xCss: `calc(${(index + 0.5) * 25}% + 20px)`,
             y: 100 - staffHistoryChartHeight(year.average),
             height: staffHistoryChartHeight(year.average),
             average: year.average,
@@ -1693,11 +1720,11 @@ export default function CompetitiveAnalysis({
                 className="analysis-staff-history-chart"
                 key={selectedStaffEmployee?.name ?? "staff-history"}
               >
-                <div className="analysis-staff-trend-plot">
+                <div className="analysis-staff-trend-plot" ref={staffTrendPlotRef}>
                   {selectedStaffTrendPoints.length > 1 ? (
                     <svg
                       className="analysis-staff-trend-line"
-                      viewBox="0 0 100 100"
+                      viewBox={`0 0 ${staffTrendPlotWidth} 100`}
                       preserveAspectRatio="none"
                       aria-hidden="true"
                       focusable="false"
@@ -1725,7 +1752,7 @@ export default function CompetitiveAnalysis({
                         key={point.key}
                         style={
                           {
-                            "--staff-trend-x": `${point.x}%`,
+                            "--staff-trend-x": point.xCss,
                             "--staff-trend-height": `${point.height}%`,
                             "--staff-history-index": point.index,
                           } as CSSProperties

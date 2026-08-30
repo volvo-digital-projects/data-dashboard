@@ -5205,13 +5205,15 @@ input:focus-visible {
   /* 좌→우 읽기 순서: 전국 평균(주황) → 선택 직원(파랑) */
   position: absolute;
   bottom: 0;
-  left: calc(75% - 58px);
+  left: calc(50% - 38px);
   background: linear-gradient(180deg, #efab84 0%, #c9604e 100%);
   box-shadow: 0 8px 18px -12px rgba(182, 81, 62, 0.72);
 }
 
 .analysis-staff-chart-bar.employee {
-  grid-column: 2;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% + 2px);
   background: linear-gradient(180deg, #78b3c7 0%, #17617f 100%);
   box-shadow: 0 8px 18px -12px rgba(13, 96, 125, 0.8);
 }
@@ -5236,12 +5238,12 @@ input:focus-visible {
 }
 
 .analysis-staff-chart-score.national {
-  left: calc(75% - 40px);
+  left: calc(50% - 20px);
   background: #db765d;
 }
 
 .analysis-staff-chart-score.employee {
-  left: 75%;
+  left: calc(50% + 20px);
   background: #3f8aa3;
 }
 
