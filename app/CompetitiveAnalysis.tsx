@@ -1686,6 +1686,19 @@ export default function CompetitiveAnalysis({
                       focusable="false"
                     >
                       <polyline pathLength="1" points={selectedStaffTrendPolyline} />
+                      {selectedStaffTrendPoints.slice(1).map((point, index) => {
+                        const previousPoint = selectedStaffTrendPoints[index];
+                        return previousPoint.y === 0 && point.y === 0 ? (
+                          <line
+                            className="analysis-staff-trend-top-segment"
+                            key={`${previousPoint.key}-${point.key}`}
+                            x1={previousPoint.x}
+                            y1="0.9"
+                            x2={point.x}
+                            y2="0.9"
+                          />
+                        ) : null;
+                      })}
                     </svg>
                   ) : null}
                   <div className="analysis-staff-trend-markers" aria-hidden="true">

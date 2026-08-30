@@ -5254,7 +5254,8 @@ input:focus-visible {
   z-index: 6;
 }
 
-.analysis-staff-trend-line polyline {
+.analysis-staff-trend-line polyline,
+.analysis-staff-trend-line .analysis-staff-trend-top-segment {
   fill: none;
   stroke: #17617f;
   stroke-width: 2.5;
