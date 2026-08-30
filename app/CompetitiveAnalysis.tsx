@@ -2035,11 +2035,12 @@ export default function CompetitiveAnalysis({
                                 className="v3s-award-prize-icon"
                                 aria-hidden="true"
                               >
-                                <svg viewBox="0 0 24 20" focusable="false">
-                                  <path className="back-note" d="M6 2.5h14.5v10H6z" />
-                                  <rect className="front-note" x="2.5" y="6" width="17" height="11" rx="2" />
-                                  <circle cx="11" cy="11.5" r="2.5" />
-                                  <text x="11" y="13.2" textAnchor="middle">₩</text>
+                                <svg viewBox="0 0 28 22" focusable="false">
+                                  <path className="back-note" d="M8 2.5h16v11H8z" />
+                                  <path className="middle-note" d="M5 5h17v11H5z" />
+                                  <rect className="front-note" x="2" y="8" width="18" height="11.5" rx="2" />
+                                  <circle cx="11" cy="13.75" r="2.8" />
+                                  <text x="11" y="15.4" textAnchor="middle">₩</text>
                                 </svg>
                               </span>
                               <strong>{selectedAwardName}</strong>
