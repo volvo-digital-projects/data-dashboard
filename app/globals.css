@@ -14073,4 +14073,16 @@ button.header-status-item {
     box-shadow: 0 12px 18px -20px rgba(16, 42, 67, 0.58);
     pointer-events: none;
   }
+
+  /* Page 2 header content follows the same left/right rails as the tab and
+     summary rows below it. The navy background overhang remains unchanged. */
+  .dashboard-identity-header.analysis-header > .identity-title.analysis-title {
+    padding-left: 0;
+  }
+
+  .dashboard-identity-header.analysis-header > .analysis-context {
+    width: var(--header-context-width);
+    flex-basis: var(--header-context-width);
+    margin-right: 0;
+  }
 }
