@@ -5173,28 +5173,46 @@ input:focus-visible {
 
 .analysis-staff-chart-bar.national {
   /* 좌→우 읽기 순서: 전국 평균(주황) → 선택 직원(파랑) */
+  position: absolute;
+  bottom: 0;
+  left: calc(75% - 58px);
   background: linear-gradient(180deg, #efab84 0%, #c9604e 100%);
   box-shadow: 0 8px 18px -12px rgba(182, 81, 62, 0.72);
 }
 
 .analysis-staff-chart-bar.employee {
+  grid-column: 2;
   background: linear-gradient(180deg, #78b3c7 0%, #17617f 100%);
   box-shadow: 0 8px 18px -12px rgba(13, 96, 125, 0.8);
 }
 
-.analysis-staff-chart-bar b {
+.analysis-staff-chart-score {
   position: absolute;
-  z-index: 1;
-  inset: 9px 0 auto;
+  z-index: 7;
+  bottom: calc(var(--staff-bar-height) - 22px);
+  width: max-content;
+  min-width: 28px;
+  padding: 1px 2px;
+  border-radius: 2px;
   color: #fff;
   font-family: "Volvo Centum", var(--font-latin), sans-serif;
   font-size: 13px;
   font-weight: 600;
   line-height: 1;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(9, 48, 67, 0.22);
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.94);
-  paint-order: stroke fill;
+  transform: translateX(-50%);
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+
+.analysis-staff-chart-score.national {
+  left: calc(75% - 40px);
+  background: #db765d;
+}
+
+.analysis-staff-chart-score.employee {
+  left: 75%;
+  background: #3f8aa3;
 }
 
 .analysis-staff-chart-bar small {
@@ -5220,11 +5238,11 @@ input:focus-visible {
 }
 
 .analysis-staff-trend-line {
-  z-index: 2;
+  z-index: 5;
 }
 
 .analysis-staff-trend-markers {
-  z-index: 4;
+  z-index: 6;
 }
 
 .analysis-staff-trend-line polyline {
@@ -5234,7 +5252,7 @@ input:focus-visible {
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 2px 2px rgba(17, 78, 103, 0.16));
+  filter: none;
 }
 
 .analysis-staff-trend-line {

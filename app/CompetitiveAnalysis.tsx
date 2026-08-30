@@ -1736,7 +1736,6 @@ export default function CompetitiveAnalysis({
                                 { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
                               }
                             >
-                              <b>{year.nationalAverage?.toFixed(1) ?? "―"}</b>
                               <small>{year.nationalResponses.toLocaleString("ko-KR")}건</small>
                             </div>
                             <div
@@ -1745,9 +1744,26 @@ export default function CompetitiveAnalysis({
                                 { "--staff-bar-height": `${barHeight}%` } as CSSProperties
                               }
                             >
-                              <b>{year.average === null ? "―" : year.average.toFixed(1)}</b>
                               <small>{year.responses ? `${year.responses}건` : "회신 없음"}</small>
                             </div>
+                            <b
+                              className="analysis-staff-chart-score national"
+                              style={
+                                { "--staff-bar-height": `${nationalBarHeight}%` } as CSSProperties
+                              }
+                            >
+                              {year.nationalAverage?.toFixed(1) ?? "―"}
+                            </b>
+                            {year.average === null ? null : (
+                              <b
+                                className="analysis-staff-chart-score employee"
+                                style={
+                                  { "--staff-bar-height": `${barHeight}%` } as CSSProperties
+                                }
+                              >
+                                {year.average.toFixed(1)}
+                              </b>
+                            )}
                           </div>
                           <div className="analysis-staff-year-axis">
                             <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
