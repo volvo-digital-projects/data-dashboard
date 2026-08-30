@@ -5433,6 +5433,16 @@ input:focus-visible {
   display: none;
 }
 
+/* 회신값이 없는 연도도 2개 막대의 자리를 유지한다.
+   주황 막대는 왼쪽 슬롯에 두고 오른쪽 파란 슬롯만 비워 둔다. */
+.analysis-staff-year-groups > div.empty .analysis-staff-chart-bar.national {
+  left: calc(50% - 38px);
+}
+
+.analysis-staff-year-groups > div.empty .analysis-staff-chart-score.national {
+  left: calc(50% - 20px);
+}
+
 .analysis-staff-benchmarks {
   min-width: 0;
   display: grid;
