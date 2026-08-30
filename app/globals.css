@@ -12815,9 +12815,7 @@ button.header-status-item {
     border-radius: var(--es90-surface-radius);
     background:
       linear-gradient(145deg, rgba(244, 248, 250, 0.92), rgba(237, 244, 247, 0.74));
-    box-shadow:
-      inset 0 3px 0 #315f75,
-      0 7px 20px rgba(21, 50, 64, 0.055);
+    box-shadow: 0 7px 20px rgba(21, 50, 64, 0.055);
   }
 
   .dsc-score-group .metric-grid {
@@ -12876,11 +12874,7 @@ button.header-status-item {
 }
 
 .combat-card.combat-scoreboard::before {
-  content: "";
-  height: 3px;
-  position: absolute;
-  inset: 0 0 auto;
-  background: linear-gradient(90deg, #2f6680 0%, #6592a5 68%, #a7c0ca 100%);
+  content: none;
 }
 
 .combat-card.combat-scoreboard::after {
