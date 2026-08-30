@@ -13931,3 +13931,65 @@ button.header-status-item {
     min-height: 196px;
   }
 }
+
+/* Page 1·2 corner hierarchy: square primary surfaces, subtly cut nested panels.
+   Purpose-built pills, badges, circular controls, and icons are intentionally excluded. */
+:root {
+  --es90-surface-radius: 4px;
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+}
+
+.dashboard .identity-strip,
+.dashboard .hero-grid > .combat-card,
+.dashboard .metric-grid > .metric-card,
+.dashboard > .content-grid > .trend-panel,
+.competitive-analysis-page .analysis-header,
+.competitive-analysis-page .analysis-tabs,
+.competitive-analysis-page .analysis-summary-card,
+.competitive-analysis-page .analysis-scatter-card,
+.competitive-analysis-page .analysis-ranking-card,
+.competitive-analysis-page > .analysis-staff-card,
+.competitive-analysis-page > .v3s-award-card {
+  border-radius: 0;
+}
+
+.dashboard .identity-insights,
+.dashboard .identity-detail-rail,
+.dashboard .score-tier,
+.dashboard .v3s-quarter-panel,
+.dashboard .v3s-history-panel,
+.dashboard .trend-scroll,
+.dashboard .weekly-score-placeholder,
+.dashboard .voc-consultation-history,
+.dashboard .one-voice-contribution,
+.competitive-analysis-page .analysis-context,
+.competitive-analysis-page .analysis-tabs button,
+.competitive-analysis-page .analysis-ranking-list > div,
+.competitive-analysis-page .analysis-ranking-card footer,
+.competitive-analysis-page .analysis-staff-roster,
+.competitive-analysis-page .analysis-staff-detail,
+.competitive-analysis-page .analysis-staff-profile-card,
+.competitive-analysis-page .analysis-staff-metric-card,
+.competitive-analysis-page .analysis-staff-certification-card,
+.competitive-analysis-page .analysis-staff-history-chart,
+.competitive-analysis-page .analysis-staff-benchmarks,
+.competitive-analysis-page .analysis-staff-tenure,
+.competitive-analysis-page .analysis-staff-insights,
+.competitive-analysis-page .analysis-staff-insights article,
+.competitive-analysis-page .v3s-award-year {
+  border-radius: 4px;
+}
+
+.competitive-analysis-page .v3s-award-year h3 {
+  border-radius: 3px 3px 0 0;
+}
+
+.competitive-analysis-page .v3s-award-period:first-child {
+  border-radius: 0 0 0 3px;
+}
+
+.competitive-analysis-page .v3s-award-period:last-child {
+  border-radius: 0 0 3px 0;
+}
