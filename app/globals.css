@@ -13654,12 +13654,13 @@ button.header-status-item {
     flex: 0 0 auto;
     display: block;
     overflow: visible;
-    font-size: clamp(46px, 3.72vw, 54px);
+    font-size: clamp(37px, 2.98vw, 43px);
     line-height: 0.92;
   }
 
   .dashboard-identity-header .identity-title.analysis-title h1::before {
-    margin-bottom: 4px;
+    margin-bottom: 9px;
+    font-weight: 400;
   }
 
   .dashboard-identity-header .identity-title.analysis-title .header-status-row {
