@@ -10070,14 +10070,14 @@ button.quarter-score-row:disabled {
   justify-content: center;
   gap: 3px;
   padding: 3px 6px;
-  border: 1px solid #dbe6eb;
-  border-radius: 5px;
-  color: #385468;
-  background: #f4f8fa;
+  border: 0;
+  border-radius: 0;
+  color: #70838f;
+  background: transparent;
   box-shadow: none;
   font-family: var(--font-ui);
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 550;
   line-height: 1;
   white-space: nowrap;
 }
@@ -10093,19 +10093,19 @@ button.quarter-score-row:disabled {
 .score-tier-heading .voc-component-chip span,
 .score-tier-heading .cx-component-chip span {
   overflow: hidden;
-  color: #385468;
+  color: #70838f;
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 550;
   text-overflow: ellipsis;
 }
 
 .score-tier-heading .voc-component-chip em,
 .score-tier-heading .cx-component-chip em {
-  color: var(--blue);
+  color: #70838f;
   font-family: var(--font-latin);
   font-size: 8px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .score-tier-weekly {
