@@ -155,7 +155,7 @@ export default function ReleaseUpdateNotice() {
       <strong>
         {refreshing
           ? "최신 버전을 반영하고 있습니다."
-          : "최신내역이 업데이트 되었습니다."}
+          : "최신 내역이 업데이트 되었습니다."}
       </strong>
     </aside>
   );
