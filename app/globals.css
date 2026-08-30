@@ -12807,7 +12807,8 @@ button.header-status-item {
 
   .dsc-score-group {
     min-width: 0;
-    min-height: 224px;
+    height: 184px;
+    min-height: 184px;
     position: relative;
     padding: 7px;
     border: 1px solid rgba(43, 91, 112, 0.13);
@@ -12821,19 +12822,24 @@ button.header-status-item {
 
   .dsc-score-group .metric-grid {
     height: 100%;
-    min-height: 208px;
+    min-height: 168px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
   }
 
-  .dsc-score-group .metric-card,
+  .dsc-score-group .metric-card {
+    height: 168px;
+    min-height: 168px;
+  }
+
   .dashboard-sticky-shell .combat-scoreboard {
-    min-height: 208px;
+    height: 184px;
+    min-height: 184px;
   }
 }
 
 .dsc-score-group .metric-card {
-  padding: 15px 14px 12px;
+  padding: 10px 14px 8px;
   border-color: rgba(38, 76, 94, 0.1);
   border-radius: 8px;
   background: linear-gradient(148deg, #ffffff 0%, #fbfcfd 68%, #f5f8f9 100%);
@@ -12848,7 +12854,7 @@ button.header-status-item {
 
 .combat-card.combat-scoreboard {
   min-width: 0;
-  padding: 22px 14px 12px;
+  padding: 10px 14px 8px;
   color: #f7fbfd;
   border-color: rgba(159, 202, 219, 0.34);
   border-radius: var(--es90-surface-radius);
@@ -12894,7 +12900,7 @@ button.header-status-item {
 
 .metric-card-topline,
 .combat-scoreboard .scoreboard-heading {
-  min-height: 22px;
+  min-height: 18px;
   display: flex;
   align-items: center;
   padding: 0;
@@ -12948,7 +12954,7 @@ button.header-status-item {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 6px;
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 .metric-score-lockup {
@@ -12962,7 +12968,7 @@ button.header-status-item {
 .metric-value-row .metric-card-value,
 .scoreboard-main-value {
   min-width: 0;
-  min-height: 49px;
+  min-height: 40px;
   display: flex;
   align-items: flex-end;
   margin: 0;
@@ -13037,17 +13043,17 @@ button.header-status-item {
   min-width: 92px;
   display: grid;
   align-content: end;
-  gap: 5px;
+  gap: 3px;
 }
 
 .metric-stat-chips > span {
   width: 100%;
-  min-height: 23px;
+  min-height: 19px;
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 3px;
-  padding: 5px 7px;
+  padding: 3px 7px;
   overflow: hidden;
   color: #607581;
   border: 1px solid #dde8ec;
@@ -13250,12 +13256,12 @@ button.header-status-item {
 
 .metric-benchmark,
 .scoreboard-benchmark {
-  min-height: 19px;
+  min-height: 16px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 7px;
-  margin-top: 10px;
+  margin-top: 4px;
   color: var(--secondary);
   font-size: 11px;
 }
@@ -13305,7 +13311,7 @@ button.header-status-item {
 .metric-quarter-strip,
 .scoreboard-quarter-strip {
   gap: 4px;
-  margin-top: 8px;
+  margin-top: 4px;
   border: 0;
   background: transparent;
 }
@@ -13357,11 +13363,11 @@ button.header-status-item {
 
 .scoreboard-quarter-strip > button {
   display: grid;
-  grid-template-rows: 24px 18px;
-  gap: 4px;
-  min-height: 58px;
-  height: 58px;
-  padding: 6px 4px;
+  grid-template-rows: 18px 14px;
+  gap: 2px;
+  min-height: 44px;
+  height: 44px;
+  padding: 4px;
   border-color: rgba(219, 235, 242, 0.7);
   background: rgba(248, 251, 252, 0.93);
 }
@@ -13375,12 +13381,12 @@ button.header-status-item {
 }
 
 .metric-quarter-strip--status > button {
-  min-height: 58px;
-  height: 58px;
+  min-height: 44px;
+  height: 44px;
   display: grid;
-  grid-template-rows: 24px 18px;
-  gap: 4px;
-  padding: 6px 4px;
+  grid-template-rows: 18px 14px;
+  gap: 2px;
+  padding: 4px;
   border-color: #7f8a90;
   background: #f7f9fa;
 }
@@ -13419,9 +13425,9 @@ button.header-status-item {
 }
 
 .metric-quarter-strip--resources > button {
-  min-height: 30px;
-  height: 30px;
-  padding: 4px;
+  min-height: 22px;
+  height: 22px;
+  padding: 2px 4px;
 }
 
 .metric-quarter-strip--status > button strong,
@@ -13472,9 +13478,9 @@ button.header-status-item {
 .metric-card-footer,
 .metric-resource-grid,
 .scoreboard-card-footer {
-  min-height: 26px;
+  min-height: 20px;
   margin-top: auto;
-  padding-top: 6px;
+  padding-top: 3px;
 }
 
 .scoreboard-card-footer {
@@ -13525,10 +13531,10 @@ button.header-status-item {
 }
 
 .metric-quarter-strip--resources + .metric-resource-grid {
-  min-height: 23px;
-  height: 23px;
+  min-height: 18px;
+  height: 18px;
   gap: 4px;
-  margin-top: 5px;
+  margin-top: 3px;
   padding-top: 0;
 }
 
@@ -13546,7 +13552,7 @@ button.header-status-item {
   width: 100%;
   min-width: 0;
   flex: 1 1 0;
-  height: 20px;
+  height: 16px;
   border-radius: 4px;
 }
 
