@@ -1205,7 +1205,7 @@ export default function CompetitiveAnalysis({
             >
               <span>{viewMeta[key].label}</span>
               <small>
-                {key === "dealer"
+                / {key === "dealer"
                   ? `${selected.dealer} ${dealerShowroomCount}개소`
                   : key === "region"
                     ? `${selected.region} ${regionShowroomCount}개소`
