@@ -6121,14 +6121,16 @@ input:focus-visible {
 }
 
 .v3s-award-heading {
-  min-height: 42px;
+  min-height: 24px;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
+  align-items: center;
 }
 
 .v3s-award-heading h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px;
   margin: 0;
   color: var(--ink);
   font-size: 17px;
@@ -6136,35 +6138,23 @@ input:focus-visible {
   letter-spacing: -0.028em;
 }
 
-.v3s-award-heading p {
-  margin: 5px 0 0;
+.v3s-award-heading-summary {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
   color: var(--muted);
-  font-size: 9px;
-}
-
-.v3s-award-record {
-  min-width: 190px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 10px 13px;
-  border: 1px solid rgba(47, 107, 138, 0.11);
-  border-radius: 9px;
-  background: linear-gradient(135deg, #f4f9fb, #eaf3f7);
-}
-
-.v3s-award-record span {
-  color: var(--blue);
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.v3s-award-record strong {
+.v3s-award-heading-summary strong {
   color: var(--navy);
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: -0.02em;
+  font-family: var(--font-latin);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
 }
 
 .v3s-award-timeline {
@@ -6178,7 +6168,7 @@ input:focus-visible {
   min-width: 0;
   overflow: visible;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: var(--radius-md);
   background: #f9fbfc;
 }
 
@@ -6189,6 +6179,7 @@ input:focus-visible {
   margin: 0;
   color: var(--navy);
   border-bottom: 1px solid var(--line);
+  border-radius: 5px 5px 0 0;
   background: #f2f6f8;
   font-family: var(--font-latin);
   font-size: 11px;
@@ -6213,6 +6204,14 @@ input:focus-visible {
 
 .v3s-award-period + .v3s-award-period {
   border-left: 1px solid var(--line);
+}
+
+.v3s-award-period:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.v3s-award-period:last-child {
+  border-radius: 0 0 5px 0;
 }
 
 .v3s-award-period > span {
@@ -6417,13 +6416,7 @@ input:focus-visible {
   }
 
   .v3s-award-heading {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .v3s-award-record {
-    min-width: 0;
+    align-items: center;
   }
 
   .v3s-award-timeline {

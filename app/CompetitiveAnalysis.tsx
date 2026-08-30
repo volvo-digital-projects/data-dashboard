@@ -1965,20 +1965,20 @@ export default function CompetitiveAnalysis({
 
       <section className="v3s-award-card" aria-label="V3S 인센티브 수상기록">
         <header className="v3s-award-heading">
-          <div>
-            <h2>
+          <h2>
+            <span className="v3s-award-heading-title">
               <span className="english-title">V3S</span> 인센티브 수상기록
-            </h2>
-            <p>
-              상반기(Q1, Q2 모두 97점 이상 시) 하반기(Q3, Q4 모두 97점 이상 시) 지급
-            </p>
-          </div>
-          <div className="v3s-award-record">
-            <span>누적기록</span>
-            <strong>
-              {selectedAwardName} {selectedAwardCount}회 수상
-            </strong>
-          </div>
+            </span>
+            <span
+              className="v3s-award-heading-summary"
+              aria-label={`${selectedAwardName} ${selectedAwardCount}회 수상`}
+            >
+              <span aria-hidden="true">/</span>
+              <span>{selectedAwardName}</span>
+              <strong>{selectedAwardCount}</strong>
+              <span>회 수상</span>
+            </span>
+          </h2>
         </header>
 
         <div className="v3s-award-timeline">
