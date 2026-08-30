@@ -12017,7 +12017,7 @@ body {
 /* Keep page 2 stationary while the four comparison scopes are switched. */
 @media (min-width: 761px) and (max-width: 1240px) {
   .analysis-sticky-anchor {
-    min-height: 515px;
+    min-height: 346px;
   }
 
   .analysis-workspace {
@@ -12049,7 +12049,7 @@ body {
   }
 
   .analysis-sticky-anchor {
-    min-height: 314px;
+    min-height: 356px;
   }
 
   .analysis-workspace {
@@ -12172,7 +12172,21 @@ body {
   }
 
   .competitive-analysis-page {
-    gap: var(--dashboard-section-gap);
+    gap: 8px;
+  }
+
+  .competitive-analysis-page > .analysis-staff-card,
+  .competitive-analysis-page > .v3s-award-card {
+    margin-top: 8px;
+  }
+}
+
+/* Page 1 and page 2 must finish their fixed top surface on the same pixel.
+   Page 2 has one extra internal row, so its bottom padding supplies the exact
+   remaining 6/8px without changing any header, tab, or summary-card content. */
+@media (min-width: 761px) {
+  .analysis-sticky-shell {
+    padding-bottom: 16px;
   }
 }
 
