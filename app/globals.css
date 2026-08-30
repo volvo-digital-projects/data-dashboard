@@ -3714,10 +3714,13 @@ input:focus-visible {
 
 .analysis-summary-card > em {
   grid-column: 1 / -1;
+  justify-self: end;
+  max-width: 100%;
   color: var(--secondary);
   font-size: 10px;
   font-style: normal;
   font-weight: 650;
+  text-align: right;
 }
 
 .analysis-summary-card > em.positive {
