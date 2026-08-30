@@ -1540,57 +1540,58 @@ export default function CompetitiveAnalysis({
             <div className="analysis-staff-detail">
           <div className="analysis-staff-summary">
             <article className="analysis-staff-profile-card">
-              <button
-                type="button"
-                className={`analysis-staff-profile-photo${
-                  selectedStaffProfile?.smileImage ? " interactive" : ""
-                }${
-                  selectedStaffEmployee?.name === smilingStaffName
-                    ? " smiling"
-                    : ""
-                }`}
-                disabled={!selectedStaffProfile?.smileImage}
-                aria-label={
-                  selectedStaffProfile?.smileImage
-                    ? `${selectedStaffEmployee?.name ?? "선택 직원"} 미소 표정 전환`
-                    : undefined
-                }
-                aria-pressed={
-                  selectedStaffProfile?.smileImage
-                    ? selectedStaffEmployee?.name === smilingStaffName
-                    : undefined
-                }
-                onClick={() =>
-                  setSmilingStaffName((current) =>
-                    current === selectedStaffEmployee?.name
-                      ? null
-                      : selectedStaffEmployee?.name ?? null,
-                  )
-                }
-              >
-                {selectedStaffProfile ? (
-                  <>
-                    <img
-                      className="base"
-                      src={selectedStaffProfile.image}
-                      alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
-                      draggable={false}
-                    />
-                    {selectedStaffProfile.smileImage ? (
+              <span>SC이름</span>
+              <div className="analysis-staff-profile-value">
+                <button
+                  type="button"
+                  className={`analysis-staff-profile-photo${
+                    selectedStaffProfile?.smileImage ? " interactive" : ""
+                  }${
+                    selectedStaffEmployee?.name === smilingStaffName
+                      ? " smiling"
+                      : ""
+                  }`}
+                  disabled={!selectedStaffProfile?.smileImage}
+                  aria-label={
+                    selectedStaffProfile?.smileImage
+                      ? `${selectedStaffEmployee?.name ?? "선택 직원"} 미소 표정 전환`
+                      : undefined
+                  }
+                  aria-pressed={
+                    selectedStaffProfile?.smileImage
+                      ? selectedStaffEmployee?.name === smilingStaffName
+                      : undefined
+                  }
+                  onClick={() =>
+                    setSmilingStaffName((current) =>
+                      current === selectedStaffEmployee?.name
+                        ? null
+                        : selectedStaffEmployee?.name ?? null,
+                    )
+                  }
+                >
+                  {selectedStaffProfile ? (
+                    <>
                       <img
-                        className="smile"
-                        src={selectedStaffProfile.smileImage}
-                        alt=""
-                        aria-hidden="true"
+                        className="base"
+                        src={selectedStaffProfile.image}
+                        alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
                         draggable={false}
                       />
-                    ) : null}
-                  </>
-                ) : (
-                  <span aria-hidden="true">{selectedStaffInitials}</span>
-                )}
-              </button>
-              <div>
+                      {selectedStaffProfile.smileImage ? (
+                        <img
+                          className="smile"
+                          src={selectedStaffProfile.smileImage}
+                          alt=""
+                          aria-hidden="true"
+                          draggable={false}
+                        />
+                      ) : null}
+                    </>
+                  ) : (
+                    <span aria-hidden="true">{selectedStaffInitials}</span>
+                  )}
+                </button>
                 <strong className="name">
                   {selectedStaffEmployee?.name ?? "―"}
                 </strong>
@@ -1618,7 +1619,7 @@ export default function CompetitiveAnalysis({
               </div>
             </article>
             <article className="analysis-staff-metric-card">
-              <span>상담 만족도 평균(누적)</span>
+              <span>상담 만족도</span>
               <div className="analysis-staff-metric-value">
                 <strong>
                   {selectedStaffAverage === null
@@ -1635,7 +1636,7 @@ export default function CompetitiveAnalysis({
               </div>
             </article>
             <article className="analysis-staff-metric-card">
-              <span>VOC 고객회신 건수</span>
+              <span>회신건수</span>
               <div className="analysis-staff-metric-value">
                 <strong>
                   {selectedStaffResponses}
@@ -1654,11 +1655,11 @@ export default function CompetitiveAnalysis({
               <strong
                 aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
               >
-                <b>G<i className="analysis-staff-medal medal-grand" aria-hidden="true">★</i>{selectedStaffCertificationCounts.Grand}</b>
+                <b>G<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Grand}</b>
                 <em aria-hidden="true">/</em>
-                <b>A<i className="analysis-staff-medal medal-advanced" aria-hidden="true">★</i>{selectedStaffCertificationCounts.Advanced}</b>
+                <b>A<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Advanced}</b>
                 <em aria-hidden="true">/</em>
-                <b>C<i className="analysis-staff-medal medal-certified" aria-hidden="true">★</i>{selectedStaffCertificationCounts.Certified}</b>
+                <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
               </strong>
             </article>
           </div>
