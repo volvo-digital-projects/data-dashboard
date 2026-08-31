@@ -13977,11 +13977,15 @@ button.header-status-item {
 
 @media (min-width: 761px) and (max-width: 1240px) {
   .dashboard #score-voc .voc-consultation-history {
+    height: auto;
     min-height: 196px;
+    align-self: stretch;
   }
 
   .dashboard #score-cx .one-voice-contribution {
+    height: auto;
     min-height: 196px;
+    align-self: stretch;
   }
 }
 
