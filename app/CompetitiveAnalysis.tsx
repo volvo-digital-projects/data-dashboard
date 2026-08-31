@@ -1957,7 +1957,7 @@ export default function CompetitiveAnalysis({
                 <span className="showroom"><i />동일 전시장 SC</span>
                 <span className="selected">
                   <i />
-                  선택 SC
+                  {selectedStaffEmployee?.name ?? "선택 SC"}
                 </span>
                 <em>※ 원 크기 = 누적 회신 건수</em>
               </footer>
