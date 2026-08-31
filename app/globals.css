@@ -13961,6 +13961,12 @@ button.header-status-item {
   border-radius: 0;
 }
 
+/* The integrated competitiveness card follows the shared subtle corner cut;
+   its internal score, benchmark, and quarter content remain unchanged. */
+.dashboard .hero-grid > .combat-card.combat-scoreboard {
+  border-radius: var(--es90-surface-radius);
+}
+
 .dashboard .identity-insights,
 .dashboard .identity-detail-rail,
 .dashboard .score-tier,
