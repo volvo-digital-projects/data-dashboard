@@ -5299,7 +5299,7 @@ input:focus-visible {
 }
 
 .analysis-staff-card.is-motion-visible .analysis-staff-trend-line {
-  animation: analysis-staff-line-wipe 900ms cubic-bezier(0.22, 0.78, 0.24, 1) 80ms forwards;
+  animation: analysis-staff-line-wipe 900ms cubic-bezier(0.22, 0.78, 0.24, 1) 360ms forwards;
 }
 
 .analysis-staff-trend-marker {
@@ -5318,7 +5318,7 @@ input:focus-visible {
 
 .analysis-staff-card.is-motion-visible .analysis-staff-trend-marker {
   animation: analysis-staff-marker-in 220ms ease-out forwards;
-  animation-delay: calc(660ms + var(--staff-history-index, 0) * 130ms);
+  animation-delay: 80ms;
 }
 
 @keyframes analysis-staff-bar-rise {
