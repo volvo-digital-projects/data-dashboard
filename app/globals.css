@@ -13495,27 +13495,18 @@ button.header-status-item {
   grid-template-rows: 20px 16px;
   gap: 3px;
   padding: 4px;
-  border-color: #7f8a90;
+  border-color: rgba(112, 137, 148, 0.2);
   background: #f7f9fa;
 }
 
 .metric-quarter-strip--status > button.complete {
-  border-color: rgba(112, 137, 148, 0.3);
+  border-color: rgba(112, 137, 148, 0.2);
   box-shadow: none;
 }
 
 .metric-quarter-strip--status > button.current {
-  border-color: rgba(112, 137, 148, 0.3);
+  border-color: rgba(112, 137, 148, 0.46);
   box-shadow: none;
-}
-
-.metric-quarter-strip--status > button:nth-child(1),
-.metric-quarter-strip--status > button:nth-child(2) {
-  border: 1px solid rgba(112, 137, 148, 0.46);
-}
-
-.metric-quarter-strip--status > button:nth-child(4) {
-  border: 1px solid rgba(112, 137, 148, 0.2);
 }
 
 .scoreboard-quarter-strip > button.current {
@@ -13526,7 +13517,7 @@ button.header-status-item {
 .metric-quarter-strip--status > button.complete:not(:disabled):hover,
 .metric-quarter-strip--status > button.complete:not(:disabled):focus-visible {
   color: inherit;
-  border-color: rgba(112, 137, 148, 0.3);
+  border-color: rgba(112, 137, 148, 0.46);
   background: #f7f9fa;
   outline: none;
   box-shadow: none;
