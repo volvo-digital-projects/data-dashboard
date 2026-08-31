@@ -10119,6 +10119,11 @@ button.quarter-score-row:disabled {
   align-items: center;
 }
 
+.voc-score-heading .score-tier-side-title,
+.cx-score-heading .score-tier-side-title {
+  top: 1px;
+}
+
 .voc-score-heading .score-tier-heading-title,
 .cx-score-heading .score-tier-heading-title {
   width: 72px;
