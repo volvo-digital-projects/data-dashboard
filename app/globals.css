@@ -10061,8 +10061,35 @@ button.quarter-score-row:disabled {
   display: flex;
   align-items: baseline;
   gap: 10px;
+  position: relative;
   padding: 0 2px 5px;
   border-bottom: 1px solid rgba(152, 162, 179, 0.16);
+}
+
+.score-tier-side-title {
+  width: 25%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 2px;
+  color: #11283d;
+  font-family: var(--font-korean);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.25px;
+  text-align: left;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+}
+
+.score-tier-side-title .english-title,
+.score-tier-side-title.english-title {
+  color: inherit;
+  font-family: var(--font-latin);
+  font-size: inherit;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .score-tier-heading strong {
@@ -10170,7 +10197,7 @@ button.quarter-score-row:disabled {
 }
 
 .score-tier-weekly .score-tier-heading {
-  padding-right: 230px;
+  padding-right: calc(25% + var(--dashboard-card-gap));
 }
 
 .weekly-score-layout {
@@ -10243,9 +10270,9 @@ button.quarter-score-row:disabled {
 .voc-consultation-heading {
   min-width: 0;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: 20px;
+  gap: 0;
   padding: 7px 12px 6px;
   border-bottom: 1px solid rgba(47, 107, 138, 0.14);
 }
@@ -10690,6 +10717,12 @@ button.quarter-score-row:disabled {
   display: grid;
   gap: 2px;
   min-width: 0;
+}
+
+.one-voice-contribution-heading > .one-voice-context-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
 .one-voice-title-row {
@@ -11713,6 +11746,23 @@ button.quarter-score-row:disabled {
     padding-right: 2px;
   }
 
+  .score-tier-side-title {
+    width: auto;
+    flex: 0 0 auto;
+    position: static;
+    margin-left: auto;
+  }
+
+  .voc-score-heading .score-tier-heading-title,
+  .cx-score-heading .score-tier-heading-title {
+    order: 0;
+  }
+
+  .voc-score-heading .score-tier-side-title,
+  .cx-score-heading .score-tier-side-title {
+    order: 1;
+  }
+
   .voc-score-heading {
     flex-wrap: wrap;
   }
@@ -11727,6 +11777,7 @@ button.quarter-score-row:disabled {
     min-width: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-left: 0;
+    order: 2;
   }
 
   .score-tier-weekly .trend-wrap.compact .data-coverage {
@@ -12548,7 +12599,7 @@ body {
 .v3s-subhead .english-title,
 .voc-consultation-heading .english-title,
 .score-tier-heading .english-title,
-.one-voice-title-row > .english-title {
+.score-tier-side-title.english-title {
   font-family: var(--font-latin);
   font-weight: 800;
   letter-spacing: 0.02em;

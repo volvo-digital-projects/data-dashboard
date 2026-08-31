@@ -1092,14 +1092,6 @@ function V3SPerformance({
       </section>
 
       <section className="v3s-history-panel">
-        <header className="v3s-subhead">
-          <div>
-            <h3>
-              <span className="english-title">5</span>개년 추이
-            </h3>
-          </div>
-        </header>
-
         {hasHistory ? (
           <div
             className="v3s-history-chart"
@@ -1320,9 +1312,6 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       aria-label={`${displayShowroomName(showroom.showroom)} 상담 만족도 4개년 비교`}
     >
       <header className="voc-consultation-heading">
-        <div className="voc-consultation-heading-title">
-          <strong><span className="english-title">4</span>개년 추이</strong>
-        </div>
         <div className="voc-consultation-comparisons">
           <div className="voc-consultation-comparison satisfaction">
             <span>상담 만족도</span>
@@ -3343,6 +3332,9 @@ export default function Dashboard({
             >
               <header className="score-tier-heading">
                 <strong className="english-title">V3S</strong>
+                <h3 className="score-tier-side-title">
+                  <span className="english-title">5</span>개년 추이
+                </h3>
               </header>
               <V3SPerformance
                 showroom={selected}
@@ -3373,6 +3365,9 @@ export default function Dashboard({
                     </span>
                   ))}
                 </div>
+                <h3 className="score-tier-side-title">
+                  <span className="english-title">4</span>개년 추이
+                </h3>
               </header>
               <div className="weekly-score-layout">
                 <WeeklyTrend
@@ -3408,6 +3403,9 @@ export default function Dashboard({
                     </span>
                   ))}
                 </div>
+                <h3 className="score-tier-side-title english-title">
+                  ONE VOICE
+                </h3>
               </header>
               <div className="weekly-score-layout">
                 <WeeklyTrend
@@ -3426,19 +3424,16 @@ export default function Dashboard({
                   aria-label="ONE VOICE 만족도"
                 >
                   <header className="one-voice-contribution-heading">
-                    <div>
-                      <div className="one-voice-title-row">
-                        <strong className="english-title">ONE VOICE</strong>
-                        {oneVoiceReferenceDate && (
-                          <time
-                            className="one-voice-reference-date"
-                            dateTime={oneVoiceScores.capturedAt ?? undefined}
-                          >
-                            {oneVoiceReferenceDate} 기준
-                          </time>
-                        )}
-                      </div>
+                    <div className="one-voice-context-row">
                       <span>Volvo Korea 전체</span>
+                      {oneVoiceReferenceDate && (
+                        <time
+                          className="one-voice-reference-date"
+                          dateTime={oneVoiceScores.capturedAt ?? undefined}
+                        >
+                          {oneVoiceReferenceDate} 기준
+                        </time>
+                      )}
                     </div>
                     <small>지난 6개월부터 오늘까지</small>
                   </header>
