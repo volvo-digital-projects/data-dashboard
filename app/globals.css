@@ -14135,7 +14135,7 @@ button.header-status-item {
   .dashboard #score-voc .voc-consultation-comparison {
     box-sizing: border-box;
     width: 100%;
-    grid-template-columns: 41px minmax(0, 1fr) minmax(0, 1fr) 34px;
+    grid-template-columns: 41px minmax(0, 1.08fr) minmax(0, 0.92fr) 34px;
     column-gap: 1px;
     padding-right: 4px;
     overflow: hidden;
@@ -14155,6 +14155,6 @@ button.header-status-item {
 
 @media (min-width: 761px) and (max-width: 900px) {
   .dashboard #score-voc .weekly-score-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(190px, 0.44fr);
+    grid-template-columns: minmax(0, 1fr) minmax(214px, 0.48fr);
   }
 }
