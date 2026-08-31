@@ -14117,3 +14117,43 @@ button.header-status-item {
     text-align: right;
   }
 }
+
+/* The VOC insight card is one quarter of the score row on iPad. Give its
+   comparison rows the card's full inner width and let the two name/value
+   groups shrink before the values can cross the right edge. */
+@media (min-width: 761px) and (max-width: 1240px) {
+  .dashboard #score-voc .voc-consultation-heading {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 3px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparisons {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison {
+    width: 100%;
+    grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) 31px;
+    column-gap: 2px;
+    overflow: hidden;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > b,
+  .dashboard #score-voc .voc-consultation-comparison > em {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    column-gap: 2px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > em {
+    box-sizing: border-box;
+    padding-left: 5px;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 900px) {
+  .dashboard #score-voc .weekly-score-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 0.44fr);
+  }
+}
