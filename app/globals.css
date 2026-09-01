@@ -14828,7 +14828,7 @@ button.header-status-item {
 
 .metric-detail-complete-arrow {
   stroke: #f47b3f;
-  stroke-width: 1.35;
+  stroke-width: 1.8;
 }
 
 @keyframes metric-detail-complete-pulse {
@@ -14874,7 +14874,7 @@ button.header-status-item {
 }
 
 .metric-detail-latest-point {
-  fill: #ffffff;
+  fill: #f47b3f;
   stroke: #276e8f;
   stroke-width: 2.4;
   vector-effect: non-scaling-stroke;

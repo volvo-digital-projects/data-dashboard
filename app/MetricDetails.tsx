@@ -40,8 +40,8 @@ const chart = {
   height: 104,
   left: 52,
   right: 28,
-  top: 12,
-  bottom: 38,
+  top: 20,
+  bottom: 30,
 };
 
 const quarterRanges = [
@@ -271,14 +271,14 @@ function MetricDetailChart({
           })}
           {completedWeekPoint ? (
             <g className="metric-detail-complete-marker" aria-hidden="true">
-              <circle cx={completedWeekPoint.x} cy="5" r="3.8" />
+              <circle cx={completedWeekPoint.x} cy="5" r="4.5" />
               <path
                 className="metric-detail-complete-check"
-                d={`M${(completedWeekPoint.x - 1.8).toFixed(2)} 5 L${(completedWeekPoint.x - 0.45).toFixed(2)} 6.35 L${(completedWeekPoint.x + 2).toFixed(2)} 3.45`}
+                d={`M${(completedWeekPoint.x - 2.1).toFixed(2)} 5 L${(completedWeekPoint.x - 0.5).toFixed(2)} 6.6 L${(completedWeekPoint.x + 2.35).toFixed(2)} 3.25`}
               />
               <path
                 className="metric-detail-complete-arrow"
-                d={`M${completedWeekPoint.x.toFixed(2)} 9 V13 M${(completedWeekPoint.x - 2).toFixed(2)} 11 L${completedWeekPoint.x.toFixed(2)} 13 L${(completedWeekPoint.x + 2).toFixed(2)} 11`}
+                d={`M${completedWeekPoint.x.toFixed(2)} 10 V15 M${(completedWeekPoint.x - 3).toFixed(2)} 12 L${completedWeekPoint.x.toFixed(2)} 15 L${(completedWeekPoint.x + 3).toFixed(2)} 12`}
               />
             </g>
           ) : null}
