@@ -1548,6 +1548,7 @@ function WeeklyTrend({
   const activeQuarterEnd = weekBoundaryX(39);
   const upcomingQuarterStart = weekBoundaryX(39);
   const upcomingQuarterEnd = weekBoundaryX(52);
+  const futureWindowCenterY = chartY(18 + 152 / 2);
   const highlightedQuarterStartWeek =
     highlightQuarter === "q1"
       ? 0
@@ -1770,8 +1771,9 @@ function WeeklyTrend({
                 />
                 <text
                   x={(activeQuarterStart + activeQuarterEnd) / 2}
-                  y={chartY(88)}
+                  y={futureWindowCenterY}
                   textAnchor="middle"
+                  dominantBaseline="middle"
                   className="future-window-label"
                 >
                   평가 중
@@ -1789,8 +1791,9 @@ function WeeklyTrend({
                 />
                 <text
                   x={(upcomingQuarterStart + upcomingQuarterEnd) / 2}
-                  y={chartY(88)}
+                  y={futureWindowCenterY}
                   textAnchor="middle"
+                  dominantBaseline="middle"
                   className="future-window-label"
                 >
                   평가 전

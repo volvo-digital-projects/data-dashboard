@@ -1072,6 +1072,15 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 32);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
+  assert.match(
+    dashboardSource,
+    /const futureWindowCenterY = chartY\(18 \+ 152 \/ 2\)/,
+  );
+  assert.equal(
+    (dashboardSource.match(/y=\{futureWindowCenterY\}[\s\S]{0,100}?dominantBaseline="middle"/g) ?? [])
+      .length,
+    2,
+  );
   assert.match(visibleHtml, /Q3 평가 중/);
   assert.match(vocHtml, /class="future-window future-window-upcoming"/);
   assert.match(visibleHtml, /Q4 평가 전/);
