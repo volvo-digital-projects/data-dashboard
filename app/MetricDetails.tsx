@@ -278,7 +278,7 @@ function MetricDetailChart({
               />
               <path
                 className="metric-detail-complete-arrow"
-                d={`M${completedWeekPoint.x.toFixed(2)} 10 V15 M${(completedWeekPoint.x - 3).toFixed(2)} 12 L${completedWeekPoint.x.toFixed(2)} 15 L${(completedWeekPoint.x + 3).toFixed(2)} 12`}
+                d={`M${(completedWeekPoint.x - 4).toFixed(2)} 9 L${(completedWeekPoint.x + 4).toFixed(2)} 9 L${completedWeekPoint.x.toFixed(2)} 15 Z`}
               />
             </g>
           ) : null}
@@ -303,13 +303,23 @@ function MetricDetailChart({
           {scorePoints.map(({ index, value, x, y }) => {
             const showLabel =
               component.cadence === "weekly" || (index + 1) % 13 === 0;
-            const labelY = y <= chart.top + 12 ? y + 12 : y - 6;
+            const isFullScore = value === 100;
+            const isCompletedFullScore = isFullScore && index === completedWeek - 1;
+            const labelY = isFullScore ? y - 6 : y <= chart.top + 12 ? y + 12 : y - 6;
+            const labelX = isCompletedFullScore ? x - 6 : x;
+            const labelAnchor = isCompletedFullScore
+              ? "end"
+              : index === 0
+                ? "start"
+                : index === 51
+                  ? "end"
+                  : "middle";
             return showLabel ? (
               <text
                 className="metric-detail-score-label"
-                x={x}
+                x={labelX}
                 y={labelY}
-                textAnchor={index === 0 ? "start" : index === 51 ? "end" : "middle"}
+                textAnchor={labelAnchor}
                 key={`score-label-${index}`}
               >
                 {displayNumber(value)}

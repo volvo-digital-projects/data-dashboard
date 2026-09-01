@@ -1173,6 +1173,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, />W1<\/text>/);
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
+  assert.match(vocBody, /class="metric-detail-score-label"[^>]*y="14"[^>]*>100<\/text>/);
+  assert.match(vocBody, /class="metric-detail-complete-arrow" d="[^"]+ Z"/);
   assert.doesNotMatch(vocBody, /class="metric-detail-national-line"/);
   assert.doesNotMatch(vocBody, /W01~W52 원본값 보기/);
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
@@ -1272,11 +1274,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-complete-marker\s*\{[^}]*animation:\s*metric-detail-complete-pulse 1\.45s ease-in-out infinite;/,
+    /\.metric-detail-complete-arrow\s*\{[^}]*fill:\s*#f47b3f;[^}]*animation:\s*metric-detail-complete-drop 1\.25s cubic-bezier\(0\.2, 0\.72, 0\.3, 1\) infinite;/,
   );
   assert.match(
     detailCss,
-    /\.metric-detail-latest-point\s*\{[^}]*fill:\s*#f47b3f;[^}]*stroke:\s*#276e8f;/,
+    /\.metric-detail-latest-point\s*\{[^}]*fill:\s*#f47b3f;[^}]*stroke:\s*#c65a24;/,
   );
   assert.match(
     detailCss,
