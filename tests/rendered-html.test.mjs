@@ -1149,14 +1149,14 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
-test("server-renders the original VOC and CX weekly detail pages", async () => {
+test("renders the simplified VOC and CX weekly detail pages", async () => {
   const vocResponse = await render("/dashboard/6KR6834/details/voc");
   assert.equal(vocResponse.status, 200);
   const vocHtml = (await vocResponse.text()).replaceAll("<!-- -->", "");
   const vocBody = vocHtml.match(/<body>([\s\S]*?)<script/)?.[1] ?? vocHtml;
-  assert.match(vocBody, /볼보 강남대치 VOC 세부지표/);
+  assert.match(vocBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
   assert.match(vocBody, /DATA DASHBOARD DETAIL/);
-  assert.match(vocBody, /원본 구글시트에서 동기화한 W1~W52 전시장값/);
+  assert.doesNotMatch(vocBody, /원본 구글시트에서 동기화한 W1~W52 전시장값/);
   assert.match(vocBody, /VOC 종합만족도/);
   assert.match(vocBody, /VOC 첫인사/);
   assert.match(vocBody, /VOC 태블릿/);
@@ -1169,13 +1169,15 @@ test("server-renders the original VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
   assert.doesNotMatch(vocBody, /class="metric-detail-national-line"/);
-  assert.match(vocBody, /W01~W52 원본값 보기/);
+  assert.doesNotMatch(vocBody, /W01~W52 원본값 보기/);
+  assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
+  assert.doesNotMatch(vocBody, /최신값/);
 
   const cxResponse = await render("/dashboard/6KR6834/details/cx");
   assert.equal(cxResponse.status, 200);
   const cxHtml = (await cxResponse.text()).replaceAll("<!-- -->", "");
   const cxBody = cxHtml.match(/<body>([\s\S]*?)<script/)?.[1] ?? cxHtml;
-  assert.match(cxBody, /볼보 강남대치 CX Index 세부지표/);
+  assert.match(cxBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
   assert.match(cxBody, /신차출고 만족도/);
   assert.match(cxBody, /시승 만족도/);
   assert.match(cxBody, /긴급경보 처리여부/);
@@ -1186,7 +1188,9 @@ test("server-renders the original VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/VCK 평가/g) ?? []).length, 1);
   assert.equal((cxBody.match(/class="metric-detail-week-label"/g) ?? []).length, 260);
   assert.doesNotMatch(cxBody, /class="metric-detail-national-line"/);
-  assert.match(cxBody, /Q3 최신값/);
+  assert.doesNotMatch(cxBody, /W01~W52 원본값 보기/);
+  assert.doesNotMatch(cxBody, /class="metric-detail-current"/);
+  assert.doesNotMatch(cxBody, /최신값/);
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
@@ -2215,7 +2219,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.match(syncSource, /04☆VOC해피콜\(10%\)/);
   assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
-  assert.match(detailsSource, /W01~W52 원본값 보기/);
+  assert.doesNotMatch(detailsSource, /W01~W52 원본값 보기/);
 });
 
 test("aligns every quarter boundary to the same 52-week grid", async () => {

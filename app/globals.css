@@ -14564,13 +14564,6 @@ button.header-status-item {
   outline: 0;
 }
 
-.metric-detail-header-subline p {
-  margin: 0;
-  color: rgba(226, 239, 246, 0.76);
-  font-size: 9px;
-  font-weight: 620;
-}
-
 .metric-detail-header-context {
   min-width: 0;
   min-height: 86px;
@@ -14759,44 +14752,6 @@ button.header-status-item {
   font-weight: 680;
 }
 
-.metric-detail-current {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: baseline;
-  column-gap: 9px;
-  text-align: right;
-}
-
-.metric-detail-current > span {
-  grid-column: 1 / -1;
-  color: #7a8b94;
-  font-family: var(--font-latin), var(--font-korean);
-  font-size: 8px;
-  font-weight: 650;
-}
-
-.metric-detail-current > strong {
-  color: var(--navy);
-  font-family: var(--font-latin);
-  font-size: 23px;
-  font-weight: 760;
-}
-
-.metric-detail-current > strong small {
-  margin-left: 2px;
-  font-family: var(--font-korean);
-  font-size: 8px;
-  font-weight: 600;
-}
-
-.metric-detail-current > em {
-  color: #738690;
-  font-family: var(--font-latin), var(--font-korean);
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 650;
-}
-
 .metric-detail-chart-legend {
   display: flex;
   justify-content: flex-end;
@@ -14905,73 +14860,6 @@ button.header-status-item {
   vector-effect: non-scaling-stroke;
 }
 
-.metric-detail-values {
-  margin-top: 5px;
-  border-top: 1px solid #edf1f3;
-}
-
-.metric-detail-values summary {
-  width: fit-content;
-  margin: 8px 0 2px;
-  color: #547285;
-  font-size: 9px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.metric-detail-value-grid {
-  min-width: 1180px;
-  display: grid;
-  grid-template-columns: repeat(13, minmax(82px, 1fr));
-  gap: 4px;
-  padding: 7px 0 3px;
-  overflow-x: auto;
-}
-
-.metric-detail-value-grid > div {
-  min-height: 66px;
-  display: grid;
-  align-content: center;
-  gap: 2px;
-  padding: 5px 6px;
-  border: 1px solid #e5ebee;
-  border-radius: 4px;
-  background: #f8fafb;
-}
-
-.metric-detail-value-grid > div.pending {
-  opacity: 0.46;
-  background: #fbfcfc;
-}
-
-.metric-detail-value-grid b,
-.metric-detail-value-grid strong {
-  color: #315f75;
-  font-family: var(--font-latin);
-}
-
-.metric-detail-value-grid b {
-  font-size: 8px;
-}
-
-.metric-detail-value-grid small,
-.metric-detail-value-grid span,
-.metric-detail-value-grid em {
-  color: #7d8d95;
-  font-size: 7px;
-  font-style: normal;
-}
-
-.metric-detail-value-grid span {
-  display: flex;
-  justify-content: space-between;
-  gap: 4px;
-}
-
-.metric-detail-value-grid strong {
-  font-size: 8px;
-}
-
 @media (max-width: 900px) {
   .metric-detail-page {
     padding: 0 16px 24px;
@@ -15010,10 +14898,6 @@ button.header-status-item {
     font-size: 22px;
   }
 
-  .metric-detail-header-subline p {
-    display: none;
-  }
-
   .metric-detail-header-context {
     min-height: 68px;
   }
@@ -15027,13 +14911,6 @@ button.header-status-item {
     align-items: flex-start;
   }
 
-  .metric-detail-current {
-    min-width: 98px;
-  }
-
-  .metric-detail-current > strong {
-    font-size: 19px;
-  }
 }
 
 @media (min-width: 761px) and (max-width: 1240px) {

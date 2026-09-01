@@ -101,21 +101,15 @@ function MetricDetailChart({
   cdsid,
   metric,
   showroomName,
-  weekRanges,
 }: {
   component: DetailComponent;
   cdsid: string;
   metric: DetailMetric;
   showroomName: string;
-  weekRanges: WeekRange[];
 }) {
   const showroomValues = component.byCdsid[cdsid] ?? Array(52).fill(null);
   const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
-  const nationalLatestIndex = lastValueIndex(component.average, component.latestWeek);
-  const latestWeek = Math.max(latestIndex, nationalLatestIndex) + 1;
   const latestShowroom = latestIndex >= 0 ? showroomValues[latestIndex] : null;
-  const latestNational =
-    nationalLatestIndex >= 0 ? component.average[nationalLatestIndex] : null;
   const latestPoint =
     latestIndex >= 0 && typeof latestShowroom === "number"
       ? point(latestIndex, latestShowroom, component.max)
@@ -127,10 +121,6 @@ function MetricDetailChart({
     const coordinates = point(index, value, component.max);
     return [{ index, value, ...coordinates }];
   });
-  const latestPeriodLabel =
-    component.cadence === "quarterly"
-      ? `Q${Math.max(1, Math.ceil(latestWeek / 13))}`
-      : `W${String(latestWeek || 0).padStart(2, "0")}`;
   const isVckEvaluation = metric === "voc" || component.key === "app";
   const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
 
@@ -169,13 +159,6 @@ function MetricDetailChart({
             <strong>{displayNumber(component.max)}점 만점</strong>
             {component.cadence === "quarterly" ? " · 분기값을 해당 주차 구간에 표시" : ""}
           </small>
-        </div>
-        <div className="metric-detail-current">
-          <span>{latestPeriodLabel} 최신값</span>
-          <strong>
-            {displayNumber(latestShowroom)}<small>{component.unit}</small>
-          </strong>
-          <em>전국 {displayNumber(latestNational)}{component.unit}</em>
         </div>
       </header>
 
@@ -267,19 +250,6 @@ function MetricDetailChart({
         </svg>
       </div>
 
-      <details className="metric-detail-values">
-        <summary>W01~W52 원본값 보기</summary>
-        <div className="metric-detail-value-grid">
-          {weekRanges.map((range, index) => (
-            <div className={index + 1 > component.latestWeek ? "pending" : ""} key={range.week}>
-              <b>W{String(range.week).padStart(2, "0")}</b>
-              <small>{range.start}~{range.end}</small>
-              <span>{showroomName} <strong>{displayNumber(showroomValues[index])}</strong></span>
-              <em>전국 {displayNumber(component.average[index])}</em>
-            </div>
-          ))}
-        </div>
-      </details>
     </article>
   );
 }
@@ -300,13 +270,12 @@ export default function MetricDetails({
       <header className="metric-detail-page-header">
         <div className="metric-detail-header-primary">
           <small>DATA DASHBOARD DETAIL</small>
-          <h1>{showroom?.showroom ?? cdsid} {group.label} 세부지표</h1>
+          <h1>{showroom?.showroom ?? cdsid} 세부지표</h1>
           <div className="metric-detail-header-subline">
             <Link href={`/dashboard/${cdsid}`}>
               <span aria-hidden="true">←</span>
               현황으로
             </Link>
-            <p>원본 구글시트에서 동기화한 W1~W52 전시장값입니다.</p>
           </div>
         </div>
         <div className="metric-detail-header-context" aria-label="현재 세부지표 정보">
@@ -335,7 +304,6 @@ export default function MetricDetails({
             cdsid={cdsid}
             metric={metric}
             showroomName={showroomName}
-            weekRanges={detailData.meta.weekRanges}
             key={component.key}
           />
         ))}
