@@ -284,20 +284,36 @@ export default function MetricDetails({
         <div className="identity-detail-rail metric-detail-header-context" aria-label="현재 세부지표 정보">
           <dl>
             <div className="identity-analysis-entry">
-              <span className="identity-icon identity-icon--dealer" aria-hidden="true" />
+              <span className="identity-icon metric-detail-context-icon-box metric" aria-hidden="true">
+                <svg className="metric-detail-context-icon" viewBox="0 0 20 20">
+                  <path d="M3 16.5h14M4.5 15V11m3.7 4V7m3.7 8V9m3.6 6V4" />
+                </svg>
+              </span>
               <dt>지표</dt><dd>{group.label}</dd>
             </div>
             <div className="identity-analysis-entry">
-              <span className="identity-icon identity-icon--region" aria-hidden="true" />
+              <span className="identity-icon metric-detail-context-icon-box showroom" aria-hidden="true">
+                <svg className="metric-detail-context-icon" viewBox="0 0 20 20">
+                  <path d="M4 17V5h12v12M7 8h2m2 0h2m-6 3h2m2 0h2M8 17v-3h4v3M3 17h14" />
+                </svg>
+              </span>
               <dt>전시장</dt><dd>{showroomName}</dd>
             </div>
             <div className="identity-analysis-entry">
-              <span className="identity-icon identity-icon--size" aria-hidden="true" />
+              <span className="identity-icon metric-detail-context-icon-box week" aria-hidden="true">
+                <svg className="metric-detail-context-icon" viewBox="0 0 20 20">
+                  <path d="M4 6h12v11H4zM7 3v5m6-5v5M4 10h12m-9 3h1m3 0h1" />
+                </svg>
+              </span>
               <dt>주차</dt><dd>W1–W52</dd>
             </div>
           </dl>
           <time className="identity-profile identity-profile--static" dateTime={detailData.meta.syncedAt}>
-            <span className="identity-profile-icon" aria-hidden="true" />
+            <span className="identity-icon metric-detail-context-icon-box update" aria-hidden="true">
+              <svg className="metric-detail-context-icon" viewBox="0 0 20 20">
+                <path d="M16 6V3m0 3h-3M15.7 6A6.5 6.5 0 1 0 16 13M10 6.5V10l2.7 1.8" />
+              </svg>
+            </span>
             <span className="identity-profile-role">업데이트</span>
             <strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
           </time>

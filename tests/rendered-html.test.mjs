@@ -1190,9 +1190,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, /class="identity-profile-role">업데이트<\/span><strong>260901<\/strong>/);
   assert.doesNotMatch(vocBody, /<dt>기준<\/dt>/);
   assert.equal((vocBody.match(/class="identity-analysis-entry"/g) ?? []).length, 3);
+  assert.equal((vocBody.match(/class="metric-detail-context-icon"/g) ?? []).length, 4);
   assert.match(
     vocBody,
-    /identity-icon--dealer[\s\S]*?identity-icon--region[\s\S]*?identity-icon--size[\s\S]*?identity-profile-icon/,
+    /metric-detail-context-icon-box metric[\s\S]*?metric-detail-context-icon-box showroom[\s\S]*?metric-detail-context-icon-box week[\s\S]*?metric-detail-context-icon-box update/,
   );
 
   const cxResponse = await render("/dashboard/6KR6834/details/cx");
@@ -1267,6 +1268,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.dashboard-identity-header\.metric-detail-page-header \.identity-title h1::before\s*\{[^}]*content:\s*"DATA DASHBOARD DETAIL";/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-header-context \.identity-analysis-entry::after\s*\{[^}]*content:\s*none;/,
   );
 });
 

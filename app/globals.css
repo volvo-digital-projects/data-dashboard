@@ -14510,6 +14510,33 @@ button.header-status-item {
   font-style: normal;
 }
 
+.metric-detail-header-context .identity-analysis-entry::after {
+  content: none;
+}
+
+.metric-detail-header-context .identity-analysis-entry {
+  cursor: default;
+}
+
+.metric-detail-header-context .identity-profile > .metric-detail-context-icon-box {
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.metric-detail-context-icon {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: translate(-50%, -50%);
+}
+
 .metric-detail-tabs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
