@@ -13867,6 +13867,12 @@ button.header-status-item {
   .weekly-score-layout .trend-wrap.compact .trend-chart {
     overflow: hidden;
   }
+
+  .dashboard #score-voc .score-tier-side-title,
+  .dashboard #score-cx .score-tier-side-title {
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 /* Expand the right-side V3S, VOC, and CX insight panels to their tier headings. */
