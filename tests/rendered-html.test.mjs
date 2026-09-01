@@ -1175,8 +1175,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
   assert.doesNotMatch(vocBody, /최신값/);
   assert.doesNotMatch(vocBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/preserveAspectRatio="none"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(
     vocBody,
@@ -1225,8 +1225,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(cxBody, /class="metric-detail-current"/);
   assert.doesNotMatch(cxBody, /최신값/);
   assert.doesNotMatch(cxBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((cxBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
-  assert.equal((cxBody.match(/preserveAspectRatio="none"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
   assert.match(
     detailCss,
@@ -1238,11 +1238,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-chart-scroll\s*\{[^}]*overflow:\s*hidden;/,
+    /\.metric-detail-chart-scroll\s*\{[^}]*padding:\s*4px 10px 6px;[^}]*overflow:\s*hidden;/,
   );
   assert.match(
     detailCss,
-    /\.metric-detail-week-label\s*\{[^}]*font-size:\s*11px;[^}]*font-weight:\s*700;/,
+    /\.metric-detail-week-label\s*\{[^}]*font-size:\s*9px;[^}]*font-weight:\s*680;/,
   );
   assert.match(
     detailCss,

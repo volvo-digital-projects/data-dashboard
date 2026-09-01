@@ -37,10 +37,10 @@ type DetailData = {
 const detailData = weeklyDetailsJson as DetailData;
 const chart = {
   width: 1440,
-  height: 104,
-  left: 40,
-  right: 16,
-  top: 8,
+  height: 88,
+  left: 52,
+  right: 28,
+  top: 12,
   bottom: 22,
 };
 
@@ -170,7 +170,7 @@ function MetricDetailChart({
         <svg
           className="metric-detail-chart"
           viewBox={`0 0 ${chart.width} ${chart.height}`}
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid meet"
           role="img"
           aria-label={`${component.label} W1부터 W52까지 ${showroomName} 점수 추이`}
         >
@@ -211,7 +211,7 @@ function MetricDetailChart({
                   y1={chart.height - chart.bottom}
                   y2={chart.height - chart.bottom + 4}
                 />
-                <text className="metric-detail-week-label" x={x} y={chart.height - 6}>
+                <text className="metric-detail-week-label" x={x} y={chart.height - 5}>
                   W{week}
                 </text>
               </g>
