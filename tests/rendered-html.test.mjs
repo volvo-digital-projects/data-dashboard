@@ -1180,16 +1180,16 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(
     vocBody,
-    /class="metric-detail-sticky-shell">[\s\S]*?class="dashboard-identity-header analysis-header metric-detail-page-header"[\s\S]*?class="identity-title analysis-title metric-detail-header-primary"[\s\S]*?class="metric-detail-tabs"/,
+    /class="metric-detail-sticky-shell">[\s\S]*?class="dashboard-identity-header identity-strip metric-detail-page-header"[\s\S]*?class="identity-title metric-detail-header-primary"[\s\S]*?class="identity-detail-rail metric-detail-header-context"[\s\S]*?class="metric-detail-tabs"/,
   );
   assert.match(
     vocBody,
     /href="\/dashboard\/6KR6834"[\s\S]*?viewBox="0 0 24 24"[\s\S]*?d="M4 19V9m5 10V5m5 14v-7m5 7V3"[\s\S]*?대시보드/,
   );
   assert.doesNotMatch(vocBody, /현황으로/);
-  assert.match(vocBody, /<small>업데이트<\/small><strong>260901<\/strong>/);
-  assert.doesNotMatch(vocBody, /<small>기준<\/small>/);
-  assert.equal((vocBody.match(/class="analysis-context-item"/g) ?? []).length, 4);
+  assert.match(vocBody, /class="identity-profile-role">업데이트<\/span><strong>260901<\/strong>/);
+  assert.doesNotMatch(vocBody, /<dt>기준<\/dt>/);
+  assert.equal((vocBody.match(/class="identity-analysis-entry"/g) ?? []).length, 3);
   assert.match(
     vocBody,
     /identity-icon--dealer[\s\S]*?identity-icon--region[\s\S]*?identity-icon--size[\s\S]*?identity-profile-icon/,
@@ -1254,7 +1254,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-page-header > \.metric-detail-header-context\s*\{[^}]*height:\s*92px;[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows:\s*repeat\(2, 45px\);/,
+    /\.metric-detail-sticky-shell\s*\{[^}]*padding:\s*0 var\(--dashboard-sticky-content-gutter\) 1px;/,
   );
   assert.match(
     detailCss,

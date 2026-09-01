@@ -269,8 +269,8 @@ export default function MetricDetails({
   return (
     <main className="metric-detail-page">
       <div className="metric-detail-sticky-shell">
-      <header className="dashboard-identity-header analysis-header metric-detail-page-header">
-        <div className="identity-title analysis-title metric-detail-header-primary">
+      <header className="dashboard-identity-header identity-strip metric-detail-page-header">
+        <div className="identity-title metric-detail-header-primary">
           <h1>{showroom?.showroom ?? cdsid} 세부지표</h1>
           <div className="header-status-row metric-detail-header-subline">
             <Link className="header-status-item" href={`/dashboard/${cdsid}`}>
@@ -281,22 +281,25 @@ export default function MetricDetails({
             </Link>
           </div>
         </div>
-        <div className="analysis-context metric-detail-header-context" aria-label="현재 세부지표 정보">
-          <div className="analysis-context-item">
-            <span className="identity-icon identity-icon--dealer" aria-hidden="true" />
-            <small>지표</small><strong>{group.label}</strong>
-          </div>
-          <div className="analysis-context-item">
-            <span className="identity-icon identity-icon--region" aria-hidden="true" />
-            <small>전시장</small><strong>{showroomName}</strong>
-          </div>
-          <div className="analysis-context-item">
-            <span className="identity-icon identity-icon--size" aria-hidden="true" />
-            <small>주차</small><strong>W1–W52</strong>
-          </div>
-          <time className="analysis-context-item" dateTime={detailData.meta.syncedAt}>
+        <div className="identity-detail-rail metric-detail-header-context" aria-label="현재 세부지표 정보">
+          <dl>
+            <div className="identity-analysis-entry">
+              <span className="identity-icon identity-icon--dealer" aria-hidden="true" />
+              <dt>지표</dt><dd>{group.label}</dd>
+            </div>
+            <div className="identity-analysis-entry">
+              <span className="identity-icon identity-icon--region" aria-hidden="true" />
+              <dt>전시장</dt><dd>{showroomName}</dd>
+            </div>
+            <div className="identity-analysis-entry">
+              <span className="identity-icon identity-icon--size" aria-hidden="true" />
+              <dt>주차</dt><dd>W1–W52</dd>
+            </div>
+          </dl>
+          <time className="identity-profile identity-profile--static" dateTime={detailData.meta.syncedAt}>
             <span className="identity-profile-icon" aria-hidden="true" />
-            <small>업데이트</small><strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
+            <span className="identity-profile-role">업데이트</span>
+            <strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
           </time>
         </div>
       </header>
