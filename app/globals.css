@@ -14224,3 +14224,112 @@ button.header-status-item {
     grid-template-columns: minmax(0, 1fr) minmax(214px, 0.48fr);
   }
 }
+
+/* Use the space freed by the external 4-year title for a clearer VOC summary.
+   Each metric is now a self-contained reading column: metric/delta, showroom,
+   then national value. This also prevents four-character showroom names from
+   squeezing the figures at iPad widths. */
+.dashboard #score-voc .voc-consultation-heading {
+  padding: 8px 10px 7px;
+}
+
+.dashboard #score-voc .voc-consultation-comparisons {
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  justify-content: stretch;
+}
+
+.dashboard #score-voc .voc-consultation-comparison {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  grid-template-areas:
+    "label delta"
+    "showroom showroom"
+    "national national";
+  align-items: center;
+  row-gap: 3px;
+  column-gap: 5px;
+  padding: 0 12px;
+  overflow: visible;
+  font-size: 9px;
+  line-height: 1.1;
+}
+
+.dashboard #score-voc .voc-consultation-comparison:first-child {
+  padding-left: 2px;
+}
+
+.dashboard #score-voc .voc-consultation-comparison + .voc-consultation-comparison {
+  border-left: 1px solid rgba(112, 139, 153, 0.24);
+}
+
+.dashboard #score-voc .voc-consultation-comparison > span {
+  grid-area: label;
+  font-size: 9px;
+  font-weight: 760;
+}
+
+.dashboard #score-voc .voc-consultation-comparison > b,
+.dashboard #score-voc .voc-consultation-comparison > em {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: baseline;
+  column-gap: 5px;
+  padding-left: 0;
+  border-left: 0;
+  overflow: visible;
+  font-size: 9px;
+  text-overflow: clip;
+}
+
+.dashboard #score-voc .voc-consultation-comparison > b {
+  grid-area: showroom;
+  color: #2f718b;
+  font-weight: 780;
+}
+
+.dashboard #score-voc .voc-consultation-comparison > em {
+  grid-area: national;
+  color: #a65f50;
+  font-weight: 720;
+}
+
+.dashboard #score-voc .voc-consultation-comparison .comparison-name {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.dashboard #score-voc .voc-consultation-comparison .comparison-value {
+  justify-self: end;
+  font-size: 9.5px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.dashboard #score-voc .voc-consultation-comparison > strong {
+  grid-area: delta;
+  justify-self: end;
+  font-size: 9.5px;
+}
+
+@media (min-width: 761px) and (max-width: 1240px) {
+  .dashboard #score-voc .voc-consultation-heading {
+    padding-inline: 6px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison {
+    padding-inline: 8px;
+    column-gap: 3px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison:first-child {
+    padding-left: 1px;
+  }
+
+  .dashboard #score-voc .voc-consultation-comparison > b,
+  .dashboard #score-voc .voc-consultation-comparison > em {
+    column-gap: 3px;
+  }
+}
