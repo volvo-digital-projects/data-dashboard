@@ -14719,7 +14719,7 @@ button.header-status-item {
   transform: scaleX(0);
   transform-box: fill-box;
   transform-origin: left center;
-  animation: metric-detail-series-wipe 1.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: metric-detail-series-wipe 3.4s cubic-bezier(0.2, 0.72, 0.24, 1) both;
   will-change: transform;
 }
 
