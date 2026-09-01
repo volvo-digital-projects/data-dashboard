@@ -37,11 +37,11 @@ type DetailData = {
 const detailData = weeklyDetailsJson as DetailData;
 const chart = {
   width: 1440,
-  height: 132,
+  height: 104,
   left: 40,
   right: 16,
-  top: 14,
-  bottom: 26,
+  top: 8,
+  bottom: 22,
 };
 
 const displayNumber = (value: number | null | undefined) =>
@@ -161,16 +161,16 @@ function MetricDetailChart({
             </em>
           </h2>
         </div>
+        <div className="metric-detail-chart-legend" aria-hidden="true">
+          <span className="showroom">{showroomName} 점수</span>
+        </div>
       </header>
-
-      <div className="metric-detail-chart-legend" aria-hidden="true">
-        <span className="showroom">{showroomName} 점수</span>
-      </div>
 
       <div className="metric-detail-chart-scroll">
         <svg
           className="metric-detail-chart"
           viewBox={`0 0 ${chart.width} ${chart.height}`}
+          preserveAspectRatio="none"
           role="img"
           aria-label={`${component.label} W1부터 W52까지 ${showroomName} 점수 추이`}
         >
@@ -211,7 +211,7 @@ function MetricDetailChart({
                   y1={chart.height - chart.bottom}
                   y2={chart.height - chart.bottom + 4}
                 />
-                <text className="metric-detail-week-label" x={x} y={chart.height - 8}>
+                <text className="metric-detail-week-label" x={x} y={chart.height - 6}>
                   W{week}
                 </text>
               </g>
@@ -311,7 +311,10 @@ export default function MetricDetails({
       </nav>
       </div>
 
-      <section className="metric-detail-list" aria-label={`${group.label} 주간 세부지표`}>
+      <section
+        className={`metric-detail-list metric-detail-list--${metric}`}
+        aria-label={`${group.label} 주간 세부지표`}
+      >
         {group.components.map((component) => (
           <MetricDetailChart
             component={component}

@@ -1175,7 +1175,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
   assert.doesNotMatch(vocBody, /최신값/);
   assert.doesNotMatch(vocBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((vocBody.match(/viewBox="0 0 1440 132"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/preserveAspectRatio="none"/g) ?? []).length, 4);
+  assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(
     vocBody,
     /class="metric-detail-sticky-shell">[\s\S]*?class="dashboard-identity-header analysis-header metric-detail-page-header"[\s\S]*?class="identity-title analysis-title metric-detail-header-primary"[\s\S]*?class="metric-detail-tabs"/,
@@ -1223,14 +1225,28 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(cxBody, /class="metric-detail-current"/);
   assert.doesNotMatch(cxBody, /최신값/);
   assert.doesNotMatch(cxBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((cxBody.match(/viewBox="0 0 1440 132"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/preserveAspectRatio="none"/g) ?? []).length, 5);
+  assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
   assert.match(
     detailCss,
-    /\.metric-detail-card\s*\{[^}]*padding:\s*8px 10px 6px;/,
+    /\.metric-detail-card\s*\{[^}]*grid-template-rows:\s*auto minmax\(0, 1fr\);[^}]*padding:\s*5px 8px 4px;[^}]*overflow:\s*hidden;/,
   );
   assert.match(
     detailCss,
-    /\.metric-detail-chart\s*\{[^}]*width:\s*max\(100%, 1440px\);[^}]*min-width:\s*1440px;[^}]*height:\s*132px;/,
+    /\.metric-detail-chart\s*\{[^}]*width:\s*100%;[^}]*min-width:\s*0;[^}]*height:\s*100%;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-chart-scroll\s*\{[^}]*overflow:\s*hidden;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-week-label\s*\{[^}]*font-size:\s*11px;[^}]*font-weight:\s*700;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-page\s*\{[^}]*height:\s*100dvh;[^}]*overflow:\s*hidden;[^}]*touch-action:\s*pan-x pan-y;/,
   );
   assert.match(
     detailCss,
@@ -2014,6 +2030,8 @@ test("ships project metadata and removes the disposable starter", async () => {
   assert.match(analysisPage, /CompetitiveAnalysis/);
   assert.match(layout, /generateMetadata/);
   assert.match(layout, /viewportFit: "cover"/);
+  assert.match(layout, /maximumScale: 1/);
+  assert.match(layout, /userScalable: false/);
   assert.match(layout, /themeColor: "#07141d"/);
   assert.match(layout, /statusBarStyle: "black-translucent"/);
   assert.match(layout, /볼보 관리자 전용/);

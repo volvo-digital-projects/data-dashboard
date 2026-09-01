@@ -14456,9 +14456,15 @@ button.header-status-item {
 
 .metric-detail-page {
   width: min(var(--dashboard-page-max), 100%);
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  padding: 0 28px 32px;
+  padding: 0 28px 5px;
+  overflow: hidden;
+  touch-action: pan-x pan-y;
 }
 
 .metric-detail-sticky-shell {
@@ -14602,14 +14608,29 @@ button.header-status-item {
 }
 
 .metric-detail-list {
+  min-height: 0;
+  flex: 1;
   display: grid;
-  gap: 7px;
-  margin-top: 8px;
+  gap: 5px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.metric-detail-list--voc {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+.metric-detail-list--cx {
+  grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 
 .metric-detail-card {
   min-width: 0;
-  padding: 8px 10px 6px;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: 5px 8px 4px;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--es90-surface-radius);
   background: #ffffff;
@@ -14621,7 +14642,7 @@ button.header-status-item {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-bottom: 6px;
+  padding-bottom: 3px;
   border-bottom: 1px solid #e8edef;
 }
 
@@ -14689,10 +14710,11 @@ button.header-status-item {
 }
 
 .metric-detail-chart-legend {
+  flex: 0 0 auto;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding: 4px 4px 0;
+  padding: 0 4px;
   color: #6f8089;
   font-size: 8px;
 }
@@ -14711,14 +14733,15 @@ button.header-status-item {
 }
 
 .metric-detail-chart-scroll {
-  overflow-x: auto;
-  scrollbar-width: thin;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .metric-detail-chart {
-  width: max(100%, 1440px);
-  min-width: 1440px;
-  height: 132px;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
   display: block;
 }
 
@@ -14754,8 +14777,8 @@ button.header-status-item {
 }
 
 .metric-detail-week-label {
-  font-size: 6.25px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   text-anchor: middle;
 }
 
@@ -14798,7 +14821,7 @@ button.header-status-item {
 
 @media (max-width: 900px) {
   .metric-detail-page {
-    padding: 0 16px 24px;
+    padding: 0 12px 4px;
   }
 
   .metric-detail-page-header {
@@ -14809,7 +14832,7 @@ button.header-status-item {
   }
 
   .metric-detail-card {
-    padding-inline: 8px;
+    padding-inline: 6px;
   }
 }
 
