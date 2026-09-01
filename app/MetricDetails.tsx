@@ -267,12 +267,11 @@ export default function MetricDetails({
   return (
     <main className="metric-detail-page">
       <div className="metric-detail-sticky-shell">
-      <header className="dashboard-identity-header metric-detail-page-header">
-        <div className="metric-detail-header-primary">
-          <small>DATA DASHBOARD DETAIL</small>
+      <header className="dashboard-identity-header analysis-header metric-detail-page-header">
+        <div className="identity-title analysis-title metric-detail-header-primary">
           <h1>{showroom?.showroom ?? cdsid} 세부지표</h1>
-          <div className="metric-detail-header-subline">
-            <Link href={`/dashboard/${cdsid}`}>
+          <div className="header-status-row metric-detail-header-subline">
+            <Link className="header-status-item" href={`/dashboard/${cdsid}`}>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 19V9m5 10V5m5 14v-7m5 7V3" />
               </svg>

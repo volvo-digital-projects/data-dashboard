@@ -1156,7 +1156,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   const vocHtml = (await vocResponse.text()).replaceAll("<!-- -->", "");
   const vocBody = vocHtml.match(/<body>([\s\S]*?)<script/)?.[1] ?? vocHtml;
   assert.match(vocBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
-  assert.match(vocBody, /DATA DASHBOARD DETAIL/);
+  assert.doesNotMatch(vocBody, />DATA DASHBOARD DETAIL</);
   assert.doesNotMatch(vocBody, /원본 구글시트에서 동기화한 W1~W52 전시장값/);
   assert.match(vocBody, /VOC 종합만족도/);
   assert.match(vocBody, /VOC 첫인사/);
@@ -1177,7 +1177,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/viewBox="0 0 1440 132"/g) ?? []).length, 4);
   assert.match(
     vocBody,
-    /class="metric-detail-sticky-shell">[\s\S]*?class="dashboard-identity-header metric-detail-page-header"[\s\S]*?class="metric-detail-tabs"/,
+    /class="metric-detail-sticky-shell">[\s\S]*?class="dashboard-identity-header analysis-header metric-detail-page-header"[\s\S]*?class="identity-title analysis-title metric-detail-header-primary"[\s\S]*?class="metric-detail-tabs"/,
   );
   assert.match(
     vocBody,
@@ -1227,6 +1227,14 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-page-header > \.metric-detail-header-context\s*\{[^}]*height:\s*92px;[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows:\s*repeat\(2, 45px\);/,
+  );
+  assert.match(
+    detailCss,
+    /\.voc-consultation-heading > div:first-child > strong,\s*\.metric-detail-card h2\s*\{[^}]*color:\s*#11283d;[^}]*font-family:\s*var\(--font-korean\);[^}]*font-size:\s*14px;[^}]*font-weight:\s*600;[^}]*line-height:\s*1\.25;[^}]*letter-spacing:\s*-0\.25px;/,
+  );
+  assert.match(
+    detailCss,
+    /\.dashboard-identity-header\.metric-detail-page-header \.identity-title h1::before\s*\{[^}]*content:\s*"DATA DASHBOARD DETAIL";/,
   );
 });
 
