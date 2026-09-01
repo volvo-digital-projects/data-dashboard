@@ -14648,6 +14648,14 @@ button.header-status-item {
   letter-spacing: 0.04em;
 }
 
+.metric-detail-card h2 > .metric-detail-max-inline {
+  color: #607581;
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 680;
+  line-height: 1;
+}
+
 .metric-detail-card h2 > em {
   min-height: 20px;
   display: inline-flex;
@@ -14678,17 +14686,6 @@ button.header-status-item {
   stroke-width: 1.45;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.metric-detail-card > header > div:first-child > small {
-  color: #7b8c95;
-  font-size: 8px;
-  font-weight: 550;
-}
-
-.metric-detail-card > header > div:first-child > small strong {
-  color: #607581;
-  font-weight: 680;
 }
 
 .metric-detail-chart-legend {

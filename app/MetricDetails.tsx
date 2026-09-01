@@ -123,6 +123,8 @@ function MetricDetailChart({
   });
   const isVckEvaluation = metric === "voc" || component.key === "app";
   const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
+  const sourceLabel =
+    metric === "cx" ? (component.key === "app" ? "Sales-DMS" : "ONE Voice") : null;
 
   return (
     <article className="metric-detail-card">
@@ -130,10 +132,14 @@ function MetricDetailChart({
         <div>
           <h2>
             <span>{component.label}</span>
-            {metric === "cx" ? (
+            <i aria-hidden="true">/</i>
+            <small className="metric-detail-max-inline">
+              {displayNumber(component.max)}점 만점
+            </small>
+            {sourceLabel ? (
               <>
                 <i aria-hidden="true">/</i>
-                <b>CX INDEX</b>
+                <b>{sourceLabel}</b>
               </>
             ) : null}
             <i aria-hidden="true">/</i>
@@ -154,10 +160,6 @@ function MetricDetailChart({
               {evaluationLabel}
             </em>
           </h2>
-          <small>
-            <strong>{displayNumber(component.max)}점 만점</strong>
-            {component.cadence === "quarterly" ? " · 분기값을 해당 주차 구간에 표시" : ""}
-          </small>
         </div>
       </header>
 

@@ -1165,6 +1165,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/VCK 평가/g) ?? []).length, 4);
   assert.equal((vocBody.match(/metric-detail-evaluation-icon/g) ?? []).length, 4);
   assert.equal((vocBody.match(/100점 만점/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/class="metric-detail-week-label"/g) ?? []).length, 208);
   assert.match(vocBody, />W1<\/text>/);
   assert.match(vocBody, />W52<\/text>/);
@@ -1202,9 +1203,20 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(cxBody, /긴급경보 처리여부/);
   assert.match(cxBody, /조치 계획/);
   assert.match(cxBody, /헤이볼보 앱 가입율/);
-  assert.equal((cxBody.match(/CX INDEX/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/ONE Voice/g) ?? []).length, 4);
+  assert.equal((cxBody.match(/Sales-DMS/g) ?? []).length, 1);
+  assert.doesNotMatch(cxBody, /CX INDEX/);
+  assert.equal((cxBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/글로벌 평가/g) ?? []).length, 4);
   assert.equal((cxBody.match(/VCK 평가/g) ?? []).length, 1);
+  assert.match(
+    cxBody,
+    /신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><b>ONE Voice<\/b>/,
+  );
+  assert.match(
+    cxBody,
+    /헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><b>Sales-DMS<\/b>[\s\S]*?VCK 평가/,
+  );
   assert.equal((cxBody.match(/class="metric-detail-week-label"/g) ?? []).length, 260);
   assert.doesNotMatch(cxBody, /class="metric-detail-national-line"/);
   assert.doesNotMatch(cxBody, /W01~W52 원본값 보기/);
@@ -1231,6 +1243,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.voc-consultation-heading > div:first-child > strong,\s*\.metric-detail-card h2\s*\{[^}]*color:\s*#11283d;[^}]*font-family:\s*var\(--font-korean\);[^}]*font-size:\s*14px;[^}]*font-weight:\s*600;[^}]*line-height:\s*1\.25;[^}]*letter-spacing:\s*-0\.25px;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-card h2 > \.metric-detail-max-inline\s*\{[^}]*font-size:\s*8px;[^}]*font-weight:\s*680;/,
   );
   assert.match(
     detailCss,
