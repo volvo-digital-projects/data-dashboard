@@ -960,6 +960,33 @@ export default function CompetitiveAnalysis({
   const selectedStaffResponseShare = staffNationalResponses
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
+  const selectedStaffTenurePeers = selectedStaffEmployee
+    ? staffCurrentSalesPopulation.flatMap(({ employee }) => {
+        if (employee.tenureMonths !== selectedStaffEmployee.tenureMonths) {
+          return [];
+        }
+        const totals = staffYears.reduce(
+          (summary, year) => {
+            summary.responses += employee.years[year]?.responses ?? 0;
+            summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
+            return summary;
+          },
+          { responses: 0, scoreSum: 0 },
+        );
+        return totals.responses > 0 ? [totals] : [];
+      })
+    : [];
+  const selectedStaffTenurePeerResponses = selectedStaffTenurePeers.reduce(
+    (sum, peer) => sum + peer.responses,
+    0,
+  );
+  const selectedStaffTenurePeerScoreSum = selectedStaffTenurePeers.reduce(
+    (sum, peer) => sum + peer.scoreSum,
+    0,
+  );
+  const selectedStaffTenurePeerAverage = selectedStaffTenurePeerResponses
+    ? selectedStaffTenurePeerScoreSum / selectedStaffTenurePeerResponses
+    : null;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1638,6 +1665,28 @@ export default function CompetitiveAnalysis({
                 )}
               </div>
             </article>
+            <article
+              className="analysis-staff-metric-card analysis-staff-tenure-peer-card"
+              aria-label={`동일연차 상담 만족도 ${
+                selectedStaffTenurePeerAverage === null
+                  ? "표본 없음"
+                  : `${selectedStaffTenurePeerAverage.toFixed(1)}점`
+              }, ${selectedStaffTenurePeers.length}명`}
+            >
+              <span>동일연차 정보</span>
+              <div className="analysis-staff-metric-value">
+                <strong>
+                  {selectedStaffTenurePeerAverage === null
+                    ? "―"
+                    : selectedStaffTenurePeerAverage.toFixed(1)}
+                  {selectedStaffTenurePeerAverage === null ? null : <small>점</small>}
+                </strong>
+                <small className="analysis-staff-metric-comparison">
+                  <i aria-hidden="true">/</i>
+                  {selectedStaffTenurePeers.length}명
+                </small>
+              </div>
+            </article>
             <article className="analysis-staff-metric-card">
               <span>상담 만족도</span>
               <div className="analysis-staff-metric-value">
@@ -1684,6 +1733,7 @@ export default function CompetitiveAnalysis({
             </article>
           </div>
 
+          <div className="analysis-staff-detail-body">
           <div className="analysis-staff-comparison-layout">
             <div
               className="analysis-staff-history"
@@ -1989,6 +2039,7 @@ export default function CompetitiveAnalysis({
             </div>
           </section>
 
+            </div>
             </div>
           </div>
 
