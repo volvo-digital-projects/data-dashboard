@@ -258,6 +258,7 @@ function MetricDetailChart({
               quarter.end === 52 ? chart.width - chart.right : endX + weekStep / 2;
             const centerX = (boundaryStartX + boundaryEndX) / 2;
             const quarterLineY = chart.height - 15;
+            const quarterBoundaryBottom = chart.height - 1;
             return (
               <g className="metric-detail-quarter-band" key={quarter.label} aria-hidden="true">
                 <line
@@ -272,14 +273,14 @@ function MetricDetailChart({
                   x1={boundaryStartX}
                   x2={boundaryStartX}
                   y1={chart.height - chart.bottom}
-                  y2={quarterLineY}
+                  y2={quarterBoundaryBottom}
                 />
                 <line
                   className="metric-detail-quarter-boundary"
                   x1={boundaryEndX}
                   x2={boundaryEndX}
                   y1={chart.height - chart.bottom}
-                  y2={quarterLineY}
+                  y2={quarterBoundaryBottom}
                 />
                 <text
                   className="metric-detail-quarter-label"
