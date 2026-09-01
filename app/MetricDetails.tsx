@@ -152,7 +152,9 @@ function MetricDetailChart({
             <span>{component.label}</span>
             <i aria-hidden="true">/</i>
             <small className="metric-detail-max-inline">
-              {displayNumber(component.max)}점 만점
+              {component.key === "sent"
+                ? `${displayNumber(component.max)}건 기준`
+                : `${displayNumber(component.max)}점 만점`}
             </small>
             {sourceLabel ? (
               <>
@@ -388,7 +390,7 @@ export default function MetricDetails({
 
       <nav className="metric-detail-tabs" aria-label="세부지표 종류">
         <Link className={metric === "voc" ? "active" : ""} href={`/dashboard/${cdsid}/details/voc`}>
-          VOC <small>4개 지표</small>
+          VOC <small>5개 지표</small>
         </Link>
         <Link className={metric === "cx" ? "active" : ""} href={`/dashboard/${cdsid}/details/cx`}>
           CX Index <small>5개 지표</small>

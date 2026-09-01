@@ -1162,11 +1162,14 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, /VOC 첫인사/);
   assert.match(vocBody, /VOC 태블릿/);
   assert.match(vocBody, /VOC 해피콜/);
-  assert.equal((vocBody.match(/VCK 평가/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/metric-detail-evaluation-icon/g) ?? []).length, 4);
+  assert.match(vocBody, /VOC 발송건수/);
+  assert.match(vocBody, /VOC <small>5개 지표<\/small>/);
+  assert.match(vocBody, /건 기준/);
+  assert.equal((vocBody.match(/VCK 평가/g) ?? []).length, 5);
+  assert.equal((vocBody.match(/metric-detail-evaluation-icon/g) ?? []).length, 5);
   assert.equal((vocBody.match(/100점 만점/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/class="metric-detail-week-label"/g) ?? []).length, 208);
+  assert.equal((vocBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 5);
+  assert.equal((vocBody.match(/class="metric-detail-week-label"/g) ?? []).length, 260);
   assert.match(vocBody, />W1<\/text>/);
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
@@ -1175,13 +1178,13 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
   assert.doesNotMatch(vocBody, /최신값/);
   assert.doesNotMatch(vocBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 16);
-  assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 128);
+  assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
+  assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
+  assert.equal((vocBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
+  assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 5);
+  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 160);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
-  assert.equal((vocBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 5);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(
     vocBody,
@@ -1192,7 +1195,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
     /href="\/dashboard\/6KR6834"[\s\S]*?viewBox="0 0 24 24"[\s\S]*?d="M4 19V9m5 10V5m5 14v-7m5 7V3"[\s\S]*?대시보드/,
   );
   assert.doesNotMatch(vocBody, /현황으로/);
-  assert.match(vocBody, /class="identity-profile-role">업데이트<\/span><strong>260901<\/strong>/);
+  assert.match(vocBody, /class="identity-profile-role">업데이트<\/span><strong>\d{6}<\/strong>/);
   assert.doesNotMatch(vocBody, /<dt>기준<\/dt>/);
   assert.equal((vocBody.match(/class="identity-analysis-entry"/g) ?? []).length, 3);
   assert.equal((vocBody.match(/class="metric-detail-context-icon"/g) ?? []).length, 4);
@@ -1240,6 +1243,14 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-card\s*\{[^}]*grid-template-rows:\s*auto minmax\(0, 1fr\);[^}]*padding:\s*5px 8px 4px;[^}]*overflow:\s*hidden;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-list--voc\s*\{[^}]*grid-template-rows:\s*repeat\(5, minmax\(0, 1fr\)\);/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-list--cx\s*\{[^}]*grid-template-rows:\s*repeat\(5, minmax\(0, 1fr\)\);/,
   );
   assert.match(
     detailCss,

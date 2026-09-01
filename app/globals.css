@@ -14586,7 +14586,7 @@ button.header-status-item {
 }
 
 .metric-detail-list--voc {
-  grid-template-rows: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 
 .metric-detail-list--cx {

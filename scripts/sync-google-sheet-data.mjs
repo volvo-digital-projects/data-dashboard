@@ -9,6 +9,7 @@ const sheets = {
   vocGreeting: "02☆VOC첫인사(20%)",
   vocTablet: "03☆VOC태블릿(10%)",
   vocHappyCall: "04☆VOC해피콜(10%)",
+  vocSent: "☆VOC 발송건수",
   delivery: "③-1 신차출고 만족도(결과)",
   testDrive: "③-2시승 만족도(결과)",
   emergency: "③-3긴급경보 처리여부(결과)",
@@ -198,6 +199,13 @@ const vocOverall = weeklyResult(loaded.vocOverall);
 const vocGreeting = weeklyResult(loaded.vocGreeting);
 const vocTablet = weeklyResult(loaded.vocTablet);
 const vocHappyCall = weeklyResult(loaded.vocHappyCall);
+const vocSent = weeklyResult(loaded.vocSent);
+const vocSentMax = Math.max(
+  1,
+  ...Object.values(vocSent.byCdsid)
+    .flat()
+    .filter((value) => typeof value === "number"),
+);
 const delivery = weeklyResult(loaded.delivery);
 const testDrive = weeklyResult(loaded.testDrive);
 const emergency = weeklyResult(loaded.emergency);
@@ -319,6 +327,15 @@ const detailsOutput = {
         unit: "점",
         cadence: "weekly",
         ...vocHappyCall,
+      },
+      {
+        key: "sent",
+        label: "VOC 발송건수",
+        weight: "",
+        max: vocSentMax,
+        unit: "건",
+        cadence: "weekly",
+        ...vocSent,
       },
     ],
   },
