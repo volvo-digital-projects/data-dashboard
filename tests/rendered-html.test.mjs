@@ -1178,6 +1178,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 208);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(

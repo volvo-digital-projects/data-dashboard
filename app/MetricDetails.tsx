@@ -111,7 +111,7 @@ function MetricDetailChart({
   const showroomValues = Array.from({ length: 52 }, (_, index) => {
     const value = rawShowroomValues[index];
     if (typeof value === "number") return value;
-    return metric === "voc" && index < Math.min(52, component.latestWeek) ? 0 : null;
+    return metric === "voc" ? 0 : null;
   });
   const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
   const latestShowroom = latestIndex >= 0 ? showroomValues[latestIndex] : null;
