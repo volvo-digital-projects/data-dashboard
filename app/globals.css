@@ -14711,6 +14711,25 @@ button.header-status-item {
   min-width: 0;
   height: 100%;
   display: block;
+  clip-path: inset(0 100% 0 0);
+  animation: metric-detail-chart-wipe 1.18s cubic-bezier(0.22, 0.72, 0.22, 1) both;
+  will-change: clip-path;
+}
+
+@keyframes metric-detail-chart-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metric-detail-chart {
+    clip-path: none;
+    animation: none;
+  }
 }
 
 .metric-detail-grid-line {

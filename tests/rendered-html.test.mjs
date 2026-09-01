@@ -1239,6 +1239,18 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
+    /\.metric-detail-chart\s*\{[^}]*clip-path:\s*inset\(0 100% 0 0\);[^}]*animation:\s*metric-detail-chart-wipe 1\.18s cubic-bezier\(0\.22, 0\.72, 0\.22, 1\) both;/,
+  );
+  assert.match(
+    detailCss,
+    /@keyframes metric-detail-chart-wipe\s*\{[\s\S]*?clip-path:\s*inset\(0 0 0 0\);/,
+  );
+  assert.match(
+    detailCss,
+    /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.metric-detail-chart\s*\{[^}]*animation:\s*none;/,
+  );
+  assert.match(
+    detailCss,
     /\.metric-detail-chart-scroll\s*\{[^}]*padding:\s*4px 10px 6px;[^}]*overflow:\s*hidden;/,
   );
   assert.match(
