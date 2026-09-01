@@ -4667,8 +4667,7 @@ input:focus-visible {
   gap: 12px;
 }
 
-.analysis-staff-roster,
-.analysis-staff-detail-body {
+.analysis-staff-roster {
   min-width: 0;
   border: 1px solid #dbe6eb;
   border-radius: 7px;
@@ -4865,12 +4864,13 @@ input:focus-visible {
 }
 
 .analysis-staff-detail-body {
+  min-width: 0;
   grid-column: 2;
   grid-row: 2;
   display: grid;
   gap: 10px;
-  padding: 10px;
-  background: #fff;
+  padding: 0;
+  background: transparent;
 }
 
 .analysis-staff-summary {
@@ -5132,6 +5132,7 @@ input:focus-visible {
 
 .analysis-staff-comparison-layout {
   --analysis-staff-comparison-legend-height: 36px;
+  min-height: 312px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
@@ -5512,8 +5513,8 @@ input:focus-visible {
 }
 
 .analysis-staff-insights {
-  height: 156px;
-  min-height: 156px;
+  height: 166px;
+  min-height: 166px;
   padding: 10px;
   overflow: hidden;
 }
@@ -6214,7 +6215,7 @@ input:focus-visible {
 
   .analysis-staff-insights {
     height: auto;
-    min-height: 156px;
+    min-height: 166px;
     overflow: visible;
   }
 

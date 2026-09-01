@@ -85,6 +85,29 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
   );
 });
 
+test("expands the four staff analysis panels after removing their outer frame", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(
+    css,
+    /\.analysis-staff-detail-body\s*\{[^}]*min-width:\s*0;[^}]*display:\s*grid;[^}]*gap:\s*10px;[^}]*padding:\s*0;[^}]*background:\s*transparent;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.analysis-staff-roster,\s*\.analysis-staff-detail-body\s*\{[^}]*border:/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-comparison-layout\s*\{[^}]*min-height:\s*312px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-insights\s*\{[^}]*height:\s*166px;[^}]*min-height:\s*166px;/,
+  );
+  assert.match(css, /\.analysis-staff-history-chart\s*\{[^}]*border:\s*1px solid #dbe7ec;/);
+  assert.match(css, /\.analysis-staff-benchmarks\s*\{[^}]*border:\s*1px solid #cddfe7;/);
+  assert.match(css, /\.analysis-staff-insights article\s*\{[^}]*border:\s*1px solid #e2e9ec;/);
+});
+
 async function render(
   pathname = "/",
   { authenticated = true, cookie = null } = {},
