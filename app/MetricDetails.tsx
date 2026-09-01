@@ -36,12 +36,12 @@ type DetailData = {
 
 const detailData = weeklyDetailsJson as DetailData;
 const chart = {
-  width: 960,
-  height: 174,
-  left: 38,
-  right: 12,
-  top: 20,
-  bottom: 32,
+  width: 1440,
+  height: 132,
+  left: 40,
+  right: 16,
+  top: 14,
+  bottom: 26,
 };
 
 const displayNumber = (value: number | null | undefined) =>
@@ -128,7 +128,6 @@ function MetricDetailChart({
     <article className="metric-detail-card">
       <header>
         <div>
-          <span>{component.cadence === "quarterly" ? "QUARTERLY" : "WEEKLY"}</span>
           <h2>
             <span>{component.label}</span>
             {metric === "cx" ? (

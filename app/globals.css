@@ -14653,13 +14653,13 @@ button.header-status-item {
 
 .metric-detail-list {
   display: grid;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 7px;
+  margin-top: 8px;
 }
 
 .metric-detail-card {
   min-width: 0;
-  padding: 14px 16px 12px;
+  padding: 8px 10px 6px;
   border: 1px solid var(--line);
   border-radius: var(--es90-surface-radius);
   background: #ffffff;
@@ -14670,17 +14670,9 @@ button.header-status-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding-bottom: 10px;
+  gap: 12px;
+  padding-bottom: 6px;
   border-bottom: 1px solid #e8edef;
-}
-
-.metric-detail-card > header > div:first-child > span {
-  color: #4c839b;
-  font-family: var(--font-latin);
-  font-size: 8px;
-  font-weight: 760;
-  letter-spacing: 0.13em;
 }
 
 .metric-detail-card h2 {
@@ -14688,7 +14680,7 @@ button.header-status-item {
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
-  margin: 2px 0 1px;
+  margin: 0 0 1px;
   color: var(--navy);
   font-size: 15px;
   font-weight: 760;
@@ -14756,7 +14748,7 @@ button.header-status-item {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding: 8px 4px 2px;
+  padding: 4px 4px 0;
   color: #6f8089;
   font-size: 8px;
 }
@@ -14780,9 +14772,9 @@ button.header-status-item {
 }
 
 .metric-detail-chart {
-  width: 100%;
-  min-width: 960px;
-  height: 174px;
+  width: max(100%, 1440px);
+  min-width: 1440px;
+  height: 132px;
   display: block;
 }
 
@@ -14883,7 +14875,7 @@ button.header-status-item {
   }
 
   .metric-detail-card {
-    padding-inline: 12px;
+    padding-inline: 8px;
   }
 }
 

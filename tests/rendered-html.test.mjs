@@ -1150,6 +1150,7 @@ test("server-renders the selected CDSID dashboard", async () => {
 });
 
 test("renders the simplified VOC and CX weekly detail pages", async () => {
+  const detailCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   const vocResponse = await render("/dashboard/6KR6834/details/voc");
   assert.equal(vocResponse.status, 200);
   const vocHtml = (await vocResponse.text()).replaceAll("<!-- -->", "");
@@ -1172,6 +1173,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(vocBody, /W01~W52 원본값 보기/);
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
   assert.doesNotMatch(vocBody, /최신값/);
+  assert.doesNotMatch(vocBody, />WEEKLY<|>QUARTERLY</);
+  assert.equal((vocBody.match(/viewBox="0 0 1440 132"/g) ?? []).length, 4);
 
   const cxResponse = await render("/dashboard/6KR6834/details/cx");
   assert.equal(cxResponse.status, 200);
@@ -1191,6 +1194,16 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(cxBody, /W01~W52 원본값 보기/);
   assert.doesNotMatch(cxBody, /class="metric-detail-current"/);
   assert.doesNotMatch(cxBody, /최신값/);
+  assert.doesNotMatch(cxBody, />WEEKLY<|>QUARTERLY</);
+  assert.equal((cxBody.match(/viewBox="0 0 1440 132"/g) ?? []).length, 5);
+  assert.match(
+    detailCss,
+    /\.metric-detail-card\s*\{[^}]*padding:\s*8px 10px 6px;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-chart\s*\{[^}]*width:\s*max\(100%, 1440px\);[^}]*min-width:\s*1440px;[^}]*height:\s*132px;/,
+  );
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
