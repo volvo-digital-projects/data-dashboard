@@ -37,12 +37,19 @@ type DetailData = {
 const detailData = weeklyDetailsJson as DetailData;
 const chart = {
   width: 1440,
-  height: 88,
+  height: 104,
   left: 52,
   right: 28,
   top: 12,
-  bottom: 22,
+  bottom: 38,
 };
+
+const quarterRanges = [
+  { label: "Q1", start: 1, end: 13, range: "W01–W13" },
+  { label: "Q2", start: 14, end: 26, range: "W14–W26" },
+  { label: "Q3", start: 27, end: 39, range: "W27–W39" },
+  { label: "Q4", start: 40, end: 52, range: "W40–W52" },
+];
 
 const displayNumber = (value: number | null | undefined) =>
   typeof value === "number"
@@ -233,8 +240,29 @@ function MetricDetailChart({
                   y1={chart.height - chart.bottom}
                   y2={chart.height - chart.bottom + 4}
                 />
-                <text className="metric-detail-week-label" x={x} y={chart.height - 5}>
+                <text className="metric-detail-week-label" x={x} y={chart.height - 21}>
                   W{week}
+                </text>
+              </g>
+            );
+          })}
+          {quarterRanges.map((quarter) => {
+            const startX = point(quarter.start - 1, 0, component.max).x;
+            const endX = point(quarter.end - 1, 0, component.max).x;
+            const centerX = (startX + endX) / 2;
+            return (
+              <g className="metric-detail-quarter-band" key={quarter.label} aria-hidden="true">
+                <line x1={startX} x2={endX} y1={chart.height - 15} y2={chart.height - 15} />
+                <text
+                  className="metric-detail-quarter-label"
+                  x={centerX}
+                  y={chart.height - 3}
+                  textAnchor="middle"
+                >
+                  <tspan>{quarter.label}</tspan>
+                  <tspan className="metric-detail-quarter-range" dx="5">
+                    {quarter.range}
+                  </tspan>
                 </text>
               </g>
             );

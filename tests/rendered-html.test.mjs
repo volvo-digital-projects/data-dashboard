@@ -1175,8 +1175,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
   assert.doesNotMatch(vocBody, /최신값/);
   assert.doesNotMatch(vocBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((vocBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
+  assert.equal((vocBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 16);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 128);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
@@ -1230,8 +1231,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(cxBody, /class="metric-detail-current"/);
   assert.doesNotMatch(cxBody, /최신값/);
   assert.doesNotMatch(cxBody, />WEEKLY<|>QUARTERLY</);
-  assert.equal((cxBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
