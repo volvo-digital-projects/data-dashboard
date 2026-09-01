@@ -266,23 +266,36 @@ export default function MetricDetails({
 
   return (
     <main className="metric-detail-page">
-      <header className="metric-detail-page-header">
+      <div className="metric-detail-sticky-shell">
+      <header className="dashboard-identity-header metric-detail-page-header">
         <div className="metric-detail-header-primary">
           <small>DATA DASHBOARD DETAIL</small>
           <h1>{showroom?.showroom ?? cdsid} 세부지표</h1>
           <div className="metric-detail-header-subline">
             <Link href={`/dashboard/${cdsid}`}>
-              <span aria-hidden="true">←</span>
-              현황으로
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 19V9m5 10V5m5 14v-7m5 7V3" />
+              </svg>
+              대시보드
             </Link>
           </div>
         </div>
-        <div className="metric-detail-header-context" aria-label="현재 세부지표 정보">
-          <div><span>지표</span><strong>{group.label}</strong></div>
-          <div><span>전시장</span><strong>{showroomName}</strong></div>
-          <div><span>주차</span><strong>W1–W52</strong></div>
-          <time dateTime={detailData.meta.syncedAt}>
-            <span>기준</span><strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
+        <div className="analysis-context metric-detail-header-context" aria-label="현재 세부지표 정보">
+          <div className="analysis-context-item">
+            <span className="identity-icon identity-icon--dealer" aria-hidden="true" />
+            <small>지표</small><strong>{group.label}</strong>
+          </div>
+          <div className="analysis-context-item">
+            <span className="identity-icon identity-icon--region" aria-hidden="true" />
+            <small>전시장</small><strong>{showroomName}</strong>
+          </div>
+          <div className="analysis-context-item">
+            <span className="identity-icon identity-icon--size" aria-hidden="true" />
+            <small>주차</small><strong>W1–W52</strong>
+          </div>
+          <time className="analysis-context-item" dateTime={detailData.meta.syncedAt}>
+            <span className="identity-profile-icon" aria-hidden="true" />
+            <small>업데이트</small><strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
           </time>
         </div>
       </header>
@@ -295,6 +308,7 @@ export default function MetricDetails({
           CX Index <small>5개 지표</small>
         </Link>
       </nav>
+      </div>
 
       <section className="metric-detail-list" aria-label={`${group.label} 주간 세부지표`}>
         {group.components.map((component) => (

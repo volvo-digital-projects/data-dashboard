@@ -1175,6 +1175,22 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(vocBody, /최신값/);
   assert.doesNotMatch(vocBody, />WEEKLY<|>QUARTERLY</);
   assert.equal((vocBody.match(/viewBox="0 0 1440 132"/g) ?? []).length, 4);
+  assert.match(
+    vocBody,
+    /class="metric-detail-sticky-shell">[\s\S]*?class="dashboard-identity-header metric-detail-page-header"[\s\S]*?class="metric-detail-tabs"/,
+  );
+  assert.match(
+    vocBody,
+    /href="\/dashboard\/6KR6834"[\s\S]*?viewBox="0 0 24 24"[\s\S]*?d="M4 19V9m5 10V5m5 14v-7m5 7V3"[\s\S]*?대시보드/,
+  );
+  assert.doesNotMatch(vocBody, /현황으로/);
+  assert.match(vocBody, /<small>업데이트<\/small><strong>260901<\/strong>/);
+  assert.doesNotMatch(vocBody, /<small>기준<\/small>/);
+  assert.equal((vocBody.match(/class="analysis-context-item"/g) ?? []).length, 4);
+  assert.match(
+    vocBody,
+    /identity-icon--dealer[\s\S]*?identity-icon--region[\s\S]*?identity-icon--size[\s\S]*?identity-profile-icon/,
+  );
 
   const cxResponse = await render("/dashboard/6KR6834/details/cx");
   assert.equal(cxResponse.status, 200);
@@ -1203,6 +1219,14 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-chart\s*\{[^}]*width:\s*max\(100%, 1440px\);[^}]*min-width:\s*1440px;[^}]*height:\s*132px;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-sticky-shell\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;[^}]*z-index:\s*70;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-page-header > \.metric-detail-header-context\s*\{[^}]*height:\s*92px;[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows:\s*repeat\(2, 45px\);/,
   );
 });
 
