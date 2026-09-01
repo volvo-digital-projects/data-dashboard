@@ -344,7 +344,7 @@ export default function LoginHome({
 
         <footer>
           <span>Copyright (C) Volvo Car Korea. All rights reserved.</span>
-          <span>Since 260831</span>
+          <span>Since 260901</span>
         </footer>
       </section>
       <ReleaseUpdateNotice />
