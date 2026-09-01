@@ -4953,6 +4953,15 @@ input:focus-visible {
   font-weight: 700;
 }
 
+.analysis-staff-summary strong.name .analysis-staff-job-title {
+  margin-left: 0;
+  color: #718694;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
 .analysis-staff-summary article.analysis-staff-profile-card {
   background: #f7fafb;
 }

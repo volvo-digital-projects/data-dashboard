@@ -47,6 +47,7 @@ type StaffKeyword = { label: string; mentions: number };
 type StaffEmployee = {
   name: string;
   role: "영업직원" | "영업팀장";
+  jobTitle: string;
   hireDate: string;
   tenureMonths: number;
   tenureBucket: string;
@@ -1670,6 +1671,11 @@ export default function CompetitiveAnalysis({
                 </button>
                 <strong className="name">
                   {selectedStaffEmployee?.name ?? "―"}
+                  {selectedStaffEmployee?.jobTitle ? (
+                    <small className="analysis-staff-job-title">
+                      {selectedStaffEmployee.jobTitle}
+                    </small>
+                  ) : null}
                 </strong>
               </div>
             </article>

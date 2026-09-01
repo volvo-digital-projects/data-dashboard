@@ -58,6 +58,33 @@ test("keeps the 2021-2026 certification results complete and cumulative", async 
   );
 });
 
+test("shows Sales-DMS job titles beside the selected staff name", async () => {
+  const [staffAnalysis, analysisSource, css] = await Promise.all([
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+  const employees = Object.values(staffAnalysis.showrooms).flatMap(
+    (showroom) => showroom.employees,
+  );
+  const gangnamDaechi = staffAnalysis.showrooms["6KR6834"].employees;
+  assert.equal(employees.length, 366);
+  assert.ok(employees.every((employee) => employee.jobTitle));
+  assert.equal(gangnamDaechi.find((employee) => employee.name === "문정환").jobTitle, "팀장");
+  assert.match(
+    analysisSource,
+    /type StaffEmployee = \{[\s\S]*?jobTitle: string;/,
+  );
+  assert.match(
+    analysisSource,
+    /className="analysis-staff-job-title">[\s\S]*?selectedStaffEmployee\.jobTitle/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-summary strong\.name \.analysis-staff-job-title\s*\{[\s\S]*?font-size:\s*9px;[\s\S]*?font-weight:\s*600;/,
+  );
+});
+
 async function render(
   pathname = "/",
   { authenticated = true, cookie = null } = {},

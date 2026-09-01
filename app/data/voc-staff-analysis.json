@@ -6,7 +6,10 @@
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "현재 재직자 · 영업직원/영업팀장",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
-    "historyRange": "2023-2026 YTD"
+    "historyRange": "2023-2026 YTD",
+    "jobTitleSourceWorkbook": "영엽직원_CDSID_260825.xlsx",
+    "jobTitleSourceSheet": "직원등록_2026-07-21",
+    "jobTitleSourceDate": "2026-07-21"
   },
   "nationalYears": {
     "2023": {
@@ -103,6 +106,7 @@
         {
           "name": "김태형",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2022-09-01",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -158,6 +162,7 @@
         {
           "name": "전훈기",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2022-03-15",
           "tenureMonths": 53,
           "tenureBucket": "3-5y",
@@ -204,6 +209,7 @@
         {
           "name": "하지혁",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2023-06-26",
           "tenureMonths": 38,
           "tenureBucket": "3-5y",
@@ -259,6 +265,7 @@
         {
           "name": "함진호",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2024-05-14",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -293,6 +300,7 @@
         {
           "name": "김내환",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2016-09-05",
           "tenureMonths": 119,
           "tenureBucket": "5-10y",
@@ -343,6 +351,7 @@
         {
           "name": "신수경",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2018-05-02",
           "tenureMonths": 99,
           "tenureBucket": "5-10y",
@@ -437,6 +446,7 @@
         {
           "name": "김광현",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2024-05-14",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -483,6 +493,7 @@
         {
           "name": "김선민",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2021-03-09",
           "tenureMonths": 65,
           "tenureBucket": "5-10y",
@@ -534,6 +545,7 @@
         {
           "name": "김성준",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2021-12-13",
           "tenureMonths": 56,
           "tenureBucket": "3-5y",
@@ -560,6 +572,7 @@
         {
           "name": "김종선",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2024-05-14",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -590,6 +603,7 @@
         {
           "name": "김종욱",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2020-11-01",
           "tenureMonths": 69,
           "tenureBucket": "5-10y",
@@ -632,6 +646,7 @@
         {
           "name": "송호준",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2023-04-03",
           "tenureMonths": 40,
           "tenureBucket": "3-5y",
@@ -678,6 +693,7 @@
         {
           "name": "김태환",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-07-21",
           "tenureMonths": 73,
           "tenureBucket": "5-10y",
@@ -724,6 +740,7 @@
         {
           "name": "박형관",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-11-01",
           "tenureMonths": 69,
           "tenureBucket": "5-10y",
@@ -779,6 +796,7 @@
         {
           "name": "송명석",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-11-01",
           "tenureMonths": 69,
           "tenureBucket": "5-10y",
@@ -854,6 +872,7 @@
         {
           "name": "강희민",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2026-03-23",
           "tenureMonths": 5,
           "tenureBucket": "under-1y",
@@ -876,6 +895,7 @@
         {
           "name": "김유수",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2026-02-02",
           "tenureMonths": 6,
           "tenureBucket": "under-1y",
@@ -902,6 +922,7 @@
         {
           "name": "박재원",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2026-03-03",
           "tenureMonths": 5,
           "tenureBucket": "under-1y",
@@ -928,6 +949,7 @@
         {
           "name": "양진호",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2015-07-27",
           "tenureMonths": 133,
           "tenureBucket": "over-10y",
@@ -974,6 +996,7 @@
         {
           "name": "최준영",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2022-11-18",
           "tenureMonths": 45,
           "tenureBucket": "3-5y",
@@ -1025,6 +1048,7 @@
         {
           "name": "홍대현",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2022-09-15",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -1080,6 +1104,7 @@
         {
           "name": "송민경",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-09-09",
           "tenureMonths": 83,
           "tenureBucket": "5-10y",
@@ -1127,6 +1152,7 @@
         {
           "name": "정기훈",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2018-11-05",
           "tenureMonths": 93,
           "tenureBucket": "5-10y",
@@ -1211,6 +1237,7 @@
         {
           "name": "김광수",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2015-07-27",
           "tenureMonths": 133,
           "tenureBucket": "over-10y",
@@ -1266,6 +1293,7 @@
         {
           "name": "김형천",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2017-06-19",
           "tenureMonths": 110,
           "tenureBucket": "5-10y",
@@ -1321,6 +1349,7 @@
         {
           "name": "박치영",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2022-12-12",
           "tenureMonths": 44,
           "tenureBucket": "3-5y",
@@ -1371,6 +1400,7 @@
         {
           "name": "정병수",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2025-05-20",
           "tenureMonths": 15,
           "tenureBucket": "1-3y",
@@ -1397,6 +1427,7 @@
         {
           "name": "최연승",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2016-03-14",
           "tenureMonths": 125,
           "tenureBucket": "over-10y",
@@ -1452,6 +1483,7 @@
         {
           "name": "최진원",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2020-07-21",
           "tenureMonths": 73,
           "tenureBucket": "5-10y",
@@ -1502,6 +1534,7 @@
         {
           "name": "최찬",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2023-01-16",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -1552,6 +1585,7 @@
         {
           "name": "황선형",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2025-01-15",
           "tenureMonths": 19,
           "tenureBucket": "1-3y",
@@ -1564,6 +1598,7 @@
         {
           "name": "이윤재",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2017-07-10",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -1615,6 +1650,7 @@
         {
           "name": "이종우",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-11-01",
           "tenureMonths": 69,
           "tenureBucket": "5-10y",
@@ -1670,6 +1706,7 @@
         {
           "name": "정지성",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2017-07-03",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -1759,6 +1796,7 @@
         {
           "name": "김동호",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2024-03-25",
           "tenureMonths": 29,
           "tenureBucket": "1-3y",
@@ -1810,6 +1848,7 @@
         {
           "name": "박상현",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2025-10-13",
           "tenureMonths": 10,
           "tenureBucket": "under-1y",
@@ -1836,6 +1875,7 @@
         {
           "name": "신승희",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2025-03-04",
           "tenureMonths": 17,
           "tenureBucket": "1-3y",
@@ -1866,6 +1906,7 @@
         {
           "name": "이재석",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2025-10-13",
           "tenureMonths": 10,
           "tenureBucket": "under-1y",
@@ -1901,6 +1942,7 @@
         {
           "name": "장민규",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2023-06-01",
           "tenureMonths": 38,
           "tenureBucket": "3-5y",
@@ -1951,6 +1993,7 @@
         {
           "name": "정나누리",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2026-07-07",
           "tenureMonths": 1,
           "tenureBucket": "under-3m",
@@ -1993,6 +2036,7 @@
         {
           "name": "천명현",
           "role": "영업직원",
+          "jobTitle": "매니저",
           "hireDate": "2020-09-07",
           "tenureMonths": 71,
           "tenureBucket": "5-10y",
@@ -2039,6 +2083,7 @@
         {
           "name": "김호연",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-10-16",
           "tenureMonths": 34,
           "tenureBucket": "1-3y",
@@ -2077,6 +2122,7 @@
         {
           "name": "박형진",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-06-03",
           "tenureMonths": 86,
           "tenureBucket": "5-10y",
@@ -2181,6 +2227,7 @@
         {
           "name": "강혜원",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2019-12-02",
           "tenureMonths": 80,
           "tenureBucket": "5-10y",
@@ -2236,6 +2283,7 @@
         {
           "name": "권하영",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-08-07",
           "tenureMonths": 36,
           "tenureBucket": "1-3y",
@@ -2282,6 +2330,7 @@
         {
           "name": "김남서",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-06-01",
           "tenureMonths": 2,
           "tenureBucket": "under-3m",
@@ -2294,6 +2343,7 @@
         {
           "name": "김찬양",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-04-28",
           "tenureMonths": 16,
           "tenureBucket": "1-3y",
@@ -2315,6 +2365,7 @@
         {
           "name": "박민성",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-10-01",
           "tenureMonths": 10,
           "tenureBucket": "under-1y",
@@ -2327,6 +2378,7 @@
         {
           "name": "서원빈",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-03-03",
           "tenureMonths": 5,
           "tenureBucket": "under-1y",
@@ -2344,6 +2396,7 @@
         {
           "name": "윤도준",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-06-01",
           "tenureMonths": 2,
           "tenureBucket": "under-3m",
@@ -2356,6 +2409,7 @@
         {
           "name": "이은섭",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-02-20",
           "tenureMonths": 42,
           "tenureBucket": "3-5y",
@@ -2402,6 +2456,7 @@
         {
           "name": "정지윤",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-01-26",
           "tenureMonths": 7,
           "tenureBucket": "under-1y",
@@ -2424,6 +2479,7 @@
         {
           "name": "신은광",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-04-03",
           "tenureMonths": 40,
           "tenureBucket": "3-5y",
@@ -2479,6 +2535,7 @@
         {
           "name": "윤원희",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2018-01-02",
           "tenureMonths": 103,
           "tenureBucket": "5-10y",
@@ -2529,6 +2586,7 @@
         {
           "name": "이상민",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2024-01-02",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -2575,6 +2633,7 @@
         {
           "name": "정승현",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2017-11-01",
           "tenureMonths": 105,
           "tenureBucket": "5-10y",
@@ -2709,6 +2768,7 @@
         {
           "name": "김남호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-08-01",
           "tenureMonths": 12,
           "tenureBucket": "under-1y",
@@ -2721,6 +2781,7 @@
         {
           "name": "김도현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-03-18",
           "tenureMonths": 29,
           "tenureBucket": "1-3y",
@@ -2759,6 +2820,7 @@
         {
           "name": "김성일",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2018-07-02",
           "tenureMonths": 97,
           "tenureBucket": "5-10y",
@@ -2809,6 +2871,7 @@
         {
           "name": "은성욱",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-04-15",
           "tenureMonths": 28,
           "tenureBucket": "1-3y",
@@ -2839,6 +2902,7 @@
         {
           "name": "정충화",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-02-01",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -2869,6 +2933,7 @@
         {
           "name": "김도윤",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2021-08-17",
           "tenureMonths": 60,
           "tenureBucket": "3-5y",
@@ -2924,6 +2989,7 @@
         {
           "name": "윤지환",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2024-01-02",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -2966,6 +3032,7 @@
         {
           "name": "이용환",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2023-10-23",
           "tenureMonths": 34,
           "tenureBucket": "1-3y",
@@ -3061,6 +3128,7 @@
         {
           "name": "김민석",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-08-10",
           "tenureMonths": 0,
           "tenureBucket": "under-3m",
@@ -3073,6 +3141,7 @@
         {
           "name": "박진영",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-01-06",
           "tenureMonths": 19,
           "tenureBucket": "1-3y",
@@ -3107,6 +3176,7 @@
         {
           "name": "방영민",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-03-12",
           "tenureMonths": 17,
           "tenureBucket": "1-3y",
@@ -3133,6 +3203,7 @@
         {
           "name": "백승환",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2024-01-02",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -3176,6 +3247,7 @@
         {
           "name": "오영재",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2019-08-26",
           "tenureMonths": 84,
           "tenureBucket": "5-10y",
@@ -3227,6 +3299,7 @@
         {
           "name": "유병훈",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-01-11",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -3274,6 +3347,7 @@
         {
           "name": "이송봉",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-12-01",
           "tenureMonths": 44,
           "tenureBucket": "3-5y",
@@ -3324,6 +3398,7 @@
         {
           "name": "황명하",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-04-01",
           "tenureMonths": 4,
           "tenureBucket": "under-1y",
@@ -3336,6 +3411,7 @@
         {
           "name": "김현철",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-10-07",
           "tenureMonths": 82,
           "tenureBucket": "5-10y",
@@ -3386,6 +3462,7 @@
         {
           "name": "김현호",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-12-16",
           "tenureMonths": 80,
           "tenureBucket": "5-10y",
@@ -3436,6 +3513,7 @@
         {
           "name": "최인영",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2021-10-01",
           "tenureMonths": 58,
           "tenureBucket": "3-5y",
@@ -3546,6 +3624,7 @@
         {
           "name": "구현모",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2024-02-01",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -3592,6 +3671,7 @@
         {
           "name": "김명준",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-09-02",
           "tenureMonths": 23,
           "tenureBucket": "1-3y",
@@ -3604,6 +3684,7 @@
         {
           "name": "김선빈",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-01-06",
           "tenureMonths": 19,
           "tenureBucket": "1-3y",
@@ -3626,6 +3707,7 @@
         {
           "name": "박준수",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2023-12-13",
           "tenureMonths": 32,
           "tenureBucket": "1-3y",
@@ -3660,6 +3742,7 @@
         {
           "name": "서준혁",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-04-08",
           "tenureMonths": 28,
           "tenureBucket": "1-3y",
@@ -3702,6 +3785,7 @@
         {
           "name": "엄규식",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-02-19",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -3736,6 +3820,7 @@
         {
           "name": "윤유진",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-02-06",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -3782,6 +3867,7 @@
         {
           "name": "이완",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2025-11-03",
           "tenureMonths": 9,
           "tenureBucket": "under-1y",
@@ -3794,6 +3880,7 @@
         {
           "name": "임재환",
           "role": "영업직원",
+          "jobTitle": "팀장",
           "hireDate": "2024-01-15",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -3832,6 +3919,7 @@
         {
           "name": "황인성",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-01-12",
           "tenureMonths": 7,
           "tenureBucket": "under-1y",
@@ -3844,6 +3932,7 @@
         {
           "name": "김민웅",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-12-13",
           "tenureMonths": 32,
           "tenureBucket": "1-3y",
@@ -3886,6 +3975,7 @@
         {
           "name": "임승준",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-12-13",
           "tenureMonths": 32,
           "tenureBucket": "1-3y",
@@ -3924,6 +4014,7 @@
         {
           "name": "정요한",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-12-13",
           "tenureMonths": 32,
           "tenureBucket": "1-3y",
@@ -3996,6 +4087,7 @@
         {
           "name": "김은영",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2019-03-15",
           "tenureMonths": 89,
           "tenureBucket": "5-10y",
@@ -4046,6 +4138,7 @@
         {
           "name": "안정규",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2019-07-10",
           "tenureMonths": 85,
           "tenureBucket": "5-10y",
@@ -4101,6 +4194,7 @@
         {
           "name": "유현수",
           "role": "영업직원",
+          "jobTitle": "사원",
           "hireDate": "2025-07-01",
           "tenureMonths": 13,
           "tenureBucket": "1-3y",
@@ -4131,6 +4225,7 @@
         {
           "name": "윤형원",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2026-06-08",
           "tenureMonths": 2,
           "tenureBucket": "under-3m",
@@ -4143,6 +4238,7 @@
         {
           "name": "이종인",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-07-27",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -4193,6 +4289,7 @@
         {
           "name": "이진영",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2016-08-09",
           "tenureMonths": 120,
           "tenureBucket": "5-10y",
@@ -4243,6 +4340,7 @@
         {
           "name": "이충규",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2017-09-01",
           "tenureMonths": 107,
           "tenureBucket": "5-10y",
@@ -4298,6 +4396,7 @@
         {
           "name": "진주현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2018-11-26",
           "tenureMonths": 93,
           "tenureBucket": "5-10y",
@@ -4348,6 +4447,7 @@
         {
           "name": "김충현",
           "role": "영업팀장",
+          "jobTitle": "부장",
           "hireDate": "2016-01-18",
           "tenureMonths": 127,
           "tenureBucket": "over-10y",
@@ -4398,6 +4498,7 @@
         {
           "name": "박원희",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2017-12-15",
           "tenureMonths": 104,
           "tenureBucket": "5-10y",
@@ -4444,6 +4545,7 @@
         {
           "name": "이동규",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2016-10-24",
           "tenureMonths": 118,
           "tenureBucket": "5-10y",
@@ -4538,6 +4640,7 @@
         {
           "name": "강인식",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-07-01",
           "tenureMonths": 25,
           "tenureBucket": "1-3y",
@@ -4572,6 +4675,7 @@
         {
           "name": "김기민",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-12-01",
           "tenureMonths": 8,
           "tenureBucket": "under-1y",
@@ -4584,6 +4688,7 @@
         {
           "name": "원종필",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2024-04-01",
           "tenureMonths": 28,
           "tenureBucket": "1-3y",
@@ -4635,6 +4740,7 @@
         {
           "name": "이학정",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-04-01",
           "tenureMonths": 28,
           "tenureBucket": "1-3y",
@@ -4681,6 +4787,7 @@
         {
           "name": "최윤호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-05-02",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -4732,6 +4839,7 @@
         {
           "name": "이상원",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2024-05-02",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -4778,6 +4886,7 @@
         {
           "name": "황보성",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2024-04-08",
           "tenureMonths": 28,
           "tenureBucket": "1-3y",
@@ -4843,6 +4952,7 @@
         {
           "name": "강동석",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2016-11-10",
           "tenureMonths": 117,
           "tenureBucket": "5-10y",
@@ -4889,6 +4999,7 @@
         {
           "name": "김정기",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2024-05-02",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -4935,6 +5046,7 @@
         {
           "name": "송승호",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2021-04-01",
           "tenureMonths": 64,
           "tenureBucket": "5-10y",
@@ -4985,6 +5097,7 @@
         {
           "name": "이봉재",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2020-02-03",
           "tenureMonths": 78,
           "tenureBucket": "5-10y",
@@ -5040,6 +5153,7 @@
         {
           "name": "이상학",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-06-22",
           "tenureMonths": 50,
           "tenureBucket": "3-5y",
@@ -5091,6 +5205,7 @@
         {
           "name": "이수현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2017-01-17",
           "tenureMonths": 115,
           "tenureBucket": "5-10y",
@@ -5146,6 +5261,7 @@
         {
           "name": "장혁",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2016-04-25",
           "tenureMonths": 124,
           "tenureBucket": "over-10y",
@@ -5192,6 +5308,7 @@
         {
           "name": "정호영",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2022-06-22",
           "tenureMonths": 50,
           "tenureBucket": "3-5y",
@@ -5238,6 +5355,7 @@
         {
           "name": "조우진",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-07-03",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -5293,6 +5411,7 @@
         {
           "name": "최재형",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2016-02-15",
           "tenureMonths": 126,
           "tenureBucket": "over-10y",
@@ -5348,6 +5467,7 @@
         {
           "name": "최재훈",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-10-16",
           "tenureMonths": 34,
           "tenureBucket": "1-3y",
@@ -5398,6 +5518,7 @@
         {
           "name": "한재필",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-02-17",
           "tenureMonths": 18,
           "tenureBucket": "1-3y",
@@ -5440,6 +5561,7 @@
         {
           "name": "김정훈",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-04-22",
           "tenureMonths": 88,
           "tenureBucket": "5-10y",
@@ -5486,6 +5608,7 @@
         {
           "name": "신영선",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-07-17",
           "tenureMonths": 37,
           "tenureBucket": "3-5y",
@@ -5536,6 +5659,7 @@
         {
           "name": "함봉수",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2015-07-20",
           "tenureMonths": 133,
           "tenureBucket": "over-10y",
@@ -5625,6 +5749,7 @@
         {
           "name": "김대준",
           "role": "영업직원",
+          "jobTitle": "부장",
           "hireDate": "2013-02-01",
           "tenureMonths": 162,
           "tenureBucket": "over-10y",
@@ -5688,6 +5813,7 @@
         {
           "name": "김성경",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2016-11-23",
           "tenureMonths": 117,
           "tenureBucket": "5-10y",
@@ -5738,6 +5864,7 @@
         {
           "name": "박영환",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-12-12",
           "tenureMonths": 44,
           "tenureBucket": "3-5y",
@@ -5788,6 +5915,7 @@
         {
           "name": "박준수",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-01-26",
           "tenureMonths": 7,
           "tenureBucket": "under-1y",
@@ -5810,6 +5938,7 @@
         {
           "name": "송용주",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2025-04-28",
           "tenureMonths": 16,
           "tenureBucket": "1-3y",
@@ -5827,6 +5956,7 @@
         {
           "name": "이민하",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2018-06-01",
           "tenureMonths": 98,
           "tenureBucket": "5-10y",
@@ -5877,6 +6007,7 @@
         {
           "name": "이진용",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-05-02",
           "tenureMonths": 51,
           "tenureBucket": "3-5y",
@@ -5923,6 +6054,7 @@
         {
           "name": "정지만",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2026-07-01",
           "tenureMonths": 1,
           "tenureBucket": "under-3m",
@@ -5935,6 +6067,7 @@
         {
           "name": "정한영",
           "role": "영업직원",
+          "jobTitle": "부장",
           "hireDate": "2013-10-28",
           "tenureMonths": 154,
           "tenureBucket": "over-10y",
@@ -5990,6 +6123,7 @@
         {
           "name": "조동조",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2017-08-16",
           "tenureMonths": 108,
           "tenureBucket": "5-10y",
@@ -6045,6 +6179,7 @@
         {
           "name": "강석",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-03-09",
           "tenureMonths": 77,
           "tenureBucket": "5-10y",
@@ -6095,6 +6230,7 @@
         {
           "name": "문정환",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2024-02-01",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -6133,6 +6269,7 @@
         {
           "name": "변수민",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2018-01-18",
           "tenureMonths": 103,
           "tenureBucket": "5-10y",
@@ -6183,6 +6320,7 @@
         {
           "name": "장길호",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-06-03",
           "tenureMonths": 86,
           "tenureBucket": "5-10y",
@@ -6303,6 +6441,7 @@
         {
           "name": "권보미",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-10-07",
           "tenureMonths": 46,
           "tenureBucket": "3-5y",
@@ -6353,6 +6492,7 @@
         {
           "name": "권영진",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-07-20",
           "tenureMonths": 49,
           "tenureBucket": "3-5y",
@@ -6408,6 +6548,7 @@
         {
           "name": "김성현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2021-10-25",
           "tenureMonths": 58,
           "tenureBucket": "3-5y",
@@ -6458,6 +6599,7 @@
         {
           "name": "김정수",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-09-11",
           "tenureMonths": 107,
           "tenureBucket": "5-10y",
@@ -6508,6 +6650,7 @@
         {
           "name": "김태현",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2020-10-26",
           "tenureMonths": 70,
           "tenureBucket": "5-10y",
@@ -6554,6 +6697,7 @@
         {
           "name": "민슬기",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2022-05-02",
           "tenureMonths": 51,
           "tenureBucket": "3-5y",
@@ -6604,6 +6748,7 @@
         {
           "name": "옥수찬",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-02-20",
           "tenureMonths": 114,
           "tenureBucket": "5-10y",
@@ -6654,6 +6799,7 @@
         {
           "name": "이병현",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2019-06-24",
           "tenureMonths": 86,
           "tenureBucket": "5-10y",
@@ -6700,6 +6846,7 @@
         {
           "name": "이충원",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2021-01-11",
           "tenureMonths": 67,
           "tenureBucket": "5-10y",
@@ -6750,6 +6897,7 @@
         {
           "name": "이현우",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2015-08-27",
           "tenureMonths": 132,
           "tenureBucket": "over-10y",
@@ -6800,6 +6948,7 @@
         {
           "name": "정형욱",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2017-04-24",
           "tenureMonths": 112,
           "tenureBucket": "5-10y",
@@ -6830,6 +6979,7 @@
         {
           "name": "박호영",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2021-03-08",
           "tenureMonths": 65,
           "tenureBucket": "5-10y",
@@ -6872,6 +7022,7 @@
         {
           "name": "안희철",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2016-11-01",
           "tenureMonths": 117,
           "tenureBucket": "5-10y",
@@ -6914,6 +7065,7 @@
         {
           "name": "정성택",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2022-06-27",
           "tenureMonths": 50,
           "tenureBucket": "3-5y",
@@ -6996,6 +7148,7 @@
         {
           "name": "김규동",
           "role": "영업직원",
+          "jobTitle": "팀장",
           "hireDate": "2023-11-01",
           "tenureMonths": 33,
           "tenureBucket": "1-3y",
@@ -7042,6 +7195,7 @@
         {
           "name": "김민지",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2024-06-03",
           "tenureMonths": 26,
           "tenureBucket": "1-3y",
@@ -7080,6 +7234,7 @@
         {
           "name": "김태환",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2016-09-23",
           "tenureMonths": 119,
           "tenureBucket": "5-10y",
@@ -7135,6 +7290,7 @@
         {
           "name": "박한글",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-11-01",
           "tenureMonths": 21,
           "tenureBucket": "1-3y",
@@ -7177,6 +7333,7 @@
         {
           "name": "복수빈",
           "role": "영업직원",
+          "jobTitle": "사원",
           "hireDate": "2026-04-01",
           "tenureMonths": 4,
           "tenureBucket": "under-1y",
@@ -7194,6 +7351,7 @@
         {
           "name": "유병천",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2021-01-25",
           "tenureMonths": 67,
           "tenureBucket": "5-10y",
@@ -7249,6 +7407,7 @@
         {
           "name": "정재성",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2026-03-03",
           "tenureMonths": 5,
           "tenureBucket": "under-1y",
@@ -7261,6 +7420,7 @@
         {
           "name": "차종서",
           "role": "영업직원",
+          "jobTitle": "사원",
           "hireDate": "2024-07-01",
           "tenureMonths": 25,
           "tenureBucket": "1-3y",
@@ -7303,6 +7463,7 @@
         {
           "name": "한상진",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2019-08-26",
           "tenureMonths": 84,
           "tenureBucket": "5-10y",
@@ -7349,6 +7510,7 @@
         {
           "name": "함성준",
           "role": "영업직원",
+          "jobTitle": "부장",
           "hireDate": "2012-11-08",
           "tenureMonths": 165,
           "tenureBucket": "over-10y",
@@ -7399,6 +7561,7 @@
         {
           "name": "유호연",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2017-04-17",
           "tenureMonths": 112,
           "tenureBucket": "5-10y",
@@ -7449,6 +7612,7 @@
         {
           "name": "한경철",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2021-08-02",
           "tenureMonths": 60,
           "tenureBucket": "3-5y",
@@ -7543,6 +7707,7 @@
         {
           "name": "김달해",
           "role": "영업직원",
+          "jobTitle": "사원",
           "hireDate": "2026-03-09",
           "tenureMonths": 5,
           "tenureBucket": "under-1y",
@@ -7555,6 +7720,7 @@
         {
           "name": "김대헌",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2017-12-04",
           "tenureMonths": 104,
           "tenureBucket": "5-10y",
@@ -7610,6 +7776,7 @@
         {
           "name": "김상민",
           "role": "영업직원",
+          "jobTitle": "부장",
           "hireDate": "2014-11-01",
           "tenureMonths": 141,
           "tenureBucket": "over-10y",
@@ -7665,6 +7832,7 @@
         {
           "name": "김용주",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2022-09-15",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -7715,6 +7883,7 @@
         {
           "name": "김효승",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-08-01",
           "tenureMonths": 48,
           "tenureBucket": "3-5y",
@@ -7765,6 +7934,7 @@
         {
           "name": "오영민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2018-11-15",
           "tenureMonths": 93,
           "tenureBucket": "5-10y",
@@ -7820,6 +7990,7 @@
         {
           "name": "유동규",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2019-08-12",
           "tenureMonths": 84,
           "tenureBucket": "5-10y",
@@ -7875,6 +8046,7 @@
         {
           "name": "이강일",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2018-04-23",
           "tenureMonths": 100,
           "tenureBucket": "5-10y",
@@ -7921,6 +8093,7 @@
         {
           "name": "이영빈",
           "role": "영업직원",
+          "jobTitle": "사원",
           "hireDate": "2024-10-10",
           "tenureMonths": 22,
           "tenureBucket": "1-3y",
@@ -7943,6 +8116,7 @@
         {
           "name": "이준희",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2019-06-24",
           "tenureMonths": 86,
           "tenureBucket": "5-10y",
@@ -7993,6 +8167,7 @@
         {
           "name": "장원익",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2018-05-14",
           "tenureMonths": 99,
           "tenureBucket": "5-10y",
@@ -8043,6 +8218,7 @@
         {
           "name": "전성배",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2018-05-14",
           "tenureMonths": 99,
           "tenureBucket": "5-10y",
@@ -8089,6 +8265,7 @@
         {
           "name": "주랑",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2014-07-30",
           "tenureMonths": 144,
           "tenureBucket": "over-10y",
@@ -8144,6 +8321,7 @@
         {
           "name": "최중범",
           "role": "영업직원",
+          "jobTitle": "부장",
           "hireDate": "2014-08-26",
           "tenureMonths": 144,
           "tenureBucket": "over-10y",
@@ -8194,6 +8372,7 @@
         {
           "name": "홍준기",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2019-01-07",
           "tenureMonths": 91,
           "tenureBucket": "5-10y",
@@ -8249,6 +8428,7 @@
         {
           "name": "김상일",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2017-05-10",
           "tenureMonths": 111,
           "tenureBucket": "5-10y",
@@ -8304,6 +8484,7 @@
         {
           "name": "김용민",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2018-07-27",
           "tenureMonths": 97,
           "tenureBucket": "5-10y",
@@ -8354,6 +8535,7 @@
         {
           "name": "김정석",
           "role": "영업팀장",
+          "jobTitle": "부장",
           "hireDate": "2013-01-30",
           "tenureMonths": 162,
           "tenureBucket": "over-10y",
@@ -8409,6 +8591,7 @@
         {
           "name": "이효석",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2016-08-30",
           "tenureMonths": 119,
           "tenureBucket": "5-10y",
@@ -8483,6 +8666,7 @@
         {
           "name": "김진수",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-11-25",
           "tenureMonths": 9,
           "tenureBucket": "under-1y",
@@ -8500,6 +8684,7 @@
         {
           "name": "윤정현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-05-08",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -8562,6 +8747,7 @@
         {
           "name": "권희성",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2020-01-02",
           "tenureMonths": 79,
           "tenureBucket": "5-10y",
@@ -8617,6 +8803,7 @@
         {
           "name": "김성광",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-04-12",
           "tenureMonths": 52,
           "tenureBucket": "3-5y",
@@ -8672,6 +8859,7 @@
         {
           "name": "김양수",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2018-07-02",
           "tenureMonths": 97,
           "tenureBucket": "5-10y",
@@ -8727,6 +8915,7 @@
         {
           "name": "김현호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-06-01",
           "tenureMonths": 38,
           "tenureBucket": "3-5y",
@@ -8773,6 +8962,7 @@
         {
           "name": "박진오",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-03-04",
           "tenureMonths": 29,
           "tenureBucket": "1-3y",
@@ -8824,6 +9014,7 @@
         {
           "name": "이정현",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2021-02-01",
           "tenureMonths": 66,
           "tenureBucket": "5-10y",
@@ -8874,6 +9065,7 @@
         {
           "name": "조기상",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-03-21",
           "tenureMonths": 53,
           "tenureBucket": "3-5y",
@@ -8924,6 +9116,7 @@
         {
           "name": "천진호",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2018-09-03",
           "tenureMonths": 95,
           "tenureBucket": "5-10y",
@@ -8979,6 +9172,7 @@
         {
           "name": "문종현",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2016-01-25",
           "tenureMonths": 127,
           "tenureBucket": "over-10y",
@@ -9034,6 +9228,7 @@
         {
           "name": "원효",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2018-04-03",
           "tenureMonths": 100,
           "tenureBucket": "5-10y",
@@ -9084,6 +9279,7 @@
         {
           "name": "이경호",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2015-07-06",
           "tenureMonths": 133,
           "tenureBucket": "over-10y",
@@ -9168,6 +9364,7 @@
         {
           "name": "고영우",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2020-04-03",
           "tenureMonths": 76,
           "tenureBucket": "5-10y",
@@ -9218,6 +9415,7 @@
         {
           "name": "김민성",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-06-19",
           "tenureMonths": 26,
           "tenureBucket": "1-3y",
@@ -9256,6 +9454,7 @@
         {
           "name": "김승범",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-08-22",
           "tenureMonths": 48,
           "tenureBucket": "3-5y",
@@ -9299,6 +9498,7 @@
         {
           "name": "임경률",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-01-02",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -9350,6 +9550,7 @@
         {
           "name": "김보성",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-02-17",
           "tenureMonths": 78,
           "tenureBucket": "5-10y",
@@ -9434,6 +9635,7 @@
         {
           "name": "박진영",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-01-16",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -9485,6 +9687,7 @@
         {
           "name": "주재관",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-07-27",
           "tenureMonths": 1,
           "tenureBucket": "under-3m",
@@ -9497,6 +9700,7 @@
         {
           "name": "하석권",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-01-02",
           "tenureMonths": 19,
           "tenureBucket": "1-3y",
@@ -9536,6 +9740,7 @@
         {
           "name": "한송담",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-07-01",
           "tenureMonths": 25,
           "tenureBucket": "1-3y",
@@ -9574,6 +9779,7 @@
         {
           "name": "김도윤",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2019-05-10",
           "tenureMonths": 87,
           "tenureBucket": "5-10y",
@@ -9673,6 +9879,7 @@
         {
           "name": "김나란",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-05-02",
           "tenureMonths": 51,
           "tenureBucket": "3-5y",
@@ -9728,6 +9935,7 @@
         {
           "name": "김성식",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-07-25",
           "tenureMonths": 49,
           "tenureBucket": "3-5y",
@@ -9778,6 +9986,7 @@
         {
           "name": "김성준",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-05-09",
           "tenureMonths": 39,
           "tenureBucket": "3-5y",
@@ -9833,6 +10042,7 @@
         {
           "name": "이재명",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-03-06",
           "tenureMonths": 113,
           "tenureBucket": "5-10y",
@@ -9888,6 +10098,7 @@
         {
           "name": "임진호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-07-01",
           "tenureMonths": 13,
           "tenureBucket": "1-3y",
@@ -9918,6 +10129,7 @@
         {
           "name": "신환욱",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2015-05-01",
           "tenureMonths": 135,
           "tenureBucket": "over-10y",
@@ -9997,6 +10209,7 @@
         {
           "name": "강병우",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-05-07",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -10035,6 +10248,7 @@
         {
           "name": "박진성",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-03-04",
           "tenureMonths": 29,
           "tenureBucket": "1-3y",
@@ -10081,6 +10295,7 @@
         {
           "name": "이유성",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-06-16",
           "tenureMonths": 14,
           "tenureBucket": "1-3y",
@@ -10115,6 +10330,7 @@
         {
           "name": "이재훈",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-05-07",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -10157,6 +10373,7 @@
         {
           "name": "임태우",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2018-11-01",
           "tenureMonths": 93,
           "tenureBucket": "5-10y",
@@ -10207,6 +10424,7 @@
         {
           "name": "정용호",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-09-05",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -10257,6 +10475,7 @@
         {
           "name": "김기태",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2022-04-04",
           "tenureMonths": 52,
           "tenureBucket": "3-5y",
@@ -10312,6 +10531,7 @@
         {
           "name": "박성훈",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2017-04-24",
           "tenureMonths": 112,
           "tenureBucket": "5-10y",
@@ -10367,6 +10587,7 @@
         {
           "name": "안성인",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2018-11-01",
           "tenureMonths": 93,
           "tenureBucket": "5-10y",
@@ -10496,6 +10717,7 @@
         {
           "name": "김신룡",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-11-01",
           "tenureMonths": 33,
           "tenureBucket": "1-3y",
@@ -10542,6 +10764,7 @@
         {
           "name": "김준수",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-11-03",
           "tenureMonths": 9,
           "tenureBucket": "under-1y",
@@ -10554,6 +10777,7 @@
         {
           "name": "류수헌",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-11-13",
           "tenureMonths": 33,
           "tenureBucket": "1-3y",
@@ -10605,6 +10829,7 @@
         {
           "name": "전명훈",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-01-05",
           "tenureMonths": 7,
           "tenureBucket": "under-1y",
@@ -10617,6 +10842,7 @@
         {
           "name": "박현규",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2020-06-01",
           "tenureMonths": 74,
           "tenureBucket": "5-10y",
@@ -10672,6 +10898,7 @@
         {
           "name": "사공영환",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2022-01-10",
           "tenureMonths": 55,
           "tenureBucket": "3-5y",
@@ -10786,6 +11013,7 @@
         {
           "name": "김경민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2019-05-13",
           "tenureMonths": 87,
           "tenureBucket": "5-10y",
@@ -10841,6 +11069,7 @@
         {
           "name": "김상영",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2020-03-02",
           "tenureMonths": 77,
           "tenureBucket": "5-10y",
@@ -10892,6 +11121,7 @@
         {
           "name": "김성일",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-10-07",
           "tenureMonths": 22,
           "tenureBucket": "1-3y",
@@ -10904,6 +11134,7 @@
         {
           "name": "김진석",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-05-07",
           "tenureMonths": 27,
           "tenureBucket": "1-3y",
@@ -10955,6 +11186,7 @@
         {
           "name": "최준혁",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2020-10-05",
           "tenureMonths": 70,
           "tenureBucket": "5-10y",
@@ -11005,6 +11237,7 @@
         {
           "name": "박성준",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2014-06-01",
           "tenureMonths": 146,
           "tenureBucket": "over-10y",
@@ -11107,6 +11340,7 @@
         {
           "name": "김재훈",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2019-02-07",
           "tenureMonths": 90,
           "tenureBucket": "5-10y",
@@ -11142,6 +11376,7 @@
         {
           "name": "김훈",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2014-11-24",
           "tenureMonths": 141,
           "tenureBucket": "over-10y",
@@ -11197,6 +11432,7 @@
         {
           "name": "박수용",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-01-02",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -11252,6 +11488,7 @@
         {
           "name": "서지수",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-08-11",
           "tenureMonths": 12,
           "tenureBucket": "under-1y",
@@ -11264,6 +11501,7 @@
         {
           "name": "엄인섭",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-01-02",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -11298,6 +11536,7 @@
         {
           "name": "이철",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2021-05-03",
           "tenureMonths": 63,
           "tenureBucket": "5-10y",
@@ -11348,6 +11587,7 @@
         {
           "name": "조석원",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-04-20",
           "tenureMonths": 4,
           "tenureBucket": "under-1y",
@@ -11360,6 +11600,7 @@
         {
           "name": "한창우",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-01-02",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -11410,6 +11651,7 @@
         {
           "name": "양지승",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2019-01-10",
           "tenureMonths": 91,
           "tenureBucket": "5-10y",
@@ -11460,6 +11702,7 @@
         {
           "name": "홍승찬",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2022-03-30",
           "tenureMonths": 52,
           "tenureBucket": "3-5y",
@@ -11609,6 +11852,7 @@
         {
           "name": "김명수",
           "role": "영업직원",
+          "jobTitle": "팀장",
           "hireDate": "2023-08-07",
           "tenureMonths": 36,
           "tenureBucket": "1-3y",
@@ -11660,6 +11904,7 @@
         {
           "name": "김승",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-05-06",
           "tenureMonths": 3,
           "tenureBucket": "under-3m",
@@ -11672,6 +11917,7 @@
         {
           "name": "김종율",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-02-01",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -11719,6 +11965,7 @@
         {
           "name": "박상오",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-07-14",
           "tenureMonths": 13,
           "tenureBucket": "1-3y",
@@ -11741,6 +11988,7 @@
         {
           "name": "성재욱",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-03-04",
           "tenureMonths": 29,
           "tenureBucket": "1-3y",
@@ -11787,6 +12035,7 @@
         {
           "name": "성지혜",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-01-02",
           "tenureMonths": 31,
           "tenureBucket": "1-3y",
@@ -11862,6 +12111,7 @@
         {
           "name": "강정현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-04-01",
           "tenureMonths": 16,
           "tenureBucket": "1-3y",
@@ -11888,6 +12138,7 @@
         {
           "name": "김용익",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-09-26",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -11934,6 +12185,7 @@
         {
           "name": "노경효",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-04-01",
           "tenureMonths": 16,
           "tenureBucket": "1-3y",
@@ -11972,6 +12224,7 @@
         {
           "name": "전규철",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2015-03-16",
           "tenureMonths": 137,
           "tenureBucket": "over-10y",
@@ -11984,6 +12237,7 @@
         {
           "name": "정한영",
           "role": "영업직원",
+          "jobTitle": "팀장",
           "hireDate": "2023-07-10",
           "tenureMonths": 37,
           "tenureBucket": "3-5y",
@@ -12026,6 +12280,7 @@
         {
           "name": "조상현",
           "role": "영업직원",
+          "jobTitle": "팀장",
           "hireDate": "2020-12-01",
           "tenureMonths": 68,
           "tenureBucket": "5-10y",
@@ -12135,6 +12390,7 @@
         {
           "name": "김민수",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2022-06-07",
           "tenureMonths": 50,
           "tenureBucket": "3-5y",
@@ -12190,6 +12446,7 @@
         {
           "name": "김성민",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2024-02-14",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",
@@ -12232,6 +12489,7 @@
         {
           "name": "김종천",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-09-18",
           "tenureMonths": 107,
           "tenureBucket": "5-10y",
@@ -12287,6 +12545,7 @@
         {
           "name": "김형주",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-06-02",
           "tenureMonths": 50,
           "tenureBucket": "3-5y",
@@ -12337,6 +12596,7 @@
         {
           "name": "나수연",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-05-18",
           "tenureMonths": 3,
           "tenureBucket": "under-3m",
@@ -12349,6 +12609,7 @@
         {
           "name": "안종효",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2021-11-17",
           "tenureMonths": 57,
           "tenureBucket": "3-5y",
@@ -12400,6 +12661,7 @@
         {
           "name": "양원준",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-01-12",
           "tenureMonths": 7,
           "tenureBucket": "under-1y",
@@ -12412,6 +12674,7 @@
         {
           "name": "이병진",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2020-02-19",
           "tenureMonths": 78,
           "tenureBucket": "5-10y",
@@ -12462,6 +12725,7 @@
         {
           "name": "이태우",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-07-19",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -12513,6 +12777,7 @@
         {
           "name": "정재헌",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2023-06-01",
           "tenureMonths": 38,
           "tenureBucket": "3-5y",
@@ -12568,6 +12833,7 @@
         {
           "name": "조선별",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2021-09-01",
           "tenureMonths": 59,
           "tenureBucket": "3-5y",
@@ -12598,6 +12864,7 @@
         {
           "name": "허민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-12-23",
           "tenureMonths": 20,
           "tenureBucket": "1-3y",
@@ -12628,6 +12895,7 @@
         {
           "name": "문승현",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2020-02-03",
           "tenureMonths": 78,
           "tenureBucket": "5-10y",
@@ -12683,6 +12951,7 @@
         {
           "name": "박서빈",
           "role": "영업팀장",
+          "jobTitle": "대리",
           "hireDate": "2023-09-01",
           "tenureMonths": 35,
           "tenureBucket": "1-3y",
@@ -12734,6 +13003,7 @@
         {
           "name": "신동민",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2017-07-10",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -12784,6 +13054,7 @@
         {
           "name": "조성원",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2020-12-14",
           "tenureMonths": 68,
           "tenureBucket": "5-10y",
@@ -12875,6 +13146,7 @@
         {
           "name": "김장배",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2017-04-17",
           "tenureMonths": 112,
           "tenureBucket": "5-10y",
@@ -12925,6 +13197,7 @@
         {
           "name": "김현수",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-05-09",
           "tenureMonths": 51,
           "tenureBucket": "3-5y",
@@ -12975,6 +13248,7 @@
         {
           "name": "송찬우",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2020-10-22",
           "tenureMonths": 70,
           "tenureBucket": "5-10y",
@@ -13025,6 +13299,7 @@
         {
           "name": "신동규",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2017-08-21",
           "tenureMonths": 108,
           "tenureBucket": "5-10y",
@@ -13075,6 +13350,7 @@
         {
           "name": "안영민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2016-11-01",
           "tenureMonths": 117,
           "tenureBucket": "5-10y",
@@ -13130,6 +13406,7 @@
         {
           "name": "양동준",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2018-07-02",
           "tenureMonths": 97,
           "tenureBucket": "5-10y",
@@ -13180,6 +13457,7 @@
         {
           "name": "양태민",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2025-09-15",
           "tenureMonths": 11,
           "tenureBucket": "under-1y",
@@ -13202,6 +13480,7 @@
         {
           "name": "윤재필",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2016-09-01",
           "tenureMonths": 119,
           "tenureBucket": "5-10y",
@@ -13257,6 +13536,7 @@
         {
           "name": "이정환",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2018-07-02",
           "tenureMonths": 97,
           "tenureBucket": "5-10y",
@@ -13307,6 +13587,7 @@
         {
           "name": "이진형",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-08-11",
           "tenureMonths": 12,
           "tenureBucket": "under-1y",
@@ -13319,6 +13600,7 @@
         {
           "name": "최건우",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2020-07-01",
           "tenureMonths": 73,
           "tenureBucket": "5-10y",
@@ -13369,6 +13651,7 @@
         {
           "name": "허동환",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2020-02-03",
           "tenureMonths": 78,
           "tenureBucket": "5-10y",
@@ -13419,6 +13702,7 @@
         {
           "name": "김재범",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2017-04-17",
           "tenureMonths": 112,
           "tenureBucket": "5-10y",
@@ -13474,6 +13758,7 @@
         {
           "name": "양덕우",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2023-03-13",
           "tenureMonths": 41,
           "tenureBucket": "3-5y",
@@ -13525,6 +13810,7 @@
         {
           "name": "장경호",
           "role": "영업팀장",
+          "jobTitle": "대리",
           "hireDate": "2016-08-01",
           "tenureMonths": 120,
           "tenureBucket": "5-10y",
@@ -13609,6 +13895,7 @@
         {
           "name": "박은성",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-02-09",
           "tenureMonths": 6,
           "tenureBucket": "under-1y",
@@ -13639,6 +13926,7 @@
         {
           "name": "이상헌",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-09-04",
           "tenureMonths": 35,
           "tenureBucket": "1-3y",
@@ -13690,6 +13978,7 @@
         {
           "name": "장현두",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-09-04",
           "tenureMonths": 35,
           "tenureBucket": "1-3y",
@@ -13741,6 +14030,7 @@
         {
           "name": "김영곤",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2023-09-04",
           "tenureMonths": 35,
           "tenureBucket": "1-3y",
@@ -13805,6 +14095,7 @@
         {
           "name": "곽지명",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-03-20",
           "tenureMonths": 41,
           "tenureBucket": "3-5y",
@@ -13855,6 +14146,7 @@
         {
           "name": "김민석",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2021-03-02",
           "tenureMonths": 65,
           "tenureBucket": "5-10y",
@@ -13910,6 +14202,7 @@
         {
           "name": "김의영",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2021-03-29",
           "tenureMonths": 64,
           "tenureBucket": "5-10y",
@@ -13932,6 +14225,7 @@
         {
           "name": "김태평",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2021-01-25",
           "tenureMonths": 67,
           "tenureBucket": "5-10y",
@@ -13982,6 +14276,7 @@
         {
           "name": "문현수",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2020-12-14",
           "tenureMonths": 68,
           "tenureBucket": "5-10y",
@@ -14037,6 +14332,7 @@
         {
           "name": "임경욱",
           "role": "영업팀장",
+          "jobTitle": "대리",
           "hireDate": "2020-07-13",
           "tenureMonths": 73,
           "tenureBucket": "5-10y",
@@ -14136,6 +14432,7 @@
         {
           "name": "강진석",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-09-18",
           "tenureMonths": 35,
           "tenureBucket": "1-3y",
@@ -14187,6 +14484,7 @@
         {
           "name": "유재민",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-08-12",
           "tenureMonths": 12,
           "tenureBucket": "under-1y",
@@ -14204,6 +14502,7 @@
         {
           "name": "주장복",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2023-01-02",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -14255,6 +14554,7 @@
         {
           "name": "김영주",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2023-09-18",
           "tenureMonths": 35,
           "tenureBucket": "1-3y",
@@ -14319,6 +14619,7 @@
         {
           "name": "김경민",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-04-16",
           "tenureMonths": 16,
           "tenureBucket": "1-3y",
@@ -14331,6 +14632,7 @@
         {
           "name": "김범준",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2026-05-18",
           "tenureMonths": 3,
           "tenureBucket": "under-3m",
@@ -14353,6 +14655,7 @@
         {
           "name": "김상우",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-12-01",
           "tenureMonths": 8,
           "tenureBucket": "under-1y",
@@ -14365,6 +14668,7 @@
         {
           "name": "김재식",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-06-11",
           "tenureMonths": 26,
           "tenureBucket": "1-3y",
@@ -14407,6 +14711,7 @@
         {
           "name": "나희진",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2019-11-25",
           "tenureMonths": 81,
           "tenureBucket": "5-10y",
@@ -14449,6 +14754,7 @@
         {
           "name": "설동명",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2020-03-16",
           "tenureMonths": 77,
           "tenureBucket": "5-10y",
@@ -14499,6 +14805,7 @@
         {
           "name": "이규환",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2019-04-15",
           "tenureMonths": 88,
           "tenureBucket": "5-10y",
@@ -14550,6 +14857,7 @@
         {
           "name": "이우석",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-09-01",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -14596,6 +14904,7 @@
         {
           "name": "이종성",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-03-28",
           "tenureMonths": 53,
           "tenureBucket": "3-5y",
@@ -14646,6 +14955,7 @@
         {
           "name": "이주원",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-04-01",
           "tenureMonths": 28,
           "tenureBucket": "1-3y",
@@ -14692,6 +15002,7 @@
         {
           "name": "김수학",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2020-03-02",
           "tenureMonths": 77,
           "tenureBucket": "5-10y",
@@ -14747,6 +15058,7 @@
         {
           "name": "이준호",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2023-06-01",
           "tenureMonths": 38,
           "tenureBucket": "3-5y",
@@ -14759,6 +15071,7 @@
         {
           "name": "임현석",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2019-08-19",
           "tenureMonths": 84,
           "tenureBucket": "5-10y",
@@ -14810,6 +15123,7 @@
         {
           "name": "주선종",
           "role": "영업팀장",
+          "jobTitle": "차장",
           "hireDate": "2017-09-04",
           "tenureMonths": 107,
           "tenureBucket": "5-10y",
@@ -14952,6 +15266,7 @@
         {
           "name": "김가빈",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-06-23",
           "tenureMonths": 14,
           "tenureBucket": "1-3y",
@@ -14964,6 +15279,7 @@
         {
           "name": "김여겸",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-02-10",
           "tenureMonths": 18,
           "tenureBucket": "1-3y",
@@ -14976,6 +15292,7 @@
         {
           "name": "박수정",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2017-09-19",
           "tenureMonths": 107,
           "tenureBucket": "5-10y",
@@ -14988,6 +15305,7 @@
         {
           "name": "유수영",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-12-01",
           "tenureMonths": 8,
           "tenureBucket": "under-1y",
@@ -15000,6 +15318,7 @@
         {
           "name": "이성진",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-03-07",
           "tenureMonths": 29,
           "tenureBucket": "1-3y",
@@ -15051,6 +15370,7 @@
         {
           "name": "한필성",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-07-10",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -15085,6 +15405,7 @@
         {
           "name": "황준원",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2020-07-23",
           "tenureMonths": 73,
           "tenureBucket": "5-10y",
@@ -15136,6 +15457,7 @@
         {
           "name": "이정훈",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2018-05-28",
           "tenureMonths": 99,
           "tenureBucket": "5-10y",
@@ -15221,6 +15543,7 @@
         {
           "name": "김대현",
           "role": "영업직원",
+          "jobTitle": "차장",
           "hireDate": "2016-08-08",
           "tenureMonths": 120,
           "tenureBucket": "5-10y",
@@ -15271,6 +15594,7 @@
         {
           "name": "김용상",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-04-01",
           "tenureMonths": 112,
           "tenureBucket": "5-10y",
@@ -15326,6 +15650,7 @@
         {
           "name": "김정호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-12-01",
           "tenureMonths": 8,
           "tenureBucket": "under-1y",
@@ -15338,6 +15663,7 @@
         {
           "name": "김종민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2023-05-22",
           "tenureMonths": 39,
           "tenureBucket": "3-5y",
@@ -15388,6 +15714,7 @@
         {
           "name": "김준호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-03-07",
           "tenureMonths": 53,
           "tenureBucket": "3-5y",
@@ -15443,6 +15770,7 @@
         {
           "name": "김형중",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-07-29",
           "tenureMonths": 12,
           "tenureBucket": "under-1y",
@@ -15465,6 +15793,7 @@
         {
           "name": "김훈철",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-07-27",
           "tenureMonths": 1,
           "tenureBucket": "under-3m",
@@ -15477,6 +15806,7 @@
         {
           "name": "변호석",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2021-04-01",
           "tenureMonths": 64,
           "tenureBucket": "5-10y",
@@ -15527,6 +15857,7 @@
         {
           "name": "이진섭",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2022-12-01",
           "tenureMonths": 44,
           "tenureBucket": "3-5y",
@@ -15573,6 +15904,7 @@
         {
           "name": "추헌진",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-07-10",
           "tenureMonths": 109,
           "tenureBucket": "5-10y",
@@ -15620,6 +15952,7 @@
         {
           "name": "하재현",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-02-02",
           "tenureMonths": 6,
           "tenureBucket": "under-1y",
@@ -15632,6 +15965,7 @@
         {
           "name": "백광현",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2016-06-15",
           "tenureMonths": 122,
           "tenureBucket": "over-10y",
@@ -15682,6 +16016,7 @@
         {
           "name": "윤덕인",
           "role": "영업팀장",
+          "jobTitle": "대리",
           "hireDate": "2018-01-01",
           "tenureMonths": 103,
           "tenureBucket": "5-10y",
@@ -15732,6 +16067,7 @@
         {
           "name": "이인규",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2018-07-02",
           "tenureMonths": 97,
           "tenureBucket": "5-10y",
@@ -15782,6 +16118,7 @@
         {
           "name": "최성환",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2021-09-27",
           "tenureMonths": 59,
           "tenureBucket": "3-5y",
@@ -15892,6 +16229,7 @@
         {
           "name": "곽문호",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-06-23",
           "tenureMonths": 14,
           "tenureBucket": "1-3y",
@@ -15930,6 +16268,7 @@
         {
           "name": "신진솔",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-06-01",
           "tenureMonths": 2,
           "tenureBucket": "under-3m",
@@ -15942,6 +16281,7 @@
         {
           "name": "원종호",
           "role": "영업직원",
+          "jobTitle": "부장",
           "hireDate": "2017-02-15",
           "tenureMonths": 114,
           "tenureBucket": "5-10y",
@@ -15997,6 +16337,7 @@
         {
           "name": "인성환",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2023-08-07",
           "tenureMonths": 36,
           "tenureBucket": "1-3y",
@@ -16027,6 +16368,7 @@
         {
           "name": "최희령",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2021-11-01",
           "tenureMonths": 57,
           "tenureBucket": "3-5y",
@@ -16073,6 +16415,7 @@
         {
           "name": "김정삼",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2020-03-23",
           "tenureMonths": 77,
           "tenureBucket": "5-10y",
@@ -16123,6 +16466,7 @@
         {
           "name": "조효신",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2018-05-08",
           "tenureMonths": 99,
           "tenureBucket": "5-10y",
@@ -16203,6 +16547,7 @@
         {
           "name": "김가영",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-09-01",
           "tenureMonths": 11,
           "tenureBucket": "under-1y",
@@ -16237,6 +16582,7 @@
         {
           "name": "김광진",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-11-04",
           "tenureMonths": 9,
           "tenureBucket": "under-1y",
@@ -16267,6 +16613,7 @@
         {
           "name": "김기대",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2024-08-01",
           "tenureMonths": 24,
           "tenureBucket": "1-3y",
@@ -16302,6 +16649,7 @@
         {
           "name": "김대희",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2017-01-02",
           "tenureMonths": 115,
           "tenureBucket": "5-10y",
@@ -16352,6 +16700,7 @@
         {
           "name": "김성민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2025-07-14",
           "tenureMonths": 13,
           "tenureBucket": "1-3y",
@@ -16390,6 +16739,7 @@
         {
           "name": "김신우",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2025-06-02",
           "tenureMonths": 14,
           "tenureBucket": "1-3y",
@@ -16424,6 +16774,7 @@
         {
           "name": "안재현",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2026-04-01",
           "tenureMonths": 4,
           "tenureBucket": "under-1y",
@@ -16436,6 +16787,7 @@
         {
           "name": "조광래",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2024-11-11",
           "tenureMonths": 21,
           "tenureBucket": "1-3y",
@@ -16470,6 +16822,7 @@
         {
           "name": "김진형",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2023-01-02",
           "tenureMonths": 43,
           "tenureBucket": "3-5y",
@@ -16525,6 +16878,7 @@
         {
           "name": "방준호",
           "role": "영업팀장",
+          "jobTitle": "대리",
           "hireDate": "2025-03-17",
           "tenureMonths": 17,
           "tenureBucket": "1-3y",
@@ -16568,6 +16922,7 @@
         {
           "name": "송용운",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2025-07-07",
           "tenureMonths": 13,
           "tenureBucket": "1-3y",
@@ -16723,6 +17078,7 @@
         {
           "name": "김명준",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2022-02-17",
           "tenureMonths": 54,
           "tenureBucket": "3-5y",
@@ -16778,6 +17134,7 @@
         {
           "name": "김하늘",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-04-01",
           "tenureMonths": 16,
           "tenureBucket": "1-3y",
@@ -16817,6 +17174,7 @@
         {
           "name": "윤민상",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2025-08-19",
           "tenureMonths": 12,
           "tenureBucket": "under-1y",
@@ -16829,6 +17187,7 @@
         {
           "name": "백종윤",
           "role": "영업팀장",
+          "jobTitle": "대리",
           "hireDate": "2023-04-18",
           "tenureMonths": 40,
           "tenureBucket": "3-5y",
@@ -16879,6 +17238,7 @@
         {
           "name": "장재형",
           "role": "영업팀장",
+          "jobTitle": "과장",
           "hireDate": "2020-06-29",
           "tenureMonths": 73,
           "tenureBucket": "5-10y",
@@ -16959,6 +17319,7 @@
         {
           "name": "박찬희",
           "role": "영업직원",
+          "jobTitle": "주임",
           "hireDate": "2026-02-19",
           "tenureMonths": 6,
           "tenureBucket": "under-1y",
@@ -16989,6 +17350,7 @@
         {
           "name": "변종민",
           "role": "영업직원",
+          "jobTitle": "과장",
           "hireDate": "2022-09-13",
           "tenureMonths": 47,
           "tenureBucket": "3-5y",
@@ -17039,6 +17401,7 @@
         {
           "name": "이승규",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-03-04",
           "tenureMonths": 17,
           "tenureBucket": "1-3y",
@@ -17069,6 +17432,7 @@
         {
           "name": "이영재",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-03-04",
           "tenureMonths": 17,
           "tenureBucket": "1-3y",
@@ -17103,6 +17467,7 @@
         {
           "name": "정재인",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-01-02",
           "tenureMonths": 7,
           "tenureBucket": "under-1y",
@@ -17129,6 +17494,7 @@
         {
           "name": "정호조",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2026-01-29",
           "tenureMonths": 6,
           "tenureBucket": "under-1y",
@@ -17175,6 +17541,7 @@
         {
           "name": "조도흠",
           "role": "영업직원",
+          "jobTitle": "대리",
           "hireDate": "2025-07-09",
           "tenureMonths": 13,
           "tenureBucket": "1-3y",
@@ -17205,6 +17572,7 @@
         {
           "name": "이지수",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2021-09-01",
           "tenureMonths": 59,
           "tenureBucket": "3-5y",
@@ -17260,6 +17628,7 @@
         {
           "name": "정상호",
           "role": "영업팀장",
+          "jobTitle": "팀장",
           "hireDate": "2024-02-28",
           "tenureMonths": 30,
           "tenureBucket": "1-3y",

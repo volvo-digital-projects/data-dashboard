@@ -163,6 +163,7 @@ def load_roster(path: Path, as_of: date) -> list[dict[str, Any]]:
             {
                 "dmsShowroom": row[headers["전시장명"]],
                 "role": role,
+                "jobTitle": str(row[headers["직급"]] or "").strip(),
                 "name": row[headers["직원명"]],
                 "hireDate": hire_date.isoformat(),
                 "tenureMonths": months,
@@ -367,6 +368,7 @@ def build_payload(
                 {
                     "name": person["name"],
                     "role": person["role"],
+                    "jobTitle": person["jobTitle"],
                     "hireDate": person["hireDate"],
                     "tenureMonths": person["tenureMonths"],
                     "tenureBucket": person["tenureBucket"],
