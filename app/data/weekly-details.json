@@ -17642,7 +17642,7 @@
       },
       {
         "key": "actionPlan",
-        "label": "조치 계획",
+        "label": "조치계획 작성 및 제출",
         "weight": "10점",
         "max": 10,
         "unit": "점",

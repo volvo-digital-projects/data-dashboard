@@ -1218,7 +1218,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(cxBody, /신차출고 만족도/);
   assert.match(cxBody, /시승 만족도/);
   assert.match(cxBody, /긴급경보 처리여부/);
-  assert.match(cxBody, /조치 계획/);
+  assert.match(cxBody, /조치계획 작성 및 제출/);
   assert.match(cxBody, /헤이볼보 앱 가입율/);
   assert.equal((cxBody.match(/ONE Voice/g) ?? []).length, 4);
   assert.equal((cxBody.match(/Sales-DMS/g) ?? []).length, 1);
