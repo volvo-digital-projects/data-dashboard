@@ -14717,7 +14717,7 @@ button.header-status-item {
   transform: scaleX(0);
   transform-box: fill-box;
   transform-origin: left center;
-  animation: metric-detail-series-wipe 1.18s cubic-bezier(0.22, 0.72, 0.22, 1) both;
+  animation: metric-detail-series-wipe 1.48s cubic-bezier(0.22, 0.72, 0.22, 1) both;
   will-change: transform;
 }
 
