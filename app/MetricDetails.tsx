@@ -107,7 +107,12 @@ function MetricDetailChart({
   metric: DetailMetric;
   showroomName: string;
 }) {
-  const showroomValues = component.byCdsid[cdsid] ?? Array(52).fill(null);
+  const rawShowroomValues = component.byCdsid[cdsid] ?? [];
+  const showroomValues = Array.from({ length: 52 }, (_, index) => {
+    const value = rawShowroomValues[index];
+    if (typeof value === "number") return value;
+    return metric === "voc" && index < Math.min(52, component.latestWeek) ? 0 : null;
+  });
   const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
   const latestShowroom = latestIndex >= 0 ? showroomValues[latestIndex] : null;
   const latestPoint =
