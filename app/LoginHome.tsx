@@ -23,18 +23,8 @@ function wait(milliseconds: number) {
   return new Promise<void>((resolve) => window.setTimeout(resolve, milliseconds));
 }
 
-function formatSeoulTimestamp(date: Date) {
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Seoul",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).formatToParts(date);
-  const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  return `${value.year}-${value.month}-${value.day} ${value.hour}:${value.minute}`;
+function formatReleaseTimestamp(value: string) {
+  return value.replaceAll(".", "-");
 }
 
 export default function LoginHome({
@@ -137,10 +127,45 @@ export default function LoginHome({
   }, []);
 
   useEffect(() => {
-    const refreshTimestamp = () => setUpdatedAt(formatSeoulTimestamp(new Date()));
-    refreshTimestamp();
-    const timer = window.setInterval(refreshTimestamp, 60_000);
-    return () => window.clearInterval(timer);
+    let mounted = true;
+
+    const refreshTimestamp = async () => {
+      try {
+        const response = await fetch(`/dashboard-release.json?t=${Date.now()}`, {
+          cache: "no-store",
+          headers: { accept: "application/json" },
+        });
+        if (!response.ok) return;
+        const release = (await response.json()) as {
+          items?: unknown;
+          publishedAtKst?: unknown;
+        };
+        if (
+          mounted &&
+          Array.isArray(release.items) &&
+          release.items.length > 0 &&
+          typeof release.publishedAtKst === "string"
+        ) {
+          setUpdatedAt(formatReleaseTimestamp(release.publishedAtKst));
+        }
+      } catch {
+        // Keep the last confirmed completion time when the release check fails.
+      }
+    };
+
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") void refreshTimestamp();
+    };
+
+    void refreshTimestamp();
+    window.addEventListener("pageshow", refreshTimestamp);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+
+    return () => {
+      mounted = false;
+      window.removeEventListener("pageshow", refreshTimestamp);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
   }, []);
 
   async function openDashboard(event: FormEvent<HTMLFormElement>) {

@@ -2,7 +2,10 @@ import vinext from "vinext";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 import { sites } from "./build/sites-vite-plugin";
-import { prepareDashboardRelease } from "./build/prepare-dashboard-release";
+import {
+  finalizeDashboardRelease,
+  prepareDashboardRelease,
+} from "./build/prepare-dashboard-release";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
@@ -60,6 +63,14 @@ export default defineConfig(async () => {
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         config: localBindingConfig,
       }),
+      {
+        name: "finalize-dashboard-release",
+        enforce: "post",
+        apply: "build",
+        async closeBundle() {
+          await finalizeDashboardRelease(dashboardReleaseId);
+        },
+      },
     ],
   };
 });

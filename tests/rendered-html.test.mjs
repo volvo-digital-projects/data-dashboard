@@ -186,7 +186,11 @@ test("server-renders the CDSID login route", async () => {
   assert.match(html, /누적/);
   assert.doesNotMatch(html, /86(?:<!-- -->)?명|1,265(?:<!-- -->)?명/);
   assert.match(html, /UPDATE/);
-  assert.match(html, /Since 260831/);
+  assert.match(html, /Since 260901/);
+  assert.match(loginSource, /fetch\(`\/dashboard-release\.json\?t=\$\{Date\.now\(\)\}`/);
+  assert.match(loginSource, /release\.items\.length > 0/);
+  assert.match(loginSource, /release\.publishedAtKst/);
+  assert.doesNotMatch(loginSource, /formatSeoulTimestamp\(new Date\(\)\)/);
   assert.match(
     css,
     /\.cdsid-form > button\[type="submit"\] strong\s*\{[^}]*display: inline-flex;[^}]*align-items: center;[^}]*min-height: 22px;[^}]*line-height: 22px;/,

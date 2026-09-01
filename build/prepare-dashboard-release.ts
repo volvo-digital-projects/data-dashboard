@@ -21,6 +21,30 @@ function formatSeoulReleaseTime(date: Date) {
   return `${value.year}.${value.month}.${value.day} ${value.hour}:${value.minute}`;
 }
 
+async function writeDashboardRelease(
+  id: string,
+  note: ReleaseNote,
+  completedAt: Date,
+  outputPath: string,
+) {
+  await mkdir(path.dirname(outputPath), { recursive: true });
+  await writeFile(
+    outputPath,
+    `${JSON.stringify(
+      {
+        id,
+        title: note.title,
+        items: note.items,
+        publishedAt: completedAt.toISOString(),
+        publishedAtKst: formatSeoulReleaseTime(completedAt),
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
+}
+
 export async function prepareDashboardRelease() {
   const root = process.cwd();
   const notePath = path.join(root, "app", "data", "release-note.json");
@@ -31,22 +55,25 @@ export async function prepareDashboardRelease() {
   const seed = `${JSON.stringify(note)}:${builtAt.toISOString()}`;
   const id = createHash("sha256").update(seed).digest("hex").slice(0, 16);
 
-  await mkdir(publicDirectory, { recursive: true });
-  await writeFile(
-    outputPath,
-    `${JSON.stringify(
-      {
-        id,
-        title: note.title,
-        items: note.items,
-        publishedAt: builtAt.toISOString(),
-        publishedAtKst: formatSeoulReleaseTime(builtAt),
-      },
-      null,
-      2,
-    )}\n`,
-    "utf8",
-  );
+  await writeDashboardRelease(id, note, builtAt, outputPath);
 
   return id;
+}
+
+export async function finalizeDashboardRelease(id: string) {
+  const root = process.cwd();
+  const note = JSON.parse(
+    await readFile(path.join(root, "app", "data", "release-note.json"), "utf8"),
+  ) as ReleaseNote;
+  const completedAt = new Date();
+  const outputPaths = [
+    path.join(root, "public", "dashboard-release.json"),
+    path.join(root, "dist", "client", "dashboard-release.json"),
+  ];
+
+  await Promise.all(
+    outputPaths.map((outputPath) =>
+      writeDashboardRelease(id, note, completedAt, outputPath),
+    ),
+  );
 }
