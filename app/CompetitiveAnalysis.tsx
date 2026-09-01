@@ -384,6 +384,14 @@ function AnimatedAnalysisScore({
 
 const formatStaffShortDate = (value: string) => value.replaceAll("-", "").slice(2);
 
+const formatStaffTenureDuration = (months: number) => {
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  if (years && remainingMonths) return `${years}년 ${remainingMonths}개월`;
+  if (years) return `${years}년`;
+  return `${remainingMonths}개월`;
+};
+
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
   value === null || benchmark === null || benchmark === 0
     ? null
@@ -960,9 +968,24 @@ export default function CompetitiveAnalysis({
   const selectedStaffResponseShare = staffNationalResponses
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
+  const selectedStaffTenurePeerRangeStart =
+    selectedStaffEmployee?.tenureMonths ?? null;
+  const selectedStaffTenurePeerRangeEnd =
+    selectedStaffTenurePeerRangeStart === null
+      ? null
+      : selectedStaffTenurePeerRangeStart + 6;
+  const selectedStaffTenurePeerRangeLabel =
+    selectedStaffTenurePeerRangeStart === null ||
+    selectedStaffTenurePeerRangeEnd === null
+      ? null
+      : `${formatStaffTenureDuration(selectedStaffTenurePeerRangeStart)} ~ ${formatStaffTenureDuration(selectedStaffTenurePeerRangeEnd)}`;
   const selectedStaffTenurePeers = selectedStaffEmployee
     ? staffCurrentSalesPopulation.flatMap(({ employee }) => {
-        if (employee.tenureMonths !== selectedStaffEmployee.tenureMonths) {
+        if (
+          selectedStaffTenurePeerRangeEnd === null ||
+          employee.tenureMonths < selectedStaffEmployee.tenureMonths ||
+          employee.tenureMonths > selectedStaffTenurePeerRangeEnd
+        ) {
           return [];
         }
         const totals = staffYears.reduce(
@@ -1665,28 +1688,6 @@ export default function CompetitiveAnalysis({
                 )}
               </div>
             </article>
-            <article
-              className="analysis-staff-metric-card analysis-staff-tenure-peer-card"
-              aria-label={`동일연차 상담 만족도 ${
-                selectedStaffTenurePeerAverage === null
-                  ? "표본 없음"
-                  : `${selectedStaffTenurePeerAverage.toFixed(1)}점`
-              }, ${selectedStaffTenurePeers.length}명`}
-            >
-              <span>동일연차 정보</span>
-              <div className="analysis-staff-metric-value">
-                <strong>
-                  {selectedStaffTenurePeerAverage === null
-                    ? "―"
-                    : selectedStaffTenurePeerAverage.toFixed(1)}
-                  {selectedStaffTenurePeerAverage === null ? null : <small>점</small>}
-                </strong>
-                <small className="analysis-staff-metric-comparison">
-                  <i aria-hidden="true">/</i>
-                  {selectedStaffTenurePeers.length}명
-                </small>
-              </div>
-            </article>
             <article className="analysis-staff-metric-card">
               <span>상담 만족도</span>
               <div className="analysis-staff-metric-value">
@@ -1702,6 +1703,30 @@ export default function CompetitiveAnalysis({
                     전체 {staffNationalScoreRanking.length}명 중 {selectedStaffScoreRank}위
                   </small>
                 ) : null}
+              </div>
+            </article>
+            <article
+              className="analysis-staff-metric-card analysis-staff-tenure-peer-card"
+              aria-label={`동일연차 ${selectedStaffTenurePeerRangeLabel ?? "범위 없음"}, 상담 만족도 ${
+                selectedStaffTenurePeerAverage === null
+                  ? "표본 없음"
+                  : `${selectedStaffTenurePeerAverage.toFixed(1)}점`
+              }, ${selectedStaffTenurePeers.length}명`}
+            >
+              <span>동일연차 정보</span>
+              <div className="analysis-staff-metric-value">
+                <strong>
+                  {selectedStaffTenurePeerAverage === null
+                    ? "―"
+                    : selectedStaffTenurePeerAverage.toFixed(1)}
+                  {selectedStaffTenurePeerAverage === null ? null : <small>점</small>}
+                </strong>
+                <small className="analysis-staff-metric-comparison">
+                  <i aria-hidden="true">/</i>
+                  {selectedStaffTenurePeerRangeLabel ?? "―"}
+                  <i aria-hidden="true">/</i>
+                  {selectedStaffTenurePeers.length}명
+                </small>
               </div>
             </article>
             <article className="analysis-staff-metric-card">

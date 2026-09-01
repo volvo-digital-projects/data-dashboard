@@ -5109,6 +5109,14 @@ input:focus-visible {
   .analysis-staff-metric-value > small.analysis-staff-metric-comparison {
     font-size: 8px;
   }
+
+  .analysis-staff-tenure-peer-card .analysis-staff-metric-value {
+    gap: 4px;
+  }
+
+  .analysis-staff-tenure-peer-card .analysis-staff-metric-value > small.analysis-staff-metric-comparison {
+    font-size: 7px;
+  }
 }
 
 .analysis-staff-comparison-layout {
