@@ -12384,11 +12384,11 @@ body {
 }
 
 /* Page 1 and page 2 must finish their fixed top surface on the same pixel.
-   Page 2 has one extra internal row, so its bottom padding supplies the exact
-   remaining 6/8px without changing any header, tab, or summary-card content. */
+   Page 2's header + tabs + summary stack is 6px shorter than page 1 at both
+   desktop and iPad widths, so only its final inset balances the outer shell. */
 @media (min-width: 761px) {
   .analysis-sticky-shell {
-    padding-bottom: 16px;
+    padding-bottom: 22px;
   }
 }
 

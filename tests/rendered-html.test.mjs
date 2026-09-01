@@ -2927,6 +2927,10 @@ test("aligns both sticky shells themselves with their lower panels at every zoom
     css,
     /@media \(min-width: 761px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\)/,
   );
+  assert.match(
+    css,
+    /@media \(min-width: 761px\)\s*\{\s*\.analysis-sticky-shell\s*\{[^}]*padding-bottom: 22px/,
+  );
   assert.equal(
     (css.match(/calc\(24px - var\(--dashboard-sticky-inner-gutter\)\)/g) ?? [])
       .length,
