@@ -13975,7 +13975,7 @@ button.header-status-item {
   }
 }
 
-@media (min-width: 761px) and (max-width: 1240px) {
+@media (min-width: 761px) and (max-width: 1366px) {
   .dashboard #score-voc .voc-consultation-history {
     height: auto;
     min-height: 196px;
