@@ -37,11 +37,11 @@ type DetailData = {
 const detailData = weeklyDetailsJson as DetailData;
 const chart = {
   width: 960,
-  height: 148,
+  height: 174,
   left: 38,
   right: 12,
-  top: 12,
-  bottom: 26,
+  top: 20,
+  bottom: 32,
 };
 
 const displayNumber = (value: number | null | undefined) =>
@@ -99,11 +99,13 @@ const lastValueIndex = (values: Array<number | null>, latestWeek: number) => {
 function MetricDetailChart({
   component,
   cdsid,
+  metric,
   showroomName,
   weekRanges,
 }: {
   component: DetailComponent;
   cdsid: string;
+  metric: DetailMetric;
   showroomName: string;
   weekRanges: WeekRange[];
 }) {
@@ -118,20 +120,53 @@ function MetricDetailChart({
     latestIndex >= 0 && typeof latestShowroom === "number"
       ? point(latestIndex, latestShowroom, component.max)
       : null;
-  const axisWeeks = [1, 13, 26, 39, 52];
+  const axisWeeks = Array.from({ length: 52 }, (_, index) => index + 1);
+  const majorAxisWeeks = new Set([1, 13, 26, 39, 52]);
+  const scorePoints = showroomValues.slice(0, 52).flatMap((value, index) => {
+    if (typeof value !== "number") return [];
+    const coordinates = point(index, value, component.max);
+    return [{ index, value, ...coordinates }];
+  });
   const latestPeriodLabel =
     component.cadence === "quarterly"
       ? `Q${Math.max(1, Math.ceil(latestWeek / 13))}`
       : `W${String(latestWeek || 0).padStart(2, "0")}`;
+  const isVckEvaluation = metric === "voc" || component.key === "app";
+  const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
 
   return (
     <article className="metric-detail-card">
       <header>
         <div>
           <span>{component.cadence === "quarterly" ? "QUARTERLY" : "WEEKLY"}</span>
-          <h2>{component.label}</h2>
+          <h2>
+            <span>{component.label}</span>
+            {metric === "cx" ? (
+              <>
+                <i aria-hidden="true">/</i>
+                <b>CX INDEX</b>
+              </>
+            ) : null}
+            <i aria-hidden="true">/</i>
+            <em className={isVckEvaluation ? "vck" : "global"}>
+              <svg className="metric-detail-evaluation-icon" viewBox="0 0 20 20" aria-hidden="true">
+                {isVckEvaluation ? (
+                  <>
+                    <path d="M10 2.5 16 5v4.4c0 3.8-2.4 6.5-6 8.1-3.6-1.6-6-4.3-6-8.1V5l6-2.5Z" />
+                    <path d="m7.2 10 1.8 1.8 3.9-4" />
+                  </>
+                ) : (
+                  <>
+                    <circle cx="10" cy="10" r="7.2" />
+                    <path d="M2.8 10h14.4M10 2.8c2.1 2 3.2 4.4 3.2 7.2S12.1 15.2 10 17.2C7.9 15.2 6.8 12.8 6.8 10S7.9 4.8 10 2.8Z" />
+                  </>
+                )}
+              </svg>
+              {evaluationLabel}
+            </em>
+          </h2>
           <small>
-            {component.weight} 반영
+            <strong>{displayNumber(component.max)}점 만점</strong>
             {component.cadence === "quarterly" ? " · 분기값을 해당 주차 구간에 표시" : ""}
           </small>
         </div>
@@ -145,8 +180,7 @@ function MetricDetailChart({
       </header>
 
       <div className="metric-detail-chart-legend" aria-hidden="true">
-        <span className="showroom">{showroomName}</span>
-        <span className="national">전국</span>
+        <span className="showroom">{showroomName} 점수</span>
       </div>
 
       <div className="metric-detail-chart-scroll">
@@ -154,7 +188,7 @@ function MetricDetailChart({
           className="metric-detail-chart"
           viewBox={`0 0 ${chart.width} ${chart.height}`}
           role="img"
-          aria-label={`${component.label} W01부터 W52까지 ${showroomName} 및 전국 추이`}
+          aria-label={`${component.label} W1부터 W52까지 ${showroomName} 점수 추이`}
         >
           {[0, 0.5, 1].map((ratio) => {
             const y = chart.top + ratio * (chart.height - chart.top - chart.bottom);
@@ -176,27 +210,52 @@ function MetricDetailChart({
           })}
           {axisWeeks.map((week) => {
             const x = point(week - 1, 0, component.max).x;
+            const isMajor = majorAxisWeeks.has(week);
             return (
               <g key={week}>
                 <line
-                  className="metric-detail-week-guide"
+                  className={`metric-detail-week-guide${isMajor ? " major" : ""}`}
                   x1={x}
                   x2={x}
                   y1={chart.top}
                   y2={chart.height - chart.bottom}
                 />
+                <line
+                  className="metric-detail-week-tick"
+                  x1={x}
+                  x2={x}
+                  y1={chart.height - chart.bottom}
+                  y2={chart.height - chart.bottom + 4}
+                />
                 <text className="metric-detail-week-label" x={x} y={chart.height - 8}>
-                  W{String(week).padStart(2, "0")}
+                  W{week}
                 </text>
               </g>
             );
           })}
-          {lineSegments(component.average, component.max).map((path, index) => (
-            <path className="metric-detail-national-line" d={path} key={`national-${index}`} />
-          ))}
           {lineSegments(showroomValues, component.max).map((path, index) => (
             <path className="metric-detail-showroom-line" d={path} key={`showroom-${index}`} />
           ))}
+          {scorePoints.map(({ index, value, x, y }) => {
+            const showLabel =
+              component.cadence === "weekly" || (index + 1) % 13 === 0;
+            const labelY = y <= chart.top + 12 ? y + 12 : y - 6;
+            return (
+              <g className="metric-detail-score-point" key={`score-${index}`}>
+                <circle cx={x} cy={y} r="2.1" />
+                {showLabel ? (
+                  <text
+                    className="metric-detail-score-label"
+                    x={x}
+                    y={labelY}
+                    textAnchor={index === 0 ? "start" : index === 51 ? "end" : "middle"}
+                  >
+                    {displayNumber(value)}
+                  </text>
+                ) : null}
+              </g>
+            );
+          })}
           {latestPoint ? (
             <circle
               className="metric-detail-latest-point"
@@ -239,21 +298,25 @@ export default function MetricDetails({
   return (
     <main className="metric-detail-page">
       <header className="metric-detail-page-header">
-        <div>
-          <Link href={`/dashboard/${cdsid}`}>
-            <span aria-hidden="true">←</span>
-            현황으로
-          </Link>
-          <span>{showroom?.showroom ?? cdsid}</span>
+        <div className="metric-detail-header-primary">
+          <small>DATA DASHBOARD DETAIL</small>
+          <h1>{showroom?.showroom ?? cdsid} {group.label} 세부지표</h1>
+          <div className="metric-detail-header-subline">
+            <Link href={`/dashboard/${cdsid}`}>
+              <span aria-hidden="true">←</span>
+              현황으로
+            </Link>
+            <p>원본 구글시트에서 동기화한 W1~W52 전시장값입니다.</p>
+          </div>
         </div>
-        <div>
-          <small>GOOGLE SHEET WEEKLY DETAIL</small>
-          <h1>{group.label} 세부지표</h1>
-          <p>원본 구글시트에서 동기화한 W01~W52 전시장값과 전국값입니다.</p>
+        <div className="metric-detail-header-context" aria-label="현재 세부지표 정보">
+          <div><span>지표</span><strong>{group.label}</strong></div>
+          <div><span>전시장</span><strong>{showroomName}</strong></div>
+          <div><span>주차</span><strong>W1–W52</strong></div>
+          <time dateTime={detailData.meta.syncedAt}>
+            <span>기준</span><strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
+          </time>
         </div>
-        <time dateTime={detailData.meta.syncedAt}>
-          {formatSyncDate(detailData.meta.syncedAt)} 기준
-        </time>
       </header>
 
       <nav className="metric-detail-tabs" aria-label="세부지표 종류">
@@ -270,6 +333,7 @@ export default function MetricDetails({
           <MetricDetailChart
             component={component}
             cdsid={cdsid}
+            metric={metric}
             showroomName={showroomName}
             weekRanges={detailData.meta.weekRanges}
             key={component.key}
