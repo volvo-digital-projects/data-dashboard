@@ -2030,6 +2030,95 @@ test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1
   );
 });
 
+test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", async () => {
+  const [dashboardText, syncSource] = await Promise.all([
+    readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/sync-v3s-q2-final.py", import.meta.url), "utf8"),
+  ]);
+  const dashboard = JSON.parse(dashboardText);
+  const expected = {
+    "6KR342": 96.4,
+    "6KR6834": 93.4,
+    "6KR6868": 98.4,
+    "6KR6867": 97.5,
+    "6KR6850": 97.6,
+    "6KR6828": 98.2,
+    "6KR6864": 97.7,
+    "6KR6873": 91.7,
+    "6KR6863": 95.3,
+    "6KR6829": 91.8,
+    "6KR6833": 98.2,
+    "6KR6841": 85.3,
+    "6KR6846": 91.9,
+    "6KR6862": 95.6,
+    "6KR6830": 96.7,
+    "6KR6858": 92.6,
+    "6KR6865": 98.9,
+    "6KR6869": 99.6,
+    "6KR6870": 97.0,
+    "6KR6852": 89.7,
+    "6KR6847": 88.9,
+    "6KR6802": 97.5,
+    "6KR6856": 98.2,
+    "6KR6849": 91.1,
+    "6KR6839": 96.0,
+    "6KR6874": 94.2,
+    "6KR6851": 99.4,
+    "6KR6857": 96.9,
+    "6KR6836": 90.3,
+    "6KR6845": 98.4,
+    "6KR6840": 93.4,
+    "6KR6859": 98.0,
+    "6KR6871": 98.5,
+    "6KR6838": 97.5,
+    "6KR6848": 98.4,
+    "6KR6872": 96.9,
+    "6KR6854": 93.8,
+    "6KR6861": 96.5,
+    "6KR6842": 94.4,
+  };
+
+  assert.equal(dashboard.showrooms.length, 39);
+  assert.deepEqual(
+    Object.fromEntries(dashboard.showrooms.map((showroom) => [showroom.cdsid, showroom.v3s])),
+    expected,
+  );
+  assert.equal(dashboard.averages.v3s, 95.4);
+  assert.equal(dashboard.meta.combatAverage, 305.6);
+  assert.ok(
+    dashboard.meta.generatedFrom.includes(
+      "2026 Volvo Sales Skill Simulation_Q2_Raw Data_V5.csv",
+    ),
+  );
+  for (const showroom of dashboard.showrooms) {
+    assert.equal(
+      showroom.combat,
+      Math.round((showroom.v3s + showroom.voc + showroom.cx) * 10) / 10,
+      `${showroom.showroom} 통합 원점수도 Q2 V3S 수정값을 반영해야 합니다.`,
+    );
+  }
+  assert.match(syncSource, /extract_pdf_score/);
+  assert.match(syncSource, /if pdf_mismatches:[\s\S]*?쓰기를 중단/);
+
+  for (const [cdsid, showroomName, score] of [
+    ["6KR6833", "대전", "98.2"],
+    ["6KR6834", "강남대치", "93.4"],
+  ]) {
+    const response = await render(`/dashboard/${cdsid}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, new RegExp(`<h1>볼보 ${showroomName}(?:<!-- -->)? 현황<\\/h1>`));
+    assert.match(
+      html,
+      new RegExp(
+        `title="Volvo Sales Skill Simulation 평가\\(VCK\\)">V3S[\\s\\S]*?` +
+          `class="metric-card-value animated-score" aria-label="${score}"[^>]*>${score}<`,
+      ),
+    );
+    assert.match(html, /title="Q2 볼보 평균 95\.4점"/);
+  }
+});
+
 test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   const [weeklyText, detailsText, syncSource, dashboardSource, detailsSource] = await Promise.all([
     readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
