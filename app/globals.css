@@ -14387,13 +14387,13 @@ button.header-status-item {
 
 .dashboard #score-voc .voc-consultation-comparison > b {
   grid-area: showroom;
-  color: #2f718b;
+  color: #728694;
   font-weight: 780;
 }
 
 .dashboard #score-voc .voc-consultation-comparison > em {
   grid-area: national;
-  color: #a65f50;
+  color: #728694;
   font-weight: 720;
 }
 
