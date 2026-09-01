@@ -1,11 +1,14 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
 const workbookId = "1KZust31kwsHrv0VZEqyPhACza9R3rZibOdf467c6JXA";
-const workbookUrl = `https://docs.google.com/spreadsheets/d/${workbookId}/edit`;
 
 const sheets = {
   dates: "DB_날짜(참고)",
   voc: "②VOC(결과)",
+  vocOverall: "01☆VOC종합만족도(60%)",
+  vocGreeting: "02☆VOC첫인사(20%)",
+  vocTablet: "03☆VOC태블릿(10%)",
+  vocHappyCall: "04☆VOC해피콜(10%)",
   delivery: "③-1 신차출고 만족도(결과)",
   testDrive: "③-2시승 만족도(결과)",
   emergency: "③-3긴급경보 처리여부(결과)",
@@ -163,6 +166,23 @@ function quarterlyResult(rows) {
   };
 }
 
+function expandQuarterlyResult(result) {
+  const expand = (values) =>
+    Array.from({ length: 52 }, (_, index) => values[Math.floor(index / 13)] ?? null);
+  const latestQuarter = result.average.reduce(
+    (latest, value, index) => (value === null ? latest : index + 1),
+    0,
+  );
+
+  return {
+    latestWeek: latestQuarter * 13,
+    average: expand(result.average),
+    byCdsid: Object.fromEntries(
+      Object.entries(result.byCdsid).map(([cdsid, values]) => [cdsid, expand(values)]),
+    ),
+  };
+}
+
 const loaded = Object.fromEntries(
   await Promise.all(
     Object.entries(sheets).map(async ([key, sheetName]) => [
@@ -174,11 +194,17 @@ const loaded = Object.fromEntries(
 
 const weekRanges = weekRangesResult(loaded.dates);
 const voc = weeklyResult(loaded.voc);
+const vocOverall = weeklyResult(loaded.vocOverall);
+const vocGreeting = weeklyResult(loaded.vocGreeting);
+const vocTablet = weeklyResult(loaded.vocTablet);
+const vocHappyCall = weeklyResult(loaded.vocHappyCall);
 const delivery = weeklyResult(loaded.delivery);
 const testDrive = weeklyResult(loaded.testDrive);
 const emergency = weeklyResult(loaded.emergency);
 const app = weeklyResult(loaded.app);
 const actionPlan = quarterlyResult(loaded.actionPlan);
+const actionPlanWeekly = expandQuarterlyResult(actionPlan);
+const syncedAt = new Date().toISOString();
 
 const cxLatestWeek = Math.min(
   delivery.latestWeek,
@@ -229,8 +255,7 @@ const cxAverage = Array.from({ length: 52 }, (_, index) => {
 
 const output = {
   meta: {
-    workbookUrl,
-    syncedAt: new Date().toISOString(),
+    syncedAt,
     vocLatestWeek: voc.latestWeek,
     cxLatestWeek,
     weekRanges,
@@ -251,10 +276,113 @@ const output = {
   },
 };
 
+const detailsOutput = {
+  meta: {
+    syncedAt,
+    weekRanges,
+  },
+  voc: {
+    label: "VOC",
+    components: [
+      {
+        key: "overall",
+        label: "VOC 종합만족도",
+        weight: "60점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...vocOverall,
+      },
+      {
+        key: "greeting",
+        label: "VOC 첫인사",
+        weight: "20점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...vocGreeting,
+      },
+      {
+        key: "tablet",
+        label: "VOC 태블릿",
+        weight: "10점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...vocTablet,
+      },
+      {
+        key: "happyCall",
+        label: "VOC 해피콜",
+        weight: "10점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...vocHappyCall,
+      },
+    ],
+  },
+  cx: {
+    label: "CX Index",
+    components: [
+      {
+        key: "delivery",
+        label: "신차출고 만족도",
+        weight: "100점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...delivery,
+      },
+      {
+        key: "testDrive",
+        label: "시승 만족도",
+        weight: "100점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...testDrive,
+      },
+      {
+        key: "emergency",
+        label: "긴급경보 처리여부",
+        weight: "10점",
+        max: 10,
+        unit: "점",
+        cadence: "weekly",
+        ...emergency,
+      },
+      {
+        key: "actionPlan",
+        label: "조치 계획",
+        weight: "10점",
+        max: 10,
+        unit: "점",
+        cadence: "quarterly",
+        ...actionPlanWeekly,
+      },
+      {
+        key: "app",
+        label: "헤이볼보 앱 가입율",
+        weight: "100점",
+        max: 100,
+        unit: "점",
+        cadence: "weekly",
+        ...app,
+      },
+    ],
+  },
+};
+
 await mkdir("app/data", { recursive: true });
 await writeFile(
   "app/data/weekly.json",
   `${JSON.stringify(output, null, 2)}\n`,
+  "utf8",
+);
+await writeFile(
+  "app/data/weekly-details.json",
+  `${JSON.stringify(detailsOutput, null, 2)}\n`,
   "utf8",
 );
 

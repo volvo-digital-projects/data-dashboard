@@ -776,20 +776,14 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /VOC/);
   assert.match(
     visibleHtml,
-    /class="voc-component-chip"><span>VOC종합만족도<\/span><em>\(60점\)<\/em>/,
+    /class="metric-detail-link" href="\/dashboard\/6KR6834\/details\/voc"/,
   );
   assert.match(
     visibleHtml,
-    /class="voc-component-chip"><span>VOC첫인상<\/span><em>\(20점\)<\/em>/,
+    /class="metric-detail-link" href="\/dashboard\/6KR6834\/details\/cx"/,
   );
-  assert.equal(
-    (visibleHtml.match(/class="voc-component-chip"><span>VOC(?:태블릿|해피콜)<\/span><em>\(10점\)<\/em>/g) ?? []).length,
-    2,
-  );
-  assert.doesNotMatch(
-    visibleHtml,
-    /class="voc-component-chip"><b>0[1-4]<\/b>|VOC(?:종합만족도|첫인상|태블릿|해피콜)<\/span><em>\(\d+%\)<\/em>/,
-  );
+  assert.equal((visibleHtml.match(/class="metric-detail-link"/g) ?? []).length, 2);
+  assert.doesNotMatch(visibleHtml, /class="voc-component-chip"/);
   assert.doesNotMatch(visibleHtml, /class="signal-icon/);
   assert.doesNotMatch(visibleHtml, /class="signal-pill/);
   assert.match(html, /CX Index/);
@@ -1010,23 +1004,16 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(html, /class="trend-selector"/);
   assert.doesNotMatch(html, /class="trend-selector-icon"/);
   assert.equal((html.match(/class="score-tier /g) ?? []).length, 3);
-  assert.equal((html.match(/class="cx-component-chip"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="metric-detail-link"/g) ?? []).length, 2);
   assert.match(
     css,
-    /\.score-tier-heading \.voc-component-chip,[\s\S]*?\.score-tier-heading \.cx-component-chip\s*\{[^}]*background: #f4f8fa;[^}]*box-shadow: none;/,
-  );
-  assert.doesNotMatch(
-    css,
-    /\.score-tier-heading \.voc-component-chip,[\s\S]*?\.score-tier-heading \.cx-component-chip\s*\{[^}]*linear-gradient/,
+    /\.score-tier-heading \.metric-detail-link\s*\{[^}]*display: inline-flex;[^}]*border: 1px solid rgba\(80, 109, 128, 0\.24\);/,
   );
   assert.match(
     visibleHtml,
-    /aria-label="CX Index 평가 구성 항목"[\s\S]*?<span>신차출고 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>시승 만족도<\/span><em>\(100점\)<\/em>[\s\S]*?<span>긴급경보 처리여부<\/span><em>\(10점\)<\/em>[\s\S]*?<span>조치 계획<\/span><em>\(10점\)<\/em>[\s\S]*?<span>헤이볼보 앱 가입율<\/span><em>\(100점\)<\/em>/,
+    /aria-label="CX Index 세부지표 W01부터 W52까지 보기"/,
   );
-  assert.doesNotMatch(
-    visibleHtml,
-    /class="cx-component-chip"><b>0[1-5]<\/b>/,
-  );
+  assert.doesNotMatch(visibleHtml, /class="cx-component-chip"/);
   assert.doesNotMatch(html, /<h3>분기 평가<\/h3>/);
   assert.doesNotMatch(visibleHtml, /분기 평가 흐름/);
   assert.match(
@@ -1160,6 +1147,30 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /EDIT 권한|PRIVATE · 관리자 전용/);
   assert.doesNotMatch(visibleHtml, /MY SHOWROOM|전시장의 현재 위상/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+});
+
+test("server-renders the original VOC and CX weekly detail pages", async () => {
+  const vocResponse = await render("/dashboard/6KR6834/details/voc");
+  assert.equal(vocResponse.status, 200);
+  const vocHtml = (await vocResponse.text()).replaceAll("<!-- -->", "");
+  assert.match(vocHtml, /VOC 세부지표/);
+  assert.match(vocHtml, /원본 구글시트에서 동기화한 W01~W52 전시장값과 전국값/);
+  assert.match(vocHtml, /VOC 종합만족도/);
+  assert.match(vocHtml, /VOC 첫인사/);
+  assert.match(vocHtml, /VOC 태블릿/);
+  assert.match(vocHtml, /VOC 해피콜/);
+  assert.match(vocHtml, /W01~W52 원본값 보기/);
+
+  const cxResponse = await render("/dashboard/6KR6834/details/cx");
+  assert.equal(cxResponse.status, 200);
+  const cxHtml = (await cxResponse.text()).replaceAll("<!-- -->", "");
+  assert.match(cxHtml, /CX Index 세부지표/);
+  assert.match(cxHtml, /신차출고 만족도/);
+  assert.match(cxHtml, /시승 만족도/);
+  assert.match(cxHtml, /긴급경보 처리여부/);
+  assert.match(cxHtml, /조치 계획/);
+  assert.match(cxHtml, /헤이볼보 앱 가입율/);
+  assert.match(cxHtml, /Q3 최신값/);
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
@@ -2003,14 +2014,18 @@ test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1
   );
 });
 
-test("ships Google Sheet weekly VOC and calculated CX series", async () => {
-  const [weeklyText, syncSource, dashboardSource] = await Promise.all([
+test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
+  const [weeklyText, detailsText, syncSource, dashboardSource, detailsSource] = await Promise.all([
     readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/weekly-details.json", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-google-sheet-data.mjs", import.meta.url), "utf8"),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/MetricDetails.tsx", import.meta.url), "utf8"),
   ]);
   const weekly = JSON.parse(weeklyText);
+  const details = JSON.parse(detailsText);
 
+  assert.equal(weekly.meta.workbookUrl, undefined);
   assert.equal(weekly.meta.vocLatestWeek, 32);
   assert.equal(weekly.meta.cxLatestWeek, 30);
   assert.equal(weekly.meta.weekRanges.length, 52);
@@ -2079,6 +2094,23 @@ test("ships Google Sheet weekly VOC and calculated CX series", async () => {
     dashboardSource,
     /cxRawTotalOf[\s\S]*?record\.delivery[\s\S]*?record\.testDrive[\s\S]*?record\.emergency[\s\S]*?record\.actionPlan[\s\S]*?record\.app/,
   );
+  assert.equal(details.meta.weekRanges.length, 52);
+  assert.equal(details.voc.components.length, 4);
+  assert.equal(details.cx.components.length, 5);
+  assert.equal(Object.keys(details.voc.components[0].byCdsid).length, 39);
+  assert.equal(Object.keys(details.cx.components[0].byCdsid).length, 39);
+  assert.ok(
+    [...details.voc.components, ...details.cx.components].every(
+      (component) =>
+        component.average.length === 52 &&
+        component.byCdsid["6KR6834"].length === 52,
+    ),
+  );
+  assert.match(syncSource, /01☆VOC종합만족도\(60%\)/);
+  assert.match(syncSource, /04☆VOC해피콜\(10%\)/);
+  assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
+  assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
+  assert.match(detailsSource, /W01~W52 원본값 보기/);
 });
 
 test("aligns every quarter boundary to the same 52-week grid", async () => {

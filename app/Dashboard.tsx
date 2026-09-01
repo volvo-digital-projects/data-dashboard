@@ -122,7 +122,6 @@ type LatestUpdate = {
 
 type WeeklyData = {
   meta: {
-    workbookUrl: string;
     syncedAt: string;
     vocLatestWeek: number;
     cxLatestWeek: number;
@@ -287,21 +286,6 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
   voc: "Voice of Customer · 고객 의견 평가(VCK)",
   cx: "Customer Experience Index · 고객경험 종합지수(글로벌)",
 };
-
-const vocComponents = [
-  { label: "VOC종합만족도", weight: "60점" },
-  { label: "VOC첫인상", weight: "20점" },
-  { label: "VOC태블릿", weight: "10점" },
-  { label: "VOC해피콜", weight: "10점" },
-];
-
-const cxComponents = [
-  { label: "신차출고 만족도", score: "100점" },
-  { label: "시승 만족도", score: "100점" },
-  { label: "긴급경보 처리여부", score: "10점" },
-  { label: "조치 계획", score: "10점" },
-  { label: "헤이볼보 앱 가입율", score: "100점" },
-];
 
 const cxQ2Dsc = cxQ2DscJson as CxQ2DscData;
 
@@ -3366,17 +3350,16 @@ export default function Dashboard({
                 <div className="score-tier-heading-title">
                   <strong className="english-title">VOC</strong>
                 </div>
-                <div
-                  className="voc-component-tabs"
-                  aria-label="VOC 평가 구성 항목"
+                <Link
+                  className="metric-detail-link"
+                  href={`/dashboard/${selected.cdsid}/details/voc`}
+                  aria-label="VOC 세부지표 W01부터 W52까지 보기"
                 >
-                  {vocComponents.map((component) => (
-                    <span className="voc-component-chip" key={component.label}>
-                      <span>{component.label}</span>
-                      <em>({component.weight})</em>
-                    </span>
-                  ))}
-                </div>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 19V9m5 10V5m5 14v-7m5 7V3" />
+                  </svg>
+                  <span>세부지표</span>
+                </Link>
                 <h3 className="score-tier-side-title">
                   <span className="english-title">4</span>개년 추이
                 </h3>
@@ -3404,17 +3387,16 @@ export default function Dashboard({
                 <div className="score-tier-heading-title">
                   <strong className="english-title">CX Index</strong>
                 </div>
-                <div
-                  className="cx-component-tabs"
-                  aria-label="CX Index 평가 구성 항목"
+                <Link
+                  className="metric-detail-link"
+                  href={`/dashboard/${selected.cdsid}/details/cx`}
+                  aria-label="CX Index 세부지표 W01부터 W52까지 보기"
                 >
-                  {cxComponents.map((component) => (
-                    <span className="cx-component-chip" key={component.label}>
-                      <span>{component.label}</span>
-                      <em>({component.score})</em>
-                    </span>
-                  ))}
-                </div>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 19V9m5 10V5m5 14v-7m5 7V3" />
+                  </svg>
+                  <span>세부지표</span>
+                </Link>
                 <h3 className="score-tier-side-title english-title">
                   ONE VOICE
                 </h3>
