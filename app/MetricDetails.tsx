@@ -122,7 +122,7 @@ function MetricDetailChart({
   });
   const completedWeek = Math.max(0, Math.min(52, component.latestWeek));
   const completedWeekPoint =
-    metric === "voc" && completedWeek > 0
+    completedWeek > 0
       ? point(completedWeek - 1, 0, component.max)
       : null;
   const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
