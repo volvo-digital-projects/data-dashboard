@@ -10665,7 +10665,21 @@ button.quarter-score-row:disabled {
     0 9px 18px -10px rgba(47, 107, 138, 0.56);
   transform: scaleY(0);
   transform-origin: bottom;
-  animation: v3s-bar-rise 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: voc-consultation-bar-rise 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes voc-consultation-bar-rise {
+  0% {
+    opacity: 0.45;
+    transform: scaleY(0);
+  }
+  62% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 .voc-consultation-bar.national {
