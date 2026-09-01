@@ -14737,6 +14737,12 @@ button.header-status-item {
     transform: none;
     animation: none;
   }
+
+  .metric-detail-complete-marker {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
 }
 
 .metric-detail-grid-line {
@@ -14774,6 +14780,46 @@ button.header-status-item {
   font-size: 9px;
   font-weight: 680;
   text-anchor: middle;
+}
+
+.metric-detail-complete-marker {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: metric-detail-complete-pulse 1.45s ease-in-out infinite;
+}
+
+.metric-detail-complete-marker circle {
+  fill: #f47b3f;
+}
+
+.metric-detail-complete-check,
+.metric-detail-complete-arrow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.metric-detail-complete-check {
+  stroke: #ffffff;
+  stroke-width: 1.25;
+}
+
+.metric-detail-complete-arrow {
+  stroke: #f47b3f;
+  stroke-width: 1.35;
+}
+
+@keyframes metric-detail-complete-pulse {
+  0%,
+  100% {
+    transform: translateY(-1px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .metric-detail-showroom-line {

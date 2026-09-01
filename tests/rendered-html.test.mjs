@@ -1178,8 +1178,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 4);
-  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 208);
+  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 128);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
+  assert.equal((vocBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 4);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(
     vocBody,
@@ -1253,6 +1254,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /@keyframes metric-detail-series-wipe\s*\{[\s\S]*?transform:\s*scaleX\(1\);/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-complete-marker\s*\{[^}]*animation:\s*metric-detail-complete-pulse 1\.45s ease-in-out infinite;/,
   );
   assert.match(
     detailCss,

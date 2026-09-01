@@ -111,8 +111,13 @@ function MetricDetailChart({
   const showroomValues = Array.from({ length: 52 }, (_, index) => {
     const value = rawShowroomValues[index];
     if (typeof value === "number") return value;
-    return metric === "voc" ? 0 : null;
+    return metric === "voc" && index < Math.min(52, component.latestWeek) ? 0 : null;
   });
+  const completedWeek = Math.max(0, Math.min(52, component.latestWeek));
+  const completedWeekPoint =
+    metric === "voc" && completedWeek > 0
+      ? point(completedWeek - 1, 0, component.max)
+      : null;
   const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
   const latestShowroom = latestIndex >= 0 ? showroomValues[latestIndex] : null;
   const latestPoint =
@@ -234,6 +239,19 @@ function MetricDetailChart({
               </g>
             );
           })}
+          {completedWeekPoint ? (
+            <g className="metric-detail-complete-marker" aria-hidden="true">
+              <circle cx={completedWeekPoint.x} cy="5" r="3.8" />
+              <path
+                className="metric-detail-complete-check"
+                d={`M${(completedWeekPoint.x - 1.8).toFixed(2)} 5 L${(completedWeekPoint.x - 0.45).toFixed(2)} 6.35 L${(completedWeekPoint.x + 2).toFixed(2)} 3.45`}
+              />
+              <path
+                className="metric-detail-complete-arrow"
+                d={`M${completedWeekPoint.x.toFixed(2)} 9 V13 M${(completedWeekPoint.x - 2).toFixed(2)} 11 L${completedWeekPoint.x.toFixed(2)} 13 L${(completedWeekPoint.x + 2).toFixed(2)} 11`}
+              />
+            </g>
+          ) : null}
           <g className="metric-detail-data-series" clipPath={`url(#${seriesRevealId})`}>
             {lineSegments(showroomValues, component.max).map((path, index) => (
               <path className="metric-detail-showroom-line" d={path} key={`showroom-${index}`} />
