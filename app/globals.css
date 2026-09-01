@@ -6155,6 +6155,20 @@ input:focus-visible {
     padding-left: 8px;
   }
 
+  .analysis-staff-summary .analysis-staff-metric-value {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .analysis-staff-summary .analysis-staff-metric-value > small.analysis-staff-metric-comparison {
+    width: 100%;
+    margin-left: 0;
+    font-size: 7px;
+    text-align: left;
+  }
+
   .analysis-staff-detail-body {
     grid-template-rows: auto;
   }
