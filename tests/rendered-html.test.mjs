@@ -1373,6 +1373,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     /class="analysis-staff-tenure-value"><b>2<\/b><small>년<\/small><b>6<\/b><small>개월<\/small>/,
   );
+  assert.match(staffSectionHtml, /동일연차 2년 7개월 ~ 3년/);
+  assert.match(
+    analysisSource,
+    /const staffTenureHalfYearRange = \(completedMonths: number\) => \{[\s\S]*?Math\.floor\(Math\.max\(0, completedMonths\) \/ 6\) \* 6 \+ 1[\s\S]*?end: start \+ 5/,
+  );
+  assert.match(
+    analysisSource,
+    /staffTenureHalfYearRange\(employee\.tenureMonths\)\.start !==[\s\S]*?selectedStaffTenurePeerRangeStart/,
+  );
   assert.doesNotMatch(
     staffSectionHtml,
     /<span>근무기간<\/span><strong>13년 6개월<small>10년 이상<\/small><\/strong>/,

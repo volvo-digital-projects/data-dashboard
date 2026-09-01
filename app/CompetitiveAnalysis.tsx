@@ -392,6 +392,11 @@ const formatStaffTenureDuration = (months: number) => {
   return `${remainingMonths}개월`;
 };
 
+const staffTenureHalfYearRange = (completedMonths: number) => {
+  const start = Math.floor(Math.max(0, completedMonths) / 6) * 6 + 1;
+  return { start, end: start + 5 };
+};
+
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
   value === null || benchmark === null || benchmark === 0
     ? null
@@ -968,12 +973,13 @@ export default function CompetitiveAnalysis({
   const selectedStaffResponseShare = staffNationalResponses
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
+  const selectedStaffTenurePeerRange = selectedStaffEmployee
+    ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
+    : null;
   const selectedStaffTenurePeerRangeStart =
-    selectedStaffEmployee?.tenureMonths ?? null;
+    selectedStaffTenurePeerRange?.start ?? null;
   const selectedStaffTenurePeerRangeEnd =
-    selectedStaffTenurePeerRangeStart === null
-      ? null
-      : selectedStaffTenurePeerRangeStart + 6;
+    selectedStaffTenurePeerRange?.end ?? null;
   const selectedStaffTenurePeerRangeLabel =
     selectedStaffTenurePeerRangeStart === null ||
     selectedStaffTenurePeerRangeEnd === null
@@ -982,9 +988,9 @@ export default function CompetitiveAnalysis({
   const selectedStaffTenurePeers = selectedStaffEmployee
     ? staffCurrentSalesPopulation.flatMap(({ employee }) => {
         if (
-          selectedStaffTenurePeerRangeEnd === null ||
-          employee.tenureMonths < selectedStaffEmployee.tenureMonths ||
-          employee.tenureMonths > selectedStaffTenurePeerRangeEnd
+          selectedStaffTenurePeerRangeStart === null ||
+          staffTenureHalfYearRange(employee.tenureMonths).start !==
+            selectedStaffTenurePeerRangeStart
         ) {
           return [];
         }
