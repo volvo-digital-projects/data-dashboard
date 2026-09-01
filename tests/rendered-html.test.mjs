@@ -1183,8 +1183,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
-  assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 40);
-  assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 40);
+  assert.equal((vocBody.match(/class="metric-detail-week-guide(?: major)?"/g) ?? []).length, 265);
+  assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 25);
+  assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 160);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
@@ -1242,8 +1243,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
-  assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 40);
-  assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 40);
+  assert.equal((cxBody.match(/class="metric-detail-week-guide(?: major)?"/g) ?? []).length, 265);
+  assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 25);
+  assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 5);

@@ -43,6 +43,10 @@ const chart = {
   top: 20,
   bottom: 30,
 };
+const chartPlotWidth = chart.width - chart.left - chart.right;
+const weekCellWidth = chartPlotWidth / 52;
+const weekBoundaryX = (boundaryIndex: number) =>
+  chart.left + boundaryIndex * weekCellWidth;
 
 const quarterRanges = [
   { label: "Q1", start: 1, end: 13, range: "W01–W13" },
@@ -71,9 +75,8 @@ const formatSyncDate = (value: string) => {
 };
 
 const point = (index: number, value: number, max: number) => {
-  const plotWidth = chart.width - chart.left - chart.right;
   const plotHeight = chart.height - chart.top - chart.bottom;
-  const x = chart.left + (index / 51) * plotWidth;
+  const x = weekBoundaryX(index + 0.5);
   const ratio = Math.max(0, Math.min(1, value / max));
   const y = chart.top + (1 - ratio) * plotHeight;
   return { x, y };
@@ -132,7 +135,9 @@ function MetricDetailChart({
       ? point(latestIndex, latestShowroom, component.max)
       : null;
   const axisWeeks = Array.from({ length: 52 }, (_, index) => index + 1);
-  const majorAxisWeeks = new Set([1, 13, 26, 39, 52]);
+  const axisBoundaries = Array.from({ length: 53 }, (_, index) => index);
+  const quarterBoundaryIndexes = [0, 13, 26, 39, 52];
+  const majorAxisBoundaries = new Set(quarterBoundaryIndexes);
   const scorePoints = showroomValues.slice(0, 52).flatMap((value, index) => {
     if (typeof value !== "number") return [];
     const coordinates = point(index, value, component.max);
@@ -223,18 +228,24 @@ function MetricDetailChart({
               </g>
             );
           })}
+          {axisBoundaries.map((boundaryIndex) => {
+            const x = weekBoundaryX(boundaryIndex);
+            const isMajor = majorAxisBoundaries.has(boundaryIndex);
+            return (
+              <line
+                className={`metric-detail-week-guide${isMajor ? " major" : ""}`}
+                x1={x}
+                x2={x}
+                y1={chart.top}
+                y2={chart.height - chart.bottom}
+                key={`boundary-${boundaryIndex}`}
+              />
+            );
+          })}
           {axisWeeks.map((week) => {
             const x = point(week - 1, 0, component.max).x;
-            const isMajor = majorAxisWeeks.has(week);
             return (
               <g key={week}>
-                <line
-                  className={`metric-detail-week-guide${isMajor ? " major" : ""}`}
-                  x1={x}
-                  x2={x}
-                  y1={chart.top}
-                  y2={chart.height - chart.bottom}
-                />
                 <line
                   className="metric-detail-week-tick"
                   x1={x}
@@ -249,16 +260,10 @@ function MetricDetailChart({
             );
           })}
           {quarterRanges.map((quarter) => {
-            const startX = point(quarter.start - 1, 0, component.max).x;
-            const endX = point(quarter.end - 1, 0, component.max).x;
-            const weekStep = (chart.width - chart.left - chart.right) / 51;
-            const boundaryStartX =
-              quarter.start === 1 ? chart.left : startX - weekStep / 2;
-            const boundaryEndX =
-              quarter.end === 52 ? chart.width - chart.right : endX + weekStep / 2;
+            const boundaryStartX = weekBoundaryX(quarter.start - 1);
+            const boundaryEndX = weekBoundaryX(quarter.end);
             const centerX = (boundaryStartX + boundaryEndX) / 2;
             const quarterLineY = chart.height - 15;
-            const quarterBoundaryBottom = chart.height - 1;
             return (
               <g className="metric-detail-quarter-band" key={quarter.label} aria-hidden="true">
                 <line
@@ -267,20 +272,6 @@ function MetricDetailChart({
                   x2={boundaryEndX}
                   y1={quarterLineY}
                   y2={quarterLineY}
-                />
-                <line
-                  className="metric-detail-quarter-boundary"
-                  x1={boundaryStartX}
-                  x2={boundaryStartX}
-                  y1={chart.height - chart.bottom}
-                  y2={quarterBoundaryBottom}
-                />
-                <line
-                  className="metric-detail-quarter-boundary"
-                  x1={boundaryEndX}
-                  x2={boundaryEndX}
-                  y1={chart.height - chart.bottom}
-                  y2={quarterBoundaryBottom}
                 />
                 <text
                   className="metric-detail-quarter-label"
@@ -294,6 +285,20 @@ function MetricDetailChart({
                   </tspan>
                 </text>
               </g>
+            );
+          })}
+          {quarterBoundaryIndexes.map((boundaryIndex) => {
+            const x = weekBoundaryX(boundaryIndex);
+            return (
+              <line
+                className="metric-detail-quarter-boundary"
+                x1={x}
+                x2={x}
+                y1={chart.height - chart.bottom}
+                y2={chart.height - 1}
+                key={`quarter-boundary-${boundaryIndex}`}
+                aria-hidden="true"
+              />
             );
           })}
           {completedWeekPoint ? (
