@@ -14711,23 +14711,28 @@ button.header-status-item {
   min-width: 0;
   height: 100%;
   display: block;
-  clip-path: inset(0 100% 0 0);
-  animation: metric-detail-chart-wipe 1.18s cubic-bezier(0.22, 0.72, 0.22, 1) both;
-  will-change: clip-path;
 }
 
-@keyframes metric-detail-chart-wipe {
+.metric-detail-series-reveal {
+  transform: scaleX(0);
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: metric-detail-series-wipe 1.18s cubic-bezier(0.22, 0.72, 0.22, 1) both;
+  will-change: transform;
+}
+
+@keyframes metric-detail-series-wipe {
   from {
-    clip-path: inset(0 100% 0 0);
+    transform: scaleX(0);
   }
   to {
-    clip-path: inset(0 0 0 0);
+    transform: scaleX(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .metric-detail-chart {
-    clip-path: none;
+  .metric-detail-series-reveal {
+    transform: none;
     animation: none;
   }
 }

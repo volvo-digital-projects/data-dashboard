@@ -125,6 +125,7 @@ function MetricDetailChart({
   const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
   const sourceLabel =
     metric === "cx" ? (component.key === "app" ? "Sales-DMS" : "ONE Voice") : null;
+  const seriesRevealId = `metric-${metric}-${component.key}-series-reveal`;
 
   return (
     <article className="metric-detail-card">
@@ -174,6 +175,17 @@ function MetricDetailChart({
           role="img"
           aria-label={`${component.label} W1부터 W52까지 ${showroomName} 점수 추이`}
         >
+          <defs>
+            <clipPath id={seriesRevealId}>
+              <rect
+                className="metric-detail-series-reveal"
+                x="0"
+                y="0"
+                width={chart.width}
+                height={chart.height}
+              />
+            </clipPath>
+          </defs>
           {[0, 0.5, 1].map((ratio) => {
             const y = chart.top + ratio * (chart.height - chart.top - chart.bottom);
             const value = component.max * (1 - ratio);
@@ -217,37 +229,40 @@ function MetricDetailChart({
               </g>
             );
           })}
-          {lineSegments(showroomValues, component.max).map((path, index) => (
-            <path className="metric-detail-showroom-line" d={path} key={`showroom-${index}`} />
-          ))}
+          <g className="metric-detail-data-series" clipPath={`url(#${seriesRevealId})`}>
+            {lineSegments(showroomValues, component.max).map((path, index) => (
+              <path className="metric-detail-showroom-line" d={path} key={`showroom-${index}`} />
+            ))}
+            {scorePoints.map(({ index, x, y }) => (
+              <g className="metric-detail-score-point" key={`point-${index}`}>
+                <circle cx={x} cy={y} r="2.1" />
+              </g>
+            ))}
+            {latestPoint ? (
+              <circle
+                className="metric-detail-latest-point"
+                cx={latestPoint.x}
+                cy={latestPoint.y}
+                r="4.5"
+              />
+            ) : null}
+          </g>
           {scorePoints.map(({ index, value, x, y }) => {
             const showLabel =
               component.cadence === "weekly" || (index + 1) % 13 === 0;
             const labelY = y <= chart.top + 12 ? y + 12 : y - 6;
-            return (
-              <g className="metric-detail-score-point" key={`score-${index}`}>
-                <circle cx={x} cy={y} r="2.1" />
-                {showLabel ? (
-                  <text
-                    className="metric-detail-score-label"
-                    x={x}
-                    y={labelY}
-                    textAnchor={index === 0 ? "start" : index === 51 ? "end" : "middle"}
-                  >
-                    {displayNumber(value)}
-                  </text>
-                ) : null}
-              </g>
-            );
+            return showLabel ? (
+              <text
+                className="metric-detail-score-label"
+                x={x}
+                y={labelY}
+                textAnchor={index === 0 ? "start" : index === 51 ? "end" : "middle"}
+                key={`score-label-${index}`}
+              >
+                {displayNumber(value)}
+              </text>
+            ) : null;
           })}
-          {latestPoint ? (
-            <circle
-              className="metric-detail-latest-point"
-              cx={latestPoint.x}
-              cy={latestPoint.y}
-              r="4.5"
-            />
-          ) : null}
         </svg>
       </div>
 

@@ -1228,6 +1228,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.doesNotMatch(cxBody, />WEEKLY<|>QUARTERLY</);
   assert.equal((cxBody.match(/viewBox="0 0 1440 88"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
   assert.match(
     detailCss,
@@ -1239,15 +1241,15 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-chart\s*\{[^}]*clip-path:\s*inset\(0 100% 0 0\);[^}]*animation:\s*metric-detail-chart-wipe 1\.18s cubic-bezier\(0\.22, 0\.72, 0\.22, 1\) both;/,
+    /\.metric-detail-series-reveal\s*\{[^}]*transform:\s*scaleX\(0\);[^}]*transform-box:\s*fill-box;[^}]*animation:\s*metric-detail-series-wipe 1\.18s cubic-bezier\(0\.22, 0\.72, 0\.22, 1\) both;/,
   );
   assert.match(
     detailCss,
-    /@keyframes metric-detail-chart-wipe\s*\{[\s\S]*?clip-path:\s*inset\(0 0 0 0\);/,
+    /@keyframes metric-detail-series-wipe\s*\{[\s\S]*?transform:\s*scaleX\(1\);/,
   );
   assert.match(
     detailCss,
-    /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.metric-detail-chart\s*\{[^}]*animation:\s*none;/,
+    /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.metric-detail-series-reveal\s*\{[^}]*animation:\s*none;/,
   );
   assert.match(
     detailCss,
