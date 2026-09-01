@@ -251,10 +251,36 @@ function MetricDetailChart({
           {quarterRanges.map((quarter) => {
             const startX = point(quarter.start - 1, 0, component.max).x;
             const endX = point(quarter.end - 1, 0, component.max).x;
-            const centerX = (startX + endX) / 2;
+            const weekStep = (chart.width - chart.left - chart.right) / 51;
+            const boundaryStartX =
+              quarter.start === 1 ? chart.left : startX - weekStep / 2;
+            const boundaryEndX =
+              quarter.end === 52 ? chart.width - chart.right : endX + weekStep / 2;
+            const centerX = (boundaryStartX + boundaryEndX) / 2;
+            const quarterLineY = chart.height - 15;
             return (
               <g className="metric-detail-quarter-band" key={quarter.label} aria-hidden="true">
-                <line x1={startX} x2={endX} y1={chart.height - 15} y2={chart.height - 15} />
+                <line
+                  className="metric-detail-quarter-rule"
+                  x1={boundaryStartX}
+                  x2={boundaryEndX}
+                  y1={quarterLineY}
+                  y2={quarterLineY}
+                />
+                <line
+                  className="metric-detail-quarter-boundary"
+                  x1={boundaryStartX}
+                  x2={boundaryStartX}
+                  y1={chart.height - chart.bottom}
+                  y2={quarterLineY}
+                />
+                <line
+                  className="metric-detail-quarter-boundary"
+                  x1={boundaryEndX}
+                  x2={boundaryEndX}
+                  y1={chart.height - chart.bottom}
+                  y2={quarterLineY}
+                />
                 <text
                   className="metric-detail-quarter-label"
                   x={centerX}

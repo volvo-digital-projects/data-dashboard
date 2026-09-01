@@ -14788,6 +14788,10 @@ button.header-status-item {
   vector-effect: non-scaling-stroke;
 }
 
+.metric-detail-quarter-boundary {
+  stroke: #cad8dd;
+}
+
 .metric-detail-quarter-label {
   fill: #17384a;
   font-family: var(--font-latin), var(--font-korean);

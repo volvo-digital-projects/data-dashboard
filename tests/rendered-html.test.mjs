@@ -1183,6 +1183,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
+  assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 40);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 160);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
@@ -1240,6 +1241,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
+  assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 40);
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 5);
@@ -1291,6 +1293,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-week-label\s*\{[^}]*font-size:\s*9px;[^}]*font-weight:\s*680;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-quarter-boundary\s*\{[^}]*stroke:\s*#cad8dd;/,
   );
   assert.match(
     detailCss,
