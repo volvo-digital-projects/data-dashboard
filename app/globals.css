@@ -13298,7 +13298,7 @@ button.header-status-item {
 .metric-rank-note small {
   color: inherit;
   font-family: var(--font-latin);
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 500;
   letter-spacing: 0;
 }
