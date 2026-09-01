@@ -4881,6 +4881,17 @@ input:focus-visible {
   gap: 6px;
 }
 
+@media (min-width: 761px) {
+  .competitive-analysis-page .analysis-staff-summary {
+    position: sticky;
+    top: var(--analysis-staff-summary-sticky-top, 354px);
+    z-index: 35;
+    align-self: start;
+    background: #ffffff;
+    box-shadow: 0 14px 18px -22px rgba(16, 42, 67, 0.72);
+  }
+}
+
 .analysis-staff-summary article {
   min-height: 76px;
   display: grid;

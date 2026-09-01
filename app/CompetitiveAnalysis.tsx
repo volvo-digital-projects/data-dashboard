@@ -726,11 +726,20 @@ export default function CompetitiveAnalysis({
     let resizeFrame = 0;
 
     const syncAnchorHeight = () => {
+      const staffCard = staffAnalysisCardRef.current;
       if (window.matchMedia("(max-width: 760px)").matches) {
         anchor.style.removeProperty("height");
+        staffCard?.style.removeProperty(
+          "--analysis-staff-summary-sticky-top",
+        );
         return;
       }
-      anchor.style.height = `${Math.ceil(shell.getBoundingClientRect().height)}px`;
+      const shellHeight = Math.ceil(shell.getBoundingClientRect().height);
+      anchor.style.height = `${shellHeight}px`;
+      staffCard?.style.setProperty(
+        "--analysis-staff-summary-sticky-top",
+        `${shellHeight + 8}px`,
+      );
     };
 
     const queueAnchorHeightSync = () => {
@@ -750,6 +759,9 @@ export default function CompetitiveAnalysis({
       observer.disconnect();
       window.removeEventListener("resize", queueAnchorHeightSync);
       window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
+      staffAnalysisCardRef.current?.style.removeProperty(
+        "--analysis-staff-summary-sticky-top",
+      );
     };
   }, []);
 

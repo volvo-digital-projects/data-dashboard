@@ -1673,6 +1673,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /@keyframes analysis-staff-line-wipe/);
   assert.match(analysisSource, /IntersectionObserver/);
   assert.match(analysisSource, /staffAnalysisCardRef/);
+  assert.match(
+    analysisSource,
+    /staffCard\?\.style\.setProperty\([\s\S]*?--analysis-staff-summary-sticky-top[\s\S]*?`\$\{shellHeight \+ 8\}px`/,
+  );
+  assert.match(
+    css,
+    /\.competitive-analysis-page \.analysis-staff-summary\s*\{[\s\S]*?position:\s*sticky;[\s\S]*?top:\s*var\(--analysis-staff-summary-sticky-top, 354px\);[\s\S]*?z-index:\s*35;/,
+  );
   assert.match(analysisSource, /staffAnalysisInView \? " is-motion-visible"/);
   assert.match(
     css,
