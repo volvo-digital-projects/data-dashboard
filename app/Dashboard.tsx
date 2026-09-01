@@ -2457,9 +2457,9 @@ export default function Dashboard({
   const quarterScrollFrameRef = useRef<number | null>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
-    carHandoverScore: 94.0,
-    testDriveScore: 88.5,
-    capturedAt: "2026-08-20T10:00:00+09:00",
+    carHandoverScore: 94.4,
+    testDriveScore: 89.1,
+    capturedAt: "2026-09-01T00:00:00+09:00",
   });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
@@ -2581,10 +2581,19 @@ export default function Dashboard({
           typeof snapshot.carHandoverScore === "number" &&
           typeof snapshot.testDriveScore === "number"
         ) {
-          setOneVoiceScores({
-            carHandoverScore: snapshot.carHandoverScore,
-            testDriveScore: snapshot.testDriveScore,
-            capturedAt: snapshot.capturedAt ?? null,
+          setOneVoiceScores((current) => {
+            const currentCapturedAt = current.capturedAt
+              ? Date.parse(current.capturedAt)
+              : Number.NEGATIVE_INFINITY;
+            const snapshotCapturedAt = snapshot.capturedAt
+              ? Date.parse(snapshot.capturedAt)
+              : Number.NEGATIVE_INFINITY;
+            if (snapshotCapturedAt <= currentCapturedAt) return current;
+            return {
+              carHandoverScore: snapshot.carHandoverScore,
+              testDriveScore: snapshot.testDriveScore,
+              capturedAt: snapshot.capturedAt ?? null,
+            };
           });
         }
       } catch {

@@ -2835,9 +2835,10 @@ test("shows the ONE VOICE capture date beside the title", async () => {
   );
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  assert.match(dashboardSource, /carHandoverScore: 94\.0/);
-  assert.match(dashboardSource, /testDriveScore: 88\.5/);
-  assert.match(dashboardSource, /capturedAt: "2026-08-20T10:00:00\+09:00"/);
+  assert.match(dashboardSource, /carHandoverScore: 94\.4/);
+  assert.match(dashboardSource, /testDriveScore: 89\.1/);
+  assert.match(dashboardSource, /capturedAt: "2026-09-01T00:00:00\+09:00"/);
+  assert.match(dashboardSource, /snapshotCapturedAt <= currentCapturedAt/);
   assert.match(
     dashboardSource,
     /className="one-voice-reference-date"[\s\S]*?\{oneVoiceReferenceDate\} 기준/,
