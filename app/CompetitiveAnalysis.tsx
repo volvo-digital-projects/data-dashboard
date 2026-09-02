@@ -649,6 +649,7 @@ export default function CompetitiveAnalysis({
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const staffAnalysisCardRef = useRef<HTMLElement>(null);
+  const staffAnalysisHeadingRef = useRef<HTMLElement>(null);
   const scatterMotionTimersRef = useRef<number[]>([]);
   const [scatterSize, setScatterSize] = useState({
     width: 920,
@@ -730,15 +731,25 @@ export default function CompetitiveAnalysis({
       if (window.matchMedia("(max-width: 760px)").matches) {
         anchor.style.removeProperty("height");
         staffCard?.style.removeProperty(
+          "--analysis-staff-heading-sticky-top",
+        );
+        staffCard?.style.removeProperty(
           "--analysis-staff-summary-sticky-top",
         );
         return;
       }
       const shellHeight = Math.ceil(shell.getBoundingClientRect().height);
+      const staffHeadingHeight = Math.ceil(
+        staffAnalysisHeadingRef.current?.getBoundingClientRect().height ?? 0,
+      );
       anchor.style.height = `${shellHeight}px`;
       staffCard?.style.setProperty(
-        "--analysis-staff-summary-sticky-top",
+        "--analysis-staff-heading-sticky-top",
         `${shellHeight + 8}px`,
+      );
+      staffCard?.style.setProperty(
+        "--analysis-staff-summary-sticky-top",
+        `${shellHeight + staffHeadingHeight + 24}px`,
       );
     };
 
@@ -750,6 +761,9 @@ export default function CompetitiveAnalysis({
     syncAnchorHeight();
     const observer = new ResizeObserver(queueAnchorHeightSync);
     observer.observe(shell);
+    if (staffAnalysisHeadingRef.current) {
+      observer.observe(staffAnalysisHeadingRef.current);
+    }
     window.addEventListener("resize", queueAnchorHeightSync);
     window.visualViewport?.addEventListener("resize", queueAnchorHeightSync);
     void document.fonts?.ready.then(queueAnchorHeightSync);
@@ -759,6 +773,9 @@ export default function CompetitiveAnalysis({
       observer.disconnect();
       window.removeEventListener("resize", queueAnchorHeightSync);
       window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
+      staffAnalysisCardRef.current?.style.removeProperty(
+        "--analysis-staff-heading-sticky-top",
+      );
       staffAnalysisCardRef.current?.style.removeProperty(
         "--analysis-staff-summary-sticky-top",
       );
@@ -1552,9 +1569,11 @@ export default function CompetitiveAnalysis({
           }`}
           aria-label={`${displayShowroomName(selected.showroom)} VOC 고객상담 만족도 분석결과`}
         >
-          <header className="analysis-staff-heading">
+          <header className="analysis-staff-heading" ref={staffAnalysisHeadingRef}>
             <div>
-              <h2>VOC 고객상담 만족도 분석결과</h2>
+              <h2>
+                <span className="english-title">VOC</span> 고객상담 만족도 분석결과
+              </h2>
             </div>
             <div className="analysis-staff-source" aria-label="영업직원 분석 기준">
               <span>Sales-DMS 기준</span>

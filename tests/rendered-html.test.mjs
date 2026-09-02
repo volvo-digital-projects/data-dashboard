@@ -1850,11 +1850,23 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(analysisSource, /staffAnalysisCardRef/);
   assert.match(
     analysisSource,
-    /staffCard\?\.style\.setProperty\([\s\S]*?--analysis-staff-summary-sticky-top[\s\S]*?`\$\{shellHeight \+ 8\}px`/,
+    /staffCard\?\.style\.setProperty\([\s\S]*?--analysis-staff-heading-sticky-top[\s\S]*?`\$\{shellHeight \+ 8\}px`[\s\S]*?--analysis-staff-summary-sticky-top[\s\S]*?shellHeight \+ staffHeadingHeight \+ 24/,
+  );
+  assert.match(
+    analysisSource,
+    /<header className="analysis-staff-heading" ref=\{staffAnalysisHeadingRef\}>[\s\S]*?<span className="english-title">VOC<\/span> 고객상담 만족도 분석결과/,
+  );
+  assert.match(
+    css,
+    /\.competitive-analysis-page \.analysis-staff-heading\s*\{[\s\S]*?position:\s*sticky;[\s\S]*?top:\s*var\(--analysis-staff-heading-sticky-top, 354px\);[\s\S]*?z-index:\s*36;/,
   );
   assert.match(
     css,
     /\.competitive-analysis-page \.analysis-staff-summary\s*\{[\s\S]*?position:\s*sticky;[\s\S]*?top:\s*var\(--analysis-staff-summary-sticky-top, 354px\);[\s\S]*?z-index:\s*35;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-card-heading \.english-title,[\s\S]*?\.analysis-staff-heading \.english-title,[\s\S]*?\.v3s-award-heading \.english-title\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);/,
   );
   assert.match(analysisSource, /staffAnalysisInView \? " is-motion-visible"/);
   assert.match(
