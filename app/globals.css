@@ -4703,7 +4703,7 @@ input:focus-visible {
 
 .analysis-staff-workspace {
   display: grid;
-  grid-template-columns: 370px minmax(0, 1fr);
+  grid-template-columns: 330px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-items: start;
   gap: 12px;
@@ -4726,7 +4726,7 @@ input:focus-visible {
 .analysis-staff-roster > header {
   min-height: 30px;
   display: grid;
-  grid-template-columns: 28px 116px repeat(3, minmax(0, 1fr));
+  grid-template-columns: 24px 104px repeat(3, minmax(0, 1fr));
   align-items: center;
   padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
@@ -4739,7 +4739,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px;
+  padding: 0 3px;
   color: #587383;
   font-size: 9px;
   font-family: var(--font-latin), var(--font-korean), sans-serif;
@@ -4777,7 +4777,7 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 28px 116px repeat(3, minmax(0, 1fr));
+  grid-template-columns: 24px 104px repeat(3, minmax(0, 1fr));
   align-items: center;
   gap: 0;
   padding: 4px 0;
@@ -4834,8 +4834,8 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 3px;
-  padding: 0 9px 0 7px;
+  gap: 2px;
+  padding: 0 6px 0 4px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
 
@@ -4884,7 +4884,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 5px;
+  padding: 0 4px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-variant-numeric: tabular-nums;
@@ -6483,7 +6483,7 @@ input:focus-visible {
 
   .analysis-staff-roster > header,
   .analysis-staff-roster-list {
-    min-width: 368px;
+    min-width: 328px;
   }
 
 }

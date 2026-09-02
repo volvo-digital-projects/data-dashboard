@@ -163,7 +163,7 @@ test("averages Q1-Q2 metrics before combining and keeps staff scores legible", a
     assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
   }
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 370px minmax\(0, 1fr\);/);
+  assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 330px minmax\(0, 1fr\);/);
   assert.match(css, /\.analysis-staff-roster-identity strong\s*\{[^}]*flex: 0 0 auto;[^}]*font-size: 12px;/);
   assert.doesNotMatch(css.match(/\.analysis-staff-roster-identity strong\s*\{[^}]*\}/)?.[0] ?? "", /ellipsis/);
   assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-weight: 400;/);
@@ -220,7 +220,7 @@ test("includes every staff member with fair provisional and unscored scatter sta
   assert.doesNotMatch(source, /staffScatterY\(point\.average\)|staffScatterY\(staffNationalAverage\)/);
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[^}]*font-size: 9px;[^}]*font-family: var\(--font-latin\)[^}]*font-weight: 400;/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*28px 116px repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*24px 104px repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size: 11px;/);
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-size: 12px;[^}]*font-weight: 700;/);
   assert.match(css, /\.analysis-staff-summary\s*\{[^}]*minmax\(160px, 0\.72fr\) repeat\(5, minmax\(0, 1fr\)\)/);
@@ -257,6 +257,19 @@ test("keeps half-year tenure labels compact and comparison details inside the ca
   assert.match(card, /<span>3년 6개월 ~ 4년<\/span><span>산정 20명<\/span>/);
   assert.match(card, /<strong>86\.8<small>점<\/small><\/strong>/);
   assert.match(css, /\.analysis-staff-tenure-peer-card \.analysis-staff-metric-value > small\.analysis-staff-metric-comparison\s*\{[^}]*min-width: 0;[^}]*display: grid;[^}]*white-space: normal;[^}]*overflow-wrap: anywhere;/);
+});
+
+test("redistributes compact roster width equally to both staff charts", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const block = (selector) => css.slice(css.indexOf(`${selector} {`)).split("}")[0];
+  assert.match(block(".analysis-staff-workspace"), /grid-template-columns: 330px minmax\(0, 1fr\);/);
+  assert.match(block(".analysis-staff-comparison-layout"), /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  for (const selector of [".analysis-staff-roster > header", ".analysis-staff-roster-list button"]) {
+    assert.match(block(selector), /grid-template-columns: 24px 104px repeat\(3, minmax\(0, 1fr\)\);/);
+  }
+  assert.match(block(".analysis-staff-roster-identity"), /gap: 2px;[^]*padding: 0 6px 0 4px;/);
+  assert.match(block(".analysis-staff-roster-identity strong"), /flex: 0 0 auto;[^]*font-size: 12px;/);
+  assert.match(css, /\.analysis-staff-roster-list\s*\{\s*min-width: 328px;/);
 });
 
 async function login(cdsid) {
@@ -1839,14 +1852,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.doesNotMatch(staffSectionHtml, />누적평균<\/span>/);
   assert.doesNotMatch(staffSectionHtml, />회신건수<\/span>/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*grid-template-columns:\s*28px 116px repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*grid-template-columns:\s*24px 104px repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?min-height:\s*30px;/);
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[\s\S]*?height:\s*16px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
   assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size:\s*11px;[^}]*font-weight:\s*400;/);
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-size:\s*12px;[^}]*font-weight:\s*700;/);
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-family:\s*var\(--font-volvo\)/);
-  assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 370px minmax\(0, 1fr\);/);
+  assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 330px minmax\(0, 1fr\);/);
   assert.match(css, /\.analysis-staff-roster-rank\s*\{[\s\S]*?font-size:\s*8px;[\s\S]*?font-weight:\s*700;/);
   assert.match(
     staffSectionHtml,
