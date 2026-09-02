@@ -14657,6 +14657,14 @@ button.header-status-item {
   line-height: 1;
 }
 
+.metric-detail-card h2 > .metric-detail-weight-inline {
+  color: #315f75;
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 720;
+  line-height: 1;
+}
+
 .metric-detail-card h2 > em {
   min-height: 20px;
   display: inline-flex;
@@ -14679,7 +14687,23 @@ button.header-status-item {
   background: #f4f7f8;
 }
 
+.metric-detail-card h2 > em.appealable {
+  color: #9a552d;
+  border-color: rgba(211, 112, 54, 0.34);
+  background: #fff2e9;
+}
+
 .metric-detail-evaluation-icon {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.metric-detail-appeal-icon {
   width: 12px;
   height: 12px;
   fill: none;

@@ -1264,6 +1264,20 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, /VOC 발송건수/);
   assert.match(
     vocBody,
+    /VOC 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(60점\)/,
+  );
+  for (const label of ["VOC 첫인사", "VOC 태블릿", "VOC 해피콜"]) {
+    assert.match(
+      vocBody,
+      new RegExp(`${label}[\\s\\S]*?100점 만점[\\s\\S]*?10% 반영\\(10점\\)`),
+    );
+  }
+  assert.match(
+    vocBody,
+    /VOC 해피콜[\s\S]*?VCK 평가[\s\S]*?class="appealable"[\s\S]*?metric-detail-appeal-icon[\s\S]*?소명가능/,
+  );
+  assert.match(
+    vocBody,
     /VOC <small>4개 메인지표 \/ 총점 100점 \+ 1개 참고지표<\/small>/,
   );
   assert.match(

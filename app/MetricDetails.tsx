@@ -55,6 +55,13 @@ const quarterRanges = [
   { label: "Q4", start: 40, end: 52, range: "W40–W52" },
 ];
 
+const vocContributionLabels: Record<string, string> = {
+  overall: "60% 반영(60점)",
+  greeting: "10% 반영(10점)",
+  tablet: "10% 반영(10점)",
+  happyCall: "10% 반영(10점)",
+};
+
 const displayNumber = (value: number | null | undefined) =>
   typeof value === "number"
     ? value.toLocaleString("ko-KR", { maximumFractionDigits: 2 })
@@ -147,6 +154,9 @@ function MetricDetailChart({
   const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
   const sourceLabel =
     metric === "cx" ? (component.key === "app" ? "Sales-DMS" : "ONE Voice") : null;
+  const contributionLabel =
+    metric === "voc" ? vocContributionLabels[component.key] : null;
+  const isAppealable = metric === "voc" && component.key === "happyCall";
   const seriesRevealId = `metric-${metric}-${component.key}-series-reveal`;
 
   return (
@@ -161,6 +171,12 @@ function MetricDetailChart({
                 ? `${displayNumber(component.max)}건 기준`
                 : `${displayNumber(component.max)}점 만점`}
             </small>
+            {contributionLabel ? (
+              <>
+                <i aria-hidden="true">/</i>
+                <small className="metric-detail-weight-inline">{contributionLabel}</small>
+              </>
+            ) : null}
             {sourceLabel ? (
               <>
                 <i aria-hidden="true">/</i>
@@ -184,6 +200,18 @@ function MetricDetailChart({
               </svg>
               {evaluationLabel}
             </em>
+            {isAppealable ? (
+              <>
+                <i aria-hidden="true">/</i>
+                <em className="appealable">
+                  <svg className="metric-detail-appeal-icon" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M5 2.8h7l3 3V17H5V2.8Z" />
+                    <path d="M12 2.8V6h3M7.5 10.3l1.6 1.6 3.5-3.6" />
+                  </svg>
+                  소명가능
+                </em>
+              </>
+            ) : null}
           </h2>
         </div>
         <div className="metric-detail-chart-legend" aria-hidden="true">
