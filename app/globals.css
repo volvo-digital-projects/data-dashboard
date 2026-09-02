@@ -5173,6 +5173,15 @@ input:focus-visible {
   font-weight: 500;
 }
 
+.analysis-staff-tenure-peer-card .analysis-staff-metric-value > small.analysis-staff-metric-comparison {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .analysis-staff-certification-card strong {
   display: flex;
   align-items: center;

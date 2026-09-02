@@ -1235,7 +1235,7 @@ export default function CompetitiveAnalysis({
     selectedStaffTenurePeerRangeStart === null ||
     selectedStaffTenurePeerRangeEnd === null
       ? null
-      : `${formatStaffTenureDuration(selectedStaffTenurePeerRangeStart)} ~ ${formatStaffTenureDuration(selectedStaffTenurePeerRangeEnd)}`;
+      : `${formatStaffTenureDuration(selectedStaffTenurePeerRangeStart - 1)} ~ ${formatStaffTenureDuration(selectedStaffTenurePeerRangeEnd)}`;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -2007,10 +2007,8 @@ export default function CompetitiveAnalysis({
                   {selectedStaffTenureFinalScore === null ? null : <small>점</small>}
                 </strong>
                 <small className="analysis-staff-metric-comparison">
-                  <i aria-hidden="true">/</i>
-                  {selectedStaffTenurePeerRangeLabel ?? "―"}
-                  <i aria-hidden="true">/</i>
-                  산정 {selectedStaffTenureScoreRows.length}명
+                  <span>{selectedStaffTenurePeerRangeLabel ?? "―"}</span>
+                  <span>산정 {selectedStaffTenureScoreRows.length}명</span>
                 </small>
               </div>
             </article>

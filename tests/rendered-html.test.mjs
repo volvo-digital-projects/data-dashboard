@@ -237,6 +237,28 @@ test("keeps comparison footer labels compact without changing scores", async () 
   assert.doesNotMatch(footer, /누적평균|볼보|합산점수/);
 });
 
+test("keeps half-year tenure labels compact and comparison details inside the card", async () => {
+  const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const formatBody = source.match(/const formatStaffTenureDuration = \(months: number\) => \{([^]*?)\n\};/)[1];
+  const rangeBody = source.match(/const staffTenureHalfYearRange = \(completedMonths: number\) => \{([^]*?)\n\};/)[1];
+  const format = new Function("months", formatBody);
+  const rangeFor = new Function("completedMonths", rangeBody);
+  for (const [months, expected] of [[0, "0개월 ~ 6개월"], [36, "3년 ~ 3년 6개월"], [41, "3년 ~ 3년 6개월"], [42, "3년 6개월 ~ 4년"], [47, "3년 6개월 ~ 4년"], [48, "4년 ~ 4년 6개월"]]) {
+    const range = rangeFor(months);
+    assert.equal(`${format(range.start - 1)} ~ ${format(range.end)}`, expected);
+  }
+  assert.match(source, /formatStaffTenureDuration\(selectedStaffTenurePeerRangeStart - 1\)/);
+  const response = await render("/dashboard/6KR6834/analysis?view=size");
+  assert.equal(response.status, 200);
+  const html = (await response.text()).replaceAll("<!-- -->", "");
+  const card = html.match(/<article[^>]*class="analysis-staff-metric-card analysis-staff-tenure-peer-card"[^]*?<\/article>/)?.[0];
+  assert.ok(card);
+  assert.match(card, /<span>3년 6개월 ~ 4년<\/span><span>산정 20명<\/span>/);
+  assert.match(card, /<strong>86\.8<small>점<\/small><\/strong>/);
+  assert.match(css, /\.analysis-staff-tenure-peer-card \.analysis-staff-metric-value > small\.analysis-staff-metric-comparison\s*\{[^}]*min-width: 0;[^}]*display: grid;[^}]*white-space: normal;[^}]*overflow-wrap: anywhere;/);
+});
+
 async function login(cdsid) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `login-${process.pid}-${Date.now()}`);
