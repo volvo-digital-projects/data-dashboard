@@ -5995,7 +5995,7 @@ input:focus-visible {
   min-height: 256px;
   flex: 1;
   display: grid;
-  grid-template-rows: minmax(0, 1fr);
+  grid-template-rows: minmax(228px, 1fr) auto;
   gap: 0;
   padding: 8px;
   border: 1px solid #d5e4ea;
@@ -6019,6 +6019,15 @@ input:focus-visible {
   height: 218px;
   display: block;
   overflow: visible;
+}
+
+.analysis-staff-scatter-score-note {
+  margin: 4px 0 0;
+  color: #6f8794;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .analysis-staff-scatter-grid line {

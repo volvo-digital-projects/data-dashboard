@@ -171,6 +171,37 @@ test("averages Q1-Q2 metrics before combining and keeps staff scores legible", a
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-weight: 700;/);
 });
 
+test("plots staff final scores and their national mean on a fixed 100-point scale", async () => {
+  const { showrooms } = JSON.parse(await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"));
+  for (const showroom of showrooms) {
+    const response = await render(`/dashboard/${showroom.cdsid}/analysis?view=size`);
+    assert.equal(response.status, 200);
+    const html = (await response.text()).replaceAll("<!-- -->", "");
+    const scatter = html.match(/class="analysis-staff-tenure-scatter"[^]*?<\/svg>/)?.[0];
+    assert.ok(scatter);
+    assert.ok(scatter.includes("최종점수(100점)"));
+    for (const tick of [0, 20, 40, 60, 80, 100]) {
+      assert.ok(scatter.includes(`text-anchor="end">${tick}</text>`), `Missing y tick ${tick}`);
+    }
+    const plotted = [...scatter.matchAll(/data-final-score="([\d.]+)"/g)].map((match) => Number(match[1]));
+    assert.ok(plotted.length > 0 && plotted.every((value) => value >= 0 && value <= 100));
+    const average = plotted.reduce((sum, value) => sum + value, 0) / plotted.length;
+    assert.ok(scatter.includes(`>${average.toFixed(1)}점</text>`));
+    const selected = scatter.match(/class="analysis-staff-scatter-selected" data-final-score="([\d.]+)"/);
+    const rosterScore = html.match(/class="analysis-staff-roster-final">([\d.]+)<\/span>/);
+    if (rosterScore) {
+      assert.ok(selected);
+      assert.equal(Number(selected[1]).toFixed(1), rosterScore[1]);
+    } else {
+      assert.equal(selected, null);
+      assert.ok(scatter.includes("산정 유보"));
+    }
+  }
+  const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
+  assert.match(source, /staffTenureScatterPopulation: StaffTenureScatterPoint\[\] = nationalStaffFinalScores\.flatMap\([\s\S]*?staff\.finalScore === null \? \[\]/);
+  assert.doesNotMatch(source, /staffScatterY\(point\.average\)|staffScatterY\(staffNationalAverage\)/);
+});
+
 async function login(cdsid) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `login-${process.pid}-${Date.now()}`);

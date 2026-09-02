@@ -77,7 +77,7 @@ type StaffTenureScatterPoint = {
   cdsid: string;
   name: string;
   tenureYears: number;
-  average: number;
+  finalScore: number;
   responses: number;
 };
 type StaffAnalysisShowroom = {
@@ -155,32 +155,6 @@ const staffImprovementKeywordLabel: Record<string, string | null> = {
   "서비스 품목 안내": "보증·정비 안내",
   "제품 강점 설명 확장": "제품 강점 설명",
 };
-const staffTenureScatterPopulation: StaffTenureScatterPoint[] = Object.entries(
-  staffAnalysisByCdsid,
-).flatMap(([cdsid, showroom]) =>
-  showroom.employees.flatMap((employee) => {
-    if (employee.role !== "영업직원" && employee.role !== "영업팀장") return [];
-    const totals = staffYears.reduce(
-      (summary, year) => {
-        summary.responses += employee.years[year]?.responses ?? 0;
-        summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
-        return summary;
-      },
-      { responses: 0, scoreSum: 0 },
-    );
-    if (!totals.responses) return [];
-    return [
-      {
-        key: `${cdsid}-${employee.name}`,
-        cdsid,
-        name: employee.name,
-        tenureYears: employee.tenureMonths / 12,
-        average: totals.scoreSum / totals.responses,
-        responses: totals.responses,
-      },
-    ];
-  }),
-);
 const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap(
   ([cdsid, showroom]) =>
     showroom.employees
@@ -480,6 +454,7 @@ const nationalStaffFinalScores = staffCurrentSalesPopulation
       cdsid,
       name: employee.name,
       tenureKey,
+      tenureYears: employee.tenureMonths / 12,
       responses: totals.responses,
       finalScore:
         adjustedPoints === null ? null : adjustedPoints + freshnessPoints,
@@ -497,6 +472,22 @@ const nationalStaffFinalScores = staffCurrentSalesPopulation
 const nationalStaffRespondingCount = nationalStaffFinalScores.filter(
   (staff) => staff.responses > 0,
 ).length;
+
+// Reuse the same final scores as the national ranking; unscored staff are not zeroes.
+const staffTenureScatterPopulation: StaffTenureScatterPoint[] = nationalStaffFinalScores.flatMap(
+  (staff) => staff.finalScore === null ? [] : [{
+    key: `${staff.cdsid}-${staff.name}`,
+    cdsid: staff.cdsid,
+    name: staff.name,
+    tenureYears: staff.tenureYears,
+    finalScore: staff.finalScore,
+    responses: staff.responses,
+  }],
+);
+const staffScatterNationalAverage = staffTenureScatterPopulation.length
+  ? staffTenureScatterPopulation.reduce((sum, staff) => sum + staff.finalScore, 0) /
+    staffTenureScatterPopulation.length
+  : null;
 
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
   value === null || benchmark === null || benchmark === 0
@@ -1256,33 +1247,20 @@ export default function CompetitiveAnalysis({
       ) / 5,
     ) * 5,
   );
-  const staffScatterMinScore = Math.max(
-    0,
-    Math.floor(
-      Math.min(
-        ...staffTenureScatterPopulation.map((point) => point.average),
-        selectedStaffScatterPoint?.average ?? 10,
-      ) * 2,
-    ) / 2,
-  );
   const staffScatterPlot = { left: 42, right: 448, top: 20, bottom: 204 };
   const staffScatterX = (tenureYears: number) =>
     staffScatterPlot.left +
     (tenureYears / staffScatterMaxYears) *
       (staffScatterPlot.right - staffScatterPlot.left);
-  const staffScatterY = (average: number) =>
+  const staffScatterY = (finalScore: number) =>
     staffScatterPlot.bottom -
-    ((average - staffScatterMinScore) / (10 - staffScatterMinScore || 1)) *
+    (finalScore / 100) *
       (staffScatterPlot.bottom - staffScatterPlot.top);
   const staffScatterXTicks = Array.from(
     { length: 6 },
     (_, index) => (staffScatterMaxYears / 5) * index,
   );
-  const staffScatterYTicks = Array.from(
-    { length: 4 },
-    (_, index) =>
-      staffScatterMinScore + ((10 - staffScatterMinScore) / 3) * index,
-  );
+  const staffScatterYTicks = [0, 20, 40, 60, 80, 100];
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
@@ -2193,13 +2171,15 @@ export default function CompetitiveAnalysis({
               <div
                 className="analysis-staff-tenure-scatter"
                 role="group"
-                aria-label="근속기간별 상담 만족도 산포도"
+                aria-label="근속기간별 최종점수 산포도, 100점 만점"
               >
                 <div className="analysis-staff-tenure-scatter-chart">
                   <svg
                     viewBox="0 0 470 240"
                     role="img"
-                    aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"}의 근속기간과 상담 만족도 좌표`}
+                    aria-label={selectedStaffScatterPoint
+                      ? `${selectedStaffScatterPoint.name}의 근속기간과 최종점수 ${selectedStaffScatterPoint.finalScore.toFixed(1)}점 좌표, 100점 만점`
+                      : `${selectedStaffEmployee?.name ?? "선택 직원"}: 최종점수 산정 유보, 산포도 위치 미표시`}
                   >
                     {staffScatterYTicks.map((tick) => {
                       const y = staffScatterY(tick);
@@ -2207,7 +2187,7 @@ export default function CompetitiveAnalysis({
                         <g className="analysis-staff-scatter-grid" key={`y-${tick}`}>
                           <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={y} y2={y} />
                           <text x={staffScatterPlot.left - 8} y={y + 3} textAnchor="end">
-                            {tick.toFixed(1)}
+                            {tick.toFixed(0)}
                           </text>
                         </g>
                       );
@@ -2224,25 +2204,25 @@ export default function CompetitiveAnalysis({
                       );
                     })}
                     <text className="analysis-staff-scatter-y-label" x="12" y="116" textAnchor="middle">
-                      상담 만족도
+                      최종점수(100점)
                     </text>
                     <text className="analysis-staff-scatter-x-label" x="245" y="235" textAnchor="middle">
                       근속기간(년)
                     </text>
-                    {staffNationalAverage !== null ? (
+                    {staffScatterNationalAverage !== null ? (
                       <g className="analysis-staff-scatter-average">
                         <line
                           x1={staffScatterPlot.left - 10}
                           x2={staffScatterPlot.right + 10}
-                          y1={staffScatterY(staffNationalAverage)}
-                          y2={staffScatterY(staffNationalAverage)}
+                          y1={staffScatterY(staffScatterNationalAverage)}
+                          y2={staffScatterY(staffScatterNationalAverage)}
                         />
-                        <g className="label" transform={`translate(${staffScatterPlot.right - 30} ${staffScatterY(staffNationalAverage) - 36})`}>
+                        <g className="label" transform={`translate(${staffScatterPlot.right - 30} ${staffScatterY(staffScatterNationalAverage) - 36})`}>
                           <path className="pointer" d="M 22 28 L 30 36 L 38 28 Z" />
                           <rect width="56" height="30" rx="6" />
                           <text x="28" y="11" textAnchor="middle">전국 평균</text>
                           <text className="score" x="28" y="23" textAnchor="middle">
-                            {staffNationalAverage.toFixed(1)}점
+                            {staffScatterNationalAverage.toFixed(1)}점
                           </text>
                         </g>
                       </g>
@@ -2251,8 +2231,9 @@ export default function CompetitiveAnalysis({
                       {otherStaffScatterPoints.map((point) => (
                         <circle
                           cx={staffScatterX(point.tenureYears)}
-                          cy={staffScatterY(point.average)}
+                          cy={staffScatterY(point.finalScore)}
                           key={point.key}
+                          data-final-score={point.finalScore}
                           r={Math.min(5.2, 2.7 + Math.sqrt(point.responses) / 3.2)}
                         />
                       ))}
@@ -2261,25 +2242,27 @@ export default function CompetitiveAnalysis({
                       {sameShowroomStaffScatterPoints.map((point) => (
                         <circle
                           cx={staffScatterX(point.tenureYears)}
-                          cy={staffScatterY(point.average)}
+                          cy={staffScatterY(point.finalScore)}
                           key={point.key}
+                          data-final-score={point.finalScore}
                           r={Math.min(5.8, 3.2 + Math.sqrt(point.responses) / 3.2)}
                         >
-                          <title>{`${point.name} SC · ${point.tenureYears.toFixed(1)}년 · ${point.average.toFixed(1)}점 · ${point.responses}건`}</title>
+                          <title>{`${point.name} SC · ${point.tenureYears.toFixed(1)}년 · 최종점수 ${point.finalScore.toFixed(1)}점/100점 · ${point.responses}건`}</title>
                         </circle>
                       ))}
                     </g>
                     {selectedStaffScatterPoint ? (
                       <g
                         className="analysis-staff-scatter-selected"
-                        transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.average)})`}
+                        data-final-score={selectedStaffScatterPoint.finalScore}
+                        transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}
                       >
                         <line
                           className="axis-x"
                           x1={0}
                           x2={0}
                           y1={0}
-                          y2={staffScatterPlot.bottom - staffScatterY(selectedStaffScatterPoint.average)}
+                          y2={staffScatterPlot.bottom - staffScatterY(selectedStaffScatterPoint.finalScore)}
                         />
                         <line
                           className="axis-y"
@@ -2295,6 +2278,13 @@ export default function CompetitiveAnalysis({
                     ) : null}
                   </svg>
                 </div>
+                <p className="analysis-staff-scatter-score-note">
+                  만족도 80% + 최신성 20% · 전국 평균은 점수 산정 직원 기준
+                  <br />
+                  {selectedStaffScatterPoint
+                    ? "회신 8건 미만은 목록에 유지하며 산포도 위치는 미표시"
+                    : `${selectedStaffEmployee?.name ?? "선택 직원"}: 회신 8건 미만으로 위치 미표시 · 목록에서 검토`}
+                </p>
               </div>
               <footer className="analysis-staff-benchmark-legend">
                 <span><i />전체 볼보 SC</span>
