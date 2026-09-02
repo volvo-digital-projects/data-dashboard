@@ -1450,6 +1450,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
+    /\.header-status-row \.header-status-item:active\s*\{[^}]*border-color:\s*rgba\(139, 197, 223, 0\.78\);[^}]*background:\s*rgba\(54, 142, 184, 0\.46\);/,
+  );
+  assert.match(
+    detailCss,
     /@keyframes metric-detail-update-pulse\s*\{[\s\S]*?opacity:\s*0\.58;[\s\S]*?opacity:\s*1;/,
   );
   assert.doesNotMatch(detailCss, /metric-detail-complete-(?:marker|check|arrow|drop)/);
