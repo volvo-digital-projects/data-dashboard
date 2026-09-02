@@ -1547,7 +1547,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /<footer><span>에이치 평균<strong>93\.6<\/strong><\/span><span>볼보 강남대치 평균<strong>93\.8<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 0\.2점<\/strong><\/span><\/footer>/,
+    /<footer><span>에이치 누적평균<strong>375\.3<\/strong><\/span><span>볼보 강남대치 누적점수<strong>380\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 5\.3점<\/strong><\/span><\/footer>/,
   );
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
@@ -1586,37 +1586,28 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.doesNotMatch(visibleHtml, />내 전시장<\/span>/);
   assert.match(visibleHtml, /<strong>7개소<\/strong>/);
-  assert.match(visibleHtml, /종합 만족도[\s\S]*87\.5/);
   assert.match(
     visibleHtml,
-    /에이치 평균 93\.4점 대비 -5\.9점/,
+    /종합 만족도 누적점수[\s\S]*Q1 93\.1점 \+ Q2 87\.5점[\s\S]*2개 분기 · 200점 만점[\s\S]*180\.6/,
   );
   assert.match(
     visibleHtml,
-    /종합 만족도 평균[\s\S]*VOC 상담 만족도[\s\S]*ONE Voice 시승 만족도[\s\S]*ONE Voice 출고 만족도/,
+    /에이치 누적평균 190\.0점 대비 ▼ 9\.4점/,
   );
-  assert.doesNotMatch(visibleHtml, /VOC · 상담\/시승\/출고 경험/);
-  assert.match(visibleHtml, /해피콜 이행[\s\S]*>100<[^]*?점/);
-  assert.doesNotMatch(visibleHtml, /해피콜 이행[\s\S]*100\.0/);
+  assert.match(visibleHtml, /해피콜 이행률 누적점수[\s\S]*Q1 100점 \+ Q2 100점[\s\S]*2개 분기 · 200점 만점[\s\S]*>200\.0<[^]*?점/);
   assert.match(
     visibleHtml,
-    /에이치 평균 93\.8점 대비 \+6\.2점/,
+    /에이치 누적평균 185\.3점 대비 ▲ 14\.7점/,
   );
-  assert.match(
-    visibleHtml,
-    /해피콜 이행률 평균[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE VOICE 출고 후 해피콜\(24시간 이내 시행\)/,
-  );
-  assert.doesNotMatch(visibleHtml, /상담\/출고 사후관리 실행력/);
-  assert.match(visibleHtml, /균형 경쟁력[\s\S]*93\.8/);
-  assert.match(visibleHtml, /종합 만족도와 해피콜 합산 평균/);
-  assert.doesNotMatch(visibleHtml, /종합 만족도와 해피콜 단순 평균/);
-  assert.match(visibleHtml, /만족도[\s\S]*해피콜[\s\S]*합산 평균/);
+  assert.match(visibleHtml, /누적 경쟁력[\s\S]*종합 만족도 \+ 해피콜 단순 합산 · 400점 만점[\s\S]*380\.6/);
+  assert.match(visibleHtml, /전국 17위 \/ 전체 39/);
+  assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
   assert.match(html, /class="analysis-scatter scatter-motion-settled"/);
   assert.equal((html.match(/class="scatter-zone /g) ?? []).length, 2);
   assert.match(
     html.replaceAll("<!-- -->", ""),
-    /class="scatter-average-value vertical"><span>해피콜 이행<\/span><strong>평균 \d+\.\d점<\/strong>/,
+    /class="scatter-average-value vertical"><span>해피콜 이행률<\/span><strong>평균 \d+\.\d점<\/strong>/,
   );
   assert.match(
     html.replaceAll("<!-- -->", ""),
@@ -2253,11 +2244,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const showroomHtml = await showroomResponse.text();
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /<footer><span>전국 전시장 평균<strong>94\.6<\/strong><\/span><span>볼보 강남대치 평균<strong>93\.8<\/strong><\/span><span class="analysis-average-delta delta-negative">평균 대비<strong>▼ 0\.8점<\/strong><\/span><\/footer>/,
+    /<footer><span>전국 전시장 누적평균<strong>375\.9<\/strong><\/span><span>볼보 강남대치 누적점수<strong>380\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 4\.7점<\/strong><\/span><\/footer>/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /class="analysis-ranking-head"[^>]*>[\s\S]*?종합 만족도[\s\S]*?해피콜 이행[\s\S]*?합산 평균/,
+    /class="analysis-ranking-head"[^>]*>[\s\S]*?만족도 누적[\s\S]*?해피콜 누적[\s\S]*?누적 합산/,
   );
   const showroomRankingHtml = showroomHtml.match(
     /class="analysis-ranking-list">([\s\S]*?)<\/div><footer>/,
@@ -2270,11 +2261,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
         /class="analysis-rank"><strong>(\d+)<\/strong>/g,
       ),
     ].map((match) => Number(match[1])),
-    [22, 23, 24, 25, 26, 27, 28],
+    [14, 15, 16, 17, 18, 19, 20],
   );
   assert.match(
     showroomRankingHtml,
-    /class="selected"[\s\S]*?class="analysis-rank"><strong>25<\/strong>[\s\S]*?<em>강남대치<\/em>/,
+    /class="selected"[\s\S]*?class="analysis-rank"><strong>17<\/strong>[\s\S]*?<em>강남대치<\/em>/,
   );
   assert.equal(
     (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,
@@ -2285,8 +2276,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     39,
   );
   assert.doesNotMatch(showroomHtml, /scatter-callout-leader|--leader-angle/);
-  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전시장 25위 \/ 전체 39/);
-  assert.doesNotMatch(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 25위 \/ 전체 39/);
+  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 17위 \/ 전체 39/);
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
     /전국 39개 전시장 평균 96\.2점 대비 -8\.7점/,

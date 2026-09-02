@@ -32,13 +32,22 @@ type AnalysisShowroom = {
   testDrive: number | null;
   app: number | null;
   happyCall: number | null;
-  q1?: { v3s: number | null } | null;
+  q1?: {
+    v3s: number | null;
+    voc?: number | null;
+    happyCall?: number | null;
+  } | null;
 };
 
 type AnalysisPoint = AnalysisShowroom & {
   vocScore: number;
   happyScore: number;
   combined: number;
+  vocAverage: number;
+  happyAverage: number;
+  vocQuarterCount: number;
+  happyQuarterCount: number;
+  scoreMax: number;
 };
 
 type StaffYear = "2023" | "2024" | "2025" | "2026";
@@ -429,10 +438,50 @@ const normalizeStaffCertificationShowroom = (name: string) => {
   return aliases[compact] ?? compact;
 };
 
-const averageOf = (items: AnalysisPoint[], key: "vocScore" | "happyScore" | "combined") =>
+const averageOf = (
+  items: AnalysisPoint[],
+  key: "vocScore" | "happyScore" | "combined" | "vocAverage" | "happyAverage",
+) =>
   items.length
     ? items.reduce((sum, item) => sum + item[key], 0) / items.length
     : 0;
+
+const cumulativeAnalysisPoint = (item: AnalysisShowroom): AnalysisPoint => {
+  const vocQuarterScores = [item.q1?.voc, item.voc].filter(
+    (score): score is number => typeof score === "number",
+  );
+  const happyQuarterScores = [item.q1?.happyCall, item.happyCall].filter(
+    (score): score is number => typeof score === "number",
+  );
+  const vocScore = vocQuarterScores.reduce((sum, score) => sum + score, 0);
+  const happyScore = happyQuarterScores.reduce((sum, score) => sum + score, 0);
+  return {
+    ...item,
+    vocScore,
+    happyScore,
+    combined: vocScore + happyScore,
+    vocAverage: vocQuarterScores.length ? vocScore / vocQuarterScores.length : 0,
+    happyAverage: happyQuarterScores.length
+      ? happyScore / happyQuarterScores.length
+      : 0,
+    vocQuarterCount: vocQuarterScores.length,
+    happyQuarterCount: happyQuarterScores.length,
+    scoreMax: (vocQuarterScores.length + happyQuarterScores.length) * 100,
+  };
+};
+
+const nationalCumulativeAnalysisPoints = showrooms
+  .filter(
+    (item) =>
+      typeof item.voc === "number" && typeof item.happyCall === "number",
+  )
+  .map(cumulativeAnalysisPoint)
+  .sort(
+    (a, b) =>
+      b.combined - a.combined ||
+      b.vocScore - a.vocScore ||
+      a.showroom.localeCompare(b.showroom, "ko"),
+  );
 
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
@@ -458,8 +507,8 @@ const scatterPointPosition = (
   width: number,
   height: number,
 ) => {
-  const x = clamp(((item.happyScore - 65) / 35) * 100);
-  const y = clamp(((item.vocScore - 75) / 25) * 100);
+  const x = clamp(((item.happyAverage - 65) / 35) * 100);
+  const y = clamp(((item.vocAverage - 75) / 25) * 100);
   return {
     x: (x / 100) * width,
     y: ((100 - y) / 100) * height,
@@ -783,35 +832,25 @@ export default function CompetitiveAnalysis({
   const groupItems = useMemo(() => {
     const filtered =
       view === "dealer"
-        ? showrooms.filter((item) => item.dealer === selected.dealer)
+        ? nationalCumulativeAnalysisPoints.filter(
+            (item) => item.dealer === selected.dealer,
+          )
         : view === "region"
-          ? showrooms.filter((item) => item.region === selected.region)
+          ? nationalCumulativeAnalysisPoints.filter(
+              (item) => item.region === selected.region,
+            )
           : view === "size"
-            ? showrooms.filter((item) => item.size === selected.size)
-            : showrooms;
+            ? nationalCumulativeAnalysisPoints.filter(
+                (item) => item.size === selected.size,
+              )
+            : nationalCumulativeAnalysisPoints;
 
-    return filtered
-      .filter(
-        (item) =>
-          typeof item.voc === "number" && typeof item.happyCall === "number",
-      )
-      .map((item) => ({
-        ...item,
-        vocScore: item.voc as number,
-        happyScore: item.happyCall as number,
-        combined: ((item.voc as number) + (item.happyCall as number)) / 2,
-      }))
-      .sort((a, b) => b.combined - a.combined);
+    return [...filtered].sort((a, b) => b.combined - a.combined);
   }, [selected.dealer, selected.region, selected.size, view]);
 
   const selectedPoint =
     groupItems.find((item) => item.cdsid === selected.cdsid) ??
-    ({
-      ...selected,
-      vocScore: selected.voc ?? 0,
-      happyScore: selected.happyCall ?? 0,
-      combined: ((selected.voc ?? 0) + (selected.happyCall ?? 0)) / 2,
-    } satisfies AnalysisPoint);
+    cumulativeAnalysisPoint(selected);
   const selectedAwardPeriods = v3sAwardPeriods
     .filter((period) =>
       v3sAwardWinnersByPeriod[period.id]?.includes(selected.cdsid),
@@ -1157,15 +1196,17 @@ export default function CompetitiveAnalysis({
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
+  const groupVocRateAverage = averageOf(groupItems, "vocAverage");
+  const groupHappyRateAverage = averageOf(groupItems, "happyAverage");
   const groupAverageLabel =
     view === "dealer"
-      ? `${selected.dealer} 평균`
+      ? `${selected.dealer} 누적평균`
       : view === "showroom"
-        ? "전국 전시장 평균"
+        ? "전국 전시장 누적평균"
         : view === "region"
-          ? "동일 권역별 평균"
-          : "동일 사이즈 평균";
-  const selectedAverageLabel = `${displayShowroomName(selected.showroom)} 평균`;
+          ? "동일 권역별 누적평균"
+          : "동일 사이즈 누적평균";
+  const selectedAverageLabel = `${displayShowroomName(selected.showroom)} 누적점수`;
   const displayedGroupAverage = Number(groupCombinedAverage.toFixed(1));
   const displayedSelectedAverage = Number(selectedPoint.combined.toFixed(1));
   const selectedAverageDelta = Number(
@@ -1182,6 +1223,10 @@ export default function CompetitiveAnalysis({
   const selectedRank =
     groupItems.findIndex((item) => item.cdsid === selected.cdsid) + 1;
   const safeSelectedRank = selectedRank || groupItems.length;
+  const selectedNationalRank =
+    nationalCumulativeAnalysisPoints.findIndex(
+      (item) => item.cdsid === selected.cdsid,
+    ) + 1;
   const rankWindowSize = 7;
   const rankWindowRadius = Math.floor(rankWindowSize / 2);
   const rankWindowStart = Math.min(
@@ -1217,8 +1262,8 @@ export default function CompetitiveAnalysis({
             ? `${selected.dealer} 내 순위`
         : `${groupLabel} 순위`;
   const scatterStyle = {
-    "--avg-x": `${clamp(((groupHappyAverage - 65) / 35) * 100)}%`,
-    "--avg-y": `${clamp(((groupVocAverage - 75) / 25) * 100)}%`,
+    "--avg-x": `${clamp(((groupHappyRateAverage - 65) / 35) * 100)}%`,
+    "--avg-y": `${clamp(((groupVocRateAverage - 75) / 25) * 100)}%`,
   } as CSSProperties;
   const denseScatter = groupItems.length > 12;
   const scatterCallouts = useMemo(
@@ -1376,11 +1421,10 @@ export default function CompetitiveAnalysis({
         <section className="analysis-summary-grid">
         <article className="analysis-summary-card satisfaction">
           <div>
-            <span>종합 만족도 평균</span>
+            <span>종합 만족도 누적점수</span>
             <ul className="analysis-summary-breakdown">
-              <li>VOC 상담 만족도</li>
-              <li>ONE Voice 시승 만족도</li>
-              <li>ONE Voice 출고 만족도</li>
+              <li>Q1 {displayNumber(selected.q1?.voc ?? 0)}점 + Q2 {displayNumber(selected.voc ?? 0)}점</li>
+              <li>{selectedPoint.vocQuarterCount}개 분기 · {selectedPoint.vocQuarterCount * 100}점 만점</li>
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.vocScore} sequence={0} />
@@ -1389,7 +1433,7 @@ export default function CompetitiveAnalysis({
               selectedPoint.vocScore >= groupVocAverage ? "positive" : "negative"
             }
           >
-            {groupLabel} 평균 {displayNumber(groupVocAverage)}점 대비{" "}
+            {groupLabel} 누적평균 {displayNumber(groupVocAverage)}점 대비{" "}
             {selectedPoint.vocScore > groupVocAverage
               ? "▲ "
               : selectedPoint.vocScore < groupVocAverage
@@ -1401,10 +1445,10 @@ export default function CompetitiveAnalysis({
 
         <article className="analysis-summary-card happycall">
           <div>
-            <span>해피콜 이행률 평균</span>
+            <span>해피콜 이행률 누적점수</span>
             <ul className="analysis-summary-breakdown">
-              <li>VOC 상담 후 해피콜(24시간 이내 시행)</li>
-              <li>ONE VOICE 출고 후 해피콜(24시간 이내 시행)</li>
+              <li>Q1 {displayNumber(selected.q1?.happyCall ?? 0)}점 + Q2 {displayNumber(selected.happyCall ?? 0)}점</li>
+              <li>{selectedPoint.happyQuarterCount}개 분기 · {selectedPoint.happyQuarterCount * 100}점 만점</li>
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
@@ -1415,7 +1459,7 @@ export default function CompetitiveAnalysis({
                 : "negative"
             }
           >
-            {groupLabel} 평균 {displayNumber(groupHappyAverage)}점 대비{" "}
+            {groupLabel} 누적평균 {displayNumber(groupHappyAverage)}점 대비{" "}
             {selectedPoint.happyScore > groupHappyAverage
               ? "▲ "
               : selectedPoint.happyScore < groupHappyAverage
@@ -1427,12 +1471,12 @@ export default function CompetitiveAnalysis({
 
         <article className="analysis-summary-card balance">
           <div>
-            <span>균형 경쟁력</span>
-            <small>종합 만족도와 해피콜 합산 평균</small>
+            <span>누적 경쟁력</span>
+            <small>종합 만족도 + 해피콜 단순 합산 · {selectedPoint.scoreMax}점 만점</small>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
           <em>
-            {viewMeta[view].short} {safeSelectedRank}위 / 전체 {groupItems.length}
+            전국 {selectedNationalRank || nationalCumulativeAnalysisPoints.length}위 / 전체 {nationalCumulativeAnalysisPoints.length}
           </em>
         </article>
         </section>
@@ -1443,7 +1487,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-scatter-card">
           <header className="analysis-card-heading">
             <div>
-              <h2>종합 만족도 평균 × 해피콜 이행률 평균</h2>
+              <h2>종합 만족도 × 해피콜 이행률 (분기 평균)</h2>
             </div>
             <div className="analysis-legend" aria-label="차트 범례">
               <span className="selected">
@@ -1471,18 +1515,18 @@ export default function CompetitiveAnalysis({
               <i className="scatter-average-line horizontal" />
               <span className="scatter-average-value vertical">
                 <span>해피콜 이행률</span>
-                <strong>평균 {displayNumber(groupHappyAverage)}점</strong>
+                <strong>평균 {displayNumber(groupHappyRateAverage)}점</strong>
               </span>
               <span className="scatter-average-value horizontal">
                 <span>종합 만족도</span>
-                <strong>평균 {displayNumber(groupVocAverage)}점</strong>
+                <strong>평균 {displayNumber(groupVocRateAverage)}점</strong>
               </span>
               {groupItems.map((item) => {
                 const pointX = clamp(
-                  ((item.happyScore - 65) / 35) * 100,
+                  ((item.happyAverage - 65) / 35) * 100,
                 );
                 const pointY = clamp(
-                  ((item.vocScore - 75) / 25) * 100,
+                  ((item.vocAverage - 75) / 25) * 100,
                 );
                 const isSelected = item.cdsid === selected.cdsid;
                 const isHovered =
@@ -1506,9 +1550,9 @@ export default function CompetitiveAnalysis({
                   "--callout-width": `${callout.labelWidth}px`,
                   "--callout-height": `${callout.labelHeight}px`,
                 } as CSSProperties;
-                const pointLabel = `${displayShowroomName(item.showroom)} · 종합 만족도 ${displayNumber(
-                  item.vocScore,
-                )} · 해피콜 ${displayNumber(item.happyScore)}`;
+                const pointLabel = `${displayShowroomName(item.showroom)} · 분기 평균 만족도 ${displayNumber(
+                  item.vocAverage,
+                )} · 분기 평균 해피콜 ${displayNumber(item.happyAverage)}`;
                 return (
                   <span
                     key={item.cdsid}
@@ -1568,9 +1612,9 @@ export default function CompetitiveAnalysis({
           </header>
           <div className="analysis-ranking-head" aria-hidden="true">
             <span>순위 · 전시장</span>
-            <span>종합 만족도</span>
-            <span>해피콜 이행률</span>
-            <span>합산 평균</span>
+            <span>만족도 누적</span>
+            <span>해피콜 누적</span>
+            <span>누적 합산</span>
           </div>
           <div className="analysis-ranking-list">
             {rankRows.map((item) => {
