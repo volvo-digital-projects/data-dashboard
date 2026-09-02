@@ -1806,6 +1806,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /2024/);
   assert.match(staffSectionHtml, /2025/);
   assert.match(staffSectionHtml, /2026 YTD/);
+  assert.match(staffSectionHtml, /회신 없음/);
+  assert.doesNotMatch(staffSectionHtml, /비교 없음/);
   assert.match(staffSectionHtml, />VOC 고객회신 건수<[^]*?<strong>8<small>건<\/small>/);
   assert.match(staffSectionHtml, /상담 만족도 평균\(누적\)/);
   assert.doesNotMatch(staffSectionHtml, /고객상담 만족도 평균\(2023 ~ 2026 YTD\)/);

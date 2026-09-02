@@ -1920,7 +1920,7 @@ export default function CompetitiveAnalysis({
                             <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
                             <span className={`delta-${deltaTone}`}>
                               {year.deltaPercent === null
-                                ? "비교 없음"
+                                ? "회신 없음"
                                 : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
                             </span>
                           </div>
