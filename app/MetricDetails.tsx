@@ -63,11 +63,11 @@ const vocContributionLabels: Record<string, string> = {
 };
 
 const cxContributionLabels: Record<string, string> = {
-  delivery: "90점 이상 시 40점 반영",
-  testDrive: "90점 이상 시 50점 반영",
-  emergency: "미발생 혹은 2일 이내 조치 시, 10점 반영",
-  actionPlan: "기한 내 제출 시, 10점 반영",
-  app: "가입율 90%(점) 이상 시, 20점 반영",
+  delivery: "90점 이상 시, DSC 40점 반영",
+  testDrive: "90점 이상 시, DSC 50점 반영",
+  emergency: "미발생 혹은 2일 이내 조치 시, DSC 10점 반영",
+  actionPlan: "기한 내 제출 시, DSC 10점 반영",
+  app: "가입율 90%(점) 이상 시, DSC 20점 반영",
 };
 
 const displayNumber = (value: number | null | undefined) =>

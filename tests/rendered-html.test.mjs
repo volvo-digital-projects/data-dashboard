@@ -1359,16 +1359,16 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/VCK 평가/g) ?? []).length, 1);
   assert.match(
     cxBody,
-    /metric-detail-source-title">ONE Voice<\/span> 신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">90점 이상 시 40점 반영<\/small><i[^>]*>\/<\/i><em class="global">/,
+    /metric-detail-source-title">ONE Voice<\/span> 신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">90점 이상 시, DSC 40점 반영<\/small><i[^>]*>\/<\/i><em class="global">/,
   );
   assert.match(
     cxBody,
-    /metric-detail-source-title">Sales-DMS<\/span> 헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">가입율 90%\(점\) 이상 시, 20점 반영<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
+    /metric-detail-source-title">Sales-DMS<\/span> 헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">가입율 90%\(점\) 이상 시, DSC 20점 반영<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
   );
   for (const label of [
-    "90점 이상 시 50점 반영",
-    "미발생 혹은 2일 이내 조치 시, 10점 반영",
-    "기한 내 제출 시, 10점 반영",
+    "90점 이상 시, DSC 50점 반영",
+    "미발생 혹은 2일 이내 조치 시, DSC 10점 반영",
+    "기한 내 제출 시, DSC 10점 반영",
   ]) {
     assert.match(cxBody, new RegExp(label));
   }
