@@ -1265,7 +1265,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   }
   assert.match(
     vocBody,
-    /metric-detail-source-title">VOC<\/span> 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(DSC 60점\)/,
+    /metric-detail-source-title">VOC<\/span> 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(DSC 60점 반영\)/,
   );
   for (const label of ["VOC 첫인사", "VOC 태블릿", "VOC 해피콜"]) {
     assert.match(

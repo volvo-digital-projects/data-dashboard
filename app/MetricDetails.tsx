@@ -56,7 +56,7 @@ const quarterRanges = [
 ];
 
 const vocContributionLabels: Record<string, string> = {
-  overall: "60% 반영(DSC 60점)",
+  overall: "60% 반영(DSC 60점 반영)",
   greeting: "20% 반영(DSC 20점)",
   tablet: "10% 반영(DSC 10점)",
   happyCall: "10% 반영(DSC 10점)",
