@@ -1837,6 +1837,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     /class="analysis-staff-chart-bar national"[\s\S]*class="analysis-staff-chart-bar employee"/,
   );
+  assert.match(staffSectionHtml, /발송 21건/);
+  assert.match(analysisSource, /sent: metrics\.sent \?\? 0/);
   assert.match(staffSectionHtml, /--staff-trend-x:43\.75%/);
   assert.match(
     css,
@@ -1890,6 +1892,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(
     css,
     /\.analysis-staff-year-axis span\s*\{[\s\S]*?font-family:\s*"Volvo Centum"[\s\S]*?font-size:\s*9px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-year-axis small\s*\{[\s\S]*?font-size:\s*9px;[\s\S]*?font-weight:\s*700;/,
+  );
+  assert.match(
+    css,
+    /@container \(max-width:\s*420px\)[\s\S]*?\.analysis-staff-year-axis > div\s*\{[\s\S]*?flex-direction:\s*column;/,
   );
   assert.equal(
     (staffSectionHtml.match(/class="analysis-staff-history-legend"/g) ?? []).length,

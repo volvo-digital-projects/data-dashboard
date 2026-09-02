@@ -5167,6 +5167,7 @@ input:focus-visible {
 }
 
 .analysis-staff-history-chart {
+  container-type: inline-size;
   width: 100%;
   height: 100%;
   min-width: 0;
@@ -5182,7 +5183,7 @@ input:focus-visible {
   position: relative;
   height: 194px;
   align-self: center;
-  margin: 0 14px;
+  margin: 0 18px;
 }
 
 .analysis-staff-year-groups {
@@ -5195,7 +5196,7 @@ input:focus-visible {
 .analysis-staff-year-groups > div {
   min-width: 0;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) 36px;
+  grid-template-rows: minmax(0, 1fr) 48px;
   border-left: 1px solid rgba(166, 190, 201, 0.28);
 }
 
@@ -5217,11 +5218,22 @@ input:focus-visible {
 }
 
 .analysis-staff-year-axis {
+  min-width: 0;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  gap: 2px;
+  padding: 5px 8px 4px;
+  white-space: nowrap;
+}
+
+.analysis-staff-year-axis > div {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  white-space: nowrap;
 }
 
 .analysis-staff-year-axis strong {
@@ -5244,6 +5256,25 @@ input:focus-visible {
 
 .analysis-staff-year-axis span.delta-negative {
   color: #cf493f;
+}
+
+.analysis-staff-year-axis small {
+  color: #3f5968;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@container (max-width: 420px) {
+  .analysis-staff-year-axis {
+    padding-inline: 4px;
+  }
+
+  .analysis-staff-year-axis > div {
+    flex-direction: column;
+    gap: 0;
+    line-height: 1.05;
+  }
 }
 
 .analysis-staff-chart-bar {

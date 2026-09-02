@@ -42,7 +42,7 @@ type AnalysisPoint = AnalysisShowroom & {
 };
 
 type StaffYear = "2023" | "2024" | "2025" | "2026";
-type StaffYearMetric = { responses: number; scoreSum: number };
+type StaffYearMetric = { responses: number; scoreSum: number; sent?: number };
 type StaffKeyword = { label: string; mentions: number };
 type StaffEmployee = {
   name: string;
@@ -930,6 +930,7 @@ export default function CompetitiveAnalysis({
       metrics.responses > 0 ? metrics.scoreSum / metrics.responses : null;
     return {
       year,
+      sent: metrics.sent ?? 0,
       responses: metrics.responses,
       scoreSum: metrics.scoreSum,
       average,
@@ -1874,7 +1875,7 @@ export default function CompetitiveAnalysis({
                           style={
                             { "--staff-history-index": yearIndex } as CSSProperties
                           }
-                          aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: ${
+                          aria-label={`${year.year === "2026" ? "2026 YTD" : year.year}: 발송 ${year.sent}건, ${
                             year.average === null
                               ? "회신 없음"
                               : `평균 ${year.average.toFixed(1)}점, ${year.responses}건`
@@ -1917,12 +1918,15 @@ export default function CompetitiveAnalysis({
                             )}
                           </div>
                           <div className="analysis-staff-year-axis">
-                            <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
-                            <span className={`delta-${deltaTone}`}>
-                              {year.deltaPercent === null
-                                ? "회신 없음"
-                                : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
-                            </span>
+                            <div>
+                              <strong>{year.year === "2026" ? "2026 YTD" : year.year}</strong>
+                              <span className={`delta-${deltaTone}`}>
+                                {year.deltaPercent === null
+                                  ? "회신 없음"
+                                  : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
+                              </span>
+                            </div>
+                            <small>발송 {year.sent.toLocaleString("ko-KR")}건</small>
                           </div>
                         </div>
                       );
