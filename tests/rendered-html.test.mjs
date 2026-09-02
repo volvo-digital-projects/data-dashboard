@@ -1337,26 +1337,31 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   const cxHtml = (await cxResponse.text()).replaceAll("<!-- -->", "");
   const cxBody = cxHtml.match(/<body>([\s\S]*?)<script/)?.[1] ?? cxHtml;
   assert.match(cxBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
-  assert.match(cxBody, /ONE Voice 신차출고 만족도/);
-  assert.match(cxBody, /ONE Voice 시승 만족도/);
-  assert.match(cxBody, /ONE Voice 긴급경보 처리여부/);
-  assert.match(cxBody, /ONE Voice 조치계획 작성 및 제출/);
-  assert.match(cxBody, /Sales-DMS 헤이볼보 앱 가입율/);
-  assert.equal((cxBody.match(/ONE Voice/g) ?? []).length, 8);
-  assert.equal((cxBody.match(/Sales-DMS/g) ?? []).length, 2);
+  assert.match(cxBody, /신차출고 만족도/);
+  assert.match(cxBody, /시승 만족도/);
+  assert.match(cxBody, /긴급경보 처리여부/);
+  assert.match(cxBody, /조치계획 작성 및 제출/);
+  assert.match(cxBody, /헤이볼보 앱 가입율/);
+  assert.doesNotMatch(cxBody, /ONE Voice|Sales-DMS/);
   assert.doesNotMatch(cxBody, /CX INDEX/);
   assert.equal((cxBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/글로벌 평가/g) ?? []).length, 4);
   assert.equal((cxBody.match(/VCK 평가/g) ?? []).length, 1);
   assert.match(
     cxBody,
-    /ONE Voice 신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><em class="global">/,
+    /신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">90점 이상 시 40점 반영<\/small><i[^>]*>\/<\/i><em class="global">/,
   );
   assert.match(
     cxBody,
-    /Sales-DMS 헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
+    /헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">가입율 90%\(점\) 이상 시, 20점 반영<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
   );
-  assert.doesNotMatch(cxBody, /<b>(?:ONE Voice|Sales-DMS)<\/b>/);
+  for (const label of [
+    "90점 이상 시 50점 반영",
+    "미발생 혹은 2일 이내 조치 시, 10점 반영",
+    "기한 내 제출 시, 10점 반영",
+  ]) {
+    assert.match(cxBody, new RegExp(label));
+  }
   assert.equal((cxBody.match(/class="metric-detail-week-label"/g) ?? []).length, 260);
   assert.doesNotMatch(cxBody, /class="metric-detail-national-line"/);
   assert.doesNotMatch(cxBody, /W01~W52 원본값 보기/);
@@ -1403,6 +1408,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-tabs a small\s*\{[^}]*color:\s*inherit;[^}]*font-size:\s*inherit;[^}]*font-weight:\s*inherit;[^}]*line-height:\s*inherit;/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-card h2 > em\s*\{[^}]*font-family:\s*var\(--font-latin\), var\(--font-korean\);/,
   );
   assert.match(
     detailCss,

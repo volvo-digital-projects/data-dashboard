@@ -14736,6 +14736,7 @@ button.header-status-item {
   border-radius: 4px;
   color: #416c80;
   background: #f1f7f9;
+  font-family: var(--font-latin), var(--font-korean);
   font-size: 8px;
   font-style: normal;
   font-weight: 720;

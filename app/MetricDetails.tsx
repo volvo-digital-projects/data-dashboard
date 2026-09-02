@@ -62,6 +62,14 @@ const vocContributionLabels: Record<string, string> = {
   happyCall: "10% 반영(10점)",
 };
 
+const cxContributionLabels: Record<string, string> = {
+  delivery: "90점 이상 시 40점 반영",
+  testDrive: "90점 이상 시 50점 반영",
+  emergency: "미발생 혹은 2일 이내 조치 시, 10점 반영",
+  actionPlan: "기한 내 제출 시, 10점 반영",
+  app: "가입율 90%(점) 이상 시, 20점 반영",
+};
+
 const displayNumber = (value: number | null | undefined) =>
   typeof value === "number"
     ? value.toLocaleString("ko-KR", { maximumFractionDigits: 2 })
@@ -151,12 +159,10 @@ function MetricDetailChart({
   });
   const isVckEvaluation = metric === "voc" || component.key === "app";
   const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
-  const displayLabel =
-    metric === "cx"
-      ? `${component.key === "app" ? "Sales-DMS" : "ONE Voice"} ${component.label}`
-      : component.label;
   const contributionLabel =
-    metric === "voc" ? vocContributionLabels[component.key] : null;
+    metric === "voc"
+      ? vocContributionLabels[component.key]
+      : cxContributionLabels[component.key];
   const isAppealable = metric === "voc" && component.key === "happyCall";
   const seriesRevealId = `metric-${metric}-${component.key}-series-reveal`;
 
@@ -165,7 +171,7 @@ function MetricDetailChart({
       <header>
         <div>
           <h2>
-            <span>{displayLabel}</span>
+            <span>{component.label}</span>
             <i aria-hidden="true">/</i>
             <small className="metric-detail-max-inline">
               {component.key === "sent"
@@ -220,7 +226,7 @@ function MetricDetailChart({
           viewBox={`0 0 ${chart.width} ${chart.height}`}
           preserveAspectRatio="xMidYMid meet"
           role="img"
-          aria-label={`${displayLabel} W1부터 W52까지 ${showroomName} 점수 추이`}
+          aria-label={`${component.label} W1부터 W52까지 ${showroomName} 점수 추이`}
         >
           <defs>
             <clipPath id={seriesRevealId}>
