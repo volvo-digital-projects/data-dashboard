@@ -4698,7 +4698,7 @@ input:focus-visible {
 .analysis-staff-roster > header {
   min-height: 30px;
   display: grid;
-  grid-template-columns: 30px minmax(104px, 1fr) 40px 40px 44px;
+  grid-template-columns: 30px minmax(82px, 1fr) 52px 52px 56px;
   align-items: center;
   padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
@@ -4748,7 +4748,7 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 30px minmax(104px, 1fr) 40px 40px 44px;
+  grid-template-columns: 30px minmax(82px, 1fr) 52px 52px 56px;
   align-items: center;
   gap: 0;
   padding: 4px 0;
@@ -4803,10 +4803,10 @@ input:focus-visible {
 .analysis-staff-roster-identity {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(30px, 1fr) 58px;
+  grid-template-columns: minmax(30px, 1fr) 39px;
   align-items: center;
   gap: 4px;
-  padding: 0 7px 0 11px;
+  padding: 0 5px 0 7px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
 
@@ -4820,9 +4820,9 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-identity small {
-  width: 58px;
+  width: 39px;
   display: grid;
-  grid-template-columns: 24px 30px;
+  grid-template-columns: 5px 30px;
   align-items: center;
   justify-content: end;
   column-gap: 4px;
@@ -4832,7 +4832,7 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.analysis-staff-roster-identity small em {
+.analysis-staff-roster-identity small i {
   font-style: normal;
   font-weight: 620;
   text-align: right;
@@ -4892,6 +4892,20 @@ input:focus-visible {
   flex-direction: column;
   gap: 1px;
   line-height: 1;
+}
+
+.analysis-staff-roster-identity-heading {
+  gap: 3px;
+}
+
+.analysis-staff-roster-identity-heading b {
+  font-size: 9px;
+}
+
+.analysis-staff-roster-identity-heading small {
+  color: #6f8794;
+  font-size: 7px;
+  font-weight: 650;
 }
 
 .analysis-staff-roster-score-heading b {

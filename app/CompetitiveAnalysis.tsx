@@ -181,13 +181,6 @@ const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap
       )
       .map((employee) => ({ cdsid, employee })),
 );
-const staffNationalScoreRanking = [...staffTenureScatterPopulation].sort(
-  (a, b) =>
-    b.average - a.average ||
-    b.responses - a.responses ||
-    a.name.localeCompare(b.name, "ko"),
-);
-
 type ScatterLabelPlacement =
   | "left-up"
   | "left-down"
@@ -938,6 +931,9 @@ export default function CompetitiveAnalysis({
   const selectedStaffEmployee =
     rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
       ?.employee ?? rankedSalesStaff[0]?.employee;
+  const selectedStaffScoring = rankedSalesStaff.find(
+    ({ employee }) => employee.name === selectedStaffEmployee?.name,
+  );
   const selectedStaffRosterIndex = Math.max(
     0,
     rankedSalesStaff.findIndex(
@@ -1039,13 +1035,6 @@ export default function CompetitiveAnalysis({
     (sum, year) => sum + year.responses,
     0,
   );
-  const selectedStaffScoreSum = selectedStaffYearRows.reduce(
-    (sum, year) => sum + year.scoreSum,
-    0,
-  );
-  const selectedStaffAverage = selectedStaffResponses
-    ? selectedStaffScoreSum / selectedStaffResponses
-    : null;
   const staffNationalResponses = selectedStaffYearRows.reduce(
     (sum, year) => sum + year.nationalResponses,
     0,
@@ -1072,13 +1061,6 @@ export default function CompetitiveAnalysis({
   const selectedStaffTenureTopPercent = selectedStaffTenureRank
     ? (selectedStaffTenureRank / staffCurrentSalesPopulation.length) * 100
     : null;
-  const selectedStaffScoreRank = selectedStaffEmployee
-    ? staffNationalScoreRanking.findIndex(
-        (point) =>
-          point.cdsid === selected.cdsid &&
-          point.name === selectedStaffEmployee.name,
-      ) + 1
-    : 0;
   const selectedStaffResponseShare = staffNationalResponses
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
@@ -1670,18 +1652,21 @@ export default function CompetitiveAnalysis({
             >
               <header className="analysis-staff-roster-columns" aria-hidden="true">
                 <span>번호</span>
-                <span>영업직원</span>
+                <span className="analysis-staff-roster-identity-heading">
+                  <b>영업직원</b>
+                  <small>/ 입사일</small>
+                </span>
                 <span className="analysis-staff-roster-score-heading">
-                  <b>보정</b>
-                  <small>80%</small>
+                  <b>만족도</b>
+                  <small>(80%)</small>
                 </span>
                 <span className="analysis-staff-roster-score-heading">
                   <b>최신성</b>
-                  <small>20%</small>
+                  <small>(20%)</small>
                 </span>
                 <span className="analysis-staff-roster-score-heading">
-                  <b>최종</b>
-                  <small>100점</small>
+                  <b>최종점수</b>
+                  <small>(100점)</small>
                 </span>
               </header>
               <div className="analysis-staff-roster-list">
@@ -1729,7 +1714,7 @@ export default function CompetitiveAnalysis({
                       <span className="analysis-staff-roster-identity">
                         <strong>{employee.name}</strong>
                         <small>
-                          <em>입사일</em>
+                          <i aria-hidden="true">/</i>
                           <b>{formatStaffShortDate(employee.hireDate)}</b>
                         </small>
                       </span>
@@ -1834,21 +1819,30 @@ export default function CompetitiveAnalysis({
                 )}
               </div>
             </article>
-            <article className="analysis-staff-metric-card">
-              <span>상담 만족도</span>
+            <article
+              className="analysis-staff-metric-card"
+              aria-label={
+                selectedStaffScoring?.finalScore === null
+                  ? `최종점수 검토, 회신 ${selectedStaffScoring.responses}건`
+                  : `최종점수 ${selectedStaffScoring?.finalScore.toFixed(1)}점, 만족도 ${selectedStaffScoring?.adjustedPoints?.toFixed(1)}점과 최신성 ${selectedStaffScoring?.freshnessPoints.toFixed(1)}점 합산`
+              }
+            >
+              <span>최종점수</span>
               <div className="analysis-staff-metric-value">
                 <strong>
-                  {selectedStaffAverage === null
-                    ? "―"
-                    : selectedStaffAverage.toFixed(1)}
-                  <small>점</small>
+                  {selectedStaffScoring?.finalScore === null || !selectedStaffScoring
+                    ? "검토"
+                    : selectedStaffScoring.finalScore.toFixed(1)}
+                  {selectedStaffScoring?.finalScore === null || !selectedStaffScoring
+                    ? null
+                    : <small>점</small>}
                 </strong>
-                {selectedStaffScoreRank > 0 ? (
-                  <small className="analysis-staff-metric-comparison">
-                    <i aria-hidden="true">/</i>
-                    전체 {staffNationalScoreRanking.length}명 중 {selectedStaffScoreRank}위
-                  </small>
-                ) : null}
+                <small className="analysis-staff-metric-comparison">
+                  <i aria-hidden="true">/</i>
+                  {selectedStaffScoring?.finalScore === null || !selectedStaffScoring
+                    ? `회신 ${selectedStaffScoring?.responses ?? 0}건 · 8건부터 산정`
+                    : `만족도 ${selectedStaffScoring.adjustedPoints?.toFixed(1)} + 최신성 ${selectedStaffScoring.freshnessPoints.toFixed(1)}`}
+                </small>
               </div>
             </article>
             <article

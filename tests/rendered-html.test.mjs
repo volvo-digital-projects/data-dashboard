@@ -1715,11 +1715,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /9\.28/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-final">89\.8<\/span>/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-final">77\.0<\/span>/);
-  assert.match(staffSectionHtml, /번호[\s\S]*?영업직원[\s\S]*?보정[\s\S]*?80%[\s\S]*?최신성[\s\S]*?20%[\s\S]*?최종[\s\S]*?100점/);
+  assert.match(staffSectionHtml, /번호[\s\S]*?영업직원[\s\S]*?\/ 입사일[\s\S]*?만족도[\s\S]*?\(80%\)[\s\S]*?최신성[\s\S]*?\(20%\)[\s\S]*?최종점수[\s\S]*?\(100점\)/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster-adjusted-points">76\.9<\/span><span class="analysis-staff-roster-freshness-points">17\.2<\/span><span class="analysis-staff-roster-final">94\.1<\/span>/);
+  assert.match(
+    staffSectionHtml,
+    /aria-label="최종점수 94\.1점, 만족도 76\.9점과 최신성 17\.2점 합산"[\s\S]*?<span>최종점수<\/span>[\s\S]*?94\.1<small>점<\/small>[\s\S]*?만족도 76\.9 \+ 최신성 17\.2/,
+  );
   assert.doesNotMatch(staffSectionHtml, />누적평균<\/span>/);
   assert.doesNotMatch(staffSectionHtml, />회신건수<\/span>/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*30px minmax\(104px, 1fr\) 40px 40px 44px;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*30px minmax\(82px, 1fr\) 52px 52px 56px;/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?min-height:\s*30px;/);
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[\s\S]*?height:\s*16px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
@@ -1727,11 +1731,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(css, /\.analysis-staff-roster-rank\s*\{[\s\S]*?font-size:\s*8px;[\s\S]*?font-weight:\s*700;/);
   assert.match(
     staffSectionHtml,
-    /class="analysis-staff-roster-identity"><strong>김대준<\/strong><small><em>입사일<\/em><b>130201<\/b><\/small><\/span>/,
+    /class="analysis-staff-roster-identity"><strong>김대준<\/strong><small><i aria-hidden="true">\/<\/i><b>130201<\/b><\/small><\/span>/,
   );
   assert.match(
     css,
-    /\.analysis-staff-roster-identity small\s*\{[\s\S]*?width:\s*58px;[\s\S]*?grid-template-columns:\s*24px 30px;/,
+    /\.analysis-staff-roster-identity small\s*\{[\s\S]*?width:\s*39px;[\s\S]*?grid-template-columns:\s*5px 30px;/,
   );
   assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("강석"));
   assert.ok(staffSectionHtml.indexOf("강석") < staffSectionHtml.indexOf("김대준"));
