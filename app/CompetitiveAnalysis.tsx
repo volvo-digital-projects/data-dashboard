@@ -546,20 +546,23 @@ const cumulativeAnalysisPoint = (item: AnalysisShowroom): AnalysisPoint => {
   const happyQuarterScores = [item.q1?.happyCall, item.happyCall].filter(
     (score): score is number => typeof score === "number",
   );
-  const vocScore = vocQuarterScores.reduce((sum, score) => sum + score, 0);
-  const happyScore = happyQuarterScores.reduce((sum, score) => sum + score, 0);
+  // Average the available quarters for each 100-point metric, then add the two.
+  const vocScore = vocQuarterScores.length
+    ? vocQuarterScores.reduce((sum, score) => sum + score, 0) / vocQuarterScores.length
+    : 0;
+  const happyScore = happyQuarterScores.length
+    ? happyQuarterScores.reduce((sum, score) => sum + score, 0) / happyQuarterScores.length
+    : 0;
   return {
     ...item,
     vocScore,
     happyScore,
     combined: vocScore + happyScore,
-    vocAverage: vocQuarterScores.length ? vocScore / vocQuarterScores.length : 0,
-    happyAverage: happyQuarterScores.length
-      ? happyScore / happyQuarterScores.length
-      : 0,
+    vocAverage: vocScore,
+    happyAverage: happyScore,
     vocQuarterCount: vocQuarterScores.length,
     happyQuarterCount: happyQuarterScores.length,
-    scoreMax: (vocQuarterScores.length + happyQuarterScores.length) * 100,
+    scoreMax: 200,
   };
 };
 
@@ -1293,7 +1296,7 @@ export default function CompetitiveAnalysis({
         : view === "region"
           ? "동일 권역별 누적평균"
           : "동일 사이즈 누적평균";
-  const selectedAverageLabel = `${displayShowroomName(selected.showroom)} 누적점수`;
+  const selectedAverageLabel = `${displayShowroomName(selected.showroom)} 합산점수`;
   const displayedGroupAverage = Number(groupCombinedAverage.toFixed(1));
   const displayedSelectedAverage = Number(selectedPoint.combined.toFixed(1));
   const selectedAverageDelta = Number(
@@ -1515,8 +1518,9 @@ export default function CompetitiveAnalysis({
               </span>
             </span>
             <ul className="analysis-summary-breakdown">
-              <li>Q1 {displayNumber(selected.q1?.voc ?? 0)}점 + Q2 {displayNumber(selected.voc ?? 0)}점</li>
-              <li>{selectedPoint.vocQuarterCount}개 분기 · {selectedPoint.vocQuarterCount * 100}점 만점</li>
+              <li>VOC 상담 만족도</li>
+              <li>ONE Voice 시승 만족도</li>
+              <li>ONE Voice 출고 만족도</li>
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.vocScore} sequence={0} />
@@ -1544,8 +1548,8 @@ export default function CompetitiveAnalysis({
               </span>
             </span>
             <ul className="analysis-summary-breakdown">
-              <li>Q1 {displayNumber(selected.q1?.happyCall ?? 0)}점 + Q2 {displayNumber(selected.happyCall ?? 0)}점</li>
-              <li>{selectedPoint.happyQuarterCount}개 분기 · {selectedPoint.happyQuarterCount * 100}점 만점</li>
+              <li>VOC 상담 후 해피콜(24시간 이내 시행)</li>
+              <li>ONE VOICE 출고 후 해피콜(24시간 이내 시행)</li>
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
@@ -1574,7 +1578,7 @@ export default function CompetitiveAnalysis({
                 <b>Q1</b><b>Q2</b>
               </span>
             </span>
-            <small>종합 만족도 + 해피콜 단순 합산 · {selectedPoint.scoreMax}점 만점</small>
+            <small>종합 만족도와 해피콜 평균점수 합산</small>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
           <em>
@@ -1714,9 +1718,9 @@ export default function CompetitiveAnalysis({
           </header>
           <div className="analysis-ranking-head" aria-hidden="true">
             <span>순위 · 전시장</span>
-            <span>만족도 누적</span>
-            <span>해피콜 누적</span>
-            <span>누적 합산</span>
+            <span>만족도 평균</span>
+            <span>해피콜 평균</span>
+            <span>합산점수</span>
           </div>
           <div className="analysis-ranking-list">
             {rankRows.map((item) => {

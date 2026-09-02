@@ -136,6 +136,41 @@ async function render(
   );
 }
 
+test("averages Q1-Q2 metrics before combining and keeps staff scores legible", async () => {
+  const { showrooms } = JSON.parse(await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"));
+  const mean = (values) => {
+    const present = values.filter((value) => typeof value === "number");
+    return present.length ? present.reduce((sum, value) => sum + value, 0) / present.length : 0;
+  };
+  const expected = showrooms.map((showroom) => {
+    const satisfaction = mean([showroom.q1?.voc, showroom.voc]);
+    const happycall = mean([showroom.q1?.happyCall, showroom.happyCall]);
+    return { ...showroom, satisfaction, happycall, combined: satisfaction + happycall };
+  }).sort((a, b) => b.combined - a.combined || b.satisfaction - a.satisfaction || a.showroom.localeCompare(b.showroom, "ko"));
+  for (const [index, showroom] of expected.entries()) {
+    const response = await render(`/dashboard/${showroom.cdsid}/analysis?view=showroom`);
+    assert.equal(response.status, 200);
+    const html = (await response.text()).replaceAll("<!-- -->", "");
+    for (const [kind, score] of [["satisfaction", showroom.satisfaction], ["happycall", showroom.happycall], ["balance", showroom.combined]]) {
+      const card = html.match(new RegExp(`<article class="analysis-summary-card ${kind}">([\\s\\S]*?)</article>`))?.[1];
+      assert.ok(card, `${showroom.cdsid} ${kind}`);
+      const actual = Number(card.match(/aria-label="([\d.]+)점"/)?.[1]);
+      assert.equal(actual, Number(score.toFixed(1)), `${showroom.cdsid} ${kind}`);
+    }
+    assert.ok(html.includes(`전국 ${index + 1}위 / 전체 ${expected.length}`));
+    assert.ok(html.includes("VOC 상담 만족도") && html.includes("ONE Voice 시승 만족도") && html.includes("ONE Voice 출고 만족도"));
+    assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE VOICE 출고 후 해피콜(24시간 이내 시행)"));
+    assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
+  }
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 370px minmax\(0, 1fr\);/);
+  assert.match(css, /\.analysis-staff-roster-identity strong\s*\{[^}]*flex: 0 0 auto;[^}]*font-size: 12px;/);
+  assert.doesNotMatch(css.match(/\.analysis-staff-roster-identity strong\s*\{[^}]*\}/)?.[0] ?? "", /ellipsis/);
+  assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-weight: 400;/);
+  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-family: var\(--font-volvo\)/);
+  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-weight: 700;/);
+});
+
 async function login(cdsid) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `login-${process.pid}-${Date.now()}`);
@@ -1547,7 +1582,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /<footer><span>에이치 누적평균<strong>375\.3<\/strong><\/span><span>볼보 강남대치 누적점수<strong>380\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 5\.3점<\/strong><\/span><\/footer>/,
+    /<footer><span>에이치 누적평균<strong>187\.6<\/strong><\/span><span>볼보 강남대치 합산점수<strong>190\.3<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 2\.7점<\/strong><\/span><\/footer>/,
   );
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
@@ -1588,18 +1623,19 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /<strong>7개소<\/strong>/);
   assert.match(
     visibleHtml,
-    /종합 만족도 평균 누적[\s\S]*Q1 93\.1점 \+ Q2 87\.5점[\s\S]*2개 분기 · 200점 만점[\s\S]*180\.6/,
+    /종합 만족도 평균 누적[\s\S]*VOC 상담 만족도[\s\S]*ONE Voice 시승 만족도[\s\S]*ONE Voice 출고 만족도[\s\S]*90\.3/,
   );
   assert.match(
     visibleHtml,
-    /에이치 누적평균 190\.0점 대비 ▼ 9\.4점/,
+    /에이치 누적평균 95\.0점 대비 ▼ 4\.7점/,
   );
-  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*Q1 100점 \+ Q2 100점[\s\S]*2개 분기 · 200점 만점[\s\S]*>200\.0<[^]*?점/);
+  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE VOICE 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>100\.0<[^]*?점/);
   assert.match(
     visibleHtml,
-    /에이치 누적평균 185\.3점 대비 ▲ 14\.7점/,
+    /에이치 누적평균 92\.7점 대비 ▲ 7\.3점/,
   );
-  assert.match(visibleHtml, /합산 경쟁력[\s\S]*종합 만족도 \+ 해피콜 단순 합산 · 400점 만점[\s\S]*380\.6/);
+  assert.match(visibleHtml, /합산 경쟁력[\s\S]*종합 만족도와 해피콜 평균점수 합산[\s\S]*190\.3/);
+  assert.doesNotMatch(visibleHtml, /2개 분기 · 200점 만점|Q1 93\.1점 \+ Q2 87\.5점|400점 만점/);
   assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 3);
   assert.match(visibleHtml, /전국 17위 \/ 전체 39/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
@@ -1715,11 +1751,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.doesNotMatch(staffSectionHtml, />누적평균<\/span>/);
   assert.doesNotMatch(staffSectionHtml, />회신건수<\/span>/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?grid-template-columns:\s*30px minmax\(82px, 1fr\) 52px 52px 56px;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*grid-template-columns:\s*28px minmax\(130px, 1fr\) 58px 58px 64px;/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?min-height:\s*30px;/);
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[\s\S]*?height:\s*16px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
-  assert.match(css, /\.analysis-staff-roster-adjusted-points,[\s\S]*?\.analysis-staff-roster-freshness-points\s*\{[\s\S]*?font-size:\s*9px;/);
+  assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size:\s*12px;[^}]*font-weight:\s*400;/);
+  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-size:\s*13px;[^}]*font-weight:\s*700;/);
+  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-family:\s*var\(--font-volvo\)/);
+  assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 370px minmax\(0, 1fr\);/);
   assert.match(css, /\.analysis-staff-roster-rank\s*\{[\s\S]*?font-size:\s*8px;[\s\S]*?font-weight:\s*700;/);
   assert.match(
     staffSectionHtml,
@@ -1727,7 +1766,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-roster-identity small\s*\{[\s\S]*?width:\s*35px;[\s\S]*?grid-template-columns:\s*4px 29px;/,
+    /\.analysis-staff-roster-identity small\s*\{[^}]*width:\s*44px;[^}]*grid-template-columns:\s*4px 38px;/,
   );
   assert.match(
     staffSectionHtml,
@@ -2249,11 +2288,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const showroomHtml = await showroomResponse.text();
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /<footer><span>전국 전시장 누적평균<strong>375\.9<\/strong><\/span><span>볼보 강남대치 누적점수<strong>380\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 4\.7점<\/strong><\/span><\/footer>/,
+    /<footer><span>전국 전시장 누적평균<strong>188\.0<\/strong><\/span><span>볼보 강남대치 합산점수<strong>190\.3<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 2\.3점<\/strong><\/span><\/footer>/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /class="analysis-ranking-head"[^>]*>[\s\S]*?만족도 누적[\s\S]*?해피콜 누적[\s\S]*?누적 합산/,
+    /class="analysis-ranking-head"[^>]*>[\s\S]*?만족도 평균[\s\S]*?해피콜 평균[\s\S]*?합산점수/,
   );
   const showroomRankingHtml = showroomHtml.match(
     /class="analysis-ranking-list">([\s\S]*?)<\/div><footer>/,
