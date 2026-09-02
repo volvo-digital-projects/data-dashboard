@@ -4672,7 +4672,7 @@ input:focus-visible {
 
 .analysis-staff-workspace {
   display: grid;
-  grid-template-columns: minmax(220px, 252px) minmax(0, 1fr);
+  grid-template-columns: minmax(260px, 284px) minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-items: start;
   gap: 12px;
@@ -4695,7 +4695,7 @@ input:focus-visible {
 .analysis-staff-roster > header {
   min-height: 30px;
   display: grid;
-  grid-template-columns: 36px minmax(94px, 1fr) 44px 52px;
+  grid-template-columns: 30px minmax(104px, 1fr) 40px 40px 44px;
   align-items: center;
   padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
@@ -4745,7 +4745,7 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 36px minmax(94px, 1fr) 44px 52px;
+  grid-template-columns: 30px minmax(104px, 1fr) 40px 40px 44px;
   align-items: center;
   gap: 0;
   padding: 4px 0;
@@ -4844,7 +4844,8 @@ input:focus-visible {
   text-align: right;
 }
 
-.analysis-staff-roster-average,
+.analysis-staff-roster-adjusted-points,
+.analysis-staff-roster-freshness-points,
 .analysis-staff-roster-final {
   height: 22px;
   display: flex;
@@ -4858,10 +4859,16 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.analysis-staff-roster-average {
+.analysis-staff-roster-adjusted-points,
+.analysis-staff-roster-freshness-points {
   color: #0d5f7d;
-  font-size: 12px;
+  font-size: 9px;
+  font-weight: 690;
   line-height: 1;
+}
+
+.analysis-staff-roster-freshness-points {
+  color: #38758c;
 }
 
 .analysis-staff-roster-final {
@@ -4877,18 +4884,18 @@ input:focus-visible {
   font-weight: 680;
 }
 
-.analysis-staff-roster-final-heading {
+.analysis-staff-roster-score-heading {
   min-height: 26px;
   flex-direction: column;
   gap: 1px;
   line-height: 1;
 }
 
-.analysis-staff-roster-final-heading b {
+.analysis-staff-roster-score-heading b {
   font-size: 8px;
 }
 
-.analysis-staff-roster-final-heading small {
+.analysis-staff-roster-score-heading small {
   color: #6f8794;
   font-size: 6px;
   font-weight: 650;

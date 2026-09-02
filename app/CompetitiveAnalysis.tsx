@@ -903,15 +903,18 @@ export default function CompetitiveAnalysis({
             ? 0
             : Math.max(0, 1 - daysSinceResponse / staffScoreFreshnessDays) *
               staffScoreFreshnessWeight;
-          const finalScore =
+          const adjustedPoints =
             totals.responses >= staffScorePriorResponses && adjustedAverage !== null
-              ? (adjustedAverage / 10) * staffScoreQualityWeight + freshnessPoints
+              ? (adjustedAverage / 10) * staffScoreQualityWeight
               : null;
+          const finalScore = adjustedPoints === null
+            ? null
+            : adjustedPoints + freshnessPoints;
           return {
             employee,
             responses: totals.responses,
             average,
-            adjustedAverage,
+            adjustedPoints,
             freshnessPoints,
             finalScore,
           };
@@ -1668,10 +1671,17 @@ export default function CompetitiveAnalysis({
               <header className="analysis-staff-roster-columns" aria-hidden="true">
                 <span>번호</span>
                 <span>영업직원</span>
-                <span>누적평균</span>
-                <span className="analysis-staff-roster-final-heading">
-                  <b>최종점수</b>
-                  <small>보정80+최신20</small>
+                <span className="analysis-staff-roster-score-heading">
+                  <b>보정</b>
+                  <small>80%</small>
+                </span>
+                <span className="analysis-staff-roster-score-heading">
+                  <b>최신성</b>
+                  <small>20%</small>
+                </span>
+                <span className="analysis-staff-roster-score-heading">
+                  <b>최종</b>
+                  <small>100점</small>
                 </span>
               </header>
               <div className="analysis-staff-roster-list">
@@ -1690,7 +1700,7 @@ export default function CompetitiveAnalysis({
                   employee,
                   average,
                   responses,
-                  adjustedAverage,
+                  adjustedPoints,
                   freshnessPoints,
                   finalScore,
                 }, index) => {
@@ -1705,7 +1715,7 @@ export default function CompetitiveAnalysis({
                       }, ${
                         finalScore === null
                           ? `회신 ${responses}건으로 최종점수 산정 유보`
-                          : `보정 만족도 ${adjustedAverage?.toFixed(2)}점, 최신성 ${freshnessPoints.toFixed(1)}점, 최종 ${finalScore.toFixed(1)}점`
+                          : `보정 만족도 환산 ${adjustedPoints?.toFixed(1)}점, 최신성 ${freshnessPoints.toFixed(1)}점, 최종 ${finalScore.toFixed(1)}점`
                       }`}
                       onClick={() => {
                         setSelectedStaffName(employee.name);
@@ -1723,8 +1733,11 @@ export default function CompetitiveAnalysis({
                           <b>{formatStaffShortDate(employee.hireDate)}</b>
                         </small>
                       </span>
-                      <span className="analysis-staff-roster-average">
-                        {average === null ? "―" : average.toFixed(1)}
+                      <span className="analysis-staff-roster-adjusted-points">
+                        {adjustedPoints === null ? "―" : adjustedPoints.toFixed(1)}
+                      </span>
+                      <span className="analysis-staff-roster-freshness-points">
+                        {finalScore === null ? "―" : freshnessPoints.toFixed(1)}
                       </span>
                       <span className={`analysis-staff-roster-final${finalScore === null ? " pending" : ""}`}>
                         {finalScore === null ? "검토" : finalScore.toFixed(1)}
