@@ -53,6 +53,7 @@ type StaffEmployee = {
   tenureBucket: string;
   tenureBucketLabel: string;
   years: Partial<Record<StaffYear, StaffYearMetric>>;
+  latestResponseDate?: string;
   commentResponses: number;
   strengthKeywords: StaffKeyword[];
   improvementKeywords: StaffKeyword[];
@@ -124,6 +125,10 @@ const staffCurrentNameFrequency = Object.values(staffAnalysisByCdsid).reduce(
   new Map<string, number>(),
 );
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
+const staffScoreQualityWeight = 80;
+const staffScoreFreshnessWeight = 20;
+const staffScorePriorResponses = 8;
+const staffScoreFreshnessDays = 365;
 const staffHistoryChartMinScore = 7;
 const staffHistoryChartMaxScore = 10;
 const staffHistoryChartHeight = (score: number) =>
@@ -831,8 +836,43 @@ export default function CompetitiveAnalysis({
     [selectedStaffAnalysis],
   );
   const rankedSalesStaff = useMemo(
-    () =>
-      currentSalesStaff
+    () => {
+      const peerTotalsByTenure = staffCurrentSalesPopulation.reduce(
+        (benchmarks, { employee }) => {
+          const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
+          const totals = staffYears.reduce(
+            (summary, year) => {
+              summary.responses += employee.years[year]?.responses ?? 0;
+              summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
+              return summary;
+            },
+            { responses: 0, scoreSum: 0 },
+          );
+          const benchmark = benchmarks.get(tenureKey) ?? {
+            responses: 0,
+            scoreSum: 0,
+          };
+          benchmark.responses += totals.responses;
+          benchmark.scoreSum += totals.scoreSum;
+          benchmarks.set(tenureKey, benchmark);
+          return benchmarks;
+        },
+        new Map<number, { responses: number; scoreSum: number }>(),
+      );
+      const nationalTotals = staffYears.reduce(
+        (summary, year) => {
+          summary.responses += staffNationalYears[year].responses;
+          summary.scoreSum += staffNationalYears[year].scoreSum;
+          return summary;
+        },
+        { responses: 0, scoreSum: 0 },
+      );
+      const nationalAverage = nationalTotals.responses
+        ? nationalTotals.scoreSum / nationalTotals.responses
+        : 0;
+      const scoringAsOf = Date.parse(`${staffAnalysisSource.vocThrough}T00:00:00Z`);
+
+      return currentSalesStaff
         .map((employee) => {
           const totals = staffYears.reduce(
             (summary, year) => {
@@ -843,22 +883,53 @@ export default function CompetitiveAnalysis({
             },
             { responses: 0, scoreSum: 0 },
           );
+          const average = totals.responses ? totals.scoreSum / totals.responses : null;
+          const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
+          const peerTotals = peerTotalsByTenure.get(tenureKey);
+          const peerAverage = peerTotals?.responses
+            ? peerTotals.scoreSum / peerTotals.responses
+            : nationalAverage;
+          const adjustedAverage = average === null
+            ? null
+            : (totals.scoreSum + peerAverage * staffScorePriorResponses) /
+              (totals.responses + staffScorePriorResponses);
+          const latestResponseTime = employee.latestResponseDate
+            ? Date.parse(`${employee.latestResponseDate}T00:00:00Z`)
+            : Number.NaN;
+          const daysSinceResponse = Number.isFinite(latestResponseTime)
+            ? Math.max(0, (scoringAsOf - latestResponseTime) / 86_400_000)
+            : null;
+          const freshnessPoints = daysSinceResponse === null
+            ? 0
+            : Math.max(0, 1 - daysSinceResponse / staffScoreFreshnessDays) *
+              staffScoreFreshnessWeight;
+          const finalScore =
+            totals.responses >= staffScorePriorResponses && adjustedAverage !== null
+              ? (adjustedAverage / 10) * staffScoreQualityWeight + freshnessPoints
+              : null;
           return {
             employee,
             responses: totals.responses,
-            average: totals.responses ? totals.scoreSum / totals.responses : null,
+            average,
+            adjustedAverage,
+            freshnessPoints,
+            finalScore,
           };
         })
         .sort((a, b) => {
-          if (a.average === null && b.average === null) {
+          if (a.finalScore === null && b.finalScore === null) {
             return a.employee.name.localeCompare(b.employee.name, "ko");
           }
+          if (a.finalScore === null) return 1;
+          if (b.finalScore === null) return -1;
+          if (b.finalScore !== a.finalScore) return b.finalScore - a.finalScore;
           if (a.average === null) return 1;
           if (b.average === null) return -1;
           if (b.average !== a.average) return b.average - a.average;
           if (b.responses !== a.responses) return b.responses - a.responses;
           return a.employee.name.localeCompare(b.employee.name, "ko");
-        }),
+        });
+    },
     [currentSalesStaff],
   );
   const selectedStaffEmployee =
@@ -1592,13 +1663,16 @@ export default function CompetitiveAnalysis({
           <div className="analysis-staff-workspace">
             <aside
               className="analysis-staff-roster"
-              aria-label="전체 기간 상담 만족도 순위별 소속 직원"
+              aria-label="보정 만족도와 최신성 최종점수 순위별 소속 직원"
             >
               <header className="analysis-staff-roster-columns" aria-hidden="true">
                 <span>번호</span>
                 <span>영업직원</span>
                 <span>누적평균</span>
-                <span>회신건수</span>
+                <span className="analysis-staff-roster-final-heading">
+                  <b>최종점수</b>
+                  <small>보정80+최신20</small>
+                </span>
               </header>
               <div className="analysis-staff-roster-list">
                 {selectedStaffEmployee ? (
@@ -1612,16 +1686,27 @@ export default function CompetitiveAnalysis({
                     }
                   />
                 ) : null}
-                {rankedSalesStaff.map(({ employee, average, responses }, index) => {
+                {rankedSalesStaff.map(({
+                  employee,
+                  average,
+                  responses,
+                  adjustedAverage,
+                  freshnessPoints,
+                  finalScore,
+                }, index) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
                   return (
                     <button
                       type="button"
                       className={isSelected ? "selected" : ""}
                       aria-pressed={isSelected}
-                      aria-label={`${employee.name}, 상담 만족도 ${
+                      aria-label={`${employee.name}, 누적 만족도 ${
                         average === null ? "표본 없음" : `${average.toFixed(1)}점`
-                      }, ${responses ? `${responses}건` : "표본 없음"}`}
+                      }, ${
+                        finalScore === null
+                          ? `회신 ${responses}건으로 최종점수 산정 유보`
+                          : `보정 만족도 ${adjustedAverage?.toFixed(2)}점, 최신성 ${freshnessPoints.toFixed(1)}점, 최종 ${finalScore.toFixed(1)}점`
+                      }`}
                       onClick={() => {
                         setSelectedStaffName(employee.name);
                         setSmilingStaffName(null);
@@ -1641,8 +1726,8 @@ export default function CompetitiveAnalysis({
                       <span className="analysis-staff-roster-average">
                         {average === null ? "―" : average.toFixed(1)}
                       </span>
-                      <span className="analysis-staff-roster-responses">
-                        {String(responses).padStart(2, "0")}건
+                      <span className={`analysis-staff-roster-final${finalScore === null ? " pending" : ""}`}>
+                        {finalScore === null ? "검토" : finalScore.toFixed(1)}
                       </span>
                     </button>
                   );

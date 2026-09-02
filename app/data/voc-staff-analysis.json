@@ -11,7 +11,8 @@
     "jobTitleSourceSheet": "직원등록_2026-07-21",
     "jobTitleSourceDate": "2026-07-21",
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
-    "sentThrough": "2026-08-24"
+    "sentThrough": "2026-08-24",
+    "latestResponseThrough": "2026-08-24"
   },
   "nationalYears": {
     "2023": {
@@ -163,7 +164,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-24"
         },
         {
           "name": "전훈기",
@@ -218,7 +220,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-08-09"
         },
         {
           "name": "하지혁",
@@ -278,7 +281,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-04"
         },
         {
           "name": "함진호",
@@ -320,7 +324,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-23"
         },
         {
           "name": "김내환",
@@ -375,7 +380,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-27"
         },
         {
           "name": "신수경",
@@ -435,7 +441,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-21"
         }
       ],
       "excludedRawNames": [
@@ -524,7 +531,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-11"
         },
         {
           "name": "김선민",
@@ -584,7 +592,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-11-29"
         },
         {
           "name": "김성준",
@@ -612,7 +621,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-25"
         },
         {
           "name": "김종선",
@@ -654,7 +664,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-07-07"
         },
         {
           "name": "김종욱",
@@ -705,7 +716,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-12-06"
         },
         {
           "name": "송호준",
@@ -760,7 +772,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-09-09"
         },
         {
           "name": "김태환",
@@ -815,7 +828,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-07-12"
         },
         {
           "name": "박형관",
@@ -875,7 +889,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-05"
         },
         {
           "name": "송명석",
@@ -935,7 +950,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-07-19"
         }
       ],
       "excludedRawNames": [
@@ -983,7 +999,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-21"
         },
         {
           "name": "김유수",
@@ -1011,7 +1028,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-20"
         },
         {
           "name": "박재원",
@@ -1039,7 +1057,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-07"
         },
         {
           "name": "양진호",
@@ -1094,7 +1113,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-18"
         },
         {
           "name": "최준영",
@@ -1149,7 +1169,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-27"
         },
         {
           "name": "홍대현",
@@ -1209,7 +1230,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-25"
         },
         {
           "name": "송민경",
@@ -1259,7 +1281,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-20"
         },
         {
           "name": "정기훈",
@@ -1314,7 +1337,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-07"
         }
       ],
       "excludedRawNames": [
@@ -1408,7 +1432,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-01"
         },
         {
           "name": "김형천",
@@ -1468,7 +1493,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-21"
         },
         {
           "name": "박치영",
@@ -1523,7 +1549,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-08"
         },
         {
           "name": "정병수",
@@ -1556,7 +1583,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-11-12"
         },
         {
           "name": "최연승",
@@ -1616,7 +1644,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-27"
         },
         {
           "name": "최진원",
@@ -1671,7 +1700,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-25"
         },
         {
           "name": "최찬",
@@ -1726,7 +1756,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-11"
         },
         {
           "name": "황선형",
@@ -1810,7 +1841,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2025-09-08"
         },
         {
           "name": "이종우",
@@ -1870,7 +1902,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-18"
         },
         {
           "name": "정지성",
@@ -1925,7 +1958,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-01"
         }
       ],
       "excludedRawNames": [
@@ -2019,7 +2053,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-09"
         },
         {
           "name": "박상현",
@@ -2052,7 +2087,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-01"
         },
         {
           "name": "신승희",
@@ -2085,7 +2121,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-03"
         },
         {
           "name": "이재석",
@@ -2123,7 +2160,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-03"
         },
         {
           "name": "장민규",
@@ -2178,7 +2216,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-05"
         },
         {
           "name": "정나누리",
@@ -2223,7 +2262,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-03-26"
         },
         {
           "name": "천명현",
@@ -2278,7 +2318,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-03"
         },
         {
           "name": "김호연",
@@ -2325,7 +2366,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-05"
         },
         {
           "name": "박형진",
@@ -2385,7 +2427,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-15"
         }
       ],
       "excludedRawNames": [
@@ -2494,7 +2537,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-08"
         },
         {
           "name": "권하영",
@@ -2545,7 +2589,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-26"
         },
         {
           "name": "김남서",
@@ -2582,7 +2627,8 @@
           },
           "commentResponses": 2,
           "strengthKeywords": [],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-07"
         },
         {
           "name": "박민성",
@@ -2620,7 +2666,8 @@
           },
           "commentResponses": 1,
           "strengthKeywords": [],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-11"
         },
         {
           "name": "윤도준",
@@ -2694,7 +2741,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-11-01"
         },
         {
           "name": "정지윤",
@@ -2718,7 +2766,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-20"
         },
         {
           "name": "신은광",
@@ -2778,7 +2827,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-29"
         },
         {
           "name": "윤원희",
@@ -2833,7 +2883,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-10"
         },
         {
           "name": "이상민",
@@ -2883,7 +2934,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-22"
         },
         {
           "name": "정승현",
@@ -2938,7 +2990,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-31"
         }
       ],
       "excludedRawNames": [
@@ -3083,7 +3136,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-21"
         },
         {
           "name": "김성일",
@@ -3138,7 +3192,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-07"
         },
         {
           "name": "은성욱",
@@ -3176,7 +3231,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-12-06"
         },
         {
           "name": "정충화",
@@ -3213,7 +3269,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-18"
         },
         {
           "name": "김도윤",
@@ -3277,7 +3334,8 @@
               "label": "서비스 품목 안내",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-12-06"
         },
         {
           "name": "윤지환",
@@ -3327,7 +3385,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "이용환",
@@ -3377,7 +3436,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-20"
         }
       ],
       "excludedRawNames": [
@@ -3476,7 +3536,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-17"
         },
         {
           "name": "방영민",
@@ -3509,7 +3570,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-05-17"
         },
         {
           "name": "백승환",
@@ -3556,7 +3618,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-26"
         },
         {
           "name": "오영재",
@@ -3616,7 +3679,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-24"
         },
         {
           "name": "유병훈",
@@ -3671,7 +3735,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-10-03"
         },
         {
           "name": "이송봉",
@@ -3726,7 +3791,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-20"
         },
         {
           "name": "황명하",
@@ -3794,7 +3860,8 @@
               "mentions": 6
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-30"
         },
         {
           "name": "김현호",
@@ -3849,7 +3916,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-31"
         },
         {
           "name": "최인영",
@@ -3904,7 +3972,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-12-13"
         }
       ],
       "excludedRawNames": [
@@ -4018,7 +4087,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-07"
         },
         {
           "name": "김명준",
@@ -4066,7 +4136,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-23"
         },
         {
           "name": "박준수",
@@ -4108,7 +4179,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-31"
         },
         {
           "name": "서준혁",
@@ -4154,7 +4226,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-26"
         },
         {
           "name": "엄규식",
@@ -4191,7 +4264,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-07-07"
         },
         {
           "name": "윤유진",
@@ -4241,7 +4315,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-14"
         },
         {
           "name": "이완",
@@ -4310,7 +4385,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-11-17"
         },
         {
           "name": "황인성",
@@ -4373,7 +4449,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-06-17"
         },
         {
           "name": "임승준",
@@ -4418,7 +4495,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-08-12"
         },
         {
           "name": "정요한",
@@ -4464,7 +4542,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-06-23"
         }
       ],
       "excludedRawNames": [
@@ -4553,7 +4632,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-20"
         },
         {
           "name": "안정규",
@@ -4613,7 +4693,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "유현수",
@@ -4646,7 +4727,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-17"
         },
         {
           "name": "윤형원",
@@ -4714,7 +4796,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-01"
         },
         {
           "name": "이진영",
@@ -4769,7 +4852,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-17"
         },
         {
           "name": "이충규",
@@ -4829,7 +4913,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-17"
         },
         {
           "name": "진주현",
@@ -4884,7 +4969,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-20"
         },
         {
           "name": "김충현",
@@ -4939,7 +5025,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-17"
         },
         {
           "name": "박원희",
@@ -4994,7 +5081,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-07-20"
         },
         {
           "name": "이동규",
@@ -5049,7 +5137,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-07"
         }
       ],
       "excludedRawNames": [
@@ -5135,7 +5224,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-22"
         },
         {
           "name": "김기민",
@@ -5209,7 +5299,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-12"
         },
         {
           "name": "이학정",
@@ -5259,7 +5350,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "최윤호",
@@ -5314,7 +5406,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 4
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "이상원",
@@ -5364,7 +5457,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-05"
         },
         {
           "name": "황보성",
@@ -5414,7 +5508,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-06"
         }
       ],
       "excludedRawNames": [
@@ -5488,7 +5583,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-14"
         },
         {
           "name": "김정기",
@@ -5538,7 +5634,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-07"
         },
         {
           "name": "송승호",
@@ -5593,7 +5690,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-08"
         },
         {
           "name": "이봉재",
@@ -5653,7 +5751,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-10"
         },
         {
           "name": "이상학",
@@ -5713,7 +5812,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-10-16"
         },
         {
           "name": "이수현",
@@ -5773,7 +5873,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-11"
         },
         {
           "name": "장혁",
@@ -5828,7 +5929,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-18"
         },
         {
           "name": "정호영",
@@ -5883,7 +5985,8 @@
               "mentions": 11
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-07-22"
         },
         {
           "name": "조우진",
@@ -5943,7 +6046,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-11"
         },
         {
           "name": "최재형",
@@ -6003,7 +6107,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-01"
         },
         {
           "name": "최재훈",
@@ -6058,7 +6163,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-13"
         },
         {
           "name": "한재필",
@@ -6103,7 +6209,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-21"
         },
         {
           "name": "김정훈",
@@ -6158,7 +6265,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-07-17"
         },
         {
           "name": "신영선",
@@ -6213,7 +6321,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "함봉수",
@@ -6268,7 +6377,8 @@
               "mentions": 9
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-07"
         }
       ],
       "excludedRawNames": [
@@ -6375,7 +6485,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-10"
         },
         {
           "name": "김성경",
@@ -6430,7 +6541,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-19"
         },
         {
           "name": "박영환",
@@ -6485,7 +6597,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-04"
         },
         {
           "name": "박준수",
@@ -6509,7 +6622,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-07"
         },
         {
           "name": "송용주",
@@ -6528,7 +6642,8 @@
           },
           "commentResponses": 1,
           "strengthKeywords": [],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-22"
         },
         {
           "name": "이민하",
@@ -6583,7 +6698,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-23"
         },
         {
           "name": "이진용",
@@ -6638,7 +6754,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-22"
         },
         {
           "name": "정지만",
@@ -6711,7 +6828,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-05"
         },
         {
           "name": "조동조",
@@ -6771,7 +6889,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-01"
         },
         {
           "name": "강석",
@@ -6826,7 +6945,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-06"
         },
         {
           "name": "문정환",
@@ -6876,7 +6996,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-10-16"
         },
         {
           "name": "변수민",
@@ -6931,7 +7052,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-06"
         },
         {
           "name": "장길호",
@@ -6991,7 +7113,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2025-10-18"
         }
       ],
       "excludedRawNames": [
@@ -7115,7 +7238,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-20"
         },
         {
           "name": "권영진",
@@ -7175,7 +7299,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-29"
         },
         {
           "name": "김성현",
@@ -7230,7 +7355,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-16"
         },
         {
           "name": "김정수",
@@ -7285,7 +7411,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-21"
         },
         {
           "name": "김태현",
@@ -7340,7 +7467,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-11-15"
         },
         {
           "name": "민슬기",
@@ -7395,7 +7523,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-03"
         },
         {
           "name": "옥수찬",
@@ -7450,7 +7579,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-03"
         },
         {
           "name": "이병현",
@@ -7501,7 +7631,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-05"
         },
         {
           "name": "이충원",
@@ -7556,7 +7687,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-24"
         },
         {
           "name": "이현우",
@@ -7611,7 +7743,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-09"
         },
         {
           "name": "정형욱",
@@ -7654,7 +7787,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-25"
         },
         {
           "name": "박호영",
@@ -7701,7 +7835,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-06"
         },
         {
           "name": "안희철",
@@ -7748,7 +7883,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-05"
         },
         {
           "name": "정성택",
@@ -7799,7 +7935,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-08-04"
         }
       ],
       "excludedRawNames": [
@@ -7893,7 +8030,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-24"
         },
         {
           "name": "김민지",
@@ -7939,7 +8077,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-05-27"
         },
         {
           "name": "김태환",
@@ -7999,7 +8138,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-18"
         },
         {
           "name": "박한글",
@@ -8044,7 +8184,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-21"
         },
         {
           "name": "복수빈",
@@ -8063,7 +8204,8 @@
           },
           "commentResponses": 1,
           "strengthKeywords": [],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-25"
         },
         {
           "name": "유병천",
@@ -8123,7 +8265,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-12"
         },
         {
           "name": "정재성",
@@ -8188,7 +8331,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-26"
         },
         {
           "name": "한상진",
@@ -8239,7 +8383,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-22"
         },
         {
           "name": "함성준",
@@ -8294,7 +8439,8 @@
               "mentions": 10
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-01"
         },
         {
           "name": "유호연",
@@ -8349,7 +8495,8 @@
               "mentions": 6
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "한경철",
@@ -8404,7 +8551,8 @@
               "mentions": 7
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-19"
         }
       ],
       "excludedRawNames": [
@@ -8527,7 +8675,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-09"
         },
         {
           "name": "김상민",
@@ -8587,7 +8736,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-05"
         },
         {
           "name": "김용주",
@@ -8642,7 +8792,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-11"
         },
         {
           "name": "김효승",
@@ -8697,7 +8848,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-28"
         },
         {
           "name": "오영민",
@@ -8757,7 +8909,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-10"
         },
         {
           "name": "유동규",
@@ -8817,7 +8970,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-28"
         },
         {
           "name": "이강일",
@@ -8872,7 +9026,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-27"
         },
         {
           "name": "이영빈",
@@ -8906,7 +9061,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-03-02"
         },
         {
           "name": "이준희",
@@ -8961,7 +9117,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-26"
         },
         {
           "name": "장원익",
@@ -9016,7 +9173,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-05"
         },
         {
           "name": "전성배",
@@ -9071,7 +9229,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-08-02"
         },
         {
           "name": "주랑",
@@ -9131,7 +9290,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-15"
         },
         {
           "name": "최중범",
@@ -9186,7 +9346,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-04"
         },
         {
           "name": "홍준기",
@@ -9246,7 +9407,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-03"
         },
         {
           "name": "김상일",
@@ -9306,7 +9468,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-04"
         },
         {
           "name": "김용민",
@@ -9361,7 +9524,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-24"
         },
         {
           "name": "김정석",
@@ -9421,7 +9585,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-26"
         },
         {
           "name": "이효석",
@@ -9476,7 +9641,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-15"
         }
       ],
       "excludedRawNames": [
@@ -9519,7 +9685,8 @@
           },
           "commentResponses": 1,
           "strengthKeywords": [],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-21"
         },
         {
           "name": "윤정현",
@@ -9564,7 +9731,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2024-10-19"
         }
       ],
       "excludedRawNames": [
@@ -9648,7 +9816,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-04"
         },
         {
           "name": "김성광",
@@ -9708,7 +9877,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-11"
         },
         {
           "name": "김양수",
@@ -9768,7 +9938,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "김현호",
@@ -9823,7 +9994,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "박진오",
@@ -9878,7 +10050,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-07"
         },
         {
           "name": "이정현",
@@ -9933,7 +10106,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-10"
         },
         {
           "name": "조기상",
@@ -9988,7 +10162,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-18"
         },
         {
           "name": "천진호",
@@ -10048,7 +10223,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-03"
         },
         {
           "name": "문종현",
@@ -10108,7 +10284,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-26"
         },
         {
           "name": "원효",
@@ -10163,7 +10340,8 @@
               "mentions": 6
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-14"
         },
         {
           "name": "이경호",
@@ -10223,7 +10401,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 4
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-03"
         }
       ],
       "excludedRawNames": [
@@ -10307,7 +10486,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-23"
         },
         {
           "name": "김민성",
@@ -10353,7 +10533,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-11-18"
         },
         {
           "name": "김승범",
@@ -10405,7 +10586,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-23"
         },
         {
           "name": "임경률",
@@ -10465,7 +10647,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-02-17"
         },
         {
           "name": "김보성",
@@ -10520,7 +10703,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         }
       ],
       "excludedRawNames": [
@@ -10609,7 +10793,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-14"
         },
         {
           "name": "주재관",
@@ -10664,7 +10849,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-18"
         },
         {
           "name": "한송담",
@@ -10706,7 +10892,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-11"
         },
         {
           "name": "김도윤",
@@ -10766,7 +10953,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         }
       ],
       "excludedRawNames": [
@@ -10870,7 +11058,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-26"
         },
         {
           "name": "김성식",
@@ -10925,7 +11114,8 @@
               "mentions": 7
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-30"
         },
         {
           "name": "김성준",
@@ -10985,7 +11175,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-19"
         },
         {
           "name": "이재명",
@@ -11045,7 +11236,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "임진호",
@@ -11078,7 +11270,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-11"
         },
         {
           "name": "신환욱",
@@ -11111,7 +11304,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-07"
         }
       ],
       "excludedRawNames": [
@@ -11202,7 +11396,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-27"
         },
         {
           "name": "박진성",
@@ -11252,7 +11447,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "이유성",
@@ -11289,7 +11485,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "이재훈",
@@ -11335,7 +11532,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-03"
         },
         {
           "name": "임태우",
@@ -11390,7 +11588,8 @@
               "mentions": 6
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-19"
         },
         {
           "name": "정용호",
@@ -11445,7 +11644,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "김기태",
@@ -11505,7 +11705,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 5
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-28"
         },
         {
           "name": "박성훈",
@@ -11565,7 +11766,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "안성인",
@@ -11620,7 +11822,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-10"
         }
       ],
       "excludedRawNames": [
@@ -11754,7 +11957,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-06"
         },
         {
           "name": "김준수",
@@ -11828,7 +12032,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "전명훈",
@@ -11907,7 +12112,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-20"
         },
         {
           "name": "사공영환",
@@ -11962,7 +12168,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         }
       ],
       "excludedRawNames": [
@@ -12086,7 +12293,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "김상영",
@@ -12141,7 +12349,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-09"
         },
         {
           "name": "김성일",
@@ -12220,7 +12429,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "최준혁",
@@ -12275,7 +12485,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-10"
         },
         {
           "name": "박성준",
@@ -12316,7 +12527,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         }
       ],
       "excludedRawNames": [
@@ -12418,7 +12630,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "김훈",
@@ -12478,7 +12691,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-22"
         },
         {
           "name": "박수용",
@@ -12538,7 +12752,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-23"
         },
         {
           "name": "서지수",
@@ -12599,7 +12814,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-12-26"
         },
         {
           "name": "이철",
@@ -12654,7 +12870,8 @@
               "mentions": 8
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-24"
         },
         {
           "name": "조석원",
@@ -12728,7 +12945,8 @@
               "mentions": 7
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "양지승",
@@ -12783,7 +13001,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "홍승찬",
@@ -12843,7 +13062,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         }
       ],
       "excludedRawNames": [
@@ -12992,7 +13212,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-01"
         },
         {
           "name": "김승",
@@ -13066,7 +13287,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-07-20"
         },
         {
           "name": "박상오",
@@ -13095,7 +13317,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-13"
         },
         {
           "name": "성재욱",
@@ -13145,7 +13368,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-28"
         },
         {
           "name": "성지혜",
@@ -13195,7 +13419,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-26"
         }
       ],
       "excludedRawNames": [
@@ -13257,7 +13482,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-27"
         },
         {
           "name": "김용익",
@@ -13312,7 +13538,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-19"
         },
         {
           "name": "노경효",
@@ -13353,7 +13580,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-15"
         },
         {
           "name": "전규철",
@@ -13423,7 +13651,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-07-13"
         },
         {
           "name": "조상현",
@@ -13483,7 +13712,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-26"
         }
       ],
       "excludedRawNames": [
@@ -13597,7 +13827,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-28"
         },
         {
           "name": "김성민",
@@ -13643,7 +13874,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-01"
         },
         {
           "name": "김종천",
@@ -13703,7 +13935,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-17"
         },
         {
           "name": "김형주",
@@ -13758,7 +13991,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-28"
         },
         {
           "name": "나수연",
@@ -13837,7 +14071,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-08-09"
         },
         {
           "name": "양원준",
@@ -13911,7 +14146,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-02"
         },
         {
           "name": "이태우",
@@ -13971,7 +14207,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2025-08-11"
         },
         {
           "name": "정재헌",
@@ -14031,7 +14268,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-28"
         },
         {
           "name": "조선별",
@@ -14063,7 +14301,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-03"
         },
         {
           "name": "허민",
@@ -14096,7 +14335,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-03"
         },
         {
           "name": "문승현",
@@ -14156,7 +14396,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-01"
         },
         {
           "name": "박서빈",
@@ -14216,7 +14457,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 4
             }
-          ]
+          ],
+          "latestResponseDate": "2025-07-20"
         },
         {
           "name": "신동민",
@@ -14271,7 +14513,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-01"
         },
         {
           "name": "조성원",
@@ -14327,7 +14570,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-08-02"
         }
       ],
       "excludedRawNames": [
@@ -14426,7 +14670,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-11"
         },
         {
           "name": "김현수",
@@ -14481,7 +14726,8 @@
               "mentions": 6
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-04"
         },
         {
           "name": "송찬우",
@@ -14536,7 +14782,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-25"
         },
         {
           "name": "신동규",
@@ -14591,7 +14838,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-02"
         },
         {
           "name": "안영민",
@@ -14651,7 +14899,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-24"
         },
         {
           "name": "양동준",
@@ -14706,7 +14955,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-17"
         },
         {
           "name": "양태민",
@@ -14735,7 +14985,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-24"
         },
         {
           "name": "윤재필",
@@ -14795,7 +15046,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-24"
         },
         {
           "name": "이정환",
@@ -14850,7 +15102,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "이진형",
@@ -14924,7 +15177,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-26"
         },
         {
           "name": "허동환",
@@ -14979,7 +15233,8 @@
               "mentions": 4
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-11"
         },
         {
           "name": "김재범",
@@ -15039,7 +15294,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-13"
         },
         {
           "name": "양덕우",
@@ -15099,7 +15355,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-24"
         },
         {
           "name": "장경호",
@@ -15159,7 +15416,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         }
       ],
       "excludedRawNames": [
@@ -15220,7 +15478,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-09"
         },
         {
           "name": "이상헌",
@@ -15275,7 +15534,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-24"
         },
         {
           "name": "장현두",
@@ -15330,7 +15590,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-08"
         },
         {
           "name": "김영곤",
@@ -15385,7 +15646,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-03"
         }
       ],
       "excludedRawNames": [
@@ -15454,7 +15716,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-27"
         },
         {
           "name": "김민석",
@@ -15514,7 +15777,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-24"
         },
         {
           "name": "김의영",
@@ -15543,7 +15807,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-29"
         },
         {
           "name": "김태평",
@@ -15598,7 +15863,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-23"
         },
         {
           "name": "문현수",
@@ -15658,7 +15924,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-11"
         },
         {
           "name": "임경욱",
@@ -15718,7 +15985,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-01"
         }
       ],
       "excludedRawNames": [
@@ -15822,7 +16090,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-08-21"
         },
         {
           "name": "유재민",
@@ -15841,7 +16110,8 @@
           },
           "commentResponses": 1,
           "strengthKeywords": [],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-23"
         },
         {
           "name": "주장복",
@@ -15901,7 +16171,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-09-30"
         },
         {
           "name": "김영주",
@@ -15956,7 +16227,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-26"
         }
       ],
       "excludedRawNames": [
@@ -16013,7 +16285,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-29"
         },
         {
           "name": "김상우",
@@ -16072,7 +16345,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-05-31"
         },
         {
           "name": "나희진",
@@ -16122,7 +16396,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-05-20"
         },
         {
           "name": "설동명",
@@ -16177,7 +16452,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-23"
         },
         {
           "name": "이규환",
@@ -16237,7 +16513,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-04-17"
         },
         {
           "name": "이우석",
@@ -16292,7 +16569,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-10-11"
         },
         {
           "name": "이종성",
@@ -16347,7 +16625,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-19"
         },
         {
           "name": "이주원",
@@ -16397,7 +16676,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-14"
         },
         {
           "name": "김수학",
@@ -16457,7 +16737,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "이준호",
@@ -16536,7 +16817,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-07-18"
         },
         {
           "name": "주선종",
@@ -16582,7 +16864,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-29"
         }
       ],
       "excludedRawNames": [
@@ -16811,7 +17094,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "한필성",
@@ -16847,7 +17131,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-29"
         },
         {
           "name": "황준원",
@@ -16902,7 +17187,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-06-29"
         },
         {
           "name": "이정훈",
@@ -16962,7 +17248,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-21"
         }
       ],
       "excludedRawNames": [
@@ -17051,7 +17338,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-06"
         },
         {
           "name": "김용상",
@@ -17111,7 +17399,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-15"
         },
         {
           "name": "김정호",
@@ -17185,7 +17474,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "김준호",
@@ -17245,7 +17535,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-07-14"
         },
         {
           "name": "김형중",
@@ -17269,7 +17560,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-01-19"
         },
         {
           "name": "김훈철",
@@ -17337,7 +17629,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-22"
         },
         {
           "name": "이진섭",
@@ -17392,7 +17685,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-11-05"
         },
         {
           "name": "추헌진",
@@ -17452,7 +17746,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2024-06-20"
         },
         {
           "name": "하재현",
@@ -17520,7 +17815,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-14"
         },
         {
           "name": "윤덕인",
@@ -17575,7 +17871,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-13"
         },
         {
           "name": "이인규",
@@ -17630,7 +17927,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-08"
         },
         {
           "name": "최성환",
@@ -17690,7 +17988,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2025-12-06"
         }
       ],
       "excludedRawNames": [
@@ -17795,7 +18094,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-08-09"
         },
         {
           "name": "신진솔",
@@ -17868,7 +18168,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 3
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-28"
         },
         {
           "name": "인성환",
@@ -17906,7 +18207,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-08-04"
         },
         {
           "name": "최희령",
@@ -17961,7 +18263,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-08-06"
         },
         {
           "name": "김정삼",
@@ -18016,7 +18319,8 @@
               "mentions": 5
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-02-12"
         },
         {
           "name": "조효신",
@@ -18071,7 +18375,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-21"
         }
       ],
       "excludedRawNames": [
@@ -18142,7 +18447,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-28"
         },
         {
           "name": "김광진",
@@ -18179,7 +18485,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-03-16"
         },
         {
           "name": "김기대",
@@ -18222,7 +18529,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-03-15"
         },
         {
           "name": "김대희",
@@ -18277,7 +18585,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-15"
         },
         {
           "name": "김성민",
@@ -18318,7 +18627,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-01"
         },
         {
           "name": "김신우",
@@ -18355,7 +18665,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-06"
         },
         {
           "name": "안재현",
@@ -18411,7 +18722,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-10"
         },
         {
           "name": "김진형",
@@ -18471,7 +18783,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-26"
         },
         {
           "name": "방준호",
@@ -18517,7 +18830,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-01"
         },
         {
           "name": "송용운",
@@ -18572,7 +18886,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-05-09"
         }
       ],
       "excludedRawNames": [
@@ -18736,7 +19051,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-01-30"
         },
         {
           "name": "김하늘",
@@ -18778,7 +19094,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 1
             }
-          ]
+          ],
+          "latestResponseDate": "2026-08-05"
         },
         {
           "name": "윤민상",
@@ -18846,7 +19163,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-02"
         },
         {
           "name": "장재형",
@@ -18901,7 +19219,8 @@
               "mentions": 6
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2025-11-06"
         }
       ],
       "excludedRawNames": [
@@ -18967,7 +19286,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-19"
         },
         {
           "name": "변종민",
@@ -19022,7 +19342,8 @@
               "mentions": 8
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-24"
         },
         {
           "name": "이승규",
@@ -19055,7 +19376,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-14"
         },
         {
           "name": "이영재",
@@ -19092,7 +19414,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-13"
         },
         {
           "name": "정재인",
@@ -19120,7 +19443,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-22"
         },
         {
           "name": "정호조",
@@ -19170,7 +19494,8 @@
               "mentions": 3
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-06-12"
         },
         {
           "name": "조도흠",
@@ -19207,7 +19532,8 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-25"
         },
         {
           "name": "이지수",
@@ -19267,7 +19593,8 @@
               "label": "제품 강점 설명 확장",
               "mentions": 2
             }
-          ]
+          ],
+          "latestResponseDate": "2026-02-05"
         },
         {
           "name": "정상호",
@@ -19313,7 +19640,8 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": []
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-20"
         }
       ],
       "excludedRawNames": [
