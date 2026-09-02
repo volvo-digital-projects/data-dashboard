@@ -14608,7 +14608,7 @@ button.header-status-item {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
+  width: 1px;
   transform: translateX(-50%);
   background: repeating-linear-gradient(
     to bottom,
