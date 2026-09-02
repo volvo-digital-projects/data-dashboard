@@ -14337,9 +14337,8 @@ button.header-status-item {
     inset: 0 calc(-1 * var(--dashboard-sticky-content-gutter));
   }
 
-  /* Keep the complete score-heading cap attached below the fixed dashboard.
-     The title position stays unchanged; only its surrounding card surface
-     travels with the sticky heading instead of scrolling away. */
+  /* Match page 2: the score panel begins after the shared shadow and 8px gap.
+     Keep only the panel's own heading cap, without extending it into that gap. */
   .dashboard .score-stack-heading {
     isolation: isolate;
     background: #ffffff;
@@ -14350,7 +14349,7 @@ button.header-status-item {
   .dashboard .score-stack-heading::before {
     content: "";
     position: absolute;
-    top: -64px;
+    top: -16px;
     right: -16px;
     bottom: -1px;
     left: -16px;

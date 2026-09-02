@@ -2782,6 +2782,14 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
     /\.score-stack-heading\s*\{[^}]*position: sticky[^}]*--score-heading-sticky-top,[^}]*var\(--dashboard-sticky-offset, 356px\)/,
   );
   assert.match(
+    css,
+    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-16px;[\s\S]*?right:\s*-16px;[\s\S]*?left:\s*-16px;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-64px;/,
+  );
+  assert.match(
     dashboardSource,
     /const scoreHeadingRef = useRef<HTMLDivElement>\(null\);[\s\S]*?--score-heading-sticky-top[\s\S]*?ref=\{scoreHeadingRef\}/,
   );
