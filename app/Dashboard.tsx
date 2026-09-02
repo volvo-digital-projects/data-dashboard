@@ -377,6 +377,13 @@ const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
 
 const integratedScoreMax =
   metricMeta.v3s.max + metricMeta.voc.max + metricMeta.cx.max;
+const fixedDscScores: Record<TrendMetricKey, number> = {
+  v3s: 100,
+  voc: 100,
+  cx: 130,
+};
+const integratedDscScoreMax =
+  fixedDscScores.v3s + fixedDscScores.voc + fixedDscScores.cx;
 const integratedQuarterScoreOf = (
   item: Showroom,
   quarter: QuarterKey,
@@ -401,9 +408,6 @@ const v3sDscScoreOf = (value: number) => {
   return roundedScore >= 90 ? 100 : roundedScore >= 85 ? 90 : 80;
 };
 
-const vocDscScoreOf = (value: number) =>
-  Math.round(value) >= 85 ? 100 : 90;
-
 const cxDscScoreOf = (value: number) =>
   Math.max(
     0,
@@ -427,16 +431,10 @@ const metricRtcIncentiveRateOf = (
 };
 
 const metricDscScoreOf = (
-  item: Showroom,
+  _item: Showroom,
   metric: TrendMetricKey,
-  quarter: QuarterKey,
-): number | null => {
-  const value = quarterValueOf(item, metric, quarter);
-  if (value === null) return null;
-  if (metric === "v3s") return v3sDscScoreOf(value);
-  if (metric === "voc") return vocDscScoreOf(value);
-  return metric === "cx" ? cxDscScoreOf(value) : value;
-};
+  _quarter: QuarterKey,
+): number => fixedDscScores[metric];
 
 const groupQuarterAverageOf = (
   showroom: Showroom,
@@ -2910,15 +2908,7 @@ export default function Dashboard({
       : Number.NEGATIVE_INFINITY;
   };
   const selectedIntegratedRank = competitionRankOf(selectedIntegratedScoreOf);
-  const selectedMetricDscScore = kpis.every(
-    (item) => typeof item.dscScore === "number",
-  )
-    ? Number(
-        kpis
-          .reduce((sum, item) => sum + (item.dscScore ?? 0), 0)
-          .toFixed(1),
-      )
-    : null;
+  const selectedMetricDscScore = integratedDscScoreMax;
   const selectedMetricRtcRate = kpis.every(
     (item) => typeof item.rtcRate === "number",
   )

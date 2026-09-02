@@ -517,15 +517,21 @@ test("scopes dashboard routes to master, dealer-head, and manager access", async
 });
 
 test("keeps the CX Index maximum at 320 for every authorized login", async () => {
-  const loginAccess = JSON.parse(
-    await readFile(new URL("../app/data/login-access.json", import.meta.url), "utf8"),
-  );
+  const [loginAccess, showroomData] = await Promise.all([
+    readFile(new URL("../app/data/login-access.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
   const cxMaximum =
     /CX Index[\s\S]*?<small class="metric-max-note">\/\s*(?:<!-- -->)?320(?:<!-- -->)?점 만점<\/small>/;
-  assert.equal(
-    new Set(loginAccess.accounts.map((account) => account.dashboardCdsid)).size,
-    39,
-  );
+
+  assert.equal(showroomData.showrooms.length, 39);
+  for (const showroom of showroomData.showrooms) {
+    const response = await render(`/dashboard/${showroom.cdsid}`, {
+      cookie: cookieFor("VCK-ES90"),
+    });
+    assert.equal(response.status, 200, `${showroom.cdsid} 관리자 접근`);
+    assert.match(await response.text(), cxMaximum, `${showroom.cdsid} CX Index 320점 만점`);
+  }
 
   for (const account of loginAccess.accounts) {
     const response = await render(`/dashboard/${account.dashboardCdsid}`, {
@@ -539,6 +545,50 @@ test("keeps the CX Index maximum at 320 for every authorized login", async () =>
       /CX Index[\s\S]*?\/\s*(?:<!-- -->)?120(?:<!-- -->)?점 만점/,
       `${account.cdsid} CX Index 120점 오표기 방지`,
     );
+  }
+});
+
+test("keeps fixed DSC benchmarks across all 39 showrooms and authorized logins", async () => {
+  const [loginAccess, showroomData] = await Promise.all([
+    readFile(new URL("../app/data/login-access.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
+  assert.equal(showroomData.showrooms.length, 39);
+
+  const assertFixedDscScores = async (dashboardCdsid, loginCdsid) => {
+    const response = await render(`/dashboard/${dashboardCdsid}`, {
+      cookie: cookieFor(loginCdsid),
+    });
+    assert.equal(response.status, 200, `${dashboardCdsid} 대시보드 접근`);
+    const html = (await response.text()).replaceAll("<!-- -->", "");
+
+    assert.match(
+      html,
+      /V3S[\s\S]*?aria-label="DSC 스코어 및 RTC 인센티브율"[\s\S]*?DSC 스코어\s*<strong>100점<\/strong>/,
+      `${dashboardCdsid} V3S DSC 100점`,
+    );
+    assert.match(
+      html,
+      /VOC[\s\S]*?aria-label="DSC 스코어 및 RTC 인센티브율"[\s\S]*?DSC 스코어\s*<strong>100점<\/strong>/,
+      `${dashboardCdsid} VOC DSC 100점`,
+    );
+    assert.match(
+      html,
+      /CX Index[\s\S]*?aria-label="DSC 스코어 및 RTC 인센티브율"[\s\S]*?DSC 스코어\s*<strong>130점<\/strong>/,
+      `${dashboardCdsid} CX DSC 130점`,
+    );
+    assert.match(
+      html,
+      /통합 경쟁력 지수[\s\S]*?class="metric-stat-chips scoreboard-stat-chips"[\s\S]*?DSC 스코어\s*<strong>330점<\/strong>/,
+      `${dashboardCdsid} 통합 DSC 330점`,
+    );
+  };
+
+  for (const showroom of showroomData.showrooms) {
+    await assertFixedDscScores(showroom.cdsid, "VCK-ES90");
+  }
+  for (const account of loginAccess.accounts) {
+    await assertFixedDscScores(account.dashboardCdsid, account.cdsid);
   }
 });
 
@@ -2232,7 +2282,11 @@ test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1
   );
   assert.match(
     dashboardSource,
-    /const cxDscScoreOf = \(value: number\) =>[\s\S]*?Math\.ceil\(\(value \+ 2\) \/ 10\) \* 10[\s\S]*?cxDscScoreOf\(value\) >= cxQ2Dsc\.rtcThreshold \? 0\.2 : 0\.1[\s\S]*?metric === "cx" \? cxDscScoreOf\(value\) : value/,
+    /const cxDscScoreOf = \(value: number\) =>[\s\S]*?Math\.ceil\(\(value \+ 2\) \/ 10\) \* 10[\s\S]*?cxDscScoreOf\(value\) >= cxQ2Dsc\.rtcThreshold \? 0\.2 : 0\.1/,
+  );
+  assert.match(
+    dashboardSource,
+    /const fixedDscScores: Record<TrendMetricKey, number> = \{[\s\S]*?v3s: 100,[\s\S]*?voc: 100,[\s\S]*?cx: 130,[\s\S]*?const integratedDscScoreMax =[\s\S]*?fixedDscScores\.v3s \+ fixedDscScores\.voc \+ fixedDscScores\.cx/,
   );
   assert.match(
     dashboardSource,
@@ -2845,7 +2899,11 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     dashboardSource,
-    /const vocDscScoreOf =[\s\S]*?Math\.round\(value\) >= 85 \? 100 : 90[\s\S]*?const metricDscScoreOf =[\s\S]*?metric === "v3s"\) return v3sDscScoreOf\(value\)[\s\S]*?metric === "voc"\) return vocDscScoreOf\(value\)/,
+    /const metricDscScoreOf = \([\s\S]*?\): number => fixedDscScores\[metric\];/,
+  );
+  assert.match(
+    dashboardSource,
+    /const selectedMetricDscScore = integratedDscScoreMax;/,
   );
   assert.match(
     dashboardSource,
