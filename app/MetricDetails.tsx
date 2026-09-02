@@ -171,6 +171,9 @@ function MetricDetailChart({
       : cxContributionLabels[component.key];
   const isAppealable = metric === "voc" && component.key === "happyCall";
   const seriesRevealId = `metric-${metric}-${component.key}-series-reveal`;
+  const seriesRevealWidth = latestPoint
+    ? Math.min(chart.width, latestPoint.x + 7)
+    : chart.width;
 
   return (
     <article className="metric-detail-card">
@@ -243,7 +246,7 @@ function MetricDetailChart({
                 className="metric-detail-series-reveal"
                 x="0"
                 y="0"
-                width={chart.width}
+                width={seriesRevealWidth}
                 height={chart.height}
               />
             </clipPath>
