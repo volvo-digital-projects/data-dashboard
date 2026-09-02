@@ -459,10 +459,10 @@ export default function MetricDetails({
 
       <nav className="metric-detail-tabs" aria-label="세부지표 종류">
         <Link className={metric === "voc" ? "active" : ""} href={`/dashboard/${cdsid}/details/voc`}>
-          VOC <small>4개 메인지표 / 총점 100점 + 1개 참고지표</small>
+          VOC <small>4개 메인지표 / 총점 100점(DSC 100점) + 1개 참고지표</small>
         </Link>
         <Link className={metric === "cx" ? "active" : ""} href={`/dashboard/${cdsid}/details/cx`}>
-          CX Index <small>5개 메인지표 / 총점 320점</small>
+          CX Index <small>5개 메인지표 / 총점 320점(DSC 130점)</small>
         </Link>
       </nav>
       </div>

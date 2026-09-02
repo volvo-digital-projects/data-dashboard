@@ -1279,11 +1279,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     vocBody,
-    /VOC <small>4개 메인지표 \/ 총점 100점 \+ 1개 참고지표<\/small>/,
+    /VOC <small>4개 메인지표 \/ 총점 100점\(DSC 100점\) \+ 1개 참고지표<\/small>/,
   );
   assert.match(
     vocBody,
-    /CX Index <small>5개 메인지표 \/ 총점 320점<\/small>/,
+    /CX Index <small>5개 메인지표 \/ 총점 320점\(DSC 130점\)<\/small>/,
   );
   assert.match(vocBody, /건 기준/);
   assert.doesNotMatch(vocBody, /DSC 44건/);
