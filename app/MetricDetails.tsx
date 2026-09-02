@@ -1,6 +1,7 @@
 import Link from "next/link";
 import dashboardJson from "./data/showrooms.json";
 import weeklyDetailsJson from "./data/weekly-details.json";
+import MetricUpdateGuide from "./MetricUpdateGuide";
 
 type DetailMetric = "voc" | "cx";
 type WeekRange = {
@@ -470,18 +471,7 @@ export default function MetricDetails({
         className={`metric-detail-list metric-detail-list--${metric}`}
         aria-label={`${group.label} 주간 세부지표`}
       >
-        <div
-          className="metric-detail-update-guide-layer"
-          role="note"
-          aria-label={`현재 업데이트 기준 W${updateWeek}`}
-        >
-          <div
-            className="metric-detail-update-guide"
-            style={{ left: `${updateGuideX}%` }}
-          >
-            <span>업데이트</span>
-          </div>
-        </div>
+        <MetricUpdateGuide updateWeek={updateWeek} fallbackLeft={updateGuideX} />
         {group.components.map((component) => (
           <MetricDetailChart
             component={component}
