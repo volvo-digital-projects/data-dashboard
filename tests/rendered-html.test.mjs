@@ -1430,7 +1430,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-series-reveal\s*\{[^}]*transform:\s*scaleX\(0\);[^}]*transform-box:\s*fill-box;[^}]*animation:\s*metric-detail-series-wipe 7\.2s cubic-bezier\(0\.16, 0\.72, 0\.18, 1\) both;/,
+    /\.metric-detail-series-reveal\s*\{[^}]*transform:\s*scaleX\(0\);[^}]*transform-box:\s*fill-box;[^}]*animation:\s*metric-detail-series-wipe 6\.6s cubic-bezier\(0\.16, 0\.72, 0\.18, 1\) both;/,
   );
   assert.match(
     detailCss,
