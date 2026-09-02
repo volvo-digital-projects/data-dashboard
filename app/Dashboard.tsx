@@ -289,10 +289,7 @@ const metricDescriptions: Record<TrendMetricKey, string> = {
 
 const cxQ2Dsc = cxQ2DscJson as CxQ2DscData;
 
-const metricMaxOf = (metric: MetricKey, quarter: QuarterKey) =>
-  metric === "cx" && (quarter === "q1" || quarter === "q2")
-    ? cxQ2Dsc.maxScore
-    : metricMeta[metric].max;
+const metricMaxOf = (metric: MetricKey) => metricMeta[metric].max;
 
 type CxComponentRecord = Pick<
   QuarterRecord,
@@ -664,7 +661,7 @@ function MetricCard({
             {metricMeta[metric].short}
           </span>
           <small className="metric-max-note">
-            / {metricMaxOf(metric, quarter)}점 만점
+            / {metricMaxOf(metric)}점 만점
           </small>
         </div>
       </div>

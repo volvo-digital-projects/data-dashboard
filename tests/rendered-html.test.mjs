@@ -491,6 +491,55 @@ test("scopes dashboard routes to master, dealer-head, and manager access", async
     cookie: cookieFor("VCK-ES90"),
   });
   assert.equal(masterCrossDealer.status, 200);
+
+  const [hanamManagerResponse, hanamMasterResponse] = await Promise.all([
+    render("/dashboard/6KR6861", { cookie: cookieFor("H-KIM21") }),
+    render("/dashboard/6KR6861", { cookie: cookieFor("VCK-ES90") }),
+  ]);
+  assert.equal(hanamManagerResponse.status, 200);
+  assert.equal(hanamMasterResponse.status, 200);
+  const [hanamManagerHtml, hanamMasterHtml] = await Promise.all([
+    hanamManagerResponse.text(),
+    hanamMasterResponse.text(),
+  ]);
+  const cxMaximum =
+    /CX Index[\s\S]*?<small class="metric-max-note">\/\s*(?:<!-- -->)?320(?:<!-- -->)?점 만점<\/small>/;
+  assert.match(hanamManagerHtml, cxMaximum);
+  assert.match(hanamMasterHtml, cxMaximum);
+  assert.doesNotMatch(
+    hanamManagerHtml,
+    /CX Index[\s\S]*?\/\s*(?:<!-- -->)?120(?:<!-- -->)?점 만점/,
+  );
+  assert.doesNotMatch(
+    hanamMasterHtml,
+    /CX Index[\s\S]*?\/\s*(?:<!-- -->)?120(?:<!-- -->)?점 만점/,
+  );
+});
+
+test("keeps the CX Index maximum at 320 for every authorized login", async () => {
+  const loginAccess = JSON.parse(
+    await readFile(new URL("../app/data/login-access.json", import.meta.url), "utf8"),
+  );
+  const cxMaximum =
+    /CX Index[\s\S]*?<small class="metric-max-note">\/\s*(?:<!-- -->)?320(?:<!-- -->)?점 만점<\/small>/;
+  assert.equal(
+    new Set(loginAccess.accounts.map((account) => account.dashboardCdsid)).size,
+    39,
+  );
+
+  for (const account of loginAccess.accounts) {
+    const response = await render(`/dashboard/${account.dashboardCdsid}`, {
+      cookie: cookieFor(account.cdsid),
+    });
+    assert.equal(response.status, 200, `${account.cdsid} 대시보드 접근`);
+    const html = await response.text();
+    assert.match(html, cxMaximum, `${account.cdsid} CX Index 320점 만점`);
+    assert.doesNotMatch(
+      html,
+      /CX Index[\s\S]*?\/\s*(?:<!-- -->)?120(?:<!-- -->)?점 만점/,
+      `${account.cdsid} CX Index 120점 오표기 방지`,
+    );
+  }
 });
 
 test("uses the blue exceptional state only from ten points above average", async () => {
@@ -2169,6 +2218,14 @@ test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1
   assert.equal(expectedRows.filter(([, , dsc]) => dsc >= 100).length, 39);
   assert.equal(cxQ2Dsc.maxScore, 130);
   assert.equal(cxQ2Dsc.rtcThreshold, 100);
+  assert.match(
+    dashboardSource,
+    /const metricMaxOf = \(metric: MetricKey\) => metricMeta\[metric\]\.max;/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /metricMaxOf[\s\S]{0,240}quarter === "q1"/,
+  );
   assert.match(
     dashboardSource,
     /if \(quarter === "q2"\) return item\.cx;[\s\S]*?if \(metric === "cx"\) return dashboard\.averages\.cx \?\? 0/,
