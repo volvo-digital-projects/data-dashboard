@@ -4802,15 +4802,17 @@ input:focus-visible {
 
 .analysis-staff-roster-identity {
   min-width: 0;
-  display: grid;
-  grid-template-columns: minmax(30px, 1fr) 39px;
+  display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 5px 0 7px;
+  justify-content: flex-start;
+  gap: 3px;
+  padding: 0 9px 0 7px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
 
 .analysis-staff-roster-identity strong {
+  min-width: 0;
+  flex: 0 1 auto;
   overflow: hidden;
   color: #17384b;
   font-size: 11px;
@@ -4820,12 +4822,13 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-identity small {
-  width: 39px;
+  width: 35px;
+  flex: 0 0 35px;
   display: grid;
-  grid-template-columns: 5px 30px;
+  grid-template-columns: 4px 29px;
   align-items: center;
-  justify-content: end;
-  column-gap: 4px;
+  justify-content: start;
+  column-gap: 2px;
   color: #78909e;
   font-size: 7px;
   line-height: 1;
@@ -4844,7 +4847,7 @@ input:focus-visible {
   font-feature-settings: "tnum" 1;
   font-weight: 560;
   letter-spacing: 0.02em;
-  text-align: right;
+  text-align: left;
 }
 
 .analysis-staff-roster-adjusted-points,
