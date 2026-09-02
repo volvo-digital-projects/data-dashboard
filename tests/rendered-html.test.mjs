@@ -1588,13 +1588,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /<strong>7개소<\/strong>/);
   assert.match(
     visibleHtml,
-    /종합 만족도 누적점수[\s\S]*Q1 93\.1점 \+ Q2 87\.5점[\s\S]*2개 분기 · 200점 만점[\s\S]*180\.6/,
+    /종합 만족도 평균 누적[\s\S]*Q1 93\.1점 \+ Q2 87\.5점[\s\S]*2개 분기 · 200점 만점[\s\S]*180\.6/,
   );
   assert.match(
     visibleHtml,
     /에이치 누적평균 190\.0점 대비 ▼ 9\.4점/,
   );
-  assert.match(visibleHtml, /해피콜 이행률 누적점수[\s\S]*Q1 100점 \+ Q2 100점[\s\S]*2개 분기 · 200점 만점[\s\S]*>200\.0<[^]*?점/);
+  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*Q1 100점 \+ Q2 100점[\s\S]*2개 분기 · 200점 만점[\s\S]*>200\.0<[^]*?점/);
   assert.match(
     visibleHtml,
     /에이치 누적평균 185\.3점 대비 ▲ 14\.7점/,

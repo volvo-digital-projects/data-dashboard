@@ -1509,7 +1509,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-summary-card satisfaction">
           <div>
             <span className="analysis-summary-title">
-              종합 만족도 누적점수
+              종합 만족도 평균 누적
               <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
                 <b>Q1</b><b>Q2</b>
               </span>
@@ -1538,7 +1538,7 @@ export default function CompetitiveAnalysis({
         <article className="analysis-summary-card happycall">
           <div>
             <span className="analysis-summary-title">
-              해피콜 이행률 누적점수
+              해피콜 이행률 평균 누적
               <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
                 <b>Q1</b><b>Q2</b>
               </span>
