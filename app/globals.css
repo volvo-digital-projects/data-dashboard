@@ -4726,7 +4726,7 @@ input:focus-visible {
 .analysis-staff-roster > header {
   min-height: 30px;
   display: grid;
-  grid-template-columns: 28px minmax(130px, 1fr) 58px 58px 64px;
+  grid-template-columns: 28px 116px repeat(3, minmax(0, 1fr));
   align-items: center;
   padding: 0 6px;
   border-bottom: 1px solid #dbe6eb;
@@ -4742,7 +4742,8 @@ input:focus-visible {
   padding: 0 4px;
   color: #587383;
   font-size: 9px;
-  font-weight: 720;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -4776,7 +4777,7 @@ input:focus-visible {
   width: 100%;
   min-height: 36px;
   display: grid;
-  grid-template-columns: 28px minmax(130px, 1fr) 58px 58px 64px;
+  grid-template-columns: 28px 116px repeat(3, minmax(0, 1fr));
   align-items: center;
   gap: 0;
   padding: 4px 0;
@@ -4819,7 +4820,7 @@ input:focus-visible {
   background: #dfeaf0;
   color: #476c7e;
   font-family: var(--font-volvo), sans-serif;
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 700;
 }
 
@@ -4848,15 +4849,15 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-identity small {
-  width: 44px;
-  flex: 0 0 44px;
+  width: 40px;
+  flex: 0 0 40px;
   display: grid;
-  grid-template-columns: 4px 38px;
+  grid-template-columns: 4px 34px;
   align-items: center;
   justify-content: start;
   column-gap: 2px;
   color: #78909e;
-  font-size: 10px;
+  font-size: 9px;
   line-height: 1;
   white-space: nowrap;
 }
@@ -4894,7 +4895,7 @@ input:focus-visible {
 .analysis-staff-roster-adjusted-points,
 .analysis-staff-roster-freshness-points {
   color: #0d5f7d;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1;
 }
@@ -4905,7 +4906,7 @@ input:focus-visible {
 
 .analysis-staff-roster-final {
   color: #0d5f7d;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -4928,22 +4929,19 @@ input:focus-visible {
 }
 
 .analysis-staff-roster-identity-heading b {
-  font-size: 10px;
+  font-size: 9px;
+  font-weight: 400;
 }
 
 .analysis-staff-roster-identity-heading small {
   color: #6f8794;
   font-size: 9px;
-  font-weight: 650;
-}
-
-.analysis-staff-roster-score-heading b {
-  font-size: 10px;
   font-weight: 400;
 }
 
-.analysis-staff-roster-score-heading:last-child b {
-  font-weight: 700;
+.analysis-staff-roster-score-heading b {
+  font-size: 9px;
+  font-weight: 400;
 }
 
 .analysis-staff-roster-score-heading small {
@@ -4972,7 +4970,7 @@ input:focus-visible {
   grid-column: 1 / -1;
   grid-row: 1;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: minmax(160px, 0.72fr) repeat(5, minmax(0, 1fr));
   gap: 6px;
 }
 
@@ -5215,7 +5213,7 @@ input:focus-visible {
 
 @media (max-width: 1240px) and (min-width: 901px) {
   .analysis-staff-summary {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: minmax(150px, 0.72fr) repeat(5, minmax(0, 1fr));
   }
 
   .analysis-staff-metric-value {
@@ -5995,7 +5993,7 @@ input:focus-visible {
   min-height: 256px;
   flex: 1;
   display: grid;
-  grid-template-rows: minmax(228px, 1fr) auto;
+  grid-template-rows: auto minmax(264px, 1fr) auto;
   gap: 0;
   padding: 8px;
   border: 1px solid #d5e4ea;
@@ -6005,8 +6003,8 @@ input:focus-visible {
 
 .analysis-staff-tenure-scatter-chart {
   min-width: 0;
-  height: 228px;
-  min-height: 228px;
+  height: 264px;
+  min-height: 264px;
   align-self: start;
   overflow: visible;
   border: 1px solid #dce8ed;
@@ -6016,7 +6014,7 @@ input:focus-visible {
 
 .analysis-staff-tenure-scatter-chart svg {
   width: 100%;
-  height: 218px;
+  height: 260px;
   display: block;
   overflow: visible;
 }
@@ -6028,6 +6026,27 @@ input:focus-visible {
   font-size: 9px;
   font-weight: 400;
   line-height: 1.45;
+}
+
+.analysis-staff-scatter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  color: #6f8794;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-size: 9px;
+}
+
+.analysis-staff-scatter-controls button {
+  border: 1px solid #cddfe7;
+  border-radius: 4px;
+  padding: 3px 6px;
+  color: #315b70;
+  background: #f5f9fb;
+  font: inherit;
+  cursor: pointer;
 }
 
 .analysis-staff-scatter-grid line {
@@ -6106,6 +6125,50 @@ input:focus-visible {
   stroke-width: 1.8;
   filter: drop-shadow(0 1px 2px rgba(30, 64, 175, 0.28));
   vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-population circle.provisional,
+.analysis-staff-scatter-showroom circle.provisional,
+.analysis-staff-scatter-selected.provisional .point {
+  fill: #fff;
+  stroke: #dc8a4b;
+  stroke-width: 1.5;
+}
+
+.analysis-staff-scatter-showroom circle.provisional {
+  stroke: #2563eb;
+}
+
+.analysis-staff-scatter-selected.provisional .point {
+  stroke: #126886;
+}
+
+.analysis-staff-scatter-unscored > rect {
+  fill: #f3f6f8;
+  stroke: #dce5eb;
+  stroke-dasharray: 3 2;
+}
+
+.analysis-staff-scatter-unscored text {
+  fill: #7b8e99;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-size: 8px;
+}
+
+.analysis-staff-scatter-unscored circle {
+  fill: #fff;
+  stroke: #9baab3;
+  stroke-width: 1;
+}
+
+.analysis-staff-scatter-unscored circle.showroom {
+  stroke: #2563eb;
+  stroke-width: 1.5;
+}
+
+.analysis-staff-scatter-unscored circle.selected {
+  stroke: #126886;
+  stroke-width: 2;
 }
 
 .analysis-staff-scatter-selected > line {

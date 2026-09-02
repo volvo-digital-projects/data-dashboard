@@ -171,8 +171,15 @@ test("averages Q1-Q2 metrics before combining and keeps staff scores legible", a
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-weight: 700;/);
 });
 
-test("plots staff final scores and their national mean on a fixed 100-point scale", async () => {
+test("includes every staff member with fair provisional and unscored scatter states", async () => {
   const { showrooms } = JSON.parse(await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"));
+  const staffData = JSON.parse(await readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8"));
+  const responseCounts = Object.values(staffData.showrooms).flatMap((showroom) => showroom.employees)
+    .filter((staff) => staff.role === "영업직원" || staff.role === "영업팀장")
+    .map((staff) => Object.values(staff.years).reduce((sum, year) => sum + year.responses, 0));
+  const expectedConfirmed = responseCounts.filter((count) => count >= 8).length;
+  const expectedProvisional = responseCounts.filter((count) => count > 0 && count < 8).length;
+  const expectedUnscored = responseCounts.filter((count) => count === 0).length;
   for (const showroom of showrooms) {
     const response = await render(`/dashboard/${showroom.cdsid}/analysis?view=size`);
     assert.equal(response.status, 200);
@@ -180,12 +187,22 @@ test("plots staff final scores and their national mean on a fixed 100-point scal
     const scatter = html.match(/class="analysis-staff-tenure-scatter"[^]*?<\/svg>/)?.[0];
     assert.ok(scatter);
     assert.ok(scatter.includes("최종점수(100점)"));
-    for (const tick of [0, 20, 40, 60, 80, 100]) {
+    const minimum = Number(scatter.match(/표시 범위 (\d+)~100점/)?.[1]);
+    assert.ok(minimum >= 0 && minimum <= 60);
+    for (let tick = minimum; tick <= 100; tick += 10) {
       assert.ok(scatter.includes(`text-anchor="end">${tick}</text>`), `Missing y tick ${tick}`);
     }
+    assert.ok(scatter.includes("전체 0~100"));
     const plotted = [...scatter.matchAll(/data-final-score="([\d.]+)"/g)].map((match) => Number(match[1]));
     assert.ok(plotted.length > 0 && plotted.every((value) => value >= 0 && value <= 100));
-    const average = plotted.reduce((sum, value) => sum + value, 0) / plotted.length;
+    const confirmed = [...scatter.matchAll(/data-final-score="([\d.]+)" data-provisional="false"/g)].map((match) => Number(match[1]));
+    const provisionalCount = [...scatter.matchAll(/data-provisional="true"/g)].length;
+    const unscoredCount = [...scatter.matchAll(/data-unscored="true"/g)].length;
+    assert.equal(confirmed.length, expectedConfirmed);
+    assert.equal(provisionalCount, expectedProvisional);
+    assert.equal(unscoredCount, expectedUnscored);
+    assert.equal(plotted.length + unscoredCount, responseCounts.length);
+    const average = confirmed.reduce((sum, value) => sum + value, 0) / confirmed.length;
     assert.ok(scatter.includes(`>${average.toFixed(1)}점</text>`));
     const selected = scatter.match(/class="analysis-staff-scatter-selected" data-final-score="([\d.]+)"/);
     const rosterScore = html.match(/class="analysis-staff-roster-final">([\d.]+)<\/span>/);
@@ -193,13 +210,20 @@ test("plots staff final scores and their national mean on a fixed 100-point scal
       assert.ok(selected);
       assert.equal(Number(selected[1]).toFixed(1), rosterScore[1]);
     } else {
-      assert.equal(selected, null);
-      assert.ok(scatter.includes("산정 유보"));
+      assert.ok(scatter.includes("참고점수") || scatter.includes("미평가 줄 표시"));
     }
   }
   const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
-  assert.match(source, /staffTenureScatterPopulation: StaffTenureScatterPoint\[\] = nationalStaffFinalScores\.flatMap\([\s\S]*?staff\.finalScore === null \? \[\]/);
+  assert.match(source, /staffTenureScatterPopulation: StaffTenureScatterPoint\[\] = nationalStaffFinalScores\.flatMap\([\s\S]*?staff\.referenceScore === null \? \[\]/);
+  assert.match(source, /referenceScore: adjustedAverage === null[\s\S]*?\(adjustedAverage \/ 10\) \* staffScoreQualityWeight \+ freshnessPoints/);
+  assert.match(source, /setStaffScatterFullScale\(\(value\) => !value\)/);
   assert.doesNotMatch(source, /staffScatterY\(point\.average\)|staffScatterY\(staffNationalAverage\)/);
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.analysis-staff-roster > header > span\s*\{[^}]*font-size: 9px;[^}]*font-family: var\(--font-latin\)[^}]*font-weight: 400;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*28px 116px repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size: 11px;/);
+  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-size: 12px;[^}]*font-weight: 700;/);
+  assert.match(css, /\.analysis-staff-summary\s*\{[^}]*minmax\(160px, 0\.72fr\) repeat\(5, minmax\(0, 1fr\)\)/);
 });
 
 async function login(cdsid) {
@@ -1782,12 +1806,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.doesNotMatch(staffSectionHtml, />누적평균<\/span>/);
   assert.doesNotMatch(staffSectionHtml, />회신건수<\/span>/);
-  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*grid-template-columns:\s*28px minmax\(130px, 1fr\) 58px 58px 64px;/);
+  assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*grid-template-columns:\s*28px 116px repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[\s\S]*?min-height:\s*30px;/);
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[\s\S]*?height:\s*16px;/);
   assert.match(css, /\.analysis-staff-roster > header > span \+ span\s*\{[\s\S]*?border-left:\s*1px solid rgba\(137, 166, 180, 0\.25\);/);
-  assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size:\s*12px;[^}]*font-weight:\s*400;/);
-  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-size:\s*13px;[^}]*font-weight:\s*700;/);
+  assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size:\s*11px;[^}]*font-weight:\s*400;/);
+  assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-size:\s*12px;[^}]*font-weight:\s*700;/);
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-family:\s*var\(--font-volvo\)/);
   assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 370px minmax\(0, 1fr\);/);
   assert.match(css, /\.analysis-staff-roster-rank\s*\{[\s\S]*?font-size:\s*8px;[\s\S]*?font-weight:\s*700;/);
@@ -1797,7 +1821,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-roster-identity small\s*\{[^}]*width:\s*44px;[^}]*grid-template-columns:\s*4px 38px;/,
+    /\.analysis-staff-roster-identity small\s*\{[^}]*width:\s*40px;[^}]*grid-template-columns:\s*4px 34px;/,
   );
   assert.match(
     staffSectionHtml,
