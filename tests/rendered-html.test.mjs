@@ -1874,6 +1874,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
+    /\.competitive-analysis-page \.analysis-staff-heading\s*\{[\s\S]*?box-shadow:\s*0 -10px 0 #ffffff,[\s\S]*?0 16px 0 #ffffff;/,
+  );
+  assert.match(
+    css,
+    /\.competitive-analysis-page \.analysis-staff-summary\s*\{[\s\S]*?box-shadow:\s*0 -18px 0 #ffffff,[\s\S]*?0 14px 18px -22px rgba\(16, 42, 67, 0\.72\);/,
+  );
+  assert.match(
+    css,
     /\.analysis-card-heading \.english-title,[\s\S]*?\.analysis-staff-heading \.english-title,[\s\S]*?\.v3s-award-heading \.english-title\s*\{[\s\S]*?font-family:\s*var\(--font-latin\);/,
   );
   assert.match(analysisSource, /staffAnalysisInView \? " is-motion-visible"/);
