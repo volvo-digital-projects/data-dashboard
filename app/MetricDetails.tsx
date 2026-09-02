@@ -159,6 +159,11 @@ function MetricDetailChart({
   });
   const isVckEvaluation = metric === "voc" || component.key === "app";
   const evaluationLabel = isVckEvaluation ? "VCK 평가" : "글로벌 평가";
+  const sourceTitle =
+    metric === "voc" ? "VOC" : component.key === "app" ? "Sales-DMS" : "ONE Voice";
+  const metricTitle =
+    metric === "voc" ? component.label.replace(/^VOC\s*/, "") : component.label;
+  const displayLabel = `${sourceTitle} ${metricTitle}`;
   const contributionLabel =
     metric === "voc"
       ? vocContributionLabels[component.key]
@@ -171,7 +176,10 @@ function MetricDetailChart({
       <header>
         <div>
           <h2>
-            <span>{component.label}</span>
+            <span>
+              <span className="metric-detail-source-title">{sourceTitle}</span>{" "}
+              {metricTitle}
+            </span>
             <i aria-hidden="true">/</i>
             <small className="metric-detail-max-inline">
               {component.key === "sent"
@@ -226,7 +234,7 @@ function MetricDetailChart({
           viewBox={`0 0 ${chart.width} ${chart.height}`}
           preserveAspectRatio="xMidYMid meet"
           role="img"
-          aria-label={`${component.label} W1부터 W52까지 ${showroomName} 점수 추이`}
+          aria-label={`${displayLabel} W1부터 W52까지 ${showroomName} 점수 추이`}
         >
           <defs>
             <clipPath id={seriesRevealId}>

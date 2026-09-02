@@ -1257,24 +1257,25 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
   assert.doesNotMatch(vocBody, />DATA DASHBOARD DETAIL</);
   assert.doesNotMatch(vocBody, /원본 구글시트에서 동기화한 W1~W52 전시장값/);
-  assert.match(vocBody, /VOC 종합만족도/);
-  assert.match(vocBody, /VOC 첫인사/);
-  assert.match(vocBody, /VOC 태블릿/);
-  assert.match(vocBody, /VOC 해피콜/);
-  assert.match(vocBody, /VOC 발송건수/);
-  assert.match(
-    vocBody,
-    /VOC 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(60점\)/,
-  );
-  for (const label of ["VOC 첫인사", "VOC 태블릿", "VOC 해피콜"]) {
+  for (const label of ["종합만족도", "첫인사", "태블릿", "해피콜", "발송건수"]) {
     assert.match(
       vocBody,
-      new RegExp(`${label}[\\s\\S]*?100점 만점[\\s\\S]*?10% 반영\\(10점\\)`),
+      new RegExp(`metric-detail-source-title">VOC<\\/span> ${label}`),
     );
   }
   assert.match(
     vocBody,
-    /VOC 해피콜[\s\S]*?VCK 평가[\s\S]*?class="appealable"[\s\S]*?metric-detail-appeal-icon[\s\S]*?소명가능/,
+    /metric-detail-source-title">VOC<\/span> 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(60점\)/,
+  );
+  for (const label of ["VOC 첫인사", "VOC 태블릿", "VOC 해피콜"]) {
+    assert.match(
+      vocBody,
+      new RegExp(`${label.replace("VOC ", "")}[\\s\\S]*?100점 만점[\\s\\S]*?10% 반영\\(10점\\)`),
+    );
+  }
+  assert.match(
+    vocBody,
+    /metric-detail-source-title">VOC<\/span> 해피콜[\s\S]*?VCK 평가[\s\S]*?class="appealable"[\s\S]*?metric-detail-appeal-icon[\s\S]*?소명가능/,
   );
   assert.match(
     vocBody,
@@ -1337,23 +1338,32 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   const cxHtml = (await cxResponse.text()).replaceAll("<!-- -->", "");
   const cxBody = cxHtml.match(/<body>([\s\S]*?)<script/)?.[1] ?? cxHtml;
   assert.match(cxBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
-  assert.match(cxBody, /신차출고 만족도/);
-  assert.match(cxBody, /시승 만족도/);
-  assert.match(cxBody, /긴급경보 처리여부/);
-  assert.match(cxBody, /조치계획 작성 및 제출/);
-  assert.match(cxBody, /헤이볼보 앱 가입율/);
-  assert.doesNotMatch(cxBody, /ONE Voice|Sales-DMS/);
+  for (const label of [
+    "신차출고 만족도",
+    "시승 만족도",
+    "긴급경보 처리여부",
+    "조치계획 작성 및 제출",
+  ]) {
+    assert.match(
+      cxBody,
+      new RegExp(`metric-detail-source-title">ONE Voice<\\/span> ${label}`),
+    );
+  }
+  assert.match(
+    cxBody,
+    /metric-detail-source-title">Sales-DMS<\/span> 헤이볼보 앱 가입율/,
+  );
   assert.doesNotMatch(cxBody, /CX INDEX/);
   assert.equal((cxBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/글로벌 평가/g) ?? []).length, 4);
   assert.equal((cxBody.match(/VCK 평가/g) ?? []).length, 1);
   assert.match(
     cxBody,
-    /신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">90점 이상 시 40점 반영<\/small><i[^>]*>\/<\/i><em class="global">/,
+    /metric-detail-source-title">ONE Voice<\/span> 신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">90점 이상 시 40점 반영<\/small><i[^>]*>\/<\/i><em class="global">/,
   );
   assert.match(
     cxBody,
-    /헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">가입율 90%\(점\) 이상 시, 20점 반영<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
+    /metric-detail-source-title">Sales-DMS<\/span> 헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><small class="metric-detail-weight-inline">가입율 90%\(점\) 이상 시, 20점 반영<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
   );
   for (const label of [
     "90점 이상 시 50점 반영",
@@ -1412,6 +1422,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-card h2 > em\s*\{[^}]*font-family:\s*var\(--font-latin\), var\(--font-korean\);/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-source-title\s*\{[^}]*font-family:\s*var\(--font-volvo\), var\(--font-latin\), sans-serif;/,
   );
   assert.match(
     detailCss,
