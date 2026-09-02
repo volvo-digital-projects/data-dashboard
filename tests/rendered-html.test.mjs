@@ -1262,7 +1262,14 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, /VOC 태블릿/);
   assert.match(vocBody, /VOC 해피콜/);
   assert.match(vocBody, /VOC 발송건수/);
-  assert.match(vocBody, /VOC <small>5개 지표<\/small>/);
+  assert.match(
+    vocBody,
+    /VOC <small>4개 메인지표 \/ 총점 100점 \+ 1개 참고지표<\/small>/,
+  );
+  assert.match(
+    vocBody,
+    /CX Index <small>5개 메인지표 \/ 총점 320점<\/small>/,
+  );
   assert.match(vocBody, /건 기준/);
   assert.equal((vocBody.match(/VCK 평가/g) ?? []).length, 5);
   assert.equal((vocBody.match(/metric-detail-evaluation-icon/g) ?? []).length, 5);
