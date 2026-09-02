@@ -405,6 +405,99 @@ const staffTenureHalfYearRange = (completedMonths: number) => {
   return { start, end: start + 5 };
 };
 
+const staffNationalPeerTotalsByTenure = staffCurrentSalesPopulation.reduce(
+  (benchmarks, { employee }) => {
+    const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
+    const totals = staffYears.reduce(
+      (summary, year) => {
+        summary.responses += employee.years[year]?.responses ?? 0;
+        summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
+        return summary;
+      },
+      { responses: 0, scoreSum: 0 },
+    );
+    const benchmark = benchmarks.get(tenureKey) ?? {
+      responses: 0,
+      scoreSum: 0,
+    };
+    benchmark.responses += totals.responses;
+    benchmark.scoreSum += totals.scoreSum;
+    benchmarks.set(tenureKey, benchmark);
+    return benchmarks;
+  },
+  new Map<number, { responses: number; scoreSum: number }>(),
+);
+
+const staffNationalScoringTotals = staffYears.reduce(
+  (summary, year) => {
+    summary.responses += staffNationalYears[year].responses;
+    summary.scoreSum += staffNationalYears[year].scoreSum;
+    return summary;
+  },
+  { responses: 0, scoreSum: 0 },
+);
+const staffNationalScoringAverage = staffNationalScoringTotals.responses
+  ? staffNationalScoringTotals.scoreSum / staffNationalScoringTotals.responses
+  : 0;
+const staffScoringAsOf = Date.parse(`${staffAnalysisSource.vocThrough}T00:00:00Z`);
+
+const nationalStaffFinalScores = staffCurrentSalesPopulation
+  .map(({ cdsid, employee }) => {
+    const totals = staffYears.reduce(
+      (summary, year) => {
+        const metrics = employee.years[year];
+        summary.responses += metrics?.responses ?? 0;
+        summary.scoreSum += metrics?.scoreSum ?? 0;
+        return summary;
+      },
+      { responses: 0, scoreSum: 0 },
+    );
+    const average = totals.responses ? totals.scoreSum / totals.responses : null;
+    const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
+    const peerTotals = staffNationalPeerTotalsByTenure.get(tenureKey);
+    const peerAverage = peerTotals?.responses
+      ? peerTotals.scoreSum / peerTotals.responses
+      : staffNationalScoringAverage;
+    const adjustedAverage = average === null
+      ? null
+      : (totals.scoreSum + peerAverage * staffScorePriorResponses) /
+        (totals.responses + staffScorePriorResponses);
+    const latestResponseTime = employee.latestResponseDate
+      ? Date.parse(`${employee.latestResponseDate}T00:00:00Z`)
+      : Number.NaN;
+    const daysSinceResponse = Number.isFinite(latestResponseTime)
+      ? Math.max(0, (staffScoringAsOf - latestResponseTime) / 86_400_000)
+      : null;
+    const freshnessPoints = daysSinceResponse === null
+      ? 0
+      : Math.max(0, 1 - daysSinceResponse / staffScoreFreshnessDays) *
+        staffScoreFreshnessWeight;
+    const adjustedPoints =
+      totals.responses >= staffScorePriorResponses && adjustedAverage !== null
+        ? (adjustedAverage / 10) * staffScoreQualityWeight
+        : null;
+    return {
+      cdsid,
+      name: employee.name,
+      tenureKey,
+      responses: totals.responses,
+      finalScore:
+        adjustedPoints === null ? null : adjustedPoints + freshnessPoints,
+    };
+  })
+  .sort((a, b) => {
+    if (a.finalScore === null && b.finalScore === null) {
+      return a.name.localeCompare(b.name, "ko");
+    }
+    if (a.finalScore === null) return 1;
+    if (b.finalScore === null) return -1;
+    if (b.finalScore !== a.finalScore) return b.finalScore - a.finalScore;
+    return a.name.localeCompare(b.name, "ko");
+  });
+const nationalStaffRespondingCount = nationalStaffFinalScores.filter(
+  (staff) => staff.responses > 0,
+).length;
+
 const staffDeltaPercent = (value: number | null, benchmark: number | null) =>
   value === null || benchmark === null || benchmark === 0
     ? null
@@ -973,6 +1066,31 @@ export default function CompetitiveAnalysis({
   const selectedStaffScoring = rankedSalesStaff.find(
     ({ employee }) => employee.name === selectedStaffEmployee?.name,
   );
+  const selectedStaffNationalRankIndex = selectedStaffEmployee &&
+    selectedStaffScoring?.finalScore !== null
+      ? nationalStaffFinalScores.findIndex(
+          (staff) =>
+            staff.cdsid === selected.cdsid &&
+            staff.name === selectedStaffEmployee.name,
+        )
+      : -1;
+  const selectedStaffNationalRank = selectedStaffNationalRankIndex >= 0
+    ? selectedStaffNationalRankIndex + 1
+    : null;
+  const selectedStaffTenureScoreRows = selectedStaffEmployee
+    ? nationalStaffFinalScores.filter(
+        (staff) =>
+          staff.tenureKey ===
+            staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths).start &&
+          staff.finalScore !== null,
+      )
+    : [];
+  const selectedStaffTenureFinalScore = selectedStaffTenureScoreRows.length
+    ? selectedStaffTenureScoreRows.reduce(
+        (sum, staff) => sum + (staff.finalScore ?? 0),
+        0,
+      ) / selectedStaffTenureScoreRows.length
+    : null;
   const selectedStaffRosterIndex = Math.max(
     0,
     rankedSalesStaff.findIndex(
@@ -1115,37 +1233,6 @@ export default function CompetitiveAnalysis({
     selectedStaffTenurePeerRangeEnd === null
       ? null
       : `${formatStaffTenureDuration(selectedStaffTenurePeerRangeStart)} ~ ${formatStaffTenureDuration(selectedStaffTenurePeerRangeEnd)}`;
-  const selectedStaffTenurePeers = selectedStaffEmployee
-    ? staffCurrentSalesPopulation.flatMap(({ employee }) => {
-        if (
-          selectedStaffTenurePeerRangeStart === null ||
-          staffTenureHalfYearRange(employee.tenureMonths).start !==
-            selectedStaffTenurePeerRangeStart
-        ) {
-          return [];
-        }
-        const totals = staffYears.reduce(
-          (summary, year) => {
-            summary.responses += employee.years[year]?.responses ?? 0;
-            summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
-            return summary;
-          },
-          { responses: 0, scoreSum: 0 },
-        );
-        return totals.responses > 0 ? [totals] : [];
-      })
-    : [];
-  const selectedStaffTenurePeerResponses = selectedStaffTenurePeers.reduce(
-    (sum, peer) => sum + peer.responses,
-    0,
-  );
-  const selectedStaffTenurePeerScoreSum = selectedStaffTenurePeers.reduce(
-    (sum, peer) => sum + peer.scoreSum,
-    0,
-  );
-  const selectedStaffTenurePeerAverage = selectedStaffTenurePeerResponses
-    ? selectedStaffTenurePeerScoreSum / selectedStaffTenurePeerResponses
-    : null;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1885,31 +1972,31 @@ export default function CompetitiveAnalysis({
                   <i aria-hidden="true">/</i>
                   {selectedStaffScoring?.finalScore === null || !selectedStaffScoring
                     ? `회신 ${selectedStaffScoring?.responses ?? 0}건 · 8건부터 산정`
-                    : `만족도 ${selectedStaffScoring.adjustedPoints?.toFixed(1)} + 최신성 ${selectedStaffScoring.freshnessPoints.toFixed(1)}`}
+                    : `전국 ${nationalStaffRespondingCount}명 중 ${selectedStaffNationalRank}위`}
                 </small>
               </div>
             </article>
             <article
               className="analysis-staff-metric-card analysis-staff-tenure-peer-card"
-              aria-label={`동일연차 ${selectedStaffTenurePeerRangeLabel ?? "범위 없음"}, 상담 만족도 ${
-                selectedStaffTenurePeerAverage === null
+              aria-label={`동일연차 ${selectedStaffTenurePeerRangeLabel ?? "범위 없음"}, 최종점수 평균 ${
+                selectedStaffTenureFinalScore === null
                   ? "표본 없음"
-                  : `${selectedStaffTenurePeerAverage.toFixed(1)}점`
-              }, ${selectedStaffTenurePeers.length}명`}
+                  : `${selectedStaffTenureFinalScore.toFixed(1)}점`
+              }, 산정 ${selectedStaffTenureScoreRows.length}명`}
             >
               <span>동일연차 정보</span>
               <div className="analysis-staff-metric-value">
                 <strong>
-                  {selectedStaffTenurePeerAverage === null
+                  {selectedStaffTenureFinalScore === null
                     ? "―"
-                    : selectedStaffTenurePeerAverage.toFixed(1)}
-                  {selectedStaffTenurePeerAverage === null ? null : <small>점</small>}
+                    : selectedStaffTenureFinalScore.toFixed(1)}
+                  {selectedStaffTenureFinalScore === null ? null : <small>점</small>}
                 </strong>
                 <small className="analysis-staff-metric-comparison">
                   <i aria-hidden="true">/</i>
                   {selectedStaffTenurePeerRangeLabel ?? "―"}
                   <i aria-hidden="true">/</i>
-                  {selectedStaffTenurePeers.length}명
+                  산정 {selectedStaffTenureScoreRows.length}명
                 </small>
               </div>
             </article>

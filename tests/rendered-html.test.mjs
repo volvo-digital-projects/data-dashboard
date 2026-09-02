@@ -1710,7 +1710,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-roster-adjusted-points">76\.9<\/span><span class="analysis-staff-roster-freshness-points">17\.2<\/span><span class="analysis-staff-roster-final">94\.1<\/span>/);
   assert.match(
     staffSectionHtml,
-    /aria-label="최종점수 94\.1점, 만족도 76\.9점과 최신성 17\.2점 합산"[\s\S]*?<span>최종점수<\/span>[\s\S]*?94\.1<small>점<\/small>[\s\S]*?만족도 76\.9 \+ 최신성 17\.2/,
+    /aria-label="최종점수 94\.1점, 만족도 76\.9점과 최신성 17\.2점 합산"[\s\S]*?<span>최종점수<\/span>[\s\S]*?94\.1<small>점<\/small>[\s\S]*?전국 327명 중 28위/,
   );
   assert.doesNotMatch(staffSectionHtml, />누적평균<\/span>/);
   assert.doesNotMatch(staffSectionHtml, />회신건수<\/span>/);
@@ -1726,7 +1726,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-roster-identity small\s*\{[\s\S]*?width:\s*39px;[\s\S]*?grid-template-columns:\s*5px 30px;/,
+    /\.analysis-staff-roster-identity small\s*\{[\s\S]*?width:\s*35px;[\s\S]*?grid-template-columns:\s*4px 29px;/,
+  );
+  assert.match(
+    staffSectionHtml,
+    /<span>동일연차 정보<\/span>[\s\S]*?86\.8<small>점<\/small>[\s\S]*?산정 20명/,
   );
   assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("강석"));
   assert.ok(staffSectionHtml.indexOf("강석") < staffSectionHtml.indexOf("김대준"));
