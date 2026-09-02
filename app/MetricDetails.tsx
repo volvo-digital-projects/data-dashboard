@@ -118,20 +118,23 @@ function MetricDetailChart({
   cdsid,
   metric,
   showroomName,
+  updateWeek,
 }: {
   component: DetailComponent;
   cdsid: string;
   metric: DetailMetric;
   showroomName: string;
+  updateWeek: number;
 }) {
   const rawShowroomValues = component.byCdsid[cdsid] ?? [];
   const showroomValues = Array.from({ length: 52 }, (_, index) => {
+    if (index >= updateWeek) return null;
     const value = rawShowroomValues[index];
     if (typeof value === "number") return value;
-    return metric === "voc" && index < Math.min(52, component.latestWeek) ? 0 : null;
+    return metric === "voc" ? 0 : null;
   });
-  const completedWeek = Math.max(0, Math.min(52, component.latestWeek));
-  const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
+  const completedWeek = updateWeek;
+  const latestIndex = lastValueIndex(showroomValues, updateWeek);
   const latestShowroom = latestIndex >= 0 ? showroomValues[latestIndex] : null;
   const latestPoint =
     latestIndex >= 0 && typeof latestShowroom === "number"
@@ -386,10 +389,7 @@ export default function MetricDetails({
   const showroom = dashboardJson.showrooms.find((item) => item.cdsid === cdsid);
   const showroomName = showroom?.showroom.replace(/^볼보\s*/, "") ?? cdsid;
   const group = detailData[metric];
-  const updateWeek = Math.max(
-    1,
-    Math.min(52, detailData.voc.components[0]?.latestWeek ?? 1),
-  );
+  const updateWeek = Math.max(1, Math.min(52, group.components[0]?.latestWeek ?? 1));
   const updateGuideX = (point(updateWeek - 1, 0, 100).x / chart.width) * 100;
 
   return (
@@ -478,6 +478,7 @@ export default function MetricDetails({
             cdsid={cdsid}
             metric={metric}
             showroomName={showroomName}
+            updateWeek={updateWeek}
             key={component.key}
           />
         ))}

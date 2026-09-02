@@ -1371,7 +1371,16 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
-  assert.match(cxBody, /aria-label="현재 업데이트 기준 W32"/);
+  assert.match(cxBody, /aria-label="현재 업데이트 기준 W30"/);
+  assert.match(cxBody, /class="metric-detail-update-guide" style="left:57\.19[^"]*%"/);
+  assert.match(
+    cxBody,
+    /조치계획 작성 및 제출[\s\S]*?class="metric-detail-latest-point" cx="823\.5384615384615"/,
+  );
+  assert.doesNotMatch(
+    cxBody,
+    /조치계획 작성 및 제출[\s\S]*?class="metric-detail-latest-point" cx="1045\.8461538461538"/,
+  );
   assert.doesNotMatch(cxBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
   assert.match(
