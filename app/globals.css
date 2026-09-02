@@ -14608,8 +14608,13 @@ button.header-status-item {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 0;
-  border-left: 1.5px solid #df713e;
+  width: 2px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    to bottom,
+    #df713e 0 5px,
+    transparent 5px 9px
+  );
   filter: drop-shadow(0 0 1px rgba(223, 113, 62, 0.28));
 }
 
@@ -14634,6 +14639,22 @@ button.header-status-item {
   font-weight: 760;
   line-height: 1;
   white-space: nowrap;
+  animation: metric-detail-update-pulse 1.8s ease-in-out infinite;
+  will-change: opacity, transform, box-shadow;
+}
+
+@keyframes metric-detail-update-pulse {
+  0%,
+  100% {
+    opacity: 0.58;
+    transform: translateX(-50%) scale(0.97);
+    box-shadow: 0 2px 5px rgba(154, 72, 35, 0.14);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 2px 9px rgba(223, 113, 62, 0.42);
+  }
 }
 
 .metric-detail-list--voc {
@@ -14810,6 +14831,10 @@ button.header-status-item {
 @media (prefers-reduced-motion: reduce) {
   .metric-detail-series-reveal {
     transform: none;
+    animation: none;
+  }
+
+  .metric-detail-update-guide > span {
     animation: none;
   }
 }

@@ -1408,7 +1408,15 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-update-guide\s*\{[^}]*top:\s*0;[^}]*bottom:\s*0;[^}]*border-left:\s*1\.5px solid #df713e;/,
+    /\.metric-detail-update-guide\s*\{[^}]*top:\s*0;[^}]*bottom:\s*0;[^}]*width:\s*2px;[^}]*transform:\s*translateX\(-50%\);[^}]*background:\s*repeating-linear-gradient\(/,
+  );
+  assert.match(
+    detailCss,
+    /\.metric-detail-update-guide > span\s*\{[^}]*animation:\s*metric-detail-update-pulse 1\.8s ease-in-out infinite;/,
+  );
+  assert.match(
+    detailCss,
+    /@keyframes metric-detail-update-pulse\s*\{[\s\S]*?opacity:\s*0\.58;[\s\S]*?opacity:\s*1;/,
   );
   assert.doesNotMatch(detailCss, /metric-detail-complete-(?:marker|check|arrow|drop)/);
   assert.match(
