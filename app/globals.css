@@ -5259,6 +5259,9 @@ input:focus-visible {
 }
 
 .analysis-staff-year-axis small {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   color: #3f5968;
   font-size: 9px;
   font-weight: 700;
@@ -5273,6 +5276,13 @@ input:focus-visible {
   .analysis-staff-year-axis > div {
     flex-direction: column;
     gap: 0;
+    line-height: 1.05;
+  }
+
+  .analysis-staff-year-axis small {
+    flex-direction: column;
+    gap: 0;
+    font-size: 8px;
     line-height: 1.05;
   }
 }

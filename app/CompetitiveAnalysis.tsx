@@ -931,6 +931,10 @@ export default function CompetitiveAnalysis({
     return {
       year,
       sent: metrics.sent ?? 0,
+      responseRate:
+        (metrics.sent ?? 0) > 0
+          ? (metrics.responses / (metrics.sent ?? 1)) * 100
+          : 0,
       responses: metrics.responses,
       scoreSum: metrics.scoreSum,
       average,
@@ -1926,7 +1930,10 @@ export default function CompetitiveAnalysis({
                                   : `${year.deltaPercent > 0 ? "▲" : year.deltaPercent < 0 ? "▼" : "―"} ${Math.abs(year.deltaPercent).toFixed(1)}%`}
                               </span>
                             </div>
-                            <small>발송 {year.sent.toLocaleString("ko-KR")}건</small>
+                            <small>
+                              <span>발송 {year.sent.toLocaleString("ko-KR")}건</span>
+                              <span>(회신율 {year.responseRate.toFixed(1)}%)</span>
+                            </small>
                           </div>
                         </div>
                       );

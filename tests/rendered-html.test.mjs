@@ -1837,8 +1837,9 @@ test("serves the dual-metric competitive analysis sample", async () => {
     staffSectionHtml,
     /class="analysis-staff-chart-bar national"[\s\S]*class="analysis-staff-chart-bar employee"/,
   );
-  assert.match(staffSectionHtml, /발송 21건/);
+  assert.match(staffSectionHtml, /발송 21건[\s\S]*회신율 38\.1%/);
   assert.match(analysisSource, /sent: metrics\.sent \?\? 0/);
+  assert.match(analysisSource, /metrics\.responses \/ \(metrics\.sent \?\? 1\)/);
   assert.match(staffSectionHtml, /--staff-trend-x:43\.75%/);
   assert.match(
     css,
