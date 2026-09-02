@@ -1337,25 +1337,26 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   const cxHtml = (await cxResponse.text()).replaceAll("<!-- -->", "");
   const cxBody = cxHtml.match(/<body>([\s\S]*?)<script/)?.[1] ?? cxHtml;
   assert.match(cxBody, /<h1>볼보 강남대치 세부지표<\/h1>/);
-  assert.match(cxBody, /신차출고 만족도/);
-  assert.match(cxBody, /시승 만족도/);
-  assert.match(cxBody, /긴급경보 처리여부/);
-  assert.match(cxBody, /조치계획 작성 및 제출/);
-  assert.match(cxBody, /헤이볼보 앱 가입율/);
-  assert.equal((cxBody.match(/ONE Voice/g) ?? []).length, 4);
-  assert.equal((cxBody.match(/Sales-DMS/g) ?? []).length, 1);
+  assert.match(cxBody, /ONE Voice 신차출고 만족도/);
+  assert.match(cxBody, /ONE Voice 시승 만족도/);
+  assert.match(cxBody, /ONE Voice 긴급경보 처리여부/);
+  assert.match(cxBody, /ONE Voice 조치계획 작성 및 제출/);
+  assert.match(cxBody, /Sales-DMS 헤이볼보 앱 가입율/);
+  assert.equal((cxBody.match(/ONE Voice/g) ?? []).length, 8);
+  assert.equal((cxBody.match(/Sales-DMS/g) ?? []).length, 2);
   assert.doesNotMatch(cxBody, /CX INDEX/);
   assert.equal((cxBody.match(/class="metric-detail-max-inline"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/글로벌 평가/g) ?? []).length, 4);
   assert.equal((cxBody.match(/VCK 평가/g) ?? []).length, 1);
   assert.match(
     cxBody,
-    /신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><b>ONE Voice<\/b>/,
+    /ONE Voice 신차출고 만족도<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><em class="global">/,
   );
   assert.match(
     cxBody,
-    /헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><b>Sales-DMS<\/b>[\s\S]*?VCK 평가/,
+    /Sales-DMS 헤이볼보 앱 가입율<\/span><i[^>]*>\/<\/i><small class="metric-detail-max-inline">100점 만점<\/small><i[^>]*>\/<\/i><em class="vck">[\s\S]*?VCK 평가/,
   );
+  assert.doesNotMatch(cxBody, /<b>(?:ONE Voice|Sales-DMS)<\/b>/);
   assert.equal((cxBody.match(/class="metric-detail-week-label"/g) ?? []).length, 260);
   assert.doesNotMatch(cxBody, /class="metric-detail-national-line"/);
   assert.doesNotMatch(cxBody, /W01~W52 원본값 보기/);
