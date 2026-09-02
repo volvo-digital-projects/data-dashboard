@@ -1599,7 +1599,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     visibleHtml,
     /에이치 누적평균 185\.3점 대비 ▲ 14\.7점/,
   );
-  assert.match(visibleHtml, /누적 경쟁력[\s\S]*종합 만족도 \+ 해피콜 단순 합산 · 400점 만점[\s\S]*380\.6/);
+  assert.match(visibleHtml, /합산 경쟁력[\s\S]*종합 만족도 \+ 해피콜 단순 합산 · 400점 만점[\s\S]*380\.6/);
+  assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 3);
   assert.match(visibleHtml, /전국 17위 \/ 전체 39/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);

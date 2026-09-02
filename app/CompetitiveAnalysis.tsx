@@ -1508,7 +1508,12 @@ export default function CompetitiveAnalysis({
         <section className="analysis-summary-grid">
         <article className="analysis-summary-card satisfaction">
           <div>
-            <span>종합 만족도 누적점수</span>
+            <span className="analysis-summary-title">
+              종합 만족도 누적점수
+              <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
+                <b>Q1</b><b>Q2</b>
+              </span>
+            </span>
             <ul className="analysis-summary-breakdown">
               <li>Q1 {displayNumber(selected.q1?.voc ?? 0)}점 + Q2 {displayNumber(selected.voc ?? 0)}점</li>
               <li>{selectedPoint.vocQuarterCount}개 분기 · {selectedPoint.vocQuarterCount * 100}점 만점</li>
@@ -1532,7 +1537,12 @@ export default function CompetitiveAnalysis({
 
         <article className="analysis-summary-card happycall">
           <div>
-            <span>해피콜 이행률 누적점수</span>
+            <span className="analysis-summary-title">
+              해피콜 이행률 누적점수
+              <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
+                <b>Q1</b><b>Q2</b>
+              </span>
+            </span>
             <ul className="analysis-summary-breakdown">
               <li>Q1 {displayNumber(selected.q1?.happyCall ?? 0)}점 + Q2 {displayNumber(selected.happyCall ?? 0)}점</li>
               <li>{selectedPoint.happyQuarterCount}개 분기 · {selectedPoint.happyQuarterCount * 100}점 만점</li>
@@ -1558,7 +1568,12 @@ export default function CompetitiveAnalysis({
 
         <article className="analysis-summary-card balance">
           <div>
-            <span>누적 경쟁력</span>
+            <span className="analysis-summary-title">
+              합산 경쟁력
+              <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
+                <b>Q1</b><b>Q2</b>
+              </span>
+            </span>
             <small>종합 만족도 + 해피콜 단순 합산 · {selectedPoint.scoreMax}점 만점</small>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
