@@ -1290,8 +1290,8 @@ export default function CompetitiveAnalysis({
         ? "전국 전시장 누적평균"
         : view === "region"
           ? "동일 권역별 누적평균"
-          : "동일 사이즈 누적평균";
-  const selectedAverageLabel = `${displayShowroomName(selected.showroom)} 합산점수`;
+          : "동일 사이즈";
+  const selectedAverageLabel = displayShowroomNameWithoutBrand(selected.showroom);
   const displayedGroupAverage = Number(groupCombinedAverage.toFixed(1));
   const displayedSelectedAverage = Number(selectedPoint.combined.toFixed(1));
   const selectedAverageDelta = Number(

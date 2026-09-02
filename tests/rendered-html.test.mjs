@@ -226,6 +226,17 @@ test("includes every staff member with fair provisional and unscored scatter sta
   assert.match(css, /\.analysis-staff-summary\s*\{[^}]*minmax\(160px, 0\.72fr\) repeat\(5, minmax\(0, 1fr\)\)/);
 });
 
+test("keeps comparison footer labels compact without changing scores", async () => {
+  const response = await render("/dashboard/6KR6834/analysis?view=size");
+  assert.equal(response.status, 200);
+  const html = (await response.text()).replaceAll("<!-- -->", "");
+  const footer = html.match(/<footer><span>동일 사이즈[^]*?<\/footer>/)?.[0];
+  assert.ok(footer);
+  assert.match(footer, /<span>동일 사이즈<strong>/);
+  assert.match(footer, /<span>강남대치<strong>190\.3<\/strong>/);
+  assert.doesNotMatch(footer, /누적평균|볼보|합산점수/);
+});
+
 async function login(cdsid) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `login-${process.pid}-${Date.now()}`);
@@ -1637,7 +1648,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /<footer><span>에이치 누적평균<strong>187\.6<\/strong><\/span><span>볼보 강남대치 합산점수<strong>190\.3<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 2\.7점<\/strong><\/span><\/footer>/,
+    /<footer><span>에이치 누적평균<strong>187\.6<\/strong><\/span><span>강남대치<strong>190\.3<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 2\.7점<\/strong><\/span><\/footer>/,
   );
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
@@ -2343,7 +2354,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const showroomHtml = await showroomResponse.text();
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /<footer><span>전국 전시장 누적평균<strong>188\.0<\/strong><\/span><span>볼보 강남대치 합산점수<strong>190\.3<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 2\.3점<\/strong><\/span><\/footer>/,
+    /<footer><span>전국 전시장 누적평균<strong>188\.0<\/strong><\/span><span>강남대치<strong>190\.3<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 2\.3점<\/strong><\/span><\/footer>/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
