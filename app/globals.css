@@ -14588,12 +14588,52 @@ button.header-status-item {
 }
 
 .metric-detail-list {
+  position: relative;
   min-height: 0;
   flex: 1;
   display: grid;
   gap: 5px;
   margin-top: 5px;
   overflow: hidden;
+}
+
+.metric-detail-update-guide-layer {
+  position: absolute;
+  z-index: 4;
+  inset: 0 19px;
+  pointer-events: none;
+}
+
+.metric-detail-update-guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1.5px solid #df713e;
+  filter: drop-shadow(0 0 1px rgba(223, 113, 62, 0.28));
+}
+
+.metric-detail-update-guide > span {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  min-width: 42px;
+  min-height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px 0;
+  transform: translateX(-50%);
+  border: 1px solid #d96632;
+  border-radius: 999px;
+  color: #ffffff;
+  background: #df713e;
+  box-shadow: 0 2px 6px rgba(154, 72, 35, 0.2);
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 760;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .metric-detail-list--voc {
@@ -14772,12 +14812,6 @@ button.header-status-item {
     transform: none;
     animation: none;
   }
-
-  .metric-detail-complete-arrow {
-    transform: none;
-    opacity: 1;
-    animation: none;
-  }
 }
 
 .metric-detail-grid-line {
@@ -14840,49 +14874,6 @@ button.header-status-item {
   font-size: 8px;
   font-weight: 650;
   letter-spacing: 0;
-}
-
-.metric-detail-complete-marker {
-  opacity: 1;
-}
-
-.metric-detail-complete-marker circle {
-  fill: #f47b3f;
-}
-
-.metric-detail-complete-check {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  stroke: #ffffff;
-  stroke-width: 1.25;
-}
-
-.metric-detail-complete-arrow {
-  fill: #f47b3f;
-  stroke: none;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: metric-detail-complete-drop 1.25s cubic-bezier(0.2, 0.72, 0.3, 1) infinite;
-}
-
-@keyframes metric-detail-complete-drop {
-  0% {
-    transform: translateY(-5px);
-    opacity: 0;
-  }
-  28% {
-    opacity: 1;
-  }
-  78% {
-    transform: translateY(1px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(3px);
-    opacity: 0;
-  }
 }
 
 .metric-detail-showroom-line {

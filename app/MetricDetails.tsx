@@ -131,10 +131,6 @@ function MetricDetailChart({
     return metric === "voc" && index < Math.min(52, component.latestWeek) ? 0 : null;
   });
   const completedWeek = Math.max(0, Math.min(52, component.latestWeek));
-  const completedWeekPoint =
-    completedWeek > 0
-      ? point(completedWeek - 1, 0, component.max)
-      : null;
   const latestIndex = lastValueIndex(showroomValues, component.latestWeek);
   const latestShowroom = latestIndex >= 0 ? showroomValues[latestIndex] : null;
   const latestPoint =
@@ -329,19 +325,6 @@ function MetricDetailChart({
               />
             );
           })}
-          {completedWeekPoint ? (
-            <g className="metric-detail-complete-marker" aria-hidden="true">
-              <circle cx={completedWeekPoint.x} cy="5" r="4.5" />
-              <path
-                className="metric-detail-complete-check"
-                d={`M${(completedWeekPoint.x - 2.1).toFixed(2)} 5 L${(completedWeekPoint.x - 0.5).toFixed(2)} 6.6 L${(completedWeekPoint.x + 2.35).toFixed(2)} 3.25`}
-              />
-              <path
-                className="metric-detail-complete-arrow"
-                d={`M${(completedWeekPoint.x - 4).toFixed(2)} 9 L${(completedWeekPoint.x + 4).toFixed(2)} 9 L${completedWeekPoint.x.toFixed(2)} 15 Z`}
-              />
-            </g>
-          ) : null}
           <g className="metric-detail-data-series" clipPath={`url(#${seriesRevealId})`}>
             {lineSegments(showroomValues, component.max).map((path, index) => (
               <path className="metric-detail-showroom-line" d={path} key={`showroom-${index}`} />
@@ -403,6 +386,11 @@ export default function MetricDetails({
   const showroom = dashboardJson.showrooms.find((item) => item.cdsid === cdsid);
   const showroomName = showroom?.showroom.replace(/^볼보\s*/, "") ?? cdsid;
   const group = detailData[metric];
+  const updateWeek = Math.max(
+    1,
+    Math.min(52, detailData.voc.components[0]?.latestWeek ?? 1),
+  );
+  const updateGuideX = (point(updateWeek - 1, 0, 100).x / chart.width) * 100;
 
   return (
     <main className="metric-detail-page">
@@ -472,6 +460,18 @@ export default function MetricDetails({
         className={`metric-detail-list metric-detail-list--${metric}`}
         aria-label={`${group.label} 주간 세부지표`}
       >
+        <div
+          className="metric-detail-update-guide-layer"
+          role="note"
+          aria-label={`현재 업데이트 기준 W${updateWeek}`}
+        >
+          <div
+            className="metric-detail-update-guide"
+            style={{ left: `${updateGuideX}%` }}
+          >
+            <span>업데이트</span>
+          </div>
+        </div>
         {group.components.map((component) => (
           <MetricDetailChart
             component={component}

@@ -1294,7 +1294,10 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
   assert.match(vocBody, /class="metric-detail-score-label"[^>]*y="14"[^>]*>100<\/text>/);
-  assert.match(vocBody, /class="metric-detail-complete-arrow" d="[^"]+ Z"/);
+  assert.match(vocBody, /class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W32"/);
+  assert.match(vocBody, /class="metric-detail-update-guide" style="left:60\.82[^"]*%"/);
+  assert.match(vocBody, /<span>업데이트<\/span>/);
+  assert.doesNotMatch(vocBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.doesNotMatch(vocBody, /class="metric-detail-national-line"/);
   assert.doesNotMatch(vocBody, /W01~W52 원본값 보기/);
   assert.doesNotMatch(vocBody, /class="metric-detail-current"/);
@@ -1309,8 +1312,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 160);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
-  assert.equal((vocBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 5);
-  assert.equal((vocBody.match(/class="metric-detail-complete-marker"[\s\S]*?<circle[^>]*cy="5" r="4\.5"/g) ?? []).length, 5);
+  assert.equal((vocBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
   assert.match(
     vocBody,
@@ -1368,7 +1370,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
-  assert.equal((cxBody.match(/class="metric-detail-complete-marker"/g) ?? []).length, 5);
+  assert.equal((cxBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
+  assert.match(cxBody, /aria-label="현재 업데이트 기준 W32"/);
+  assert.doesNotMatch(cxBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
   assert.match(
     detailCss,
@@ -1400,8 +1404,13 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-complete-arrow\s*\{[^}]*fill:\s*#f47b3f;[^}]*animation:\s*metric-detail-complete-drop 1\.25s cubic-bezier\(0\.2, 0\.72, 0\.3, 1\) infinite;/,
+    /\.metric-detail-update-guide-layer\s*\{[^}]*position:\s*absolute;[^}]*inset:\s*0 19px;[^}]*pointer-events:\s*none;/,
   );
+  assert.match(
+    detailCss,
+    /\.metric-detail-update-guide\s*\{[^}]*top:\s*0;[^}]*bottom:\s*0;[^}]*border-left:\s*1\.5px solid #df713e;/,
+  );
+  assert.doesNotMatch(detailCss, /metric-detail-complete-(?:marker|check|arrow|drop)/);
   assert.match(
     detailCss,
     /\.metric-detail-latest-point\s*\{[^}]*fill:\s*#f47b3f;[^}]*stroke:\s*#c65a24;/,
