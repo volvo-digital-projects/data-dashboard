@@ -56,10 +56,10 @@ const quarterRanges = [
 ];
 
 const vocContributionLabels: Record<string, string> = {
-  overall: "60% 반영(60점)",
-  greeting: "10% 반영(10점)",
-  tablet: "10% 반영(10점)",
-  happyCall: "10% 반영(10점)",
+  overall: "60% 반영(DSC 60점)",
+  greeting: "10% 반영(DSC 10점)",
+  tablet: "10% 반영(DSC 10점)",
+  happyCall: "10% 반영(DSC 10점)",
 };
 
 const cxContributionLabels: Record<string, string> = {

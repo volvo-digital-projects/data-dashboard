@@ -1265,12 +1265,12 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   }
   assert.match(
     vocBody,
-    /metric-detail-source-title">VOC<\/span> 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(60점\)/,
+    /metric-detail-source-title">VOC<\/span> 종합만족도[\s\S]*?100점 만점[\s\S]*?60% 반영\(DSC 60점\)/,
   );
   for (const label of ["VOC 첫인사", "VOC 태블릿", "VOC 해피콜"]) {
     assert.match(
       vocBody,
-      new RegExp(`${label.replace("VOC ", "")}[\\s\\S]*?100점 만점[\\s\\S]*?10% 반영\\(10점\\)`),
+      new RegExp(`${label.replace("VOC ", "")}[\\s\\S]*?100점 만점[\\s\\S]*?10% 반영\\(DSC 10점\\)`),
     );
   }
   assert.match(
@@ -1286,6 +1286,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
     /CX Index <small>5개 메인지표 \/ 총점 320점<\/small>/,
   );
   assert.match(vocBody, /건 기준/);
+  assert.doesNotMatch(vocBody, /DSC 44건/);
   assert.equal((vocBody.match(/VCK 평가/g) ?? []).length, 5);
   assert.equal((vocBody.match(/metric-detail-evaluation-icon/g) ?? []).length, 5);
   assert.equal((vocBody.match(/100점 만점/g) ?? []).length, 4);
