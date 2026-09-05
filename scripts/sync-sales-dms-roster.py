@@ -76,11 +76,8 @@ def effective_job_title(role: Any, job_title: Any) -> str:
 def normalize_row(raw: dict[str, Any]) -> dict[str, str] | None:
     role = text(raw.get("직원권한"))
     showroom = text(raw.get("전시장명") or raw.get("전시장"))
-    status = text(raw.get("자동배정 여부"))
     departed = text(raw.get("퇴사일자"))
     if role not in TARGET_ROLES or showroom == "Volvo Car Korea":
-        return None
-    if status and status != "활성":
         return None
     if departed:
         return None
@@ -314,7 +311,7 @@ def reconcile(payload: dict[str, Any], raw_rows: list[dict[str, Any]], as_of: da
     payload["source"].update(
         {
             "rosterCheckedAt": as_of.isoformat(),
-            "rosterRule": "현재 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
+            "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
             "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
             "jobTitleSourceDate": as_of.isoformat(),
         }

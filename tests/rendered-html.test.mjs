@@ -68,7 +68,7 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
     (showroom) => showroom.employees,
   );
   const gangnamDaechi = staffAnalysis.showrooms["6KR6834"].employees;
-  assert.equal(employees.length, 369);
+  assert.equal(employees.length, 379);
   assert.ok(employees.every((employee) => employee.jobTitle));
   assert.equal(gangnamDaechi.find((employee) => employee.name === "문정환").jobTitle, "팀장");
   assert.equal(
@@ -92,28 +92,77 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
 });
 
 test("keeps the Sales-DMS roster sync private and scheduled once each morning", async () => {
-  const [workflow, syncScript] = await Promise.all([
+  const [workflow, syncScript, generatorScript, staffAnalysis] = await Promise.all([
     readFile(
       new URL("../.github/workflows/sync-sales-dms-roster.yml", import.meta.url),
       "utf8",
     ),
     readFile(new URL("../scripts/sync-sales-dms-roster.py", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/generate-voc-staff-analysis.py", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
   ]);
   assert.match(workflow, /cron: "0 21 \* \* \*"/);
   assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
   assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
   assert.match(syncScript, /return "팀장" if normalized_role == "영업팀장"/);
   assert.match(syncScript, /MINIMUM_SAFE_ROSTER = 300/);
+  assert.match(syncScript, /departed = text\(raw\.get\("퇴사일자"\)\)/);
+  assert.doesNotMatch(syncScript, /status and status != "활성"/);
+  assert.match(generatorScript, /has_departed/);
+  assert.doesNotMatch(generatorScript, /status != "활성"/);
+  const restoredEmployees = Object.values(staffAnalysis.showrooms).flatMap(
+    (showroom) =>
+      showroom.employees.map((employee) => `${showroom.showroom}|${employee.name}`),
+  );
+  assert.deepEqual(
+    [
+      "볼보 의정부|정병준",
+      "볼보 분당|이종인",
+      "볼보 분당|조정민",
+      "볼보 청주|고태영",
+      "볼보 인천|서재현",
+      "볼보 수원|이영빈",
+      "볼보 전주|배정우",
+      "볼보 송파|허재무",
+      "볼보 동대문|정승현",
+      "볼보 용산|김민지",
+    ].filter((employee) => !restoredEmployees.includes(employee)),
+    [],
+  );
+  const restoredResponseCounts = Object.fromEntries(
+    Object.values(staffAnalysis.showrooms).flatMap((showroom) =>
+      showroom.employees
+        .filter((employee) =>
+          ["정병준", "이종인", "조정민", "서재현", "이영빈", "정승현"].includes(
+            employee.name,
+          ),
+        )
+        .map((employee) => [
+          `${showroom.showroom}|${employee.name}`,
+          Object.values(employee.years).reduce(
+            (total, year) => total + year.responses,
+            0,
+          ),
+        ]),
+    ),
+  );
+  assert.deepEqual(restoredResponseCounts, {
+    "볼보 의정부|정병준": 19,
+    "볼보 분당|이종인": 14,
+    "볼보 분당|조정민": 32,
+    "볼보 인천|서재현": 24,
+    "볼보 수원|이영빈": 1,
+    "볼보 동대문|정승현": 31,
+  });
+  assert.equal(
+    Object.values(staffAnalysis.showrooms).flatMap(
+      (showroom) => showroom.formerEmployees ?? [],
+    ).length,
+    5,
+  );
   assert.doesNotMatch(
     JSON.stringify(
-      Object.values(
-        JSON.parse(
-          await readFile(
-            new URL("../app/data/voc-staff-analysis.json", import.meta.url),
-            "utf8",
-          ),
-        ).showrooms,
-      ).flatMap((showroom) => showroom.employees),
+      Object.values(staffAnalysis.showrooms).flatMap((showroom) => showroom.employees),
     ),
     /직원 CDSID|직원 ID|E-mail|휴대폰번호/,
   );
@@ -1902,7 +1951,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(staffSectionHtml, /class="analysis-staff-roster-adjusted-points">76\.9<\/span><span class="analysis-staff-roster-freshness-points">17\.2<\/span><span class="analysis-staff-roster-final">94\.1<\/span>/);
   assert.match(
     staffSectionHtml,
-    /aria-label="최종점수 94\.1점, 만족도 76\.9점과 최신성 17\.2점 합산"[\s\S]*?<span>최종점수<\/span>[\s\S]*?94\.1<small>점<\/small>[\s\S]*?전국 327명 중 28위/,
+    /aria-label="최종점수 94\.1점, 만족도 76\.9점과 최신성 17\.2점 합산"[\s\S]*?<span>최종점수<\/span>[\s\S]*?94\.1<small>점<\/small>[\s\S]*?전국 329명 중 22위/,
   );
   assert.doesNotMatch(staffSectionHtml, />누적평균<\/span>/);
   assert.doesNotMatch(staffSectionHtml, />회신건수<\/span>/);
@@ -2294,7 +2343,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
       (total, showroom) => total + showroom.employees.length,
       0,
     ),
-    369,
+    379,
   );
   assert.ok(
     Object.values(staffAnalysisShowrooms).every(

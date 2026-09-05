@@ -149,16 +149,24 @@ def load_roster(path: Path, as_of: date) -> list[dict[str, Any]]:
     roster: list[dict[str, Any]] = []
     seen_rows: set[tuple[str, str, str, date]] = set()
     for row in worksheet.iter_rows(min_row=4, values_only=True):
-        role = row[headers["직원권한"]]
-        status = row[headers["자동배정 여부"]]
+        role = str(row[headers["직원권한"]] or "").strip()
+        dms_showroom = str(row[headers["전시장명"]] or "").strip()
+        name = str(row[headers["직원명"]] or "").strip()
         hire_value = row[headers["입사일자"]]
-        if role not in STAFF_ROLES or status != "활성" or not isinstance(hire_value, datetime):
+        departure_value = row[headers["퇴사일자"]]
+        has_departed = departure_value is not None and str(departure_value).strip() != ""
+        if (
+            role not in STAFF_ROLES
+            or dms_showroom == "Volvo Car Korea"
+            or has_departed
+            or not isinstance(hire_value, datetime)
+        ):
             continue
         hire_date = hire_value.date()
         roster_key = (
-            str(row[headers["전시장명"]]),
-            str(role),
-            str(row[headers["직원명"]]),
+            dms_showroom,
+            role,
+            name,
             hire_date,
         )
         if roster_key in seen_rows:
@@ -168,10 +176,10 @@ def load_roster(path: Path, as_of: date) -> list[dict[str, Any]]:
         bucket_id, bucket_label = tenure_bucket(months)
         roster.append(
             {
-                "dmsShowroom": row[headers["전시장명"]],
+                "dmsShowroom": dms_showroom,
                 "role": role,
                 "jobTitle": effective_job_title(role, row[headers["직급"]]),
-                "name": row[headers["직원명"]],
+                "name": name,
                 "hireDate": hire_date.isoformat(),
                 "tenureMonths": months,
                 "tenureBucket": bucket_id,
@@ -422,7 +430,7 @@ def build_payload(
             "vocThrough": "2026-08-24",
             "rosterCheckedAt": as_of.isoformat(),
             "rosterSource": "Volvo Car Korea Sales DMS",
-            "rosterRule": "현재 재직자 · 영업직원/영업팀장",
+            "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
             "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
             "historyRange": "2023-2026 YTD",
         },
@@ -440,12 +448,26 @@ def main() -> None:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--as-of", default=date.today().isoformat())
     args = parser.parse_args()
+    previous_payload: dict[str, Any] = {}
+    if args.output.exists():
+        previous_payload = json.loads(args.output.read_text(encoding="utf-8"))
     payload = build_payload(
         args.voc,
         args.roster,
         args.showrooms,
         date.fromisoformat(args.as_of),
     )
+    previous_showrooms = previous_payload.get("showrooms", {})
+    for cdsid, showroom in payload["showrooms"].items():
+        previous_showroom = previous_showrooms.get(cdsid, {})
+        showroom["formerEmployees"] = previous_showroom.get("formerEmployees", [])
+    for key in (
+        "jobTitleSourceWorkbook",
+        "jobTitleSourceSheet",
+        "jobTitleSourceDate",
+    ):
+        if key in previous_payload.get("source", {}):
+            payload["source"][key] = previous_payload["source"][key]
     args.output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
