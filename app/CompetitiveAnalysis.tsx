@@ -367,6 +367,16 @@ function AnimatedAnalysisScore({
 
 const formatStaffShortDate = (value: string) => value.replaceAll("-", "").slice(2);
 
+const compareStaffHireDateAscending = (a: StaffEmployee, b: StaffEmployee) => {
+  if (!a.hireDate && !b.hireDate) return a.name.localeCompare(b.name, "ko");
+  if (!a.hireDate) return 1;
+  if (!b.hireDate) return -1;
+  return (
+    a.hireDate.localeCompare(b.hireDate) ||
+    a.name.localeCompare(b.name, "ko")
+  );
+};
+
 const formatStaffTenureDuration = (months: number) => {
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
@@ -1049,7 +1059,7 @@ export default function CompetitiveAnalysis({
         })
         .sort((a, b) => {
           if (a.finalScore === null && b.finalScore === null) {
-            return a.employee.name.localeCompare(b.employee.name, "ko");
+            return compareStaffHireDateAscending(a.employee, b.employee);
           }
           if (a.finalScore === null) return 1;
           if (b.finalScore === null) return -1;

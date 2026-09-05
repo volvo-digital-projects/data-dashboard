@@ -170,6 +170,26 @@ async function render(
   );
 }
 
+test("orders review staff by hire date with the newest hire last", async () => {
+  const [response, analysisSource] = await Promise.all([
+    render("/dashboard/6KR6834/analysis?view=dealer"),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.equal(response.status, 200);
+
+  const html = (await response.text()).replaceAll("<!-- -->", "");
+  const rosterStart = html.indexOf('class="analysis-staff-roster-list"');
+  const rosterEnd = html.indexOf('class="analysis-staff-detail"', rosterStart);
+  const roster = html.slice(rosterStart, rosterEnd);
+
+  assert.ok(roster.indexOf("송용주") < roster.indexOf("박준수"));
+  assert.ok(roster.indexOf("박준수") < roster.indexOf("정지만"));
+  assert.match(
+    analysisSource,
+    /if \(a\.finalScore === null && b\.finalScore === null\) \{[\s\S]*?compareStaffHireDateAscending\(a\.employee, b\.employee\)/,
+  );
+});
+
 test("averages Q1-Q2 metrics before combining and keeps staff scores legible", async () => {
   const { showrooms } = JSON.parse(await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"));
   const mean = (values) => {
@@ -1910,6 +1930,12 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("강석"));
   assert.ok(staffSectionHtml.indexOf("강석") < staffSectionHtml.indexOf("김대준"));
   assert.ok(staffSectionHtml.indexOf("김대준") < staffSectionHtml.indexOf("정지만"));
+  assert.ok(staffSectionHtml.indexOf("송용주") < staffSectionHtml.indexOf("박준수"));
+  assert.ok(staffSectionHtml.indexOf("박준수") < staffSectionHtml.indexOf("정지만"));
+  assert.match(
+    analysisSource,
+    /if \(a\.finalScore === null && b\.finalScore === null\) \{[\s\S]*?compareStaffHireDateAscending\(a\.employee, b\.employee\)/,
+  );
   assert.match(
     staffSectionHtml,
     /class="analysis-staff-roster-rank">14<\/span><span class="analysis-staff-roster-identity"><strong>정지만<\/strong>[\s\S]*?class="analysis-staff-roster-adjusted-points">―<\/span><span class="analysis-staff-roster-freshness-points">―<\/span><span class="analysis-staff-roster-final pending">검토<\/span>/,
