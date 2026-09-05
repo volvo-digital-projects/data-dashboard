@@ -191,20 +191,26 @@ def decode_text(value: str) -> str:
 def consultant_name(raw_name: str) -> str:
     text = decode_text(raw_name)
     text = re.sub(r"^.*?전시장\s*", "", text)
-    return text.strip()
+    # Official dealer pages occasionally insert a visual space inside a
+    # Korean name (for example, "김 승"). DMS uses the canonical no-space name.
+    return text.replace(" ", "").strip()
 
 
-def portrait_path(cdsid: str, dealer_dir: str, showroom_dir: str, name: str) -> Path:
+def existing_profile(cdsid: str, name: str) -> dict[str, str]:
     old_data = {}
     if OUTPUT_JSON.exists():
         old_data = json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
-    old_image = (
-        old_data.get("showrooms", {})
-        .get(cdsid, {})
-        .get("employees", {})
-        .get(name, {})
-        .get("image")
+    employees = (
+        old_data.get("showrooms", {}).get(cdsid, {}).get("employees", {})
     )
+    for old_name, profile in employees.items():
+        if old_name.replace(" ", "") == name.replace(" ", ""):
+            return dict(profile)
+    return {}
+
+
+def portrait_path(cdsid: str, dealer_dir: str, showroom_dir: str, name: str) -> Path:
+    old_image = existing_profile(cdsid, name).get("image")
     if old_image:
         return PUBLIC_ROOT / old_image.lstrip("/")
     digest = hashlib.sha1(f"{cdsid}:{name}".encode("utf-8")).hexdigest()[:12]
@@ -260,7 +266,8 @@ def main() -> int:
                 if not local_file.exists() or local_file.stat().st_size == 0:
                     save_portrait(fetch_bytes(image_url, page_url), local_file)
                 employees[name] = {
-                    "image": "/" + local_file.relative_to(PUBLIC_ROOT).as_posix()
+                    **existing_profile(cdsid, name),
+                    "image": "/" + local_file.relative_to(PUBLIC_ROOT).as_posix(),
                 }
 
             showrooms[cdsid] = {

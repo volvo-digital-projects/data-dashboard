@@ -109,6 +109,13 @@ def tenure_bucket(months: int) -> tuple[str, str]:
     return "over-10y", "10년 이상"
 
 
+def effective_job_title(role: Any, job_title: Any) -> str:
+    """Use Sales-DMS authority when it identifies a sales team leader."""
+    normalized_role = str(role or "").strip()
+    normalized_title = str(job_title or "").strip()
+    return "팀장" if normalized_role == "영업팀장" else normalized_title
+
+
 def metric() -> dict[str, float | int]:
     return {"responses": 0, "scoreSum": 0}
 
@@ -163,7 +170,7 @@ def load_roster(path: Path, as_of: date) -> list[dict[str, Any]]:
             {
                 "dmsShowroom": row[headers["전시장명"]],
                 "role": role,
-                "jobTitle": str(row[headers["직급"]] or "").strip(),
+                "jobTitle": effective_job_title(role, row[headers["직급"]]),
                 "name": row[headers["직원명"]],
                 "hireDate": hire_date.isoformat(),
                 "tenureMonths": months,

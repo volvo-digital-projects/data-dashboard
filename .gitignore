@@ -21,6 +21,8 @@
 # misc
 .DS_Store
 *.pem
+__pycache__/
+*.py[cod]
 
 # debug
 npm-debug.log*
@@ -44,3 +46,8 @@ next-env.d.ts
 /.pnpm-store/
 .devserver.*.log
 .build.*.log
+
+# Local Sales-DMS roster exports contain private employee identifiers.
+/private-roster/
+*직원_CDSID*.xlsx
+*영엽직원_CDSID*.xlsx

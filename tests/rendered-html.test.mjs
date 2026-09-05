@@ -68,9 +68,15 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
     (showroom) => showroom.employees,
   );
   const gangnamDaechi = staffAnalysis.showrooms["6KR6834"].employees;
-  assert.equal(employees.length, 366);
+  assert.equal(employees.length, 369);
   assert.ok(employees.every((employee) => employee.jobTitle));
   assert.equal(gangnamDaechi.find((employee) => employee.name === "문정환").jobTitle, "팀장");
+  assert.equal(
+    staffAnalysis.showrooms["6KR6829"].employees.find(
+      (employee) => employee.name === "방준호",
+    ).jobTitle,
+    "팀장",
+  );
   assert.match(
     analysisSource,
     /type StaffEmployee = \{[\s\S]*?jobTitle: string;/,
@@ -82,6 +88,34 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
   assert.match(
     css,
     /\.analysis-staff-summary strong\.name \.analysis-staff-job-title\s*\{[\s\S]*?font-size:\s*9px;[\s\S]*?font-weight:\s*600;/,
+  );
+});
+
+test("keeps the Sales-DMS roster sync private and scheduled once each morning", async () => {
+  const [workflow, syncScript] = await Promise.all([
+    readFile(
+      new URL("../.github/workflows/sync-sales-dms-roster.yml", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../scripts/sync-sales-dms-roster.py", import.meta.url), "utf8"),
+  ]);
+  assert.match(workflow, /cron: "0 21 \* \* \*"/);
+  assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
+  assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
+  assert.match(syncScript, /return "팀장" if normalized_role == "영업팀장"/);
+  assert.match(syncScript, /MINIMUM_SAFE_ROSTER = 300/);
+  assert.doesNotMatch(
+    JSON.stringify(
+      Object.values(
+        JSON.parse(
+          await readFile(
+            new URL("../app/data/voc-staff-analysis.json", import.meta.url),
+            "utf8",
+          ),
+        ).showrooms,
+      ).flatMap((showroom) => showroom.employees),
+    ),
+    /직원 CDSID|직원 ID|E-mail|휴대폰번호/,
   );
 });
 
@@ -254,8 +288,8 @@ test("keeps half-year tenure labels compact and comparison details inside the ca
   const html = (await response.text()).replaceAll("<!-- -->", "");
   const card = html.match(/<article[^>]*class="analysis-staff-metric-card analysis-staff-tenure-peer-card"[^]*?<\/article>/)?.[0];
   assert.ok(card);
-  assert.match(card, /<span>3년 6개월 ~ 4년<\/span><span>산정 20명<\/span>/);
-  assert.match(card, /<strong>86\.8<small>점<\/small><\/strong>/);
+  assert.match(card, /<span>3년 6개월 ~ 4년<\/span><span>산정 17명<\/span>/);
+  assert.match(card, /<strong>87\.4<small>점<\/small><\/strong>/);
   assert.match(css, /\.analysis-staff-tenure-peer-card \.analysis-staff-metric-value > small\.analysis-staff-metric-comparison\s*\{[^}]*min-width: 0;[^}]*display: grid;[^}]*white-space: normal;[^}]*overflow-wrap: anywhere;/);
 });
 
@@ -2234,7 +2268,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
       (total, showroom) => total + showroom.employees.length,
       0,
     ),
-    366,
+    369,
   );
   assert.ok(
     Object.values(staffAnalysisShowrooms).every(
