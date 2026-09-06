@@ -6108,11 +6108,45 @@ input:focus-visible {
 }
 
 .analysis-staff-scatter-showroom circle {
-  fill: rgba(37, 99, 235, 0.92);
-  stroke: #ffffff;
+  fill: #00a878;
+  stroke: #e9fff8;
   stroke-width: 1.8;
-  filter: drop-shadow(0 1px 2px rgba(30, 64, 175, 0.28));
+  filter: drop-shadow(0 1px 2px rgba(4, 120, 87, 0.38));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: analysis-staff-showroom-orbit 3.4s linear infinite;
   vector-effect: non-scaling-stroke;
+}
+
+.analysis-staff-scatter-showroom circle:nth-child(4n + 2) {
+  animation-delay: -0.85s;
+}
+
+.analysis-staff-scatter-showroom circle:nth-child(4n + 3) {
+  animation-delay: -1.7s;
+}
+
+.analysis-staff-scatter-showroom circle:nth-child(4n + 4) {
+  animation-delay: -2.55s;
+}
+
+@keyframes analysis-staff-showroom-orbit {
+  0%,
+  100% {
+    transform: translate(0, -1.2px);
+  }
+
+  25% {
+    transform: translate(1.2px, 0);
+  }
+
+  50% {
+    transform: translate(0, 1.2px);
+  }
+
+  75% {
+    transform: translate(-1.2px, 0);
+  }
 }
 
 .analysis-staff-scatter-population circle.provisional,
@@ -6124,7 +6158,7 @@ input:focus-visible {
 }
 
 .analysis-staff-scatter-showroom circle.provisional {
-  stroke: #2563eb;
+  stroke: #00a878;
 }
 
 .analysis-staff-scatter-selected.provisional .point {
@@ -6150,7 +6184,7 @@ input:focus-visible {
 }
 
 .analysis-staff-scatter-unscored circle.showroom {
-  stroke: #2563eb;
+  stroke: #00a878;
   stroke-width: 1.5;
 }
 
@@ -6264,6 +6298,7 @@ input:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .analysis-staff-scatter-showroom circle,
   .analysis-staff-scatter-selected .halo,
   .analysis-staff-scatter-selected .ring,
   .analysis-staff-scatter-selected .point {
@@ -6342,8 +6377,8 @@ input:focus-visible {
 }
 
 .analysis-staff-benchmark-legend span.showroom i {
-  background: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.14);
+  background: #00a878;
+  box-shadow: 0 0 0 2px rgba(0, 168, 120, 0.16);
 }
 
 .analysis-staff-benchmark-legend span.average i {

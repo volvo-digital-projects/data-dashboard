@@ -2275,7 +2275,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
     css,
     /\.analysis-staff-scatter-selected \.halo\s*\{[\s\S]*?animation:\s*analysis-staff-selected-halo 1\.45s ease-in-out infinite;/,
   );
-  assert.match(css, /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*rgba\(131, 102, 167, 0\.82\)/);
+  assert.match(
+    css,
+    /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*#00a878;[\s\S]*?animation:\s*analysis-staff-showroom-orbit 3\.4s linear infinite;/,
+  );
+  assert.match(css, /@keyframes analysis-staff-showroom-orbit\s*\{[\s\S]*?translate\(0, -1\.2px\)[\s\S]*?translate\(1\.2px, 0\)[\s\S]*?translate\(0, 1\.2px\)[\s\S]*?translate\(-1\.2px, 0\)/);
+  assert.match(css, /\.analysis-staff-benchmark-legend span\.showroom i\s*\{[^}]*background:\s*#00a878;/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*?\.analysis-staff-scatter-showroom circle,[\s\S]*?animation:\s*none;/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);
   assert.doesNotMatch(staffSectionHtml, /aria-label="문정환 공식 프로필 사진"/);
   assert.doesNotMatch(staffSectionHtml, /소속구간/);
