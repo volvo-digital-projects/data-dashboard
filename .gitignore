@@ -43,6 +43,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+/pages-dist/
 /.pnpm-store/
 .devserver.*.log
 .build.*.log

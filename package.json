@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:github-pages": "node scripts/prepare-github-pages.mjs",
     "start": "vinext start",
     "sync:weekly": "node scripts/sync-google-sheet-data.mjs",
     "sync:staff-photos": "python scripts/sync-staff-profile-photos.py",
