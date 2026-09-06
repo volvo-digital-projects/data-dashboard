@@ -5019,3 +5019,32 @@ test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
   assert.match(viewerCss, /\.page\s*\{[^}]*height: 100dvh[^}]*scroll-snap-stop: always/);
   assert.match(viewerCss, /\.closeButton\s*\{[^}]*justify-self: end/);
 });
+
+test("keeps the dense score rail stable when Edge enforces a minimum font size", async () => {
+  const [css, dashboardSource] = await Promise.all([
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(
+    css,
+    /html\s*\{[^}]*-webkit-text-size-adjust: 100%;[^}]*text-size-adjust: 100%;/,
+  );
+  assert.match(
+    css,
+    /Edge can enforce a 12px minimum font[\s\S]*?\.metric-max-note,[\s\S]*?\.combat-scoreboard \.scoreboard-heading \.metric-max-note\s*\{[^}]*font-size: 12px;[^}]*zoom: 0\.6666667;/,
+  );
+  assert.match(
+    css,
+    /\.metric-stat-chips > span\s*\{[^}]*width: 100%;[^}]*min-height: 33\.6px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
+  );
+  assert.match(
+    css,
+    /\.metric-quarter-strip--status > button strong,[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 73\.6px;[^}]*height: 28\.8px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
+  );
+  assert.equal(
+    (dashboardSource.match(/className="metric-resource-new"[\s\S]*?<span>NEW<\/span>/g) ?? [])
+      .length,
+    2,
+  );
+});

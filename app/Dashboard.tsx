@@ -763,7 +763,7 @@ function MetricCard({
                       className="metric-resource-new"
                       aria-label={`${resourceLabel} 새 PDF 보고서`}
                     >
-                      NEW
+                      <span>NEW</span>
                     </span>
                   )}
                   <button
@@ -790,7 +790,7 @@ function MetricCard({
                       className="metric-resource-new"
                       aria-label={`${resourceLabel} 새 증빙사진`}
                     >
-                      NEW
+                      <span>NEW</span>
                     </span>
                   )}
                   <button
