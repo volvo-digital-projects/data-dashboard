@@ -1841,7 +1841,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /합산 경쟁력[\s\S]*종합 만족도와 해피콜 평균점수 합산[\s\S]*190\.3/);
   assert.doesNotMatch(visibleHtml, /2개 분기 · 200점 만점|Q1 93\.1점 \+ Q2 87\.5점|400점 만점/);
   assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 3);
-  assert.match(visibleHtml, /전국 17위 \/ 전체 39/);
+  assert.match(visibleHtml, /딜러사 내 4위 \/ 전체 7/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
   assert.match(html, /class="analysis-scatter scatter-motion-settled"/);
@@ -2489,6 +2489,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(
     gangnamSizeHtml,
     /<h2><span class="english-title">U<\/span> 사이즈 내 순위<\/h2>/,
+  );
+  assert.match(
+    gangnamSizeHtml.replaceAll("<!-- -->", ""),
+    /동일 사이즈 5위 \/ 전체 7/,
   );
 
   const showroomResponse = await render(

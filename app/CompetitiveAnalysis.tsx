@@ -1322,6 +1322,22 @@ export default function CompetitiveAnalysis({
     nationalCumulativeAnalysisPoints.findIndex(
       (item) => item.cdsid === selected.cdsid,
     ) + 1;
+  const summaryRank =
+    view === "showroom"
+      ? selectedNationalRank || nationalCumulativeAnalysisPoints.length
+      : safeSelectedRank;
+  const summaryRankTotal =
+    view === "showroom"
+      ? nationalCumulativeAnalysisPoints.length
+      : groupItems.length;
+  const summaryRankLabel =
+    view === "showroom"
+      ? "전국"
+      : view === "size"
+        ? "동일 사이즈"
+        : view === "region"
+          ? "동일 권역"
+          : "딜러사 내";
   const rankWindowSize = 7;
   const rankWindowRadius = Math.floor(rankWindowSize / 2);
   const rankWindowStart = Math.min(
@@ -1587,7 +1603,7 @@ export default function CompetitiveAnalysis({
           </div>
           <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
           <em>
-            전국 {selectedNationalRank || nationalCumulativeAnalysisPoints.length}위 / 전체 {nationalCumulativeAnalysisPoints.length}
+            {summaryRankLabel} {summaryRank}위 / 전체 {summaryRankTotal}
           </em>
         </article>
         </section>
