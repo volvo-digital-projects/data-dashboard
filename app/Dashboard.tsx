@@ -338,11 +338,54 @@ const latestCxWeeklyAverageOf = (quarter: QuarterKey): number | null => {
     .find((value): value is number => typeof value === "number") ?? null;
 };
 
+const vocQuarterValuesOf = (
+  series: (number | null)[],
+  quarter: QuarterKey,
+) => {
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+  return series.slice(quarterIndex * 13, quarterIndex * 13 + 13);
+};
+
+const vocQuarterValueOf = (
+  cdsid: string,
+  quarter: QuarterKey,
+): number | null => {
+  const values = vocQuarterValuesOf(
+    weeklyDashboard.voc.byCdsid[cdsid] ?? [],
+    quarter,
+  ).filter(
+    (value): value is number => typeof value === "number" && value !== 0,
+  );
+
+  return values.length
+    ? values.reduce((sum, value) => sum + value, 0) / values.length
+    : null;
+};
+
+const vocQuarterAverageOf = (quarter: QuarterKey): number | null => {
+  // ‘②VOC(결과)’ 전국 행은 Q1·Q2만 0을 제외하고 Q3·Q4는 기록된 0을 포함한다.
+  const excludeZero = quarter === "q1" || quarter === "q2";
+  const values = Object.values(weeklyDashboard.voc.byCdsid)
+    .flatMap((series) => vocQuarterValuesOf(series, quarter))
+    .filter(
+      (value): value is number =>
+        typeof value === "number" && (!excludeZero || value !== 0),
+    );
+
+  return values.length
+    ? values.reduce((sum, value) => sum + value, 0) / values.length
+    : null;
+};
+
 const quarterValueOf = (
   item: Showroom,
   metric: MetricKey,
   quarter: QuarterKey,
 ) => {
+  if (metric === "voc") {
+    return vocQuarterValueOf(item.cdsid, quarter);
+  }
+
   if (metric === "cx") {
     if (quarter === "q1") return item.q1?.cx ?? null;
     if (quarter === "q2") return item.cx;
@@ -354,6 +397,10 @@ const quarterValueOf = (
 };
 
 const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
+  if (metric === "voc") {
+    return vocQuarterAverageOf(quarter) ?? 0;
+  }
+
   if (quarter === "q2") {
     if (metric === "cx") return dashboard.averages.cx ?? 0;
 

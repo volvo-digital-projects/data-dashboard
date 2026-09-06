@@ -2810,7 +2810,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   const details = JSON.parse(detailsText);
 
   assert.equal(weekly.meta.workbookUrl, undefined);
-  assert.equal(weekly.meta.vocLatestWeek, 32);
+  assert.equal(weekly.meta.vocLatestWeek, 34);
   assert.equal(weekly.meta.cxLatestWeek, 30);
   assert.equal(weekly.meta.weekRanges.length, 52);
   assert.deepEqual(weekly.meta.weekRanges[0], {
@@ -2852,6 +2852,8 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.equal(weekly.voc.byCdsid["6KR6834"][26], 100);
   assert.equal(weekly.voc.byCdsid["6KR6834"][27], 96);
   assert.equal(weekly.voc.byCdsid["6KR6834"][28], 0);
+  assert.equal(weekly.voc.byCdsid["6KR6833"][32], 100);
+  assert.equal(weekly.voc.byCdsid["6KR6833"][33], 50);
   assert.equal(
     weekly.meta.rules.voc,
     "VOC(결과) 시트의 전시장별 원점수를 사용하며, 0.0도 실제 점수로 표시",
@@ -2864,6 +2866,51 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.match(
     dashboardSource,
     /const storeSegments = \[rawPoints\]/,
+  );
+  const vocQuarterValues = (series, quarterIndex) =>
+    series.slice(quarterIndex * 13, quarterIndex * 13 + 13);
+  const vocQuarterAverage = (quarterIndex) => {
+    const excludeZero = quarterIndex < 2;
+    const values = Object.values(weekly.voc.byCdsid)
+      .flatMap((series) => vocQuarterValues(series, quarterIndex))
+      .filter(
+        (value) =>
+          typeof value === "number" && (!excludeZero || value !== 0),
+      );
+    return values.length
+      ? values.reduce((sum, value) => sum + value, 0) / values.length
+      : null;
+  };
+  const showroomQuarterAverage = (cdsid, quarterIndex) => {
+    const values = vocQuarterValues(
+      weekly.voc.byCdsid[cdsid],
+      quarterIndex,
+    ).filter((value) => typeof value === "number" && value !== 0);
+    return values.length
+      ? values.reduce((sum, value) => sum + value, 0) / values.length
+      : null;
+  };
+  assert.deepEqual(
+    [0, 1, 2, 3].map((quarterIndex) => {
+      const value = vocQuarterAverage(quarterIndex);
+      return value === null ? null : Number(value.toFixed(1));
+    }),
+    [94.5, 95.4, 28.3, null],
+  );
+  assert.deepEqual(
+    [0, 1, 2, 3].map((quarterIndex) => {
+      const value = showroomQuarterAverage("6KR6857", quarterIndex);
+      return value === null ? null : Number(value.toFixed(1));
+    }),
+    [98.1, 99, 100, null],
+  );
+  assert.match(
+    dashboardSource,
+    /if \(metric === "voc"\) \{[\s\S]*?return vocQuarterValueOf\(item\.cdsid, quarter\);/,
+  );
+  assert.match(
+    dashboardSource,
+    /if \(metric === "voc"\) \{[\s\S]*?return vocQuarterAverageOf\(quarter\) \?\? 0;/,
   );
   assert.equal(weekly.cx.byCdsid["6KR6834"][0], 220);
   assert.equal(weekly.cx.byCdsid["6KR6834"][29], 220);
@@ -2879,7 +2926,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
     /cxRawTotalOf[\s\S]*?record\.delivery[\s\S]*?record\.testDrive[\s\S]*?record\.emergency[\s\S]*?record\.actionPlan[\s\S]*?record\.app/,
   );
   assert.equal(details.meta.weekRanges.length, 52);
-  assert.equal(details.voc.components.length, 4);
+  assert.equal(details.voc.components.length, 5);
   assert.equal(details.cx.components.length, 5);
   assert.equal(Object.keys(details.voc.components[0].byCdsid).length, 39);
   assert.equal(Object.keys(details.cx.components[0].byCdsid).length, 39);
