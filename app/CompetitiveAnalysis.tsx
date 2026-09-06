@@ -1800,12 +1800,12 @@ export default function CompetitiveAnalysis({
           className={`analysis-staff-card${
             staffAnalysisInView ? " is-motion-visible" : ""
           }`}
-          aria-label={`${displayShowroomName(selected.showroom)} VOC 고객상담 만족도 분석결과`}
+          aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 상담 및 영업 역량 매트릭스`}
         >
           <header className="analysis-staff-heading" ref={staffAnalysisHeadingRef}>
             <div>
               <h2>
-                <span className="english-title">VOC</span> 고객상담 만족도 분석결과
+                소속 영업직원 상담 및 영업 역량 매트릭스
               </h2>
             </div>
             <div className="analysis-staff-source" aria-label="영업직원 분석 기준">
