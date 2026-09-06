@@ -4831,26 +4831,27 @@ input:focus-visible {
 
 .analysis-staff-roster-identity {
   min-width: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 38px 40px;
   align-items: center;
   justify-content: flex-start;
   gap: 2px;
-  padding: 0 6px 0 4px;
+  padding: 0 4px 0 8px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
 }
 
 .analysis-staff-roster-identity strong {
   min-width: 0;
-  flex: 0 0 auto;
+  width: 38px;
   color: #17384b;
   font-size: 12px;
   font-weight: 760;
+  text-align: left;
   white-space: nowrap;
 }
 
 .analysis-staff-roster-identity small {
   width: 40px;
-  flex: 0 0 40px;
   display: grid;
   grid-template-columns: 4px 34px;
   align-items: center;

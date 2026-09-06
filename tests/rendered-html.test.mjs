@@ -1994,6 +1994,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /\.analysis-staff-roster-identity small\s*\{[^}]*width:\s*40px;[^}]*grid-template-columns:\s*4px 34px;/,
   );
   assert.match(
+    css,
+    /\.analysis-staff-roster-identity\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*38px 40px;[^}]*padding:\s*0 4px 0 8px;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-staff-roster-identity strong\s*\{[^}]*width:\s*38px;[^}]*text-align:\s*left;/,
+  );
+  assert.match(
     staffSectionHtml,
     /<span>동일연차 정보<\/span>[\s\S]*?86\.8<small>점<\/small>[\s\S]*?비교 20명/,
   );
