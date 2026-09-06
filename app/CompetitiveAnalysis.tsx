@@ -2021,7 +2021,7 @@ export default function CompetitiveAnalysis({
                 selectedStaffTenureFinalScore === null
                   ? "표본 없음"
                   : `${selectedStaffTenureFinalScore.toFixed(1)}점`
-              }, 산정 ${selectedStaffTenureScoreRows.length}명`}
+              }, 비교 ${selectedStaffTenureScoreRows.length}명`}
             >
               <span>동일연차 정보</span>
               <div className="analysis-staff-metric-value">
@@ -2032,8 +2032,7 @@ export default function CompetitiveAnalysis({
                   {selectedStaffTenureFinalScore === null ? null : <small>점</small>}
                 </strong>
                 <small className="analysis-staff-metric-comparison">
-                  <span>{selectedStaffTenurePeerRangeLabel ?? "―"}</span>
-                  <span>산정 {selectedStaffTenureScoreRows.length}명</span>
+                  {selectedStaffTenurePeerRangeLabel ?? "―"} · 비교 {selectedStaffTenureScoreRows.length}명
                 </small>
               </div>
             </article>

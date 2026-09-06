@@ -355,9 +355,9 @@ test("keeps half-year tenure labels compact and comparison details inside the ca
   const html = (await response.text()).replaceAll("<!-- -->", "");
   const card = html.match(/<article[^>]*class="analysis-staff-metric-card analysis-staff-tenure-peer-card"[^]*?<\/article>/)?.[0];
   assert.ok(card);
-  assert.match(card, /<span>3년 6개월 ~ 4년<\/span><span>산정 17명<\/span>/);
+  assert.match(card, /3년 6개월 ~ 4년 · 비교 17명/);
   assert.match(card, /<strong>87\.4<small>점<\/small><\/strong>/);
-  assert.match(css, /\.analysis-staff-tenure-peer-card \.analysis-staff-metric-value > small\.analysis-staff-metric-comparison\s*\{[^}]*min-width: 0;[^}]*display: grid;[^}]*white-space: normal;[^}]*overflow-wrap: anywhere;/);
+  assert.match(css, /\.analysis-staff-tenure-peer-card \.analysis-staff-metric-value > small\.analysis-staff-metric-comparison\s*\{[^}]*min-width: 0;[^}]*display: block;[^}]*white-space: nowrap;[^}]*overflow-wrap: normal;/);
 });
 
 test("redistributes compact roster width equally to both staff charts", async () => {
@@ -1972,7 +1972,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     staffSectionHtml,
-    /<span>동일연차 정보<\/span>[\s\S]*?86\.8<small>점<\/small>[\s\S]*?산정 20명/,
+    /<span>동일연차 정보<\/span>[\s\S]*?86\.8<small>점<\/small>[\s\S]*?비교 20명/,
   );
   assert.ok(staffSectionHtml.indexOf("박영환") < staffSectionHtml.indexOf("강석"));
   assert.ok(staffSectionHtml.indexOf("강석") < staffSectionHtml.indexOf("김대준"));
