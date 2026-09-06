@@ -1294,11 +1294,11 @@ export default function CompetitiveAnalysis({
   const groupHappyRateAverage = averageOf(groupItems, "happyAverage");
   const groupAverageLabel =
     view === "dealer"
-      ? `${selected.dealer} 누적평균`
+      ? selected.dealer
       : view === "showroom"
-        ? "전국 전시장 누적평균"
+        ? "전국 전시장"
         : view === "region"
-          ? "동일 권역별 누적평균"
+          ? "동일 권역별"
           : "동일 사이즈";
   const selectedAverageLabel = displayShowroomNameWithoutBrand(selected.showroom);
   const displayedGroupAverage = Number(groupCombinedAverage.toFixed(1));
