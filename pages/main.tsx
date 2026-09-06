@@ -4,6 +4,7 @@ import LoginHome from "../app/LoginHome";
 import Dashboard, { CriteriaGuide } from "../app/Dashboard";
 import CompetitiveAnalysis from "../app/CompetitiveAnalysis";
 import MetricDetails from "../app/MetricDetails";
+import ReleaseUpdateNotice from "../app/ReleaseUpdateNotice";
 import { canAccessDashboard, getDashboardAccess } from "../app/dashboard-access";
 import "../app/globals.css";
 
@@ -166,5 +167,6 @@ function PagesApp() {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <PagesApp />
+    <ReleaseUpdateNotice />
   </StrictMode>,
 );

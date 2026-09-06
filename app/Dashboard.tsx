@@ -17,7 +17,6 @@ import vocSentJson from "./data/voc-sent.json";
 import weeklyJson from "./data/weekly.json";
 import v3sQuarterSummaryStyles from "./V3SQuarterSummary.module.css";
 import DashboardHeaderLead from "./DashboardHeaderLead";
-import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import { formatSizeFullName } from "./sizeLabels";
 import {
   getV3sEvidence,
@@ -3506,7 +3505,6 @@ export default function Dashboard({
           setAdminOpen(false);
         }}
       />
-      <ReleaseUpdateNotice />
       {reportQuarter && (
         <V3SReportViewer
           cdsid={selected.cdsid}

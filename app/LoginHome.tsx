@@ -2,7 +2,6 @@
 
 import type { FormEvent, KeyboardEvent } from "react";
 import { useEffect, useRef, useState } from "react";
-import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import type { LoginStats } from "./login-stats";
 
 const LAST_LOGIN_CDSID_KEY = "volvo-dashboard-last-cdsid";
@@ -372,7 +371,6 @@ export default function LoginHome({
           <span>Since 260901</span>
         </footer>
       </section>
-      <ReleaseUpdateNotice />
     </main>
   );
 }

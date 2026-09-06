@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -70,7 +71,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        {children}
+        <ReleaseUpdateNotice />
+      </body>
     </html>
   );
 }

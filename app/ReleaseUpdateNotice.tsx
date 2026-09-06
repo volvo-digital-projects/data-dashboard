@@ -6,6 +6,7 @@ const RELEASE_URL = "/dashboard-release.json";
 const RELEASE_STORAGE_KEY = "volvo-dashboard-seen-release";
 const RELEASE_CHECK_INTERVAL = 15_000;
 const NOTICE_DURATION = 3_200;
+const GITHUB_PAGES_BASE_PATH = "/data-dashboard/";
 
 declare const __DASHBOARD_RELEASE_ID__: string;
 
@@ -69,6 +70,16 @@ export default function ReleaseUpdateNotice() {
       if (reloadTimer.current !== null) window.clearTimeout(reloadTimer.current);
       reloadTimer.current = window.setTimeout(() => {
         const nextUrl = new URL(window.location.href);
+        if (window.location.hostname.endsWith(".github.io")) {
+          const legacyDashboardRoute = nextUrl.pathname.startsWith("/dashboard/")
+            ? `${nextUrl.pathname}${nextUrl.search}`
+            : "";
+          const currentDashboardRoute = nextUrl.hash ||
+            (legacyDashboardRoute ? `#${legacyDashboardRoute}` : "");
+          nextUrl.pathname = GITHUB_PAGES_BASE_PATH;
+          nextUrl.search = "";
+          nextUrl.hash = currentDashboardRoute;
+        }
         nextUrl.searchParams.set("release", nextRelease.id);
         window.location.replace(nextUrl.toString());
       }, 2_400);

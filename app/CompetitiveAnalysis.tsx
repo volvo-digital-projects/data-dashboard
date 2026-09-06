@@ -14,7 +14,6 @@ import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
-import ReleaseUpdateNotice from "./ReleaseUpdateNotice";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1435,11 +1434,14 @@ export default function CompetitiveAnalysis({
       window.setTimeout(() => setScatterMotionStage("points"), 185),
       window.setTimeout(() => setScatterMotionStage("settled"), 470),
     );
-    window.history.replaceState(
-      null,
-      "",
-      `/dashboard/${selected.cdsid}/analysis?view=${nextView}`,
-    );
+    const nextRoute = `/dashboard/${selected.cdsid}/analysis?view=${nextView}`;
+    if (window.location.pathname.startsWith("/data-dashboard/")) {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.hash = nextRoute;
+      window.history.replaceState(null, "", nextUrl.toString());
+    } else {
+      window.history.replaceState(null, "", nextRoute);
+    }
   };
 
   return (
@@ -2482,7 +2484,6 @@ export default function CompetitiveAnalysis({
           )}
         </div>
       </section>
-      <ReleaseUpdateNotice />
     </main>
   );
 }

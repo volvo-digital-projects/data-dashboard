@@ -636,10 +636,10 @@ test("remembers only the last successfully authenticated CDSID", async () => {
 });
 
 test("automatically detects, announces, and applies new dashboard releases", async () => {
-  const [loginSource, dashboardSource, noticeSource, css, releaseAsset] =
+  const [layoutSource, pagesSource, noticeSource, css, releaseAsset] =
     await Promise.all([
-      readFile(new URL("../app/LoginHome.tsx", import.meta.url), "utf8"),
-      readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../pages/main.tsx", import.meta.url), "utf8"),
       readFile(
         new URL("../app/ReleaseUpdateNotice.tsx", import.meta.url),
         "utf8",
@@ -652,8 +652,8 @@ test("automatically detects, announces, and applies new dashboard releases", asy
     ]);
   const release = JSON.parse(releaseAsset);
 
-  assert.match(loginSource, /<ReleaseUpdateNotice \/>/);
-  assert.match(dashboardSource, /<ReleaseUpdateNotice \/>/);
+  assert.match(layoutSource, /\{children\}[\s\S]*?<ReleaseUpdateNotice \/>/);
+  assert.match(pagesSource, /<PagesApp \/>[\s\S]*?<ReleaseUpdateNotice \/>/);
   assert.match(noticeSource, /\/dashboard-release\.json/);
   assert.match(noticeSource, /cache: "no-store"/);
   assert.match(noticeSource, /window\.setInterval\([\s\S]*?RELEASE_CHECK_INTERVAL/);
@@ -662,8 +662,12 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeSource, /currentId !== nextRelease\.id[\s\S]*?reloadForRelease/);
   assert.match(noticeSource, /nextRelease\.id !== __DASHBOARD_RELEASE_ID__/);
   assert.match(noticeSource, /searchParams\.set\("release", nextRelease\.id\)/);
+  assert.match(
+    noticeSource,
+    /hostname\.endsWith\("\.github\.io"\)[\s\S]*?pathname\.startsWith\("\/dashboard\/"\)[\s\S]*?nextUrl\.pathname = GITHUB_PAGES_BASE_PATH;[\s\S]*?nextUrl\.hash = currentDashboardRoute;/,
+  );
   assert.match(noticeSource, /window\.location\.replace\(nextUrl\.toString\(\)\)/);
-  assert.match(noticeSource, /최신내역이 업데이트 되었습니다\./);
+  assert.match(noticeSource, /최신 내역이 업데이트 되었습니다\./);
   assert.doesNotMatch(noticeSource, /release\.items\.map/);
   assert.match(noticeSource, /const NOTICE_DURATION = 3_200/);
   assert.match(
@@ -678,6 +682,21 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.equal(release.title, "최신내용 업데이트");
   assert.ok(release.items.length >= 80);
   assert.match(release.id, /^[a-f0-9]{16}$/);
+});
+
+test("keeps GitHub Pages analysis tab changes inside the app URL", async () => {
+  const analysisSource = await readFile(
+    new URL("../app/CompetitiveAnalysis.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    analysisSource,
+    /const nextRoute = `\/dashboard\/\$\{selected\.cdsid\}\/analysis\?view=\$\{nextView\}`;[\s\S]*?pathname\.startsWith\("\/data-dashboard\/"\)[\s\S]*?nextUrl\.hash = nextRoute;[\s\S]*?replaceState\(null, "", nextUrl\.toString\(\)\)/,
+  );
+  assert.doesNotMatch(
+    analysisSource,
+    /replaceState\([\s\S]{0,80}`\/dashboard\/\$\{selected\.cdsid\}\/analysis\?view=/,
+  );
 });
 
 test("protects dashboard routes behind the manager CDSID login", async () => {
