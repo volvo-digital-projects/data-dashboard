@@ -46,6 +46,14 @@ test("keeps the 2021-2026 certification results complete and cumulative", async 
     1,
   );
   assert.equal(certifications.records.some((record) => record.name === "원호"), false);
+  const uijeongbuGrand = certifications.records.find(
+    (record) =>
+      record.year === 2026 &&
+      record.showroom === "의정부" &&
+      record.level === "Grand",
+  );
+  assert.equal(uijeongbuGrand?.name, "이송봉");
+  assert.equal(uijeongbuGrand?.sourceName, "이승복");
   const kimDaeJun = certifications.records.filter((record) => record.name === "김대준");
   assert.deepEqual(
     Object.fromEntries(
@@ -69,6 +77,12 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
   );
   const gangnamDaechi = staffAnalysis.showrooms["6KR6834"].employees;
   assert.equal(employees.length, 379);
+  assert.equal(
+    staffAnalysis.showrooms["6KR6857"].employees.some(
+      (employee) => employee.name === "이송봉",
+    ),
+    true,
+  );
   assert.ok(employees.every((employee) => employee.jobTitle));
   assert.equal(gangnamDaechi.find((employee) => employee.name === "문정환").jobTitle, "팀장");
   assert.equal(
