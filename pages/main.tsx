@@ -10,6 +10,9 @@ import "../app/globals.css";
 
 const BASE_PATH = "/data-dashboard/";
 const SESSION_KEY = "volvo-dashboard-pages-session";
+if (/Edg\//.test(navigator.userAgent)) {
+  document.documentElement.dataset.browser = "edge-desktop";
+}
 const nativeFetch = window.fetch.bind(window);
 
 function apiResponse(body: unknown, status = 200) {

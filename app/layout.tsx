@@ -71,6 +71,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'if (/Edg\\//.test(navigator.userAgent)) document.documentElement.dataset.browser = "edge-desktop";',
+          }}
+        />
+      </head>
       <body>
         {children}
         <ReleaseUpdateNotice />

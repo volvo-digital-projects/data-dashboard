@@ -136,8 +136,6 @@
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
 }
 
 body {
@@ -14099,29 +14097,35 @@ button.header-status-item {
 }
 
 /*
-  Edge can enforce a 12px minimum font even for explicit pixel sizes.  The
-  score rail intentionally uses denser 5–9px annotations, so author them at
-  12px and scale their painted boxes back to the established dimensions.
-  This keeps the Chrome layout unchanged while preventing Edge/iPad text
-  inflation from widening chips or clipping rank and status labels.
+  Desktop Edge can enforce a 12px minimum font even for explicit pixel sizes.
+  Scope the compensation to its Edg/ user agent so Safari and every iPad layout
+  keep the established score-card dimensions.
 */
-.metric-max-note,
-.combat-scoreboard .scoreboard-heading .metric-max-note {
+html[data-browser="edge-desktop"] {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html[data-browser="edge-desktop"] .metric-max-note,
+html[data-browser="edge-desktop"]
+  .combat-scoreboard
+  .scoreboard-heading
+  .metric-max-note {
   font-size: 12px;
   zoom: 0.6666667;
 }
 
-.metric-rank-note {
+html[data-browser="edge-desktop"] .metric-rank-note {
   font-size: 12px;
   zoom: 0.6666667;
 }
 
-.metric-rank-note strong,
-.metric-rank-note small {
+html[data-browser="edge-desktop"] .metric-rank-note strong,
+html[data-browser="edge-desktop"] .metric-rank-note small {
   font-size: 13.5px;
 }
 
-.metric-stat-chips > span {
+html[data-browser="edge-desktop"] .metric-stat-chips > span {
   width: 100%;
   min-height: 33.6px;
   padding: 6.4px 11.2px;
@@ -14129,12 +14133,15 @@ button.header-status-item {
   zoom: 0.625;
 }
 
-.metric-stat-chips > span strong {
+html[data-browser="edge-desktop"] .metric-stat-chips > span strong {
   font-size: 14.4px;
 }
 
-.metric-quarter-strip--status > button strong,
-.scoreboard-quarter-strip > button strong {
+html[data-browser="edge-desktop"]
+  .metric-quarter-strip--status
+  > button
+  strong,
+html[data-browser="edge-desktop"] .scoreboard-quarter-strip > button strong {
   width: 73.6px;
   min-width: 73.6px;
   max-width: 73.6px;
@@ -14145,20 +14152,23 @@ button.header-status-item {
   zoom: 0.625;
 }
 
-.metric-quarter-strip--status > button.planned strong {
+html[data-browser="edge-desktop"]
+  .metric-quarter-strip--status
+  > button.planned
+  strong {
   font-size: 12px;
 }
 
-.metric-resource-pdf {
+html[data-browser="edge-desktop"] .metric-resource-pdf {
   font-size: 12px;
   transform: scale(0.5833333);
 }
 
-.metric-resource-new {
+html[data-browser="edge-desktop"] .metric-resource-new {
   font-size: 12px;
 }
 
-.metric-resource-new > span {
+html[data-browser="edge-desktop"] .metric-resource-new > span {
   display: inline-block;
   transform: scale(0.4166667);
 }

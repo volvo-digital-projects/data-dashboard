@@ -5069,27 +5069,35 @@ test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
 });
 
 test("keeps the dense score rail stable when Edge enforces a minimum font size", async () => {
-  const [css, dashboardSource] = await Promise.all([
+  const [css, dashboardSource, layoutSource, pagesSource] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../pages/main.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(
-    css,
-    /html\s*\{[^}]*-webkit-text-size-adjust: 100%;[^}]*text-size-adjust: 100%;/,
+    layoutSource,
+    /\/Edg\\\\\/\/.+documentElement\.dataset\.browser = \"edge-desktop\"/,
   );
   assert.match(
     css,
-    /Edge can enforce a 12px minimum font[\s\S]*?\.metric-max-note,[\s\S]*?\.combat-scoreboard \.scoreboard-heading \.metric-max-note\s*\{[^}]*font-size: 12px;[^}]*zoom: 0\.6666667;/,
+    /html\[data-browser="edge-desktop"\]\s*\{[^}]*-webkit-text-size-adjust: 100%;[^}]*text-size-adjust: 100%;/,
   );
   assert.match(
     css,
-    /\.metric-stat-chips > span\s*\{[^}]*width: 100%;[^}]*min-height: 33\.6px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
+    /html\[data-browser="edge-desktop"\] \.metric-stat-chips > span\s*\{[^}]*width: 100%;[^}]*min-height: 33\.6px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--status > button strong,[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 73\.6px;[^}]*height: 28\.8px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
+    /html\[data-browser="edge-desktop"\][\s\S]*?\.metric-quarter-strip--status[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 73\.6px;[^}]*height: 28\.8px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
   );
+  assert.doesNotMatch(layoutSource, /EdgiOS/);
+  assert.match(
+    pagesSource,
+    /\/Edg\\\/\/.+navigator\.userAgent[\s\S]*?dataset\.browser = "edge-desktop"/,
+  );
+  assert.doesNotMatch(pagesSource, /EdgiOS/);
   assert.equal(
     (dashboardSource.match(/className="metric-resource-new"[\s\S]*?<span>NEW<\/span>/g) ?? [])
       .length,
