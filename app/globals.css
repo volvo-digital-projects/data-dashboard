@@ -6001,7 +6001,7 @@ input:focus-visible {
   min-height: 256px;
   flex: 1;
   display: grid;
-  grid-template-rows: auto minmax(264px, 1fr) auto;
+  grid-template-rows: minmax(264px, 1fr) auto;
   gap: 0;
   padding: 8px;
   border: 1px solid #d5e4ea;

@@ -291,6 +291,10 @@ test("includes every staff member with fair provisional and unscored scatter sta
     assert.ok(scatter);
     assert.ok(scatter.includes("최종점수(100점)"));
     assert.doesNotMatch(scatter, /100점 만점 · 표시 범위|전체 0~100|analysis-staff-scatter-controls/);
+    assert.match(
+      css,
+      /\.analysis-staff-tenure-scatter\s*\{[^}]*grid-template-rows:\s*minmax\(264px, 1fr\) auto;/,
+    );
     for (const tick of [60, 70, 80, 90, 100]) {
       assert.ok(scatter.includes(`text-anchor="end">${tick}</text>`), `Missing y tick ${tick}`);
     }
