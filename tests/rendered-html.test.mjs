@@ -2291,9 +2291,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*#00a878;[\s\S]*?animation:\s*analysis-staff-showroom-orbit 3\.4s linear infinite;/,
+    /\.analysis-staff-scatter-showroom circle\s*\{[\s\S]*?fill:\s*#00a878;[\s\S]*?animation:\s*analysis-staff-showroom-blink 2\.8s ease-in-out infinite;/,
   );
-  assert.match(css, /@keyframes analysis-staff-showroom-orbit\s*\{[\s\S]*?translate\(0, -1\.2px\)[\s\S]*?translate\(1\.2px, 0\)[\s\S]*?translate\(0, 1\.2px\)[\s\S]*?translate\(-1\.2px, 0\)/);
+  assert.match(css, /@keyframes analysis-staff-showroom-blink\s*\{[\s\S]*?opacity:\s*0\.92;[\s\S]*?opacity:\s*0\.58;/);
+  assert.doesNotMatch(css, /analysis-staff-showroom-orbit|translate\(0, -1\.2px\)|translate\(1\.2px, 0\)/);
   assert.match(css, /\.analysis-staff-benchmark-legend span\.showroom i\s*\{[^}]*background:\s*#00a878;/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*?\.analysis-staff-scatter-showroom circle,[\s\S]*?animation:\s*none;/);
   assert.doesNotMatch(staffSectionHtml, /class="analysis-staff-scatter-profile"/);

@@ -6114,40 +6114,32 @@ input:focus-visible {
   stroke: #e9fff8;
   stroke-width: 1.8;
   filter: drop-shadow(0 1px 2px rgba(4, 120, 87, 0.38));
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: analysis-staff-showroom-orbit 3.4s linear infinite;
+  animation: analysis-staff-showroom-blink 2.8s ease-in-out infinite;
   vector-effect: non-scaling-stroke;
 }
 
 .analysis-staff-scatter-showroom circle:nth-child(4n + 2) {
-  animation-delay: -0.85s;
+  animation-delay: -0.7s;
 }
 
 .analysis-staff-scatter-showroom circle:nth-child(4n + 3) {
-  animation-delay: -1.7s;
+  animation-delay: -1.4s;
 }
 
 .analysis-staff-scatter-showroom circle:nth-child(4n + 4) {
-  animation-delay: -2.55s;
+  animation-delay: -2.1s;
 }
 
-@keyframes analysis-staff-showroom-orbit {
+@keyframes analysis-staff-showroom-blink {
   0%,
   100% {
-    transform: translate(0, -1.2px);
-  }
-
-  25% {
-    transform: translate(1.2px, 0);
+    opacity: 0.92;
+    filter: drop-shadow(0 1px 2px rgba(4, 120, 87, 0.32));
   }
 
   50% {
-    transform: translate(0, 1.2px);
-  }
-
-  75% {
-    transform: translate(-1.2px, 0);
+    opacity: 0.58;
+    filter: drop-shadow(0 0 1px rgba(4, 120, 87, 0.14));
   }
 }
 
