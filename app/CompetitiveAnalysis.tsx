@@ -1297,8 +1297,8 @@ export default function CompetitiveAnalysis({
       : view === "showroom"
         ? "전국 전시장"
         : view === "region"
-          ? "동일 권역별"
-          : "동일 사이즈";
+          ? selected.region
+          : selected.size;
   const selectedAverageLabel = displayShowroomNameWithoutBrand(selected.showroom);
   const displayedGroupAverage = Number(groupCombinedAverage.toFixed(1));
   const displayedSelectedAverage = Number(selectedPoint.combined.toFixed(1));
@@ -1332,10 +1332,10 @@ export default function CompetitiveAnalysis({
     view === "showroom"
       ? "전국 전시장 내"
       : view === "size"
-        ? "동일 사이즈 내"
+        ? `${selected.size} 사이즈 내`
         : view === "region"
-          ? "동일 권역 내"
-          : "딜러사 내";
+          ? `${selected.region} 내`
+          : `${selected.dealer} 내`;
   const rankWindowSize = 7;
   const rankWindowRadius = Math.floor(rankWindowSize / 2);
   const rankWindowStart = Math.min(

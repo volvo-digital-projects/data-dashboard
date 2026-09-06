@@ -345,15 +345,15 @@ test("includes every staff member with fair provisional and unscored scatter sta
   assert.match(css, /\.analysis-staff-summary\s*\{[^}]*minmax\(160px, 0\.72fr\) repeat\(5, minmax\(0, 1fr\)\)/);
 });
 
-test("keeps comparison footer labels compact without changing scores", async () => {
+test("uses the selected showroom's actual comparison values in footer labels", async () => {
   const response = await render("/dashboard/6KR6834/analysis?view=size");
   assert.equal(response.status, 200);
   const html = (await response.text()).replaceAll("<!-- -->", "");
-  const footer = html.match(/<footer><span>동일 사이즈[^]*?<\/footer>/)?.[0];
+  const footer = html.match(/<footer><span>U[^]*?<\/footer>/)?.[0];
   assert.ok(footer);
-  assert.match(footer, /<span>동일 사이즈<strong>/);
+  assert.match(footer, /<span>U<strong>/);
   assert.match(footer, /<span>강남대치<strong>190\.3<\/strong>/);
-  assert.doesNotMatch(footer, /누적평균|볼보|합산점수/);
+  assert.doesNotMatch(footer, /동일 사이즈|누적평균|볼보|합산점수/);
 });
 
 test("keeps half-year tenure labels compact and comparison details inside the card", async () => {
@@ -1876,7 +1876,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /합산 경쟁력[\s\S]*종합 만족도와 해피콜 평균점수 합산[\s\S]*190\.3/);
   assert.doesNotMatch(visibleHtml, /2개 분기 · 200점 만점|Q1 93\.1점 \+ Q2 87\.5점|400점 만점/);
   assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 3);
-  assert.match(visibleHtml, /딜러사 내 4위 \/ 전체 7/);
+  assert.match(visibleHtml, /에이치 내 4위 \/ 전체 7/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
   assert.match(html, /class="analysis-scatter scatter-motion-settled"/);
@@ -2443,8 +2443,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(analysisContextHtml, /identity-profile-icon/);
   assert.equal((analysisContextHtml.match(/<a\b/g) ?? []).length, 4);
   assert.doesNotMatch(analysisContextHtml, /<button\b|onclick=/i);
-  assert.match(regionVisibleHtml, /<footer><span>동일 권역별<strong>/);
-  assert.match(regionVisibleHtml, /동일 권역 내 \d+위 \/ 전체 19/);
+  assert.match(regionVisibleHtml, /<footer><span>수도권<strong>/);
+  assert.match(regionVisibleHtml, /수도권 내 \d+위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
   assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);
@@ -2503,10 +2503,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal(sizeResponse.status, 200);
   const sizeHtml = await sizeResponse.text();
   const sizeVisibleHtml = sizeHtml.replaceAll("<!-- -->", "");
-  assert.match(
-    sizeVisibleHtml,
-    /<footer><span>동일 사이즈 평균/,
-  );
+  assert.match(sizeVisibleHtml, /<footer><span>ML<strong>/);
   assert.match(sizeHtml, /scatter-point [^"]*dense/);
   assert.match(sizeHtml, /scatter-label comparison/);
   assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
@@ -2542,7 +2539,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     gangnamSizeHtml.replaceAll("<!-- -->", ""),
-    /동일 사이즈 내 \d+위 \/ 전체 7/,
+    /U 사이즈 내 \d+위 \/ 전체 7/,
   );
 
   const showroomResponse = await render(
