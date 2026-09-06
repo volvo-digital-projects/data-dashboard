@@ -1330,11 +1330,11 @@ export default function CompetitiveAnalysis({
       : groupItems.length;
   const summaryRankLabel =
     view === "showroom"
-      ? "전국"
+      ? "전국 전시장 내"
       : view === "size"
-        ? "동일 사이즈"
+        ? "동일 사이즈 내"
         : view === "region"
-          ? "동일 권역"
+          ? "동일 권역 내"
           : "딜러사 내";
   const rankWindowSize = 7;
   const rankWindowRadius = Math.floor(rankWindowSize / 2);

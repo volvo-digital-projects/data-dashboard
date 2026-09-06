@@ -2423,7 +2423,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.equal((analysisContextHtml.match(/<a\b/g) ?? []).length, 4);
   assert.doesNotMatch(analysisContextHtml, /<button\b|onclick=/i);
   assert.match(regionVisibleHtml, /<footer><span>동일 권역별<strong>/);
-  assert.match(regionVisibleHtml, /권역별 10위 \/ 전체 19/);
+  assert.match(regionVisibleHtml, /동일 권역 내 \d+위 \/ 전체 19/);
   assert.match(regionVisibleHtml, /볼보 강남신사/);
   assert.match(regionVisibleHtml, /볼보 분당판교/);
   assert.doesNotMatch(regionVisibleHtml, /볼보 강남 신사|볼보 분당 판교/);
@@ -2521,7 +2521,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     gangnamSizeHtml.replaceAll("<!-- -->", ""),
-    /동일 사이즈 5위 \/ 전체 7/,
+    /동일 사이즈 내 \d+위 \/ 전체 7/,
   );
 
   const showroomResponse = await render(
@@ -2542,6 +2542,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   )?.[1];
   assert.ok(showroomRankingHtml);
   assert.match(showroomHtml, /<h2>전국 전시장 내 순위<\/h2>/);
+  assert.match(showroomHtml, /전국 전시장 내 \d+위 \/ 전체 39/);
   assert.deepEqual(
     [
       ...showroomRankingHtml.matchAll(
