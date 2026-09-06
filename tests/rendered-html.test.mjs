@@ -276,7 +276,7 @@ test("averages Q1-Q2 metrics before combining and keeps staff scores legible", a
     }
     assert.ok(html.includes(`전국 ${index + 1}위 / 전체 ${expected.length}`));
     assert.ok(html.includes("VOC 상담 만족도") && html.includes("ONE Voice 시승 만족도") && html.includes("ONE Voice 출고 만족도"));
-    assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE VOICE 출고 후 해피콜(24시간 이내 시행)"));
+    assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE Voice 출고 후 해피콜(24시간 이내 시행)"));
     assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
   }
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
@@ -1443,7 +1443,7 @@ test("server-renders the selected CDSID dashboard", async () => {
     /class="voc-response-rate-line-layer"[\s\S]*?<polyline points="[^"]+"[\s\S]*?class="voc-response-rate-point/,
   );
   assert.doesNotMatch(html, /class="voc-response-rate-panel"/);
-  assert.match(html, /aria-label="ONE VOICE 만족도"[\s\S]*?ONE VOICE/);
+  assert.match(html, /aria-label="ONE Voice 만족도"[\s\S]*?ONE Voice/);
   const v3sStart = html.indexOf('id="score-v3s"');
   const vocStart = html.indexOf('id="score-voc"');
   assert.ok(v3sStart >= 0 && vocStart > v3sStart);
@@ -1868,7 +1868,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     visibleHtml,
     /에이치 누적평균 95\.0점 대비 ▼ 4\.7점/,
   );
-  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE VOICE 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>100\.0<[^]*?점/);
+  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE Voice 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>100\.0<[^]*?점/);
   assert.match(
     visibleHtml,
     /에이치 누적평균 92\.7점 대비 ▲ 7\.3점/,

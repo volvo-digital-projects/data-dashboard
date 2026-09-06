@@ -3431,7 +3431,7 @@ export default function Dashboard({
                   <span>세부지표</span>
                 </Link>
                 <h3 className="score-tier-side-title english-title">
-                  ONE VOICE
+                  ONE Voice
                 </h3>
               </header>
               <div className="weekly-score-layout">
@@ -3448,7 +3448,7 @@ export default function Dashboard({
                 <aside
                   ref={oneVoiceRef}
                   className={`one-voice-contribution ${oneVoiceInView ? "is-visible" : ""}`}
-                  aria-label="ONE VOICE 만족도"
+                  aria-label="ONE Voice 만족도"
                 >
                   <header className="one-voice-contribution-heading">
                     <div className="one-voice-context-row">
