@@ -792,7 +792,6 @@ export default function CompetitiveAnalysis({
   >("settled");
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState<string | null>(null);
-  const [staffScatterFullScale, setStaffScatterFullScale] = useState(false);
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
   const [staffAnalysisInView, setStaffAnalysisInView] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
@@ -1267,7 +1266,7 @@ export default function CompetitiveAnalysis({
     ) * 5,
   );
   const staffScatterPlot = { left: 42, right: 448, top: 20, bottom: 204 };
-  const staffScatterMinScore = staffScatterFullScale ? 0 : Math.max(0, Math.min(
+  const staffScatterMinScore = Math.max(0, Math.min(
     60,
     Math.floor(Math.min(100, ...staffTenureScatterPopulation.map((point) => point.finalScore)) / 10) * 10,
   ));
@@ -1283,7 +1282,7 @@ export default function CompetitiveAnalysis({
     { length: 6 },
     (_, index) => (staffScatterMaxYears / 5) * index,
   );
-  const staffScatterTickStep = staffScatterFullScale ? 20 : 10;
+  const staffScatterTickStep = 10;
   const staffScatterYTicks = Array.from(
     { length: (100 - staffScatterMinScore) / staffScatterTickStep + 1 },
     (_, index) => staffScatterMinScore + index * staffScatterTickStep,
@@ -2214,13 +2213,6 @@ export default function CompetitiveAnalysis({
                 role="group"
                 aria-label="근속기간별 최종점수 산포도, 100점 만점"
               >
-                <div className="analysis-staff-scatter-controls">
-                  <span>100점 만점 · 표시 범위 {staffScatterMinScore}~100점</span>
-                  <button type="button" aria-pressed={staffScatterFullScale}
-                    onClick={() => setStaffScatterFullScale((value) => !value)}>
-                    {staffScatterFullScale ? "분포 확대" : "전체 0~100"}
-                  </button>
-                </div>
                 <div className="analysis-staff-tenure-scatter-chart">
                   <svg
                     viewBox="0 0 470 284"

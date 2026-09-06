@@ -290,12 +290,10 @@ test("includes every staff member with fair provisional and unscored scatter sta
     const scatter = html.match(/class="analysis-staff-tenure-scatter"[^]*?<\/svg>/)?.[0];
     assert.ok(scatter);
     assert.ok(scatter.includes("최종점수(100점)"));
-    const minimum = Number(scatter.match(/표시 범위 (\d+)~100점/)?.[1]);
-    assert.ok(minimum >= 0 && minimum <= 60);
-    for (let tick = minimum; tick <= 100; tick += 10) {
+    assert.doesNotMatch(scatter, /100점 만점 · 표시 범위|전체 0~100|analysis-staff-scatter-controls/);
+    for (const tick of [60, 70, 80, 90, 100]) {
       assert.ok(scatter.includes(`text-anchor="end">${tick}</text>`), `Missing y tick ${tick}`);
     }
-    assert.ok(scatter.includes("전체 0~100"));
     const plotted = [...scatter.matchAll(/data-final-score="([\d.]+)"/g)].map((match) => Number(match[1]));
     assert.ok(plotted.length > 0 && plotted.every((value) => value >= 0 && value <= 100));
     const confirmed = [...scatter.matchAll(/data-final-score="([\d.]+)" data-provisional="false"/g)].map((match) => Number(match[1]));

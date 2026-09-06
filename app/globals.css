@@ -6037,27 +6037,6 @@ input:focus-visible {
   line-height: 1.45;
 }
 
-.analysis-staff-scatter-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 5px;
-  color: #6f8794;
-  font-family: var(--font-latin), var(--font-korean), sans-serif;
-  font-size: 9px;
-}
-
-.analysis-staff-scatter-controls button {
-  border: 1px solid #cddfe7;
-  border-radius: 4px;
-  padding: 3px 6px;
-  color: #315b70;
-  background: #f5f9fb;
-  font: inherit;
-  cursor: pointer;
-}
-
 .analysis-staff-scatter-grid line {
   stroke: #e5edf1;
   stroke-width: 1;
