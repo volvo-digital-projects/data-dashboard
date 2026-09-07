@@ -11,6 +11,16 @@ const cookieFor = (cdsid) =>
   `volvo-dashboard-access=${loginCookieBase}--${cdsid.toUpperCase()}`;
 const loginCookie = cookieFor("VCK-ES90");
 
+test("uses the current Jeju showroom manager", async () => {
+  const dashboard = JSON.parse(
+    await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
+  );
+  const jeju = dashboard.showrooms.find((showroom) => showroom.cdsid === "6KR6859");
+  assert.equal(jeju?.showroom, "볼보 제주");
+  assert.equal(jeju?.manager, "이성민");
+  assert.equal(jeju?.q1?.manager, "이성민");
+});
+
 test("keeps the 2021-2026 certification results complete and cumulative", async () => {
   const certifications = JSON.parse(
     await readFile(new URL("../app/data/staff-certifications.json", import.meta.url), "utf8"),
