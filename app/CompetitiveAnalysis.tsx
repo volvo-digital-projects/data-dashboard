@@ -1111,6 +1111,9 @@ export default function CompetitiveAnalysis({
           ? 2
           : 1;
   const selectedStaffGrowthLabels = ["집중 코칭", "성장 가속", "성과 확산"] as const;
+  const selectedStaffGrowthNeedleAngle = selectedStaffGrowthZone === null
+    ? 0
+    : [28, 90, 152][selectedStaffGrowthZone];
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
@@ -1780,22 +1783,50 @@ export default function CompetitiveAnalysis({
                       <small>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</small>
                     </header>
                     <div
-                      className={`growth-zone-track${selectedStaffGrowthZone === null ? " no-evidence" : ""}`}
-                      style={{ "--growth-zone": selectedStaffGrowthZone ?? 1 } as CSSProperties}
+                      className={`growth-zone-gauge${selectedStaffGrowthZone === null ? " no-evidence" : ""}`}
+                      style={{ "--growth-needle-angle": `${selectedStaffGrowthNeedleAngle}deg` } as CSSProperties}
                       data-zone={selectedStaffGrowthZone ?? "none"}
-                      aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}`}
                     >
-                      {selectedStaffGrowthLabels.map((label, index) => (
-                        <span className={selectedStaffGrowthZone !== null && index === selectedStaffGrowthZone ? "active" : ""} key={label}>
-                          <i aria-hidden="true" />
-                          <b>{label}</b>
-                          <small>{index === 0 ? "한 행동부터 교정" : index === 1 ? "강점 유지·전환 보완" : "우수 행동을 확산"}</small>
-                        </span>
-                      ))}
-                      <em
-                        key={`${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}-${selectedStaffGrowthZone ?? "none"}`}
-                        aria-hidden="true"
-                      />
+                      <svg viewBox="0 0 420 230" role="img" aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}`}>
+                        <title>상담 역량 타코미터: {selectedStaffGrowthLabel}</title>
+                        <g className="growth-gauge-segments">
+                          <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L156 96.5 A108 108 0 0 0 102 190 Z" />
+                          <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L264 96.5 A108 108 0 0 0 156 96.5 Z" />
+                          <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L318 190 A108 108 0 0 0 264 96.5 Z" />
+                        </g>
+                        <g className="growth-gauge-ticks" aria-hidden="true">
+                          <circle cx="124" cy="168" r="2.4" /><circle cx="134" cy="146" r="2.4" />
+                          <circle cx="149" cy="128" r="2.4" /><circle cx="167" cy="114" r="2.4" />
+                          <circle cx="188" cy="105" r="2.4" /><circle cx="210" cy="102" r="2.4" />
+                          <circle cx="232" cy="105" r="2.4" /><circle cx="253" cy="114" r="2.4" />
+                          <circle cx="271" cy="128" r="2.4" /><circle cx="286" cy="146" r="2.4" />
+                          <circle cx="296" cy="168" r="2.4" />
+                        </g>
+                        <g className="growth-gauge-label coaching-label">
+                          <text x="101" y="102">집중 코칭</text>
+                          <text className="detail" x="101" y="121">한 행동부터 교정</text>
+                        </g>
+                        <g className="growth-gauge-label accelerating-label">
+                          <text x="210" y="54">성장 가속</text>
+                          <text className="detail" x="210" y="73">강점 유지·전환 보완</text>
+                        </g>
+                        <g className="growth-gauge-label expanding-label">
+                          <text x="319" y="102">성과 확산</text>
+                          <text className="detail" x="319" y="121">우수 행동을 확산</text>
+                        </g>
+                        {selectedStaffGrowthZone !== null && (
+                          <g
+                            className="growth-gauge-needle"
+                            key={`${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}-${selectedStaffGrowthZone}`}
+                            aria-hidden="true"
+                          >
+                            <path d="M220 183.5 L74 190 L220 196.5 Z" />
+                            <circle cx="210" cy="190" r="13" />
+                            <circle className="needle-cap" cx="210" cy="190" r="5" />
+                          </g>
+                        )}
+                        <text className="growth-gauge-current" x="210" y="220">{selectedStaffGrowthLabel}</text>
+                      </svg>
                     </div>
                     <p>
                       {selectedStaffPeerDelta === null

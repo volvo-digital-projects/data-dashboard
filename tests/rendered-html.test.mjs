@@ -265,9 +265,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 312px minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns:/);
-  assert.match(css, /@keyframes growth-navigation-arrow/);
-  assert.match(css, /\.growth-zone-track\[data-zone="0"\] > em/);
-  assert.match(css, /\.growth-zone-track > span:nth-of-type\(3\)/);
+  assert.match(navigation, /className=\{`growth-zone-gauge/);
+  assert.match(navigation, /상담 역량 타코미터/);
+  assert.match(navigation, /M45 190 A165 165/);
+  assert.match(css, /@keyframes growth-gauge-sweep/);
+  assert.match(css, /0% \{ transform: rotate\(0deg\); \}/);
+  assert.match(css, /transform: rotate\(var\(--growth-needle-angle\)\)/);
+  assert.match(css, /\.growth-gauge-segments \.expanding\.active/);
 });
 
 test("orders review staff by hire date with the newest hire last", async () => {
