@@ -1844,19 +1844,20 @@ export default function CompetitiveAnalysis({
                             cy={staffScatterY(point.finalScore)}
                             r={Math.min(6, 2.8 + Math.sqrt(point.responses) * 0.46)}
                             key={point.key}
-                          ><title>{`${point.name} · 동일 전시장 · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
+                          ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
                         ))}
                       </g>
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
                           <circle className="halo" r="11" />
                           <circle className="point" r="5" />
-                          <text x="9" y="-9">{selectedStaffScatterPoint.name}</text>
                         </g>
                       ) : null}
                     </svg>
                     <footer>
-                      <span><i />전국 SC</span><span className="showroom"><i />동일 전시장</span><span className="selected"><i />선택 직원</span>
+                      <span><i />전국 SC</span>
+                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} 전시장</span>
+                      <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
                     </footer>
                   </article>
                 </div>
