@@ -1166,10 +1166,19 @@ export default function CompetitiveAnalysis({
     staffScatterPlot.left +
     (tenureYears / staffScatterMaxYears) *
       (staffScatterPlot.right - staffScatterPlot.left);
-  const staffScatterY = (finalScore: number) =>
-    staffScatterPlot.bottom -
-    ((finalScore - staffScatterMinScore) / (100 - staffScatterMinScore)) *
-      (staffScatterPlot.bottom - staffScatterPlot.top);
+  const staffScatterUpperRangeExponent = 1.7;
+  const staffScatterY = (finalScore: number) => {
+    const scoreRatio = Math.max(
+      0,
+      Math.min(
+        1,
+        (finalScore - staffScatterMinScore) / (100 - staffScatterMinScore),
+      ),
+    );
+    return staffScatterPlot.bottom -
+      Math.pow(scoreRatio, staffScatterUpperRangeExponent) *
+        (staffScatterPlot.bottom - staffScatterPlot.top);
+  };
   const staffScatterXTicks = Array.from(
     { length: 6 },
     (_, index) => (staffScatterMaxYears / 5) * index,
@@ -1885,7 +1894,8 @@ export default function CompetitiveAnalysis({
                     <header>
                       <div><strong>근속기간 × 상담만족</strong></div>
                     </header>
-                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포">
+                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포, 상단 점수 구간 확대">
+                      <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
                       {staffScatterYTicks.map((tick) => {
                         const y = staffScatterY(tick);
                         return <g className="growth-scatter-grid" key={`growth-y-${tick}`}>

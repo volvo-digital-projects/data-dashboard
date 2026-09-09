@@ -287,6 +287,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /전체 상담 분포/);
   assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
   assert.match(navigation, /viewBox="0 0 470 210"/);
+  assert.match(navigation, /전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다\./);
+  assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
+  assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /영업활동 원자료 연결 후 활성화/);
   assert.match(navigation, /영업 역량 위치/);
   assert.match(navigation, /전체 영업활동 분포/);
