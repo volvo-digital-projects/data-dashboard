@@ -1113,7 +1113,11 @@ export default function CompetitiveAnalysis({
   const selectedStaffGrowthLabels = ["집중 코칭", "성장 가속", "성과 확산"] as const;
   const selectedStaffGrowthNeedleAngle = selectedStaffGrowthZone === null
     ? 0
-    : [28, 90, 152][selectedStaffGrowthZone];
+    : selectedStaffPeerDelta === null
+      ? 90
+      : Math.round(
+          ((Math.max(-6, Math.min(6, selectedStaffPeerDelta)) + 6) / 12) * 1800,
+        ) / 10;
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
@@ -1788,7 +1792,11 @@ export default function CompetitiveAnalysis({
                       style={{ "--growth-needle-angle": `${selectedStaffGrowthNeedleAngle}deg` } as CSSProperties}
                       data-zone={selectedStaffGrowthZone ?? "none"}
                     >
-                      <svg viewBox="0 0 420 230" role="img" aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}`}>
+                      <svg
+                        viewBox="0 0 420 230"
+                        role="img"
+                        aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}${selectedStaffPeerDelta === null ? "" : `, 동일연차 평균 대비 ${(selectedStaffPeerDelta / 10).toFixed(1)}점 위치`}`}
+                      >
                         <title>상담 역량 타코미터: {selectedStaffGrowthLabel}</title>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L156 96.5 A108 108 0 0 0 102 190 Z" />
@@ -1829,11 +1837,6 @@ export default function CompetitiveAnalysis({
                         <text className="growth-gauge-current" x="210" y="220">{selectedStaffGrowthLabel}</text>
                       </svg>
                     </div>
-                    <p>
-                      {selectedStaffPeerDelta === null
-                        ? "비교 가능한 회신이 없어 상담 사례 중심으로 면담합니다."
-                        : `동일연차 평균과 ${selectedStaffPeerDelta >= 0 ? "+" : ""}${(selectedStaffPeerDelta / 10).toFixed(1)}점 차이입니다. 등수로 평가하지 않고 다음 행동을 정합니다.`}
-                    </p>
                   </article>
 
                   <article className="growth-scatter-card">

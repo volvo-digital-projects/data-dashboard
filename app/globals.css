@@ -680,16 +680,6 @@ html {
   .growth-gauge-needle { animation: none; }
 }
 
-.growth-position-card > p {
-  margin: 0;
-  padding: 7px 8px;
-  border-radius: 4px;
-  background: #eff6f8;
-  font-size: 10px;
-  line-height: 1.55;
-  color: #587381;
-}
-
 .growth-scatter-card {
   padding: 10px 10px 6px;
 }
