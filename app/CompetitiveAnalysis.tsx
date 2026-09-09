@@ -1757,6 +1757,7 @@ export default function CompetitiveAnalysis({
               <div className="growth-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, responses }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
+                  const isTeamLeader = employee.role === "영업팀장" || employee.jobTitle === "팀장";
                   return (
                     <button
                       type="button"
@@ -1769,7 +1770,12 @@ export default function CompetitiveAnalysis({
                       key={employee.name}
                     >
                       <span>
-                        <strong>{employee.name}</strong>
+                        <strong>
+                          {employee.name}
+                          {isTeamLeader ? (
+                            <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>
+                          ) : null}
+                        </strong>
                         <small>{formatStaffShortDate(employee.hireDate)}</small>
                       </span>
                       <b>{average === null ? "―" : average.toFixed(1)}</b>

@@ -273,7 +273,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<span>상담만족<\/span>|회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(108px, 1fr\) 76px 80px;/);
   assert.doesNotMatch(navigation, /자료 근거 -/);
-  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*4\.25em;[\s\S]*?flex:\s*0 0 4\.25em;[\s\S]*?white-space:\s*nowrap;/);
+  assert.match(navigation, /const isTeamLeader = employee\.role === "영업팀장" \|\| employee\.jobTitle === "팀장";/);
+  assert.match(navigation, /className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L<\/i>/);
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?white-space:\s*nowrap;/);
+  assert.match(css, /\.growth-staff-lead-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*13px;[^}]*border-radius:\s*50%;[^}]*background:\s*#176f8a;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*38px;/);
   assert.match(navigation, /자료 근거 회신 \$\{responses\}건, 2023년부터 2026년 YTD/);
   assert.doesNotMatch(navigation, /const evidenceConfidence = staffEvidenceConfidence\(responses\)/);
@@ -382,7 +385,7 @@ test("orders review staff by hire date with the newest hire last", async () => {
     analysisSource,
     /\.sort\(\(a, b\) => compareStaffHireDateAscending\(a\.employee, b\.employee\)\)/,
   );
-  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 3em;[^}]*flex: 0 0 3em;/);
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 5\.25em;[^}]*flex: 0 0 5\.25em;/);
 });
 
 test("averages Q1-Q2 metrics before combining and keeps staff scores legible", async () => {
