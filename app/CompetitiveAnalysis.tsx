@@ -1728,10 +1728,16 @@ export default function CompetitiveAnalysis({
               <h2>소속 영업직원 성장 내비게이션</h2>
             </div>
             <div className="growth-navigation-source" aria-label="분석 기준">
-              <span>Sales-DMS 기준</span>
-              <span>VOC 상담만족도</span>
-              <span>23 ~ 26 YTD 누적 기준</span>
-              <span><strong>{staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)}</strong> 기준</span>
+              <span>
+                <b>Sales-DMS</b>
+                <i aria-hidden="true">/</i>
+                <strong>{staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)} 기준</strong>
+              </span>
+              <span>
+                <b>VOC 상담만족도</b>
+                <i aria-hidden="true">/</i>
+                <strong>23 ~ 26 YTD 기준</strong>
+              </span>
             </div>
           </header>
 
