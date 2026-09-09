@@ -324,6 +324,29 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-position-card > p\s*\{/);
 });
 
+test("links ranking selections to the scatter plot in every analysis view", async () => {
+  const [source, css] = await Promise.all([
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(source, /type AnalysisView = "dealer" \| "showroom" \| "region" \| "size";/);
+  assert.match(source, /const \[pinnedCdsid, setPinnedCdsid\] = useState<string \| null>\(null\);/);
+  assert.match(source, /const linkedCdsid = hoveredCdsid \?\? pinnedCdsid;/);
+  assert.equal(
+    (source.match(/const isHovered = !isSelected && linkedCdsid === item\.cdsid;/g) ?? []).length,
+    2,
+  );
+  assert.match(
+    source,
+    /className=\{isSelected \? "selected" : isHovered \? "hovered" : ""\}[\s\S]*?aria-pressed=\{!isSelected \? pinnedCdsid === item\.cdsid : undefined\}[\s\S]*?onClick=\{\(\) => !isSelected && toggleLinkedShowroom\(item\.cdsid\)\}[\s\S]*?event\.key === "Enter" \|\| event\.key === " "/,
+  );
+  assert.match(
+    css,
+    /\.scatter-point\.dense\.hovered:not\(\.selected\) > b\s*\{[^}]*border-color: #4a938f[^}]*color: #245f5c[^}]*background: #e8f4f3/,
+  );
+});
+
 test("orders review staff by hire date with the newest hire last", async () => {
   const [staffData, analysisSource, css] = await Promise.all([
     readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),

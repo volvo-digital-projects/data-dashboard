@@ -720,6 +720,7 @@ export default function CompetitiveAnalysis({
     "settled" | "guides" | "zones" | "points"
   >("settled");
   const [hoveredCdsid, setHoveredCdsid] = useState<string | null>(null);
+  const [pinnedCdsid, setPinnedCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState<string | null>(null);
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
   const [staffAnalysisInView, setStaffAnalysisInView] = useState(false);
@@ -1319,6 +1320,7 @@ export default function CompetitiveAnalysis({
     );
     scatterMotionTimersRef.current = [];
     setHoveredCdsid(null);
+    setPinnedCdsid(null);
     setScatterMotionStage("guides");
     setView(nextView);
     scatterMotionTimersRef.current.push(
@@ -1335,6 +1337,12 @@ export default function CompetitiveAnalysis({
       window.history.replaceState(null, "", nextRoute);
     }
   };
+
+  const toggleLinkedShowroom = (cdsid: string) => {
+    setPinnedCdsid((current) => (current === cdsid ? null : cdsid));
+  };
+
+  const linkedCdsid = hoveredCdsid ?? pinnedCdsid;
 
   return (
     <main className="competitive-analysis-page">
@@ -1549,8 +1557,7 @@ export default function CompetitiveAnalysis({
                   ((item.vocAverage - 75) / 25) * 100,
                 );
                 const isSelected = item.cdsid === selected.cdsid;
-                const isHovered =
-                  !isSelected && hoveredCdsid === item.cdsid;
+                const isHovered = !isSelected && linkedCdsid === item.cdsid;
                 const callout = scatterCallouts.get(item.cdsid) ?? {
                   offsetX: 16,
                   offsetY: -16,
@@ -1588,11 +1595,20 @@ export default function CompetitiveAnalysis({
                     style={pointStyle}
                     title={pointLabel}
                     aria-label={pointLabel}
-                    tabIndex={denseScatter && !isSelected ? 0 : undefined}
+                    role={!isSelected ? "button" : undefined}
+                    aria-pressed={!isSelected ? pinnedCdsid === item.cdsid : undefined}
+                    tabIndex={!isSelected ? 0 : undefined}
                     onMouseEnter={() => setHoveredCdsid(item.cdsid)}
                     onMouseLeave={() => setHoveredCdsid(null)}
                     onFocus={() => setHoveredCdsid(item.cdsid)}
                     onBlur={() => setHoveredCdsid(null)}
+                    onClick={() => !isSelected && toggleLinkedShowroom(item.cdsid)}
+                    onKeyDown={(event) => {
+                      if (!isSelected && (event.key === "Enter" || event.key === " ")) {
+                        event.preventDefault();
+                        toggleLinkedShowroom(item.cdsid);
+                      }
+                    }}
                   >
                     <i />
                     <b
@@ -1642,14 +1658,26 @@ export default function CompetitiveAnalysis({
                 groupItems.findIndex((groupItem) => groupItem.cdsid === item.cdsid) +
                 1;
               const isSelected = item.cdsid === selected.cdsid;
-              const isHovered =
-                !isSelected && hoveredCdsid === item.cdsid;
+              const isHovered = !isSelected && linkedCdsid === item.cdsid;
               return (
                 <div
                   className={isSelected ? "selected" : isHovered ? "hovered" : ""}
                   key={item.cdsid}
+                  role={!isSelected ? "button" : undefined}
+                  tabIndex={!isSelected ? 0 : undefined}
+                  aria-label={!isSelected ? `${displayShowroomName(item.showroom)}를 차트에서 강조` : undefined}
+                  aria-pressed={!isSelected ? pinnedCdsid === item.cdsid : undefined}
                   onMouseEnter={() => setHoveredCdsid(item.cdsid)}
                   onMouseLeave={() => setHoveredCdsid(null)}
+                  onFocus={() => setHoveredCdsid(item.cdsid)}
+                  onBlur={() => setHoveredCdsid(null)}
+                  onClick={() => !isSelected && toggleLinkedShowroom(item.cdsid)}
+                  onKeyDown={(event) => {
+                    if (!isSelected && (event.key === "Enter" || event.key === " ")) {
+                      event.preventDefault();
+                      toggleLinkedShowroom(item.cdsid);
+                    }
+                  }}
                 >
                   <span className="analysis-rank">
                     <strong>{rank}</strong>

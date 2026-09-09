@@ -5176,6 +5176,13 @@ input:focus-visible {
   pointer-events: none;
 }
 
+.scatter-point.dense.hovered:not(.selected) > b {
+  border-color: #4a938f;
+  color: #245f5c;
+  background: #e8f4f3;
+  box-shadow: 0 6px 16px rgba(37, 98, 95, 0.2);
+}
+
 .scatter-point.dense:not(.selected):hover > b,
 .scatter-point.dense:not(.selected):focus-visible > b {
   opacity: 1;
@@ -5282,6 +5289,7 @@ input:focus-visible {
   border: 1px solid transparent;
   border-radius: 8px;
   background: #fafbfc;
+  cursor: pointer;
   transition:
     background 160ms ease,
     border-color 160ms ease,
@@ -5682,6 +5690,11 @@ input:focus-visible {
   gap: 2px;
   padding: 0 4px 0 8px;
   border-left: 1px solid rgba(137, 166, 180, 0.18);
+}
+
+.analysis-ranking-list > div:focus-visible {
+  outline: 2px solid rgba(74, 147, 143, 0.54);
+  outline-offset: 1px;
 }
 
 .analysis-staff-roster-identity strong {
