@@ -260,6 +260,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /고객 코멘트 · 강점/);
   assert.match(navigation, /지점장 면담 가이드/);
   assert.match(navigation, /영업활동 원자료 연결 후 활성화/);
+  assert.match(navigation, /\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)/);
+  assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/10<\/small>/);
+  assert.match(source, /staff\.finalScore > selectedStaffSatisfactionScore/);
   assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);
   assert.doesNotMatch(source, /const staffScoreFreshnessWeight|const staffScorePriorResponses/);
   assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);

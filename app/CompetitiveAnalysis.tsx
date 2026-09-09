@@ -1085,6 +1085,14 @@ export default function CompetitiveAnalysis({
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
   const selectedStaffSatisfactionScore = selectedStaffScoring?.satisfactionScore ?? null;
+  const selectedStaffSatisfactionTopPercent =
+    selectedStaffSatisfactionScore === null || staffTenureScatterPopulation.length === 0
+      ? null
+      : ((staffTenureScatterPopulation.filter(
+          (staff) => staff.finalScore > selectedStaffSatisfactionScore,
+        ).length + 1) /
+          staffTenureScatterPopulation.length) *
+        100;
   const selectedStaffEvidenceLevel = staffEvidenceConfidence(selectedStaffResponses);
   const selectedStaffTenurePeerRange = selectedStaffEmployee
     ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
@@ -1749,12 +1757,21 @@ export default function CompetitiveAnalysis({
                   <span>
                     <small>선택 영업직원</small>
                     <strong>{selectedStaffEmployee?.name ?? "―"}<i>{selectedStaffEmployee?.jobTitle ?? ""}</i></strong>
-                    <em>{displayShowroomNameWithoutBrand(selected.showroom)} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월</em>
+                    <em>
+                      {displayShowroomNameWithoutBrand(selected.showroom)} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월
+                      {selectedStaffSatisfactionTopPercent === null ? null : (
+                        <small>(상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%)</small>
+                      )}
+                    </em>
                   </span>
                 </div>
                 <div className="growth-profile-metric">
                   <span>상담 만족도</span>
-                  <strong>{selectedStaffScoring?.average?.toFixed(1) ?? "―"}<small>/10</small></strong>
+                  <strong>
+                    {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
+                    {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
+                    <small>/10</small>
+                  </strong>
                   <em>실제 회신만 사용</em>
                 </div>
                 <div className="growth-profile-metric">

@@ -444,6 +444,12 @@ html {
   white-space: nowrap;
 }
 
+.growth-profile-person em small {
+  margin-left: 5px;
+  font-size: inherit;
+  color: #3f7588;
+}
+
 .growth-profile-metric strong {
   margin-top: 5px;
   font-family: var(--font-volvo);
