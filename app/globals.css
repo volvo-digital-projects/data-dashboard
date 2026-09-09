@@ -318,10 +318,34 @@ html {
 }
 
 .growth-staff-roster-list button > em {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 5px;
   font-size: 9px;
   font-style: normal;
-  text-align: center;
+  text-align: left;
   color: #6d818d;
+}
+
+.growth-staff-roster-list button > em > span {
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.growth-staff-roster-list button > em > b {
+  min-width: 3.4ch;
+  font-family: var(--font-volvo);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 650;
+  text-align: right;
+  color: currentColor;
+  white-space: nowrap;
 }
 
 .growth-navigation-detail {

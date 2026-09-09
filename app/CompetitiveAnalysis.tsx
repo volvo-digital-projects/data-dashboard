@@ -1701,6 +1701,7 @@ export default function CompetitiveAnalysis({
               <div className="growth-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, responses }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
+                  const evidenceConfidence = staffEvidenceConfidence(responses);
                   return (
                     <button
                       type="button"
@@ -1717,8 +1718,12 @@ export default function CompetitiveAnalysis({
                         <small>{formatStaffShortDate(employee.hireDate)}</small>
                       </span>
                       <b>{average === null ? "―" : average.toFixed(1)}</b>
-                      <em className={`confidence-${staffEvidenceConfidence(responses)}`}>
-                        {responses}건 · {staffEvidenceConfidence(responses)}
+                      <em
+                        className={`confidence-${evidenceConfidence}`}
+                        aria-label={`자료 근거 ${evidenceConfidence}, 회신 ${responses}건`}
+                      >
+                        <span>{evidenceConfidence}</span>
+                        <b>{responses}건</b>
                       </em>
                     </button>
                   );
