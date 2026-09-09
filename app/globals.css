@@ -245,16 +245,29 @@ html {
 }
 
 .growth-staff-roster-columns {
-  min-height: 24px;
+  min-height: 34px;
   padding: 0 10px 0 14px;
   background: #f6fafb;
   border-bottom: 1px solid #e3ecef;
   font-size: 9px;
+  line-height: 1.25;
   color: #81949e;
 }
 
 .growth-staff-roster-columns span:not(:first-child) {
   text-align: center;
+}
+
+.growth-staff-roster-columns span:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.growth-staff-roster-columns span:last-child small {
+  margin-top: 1px;
+  font-size: 8px;
+  color: #718995;
 }
 
 .growth-staff-roster-list {
@@ -321,31 +334,22 @@ html {
 
 .growth-staff-roster-list button > em {
   min-width: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
-  column-gap: 5px;
+  justify-content: center;
   font-size: 9px;
   font-style: normal;
-  text-align: left;
+  text-align: center;
   color: #6d818d;
 }
 
-.growth-staff-roster-list button > em > span {
-  min-width: 0;
-  overflow: hidden;
-  text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .growth-staff-roster-list button > em > b {
-  min-width: 3.4ch;
+  min-width: 4ch;
   font-family: var(--font-volvo);
   font-size: 9px;
   font-style: normal;
   font-weight: 650;
-  text-align: right;
+  text-align: center;
   color: currentColor;
   white-space: nowrap;
 }

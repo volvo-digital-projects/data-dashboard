@@ -1711,12 +1711,11 @@ export default function CompetitiveAnalysis({
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
                 <span>상담만족</span>
-                <span>자료 근거</span>
+                <span>자료 근거 - 회신 건수<small>(23 ~ 26 YTD)</small></span>
               </div>
               <div className="growth-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, responses }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
-                  const evidenceConfidence = staffEvidenceConfidence(responses);
                   return (
                     <button
                       type="button"
@@ -1734,10 +1733,8 @@ export default function CompetitiveAnalysis({
                       </span>
                       <b>{average === null ? "―" : average.toFixed(1)}</b>
                       <em
-                        className={`confidence-${evidenceConfidence}`}
-                        aria-label={`자료 근거 ${evidenceConfidence}, 회신 ${responses}건`}
+                        aria-label={`자료 근거 회신 ${responses}건, 2023년부터 2026년 YTD`}
                       >
-                        <span>{evidenceConfidence}</span>
                         <b>{responses}건</b>
                       </em>
                     </button>
