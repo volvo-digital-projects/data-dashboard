@@ -1763,7 +1763,6 @@ export default function CompetitiveAnalysis({
                     <span>01 · 상담 영역</span>
                     <h3>고객상담 역량</h3>
                   </div>
-                  <p>2025·2026 수집 누락은 직원 점수에 반영하지 않습니다.</p>
                 </header>
 
                 <div className="growth-capability-grid">
