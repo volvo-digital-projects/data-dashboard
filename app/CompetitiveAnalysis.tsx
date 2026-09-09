@@ -1747,14 +1747,16 @@ export default function CompetitiveAnalysis({
                     ) : selectedStaffInitials}
                   </span>
                   <span>
-                    <small>선택 영업직원</small>
-                    <strong>{selectedStaffEmployee?.name ?? "―"}<i>{selectedStaffEmployee?.jobTitle ?? ""}</i></strong>
-                    <em>
-                      {displayShowroomNameWithoutBrand(selected.showroom)} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월
+                    <span className="growth-profile-person-label">
+                      <small>선택 영업직원</small>
                       {selectedStaffSatisfactionTopPercent === null ? null : (
-                        <small>(상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%)</small>
+                        <em>상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%</em>
                       )}
-                    </em>
+                    </span>
+                    <strong>
+                      {selectedStaffEmployee?.name ?? "―"}
+                      <i>{selectedStaffEmployee?.jobTitle ?? ""} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월</i>
+                    </strong>
                   </span>
                 </div>
                 <div className="growth-profile-metric">
@@ -1768,8 +1770,10 @@ export default function CompetitiveAnalysis({
                 </div>
                 <div className="growth-profile-metric">
                   <span>자료 신뢰도</span>
-                  <strong className={`confidence-${selectedStaffEvidenceLevel}`}>{selectedStaffEvidenceLevel}</strong>
-                  <em>회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffEmployee?.commentResponses ?? 0}건</em>
+                  <strong className={`confidence-${selectedStaffEvidenceLevel}`}>
+                    {selectedStaffEvidenceLevel}
+                    <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffEmployee?.commentResponses ?? 0}건</small>
+                  </strong>
                 </div>
                 <div className="growth-profile-metric">
                   <span>현재 면담 방향</span>

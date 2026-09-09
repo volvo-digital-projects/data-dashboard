@@ -364,8 +364,8 @@ html {
 
 .growth-profile-strip > div {
   min-width: 0;
-  min-height: 74px;
-  padding: 9px 12px;
+  min-height: 58px;
+  padding: 6px 12px;
   border-left: 1px solid #e1eaee;
 }
 
@@ -380,8 +380,8 @@ html {
 }
 
 .growth-profile-photo {
-  width: 42px;
-  height: 52px;
+  width: 36px;
+  height: 44px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
@@ -414,10 +414,28 @@ html {
   color: #6e8491;
 }
 
+.growth-profile-person-label {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.growth-profile-person-label em {
+  font-size: 9px;
+  font-style: normal;
+  color: #3f7588;
+  white-space: nowrap;
+}
+
 .growth-profile-person strong {
-  margin-top: 5px;
+  margin-top: 3px;
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
   font-size: 18px;
   color: #155873;
+  white-space: nowrap;
 }
 
 .growth-profile-person strong i {
@@ -428,9 +446,8 @@ html {
   color: #647d89;
 }
 
-.growth-profile-person em,
 .growth-profile-metric em {
-  margin-top: 5px;
+  margin-top: 3px;
   overflow: hidden;
   font-size: 9px;
   font-style: normal;
@@ -439,14 +456,8 @@ html {
   white-space: nowrap;
 }
 
-.growth-profile-person em small {
-  margin-left: 5px;
-  font-size: inherit;
-  color: #3f7588;
-}
-
 .growth-profile-metric strong {
-  margin-top: 5px;
+  margin-top: 3px;
   font-family: var(--font-volvo);
   font-size: 19px;
   line-height: 1;
@@ -457,6 +468,14 @@ html {
   margin-left: 2px;
   font-size: 9px;
   color: #728793;
+}
+
+.growth-profile-metric strong .growth-profile-evidence-count {
+  margin-left: 7px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .growth-profile-metric strong.confidence-충분,
