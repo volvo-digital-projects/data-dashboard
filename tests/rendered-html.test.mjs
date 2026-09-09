@@ -360,6 +360,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /0% \{ transform: rotate\(0deg\); \}/);
   assert.match(css, /transform: rotate\(var\(--growth-needle-angle\)\)/);
   assert.match(css, /\.growth-gauge-segments \.expanding\.active/);
+  assert.match(css, /\.growth-zone-gauge\[data-zone="0"\] \.coaching-label,[\s\S]*?\.growth-zone-gauge\[data-zone="1"\] \.accelerating-label,[\s\S]*?\.growth-zone-gauge\[data-zone="2"\] \.expanding-label\s*\{[^}]*fill:\s*#ffffff;/);
   assert.match(source, /Math\.max\(-6, Math\.min\(6, selectedStaffPeerDelta\)\)/);
   assert.doesNotMatch(navigation, /동일연차 평균과|등수로 평가하지 않고 다음 행동을 정합니다/);
   assert.doesNotMatch(css, /\.growth-position-card > p\s*\{/);

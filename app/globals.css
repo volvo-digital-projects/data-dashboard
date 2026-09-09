@@ -690,6 +690,7 @@ html {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: -0.35px;
+  transition: fill 180ms ease;
 }
 
 .growth-gauge-label .detail {
@@ -702,6 +703,12 @@ html {
 .growth-gauge-label.coaching-label { fill: #924a39; }
 .growth-gauge-label.accelerating-label { fill: #1c6279; }
 .growth-gauge-label.expanding-label { fill: #286e59; }
+
+.growth-zone-gauge[data-zone="0"] .coaching-label,
+.growth-zone-gauge[data-zone="1"] .accelerating-label,
+.growth-zone-gauge[data-zone="2"] .expanding-label {
+  fill: #ffffff;
+}
 
 .growth-gauge-ticks circle {
   fill: #8ba1ab;
