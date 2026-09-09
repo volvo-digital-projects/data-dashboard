@@ -243,6 +243,30 @@ async function render(
   );
 }
 
+test("renders an evidence-first growth navigation without recency scoring", async () => {
+  const [source, css] = await Promise.all([
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+  const start = source.indexOf('className="growth-navigation"');
+  const end = source.indexOf('{false && selectedStaffAnalysis', start);
+  const navigation = source.slice(start, end);
+  assert.ok(start >= 0 && end > start);
+  assert.match(navigation, /소속 영업직원 성장 내비게이션/);
+  assert.match(navigation, /집중 코칭/);
+  assert.match(navigation, /성장 가속/);
+  assert.match(navigation, /성과 확산/);
+  assert.match(navigation, /고객 코멘트 · 강점/);
+  assert.match(navigation, /지점장 면담 가이드/);
+  assert.match(navigation, /영업활동 원자료 연결 후 활성화/);
+  assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);
+  assert.doesNotMatch(source, /const staffScoreFreshnessWeight|const staffScorePriorResponses/);
+  assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);
+  assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
+  assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 312px minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns:/);
+});
+
 test("orders review staff by hire date with the newest hire last", async () => {
   const [response, analysisSource] = await Promise.all([
     render("/dashboard/6KR6834/analysis?view=dealer"),

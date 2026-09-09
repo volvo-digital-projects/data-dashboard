@@ -134,10 +134,8 @@ const staffCurrentNameFrequency = Object.values(staffAnalysisByCdsid).reduce(
   new Map<string, number>(),
 );
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
-const staffScoreQualityWeight = 80;
-const staffScoreFreshnessWeight = 20;
-const staffScorePriorResponses = 8;
-const staffScoreFreshnessDays = 365;
+const staffEvidenceConfidence = (responses: number) =>
+  responses >= 20 ? "충분" : responses >= 8 ? "보통" : responses > 0 ? "참고" : "없음";
 const staffHistoryChartMinScore = 7;
 const staffHistoryChartMaxScore = 10;
 const staffHistoryChartHeight = (score: number) =>
@@ -389,42 +387,6 @@ const staffTenureHalfYearRange = (completedMonths: number) => {
   return { start, end: start + 5 };
 };
 
-const staffNationalPeerTotalsByTenure = staffCurrentSalesPopulation.reduce(
-  (benchmarks, { employee }) => {
-    const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
-    const totals = staffYears.reduce(
-      (summary, year) => {
-        summary.responses += employee.years[year]?.responses ?? 0;
-        summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
-        return summary;
-      },
-      { responses: 0, scoreSum: 0 },
-    );
-    const benchmark = benchmarks.get(tenureKey) ?? {
-      responses: 0,
-      scoreSum: 0,
-    };
-    benchmark.responses += totals.responses;
-    benchmark.scoreSum += totals.scoreSum;
-    benchmarks.set(tenureKey, benchmark);
-    return benchmarks;
-  },
-  new Map<number, { responses: number; scoreSum: number }>(),
-);
-
-const staffNationalScoringTotals = staffYears.reduce(
-  (summary, year) => {
-    summary.responses += staffNationalYears[year].responses;
-    summary.scoreSum += staffNationalYears[year].scoreSum;
-    return summary;
-  },
-  { responses: 0, scoreSum: 0 },
-);
-const staffNationalScoringAverage = staffNationalScoringTotals.responses
-  ? staffNationalScoringTotals.scoreSum / staffNationalScoringTotals.responses
-  : 0;
-const staffScoringAsOf = Date.parse(`${staffAnalysisSource.vocThrough}T00:00:00Z`);
-
 const nationalStaffFinalScores = staffCurrentSalesPopulation
   .map(({ cdsid, employee }) => {
     const totals = staffYears.reduce(
@@ -438,55 +400,23 @@ const nationalStaffFinalScores = staffCurrentSalesPopulation
     );
     const average = totals.responses ? totals.scoreSum / totals.responses : null;
     const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
-    const peerTotals = staffNationalPeerTotalsByTenure.get(tenureKey);
-    const peerAverage = peerTotals?.responses
-      ? peerTotals.scoreSum / peerTotals.responses
-      : staffNationalScoringAverage;
-    const adjustedAverage = average === null
-      ? null
-      : (totals.scoreSum + peerAverage * staffScorePriorResponses) /
-        (totals.responses + staffScorePriorResponses);
-    const latestResponseTime = employee.latestResponseDate
-      ? Date.parse(`${employee.latestResponseDate}T00:00:00Z`)
-      : Number.NaN;
-    const daysSinceResponse = Number.isFinite(latestResponseTime)
-      ? Math.max(0, (staffScoringAsOf - latestResponseTime) / 86_400_000)
-      : null;
-    const freshnessPoints = daysSinceResponse === null
-      ? 0
-      : Math.max(0, 1 - daysSinceResponse / staffScoreFreshnessDays) *
-        staffScoreFreshnessWeight;
-    const adjustedPoints =
-      totals.responses >= staffScorePriorResponses && adjustedAverage !== null
-        ? (adjustedAverage / 10) * staffScoreQualityWeight
-        : null;
+    const satisfactionScore = average === null ? null : average * 10;
     return {
       cdsid,
       name: employee.name,
       tenureKey,
       tenureYears: employee.tenureMonths / 12,
       responses: totals.responses,
-      referenceScore: adjustedAverage === null
-        ? null
-        : (adjustedAverage / 10) * staffScoreQualityWeight + freshnessPoints,
-      finalScore:
-        adjustedPoints === null ? null : adjustedPoints + freshnessPoints,
+      referenceScore: satisfactionScore,
+      finalScore: satisfactionScore,
     };
   })
-  .sort((a, b) => {
-    if (a.finalScore === null && b.finalScore === null) {
-      return a.name.localeCompare(b.name, "ko");
-    }
-    if (a.finalScore === null) return 1;
-    if (b.finalScore === null) return -1;
-    if (b.finalScore !== a.finalScore) return b.finalScore - a.finalScore;
-    return a.name.localeCompare(b.name, "ko");
-  });
+  .sort((a, b) => a.name.localeCompare(b.name, "ko"));
 const nationalStaffRespondingCount = nationalStaffFinalScores.filter(
   (staff) => staff.responses > 0,
 ).length;
 
-// Small samples use the same prior-adjusted estimate, visually marked as provisional.
+// Every actual response is retained. Evidence volume changes confidence, never the score.
 // No-response staff have no score and belong in a separate, non-numeric lane.
 const staffTenureScatterPopulation: StaffTenureScatterPoint[] = nationalStaffFinalScores.flatMap(
   (staff) => staff.referenceScore === null ? [] : [{
@@ -495,7 +425,7 @@ const staffTenureScatterPopulation: StaffTenureScatterPoint[] = nationalStaffFin
     name: staff.name,
     tenureYears: staff.tenureYears,
     finalScore: staff.finalScore ?? staff.referenceScore,
-    provisional: staff.finalScore === null,
+    provisional: false,
     responses: staff.responses,
   }],
 );
@@ -973,41 +903,6 @@ export default function CompetitiveAnalysis({
   );
   const rankedSalesStaff = useMemo(
     () => {
-      const peerTotalsByTenure = staffCurrentSalesPopulation.reduce(
-        (benchmarks, { employee }) => {
-          const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
-          const totals = staffYears.reduce(
-            (summary, year) => {
-              summary.responses += employee.years[year]?.responses ?? 0;
-              summary.scoreSum += employee.years[year]?.scoreSum ?? 0;
-              return summary;
-            },
-            { responses: 0, scoreSum: 0 },
-          );
-          const benchmark = benchmarks.get(tenureKey) ?? {
-            responses: 0,
-            scoreSum: 0,
-          };
-          benchmark.responses += totals.responses;
-          benchmark.scoreSum += totals.scoreSum;
-          benchmarks.set(tenureKey, benchmark);
-          return benchmarks;
-        },
-        new Map<number, { responses: number; scoreSum: number }>(),
-      );
-      const nationalTotals = staffYears.reduce(
-        (summary, year) => {
-          summary.responses += staffNationalYears[year].responses;
-          summary.scoreSum += staffNationalYears[year].scoreSum;
-          return summary;
-        },
-        { responses: 0, scoreSum: 0 },
-      );
-      const nationalAverage = nationalTotals.responses
-        ? nationalTotals.scoreSum / nationalTotals.responses
-        : 0;
-      const scoringAsOf = Date.parse(`${staffAnalysisSource.vocThrough}T00:00:00Z`);
-
       return currentSalesStaff
         .map((employee) => {
           const totals = staffYears.reduce(
@@ -1020,54 +915,18 @@ export default function CompetitiveAnalysis({
             { responses: 0, scoreSum: 0 },
           );
           const average = totals.responses ? totals.scoreSum / totals.responses : null;
-          const tenureKey = staffTenureHalfYearRange(employee.tenureMonths).start;
-          const peerTotals = peerTotalsByTenure.get(tenureKey);
-          const peerAverage = peerTotals?.responses
-            ? peerTotals.scoreSum / peerTotals.responses
-            : nationalAverage;
-          const adjustedAverage = average === null
-            ? null
-            : (totals.scoreSum + peerAverage * staffScorePriorResponses) /
-              (totals.responses + staffScorePriorResponses);
-          const latestResponseTime = employee.latestResponseDate
-            ? Date.parse(`${employee.latestResponseDate}T00:00:00Z`)
-            : Number.NaN;
-          const daysSinceResponse = Number.isFinite(latestResponseTime)
-            ? Math.max(0, (scoringAsOf - latestResponseTime) / 86_400_000)
-            : null;
-          const freshnessPoints = daysSinceResponse === null
-            ? 0
-            : Math.max(0, 1 - daysSinceResponse / staffScoreFreshnessDays) *
-              staffScoreFreshnessWeight;
-          const adjustedPoints =
-            totals.responses >= staffScorePriorResponses && adjustedAverage !== null
-              ? (adjustedAverage / 10) * staffScoreQualityWeight
-              : null;
-          const finalScore = adjustedPoints === null
-            ? null
-            : adjustedPoints + freshnessPoints;
+          const satisfactionScore = average === null ? null : average * 10;
           return {
             employee,
             responses: totals.responses,
             average,
-            adjustedPoints,
-            freshnessPoints,
-            finalScore,
+            satisfactionScore,
+            adjustedPoints: satisfactionScore,
+            freshnessPoints: 0,
+            finalScore: satisfactionScore,
           };
         })
-        .sort((a, b) => {
-          if (a.finalScore === null && b.finalScore === null) {
-            return compareStaffHireDateAscending(a.employee, b.employee);
-          }
-          if (a.finalScore === null) return 1;
-          if (b.finalScore === null) return -1;
-          if (b.finalScore !== a.finalScore) return b.finalScore - a.finalScore;
-          if (a.average === null) return 1;
-          if (b.average === null) return -1;
-          if (b.average !== a.average) return b.average - a.average;
-          if (b.responses !== a.responses) return b.responses - a.responses;
-          return a.employee.name.localeCompare(b.employee.name, "ko");
-        });
+        .sort((a, b) => compareStaffHireDateAscending(a.employee, b.employee));
     },
     [currentSalesStaff],
   );
@@ -1207,13 +1066,6 @@ export default function CompetitiveAnalysis({
     (sum, year) => sum + year.nationalResponses,
     0,
   );
-  const staffNationalScoreSum = staffYears.reduce(
-    (sum, year) => sum + staffNationalYears[year].scoreSum,
-    0,
-  );
-  const staffNationalAverage = staffNationalResponses
-    ? staffNationalScoreSum / staffNationalResponses
-    : null;
   const selectedStaffTenureYears = selectedStaffEmployee
     ? Math.floor(selectedStaffEmployee.tenureMonths / 12)
     : null;
@@ -1232,6 +1084,8 @@ export default function CompetitiveAnalysis({
   const selectedStaffResponseShare = staffNationalResponses
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
+  const selectedStaffSatisfactionScore = selectedStaffScoring?.satisfactionScore ?? null;
+  const selectedStaffEvidenceLevel = staffEvidenceConfidence(selectedStaffResponses);
   const selectedStaffTenurePeerRange = selectedStaffEmployee
     ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
     : null;
@@ -1244,6 +1098,27 @@ export default function CompetitiveAnalysis({
     selectedStaffTenurePeerRangeEnd === null
       ? null
       : `${formatStaffTenureDuration(selectedStaffTenurePeerRangeStart - 1)} ~ ${formatStaffTenureDuration(selectedStaffTenurePeerRangeEnd)}`;
+  const selectedStaffPeerDelta =
+    selectedStaffSatisfactionScore === null || selectedStaffTenureFinalScore === null
+      ? null
+      : selectedStaffSatisfactionScore - selectedStaffTenureFinalScore;
+  const selectedStaffGrowthZone =
+    selectedStaffSatisfactionScore === null
+      ? 0
+      : selectedStaffPeerDelta !== null && selectedStaffPeerDelta < -2
+        ? 0
+        : selectedStaffPeerDelta !== null && selectedStaffPeerDelta >= 2
+          ? 2
+          : 1;
+  const selectedStaffGrowthLabels = ["집중 코칭", "성장 가속", "성과 확산"] as const;
+  const selectedStaffGrowthLabel = selectedStaffGrowthLabels[selectedStaffGrowthZone];
+  const selectedStaffPrimaryStrength = selectedStaffStrengthKeywords[0]?.label ?? null;
+  const selectedStaffPrimaryImprovement = selectedStaffImprovementKeywords[0]?.label ?? null;
+  const selectedStaffInterviewGuide = selectedStaffPrimaryImprovement
+    ? `최근 상담에서 ‘${selectedStaffPrimaryImprovement}’가 나타난 상황을 한 건 골라, 다음 상담에서 바꿀 행동 한 가지를 합의해 주세요.`
+    : selectedStaffPrimaryStrength
+      ? `강점 ‘${selectedStaffPrimaryStrength}’이 잘 드러난 상담 행동을 한 가지 정리해 팀 안에서 재현해 주세요.`
+      : "평가 코멘트가 더 모일 때까지 실제 상담 사례 한 건을 함께 듣고, 다음 상담 행동 한 가지를 합의해 주세요.";
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1795,6 +1670,249 @@ export default function CompetitiveAnalysis({
       </section>
 
       {selectedStaffAnalysis ? (
+        <section
+          className="growth-navigation"
+          aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 성장 내비게이션`}
+        >
+          <header className="growth-navigation-heading">
+            <div>
+              <h2>소속 영업직원 성장 내비게이션</h2>
+              <p>등수 대신 상담 근거와 면담 행동을 연결합니다.</p>
+            </div>
+            <div className="growth-navigation-source" aria-label="분석 기준">
+              <span>Sales-DMS 기준</span>
+              <span><strong>{staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)}</strong> 기준</span>
+            </div>
+          </header>
+
+          <div className="growth-navigation-workspace">
+            <aside className="growth-staff-roster" aria-label="소속 영업직원 선택">
+              <header>
+                <strong>면담 직원 선택</strong>
+                <span>{rankedSalesStaff.length}명</span>
+              </header>
+              <div className="growth-staff-roster-columns" aria-hidden="true">
+                <span>영업직원 / 입사일</span>
+                <span>상담만족</span>
+                <span>자료 근거</span>
+              </div>
+              <div className="growth-staff-roster-list">
+                {rankedSalesStaff.map(({ employee, average, responses }) => {
+                  const isSelected = employee.name === selectedStaffEmployee?.name;
+                  return (
+                    <button
+                      type="button"
+                      className={isSelected ? "selected" : ""}
+                      aria-pressed={isSelected}
+                      onClick={() => {
+                        setSelectedStaffName(employee.name);
+                        setSmilingStaffName(null);
+                      }}
+                      key={employee.name}
+                    >
+                      <span>
+                        <strong>{employee.name}</strong>
+                        <small>{formatStaffShortDate(employee.hireDate)}</small>
+                      </span>
+                      <b>{average === null ? "―" : average.toFixed(1)}</b>
+                      <em className={`confidence-${staffEvidenceConfidence(responses)}`}>
+                        {responses}건 · {staffEvidenceConfidence(responses)}
+                      </em>
+                    </button>
+                  );
+                })}
+              </div>
+            </aside>
+
+            <div className="growth-navigation-detail">
+              <section className="growth-profile-strip" aria-label="선택 직원 상담 분석 요약">
+                <div className="growth-profile-person">
+                  <span className="growth-profile-photo" aria-hidden="true">
+                    {selectedStaffProfile ? (
+                      <img src={selectedStaffProfile.image} alt="" draggable={false} />
+                    ) : selectedStaffInitials}
+                  </span>
+                  <span>
+                    <small>선택 영업직원</small>
+                    <strong>{selectedStaffEmployee?.name ?? "―"}<i>{selectedStaffEmployee?.jobTitle ?? ""}</i></strong>
+                    <em>{displayShowroomNameWithoutBrand(selected.showroom)} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월</em>
+                  </span>
+                </div>
+                <div className="growth-profile-metric">
+                  <span>상담 만족도</span>
+                  <strong>{selectedStaffScoring?.average?.toFixed(1) ?? "―"}<small>/10</small></strong>
+                  <em>실제 회신만 사용</em>
+                </div>
+                <div className="growth-profile-metric">
+                  <span>자료 신뢰도</span>
+                  <strong className={`confidence-${selectedStaffEvidenceLevel}`}>{selectedStaffEvidenceLevel}</strong>
+                  <em>회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffEmployee?.commentResponses ?? 0}건</em>
+                </div>
+                <div className="growth-profile-metric">
+                  <span>현재 면담 방향</span>
+                  <strong>{selectedStaffGrowthLabel}</strong>
+                  <em>동일연차 기준으로 진단</em>
+                </div>
+              </section>
+
+              <section className="growth-capability consultation">
+                <header>
+                  <div>
+                    <span>01 · 상담 영역</span>
+                    <h3>고객상담 역량</h3>
+                  </div>
+                  <p>2025·2026 수집 누락은 직원 점수에 반영하지 않습니다.</p>
+                </header>
+
+                <div className="growth-capability-grid">
+                  <article className="growth-position-card">
+                    <header>
+                      <div>
+                        <span>상담 역량 위치</span>
+                        <strong>{selectedStaffGrowthLabel}</strong>
+                      </div>
+                      <small>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</small>
+                    </header>
+                    <div
+                      className="growth-zone-track"
+                      style={{ "--growth-zone": selectedStaffGrowthZone } as CSSProperties}
+                      aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}`}
+                    >
+                      {selectedStaffGrowthLabels.map((label, index) => (
+                        <span className={index === selectedStaffGrowthZone ? "active" : ""} key={label}>
+                          <i aria-hidden="true" />
+                          <b>{label}</b>
+                          <small>{index === 0 ? "한 행동부터 교정" : index === 1 ? "강점 유지·전환 보완" : "우수 행동을 확산"}</small>
+                        </span>
+                      ))}
+                      <em aria-hidden="true" />
+                    </div>
+                    <p>
+                      {selectedStaffPeerDelta === null
+                        ? "비교 가능한 회신이 없어 상담 사례 중심으로 면담합니다."
+                        : `동일연차 평균과 ${selectedStaffPeerDelta >= 0 ? "+" : ""}${(selectedStaffPeerDelta / 10).toFixed(1)}점 차이입니다. 등수로 평가하지 않고 다음 행동을 정합니다.`}
+                    </p>
+                  </article>
+
+                  <article className="growth-scatter-card">
+                    <header>
+                      <div><span>전체 상담 분포</span><strong>근속기간 × 상담만족</strong></div>
+                      <small>원 크기 = 실제 회신 근거</small>
+                    </header>
+                    <svg viewBox="0 0 470 250" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포">
+                      {staffScatterYTicks.map((tick) => {
+                        const y = staffScatterY(tick);
+                        return <g className="growth-scatter-grid" key={`growth-y-${tick}`}>
+                          <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={y} y2={y} />
+                          <text x={staffScatterPlot.left - 7} y={y + 3} textAnchor="end">{(tick / 10).toFixed(0)}</text>
+                        </g>;
+                      })}
+                      {staffScatterXTicks.map((tick) => {
+                        const x = staffScatterX(tick);
+                        return <g className="growth-scatter-grid" key={`growth-x-${tick}`}>
+                          <line x1={x} x2={x} y1={staffScatterPlot.top} y2={staffScatterPlot.bottom} />
+                          <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">{tick.toFixed(0)}</text>
+                        </g>;
+                      })}
+                      <text className="growth-scatter-y-label" x="12" y="112" textAnchor="middle">상담만족(10점)</text>
+                      <text className="growth-scatter-x-label" x="245" y="240" textAnchor="middle">근속기간(년)</text>
+                      {staffScatterNationalAverage !== null ? (
+                        <g className="growth-scatter-average">
+                          <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={staffScatterY(staffScatterNationalAverage)} y2={staffScatterY(staffScatterNationalAverage)} />
+                          <text x={staffScatterPlot.right - 2} y={staffScatterY(staffScatterNationalAverage) - 5} textAnchor="end">전국 {(staffScatterNationalAverage / 10).toFixed(1)}</text>
+                        </g>
+                      ) : null}
+                      <g className="growth-scatter-population">
+                        {otherStaffScatterPoints.map((point) => (
+                          <circle
+                            cx={staffScatterX(point.tenureYears)}
+                            cy={staffScatterY(point.finalScore)}
+                            r={Math.min(5.2, 2.2 + Math.sqrt(point.responses) * 0.42)}
+                            key={point.key}
+                          ><title>{`${point.name} · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
+                        ))}
+                      </g>
+                      <g className="growth-scatter-showroom">
+                        {sameShowroomStaffScatterPoints.map((point) => (
+                          <circle
+                            cx={staffScatterX(point.tenureYears)}
+                            cy={staffScatterY(point.finalScore)}
+                            r={Math.min(6, 2.8 + Math.sqrt(point.responses) * 0.46)}
+                            key={point.key}
+                          ><title>{`${point.name} · 동일 전시장 · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
+                        ))}
+                      </g>
+                      {selectedStaffScatterPoint ? (
+                        <g className="growth-scatter-selected" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
+                          <circle className="halo" r="11" />
+                          <circle className="point" r="5" />
+                          <text x="9" y="-9">{selectedStaffScatterPoint.name}</text>
+                        </g>
+                      ) : null}
+                    </svg>
+                    <footer>
+                      <span><i />전국 SC</span><span className="showroom"><i />동일 전시장</span><span className="selected"><i />선택 직원</span>
+                    </footer>
+                  </article>
+                </div>
+
+                <div className="growth-evidence-grid">
+                  <article className="growth-comment-evidence strength">
+                    <header><span>고객 코멘트 · 강점</span><strong>{selectedStaffPrimaryStrength ?? "확인 중"}</strong></header>
+                    <div>
+                      {selectedStaffStrengthKeywords.slice(0, 3).map((keyword) => (
+                        <span key={keyword.label}><b>{keyword.label}</b><small>{keyword.mentions}회</small></span>
+                      ))}
+                      {!selectedStaffStrengthKeywords.length ? <em>분석 가능한 긍정 코멘트가 없습니다.</em> : null}
+                    </div>
+                  </article>
+                  <article className="growth-comment-evidence improvement">
+                    <header><span>고객 코멘트 · 주의 신호</span><strong>{selectedStaffPrimaryImprovement ?? "반복 신호 없음"}</strong></header>
+                    <div>
+                      {selectedStaffImprovementKeywords.slice(0, 3).map((keyword) => (
+                        <span key={keyword.label}><b>{keyword.label}</b><small>{keyword.mentions}회</small></span>
+                      ))}
+                      {!selectedStaffImprovementKeywords.length ? <em>반복 확인된 개선 키워드가 없습니다.</em> : null}
+                    </div>
+                  </article>
+                  <article className="growth-interview-guide">
+                    <header><span>지점장 면담 가이드</span><strong>다음 행동 1개 합의</strong></header>
+                    <p>{selectedStaffInterviewGuide}</p>
+                  </article>
+                </div>
+              </section>
+
+              <section className="growth-capability sales pending">
+                <header>
+                  <div><span>02 · 영업 영역</span><h3>영업활동 역량</h3></div>
+                  <p>영업활동 원자료 연결 후 활성화됩니다.</p>
+                </header>
+                <div className="growth-sales-placeholder">
+                  <div>
+                    <span>상담 → 시승</span><i /><small>전환 흐름</small>
+                  </div>
+                  <div>
+                    <span>시승 → 계약</span><i /><small>전환 흐름</small>
+                  </div>
+                  <div>
+                    <span>계약 → 유지</span><i /><small>계약 해지 방어</small>
+                  </div>
+                  <p>실제 데이터를 받으면 동일하게 <b>역량 위치 · 전체 산포도 · 면담 행동</b>으로 연결합니다. 임의 점수는 표시하지 않습니다.</p>
+                </div>
+              </section>
+
+              <aside className="growth-data-policy">
+                <strong>이번 설계의 데이터 원칙</strong>
+                <span>2025·2026 연도별 증감과 최신성은 판단에서 제외</span>
+                <span>회신 수가 적어도 제외하지 않고 자료 신뢰도만 별도 표시</span>
+                <span>점수에 임의의 8건을 더하지 않고 실제 회신과 고객 코멘트만 사용</span>
+              </aside>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {false && selectedStaffAnalysis ? (
         <section
           ref={staffAnalysisCardRef}
           className={`analysis-staff-card${
