@@ -253,6 +253,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   const navigation = source.slice(start, end);
   assert.ok(start >= 0 && end > start);
   assert.match(navigation, /소속 영업직원 성장 내비게이션/);
+  assert.match(navigation, /영업직원 \/ 입사일자/);
   assert.match(navigation, /집중 코칭/);
   assert.match(navigation, /성장 가속/);
   assert.match(navigation, /성과 확산/);

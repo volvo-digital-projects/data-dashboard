@@ -1697,7 +1697,7 @@ export default function CompetitiveAnalysis({
                 <span>{rankedSalesStaff.length}명</span>
               </header>
               <div className="growth-staff-roster-columns" aria-hidden="true">
-                <span>영업직원 / 입사일</span>
+                <span>영업직원 / 입사일자</span>
                 <span>상담만족</span>
                 <span>자료 근거</span>
               </div>
