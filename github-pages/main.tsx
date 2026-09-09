@@ -1,4 +1,6 @@
 import { StrictMode, useEffect, useMemo, useState } from "react";
+
+// Client-only GitHub Pages entry. Keep this outside Next.js's reserved pages directory.
 import { createRoot } from "react-dom/client";
 import LoginHome from "../app/LoginHome";
 import Dashboard, { CriteriaGuide } from "../app/Dashboard";

@@ -741,7 +741,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   const [layoutSource, pagesSource, noticeSource, css, releaseAsset] =
     await Promise.all([
       readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-      readFile(new URL("../pages/main.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
       readFile(
         new URL("../app/ReleaseUpdateNotice.tsx", import.meta.url),
         "utf8",
@@ -5157,7 +5157,7 @@ test("keeps the dense score rail stable when Edge enforces a minimum font size",
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../pages/main.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(

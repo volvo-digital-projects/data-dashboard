@@ -1,5 +1,7 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 
+// GitHub Pages link adapter; never include it in the server-rendered Worker bundle.
+
 const BASE_PATH = "/data-dashboard/";
 
 type LinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {

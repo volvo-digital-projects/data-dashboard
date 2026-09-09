@@ -5,13 +5,13 @@ import { defineConfig } from "vite";
 const projectRoot = __dirname;
 
 export default defineConfig({
-  root: path.join(projectRoot, "pages"),
+  root: path.join(projectRoot, "github-pages"),
   base: "/data-dashboard/",
   publicDir: false,
   plugins: [react()],
   resolve: {
     alias: {
-      "next/link": path.join(projectRoot, "pages", "next-link.tsx"),
+      "next/link": path.join(projectRoot, "github-pages", "next-link.tsx"),
     },
   },
   css: {
