@@ -1786,7 +1786,7 @@ export default function CompetitiveAnalysis({
               <section className="growth-capability consultation">
                 <header>
                   <div>
-                    <span>01 · 상담 영역</span>
+                    <span>01 · 고객상담 역량</span>
                     <h3>고객상담 역량</h3>
                   </div>
                 </header>
@@ -1943,7 +1943,7 @@ export default function CompetitiveAnalysis({
 
               <section className="growth-capability sales pending">
                 <header>
-                  <div><span>02 · 영업 영역</span><h3>영업활동 역량</h3></div>
+                  <div><span>02 · 영업활동 역량</span><h3>영업활동 역량</h3></div>
                   <p>영업활동 원자료 연결 후 활성화됩니다.</p>
                 </header>
                 <div className="growth-sales-placeholder">
