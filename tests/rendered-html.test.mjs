@@ -264,7 +264,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source, /const staffScoreFreshnessWeight|const staffScorePriorResponses/);
   assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
-  assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 312px minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);/);
+  assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales pending"/);
+  assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns:/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns:/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
   assert.match(navigation, /상담 역량 타코미터/);

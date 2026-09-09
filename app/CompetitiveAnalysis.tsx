@@ -1765,6 +1765,7 @@ export default function CompetitiveAnalysis({
                 </div>
               </section>
 
+              <div className="growth-capability-columns">
               <section className="growth-capability consultation">
                 <header>
                   <div>
@@ -1942,6 +1943,7 @@ export default function CompetitiveAnalysis({
                   <p>실제 데이터를 받으면 동일하게 <b>역량 위치 · 전체 산포도 · 면담 행동</b>으로 연결합니다. 임의 점수는 표시하지 않습니다.</p>
                 </div>
               </section>
+              </div>
 
               <aside className="growth-data-policy">
                 <strong>이번 설계의 데이터 원칙</strong>
