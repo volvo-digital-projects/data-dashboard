@@ -340,10 +340,11 @@ html {
 }
 
 .growth-staff-roster-list button > span strong {
-  width: 3em;
-  flex: 0 0 3em;
+  width: 4.25em;
+  flex: 0 0 4.25em;
   font-size: 12px;
   text-align: left;
+  white-space: nowrap;
 }
 
 .growth-staff-roster-list button > span small {
