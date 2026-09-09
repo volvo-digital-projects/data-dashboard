@@ -367,8 +367,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className=\{`growth-zone-gauge/);
   assert.match(navigation, /상담 역량 타코미터/);
   assert.match(navigation, /M45 190 A165 165/);
-  assert.match(navigation, /className="growth-gauge-current"[\s\S]*?\{selectedStaffGrowthCalculation\}/);
-  assert.match(source, /`본인 \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 =/);
+  assert.match(navigation, /className=\{`growth-gauge-current \$\{selectedStaffGrowthDeltaTone\}`\}[\s\S]*?\{selectedStaffGrowthCalculation\}/);
+  assert.match(source, /selectedStaffPeerDelta > 0[\s\S]*?\? "▲"[\s\S]*?: "▼"/);
+  assert.match(source, /`본인 \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 = \$\{selectedStaffGrowthDeltaMark\} \$\{Math\.abs\(selectedStaffPeerDelta \/ 10\)\.toFixed\(1\)\}점`/);
+  assert.doesNotMatch(source, /selectedStaffPeerDelta >= 0 \? "\+"/);
+  assert.match(css, /\.growth-gauge-current\.positive\s*\{[^}]*fill:\s*var\(--blue\);/);
+  assert.match(css, /\.growth-gauge-current\.negative\s*\{[^}]*fill:\s*var\(--warning\);/);
+  assert.match(css, /\.growth-gauge-current\.neutral\s*\{[^}]*fill:\s*#536f7b;/);
   assert.doesNotMatch(navigation, /className="growth-gauge-current"[^>]*>\{selectedStaffGrowthLabel\}/);
   assert.match(css, /@keyframes growth-gauge-sweep/);
   assert.match(css, /0% \{ transform: rotate\(0deg\); \}/);

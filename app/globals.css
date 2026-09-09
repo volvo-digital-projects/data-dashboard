@@ -748,6 +748,10 @@ html {
   text-anchor: middle;
 }
 
+.growth-gauge-current.positive { fill: var(--blue); }
+.growth-gauge-current.negative { fill: var(--warning); }
+.growth-gauge-current.neutral { fill: #536f7b; }
+
 .growth-zone-gauge.no-evidence .growth-gauge-segments path {
   fill: #edf2f4;
   stroke: #fff;
