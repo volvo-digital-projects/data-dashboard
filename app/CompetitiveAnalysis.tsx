@@ -748,6 +748,47 @@ export default function CompetitiveAnalysis({
   ).length;
 
   useEffect(() => {
+    const root = document.documentElement;
+    const viewport = document.querySelector<HTMLMetaElement>('meta[name="viewport"]');
+    const previousViewport = viewport?.getAttribute("content") ?? null;
+    const preventGestureZoom = (event: Event) => event.preventDefault();
+    const preventModifiedWheelZoom = (event: WheelEvent) => {
+      if (event.ctrlKey || event.metaKey) event.preventDefault();
+    };
+    const preventKeyboardZoom = (event: KeyboardEvent) => {
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        ["+", "-", "=", "0"].includes(event.key)
+      ) {
+        event.preventDefault();
+      }
+    };
+
+    root.classList.add("analysis-viewport-locked");
+    viewport?.setAttribute(
+      "content",
+      "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover",
+    );
+    document.addEventListener("gesturestart", preventGestureZoom, { passive: false });
+    document.addEventListener("gesturechange", preventGestureZoom, { passive: false });
+    document.addEventListener("gestureend", preventGestureZoom, { passive: false });
+    document.addEventListener("wheel", preventModifiedWheelZoom, { passive: false });
+    document.addEventListener("keydown", preventKeyboardZoom);
+
+    return () => {
+      root.classList.remove("analysis-viewport-locked");
+      if (viewport && previousViewport !== null) {
+        viewport.setAttribute("content", previousViewport);
+      }
+      document.removeEventListener("gesturestart", preventGestureZoom);
+      document.removeEventListener("gesturechange", preventGestureZoom);
+      document.removeEventListener("gestureend", preventGestureZoom);
+      document.removeEventListener("wheel", preventModifiedWheelZoom);
+      document.removeEventListener("keydown", preventKeyboardZoom);
+    };
+  }, []);
+
+  useEffect(() => {
     const syncAccessDate = () => setAccessDate(formatAnalysisDate(new Date()));
     syncAccessDate();
     const timer = window.setInterval(syncAccessDate, 60_000);

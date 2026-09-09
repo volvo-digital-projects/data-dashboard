@@ -1091,6 +1091,31 @@ body {
   font-family: var(--font-ui);
 }
 
+html.analysis-viewport-locked,
+html.analysis-viewport-locked body {
+  overscroll-behavior-x: none;
+}
+
+html.analysis-viewport-locked .competitive-analysis-page {
+  touch-action: pan-x pan-y;
+}
+
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 1180px) and (max-width: 1400px) {
+  html.analysis-viewport-locked,
+  html.analysis-viewport-locked body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  html.analysis-viewport-locked .competitive-analysis-page {
+    --dashboard-page-max: 1376px;
+    --dashboard-page-gutter: 24px;
+    width: min(1376px, 100vw);
+    max-width: 100vw;
+  }
+}
+
 button,
 select,
 input {

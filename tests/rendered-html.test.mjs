@@ -2781,6 +2781,22 @@ test("ships project metadata and removes the disposable starter", async () => {
   );
 });
 
+test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {
+  const [source, css] = await Promise.all([
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(source, /root\.classList\.add\("analysis-viewport-locked"\)/);
+  assert.match(source, /minimum-scale=1, maximum-scale=1, user-scalable=no/);
+  assert.match(source, /addEventListener\("gesturestart", preventGestureZoom, \{ passive: false \}\)/);
+  assert.match(source, /addEventListener\("wheel", preventModifiedWheelZoom, \{ passive: false \}\)/);
+  assert.match(source, /\["\+", "-", "=", "0"\]\.includes\(event\.key\)/);
+  assert.match(source, /root\.classList\.remove\("analysis-viewport-locked"\)/);
+  assert.match(css, /html\.analysis-viewport-locked \.competitive-analysis-page\s*\{[^}]*touch-action:\s*pan-x pan-y;/);
+  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 1180px\) and \(max-width: 1400px\)\s*\{[\s\S]*?--dashboard-page-max:\s*1376px;[\s\S]*?--dashboard-page-gutter:\s*24px;[\s\S]*?width:\s*min\(1376px, 100vw\);/);
+});
+
 test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1-Q4", async () => {
   const [showroomsText, cxQ2DscText, dashboardSource] = await Promise.all([
     readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
