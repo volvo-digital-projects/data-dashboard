@@ -278,23 +278,25 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
 });
 
 test("orders review staff by hire date with the newest hire last", async () => {
-  const [response, analysisSource] = await Promise.all([
-    render("/dashboard/6KR6834/analysis?view=dealer"),
+  const [staffData, analysisSource, css] = await Promise.all([
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
-  assert.equal(response.status, 200);
+  const orderedNames = staffData.showrooms["6KR6834"].employees
+    .filter((employee) => employee.role === "영업직원" || employee.role === "영업팀장")
+    .sort((a, b) => a.hireDate.localeCompare(b.hireDate) || a.name.localeCompare(b.name, "ko"))
+    .map((employee) => employee.name);
 
-  const html = (await response.text()).replaceAll("<!-- -->", "");
-  const rosterStart = html.indexOf('class="analysis-staff-roster-list"');
-  const rosterEnd = html.indexOf('class="analysis-staff-detail"', rosterStart);
-  const roster = html.slice(rosterStart, rosterEnd);
-
-  assert.ok(roster.indexOf("송용주") < roster.indexOf("박준수"));
-  assert.ok(roster.indexOf("박준수") < roster.indexOf("정지만"));
+  assert.ok(orderedNames.indexOf("김대준") < orderedNames.indexOf("강석"));
+  assert.ok(orderedNames.indexOf("강석") < orderedNames.indexOf("송용주"));
+  assert.ok(orderedNames.indexOf("송용주") < orderedNames.indexOf("박준수"));
+  assert.ok(orderedNames.indexOf("박준수") < orderedNames.indexOf("정지만"));
   assert.match(
     analysisSource,
-    /if \(a\.finalScore === null && b\.finalScore === null\) \{[\s\S]*?compareStaffHireDateAscending\(a\.employee, b\.employee\)/,
+    /\.sort\(\(a, b\) => compareStaffHireDateAscending\(a\.employee, b\.employee\)\)/,
   );
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 3em;[^}]*flex: 0 0 3em;/);
 });
 
 test("averages Q1-Q2 metrics before combining and keeps staff scores legible", async () => {

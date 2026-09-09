@@ -297,8 +297,10 @@ html {
 }
 
 .growth-staff-roster-list button > span strong {
-  flex: 0 0 auto;
+  width: 3em;
+  flex: 0 0 3em;
   font-size: 12px;
+  text-align: left;
 }
 
 .growth-staff-roster-list button > span small {
