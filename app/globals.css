@@ -155,12 +155,12 @@ html {
 }
 
 .growth-navigation-heading {
-  min-height: 62px;
+  min-height: 46px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 11px 16px;
+  padding: 8px 16px;
   border-bottom: 1px solid #d8e5ea;
   background: #fff;
 }
@@ -176,30 +176,42 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-.growth-navigation-heading p {
-  margin: 4px 0 0;
-  font-size: 11px;
-  color: #718795;
-}
-
 .growth-navigation-source {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   flex: 0 0 auto;
 }
 
 .growth-navigation-source span {
-  min-height: 28px;
+  width: 92px;
+  min-width: 92px;
+  min-height: 21px;
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
+  justify-content: center;
   gap: 4px;
-  padding: 0 13px;
-  border: 1px solid #d4e2e8;
+  padding: 4px 7px;
+  overflow: hidden;
+  border: 1px solid #dde8ec;
   border-radius: 999px;
-  background: #f5fafc;
-  font-size: 10px;
-  color: #617b8a;
+  background: rgba(244, 248, 250, 0.9);
+  color: #607581;
+  font-family: var(--font-latin);
+  font-size: 7.5px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.growth-navigation-source strong {
+  color: #244f64;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
 }
 
 .growth-navigation-workspace {
@@ -5225,16 +5237,30 @@ input:focus-visible {
 }
 
 .analysis-ranking-card > .analysis-card-heading > strong {
-  min-width: 48px;
-  height: 27px;
-  display: inline-grid;
-  place-items: center;
-  border-radius: 7px;
-  color: var(--blue);
-  background: var(--blue-soft);
+  min-width: 52px;
+  min-height: 21px;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 7px;
+  border: 1px solid #dde8ec;
+  border-radius: 999px;
+  background: rgba(244, 248, 250, 0.9);
+  color: #607581;
   font-family: var(--font-latin);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 7.5px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.analysis-ranking-card > .analysis-card-heading > strong b {
+  color: #244f64;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
 }
 
 .analysis-ranking-head,

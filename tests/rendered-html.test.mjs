@@ -253,6 +253,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   const navigation = source.slice(start, end);
   assert.ok(start >= 0 && end > start);
   assert.match(navigation, /소속 영업직원 성장 내비게이션/);
+  assert.doesNotMatch(navigation, /등수 대신 상담 근거와 면담 행동을 연결합니다/);
   assert.match(navigation, /영업직원 \/ 입사일자/);
   assert.match(navigation, /자료 근거 - 회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.match(navigation, /자료 근거 회신 \$\{responses\}건, 2023년부터 2026년 YTD/);
@@ -275,6 +276,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);
+  assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: 92px;[^}]*min-height: 21px;[^}]*font-size: 7\.5px;/);
+  assert.match(source, /<strong><b>\{groupItems\.length\}<\/b>개소<\/strong>/);
+  assert.match(css, /\.analysis-ranking-card > \.analysis-card-heading > strong\s*\{[^}]*min-height: 21px;[^}]*border-radius: 999px;[^}]*font-size: 7\.5px;/);
   assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales pending"/);
   assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);

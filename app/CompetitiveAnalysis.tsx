@@ -1628,7 +1628,7 @@ export default function CompetitiveAnalysis({
                 )}
               </h2>
             </div>
-            <strong>{groupItems.length}개소</strong>
+            <strong><b>{groupItems.length}</b>개소</strong>
           </header>
           <div className="analysis-ranking-head" aria-hidden="true">
             <span>순위 · 전시장</span>
@@ -1694,7 +1694,6 @@ export default function CompetitiveAnalysis({
           <header className="growth-navigation-heading">
             <div>
               <h2>소속 영업직원 성장 내비게이션</h2>
-              <p>등수 대신 상담 근거와 면담 행동을 연결합니다.</p>
             </div>
             <div className="growth-navigation-source" aria-label="분석 기준">
               <span>Sales-DMS 기준</span>
