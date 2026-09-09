@@ -1977,7 +1977,7 @@ export default function CompetitiveAnalysis({
                           <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">{tick.toFixed(0)}</text>
                         </g>;
                       })}
-                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">상담만족(10점)</text>
+                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">고객상담 만족(10점)</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {staffScatterNationalAverage !== null ? (
                         <line

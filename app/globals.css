@@ -781,6 +781,11 @@ html {
   font-size: 7px;
 }
 
+.growth-scatter-y-label,
+.growth-scatter-x-label {
+  font-size: 8px;
+}
+
 .growth-scatter-y-label {
   transform: rotate(-90deg);
   transform-origin: 12px 93px;

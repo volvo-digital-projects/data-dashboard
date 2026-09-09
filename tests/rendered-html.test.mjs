@@ -312,6 +312,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /지점장 면담 가이드|다음 행동 1개 합의/);
   assert.doesNotMatch(navigation, /전체 상담 분포/);
   assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
+  assert.match(navigation, /className="growth-scatter-y-label"[^>]*>고객상담 만족\(10점\)<\/text>/);
+  assert.match(navigation, /className="growth-scatter-x-label"[^>]*>근속기간\(년\)<\/text>/);
+  assert.doesNotMatch(navigation, />상담만족\(10점\)<\/text>/);
+  assert.match(css, /\.growth-scatter-y-label,\s*\.growth-scatter-x-label\s*\{[^}]*font-size:\s*8px;/);
   assert.match(navigation, /className="growth-scatter-average-line"/);
   assert.match(navigation, /className="growth-scatter-average-label"[\s\S]*?staffScatterPlot\.right - 28[\s\S]*?staffScatterY\(staffScatterNationalAverage\) - 36/);
   assert.match(navigation, /<text x="28" y="11" textAnchor="middle">전국 평균<\/text>/);
