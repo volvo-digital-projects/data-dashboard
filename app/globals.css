@@ -685,8 +685,8 @@ html {
 
 .growth-gauge-current {
   fill: #183f51;
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 10.5px;
+  font-weight: 650;
   text-anchor: middle;
 }
 

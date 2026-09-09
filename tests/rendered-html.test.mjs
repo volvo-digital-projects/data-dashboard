@@ -325,6 +325,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className=\{`growth-zone-gauge/);
   assert.match(navigation, /상담 역량 타코미터/);
   assert.match(navigation, /M45 190 A165 165/);
+  assert.match(navigation, /className="growth-gauge-current"[\s\S]*?\{selectedStaffGrowthCalculation\}/);
+  assert.match(source, /`본인 \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 =/);
+  assert.doesNotMatch(navigation, /className="growth-gauge-current"[^>]*>\{selectedStaffGrowthLabel\}/);
   assert.match(css, /@keyframes growth-gauge-sweep/);
   assert.match(css, /0% \{ transform: rotate\(0deg\); \}/);
   assert.match(css, /transform: rotate\(var\(--growth-needle-angle\)\)/);

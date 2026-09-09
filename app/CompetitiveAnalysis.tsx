@@ -1130,6 +1130,12 @@ export default function CompetitiveAnalysis({
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
+  const selectedStaffGrowthCalculation =
+    selectedStaffSatisfactionScore === null ||
+    selectedStaffTenureFinalScore === null ||
+    selectedStaffPeerDelta === null
+      ? "본인 점수와 동일연차 평균을 비교해 위치를 산출합니다"
+      : `본인 ${(selectedStaffSatisfactionScore / 10).toFixed(1)}점 − 동일연차 평균 ${(selectedStaffTenureFinalScore / 10).toFixed(1)}점 = ${selectedStaffPeerDelta >= 0 ? "+" : ""}${(selectedStaffPeerDelta / 10).toFixed(1)}점`;
   const selectedStaffPrimaryStrength = selectedStaffStrengthKeywords[0]?.label ?? null;
   const selectedStaffPrimaryImprovement = selectedStaffImprovementKeywords[0]?.label ?? null;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
@@ -1884,7 +1890,7 @@ export default function CompetitiveAnalysis({
                             <circle className="needle-cap" cx="210" cy="190" r="5" />
                           </g>
                         )}
-                        <text className="growth-gauge-current" x="210" y="220">{selectedStaffGrowthLabel}</text>
+                        <text className="growth-gauge-current" x="210" y="220">{selectedStaffGrowthCalculation}</text>
                       </svg>
                     </div>
                   </article>
