@@ -268,6 +268,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*4\.25em;[\s\S]*?flex:\s*0 0 4\.25em;[\s\S]*?white-space:\s*nowrap;/);
+  assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*38px;/);
   assert.match(navigation, /자료 근거 회신 \$\{responses\}건, 2023년부터 2026년 YTD/);
   assert.doesNotMatch(navigation, /const evidenceConfidence = staffEvidenceConfidence\(responses\)/);
   assert.match(navigation, /집중 코칭/);
