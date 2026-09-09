@@ -1104,14 +1104,16 @@ export default function CompetitiveAnalysis({
       : selectedStaffSatisfactionScore - selectedStaffTenureFinalScore;
   const selectedStaffGrowthZone =
     selectedStaffSatisfactionScore === null
-      ? 0
+      ? null
       : selectedStaffPeerDelta !== null && selectedStaffPeerDelta < -2
         ? 0
         : selectedStaffPeerDelta !== null && selectedStaffPeerDelta >= 2
           ? 2
           : 1;
   const selectedStaffGrowthLabels = ["집중 코칭", "성장 가속", "성과 확산"] as const;
-  const selectedStaffGrowthLabel = selectedStaffGrowthLabels[selectedStaffGrowthZone];
+  const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
+    ? "자료 확인"
+    : selectedStaffGrowthLabels[selectedStaffGrowthZone];
   const selectedStaffPrimaryStrength = selectedStaffStrengthKeywords[0]?.label ?? null;
   const selectedStaffPrimaryImprovement = selectedStaffImprovementKeywords[0]?.label ?? null;
   const selectedStaffInterviewGuide = selectedStaffPrimaryImprovement
@@ -1774,12 +1776,12 @@ export default function CompetitiveAnalysis({
                       <small>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</small>
                     </header>
                     <div
-                      className="growth-zone-track"
-                      style={{ "--growth-zone": selectedStaffGrowthZone } as CSSProperties}
+                      className={`growth-zone-track${selectedStaffGrowthZone === null ? " no-evidence" : ""}`}
+                      style={{ "--growth-zone": selectedStaffGrowthZone ?? 1 } as CSSProperties}
                       aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}`}
                     >
                       {selectedStaffGrowthLabels.map((label, index) => (
-                        <span className={index === selectedStaffGrowthZone ? "active" : ""} key={label}>
+                        <span className={selectedStaffGrowthZone !== null && index === selectedStaffGrowthZone ? "active" : ""} key={label}>
                           <i aria-hidden="true" />
                           <b>{label}</b>
                           <small>{index === 0 ? "한 행동부터 교정" : index === 1 ? "강점 유지·전환 보완" : "우수 행동을 확산"}</small>

@@ -578,6 +578,10 @@ html {
   box-shadow: 0 0 0 2px #6ebbd1, 0 2px 7px rgba(17, 61, 80, 0.22);
 }
 
+.growth-zone-track.no-evidence > em {
+  display: none;
+}
+
 .growth-zone-track > span {
   min-height: 75px;
   padding: 12px 7px 7px;
