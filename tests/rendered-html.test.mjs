@@ -255,6 +255,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /소속 영업직원 성장 내비게이션/);
   assert.doesNotMatch(navigation, /등수 대신 상담 근거와 면담 행동을 연결합니다/);
   assert.match(navigation, /영업직원 \/ 입사일자/);
+  assert.match(navigation, /총 <strong>\{rankedSalesStaff\.length\}<\/strong>명/);
   assert.match(navigation, /회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(navigation, /자료 근거 회신 \$\{responses\}건, 2023년부터 2026년 YTD/);

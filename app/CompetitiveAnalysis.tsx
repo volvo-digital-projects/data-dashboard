@@ -1705,7 +1705,7 @@ export default function CompetitiveAnalysis({
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
               <header>
                 <strong>면담 직원 선택</strong>
-                <span>{rankedSalesStaff.length}명</span>
+                <span>총 <strong>{rankedSalesStaff.length}</strong>명</span>
               </header>
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
