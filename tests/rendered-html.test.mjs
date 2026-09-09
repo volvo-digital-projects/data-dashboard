@@ -268,6 +268,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(profile, /displayShowroomNameWithoutBrand\(selected\.showroom\)/);
   assert.match(navigation, /selectedStaffEmployee\?\.jobTitle \?\? ""\} · \{selectedStaffTenureYears \?\? 0\}년 \{selectedStaffTenureMonths \?\? 0\}개월/);
   assert.match(navigation, /growth-profile-evidence-count">회신 \{selectedStaffResponses\}건 · 코멘트/);
+  assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
   assert.match(navigation, /회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.doesNotMatch(navigation, /자료 근거 -/);

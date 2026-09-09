@@ -1800,7 +1800,6 @@ export default function CompetitiveAnalysis({
                     {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
                     <small>/10</small>
                   </strong>
-                  <em>실제 회신만 사용</em>
                 </div>
                 <div className="growth-profile-metric">
                   <span>자료 신뢰도</span>
@@ -1812,7 +1811,6 @@ export default function CompetitiveAnalysis({
                 <div className="growth-profile-metric">
                   <span>현재 면담 방향</span>
                   <strong>{selectedStaffGrowthLabel}</strong>
-                  <em>동일연차 기준으로 진단</em>
                 </div>
               </section>
 
