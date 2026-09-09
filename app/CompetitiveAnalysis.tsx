@@ -1697,6 +1697,8 @@ export default function CompetitiveAnalysis({
             </div>
             <div className="growth-navigation-source" aria-label="분석 기준">
               <span>Sales-DMS 기준</span>
+              <span>VOC 상담만족도</span>
+              <span>23 ~ 26 YTD 누적 기준</span>
               <span><strong>{staffAnalysisSource.rosterCheckedAt.replaceAll("-", "").slice(2)}</strong> 기준</span>
             </div>
           </header>

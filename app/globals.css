@@ -184,14 +184,14 @@ html {
 }
 
 .growth-navigation-source span {
-  width: 92px;
-  min-width: 92px;
-  min-height: 21px;
+  width: 112px;
+  min-width: 112px;
+  height: 22px;
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 4px 7px;
+  padding: 1px 7px 0;
   overflow: hidden;
   border: 1px solid #dde8ec;
   border-radius: 999px;

@@ -257,6 +257,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(start >= 0 && end > start);
   assert.ok(profileStart >= 0 && profileEnd > profileStart);
   assert.match(navigation, /소속 영업직원 성장 내비게이션/);
+  assert.match(navigation, /Sales-DMS 기준/);
+  assert.match(navigation, /VOC 상담만족도/);
+  assert.match(navigation, /23 ~ 26 YTD 누적 기준/);
+  assert.match(navigation, /<strong>\{staffAnalysisSource\.rosterCheckedAt[\s\S]*?<\/strong> 기준/);
   assert.doesNotMatch(navigation, /등수 대신 상담 근거와 면담 행동을 연결합니다/);
   assert.match(navigation, /영업직원 \/ 입사일자/);
   assert.doesNotMatch(navigation, /면담 직원 선택|총 <strong>\{rankedSalesStaff\.length\}<\/strong>명/);
@@ -297,7 +301,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);
-  assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: 92px;[^}]*min-height: 21px;[^}]*font-size: 7\.5px;/);
+  assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: 112px;[^}]*min-width: 112px;[^}]*height: 22px;[^}]*align-items: center;[^}]*justify-content: center;[^}]*font-size: 7\.5px;/);
   assert.match(source, /<strong><b>\{groupItems\.length\}<\/b>개소<\/strong>/);
   assert.match(css, /\.analysis-ranking-card > \.analysis-card-heading > strong\s*\{[^}]*min-height: 21px;[^}]*border-radius: 999px;[^}]*font-size: 7\.5px;/);
   assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales pending"/);
