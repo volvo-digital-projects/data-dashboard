@@ -729,7 +729,7 @@ html {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 470 / 250;
+  aspect-ratio: 470 / 210;
   overflow: visible;
 }
 
@@ -747,7 +747,7 @@ html {
 
 .growth-scatter-y-label {
   transform: rotate(-90deg);
-  transform-origin: 12px 112px;
+  transform-origin: 12px 93px;
 }
 
 .growth-scatter-average line {
@@ -810,8 +810,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  min-height: 22px;
+  gap: 12px;
+  min-height: 20px;
+  padding: 0 6px;
   border-top: 1px solid #e4ecef;
   font-size: 8px;
   color: #6f838e;
@@ -832,6 +833,15 @@ html {
 
 .growth-scatter-card footer .showroom i { background: #31a985; }
 .growth-scatter-card footer .selected i { background: #177493; box-shadow: 0 0 0 2px #a7d6e3; }
+
+.growth-scatter-evidence-note {
+  padding-left: 9px;
+  border-left: 1px solid #dce7eb;
+  color: #78909b;
+  font-size: 7.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
 
 .growth-evidence-grid {
   display: grid;

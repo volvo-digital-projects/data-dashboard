@@ -270,6 +270,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /성과 확산/);
   assert.match(navigation, /고객 코멘트 · 강점/);
   assert.match(navigation, /지점장 면담 가이드/);
+  assert.doesNotMatch(navigation, /전체 상담 분포/);
+  assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
+  assert.match(navigation, /viewBox="0 0 470 210"/);
   assert.match(navigation, /영업활동 원자료 연결 후 활성화/);
   assert.match(navigation, /영업 역량 위치/);
   assert.match(navigation, /전체 영업활동 분포/);
@@ -291,6 +294,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-capability > header\s*\{[^}]*min-height: 34px;/);
+  assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
   assert.match(css, /\.growth-comment-evidence,[\s\S]*?\.growth-interview-guide\s*\{[^}]*min-height: 84px;/);
   assert.match(css, /\.growth-data-policy\s*\{[^}]*gap: 6px;[^}]*padding: 5px 10px;/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);

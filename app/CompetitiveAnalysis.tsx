@@ -1156,7 +1156,7 @@ export default function CompetitiveAnalysis({
       ) / 5,
     ) * 5,
   );
-  const staffScatterPlot = { left: 42, right: 448, top: 20, bottom: 204 };
+  const staffScatterPlot = { left: 42, right: 448, top: 16, bottom: 170 };
   const staffScatterMinScore = Math.max(0, Math.min(
     60,
     Math.floor(Math.min(100, ...staffTenureScatterPopulation.map((point) => point.finalScore)) / 10) * 10,
@@ -1853,10 +1853,9 @@ export default function CompetitiveAnalysis({
 
                   <article className="growth-scatter-card">
                     <header>
-                      <div><span>전체 상담 분포</span><strong>근속기간 × 상담만족</strong></div>
-                      <small>원 크기 = 실제 회신 근거</small>
+                      <div><strong>근속기간 × 상담만족</strong></div>
                     </header>
-                    <svg viewBox="0 0 470 250" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포">
+                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포">
                       {staffScatterYTicks.map((tick) => {
                         const y = staffScatterY(tick);
                         return <g className="growth-scatter-grid" key={`growth-y-${tick}`}>
@@ -1871,8 +1870,8 @@ export default function CompetitiveAnalysis({
                           <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">{tick.toFixed(0)}</text>
                         </g>;
                       })}
-                      <text className="growth-scatter-y-label" x="12" y="112" textAnchor="middle">상담만족(10점)</text>
-                      <text className="growth-scatter-x-label" x="245" y="240" textAnchor="middle">근속기간(년)</text>
+                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">상담만족(10점)</text>
+                      <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {staffScatterNationalAverage !== null ? (
                         <g className="growth-scatter-average">
                           <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={staffScatterY(staffScatterNationalAverage)} y2={staffScatterY(staffScatterNationalAverage)} />
@@ -1910,6 +1909,7 @@ export default function CompetitiveAnalysis({
                       <span><i />전국 SC</span>
                       <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} 전시장</span>
                       <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
+                      <small className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거</small>
                     </footer>
                   </article>
                 </div>
