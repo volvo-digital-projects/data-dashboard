@@ -265,6 +265,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 312px minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns:/);
+  assert.match(css, /@keyframes growth-navigation-arrow/);
+  assert.match(css, /\.growth-zone-track\[data-zone="0"\] > em/);
+  assert.match(css, /\.growth-zone-track > span:nth-of-type\(3\)/);
 });
 
 test("orders review staff by hire date with the newest hire last", async () => {

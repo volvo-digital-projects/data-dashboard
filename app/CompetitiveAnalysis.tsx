@@ -1777,6 +1777,7 @@ export default function CompetitiveAnalysis({
                     <div
                       className={`growth-zone-track${selectedStaffGrowthZone === null ? " no-evidence" : ""}`}
                       style={{ "--growth-zone": selectedStaffGrowthZone ?? 1 } as CSSProperties}
+                      data-zone={selectedStaffGrowthZone ?? "none"}
                       aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}`}
                     >
                       {selectedStaffGrowthLabels.map((label, index) => (
@@ -1786,7 +1787,10 @@ export default function CompetitiveAnalysis({
                           <small>{index === 0 ? "한 행동부터 교정" : index === 1 ? "강점 유지·전환 보완" : "우수 행동을 확산"}</small>
                         </span>
                       ))}
-                      <em aria-hidden="true" />
+                      <em
+                        key={`${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}-${selectedStaffGrowthZone ?? "none"}`}
+                        aria-hidden="true"
+                      />
                     </div>
                     <p>
                       {selectedStaffPeerDelta === null
