@@ -1980,10 +1980,13 @@ export default function CompetitiveAnalysis({
                       <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">상담만족(10점)</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {staffScatterNationalAverage !== null ? (
-                        <g className="growth-scatter-average">
-                          <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={staffScatterY(staffScatterNationalAverage)} y2={staffScatterY(staffScatterNationalAverage)} />
-                          <text x={staffScatterPlot.right - 2} y={staffScatterY(staffScatterNationalAverage) - 5} textAnchor="end">전국 {(staffScatterNationalAverage / 10).toFixed(1)}</text>
-                        </g>
+                        <line
+                          className="growth-scatter-average-line"
+                          x1={staffScatterPlot.left}
+                          x2={staffScatterPlot.right}
+                          y1={staffScatterY(staffScatterNationalAverage)}
+                          y2={staffScatterY(staffScatterNationalAverage)}
+                        />
                       ) : null}
                       <g className="growth-scatter-population">
                         {otherStaffScatterPoints.map((point) => (
@@ -2009,6 +2012,19 @@ export default function CompetitiveAnalysis({
                         <g className="growth-scatter-selected" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
                           <circle className="halo" r="11" />
                           <circle className="point" r="5" />
+                        </g>
+                      ) : null}
+                      {staffScatterNationalAverage !== null ? (
+                        <g
+                          className="growth-scatter-average-label"
+                          transform={`translate(${staffScatterPlot.right - 28} ${staffScatterY(staffScatterNationalAverage) - 36})`}
+                        >
+                          <path className="pointer" d="M 20 28 L 28 36 L 36 28 Z" />
+                          <rect width="56" height="30" rx="4" />
+                          <text x="28" y="11" textAnchor="middle">전국 평균</text>
+                          <text className="score" x="28" y="23" textAnchor="middle">
+                            {(staffScatterNationalAverage / 10).toFixed(1)}점
+                          </text>
                         </g>
                       ) : null}
                     </svg>

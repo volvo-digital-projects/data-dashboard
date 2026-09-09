@@ -310,6 +310,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /지점장 면담 가이드|다음 행동 1개 합의/);
   assert.doesNotMatch(navigation, /전체 상담 분포/);
   assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
+  assert.match(navigation, /className="growth-scatter-average-line"/);
+  assert.match(navigation, /className="growth-scatter-average-label"[\s\S]*?staffScatterPlot\.right - 28[\s\S]*?staffScatterY\(staffScatterNationalAverage\) - 36/);
+  assert.match(navigation, /<text x="28" y="11" textAnchor="middle">전국 평균<\/text>/);
+  assert.match(navigation, /\{\(staffScatterNationalAverage \/ 10\)\.toFixed\(1\)\}점/);
+  assert.doesNotMatch(navigation, /textAnchor="end">전국 \{\(staffScatterNationalAverage \/ 10\)\.toFixed\(1\)\}/);
+  assert.match(css, /\.growth-scatter-average-label rect,[\s\S]*?\.growth-scatter-average-label \.pointer\s*\{[^}]*fill:\s*rgba\(255, 250, 240, 0\.96\);[^}]*stroke:\s*rgba\(197, 138, 27, 0\.34\);/);
+  assert.match(css, /\.growth-scatter-average-label text\s*\{[^}]*fill:\s*#9a6714;[^}]*font-size:\s*7\.5px;[^}]*font-weight:\s*650;/);
+  assert.match(css, /\.growth-scatter-average-label text\.score\s*\{[^}]*font-size:\s*9px;[^}]*font-weight:\s*750;/);
   assert.match(navigation, /viewBox="0 0 470 210"/);
   assert.match(navigation, /전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다\./);
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
