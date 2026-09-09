@@ -265,7 +265,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-staff-roster > header/);
   assert.doesNotMatch(profile, /displayShowroomNameWithoutBrand\(selected\.showroom\)/);
   assert.match(navigation, /selectedStaffEmployee\?\.jobTitle \?\? ""\} · \{selectedStaffTenureYears \?\? 0\}년 \{selectedStaffTenureMonths \?\? 0\}개월/);
-  assert.match(navigation, /growth-profile-evidence-count">회신 \{selectedStaffResponses\}건 · 코멘트/);
+  assert.match(source, /const selectedStaffCommentTotalMentions =\s*selectedStaffStrengthTotalMentions \+ selectedStaffImprovementTotalMentions;/);
+  assert.match(navigation, /growth-profile-evidence-count">회신 \{selectedStaffResponses\}건 · 코멘트 \{selectedStaffCommentTotalMentions\}건\(중복포함\)<\/small>/);
+  assert.doesNotMatch(navigation, /코멘트 \{selectedStaffEmployee\?\.commentResponses \?\? 0\}건/);
   assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
   assert.match(navigation, /평균 상담만족도/);

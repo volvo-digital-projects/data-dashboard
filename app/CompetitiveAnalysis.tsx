@@ -998,6 +998,8 @@ export default function CompetitiveAnalysis({
     (sum, keyword) => sum + keyword.mentions,
     0,
   );
+  const selectedStaffCommentTotalMentions =
+    selectedStaffStrengthTotalMentions + selectedStaffImprovementTotalMentions;
   const selectedStaffStrengthMax = Math.max(
     1,
     ...selectedStaffStrengthKeywords.map((keyword) => keyword.mentions),
@@ -1836,7 +1838,7 @@ export default function CompetitiveAnalysis({
                   <span>자료 신뢰도</span>
                   <strong className={`confidence-${selectedStaffEvidenceLevel}`}>
                     {selectedStaffEvidenceLevel}
-                    <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffEmployee?.commentResponses ?? 0}건</small>
+                    <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
                   </strong>
                 </div>
                 <div className="growth-profile-metric">
