@@ -297,7 +297,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /전체 영업활동 분포/);
   assert.match(navigation, /산포도 표시 공간/);
   assert.doesNotMatch(navigation, /상담 → 시승|시승 → 계약|계약 → 유지/);
-  assert.match(profile, /className="growth-profile-person-label"[\s\S]*?상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%/);
+  assert.match(profile, /\{selectedStaffTenureMonths \?\? 0\}개월[\s\S]*?<em>\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)<\/em>/);
+  assert.doesNotMatch(profile, /growth-profile-person-label/);
   assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/10<\/small>/);
   assert.match(source, /staff\.finalScore > selectedStaffSatisfactionScore/);
   assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);

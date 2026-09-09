@@ -423,20 +423,6 @@ html {
   color: #6e8491;
 }
 
-.growth-profile-person-label {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.growth-profile-person-label em {
-  font-size: 9px;
-  font-style: normal;
-  color: #3f7588;
-  white-space: nowrap;
-}
-
 .growth-profile-person strong {
   margin-top: 3px;
   display: flex;
@@ -453,6 +439,14 @@ html {
   font-style: normal;
   font-weight: 500;
   color: #647d89;
+}
+
+.growth-profile-person strong i em {
+  margin-left: 4px;
+  color: #3f7588;
+  font-style: normal;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .growth-profile-metric em {

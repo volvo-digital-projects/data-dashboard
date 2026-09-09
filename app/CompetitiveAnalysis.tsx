@@ -1787,15 +1787,15 @@ export default function CompetitiveAnalysis({
                     ) : selectedStaffInitials}
                   </span>
                   <span>
-                    <span className="growth-profile-person-label">
-                      <small>선택 영업직원</small>
-                      {selectedStaffSatisfactionTopPercent === null ? null : (
-                        <em>상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%</em>
-                      )}
-                    </span>
+                    <small>선택 영업직원</small>
                     <strong>
                       {selectedStaffEmployee?.name ?? "―"}
-                      <i>{selectedStaffEmployee?.jobTitle ?? ""} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월</i>
+                      <i>
+                        {selectedStaffEmployee?.jobTitle ?? ""} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월
+                        {selectedStaffSatisfactionTopPercent === null ? null : (
+                          <em>(상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%)</em>
+                        )}
+                      </i>
                     </strong>
                   </span>
                 </div>
