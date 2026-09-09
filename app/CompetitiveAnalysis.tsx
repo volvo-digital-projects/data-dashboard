@@ -980,9 +980,24 @@ export default function CompetitiveAnalysis({
       new Map<string, number>(),
     ),
     ([label, mentions]) => ({ label, mentions }),
+  ).sort(
+    (left, right) =>
+      right.mentions - left.mentions || left.label.localeCompare(right.label, "ko"),
   );
-  const selectedStaffStrengthKeywords =
-    selectedStaffEmployee?.strengthKeywords ?? [];
+  const selectedStaffStrengthKeywords = [
+    ...(selectedStaffEmployee?.strengthKeywords ?? []),
+  ].sort(
+    (left, right) =>
+      right.mentions - left.mentions || left.label.localeCompare(right.label, "ko"),
+  );
+  const selectedStaffStrengthTotalMentions = selectedStaffStrengthKeywords.reduce(
+    (sum, keyword) => sum + keyword.mentions,
+    0,
+  );
+  const selectedStaffImprovementTotalMentions = selectedStaffImprovementKeywords.reduce(
+    (sum, keyword) => sum + keyword.mentions,
+    0,
+  );
   const selectedStaffStrengthMax = Math.max(
     1,
     ...selectedStaffStrengthKeywords.map((keyword) => keyword.mentions),
@@ -1136,8 +1151,6 @@ export default function CompetitiveAnalysis({
     selectedStaffPeerDelta === null
       ? "본인 점수와 동일연차 평균을 비교해 위치를 산출합니다"
       : `본인 ${(selectedStaffSatisfactionScore / 10).toFixed(1)}점 − 동일연차 평균 ${(selectedStaffTenureFinalScore / 10).toFixed(1)}점 = ${selectedStaffPeerDelta >= 0 ? "+" : ""}${(selectedStaffPeerDelta / 10).toFixed(1)}점`;
-  const selectedStaffPrimaryStrength = selectedStaffStrengthKeywords[0]?.label ?? null;
-  const selectedStaffPrimaryImprovement = selectedStaffImprovementKeywords[0]?.label ?? null;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1967,44 +1980,56 @@ export default function CompetitiveAnalysis({
 
                 <div className="growth-evidence-grid">
                   <article className="growth-comment-evidence strength">
-                    <header><span>유지·강화 포인트</span><strong>{selectedStaffPrimaryStrength ?? "확인 중"}</strong></header>
+                    <header><span>유지·강화 포인트</span><strong>중복 포함 총 {selectedStaffStrengthTotalMentions}회</strong></header>
                     <div className="growth-comment-bars">
                       {selectedStaffStrengthKeywords.length ? (
-                        selectedStaffStrengthKeywords.slice(0, 3).map((keyword, index) => (
-                          <div
-                            className="growth-comment-bar"
-                            key={keyword.label}
-                            style={{
-                              "--growth-comment-bar-ratio": `${(keyword.mentions / selectedStaffStrengthMax) * 100}%`,
-                              "--growth-comment-bar-index": index,
-                            } as CSSProperties}
-                          >
-                            <span>{keyword.label}</span>
-                            <i aria-hidden="true"><b /></i>
-                            <small>{keyword.mentions}회</small>
-                          </div>
-                        ))
+                        <>
+                          {[selectedStaffStrengthKeywords.slice(0, 3), selectedStaffStrengthKeywords.slice(3, 6)].map((column, columnIndex) => (
+                            <div className="growth-comment-bar-column" key={`strength-${columnIndex}`}>
+                              {column.map((keyword, index) => (
+                                <div
+                                  className="growth-comment-bar"
+                                  key={keyword.label}
+                                  style={{
+                                    "--growth-comment-bar-ratio": `${selectedStaffStrengthTotalMentions > 0 ? (keyword.mentions / selectedStaffStrengthTotalMentions) * 100 : 0}%`,
+                                    "--growth-comment-bar-index": columnIndex * 3 + index,
+                                  } as CSSProperties}
+                                >
+                                  <span>{keyword.label}</span>
+                                  <i aria-hidden="true"><b /></i>
+                                  <small>{keyword.mentions}회 <em>({Math.round((keyword.mentions / selectedStaffStrengthTotalMentions) * 100)}%)</em></small>
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+                        </>
                       ) : <em>분석 가능한 긍정 코멘트가 없습니다.</em>}
                     </div>
                   </article>
                   <article className="growth-comment-evidence improvement">
-                    <header><span>보완·수정 포인트</span><strong>{selectedStaffPrimaryImprovement ?? "반복 신호 없음"}</strong></header>
+                    <header><span>보완·수정 포인트</span><strong>중복 포함 총 {selectedStaffImprovementTotalMentions}회</strong></header>
                     <div className="growth-comment-bars">
                       {selectedStaffImprovementKeywords.length ? (
-                        selectedStaffImprovementKeywords.slice(0, 3).map((keyword, index) => (
-                          <div
-                            className="growth-comment-bar"
-                            key={keyword.label}
-                            style={{
-                              "--growth-comment-bar-ratio": `${(keyword.mentions / selectedStaffImprovementMax) * 100}%`,
-                              "--growth-comment-bar-index": index,
-                            } as CSSProperties}
-                          >
-                            <span>{keyword.label}</span>
-                            <i aria-hidden="true"><b /></i>
-                            <small>{keyword.mentions}회</small>
-                          </div>
-                        ))
+                        <>
+                          {[selectedStaffImprovementKeywords.slice(0, 3), selectedStaffImprovementKeywords.slice(3, 6)].map((column, columnIndex) => (
+                            <div className="growth-comment-bar-column" key={`improvement-${columnIndex}`}>
+                              {column.map((keyword, index) => (
+                                <div
+                                  className="growth-comment-bar"
+                                  key={keyword.label}
+                                  style={{
+                                    "--growth-comment-bar-ratio": `${selectedStaffImprovementTotalMentions > 0 ? (keyword.mentions / selectedStaffImprovementTotalMentions) * 100 : 0}%`,
+                                    "--growth-comment-bar-index": columnIndex * 3 + index,
+                                  } as CSSProperties}
+                                >
+                                  <span>{keyword.label}</span>
+                                  <i aria-hidden="true"><b /></i>
+                                  <small>{keyword.mentions}회 <em>({Math.round((keyword.mentions / selectedStaffImprovementTotalMentions) * 100)}%)</em></small>
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+                        </>
                       ) : <em>반복 확인된 보완 코멘트가 없습니다.</em>}
                     </div>
                   </article>

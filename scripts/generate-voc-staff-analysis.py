@@ -390,9 +390,9 @@ def build_payload(
                     "tenureBucketLabel": person["tenureBucketLabel"],
                     "years": years,
                     "commentResponses": len(comments),
-                    "strengthKeywords": keyword_summary(comments, STRENGTH_PATTERNS, 5),
+                    "strengthKeywords": keyword_summary(comments, STRENGTH_PATTERNS, 6),
                     "improvementKeywords": keyword_summary(
-                        comments, IMPROVEMENT_PATTERNS, 5
+                        comments, IMPROVEMENT_PATTERNS, 6
                     ),
                 }
             )
