@@ -272,6 +272,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
   assert.match(navigation, /평균 상담만족도/);
   assert.match(navigation, /누적 회신건수/);
+  assert.match(navigation, /<span>지점장 코칭<\/span>/);
+  assert.doesNotMatch(navigation, /<span>현재 면담 방향<\/span>/);
   assert.doesNotMatch(navigation, /<span>상담만족<\/span>|회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(108px, 1fr\) 76px 80px;/);
   assert.doesNotMatch(navigation, /자료 근거 -/);

@@ -1883,7 +1883,7 @@ export default function CompetitiveAnalysis({
                   </strong>
                 </div>
                 <div className="growth-profile-metric">
-                  <span>현재 면담 방향</span>
+                  <span>지점장 코칭</span>
                   <strong>{selectedStaffGrowthLabel}</strong>
                 </div>
               </section>
