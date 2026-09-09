@@ -291,7 +291,7 @@ html {
 }
 
 .growth-staff-roster-columns span:not(:first-child) {
-  text-align: center;
+  text-align: right;
 }
 
 .growth-staff-roster-list {
@@ -305,7 +305,7 @@ html {
   width: 100%;
   min-height: 38px;
   margin: 0 0 1px;
-  padding: 0 5px 0 8px;
+  padding: 0 10px 0 8px;
   border: 1px solid transparent;
   border-radius: 6px;
   background: transparent;
@@ -373,9 +373,11 @@ html {
 }
 
 .growth-staff-roster-list button > b {
+  width: 100%;
   font-family: var(--font-volvo);
   font-size: 13px;
-  text-align: center;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
   color: #176887;
 }
 
@@ -383,20 +385,22 @@ html {
   min-width: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: 9px;
   font-style: normal;
-  text-align: center;
+  text-align: right;
   color: #6d818d;
 }
 
 .growth-staff-roster-list button > em > b {
-  min-width: 4ch;
+  width: 100%;
+  min-width: 0;
   font-family: var(--font-volvo);
   font-size: 9px;
   font-style: normal;
   font-weight: 650;
-  text-align: center;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
   color: currentColor;
   white-space: nowrap;
 }

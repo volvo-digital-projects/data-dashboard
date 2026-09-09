@@ -280,6 +280,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-lead-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*13px;[^}]*border-radius:\s*50%;[^}]*background:\s*#176f8a;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*38px;/);
+  assert.match(css, /\.growth-staff-roster-columns span:not\(:first-child\)\s*\{[^}]*text-align:\s*right;/);
+  assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*padding:\s*0 10px 0 8px;/);
+  assert.match(css, /\.growth-staff-roster-list button > b\s*\{[^}]*width:\s*100%;[^}]*font-variant-numeric:\s*tabular-nums;[^}]*text-align:\s*right;/);
+  assert.match(css, /\.growth-staff-roster-list button > em\s*\{[^}]*justify-content:\s*flex-end;[^}]*text-align:\s*right;/);
+  assert.match(css, /\.growth-staff-roster-list button > em > b\s*\{[^}]*width:\s*100%;[^}]*font-variant-numeric:\s*tabular-nums;[^}]*text-align:\s*right;/);
   assert.match(navigation, /자료 근거 회신 \$\{responses\}건, 2023년부터 2026년 YTD/);
   assert.doesNotMatch(navigation, /const evidenceConfidence = staffEvidenceConfidence\(responses\)/);
   assert.match(navigation, /집중 코칭/);
