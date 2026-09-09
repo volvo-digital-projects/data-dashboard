@@ -1710,7 +1710,7 @@ export default function CompetitiveAnalysis({
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
                 <span>상담만족</span>
-                <span>자료 근거 - 회신 건수<small>(23 ~ 26 YTD)</small></span>
+                <span>회신 건수<small>(23 ~ 26 YTD)</small></span>
               </div>
               <div className="growth-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, responses }) => {
