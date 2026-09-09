@@ -365,6 +365,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /이번 설계의 데이터 원칙|2025·2026 연도별 증감과 최신성은 판단에서 제외/);
   assert.doesNotMatch(css, /\.growth-data-policy\s*\{/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
+  assert.match(source, /const selectedShowroomStaffResponses = rankedSalesStaff\.reduce\([\s\S]*?const selectedShowroomStaffAverage = selectedShowroomStaffResponses/);
+  assert.match(source, /\(staff\.average \?\? 0\) \* staff\.responses/);
+  assert.match(navigation, /className="growth-position-benchmarks"[\s\S]*?className="showroom-average"[\s\S]*?displayShowroomNameWithoutBrand\(selected\.showroom\)\} 평균 \{selectedShowroomStaffAverage/);
+  assert.match(navigation, /className="growth-gauge-showroom-average-marker"[\s\S]*?--growth-showroom-average-angle/);
+  assert.match(navigation, /전시장 평균 \{selectedShowroomStaffAverage\?\.toFixed\(1\)\}점/);
+  assert.match(css, /\.growth-position-benchmarks \.showroom-average i\s*\{[^}]*width:\s*13px;[^}]*border-top:\s*1px dashed #667f8a;/);
+  assert.match(css, /\.growth-gauge-showroom-average-marker\s*\{[^}]*rotate\(var\(--growth-showroom-average-angle\)\);[^}]*color:\s*#667f8a;/);
+  assert.match(css, /\.growth-gauge-showroom-average-marker line\s*\{[^}]*stroke-width:\s*1;[^}]*stroke-dasharray:\s*3 3;[^}]*opacity:\s*0\.58;/);
   assert.match(navigation, /상담 역량 타코미터/);
   assert.match(navigation, /M45 190 A165 165/);
   assert.match(navigation, /className=\{`growth-gauge-current \$\{selectedStaffGrowthDeltaTone\}`\}[\s\S]*?\{selectedStaffGrowthCalculation\}/);

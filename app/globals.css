@@ -653,6 +653,27 @@ html {
   color: #79909c;
 }
 
+.growth-position-benchmarks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.growth-position-benchmarks .showroom-average {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #5f7783;
+}
+
+.growth-position-benchmarks .showroom-average i {
+  width: 13px;
+  height: 0;
+  display: inline-block;
+  border-top: 1px dashed #667f8a;
+}
+
 .growth-zone-gauge {
   --growth-needle-angle: 90deg;
   position: relative;
@@ -683,6 +704,30 @@ html {
 
 .growth-gauge-segments path.active {
   filter: drop-shadow(0 5px 5px rgba(29, 69, 84, 0.18));
+}
+
+.growth-gauge-showroom-average-marker {
+  transform: rotate(var(--growth-showroom-average-angle));
+  transform-origin: 210px 190px;
+  transform-box: view-box;
+  color: #667f8a;
+  pointer-events: none;
+}
+
+.growth-gauge-showroom-average-marker line {
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.58;
+  vector-effect: non-scaling-stroke;
+}
+
+.growth-gauge-showroom-average-marker circle {
+  fill: #f8fbfc;
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.78;
+  vector-effect: non-scaling-stroke;
 }
 
 .growth-gauge-label text {

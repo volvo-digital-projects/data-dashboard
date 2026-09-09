@@ -978,6 +978,16 @@ export default function CompetitiveAnalysis({
   const selectedStaffScoring = rankedSalesStaff.find(
     ({ employee }) => employee.name === selectedStaffEmployee?.name,
   );
+  const selectedShowroomStaffResponses = rankedSalesStaff.reduce(
+    (sum, staff) => sum + staff.responses,
+    0,
+  );
+  const selectedShowroomStaffAverage = selectedShowroomStaffResponses
+    ? rankedSalesStaff.reduce(
+        (sum, staff) => sum + (staff.average ?? 0) * staff.responses,
+        0,
+      ) / selectedShowroomStaffResponses
+    : null;
   const selectedStaffNationalRankIndex = selectedStaffEmployee &&
     selectedStaffScoring?.finalScore !== null
       ? nationalStaffFinalScores.findIndex(
@@ -1185,6 +1195,15 @@ export default function CompetitiveAnalysis({
       : Math.round(
           ((Math.max(-6, Math.min(6, selectedStaffPeerDelta)) + 6) / 12) * 1800,
         ) / 10;
+  const selectedShowroomGrowthDelta =
+    selectedShowroomStaffAverage === null || selectedStaffTenureFinalScore === null
+      ? null
+      : selectedShowroomStaffAverage * 10 - selectedStaffTenureFinalScore;
+  const selectedShowroomGrowthAngle = selectedShowroomGrowthDelta === null
+    ? null
+    : Math.round(
+        ((Math.max(-6, Math.min(6, selectedShowroomGrowthDelta)) + 6) / 12) * 1800,
+      ) / 10;
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
@@ -1913,7 +1932,10 @@ export default function CompetitiveAnalysis({
                         <span>상담 역량 위치</span>
                         <strong>{selectedStaffGrowthLabel}</strong>
                       </div>
-                      <small>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</small>
+                      <small className="growth-position-benchmarks">
+                        <span className="showroom-average"><i aria-hidden="true" />{displayShowroomNameWithoutBrand(selected.showroom)} 평균 {selectedShowroomStaffAverage === null ? "―" : selectedShowroomStaffAverage.toFixed(1)}점</span>
+                        <span>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</span>
+                      </small>
                     </header>
                     <div
                       className={`growth-zone-gauge${selectedStaffGrowthZone === null ? " no-evidence" : ""}`}
@@ -1931,6 +1953,17 @@ export default function CompetitiveAnalysis({
                           <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L264 96.5 A108 108 0 0 0 156 96.5 Z" />
                           <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L318 190 A108 108 0 0 0 264 96.5 Z" />
                         </g>
+                        {selectedShowroomGrowthAngle === null ? null : (
+                          <g
+                            className="growth-gauge-showroom-average-marker"
+                            style={{ "--growth-showroom-average-angle": `${selectedShowroomGrowthAngle}deg` } as CSSProperties}
+                            aria-label={`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`}
+                          >
+                            <line x1="48" x2="102" y1="190" y2="190" />
+                            <circle cx="55" cy="190" r="2.5" />
+                            <title>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 {selectedShowroomStaffAverage?.toFixed(1)}점</title>
+                          </g>
+                        )}
                         <g className="growth-gauge-ticks" aria-hidden="true">
                           <circle cx="124" cy="168" r="2.4" /><circle cx="134" cy="146" r="2.4" />
                           <circle cx="149" cy="128" r="2.4" /><circle cx="167" cy="114" r="2.4" />
