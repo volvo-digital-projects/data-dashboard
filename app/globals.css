@@ -227,46 +227,6 @@ html {
   background: #fff;
 }
 
-.growth-staff-roster > header {
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-  border-bottom: 1px solid #dde8ec;
-}
-
-.growth-staff-roster > header strong {
-  font-size: 12px;
-  color: #173e53;
-}
-
-.growth-staff-roster > header span {
-  min-height: 21px;
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 2px;
-  padding: 4px 9px;
-  border: 1px solid #dde8ec;
-  border-radius: 999px;
-  background: rgba(244, 248, 250, 0.9);
-  color: #607581;
-  font-family: var(--font-latin);
-  font-size: 7.5px;
-  font-weight: 650;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.growth-staff-roster > header span strong {
-  color: #244f64;
-  font-family: var(--font-latin);
-  font-size: 9px;
-  font-weight: 750;
-  font-variant-numeric: tabular-nums;
-}
-
 .growth-staff-roster-columns,
 .growth-staff-roster-list button {
   display: grid;
