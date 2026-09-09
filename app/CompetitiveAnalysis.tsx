@@ -1948,16 +1948,18 @@ export default function CompetitiveAnalysis({
                   <p>영업활동 원자료 연결 후 활성화됩니다.</p>
                 </header>
                 <div className="growth-sales-placeholder">
-                  <div>
-                    <span>상담 → 시승</span><i /><small>전환 흐름</small>
-                  </div>
-                  <div>
-                    <span>시승 → 계약</span><i /><small>전환 흐름</small>
-                  </div>
-                  <div>
-                    <span>계약 → 유지</span><i /><small>계약 해지 방어</small>
-                  </div>
-                  <p>실제 데이터를 받으면 동일하게 <b>역량 위치 · 전체 산포도 · 면담 행동</b>으로 연결합니다. 임의 점수는 표시하지 않습니다.</p>
+                  <article className="growth-sales-position-reserve">
+                    <header>
+                      <div><span>영업 역량 위치</span><strong>원자료 연결 후 표시</strong></div>
+                    </header>
+                    <div className="growth-sales-navigation-reserve" aria-hidden="true" />
+                  </article>
+                  <article className="growth-sales-scatter-reserve">
+                    <header>
+                      <div><span>전체 영업활동 분포</span><strong>산포도 표시 공간</strong></div>
+                    </header>
+                    <div className="growth-sales-scatter-canvas" aria-hidden="true" />
+                  </article>
                 </div>
               </section>
               </div>

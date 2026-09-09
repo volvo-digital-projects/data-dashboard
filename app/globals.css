@@ -494,7 +494,7 @@ html {
 .growth-capability-columns {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   align-items: stretch;
 }
@@ -540,7 +540,7 @@ html {
 .growth-capability-grid {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 7px;
   padding: 7px;
 }
@@ -597,7 +597,7 @@ html {
   --growth-needle-angle: 90deg;
   position: relative;
   margin: 5px auto 4px;
-  max-width: 330px;
+  width: min(100%, 430px);
 }
 
 .growth-zone-gauge > svg {
@@ -876,53 +876,66 @@ html {
 .growth-sales-placeholder {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, minmax(62px, 1fr)) auto;
-  gap: 8px;
-  padding: 8px;
+  grid-template-rows: minmax(260px, 0.82fr) minmax(330px, 1.18fr);
+  gap: 7px;
+  padding: 7px;
   background: #f9fbfc;
 }
 
-.growth-sales-placeholder > div {
-  min-height: 62px;
-  display: grid;
-  grid-template-columns: 92px minmax(60px, 1fr) 72px;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 10px;
-  border: 1px dashed #c9d9df;
+.growth-sales-position-reserve,
+.growth-sales-scatter-reserve {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #dce7eb;
   border-radius: 5px;
+  background: #fbfdfe;
+}
+
+.growth-sales-position-reserve > header,
+.growth-sales-scatter-reserve > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.growth-sales-position-reserve > header span,
+.growth-sales-scatter-reserve > header span {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 9px;
+  color: #728995;
+}
+
+.growth-sales-position-reserve > header strong,
+.growth-sales-scatter-reserve > header strong {
+  font-size: 13px;
+  color: #657d88;
+}
+
+.growth-sales-navigation-reserve,
+.growth-sales-scatter-canvas {
+  flex: 1;
+  min-height: 0;
+  margin-top: 10px;
+  border: 1px dashed #c9d9df;
+  border-radius: 4px;
   background: #fff;
 }
 
-.growth-sales-placeholder > div span,
-.growth-sales-placeholder > div small {
-  display: block;
-  font-size: 9px;
-  color: #6d838e;
+.growth-sales-navigation-reserve {
+  background:
+    linear-gradient(90deg, rgba(238, 146, 121, 0.18) 0 33.33%, rgba(98, 172, 195, 0.18) 33.33% 66.66%, rgba(107, 183, 155, 0.18) 66.66% 100%) top 44% left / 100% 5px no-repeat,
+    #fff;
 }
 
-.growth-sales-placeholder > div i {
-  display: block;
-  width: 100%;
-  height: 5px;
-  margin: 0;
-  border-radius: 999px;
-  background: #e3ebee;
-}
-
-.growth-sales-placeholder > div small {
-  color: #a0aeb5;
-  text-align: right;
-}
-
-.growth-sales-placeholder > p {
-  margin: 0;
-  padding: 12px 14px;
-  border-radius: 5px;
-  background: #edf4f7;
-  font-size: 10px;
-  line-height: 1.6;
-  color: #627985;
+.growth-sales-scatter-canvas {
+  background:
+    linear-gradient(#edf2f4 1px, transparent 1px) 0 0 / 100% 25%,
+    linear-gradient(90deg, #edf2f4 1px, transparent 1px) 0 0 / 20% 100%,
+    #fff;
 }
 
 .growth-data-policy {
@@ -952,7 +965,7 @@ html {
 @media (max-width: 1180px) {
   .growth-navigation-workspace { grid-template-columns: 260px minmax(0, 1fr); }
   .growth-profile-strip { grid-template-columns: minmax(190px, 1.2fr) repeat(3, minmax(112px, 0.8fr)); }
-  .growth-capability-columns { grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr); }
+  .growth-capability-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 920px) {

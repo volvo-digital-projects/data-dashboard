@@ -263,6 +263,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /고객 코멘트 · 강점/);
   assert.match(navigation, /지점장 면담 가이드/);
   assert.match(navigation, /영업활동 원자료 연결 후 활성화/);
+  assert.match(navigation, /영업 역량 위치/);
+  assert.match(navigation, /전체 영업활동 분포/);
+  assert.match(navigation, /산포도 표시 공간/);
+  assert.doesNotMatch(navigation, /상담 → 시승|시승 → 계약|계약 → 유지/);
   assert.match(navigation, /\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)/);
   assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/10<\/small>/);
   assert.match(source, /staff\.finalScore > selectedStaffSatisfactionScore/);
@@ -272,8 +276,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);/);
   assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales pending"/);
-  assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns:/);
-  assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns:/);
+  assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
   assert.match(navigation, /상담 역량 타코미터/);
   assert.match(navigation, /M45 190 A165 165/);
