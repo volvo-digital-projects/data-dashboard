@@ -1132,11 +1132,6 @@ export default function CompetitiveAnalysis({
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
   const selectedStaffPrimaryStrength = selectedStaffStrengthKeywords[0]?.label ?? null;
   const selectedStaffPrimaryImprovement = selectedStaffImprovementKeywords[0]?.label ?? null;
-  const selectedStaffInterviewGuide = selectedStaffPrimaryImprovement
-    ? `최근 상담에서 ‘${selectedStaffPrimaryImprovement}’가 나타난 상황을 한 건 골라, 다음 상담에서 바꿀 행동 한 가지를 합의해 주세요.`
-    : selectedStaffPrimaryStrength
-      ? `강점 ‘${selectedStaffPrimaryStrength}’이 잘 드러난 상담 행동을 한 가지 정리해 팀 안에서 재현해 주세요.`
-      : "평가 코멘트가 더 모일 때까지 실제 상담 사례 한 건을 함께 듣고, 다음 상담 행동 한 가지를 합의해 주세요.";
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
@@ -1956,26 +1951,46 @@ export default function CompetitiveAnalysis({
 
                 <div className="growth-evidence-grid">
                   <article className="growth-comment-evidence strength">
-                    <header><span>고객 코멘트 · 강점</span><strong>{selectedStaffPrimaryStrength ?? "확인 중"}</strong></header>
-                    <div>
-                      {selectedStaffStrengthKeywords.slice(0, 3).map((keyword) => (
-                        <span key={keyword.label}><b>{keyword.label}</b><small>{keyword.mentions}회</small></span>
-                      ))}
-                      {!selectedStaffStrengthKeywords.length ? <em>분석 가능한 긍정 코멘트가 없습니다.</em> : null}
+                    <header><span>유지·강화 포인트</span><strong>{selectedStaffPrimaryStrength ?? "확인 중"}</strong></header>
+                    <div className="growth-comment-bars">
+                      {selectedStaffStrengthKeywords.length ? (
+                        selectedStaffStrengthKeywords.slice(0, 3).map((keyword, index) => (
+                          <div
+                            className="growth-comment-bar"
+                            key={keyword.label}
+                            style={{
+                              "--growth-comment-bar-ratio": `${(keyword.mentions / selectedStaffStrengthMax) * 100}%`,
+                              "--growth-comment-bar-index": index,
+                            } as CSSProperties}
+                          >
+                            <span>{keyword.label}</span>
+                            <i aria-hidden="true"><b /></i>
+                            <small>{keyword.mentions}회</small>
+                          </div>
+                        ))
+                      ) : <em>분석 가능한 긍정 코멘트가 없습니다.</em>}
                     </div>
                   </article>
                   <article className="growth-comment-evidence improvement">
-                    <header><span>고객 코멘트 · 주의 신호</span><strong>{selectedStaffPrimaryImprovement ?? "반복 신호 없음"}</strong></header>
-                    <div>
-                      {selectedStaffImprovementKeywords.slice(0, 3).map((keyword) => (
-                        <span key={keyword.label}><b>{keyword.label}</b><small>{keyword.mentions}회</small></span>
-                      ))}
-                      {!selectedStaffImprovementKeywords.length ? <em>반복 확인된 개선 키워드가 없습니다.</em> : null}
+                    <header><span>보완·수정 포인트</span><strong>{selectedStaffPrimaryImprovement ?? "반복 신호 없음"}</strong></header>
+                    <div className="growth-comment-bars">
+                      {selectedStaffImprovementKeywords.length ? (
+                        selectedStaffImprovementKeywords.slice(0, 3).map((keyword, index) => (
+                          <div
+                            className="growth-comment-bar"
+                            key={keyword.label}
+                            style={{
+                              "--growth-comment-bar-ratio": `${(keyword.mentions / selectedStaffImprovementMax) * 100}%`,
+                              "--growth-comment-bar-index": index,
+                            } as CSSProperties}
+                          >
+                            <span>{keyword.label}</span>
+                            <i aria-hidden="true"><b /></i>
+                            <small>{keyword.mentions}회</small>
+                          </div>
+                        ))
+                      ) : <em>반복 확인된 보완 코멘트가 없습니다.</em>}
                     </div>
-                  </article>
-                  <article className="growth-interview-guide">
-                    <header><span>지점장 면담 가이드</span><strong>다음 행동 1개 합의</strong></header>
-                    <p>{selectedStaffInterviewGuide}</p>
                   </article>
                 </div>
               </section>

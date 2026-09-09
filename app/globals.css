@@ -557,8 +557,7 @@ html {
 
 .growth-position-card,
 .growth-scatter-card,
-.growth-comment-evidence,
-.growth-interview-guide {
+.growth-comment-evidence {
   min-width: 0;
   border: 1px solid #dce7eb;
   border-radius: 5px;
@@ -571,8 +570,7 @@ html {
 
 .growth-position-card > header,
 .growth-scatter-card > header,
-.growth-comment-evidence > header,
-.growth-interview-guide > header {
+.growth-comment-evidence > header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -581,8 +579,7 @@ html {
 
 .growth-position-card > header div span,
 .growth-scatter-card > header div span,
-.growth-comment-evidence > header span,
-.growth-interview-guide > header span {
+.growth-comment-evidence > header span {
   display: block;
   margin-bottom: 3px;
   font-size: 9px;
@@ -591,8 +588,7 @@ html {
 
 .growth-position-card > header strong,
 .growth-scatter-card > header strong,
-.growth-comment-evidence > header strong,
-.growth-interview-guide > header strong {
+.growth-comment-evidence > header strong {
   font-size: 13px;
   color: #184b61;
 }
@@ -824,65 +820,98 @@ html {
 
 .growth-evidence-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 5px;
   padding: 0 5px 5px;
 }
 
-.growth-comment-evidence,
-.growth-interview-guide {
-  min-height: 84px;
+.growth-comment-evidence {
+  min-height: 88px;
   padding: 7px 8px;
 }
 
-.growth-interview-guide {
-  grid-column: 1 / -1;
-}
-
 .growth-comment-evidence.strength { border-top: 3px solid #4ba388; }
-.growth-comment-evidence.improvement { border-top: 3px solid #eb9170; }
-.growth-interview-guide { border-top: 3px solid #4f9fba; background: #eff7fa; }
+.growth-comment-evidence.improvement { border-top: 3px solid #d96761; }
 
-.growth-comment-evidence > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 8px;
+.growth-comment-evidence.strength > header span,
+.growth-comment-evidence.strength > header strong {
+  color: #27785f;
 }
 
-.growth-comment-evidence > div > span {
-  display: inline-flex;
+.growth-comment-evidence.improvement > header span,
+.growth-comment-evidence.improvement > header strong {
+  color: #a34f4d;
+}
+
+.growth-comment-bars {
+  display: grid;
+  gap: 4px;
+  margin-top: 7px;
+}
+
+.growth-comment-bar {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(72px, 104px) minmax(80px, 1fr) 28px;
   align-items: center;
-  gap: 5px;
-  padding: 4px 6px;
-  border-radius: 999px;
-  background: #edf5f2;
+  gap: 7px;
+}
+
+.growth-comment-bar > span {
+  overflow: hidden;
   font-size: 9px;
+  font-weight: 700;
   color: #377461;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.growth-comment-evidence.improvement > div > span {
-  background: #fff1eb;
-  color: #a65c43;
+.growth-comment-evidence.improvement .growth-comment-bar > span,
+.growth-comment-evidence.improvement .growth-comment-bar > small {
+  color: #a34f4d;
 }
 
-.growth-comment-evidence > div small {
+.growth-comment-bar > i {
+  height: 9px;
+  overflow: hidden;
+  border: 1px solid #dbe9e5;
+  border-radius: 3px;
+  background: #f2f7f5;
+}
+
+.growth-comment-evidence.improvement .growth-comment-bar > i {
+  border-color: #f0dada;
+  background: #fcf4f4;
+}
+
+.growth-comment-bar > i > b {
+  width: var(--growth-comment-bar-ratio);
+  height: 100%;
+  display: block;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #b8ddd1 0%, #58aa8e 58%, #1f7e65 100%);
+  transform-origin: left center;
+  animation: analysis-insight-bar-enter 440ms cubic-bezier(0.22, 0.72, 0.22, 1) both;
+  animation-delay: calc(var(--growth-comment-bar-index) * 55ms);
+}
+
+.growth-comment-evidence.improvement .growth-comment-bar > i > b {
+  background: linear-gradient(90deg, #f2c1c0 0%, #df7b78 58%, #bd4548 100%);
+}
+
+.growth-comment-bar > small {
   font-size: 8px;
-  color: inherit;
-  opacity: 0.72;
+  color: #51796f;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
-.growth-comment-evidence > div em {
+.growth-comment-bars > em {
   font-size: 9px;
   font-style: normal;
   color: #82939c;
-}
-
-.growth-interview-guide p {
-  margin: 7px 0 0;
-  font-size: 10px;
-  line-height: 1.45;
-  color: #4b6978;
 }
 
 .growth-capability.sales > header div span { color: #b97858; }

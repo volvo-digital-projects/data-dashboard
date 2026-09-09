@@ -282,8 +282,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /01 · 상담 영역|02 · 영업 영역/);
   assert.match(navigation, /성장 가속/);
   assert.match(navigation, /성과 확산/);
-  assert.match(navigation, /고객 코멘트 · 강점/);
-  assert.match(navigation, /지점장 면담 가이드/);
+  assert.match(navigation, /유지·강화 포인트/);
+  assert.match(navigation, /보완·수정 포인트/);
+  assert.match(navigation, /className="growth-comment-bars"/);
+  assert.match(navigation, /--growth-comment-bar-ratio/);
+  assert.doesNotMatch(navigation, /지점장 면담 가이드|다음 행동 1개 합의/);
   assert.doesNotMatch(navigation, /전체 상담 분포/);
   assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
   assert.match(navigation, /viewBox="0 0 470 210"/);
@@ -312,7 +315,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-capability > header\s*\{[^}]*min-height: 34px;/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
-  assert.match(css, /\.growth-comment-evidence,[\s\S]*?\.growth-interview-guide\s*\{[^}]*min-height: 84px;/);
+  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-comment-evidence\s*\{[^}]*min-height: 88px;/);
+  assert.match(css, /\.growth-comment-bar > i > b\s*\{[^}]*width: var\(--growth-comment-bar-ratio\);/);
+  assert.match(css, /\.growth-comment-evidence\.improvement \.growth-comment-bar > i > b\s*\{[^}]*#bd4548/);
+  assert.doesNotMatch(css, /\.growth-interview-guide/);
   assert.doesNotMatch(navigation, /이번 설계의 데이터 원칙|2025·2026 연도별 증감과 최신성은 판단에서 제외/);
   assert.doesNotMatch(css, /\.growth-data-policy\s*\{/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
