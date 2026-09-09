@@ -1751,8 +1751,8 @@ export default function CompetitiveAnalysis({
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
-                <span>상담만족</span>
-                <span>회신 건수<small>(23 ~ 26 YTD)</small></span>
+                <span>평균 상담만족도</span>
+                <span>누적 회신건수</span>
               </div>
               <div className="growth-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, responses }) => {

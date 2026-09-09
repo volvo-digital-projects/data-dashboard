@@ -239,7 +239,7 @@ html {
 .growth-staff-roster-columns,
 .growth-staff-roster-list button {
   display: grid;
-  grid-template-columns: minmax(112px, 1fr) 58px 92px;
+  grid-template-columns: minmax(108px, 1fr) 76px 80px;
   align-items: center;
 }
 
@@ -248,25 +248,13 @@ html {
   padding: 0 10px 0 14px;
   background: #f6fafb;
   border-bottom: 1px solid #e3ecef;
-  font-size: 9px;
+  font-size: 8.5px;
   line-height: 1.25;
   color: #81949e;
 }
 
 .growth-staff-roster-columns span:not(:first-child) {
   text-align: center;
-}
-
-.growth-staff-roster-columns span:last-child {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.growth-staff-roster-columns span:last-child small {
-  margin-top: 1px;
-  font-size: 8px;
-  color: #718995;
 }
 
 .growth-staff-roster-list {

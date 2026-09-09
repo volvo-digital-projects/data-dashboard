@@ -268,7 +268,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /growth-profile-evidence-count">회신 \{selectedStaffResponses\}건 · 코멘트/);
   assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
-  assert.match(navigation, /회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
+  assert.match(navigation, /평균 상담만족도/);
+  assert.match(navigation, /누적 회신건수/);
+  assert.doesNotMatch(navigation, /<span>상담만족<\/span>|회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
+  assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(108px, 1fr\) 76px 80px;/);
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*4\.25em;[\s\S]*?flex:\s*0 0 4\.25em;[\s\S]*?white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*38px;/);
