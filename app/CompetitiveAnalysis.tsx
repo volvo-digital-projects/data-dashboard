@@ -1962,12 +1962,6 @@ export default function CompetitiveAnalysis({
               </section>
               </div>
 
-              <aside className="growth-data-policy">
-                <strong>이번 설계의 데이터 원칙</strong>
-                <span>2025·2026 연도별 증감과 최신성은 판단에서 제외</span>
-                <span>회신 수가 적어도 제외하지 않고 자료 신뢰도만 별도 표시</span>
-                <span>점수에 임의의 8건을 더하지 않고 실제 회신과 고객 코멘트만 사용</span>
-              </aside>
             </div>
           </div>
         </section>

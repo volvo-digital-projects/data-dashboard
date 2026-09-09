@@ -296,7 +296,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-capability > header\s*\{[^}]*min-height: 34px;/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
   assert.match(css, /\.growth-comment-evidence,[\s\S]*?\.growth-interview-guide\s*\{[^}]*min-height: 84px;/);
-  assert.match(css, /\.growth-data-policy\s*\{[^}]*gap: 6px;[^}]*padding: 5px 10px;/);
+  assert.doesNotMatch(navigation, /이번 설계의 데이터 원칙|2025·2026 연도별 증감과 최신성은 판단에서 제외/);
+  assert.doesNotMatch(css, /\.growth-data-policy\s*\{/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
   assert.match(navigation, /상담 역량 타코미터/);
   assert.match(navigation, /M45 190 A165 165/);
