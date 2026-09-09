@@ -167,10 +167,13 @@ html {
 
 .growth-navigation-heading h2 {
   margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #173e53;
+  color: #11283d;
+  font-family: var(--font-korean);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.25px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .growth-navigation-heading p {
