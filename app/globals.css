@@ -388,8 +388,8 @@ html {
 .growth-navigation-detail {
   min-width: 0;
   display: grid;
-  gap: 8px;
-  padding: 8px;
+  gap: 6px;
+  padding: 6px;
 }
 
 .growth-profile-strip {
@@ -404,8 +404,8 @@ html {
 
 .growth-profile-strip > div {
   min-width: 0;
-  min-height: 86px;
-  padding: 12px 14px;
+  min-height: 74px;
+  padding: 9px 12px;
   border-left: 1px solid #e1eaee;
 }
 
@@ -420,8 +420,8 @@ html {
 }
 
 .growth-profile-photo {
-  width: 46px;
-  height: 58px;
+  width: 42px;
+  height: 52px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
@@ -535,19 +535,19 @@ html {
 }
 
 .growth-capability > header {
-  min-height: 52px;
+  min-height: 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 9px 13px;
+  padding: 6px 11px;
   border-bottom: 1px solid #dce7eb;
   background: #f8fbfc;
 }
 
 .growth-capability > header div span {
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 0;
   font-family: var(--font-volvo);
   font-size: 9px;
   font-weight: 700;
@@ -572,8 +572,8 @@ html {
   min-width: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 7px;
-  padding: 7px;
+  gap: 5px;
+  padding: 5px;
 }
 
 .growth-position-card,
@@ -587,7 +587,7 @@ html {
 }
 
 .growth-position-card {
-  padding: 9px;
+  padding: 7px;
 }
 
 .growth-position-card > header,
@@ -627,8 +627,8 @@ html {
 .growth-zone-gauge {
   --growth-needle-angle: 90deg;
   position: relative;
-  margin: 5px auto 4px;
-  width: min(100%, 430px);
+  margin: 2px auto 0;
+  width: min(100%, 380px);
 }
 
 .growth-zone-gauge > svg {
@@ -722,7 +722,7 @@ html {
 }
 
 .growth-scatter-card {
-  padding: 10px 10px 6px;
+  padding: 8px 8px 4px;
 }
 
 .growth-scatter-card svg {
@@ -836,14 +836,14 @@ html {
 .growth-evidence-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
-  padding: 0 7px 7px;
+  gap: 5px;
+  padding: 0 5px 5px;
 }
 
 .growth-comment-evidence,
 .growth-interview-guide {
-  min-height: 102px;
-  padding: 9px 10px;
+  min-height: 84px;
+  padding: 7px 8px;
 }
 
 .growth-interview-guide {
@@ -857,15 +857,15 @@ html {
 .growth-comment-evidence > div {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
+  gap: 5px;
+  margin-top: 8px;
 }
 
 .growth-comment-evidence > div > span {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 7px;
+  padding: 4px 6px;
   border-radius: 999px;
   background: #edf5f2;
   font-size: 9px;
@@ -890,9 +890,9 @@ html {
 }
 
 .growth-interview-guide p {
-  margin: 11px 0 0;
+  margin: 7px 0 0;
   font-size: 10px;
-  line-height: 1.65;
+  line-height: 1.45;
   color: #4b6978;
 }
 
@@ -907,9 +907,9 @@ html {
 .growth-sales-placeholder {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(260px, 0.82fr) minmax(330px, 1.18fr);
-  gap: 7px;
-  padding: 7px;
+  grid-template-rows: minmax(220px, 0.82fr) minmax(270px, 1.18fr);
+  gap: 5px;
+  padding: 5px;
   background: #f9fbfc;
 }
 
@@ -918,7 +918,7 @@ html {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #dce7eb;
   border-radius: 5px;
   background: #fbfdfe;
@@ -950,7 +950,7 @@ html {
 .growth-sales-scatter-canvas {
   flex: 1;
   min-height: 0;
-  margin-top: 10px;
+  margin-top: 7px;
   border: 1px dashed #c9d9df;
   border-radius: 4px;
   background: #fff;
