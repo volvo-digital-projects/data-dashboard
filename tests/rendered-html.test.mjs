@@ -2213,7 +2213,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.analysis-rank > span\s*\{[\s\S]*?display:\s*flex;[\s\S]*?align-items:\s*baseline;[\s\S]*?white-space:\s*nowrap;[\s\S]*?\.analysis-rank > span > em\s*\{[^}]*flex:\s*0 0 56px;[^}]*font-size:\s*11px;[^}]*text-align:\s*left;[\s\S]*?\.analysis-rank small\s*\{[^}]*font-size:\s*8px;[^}]*text-align:\s*left;/,
+    /\.analysis-rank > span\s*\{[\s\S]*?display:\s*flex;[\s\S]*?align-items:\s*baseline;[\s\S]*?white-space:\s*nowrap;[\s\S]*?\.analysis-rank > span > em\s*\{[^}]*flex:\s*0 0 56px;[^}]*font-size:\s*11px;[^}]*text-align:\s*left;[\s\S]*?\.analysis-rank small\s*\{[^}]*font-size:\s*9px;[^}]*text-align:\s*left;/,
   );
   assert.match(visibleHtml, /볼보 분당/);
   assert.match(
@@ -5391,5 +5391,18 @@ test("keeps the dense score rail stable when Edge enforces a minimum font size",
     (dashboardSource.match(/className="metric-resource-new"[\s\S]*?<span>NEW<\/span>/g) ?? [])
       .length,
     2,
+  );
+});
+
+test("keeps ranking metadata one pixel larger without changing row geometry", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(
+    css,
+    /\.analysis-rank small\s*\{[^}]*font-size:\s*9px;[^}]*white-space:\s*nowrap;/,
+  );
+  assert.match(
+    css,
+    /\.analysis-ranking-list > div\s*\{[^}]*min-height:\s*40px;[^}]*padding:\s*5px 8px;/,
   );
 });
