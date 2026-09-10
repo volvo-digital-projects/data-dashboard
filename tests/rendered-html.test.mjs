@@ -355,9 +355,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);/);
-  assert.match(css, /\.competitive-analysis-page > \.growth-navigation\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
+  assert.match(css, /\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*0 -18px 0 #ffffff,/);
-  assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-profile-strip\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 46px\);[^}]*background: #ffffff;/);
+  assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 46px\);[^}]*align-self: start;[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 58px\);[^}]*overflow: hidden;[^}]*background: #ffffff;/);
+  assert.match(css, /\.growth-profile-strip\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 46px\);[^}]*background: #ffffff;/);
+  assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 92px\);/);
   assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -34px;/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);
   assert.match(css, /\.growth-navigation-source\s*\{[^}]*justify-content: flex-end;[^}]*margin-left: auto;/);
