@@ -1151,10 +1151,20 @@ html {
 .growth-sales-dashboard {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(220px, 0.82fr) minmax(270px, 1.18fr);
+  grid-template-rows: auto auto auto;
   gap: 5px;
   padding: 5px;
   background: #f9fbfc;
+}
+
+.growth-sales-scatter-card {
+  background: #fbfdfe;
+}
+
+.growth-sales-scatter-card > header > small {
+  color: #7a909b;
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 .growth-sales-funnel-card,
@@ -1166,6 +1176,14 @@ html {
   border: 1px solid #dce7eb;
   border-radius: 5px;
   background: #fbfdfe;
+}
+
+.growth-sales-funnel-card {
+  min-height: 220px;
+}
+
+.growth-sales-monthly-card {
+  min-height: 250px;
 }
 
 .growth-sales-funnel-card > header,
@@ -1320,7 +1338,7 @@ html {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: end;
   gap: 5px;
   margin-top: 8px;
@@ -1372,7 +1390,31 @@ html {
 .growth-sales-month > i b {
   width: 38%;
   min-height: 2px;
-  background: #d97858;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2), transparent 44%),
+    linear-gradient(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 16px -10px rgba(47, 107, 138, 0.62);
+}
+
+.growth-sales-month > i b.unreported {
+  height: 8% !important;
+  min-height: 7px;
+  border: 1px dashed #c8d5da;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(226, 234, 237, 0.7),
+    rgba(226, 234, 237, 0.7) 3px,
+    rgba(248, 250, 251, 0.9) 3px,
+    rgba(248, 250, 251, 0.9) 6px
+  );
+  box-shadow: none;
+}
+
+.growth-sales-month.unreported > strong,
+.growth-sales-month.unreported > small {
+  color: #a3b0b6;
 }
 
 .growth-sales-month > small {
@@ -1404,7 +1446,9 @@ html {
   border-radius: 2px;
 }
 
-.growth-sales-monthly-card > footer i.staff { background: #d97858; }
+.growth-sales-monthly-card > footer i.staff {
+  background: linear-gradient(180deg, #74aec5 0%, #174662 100%);
+}
 .growth-sales-monthly-card > footer i.average { background: rgba(88, 157, 178, 0.34); }
 
 .growth-sales-monthly-card > footer > strong {

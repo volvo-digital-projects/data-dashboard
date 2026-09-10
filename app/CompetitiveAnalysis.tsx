@@ -141,6 +141,14 @@ type SalesActivityShowroom = {
   };
 };
 
+type StaffSalesScatterPoint = {
+  key: string;
+  cdsid: string;
+  name: string;
+  tenureYears: number;
+  deliveredSales: number;
+};
+
 const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   string,
   StaffAnalysisShowroom
@@ -199,6 +207,21 @@ const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap
       )
       .map((employee) => ({ cdsid, employee })),
 );
+const nationalStaffSalesPopulation: StaffSalesScatterPoint[] =
+  staffCurrentSalesPopulation.flatMap(({ cdsid, employee }) => {
+    const sales = salesActivityByCdsid[cdsid]?.staff.find(
+      (staff) => staff.name === employee.name,
+    );
+    return sales
+      ? [{
+          key: `${cdsid}-${employee.name}`,
+          cdsid,
+          name: employee.name,
+          tenureYears: employee.tenureMonths / 12,
+          deliveredSales: sales.deliveredSales,
+        }]
+      : [];
+  });
 type ScatterLabelPlacement =
   | "left-up"
   | "left-down"
@@ -1050,16 +1073,27 @@ export default function CompetitiveAnalysis({
   const selectedStaffSalesShare = selectedShowroomDeliveredSales
     ? (selectedStaffDeliveredSales / selectedShowroomDeliveredSales) * 100
     : null;
-  const selectedStaffMonthlyDeliveredSales =
-    selectedStaffSalesActivity?.monthlyDeliveredSales ?? Array(9).fill(0);
-  const selectedShowroomMonthlyAverageDeliveredSales =
-    selectedSalesActivityShowroom?.summary.monthlyDeliveredSales.map((count) =>
-      selectedShowroomSalesStaffCount ? count / selectedShowroomSalesStaffCount : 0,
-    ) ?? Array(9).fill(0);
+  const selectedStaffMonthlyDeliveredSales = Array.from(
+    { length: 12 },
+    (_, index) => selectedStaffSalesActivity?.monthlyDeliveredSales[index] ?? null,
+  );
+  const selectedShowroomMonthlyAverageDeliveredSales = Array.from(
+    { length: 12 },
+    (_, index) => {
+      const count = selectedSalesActivityShowroom?.summary.monthlyDeliveredSales[index];
+      return typeof count === "number" && selectedShowroomSalesStaffCount
+        ? count / selectedShowroomSalesStaffCount
+        : null;
+    },
+  );
   const selectedSalesMonthScale = Math.max(
     1,
-    ...selectedStaffMonthlyDeliveredSales,
-    ...selectedShowroomMonthlyAverageDeliveredSales,
+    ...selectedStaffMonthlyDeliveredSales.filter(
+      (count): count is number => count !== null,
+    ),
+    ...selectedShowroomMonthlyAverageDeliveredSales.filter(
+      (count): count is number => count !== null,
+    ),
   );
   const selectedStaffConsultationToTestDriveRate = selectedStaffConsultationCustomers
     ? ((selectedStaffSalesActivity?.transitions.consultationToTestDrive ?? 0) /
@@ -1368,6 +1402,37 @@ export default function CompetitiveAnalysis({
   const staffScatterYTicks = Array.from(
     { length: (100 - staffScatterMinScore) / staffScatterTickStep + 1 },
     (_, index) => staffScatterMinScore + index * staffScatterTickStep,
+  );
+  const selectedStaffSalesScatterPoint = nationalStaffSalesPopulation.find(
+    (point) =>
+      point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
+  );
+  const sameShowroomStaffSalesScatterPoints = nationalStaffSalesPopulation.filter(
+    (point) =>
+      point.cdsid === selected.cdsid && point.name !== selectedStaffEmployee?.name,
+  );
+  const otherStaffSalesScatterPoints = nationalStaffSalesPopulation.filter(
+    (point) => point.cdsid !== selected.cdsid,
+  );
+  const staffSalesNationalAverage = nationalStaffSalesPopulation.length
+    ? nationalStaffSalesPopulation.reduce(
+        (sum, point) => sum + point.deliveredSales,
+        0,
+      ) / nationalStaffSalesPopulation.length
+    : null;
+  const staffSalesMax = Math.max(
+    1,
+    ...nationalStaffSalesPopulation.map((point) => point.deliveredSales),
+  );
+  const staffSalesTickStep = Math.max(5, Math.ceil(staffSalesMax / 25) * 5);
+  const staffSalesScaleMax = staffSalesTickStep * 5;
+  const staffSalesScatterY = (sales: number) =>
+    staffScatterPlot.bottom -
+    (Math.max(0, Math.min(staffSalesScaleMax, sales)) / staffSalesScaleMax) *
+      (staffScatterPlot.bottom - staffScatterPlot.top);
+  const staffSalesYTicks = Array.from(
+    { length: 6 },
+    (_, index) => index * staffSalesTickStep,
   );
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
@@ -2310,6 +2375,85 @@ export default function CompetitiveAnalysis({
                       )}
                     </footer>
                   </article>
+                  <article className="growth-scatter-card growth-sales-scatter-card">
+                    <header>
+                      <div><strong>근속기간 × 2026 누적판매</strong></div>
+                      <small>{salesActivitySource.salesAsOf.replaceAll("-", ".")} 기준</small>
+                    </header>
+                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매 분포">
+                      <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>
+                      {staffSalesYTicks.map((tick) => {
+                        const y = staffSalesScatterY(tick);
+                        return <g className="growth-scatter-grid" key={`sales-y-${tick}`}>
+                          <line x1={staffScatterPlot.left} x2={staffScatterPlot.right} y1={y} y2={y} />
+                          <text x={staffScatterPlot.left - 7} y={y + 3} textAnchor="end">{tick}</text>
+                        </g>;
+                      })}
+                      {staffScatterXTicks.map((tick) => {
+                        const x = staffScatterX(tick);
+                        return <g className="growth-scatter-grid" key={`sales-x-${tick}`}>
+                          <line x1={x} x2={x} y1={staffScatterPlot.top} y2={staffScatterPlot.bottom} />
+                          <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">{tick.toFixed(0)}</text>
+                        </g>;
+                      })}
+                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">2026 누적판매(대)</text>
+                      <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
+                      {staffSalesNationalAverage !== null ? (
+                        <line
+                          className="growth-scatter-average-line"
+                          x1={staffScatterPlot.left}
+                          x2={staffScatterPlot.right}
+                          y1={staffSalesScatterY(staffSalesNationalAverage)}
+                          y2={staffSalesScatterY(staffSalesNationalAverage)}
+                        />
+                      ) : null}
+                      <g className="growth-scatter-population">
+                        {otherStaffSalesScatterPoints.map((point) => (
+                          <circle
+                            cx={staffScatterX(point.tenureYears)}
+                            cy={staffSalesScatterY(point.deliveredSales)}
+                            r="3.2"
+                            key={point.key}
+                          ><title>{`${point.name} · 누적판매 ${point.deliveredSales}대 · 근속 ${point.tenureYears.toFixed(1)}년`}</title></circle>
+                        ))}
+                      </g>
+                      <g className="growth-scatter-showroom">
+                        {sameShowroomStaffSalesScatterPoints.map((point) => (
+                          <circle
+                            cx={staffScatterX(point.tenureYears)}
+                            cy={staffSalesScatterY(point.deliveredSales)}
+                            r="4.2"
+                            key={point.key}
+                          ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 누적판매 ${point.deliveredSales}대`}</title></circle>
+                        ))}
+                      </g>
+                      {selectedStaffSalesScatterPoint ? (
+                        <g className="growth-scatter-selected" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
+                          <circle className="halo" r="11" />
+                          <circle className="point" r="5" />
+                        </g>
+                      ) : null}
+                      {staffSalesNationalAverage !== null ? (
+                        <g
+                          className="growth-scatter-average-label"
+                          transform={`translate(${staffScatterPlot.right - 28} ${staffSalesScatterY(staffSalesNationalAverage) - 36})`}
+                        >
+                          <path className="pointer" d="M 20 28 L 28 36 L 36 28 Z" />
+                          <rect width="56" height="30" rx="4" />
+                          <text x="28" y="11" textAnchor="middle">전국 평균</text>
+                          <text className="score" x="28" y="23" textAnchor="middle">
+                            {staffSalesNationalAverage.toFixed(1)}대
+                          </text>
+                        </g>
+                      ) : null}
+                    </svg>
+                    <footer>
+                      <span><i />전국 SC</span>
+                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} 전시장</span>
+                      <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
+                      <small className="growth-scatter-evidence-note">평균 = 전국 {nationalStaffSalesPopulation.length}명 누적판매 합계 ÷ 인원</small>
+                    </footer>
+                  </article>
                   <article className="growth-sales-monthly-card">
                     <header>
                       <div>
@@ -2318,13 +2462,17 @@ export default function CompetitiveAnalysis({
                       </div>
                       <small>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 {selectedShowroomDeliveredSales}대</small>
                     </header>
-                    <div className="growth-sales-monthly-chart" role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 9월까지 월별 출고 실적`}>
+                    <div className="growth-sales-monthly-chart" role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계`}>
                       {selectedStaffMonthlyDeliveredSales.map((count, index) => (
-                        <div className="growth-sales-month" key={`sales-month-${index + 1}`}>
-                          <strong>{count}</strong>
+                        <div className={`growth-sales-month${count === null ? " unreported" : ""}`} key={`sales-month-${index + 1}`}>
+                          <strong>{count ?? "―"}</strong>
                           <i aria-hidden="true">
-                            <span style={{ height: `${(selectedShowroomMonthlyAverageDeliveredSales[index] / selectedSalesMonthScale) * 100}%` }} />
-                            <b style={{ height: `${(count / selectedSalesMonthScale) * 100}%` }} />
+                            {selectedShowroomMonthlyAverageDeliveredSales[index] === null ? null : (
+                              <span style={{ height: `${(selectedShowroomMonthlyAverageDeliveredSales[index] / selectedSalesMonthScale) * 100}%` }} />
+                            )}
+                            {count === null ? <b className="unreported" /> : (
+                              <b style={{ height: `${(count / selectedSalesMonthScale) * 100}%` }} />
+                            )}
                           </i>
                           <small>{index + 1}월</small>
                         </div>
@@ -2332,7 +2480,7 @@ export default function CompetitiveAnalysis({
                     </div>
                     <footer>
                       <span><i className="staff" />선택 직원</span>
-                      <span><i className="average" />직원 1인 평균</span>
+                      <span title={`월별 소속 전시장 출고 ÷ 현재 영업직원 ${selectedShowroomSalesStaffCount}명`}><i className="average" />소속 전시장 1인 평균</span>
                       <strong>
                         전시장 {selectedStaffSalesRank ?? "―"}위
                         <small> · 평균 대비 {selectedStaffDeliveredSales >= selectedShowroomAverageDeliveredSales ? "+" : ""}{(selectedStaffDeliveredSales - selectedShowroomAverageDeliveredSales).toFixed(1)}대</small>

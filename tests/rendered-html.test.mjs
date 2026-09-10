@@ -334,6 +334,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /상담 → 시승 → 계약 전환/);
+  assert.match(navigation, /근속기간 × 2026 누적판매/);
+  assert.match(navigation, /전국 영업직원 근속기간별 2026년 누적판매 분포/);
+  assert.match(navigation, /2026 누적판매\(대\)/);
+  assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
+  assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
   assert.match(navigation, /2026 월별 출고 실적/);
   assert.match(navigation, /원자료 갱신 필요/);
   assert.match(navigation, /2026 영업활동 기록 없음/);
@@ -348,7 +353,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal(kimDaejunSales.deliveredSales, 49);
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-sales-funnel\s*\{[^}]*grid-template-columns: minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\);/);
-  assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(9, minmax\(0, 1fr\)\);/);
+  assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
+  assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계/);
+  assert.match(navigation, /소속 전시장 1인 평균/);
+  assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(12, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*linear-gradient\(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%\);/);
   assert.match(profile, /\{selectedStaffTenureMonths \?\? 0\}개월[\s\S]*?<em>\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)<\/em>/);
   assert.doesNotMatch(profile, /growth-profile-person-label/);
   assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/10<\/small>/);
