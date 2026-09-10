@@ -2016,9 +2016,17 @@ export default function CompetitiveAnalysis({
                     <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
                   </strong>
                 </div>
-                <div className="growth-profile-metric">
-                  <span>지점장 코칭</span>
-                  <strong>{selectedStaffGrowthLabel}</strong>
+                <div className="growth-profile-metric growth-profile-certification">
+                  <span>인증직원 선정</span>
+                  <strong
+                    aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
+                  >
+                    <b>G<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Grand}</b>
+                    <em aria-hidden="true">/</em>
+                    <b>A<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Advanced}</b>
+                    <em aria-hidden="true">/</em>
+                    <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
+                  </strong>
                 </div>
               </section>
 

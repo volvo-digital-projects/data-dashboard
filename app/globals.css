@@ -557,6 +557,40 @@ html {
   white-space: nowrap;
 }
 
+.growth-profile-certification strong {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-latin), var(--font-korean), sans-serif;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.growth-profile-certification strong b {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: 700;
+}
+
+.growth-profile-certification strong b i {
+  margin: 0 1px;
+  color: #7f929c;
+  font-size: 0.72em;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.growth-profile-certification strong em {
+  margin: 0;
+  color: #a6b5bc;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+}
+
 .growth-profile-metric strong.confidence-충분,
 .growth-staff-roster-list .confidence-충분 {
   color: #21866f;

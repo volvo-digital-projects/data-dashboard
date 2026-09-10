@@ -273,7 +273,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
   assert.match(navigation, /평균 상담만족도/);
   assert.match(navigation, /누적 회신건수/);
-  assert.match(navigation, /<span>지점장 코칭<\/span>/);
+  assert.match(navigation, /<span>인증직원 선정<\/span>/);
+  assert.match(navigation, /className="growth-profile-metric growth-profile-certification"[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
+  assert.match(css, /\.growth-profile-certification strong b i\s*\{[^}]*font-size:\s*0\.72em;[^}]*font-weight:\s*300;/);
+  assert.doesNotMatch(navigation, /<span>지점장 코칭<\/span>/);
   assert.doesNotMatch(navigation, /<span>현재 면담 방향<\/span>/);
   assert.doesNotMatch(navigation, /<span>상담만족<\/span>|회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(108px, 1fr\) 76px 80px;/);
