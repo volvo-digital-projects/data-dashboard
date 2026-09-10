@@ -305,8 +305,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-comment-evidence > header span\s*\{[^}]*font-size:\s*10px;[^}]*font-weight:\s*700;[^}]*line-height:\s*1\.2;/);
   assert.match(navigation, /className="growth-comment-bars"/);
   assert.match(navigation, /--growth-comment-bar-ratio/);
-  assert.match(navigation, /중복 포함 총 \{selectedStaffStrengthTotalMentions\}회/);
-  assert.match(navigation, /중복 포함 총 \{selectedStaffImprovementTotalMentions\}회/);
+  assert.match(source, /const displayTwoDigitCount = \(value: number\) => String\(value\)\.padStart\(2, "0"\);/);
+  assert.match(navigation, /중복포함 총 \{displayTwoDigitCount\(selectedStaffStrengthTotalMentions\)\}회/);
+  assert.match(navigation, /중복포함 총 \{displayTwoDigitCount\(selectedStaffImprovementTotalMentions\)\}회/);
+  assert.doesNotMatch(navigation, /중복 포함 총/);
   assert.match(navigation, /selectedStaffStrengthKeywords\.slice\(3, 6\)/);
   assert.match(navigation, /selectedStaffImprovementKeywords\.slice\(3, 6\)/);
   assert.match(await readFile("scripts/generate-voc-staff-analysis.py", "utf8"), /keyword_summary\(comments, STRENGTH_PATTERNS, 6\)/);

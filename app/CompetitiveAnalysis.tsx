@@ -397,6 +397,8 @@ const displayNumber = (value: number) =>
 const displayQuarterNumber = (value: number | null | undefined) =>
   typeof value === "number" ? displayNumber(value) : "―";
 
+const displayTwoDigitCount = (value: number) => String(value).padStart(2, "0");
+
 const displayRankingNumber = (value: number) => value.toFixed(1);
 
 function AnimatedAnalysisScore({
@@ -2260,7 +2262,7 @@ export default function CompetitiveAnalysis({
 
                 <div className="growth-evidence-grid">
                   <article className="growth-comment-evidence strength">
-                    <header><span>유지·강화 포인트</span><strong>중복 포함 총 {selectedStaffStrengthTotalMentions}회</strong></header>
+                    <header><span>유지·강화 포인트</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars">
                       {selectedStaffStrengthKeywords.length ? (
                         <>
@@ -2287,7 +2289,7 @@ export default function CompetitiveAnalysis({
                     </div>
                   </article>
                   <article className="growth-comment-evidence improvement">
-                    <header><span>보완·수정 포인트</span><strong>중복 포함 총 {selectedStaffImprovementTotalMentions}회</strong></header>
+                    <header><span>보완·수정 포인트</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars">
                       {selectedStaffImprovementKeywords.length ? (
                         <>
