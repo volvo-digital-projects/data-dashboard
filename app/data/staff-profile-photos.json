@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-09",
+  "updatedAt": "2026-09-11",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 363,
+  "consultantCount": 362,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -960,9 +960,6 @@
       "employees": {
         "김민수": {
           "image": "/staff-profiles/kolon/bundang-pangyo/consultant-aae9659ace86.jpg"
-        },
-        "김성민": {
-          "image": "/staff-profiles/kolon/bundang-pangyo/consultant-b5233f67abd9.jpg"
         },
         "김종천": {
           "image": "/staff-profiles/kolon/bundang-pangyo/consultant-623a44288941.jpg"
