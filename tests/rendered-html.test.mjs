@@ -2004,6 +2004,31 @@ test("serves score criteria as a separate CDSID page", async () => {
   assert.match(visibleHtml, /반올림한 V3S 평가 총점 기준/);
 });
 
+test("shows Q1 and Q2 values in the analysis summary cards", async () => {
+  const response = await render(
+    "/dashboard/6KR6834/analysis?view=region",
+  );
+  assert.equal(response.status, 200);
+
+  const visibleHtml = (await response.text()).replaceAll("<!-- -->", "");
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    visibleHtml,
+    /class="analysis-quarter-values"><span>Q1 93\.1<\/span><i aria-hidden="true">\/<\/i><span>Q2 87\.5<\/span>/,
+  );
+  assert.match(
+    visibleHtml,
+    /class="analysis-quarter-values"><span>Q1 100<\/span><i aria-hidden="true">\/<\/i><span>Q2 100<\/span>/,
+  );
+  assert.match(
+    css,
+    /\.analysis-quarter-values\s*\{[^}]*color: var\(--muted\);[^}]*font-size: 9px;[^}]*font-weight: 500;[^}]*line-height: 1\.18;/,
+  );
+});
+
 test("serves the dual-metric competitive analysis sample", async () => {
   const response = await render(
     "/dashboard/6KR6834/analysis?view=dealer",

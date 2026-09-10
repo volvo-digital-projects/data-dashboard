@@ -5011,6 +5011,22 @@ input:focus-visible {
   margin-right: 4px;
 }
 
+.analysis-quarter-values {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 1px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.analysis-quarter-values i {
+  color: #a2afb6;
+  font-style: normal;
+}
+
 .analysis-summary-card > strong {
   align-self: center;
   color: var(--ink);

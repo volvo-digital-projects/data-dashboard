@@ -371,6 +371,9 @@ const viewMeta: Record<
 const displayNumber = (value: number) =>
   Math.abs(value - 100) < Number.EPSILON ? "100" : value.toFixed(1);
 
+const displayQuarterNumber = (value: number | null | undefined) =>
+  typeof value === "number" ? displayNumber(value) : "―";
+
 const displayRankingNumber = (value: number) => value.toFixed(1);
 
 function AnimatedAnalysisScore({
@@ -1631,6 +1634,11 @@ export default function CompetitiveAnalysis({
               <li>ONE Voice 시승 만족도</li>
               <li>ONE Voice 출고 만족도</li>
             </ul>
+            <p className="analysis-quarter-values">
+              <span>Q1 {displayQuarterNumber(selected.q1?.voc)}</span>
+              <i aria-hidden="true">/</i>
+              <span>Q2 {displayQuarterNumber(selected.voc)}</span>
+            </p>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.vocScore} sequence={0} />
           <em
@@ -1660,6 +1668,11 @@ export default function CompetitiveAnalysis({
               <li>VOC 상담 후 해피콜(24시간 이내 시행)</li>
               <li>ONE Voice 출고 후 해피콜(24시간 이내 시행)</li>
             </ul>
+            <p className="analysis-quarter-values">
+              <span>Q1 {displayQuarterNumber(selected.q1?.happyCall)}</span>
+              <i aria-hidden="true">/</i>
+              <span>Q2 {displayQuarterNumber(selected.happyCall)}</span>
+            </p>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
           <em
