@@ -2331,7 +2331,6 @@ export default function CompetitiveAnalysis({
               <section className="growth-capability sales">
                 <header>
                   <div><span>02 · 영업활동 역량</span></div>
-                  <p>활동 {salesActivitySource.activityAsOf.replaceAll("-", "").slice(2)} · 판매 {salesActivitySource.salesAsOf.replaceAll("-", "").slice(2)} 기준</p>
                 </header>
                 <div className="growth-sales-dashboard">
                   <article className="growth-sales-funnel-card">
@@ -2372,20 +2371,11 @@ export default function CompetitiveAnalysis({
                         <strong>{selectedStaffDeliveredSales}<small>대</small></strong>
                       </div>
                     </div>
-                    <footer className={selectedStaffHasActivityFunnel ? "available" : "warning"}>
-                      {selectedStaffHasActivityFunnel ? (
-                        <><b>활동 기록 연결 완료</b><span>동일 고객·직원 조합의 단계 이동으로 계산</span></>
-                      ) : (
-                        <>
-                          <b>{selectedStaffSalesActivity?.activityStatus === "ambiguous-name" ? "동명이인 확인 필요" : "2026 영업활동 기록 없음"}</b>
-                          <span>
-                            {selectedStaffSalesActivity?.lastActivityDate
-                              ? `최근 기록 ${selectedStaffSalesActivity.lastActivityDate.replaceAll("-", ".")}`
-                              : "이 파일에서 과거 기록도 확인되지 않음"}
-                          </span>
-                        </>
-                      )}
-                    </footer>
+                    {selectedStaffHasActivityFunnel ? (
+                      <footer className="available">
+                        <b>활동 기록 연결 완료</b><span>동일 고객·직원 조합의 단계 이동으로 계산</span>
+                      </footer>
+                    ) : null}
                   </article>
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>

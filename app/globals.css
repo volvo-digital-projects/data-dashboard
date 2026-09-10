@@ -1163,7 +1163,6 @@ html {
 }
 
 .growth-capability.sales > header div span { color: #b97858; }
-.growth-capability.sales > header p { color: #7e9099; }
 
 .growth-capability.sales {
   display: grid;
@@ -1341,12 +1340,6 @@ html {
   padding: 5px 7px;
   border-radius: 4px;
   font-size: 8px;
-}
-
-.growth-sales-funnel-card > footer.warning {
-  border: 1px solid #efd2c6;
-  background: #fff7f3;
-  color: #8c5b48;
 }
 
 .growth-sales-funnel-card > footer.available {

@@ -362,7 +362,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{\s*background:\s*#087a58;/);
   assert.match(navigation, /2026 월별 출고 실적/);
   assert.match(navigation, /원자료 갱신 필요/);
-  assert.match(navigation, /2026 영업활동 기록 없음/);
+  assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
+  assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);
   assert.match(navigation, /전시장 판매의/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
