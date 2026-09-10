@@ -298,6 +298,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /성과 확산/);
   assert.match(navigation, /유지·강화 포인트/);
   assert.match(navigation, /보완·수정 포인트/);
+  assert.match(css, /\.growth-comment-evidence > header span\s*\{[^}]*font-size:\s*10px;[^}]*font-weight:\s*700;[^}]*line-height:\s*1\.2;/);
   assert.match(navigation, /className="growth-comment-bars"/);
   assert.match(navigation, /--growth-comment-bar-ratio/);
   assert.match(navigation, /중복 포함 총 \{selectedStaffStrengthTotalMentions\}회/);

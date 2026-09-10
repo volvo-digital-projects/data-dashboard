@@ -978,6 +978,12 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
+.growth-comment-evidence > header span {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .growth-comment-evidence.strength { border-top: 3px solid #4ba388; }
 .growth-comment-evidence.improvement { border-top: 3px solid #d96761; }
 
