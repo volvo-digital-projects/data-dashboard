@@ -1978,6 +1978,7 @@ export default function CompetitiveAnalysis({
           className="growth-navigation"
           aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 성장 내비게이션`}
         >
+          <div className="growth-navigation-sticky-summary">
           <header className="growth-navigation-heading">
             <div>
               <h2>소속 영업직원 성장 내비게이션</h2>
@@ -1996,8 +1997,7 @@ export default function CompetitiveAnalysis({
             </div>
           </header>
 
-          <div className="growth-navigation-workspace">
-            <section className="growth-profile-strip" aria-label="영업직원 상담 분석 요약">
+          <section className="growth-profile-strip" aria-label="영업직원 상담 분석 요약">
               <div className="growth-profile-person">
                 <span className="growth-profile-photo" aria-hidden="true">
                   {selectedStaffProfile ? (
@@ -2044,7 +2044,10 @@ export default function CompetitiveAnalysis({
                   <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
                 </strong>
               </div>
-            </section>
+          </section>
+          </div>
+
+          <div className="growth-navigation-workspace">
 
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
               <div className="growth-staff-roster-columns" aria-hidden="true">

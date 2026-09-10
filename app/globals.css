@@ -155,10 +155,11 @@ html {
     margin-left: calc(-1 * var(--dashboard-content-overhang));
   }
 
-  .growth-navigation-heading {
+  .growth-navigation-sticky-summary {
     position: sticky;
     top: var(--growth-navigation-sticky-top, 356px);
     z-index: 44;
+    background: #f5f9fb;
     box-shadow:
       0 -18px 0 #ffffff,
       0 12px 18px -22px rgba(16, 42, 67, 0.72);
@@ -166,27 +167,26 @@ html {
 
   .growth-staff-roster {
     position: sticky;
-    top: calc(var(--growth-navigation-sticky-top, 356px) + 110px);
+    top: calc(var(--growth-navigation-sticky-top, 356px) + 112px);
     z-index: 43;
     align-self: start;
-    max-height: calc(100vh - var(--growth-navigation-sticky-top, 356px) - 122px);
-    max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 122px);
+    max-height: calc(100vh - var(--growth-navigation-sticky-top, 356px) - 124px);
+    max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 124px);
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
   }
 
-  .growth-profile-strip {
-    position: sticky;
-    top: calc(var(--growth-navigation-sticky-top, 356px) + 46px);
-    z-index: 43;
-    background: #ffffff;
-    box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
+  .growth-staff-roster-list {
+    max-height: calc(100vh - var(--growth-navigation-sticky-top, 356px) - 158px);
+    max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 158px);
   }
 
-  .growth-staff-roster-list {
-    max-height: calc(100vh - var(--growth-navigation-sticky-top, 356px) - 156px);
-    max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 156px);
+  .growth-navigation-detail .growth-capability > header {
+    position: sticky;
+    top: calc(var(--growth-navigation-sticky-top, 356px) + 118px);
+    z-index: 42;
+    background: #f8fbfc;
   }
 }
 
@@ -283,9 +283,7 @@ html {
   min-width: 0;
   display: grid;
   grid-template-columns: 288px minmax(0, 1fr);
-  grid-template-areas:
-    "profile profile"
-    "roster detail";
+  grid-template-areas: "roster detail";
   align-items: start;
 }
 
@@ -444,7 +442,6 @@ html {
 }
 
 .growth-profile-strip {
-  grid-area: profile;
   min-width: 0;
   margin: 6px 6px 0;
   display: grid;
