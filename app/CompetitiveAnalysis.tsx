@@ -2186,6 +2186,11 @@ export default function CompetitiveAnalysis({
                     </header>
                     <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포, 상단 점수 구간 확대">
                       <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
+                      <defs>
+                        <clipPath id="consultation-selected-staff-photo">
+                          <circle r="6.5" />
+                        </clipPath>
+                      </defs>
                       {staffScatterYTicks.map((tick) => {
                         const y = staffScatterY(tick);
                         return <g className="growth-scatter-grid" key={`growth-y-${tick}`}>
@@ -2232,9 +2237,22 @@ export default function CompetitiveAnalysis({
                         ))}
                       </g>
                       {selectedStaffScatterPoint ? (
-                        <g className="growth-scatter-selected" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
-                          <circle className="halo" r="11" />
-                          <circle className="point" r="5" />
+                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
+                          <circle className="photo-backdrop" r="8" />
+                          {selectedStaffProfile ? (
+                            <image
+                              href={selectedStaffProfile.image}
+                              x="-6.5"
+                              y="-6.5"
+                              width="13"
+                              height="13"
+                              preserveAspectRatio="xMidYMin slice"
+                              clipPath="url(#consultation-selected-staff-photo)"
+                            />
+                          ) : (
+                            <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
+                          )}
+                          <circle className="photo-ring" r="7" />
                         </g>
                       ) : null}
                       {staffScatterNationalAverage !== null ? (
@@ -2253,7 +2271,7 @@ export default function CompetitiveAnalysis({
                     </svg>
                     <footer>
                       <span><i />전국 SC</span>
-                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} 전시장</span>
+                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
                       <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
                       <small className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거</small>
                     </footer>
@@ -2384,6 +2402,11 @@ export default function CompetitiveAnalysis({
                     </header>
                     <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매 분포">
                       <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>
+                      <defs>
+                        <clipPath id="sales-selected-staff-photo">
+                          <circle r="6.5" />
+                        </clipPath>
+                      </defs>
                       {staffSalesYTicks.map((tick) => {
                         const y = staffSalesScatterY(tick);
                         return <g className="growth-scatter-grid" key={`sales-y-${tick}`}>
@@ -2430,9 +2453,22 @@ export default function CompetitiveAnalysis({
                         ))}
                       </g>
                       {selectedStaffSalesScatterPoint ? (
-                        <g className="growth-scatter-selected" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
-                          <circle className="halo" r="11" />
-                          <circle className="point" r="5" />
+                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
+                          <circle className="photo-backdrop" r="8" />
+                          {selectedStaffProfile ? (
+                            <image
+                              href={selectedStaffProfile.image}
+                              x="-6.5"
+                              y="-6.5"
+                              width="13"
+                              height="13"
+                              preserveAspectRatio="xMidYMin slice"
+                              clipPath="url(#sales-selected-staff-photo)"
+                            />
+                          ) : (
+                            <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
+                          )}
+                          <circle className="photo-ring" r="7" />
                         </g>
                       ) : null}
                       {staffSalesNationalAverage !== null ? (
@@ -2451,7 +2487,7 @@ export default function CompetitiveAnalysis({
                     </svg>
                     <footer>
                       <span><i />전국 SC</span>
-                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} 전시장</span>
+                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
                       <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
                       <small className="growth-scatter-evidence-note">평균 = 전국 {nationalStaffSalesPopulation.length}명 누적판매 합계 ÷ 인원</small>
                     </footer>

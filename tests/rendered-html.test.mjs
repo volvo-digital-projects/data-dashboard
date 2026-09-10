@@ -341,6 +341,17 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /2026 누적판매\(대\)/);
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
   assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
+  assert.equal((navigation.match(/className="growth-scatter-selected-photo"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/href=\{selectedStaffProfile\.image\}/g) ?? []).length, 2);
+  assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
+  assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
+  assert.doesNotMatch(navigation, /className="growth-scatter-selected"|className="point"|className="halo"/);
+  assert.equal((navigation.match(/\{displayShowroomNameWithoutBrand\(selected\.showroom\)\}<\/span>/g) ?? []).length, 2);
+  assert.doesNotMatch(navigation, /\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} 전시장<\/span>/);
+  assert.match(css, /\.growth-position-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
+  assert.match(css, /\.growth-sales-funnel-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
+  assert.match(css, /\.growth-scatter-showroom circle\s*\{[^}]*fill:\s*#087a58;[^}]*fill-opacity:\s*0\.94;/);
+  assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{\s*background:\s*#087a58;/);
   assert.match(navigation, /2026 월별 출고 실적/);
   assert.match(navigation, /원자료 갱신 필요/);
   assert.match(navigation, /2026 영업활동 기록 없음/);

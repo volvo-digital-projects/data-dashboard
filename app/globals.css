@@ -678,6 +678,8 @@ html {
 }
 
 .growth-position-card {
+  height: 244px;
+  box-sizing: border-box;
   padding: 7px;
 }
 
@@ -939,40 +941,29 @@ html {
 }
 
 .growth-scatter-showroom circle {
-  fill: #31a985;
-  fill-opacity: 0.75;
+  fill: #087a58;
+  fill-opacity: 0.94;
   stroke: #fff;
-  stroke-width: 0.8;
+  stroke-width: 1;
 }
 
-.growth-scatter-selected .halo {
-  fill: #5fb7d0;
-  opacity: 0.18;
-  animation: growth-selected-blink 2.2s ease-in-out infinite;
+.growth-scatter-selected-photo .photo-backdrop {
+  fill: #fff;
+  stroke: #fff;
+  stroke-width: 2;
+  filter: drop-shadow(0 1px 2px rgba(14, 53, 69, 0.34));
 }
 
-.growth-scatter-selected .point {
-  fill: #177493;
+.growth-scatter-selected-photo .photo-ring {
+  fill: none;
   stroke: #fff;
   stroke-width: 2;
 }
 
-.growth-scatter-selected text {
-  fill: #134e65;
-  font-size: 8px;
+.growth-scatter-selected-photo .photo-fallback {
+  fill: #173f50;
+  font-size: 5.5px;
   font-weight: 700;
-  paint-order: stroke;
-  stroke: #fff;
-  stroke-width: 3px;
-}
-
-@keyframes growth-selected-blink {
-  0%, 100% { opacity: 0.12; transform: scale(0.92); }
-  50% { opacity: 0.34; transform: scale(1.08); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .growth-scatter-selected .halo { animation: none; }
 }
 
 .growth-scatter-card footer {
@@ -1000,7 +991,7 @@ html {
   background: #f08b66;
 }
 
-.growth-scatter-card footer .showroom i { background: #31a985; }
+.growth-scatter-card footer .showroom i { background: #087a58; }
 .growth-scatter-card footer .selected i { background: #177493; box-shadow: 0 0 0 2px #a7d6e3; }
 
 .growth-scatter-evidence-note {
@@ -1179,7 +1170,8 @@ html {
 }
 
 .growth-sales-funnel-card {
-  min-height: 220px;
+  height: 244px;
+  box-sizing: border-box;
 }
 
 .growth-sales-monthly-card {
