@@ -216,19 +216,21 @@ html {
 .growth-navigation-source {
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
   flex: 0 0 auto;
 }
 
 .growth-navigation-source span {
-  width: 224px;
-  min-width: 224px;
+  width: auto;
+  min-width: max-content;
   height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 1px 7px 0;
+  padding: 1px 18px 0;
   overflow: hidden;
   border: 1px solid #dde8ec;
   border-radius: 999px;

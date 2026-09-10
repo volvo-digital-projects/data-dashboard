@@ -347,7 +347,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-profile-strip\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 46px\);[^}]*background: #ffffff;/);
   assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -34px;/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);
-  assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: 224px;[^}]*min-width: 224px;[^}]*height: 22px;[^}]*align-items: center;[^}]*justify-content: center;[^}]*font-size: 7\.5px;/);
+  assert.match(css, /\.growth-navigation-source\s*\{[^}]*justify-content: flex-end;[^}]*margin-left: auto;/);
+  assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: auto;[^}]*min-width: max-content;[^}]*height: 22px;[^}]*align-items: center;[^}]*justify-content: center;[^}]*padding: 1px 18px 0;[^}]*font-size: 7\.5px;/);
   assert.match(source, /<strong><b>\{groupItems\.length\}<\/b>개소<\/strong>/);
   assert.match(css, /\.analysis-ranking-card > \.analysis-card-heading > strong\s*\{[^}]*min-height: 21px;[^}]*border-radius: 999px;[^}]*font-size: 7\.5px;/);
   assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales pending"/);
