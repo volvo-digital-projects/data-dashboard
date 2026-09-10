@@ -1405,7 +1405,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
 
   html.analysis-viewport-locked .competitive-analysis-page {
     --dashboard-page-max: 1376px;
-    --dashboard-page-gutter: 24px;
+    --dashboard-page-gutter: 32px;
     width: min(1376px, 100vw);
     max-width: 100vw;
   }

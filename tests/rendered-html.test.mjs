@@ -2835,7 +2835,7 @@ test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () 
   assert.match(source, /\["\+", "-", "=", "0"\]\.includes\(event\.key\)/);
   assert.match(source, /root\.classList\.remove\("analysis-viewport-locked"\)/);
   assert.match(css, /html\.analysis-viewport-locked \.competitive-analysis-page\s*\{[^}]*touch-action:\s*pan-x pan-y;/);
-  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 1180px\) and \(max-width: 1400px\)\s*\{[\s\S]*?--dashboard-page-max:\s*1376px;[\s\S]*?--dashboard-page-gutter:\s*24px;[\s\S]*?width:\s*min\(1376px, 100vw\);/);
+  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 1180px\) and \(max-width: 1400px\)\s*\{[\s\S]*?--dashboard-page-max:\s*1376px;[\s\S]*?--dashboard-page-gutter:\s*32px;[\s\S]*?width:\s*min\(1376px, 100vw\);/);
 });
 
 test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1-Q4", async () => {
