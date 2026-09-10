@@ -725,14 +725,15 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #5f7783;
+  color: #075f49;
+  font-weight: 700;
 }
 
 .growth-position-benchmarks .showroom-average i {
   width: 13px;
   height: 0;
   display: inline-block;
-  border-top: 1px dashed #667f8a;
+  border-top: 1.5px dashed #087a58;
 }
 
 .growth-zone-gauge {
@@ -771,23 +772,23 @@ html {
   transform: rotate(var(--growth-showroom-average-angle));
   transform-origin: 210px 190px;
   transform-box: view-box;
-  color: #667f8a;
+  color: #087a58;
   pointer-events: none;
 }
 
 .growth-gauge-showroom-average-marker line {
   stroke: currentColor;
-  stroke-width: 1;
+  stroke-width: 1.5;
   stroke-dasharray: 3 3;
-  opacity: 0.58;
+  opacity: 0.92;
   vector-effect: non-scaling-stroke;
 }
 
 .growth-gauge-showroom-average-marker circle {
   fill: #f8fbfc;
   stroke: currentColor;
-  stroke-width: 1;
-  opacity: 0.78;
+  stroke-width: 1.5;
+  opacity: 1;
   vector-effect: non-scaling-stroke;
 }
 
@@ -1102,8 +1103,8 @@ html {
   border-radius: 2px;
   background: linear-gradient(90deg, #b8ddd1 0%, #58aa8e 58%, #1f7e65 100%);
   transform-origin: left center;
-  animation: analysis-insight-bar-enter 440ms cubic-bezier(0.22, 0.72, 0.22, 1) both;
-  animation-delay: calc(var(--growth-comment-bar-index) * 55ms);
+  animation: analysis-insight-bar-enter 620ms cubic-bezier(0.2, 0.76, 0.24, 1) both;
+  animation-delay: calc(var(--growth-comment-bar-index) * 70ms);
 }
 
 .growth-comment-evidence.improvement .growth-comment-bar > i > b {
@@ -1388,6 +1389,20 @@ html {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.42),
     0 8px 16px -10px rgba(47, 107, 138, 0.62);
+  transform-origin: center bottom;
+  animation: growth-sales-bar-enter 720ms cubic-bezier(0.2, 0.76, 0.24, 1) both;
+  animation-delay: calc(var(--growth-sales-month-index, 0) * 55ms);
+}
+
+@keyframes growth-sales-bar-enter {
+  from {
+    opacity: 0.35;
+    transform: translateX(-50%) scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
 }
 
 .growth-sales-month > i b.unreported {
@@ -1402,6 +1417,7 @@ html {
     rgba(248, 250, 251, 0.9) 6px
   );
   box-shadow: none;
+  animation: none;
 }
 
 .growth-sales-month.unreported > strong,

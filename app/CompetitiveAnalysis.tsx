@@ -1285,14 +1285,6 @@ export default function CompetitiveAnalysis({
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
   const selectedStaffSatisfactionScore = selectedStaffScoring?.satisfactionScore ?? null;
-  const selectedStaffSatisfactionTopPercent =
-    selectedStaffSatisfactionScore === null || staffTenureScatterPopulation.length === 0
-      ? null
-      : ((staffTenureScatterPopulation.filter(
-          (staff) => staff.finalScore > selectedStaffSatisfactionScore,
-        ).length + 1) /
-          staffTenureScatterPopulation.length) *
-        100;
   const selectedStaffEvidenceLevel = staffEvidenceConfidence(selectedStaffResponses);
   const selectedStaffTenurePeerRange = selectedStaffEmployee
     ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
@@ -2056,13 +2048,13 @@ export default function CompetitiveAnalysis({
                     ) : selectedStaffInitials}
                   </span>
                   <span>
-                    <small>선택 영업직원</small>
+                    <small>영업직원</small>
                     <strong>
                       {selectedStaffEmployee?.name ?? "―"}
                       <i>
-                        {selectedStaffEmployee?.jobTitle ?? ""} · {selectedStaffTenureYears ?? 0}년 {selectedStaffTenureMonths ?? 0}개월
-                        {selectedStaffSatisfactionTopPercent === null ? null : (
-                          <em>(상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%)</em>
+                        {selectedStaffEmployee?.jobTitle ?? ""} · {displayTwoDigitCount(selectedStaffTenureYears ?? 0)}년 {displayTwoDigitCount(selectedStaffTenureMonths ?? 0)}개월
+                        {selectedStaffTenureTopPercent === null ? null : (
+                          <em>(상위 {selectedStaffTenureTopPercent.toFixed(1)}%)</em>
                         )}
                       </i>
                     </strong>
@@ -2271,7 +2263,7 @@ export default function CompetitiveAnalysis({
                     </svg>
                     <footer>
                       <span><i />전국 SC</span>
-                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
+                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
                       <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
                       <small className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거</small>
                     </footer>
@@ -2280,8 +2272,8 @@ export default function CompetitiveAnalysis({
 
                 <div className="growth-evidence-grid">
                   <article className="growth-comment-evidence strength">
-                    <header><span>유지·강화 포인트</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
-                    <div className="growth-comment-bars">
+                    <header><span>유지/ 강화 사항</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
+                    <div className="growth-comment-bars" key={`strength-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffStrengthKeywords.length ? (
                         <>
                           {[selectedStaffStrengthKeywords.slice(0, 3), selectedStaffStrengthKeywords.slice(3, 6)].map((column, columnIndex) => (
@@ -2307,8 +2299,8 @@ export default function CompetitiveAnalysis({
                     </div>
                   </article>
                   <article className="growth-comment-evidence improvement">
-                    <header><span>보완·수정 포인트</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
-                    <div className="growth-comment-bars">
+                    <header><span>보완/ 수정 사항</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
+                    <div className="growth-comment-bars" key={`improvement-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffImprovementKeywords.length ? (
                         <>
                           {[selectedStaffImprovementKeywords.slice(0, 3), selectedStaffImprovementKeywords.slice(3, 6)].map((column, columnIndex) => (
@@ -2487,7 +2479,7 @@ export default function CompetitiveAnalysis({
                     </svg>
                     <footer>
                       <span><i />전국 SC</span>
-                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)}</span>
+                      <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
                       <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
                       <small className="growth-scatter-evidence-note">평균 = 전국 {nationalStaffSalesPopulation.length}명 누적판매 합계 ÷ 인원</small>
                     </footer>
@@ -2500,7 +2492,7 @@ export default function CompetitiveAnalysis({
                       </div>
                       <small>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 {selectedShowroomDeliveredSales}대</small>
                     </header>
-                    <div className="growth-sales-monthly-chart" role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계`}>
+                    <div className="growth-sales-monthly-chart" key={`monthly-sales-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`} role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계`}>
                       {selectedStaffMonthlyDeliveredSales.map((count, index) => (
                         <div className={`growth-sales-month${count === null ? " unreported" : ""}`} key={`sales-month-${index + 1}`}>
                           <strong>{count ?? "―"}</strong>
@@ -2509,7 +2501,12 @@ export default function CompetitiveAnalysis({
                               <span style={{ height: `${(selectedShowroomMonthlyAverageDeliveredSales[index] / selectedSalesMonthScale) * 100}%` }} />
                             )}
                             {count === null ? <b className="unreported" /> : (
-                              <b style={{ height: `${(count / selectedSalesMonthScale) * 100}%` }} />
+                              <b
+                                style={{
+                                  height: `${(count / selectedSalesMonthScale) * 100}%`,
+                                  "--growth-sales-month-index": index,
+                                } as CSSProperties}
+                              />
                             )}
                           </i>
                           <small>{index + 1}월</small>
