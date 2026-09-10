@@ -1997,6 +1997,55 @@ export default function CompetitiveAnalysis({
           </header>
 
           <div className="growth-navigation-workspace">
+            <section className="growth-profile-strip" aria-label="영업직원 상담 분석 요약">
+              <div className="growth-profile-person">
+                <span className="growth-profile-photo" aria-hidden="true">
+                  {selectedStaffProfile ? (
+                    <img src={selectedStaffProfile.image} alt="" draggable={false} />
+                  ) : selectedStaffInitials}
+                </span>
+                <span>
+                  <small>영업직원</small>
+                  <strong>
+                    {selectedStaffEmployee?.name ?? "―"}
+                    <i>
+                      {selectedStaffEmployee?.jobTitle ?? ""} · {displayTwoDigitCount(selectedStaffTenureYears ?? 0)}년 {displayTwoDigitCount(selectedStaffTenureMonths ?? 0)}개월
+                      {selectedStaffTenureTopPercent === null ? null : (
+                        <em>(상위 {selectedStaffTenureTopPercent.toFixed(1)}%)</em>
+                      )}
+                    </i>
+                  </strong>
+                </span>
+              </div>
+              <div className="growth-profile-metric">
+                <span>상담 만족도</span>
+                <strong>
+                  {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
+                  {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
+                  <small>/10</small>
+                </strong>
+              </div>
+              <div className="growth-profile-metric">
+                <span>자료 신뢰도</span>
+                <strong className={`confidence-${selectedStaffEvidenceLevel}`}>
+                  {selectedStaffEvidenceLevel}
+                  <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
+                </strong>
+              </div>
+              <div className="growth-profile-metric growth-profile-certification">
+                <span>인증직원 선정</span>
+                <strong
+                  aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
+                >
+                  <b>G<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Grand}</b>
+                  <em aria-hidden="true">/</em>
+                  <b>A<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Advanced}</b>
+                  <em aria-hidden="true">/</em>
+                  <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
+                </strong>
+              </div>
+            </section>
+
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
@@ -2040,55 +2089,6 @@ export default function CompetitiveAnalysis({
             </aside>
 
             <div className="growth-navigation-detail">
-              <section className="growth-profile-strip" aria-label="선택 직원 상담 분석 요약">
-                <div className="growth-profile-person">
-                  <span className="growth-profile-photo" aria-hidden="true">
-                    {selectedStaffProfile ? (
-                      <img src={selectedStaffProfile.image} alt="" draggable={false} />
-                    ) : selectedStaffInitials}
-                  </span>
-                  <span>
-                    <small>영업직원</small>
-                    <strong>
-                      {selectedStaffEmployee?.name ?? "―"}
-                      <i>
-                        {selectedStaffEmployee?.jobTitle ?? ""} · {displayTwoDigitCount(selectedStaffTenureYears ?? 0)}년 {displayTwoDigitCount(selectedStaffTenureMonths ?? 0)}개월
-                        {selectedStaffTenureTopPercent === null ? null : (
-                          <em>(상위 {selectedStaffTenureTopPercent.toFixed(1)}%)</em>
-                        )}
-                      </i>
-                    </strong>
-                  </span>
-                </div>
-                <div className="growth-profile-metric">
-                  <span>상담 만족도</span>
-                  <strong>
-                    {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
-                    {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
-                    <small>/10</small>
-                  </strong>
-                </div>
-                <div className="growth-profile-metric">
-                  <span>자료 신뢰도</span>
-                  <strong className={`confidence-${selectedStaffEvidenceLevel}`}>
-                    {selectedStaffEvidenceLevel}
-                    <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
-                  </strong>
-                </div>
-                <div className="growth-profile-metric growth-profile-certification">
-                  <span>인증직원 선정</span>
-                  <strong
-                    aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
-                  >
-                    <b>G<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Grand}</b>
-                    <em aria-hidden="true">/</em>
-                    <b>A<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Advanced}</b>
-                    <em aria-hidden="true">/</em>
-                    <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
-                  </strong>
-                </div>
-              </section>
-
               <div className="growth-capability-columns">
               <section className="growth-capability consultation">
                 <header>
@@ -2180,7 +2180,7 @@ export default function CompetitiveAnalysis({
                       <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
                       <defs>
                         <clipPath id="consultation-selected-staff-photo">
-                          <circle r="6.5" />
+                          <circle r="8" />
                         </clipPath>
                       </defs>
                       {staffScatterYTicks.map((tick) => {
@@ -2230,21 +2230,21 @@ export default function CompetitiveAnalysis({
                       </g>
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
-                          <circle className="photo-backdrop" r="8" />
+                          <circle className="photo-backdrop" r="10" />
                           {selectedStaffProfile ? (
                             <image
                               href={selectedStaffProfile.image}
-                              x="-6.5"
-                              y="-6.5"
-                              width="13"
-                              height="13"
+                              x="-8"
+                              y="-8"
+                              width="16"
+                              height="16"
                               preserveAspectRatio="xMidYMin slice"
                               clipPath="url(#consultation-selected-staff-photo)"
                             />
                           ) : (
                             <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
                           )}
-                          <circle className="photo-ring" r="7" />
+                          <circle className="photo-ring" r="8.5" />
                         </g>
                       ) : null}
                       {staffScatterNationalAverage !== null ? (
@@ -2396,7 +2396,7 @@ export default function CompetitiveAnalysis({
                       <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>
                       <defs>
                         <clipPath id="sales-selected-staff-photo">
-                          <circle r="6.5" />
+                          <circle r="8" />
                         </clipPath>
                       </defs>
                       {staffSalesYTicks.map((tick) => {
@@ -2446,21 +2446,21 @@ export default function CompetitiveAnalysis({
                       </g>
                       {selectedStaffSalesScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
-                          <circle className="photo-backdrop" r="8" />
+                          <circle className="photo-backdrop" r="10" />
                           {selectedStaffProfile ? (
                             <image
                               href={selectedStaffProfile.image}
-                              x="-6.5"
-                              y="-6.5"
-                              width="13"
-                              height="13"
+                              x="-8"
+                              y="-8"
+                              width="16"
+                              height="16"
                               preserveAspectRatio="xMidYMin slice"
                               clipPath="url(#sales-selected-staff-photo)"
                             />
                           ) : (
                             <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
                           )}
-                          <circle className="photo-ring" r="7" />
+                          <circle className="photo-ring" r="8.5" />
                         </g>
                       ) : null}
                       {staffSalesNationalAverage !== null ? (
