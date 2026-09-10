@@ -244,9 +244,10 @@ async function render(
 }
 
 test("renders an evidence-first growth navigation without recency scoring", async () => {
-  const [source, css] = await Promise.all([
+  const [source, css, salesActivity] = await Promise.all([
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/sales-activity-analysis.json", import.meta.url), "utf8").then(JSON.parse),
   ]);
   const start = source.indexOf('className="growth-navigation"');
   const end = source.indexOf('{false && selectedStaffAnalysis', start);
@@ -329,11 +330,22 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다\./);
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
-  assert.match(navigation, /영업활동 원자료 연결 후 활성화/);
-  assert.match(navigation, /영업 역량 위치/);
-  assert.match(navigation, /전체 영업활동 분포/);
-  assert.match(navigation, /산포도 표시 공간/);
-  assert.doesNotMatch(navigation, /상담 → 시승|시승 → 계약|계약 → 유지/);
+  assert.match(navigation, /상담 → 시승 → 계약 전환/);
+  assert.match(navigation, /2026 월별 출고 실적/);
+  assert.match(navigation, /원자료 갱신 필요/);
+  assert.match(navigation, /2026 영업활동 기록 없음/);
+  assert.match(navigation, /전시장 판매의/);
+  assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
+  assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
+  assert.equal(salesActivity.source.salesAsOf, "2026-09-10");
+  assert.equal(salesActivity.showrooms["6KR6834"].salesDealerCode, "HMGD");
+  assert.equal(salesActivity.showrooms["6KR6834"].summary.activityStaffCount, 0);
+  assert.equal(salesActivity.showrooms["6KR6834"].summary.deliveredSales, 270);
+  const kimDaejunSales = salesActivity.showrooms["6KR6834"].staff.find((staff) => staff.name === "김대준");
+  assert.equal(kimDaejunSales.deliveredSales, 49);
+  assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
+  assert.match(css, /\.growth-sales-funnel\s*\{[^}]*grid-template-columns: minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\);/);
+  assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(9, minmax\(0, 1fr\)\);/);
   assert.match(profile, /\{selectedStaffTenureMonths \?\? 0\}개월[\s\S]*?<em>\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)<\/em>/);
   assert.doesNotMatch(profile, /growth-profile-person-label/);
   assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/10<\/small>/);
@@ -352,7 +364,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: auto;[^}]*min-width: max-content;[^}]*height: 22px;[^}]*align-items: center;[^}]*justify-content: center;[^}]*padding: 1px 18px 0;[^}]*font-size: 7\.5px;/);
   assert.match(source, /<strong><b>\{groupItems\.length\}<\/b>개소<\/strong>/);
   assert.match(css, /\.analysis-ranking-card > \.analysis-card-heading > strong\s*\{[^}]*min-height: 21px;[^}]*border-radius: 999px;[^}]*font-size: 7\.5px;/);
-  assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales pending"/);
+  assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales"/);
   assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-capability > header\s*\{[^}]*min-height: 34px;/);

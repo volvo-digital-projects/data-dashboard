@@ -1097,7 +1097,7 @@ html {
   grid-template-rows: auto 1fr;
 }
 
-.growth-sales-placeholder {
+.growth-sales-dashboard {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: minmax(220px, 0.82fr) minmax(270px, 1.18fr);
@@ -1106,8 +1106,8 @@ html {
   background: #f9fbfc;
 }
 
-.growth-sales-position-reserve,
-.growth-sales-scatter-reserve {
+.growth-sales-funnel-card,
+.growth-sales-monthly-card {
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -1117,49 +1117,256 @@ html {
   background: #fbfdfe;
 }
 
-.growth-sales-position-reserve > header,
-.growth-sales-scatter-reserve > header {
+.growth-sales-funnel-card > header,
+.growth-sales-monthly-card > header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
 }
 
-.growth-sales-position-reserve > header span,
-.growth-sales-scatter-reserve > header span {
+.growth-sales-funnel-card > header span,
+.growth-sales-monthly-card > header span {
   display: block;
   margin-bottom: 3px;
   font-size: 9px;
   color: #728995;
 }
 
-.growth-sales-position-reserve > header strong,
-.growth-sales-scatter-reserve > header strong {
+.growth-sales-funnel-card > header strong,
+.growth-sales-monthly-card > header strong {
   font-size: 13px;
-  color: #657d88;
+  color: #244f64;
 }
 
-.growth-sales-navigation-reserve,
-.growth-sales-scatter-canvas {
+.growth-sales-funnel-card > header > small,
+.growth-sales-monthly-card > header > small {
+  font-size: 8px;
+  color: #7a909b;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-sales-funnel {
   flex: 1;
   min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(58px, 1fr) 44px minmax(58px, 1fr) 44px minmax(58px, 1fr) 44px minmax(58px, 1fr);
+  align-items: center;
+  gap: 3px;
   margin-top: 7px;
-  border: 1px dashed #c9d9df;
-  border-radius: 4px;
+}
+
+.growth-sales-stage {
+  min-width: 0;
+  height: 94px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d8e6eb;
+  border-radius: 6px;
   background: #fff;
 }
 
-.growth-sales-navigation-reserve {
-  background:
-    linear-gradient(90deg, rgba(238, 146, 121, 0.18) 0 33.33%, rgba(98, 172, 195, 0.18) 33.33% 66.66%, rgba(107, 183, 155, 0.18) 66.66% 100%) top 44% left / 100% 5px no-repeat,
-    #fff;
+.growth-sales-stage span {
+  font-size: 9px;
+  font-weight: 700;
+  color: #607884;
 }
 
-.growth-sales-scatter-canvas {
-  background:
-    linear-gradient(#edf2f4 1px, transparent 1px) 0 0 / 100% 25%,
-    linear-gradient(90deg, #edf2f4 1px, transparent 1px) 0 0 / 20% 100%,
-    #fff;
+.growth-sales-stage strong {
+  font-family: var(--font-volvo);
+  font-size: 23px;
+  color: #214e62;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-sales-stage strong small {
+  margin-left: 2px;
+  font-family: var(--font-korean);
+  font-size: 9px;
+}
+
+.growth-sales-stage.consultation { border-top: 3px solid #e78a6d; }
+.growth-sales-stage.test-drive { border-top: 3px solid #e1ad65; }
+.growth-sales-stage.contract { border-top: 3px solid #5da6bd; }
+.growth-sales-stage.delivered { border-top: 3px solid #4a9c82; background: #f4faf8; }
+
+.growth-sales-transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-style: normal;
+  color: #7a8f98;
+}
+
+.growth-sales-transition::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  order: 2;
+  background: #c9d9df;
+}
+
+.growth-sales-transition::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-top: -8px;
+  margin-left: auto;
+  order: 3;
+  border-top: 1px solid #9db2ba;
+  border-right: 1px solid #9db2ba;
+  transform: rotate(45deg);
+}
+
+.growth-sales-transition b {
+  font-size: 10px;
+  color: #496977;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-sales-transition span {
+  order: 4;
+  margin-top: -2px;
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.growth-sales-funnel.unavailable .growth-sales-stage:not(.delivered),
+.growth-sales-funnel.unavailable .growth-sales-transition {
+  opacity: 0.42;
+}
+
+.growth-sales-funnel-card > footer {
+  min-height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 7px;
+  border-radius: 4px;
+  font-size: 8px;
+}
+
+.growth-sales-funnel-card > footer.warning {
+  border: 1px solid #efd2c6;
+  background: #fff7f3;
+  color: #8c5b48;
+}
+
+.growth-sales-funnel-card > footer.available {
+  border: 1px solid #cfe5dd;
+  background: #f4faf8;
+  color: #447466;
+}
+
+.growth-sales-funnel-card > footer b { font-size: 9px; }
+.growth-sales-funnel-card > footer span { margin-left: auto; }
+
+.growth-sales-monthly-chart {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  align-items: end;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 0 6px;
+  border-bottom: 1px solid #dce6ea;
+}
+
+.growth-sales-month {
+  height: 100%;
+  min-height: 155px;
+  display: grid;
+  grid-template-rows: 17px 1fr 19px;
+  align-items: end;
+  text-align: center;
+}
+
+.growth-sales-month > strong {
+  font-family: var(--font-volvo);
+  font-size: 9px;
+  color: #355e70;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-sales-month > i {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 105px;
+  display: block;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(#edf2f4 1px, transparent 1px) 0 0 / 100% 25%;
+}
+
+.growth-sales-month > i span,
+.growth-sales-month > i b {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border-radius: 3px 3px 0 0;
+  transform: translateX(-50%);
+}
+
+.growth-sales-month > i span {
+  width: 68%;
+  min-height: 2px;
+  background: rgba(88, 157, 178, 0.24);
+}
+
+.growth-sales-month > i b {
+  width: 38%;
+  min-height: 2px;
+  background: #d97858;
+}
+
+.growth-sales-month > small {
+  padding-top: 5px;
+  font-size: 8px;
+  color: #718690;
+}
+
+.growth-sales-monthly-card > footer {
+  min-height: 31px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-top: 6px;
+  font-size: 8px;
+  color: #6b828d;
+}
+
+.growth-sales-monthly-card > footer > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.growth-sales-monthly-card > footer i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.growth-sales-monthly-card > footer i.staff { background: #d97858; }
+.growth-sales-monthly-card > footer i.average { background: rgba(88, 157, 178, 0.34); }
+
+.growth-sales-monthly-card > footer > strong {
+  margin-left: auto;
+  color: #315d70;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.growth-sales-monthly-card > footer > strong small {
+  font-size: 8px;
+  font-weight: 600;
 }
 
 @media (max-width: 1180px) {

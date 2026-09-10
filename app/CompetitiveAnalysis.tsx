@@ -11,6 +11,7 @@ import {
 } from "react";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
+import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
@@ -109,6 +110,37 @@ type StaffCertificationRecord = {
   level: StaffCertificationLevel;
 };
 
+type SalesActivityStaff = {
+  name: string;
+  activityStatus: "available" | "missing" | "ambiguous-name";
+  lastActivityDate: string | null;
+  activityEvents: { consultation: number; testDrive: number; contract: number };
+  customers: { consultation: number; testDrive: number; contract: number };
+  transitions: {
+    consultationToTestDrive: number;
+    testDriveToContract: number;
+    contractToDelivered: number;
+  };
+  deliveredSales: number;
+  deliveredCustomers: number;
+  monthlyDeliveredSales: number[];
+};
+
+type SalesActivityShowroom = {
+  salesDealerCode: string | null;
+  salesDealerCodeEvidence: number;
+  staff: SalesActivityStaff[];
+  summary: {
+    staffCount: number;
+    activityStaffCount: number;
+    consultationCustomers: number;
+    testDriveCustomers: number;
+    contractCustomers: number;
+    deliveredSales: number;
+    monthlyDeliveredSales: number[];
+  };
+};
+
 const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   string,
   StaffAnalysisShowroom
@@ -124,6 +156,11 @@ const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
 >;
 const staffCertificationRecords =
   staffCertificationsJson.records as StaffCertificationRecord[];
+const salesActivityByCdsid = salesActivityAnalysisJson.showrooms as Record<
+  string,
+  SalesActivityShowroom
+>;
+const salesActivitySource = salesActivityAnalysisJson.source;
 const staffCurrentNameFrequency = Object.values(staffAnalysisByCdsid).reduce(
   (frequency, showroom) => {
     showroom.employees.forEach((employee) => {
@@ -978,6 +1015,61 @@ export default function CompetitiveAnalysis({
   const selectedStaffScoring = rankedSalesStaff.find(
     ({ employee }) => employee.name === selectedStaffEmployee?.name,
   );
+  const selectedSalesActivityShowroom = salesActivityByCdsid[selected.cdsid];
+  const selectedStaffSalesActivity = selectedSalesActivityShowroom?.staff.find(
+    (staff) => staff.name === selectedStaffEmployee?.name,
+  );
+  const selectedStaffHasActivityFunnel =
+    selectedStaffSalesActivity?.activityStatus === "available";
+  const selectedStaffConsultationCustomers =
+    selectedStaffSalesActivity?.customers.consultation ?? 0;
+  const selectedStaffTestDriveCustomers =
+    selectedStaffSalesActivity?.customers.testDrive ?? 0;
+  const selectedStaffContractCustomers =
+    selectedStaffSalesActivity?.customers.contract ?? 0;
+  const selectedStaffDeliveredSales = selectedStaffSalesActivity?.deliveredSales ?? 0;
+  const selectedShowroomDeliveredSales =
+    selectedSalesActivityShowroom?.summary.deliveredSales ?? 0;
+  const selectedShowroomSalesStaffCount =
+    selectedSalesActivityShowroom?.summary.staffCount ?? 0;
+  const selectedShowroomAverageDeliveredSales = selectedShowroomSalesStaffCount
+    ? selectedShowroomDeliveredSales / selectedShowroomSalesStaffCount
+    : 0;
+  const selectedStaffSalesRank = selectedStaffSalesActivity
+    ? [...(selectedSalesActivityShowroom?.staff ?? [])]
+        .sort(
+          (left, right) =>
+            right.deliveredSales - left.deliveredSales ||
+            left.name.localeCompare(right.name, "ko"),
+        )
+        .findIndex((staff) => staff.name === selectedStaffSalesActivity.name) + 1
+    : null;
+  const selectedStaffSalesShare = selectedShowroomDeliveredSales
+    ? (selectedStaffDeliveredSales / selectedShowroomDeliveredSales) * 100
+    : null;
+  const selectedStaffMonthlyDeliveredSales =
+    selectedStaffSalesActivity?.monthlyDeliveredSales ?? Array(9).fill(0);
+  const selectedShowroomMonthlyAverageDeliveredSales =
+    selectedSalesActivityShowroom?.summary.monthlyDeliveredSales.map((count) =>
+      selectedShowroomSalesStaffCount ? count / selectedShowroomSalesStaffCount : 0,
+    ) ?? Array(9).fill(0);
+  const selectedSalesMonthScale = Math.max(
+    1,
+    ...selectedStaffMonthlyDeliveredSales,
+    ...selectedShowroomMonthlyAverageDeliveredSales,
+  );
+  const selectedStaffConsultationToTestDriveRate = selectedStaffConsultationCustomers
+    ? ((selectedStaffSalesActivity?.transitions.consultationToTestDrive ?? 0) /
+        selectedStaffConsultationCustomers) * 100
+    : null;
+  const selectedStaffTestDriveToContractRate = selectedStaffTestDriveCustomers
+    ? ((selectedStaffSalesActivity?.transitions.testDriveToContract ?? 0) /
+        selectedStaffTestDriveCustomers) * 100
+    : null;
+  const selectedStaffContractToDeliveredRate = selectedStaffContractCustomers
+    ? ((selectedStaffSalesActivity?.transitions.contractToDelivered ?? 0) /
+        selectedStaffContractCustomers) * 100
+    : null;
   const selectedShowroomStaffResponses = rankedSalesStaff.reduce(
     (sum, staff) => sum + staff.responses,
     0,
@@ -2138,23 +2230,94 @@ export default function CompetitiveAnalysis({
                 </div>
               </section>
 
-              <section className="growth-capability sales pending">
+              <section className="growth-capability sales">
                 <header>
                   <div><span>02 · 영업활동 역량</span></div>
-                  <p>영업활동 원자료 연결 후 활성화됩니다.</p>
+                  <p>활동 {salesActivitySource.activityAsOf.replaceAll("-", "").slice(2)} · 판매 {salesActivitySource.salesAsOf.replaceAll("-", "").slice(2)} 기준</p>
                 </header>
-                <div className="growth-sales-placeholder">
-                  <article className="growth-sales-position-reserve">
+                <div className="growth-sales-dashboard">
+                  <article className="growth-sales-funnel-card">
                     <header>
-                      <div><span>영업 역량 위치</span><strong>원자료 연결 후 표시</strong></div>
+                      <div>
+                        <span>상담 → 시승 → 계약 전환</span>
+                        <strong>{selectedStaffHasActivityFunnel ? "고객 흐름 연결" : "원자료 갱신 필요"}</strong>
+                      </div>
+                      <small>개인정보 제외 집계</small>
                     </header>
-                    <div className="growth-sales-navigation-reserve" aria-hidden="true" />
+                    <div className={`growth-sales-funnel${selectedStaffHasActivityFunnel ? "" : " unavailable"}`}>
+                      <div className="growth-sales-stage consultation">
+                        <span>상담 고객</span>
+                        <strong>{selectedStaffHasActivityFunnel ? selectedStaffConsultationCustomers : "―"}<small>{selectedStaffHasActivityFunnel ? "명" : ""}</small></strong>
+                      </div>
+                      <i className="growth-sales-transition">
+                        <b>{selectedStaffConsultationToTestDriveRate === null || !selectedStaffHasActivityFunnel ? "―" : `${Math.round(selectedStaffConsultationToTestDriveRate)}%`}</b>
+                        <span>시승 연결</span>
+                      </i>
+                      <div className="growth-sales-stage test-drive">
+                        <span>시승 고객</span>
+                        <strong>{selectedStaffHasActivityFunnel ? selectedStaffTestDriveCustomers : "―"}<small>{selectedStaffHasActivityFunnel ? "명" : ""}</small></strong>
+                      </div>
+                      <i className="growth-sales-transition">
+                        <b>{selectedStaffTestDriveToContractRate === null || !selectedStaffHasActivityFunnel ? "―" : `${Math.round(selectedStaffTestDriveToContractRate)}%`}</b>
+                        <span>계약 연결</span>
+                      </i>
+                      <div className="growth-sales-stage contract">
+                        <span>계약 고객</span>
+                        <strong>{selectedStaffHasActivityFunnel ? selectedStaffContractCustomers : "―"}<small>{selectedStaffHasActivityFunnel ? "명" : ""}</small></strong>
+                      </div>
+                      <i className="growth-sales-transition">
+                        <b>{selectedStaffContractToDeliveredRate === null || !selectedStaffHasActivityFunnel ? "―" : `${Math.round(selectedStaffContractToDeliveredRate)}%`}</b>
+                        <span>출고 연결</span>
+                      </i>
+                      <div className="growth-sales-stage delivered">
+                        <span>실제 출고</span>
+                        <strong>{selectedStaffDeliveredSales}<small>대</small></strong>
+                      </div>
+                    </div>
+                    <footer className={selectedStaffHasActivityFunnel ? "available" : "warning"}>
+                      {selectedStaffHasActivityFunnel ? (
+                        <><b>활동 기록 연결 완료</b><span>동일 고객·직원 조합의 단계 이동으로 계산</span></>
+                      ) : (
+                        <>
+                          <b>{selectedStaffSalesActivity?.activityStatus === "ambiguous-name" ? "동명이인 확인 필요" : "2026 영업활동 기록 없음"}</b>
+                          <span>
+                            {selectedStaffSalesActivity?.lastActivityDate
+                              ? `최근 기록 ${selectedStaffSalesActivity.lastActivityDate.replaceAll("-", ".")}`
+                              : "이 파일에서 과거 기록도 확인되지 않음"}
+                          </span>
+                        </>
+                      )}
+                    </footer>
                   </article>
-                  <article className="growth-sales-scatter-reserve">
+                  <article className="growth-sales-monthly-card">
                     <header>
-                      <div><span>전체 영업활동 분포</span><strong>산포도 표시 공간</strong></div>
+                      <div>
+                        <span>2026 월별 출고 실적</span>
+                        <strong>{selectedStaffEmployee?.name ?? "선택 직원"} {selectedStaffDeliveredSales}대</strong>
+                      </div>
+                      <small>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 {selectedShowroomDeliveredSales}대</small>
                     </header>
-                    <div className="growth-sales-scatter-canvas" aria-hidden="true" />
+                    <div className="growth-sales-monthly-chart" role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 9월까지 월별 출고 실적`}>
+                      {selectedStaffMonthlyDeliveredSales.map((count, index) => (
+                        <div className="growth-sales-month" key={`sales-month-${index + 1}`}>
+                          <strong>{count}</strong>
+                          <i aria-hidden="true">
+                            <span style={{ height: `${(selectedShowroomMonthlyAverageDeliveredSales[index] / selectedSalesMonthScale) * 100}%` }} />
+                            <b style={{ height: `${(count / selectedSalesMonthScale) * 100}%` }} />
+                          </i>
+                          <small>{index + 1}월</small>
+                        </div>
+                      ))}
+                    </div>
+                    <footer>
+                      <span><i className="staff" />선택 직원</span>
+                      <span><i className="average" />직원 1인 평균</span>
+                      <strong>
+                        전시장 {selectedStaffSalesRank ?? "―"}위
+                        <small> · 평균 대비 {selectedStaffDeliveredSales >= selectedShowroomAverageDeliveredSales ? "+" : ""}{(selectedStaffDeliveredSales - selectedShowroomAverageDeliveredSales).toFixed(1)}대</small>
+                        {selectedStaffSalesShare === null ? null : <small> · 전시장 판매의 {selectedStaffSalesShare.toFixed(1)}%</small>}
+                      </strong>
+                    </footer>
                   </article>
                 </div>
               </section>
