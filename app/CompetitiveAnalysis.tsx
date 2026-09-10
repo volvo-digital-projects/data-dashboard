@@ -1856,7 +1856,7 @@ export default function CompetitiveAnalysis({
                     >
                       <span>
                         <strong>
-                          {employee.name}
+                          <span className="growth-staff-name">{employee.name}</span>
                           {isTeamLeader ? (
                             <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>
                           ) : null}
