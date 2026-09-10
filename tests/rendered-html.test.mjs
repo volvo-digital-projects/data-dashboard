@@ -400,9 +400,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-capability > header\s*\{[^}]*min-height: 34px;/);
+  assert.match(css, /\.growth-scatter-card\s*\{[^}]*display: grid;[^}]*grid-template-rows: 18px auto 20px;/);
+  assert.match(css, /\.growth-scatter-card > header\s*\{[^}]*height: 18px;[^}]*min-height: 18px;/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
-  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(css, /\.growth-comment-evidence\s*\{[^}]*min-height: 88px;/);
+  assert.match(css, /\.growth-scatter-card footer\s*\{[^}]*height: 20px;[^}]*min-height: 20px;[^}]*overflow: hidden;/);
+  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 250px;[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*grid-template-rows: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.growth-comment-evidence\s*\{[^}]*min-height: 0;/);
+  assert.match(css, /\.growth-sales-monthly-card\s*\{[^}]*height: 250px;[^}]*min-height: 250px;/);
   assert.match(css, /\.growth-comment-bars\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-comment-bar-column \+ \.growth-comment-bar-column\s*\{[^}]*border-left: 1px solid #dce7eb;/);
   assert.match(css, /\.growth-comment-bar > i > b\s*\{[^}]*width: var\(--growth-comment-bar-ratio\);/);

@@ -869,7 +869,15 @@ html {
 }
 
 .growth-scatter-card {
+  display: grid;
+  grid-template-rows: 18px auto 20px;
   padding: 8px 8px 4px;
+}
+
+.growth-scatter-card > header {
+  height: 18px;
+  min-height: 18px;
+  overflow: hidden;
 }
 
 .growth-scatter-card svg {
@@ -972,7 +980,9 @@ html {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  height: 20px;
   min-height: 20px;
+  overflow: hidden;
   padding: 0 6px;
   border-top: 1px solid #e4ecef;
   font-size: 8px;
@@ -1005,14 +1015,16 @@ html {
 }
 
 .growth-evidence-grid {
+  height: 250px;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 5px;
   padding: 0 5px 5px;
 }
 
 .growth-comment-evidence {
-  min-height: 88px;
+  min-height: 0;
   padding: 7px 8px;
 }
 
@@ -1176,6 +1188,7 @@ html {
 }
 
 .growth-sales-monthly-card {
+  height: 250px;
   min-height: 250px;
 }
 
