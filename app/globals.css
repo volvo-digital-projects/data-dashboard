@@ -1078,7 +1078,7 @@ html {
 }
 
 .growth-evidence-grid {
-  height: 250px;
+  height: 196px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: minmax(0, 1fr);
@@ -1088,16 +1088,16 @@ html {
 
 .growth-comment-evidence {
   min-height: 0;
-  padding: 7px 8px;
+  padding: 9px 10px;
 }
 
 .growth-comment-evidence > header strong {
-  font-size: 10px;
+  font-size: 10.5px;
   font-variant-numeric: tabular-nums;
 }
 
 .growth-comment-evidence > header span {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -1118,15 +1118,15 @@ html {
 .growth-comment-bars {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 4px;
-  margin-top: 7px;
+  gap: 7px;
+  margin-top: 10px;
 }
 
 .growth-comment-bar-column {
   min-width: 0;
   display: grid;
   align-content: start;
-  gap: 4px;
+  gap: 6px;
 }
 
 .growth-comment-bar-column + .growth-comment-bar-column {
@@ -1138,14 +1138,14 @@ html {
 .growth-comment-bar {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(58px, 78px) minmax(48px, 1fr) 58px;
+  grid-template-columns: minmax(66px, 88px) minmax(48px, 1fr) 62px;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .growth-comment-bar > span {
   overflow: hidden;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   color: #377461;
   line-height: 1;
@@ -1159,7 +1159,7 @@ html {
 }
 
 .growth-comment-bar > i {
-  height: 9px;
+  height: 12px;
   overflow: hidden;
   border: 1px solid #dbe9e5;
   border-radius: 3px;
@@ -1188,7 +1188,7 @@ html {
 
 .growth-comment-bar > small {
   min-width: 0;
-  font-size: 8px;
+  font-size: 9px;
   color: #51796f;
   font-weight: 750;
   font-variant-numeric: tabular-nums;
@@ -1252,8 +1252,8 @@ html {
 }
 
 .growth-sales-monthly-card {
-  height: 250px;
-  min-height: 250px;
+  height: 196px;
+  min-height: 196px;
 }
 
 .growth-sales-funnel-card > header,
@@ -1412,7 +1412,7 @@ html {
 
 .growth-sales-month {
   height: 100%;
-  min-height: 155px;
+  min-height: 104px;
   display: grid;
   grid-template-rows: 17px 1fr 19px;
   align-items: end;
@@ -1430,7 +1430,7 @@ html {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 105px;
+  min-height: 62px;
   display: block;
   border-radius: 3px 3px 0 0;
   background: linear-gradient(#edf2f4 1px, transparent 1px) 0 0 / 100% 25%;

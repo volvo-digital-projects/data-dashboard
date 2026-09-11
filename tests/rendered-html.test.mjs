@@ -305,7 +305,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /유지\/ 강화 사항/);
   assert.match(navigation, /보완\/ 수정 사항/);
   assert.doesNotMatch(navigation, /유지·강화 포인트|보완·수정 포인트/);
-  assert.match(css, /\.growth-comment-evidence > header span\s*\{[^}]*font-size:\s*13px;[^}]*font-weight:\s*700;[^}]*line-height:\s*1\.2;/);
+  assert.match(css, /\.growth-comment-evidence > header span\s*\{[^}]*font-size:\s*14px;[^}]*font-weight:\s*700;[^}]*line-height:\s*1\.2;/);
   assert.match(navigation, /className="growth-comment-bars"/);
   assert.match(navigation, /--growth-comment-bar-ratio/);
   assert.match(source, /const displayTwoDigitCount = \(value: number\) => String\(value\)\.padStart\(2, "0"\);/);
@@ -431,10 +431,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-card > header\s*\{[^}]*height: 18px;[^}]*min-height: 18px;/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
   assert.match(css, /\.growth-scatter-card footer\s*\{[^}]*height: 20px;[^}]*min-height: 20px;[^}]*overflow: hidden;/);
-  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 250px;[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows: minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 196px;[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows: minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-comment-evidence\s*\{[^}]*min-height: 0;/);
-  assert.match(css, /\.growth-sales-monthly-card\s*\{[^}]*height: 250px;[^}]*min-height: 250px;/);
-  assert.match(css, /\.growth-comment-bars\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap:\s*4px;/);
+  assert.match(css, /\.growth-sales-monthly-card\s*\{[^}]*height: 196px;[^}]*min-height: 196px;/);
+  assert.match(css, /\.growth-comment-bars\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap:\s*7px;/);
+  assert.match(css, /\.growth-comment-bar > span\s*\{[^}]*font-size:\s*10px;/);
+  assert.match(css, /\.growth-comment-bar > i\s*\{[^}]*height:\s*12px;/);
+  assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-size:\s*9px;/);
   assert.match(css, /\.growth-comment-bar-column \+ \.growth-comment-bar-column\s*\{[^}]*margin-left:\s*0;[^}]*padding-left:\s*0;[^}]*border-left:\s*0;/);
   assert.match(css, /\.growth-comment-bar > i > b\s*\{[^}]*width: var\(--growth-comment-bar-ratio\);/);
   assert.match(css, /\.growth-comment-evidence\.improvement \.growth-comment-bar > i > b\s*\{[^}]*#bd4548/);
