@@ -1023,7 +1023,108 @@ html {
 }
 
 .growth-scatter-selected-guides line {
+  transform-box: fill-box;
   vector-effect: non-scaling-stroke;
+}
+
+.growth-scatter-selected-guides.is-targeting .guide-arm-from-top {
+  transform-origin: center top;
+  animation: growth-scatter-guide-y 720ms cubic-bezier(0.18, 0.78, 0.24, 1) both;
+}
+
+.growth-scatter-selected-guides.is-targeting .guide-arm-from-bottom {
+  transform-origin: center bottom;
+  animation: growth-scatter-guide-y 720ms cubic-bezier(0.18, 0.78, 0.24, 1) both;
+}
+
+.growth-scatter-selected-guides.is-targeting .guide-arm-from-left {
+  transform-origin: left center;
+  animation: growth-scatter-guide-x 720ms cubic-bezier(0.18, 0.78, 0.24, 1) 70ms both;
+}
+
+.growth-scatter-selected-guides.is-targeting .guide-arm-from-right {
+  transform-origin: right center;
+  animation: growth-scatter-guide-x 720ms cubic-bezier(0.18, 0.78, 0.24, 1) 70ms both;
+}
+
+@keyframes growth-scatter-guide-y {
+  from {
+    opacity: 0.18;
+    transform: scaleY(0);
+  }
+
+  72% {
+    opacity: 0.92;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes growth-scatter-guide-x {
+  from {
+    opacity: 0.18;
+    transform: scaleX(0);
+  }
+
+  72% {
+    opacity: 0.92;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.growth-scatter-selected-photo .photo-reveal {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: growth-scatter-photo-reveal 620ms cubic-bezier(0.2, 1.55, 0.42, 1) 610ms both;
+}
+
+@keyframes growth-scatter-photo-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.28);
+  }
+
+  64% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.growth-scatter-selected-photo .photo-acquire-flash {
+  fill: none;
+  stroke: rgba(23, 116, 147, 0.84);
+  stroke-width: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  vector-effect: non-scaling-stroke;
+  animation: growth-scatter-photo-acquire-flash 760ms ease-out 680ms both;
+}
+
+@keyframes growth-scatter-photo-acquire-flash {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.72);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.82);
+  }
 }
 
 .growth-scatter-selected-photo .photo-halo {
@@ -1076,6 +1177,18 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .growth-scatter-selected-guides.is-targeting .guide-arm,
+  .growth-scatter-selected-photo .photo-reveal,
+  .growth-scatter-selected-photo .photo-acquire-flash {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  .growth-scatter-selected-photo .photo-acquire-flash {
+    opacity: 0;
+  }
+
   .growth-scatter-selected-photo .photo-halo {
     opacity: 0.28;
     animation: none;

@@ -2238,16 +2238,36 @@ export default function CompetitiveAnalysis({
                       <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">평균 고객상담 만족도</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {selectedStaffScatterPoint ? (
-                        <g className="growth-scatter-selected-guides" aria-hidden="true">
+                        <g
+                          className="growth-scatter-selected-guides is-targeting"
+                          aria-hidden="true"
+                          key={`consultation-guides-${selectedStaffEmployee?.name ?? "selected"}`}
+                        >
                           <line
+                            className="guide-arm guide-arm-from-top"
                             x1={staffScatterX(selectedStaffScatterPoint.tenureYears)}
                             x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
                             y1={staffScatterPlot.top}
-                            y2={staffScatterPlot.bottom}
+                            y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
                           />
                           <line
+                            className="guide-arm guide-arm-from-bottom"
+                            x1={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            y1={staffScatterPlot.bottom}
+                            y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                          />
+                          <line
+                            className="guide-arm guide-arm-from-left"
                             x1={staffScatterPlot.left}
-                            x2={staffScatterPlot.right}
+                            x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            y1={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                            y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                          />
+                          <line
+                            className="guide-arm guide-arm-from-right"
+                            x1={staffScatterPlot.right}
+                            x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
                             y1={staffScatterY(selectedStaffScatterPoint.finalScore)}
                             y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
                           />
@@ -2283,23 +2303,26 @@ export default function CompetitiveAnalysis({
                         ))}
                       </g>
                       {selectedStaffScatterPoint ? (
-                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
-                          <circle className="photo-halo" r="9.8" />
-                          <circle className="photo-backdrop" r="9.4" />
-                          {selectedStaffProfile ? (
-                            <image
-                              href={selectedStaffProfile.image}
-                              x="-7.5"
-                              y="-7.5"
-                              width="15"
-                              height="15"
-                              preserveAspectRatio="xMidYMin slice"
-                              clipPath="url(#consultation-selected-staff-photo)"
-                            />
-                          ) : (
-                            <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
-                          )}
-                          <circle className="photo-ring" r="8" />
+                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`} key={`consultation-photo-${selectedStaffEmployee?.name ?? "selected"}`}>
+                          <g className="photo-reveal">
+                            <circle className="photo-acquire-flash" r="9.8" />
+                            <circle className="photo-halo" r="9.8" />
+                            <circle className="photo-backdrop" r="9.4" />
+                            {selectedStaffProfile ? (
+                              <image
+                                href={selectedStaffProfile.image}
+                                x="-7.5"
+                                y="-7.5"
+                                width="15"
+                                height="15"
+                                preserveAspectRatio="xMidYMin slice"
+                                clipPath="url(#consultation-selected-staff-photo)"
+                              />
+                            ) : (
+                              <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
+                            )}
+                            <circle className="photo-ring" r="8" />
+                          </g>
                         </g>
                       ) : null}
                       {staffScatterNationalAverage !== null ? (
@@ -2461,16 +2484,36 @@ export default function CompetitiveAnalysis({
                       <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">2026 누적판매(대)</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {selectedStaffSalesScatterPoint ? (
-                        <g className="growth-scatter-selected-guides" aria-hidden="true">
+                        <g
+                          className="growth-scatter-selected-guides is-targeting"
+                          aria-hidden="true"
+                          key={`sales-guides-${selectedStaffEmployee?.name ?? "selected"}`}
+                        >
                           <line
+                            className="guide-arm guide-arm-from-top"
                             x1={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
                             x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
                             y1={staffScatterPlot.top}
-                            y2={staffScatterPlot.bottom}
+                            y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
                           />
                           <line
+                            className="guide-arm guide-arm-from-bottom"
+                            x1={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            y1={staffScatterPlot.bottom}
+                            y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                          />
+                          <line
+                            className="guide-arm guide-arm-from-left"
                             x1={staffScatterPlot.left}
-                            x2={staffScatterPlot.right}
+                            x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            y1={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                            y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                          />
+                          <line
+                            className="guide-arm guide-arm-from-right"
+                            x1={staffScatterPlot.right}
+                            x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
                             y1={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
                             y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
                           />
@@ -2506,23 +2549,26 @@ export default function CompetitiveAnalysis({
                         ))}
                       </g>
                       {selectedStaffSalesScatterPoint ? (
-                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
-                          <circle className="photo-halo" r="9.8" />
-                          <circle className="photo-backdrop" r="9.4" />
-                          {selectedStaffProfile ? (
-                            <image
-                              href={selectedStaffProfile.image}
-                              x="-7.5"
-                              y="-7.5"
-                              width="15"
-                              height="15"
-                              preserveAspectRatio="xMidYMin slice"
-                              clipPath="url(#sales-selected-staff-photo)"
-                            />
-                          ) : (
-                            <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
-                          )}
-                          <circle className="photo-ring" r="8" />
+                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`} key={`sales-photo-${selectedStaffEmployee?.name ?? "selected"}`}>
+                          <g className="photo-reveal">
+                            <circle className="photo-acquire-flash" r="9.8" />
+                            <circle className="photo-halo" r="9.8" />
+                            <circle className="photo-backdrop" r="9.4" />
+                            {selectedStaffProfile ? (
+                              <image
+                                href={selectedStaffProfile.image}
+                                x="-7.5"
+                                y="-7.5"
+                                width="15"
+                                height="15"
+                                preserveAspectRatio="xMidYMin slice"
+                                clipPath="url(#sales-selected-staff-photo)"
+                              />
+                            ) : (
+                              <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
+                            )}
+                            <circle className="photo-ring" r="8" />
+                          </g>
                         </g>
                       ) : null}
                       {staffSalesNationalAverage !== null ? (
