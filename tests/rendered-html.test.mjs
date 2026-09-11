@@ -364,7 +364,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-card footer\s*\{[^}]*font-size:\s*9px;/);
   assert.match(css, /\.growth-scatter-evidence-note\s*\{[^}]*font-size:\s*8\.5px;/);
   assert.match(css, /\.growth-sales-monthly-legend\s*\{[^}]*font-size:\s*9px;/);
-  assert.match(css, /\.growth-sales-share-meta > small\s*\{[^}]*font-size:\s*8\.5px;/);
+  assert.match(css, /\.growth-sales-share-meta > small\s*\{[^}]*font-size:\s*9\.5px;/);
   assert.match(navigation, /className="growth-scatter-average-line"/);
   assert.match(navigation, /className="growth-scatter-average-label"[\s\S]*?staffScatterPlot\.right - 28[\s\S]*?staffScatterY\(staffScatterNationalAverage\) - 36/);
   assert.match(navigation, /<text x="28" y="11" textAnchor="middle">전국 평균<\/text>/);
