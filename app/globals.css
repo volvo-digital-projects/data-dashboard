@@ -1728,6 +1728,7 @@ html {
   min-height: 23px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   padding-top: 4px;
   font-size: 8px;

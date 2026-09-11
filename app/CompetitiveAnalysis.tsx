@@ -2661,7 +2661,7 @@ export default function CompetitiveAnalysis({
                         </div>
                         <div className="growth-sales-monthly-legend">
                           <span><i className="staff" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
-                          <span title={`월별 소속 전시장 출고 ÷ 현재 영업직원 ${selectedShowroomSalesStaffCount}명`}><i className="average" />소속 전시장 1인 평균</span>
+                          <span title={`월별 소속 전시장 출고 ÷ 현재 영업직원 ${selectedShowroomSalesStaffCount}명`}><i className="average" />{displayShowroomNameWithoutBrand(selected.showroom)} 1인 평균</span>
                         </div>
                       </div>
                       <aside className="growth-sales-share-panel" aria-label={`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 누적판매 중 ${selectedStaffEmployee?.name ?? "선택 직원"} 판매 비중`}>
