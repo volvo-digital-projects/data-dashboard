@@ -446,6 +446,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
   assert.equal(salesActivity.source.salesAsOf, "2026-09-10");
+  assert.doesNotMatch(navigation, /salesActivitySource\.salesAsOf\.replaceAll/);
   assert.equal(salesActivity.showrooms["6KR6834"].salesDealerCode, "HMGD");
   assert.equal(salesActivity.showrooms["6KR6834"].summary.activityStaffCount, 0);
   assert.equal(salesActivity.showrooms["6KR6834"].summary.deliveredSales, 270);

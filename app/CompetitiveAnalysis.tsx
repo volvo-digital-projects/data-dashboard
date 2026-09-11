@@ -2548,7 +2548,6 @@ export default function CompetitiveAnalysis({
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>
                       <div><strong>근속기간 × <span className="growth-sales-heading-number">26</span>년 누적판매대수</strong></div>
-                      <small>{salesActivitySource.salesAsOf.replaceAll("-", ".")} 기준</small>
                     </header>
                     <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매대수 분포">
                       <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>

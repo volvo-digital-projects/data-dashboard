@@ -1527,12 +1527,6 @@ html {
   background: #fbfdfe;
 }
 
-.growth-sales-scatter-card > header > small {
-  color: #7a909b;
-  font-size: 8px;
-  font-variant-numeric: tabular-nums;
-}
-
 .growth-sales-funnel-card,
 .growth-sales-monthly-card {
   min-width: 0;
