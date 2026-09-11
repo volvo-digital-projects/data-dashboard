@@ -700,10 +700,10 @@ html {
 
 .growth-capability {
   min-width: 0;
-  overflow: clip;
-  border: 1px solid #cddfe7;
-  border-radius: 6px;
-  background: #fff;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .growth-capability-columns {
