@@ -1264,7 +1264,6 @@ export default function CompetitiveAnalysis({
   const selectedStaffProfile = selectedStaffEmployee
     ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
     : undefined;
-  const selectedStaffInitials = selectedStaffEmployee?.name.slice(-2) ?? "SC";
   const selectedStaffCertificationCounts = {
     Grand: 0,
     Advanced: 0,
@@ -2075,7 +2074,9 @@ export default function CompetitiveAnalysis({
                 <span className="growth-profile-photo" aria-hidden="true">
                   {selectedStaffProfile ? (
                     <img src={selectedStaffProfile.image} alt="" draggable={false} />
-                  ) : selectedStaffInitials}
+                  ) : (
+                    <span className="staff-profile-silhouette"><i /><b /></span>
+                  )}
                 </span>
                 <span>
                   <small>영업직원</small>
@@ -2362,7 +2363,10 @@ export default function CompetitiveAnalysis({
                                 clipPath="url(#consultation-selected-staff-photo)"
                               />
                             ) : (
-                              <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
+                              <g className="photo-fallback-silhouette">
+                                <circle cy="-2.6" r="2.3" />
+                                <path d="M-5.2 6c.3-4 2.1-6 5.2-6s4.9 2 5.2 6Z" />
+                              </g>
                             )}
                             <circle className="photo-ring" r="8" />
                           </g>
@@ -2605,7 +2609,10 @@ export default function CompetitiveAnalysis({
                                 clipPath="url(#sales-selected-staff-photo)"
                               />
                             ) : (
-                              <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
+                              <g className="photo-fallback-silhouette">
+                                <circle cy="-2.6" r="2.3" />
+                                <path d="M-5.2 6c.3-4 2.1-6 5.2-6s4.9 2 5.2 6Z" />
+                              </g>
                             )}
                             <circle className="photo-ring" r="8" />
                           </g>
@@ -2871,7 +2878,7 @@ export default function CompetitiveAnalysis({
                       ) : null}
                     </>
                   ) : (
-                    <span aria-hidden="true">{selectedStaffInitials}</span>
+                    <span className="staff-profile-silhouette" aria-hidden="true"><i /><b /></span>
                   )}
                 </button>
                 <strong className="name">
