@@ -200,6 +200,32 @@ html {
     box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
   }
 
+  .growth-navigation-workspace,
+  .growth-navigation-detail {
+    height: calc(
+      100vh - var(--growth-navigation-sticky-top, 356px) -
+        var(--growth-navigation-summary-height, 152px) - 12px
+    );
+    height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 356px) -
+        var(--growth-navigation-summary-height, 152px) - 12px
+    );
+    max-height: 660px;
+  }
+
+  .growth-navigation-workspace {
+    overflow: hidden;
+  }
+
+  .growth-navigation-detail {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    scrollbar-gutter: stable;
+  }
+
 }
 
 @media (min-width: 600px) and (max-width: 760px) {
@@ -396,7 +422,16 @@ html {
     scrollbar-color: rgba(80, 101, 111, 0.62) transparent;
   }
 
+  .growth-navigation-detail {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(80, 101, 111, 0.5) transparent;
+  }
+
   .growth-staff-roster-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .growth-navigation-detail::-webkit-scrollbar {
     width: 6px;
   }
 
@@ -404,9 +439,18 @@ html {
     background: transparent;
   }
 
+  .growth-navigation-detail::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
   .growth-staff-roster-list::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background: rgba(80, 101, 111, 0.62);
+  }
+
+  .growth-navigation-detail::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(80, 101, 111, 0.5);
   }
 
   .growth-staff-roster-list button {
@@ -545,6 +589,11 @@ html {
   display: grid;
   gap: 6px;
   padding: 6px;
+}
+
+.growth-navigation-detail:focus-visible {
+  outline: 2px solid rgba(22, 113, 142, 0.52);
+  outline-offset: -2px;
 }
 
 .growth-profile-strip {
