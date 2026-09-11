@@ -1571,7 +1571,7 @@ export default function CompetitiveAnalysis({
         ? selected.region
         : view === "size"
           ? `${selected.size} 사이즈`
-          : "전국 39개 전시장";
+          : "전국 전시장";
   const rankingTitle =
     view === "showroom"
       ? "전국 전시장 내 순위"

@@ -2948,11 +2948,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 17위 \/ 전체 39/);
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 39개 전시장 누적평균 95\.5점 대비 ▼ 5\.2점/,
+    /전국 전시장 누적평균 95\.5점 대비 ▼ 5\.2점/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 39개 전시장 누적평균 92\.5점 대비 ▲ 7\.5점/,
+    /전국 전시장 누적평균 92\.5점 대비 ▲ 7\.5점/,
   );
 });
 
