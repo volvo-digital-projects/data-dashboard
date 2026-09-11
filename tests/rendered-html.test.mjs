@@ -445,15 +445,16 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.analysis-ranking-card > \.analysis-card-heading > strong\s*\{[^}]*min-height: 21px;[^}]*border-radius: 999px;[^}]*font-size: 7\.5px;/);
   assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales"/);
   assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap: 6px;[^}]*padding: 0;/);
   assert.match(css, /\.growth-capability > header\s*\{[^}]*min-height: 34px;/);
   assert.match(css, /\.growth-scatter-card\s*\{[^}]*display: grid;[^}]*grid-template-rows: 18px auto 20px;/);
   assert.match(css, /\.growth-scatter-card > header\s*\{[^}]*height: 18px;[^}]*min-height: 18px;/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
   assert.match(css, /\.growth-scatter-card footer\s*\{[^}]*height: 20px;[^}]*min-height: 20px;[^}]*overflow: hidden;/);
-  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 196px;[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows: minmax\(0, 1fr\);/);
+  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 196px;[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows: minmax\(0, 1fr\);[^}]*gap: 6px;[^}]*padding: 6px 0 0;/);
   assert.match(css, /\.growth-comment-evidence\s*\{[^}]*min-height: 0;/);
   assert.match(css, /\.growth-sales-monthly-card\s*\{[^}]*height: 196px;[^}]*min-height: 196px;/);
+  assert.match(css, /\.growth-sales-dashboard\s*\{[^}]*grid-template-rows: auto auto auto;[^}]*gap: 6px;[^}]*padding: 0;[^}]*background: transparent;/);
   assert.match(css, /\.growth-comment-bars\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap:\s*7px;/);
   assert.match(css, /\.growth-comment-bar > span\s*\{[^}]*font-size:\s*10px;/);
   assert.match(css, /\.growth-comment-bar > i\s*\{[^}]*height:\s*12px;/);
