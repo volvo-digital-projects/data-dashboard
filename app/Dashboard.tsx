@@ -2483,8 +2483,8 @@ export default function Dashboard({
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
     carHandoverScore: 94.4,
-    testDriveScore: 89.1,
-    capturedAt: "2026-09-01T00:00:00+09:00",
+    testDriveScore: 89.2,
+    capturedAt: "2026-09-11T00:00:00+09:00",
   });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),

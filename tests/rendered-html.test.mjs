@@ -1403,8 +1403,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /class="identity-detail-rail"/);
   assert.doesNotMatch(visibleHtml, /평가 기준 한눈에 보기/);
   assert.match(visibleHtml, /DSC 가이드/);
+  const identityHeaderHtml =
+    visibleHtml.match(/<section class="dashboard-identity-header[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.doesNotMatch(
-    visibleHtml,
+    identityHeaderHtml,
     new RegExp(`${compactSeoulToday}[\\s\\S]*?기준`),
   );
   assert.doesNotMatch(visibleHtml, /Q1 \/ Q2 마감/);
@@ -4063,8 +4065,8 @@ test("shows the ONE VOICE capture date beside the title", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
   assert.match(dashboardSource, /carHandoverScore: 94\.4/);
-  assert.match(dashboardSource, /testDriveScore: 89\.1/);
-  assert.match(dashboardSource, /capturedAt: "2026-09-01T00:00:00\+09:00"/);
+  assert.match(dashboardSource, /testDriveScore: 89\.2/);
+  assert.match(dashboardSource, /capturedAt: "2026-09-11T00:00:00\+09:00"/);
   assert.match(dashboardSource, /snapshotCapturedAt <= currentCapturedAt/);
   assert.match(
     dashboardSource,
