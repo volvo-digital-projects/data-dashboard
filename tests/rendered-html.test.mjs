@@ -380,7 +380,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-funnel-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
   assert.match(css, /\.growth-scatter-showroom circle\s*\{[^}]*fill:\s*#087a58;[^}]*fill-opacity:\s*0\.94;/);
   assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{\s*background:\s*#087a58;/);
-  assert.match(navigation, /2026 월별 출고 실적/);
+  assert.doesNotMatch(navigation, /<span>2026 월별 출고 실적<\/span>/);
+  assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\} \{selectedStaffDeliveredSales\}대<\/strong>/);
   assert.match(navigation, /원자료 갱신 필요/);
   assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
   assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);

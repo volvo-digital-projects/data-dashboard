@@ -2634,10 +2634,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-sales-monthly-card">
                     <header>
-                      <div>
-                        <span>2026 월별 출고 실적</span>
-                        <strong>{selectedStaffEmployee?.name ?? "선택 직원"} {selectedStaffDeliveredSales}대</strong>
-                      </div>
+                      <strong>{selectedStaffEmployee?.name ?? "선택 직원"} {selectedStaffDeliveredSales}대</strong>
                     </header>
                     <div className="growth-sales-monthly-body">
                       <div className="growth-sales-monthly-trend">
