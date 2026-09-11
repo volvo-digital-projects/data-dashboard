@@ -573,34 +573,15 @@ html {
   object-position: center top;
 }
 
-.staff-profile-silhouette {
-  position: relative;
-  width: 24px;
-  height: 34px;
+.growth-profile-photo img.staff-profile-silhouette,
+.analysis-staff-profile-photo img.staff-profile-silhouette {
+  width: 100%;
+  height: 100%;
   display: block;
-  color: #111;
-}
-
-.staff-profile-silhouette > i {
-  position: absolute;
-  top: 2px;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: currentColor;
-  transform: translateX(-50%);
-}
-
-.staff-profile-silhouette > b {
-  position: absolute;
-  left: 50%;
-  bottom: 1px;
-  width: 23px;
-  height: 19px;
-  border-radius: 12px 12px 4px 4px;
-  background: currentColor;
-  transform: translateX(-50%);
+  box-sizing: border-box;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 2px 2px 0;
 }
 
 .growth-profile-person > span:last-child,
@@ -1253,8 +1234,8 @@ html {
   stroke-width: 1.2;
 }
 
-.growth-scatter-selected-photo .photo-fallback-silhouette {
-  fill: #111;
+.growth-scatter-selected-photo image.photo-fallback-silhouette {
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

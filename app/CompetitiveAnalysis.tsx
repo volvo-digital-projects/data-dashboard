@@ -162,6 +162,7 @@ const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
   string,
   StaffProfileShowroom
 >;
+const staffFallbackProfileImage = "/staff-profiles/neutral-human-silhouette.png";
 const staffCertificationRecords =
   staffCertificationsJson.records as StaffCertificationRecord[];
 const salesActivityByCdsid = salesActivityAnalysisJson.showrooms as Record<
@@ -2088,7 +2089,12 @@ export default function CompetitiveAnalysis({
                   {selectedStaffProfile ? (
                     <img src={selectedStaffProfile.image} alt="" draggable={false} />
                   ) : (
-                    <span className="staff-profile-silhouette"><i /><b /></span>
+                    <img
+                      className="staff-profile-silhouette"
+                      src={staffFallbackProfileImage}
+                      alt=""
+                      draggable={false}
+                    />
                   )}
                 </span>
                 <span>
@@ -2386,10 +2392,16 @@ export default function CompetitiveAnalysis({
                                 clipPath="url(#consultation-selected-staff-photo)"
                               />
                             ) : (
-                              <g className="photo-fallback-silhouette">
-                                <circle cy="-2.6" r="2.3" />
-                                <path d="M-5.2 6c.3-4 2.1-6 5.2-6s4.9 2 5.2 6Z" />
-                              </g>
+                              <image
+                                className="photo-fallback-silhouette"
+                                href={staffFallbackProfileImage}
+                                x="-7.5"
+                                y="-7.5"
+                                width="15"
+                                height="15"
+                                preserveAspectRatio="xMidYMid meet"
+                                clipPath="url(#consultation-selected-staff-photo)"
+                              />
                             )}
                             <circle className="photo-ring" r="8" />
                           </g>
@@ -2632,10 +2644,16 @@ export default function CompetitiveAnalysis({
                                 clipPath="url(#sales-selected-staff-photo)"
                               />
                             ) : (
-                              <g className="photo-fallback-silhouette">
-                                <circle cy="-2.6" r="2.3" />
-                                <path d="M-5.2 6c.3-4 2.1-6 5.2-6s4.9 2 5.2 6Z" />
-                              </g>
+                              <image
+                                className="photo-fallback-silhouette"
+                                href={staffFallbackProfileImage}
+                                x="-7.5"
+                                y="-7.5"
+                                width="15"
+                                height="15"
+                                preserveAspectRatio="xMidYMid meet"
+                                clipPath="url(#sales-selected-staff-photo)"
+                              />
                             )}
                             <circle className="photo-ring" r="8" />
                           </g>
@@ -2915,7 +2933,13 @@ export default function CompetitiveAnalysis({
                       ) : null}
                     </>
                   ) : (
-                    <span className="staff-profile-silhouette" aria-hidden="true"><i /><b /></span>
+                    <img
+                      className="staff-profile-silhouette"
+                      src={staffFallbackProfileImage}
+                      alt=""
+                      aria-hidden="true"
+                      draggable={false}
+                    />
                   )}
                 </button>
                 <strong className="name">
