@@ -2232,6 +2232,22 @@ export default function CompetitiveAnalysis({
                         ))}
                       </g>
                       {selectedStaffScatterPoint ? (
+                        <g className="growth-scatter-selected-guides" aria-hidden="true">
+                          <line
+                            x1={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            y1={staffScatterPlot.top}
+                            y2={staffScatterPlot.bottom}
+                          />
+                          <line
+                            x1={staffScatterPlot.left}
+                            x2={staffScatterPlot.right}
+                            y1={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                            y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                          />
+                        </g>
+                      ) : null}
+                      {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
                           <circle className="photo-halo" r="10.5" />
                           <circle className="photo-backdrop" r="10" />
@@ -2438,6 +2454,22 @@ export default function CompetitiveAnalysis({
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 누적판매 ${point.deliveredSales}대`}</title></circle>
                         ))}
                       </g>
+                      {selectedStaffSalesScatterPoint ? (
+                        <g className="growth-scatter-selected-guides" aria-hidden="true">
+                          <line
+                            x1={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            y1={staffScatterPlot.top}
+                            y2={staffScatterPlot.bottom}
+                          />
+                          <line
+                            x1={staffScatterPlot.left}
+                            x2={staffScatterPlot.right}
+                            y1={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                            y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                          />
+                        </g>
+                      ) : null}
                       {selectedStaffSalesScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
                           <circle className="photo-halo" r="10.5" />
