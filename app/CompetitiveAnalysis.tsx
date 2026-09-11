@@ -797,7 +797,6 @@ export default function CompetitiveAnalysis({
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
-  const growthNavigationDetailRef = useRef<HTMLDivElement>(null);
   const staffAnalysisCardRef = useRef<HTMLElement>(null);
   const staffAnalysisHeadingRef = useRef<HTMLElement>(null);
   const scatterMotionTimersRef = useRef<number[]>([]);
@@ -2197,12 +2196,6 @@ export default function CompetitiveAnalysis({
                       onClick={() => {
                         setSelectedStaffName(employee.name);
                         setSmilingStaffName(null);
-                        growthNavigationDetailRef.current?.scrollTo({
-                          top: 0,
-                          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-                            ? "auto"
-                            : "smooth",
-                        });
                       }}
                       key={employee.name}
                     >
@@ -2227,7 +2220,6 @@ export default function CompetitiveAnalysis({
 
             <div
               className="growth-navigation-detail"
-              ref={growthNavigationDetailRef}
               role="region"
               aria-label="선택 영업직원의 상담 및 영업활동 분석 세부정보"
               tabIndex={0}

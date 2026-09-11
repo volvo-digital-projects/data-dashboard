@@ -521,8 +521,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const isNarrowTabletViewport = window\.matchMedia\([\s\S]*?"\(min-width: 600px\) and \(max-width: 760px\)"[\s\S]*?\)\.matches;/);
   assert.match(source, /const shellHeight = isNarrowTabletViewport[\s\S]*?Math\.ceil\(shell\.getBoundingClientRect\(\)\.height\);[\s\S]*?--growth-navigation-sticky-top[\s\S]*?--growth-navigation-summary-height/);
   assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}[\s\S]*?className="growth-navigation-pinned-headings"/);
-  assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?ref=\{growthNavigationDetailRef\}[\s\S]*?role="region"[\s\S]*?tabIndex=\{0\}/);
-  assert.match(navigation, /growthNavigationDetailRef\.current\?\.scrollTo\(\{[\s\S]*?top: 0,[\s\S]*?prefers-reduced-motion: reduce/);
+  assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?role="region"[\s\S]*?tabIndex=\{0\}/);
+  assert.doesNotMatch(source, /growthNavigationDetailRef|scrollTo\(\{[\s\S]*?top: 0/);
   assert.match(css, /\.growth-navigation-pinned-headings\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);[^}]*border-bottom: 1px solid #d5e3e9;/);
   assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-sticky-top, 356px\)[\s\S]*?var\(--growth-navigation-summary-height, 152px\)[\s\S]*?align-self: start;[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 12px[\s\S]*?overflow: hidden;[^}]*background: #ffffff;/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 6px/);
