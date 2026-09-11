@@ -348,7 +348,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/13개 보완 주제/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffStrengthTotalMentions/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffImprovementTotalMentions/);
-  assert.match(navigation, /Math\.round\(\(keyword\.mentions \/ selectedStaffStrengthTotalMentions\) \* 100\)/);
+  assert.match(navigation, /displayTwoDigitCount\(keyword\.mentions\)\}회 <em>\(\{displayTwoDigitCount\(Math\.round\(\(keyword\.mentions \/ selectedStaffStrengthTotalMentions\) \* 100\)\)\}%\)/);
+  assert.match(navigation, /displayTwoDigitCount\(keyword\.mentions\)\}회 <em>\(\{displayTwoDigitCount\(Math\.round\(\(keyword\.mentions \/ selectedStaffImprovementTotalMentions\) \* 100\)\)\}%\)/);
   assert.doesNotMatch(navigation, /selectedStaffPrimaryStrength|selectedStaffPrimaryImprovement/);
   assert.doesNotMatch(navigation, /지점장 면담 가이드|다음 행동 1개 합의/);
   assert.doesNotMatch(navigation, /전체 상담 분포/);

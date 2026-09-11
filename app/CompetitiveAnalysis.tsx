@@ -2475,7 +2475,7 @@ export default function CompetitiveAnalysis({
                                 >
                                   <span>{keyword.label}</span>
                                   <i aria-hidden="true"><b /></i>
-                                  <small>{keyword.mentions}회 <em>({Math.round((keyword.mentions / selectedStaffStrengthTotalMentions) * 100)}%)</em></small>
+                                  <small>{displayTwoDigitCount(keyword.mentions)}회 <em>({displayTwoDigitCount(Math.round((keyword.mentions / selectedStaffStrengthTotalMentions) * 100))}%)</em></small>
                                 </div>
                               ))}
                             </div>
@@ -2502,7 +2502,7 @@ export default function CompetitiveAnalysis({
                                 >
                                   <span>{keyword.label}</span>
                                   <i aria-hidden="true"><b /></i>
-                                  <small>{keyword.mentions}회 <em>({Math.round((keyword.mentions / selectedStaffImprovementTotalMentions) * 100)}%)</em></small>
+                                  <small>{displayTwoDigitCount(keyword.mentions)}회 <em>({displayTwoDigitCount(Math.round((keyword.mentions / selectedStaffImprovementTotalMentions) * 100))}%)</em></small>
                                 </div>
                               ))}
                             </div>
