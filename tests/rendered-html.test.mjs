@@ -244,10 +244,12 @@ async function render(
 }
 
 test("renders an evidence-first growth navigation without recency scoring", async () => {
-  const [source, css, salesActivity] = await Promise.all([
+  const [source, css, salesActivity, staffAnalysis, staffAnalysisGenerator] = await Promise.all([
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/data/sales-activity-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../scripts/generate-voc-staff-analysis.py", import.meta.url), "utf8"),
   ]);
   const start = source.indexOf('className="growth-navigation-sticky-summary"');
   const end = source.indexOf('{false && selectedStaffAnalysis', start);
@@ -325,7 +327,25 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /중복 포함 총/);
   assert.match(navigation, /selectedStaffStrengthKeywords\.slice\(3, 6\)/);
   assert.match(navigation, /selectedStaffImprovementKeywords\.slice\(3, 6\)/);
-  assert.match(await readFile("scripts/generate-voc-staff-analysis.py", "utf8"), /keyword_summary\(comments, STRENGTH_PATTERNS, 6\)/);
+  assert.match(staffAnalysisGenerator, /exclude_negative_context=True/);
+  assert.match(staffAnalysisGenerator, /전문지식·정확성/);
+  assert.match(staffAnalysisGenerator, /설명 간결성/);
+  assert.match(staffAnalysisGenerator, /상담자료·도구 활용/);
+  assert.match(staffAnalysisGenerator, /전시·시승차 구성/);
+  const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
+  assert.equal(kimNaehwan.commentResponses, 36);
+  assert.deepEqual(
+    kimNaehwan.improvementKeywords.map(({ label }) => label),
+    [
+      "전시·시승차 구성",
+      "전문지식·정확성",
+      "대기·예약 운영",
+      "상담자료·도구 활용",
+      "설명 간결성",
+      "설명 구체성·범위",
+    ],
+  );
+  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/13개 보완 주제/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffStrengthTotalMentions/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffImprovementTotalMentions/);
   assert.match(navigation, /Math\.round\(\(keyword\.mentions \/ selectedStaffStrengthTotalMentions\) \* 100\)/);
