@@ -211,7 +211,14 @@ html {
     overscroll-behavior-y: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
-    scrollbar-gutter: stable;
+    scrollbar-width: none;
+    scrollbar-gutter: auto;
+  }
+
+  .growth-navigation-detail::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
   }
 
 }
@@ -410,24 +417,11 @@ html {
     scrollbar-color: rgba(80, 101, 111, 0.62) transparent;
   }
 
-  .growth-navigation-detail {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(80, 101, 111, 0.5) transparent;
-  }
-
   .growth-staff-roster-list::-webkit-scrollbar {
     width: 6px;
   }
 
-  .growth-navigation-detail::-webkit-scrollbar {
-    width: 6px;
-  }
-
   .growth-staff-roster-list::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .growth-navigation-detail::-webkit-scrollbar-track {
     background: transparent;
   }
 
@@ -436,9 +430,13 @@ html {
     background: rgba(80, 101, 111, 0.62);
   }
 
-  .growth-navigation-detail::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    background: rgba(80, 101, 111, 0.5);
+  .growth-navigation-detail {
+    cursor: grab;
+  }
+
+  .growth-navigation-detail.is-dragging {
+    cursor: grabbing;
+    user-select: none;
   }
 
   .growth-staff-roster-list button {

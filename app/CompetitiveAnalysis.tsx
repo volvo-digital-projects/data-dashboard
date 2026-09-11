@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
@@ -804,6 +805,11 @@ export default function CompetitiveAnalysis({
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
+  const growthNavigationDetailDragRef = useRef<{
+    pointerId: number;
+    originY: number;
+    originScrollTop: number;
+  } | null>(null);
   const staffAnalysisCardRef = useRef<HTMLElement>(null);
   const staffAnalysisHeadingRef = useRef<HTMLElement>(null);
   const scatterMotionTimersRef = useRef<number[]>([]);
@@ -861,6 +867,49 @@ export default function CompetitiveAnalysis({
       document.removeEventListener("keydown", preventKeyboardZoom);
     };
   }, []);
+
+  const beginGrowthNavigationDetailDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    if (
+      event.pointerType !== "mouse" ||
+      event.button !== 0 ||
+      (event.target as HTMLElement).closest("button, a, input, select, textarea")
+    ) {
+      return;
+    }
+
+    growthNavigationDetailDragRef.current = {
+      pointerId: event.pointerId,
+      originY: event.clientY,
+      originScrollTop: event.currentTarget.scrollTop,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.currentTarget.classList.add("is-dragging");
+    event.preventDefault();
+  };
+
+  const moveGrowthNavigationDetailDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const drag = growthNavigationDetailDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    event.currentTarget.scrollTop =
+      drag.originScrollTop - (event.clientY - drag.originY);
+    event.preventDefault();
+  };
+
+  const endGrowthNavigationDetailDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const drag = growthNavigationDetailDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    growthNavigationDetailDragRef.current = null;
+    event.currentTarget.classList.remove("is-dragging");
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
 
   useEffect(() => {
     const syncAccessDate = () => setAccessDate(formatAnalysisDate(new Date()));
@@ -2238,6 +2287,10 @@ export default function CompetitiveAnalysis({
               role="region"
               aria-label="선택 영업직원의 상담 및 영업활동 분석 세부정보"
               tabIndex={0}
+              onPointerDown={beginGrowthNavigationDetailDrag}
+              onPointerMove={moveGrowthNavigationDetailDrag}
+              onPointerUp={endGrowthNavigationDetailDrag}
+              onPointerCancel={endGrowthNavigationDetailDrag}
             >
               <div className="growth-capability-columns">
               <section className="growth-capability consultation">
