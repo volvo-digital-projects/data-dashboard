@@ -2736,7 +2736,7 @@ export default function CompetitiveAnalysis({
                           >
                             <polyline
                               pathLength="1"
-                              points={`${selectedStaffSalesShareLeaderX.toFixed(1)},${selectedStaffSalesShareLeaderY.toFixed(1)} ${selectedStaffSalesShareLeaderBendX.toFixed(1)},5 84,5`}
+                              points={`${selectedStaffSalesShareLeaderX.toFixed(1)},${selectedStaffSalesShareLeaderY.toFixed(1)} ${selectedStaffSalesShareLeaderBendX.toFixed(1)},10 86,10`}
                             />
                           </svg>
                           <div className="growth-sales-share-callout">

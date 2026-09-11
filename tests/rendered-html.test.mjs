@@ -450,6 +450,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /growth-sales-share-label-enter/);
   assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 8px\);[^}]*overflow: hidden;/);
   assert.match(navigation, /className="growth-sales-share-leader"[\s\S]*?pathLength="1"[\s\S]*?selectedStaffSalesShareLeaderX\.toFixed\(1\)/);
+  assert.match(navigation, /selectedStaffSalesShareLeaderBendX\.toFixed\(1\)\},10 86,10/);
   assert.match(css, /\.growth-sales-share-leader polyline\s*\{[^}]*stroke: #3d7f9e;[^}]*stroke-dasharray: 1;[^}]*stroke-dashoffset: 1;[^}]*animation: growth-sales-share-leader-draw 720ms ease-out 420ms forwards;/);
   assert.match(css, /@keyframes growth-sales-share-leader-draw\s*\{[^}]*stroke-dashoffset: 0;/);
   assert.match(css, /\.growth-sales-share-callout > span\s*\{[^}]*font-size: 9\.5px;/);
