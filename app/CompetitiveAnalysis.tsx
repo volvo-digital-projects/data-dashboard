@@ -2044,8 +2044,7 @@ export default function CompetitiveAnalysis({
                   <strong>
                     {selectedStaffEmployee?.name ?? "―"}
                     <i>
-                      {selectedStaffEmployee?.jobTitle ?? ""} · {displayTwoDigitCount(selectedStaffTenureYears ?? 0)}년 {displayTwoDigitCount(selectedStaffTenureMonths ?? 0)}개월
-                      {selectedStaffTenureTopPercent === null ? null : (
+                      {selectedStaffEmployee?.jobTitle ?? ""} · {displayTwoDigitCount(selectedStaffTenureYears ?? 0)}년 {displayTwoDigitCount(selectedStaffTenureMonths ?? 0)}개월{selectedStaffTenureTopPercent === null ? null : (
                         <em>(상위 {selectedStaffTenureTopPercent.toFixed(1)}%)</em>
                       )}
                     </i>

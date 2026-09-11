@@ -406,6 +406,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*conic-gradient\([^}]*#e9794f[^}]*#5ca799/);
   assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*linear-gradient\(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%\);/);
   assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월[\s\S]*?<em>\(상위 \{selectedStaffTenureTopPercent\.toFixed\(1\)\}%\)<\/em>/);
+  assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월\{selectedStaffTenureTopPercent/);
   assert.doesNotMatch(profile, /selectedStaffSatisfactionTopPercent/);
   assert.match(source, /employee\.tenureMonths > selectedStaffEmployee\.tenureMonths/);
   assert.match(source, /selectedStaffTenureRank \/ staffCurrentSalesPopulation\.length/);
