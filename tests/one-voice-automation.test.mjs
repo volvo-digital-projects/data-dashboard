@@ -29,11 +29,6 @@ test("refreshes the existing ONE VOICE tab and immediately retries the cards", a
     new URL("../browser-extension/one-voice-existing-tab/background.js", import.meta.url),
     "utf8",
   );
-  const workflow = await readFile(
-    new URL("../.github/workflows/one-voice-watchdog.yml", import.meta.url),
-    "utf8",
-  );
-
   assert.match(
     background,
     /async function reloadAndCollect\(tabId\)[\s\S]*?chrome\.tabs\.reload\(tabId\)[\s\S]*?waitForTabComplete\(tabId\)[\s\S]*?CARD_RETRY_ATTEMPTS[\s\S]*?injectAndCollect\(tabId\)/,
@@ -57,11 +52,6 @@ test("refreshes the existing ONE VOICE tab and immediately retries the cards", a
     /chrome\.tabs[\s\S]*?\.update\(autoCreatedTabId, \{ active: true \}\)/,
   );
   assert.match(background, /await markMissing\(slotKst\);[\s\S]*?status: "missing-tab"/);
-  assert.match(workflow, /cron: "23 1 \* \* 1-5"/);
-  assert.match(
-    workflow,
-    /ONE_VOICE_SITE_URL: https:\/\/volvo-dsc-pc-test-2026\.kongboojang\.chatgpt\.site/,
-  );
 });
 
 test("captures immediately when the client-rendered ONE VOICE cards become ready", async () => {

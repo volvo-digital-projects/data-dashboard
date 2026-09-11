@@ -6,7 +6,7 @@
   "permissions": ["alarms", "storage", "tabs", "scripting"],
   "host_permissions": [
     "https://volvo.medallia.eu/*",
-    "https://volvo-dsc-pc-test-2026.kongboojang.chatgpt.site/*"
+    "https://volvo-digital-projects.github.io/data-dashboard/*"
   ],
   "background": {
     "service_worker": "background.js",

@@ -1,5 +1,5 @@
 export const ONE_VOICE_CONFIG = {
-  siteUrl: "https://volvo-dsc-pc-test-2026.kongboojang.chatgpt.site",
+  siteUrl: "https://volvo-digital-projects.github.io/data-dashboard",
   ingestToken: "generated-outside-git",
   extraHolidays: [],
 };
