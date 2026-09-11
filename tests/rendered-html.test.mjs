@@ -434,7 +434,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*margin-top: 10px;[^}]*justify-self: start;/);
   assert.match(navigation, /key=\{`sales-share-\$\{selectedStaffEmployee\?\.cdsid \?\? selectedStaffEmployee\?\.name \?\? "none"\}`\}/);
   assert.match(css, /@property --growth-sales-share-angle\s*\{[^}]*syntax: "<angle>";[^}]*initial-value: 0deg;/);
-  assert.match(css, /@keyframes growth-sales-share-fill\s*\{[^}]*--growth-sales-share-angle: 0deg;/);
+  assert.match(css, /@keyframes growth-sales-share-fill\s*\{[^}]*--growth-sales-share-angle: 0deg;[^}]*clip-path: circle\(32\.5% at 50% 50%\);[\s\S]*?clip-path: circle\(50% at 50% 50%\);/);
+  assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*background: #fff;[^}]*position: relative;[^}]*z-index: 1;/);
+  assert.doesNotMatch(css, /growth-sales-share-label-enter/);
   assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 8px\);[^}]*overflow: hidden;/);
   assert.match(css, /\.growth-sales-share-callout::before\s*\{[^}]*width: 32px;[^}]*border-top: 1px solid #3d7f9e;[^}]*rotate\(-27deg\)/);
   assert.match(css, /\.growth-sales-share-callout > strong\s*\{[^}]*color: #176887;/);
