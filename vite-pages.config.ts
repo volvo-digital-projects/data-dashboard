@@ -23,7 +23,7 @@ export default defineConfig({
     ),
   },
   build: {
-    outDir: path.join(projectRoot, "work", "github-pages-stage", "data-dashboard"),
+    outDir: path.join(projectRoot, "work", "github-pages-stage"),
     emptyOutDir: true,
   },
 });

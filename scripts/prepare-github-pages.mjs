@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -44,15 +44,6 @@ cpSync(path.join(projectRoot, "public"), stageRoot, {
 });
 
 writeFileSync(path.join(stageRoot, ".nojekyll"), "", "utf8");
-writeFileSync(
-  path.join(stageRoot, "index.html"),
-  '<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=/data-dashboard/"><title>Volvo Data Dashboard</title></head><body><a href="/data-dashboard/">Volvo Data Dashboard 열기</a></body></html>',
-  "utf8",
-);
-writeFileSync(
-  path.join(stageRoot, "404.html"),
-  '<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=/data-dashboard/"><title>Volvo Data Dashboard</title></head><body><a href="/data-dashboard/">Volvo Data Dashboard 열기</a></body></html>',
-  "utf8",
-);
+copyFileSync(path.join(stageRoot, "index.html"), path.join(stageRoot, "404.html"));
 
 console.log(`GitHub Pages stage ready: ${stageRoot}`);
