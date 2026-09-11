@@ -983,31 +983,32 @@ html {
 }
 
 .growth-scatter-selected-photo .photo-halo {
-  fill: rgba(22, 121, 162, 0.12);
-  stroke: rgba(22, 121, 162, 0.48);
-  stroke-width: 1.2;
+  fill: rgba(23, 116, 147, 0.24);
+  stroke: rgba(23, 116, 147, 0.78);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 3px rgba(23, 116, 147, 0.34));
   pointer-events: none;
   transform-box: fill-box;
   transform-origin: center;
   vector-effect: non-scaling-stroke;
-  animation: growth-scatter-photo-halo 1.45s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  animation: growth-scatter-photo-halo 1.18s cubic-bezier(0.2, 0.7, 0.28, 1) infinite;
   will-change: opacity, transform;
 }
 
 @keyframes growth-scatter-photo-halo {
   0% {
-    opacity: 0.64;
-    transform: scale(0.94);
+    opacity: 0.92;
+    transform: scale(0.9);
   }
 
-  58% {
-    opacity: 0.12;
-    transform: scale(1.5);
+  46% {
+    opacity: 0.48;
+    transform: scale(1.12);
   }
 
   100% {
     opacity: 0;
-    transform: scale(1.68);
+    transform: scale(1.48);
   }
 }
 

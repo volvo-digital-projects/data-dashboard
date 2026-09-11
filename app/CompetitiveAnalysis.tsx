@@ -2179,7 +2179,7 @@ export default function CompetitiveAnalysis({
                       <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
                       <defs>
                         <clipPath id="consultation-selected-staff-photo">
-                          <circle r="8" />
+                          <circle r="7.5" />
                         </clipPath>
                       </defs>
                       {staffScatterYTicks.map((tick) => {
@@ -2245,22 +2245,22 @@ export default function CompetitiveAnalysis({
                       ) : null}
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
-                          <circle className="photo-halo" r="10.5" />
-                          <circle className="photo-backdrop" r="10" />
+                          <circle className="photo-halo" r="9.8" />
+                          <circle className="photo-backdrop" r="9.4" />
                           {selectedStaffProfile ? (
                             <image
                               href={selectedStaffProfile.image}
-                              x="-8"
-                              y="-8"
-                              width="16"
-                              height="16"
+                              x="-7.5"
+                              y="-7.5"
+                              width="15"
+                              height="15"
                               preserveAspectRatio="xMidYMin slice"
                               clipPath="url(#consultation-selected-staff-photo)"
                             />
                           ) : (
                             <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
                           )}
-                          <circle className="photo-ring" r="8.5" />
+                          <circle className="photo-ring" r="8" />
                         </g>
                       ) : null}
                       {staffScatterNationalAverage !== null ? (
@@ -2402,7 +2402,7 @@ export default function CompetitiveAnalysis({
                       <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>
                       <defs>
                         <clipPath id="sales-selected-staff-photo">
-                          <circle r="8" />
+                          <circle r="7.5" />
                         </clipPath>
                       </defs>
                       {staffSalesYTicks.map((tick) => {
@@ -2468,22 +2468,22 @@ export default function CompetitiveAnalysis({
                       ) : null}
                       {selectedStaffSalesScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
-                          <circle className="photo-halo" r="10.5" />
-                          <circle className="photo-backdrop" r="10" />
+                          <circle className="photo-halo" r="9.8" />
+                          <circle className="photo-backdrop" r="9.4" />
                           {selectedStaffProfile ? (
                             <image
                               href={selectedStaffProfile.image}
-                              x="-8"
-                              y="-8"
-                              width="16"
-                              height="16"
+                              x="-7.5"
+                              y="-7.5"
+                              width="15"
+                              height="15"
                               preserveAspectRatio="xMidYMin slice"
                               clipPath="url(#sales-selected-staff-photo)"
                             />
                           ) : (
                             <text className="photo-fallback" y="2.5" textAnchor="middle">{selectedStaffInitials}</text>
                           )}
-                          <circle className="photo-ring" r="8.5" />
+                          <circle className="photo-ring" r="8" />
                         </g>
                       ) : null}
                       {staffSalesNationalAverage !== null ? (
