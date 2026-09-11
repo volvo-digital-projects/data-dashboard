@@ -442,7 +442,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*background: #fff;[^}]*position: relative;[^}]*z-index: 1;/);
   assert.doesNotMatch(css, /growth-sales-share-label-enter/);
   assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 8px\);[^}]*overflow: hidden;/);
-  assert.match(css, /\.growth-sales-share-callout::before\s*\{[^}]*width: 32px;[^}]*border-top: 1px solid #3d7f9e;[^}]*rotate\(-27deg\)/);
+  assert.match(navigation, /className="growth-sales-share-leader"[\s\S]*?pathLength="1"[\s\S]*?selectedStaffSalesShareLeaderX\.toFixed\(1\)/);
+  assert.match(css, /\.growth-sales-share-leader polyline\s*\{[^}]*stroke: #3d7f9e;[^}]*stroke-dasharray: 1;[^}]*stroke-dashoffset: 1;[^}]*animation: growth-sales-share-leader-draw 720ms ease-out 420ms forwards;/);
+  assert.match(css, /@keyframes growth-sales-share-leader-draw\s*\{[^}]*stroke-dashoffset: 0;/);
+  assert.match(css, /\.growth-sales-share-callout > span\s*\{[^}]*font-size: 9\.5px;/);
+  assert.match(css, /\.growth-sales-share-callout > strong\s*\{[^}]*font-size: 12px;/);
   assert.match(css, /\.growth-sales-share-callout > strong\s*\{[^}]*color: #176887;/);
   assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*linear-gradient\(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%\);/);
   assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월[\s\S]*?<em>\(상위 \{selectedStaffTenureTopPercent\.toFixed\(1\)\}%\)<\/em>/);

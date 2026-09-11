@@ -1124,6 +1124,11 @@ export default function CompetitiveAnalysis({
   const selectedStaffSalesShare = selectedShowroomDeliveredSales
     ? (selectedStaffDeliveredSales / selectedShowroomDeliveredSales) * 100
     : null;
+  const selectedStaffSalesShareClamped = Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0));
+  const selectedStaffSalesShareLeaderRadians = ((selectedStaffSalesShareClamped * 1.8) - 90) * (Math.PI / 180);
+  const selectedStaffSalesShareLeaderX = 37 + Math.cos(selectedStaffSalesShareLeaderRadians) * 34;
+  const selectedStaffSalesShareLeaderY = 47 + Math.sin(selectedStaffSalesShareLeaderRadians) * 34;
+  const selectedStaffSalesShareLeaderBendX = Math.min(80, Math.max(70, selectedStaffSalesShareLeaderX + 8));
   const selectedStaffMonthlyDeliveredSales = Array.from(
     { length: 12 },
     (_, index) => selectedStaffSalesActivity?.monthlyDeliveredSales[index] ?? null,
@@ -2676,7 +2681,7 @@ export default function CompetitiveAnalysis({
                           <div
                             className="growth-sales-share-donut"
                             key={`sales-share-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}
-                            style={{ "--growth-sales-share-angle": `${Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0)) * 3.6}deg` } as CSSProperties}
+                            style={{ "--growth-sales-share-angle": `${selectedStaffSalesShareClamped * 3.6}deg` } as CSSProperties}
                             aria-hidden="true"
                           >
                             <div>
@@ -2684,6 +2689,17 @@ export default function CompetitiveAnalysis({
                               <strong>{selectedShowroomDeliveredSales.toLocaleString()}<small>대</small></strong>
                             </div>
                           </div>
+                          <svg
+                            className="growth-sales-share-leader"
+                            viewBox="0 0 86 24"
+                            aria-hidden="true"
+                            key={`sales-share-leader-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}
+                          >
+                            <polyline
+                              pathLength="1"
+                              points={`${selectedStaffSalesShareLeaderX.toFixed(1)},${selectedStaffSalesShareLeaderY.toFixed(1)} ${selectedStaffSalesShareLeaderBendX.toFixed(1)},5 84,5`}
+                            />
+                          </svg>
                           <div className="growth-sales-share-callout">
                             <span>{selectedStaffEmployee?.name ?? "선택 직원"} 판매비중</span>
                             <strong>

@@ -1872,34 +1872,40 @@ html {
   color: #176887;
   white-space: nowrap;
   overflow: hidden;
+  z-index: 3;
 }
 
-.growth-sales-share-callout::before {
-  content: "";
+.growth-sales-share-leader {
   position: absolute;
-  top: 8px;
-  left: -27px;
-  width: 32px;
-  border-top: 1px solid #3d7f9e;
-  transform: rotate(-27deg);
-  transform-origin: right center;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 86px;
+  height: 24px;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.growth-sales-share-callout::after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: -29px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #3d7f9e;
+.growth-sales-share-leader polyline {
+  fill: none;
+  stroke: #3d7f9e;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  vector-effect: non-scaling-stroke;
+  animation: growth-sales-share-leader-draw 720ms ease-out 420ms forwards;
+}
+
+@keyframes growth-sales-share-leader-draw {
+  to { stroke-dashoffset: 0; }
 }
 
 .growth-sales-share-callout > span {
   max-width: 100%;
   overflow: hidden;
-  font-size: 7.5px;
+  font-size: 9.5px;
   font-weight: 650;
   text-overflow: ellipsis;
 }
@@ -1908,11 +1914,18 @@ html {
   max-width: 100%;
   overflow: hidden;
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   color: #176887;
   font-variant-numeric: tabular-nums;
   text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .growth-sales-share-leader polyline {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 .growth-sales-share-meta {
