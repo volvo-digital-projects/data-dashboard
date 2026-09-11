@@ -1884,11 +1884,11 @@ html {
 .growth-sales-share-callout {
   position: relative;
   min-width: 0;
-  width: calc(100% - 8px);
+  width: calc(100% - 11px);
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin: 3px 0 0 8px;
+  margin: 3px 0 0 11px;
   padding-top: 2px;
   color: #176887;
   white-space: nowrap;
@@ -1962,6 +1962,10 @@ html {
   line-height: 1.35;
   color: #66808b;
   white-space: nowrap;
+}
+
+.growth-sales-share-rank b {
+  color: #365f71;
 }
 
 .growth-sales-share-meta strong {
