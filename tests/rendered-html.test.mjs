@@ -340,7 +340,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /상담 → 시승 → 계약 전환/);
-  assert.match(navigation, /근속기간 × 2026 누적판매/);
+  assert.match(navigation, /근속기간 × 26년 누적판매/);
+  assert.doesNotMatch(navigation, /근속기간 × 2026 누적판매/);
   assert.match(navigation, /전국 영업직원 근속기간별 2026년 누적판매 분포/);
   assert.match(navigation, /2026 누적판매\(대\)/);
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
