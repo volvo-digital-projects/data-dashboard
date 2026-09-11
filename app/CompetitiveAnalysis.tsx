@@ -2699,7 +2699,10 @@ export default function CompetitiveAnalysis({
                           <div
                             className="growth-sales-share-donut"
                             key={`sales-share-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}
-                            style={{ "--growth-sales-share-angle": `${selectedStaffSalesShareClamped * 3.6}deg` } as CSSProperties}
+                            style={{
+                              "--growth-sales-share-angle": `${selectedStaffSalesShareClamped * 3.6}deg`,
+                              "--growth-sales-share-mid-angle": `${selectedStaffSalesShareClamped * 1.8}deg`,
+                            } as CSSProperties}
                             aria-hidden="true"
                           >
                             <div>
