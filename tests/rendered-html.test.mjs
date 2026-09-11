@@ -410,9 +410,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-monthly-body\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) minmax\(190px, 34%\);/);
   assert.match(css, /\.growth-sales-monthly-chart::before\s*\{[^}]*border-top: 1px solid #e0e9ed;[^}]*border-left: 1px solid #e0e9ed;[^}]*linear-gradient\(to right, #e0e9ed 1px, transparent 1px\)[^}]*linear-gradient\(to top, #e0e9ed 1px, transparent 1px\)/);
   assert.match(css, /\.growth-sales-share-panel\s*\{[^}]*flex-direction: column;[^}]*border-left: 1px solid #c9d8de;/);
-  assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*justify-content: center;/);
+  assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*display: grid;[^}]*grid-template-columns: 78px minmax\(0, 1fr\);[^}]*overflow: hidden;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*conic-gradient\([^}]*#3d7f9e[^}]*#e9794f/);
-  assert.match(css, /\.growth-sales-share-callout::before\s*\{[^}]*border-top: 1px solid #3d7f9e;/);
+  assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*margin-top: 10px;[^}]*justify-self: start;/);
+  assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 8px\);[^}]*overflow: hidden;/);
+  assert.match(css, /\.growth-sales-share-callout::before\s*\{[^}]*width: 32px;[^}]*border-top: 1px solid #3d7f9e;[^}]*rotate\(-27deg\)/);
   assert.match(css, /\.growth-sales-share-callout > strong\s*\{[^}]*color: #176887;/);
   assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*linear-gradient\(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%\);/);
   assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월[\s\S]*?<em>\(상위 \{selectedStaffTenureTopPercent\.toFixed\(1\)\}%\)<\/em>/);

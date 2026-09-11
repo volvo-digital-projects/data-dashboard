@@ -1766,15 +1766,18 @@ html {
 .growth-sales-share-visual {
   position: relative;
   min-height: 84px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
   align-items: flex-start;
+  overflow: hidden;
 }
 
 .growth-sales-share-donut {
   width: 74px;
   height: 74px;
   flex: 0 0 74px;
+  margin-top: 10px;
+  justify-self: start;
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -1817,34 +1820,35 @@ html {
 }
 
 .growth-sales-share-callout {
-  position: absolute;
-  top: 8px;
-  left: calc(50% + 22px);
-  min-width: 86px;
+  position: relative;
+  min-width: 0;
+  width: calc(100% - 8px);
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-left: 22px;
+  margin: 3px 0 0 8px;
+  padding-top: 2px;
   color: #176887;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .growth-sales-share-callout::before {
   content: "";
   position: absolute;
-  top: 11px;
-  left: -2px;
-  width: 24px;
+  top: 8px;
+  left: -27px;
+  width: 32px;
   border-top: 1px solid #3d7f9e;
-  transform: rotate(-22deg);
+  transform: rotate(-27deg);
   transform-origin: right center;
 }
 
 .growth-sales-share-callout::after {
   content: "";
   position: absolute;
-  top: 5px;
-  left: -4px;
+  top: 20px;
+  left: -29px;
   width: 4px;
   height: 4px;
   border-radius: 50%;
@@ -1852,16 +1856,22 @@ html {
 }
 
 .growth-sales-share-callout > span {
+  max-width: 100%;
+  overflow: hidden;
   font-size: 7.5px;
   font-weight: 650;
+  text-overflow: ellipsis;
 }
 
 .growth-sales-share-callout > strong {
+  max-width: 100%;
+  overflow: hidden;
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-size: 10px;
   line-height: 1;
   color: #176887;
   font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
 }
 
 .growth-sales-share-meta {
