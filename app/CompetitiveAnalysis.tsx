@@ -2673,7 +2673,7 @@ export default function CompetitiveAnalysis({
                             aria-hidden="true"
                           >
                             <div>
-                              <span>전시장 누적</span>
+                              <span>{displayShowroomNameWithoutBrand(selected.showroom)} 누적</span>
                               <strong>{selectedShowroomDeliveredSales.toLocaleString()}<small>대</small></strong>
                             </div>
                           </div>

@@ -396,6 +396,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);
   assert.match(navigation, /className="growth-sales-share-panel"/);
   assert.match(navigation, /전시장 누적판매 중/);
+  assert.match(navigation, /<span>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} 누적<\/span>/);
+  assert.doesNotMatch(navigation, /<span>전시장 누적<\/span>/);
   assert.match(navigation, /판매비중/);
   assert.match(navigation, /selectedStaffSalesShare\.toFixed\(1\)\}%/);
   assert.match(navigation, /selectedStaffMonthlySalesAverage\.toFixed\(1\)\}대/);
