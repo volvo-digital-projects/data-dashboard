@@ -404,7 +404,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{\s*background:\s*#087a58;/);
   assert.doesNotMatch(navigation, /<span>2026 월별 출고 실적<\/span>/);
   assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\} 누적판매 <span className="growth-sales-heading-number">\{selectedStaffDeliveredSales\}<\/span>대<\/strong>/);
-  assert.match(css, /\.growth-sales-heading-number\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-variant-numeric: tabular-nums;/);
+  assert.match(css, /\.growth-scatter-card > header strong > \.growth-sales-heading-number,[\s\S]*?\.growth-sales-monthly-card > header strong > \.growth-sales-heading-number\s*\{[^}]*display: inline;[^}]*margin: 0;[^}]*font-family: var\(--font-volvo\);[^}]*font-size: inherit;[^}]*line-height: inherit;[^}]*color: inherit;[^}]*font-variant-numeric: tabular-nums;/);
   assert.match(navigation, /원자료 갱신 필요/);
   assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
   assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);

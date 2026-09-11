@@ -1497,8 +1497,14 @@ html {
   color: #244f64;
 }
 
-.growth-sales-heading-number {
+.growth-scatter-card > header strong > .growth-sales-heading-number,
+.growth-sales-monthly-card > header strong > .growth-sales-heading-number {
+  display: inline;
+  margin: 0;
   font-family: var(--font-volvo);
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
   font-variant-numeric: tabular-nums;
 }
 
