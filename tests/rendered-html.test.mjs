@@ -331,7 +331,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /<text x="28" y="11" textAnchor="middle">전국 평균<\/text>/);
   assert.match(navigation, /\{\(staffScatterNationalAverage \/ 10\)\.toFixed\(1\)\}점/);
   assert.doesNotMatch(navigation, /textAnchor="end">전국 \{\(staffScatterNationalAverage \/ 10\)\.toFixed\(1\)\}/);
-  assert.match(css, /\.growth-scatter-average-line\s*\{[^}]*stroke:\s*#c63d45;[^}]*stroke-dasharray:\s*5 4;/);
+  assert.match(css, /\.growth-scatter-average-line\s*\{[^}]*stroke:\s*#c63d45;[^}]*stroke-width:\s*1\.2;[^}]*stroke-dasharray:\s*5 4;/);
   assert.match(css, /\.growth-scatter-average-label rect,[\s\S]*?\.growth-scatter-average-label \.pointer\s*\{[^}]*fill:\s*rgba\(255, 246, 247, 0\.97\);[^}]*stroke:\s*rgba\(198, 61, 69, 0\.42\);/);
   assert.match(css, /\.growth-scatter-average-label text\s*\{[^}]*fill:\s*#a42f38;[^}]*font-size:\s*7\.5px;[^}]*font-weight:\s*650;/);
   assert.match(css, /\.growth-scatter-average-label text\.score\s*\{[^}]*font-size:\s*9px;[^}]*font-weight:\s*750;/);
@@ -347,6 +347,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
   assert.equal((navigation.match(/className="growth-scatter-selected-photo"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-selected-guides"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/className="growth-scatter-selected-guides"[\s\S]*?className="growth-scatter-population"/g) ?? []).length, 2);
   assert.match(navigation, /className="growth-scatter-selected-guides"[\s\S]*?y1=\{staffScatterPlot\.top\}[\s\S]*?y2=\{staffScatterPlot\.bottom\}[\s\S]*?x1=\{staffScatterPlot\.left\}[\s\S]*?x2=\{staffScatterPlot\.right\}[\s\S]*?className="growth-scatter-selected-photo"/);
   assert.match(css, /\.growth-scatter-selected-guides\s*\{[^}]*stroke:\s*#177493;[^}]*stroke-width:\s*1\.2;[^}]*stroke-dasharray:\s*4 4;[^}]*pointer-events:\s*none;/);
   assert.equal((navigation.match(/className="photo-halo" r="9\.8"/g) ?? []).length, 2);

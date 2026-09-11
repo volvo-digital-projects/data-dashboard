@@ -2198,6 +2198,22 @@ export default function CompetitiveAnalysis({
                       })}
                       <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">고객상담 만족(10점)</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
+                      {selectedStaffScatterPoint ? (
+                        <g className="growth-scatter-selected-guides" aria-hidden="true">
+                          <line
+                            x1={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
+                            y1={staffScatterPlot.top}
+                            y2={staffScatterPlot.bottom}
+                          />
+                          <line
+                            x1={staffScatterPlot.left}
+                            x2={staffScatterPlot.right}
+                            y1={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                            y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
+                          />
+                        </g>
+                      ) : null}
                       {staffScatterNationalAverage !== null ? (
                         <line
                           className="growth-scatter-average-line"
@@ -2227,22 +2243,6 @@ export default function CompetitiveAnalysis({
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
                         ))}
                       </g>
-                      {selectedStaffScatterPoint ? (
-                        <g className="growth-scatter-selected-guides" aria-hidden="true">
-                          <line
-                            x1={staffScatterX(selectedStaffScatterPoint.tenureYears)}
-                            x2={staffScatterX(selectedStaffScatterPoint.tenureYears)}
-                            y1={staffScatterPlot.top}
-                            y2={staffScatterPlot.bottom}
-                          />
-                          <line
-                            x1={staffScatterPlot.left}
-                            x2={staffScatterPlot.right}
-                            y1={staffScatterY(selectedStaffScatterPoint.finalScore)}
-                            y2={staffScatterY(selectedStaffScatterPoint.finalScore)}
-                          />
-                        </g>
-                      ) : null}
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
                           <circle className="photo-halo" r="9.8" />
@@ -2421,6 +2421,22 @@ export default function CompetitiveAnalysis({
                       })}
                       <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">2026 누적판매(대)</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
+                      {selectedStaffSalesScatterPoint ? (
+                        <g className="growth-scatter-selected-guides" aria-hidden="true">
+                          <line
+                            x1={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
+                            y1={staffScatterPlot.top}
+                            y2={staffScatterPlot.bottom}
+                          />
+                          <line
+                            x1={staffScatterPlot.left}
+                            x2={staffScatterPlot.right}
+                            y1={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                            y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
+                          />
+                        </g>
+                      ) : null}
                       {staffSalesNationalAverage !== null ? (
                         <line
                           className="growth-scatter-average-line"
@@ -2450,22 +2466,6 @@ export default function CompetitiveAnalysis({
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 누적판매 ${point.deliveredSales}대`}</title></circle>
                         ))}
                       </g>
-                      {selectedStaffSalesScatterPoint ? (
-                        <g className="growth-scatter-selected-guides" aria-hidden="true">
-                          <line
-                            x1={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
-                            x2={staffScatterX(selectedStaffSalesScatterPoint.tenureYears)}
-                            y1={staffScatterPlot.top}
-                            y2={staffScatterPlot.bottom}
-                          />
-                          <line
-                            x1={staffScatterPlot.left}
-                            x2={staffScatterPlot.right}
-                            y1={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
-                            y2={staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)}
-                          />
-                        </g>
-                      ) : null}
                       {selectedStaffSalesScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
                           <circle className="photo-halo" r="9.8" />
