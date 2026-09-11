@@ -385,6 +385,35 @@ html {
   padding: 3px 6px;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .growth-staff-roster-columns {
+    grid-template-columns: minmax(0, 1fr) 76px 56px;
+    padding-right: 24px;
+  }
+
+  .growth-staff-roster-list {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(80, 101, 111, 0.62) transparent;
+  }
+
+  .growth-staff-roster-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .growth-staff-roster-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .growth-staff-roster-list::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(80, 101, 111, 0.62);
+  }
+
+  .growth-staff-roster-list button {
+    grid-template-columns: minmax(0, 1fr) 76px 56px;
+  }
+}
+
 @media (min-width: 600px) {
   .growth-staff-roster-list {
     max-height: calc(

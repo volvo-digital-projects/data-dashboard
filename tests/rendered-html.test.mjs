@@ -286,6 +286,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<span>상담만족<\/span>|회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(104px, 1fr\) 76px 80px;/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-width: 100%;[^}]*overflow-x: hidden;[^}]*overflow-y: auto;/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-columns\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 76px 56px;[^}]*padding-right: 24px;/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-list::-webkit-scrollbar\s*\{[^}]*width: 6px;/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 76px 56px;/);
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(navigation, /const isTeamLeader = employee\.role === "영업팀장" \|\| employee\.jobTitle === "팀장";/);
   assert.match(navigation, /className="growth-staff-name">\{employee\.name\}<\/span>[\s\S]*?className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L<\/i>/);
