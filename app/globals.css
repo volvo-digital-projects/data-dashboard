@@ -179,12 +179,6 @@ html {
     box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
   }
 
-  .growth-navigation-detail .growth-capability > header {
-    position: sticky;
-    top: calc(var(--growth-navigation-sticky-top, 356px) + 118px);
-    z-index: 42;
-    background: #f8fbfc;
-  }
 }
 
 @media (min-width: 761px) and (max-width: 1240px) {
