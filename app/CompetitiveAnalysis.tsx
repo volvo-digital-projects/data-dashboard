@@ -1684,22 +1684,20 @@ export default function CompetitiveAnalysis({
           <div>
             <span className="analysis-summary-title">
               종합 만족도 평균 누적
-              <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
-                <b>Q1</b><b>Q2</b>
-              </span>
             </span>
             <ul className="analysis-summary-breakdown">
               <li>VOC 상담 만족도</li>
               <li>ONE Voice 시승 만족도</li>
               <li>ONE Voice 출고 만족도</li>
             </ul>
-            <p className="analysis-quarter-values">
-              <span>Q1 {displayQuarterNumber(selected.q1?.voc)}</span>
-              <i aria-hidden="true">/</i>
-              <span>Q2 {displayQuarterNumber(selected.voc)}</span>
-            </p>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.vocScore} sequence={0} />
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.voc)}, Q2 ${displayQuarterNumber(selected.voc)}, Q3 미집계, Q4 미집계`}>
+            <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.voc)}</strong></span>
+            <span><b>Q2</b><strong>{displayQuarterNumber(selected.voc)}</strong></span>
+            <span><b>Q3</b></span>
+            <span><b>Q4</b></span>
+          </p>
           <em
             className={
               selectedPoint.vocScore >= groupVocAverage ? "positive" : "negative"
@@ -1719,21 +1717,19 @@ export default function CompetitiveAnalysis({
           <div>
             <span className="analysis-summary-title">
               해피콜 이행률 평균 누적
-              <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
-                <b>Q1</b><b>Q2</b>
-              </span>
             </span>
             <ul className="analysis-summary-breakdown">
               <li>VOC 상담 후 해피콜(24시간 이내 시행)</li>
               <li>ONE Voice 출고 후 해피콜(24시간 이내 시행)</li>
             </ul>
-            <p className="analysis-quarter-values">
-              <span>Q1 {displayQuarterNumber(selected.q1?.happyCall)}</span>
-              <i aria-hidden="true">/</i>
-              <span>Q2 {displayQuarterNumber(selected.happyCall)}</span>
-            </p>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.happyCall)}, Q2 ${displayQuarterNumber(selected.happyCall)}, Q3 미집계, Q4 미집계`}>
+            <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.happyCall)}</strong></span>
+            <span><b>Q2</b><strong>{displayQuarterNumber(selected.happyCall)}</strong></span>
+            <span><b>Q3</b></span>
+            <span><b>Q4</b></span>
+          </p>
           <em
             className={
               selectedPoint.happyScore >= groupHappyAverage

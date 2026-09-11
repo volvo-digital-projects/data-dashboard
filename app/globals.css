@@ -5134,7 +5134,8 @@ input:focus-visible {
   gap: 3px;
 }
 
-.analysis-quarter-badges b {
+.analysis-quarter-badges b,
+.analysis-quarter-values b {
   width: 14px;
   height: 14px;
   display: inline-grid;
@@ -5171,19 +5172,32 @@ input:focus-visible {
 }
 
 .analysis-quarter-values {
+  grid-column: 1;
+  grid-row: 2;
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin: 1px 0 0;
+  align-self: end;
+  gap: 8px;
+  margin: 0;
   color: var(--muted);
   font-size: 9px;
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1;
 }
 
-.analysis-quarter-values i {
-  color: #a2afb6;
-  font-style: normal;
+.analysis-quarter-values span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 14px;
+}
+
+.analysis-quarter-values strong {
+  color: #5e7480;
+  font-family: var(--font-latin);
+  font-size: 9px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .analysis-summary-card > strong {
@@ -5802,6 +5816,13 @@ input:focus-visible {
     0 3px 8px rgba(16, 42, 67, 0.075),
     0 1px 2px rgba(16, 42, 67, 0.04);
   pointer-events: none;
+}
+
+.analysis-summary-card.satisfaction > em,
+.analysis-summary-card.happycall > em {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
 }
 
 .scatter-point.dense.hovered:not(.selected) > b {

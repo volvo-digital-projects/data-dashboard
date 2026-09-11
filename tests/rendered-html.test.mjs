@@ -2072,7 +2072,7 @@ test("serves score criteria as a separate CDSID page", async () => {
   assert.match(visibleHtml, /반올림한 V3S 평가 총점 기준/);
 });
 
-test("shows Q1 and Q2 values in the analysis summary cards", async () => {
+test("shows Q1-Q4 badges and available quarter values in the analysis summary cards", async () => {
   const response = await render(
     "/dashboard/6KR6834/analysis?view=region",
   );
@@ -2085,16 +2085,17 @@ test("shows Q1 and Q2 values in the analysis summary cards", async () => {
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"><span>Q1 93\.1<\/span><i aria-hidden="true">\/<\/i><span>Q2 87\.5<\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span><b>Q3<\/b><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"><span>Q1 100<\/span><i aria-hidden="true">\/<\/i><span>Q2 100<\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span><b>Q3<\/b><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
     css,
-    /\.analysis-quarter-values\s*\{[^}]*color: var\(--muted\);[^}]*font-size: 9px;[^}]*font-weight: 500;[^}]*line-height: 1\.18;/,
+    /\.analysis-quarter-values\s*\{[^}]*grid-column: 1;[^}]*grid-row: 2;[^}]*align-self: end;[^}]*color: var\(--muted\);[^}]*font-size: 9px;[^}]*font-weight: 500;/,
   );
+  assert.match(css, /\.analysis-summary-card\.satisfaction > em,[\s\S]*?\.analysis-summary-card\.happycall > em\s*\{[^}]*grid-column: 2;[^}]*grid-row: 2;[^}]*align-self: end;/);
 });
 
 test("serves the dual-metric competitive analysis sample", async () => {
