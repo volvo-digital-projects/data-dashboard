@@ -544,7 +544,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-card > header\s*\{[^}]*height: 18px;[^}]*min-height: 18px;/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*aspect-ratio: 470 \/ 210;/);
   assert.match(css, /\.growth-scatter-card footer\s*\{[^}]*height: 20px;[^}]*min-height: 20px;[^}]*overflow: hidden;/);
-  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 196px;[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows: minmax\(0, 1fr\);[^}]*gap: 6px;[^}]*padding: 6px 0 0;/);
+  assert.match(css, /\.growth-evidence-grid\s*\{[^}]*height: 202px;[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows: minmax\(0, 1fr\);[^}]*gap: 6px;[^}]*padding: 6px 0 0;/);
   assert.match(css, /\.growth-comment-evidence\s*\{[^}]*min-height: 0;/);
   assert.match(css, /\.growth-sales-monthly-card\s*\{[^}]*height: 196px;[^}]*min-height: 196px;/);
   assert.match(css, /\.growth-sales-dashboard\s*\{[^}]*grid-template-rows: auto auto auto;[^}]*gap: 6px;[^}]*padding: 0;[^}]*background: transparent;/);
