@@ -301,8 +301,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /자료 근거 회신 \$\{responses\}건/);
   assert.doesNotMatch(navigation, /const evidenceConfidence = staffEvidenceConfidence\(responses\)/);
   assert.match(navigation, /집중 코칭/);
-  assert.match(navigation, /01 · 고객상담 역량/);
-  assert.match(navigation, /02 · 영업활동 역량/);
+  assert.match(navigation, />고객상담 역량<\/span>/);
+  assert.match(navigation, />영업활동 역량<\/span>/);
+  assert.doesNotMatch(navigation, /01 ·|02 ·/);
+  assert.match(css, /\.growth-navigation-pinned-heading\s*\{[^}]*font-size: 11px;[^}]*color: #25495a;/);
+  assert.doesNotMatch(css, /\.growth-navigation-pinned-heading\.sales\s*\{/);
   assert.doesNotMatch(navigation, /<h3>고객상담 역량<\/h3>|<h3>영업활동 역량<\/h3>/);
   assert.doesNotMatch(navigation, /01 · 상담 영역|02 · 영업 영역/);
   assert.match(navigation, /성장 가속/);

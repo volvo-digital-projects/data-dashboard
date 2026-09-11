@@ -333,14 +333,10 @@ html {
   padding: 6px 11px;
   background: #f8fbfc;
   font-family: var(--font-volvo);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #21809e;
-}
-
-.growth-navigation-pinned-heading.sales {
-  color: #c66b42;
+  color: #25495a;
 }
 
 .growth-navigation-workspace {

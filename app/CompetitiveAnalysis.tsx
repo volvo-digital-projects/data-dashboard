@@ -2126,10 +2126,10 @@ export default function CompetitiveAnalysis({
             </div>
             <div className="growth-navigation-pinned-capabilities" aria-hidden="true">
               <div className="growth-navigation-pinned-heading consultation">
-                <span>01 · 고객상담 역량</span>
+                <span>고객상담 역량</span>
               </div>
               <div className="growth-navigation-pinned-heading sales">
-                <span>02 · 영업활동 역량</span>
+                <span>영업활동 역량</span>
               </div>
             </div>
           </div>
