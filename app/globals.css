@@ -95,6 +95,7 @@
   --navy-2: #17475d;
   --blue: #397a9b;
   --blue-soft: #dcebf1;
+  --comparison-positive-blue: #176f91;
   --paper: #f4f6f5;
   --white: #ffffff;
   --line: #d9e0e3;
@@ -1054,7 +1055,7 @@ html {
   text-anchor: middle;
 }
 
-.growth-gauge-current.positive { fill: var(--blue); }
+.growth-gauge-current.positive { fill: var(--comparison-positive-blue); }
 .growth-gauge-current.negative { fill: var(--warning); }
 .growth-gauge-current.neutral { fill: #536f7b; }
 
@@ -2051,7 +2052,7 @@ html {
   font-weight: 750;
 }
 
-.growth-sales-share-meta strong.positive { color: var(--blue) !important; }
+.growth-sales-share-meta strong.positive { color: var(--comparison-positive-blue) !important; }
 .growth-sales-share-meta strong.negative { color: var(--warning) !important; }
 .growth-sales-share-meta strong.neutral { color: #536f7b !important; }
 
@@ -5746,7 +5747,7 @@ input:focus-visible {
 }
 
 .analysis-summary-card > em.positive {
-  color: var(--blue) !important;
+  color: var(--comparison-positive-blue) !important;
 }
 
 .analysis-summary-card > em.negative {

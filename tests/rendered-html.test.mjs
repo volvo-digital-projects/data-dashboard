@@ -584,7 +584,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /selectedStaffPeerDelta > 0[\s\S]*?\? "▲"[\s\S]*?: "▼"/);
   assert.match(source, /`본인 \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 = \$\{selectedStaffGrowthDeltaMark\} \$\{Math\.abs\(selectedStaffPeerDelta \/ 10\)\.toFixed\(1\)\}점`/);
   assert.doesNotMatch(source, /selectedStaffPeerDelta >= 0 \? "\+"/);
-  assert.match(css, /\.growth-gauge-current\.positive\s*\{[^}]*fill:\s*var\(--blue\);/);
+  assert.match(css, /--comparison-positive-blue:\s*#176f91;/);
+  assert.match(css, /\.growth-gauge-current\.positive\s*\{[^}]*fill:\s*var\(--comparison-positive-blue\);/);
+  assert.match(css, /\.growth-sales-share-meta strong\.positive\s*\{[^}]*color:\s*var\(--comparison-positive-blue\) !important;/);
+  assert.match(css, /\.analysis-summary-card > em\.positive\s*\{[^}]*color:\s*var\(--comparison-positive-blue\) !important;/);
   assert.match(css, /\.growth-gauge-current\.negative\s*\{[^}]*fill:\s*var\(--warning\);/);
   assert.match(css, /\.growth-gauge-current\.neutral\s*\{[^}]*fill:\s*#536f7b;/);
   assert.doesNotMatch(navigation, /className="growth-gauge-current"[^>]*>\{selectedStaffGrowthLabel\}/);
@@ -4638,7 +4641,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.analysis-summary-card > em\.positive\s*\{\s*color: var\(--blue\) !important;/,
+    /\.analysis-summary-card > em\.positive\s*\{\s*color: var\(--comparison-positive-blue\) !important;/,
   );
   assert.match(
     css,
