@@ -354,7 +354,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다\./);
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
-  assert.match(navigation, /상담 → 시승 → 계약 전환/);
+  assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong>상담\/ 시승\/ 계약 전환율<\/strong>/);
+  assert.match(css, /\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;/);
   assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적판매/);
   assert.doesNotMatch(navigation, /근속기간 × 2026 누적판매/);
   assert.match(navigation, /근속기간 × 고객상담 평균만족도/);
@@ -405,7 +406,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<span>2026 월별 출고 실적<\/span>/);
   assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\} 누적판매 <span className="growth-sales-heading-number">\{selectedStaffDeliveredSales\}<\/span>대<\/strong>/);
   assert.match(css, /\.growth-scatter-card > header strong > \.growth-sales-heading-number,[\s\S]*?\.growth-sales-monthly-card > header strong > \.growth-sales-heading-number\s*\{[^}]*display: inline;[^}]*margin: 0;[^}]*font-family: var\(--font-volvo\);[^}]*font-size: inherit;[^}]*line-height: inherit;[^}]*color: inherit;[^}]*font-variant-numeric: tabular-nums;/);
-  assert.match(navigation, /원자료 갱신 필요/);
+  assert.doesNotMatch(navigation, /원자료 갱신 필요|개인정보 제외 집계|고객 흐름 연결/);
   assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
   assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);
   assert.match(navigation, /className="growth-sales-share-panel"/);

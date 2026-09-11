@@ -2493,10 +2493,8 @@ export default function CompetitiveAnalysis({
                   <article className="growth-sales-funnel-card">
                     <header>
                       <div>
-                        <span>상담 → 시승 → 계약 전환</span>
-                        <strong>{selectedStaffHasActivityFunnel ? "고객 흐름 연결" : "원자료 갱신 필요"}</strong>
+                        <strong>상담/ 시승/ 계약 전환율</strong>
                       </div>
-                      <small>개인정보 제외 집계</small>
                     </header>
                     <div className={`growth-sales-funnel${selectedStaffHasActivityFunnel ? "" : " unavailable"}`}>
                       <div className="growth-sales-stage consultation">
