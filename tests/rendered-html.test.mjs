@@ -249,7 +249,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/data/sales-activity-analysis.json", import.meta.url), "utf8").then(JSON.parse),
   ]);
-  const start = source.indexOf('className="growth-navigation"');
+  const start = source.indexOf('className="growth-navigation-sticky-summary"');
   const end = source.indexOf('{false && selectedStaffAnalysis', start);
   const navigation = source.slice(start, end);
   const profileStart = navigation.indexOf('className="growth-profile-person"');
@@ -428,12 +428,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);/);
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-areas: "roster detail";/);
-  assert.match(navigation, /className="growth-navigation-sticky-summary"[\s\S]*?className="growth-navigation-heading"[\s\S]*?className="growth-profile-strip"[\s\S]*?className="growth-navigation-workspace"[\s\S]*?className="growth-staff-roster"[\s\S]*?className="growth-navigation-detail"/);
+  assert.match(navigation, /className="growth-navigation-sticky-summary"[\s\S]*?className="growth-navigation-heading"[\s\S]*?className="growth-profile-strip"[\s\S]*?className="growth-navigation-pinned-headings"[\s\S]*?className="growth-staff-roster-columns"[\s\S]*?className="growth-navigation-pinned-capabilities"[\s\S]*?className="growth-navigation-workspace"[\s\S]*?className="growth-staff-roster"[\s\S]*?className="growth-navigation-detail"/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*margin: 6px 6px 0;/);
   assert.match(css, /\.growth-profile-strip > div:not\(:first-child\)::before\s*\{[^}]*top: 12px;[^}]*bottom: 12px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-profile-certification strong b\s*\{[^}]*min-width: 4\.2ch;[^}]*justify-content: flex-end;/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
-  assert.match(css, /\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
+  assert.match(css, /\.competitive-analysis-page > \.growth-navigation-sticky-summary,[\s\S]*?\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*align-self: start;[^}]*background: #f5f9fb;[^}]*0 -18px 0 #ffffff,/);
   assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-navigation-sticky-summary\s*\{/);
   assert.match(css, /@media \(min-width: 600px\) and \(max-width: 760px\)\s*\{[\s\S]*?--growth-navigation-sticky-top: 0px;/);
@@ -442,15 +442,16 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const isPhoneViewport = window\.matchMedia\("\(max-width: 599px\)"\)\.matches;/);
   assert.match(source, /const isNarrowTabletViewport = window\.matchMedia\([\s\S]*?"\(min-width: 600px\) and \(max-width: 760px\)"[\s\S]*?\)\.matches;/);
   assert.match(source, /const shellHeight = isNarrowTabletViewport[\s\S]*?Math\.ceil\(shell\.getBoundingClientRect\(\)\.height\);[\s\S]*?--growth-navigation-sticky-top[\s\S]*?--growth-navigation-summary-height/);
-  assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}/);
-  assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-sticky-top, 356px\)[\s\S]*?var\(--growth-navigation-summary-height, 112px\)[\s\S]*?align-self: start;[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 112px\) - 12px[\s\S]*?overflow: hidden;[^}]*background: #ffffff;/);
-  assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 112px\) - 46px/);
+  assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}[\s\S]*?className="growth-navigation-pinned-headings"/);
+  assert.match(css, /\.growth-navigation-pinned-headings\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);[^}]*border-bottom: 1px solid #d5e3e9;/);
+  assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-sticky-top, 356px\)[\s\S]*?var\(--growth-navigation-summary-height, 152px\)[\s\S]*?align-self: start;[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 12px[\s\S]*?overflow: hidden;[^}]*background: #ffffff;/);
+  assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 6px/);
   const rosterBaseHeightRule = css.indexOf("max-height: 660px;", css.indexOf(".growth-staff-roster-list"));
-  const rosterViewportHeightRule = css.indexOf("var(--growth-navigation-summary-height, 112px) - 46px", rosterBaseHeightRule + 1);
+  const rosterViewportHeightRule = css.indexOf("var(--growth-navigation-summary-height, 152px) - 6px", rosterBaseHeightRule + 1);
   assert.ok(rosterBaseHeightRule >= 0 && rosterViewportHeightRule > rosterBaseHeightRule);
   assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*overscroll-behavior-y:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch;/);
-  assert.match(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-sticky-top, 356px\)[\s\S]*?var\(--growth-navigation-summary-height, 112px\) \+ 6px[\s\S]*?z-index: 42;[^}]*background: #f8fbfc;/);
-  assert.match(css, /\.growth-navigation-workspace::before\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-summary-height, 112px\)[\s\S]*?z-index: 41;[^}]*grid-column: 1 \/ -1;[^}]*grid-row: 1;[^}]*height: 46px;[^}]*background: #f5f9fb;[^}]*pointer-events: none;/);
+  assert.doesNotMatch(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: sticky;/);
+  assert.doesNotMatch(css, /\.growth-navigation-workspace::before\s*\{[^}]*position: sticky;/);
   assert.match(css, /\.growth-capability\s*\{[^}]*overflow: clip;/);
   assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -34px;/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);

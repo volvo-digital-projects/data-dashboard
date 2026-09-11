@@ -938,7 +938,7 @@ export default function CompetitiveAnalysis({
         ? 0
         : Math.ceil(shell.getBoundingClientRect().height);
       const growthSummaryHeight = Math.ceil(
-        growthNavigationSummaryRef.current?.getBoundingClientRect().height ?? 112,
+        growthNavigationSummaryRef.current?.getBoundingClientRect().height ?? 152,
       );
       const staffHeadingHeight = Math.ceil(
         staffAnalysisHeadingRef.current?.getBoundingClientRect().height ?? 0,
@@ -2046,13 +2046,11 @@ export default function CompetitiveAnalysis({
       </section>
 
       {selectedStaffAnalysis ? (
-        <section
-          className="growth-navigation"
-          aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 성장 내비게이션`}
-        >
+        <>
           <div
             className="growth-navigation-sticky-summary"
             ref={growthNavigationSummaryRef}
+            aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 성장 내비게이션 고정 요약`}
           >
           <header className="growth-navigation-heading">
             <div>
@@ -2119,16 +2117,30 @@ export default function CompetitiveAnalysis({
                 </strong>
               </div>
           </section>
+          <div className="growth-navigation-pinned-headings">
+            <div className="growth-staff-roster-columns" aria-hidden="true">
+              <span>영업직원 / 입사일자</span>
+              <span>고객상담 평균만족도</span>
+              <span>누적 판매대수</span>
+            </div>
+            <div className="growth-navigation-pinned-capabilities" aria-hidden="true">
+              <div className="growth-navigation-pinned-heading consultation">
+                <span>01 · 고객상담 역량</span>
+              </div>
+              <div className="growth-navigation-pinned-heading sales">
+                <span>02 · 영업활동 역량</span>
+              </div>
+            </div>
+          </div>
           </div>
 
+        <section
+          className="growth-navigation"
+          aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 성장 내비게이션`}
+        >
           <div className="growth-navigation-workspace">
 
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
-              <div className="growth-staff-roster-columns" aria-hidden="true">
-                <span>영업직원 / 입사일자</span>
-                <span>고객상담 평균만족도</span>
-                <span>누적 판매대수</span>
-              </div>
               <div className="growth-staff-roster-list">
                 {rankedSalesStaff.map(({ employee, average, deliveredSales }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
@@ -2166,12 +2178,6 @@ export default function CompetitiveAnalysis({
             <div className="growth-navigation-detail">
               <div className="growth-capability-columns">
               <section className="growth-capability consultation">
-                <header>
-                  <div>
-                    <span>01 · 고객상담 역량</span>
-                  </div>
-                </header>
-
                 <div className="growth-capability-grid">
                   <article className="growth-position-card">
                     <header>
@@ -2444,9 +2450,6 @@ export default function CompetitiveAnalysis({
               </section>
 
               <section className="growth-capability sales">
-                <header>
-                  <div><span>02 · 영업활동 역량</span></div>
-                </header>
                 <div className="growth-sales-dashboard">
                   <article className="growth-sales-funnel-card">
                     <header>
@@ -2704,6 +2707,7 @@ export default function CompetitiveAnalysis({
             </div>
           </div>
         </section>
+        </>
       ) : null}
 
       {false && selectedStaffAnalysis ? (
