@@ -1442,6 +1442,21 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
+.growth-sales-monthly-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 34%);
+  margin-top: 6px;
+}
+
+.growth-sales-monthly-trend {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-right: 12px;
+}
+
 .growth-sales-funnel {
   flex: 1;
   min-height: 0;
@@ -1556,18 +1571,33 @@ html {
 .growth-sales-funnel-card > footer span { margin-left: auto; }
 
 .growth-sales-monthly-chart {
+  position: relative;
   flex: 1;
   min-height: 0;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: end;
-  gap: 5px;
-  margin-top: 8px;
-  padding: 0 6px;
+  gap: 3px;
+  padding: 0 3px;
   border-bottom: 1px solid #dce6ea;
 }
 
+.growth-sales-monthly-chart::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 17px 0 19px;
+  border-top: 1px solid #e0e9ed;
+  border-left: 1px solid #e0e9ed;
+  background:
+    linear-gradient(to right, #e0e9ed 1px, transparent 1px) 0 0 / calc(100% / 12) 100%,
+    linear-gradient(to top, #e0e9ed 1px, transparent 1px) 0 0 / 100% 25%;
+  pointer-events: none;
+}
+
 .growth-sales-month {
+  position: relative;
+  z-index: 1;
   height: 100%;
   min-height: 104px;
   display: grid;
@@ -1590,7 +1620,7 @@ html {
   min-height: 62px;
   display: block;
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(#edf2f4 1px, transparent 1px) 0 0 / 100% 25%;
+  background: transparent;
 }
 
 .growth-sales-month > i span,
@@ -1659,45 +1689,114 @@ html {
   color: #718690;
 }
 
-.growth-sales-monthly-card > footer {
-  min-height: 31px;
+.growth-sales-monthly-legend {
+  min-height: 23px;
   display: flex;
   align-items: center;
   gap: 9px;
-  padding-top: 6px;
+  padding-top: 4px;
   font-size: 8px;
   color: #6b828d;
 }
 
-.growth-sales-monthly-card > footer > span {
+.growth-sales-monthly-legend > span {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   white-space: nowrap;
 }
 
-.growth-sales-monthly-card > footer i {
+.growth-sales-monthly-legend i {
   width: 7px;
   height: 7px;
   border-radius: 2px;
 }
 
-.growth-sales-monthly-card > footer i.staff {
+.growth-sales-monthly-legend i.staff {
   background: linear-gradient(180deg, #74aec5 0%, #174662 100%);
 }
-.growth-sales-monthly-card > footer i.average { background: rgba(88, 157, 178, 0.34); }
+.growth-sales-monthly-legend i.average { background: rgba(88, 157, 178, 0.34); }
 
-.growth-sales-monthly-card > footer > strong {
-  margin-left: auto;
-  color: #315d70;
-  font-size: 9px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+.growth-sales-share-panel {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 5px 4px 5px 14px;
+  border-left: 1px solid #c9d8de;
 }
 
-.growth-sales-monthly-card > footer > strong small {
+.growth-sales-share-donut {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(
+    #e9794f 0 var(--growth-sales-share-angle, 0deg),
+    #5ca799 var(--growth-sales-share-angle, 0deg) 360deg
+  );
+  box-shadow: 0 8px 14px -10px rgba(26, 58, 70, 0.64);
+}
+
+.growth-sales-share-donut > div {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(222, 232, 235, 0.9);
+}
+
+.growth-sales-share-donut span {
+  font-size: 7px;
+  color: #708791;
+}
+
+.growth-sales-share-donut strong {
+  margin-top: 1px;
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-size: 16px;
+  color: #294f60;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-sales-share-donut strong small {
+  margin-left: 1px;
+  font-family: var(--font-korean), sans-serif;
+  font-size: 7px;
+}
+
+.growth-sales-share-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.growth-sales-share-copy > span {
   font-size: 8px;
-  font-weight: 600;
+  color: #6f858f;
+}
+
+.growth-sales-share-copy > strong {
+  margin: 1px 0 3px;
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  color: #d86643;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-sales-share-copy > small {
+  font-size: 7.5px;
+  line-height: 1.45;
+  color: #66808b;
+  white-space: nowrap;
 }
 
 @media (max-width: 1180px) {

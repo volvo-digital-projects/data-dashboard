@@ -381,7 +381,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /원자료 갱신 필요/);
   assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
   assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);
-  assert.match(navigation, /전시장 판매의/);
+  assert.match(navigation, /className="growth-sales-share-panel"/);
+  assert.match(navigation, /전시장 누적판매 중/);
+  assert.match(navigation, /판매 비중/);
+  assert.match(navigation, /selectedStaffSalesShare\.toFixed\(1\)\}%/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
   assert.equal(salesActivity.source.salesAsOf, "2026-09-10");
@@ -397,6 +400,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /<i className="staff" \/>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\}<\/span>/);
   assert.match(navigation, /소속 전시장 1인 평균/);
   assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(12, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.growth-sales-monthly-body\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) minmax\(190px, 34%\);/);
+  assert.match(css, /\.growth-sales-monthly-chart::before\s*\{[^}]*border-top: 1px solid #e0e9ed;[^}]*border-left: 1px solid #e0e9ed;[^}]*linear-gradient\(to right, #e0e9ed 1px, transparent 1px\)[^}]*linear-gradient\(to top, #e0e9ed 1px, transparent 1px\)/);
+  assert.match(css, /\.growth-sales-share-panel\s*\{[^}]*border-left: 1px solid #c9d8de;/);
+  assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*conic-gradient\([^}]*#e9794f[^}]*#5ca799/);
   assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*linear-gradient\(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%\);/);
   assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월[\s\S]*?<em>\(상위 \{selectedStaffTenureTopPercent\.toFixed\(1\)\}%\)<\/em>/);
   assert.doesNotMatch(profile, /selectedStaffSatisfactionTopPercent/);

@@ -2598,38 +2598,54 @@ export default function CompetitiveAnalysis({
                         <span>2026 월별 출고 실적</span>
                         <strong>{selectedStaffEmployee?.name ?? "선택 직원"} {selectedStaffDeliveredSales}대</strong>
                       </div>
-                      <small>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 {selectedShowroomDeliveredSales}대</small>
                     </header>
-                    <div className="growth-sales-monthly-chart" key={`monthly-sales-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`} role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계`}>
-                      {selectedStaffMonthlyDeliveredSales.map((count, index) => (
-                        <div className={`growth-sales-month${count === null ? " unreported" : ""}`} key={`sales-month-${index + 1}`}>
-                          <strong>{count ?? "―"}</strong>
-                          <i aria-hidden="true">
-                            {selectedShowroomMonthlyAverageDeliveredSales[index] === null ? null : (
-                              <span style={{ height: `${(selectedShowroomMonthlyAverageDeliveredSales[index] / selectedSalesMonthScale) * 100}%` }} />
-                            )}
-                            {count === null ? <b className="unreported" /> : (
-                              <b
-                                style={{
-                                  height: `${(count / selectedSalesMonthScale) * 100}%`,
-                                  "--growth-sales-month-index": index,
-                                } as CSSProperties}
-                              />
-                            )}
-                          </i>
-                          <small>{index + 1}월</small>
+                    <div className="growth-sales-monthly-body">
+                      <div className="growth-sales-monthly-trend">
+                        <div className="growth-sales-monthly-chart" key={`monthly-sales-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`} role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계`}>
+                          {selectedStaffMonthlyDeliveredSales.map((count, index) => (
+                            <div className={`growth-sales-month${count === null ? " unreported" : ""}`} key={`sales-month-${index + 1}`}>
+                              <strong>{count ?? "―"}</strong>
+                              <i aria-hidden="true">
+                                {selectedShowroomMonthlyAverageDeliveredSales[index] === null ? null : (
+                                  <span style={{ height: `${(selectedShowroomMonthlyAverageDeliveredSales[index] / selectedSalesMonthScale) * 100}%` }} />
+                                )}
+                                {count === null ? <b className="unreported" /> : (
+                                  <b
+                                    style={{
+                                      height: `${(count / selectedSalesMonthScale) * 100}%`,
+                                      "--growth-sales-month-index": index,
+                                    } as CSSProperties}
+                                  />
+                                )}
+                              </i>
+                              <small>{index + 1}월</small>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                        <div className="growth-sales-monthly-legend">
+                          <span><i className="staff" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
+                          <span title={`월별 소속 전시장 출고 ÷ 현재 영업직원 ${selectedShowroomSalesStaffCount}명`}><i className="average" />소속 전시장 1인 평균</span>
+                        </div>
+                      </div>
+                      <aside className="growth-sales-share-panel" aria-label={`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 누적판매 중 ${selectedStaffEmployee?.name ?? "선택 직원"} 판매 비중`}>
+                        <div
+                          className="growth-sales-share-donut"
+                          style={{ "--growth-sales-share-angle": `${Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0)) * 3.6}deg` } as CSSProperties}
+                          aria-hidden="true"
+                        >
+                          <div>
+                            <span>전시장 누적</span>
+                            <strong>{selectedShowroomDeliveredSales.toLocaleString()}<small>대</small></strong>
+                          </div>
+                        </div>
+                        <div className="growth-sales-share-copy">
+                          <span>{selectedStaffEmployee?.name ?? "선택 직원"} 판매 비중</span>
+                          <strong>{selectedStaffSalesShare === null ? "―" : `${selectedStaffSalesShare.toFixed(1)}%`}</strong>
+                          <small>{selectedStaffDeliveredSales}대 / 전시장 {selectedShowroomDeliveredSales}대</small>
+                          <small>전시장 {selectedStaffSalesRank ?? "―"}위 · 평균 대비 {selectedStaffDeliveredSales >= selectedShowroomAverageDeliveredSales ? "+" : ""}{(selectedStaffDeliveredSales - selectedShowroomAverageDeliveredSales).toFixed(1)}대</small>
+                        </div>
+                      </aside>
                     </div>
-                    <footer>
-                      <span><i className="staff" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
-                      <span title={`월별 소속 전시장 출고 ÷ 현재 영업직원 ${selectedShowroomSalesStaffCount}명`}><i className="average" />소속 전시장 1인 평균</span>
-                      <strong>
-                        전시장 {selectedStaffSalesRank ?? "―"}위
-                        <small> · 평균 대비 {selectedStaffDeliveredSales >= selectedShowroomAverageDeliveredSales ? "+" : ""}{(selectedStaffDeliveredSales - selectedShowroomAverageDeliveredSales).toFixed(1)}대</small>
-                        {selectedStaffSalesShare === null ? null : <small> · 전시장 판매의 {selectedStaffSalesShare.toFixed(1)}%</small>}
-                      </strong>
-                    </footer>
                   </article>
                 </div>
               </section>
