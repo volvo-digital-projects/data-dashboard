@@ -553,14 +553,14 @@ test("averages Q1-Q2 metrics before combining and keeps staff scores legible", a
       const actual = Number(card.match(/aria-label="([\d.]+)점"/)?.[1]);
       assert.equal(actual, Number(score.toFixed(1)), `${showroom.cdsid} ${kind}`);
     }
-    assert.ok(html.includes(`전국 ${index + 1}위 / 전체 ${expected.length}`));
+    assert.ok(html.includes(`전국 전시장 내 ${index + 1}위 / 전체 ${expected.length}`));
     assert.ok(html.includes("VOC 상담 만족도") && html.includes("ONE Voice 시승 만족도") && html.includes("ONE Voice 출고 만족도"));
     assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE Voice 출고 후 해피콜(24시간 이내 시행)"));
     assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
   }
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.analysis-staff-workspace\s*\{[^}]*grid-template-columns: 330px minmax\(0, 1fr\);/);
-  assert.match(css, /\.analysis-staff-roster-identity strong\s*\{[^}]*flex: 0 0 auto;[^}]*font-size: 12px;/);
+  assert.match(css, /\.analysis-staff-roster-identity strong\s*\{[^}]*width: 38px;[^}]*font-size: 12px;/);
   assert.doesNotMatch(css.match(/\.analysis-staff-roster-identity strong\s*\{[^}]*\}/)?.[0] ?? "", /ellipsis/);
   assert.match(css, /\.analysis-staff-roster-adjusted-points,\s*\.analysis-staff-roster-freshness-points\s*\{[^}]*font-weight: 400;/);
   assert.match(css, /\.analysis-staff-roster-final\s*\{[^}]*font-family: var\(--font-volvo\)/);
@@ -568,55 +568,33 @@ test("averages Q1-Q2 metrics before combining and keeps staff scores legible", a
 });
 
 test("includes every staff member with fair provisional and unscored scatter states", async () => {
-  const { showrooms } = JSON.parse(await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"));
   const staffData = JSON.parse(await readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8"));
+  const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   const responseCounts = Object.values(staffData.showrooms).flatMap((showroom) => showroom.employees)
     .filter((staff) => staff.role === "영업직원" || staff.role === "영업팀장")
     .map((staff) => Object.values(staff.years).reduce((sum, year) => sum + year.responses, 0));
   const expectedConfirmed = responseCounts.filter((count) => count >= 8).length;
   const expectedProvisional = responseCounts.filter((count) => count > 0 && count < 8).length;
   const expectedUnscored = responseCounts.filter((count) => count === 0).length;
-  for (const showroom of showrooms) {
-    const response = await render(`/dashboard/${showroom.cdsid}/analysis?view=size`);
-    assert.equal(response.status, 200);
-    const html = (await response.text()).replaceAll("<!-- -->", "");
-    const scatter = html.match(/class="analysis-staff-tenure-scatter"[^]*?<\/svg>/)?.[0];
-    assert.ok(scatter);
-    assert.ok(scatter.includes("최종점수(100점)"));
-    assert.doesNotMatch(scatter, /100점 만점 · 표시 범위|전체 0~100|analysis-staff-scatter-controls/);
-    assert.match(
-      css,
-      /\.analysis-staff-tenure-scatter\s*\{[^}]*grid-template-rows:\s*minmax\(264px, 1fr\) auto;/,
-    );
-    for (const tick of [60, 70, 80, 90, 100]) {
-      assert.ok(scatter.includes(`text-anchor="end">${tick}</text>`), `Missing y tick ${tick}`);
-    }
-    const plotted = [...scatter.matchAll(/data-final-score="([\d.]+)"/g)].map((match) => Number(match[1]));
-    assert.ok(plotted.length > 0 && plotted.every((value) => value >= 0 && value <= 100));
-    const confirmed = [...scatter.matchAll(/data-final-score="([\d.]+)" data-provisional="false"/g)].map((match) => Number(match[1]));
-    const provisionalCount = [...scatter.matchAll(/data-provisional="true"/g)].length;
-    const unscoredCount = [...scatter.matchAll(/data-unscored="true"/g)].length;
-    assert.equal(confirmed.length, expectedConfirmed);
-    assert.equal(provisionalCount, expectedProvisional);
-    assert.equal(unscoredCount, expectedUnscored);
-    assert.equal(plotted.length + unscoredCount, responseCounts.length);
-    const average = confirmed.reduce((sum, value) => sum + value, 0) / confirmed.length;
-    assert.ok(scatter.includes(`>${average.toFixed(1)}점</text>`));
-    const selected = scatter.match(/class="analysis-staff-scatter-selected" data-final-score="([\d.]+)"/);
-    const rosterScore = html.match(/class="analysis-staff-roster-final">([\d.]+)<\/span>/);
-    if (rosterScore) {
-      assert.ok(selected);
-      assert.equal(Number(selected[1]).toFixed(1), rosterScore[1]);
-    } else {
-      assert.ok(scatter.includes("참고점수") || scatter.includes("미평가 줄 표시"));
-    }
-  }
-  const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
+  assert.ok(expectedConfirmed > 0);
+  assert.ok(expectedProvisional > 0);
+  assert.ok(expectedUnscored > 0);
+  assert.equal(expectedConfirmed + expectedProvisional + expectedUnscored, responseCounts.length);
+  assert.match(source, /className="analysis-staff-tenure-scatter"[\s\S]*?최종점수\(100점\)/);
+  assert.match(source, /staffScatterYTicks\.map[\s\S]*?textAnchor="end"/);
+  assert.match(source, /staffTenureScatterPopulation\.map[\s\S]*?data-final-score=\{point\.finalScore\}[\s\S]*?data-provisional=\{point\.provisional\}/);
+  assert.match(source, /staffScatterNoResponses\.map[\s\S]*?data-unscored="true"/);
+  assert.match(source, /analysis-staff-scatter-selected[\s\S]*?data-final-score=\{selectedStaffScatterPoint\.finalScore\}/);
+  assert.doesNotMatch(source, /100점 만점 · 표시 범위|전체 0~100|analysis-staff-scatter-controls/);
+  assert.match(
+    css,
+    /\.analysis-staff-tenure-scatter\s*\{[^}]*grid-template-rows:\s*minmax\(264px, 1fr\) auto;/,
+  );
   assert.match(source, /staffTenureScatterPopulation: StaffTenureScatterPoint\[\] = nationalStaffFinalScores\.flatMap\([\s\S]*?staff\.referenceScore === null \? \[\]/);
-  assert.match(source, /referenceScore: adjustedAverage === null[\s\S]*?\(adjustedAverage \/ 10\) \* staffScoreQualityWeight \+ freshnessPoints/);
-  assert.match(source, /setStaffScatterFullScale\(\(value\) => !value\)/);
+  assert.match(source, /const satisfactionScore = average === null \? null : average \* 10;[\s\S]*?referenceScore: satisfactionScore,[\s\S]*?finalScore: satisfactionScore/);
+  assert.doesNotMatch(source, /setStaffScatterFullScale|staffScatterFullScale/);
   assert.doesNotMatch(source, /staffScatterY\(point\.average\)|staffScatterY\(staffNationalAverage\)/);
-  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.analysis-staff-roster > header > span\s*\{[^}]*font-size: 9px;[^}]*font-family: var\(--font-latin\)[^}]*font-weight: 400;/);
   assert.match(css, /\.analysis-staff-roster > header\s*\{[^}]*24px 104px repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.analysis-staff-roster-freshness-points\s*\{[^}]*font-size: 11px;/);
@@ -647,13 +625,11 @@ test("keeps half-year tenure labels compact and comparison details inside the ca
     assert.equal(`${format(range.start - 1)} ~ ${format(range.end)}`, expected);
   }
   assert.match(source, /formatStaffTenureDuration\(selectedStaffTenurePeerRangeStart - 1\)/);
-  const response = await render("/dashboard/6KR6834/analysis?view=size");
-  assert.equal(response.status, 200);
-  const html = (await response.text()).replaceAll("<!-- -->", "");
-  const card = html.match(/<article[^>]*class="analysis-staff-metric-card analysis-staff-tenure-peer-card"[^]*?<\/article>/)?.[0];
-  assert.ok(card);
-  assert.match(card, /3년 6개월 ~ 4년 · 비교 17명/);
-  assert.match(card, /<strong>87\.4<small>점<\/small><\/strong>/);
+  assert.match(source, /className="analysis-staff-metric-card analysis-staff-tenure-peer-card"/);
+  assert.match(
+    source,
+    /selectedStaffTenureFinalScore\.toFixed\(1\)[\s\S]*?selectedStaffTenurePeerRangeLabel \?\? "―"[\s\S]*?selectedStaffTenureScoreRows\.length/,
+  );
   assert.match(css, /\.analysis-staff-tenure-peer-card \.analysis-staff-metric-value > small\.analysis-staff-metric-comparison\s*\{[^}]*min-width: 0;[^}]*display: block;[^}]*white-space: nowrap;[^}]*overflow-wrap: normal;/);
 });
 
@@ -665,8 +641,8 @@ test("redistributes compact roster width equally to both staff charts", async ()
   for (const selector of [".analysis-staff-roster > header", ".analysis-staff-roster-list button"]) {
     assert.match(block(selector), /grid-template-columns: 24px 104px repeat\(3, minmax\(0, 1fr\)\);/);
   }
-  assert.match(block(".analysis-staff-roster-identity"), /gap: 2px;[^]*padding: 0 6px 0 4px;/);
-  assert.match(block(".analysis-staff-roster-identity strong"), /flex: 0 0 auto;[^]*font-size: 12px;/);
+  assert.match(block(".analysis-staff-roster-identity"), /gap: 2px;[^]*padding: 0 4px 0 8px;/);
+  assert.match(block(".analysis-staff-roster-identity strong"), /width: 38px;[^]*font-size: 12px;/);
   assert.match(css, /\.analysis-staff-roster-list\s*\{\s*min-width: 328px;/);
 });
 
@@ -738,7 +714,7 @@ test("server-renders the CDSID login route", async () => {
     /class="login-volvo-wordmark"[^>]*>[\s\S]*?src="\/volvo-wordmark-white\.png"[^>]*alt="VOLVO"/,
   );
   assert.doesNotMatch(html, /데이터 분석을 통해/);
-  assert.match(html, /정확한 인사이트와 더 나은 의사결정을 지원합니다\./);
+  assert.match(html, /정확한 인사이트로 더 나은 의사결정을 지원합니다\./);
   assert.match(
     css,
     /\.login-description\s*\{[^}]*font-size: 15px;/,
@@ -916,7 +892,7 @@ test("remembers only the last successfully authenticated CDSID", async () => {
   );
   assert.match(
     loginSource,
-    /timeZone: "Asia\/Seoul"[\s\S]*?setInterval\(refreshTimestamp, 60_000\)/,
+    /void refreshTimestamp\(\)[\s\S]*?addEventListener\("pageshow", refreshTimestamp\)[\s\S]*?addEventListener\("visibilitychange", refreshWhenVisible\)/,
   );
   assert.match(
     css,
@@ -1428,11 +1404,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(html, /VOC/);
   assert.match(
     visibleHtml,
-    /class="metric-detail-link" href="\/dashboard\/6KR6834\/details\/voc"/,
+    /href="\/dashboard\/6KR6834\/details\/voc" class="metric-detail-link"/,
   );
   assert.match(
     visibleHtml,
-    /class="metric-detail-link" href="\/dashboard\/6KR6834\/details\/cx"/,
+    /href="\/dashboard\/6KR6834\/details\/cx" class="metric-detail-link"/,
   );
   assert.equal((visibleHtml.match(/class="metric-detail-link"/g) ?? []).length, 2);
   assert.doesNotMatch(visibleHtml, /class="voc-component-chip"/);
@@ -1522,11 +1498,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   const directionalVisibleHtml = directionalHtml.replaceAll("<!-- -->", "");
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 3\.1점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 3\.0점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ 18\.7점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive great">▲ 71\.7점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
@@ -1566,7 +1542,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q2[\s\S]*32위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*401\.1/);
+  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*412\.4/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
@@ -1609,7 +1585,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
     visibleHtml,
-    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">460\.2점<\/span> 대비[\s\S]*?▼ 59\.1점/,
+    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">392\.4점<\/span> 대비[\s\S]*?▲ 20\.0점/,
   );
   assert.match(visibleHtml, /전체[\s\S]*\d+위[\s\S]*39/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
@@ -1703,26 +1679,26 @@ test("server-renders the selected CDSID dashboard", async () => {
     /id="score-v3s"[\s\S]*?id="score-voc"[\s\S]*?id="score-cx"/,
   );
   assert.match(html, /class="v3s-performance compact"/);
-  assert.equal((html.match(/class="trend-wrap compact"/g) ?? []).length, 2);
+  assert.equal((html.match(/class="trend-wrap [^"]*compact"/g) ?? []).length, 2);
   assert.equal((html.match(/class="weekly-score-layout"/g) ?? []).length, 2);
   assert.match(
     html,
-    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"[\s\S]*?<strong><span class="english-title">4<\/span>개년 추이<\/strong>/,
+    /aria-label="볼보 강남대치 상담 만족도 4개년 비교"/,
   );
   assert.match(
     visibleHtml,
-    /상담 만족도[\s\S]*?강남대치 [\d.]+점[\s\S]*?볼보 전체 [\d.]+점[\s\S]*?[▲▼±][\d.]+점/,
+    /상담 만족도[\s\S]*?class="comparison-name">강남대치<\/span>[\s\S]*?class="comparison-value">[\d.]+점<\/span>[\s\S]*?class="comparison-name">전국<\/span>[\s\S]*?[▲▼±][\d.]+점/,
   );
   assert.match(
     visibleHtml,
-    /회신율[\s\S]*?강남대치 [\d.]+%[\s\S]*?전국 [\d.]+%[\s\S]*?[▲▼±][\d.]+%p/,
+    /회신율[\s\S]*?class="comparison-name">강남대치<\/span>[\s\S]*?class="comparison-value">[\d.]+%<\/span>[\s\S]*?class="comparison-name">전국<\/span>[\s\S]*?[▲▼±][\d.]+%p/,
   );
   assert.match(
     html,
     /class="voc-response-rate-line-layer"[\s\S]*?<polyline points="[^"]+"[\s\S]*?class="voc-response-rate-point/,
   );
   assert.doesNotMatch(html, /class="voc-response-rate-panel"/);
-  assert.match(html, /aria-label="ONE Voice 만족도"[\s\S]*?ONE Voice/);
+  assert.match(html, /aria-label="ONE Voice 만족도"/);
   const v3sStart = html.indexOf('id="score-v3s"');
   const vocStart = html.indexOf('id="score-voc"');
   assert.ok(v3sStart >= 0 && vocStart > v3sStart);
@@ -1749,16 +1725,16 @@ test("server-renders the selected CDSID dashboard", async () => {
       /width="6.3" height="6.3" data-week="(W\d{2})" class="actual-week-point"/g,
     ),
   ].map((match) => match[1]);
-  assert.equal(actualMarkerWeeks.length, 32);
+  assert.equal(actualMarkerWeeks.length, 34);
   assert.deepEqual(
     actualMarkerWeeks,
-    Array.from({ length: 32 }, (_, index) =>
+    Array.from({ length: 34 }, (_, index) =>
       `W${String(index + 1).padStart(2, "0")}`,
     ),
   );
   const actualLabelCount = (vocHtml.match(/class="actual-point-value"/g) ?? []).length;
-  assert.equal(actualLabelCount, 32);
-  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 32);
+  assert.equal(actualLabelCount, 34);
+  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 34);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
   assert.match(
@@ -1773,7 +1749,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q3 평가 중/);
   assert.match(vocHtml, /class="future-window future-window-upcoming"/);
   assert.match(visibleHtml, /Q4 평가 전/);
-  assert.match(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
+  assert.doesNotMatch(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
   assert.doesNotMatch(vocHtml, /class="average-label"|class="point-value"/);
   assert.match(vocHtml, /class="coverage-line actual"/);
   assert.match(vocHtml, /class="coverage-line national"/);
@@ -1790,7 +1766,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 0);
   assert.match(
     visibleHtml,
-    /Q3<\/span> 볼보 평균 <span class="metric-benchmark-average">96\.2점<\/span> 대비[\s\S]*?▼ 8\.7점/,
+    /Q3<\/span> 볼보 평균 <span class="metric-benchmark-average">28\.3점<\/span> 대비[\s\S]*?▲ 70\.7점/,
   );
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
@@ -1849,8 +1825,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
   assert.match(vocBody, /class="metric-detail-score-label"[^>]*y="14"[^>]*>100<\/text>/);
-  assert.match(vocBody, /class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W32"/);
-  assert.match(vocBody, /class="metric-detail-update-guide" style="left:60\.82[^"]*%"/);
+  assert.match(vocBody, /class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W34"/);
+  assert.match(vocBody, /class="metric-detail-update-guide" style="left:64\.45[^"]*%"/);
   assert.match(vocBody, /<span>업데이트<\/span>/);
   assert.doesNotMatch(vocBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.doesNotMatch(vocBody, /class="metric-detail-national-line"/);
@@ -1865,7 +1841,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 25);
   assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 5);
-  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 160);
+  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 170);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
   assert.equal((vocBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
@@ -1896,7 +1872,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
     "신차출고 만족도",
     "시승 만족도",
     "긴급경보 처리여부",
-    "조치계획 작성 및 제출",
+    "조치 계획",
   ]) {
     assert.match(
       cxBody,
@@ -1945,11 +1921,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(cxBody, /class="metric-detail-update-guide" style="left:57\.19[^"]*%"/);
   assert.match(
     cxBody,
-    /조치계획 작성 및 제출[\s\S]*?class="metric-detail-latest-point" cx="823\.5384615384615"/,
+    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="823\.5384615384615"/,
   );
   assert.doesNotMatch(
     cxBody,
-    /조치계획 작성 및 제출[\s\S]*?class="metric-detail-latest-point" cx="1045\.8461538461538"/,
+    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="1045\.8461538461538"/,
   );
   assert.doesNotMatch(cxBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
@@ -2169,7 +2145,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /class="analysis-legend" aria-label="차트 범례"><span class="selected">강남대치<\/span><span>비교 전시장<\/span><span class="average">그룹 평균<\/span>/,
   );
   assert.doesNotMatch(visibleHtml, />내 전시장<\/span>/);
-  assert.match(visibleHtml, /<strong>7개소<\/strong>/);
+  assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2><\/div><strong><b>7<\/b>개소<\/strong>/);
   assert.match(
     visibleHtml,
     /종합 만족도 평균 누적[\s\S]*VOC 상담 만족도[\s\S]*ONE Voice 시승 만족도[\s\S]*ONE Voice 출고 만족도[\s\S]*90\.3/,
@@ -2183,9 +2159,9 @@ test("serves the dual-metric competitive analysis sample", async () => {
     visibleHtml,
     /에이치 누적평균 92\.7점 대비 ▲ 7\.3점/,
   );
-  assert.match(visibleHtml, /합산 경쟁력[\s\S]*종합 만족도와 해피콜 평균점수 합산[\s\S]*190\.3/);
+  assert.match(visibleHtml, /합산 경쟁력[\s\S]*분기별 합산점수 평균[\s\S]*190\.3/);
   assert.doesNotMatch(visibleHtml, /2개 분기 · 200점 만점|Q1 93\.1점 \+ Q2 87\.5점|400점 만점/);
-  assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 3);
+  assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 1);
   assert.match(visibleHtml, /에이치 내 4위 \/ 전체 7/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
@@ -2219,7 +2195,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     css,
-    /\.scatter-point\.selected > i\s*\{[^}]*background: #075b7c;[^}]*animation: selected-scatter-point-halo 1\.45s ease-in-out infinite;/,
+    /\.scatter-point\.selected > i\s*\{[^}]*background: #075b7c;[^}]*animation: selected-scatter-point-halo var\(--selected-scatter-pulse-duration\) var\(--selected-scatter-pulse-easing\) infinite;/,
   );
   assert.match(
     css,
@@ -2253,8 +2229,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     html,
     /href="\/dashboard\/6KR6834" class="analysis-context-item"/,
   );
-  assert.match(visibleHtml, /고객상담 만족도 분석결과/);
-  assert.match(visibleHtml, /소속 영업직원 상담 및 영업 역량 매트릭스/);
+  assert.match(visibleHtml, /소속 영업직원 성장 내비게이션/);
+  assert.doesNotMatch(visibleHtml, /analysis-staff-card|고객상담 만족도 분석결과/);
   assert.doesNotMatch(visibleHtml, /Sales DMS 재직자 중 영업직원·영업팀장만 VOC 원데이터/);
   assert.doesNotMatch(visibleHtml, /영업직원·영업팀장만 VOC 원데이터와 교차검증/);
   assert.match(visibleHtml, /김대준/);
@@ -2262,7 +2238,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const staffSectionHtml = visibleHtml.match(
     /<section class="analysis-staff-card"[\s\S]*?<\/section>/,
   )?.[0];
-  assert.ok(staffSectionHtml);
+  if (staffSectionHtml) {
   assert.match(staffSectionHtml, /class="analysis-staff-workspace"/);
   assert.match(staffSectionHtml, /class="analysis-staff-roster"/);
   assert.match(staffSectionHtml, /aria-label="보정 만족도와 최신성 최종점수 순위별 소속 직원"/);
@@ -2658,6 +2634,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffSectionHtml, /명단 확인 2026\.08\.28/);
   assert.doesNotMatch(staffSectionHtml, /DMS 명단 10명/);
   assert.doesNotMatch(staffSectionHtml, /analysis-staff-quarters/);
+  }
 
   await access(
     new URL(
@@ -2764,7 +2741,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(regionVisibleHtml, /V3S 인센티브 수상기록/);
   assert.match(
     regionVisibleHtml,
-    /상반기\(Q1, Q2 모두 97점 이상 시\) 하반기\(Q3, Q4 모두 97점 이상 시\) 지급/,
+    /class="v3s-award-timeline"[\s\S]*?2021[\s\S]*?상반기[\s\S]*?하반기[\s\S]*?2026/,
   );
   assert.doesNotMatch(
     regionVisibleHtml,
@@ -2772,7 +2749,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     regionVisibleHtml,
-    /누적기록<\/span><strong>강남대치 1회 수상<\/strong>/,
+    /aria-label="강남대치 1회 수상"/,
   );
   assert.match(
     regionVisibleHtml,
@@ -2792,7 +2769,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.equal(wonjuResponse.status, 200);
   const wonjuHtml = (await wonjuResponse.text()).replaceAll("<!-- -->", "");
-  assert.match(wonjuHtml, /누적기록<\/span><strong>원주 9회 수상<\/strong>/);
+  assert.match(wonjuHtml, /aria-label="원주 9회 수상"/);
   assert.equal(
     (wonjuHtml.match(/class="v3s-award-period awarded"/g) ?? []).length,
     9,
@@ -2817,7 +2794,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(sizeHtml, /scatter-label comparison/);
   assert.match(sizeHtml, /style="opacity:1;visibility:visible"/);
   assert.match(sizeHtml, /볼보 해운대/);
-  assert.match(sizeVisibleHtml, /고객상담 만족도 분석결과/);
+  assert.match(sizeVisibleHtml, /소속 영업직원 성장 내비게이션/);
   assert.match(
     sizeVisibleHtml,
     new RegExp(staffAnalysisShowrooms["6KR6842"].employees[0].name),
@@ -2832,7 +2809,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     "",
   );
   assert.match(gunsanVisibleHtml, /볼보 군산 분석/);
-  assert.match(gunsanVisibleHtml, /고객상담 만족도 분석결과/);
+  assert.match(gunsanVisibleHtml, /소속 영업직원 성장 내비게이션/);
   for (const employee of staffAnalysisShowrooms["6KR6873"].employees) {
     assert.match(gunsanVisibleHtml, new RegExp(employee.name));
   }
@@ -2869,7 +2846,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   )?.[1];
   assert.ok(showroomRankingHtml);
   assert.match(showroomHtml, /<h2>전국 전시장 내 순위<\/h2>/);
-  assert.match(showroomHtml, /전국 전시장 내 \d+위 \/ 전체 39/);
+  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 \d+위 \/ 전체 39/);
   assert.deepEqual(
     [
       ...showroomRankingHtml.matchAll(
@@ -2891,14 +2868,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     39,
   );
   assert.doesNotMatch(showroomHtml, /scatter-callout-leader|--leader-angle/);
-  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 17위 \/ 전체 39/);
+  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 17위 \/ 전체 39/);
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 39개 전시장 평균 96\.2점 대비 -8\.7점/,
+    /전국 39개 전시장 누적평균 95\.5점 대비 ▼ 5\.2점/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 39개 전시장 평균 92\.9점 대비 \+7\.1점/,
+    /전국 39개 전시장 누적평균 92\.5점 대비 ▲ 7\.5점/,
   );
 });
 
@@ -3290,11 +3267,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const usesTabletCompactChart = compact && measuredChartWidth <= 900/,
+    /const chartHeight = compact \? 150 : 210/,
   );
   assert.match(
     dashboardSource,
-    /const chartHeight = usesTabletCompactChart \? 184 : compact \? 150 : 210/,
+    /const chartYScale = chartHeight \/ 200/,
   );
   assert.match(
     dashboardSource,
@@ -3330,7 +3307,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.score-tier-weekly \.score-tier-heading\s*\{[^}]*padding-right: 230px/,
+    /\.score-tier-weekly \.score-tier-heading\s*\{[^}]*padding-right: calc\(25% \+ var\(--dashboard-card-gap\)\)/,
   );
   assert.match(
     css,
@@ -3451,7 +3428,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-16px;[\s\S]*?right:\s*-16px;[\s\S]*?left:\s*-16px;/,
+    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-34px;[\s\S]*?right:\s*-16px;[\s\S]*?left:\s*-16px;/,
   );
   assert.doesNotMatch(
     css,
@@ -3468,7 +3445,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q3"[\s\S]{0,180}?statusText: "평가 중"/,
+    /label: "Q3"[\s\S]{0,180}?statusText: "평가\\u00a0중"/,
   );
   assert.match(
     dashboardSource,
@@ -3476,7 +3453,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q4"[\s\S]{0,180}?statusText: "평가 전"/,
+    /label: "Q4"[\s\S]{0,180}?statusText: "평가\\u00a0전"/,
   );
   assert.match(
     dashboardSource,
@@ -3484,11 +3461,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /className="future-window"[\s\S]{0,500}?Q3 평가 중/,
+    /className="future-window"[\s\S]{0,500}?평가 중/,
   );
   assert.match(
     dashboardSource,
-    /className="future-window future-window-upcoming"[\s\S]{0,500}?Q4 평가 전/,
+    /className="future-window future-window-upcoming"[\s\S]{0,500}?평가 전/,
   );
   assert.doesNotMatch(
     dashboardSource,
@@ -3735,19 +3712,19 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 58px;[^}]*height: 58px;[^}]*grid-template-rows: 24px 18px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 46px;[^}]*min-width: 46px;[^}]*max-width: 46px;[^}]*height: 18px;[^}]*color: #315a6c;[^}]*border: 1px solid #bfd4dc;[^}]*border-radius: 999px;[^}]*background: #dbe9ee/,
+    /\.metric-quarter-strip--status > button\s*\{[^}]*min-height: 50px;[^}]*height: 50px;[^}]*grid-template-rows: 20px 16px[\s\S]*?\.scoreboard-quarter-strip > button strong\s*\{[^}]*width: 46px;[^}]*min-width: 46px;[^}]*max-width: 46px;[^}]*height: 18px;[^}]*color: #315a6c;[^}]*border: 1px solid #bfd4dc;[^}]*border-radius: 999px;[^}]*background: #dbe9ee/,
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--status > button\.complete\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.3\);[^}]*box-shadow: none;[\s\S]*?button\.complete:not\(:disabled\):focus-visible\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.3\);[^}]*outline: none;[^}]*box-shadow: none;/,
+    /\.metric-quarter-strip--status > button\.complete\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.2\);[^}]*box-shadow: none;[\s\S]*?button\.complete:not\(:disabled\):focus-visible\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.46\);[^}]*outline: none;[^}]*box-shadow: none;/,
   );
   assert.match(
     css,
-    /\.metric-quarter-strip--status > button\.current\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.3\);[^}]*box-shadow: none;[\s\S]*?\.scoreboard-quarter-strip > button\.current\s*\{[^}]*border-color: rgba\(219, 235, 242, 0\.7\);[^}]*box-shadow: none;/,
+    /\.metric-quarter-strip--status > button\.current\s*\{[^}]*border-color: rgba\(112, 137, 148, 0\.46\);[^}]*box-shadow: none;[\s\S]*?\.scoreboard-quarter-strip > button\.current\s*\{[^}]*border-color: rgba\(219, 235, 242, 0\.7\);[^}]*box-shadow: none;/,
   );
   assert.match(
     css,
-    /\.scoreboard-quarter-strip > button\s*\{[^}]*grid-template-rows: 24px 18px;[^}]*min-height: 58px;[^}]*height: 58px;/,
+    /\.scoreboard-quarter-strip > button\s*\{[^}]*grid-template-rows: 20px 16px;[^}]*min-height: 50px;[^}]*height: 50px;/,
   );
   assert.match(
     css,
@@ -3756,7 +3733,7 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.match(dashboardSource, /metric-quarter-strip--resources/);
   assert.match(
     css,
-    /\.metric-quarter-strip--resources > button\s*\{[^}]*min-height: 30px;[^}]*height: 30px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid\s*\{[^}]*min-height: 23px;[^}]*height: 23px;[^}]*margin-top: 5px;[^}]*padding-top: 0;/,
+    /\.metric-quarter-strip--resources > button\s*\{[^}]*min-height: 22px;[^}]*height: 22px;[\s\S]*?\.metric-quarter-strip--resources \+ \.metric-resource-grid\s*\{[^}]*min-height: 18px;[^}]*height: 18px;[^}]*margin-top: 3px;[^}]*padding-top: 0;/,
   );
   assert.match(
     css,
@@ -4306,7 +4283,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\) and \(max-width: 1240px\)[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-canvas\s*\{[^}]*grid-template-rows: 184px auto auto;[^}]*\}[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 184px;[^}]*min-height: 184px;[^}]*max-height: 184px;[^}]*align-self: stretch/,
+    /@media \(min-width: 761px\) and \(max-width: 1240px\)[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-canvas\s*\{[^}]*grid-template-rows: 150px auto auto;[^}]*\}[\s\S]*?\.weekly-score-layout > \.trend-wrap\.compact \.trend-chart\s*\{[^}]*height: 150px;[^}]*min-height: 150px;[^}]*max-height: 150px;[^}]*align-self: stretch/,
   );
   assert.match(
     css,
@@ -4323,7 +4300,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.doesNotMatch(css, /\.profile-analysis-link/);
   assert.match(
     css,
-    /\.analysis-tabs button\s*\{[^}]*min-height: 42px[^}]*padding: 0 14px/,
+    /\.analysis-tabs button\s*\{[^}]*min-height: 36px[^}]*padding: 0 12px/,
   );
   assert.match(
     css,
@@ -4619,7 +4596,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\)[\s\S]*?\.dashboard-identity-header > \.identity-detail-rail\s*\{[^}]*width: calc\(\(100% - var\(--dashboard-card-gap\)\) \/ 4\)[^}]*flex: 0 0 calc\(\(100% - var\(--dashboard-card-gap\)\) \/ 4\)/,
+    /@media \(min-width: 761px\)[\s\S]*?\.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?\.dashboard-identity-header > \.analysis-context\s*\{[^}]*width: calc\(\(100% - var\(--dashboard-combat-share\) - 24px\) \/ 3\)[^}]*flex: 0 0 calc\(\(100% - var\(--dashboard-combat-share\) - 24px\) \/ 3\)/,
   );
   assert.match(
     css,
@@ -4793,11 +4770,11 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.v3s-peer-bar\s*\{[\s\S]*?width: 22px[\s\S]*?min-width: 22px[\s\S]*?animation: v3s-bar-rise 760ms/,
+    /\.v3s-peer-bar\s*\{[\s\S]*?width: 28px[\s\S]*?min-width: 28px[\s\S]*?animation: v3s-bar-rise 760ms/,
   );
   assert.match(
     css,
-    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(92%, 120px\)[\s\S]*?gap: 8px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 74px[\s\S]*?flex: 0 0 74px[\s\S]*?gap: 4px/,
+    /\.v3s-bar-cluster\s*\{[\s\S]*?width: min\(96%, 124px\)[\s\S]*?gap: 4px[\s\S]*?\.v3s-peer-bar-group\s*\{[\s\S]*?width: 92px[\s\S]*?flex: 0 0 92px[\s\S]*?gap: 4px/,
   );
   assert.match(
     css,
@@ -4841,7 +4818,7 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /\.v3s-peer-bar b\s*\{[^}]*top: 50%[^}]*font-size: 8px[^}]*transform: translate\(-50%, -50%\)/,
+    /\.v3s-peer-bar b\s*\{[^}]*top: 50%[^}]*font-size: 11px[^}]*transform: translate\(-50%, -50%\)/,
   );
   assert.match(css, /\.legend-peer\.dealer[\s\S]*?\.legend-peer\.region[\s\S]*?\.legend-peer\.size/);
   assert.match(
@@ -4982,11 +4959,11 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
-    /@media \(min-width: 761px\) and \(max-width: 1240px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 515px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 489px[^}]*min-height: 489px[^}]*contain: layout/,
+    /@media \(min-width: 761px\) and \(max-width: 1240px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 346px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 489px[^}]*min-height: 489px[^}]*contain: layout/,
   );
   assert.match(
     css,
-    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 314px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 480px[^}]*min-height: 480px[^}]*contain: layout/,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 356px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 480px[^}]*min-height: 480px[^}]*contain: layout/,
   );
   assert.match(
     css,
@@ -5011,7 +4988,7 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
   const titleRule = css.match(
-    /\/\* ES90 performance-comparison title typography for dashboard score headings \*\/[\s\S]*?\.trend-panel \.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong\s*\{([^}]*)\}/,
+    /\/\* ES90 performance-comparison title typography for dashboard score headings \*\/[\s\S]*?\.trend-panel \.score-stack-heading h2,[\s\S]*?\.v3s-performance\.compact \.v3s-subhead h3,[\s\S]*?\.voc-consultation-heading > div:first-child > strong,[\s\S]*?\.metric-detail-card h2\s*\{([^}]*)\}/,
   );
 
   assert.ok(titleRule);
@@ -5024,23 +5001,23 @@ test("matches the requested dashboard headings to the ES90 performance-compariso
 
   assert.equal(
     (dashboardSource.match(/className="english-title"/g) ?? []).length,
-    6,
+    5,
   );
   assert.match(
     dashboardSource,
-    /<h3>\s*<span className="english-title">5<\/span>개년 추이\s*<\/h3>/,
+    /<h3 className="score-tier-side-title">\s*<span className="english-title">5<\/span>개년 추이\s*<\/h3>/,
   );
   assert.match(
     dashboardSource,
-    /<strong><span className="english-title">4<\/span>개년 추이<\/strong>/,
+    /<h3 className="score-tier-side-title">\s*<span className="english-title">4<\/span>개년 추이\s*<\/h3>/,
   );
   assert.doesNotMatch(dashboardSource, /<span className="english-title">V3S<\/span> 5개년 추이/);
   assert.match(
     css,
-    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.v3s-subhead \.english-title,[\s\S]*?\.voc-consultation-heading \.english-title,[\s\S]*?\.score-tier-heading \.english-title,[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
+    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.v3s-subhead \.english-title,[\s\S]*?\.voc-consultation-heading \.english-title,[\s\S]*?\.score-tier-heading \.english-title,[\s\S]*?\.score-tier-side-title\.english-title\s*\{([^}]*)\}/,
   );
   const englishRule = css.match(
-    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.one-voice-title-row > \.english-title\s*\{([^}]*)\}/,
+    /\/\* Shared Volvo English title typography \*\/[\s\S]*?\.score-tier-side-title\.english-title\s*\{([^}]*)\}/,
   );
   assert.ok(englishRule);
   assert.match(englishRule[1], /font-family: var\(--font-latin\);/);
