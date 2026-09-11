@@ -468,12 +468,12 @@ html {
   width: 100%;
   min-width: 0;
   font-family: var(--font-volvo);
-  font-size: 9px;
+  font-size: 13px;
   font-style: normal;
-  font-weight: 650;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   text-align: right;
-  color: currentColor;
+  color: #176887;
   white-space: nowrap;
 }
 

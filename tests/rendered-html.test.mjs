@@ -275,7 +275,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
   assert.equal((navigation.match(/<span>고객상담 평균만족도<\/span>/g) ?? []).length, 2);
   assert.doesNotMatch(navigation, /<span>평균 상담만족도<\/span>|<span>상담 만족도<\/span>/);
-  assert.match(navigation, /누적 회신건수/);
+  assert.match(navigation, /누적 판매대수/);
+  assert.match(source, /sales\?\.deliveredSales \?\? null/);
+  assert.match(navigation, /2026년 누적 판매 \$\{deliveredSales \?\? 0\}대/);
   assert.match(navigation, /<span>인증직원 선정<\/span>/);
   assert.match(navigation, /className="growth-profile-metric growth-profile-certification"[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
   assert.match(css, /\.growth-profile-certification strong b i\s*\{[^}]*font-size:\s*0\.72em;[^}]*font-weight:\s*300;/);
@@ -292,9 +294,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-staff-roster-columns span:not\(:first-child\)\s*\{[^}]*text-align:\s*right;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*padding:\s*0 10px 0 8px;/);
   assert.match(css, /\.growth-staff-roster-list button > b\s*\{[^}]*width:\s*100%;[^}]*font-variant-numeric:\s*tabular-nums;[^}]*text-align:\s*right;/);
+  assert.match(css, /\.growth-staff-roster-list button > em > b\s*\{[^}]*font-family:\s*var\(--font-volvo\);[^}]*font-size:\s*13px;[^}]*font-weight:\s*700;[^}]*color:\s*#176887;/);
   assert.match(css, /\.growth-staff-roster-list button > em\s*\{[^}]*justify-content:\s*flex-end;[^}]*text-align:\s*right;/);
   assert.match(css, /\.growth-staff-roster-list button > em > b\s*\{[^}]*width:\s*100%;[^}]*font-variant-numeric:\s*tabular-nums;[^}]*text-align:\s*right;/);
-  assert.match(navigation, /자료 근거 회신 \$\{responses\}건, 2023년부터 2026년 YTD/);
+  assert.doesNotMatch(navigation, /자료 근거 회신 \$\{responses\}건/);
   assert.doesNotMatch(navigation, /const evidenceConfidence = staffEvidenceConfidence\(responses\)/);
   assert.match(navigation, /집중 코칭/);
   assert.match(navigation, /01 · 고객상담 역량/);

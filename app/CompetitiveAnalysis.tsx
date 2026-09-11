@@ -1042,6 +1042,9 @@ export default function CompetitiveAnalysis({
     () => {
       return currentSalesStaff
         .map((employee) => {
+          const sales = salesActivityByCdsid[selected.cdsid]?.staff.find(
+            (staff) => staff.name === employee.name,
+          );
           const totals = staffYears.reduce(
             (summary, year) => {
               const metrics = employee.years[year];
@@ -1056,6 +1059,7 @@ export default function CompetitiveAnalysis({
           return {
             employee,
             responses: totals.responses,
+            deliveredSales: sales?.deliveredSales ?? null,
             average,
             satisfactionScore,
             adjustedPoints: satisfactionScore,
@@ -1065,7 +1069,7 @@ export default function CompetitiveAnalysis({
         })
         .sort((a, b) => compareStaffHireDateAscending(a.employee, b.employee));
     },
-    [currentSalesStaff],
+    [currentSalesStaff, selected.cdsid],
   );
   const selectedStaffEmployee =
     rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
@@ -2087,10 +2091,10 @@ export default function CompetitiveAnalysis({
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
                 <span>고객상담 평균만족도</span>
-                <span>누적 회신건수</span>
+                <span>누적 판매대수</span>
               </div>
               <div className="growth-staff-roster-list">
-                {rankedSalesStaff.map(({ employee, average, responses }) => {
+                {rankedSalesStaff.map(({ employee, average, deliveredSales }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
                   const isTeamLeader = employee.role === "영업팀장" || employee.jobTitle === "팀장";
                   return (
@@ -2114,10 +2118,8 @@ export default function CompetitiveAnalysis({
                         <small>{formatStaffShortDate(employee.hireDate)}</small>
                       </span>
                       <b>{average === null ? "―" : average.toFixed(1)}</b>
-                      <em
-                        aria-label={`자료 근거 회신 ${responses}건, 2023년부터 2026년 YTD`}
-                      >
-                        <b>{responses}건</b>
+                      <em aria-label={`2026년 누적 판매 ${deliveredSales ?? 0}대`}>
+                        <b>{deliveredSales ?? "―"}</b>
                       </em>
                     </button>
                   );
