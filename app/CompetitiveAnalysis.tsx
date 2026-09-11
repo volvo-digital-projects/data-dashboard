@@ -2278,7 +2278,7 @@ export default function CompetitiveAnalysis({
                             <circle className="needle-cap" cx="210" cy="178" r="5" />
                           </g>
                         )}
-                        <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="204">{selectedStaffGrowthCalculation}</text>
+                        <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="209">{selectedStaffGrowthCalculation}</text>
                       </svg>
                     </div>
                   </article>
