@@ -156,9 +156,11 @@ html {
   }
 
   .growth-navigation-sticky-summary {
+    position: -webkit-sticky;
     position: sticky;
     top: var(--growth-navigation-sticky-top, 356px);
     z-index: 44;
+    align-self: start;
     background: #f5f9fb;
     box-shadow:
       0 -18px 0 #ffffff,
@@ -1564,7 +1566,10 @@ html.analysis-viewport-locked .competitive-analysis-page {
   html.analysis-viewport-locked body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    /* `hidden` makes iPad Safari treat this root pair as a nested vertical
+       scroll container, so descendants no longer stick to the viewport. */
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   html.analysis-viewport-locked .competitive-analysis-page {

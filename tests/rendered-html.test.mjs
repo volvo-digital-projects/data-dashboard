@@ -403,7 +403,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-certification strong b\s*\{[^}]*min-width: 4\.2ch;[^}]*justify-content: flex-end;/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(css, /\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
-  assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*background: #f5f9fb;[^}]*0 -18px 0 #ffffff,/);
+  assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*align-self: start;[^}]*background: #f5f9fb;[^}]*0 -18px 0 #ffffff,/);
+  assert.match(css, /html\.analysis-viewport-locked body\s*\{[^}]*overflow-x: clip;[^}]*overflow-y: visible;/);
+  assert.doesNotMatch(css, /html\.analysis-viewport-locked body\s*\{[^}]*overflow-x: hidden;/);
   assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 112px\);[^}]*align-self: start;[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 124px\);[^}]*overflow: hidden;[^}]*background: #ffffff;/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 158px\);/);
   const rosterBaseHeightRule = css.indexOf("max-height: 660px;", css.indexOf(".growth-staff-roster-list"));
