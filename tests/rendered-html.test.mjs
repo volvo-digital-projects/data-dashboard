@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
@@ -857,6 +857,10 @@ test("server-renders the CDSID login route", async () => {
   );
   assert.match(
     css,
+    /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: portrait\) and \(min-width: 761px\) and \(max-width: 1100px\)\s*\{[\s\S]*?\.login-panel\s*\{[^}]*position: fixed;[^}]*z-index: 3;[^}]*inset: 0 auto 0 0;[^}]*width: min\(78vw, 760px\);[^}]*height: 100svh;[\s\S]*?\.login-copy,\s*\.login-panel footer\s*\{[^}]*transform: none;/,
+  );
+  assert.match(
+    css,
     /@media \(max-width: 760px\)\s*\{[\s\S]*?html:has\(\.login-home\)\s*\{[^}]*overflow-y: auto;[\s\S]*?body:has\(\.login-home\)\s*\{[^}]*position: static;[^}]*touch-action: pan-y;/,
   );
 
@@ -920,12 +924,16 @@ test("remembers only the last successfully authenticated CDSID", async () => {
 });
 
 test("automatically detects, announces, and applies new dashboard releases", async () => {
-  const [layoutSource, pagesSource, noticeSource, css, releaseAsset] =
+  const [layoutSource, pagesSource, noticeSource, releaseBuildSource, css, releaseAsset] =
     await Promise.all([
       readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
       readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
       readFile(
         new URL("../app/ReleaseUpdateNotice.tsx", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("../build/prepare-dashboard-release.ts", import.meta.url),
         "utf8",
       ),
       readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -945,6 +953,9 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeSource, /document\.addEventListener\("visibilitychange"/);
   assert.match(noticeSource, /currentId !== nextRelease\.id[\s\S]*?reloadForRelease/);
   assert.match(noticeSource, /nextRelease\.id !== __DASHBOARD_RELEASE_ID__/);
+  assert.match(noticeSource, /requestedReleaseId !== nextRelease\.id/);
+  assert.match(releaseBuildSource, /const seed = JSON\.stringify\(note\);/);
+  assert.doesNotMatch(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}:\$\{builtAt\.toISOString\(\)\}`/);
   assert.match(noticeSource, /searchParams\.set\("release", nextRelease\.id\)/);
   assert.match(
     noticeSource,
@@ -966,6 +977,14 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.equal(release.title, "최신내용 업데이트");
   assert.ok(release.items.length >= 80);
   assert.match(release.id, /^[a-f0-9]{16}$/);
+
+  const clientAssets = new URL("../dist/client/assets/", import.meta.url);
+  const noticeChunkName = (await readdir(clientAssets)).find((name) =>
+    name.startsWith("ReleaseUpdateNotice-") && name.endsWith(".js"),
+  );
+  assert.ok(noticeChunkName);
+  const noticeChunk = await readFile(new URL(noticeChunkName, clientAssets), "utf8");
+  assert.match(noticeChunk, new RegExp(release.id));
 });
 
 test("keeps GitHub Pages analysis tab changes inside the app URL", async () => {

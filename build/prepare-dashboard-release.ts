@@ -52,7 +52,11 @@ export async function prepareDashboardRelease() {
   const outputPath = path.join(publicDirectory, "dashboard-release.json");
   const note = JSON.parse(await readFile(notePath, "utf8")) as ReleaseNote;
   const builtAt = new Date();
-  const seed = `${JSON.stringify(note)}:${builtAt.toISOString()}`;
+  // Every Vinext environment evaluates the Vite config independently. The
+  // release id therefore has to depend only on the shared release note; using
+  // the current time here gives the client bundle and the published JSON
+  // different ids and can trap long-lived iPad tabs in a reload loop.
+  const seed = JSON.stringify(note);
   const id = createHash("sha256").update(seed).digest("hex").slice(0, 16);
 
   await writeDashboardRelease(id, note, builtAt, outputPath);

@@ -95,7 +95,13 @@ export default function ReleaseUpdateNotice() {
         const nextRelease = (await response.json()) as unknown;
         if (!mounted || !isReleaseInfo(nextRelease)) return;
 
-        if (nextRelease.id !== __DASHBOARD_RELEASE_ID__) {
+        const requestedReleaseId = new URL(window.location.href).searchParams.get(
+          "release",
+        );
+        if (
+          nextRelease.id !== __DASHBOARD_RELEASE_ID__ &&
+          requestedReleaseId !== nextRelease.id
+        ) {
           activeReleaseId.current = nextRelease.id;
           reloadForRelease(nextRelease);
           return;
