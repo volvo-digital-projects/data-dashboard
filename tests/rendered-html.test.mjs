@@ -924,7 +924,7 @@ test("remembers only the last successfully authenticated CDSID", async () => {
 });
 
 test("automatically detects, announces, and applies new dashboard releases", async () => {
-  const [layoutSource, pagesSource, noticeSource, releaseBuildSource, css, releaseAsset] =
+  const [layoutSource, pagesSource, noticeSource, releaseBuildSource, pagesBuildSource, css, releaseAsset] =
     await Promise.all([
       readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
       readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
@@ -934,6 +934,10 @@ test("automatically detects, announces, and applies new dashboard releases", asy
       ),
       readFile(
         new URL("../build/prepare-dashboard-release.ts", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("../scripts/prepare-github-pages.mjs", import.meta.url),
         "utf8",
       ),
       readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -957,6 +961,10 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(releaseBuildSource, /const seed = JSON\.stringify\(note\);/);
   assert.doesNotMatch(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}:\$\{builtAt\.toISOString\(\)\}`/);
   assert.match(noticeSource, /searchParams\.set\("release", nextRelease\.id\)/);
+  assert.match(pagesBuildSource, /"\/dashboard-release\.json"/);
+  assert.match(pagesBuildSource, /"\/staff-profiles\/"/);
+  assert.match(pagesBuildSource, /content\.replaceAll\(prefix, `\$\{pagesBasePath\}/);
+  assert.match(pagesBuildSource, /history\.replaceState/);
   assert.match(
     noticeSource,
     /hostname\.endsWith\("\.github\.io"\)[\s\S]*?pathname\.startsWith\("\/dashboard\/"\)[\s\S]*?nextUrl\.pathname = GITHUB_PAGES_BASE_PATH;[\s\S]*?nextUrl\.hash = currentDashboardRoute;/,
