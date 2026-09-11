@@ -2096,10 +2096,14 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
     /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span><b>Q3<\/b><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
+    visibleHtml,
+    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span><b>Q3<\/b><\/span><span><b>Q4<\/b><\/span>/,
+  );
+  assert.match(
     css,
     /\.analysis-quarter-values\s*\{[^}]*grid-column: 1;[^}]*grid-row: 2;[^}]*align-self: end;[^}]*color: var\(--muted\);[^}]*font-size: 9px;[^}]*font-weight: 500;/,
   );
-  assert.match(css, /\.analysis-summary-card\.satisfaction > em,[\s\S]*?\.analysis-summary-card\.happycall > em\s*\{[^}]*grid-column: 2;[^}]*grid-row: 2;[^}]*align-self: end;/);
+  assert.match(css, /\.analysis-summary-card\.satisfaction > em,[\s\S]*?\.analysis-summary-card\.happycall > em,[\s\S]*?\.analysis-summary-card\.balance > em\s*\{[^}]*grid-column: 2;[^}]*grid-row: 2;[^}]*align-self: end;/);
 });
 
 test("serves the dual-metric competitive analysis sample", async () => {

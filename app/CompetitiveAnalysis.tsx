@@ -992,6 +992,15 @@ export default function CompetitiveAnalysis({
   const selectedPoint =
     groupItems.find((item) => item.cdsid === selected.cdsid) ??
     cumulativeAnalysisPoint(selected);
+  const selectedQ1Combined =
+    typeof selected.q1?.voc === "number" &&
+    typeof selected.q1?.happyCall === "number"
+      ? selected.q1.voc + selected.q1.happyCall
+      : null;
+  const selectedQ2Combined =
+    typeof selected.voc === "number" && typeof selected.happyCall === "number"
+      ? selected.voc + selected.happyCall
+      : null;
   const selectedAwardPeriods = v3sAwardPeriods
     .filter((period) =>
       v3sAwardWinnersByPeriod[period.id]?.includes(selected.cdsid),
@@ -1755,9 +1764,15 @@ export default function CompetitiveAnalysis({
                 <b>Q1</b><b>Q2</b>
               </span>
             </span>
-            <small>종합 만족도와 해피콜 평균점수 합산</small>
+            <small>분기별 합산점수 평균</small>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selectedQ1Combined)}, Q2 ${displayQuarterNumber(selectedQ2Combined)}, Q3 미집계, Q4 미집계`}>
+            <span><b>Q1</b><strong>{displayQuarterNumber(selectedQ1Combined)}</strong></span>
+            <span><b>Q2</b><strong>{displayQuarterNumber(selectedQ2Combined)}</strong></span>
+            <span><b>Q3</b></span>
+            <span><b>Q4</b></span>
+          </p>
           <em>
             {summaryRankLabel} {summaryRank}위 / 전체 {summaryRankTotal}
           </em>

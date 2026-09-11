@@ -5820,7 +5820,8 @@ input:focus-visible {
 }
 
 .analysis-summary-card.satisfaction > em,
-.analysis-summary-card.happycall > em {
+.analysis-summary-card.happycall > em,
+.analysis-summary-card.balance > em {
   grid-column: 2;
   grid-row: 2;
   align-self: end;
