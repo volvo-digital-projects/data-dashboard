@@ -1124,6 +1124,14 @@ export default function CompetitiveAnalysis({
   const selectedStaffSalesShare = selectedShowroomDeliveredSales
     ? (selectedStaffDeliveredSales / selectedShowroomDeliveredSales) * 100
     : null;
+  const selectedStaffSalesNationalRank = selectedStaffSalesActivity
+    ? nationalStaffSalesPopulation.filter(
+        (staff) => staff.deliveredSales > selectedStaffDeliveredSales,
+      ).length + 1
+    : null;
+  const selectedStaffSalesTopPercent = selectedStaffSalesNationalRank
+    ? (selectedStaffSalesNationalRank / nationalStaffSalesPopulation.length) * 100
+    : null;
   const selectedStaffSalesShareClamped = Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0));
   const selectedStaffSalesShareLeaderRadians = ((selectedStaffSalesShareClamped * 1.8) - 90) * (Math.PI / 180);
   const selectedStaffSalesShareLeaderX = 37 + Math.cos(selectedStaffSalesShareLeaderRadians) * 34;
@@ -2101,6 +2109,16 @@ export default function CompetitiveAnalysis({
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
                   <small>/10</small>
+                </strong>
+              </div>
+              <div className="growth-profile-metric growth-profile-sales">
+                <span>누적 판매대수</span>
+                <strong>
+                  {selectedStaffDeliveredSales}<small>대</small>
+                  <small className="growth-profile-sales-context">
+                    / 월 평균 {selectedStaffMonthlySalesAverage === null ? "―" : selectedStaffMonthlySalesAverage.toFixed(1)}
+                    {selectedStaffSalesTopPercent === null ? null : <i>(상위 {selectedStaffSalesTopPercent.toFixed(1)}%)</i>}
+                  </small>
                 </strong>
               </div>
               <div className="growth-profile-metric">

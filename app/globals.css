@@ -522,7 +522,7 @@ html {
   min-width: 0;
   margin: 6px 6px 0;
   display: grid;
-  grid-template-columns: minmax(210px, 1.35fr) repeat(3, minmax(125px, 0.8fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid #d4e2e8;
   border-radius: 6px;
@@ -665,6 +665,26 @@ html {
   margin-left: 2px;
   font-size: 10px;
   color: #728793;
+}
+
+.growth-profile-sales strong {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.growth-profile-sales strong .growth-profile-sales-context {
+  margin-left: 7px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.growth-profile-sales-context i {
+  margin-left: 0;
+  color: #3f7588;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .growth-profile-metric strong .growth-profile-evidence-count {
@@ -1964,7 +1984,7 @@ html {
 @media (max-width: 1180px) {
   .growth-navigation-workspace { grid-template-columns: 260px minmax(0, 1fr); }
   .growth-navigation-pinned-headings { grid-template-columns: 260px minmax(0, 1fr); }
-  .growth-profile-strip { grid-template-columns: minmax(190px, 1.2fr) repeat(3, minmax(112px, 0.8fr)); }
+  .growth-profile-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .growth-capability-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
