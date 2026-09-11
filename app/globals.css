@@ -1957,16 +1957,6 @@ html {
   white-space: nowrap;
 }
 
-.growth-sales-share-meta b {
-  color: #365f71;
-}
-
-.growth-sales-share-meta i {
-  margin: 0 2px;
-  color: #9aabb3;
-  font-style: normal;
-}
-
 .growth-sales-share-meta strong {
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-weight: 750;

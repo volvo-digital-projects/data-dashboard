@@ -414,9 +414,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<span>전시장 누적<\/span>/);
   assert.match(navigation, /판매비중/);
   assert.match(navigation, /selectedStaffSalesShare\.toFixed\(1\)\}%/);
-  assert.match(navigation, /selectedStaffMonthlySalesAverage\.toFixed\(1\)\}대/);
   assert.match(navigation, /selectedStaffShowroomAverageDeltaMark/);
-  assert.match(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
+  assert.doesNotMatch(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
   assert.match(navigation, /1인 평균 \{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}대 대비/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");

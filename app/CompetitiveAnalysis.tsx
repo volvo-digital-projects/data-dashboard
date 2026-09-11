@@ -1113,15 +1113,6 @@ export default function CompetitiveAnalysis({
   const selectedShowroomAverageDeliveredSales = selectedShowroomSalesStaffCount
     ? selectedShowroomDeliveredSales / selectedShowroomSalesStaffCount
     : 0;
-  const selectedStaffSalesRank = selectedStaffSalesActivity
-    ? [...(selectedSalesActivityShowroom?.staff ?? [])]
-        .sort(
-          (left, right) =>
-            right.deliveredSales - left.deliveredSales ||
-            left.name.localeCompare(right.name, "ko"),
-        )
-        .findIndex((staff) => staff.name === selectedStaffSalesActivity.name) + 1
-    : null;
   const selectedStaffSalesShare = selectedShowroomDeliveredSales
     ? (selectedStaffDeliveredSales / selectedShowroomDeliveredSales) * 100
     : null;
@@ -2747,9 +2738,6 @@ export default function CompetitiveAnalysis({
                           </div>
                         </div>
                         <div className="growth-sales-share-meta">
-                          <small>
-                            <b>{selectedStaffEmployee?.name ?? "선택 직원"}</b> · 전시장 {selectedStaffSalesRank ?? "―"}위 <i>/</i> 월 평균 {selectedStaffMonthlySalesAverage === null ? "―" : selectedStaffMonthlySalesAverage.toFixed(1)}대
-                          </small>
                           <small>
                             {displayShowroomNameWithoutBrand(selected.showroom)} 1인 평균 {selectedShowroomAverageDeliveredSales.toFixed(1)}대 대비 {" "}
                             <strong className={selectedStaffShowroomAverageDeltaTone}>
