@@ -2255,9 +2255,9 @@ export default function CompetitiveAnalysis({
 
                   <article className="growth-scatter-card">
                     <header>
-                      <div><strong>근속기간 × 상담만족</strong></div>
+                      <div><strong>근속기간 × 고객상담 평균만족도</strong></div>
                     </header>
-                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 상담 만족도 분포, 상단 점수 구간 확대">
+                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 고객상담 평균만족도 분포, 상단 점수 구간 확대">
                       <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
                       <defs>
                         <clipPath id="consultation-selected-staff-photo">
