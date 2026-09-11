@@ -585,7 +585,7 @@ html {
 
 .growth-profile-person small,
 .growth-profile-metric > span {
-  font-size: 9px;
+  font-size: 10px;
   color: #6e8491;
 }
 
@@ -594,14 +594,14 @@ html {
   display: flex;
   align-items: baseline;
   min-width: 0;
-  font-size: 18px;
+  font-size: 19px;
   color: #155873;
   white-space: nowrap;
 }
 
 .growth-profile-person strong i {
   margin-left: 5px;
-  font-size: 9px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 500;
   color: #647d89;
@@ -618,7 +618,7 @@ html {
 .growth-profile-metric em {
   margin-top: 3px;
   overflow: hidden;
-  font-size: 9px;
+  font-size: 10px;
   font-style: normal;
   color: #768c98;
   text-overflow: ellipsis;
@@ -628,21 +628,21 @@ html {
 .growth-profile-metric strong {
   margin-top: 3px;
   font-family: var(--font-volvo);
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1;
   color: #155873;
 }
 
 .growth-profile-metric strong small {
   margin-left: 2px;
-  font-size: 9px;
+  font-size: 10px;
   color: #728793;
 }
 
 .growth-profile-metric strong .growth-profile-evidence-count {
   margin-left: 7px;
   font-family: var(--font-ui);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -652,7 +652,7 @@ html {
   align-items: center;
   gap: 4px;
   font-family: var(--font-latin), var(--font-korean), sans-serif;
-  font-size: 18px;
+  font-size: 19px;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   white-space: nowrap;
@@ -678,7 +678,7 @@ html {
 .growth-profile-certification strong em {
   margin: 0;
   color: #a6b5bc;
-  font-size: 10px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
 }
@@ -994,7 +994,7 @@ html {
 
 .growth-scatter-y-label,
 .growth-scatter-x-label {
-  font-size: 8px;
+  font-size: 9px;
 }
 
 .growth-scatter-y-label {
@@ -1240,7 +1240,7 @@ html {
   overflow: hidden;
   padding: 0 6px;
   border-top: 1px solid #e4ecef;
-  font-size: 8px;
+  font-size: 9px;
   color: #6f838e;
 }
 
@@ -1264,7 +1264,7 @@ html {
   padding-left: 9px;
   border-left: 1px solid #dce7eb;
   color: #78909b;
-  font-size: 7.5px;
+  font-size: 8.5px;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -1731,7 +1731,7 @@ html {
   justify-content: center;
   gap: 9px;
   padding-top: 4px;
-  font-size: 8px;
+  font-size: 9px;
   color: #6b828d;
 }
 
@@ -1883,7 +1883,7 @@ html {
 }
 
 .growth-sales-share-meta > small {
-  font-size: 7.5px;
+  font-size: 8.5px;
   line-height: 1.35;
   color: #66808b;
   white-space: nowrap;
