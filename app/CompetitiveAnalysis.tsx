@@ -2053,7 +2053,7 @@ export default function CompetitiveAnalysis({
                 </span>
               </div>
               <div className="growth-profile-metric">
-                <span>상담 만족도</span>
+                <span>평균 고객상담 만족도</span>
                 <strong>
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
@@ -2087,7 +2087,7 @@ export default function CompetitiveAnalysis({
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
               <div className="growth-staff-roster-columns" aria-hidden="true">
                 <span>영업직원 / 입사일자</span>
-                <span>평균 상담만족도</span>
+                <span>평균 고객상담 만족도</span>
                 <span>누적 회신건수</span>
               </div>
               <div className="growth-staff-roster-list">
@@ -2235,7 +2235,7 @@ export default function CompetitiveAnalysis({
                           <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">{tick.toFixed(0)}</text>
                         </g>;
                       })}
-                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">고객상담 만족(10점)</text>
+                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">평균 고객상담 만족도</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-guides" aria-hidden="true">

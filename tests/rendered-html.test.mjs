@@ -273,7 +273,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /코멘트 \{selectedStaffEmployee\?\.commentResponses \?\? 0\}건/);
   assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
-  assert.match(navigation, /평균 상담만족도/);
+  assert.match(navigation, /<span>평균 고객상담 만족도<\/span>/);
+  assert.doesNotMatch(navigation, /<span>평균 상담만족도<\/span>|<span>상담 만족도<\/span>/);
   assert.match(navigation, /누적 회신건수/);
   assert.match(navigation, /<span>인증직원 선정<\/span>/);
   assert.match(navigation, /className="growth-profile-metric growth-profile-certification"[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
@@ -322,7 +323,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /지점장 면담 가이드|다음 행동 1개 합의/);
   assert.doesNotMatch(navigation, /전체 상담 분포/);
   assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
-  assert.match(navigation, /className="growth-scatter-y-label"[^>]*>고객상담 만족\(10점\)<\/text>/);
+  assert.match(navigation, /className="growth-scatter-y-label"[^>]*>평균 고객상담 만족도<\/text>/);
   assert.match(navigation, /className="growth-scatter-x-label"[^>]*>근속기간\(년\)<\/text>/);
   assert.doesNotMatch(navigation, />상담만족\(10점\)<\/text>/);
   assert.match(css, /\.growth-scatter-y-label,\s*\.growth-scatter-x-label\s*\{[^}]*font-size:\s*8px;/);
