@@ -2201,12 +2201,12 @@ export default function CompetitiveAnalysis({
                             key={`${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}-${selectedStaffGrowthZone}`}
                             aria-hidden="true"
                           >
-                            <path d="M220 183.5 L74 190 L220 196.5 Z" />
-                            <circle cx="210" cy="190" r="13" />
-                            <circle className="needle-cap" cx="210" cy="190" r="5" />
+                            <path d="M220 171.5 L92 178 L220 184.5 Z" />
+                            <circle cx="210" cy="178" r="13" />
+                            <circle className="needle-cap" cx="210" cy="178" r="5" />
                           </g>
                         )}
-                        <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="220">{selectedStaffGrowthCalculation}</text>
+                        <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="204">{selectedStaffGrowthCalculation}</text>
                       </svg>
                     </div>
                   </article>

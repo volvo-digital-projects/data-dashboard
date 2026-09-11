@@ -487,6 +487,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@keyframes growth-sales-bar-enter/);
   assert.match(navigation, /상담 역량 타코미터/);
   assert.match(navigation, /M45 190 A165 165/);
+  assert.match(navigation, /M220 171\.5 L92 178 L220 184\.5 Z/);
+  assert.match(navigation, /circle cx="210" cy="178" r="13"/);
+  assert.match(navigation, /growth-gauge-current[\s\S]*?x="210" y="204"/);
+  assert.match(css, /\.growth-gauge-needle\s*\{[^}]*transform-origin:\s*210px 178px;/);
   assert.match(navigation, /className=\{`growth-gauge-current \$\{selectedStaffGrowthDeltaTone\}`\}[\s\S]*?\{selectedStaffGrowthCalculation\}/);
   assert.match(source, /selectedStaffPeerDelta > 0[\s\S]*?\? "▲"[\s\S]*?: "▼"/);
   assert.match(source, /`본인 \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 = \$\{selectedStaffGrowthDeltaMark\} \$\{Math\.abs\(selectedStaffPeerDelta \/ 10\)\.toFixed\(1\)\}점`/);

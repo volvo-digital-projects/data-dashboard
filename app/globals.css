@@ -882,7 +882,7 @@ html {
 .growth-gauge-needle {
   color: #162c37;
   transform: rotate(var(--growth-needle-angle));
-  transform-origin: 210px 190px;
+  transform-origin: 210px 178px;
   transform-box: view-box;
   filter: drop-shadow(0 3px 2px rgba(13, 43, 55, 0.24));
   animation: growth-gauge-sweep 1.9s cubic-bezier(0.12, 0.72, 0.16, 1) both;
