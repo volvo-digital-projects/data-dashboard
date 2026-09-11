@@ -918,7 +918,11 @@ export default function CompetitiveAnalysis({
     const syncAnchorHeight = () => {
       const staffCard = staffAnalysisCardRef.current;
       const page = anchor.closest<HTMLElement>(".competitive-analysis-page");
-      if (window.matchMedia("(max-width: 760px)").matches) {
+      const isPhoneViewport = window.matchMedia("(max-width: 599px)").matches;
+      const isNarrowTabletViewport = window.matchMedia(
+        "(min-width: 600px) and (max-width: 760px)",
+      ).matches;
+      if (isPhoneViewport) {
         anchor.style.removeProperty("height");
         page?.style.removeProperty("--growth-navigation-sticky-top");
         page?.style.removeProperty("--growth-navigation-summary-height");
@@ -930,27 +934,38 @@ export default function CompetitiveAnalysis({
         );
         return;
       }
-      const shellHeight = Math.ceil(shell.getBoundingClientRect().height);
+      const shellHeight = isNarrowTabletViewport
+        ? 0
+        : Math.ceil(shell.getBoundingClientRect().height);
       const growthSummaryHeight = Math.ceil(
         growthNavigationSummaryRef.current?.getBoundingClientRect().height ?? 112,
       );
       const staffHeadingHeight = Math.ceil(
         staffAnalysisHeadingRef.current?.getBoundingClientRect().height ?? 0,
       );
-      anchor.style.height = `${shellHeight}px`;
+      if (isNarrowTabletViewport) {
+        anchor.style.removeProperty("height");
+      } else {
+        anchor.style.height = `${shellHeight}px`;
+      }
       page?.style.setProperty("--growth-navigation-sticky-top", `${shellHeight}px`);
       page?.style.setProperty(
         "--growth-navigation-summary-height",
         `${growthSummaryHeight}px`,
       );
-      staffCard?.style.setProperty(
-        "--analysis-staff-heading-sticky-top",
-        `${shellHeight + 8}px`,
-      );
-      staffCard?.style.setProperty(
-        "--analysis-staff-summary-sticky-top",
-        `${shellHeight + staffHeadingHeight + 24}px`,
-      );
+      if (isNarrowTabletViewport) {
+        staffCard?.style.removeProperty("--analysis-staff-heading-sticky-top");
+        staffCard?.style.removeProperty("--analysis-staff-summary-sticky-top");
+      } else {
+        staffCard?.style.setProperty(
+          "--analysis-staff-heading-sticky-top",
+          `${shellHeight + 8}px`,
+        );
+        staffCard?.style.setProperty(
+          "--analysis-staff-summary-sticky-top",
+          `${shellHeight + staffHeadingHeight + 24}px`,
+        );
+      }
     };
 
     const queueAnchorHeightSync = () => {

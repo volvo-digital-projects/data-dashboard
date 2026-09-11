@@ -148,7 +148,7 @@ html {
   color: #17394b;
 }
 
-@media (min-width: 761px) {
+@media (min-width: 600px) {
   .competitive-analysis-page > .growth-navigation,
   .competitive-analysis-page > .v3s-award-card {
     margin-right: calc(-1 * var(--dashboard-content-overhang));
@@ -217,6 +217,12 @@ html {
     box-shadow: 0 10px 16px -18px rgba(16, 42, 67, 0.58);
   }
 
+}
+
+@media (min-width: 600px) and (max-width: 760px) {
+  .competitive-analysis-page {
+    --growth-navigation-sticky-top: 0px;
+  }
 }
 
 @media (min-width: 761px) and (max-width: 1240px) {
@@ -352,7 +358,7 @@ html {
   padding: 3px 6px;
 }
 
-@media (min-width: 761px) {
+@media (min-width: 600px) {
   .growth-staff-roster-list {
     max-height: calc(
       100vh - var(--growth-navigation-sticky-top, 356px) -
