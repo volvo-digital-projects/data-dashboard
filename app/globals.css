@@ -756,7 +756,7 @@ html {
 .growth-zone-gauge {
   --growth-needle-angle: 90deg;
   position: relative;
-  margin: 2px auto 0;
+  margin: -7px auto 0;
   width: min(100%, 380px);
 }
 
