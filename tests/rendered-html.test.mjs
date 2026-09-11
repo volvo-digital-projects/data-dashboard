@@ -473,7 +473,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /selectedStaffSalesTopPercent\.toFixed\(1\)\}%\)<\/i>/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 281px repeat\(4, minmax\(0, 1fr\)\);/);
   assert.match(css, /@media \(max-width: 1180px\)[\s\S]*?\.growth-navigation-workspace \{ grid-template-columns: 260px minmax\(0, 1fr\); \}[\s\S]*?\.growth-profile-strip \{ grid-template-columns: 253px repeat\(4, minmax\(0, 1fr\)\); \}/);
-  assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 7px;[^}]*font-size: 10px;/);
+  assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 2px;[^}]*font-size: 10px;/);
   assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);
   assert.doesNotMatch(source, /const staffScoreFreshnessWeight|const staffScorePriorResponses/);
   assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);
