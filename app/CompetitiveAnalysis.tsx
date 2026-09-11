@@ -2116,7 +2116,7 @@ export default function CompetitiveAnalysis({
                 <strong>
                   {selectedStaffDeliveredSales}<small>대</small>
                   <small className="growth-profile-sales-context">
-                    / 월 평균 {selectedStaffMonthlySalesAverage === null ? "―" : selectedStaffMonthlySalesAverage.toFixed(1)}
+                    / 월 평균 {selectedStaffMonthlySalesAverage === null ? "―" : `${selectedStaffMonthlySalesAverage.toFixed(1)}대`}
                     {selectedStaffSalesTopPercent === null ? null : <i>(상위 {selectedStaffSalesTopPercent.toFixed(1)}%)</i>}
                   </small>
                 </strong>

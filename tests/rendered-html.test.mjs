@@ -459,7 +459,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /selectedStaffTenureRank \/ staffCurrentSalesPopulation\.length/);
   assert.doesNotMatch(profile, /growth-profile-person-label/);
   assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/10<\/small>/);
-  assert.match(navigation, /className="growth-profile-metric growth-profile-sales"[\s\S]*?<span>누적 판매대수<\/span>[\s\S]*?\{selectedStaffDeliveredSales\}<small>대<\/small>[\s\S]*?\/ 월 평균 \{selectedStaffMonthlySalesAverage/);
+  assert.match(navigation, /className="growth-profile-metric growth-profile-sales"[\s\S]*?<span>누적 판매대수<\/span>[\s\S]*?\{selectedStaffDeliveredSales\}<small>대<\/small>[\s\S]*?\/ 월 평균 \{selectedStaffMonthlySalesAverage[\s\S]*?toFixed\(1\)\}대`\}/);
   assert.match(navigation, /selectedStaffSalesTopPercent\.toFixed\(1\)\}%\)<\/i>/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 7px;[^}]*font-size: 10px;/);
