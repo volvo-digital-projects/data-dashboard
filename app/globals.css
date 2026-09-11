@@ -188,6 +188,18 @@ html {
     box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
   }
 
+  .growth-navigation-detail .growth-capability > header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(
+      var(--growth-navigation-sticky-top, 356px) +
+        var(--growth-navigation-summary-height, 112px) + 6px
+    );
+    z-index: 42;
+    background: #f8fbfc;
+    box-shadow: 0 10px 16px -18px rgba(16, 42, 67, 0.58);
+  }
+
 }
 
 @media (min-width: 761px) and (max-width: 1240px) {
@@ -636,7 +648,7 @@ html {
 
 .growth-capability {
   min-width: 0;
-  overflow: hidden;
+  overflow: clip;
   border: 1px solid #cddfe7;
   border-radius: 6px;
   background: #fff;
