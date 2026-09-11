@@ -727,6 +727,13 @@ html {
   color: #728793;
 }
 
+.growth-profile-metric strong .growth-profile-satisfaction-rank {
+  color: #3f7588;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .growth-profile-sales strong {
   display: flex;
   align-items: baseline;

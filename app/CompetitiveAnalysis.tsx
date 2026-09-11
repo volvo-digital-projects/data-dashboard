@@ -1369,6 +1369,14 @@ export default function CompetitiveAnalysis({
     ? (selectedStaffResponses / staffNationalResponses) * 100
     : null;
   const selectedStaffSatisfactionScore = selectedStaffScoring?.satisfactionScore ?? null;
+  const selectedStaffSatisfactionNationalRank = selectedStaffSatisfactionScore === null
+    ? null
+    : staffTenureScatterPopulation.filter(
+        (staff) => staff.finalScore > selectedStaffSatisfactionScore,
+      ).length + 1;
+  const selectedStaffSatisfactionTopPercent = selectedStaffSatisfactionNationalRank === null
+    ? null
+    : (selectedStaffSatisfactionNationalRank / staffTenureScatterPopulation.length) * 100;
   const selectedStaffEvidenceLevel = staffEvidenceConfidence(selectedStaffResponses);
   const selectedStaffTenurePeerRange = selectedStaffEmployee
     ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
@@ -2116,6 +2124,11 @@ export default function CompetitiveAnalysis({
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
                   <small>/10</small>
+                  {selectedStaffSatisfactionTopPercent === null ? null : (
+                    <small className="growth-profile-satisfaction-rank">
+                      (상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%)
+                    </small>
+                  )}
                 </strong>
               </div>
               <div className="growth-profile-metric growth-profile-sales">

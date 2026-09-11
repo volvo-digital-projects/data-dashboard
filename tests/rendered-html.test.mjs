@@ -486,7 +486,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월[\s\S]*?<em>\(상위 \{selectedStaffTenureTopPercent\.toFixed\(1\)\}%\)<\/em>/);
   assert.match(profile, /displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월\{selectedStaffTenureTopPercent/);
   assert.match(css, /\.growth-profile-person strong i em\s*\{[^}]*margin-left: 0;/);
-  assert.doesNotMatch(profile, /selectedStaffSatisfactionTopPercent/);
+  assert.match(source, /staff\.finalScore > selectedStaffSatisfactionScore/);
+  assert.match(source, /selectedStaffSatisfactionNationalRank \/ staffTenureScatterPopulation\.length/);
+  assert.match(navigation, /<small className="growth-profile-satisfaction-rank">[\s\S]*?\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)/);
+  assert.match(css, /\.growth-profile-metric strong \.growth-profile-satisfaction-rank\s*\{[^}]*color: #3f7588;[^}]*font-family: var\(--font-ui\);[^}]*font-weight: 600;[^}]*white-space: nowrap;/);
   assert.match(source, /employee\.tenureMonths > selectedStaffEmployee\.tenureMonths/);
   assert.match(source, /selectedStaffTenureRank \/ staffCurrentSalesPopulation\.length/);
   assert.doesNotMatch(profile, /growth-profile-person-label/);
