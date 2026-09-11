@@ -1128,6 +1128,27 @@ export default function CompetitiveAnalysis({
     { length: 12 },
     (_, index) => selectedStaffSalesActivity?.monthlyDeliveredSales[index] ?? null,
   );
+  const selectedStaffReportedSalesMonths = selectedStaffMonthlyDeliveredSales.filter(
+    (count): count is number => count !== null,
+  );
+  const selectedStaffMonthlySalesAverage = selectedStaffReportedSalesMonths.length
+    ? selectedStaffReportedSalesMonths.reduce((sum, count) => sum + count, 0) /
+      selectedStaffReportedSalesMonths.length
+    : null;
+  const selectedStaffShowroomAverageDelta =
+    selectedStaffDeliveredSales - selectedShowroomAverageDeliveredSales;
+  const selectedStaffShowroomAverageDeltaTone =
+    selectedStaffShowroomAverageDelta > 0
+      ? "positive"
+      : selectedStaffShowroomAverageDelta < 0
+        ? "negative"
+        : "neutral";
+  const selectedStaffShowroomAverageDeltaMark =
+    selectedStaffShowroomAverageDelta > 0
+      ? "▲"
+      : selectedStaffShowroomAverageDelta < 0
+        ? "▼"
+        : "―";
   const selectedShowroomMonthlyAverageDeliveredSales = Array.from(
     { length: 12 },
     (_, index) => {
@@ -2644,21 +2665,34 @@ export default function CompetitiveAnalysis({
                         </div>
                       </div>
                       <aside className="growth-sales-share-panel" aria-label={`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 누적판매 중 ${selectedStaffEmployee?.name ?? "선택 직원"} 판매 비중`}>
-                        <div
-                          className="growth-sales-share-donut"
-                          style={{ "--growth-sales-share-angle": `${Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0)) * 3.6}deg` } as CSSProperties}
-                          aria-hidden="true"
-                        >
-                          <div>
-                            <span>전시장 누적</span>
-                            <strong>{selectedShowroomDeliveredSales.toLocaleString()}<small>대</small></strong>
+                        <div className="growth-sales-share-visual">
+                          <div
+                            className="growth-sales-share-donut"
+                            style={{ "--growth-sales-share-angle": `${Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0)) * 3.6}deg` } as CSSProperties}
+                            aria-hidden="true"
+                          >
+                            <div>
+                              <span>전시장 누적</span>
+                              <strong>{selectedShowroomDeliveredSales.toLocaleString()}<small>대</small></strong>
+                            </div>
+                          </div>
+                          <div className="growth-sales-share-callout">
+                            <span>{selectedStaffEmployee?.name ?? "선택 직원"} 판매비중</span>
+                            <strong>
+                              {selectedStaffDeliveredSales}대 · {selectedStaffSalesShare === null ? "―" : `${selectedStaffSalesShare.toFixed(1)}%`}
+                            </strong>
                           </div>
                         </div>
-                        <div className="growth-sales-share-copy">
-                          <span>{selectedStaffEmployee?.name ?? "선택 직원"} 판매 비중</span>
-                          <strong>{selectedStaffSalesShare === null ? "―" : `${selectedStaffSalesShare.toFixed(1)}%`}</strong>
-                          <small>{selectedStaffDeliveredSales}대 / 전시장 {selectedShowroomDeliveredSales}대</small>
-                          <small>전시장 {selectedStaffSalesRank ?? "―"}위 · 평균 대비 {selectedStaffDeliveredSales >= selectedShowroomAverageDeliveredSales ? "+" : ""}{(selectedStaffDeliveredSales - selectedShowroomAverageDeliveredSales).toFixed(1)}대</small>
+                        <div className="growth-sales-share-meta">
+                          <small>
+                            <b>{selectedStaffEmployee?.name ?? "선택 직원"}</b> · 전시장 {selectedStaffSalesRank ?? "―"}위 <i>/</i> 월 평균 {selectedStaffMonthlySalesAverage === null ? "―" : selectedStaffMonthlySalesAverage.toFixed(1)}대
+                          </small>
+                          <small>
+                            {displayShowroomNameWithoutBrand(selected.showroom)} 1인 평균 {selectedShowroomAverageDeliveredSales.toFixed(1)}대 대비 {" "}
+                            <strong className={selectedStaffShowroomAverageDeltaTone}>
+                              {selectedStaffShowroomAverageDeltaMark}{Math.abs(selectedStaffShowroomAverageDelta).toFixed(1)}대
+                            </strong>
+                          </small>
                         </div>
                       </aside>
                     </div>

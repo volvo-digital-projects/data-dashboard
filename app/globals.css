@@ -1725,23 +1725,33 @@ html {
 
 .growth-sales-share-panel {
   min-width: 0;
-  display: grid;
-  grid-template-columns: 78px minmax(0, 1fr);
-  align-items: center;
-  gap: 10px;
-  padding: 5px 4px 5px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 6px 8px 5px 12px;
   border-left: 1px solid #c9d8de;
+}
+
+.growth-sales-share-visual {
+  position: relative;
+  min-height: 84px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .growth-sales-share-donut {
   width: 74px;
   height: 74px;
+  flex: 0 0 74px;
   display: grid;
   place-items: center;
   border-radius: 50%;
   background: conic-gradient(
-    #e9794f 0 var(--growth-sales-share-angle, 0deg),
-    #5ca799 var(--growth-sales-share-angle, 0deg) 360deg
+    #3d7f9e 0 var(--growth-sales-share-angle, 0deg),
+    #e9794f var(--growth-sales-share-angle, 0deg) 360deg
   );
   box-shadow: 0 8px 14px -10px rgba(26, 58, 70, 0.64);
 }
@@ -1777,33 +1787,86 @@ html {
   font-size: 7px;
 }
 
-.growth-sales-share-copy {
-  min-width: 0;
+.growth-sales-share-callout {
+  position: absolute;
+  top: 8px;
+  left: calc(50% + 22px);
+  min-width: 86px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 2px;
+  padding-left: 22px;
+  color: #176887;
+  white-space: nowrap;
 }
 
-.growth-sales-share-copy > span {
-  font-size: 8px;
-  color: #6f858f;
+.growth-sales-share-callout::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: -2px;
+  width: 24px;
+  border-top: 1px solid #3d7f9e;
+  transform: rotate(-22deg);
+  transform-origin: right center;
 }
 
-.growth-sales-share-copy > strong {
-  margin: 1px 0 3px;
+.growth-sales-share-callout::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #3d7f9e;
+}
+
+.growth-sales-share-callout > span {
+  font-size: 7.5px;
+  font-weight: 650;
+}
+
+.growth-sales-share-callout > strong {
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
-  font-size: 22px;
+  font-size: 10px;
   line-height: 1;
-  color: #d86643;
+  color: #176887;
   font-variant-numeric: tabular-nums;
 }
 
-.growth-sales-share-copy > small {
+.growth-sales-share-meta {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+
+.growth-sales-share-meta > small {
   font-size: 7.5px;
-  line-height: 1.45;
+  line-height: 1.35;
   color: #66808b;
   white-space: nowrap;
 }
+
+.growth-sales-share-meta b {
+  color: #365f71;
+}
+
+.growth-sales-share-meta i {
+  margin: 0 2px;
+  color: #9aabb3;
+  font-style: normal;
+}
+
+.growth-sales-share-meta strong {
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-weight: 750;
+}
+
+.growth-sales-share-meta strong.positive { color: var(--blue) !important; }
+.growth-sales-share-meta strong.negative { color: var(--warning) !important; }
+.growth-sales-share-meta strong.neutral { color: #536f7b !important; }
 
 @media (max-width: 1180px) {
   .growth-navigation-workspace { grid-template-columns: 260px minmax(0, 1fr); }
