@@ -1070,8 +1070,8 @@ html {
 .growth-evidence-grid {
   height: 250px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
   gap: 5px;
   padding: 0 5px 5px;
 }
@@ -1087,7 +1087,7 @@ html {
 }
 
 .growth-comment-evidence > header span {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -1107,8 +1107,8 @@ html {
 
 .growth-comment-bars {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
   margin-top: 7px;
 }
 
@@ -1120,9 +1120,9 @@ html {
 }
 
 .growth-comment-bar-column + .growth-comment-bar-column {
-  margin-left: 12px;
-  padding-left: 12px;
-  border-left: 1px solid #dce7eb;
+  margin-left: 0;
+  padding-left: 0;
+  border-left: 0;
 }
 
 .growth-comment-bar {
