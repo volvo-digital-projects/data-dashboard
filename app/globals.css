@@ -638,7 +638,7 @@ html {
 }
 
 .growth-profile-person strong i em {
-  margin-left: 4px;
+  margin-left: 0;
   color: #3f7588;
   font-style: normal;
   font-weight: 600;
