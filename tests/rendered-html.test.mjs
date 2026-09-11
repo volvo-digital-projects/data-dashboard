@@ -420,6 +420,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(rosterBaseHeightRule >= 0 && rosterViewportHeightRule > rosterBaseHeightRule);
   assert.match(css, /@media \(min-width: 761px\)[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*overscroll-behavior-y:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch;/);
   assert.match(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-sticky-top, 356px\)[\s\S]*?var\(--growth-navigation-summary-height, 112px\) \+ 6px[\s\S]*?z-index: 42;[^}]*background: #f8fbfc;/);
+  assert.match(css, /\.growth-navigation-workspace::before\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-summary-height, 112px\)[\s\S]*?z-index: 41;[^}]*grid-column: 1 \/ -1;[^}]*grid-row: 1;[^}]*height: 46px;[^}]*background: #f5f9fb;[^}]*pointer-events: none;/);
   assert.match(css, /\.growth-capability\s*\{[^}]*overflow: clip;/);
   assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -34px;/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);

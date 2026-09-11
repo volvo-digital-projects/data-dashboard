@@ -188,6 +188,23 @@ html {
     box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
   }
 
+  .growth-navigation-workspace::before {
+    content: "";
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(
+      var(--growth-navigation-sticky-top, 356px) +
+        var(--growth-navigation-summary-height, 112px)
+    );
+    z-index: 41;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: 46px;
+    align-self: start;
+    background: #f5f9fb;
+    pointer-events: none;
+  }
+
   .growth-navigation-detail .growth-capability > header {
     position: -webkit-sticky;
     position: sticky;
