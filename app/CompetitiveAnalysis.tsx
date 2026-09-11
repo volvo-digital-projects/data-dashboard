@@ -795,6 +795,7 @@ export default function CompetitiveAnalysis({
   const scatterRef = useRef<HTMLDivElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
+  const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
   const staffAnalysisCardRef = useRef<HTMLElement>(null);
   const staffAnalysisHeadingRef = useRef<HTMLElement>(null);
   const scatterMotionTimersRef = useRef<number[]>([]);
@@ -916,8 +917,11 @@ export default function CompetitiveAnalysis({
 
     const syncAnchorHeight = () => {
       const staffCard = staffAnalysisCardRef.current;
+      const page = anchor.closest<HTMLElement>(".competitive-analysis-page");
       if (window.matchMedia("(max-width: 760px)").matches) {
         anchor.style.removeProperty("height");
+        page?.style.removeProperty("--growth-navigation-sticky-top");
+        page?.style.removeProperty("--growth-navigation-summary-height");
         staffCard?.style.removeProperty(
           "--analysis-staff-heading-sticky-top",
         );
@@ -927,10 +931,18 @@ export default function CompetitiveAnalysis({
         return;
       }
       const shellHeight = Math.ceil(shell.getBoundingClientRect().height);
+      const growthSummaryHeight = Math.ceil(
+        growthNavigationSummaryRef.current?.getBoundingClientRect().height ?? 112,
+      );
       const staffHeadingHeight = Math.ceil(
         staffAnalysisHeadingRef.current?.getBoundingClientRect().height ?? 0,
       );
       anchor.style.height = `${shellHeight}px`;
+      page?.style.setProperty("--growth-navigation-sticky-top", `${shellHeight}px`);
+      page?.style.setProperty(
+        "--growth-navigation-summary-height",
+        `${growthSummaryHeight}px`,
+      );
       staffCard?.style.setProperty(
         "--analysis-staff-heading-sticky-top",
         `${shellHeight + 8}px`,
@@ -952,6 +964,9 @@ export default function CompetitiveAnalysis({
     if (staffAnalysisHeadingRef.current) {
       observer.observe(staffAnalysisHeadingRef.current);
     }
+    if (growthNavigationSummaryRef.current) {
+      observer.observe(growthNavigationSummaryRef.current);
+    }
     window.addEventListener("resize", queueAnchorHeightSync);
     window.visualViewport?.addEventListener("resize", queueAnchorHeightSync);
     void document.fonts?.ready.then(queueAnchorHeightSync);
@@ -961,6 +976,12 @@ export default function CompetitiveAnalysis({
       observer.disconnect();
       window.removeEventListener("resize", queueAnchorHeightSync);
       window.visualViewport?.removeEventListener("resize", queueAnchorHeightSync);
+      anchor
+        .closest<HTMLElement>(".competitive-analysis-page")
+        ?.style.removeProperty("--growth-navigation-sticky-top");
+      anchor
+        .closest<HTMLElement>(".competitive-analysis-page")
+        ?.style.removeProperty("--growth-navigation-summary-height");
       staffAnalysisCardRef.current?.style.removeProperty(
         "--analysis-staff-heading-sticky-top",
       );
@@ -1989,7 +2010,10 @@ export default function CompetitiveAnalysis({
           className="growth-navigation"
           aria-label={`${displayShowroomName(selected.showroom)} 소속 영업직원 성장 내비게이션`}
         >
-          <div className="growth-navigation-sticky-summary">
+          <div
+            className="growth-navigation-sticky-summary"
+            ref={growthNavigationSummaryRef}
+          >
           <header className="growth-navigation-heading">
             <div>
               <h2>소속 영업직원 성장 내비게이션</h2>

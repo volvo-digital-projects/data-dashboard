@@ -169,11 +169,20 @@ html {
 
   .growth-staff-roster {
     position: sticky;
-    top: calc(var(--growth-navigation-sticky-top, 356px) + 112px);
+    top: calc(
+      var(--growth-navigation-sticky-top, 356px) +
+        var(--growth-navigation-summary-height, 112px)
+    );
     z-index: 43;
     align-self: start;
-    max-height: calc(100vh - var(--growth-navigation-sticky-top, 356px) - 124px);
-    max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 124px);
+    max-height: calc(
+      100vh - var(--growth-navigation-sticky-top, 356px) -
+        var(--growth-navigation-summary-height, 112px) - 12px
+    );
+    max-height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 356px) -
+        var(--growth-navigation-summary-height, 112px) - 12px
+    );
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 12px 18px -22px rgba(16, 42, 67, 0.58);
@@ -316,8 +325,14 @@ html {
 
 @media (min-width: 761px) {
   .growth-staff-roster-list {
-    max-height: calc(100vh - var(--growth-navigation-sticky-top, 356px) - 158px);
-    max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 158px);
+    max-height: calc(
+      100vh - var(--growth-navigation-sticky-top, 356px) -
+        var(--growth-navigation-summary-height, 112px) - 46px
+    );
+    max-height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 356px) -
+        var(--growth-navigation-summary-height, 112px) - 46px
+    );
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
   }

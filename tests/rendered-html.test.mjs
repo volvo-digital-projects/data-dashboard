@@ -411,10 +411,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*align-self: start;[^}]*background: #f5f9fb;[^}]*0 -18px 0 #ffffff,/);
   assert.match(css, /html\.analysis-viewport-locked body\s*\{[^}]*overflow-x: clip;[^}]*overflow-y: visible;/);
   assert.doesNotMatch(css, /html\.analysis-viewport-locked body\s*\{[^}]*overflow-x: hidden;/);
-  assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 112px\);[^}]*align-self: start;[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 124px\);[^}]*overflow: hidden;[^}]*background: #ffffff;/);
-  assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 158px\);/);
+  assert.match(source, /const shellHeight = Math\.ceil\(shell\.getBoundingClientRect\(\)\.height\);[\s\S]*?--growth-navigation-sticky-top[\s\S]*?--growth-navigation-summary-height/);
+  assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}/);
+  assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\([\s\S]*?var\(--growth-navigation-sticky-top, 356px\)[\s\S]*?var\(--growth-navigation-summary-height, 112px\)[\s\S]*?align-self: start;[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 112px\) - 12px[\s\S]*?overflow: hidden;[^}]*background: #ffffff;/);
+  assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 112px\) - 46px/);
   const rosterBaseHeightRule = css.indexOf("max-height: 660px;", css.indexOf(".growth-staff-roster-list"));
-  const rosterViewportHeightRule = css.indexOf("max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 158px);", rosterBaseHeightRule + 1);
+  const rosterViewportHeightRule = css.indexOf("var(--growth-navigation-summary-height, 112px) - 46px", rosterBaseHeightRule + 1);
   assert.ok(rosterBaseHeightRule >= 0 && rosterViewportHeightRule > rosterBaseHeightRule);
   assert.match(css, /@media \(min-width: 761px\)[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*overscroll-behavior-y:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch;/);
   assert.doesNotMatch(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: sticky;/);
