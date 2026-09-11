@@ -522,7 +522,7 @@ html {
   min-width: 0;
   margin: 6px 6px 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: 281px repeat(4, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid #d4e2e8;
   border-radius: 6px;
@@ -1993,7 +1993,7 @@ html {
 @media (max-width: 1180px) {
   .growth-navigation-workspace { grid-template-columns: 260px minmax(0, 1fr); }
   .growth-navigation-pinned-headings { grid-template-columns: 260px minmax(0, 1fr); }
-  .growth-profile-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .growth-profile-strip { grid-template-columns: 253px repeat(4, minmax(0, 1fr)); }
   .growth-capability-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
