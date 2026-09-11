@@ -377,6 +377,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-funnel\s*\{[^}]*grid-template-columns: minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\);/);
   assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
   assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계/);
+  assert.match(navigation, /<i className="staff" \/>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\}<\/span>/);
   assert.match(navigation, /소속 전시장 1인 평균/);
   assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(12, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*linear-gradient\(180deg, #74aec5 0%, #3d7f9e 48%, #174662 100%\);/);

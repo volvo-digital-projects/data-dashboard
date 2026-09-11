@@ -2507,7 +2507,7 @@ export default function CompetitiveAnalysis({
                       ))}
                     </div>
                     <footer>
-                      <span><i className="staff" />선택 직원</span>
+                      <span><i className="staff" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
                       <span title={`월별 소속 전시장 출고 ÷ 현재 영업직원 ${selectedShowroomSalesStaffCount}명`}><i className="average" />소속 전시장 1인 평균</span>
                       <strong>
                         전시장 {selectedStaffSalesRank ?? "―"}위
