@@ -402,6 +402,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*background: #f5f9fb;[^}]*0 -18px 0 #ffffff,/);
   assert.match(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 112px\);[^}]*align-self: start;[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 124px\);[^}]*overflow: hidden;[^}]*background: #ffffff;/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\(100dvh - var\(--growth-navigation-sticky-top, 356px\) - 158px\);/);
+  const rosterBaseHeightRule = css.indexOf("max-height: 660px;", css.indexOf(".growth-staff-roster-list"));
+  const rosterViewportHeightRule = css.indexOf("max-height: calc(100dvh - var(--growth-navigation-sticky-top, 356px) - 158px);", rosterBaseHeightRule + 1);
+  assert.ok(rosterBaseHeightRule >= 0 && rosterViewportHeightRule > rosterBaseHeightRule);
+  assert.match(css, /@media \(min-width: 761px\)[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*overscroll-behavior-y:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch;/);
   assert.match(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: sticky;[^}]*top: calc\(var\(--growth-navigation-sticky-top, 356px\) \+ 118px\);[^}]*z-index: 42;[^}]*background: #f8fbfc;/);
   assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -34px;/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);
