@@ -345,6 +345,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
   assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
   assert.equal((navigation.match(/className="growth-scatter-selected-photo"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/className="photo-halo" r="10\.5"/g) ?? []).length, 2);
   assert.equal((navigation.match(/href=\{selectedStaffProfile\.image\}/g) ?? []).length, 2);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
@@ -353,6 +354,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal((navigation.match(/<circle className="photo-ring" r="8\.5" \/>/g) ?? []).length, 2);
   assert.match(css, /\.growth-scatter-selected-photo \.photo-backdrop\s*\{[^}]*stroke: #a9c4ce;[^}]*stroke-width: 1\.5;/);
   assert.match(css, /\.growth-scatter-selected-photo \.photo-ring\s*\{[^}]*stroke: #2d7187;[^}]*stroke-width: 1\.2;/);
+  assert.match(css, /\.growth-scatter-selected-photo \.photo-halo\s*\{[^}]*pointer-events: none;[^}]*animation: growth-scatter-photo-halo 1\.45s cubic-bezier\(0\.22, 0\.61, 0\.36, 1\) infinite;/);
+  assert.match(css, /@keyframes growth-scatter-photo-halo\s*\{[\s\S]*?transform: scale\(0\.94\);[\s\S]*?transform: scale\(1\.68\);/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.growth-scatter-selected-photo \.photo-halo\s*\{[^}]*animation: none;/);
   assert.doesNotMatch(navigation, /className="growth-scatter-selected"|className="point"|className="halo"/);
   assert.equal((navigation.match(/\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} SC<\/span>/g) ?? []).length, 2);
   assert.doesNotMatch(navigation, /\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} 전시장<\/span>/);

@@ -2233,6 +2233,7 @@ export default function CompetitiveAnalysis({
                       </g>
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`}>
+                          <circle className="photo-halo" r="10.5" />
                           <circle className="photo-backdrop" r="10" />
                           {selectedStaffProfile ? (
                             <image
@@ -2439,6 +2440,7 @@ export default function CompetitiveAnalysis({
                       </g>
                       {selectedStaffSalesScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`}>
+                          <circle className="photo-halo" r="10.5" />
                           <circle className="photo-backdrop" r="10" />
                           {selectedStaffProfile ? (
                             <image
