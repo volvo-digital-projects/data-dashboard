@@ -522,6 +522,13 @@ const displayShowroomName = (name: string) => {
 const displayShowroomNameWithoutBrand = (name: string) =>
   displayShowroomName(name).replace(/^볼보\s*/, "");
 
+const displayDealerRankName = (name: string) => {
+  const compactName = name.replace(/\s+/g, "");
+  if (compactName === "아주" || compactName.includes("아주오토리움")) return "아주";
+  if (compactName === "코오롱" || compactName.includes("코오롱오토모티브")) return "코오롱";
+  return name.trim();
+};
+
 const normalizeStaffCertificationShowroom = (name: string) => {
   const compact = name
     .replace(/^볼보\s*/, "")
@@ -1114,13 +1121,21 @@ export default function CompetitiveAnalysis({
     ? selectedShowroomDeliveredSales / selectedShowroomSalesStaffCount
     : 0;
   const selectedStaffSalesRank = selectedStaffSalesActivity
-    ? [...(selectedSalesActivityShowroom?.staff ?? [])]
-        .sort(
-          (left, right) =>
-            right.deliveredSales - left.deliveredSales ||
-            left.name.localeCompare(right.name, "ko"),
-        )
-        .findIndex((staff) => staff.name === selectedStaffSalesActivity.name) + 1
+    ? (selectedSalesActivityShowroom?.staff ?? []).filter(
+        (staff) => staff.deliveredSales > selectedStaffSalesActivity.deliveredSales,
+      ).length + 1
+    : null;
+  const selectedDealerRankName = displayDealerRankName(selected.dealer);
+  const selectedStaffDealerSalesPopulation = nationalStaffSalesPopulation.filter(
+    (staff) =>
+      displayDealerRankName(
+        showrooms.find((showroom) => showroom.cdsid === staff.cdsid)?.dealer ?? "",
+      ) === selectedDealerRankName,
+  );
+  const selectedStaffDealerSalesRank = selectedStaffSalesActivity && selectedStaffDealerSalesPopulation.length
+    ? selectedStaffDealerSalesPopulation.filter(
+        (staff) => staff.deliveredSales > selectedStaffDeliveredSales,
+      ).length + 1
     : null;
   const selectedStaffSalesShare = selectedShowroomDeliveredSales
     ? (selectedStaffDeliveredSales / selectedShowroomDeliveredSales) * 100
@@ -2763,7 +2778,9 @@ export default function CompetitiveAnalysis({
                         </div>
                         <div className="growth-sales-share-meta">
                           <small className="growth-sales-share-rank">
-                            <b>{selectedStaffEmployee?.name ?? "선택 직원"}</b> 순위 {selectedStaffSalesRank ?? "―"}위
+                            <b>{selectedDealerRankName}</b> 순위 {selectedStaffDealerSalesRank ?? "―"}위
+                            <i aria-hidden="true">/</i>
+                            <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b> 순위 {selectedStaffSalesRank ?? "―"}위
                           </small>
                           <small>
                             {displayShowroomNameWithoutBrand(selected.showroom)} 1인 평균 {selectedShowroomAverageDeliveredSales.toFixed(1)}대 대비 {" "}

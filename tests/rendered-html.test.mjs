@@ -441,7 +441,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /판매비중/);
   assert.match(navigation, /selectedStaffSalesShare\.toFixed\(1\)\}%/);
   assert.match(navigation, /selectedStaffShowroomAverageDeltaMark/);
-  assert.match(navigation, /className="growth-sales-share-rank"[\s\S]*?selectedStaffEmployee[\s\S]*?순위 \{selectedStaffSalesRank/);
+  assert.match(source, /compactName === "아주" \|\| compactName\.includes\("아주오토리움"\)[\s\S]*?return "아주"/);
+  assert.match(source, /compactName === "코오롱" \|\| compactName\.includes\("코오롱오토모티브"\)[\s\S]*?return "코오롱"/);
+  assert.match(source, /selectedStaffDealerSalesPopulation\.filter\([\s\S]*?staff\.deliveredSales > selectedStaffDeliveredSales[\s\S]*?\.length \+ 1/);
+  assert.match(source, /selectedStaffSalesRank = selectedStaffSalesActivity[\s\S]*?staff\.deliveredSales > selectedStaffSalesActivity\.deliveredSales[\s\S]*?\.length \+ 1/);
+  assert.match(navigation, /className="growth-sales-share-rank"[\s\S]*?<b>\{selectedDealerRankName\}<\/b> 순위 \{selectedStaffDealerSalesRank \?\? "―"\}위[\s\S]*?<i aria-hidden="true">\/<\/i>[\s\S]*?<b>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\}<\/b> 순위 \{selectedStaffSalesRank \?\? "―"\}위/);
+  assert.doesNotMatch(navigation, /className="growth-sales-share-rank"[\s\S]*?selectedStaffEmployee/);
+  assert.match(css, /\.growth-sales-share-rank i\s*\{[^}]*margin: 0 4px;[^}]*color: #9aabb3;[^}]*font-style: normal;/);
   assert.doesNotMatch(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
   assert.match(navigation, /1인 평균 \{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}대 대비/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
