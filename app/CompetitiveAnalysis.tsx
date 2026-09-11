@@ -802,6 +802,7 @@ export default function CompetitiveAnalysis({
     formatAnalysisDate(new Date()),
   );
   const scatterRef = useRef<HTMLDivElement>(null);
+  const analysisWorkspaceRef = useRef<HTMLElement>(null);
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
@@ -1717,7 +1718,38 @@ export default function CompetitiveAnalysis({
     return () => observer.disconnect();
   }, []);
 
+  const revealAnalysisWorkspace = () => {
+    window.requestAnimationFrame(() => {
+      const workspace = analysisWorkspaceRef.current;
+      if (!workspace) return;
+
+      const bounds = workspace.getBoundingClientRect();
+      const isFixedHeader = window.matchMedia("(min-width: 761px)").matches;
+      const fixedHeaderBottom = isFixedHeader
+        ? (stickyShellRef.current?.getBoundingClientRect().bottom ?? 0)
+        : 0;
+      const visibleHeight = Math.max(
+        0,
+        Math.min(bounds.bottom, window.innerHeight) -
+          Math.max(bounds.top, fixedHeaderBottom),
+      );
+      const enoughIsVisible =
+        visibleHeight >= Math.min(240, bounds.height * 0.5);
+      if (enoughIsVisible) return;
+
+      const targetTop =
+        window.scrollY + bounds.top - fixedHeaderBottom - 8;
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    });
+  };
+
   const changeView = (nextView: AnalysisView) => {
+    revealAnalysisWorkspace();
     if (nextView === view) return;
     scatterMotionTimersRef.current.forEach((timer) =>
       window.clearTimeout(timer),
@@ -1927,7 +1959,7 @@ export default function CompetitiveAnalysis({
       </div>
       </div>
 
-      <section className="analysis-workspace">
+      <section className="analysis-workspace" ref={analysisWorkspaceRef}>
         <article className="analysis-scatter-card">
           <header className="analysis-card-heading">
             <div>

@@ -527,6 +527,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const isPhoneViewport = window\.matchMedia\("\(max-width: 599px\)"\)\.matches;/);
   assert.match(source, /const isNarrowTabletViewport = window\.matchMedia\([\s\S]*?"\(min-width: 600px\) and \(max-width: 760px\)"[\s\S]*?\)\.matches;/);
   assert.match(source, /const shellHeight = isNarrowTabletViewport[\s\S]*?Math\.ceil\(shell\.getBoundingClientRect\(\)\.height\);[\s\S]*?--growth-navigation-sticky-top[\s\S]*?--growth-navigation-summary-height/);
+  assert.match(source, /const analysisWorkspaceRef = useRef<HTMLElement>\(null\);/);
+  assert.match(source, /const revealAnalysisWorkspace = \(\) => \{[\s\S]*?visibleHeight >= Math\.min\(240, bounds\.height \* 0\.5\)[\s\S]*?window\.scrollTo\(\{[\s\S]*?top: Math\.max\(0, targetTop\),[\s\S]*?prefers-reduced-motion: reduce/);
+  assert.match(source, /const changeView = \(nextView: AnalysisView\) => \{\s*revealAnalysisWorkspace\(\);\s*if \(nextView === view\) return;/);
+  assert.match(source, /<section className="analysis-workspace" ref=\{analysisWorkspaceRef\}>/);
   assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}[\s\S]*?className="growth-navigation-pinned-headings"/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?role="region"[\s\S]*?tabIndex=\{0\}[\s\S]*?onPointerDown=\{beginGrowthNavigationDetailDrag\}[\s\S]*?onPointerMove=\{moveGrowthNavigationDetailDrag\}[\s\S]*?onPointerUp=\{endGrowthNavigationDetailDrag\}/);
   assert.match(source, /event\.currentTarget\.scrollTop\s*=\s*drag\.originScrollTop - \(event\.clientY - drag\.originY\)/);
