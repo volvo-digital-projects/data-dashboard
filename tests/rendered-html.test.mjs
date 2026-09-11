@@ -447,7 +447,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@keyframes growth-sales-share-fill\s*\{[^}]*--growth-sales-share-angle: 0deg;[^}]*clip-path: circle\(32\.5% at 50% 50%\);[\s\S]*?clip-path: circle\(50% at 50% 50%\);/);
   assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*background: #fff;[^}]*position: relative;[^}]*z-index: 1;/);
   assert.doesNotMatch(css, /growth-sales-share-label-enter/);
-  assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 8px\);[^}]*overflow: hidden;/);
+  assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 8px\);[^}]*overflow: hidden;[^}]*transform: translateY\(-7px\);/);
   assert.match(navigation, /className="growth-sales-share-leader"[\s\S]*?pathLength="1"[\s\S]*?selectedStaffSalesShareLeaderX\.toFixed\(1\)/);
   assert.match(navigation, /selectedStaffSalesShareLeaderBendX\.toFixed\(1\)\},10 86,10/);
   assert.match(css, /\.growth-sales-share-leader polyline\s*\{[^}]*stroke: #3d7f9e;[^}]*stroke-dasharray: 1;[^}]*stroke-dashoffset: 1;[^}]*animation: growth-sales-share-leader-draw 720ms ease-out 420ms forwards;/);

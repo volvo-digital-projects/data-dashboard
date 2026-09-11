@@ -1893,6 +1893,7 @@ html {
   color: #176887;
   white-space: nowrap;
   overflow: hidden;
+  transform: translateY(-7px);
   z-index: 3;
 }
 
