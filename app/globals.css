@@ -1497,6 +1497,11 @@ html {
   color: #244f64;
 }
 
+.growth-sales-heading-number {
+  font-family: var(--font-volvo);
+  font-variant-numeric: tabular-nums;
+}
+
 .growth-sales-funnel-card > header > small,
 .growth-sales-monthly-card > header > small {
   font-size: 8px;

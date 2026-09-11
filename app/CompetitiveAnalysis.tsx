@@ -2536,7 +2536,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>
-                      <div><strong>근속기간 × 26년 누적판매</strong></div>
+                      <div><strong>근속기간 × <span className="growth-sales-heading-number">26</span>년 누적판매</strong></div>
                       <small>{salesActivitySource.salesAsOf.replaceAll("-", ".")} 기준</small>
                     </header>
                     <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매 분포">
@@ -2682,7 +2682,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-sales-monthly-card">
                     <header>
-                      <strong>{selectedStaffEmployee?.name ?? "선택 직원"} 누적판매 {selectedStaffDeliveredSales}대</strong>
+                      <strong>{selectedStaffEmployee?.name ?? "선택 직원"} 누적판매 <span className="growth-sales-heading-number">{selectedStaffDeliveredSales}</span>대</strong>
                     </header>
                     <div className="growth-sales-monthly-body">
                       <div className="growth-sales-monthly-trend">

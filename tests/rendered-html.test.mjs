@@ -355,7 +355,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /상담 → 시승 → 계약 전환/);
-  assert.match(navigation, /근속기간 × 26년 누적판매/);
+  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적판매/);
   assert.doesNotMatch(navigation, /근속기간 × 2026 누적판매/);
   assert.match(navigation, /근속기간 × 고객상담 평균만족도/);
   assert.doesNotMatch(navigation, /근속기간 × 상담만족/);
@@ -403,7 +403,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-showroom circle\s*\{[^}]*fill:\s*#087a58;[^}]*fill-opacity:\s*0\.94;/);
   assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{\s*background:\s*#087a58;/);
   assert.doesNotMatch(navigation, /<span>2026 월별 출고 실적<\/span>/);
-  assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\} 누적판매 \{selectedStaffDeliveredSales\}대<\/strong>/);
+  assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\} 누적판매 <span className="growth-sales-heading-number">\{selectedStaffDeliveredSales\}<\/span>대<\/strong>/);
+  assert.match(css, /\.growth-sales-heading-number\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-variant-numeric: tabular-nums;/);
   assert.match(navigation, /원자료 갱신 필요/);
   assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
   assert.doesNotMatch(css, /\.growth-sales-funnel-card > footer\.warning/);
