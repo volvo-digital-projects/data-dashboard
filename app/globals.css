@@ -2029,7 +2029,7 @@ html {
   display: grid;
   gap: 2px;
   margin-top: 6px;
-  text-align: center;
+  text-align: left;
 }
 
 .growth-sales-share-meta > small {
@@ -2041,6 +2041,15 @@ html {
 
 .growth-sales-share-rank b {
   color: #365f71;
+}
+
+.growth-sales-share-rank {
+  display: grid;
+  gap: 2px;
+}
+
+.growth-sales-share-rank > span {
+  display: block;
 }
 
 .growth-sales-share-rank i {
