@@ -294,10 +294,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const keepGrowthStaffRosterInView = \(\) => \{[\s\S]*?const safeTop = summaryBounds\.bottom \+ 8;[\s\S]*?window\.scrollBy\(\{[\s\S]*?top: rosterBounds\.top - safeTop,[\s\S]*?behavior: "auto"/);
   assert.doesNotMatch(source.match(/const beginGrowthStaffRosterDrag = [\s\S]*?const keepGrowthStaffRosterInView =/)?.[0] ?? "", /keepGrowthStaffRosterInView\(\)/);
   assert.match(source, /const scrollGrowthStaffRosterOnly = [\s\S]*?keepGrowthStaffRosterInView\(\);[\s\S]*?roster\.scrollTop \+= event\.deltaY;/);
-  assert.match(source, /const shouldSettleAtGrowthNavigation = [\s\S]*?passedRatio >= 0\.65[\s\S]*?summaryBounds\.top > headerBottom \+ 8;/);
+  assert.match(source, /const shouldSettleAtGrowthNavigation = [\s\S]*?!entrySnapConsumed && workspacePassedRatio\(projectedDistance\) >= 0\.65;/);
   assert.match(source, /const handleEntryWheel = [\s\S]*?normalizeWheelDistance\(event\)[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtGrowthNavigation\(\);/);
   assert.match(source, /const handleEntryTouchMove = [\s\S]*?downwardPageDistance[\s\S]*?shouldSettleAtGrowthNavigation\(downwardPageDistance\)[\s\S]*?settleAtGrowthNavigation\(\);/);
-  assert.match(source, /window\.scrollTo\(\{[\s\S]*?top: Math\.max\(0, targetTop\),[\s\S]*?behavior:[\s\S]*?"smooth"/);
+  assert.match(source, /const alignEntry = \(timestamp: number\) => \{[\s\S]*?window\.scrollTo\(\{ top: nextTop, left: window\.scrollX, behavior: "auto" \}\);[\s\S]*?touchActive \|\| timestamp < snapHoldUntil/);
   assert.match(source, /if \(!event\.isPrimary \|\| \(event\.pointerType === "mouse" && event\.button !== 0\)\)/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*scroll-snap-type: y proximity;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*scroll-snap-align: start;/);
@@ -548,6 +548,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const isNarrowTabletViewport = window\.matchMedia\([\s\S]*?"\(min-width: 600px\) and \(max-width: 760px\)"[\s\S]*?\)\.matches;/);
   assert.match(source, /const shellHeight = isNarrowTabletViewport[\s\S]*?Math\.ceil\(shell\.getBoundingClientRect\(\)\.height\);[\s\S]*?--growth-navigation-sticky-top[\s\S]*?--growth-navigation-summary-height/);
   assert.match(source, /const analysisWorkspaceRef = useRef<HTMLElement>\(null\);/);
+  assert.match(source, /const workspacePassedRatio = \(projectedDistance = 0\) => \{[\s\S]*?passedDistance \/ Math\.max\(1, workspaceBounds\.height\)/);
+  assert.match(source, /const documentTop = \(element: HTMLElement\) => \{[\s\S]*?current\.offsetTop[\s\S]*?current\.offsetParent as HTMLElement/);
+  assert.match(source, /const settleAtGrowthNavigation = \(\) => \{[\s\S]*?documentTop\(growthSummary\) - fixedHeaderBottom\(\) - 8[\s\S]*?window\.requestAnimationFrame\(alignEntry\)/);
+  assert.match(source, /const handleEntryScroll = \(\) => \{[\s\S]*?movingDown[\s\S]*?shouldSettleAtGrowthNavigation\(\)[\s\S]*?settleAtGrowthNavigation\(\)/);
+  assert.match(source, /touchActive \|\| timestamp < snapHoldUntil[\s\S]*?window\.addEventListener\("scroll", handleEntryScroll, \{ passive: true \}\)/);
+  assert.match(source, /workspacePassedRatio\(\) < 0\.5\) entrySnapConsumed = false/);
   assert.match(source, /const revealAnalysisWorkspace = \(\) => \{[\s\S]*?visibleHeight >= Math\.min\(240, bounds\.height \* 0\.5\)[\s\S]*?window\.scrollTo\(\{[\s\S]*?top: Math\.max\(0, targetTop\),[\s\S]*?prefers-reduced-motion: reduce/);
   assert.match(source, /const changeView = \(nextView: AnalysisView\) => \{\s*revealAnalysisWorkspace\(\);\s*if \(nextView === view\) return;/);
   assert.match(source, /<section className="analysis-workspace" ref=\{analysisWorkspaceRef\}>/);

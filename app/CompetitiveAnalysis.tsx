@@ -887,7 +887,11 @@ export default function CompetitiveAnalysis({
     const growthSummary = growthNavigationSummaryRef.current;
     if (!workspace || !growthSummary) return;
 
-    let releaseTimer = 0;
+    let entrySnapFrame = 0;
+    let entrySnapConsumed = false;
+    let lastWindowScrollY = window.scrollY;
+    let snapHoldUntil = 0;
+    let touchActive = false;
     let touchY: number | null = null;
 
     const releaseEntrySnap = () => {
@@ -897,33 +901,68 @@ export default function CompetitiveAnalysis({
     const fixedHeaderBottom = () =>
       Math.max(0, stickyShellRef.current?.getBoundingClientRect().bottom ?? 0);
 
+    const workspacePassedRatio = (projectedDistance = 0) => {
+      const workspaceBounds = workspace.getBoundingClientRect();
+      const passedDistance =
+        fixedHeaderBottom() - workspaceBounds.top + projectedDistance;
+      return passedDistance / Math.max(1, workspaceBounds.height);
+    };
+
     const shouldSettleAtGrowthNavigation = (projectedDistance = 0) => {
       if (!window.matchMedia("(min-width: 600px)").matches) return false;
+      return !entrySnapConsumed && workspacePassedRatio(projectedDistance) >= 0.65;
+    };
 
-      const workspaceBounds = workspace.getBoundingClientRect();
-      const summaryBounds = growthSummary.getBoundingClientRect();
-      const headerBottom = fixedHeaderBottom();
-      const passedDistance = headerBottom - workspaceBounds.top + projectedDistance;
-      const passedRatio = passedDistance / Math.max(1, workspaceBounds.height);
-
-      return passedRatio >= 0.65 && summaryBounds.top > headerBottom + 8;
+    const documentTop = (element: HTMLElement) => {
+      let top = 0;
+      let current: HTMLElement | null = element;
+      while (current) {
+        top += current.offsetTop;
+        current = current.offsetParent as HTMLElement | null;
+      }
+      return top;
     };
 
     const settleAtGrowthNavigation = () => {
+      entrySnapConsumed = true;
       growthNavigationEntrySnapRef.current = true;
-      window.clearTimeout(releaseTimer);
+      window.cancelAnimationFrame(entrySnapFrame);
 
-      const summaryBounds = growthSummary.getBoundingClientRect();
-      const targetTop =
-        window.scrollY + summaryBounds.top - fixedHeaderBottom() - 8;
-      window.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-      });
+      const startTop = window.scrollY;
+      const targetTop = Math.max(
+        0,
+        documentTop(growthSummary) - fixedHeaderBottom() - 8,
+      );
+      const startedAt = performance.now();
+      const motionDuration = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches
+        ? 0
+        : 460;
+      snapHoldUntil = startedAt + motionDuration + 360;
 
-      releaseTimer = window.setTimeout(releaseEntrySnap, 720);
+      const alignEntry = (timestamp: number) => {
+        const progress = motionDuration
+          ? Math.min(1, (timestamp - startedAt) / motionDuration)
+          : 1;
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const nextTop =
+          progress < 1
+            ? startTop + (targetTop - startTop) * easedProgress
+            : targetTop;
+
+        window.scrollTo({ top: nextTop, left: window.scrollX, behavior: "auto" });
+
+        if (progress < 1 || touchActive || timestamp < snapHoldUntil) {
+          entrySnapFrame = window.requestAnimationFrame(alignEntry);
+          return;
+        }
+
+        window.scrollTo({ top: targetTop, left: window.scrollX, behavior: "auto" });
+        releaseEntrySnap();
+      };
+
+      entrySnapFrame = window.requestAnimationFrame(alignEntry);
     };
 
     const normalizeWheelDistance = (event: WheelEvent) => {
@@ -948,6 +987,7 @@ export default function CompetitiveAnalysis({
     };
 
     const handleEntryTouchStart = (event: TouchEvent) => {
+      touchActive = true;
       touchY = event.touches[0]?.clientY ?? null;
     };
 
@@ -959,6 +999,7 @@ export default function CompetitiveAnalysis({
       if (downwardPageDistance <= 0) return;
 
       if (growthNavigationEntrySnapRef.current) {
+        snapHoldUntil = Math.max(snapHoldUntil, performance.now() + 240);
         event.preventDefault();
         return;
       }
@@ -969,8 +1010,29 @@ export default function CompetitiveAnalysis({
     };
 
     const clearEntryTouch = () => {
+      touchActive = false;
       touchY = null;
+      if (growthNavigationEntrySnapRef.current) {
+        snapHoldUntil = Math.max(snapHoldUntil, performance.now() + 320);
+      }
     };
+
+    const handleEntryScroll = () => {
+      const nextScrollY = window.scrollY;
+      const movingDown = nextScrollY > lastWindowScrollY + 0.5;
+      lastWindowScrollY = nextScrollY;
+
+      if (growthNavigationEntrySnapRef.current) return;
+      if (entrySnapConsumed) {
+        if (workspacePassedRatio() < 0.5) entrySnapConsumed = false;
+        return;
+      }
+      if (movingDown && shouldSettleAtGrowthNavigation()) {
+        settleAtGrowthNavigation();
+      }
+    };
+
+    entrySnapConsumed = workspacePassedRatio() >= 0.65;
 
     window.addEventListener("wheel", handleEntryWheel, {
       capture: true,
@@ -980,15 +1042,17 @@ export default function CompetitiveAnalysis({
     window.addEventListener("touchmove", handleEntryTouchMove, { passive: false });
     window.addEventListener("touchend", clearEntryTouch, { passive: true });
     window.addEventListener("touchcancel", clearEntryTouch, { passive: true });
+    window.addEventListener("scroll", handleEntryScroll, { passive: true });
 
     return () => {
-      window.clearTimeout(releaseTimer);
+      window.cancelAnimationFrame(entrySnapFrame);
       growthNavigationEntrySnapRef.current = false;
       window.removeEventListener("wheel", handleEntryWheel, true);
       window.removeEventListener("touchstart", handleEntryTouchStart);
       window.removeEventListener("touchmove", handleEntryTouchMove);
       window.removeEventListener("touchend", clearEntryTouch);
       window.removeEventListener("touchcancel", clearEntryTouch);
+      window.removeEventListener("scroll", handleEntryScroll);
     };
   }, [initialCdsid]);
 
