@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
@@ -806,6 +807,13 @@ export default function CompetitiveAnalysis({
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
+  const growthStaffRosterDragRef = useRef<{
+    pointerId: number;
+    originY: number;
+    originScrollTop: number;
+    moved: boolean;
+  } | null>(null);
+  const suppressGrowthStaffRosterClickRef = useRef(false);
   const growthNavigationDetailDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -888,6 +896,57 @@ export default function CompetitiveAnalysis({
     event.currentTarget.setPointerCapture(event.pointerId);
     event.currentTarget.classList.add("is-dragging");
     event.preventDefault();
+  };
+
+  const beginGrowthStaffRosterDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+
+    suppressGrowthStaffRosterClickRef.current = false;
+    growthStaffRosterDragRef.current = {
+      pointerId: event.pointerId,
+      originY: event.clientY,
+      originScrollTop: event.currentTarget.scrollTop,
+      moved: false,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const moveGrowthStaffRosterDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const drag = growthStaffRosterDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const distance = event.clientY - drag.originY;
+    if (!drag.moved && Math.abs(distance) < 4) return;
+
+    drag.moved = true;
+    suppressGrowthStaffRosterClickRef.current = true;
+    event.currentTarget.classList.add("is-dragging");
+    event.currentTarget.scrollTop = drag.originScrollTop - distance;
+    event.preventDefault();
+  };
+
+  const endGrowthStaffRosterDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const drag = growthStaffRosterDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    growthStaffRosterDragRef.current = null;
+    event.currentTarget.classList.remove("is-dragging");
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const preventDraggedGrowthStaffSelection = (
+    event: ReactMouseEvent<HTMLDivElement>,
+  ) => {
+    if (!suppressGrowthStaffRosterClickRef.current) return;
+    suppressGrowthStaffRosterClickRef.current = false;
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const moveGrowthNavigationDetailDrag = (
@@ -2280,7 +2339,14 @@ export default function CompetitiveAnalysis({
           <div className="growth-navigation-workspace">
 
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
-              <div className="growth-staff-roster-list">
+              <div
+                className="growth-staff-roster-list"
+                onPointerDown={beginGrowthStaffRosterDrag}
+                onPointerMove={moveGrowthStaffRosterDrag}
+                onPointerUp={endGrowthStaffRosterDrag}
+                onPointerCancel={endGrowthStaffRosterDrag}
+                onClickCapture={preventDraggedGrowthStaffSelection}
+              >
                 {rankedSalesStaff.map(({ employee, average, deliveredSales }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
                   const isTeamLeader = employee.role === "영업팀장" || employee.jobTitle === "팀장";

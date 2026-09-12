@@ -415,6 +415,12 @@ html {
   .growth-staff-roster-list {
     scrollbar-width: thin;
     scrollbar-color: rgba(80, 101, 111, 0.62) transparent;
+    cursor: grab;
+  }
+
+  .growth-staff-roster-list.is-dragging {
+    cursor: grabbing;
+    user-select: none;
   }
 
   .growth-staff-roster-list::-webkit-scrollbar {
@@ -456,6 +462,7 @@ html {
     );
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 }
 

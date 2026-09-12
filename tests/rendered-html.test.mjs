@@ -288,8 +288,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<span>상담만족<\/span>|회신 건수<small>\(23 ~ 26 YTD\)<\/small>/);
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(104px, 1fr\) 76px 80px;/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-width: 100%;[^}]*overflow-x: hidden;[^}]*overflow-y: auto;/);
+  assert.match(navigation, /className="growth-staff-roster-list"[\s\S]*?onPointerDown=\{beginGrowthStaffRosterDrag\}[\s\S]*?onPointerMove=\{moveGrowthStaffRosterDrag\}[\s\S]*?onPointerUp=\{endGrowthStaffRosterDrag\}[\s\S]*?onClickCapture=\{preventDraggedGrowthStaffSelection\}/);
+  assert.match(source, /event\.currentTarget\.scrollTop = drag\.originScrollTop - distance;[\s\S]*?suppressGrowthStaffRosterClickRef\.current[\s\S]*?event\.stopPropagation\(\);/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-columns\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 76px 56px;[^}]*padding-right: 24px;/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-list::-webkit-scrollbar\s*\{[^}]*width: 6px;/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*cursor: grab;[^}]*\}[\s\S]*?\.growth-staff-roster-list\.is-dragging\s*\{[^}]*cursor: grabbing;[^}]*user-select: none;/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 76px 56px;/);
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(navigation, /const isTeamLeader = employee\.role === "영업팀장" \|\| employee\.jobTitle === "팀장";/);
@@ -546,7 +549,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   const rosterBaseHeightRule = css.indexOf("max-height: 660px;", css.indexOf(".growth-staff-roster-list"));
   const rosterViewportHeightRule = css.indexOf("var(--growth-navigation-summary-height, 152px) - 6px", rosterBaseHeightRule + 1);
   assert.ok(rosterBaseHeightRule >= 0 && rosterViewportHeightRule > rosterBaseHeightRule);
-  assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*overscroll-behavior-y:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch;/);
+  assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-staff-roster-list\s*\{[^}]*overscroll-behavior-y:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch;[^}]*touch-action:\s*pan-y;/);
   assert.doesNotMatch(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: sticky;/);
   assert.doesNotMatch(css, /\.growth-navigation-workspace::before\s*\{[^}]*position: sticky;/);
   assert.match(css, /\.growth-capability\s*\{[^}]*overflow: visible;[^}]*border: 0;[^}]*border-radius: 0;[^}]*background: transparent;/);
