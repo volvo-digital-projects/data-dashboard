@@ -432,6 +432,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /selectedStaffInitials/);
   assert.doesNotMatch(navigation, /<span className="staff-profile-silhouette"/);
   assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: contain;[\s\S]*?object-position: center bottom;/);
+  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*transform: scale\(1\.25\);[^}]*transform-origin: center top;/);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);

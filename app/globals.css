@@ -660,6 +660,13 @@ html {
   object-position: center top;
 }
 
+.growth-profile-photo img:not(.staff-profile-silhouette),
+.analysis-staff-profile-photo img:not(.staff-profile-silhouette) {
+  object-position: center top;
+  transform: scale(1.25);
+  transform-origin: center top;
+}
+
 .growth-profile-photo img.staff-profile-silhouette,
 .analysis-staff-profile-photo img.staff-profile-silhouette {
   width: 100%;
