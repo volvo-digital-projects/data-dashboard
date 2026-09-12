@@ -589,6 +589,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: auto;[^}]*min-width: max-content;[^}]*height: 22px;[^}]*align-items: center;[^}]*justify-content: center;[^}]*padding: 1px 18px 0;[^}]*font-size: 7\.5px;/);
   assert.match(source, /<strong><b>\{groupItems\.length\}<\/b>개소<\/strong>/);
   assert.match(css, /\.analysis-ranking-card > \.analysis-card-heading > strong\s*\{[^}]*min-height: 21px;[^}]*border-radius: 999px;[^}]*font-size: 7\.5px;/);
+  assert.match(css, /\.analysis-ranking-card footer\s*\{[^}]*gap: 0;[^}]*background: #eef5f7;/);
+  assert.match(css, /\.analysis-ranking-card footer span\s*\{[^}]*position: relative;[^}]*background: transparent;/);
+  assert.match(css, /\.analysis-ranking-card footer span \+ span::before\s*\{[^}]*top: 50%;[^}]*height: 16px;[^}]*transform: translateY\(-50%\);/);
   assert.match(navigation, /className="growth-capability-columns"[\s\S]*?className="growth-capability consultation"[\s\S]*?className="growth-capability sales"/);
   assert.match(css, /\.growth-capability-columns\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-capability-grid\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap: 6px;[^}]*padding: 0;/);

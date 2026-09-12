@@ -6623,21 +6623,33 @@ input:focus-visible {
 .analysis-ranking-card footer {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
+  gap: 0;
   margin-top: 8px;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--line);
+  background: #eef5f7;
 }
 
 .analysis-ranking-card footer span {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 9px 11px;
   color: var(--muted);
-  background: #f8fafb;
+  background: transparent;
   font-size: 9px;
+}
+
+.analysis-ranking-card footer span + span::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1px;
+  height: 16px;
+  background: rgba(75, 112, 128, 0.2);
+  content: "";
+  transform: translateY(-50%);
 }
 
 .analysis-ranking-card footer strong {
