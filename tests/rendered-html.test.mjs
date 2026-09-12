@@ -583,6 +583,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: sticky;/);
   assert.doesNotMatch(css, /\.growth-navigation-workspace::before\s*\{[^}]*position: sticky;/);
   assert.match(css, /\.growth-capability\s*\{[^}]*overflow: visible;[^}]*border: 0;[^}]*border-radius: 0;[^}]*background: transparent;/);
+  assert.match(css, /\.dashboard \.score-stack-heading\s*\{[^}]*padding-top: 4px;[^}]*background: #ffffff;/);
   assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -34px;[^}]*bottom: 100%;[^}]*background: var\(--paper\);/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 46px;[^}]*padding: 8px 16px;/);
   assert.match(css, /\.growth-navigation-source\s*\{[^}]*justify-content: flex-end;[^}]*margin-left: auto;/);

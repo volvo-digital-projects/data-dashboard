@@ -16644,6 +16644,7 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
      content cannot bleed through it. */
   .dashboard .score-stack-heading {
     isolation: isolate;
+    padding-top: 4px;
     background: #ffffff;
     box-shadow: none;
     backdrop-filter: none;
