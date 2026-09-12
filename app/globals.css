@@ -16625,8 +16625,9 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
     inset: 0 calc(-1 * var(--dashboard-sticky-content-gutter));
   }
 
-  /* Match page 2: the score panel begins after the shared shadow and 8px gap.
-     Keep only the panel's own heading cap, without extending it into that gap. */
+  /* Match page 2: keep the shared shadow and 8px page gap visible above the
+     score panel. The heading's mask covers only that gap so scrolled chart
+     content cannot bleed through it. */
   .dashboard .score-stack-heading {
     isolation: isolate;
     background: #ffffff;
@@ -16639,13 +16640,10 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
     position: absolute;
     top: -34px;
     right: -16px;
-    bottom: -1px;
+    bottom: 100%;
     left: -16px;
     z-index: 0;
-    border: 1px solid var(--color-border);
-    border-bottom: 0;
-    background: #ffffff;
-    box-shadow: 0 12px 18px -20px rgba(16, 42, 67, 0.58);
+    background: var(--paper);
     pointer-events: none;
   }
 
