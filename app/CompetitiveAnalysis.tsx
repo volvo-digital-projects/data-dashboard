@@ -58,6 +58,7 @@ type StaffYearMetric = { responses: number; scoreSum: number; sent?: number };
 type StaffKeyword = { label: string; mentions: number };
 type StaffEmployee = {
   name: string;
+  gender?: "female" | "male";
   role: "영업직원" | "영업팀장";
   jobTitle: string;
   hireDate: string;
@@ -166,6 +167,7 @@ const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
   StaffProfileShowroom
 >;
 const staffFallbackProfileImage = "/staff-profiles/neutral-human-silhouette.png";
+const staffFemaleFallbackProfileImage = "/staff-profiles/female-human-silhouette.svg";
 const staffCertificationRecords =
   staffCertificationsJson.records as StaffCertificationRecord[];
 const salesActivityByCdsid = salesActivityAnalysisJson.showrooms as Record<
@@ -915,7 +917,6 @@ export default function CompetitiveAnalysis({
       originScrollTop: event.currentTarget.scrollTop,
       moved: false,
     };
-    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const keepGrowthStaffRosterInView = () => {
@@ -955,6 +956,9 @@ export default function CompetitiveAnalysis({
 
     drag.moved = true;
     suppressGrowthStaffRosterClickRef.current = true;
+    if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
     event.currentTarget.classList.add("is-dragging");
     event.currentTarget.scrollTop = drag.originScrollTop - distance;
     event.preventDefault();
@@ -1435,6 +1439,9 @@ export default function CompetitiveAnalysis({
   const selectedStaffProfile = selectedStaffEmployee
     ? selectedStaffProfileShowroom?.employees[selectedStaffEmployee.name]
     : undefined;
+  const selectedStaffFallbackProfileImage = selectedStaffEmployee?.gender === "female"
+    ? staffFemaleFallbackProfileImage
+    : staffFallbackProfileImage;
   const selectedStaffCertificationCounts = {
     Grand: 0,
     Advanced: 0,
@@ -2287,7 +2294,7 @@ export default function CompetitiveAnalysis({
                   ) : (
                     <img
                       className="staff-profile-silhouette"
-                      src={staffFallbackProfileImage}
+                      src={selectedStaffFallbackProfileImage}
                       alt=""
                       draggable={false}
                     />
@@ -2613,7 +2620,7 @@ export default function CompetitiveAnalysis({
                             ) : (
                               <image
                                 className="photo-fallback-silhouette"
-                                href={staffFallbackProfileImage}
+                                href={selectedStaffFallbackProfileImage}
                                 x="-7.5"
                                 y="-7.5"
                                 width="15"
@@ -2862,7 +2869,7 @@ export default function CompetitiveAnalysis({
                             ) : (
                               <image
                                 className="photo-fallback-silhouette"
-                                href={staffFallbackProfileImage}
+                                href={selectedStaffFallbackProfileImage}
                                 x="-7.5"
                                 y="-7.5"
                                 width="15"
@@ -3160,7 +3167,7 @@ export default function CompetitiveAnalysis({
                   ) : (
                     <img
                       className="staff-profile-silhouette"
-                      src={staffFallbackProfileImage}
+                      src={selectedStaffFallbackProfileImage}
                       alt=""
                       aria-hidden="true"
                       draggable={false}
