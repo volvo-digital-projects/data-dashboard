@@ -888,17 +888,33 @@ export default function CompetitiveAnalysis({
     if (!workspace || !growthSummary) return;
 
     let entrySnapFrame = 0;
-    let entrySettleTimer = 0;
+    let wheelQuietTimer = 0;
     let entrySnapConsumed = false;
-    let pendingEntrySettle = false;
     let lastWindowScrollY = window.scrollY;
     let touchActive = false;
     let touchY: number | null = null;
+    let wheelGestureActive = false;
+    let entryAnimationComplete = false;
     let growthSummaryFlowTop =
       window.scrollY + growthSummary.getBoundingClientRect().top;
 
     const releaseEntrySnap = () => {
       growthNavigationEntrySnapRef.current = false;
+    };
+
+    const releaseEntrySnapWhenInputEnds = () => {
+      if (entryAnimationComplete && !touchActive && !wheelGestureActive) {
+        releaseEntrySnap();
+      }
+    };
+
+    const keepWheelGestureLocked = () => {
+      wheelGestureActive = true;
+      window.clearTimeout(wheelQuietTimer);
+      wheelQuietTimer = window.setTimeout(() => {
+        wheelGestureActive = false;
+        releaseEntrySnapWhenInputEnds();
+      }, 100);
     };
 
     const fixedHeaderBottom = () =>
@@ -925,9 +941,8 @@ export default function CompetitiveAnalysis({
 
     const settleAtGrowthNavigation = () => {
       entrySnapConsumed = true;
-      pendingEntrySettle = false;
+      entryAnimationComplete = false;
       growthNavigationEntrySnapRef.current = true;
-      window.clearTimeout(entrySettleTimer);
       window.cancelAnimationFrame(entrySnapFrame);
 
       const startTop = window.scrollY;
@@ -940,7 +955,7 @@ export default function CompetitiveAnalysis({
         "(prefers-reduced-motion: reduce)",
       ).matches
         ? 0
-        : 560;
+        : 420;
 
       const alignEntry = (timestamp: number) => {
         const progress = motionDuration
@@ -960,20 +975,11 @@ export default function CompetitiveAnalysis({
         }
 
         window.scrollTo({ top: targetTop, left: window.scrollX, behavior: "auto" });
-        releaseEntrySnap();
+        entryAnimationComplete = true;
+        releaseEntrySnapWhenInputEnds();
       };
 
       entrySnapFrame = window.requestAnimationFrame(alignEntry);
-    };
-
-    const queueEntrySettle = (delay = 90) => {
-      pendingEntrySettle = true;
-      window.clearTimeout(entrySettleTimer);
-      entrySettleTimer = window.setTimeout(() => {
-        if (!growthNavigationEntrySnapRef.current && pendingEntrySettle) {
-          settleAtGrowthNavigation();
-        }
-      }, delay);
     };
 
     const normalizeWheelDistance = (event: WheelEvent) => {
@@ -987,14 +993,20 @@ export default function CompetitiveAnalysis({
     const handleEntryWheel = (event: WheelEvent) => {
       if (event.ctrlKey || event.metaKey) return;
       if (event.deltaY <= 0) {
-        pendingEntrySettle = false;
-        window.clearTimeout(entrySettleTimer);
+        return;
+      }
+
+      if (growthNavigationEntrySnapRef.current) {
+        event.preventDefault();
+        keepWheelGestureLocked();
         return;
       }
 
       if (!shouldSettleAtGrowthNavigation(normalizeWheelDistance(event))) return;
       rememberGrowthSummaryFlowTop();
-      queueEntrySettle();
+      event.preventDefault();
+      keepWheelGestureLocked();
+      settleAtGrowthNavigation();
     };
 
     const handleEntryTouchStart = (event: TouchEvent) => {
@@ -1008,15 +1020,22 @@ export default function CompetitiveAnalysis({
       const downwardPageDistance = touchY - nextTouchY;
       touchY = nextTouchY;
       if (downwardPageDistance <= 0) return;
+
+      if (growthNavigationEntrySnapRef.current) {
+        event.preventDefault();
+        return;
+      }
+
       if (!shouldSettleAtGrowthNavigation(downwardPageDistance)) return;
       rememberGrowthSummaryFlowTop();
-      pendingEntrySettle = true;
+      event.preventDefault();
+      settleAtGrowthNavigation();
     };
 
     const clearEntryTouch = () => {
       touchActive = false;
       touchY = null;
-      if (pendingEntrySettle) queueEntrySettle(0);
+      releaseEntrySnapWhenInputEnds();
     };
 
     const handleEntryScroll = () => {
@@ -1034,8 +1053,7 @@ export default function CompetitiveAnalysis({
       }
       if (movingDown && shouldSettleAtGrowthNavigation()) {
         rememberGrowthSummaryFlowTop();
-        if (touchActive) pendingEntrySettle = true;
-        else queueEntrySettle();
+        settleAtGrowthNavigation();
       }
     };
 
@@ -1043,16 +1061,16 @@ export default function CompetitiveAnalysis({
 
     window.addEventListener("wheel", handleEntryWheel, {
       capture: true,
-      passive: true,
+      passive: false,
     });
     window.addEventListener("touchstart", handleEntryTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleEntryTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleEntryTouchMove, { passive: false });
     window.addEventListener("touchend", clearEntryTouch, { passive: true });
     window.addEventListener("touchcancel", clearEntryTouch, { passive: true });
     window.addEventListener("scroll", handleEntryScroll, { passive: true });
 
     return () => {
-      window.clearTimeout(entrySettleTimer);
+      window.clearTimeout(wheelQuietTimer);
       window.cancelAnimationFrame(entrySnapFrame);
       growthNavigationEntrySnapRef.current = false;
       window.removeEventListener("wheel", handleEntryWheel, true);
