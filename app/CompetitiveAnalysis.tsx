@@ -10,6 +10,7 @@ import {
   type CSSProperties,
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
+  type WheelEvent as ReactWheelEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
@@ -901,7 +902,9 @@ export default function CompetitiveAnalysis({
   const beginGrowthStaffRosterDrag = (
     event: ReactPointerEvent<HTMLDivElement>,
   ) => {
-    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) {
+      return;
+    }
 
     suppressGrowthStaffRosterClickRef.current = false;
     growthStaffRosterDragRef.current = {
@@ -911,6 +914,16 @@ export default function CompetitiveAnalysis({
       moved: false,
     };
     event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const scrollGrowthStaffRosterOnly = (
+    event: ReactWheelEvent<HTMLDivElement>,
+  ) => {
+    const roster = event.currentTarget;
+    if (roster.scrollHeight <= roster.clientHeight) return;
+    roster.scrollTop += event.deltaY;
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const moveGrowthStaffRosterDrag = (
@@ -2345,6 +2358,7 @@ export default function CompetitiveAnalysis({
                 onPointerMove={moveGrowthStaffRosterDrag}
                 onPointerUp={endGrowthStaffRosterDrag}
                 onPointerCancel={endGrowthStaffRosterDrag}
+                onWheel={scrollGrowthStaffRosterOnly}
                 onClickCapture={preventDraggedGrowthStaffSelection}
               >
                 {rankedSalesStaff.map(({ employee, average, deliveredSales }) => {
