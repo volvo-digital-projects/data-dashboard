@@ -722,6 +722,7 @@ html {
 }
 
 .growth-profile-metric strong .growth-profile-satisfaction-rank {
+  margin-left: 0;
   color: #3f7588;
   font-family: var(--font-ui);
   font-weight: 600;

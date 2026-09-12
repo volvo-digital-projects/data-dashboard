@@ -2310,7 +2310,7 @@ export default function CompetitiveAnalysis({
                 <strong>
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
-                  <small>/10</small>
+                  <small>/10점</small>
                   {selectedStaffSatisfactionTopPercent === null ? null : (
                     <small className="growth-profile-satisfaction-rank">
                       (상위 {selectedStaffSatisfactionTopPercent.toFixed(1)}%)
