@@ -2967,12 +2967,12 @@ export default function CompetitiveAnalysis({
                             <span>
                               <b>{selectedDealerRankName}</b> {selectedStaffDealerSalesRank ?? "―"}위
                               <i aria-hidden="true">/</i>
-                              {selectedStaffDealerSalesPopulation.length}
+                              전체 {selectedStaffDealerSalesPopulation.length}
                             </span>
                             <span>
                               <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b> {selectedStaffSalesRank ?? "―"}위
                               <i aria-hidden="true">/</i>
-                              {selectedShowroomSalesPopulationCount}
+                              전체 {selectedShowroomSalesPopulationCount}
                             </span>
                           </small>
                           <small>
