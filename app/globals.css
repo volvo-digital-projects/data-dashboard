@@ -16657,7 +16657,7 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
     bottom: 100%;
     left: -16px;
     z-index: 0;
-    background: var(--paper);
+    background: #ffffff;
     pointer-events: none;
   }
 
