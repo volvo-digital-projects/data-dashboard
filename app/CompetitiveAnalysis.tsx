@@ -823,6 +823,7 @@ export default function CompetitiveAnalysis({
     originY: number;
     originScrollTop: number;
   } | null>(null);
+  const growthNavigationEntrySnapRef = useRef(false);
   const staffAnalysisCardRef = useRef<HTMLElement>(null);
   const staffAnalysisHeadingRef = useRef<HTMLElement>(null);
   const scatterMotionTimersRef = useRef<number[]>([]);
@@ -880,6 +881,116 @@ export default function CompetitiveAnalysis({
       document.removeEventListener("keydown", preventKeyboardZoom);
     };
   }, []);
+
+  useEffect(() => {
+    const workspace = analysisWorkspaceRef.current;
+    const growthSummary = growthNavigationSummaryRef.current;
+    if (!workspace || !growthSummary) return;
+
+    let releaseTimer = 0;
+    let touchY: number | null = null;
+
+    const releaseEntrySnap = () => {
+      growthNavigationEntrySnapRef.current = false;
+    };
+
+    const fixedHeaderBottom = () =>
+      Math.max(0, stickyShellRef.current?.getBoundingClientRect().bottom ?? 0);
+
+    const shouldSettleAtGrowthNavigation = (projectedDistance = 0) => {
+      if (!window.matchMedia("(min-width: 600px)").matches) return false;
+
+      const workspaceBounds = workspace.getBoundingClientRect();
+      const summaryBounds = growthSummary.getBoundingClientRect();
+      const headerBottom = fixedHeaderBottom();
+      const passedDistance = headerBottom - workspaceBounds.top + projectedDistance;
+      const passedRatio = passedDistance / Math.max(1, workspaceBounds.height);
+
+      return passedRatio >= 0.65 && summaryBounds.top > headerBottom + 8;
+    };
+
+    const settleAtGrowthNavigation = () => {
+      growthNavigationEntrySnapRef.current = true;
+      window.clearTimeout(releaseTimer);
+
+      const summaryBounds = growthSummary.getBoundingClientRect();
+      const targetTop =
+        window.scrollY + summaryBounds.top - fixedHeaderBottom() - 8;
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+
+      releaseTimer = window.setTimeout(releaseEntrySnap, 720);
+    };
+
+    const normalizeWheelDistance = (event: WheelEvent) => {
+      if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
+      if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
+        return event.deltaY * window.innerHeight;
+      }
+      return event.deltaY;
+    };
+
+    const handleEntryWheel = (event: WheelEvent) => {
+      if (event.deltaY <= 0 || event.ctrlKey || event.metaKey) return;
+
+      if (growthNavigationEntrySnapRef.current) {
+        event.preventDefault();
+        return;
+      }
+
+      if (!shouldSettleAtGrowthNavigation(normalizeWheelDistance(event))) return;
+      event.preventDefault();
+      settleAtGrowthNavigation();
+    };
+
+    const handleEntryTouchStart = (event: TouchEvent) => {
+      touchY = event.touches[0]?.clientY ?? null;
+    };
+
+    const handleEntryTouchMove = (event: TouchEvent) => {
+      const nextTouchY = event.touches[0]?.clientY ?? null;
+      if (touchY === null || nextTouchY === null) return;
+      const downwardPageDistance = touchY - nextTouchY;
+      touchY = nextTouchY;
+      if (downwardPageDistance <= 0) return;
+
+      if (growthNavigationEntrySnapRef.current) {
+        event.preventDefault();
+        return;
+      }
+
+      if (!shouldSettleAtGrowthNavigation(downwardPageDistance)) return;
+      event.preventDefault();
+      settleAtGrowthNavigation();
+    };
+
+    const clearEntryTouch = () => {
+      touchY = null;
+    };
+
+    window.addEventListener("wheel", handleEntryWheel, {
+      capture: true,
+      passive: false,
+    });
+    window.addEventListener("touchstart", handleEntryTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleEntryTouchMove, { passive: false });
+    window.addEventListener("touchend", clearEntryTouch, { passive: true });
+    window.addEventListener("touchcancel", clearEntryTouch, { passive: true });
+
+    return () => {
+      window.clearTimeout(releaseTimer);
+      growthNavigationEntrySnapRef.current = false;
+      window.removeEventListener("wheel", handleEntryWheel, true);
+      window.removeEventListener("touchstart", handleEntryTouchStart);
+      window.removeEventListener("touchmove", handleEntryTouchMove);
+      window.removeEventListener("touchend", clearEntryTouch);
+      window.removeEventListener("touchcancel", clearEntryTouch);
+    };
+  }, [initialCdsid]);
 
   const beginGrowthNavigationDetailDrag = (
     event: ReactPointerEvent<HTMLDivElement>,
