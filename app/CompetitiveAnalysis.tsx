@@ -909,7 +909,6 @@ export default function CompetitiveAnalysis({
       return;
     }
 
-    keepGrowthStaffRosterInView();
     suppressGrowthStaffRosterClickRef.current = false;
     growthStaffRosterDragRef.current = {
       pointerId: event.pointerId,
@@ -959,6 +958,7 @@ export default function CompetitiveAnalysis({
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.setPointerCapture(event.pointerId);
     }
+    keepGrowthStaffRosterInView();
     event.currentTarget.classList.add("is-dragging");
     event.currentTarget.scrollTop = drag.originScrollTop - distance;
     event.preventDefault();

@@ -289,10 +289,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-staff-roster-columns,[\s\S]*?\.growth-staff-roster-list button\s*\{[^}]*grid-template-columns: minmax\(104px, 1fr\) 76px 80px;/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-width: 100%;[^}]*overflow-x: hidden;[^}]*overflow-y: auto;/);
   assert.match(navigation, /className="growth-staff-roster-list"[\s\S]*?ref=\{growthStaffRosterRef\}[\s\S]*?onPointerDown=\{beginGrowthStaffRosterDrag\}[\s\S]*?onPointerMove=\{moveGrowthStaffRosterDrag\}[\s\S]*?onPointerUp=\{endGrowthStaffRosterDrag\}[\s\S]*?onWheel=\{scrollGrowthStaffRosterOnly\}[\s\S]*?onClickCapture=\{preventDraggedGrowthStaffSelection\}/);
-  assert.match(source, /if \(!event\.currentTarget\.hasPointerCapture\(event\.pointerId\)\) \{[\s\S]*?event\.currentTarget\.setPointerCapture\(event\.pointerId\);[\s\S]*?event\.currentTarget\.scrollTop = drag\.originScrollTop - distance;[\s\S]*?suppressGrowthStaffRosterClickRef\.current[\s\S]*?event\.stopPropagation\(\);/);
+  assert.match(source, /if \(!event\.currentTarget\.hasPointerCapture\(event\.pointerId\)\) \{[\s\S]*?event\.currentTarget\.setPointerCapture\(event\.pointerId\);[\s\S]*?keepGrowthStaffRosterInView\(\);[\s\S]*?event\.currentTarget\.scrollTop = drag\.originScrollTop - distance;[\s\S]*?suppressGrowthStaffRosterClickRef\.current[\s\S]*?event\.stopPropagation\(\);/);
   assert.match(source, /const scrollGrowthStaffRosterOnly = [\s\S]*?roster\.scrollTop \+= event\.deltaY;[\s\S]*?event\.preventDefault\(\);[\s\S]*?event\.stopPropagation\(\);/);
   assert.match(source, /const keepGrowthStaffRosterInView = \(\) => \{[\s\S]*?const safeTop = summaryBounds\.bottom \+ 8;[\s\S]*?window\.scrollBy\(\{[\s\S]*?top: rosterBounds\.top - safeTop,[\s\S]*?behavior: "auto"/);
-  assert.match(source, /keepGrowthStaffRosterInView\(\);[\s\S]*?suppressGrowthStaffRosterClickRef\.current = false;/);
+  assert.doesNotMatch(source.match(/const beginGrowthStaffRosterDrag = [\s\S]*?const keepGrowthStaffRosterInView =/)?.[0] ?? "", /keepGrowthStaffRosterInView\(\)/);
   assert.match(source, /const scrollGrowthStaffRosterOnly = [\s\S]*?keepGrowthStaffRosterInView\(\);[\s\S]*?roster\.scrollTop \+= event\.deltaY;/);
   assert.match(source, /if \(!event\.isPrimary \|\| \(event\.pointerType === "mouse" && event\.button !== 0\)\)/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*scroll-snap-type: y proximity;/);
