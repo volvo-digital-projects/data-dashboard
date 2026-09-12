@@ -894,6 +894,8 @@ export default function CompetitiveAnalysis({
     let lastWindowScrollY = window.scrollY;
     let touchActive = false;
     let touchY: number | null = null;
+    let growthSummaryFlowTop =
+      window.scrollY + growthSummary.getBoundingClientRect().top;
 
     const releaseEntrySnap = () => {
       growthNavigationEntrySnapRef.current = false;
@@ -914,14 +916,11 @@ export default function CompetitiveAnalysis({
       return !entrySnapConsumed && workspacePassedRatio(projectedDistance) >= 0.65;
     };
 
-    const documentTop = (element: HTMLElement) => {
-      let top = 0;
-      let current: HTMLElement | null = element;
-      while (current) {
-        top += current.offsetTop;
-        current = current.offsetParent as HTMLElement | null;
+    const rememberGrowthSummaryFlowTop = () => {
+      const summaryBounds = growthSummary.getBoundingClientRect();
+      if (summaryBounds.top > fixedHeaderBottom() + 8) {
+        growthSummaryFlowTop = window.scrollY + summaryBounds.top;
       }
-      return top;
     };
 
     const settleAtGrowthNavigation = () => {
@@ -934,7 +933,7 @@ export default function CompetitiveAnalysis({
       const startTop = window.scrollY;
       const targetTop = Math.max(
         0,
-        documentTop(growthSummary) - fixedHeaderBottom() - 8,
+        growthSummaryFlowTop - fixedHeaderBottom() - 8,
       );
       const startedAt = performance.now();
       const motionDuration = window.matchMedia(
@@ -994,6 +993,7 @@ export default function CompetitiveAnalysis({
       }
 
       if (!shouldSettleAtGrowthNavigation(normalizeWheelDistance(event))) return;
+      rememberGrowthSummaryFlowTop();
       queueEntrySettle();
     };
 
@@ -1009,6 +1009,7 @@ export default function CompetitiveAnalysis({
       touchY = nextTouchY;
       if (downwardPageDistance <= 0) return;
       if (!shouldSettleAtGrowthNavigation(downwardPageDistance)) return;
+      rememberGrowthSummaryFlowTop();
       pendingEntrySettle = true;
     };
 
@@ -1025,10 +1026,14 @@ export default function CompetitiveAnalysis({
 
       if (growthNavigationEntrySnapRef.current) return;
       if (entrySnapConsumed) {
-        if (workspacePassedRatio() < 0.5) entrySnapConsumed = false;
+        if (workspacePassedRatio() < 0.5) {
+          entrySnapConsumed = false;
+          rememberGrowthSummaryFlowTop();
+        }
         return;
       }
       if (movingDown && shouldSettleAtGrowthNavigation()) {
+        rememberGrowthSummaryFlowTop();
         if (touchActive) pendingEntrySettle = true;
         else queueEntrySettle();
       }
