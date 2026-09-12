@@ -161,6 +161,20 @@ html {
 }
 
 @media (min-width: 600px) {
+  html.analysis-viewport-locked,
+  html.analysis-viewport-locked body {
+    scroll-snap-type: y proximity;
+  }
+
+  .competitive-analysis-page > .growth-navigation {
+    scroll-margin-top: calc(
+      var(--growth-navigation-sticky-top, 356px) +
+        var(--growth-navigation-summary-height, 152px) + 8px
+    );
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
   .competitive-analysis-page > .growth-navigation-sticky-summary,
   .competitive-analysis-page > .growth-navigation,
   .competitive-analysis-page > .v3s-award-card {

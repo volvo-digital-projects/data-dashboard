@@ -886,6 +886,7 @@ export default function CompetitiveAnalysis({
     const workspace = analysisWorkspaceRef.current;
     const growthSummary = growthNavigationSummaryRef.current;
     if (!workspace || !growthSummary) return;
+    if (CSS.supports("scroll-snap-type: y proximity")) return;
 
     let entrySnapFrame = 0;
     let wheelQuietTimer = 0;

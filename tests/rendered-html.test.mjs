@@ -295,6 +295,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source.match(/const beginGrowthStaffRosterDrag = [\s\S]*?const keepGrowthStaffRosterInView =/)?.[0] ?? "", /keepGrowthStaffRosterInView\(\)/);
   assert.match(source, /const scrollGrowthStaffRosterOnly = [\s\S]*?keepGrowthStaffRosterInView\(\);[\s\S]*?roster\.scrollTop \+= event\.deltaY;/);
   assert.match(source, /const shouldSettleAtGrowthNavigation = [\s\S]*?!entrySnapConsumed && workspacePassedRatio\(projectedDistance\) >= 0\.65;/);
+  assert.match(source, /if \(CSS\.supports\("scroll-snap-type: y proximity"\)\) return;/);
+  assert.match(css, /html\.analysis-viewport-locked,[\s\S]*?html\.analysis-viewport-locked body\s*\{[^}]*scroll-snap-type: y proximity;/);
+  assert.match(css, /\.competitive-analysis-page > \.growth-navigation\s*\{[^}]*scroll-margin-top: calc\([\s\S]*?--growth-navigation-sticky-top[\s\S]*?--growth-navigation-summary-height[\s\S]*?scroll-snap-align: start;[^}]*scroll-snap-stop: always;/);
   assert.match(source, /const handleEntryWheel = [\s\S]*?normalizeWheelDistance\(event\)[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtGrowthNavigation\(\);/);
   assert.match(source, /const handleEntryTouchMove = [\s\S]*?downwardPageDistance[\s\S]*?shouldSettleAtGrowthNavigation\(downwardPageDistance\)[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtGrowthNavigation\(\);/);
   assert.match(source, /window\.addEventListener\("touchmove", handleEntryTouchMove, \{ passive: false \}\)/);
