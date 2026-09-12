@@ -888,9 +888,10 @@ export default function CompetitiveAnalysis({
     if (!workspace || !growthSummary) return;
 
     let entrySnapFrame = 0;
+    let entrySettleTimer = 0;
     let entrySnapConsumed = false;
+    let pendingEntrySettle = false;
     let lastWindowScrollY = window.scrollY;
-    let snapHoldUntil = 0;
     let touchActive = false;
     let touchY: number | null = null;
 
@@ -925,7 +926,9 @@ export default function CompetitiveAnalysis({
 
     const settleAtGrowthNavigation = () => {
       entrySnapConsumed = true;
+      pendingEntrySettle = false;
       growthNavigationEntrySnapRef.current = true;
+      window.clearTimeout(entrySettleTimer);
       window.cancelAnimationFrame(entrySnapFrame);
 
       const startTop = window.scrollY;
@@ -938,8 +941,7 @@ export default function CompetitiveAnalysis({
         "(prefers-reduced-motion: reduce)",
       ).matches
         ? 0
-        : 460;
-      snapHoldUntil = startedAt + motionDuration + 360;
+        : 560;
 
       const alignEntry = (timestamp: number) => {
         const progress = motionDuration
@@ -953,7 +955,7 @@ export default function CompetitiveAnalysis({
 
         window.scrollTo({ top: nextTop, left: window.scrollX, behavior: "auto" });
 
-        if (progress < 1 || touchActive || timestamp < snapHoldUntil) {
+        if (progress < 1) {
           entrySnapFrame = window.requestAnimationFrame(alignEntry);
           return;
         }
@@ -965,6 +967,16 @@ export default function CompetitiveAnalysis({
       entrySnapFrame = window.requestAnimationFrame(alignEntry);
     };
 
+    const queueEntrySettle = (delay = 90) => {
+      pendingEntrySettle = true;
+      window.clearTimeout(entrySettleTimer);
+      entrySettleTimer = window.setTimeout(() => {
+        if (!growthNavigationEntrySnapRef.current && pendingEntrySettle) {
+          settleAtGrowthNavigation();
+        }
+      }, delay);
+    };
+
     const normalizeWheelDistance = (event: WheelEvent) => {
       if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
       if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
@@ -974,16 +986,15 @@ export default function CompetitiveAnalysis({
     };
 
     const handleEntryWheel = (event: WheelEvent) => {
-      if (event.deltaY <= 0 || event.ctrlKey || event.metaKey) return;
-
-      if (growthNavigationEntrySnapRef.current) {
-        event.preventDefault();
+      if (event.ctrlKey || event.metaKey) return;
+      if (event.deltaY <= 0) {
+        pendingEntrySettle = false;
+        window.clearTimeout(entrySettleTimer);
         return;
       }
 
       if (!shouldSettleAtGrowthNavigation(normalizeWheelDistance(event))) return;
-      event.preventDefault();
-      settleAtGrowthNavigation();
+      queueEntrySettle();
     };
 
     const handleEntryTouchStart = (event: TouchEvent) => {
@@ -997,24 +1008,14 @@ export default function CompetitiveAnalysis({
       const downwardPageDistance = touchY - nextTouchY;
       touchY = nextTouchY;
       if (downwardPageDistance <= 0) return;
-
-      if (growthNavigationEntrySnapRef.current) {
-        snapHoldUntil = Math.max(snapHoldUntil, performance.now() + 240);
-        event.preventDefault();
-        return;
-      }
-
       if (!shouldSettleAtGrowthNavigation(downwardPageDistance)) return;
-      event.preventDefault();
-      settleAtGrowthNavigation();
+      pendingEntrySettle = true;
     };
 
     const clearEntryTouch = () => {
       touchActive = false;
       touchY = null;
-      if (growthNavigationEntrySnapRef.current) {
-        snapHoldUntil = Math.max(snapHoldUntil, performance.now() + 320);
-      }
+      if (pendingEntrySettle) queueEntrySettle(0);
     };
 
     const handleEntryScroll = () => {
@@ -1028,7 +1029,8 @@ export default function CompetitiveAnalysis({
         return;
       }
       if (movingDown && shouldSettleAtGrowthNavigation()) {
-        settleAtGrowthNavigation();
+        if (touchActive) pendingEntrySettle = true;
+        else queueEntrySettle();
       }
     };
 
@@ -1036,15 +1038,16 @@ export default function CompetitiveAnalysis({
 
     window.addEventListener("wheel", handleEntryWheel, {
       capture: true,
-      passive: false,
+      passive: true,
     });
     window.addEventListener("touchstart", handleEntryTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleEntryTouchMove, { passive: false });
+    window.addEventListener("touchmove", handleEntryTouchMove, { passive: true });
     window.addEventListener("touchend", clearEntryTouch, { passive: true });
     window.addEventListener("touchcancel", clearEntryTouch, { passive: true });
     window.addEventListener("scroll", handleEntryScroll, { passive: true });
 
     return () => {
+      window.clearTimeout(entrySettleTimer);
       window.cancelAnimationFrame(entrySnapFrame);
       growthNavigationEntrySnapRef.current = false;
       window.removeEventListener("wheel", handleEntryWheel, true);
