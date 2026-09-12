@@ -808,6 +808,7 @@ export default function CompetitiveAnalysis({
   const stickyAnchorRef = useRef<HTMLDivElement>(null);
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
+  const growthStaffRosterRef = useRef<HTMLDivElement>(null);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -906,6 +907,7 @@ export default function CompetitiveAnalysis({
       return;
     }
 
+    keepGrowthStaffRosterInView();
     suppressGrowthStaffRosterClickRef.current = false;
     growthStaffRosterDragRef.current = {
       pointerId: event.pointerId,
@@ -916,11 +918,28 @@ export default function CompetitiveAnalysis({
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
+  const keepGrowthStaffRosterInView = () => {
+    const roster = growthStaffRosterRef.current;
+    const summary = growthNavigationSummaryRef.current;
+    if (!roster || !summary) return;
+
+    const rosterBounds = roster.getBoundingClientRect();
+    const summaryBounds = summary.getBoundingClientRect();
+    const safeTop = summaryBounds.bottom + 8;
+    if (rosterBounds.top >= safeTop - 1) return;
+
+    window.scrollBy({
+      top: rosterBounds.top - safeTop,
+      behavior: "auto",
+    });
+  };
+
   const scrollGrowthStaffRosterOnly = (
     event: ReactWheelEvent<HTMLDivElement>,
   ) => {
     const roster = event.currentTarget;
     if (roster.scrollHeight <= roster.clientHeight) return;
+    keepGrowthStaffRosterInView();
     roster.scrollTop += event.deltaY;
     event.preventDefault();
     event.stopPropagation();
@@ -2354,6 +2373,7 @@ export default function CompetitiveAnalysis({
             <aside className="growth-staff-roster" aria-label="소속 영업직원 선택 · 입사일자 오래된 순">
               <div
                 className="growth-staff-roster-list"
+                ref={growthStaffRosterRef}
                 onPointerDown={beginGrowthStaffRosterDrag}
                 onPointerMove={moveGrowthStaffRosterDrag}
                 onPointerUp={endGrowthStaffRosterDrag}
