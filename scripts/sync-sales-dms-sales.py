@@ -79,12 +79,14 @@ def sales_report_frame(page: Any) -> tuple[Any, Any] | None:
             # different legacy frames. Identify the actionable Area Total
             # frame by its unique query controls; the downloaded workbook is
             # validated independently before any dashboard data is written.
-            if (
-                "출고기간" in body
-                and "검색" in body
-                and "다운로드" in body
-                and len(date_inputs(frame)) >= 2
-            ):
+            if "출고기간" in body and len(date_inputs(frame)) >= 2:
+                # The two controls are legacy input elements whose values do
+                # not appear in body.innerText.
+                try:
+                    visible_control(frame, "검색")
+                    visible_control(frame, "다운로드")
+                except RuntimeError:
+                    continue
                 return candidate_page, frame
     return None
 
