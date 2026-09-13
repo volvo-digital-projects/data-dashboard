@@ -478,13 +478,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /1인 평균 \{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}대 대비/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
-  assert.equal(salesActivity.source.salesAsOf, "2026-09-10");
+  assert.match(salesActivity.source.salesAsOf, /^2026-\d{2}-\d{2}$/);
+  assert.equal(salesActivity.source.salesUpdateSchedule, "매일 09:00 KST · 1일 1회");
   assert.doesNotMatch(navigation, /salesActivitySource\.salesAsOf\.replaceAll/);
   assert.equal(salesActivity.showrooms["6KR6834"].salesDealerCode, "HMGD");
   assert.equal(salesActivity.showrooms["6KR6834"].summary.activityStaffCount, 0);
-  assert.equal(salesActivity.showrooms["6KR6834"].summary.deliveredSales, 270);
+  assert.ok(salesActivity.showrooms["6KR6834"].summary.deliveredSales > 0);
   const kimDaejunSales = salesActivity.showrooms["6KR6834"].staff.find((staff) => staff.name === "김대준");
-  assert.equal(kimDaejunSales.deliveredSales, 49);
+  assert.ok(kimDaejunSales.deliveredSales >= 49);
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-sales-funnel\s*\{[^}]*grid-template-columns: minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\) 44px minmax\(58px, 1fr\);/);
   assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
@@ -1156,14 +1157,15 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeChunk, new RegExp(release.id));
 });
 
-test("downloads privacy-safe Sales-DMS staff sales with a manual production gate", async () => {
+test("downloads privacy-safe Sales-DMS staff sales every day at 09:00 KST", async () => {
   const [workflow, source] = await Promise.all([
     readFile(new URL("../.github/workflows/sync-sales-dms-sales.yml", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-sales-dms-sales.py", import.meta.url), "utf8"),
   ]);
 
   assert.match(workflow, /workflow_dispatch:/);
-  assert.doesNotMatch(workflow, /schedule:/);
+  assert.match(workflow, /schedule:/);
+  assert.match(workflow, /cron: "0 0 \* \* \*"/);
   assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
   assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
   assert.match(workflow, /python scripts\/sync-sales-dms-sales\.py/);
