@@ -15522,6 +15522,10 @@ button.header-status-item {
     padding-bottom: calc(100dvh - 148px);
   }
 
+  .competitive-analysis-page > .analysis-sticky-anchor {
+    margin-inline: calc(-1 * var(--dashboard-content-overhang));
+  }
+
   .competitive-analysis-page .analysis-sticky-shell {
     position: static;
     width: auto;
