@@ -180,7 +180,15 @@ def download_sales_report(user_id: str, password: str, as_of: date, destination:
             report_page, frame = wait_for_sales_report(page, timeout_ms=120_000)
             with report_page.expect_download(timeout=900_000) as download_info:
                 visible_control(frame, "다운로드").click(timeout=20_000)
-            download_info.value.save_as(destination)
+            download = download_info.value
+            download.save_as(destination)
+            signature = destination.read_bytes()[:8].hex()
+            print(
+                "Sales-DMS 다운로드 완료: "
+                f"파일명={download.suggested_filename!r}, "
+                f"크기={destination.stat().st_size}바이트, 형식={signature}",
+                flush=True,
+            )
         finally:
             browser.close()
 
