@@ -1638,6 +1638,14 @@ export default function CompetitiveAnalysis({
   );
   const selectedStaffCommentTotalMentions =
     selectedStaffStrengthTotalMentions + selectedStaffImprovementTotalMentions;
+  const selectedStaffStrengthShare = selectedStaffCommentTotalMentions > 0
+    ? Math.round(
+        (selectedStaffStrengthTotalMentions / selectedStaffCommentTotalMentions) * 1_000,
+      ) / 10
+    : 0;
+  const selectedStaffImprovementShare = selectedStaffCommentTotalMentions > 0
+    ? Number((100 - selectedStaffStrengthShare).toFixed(1))
+    : 0;
   const selectedStaffStrengthMax = Math.max(
     1,
     ...selectedStaffStrengthKeywords.map((keyword) => keyword.mentions),
@@ -2876,7 +2884,7 @@ export default function CompetitiveAnalysis({
 
                 <div className="growth-evidence-grid">
                   <article className="growth-comment-evidence strength">
-                    <header><span>유지/ 강화 사항</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
+                    <header><span>강화({selectedStaffStrengthShare.toFixed(1)}%)</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars" key={`strength-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffStrengthKeywords.length ? (
                         <>
@@ -2903,7 +2911,7 @@ export default function CompetitiveAnalysis({
                     </div>
                   </article>
                   <article className="growth-comment-evidence improvement">
-                    <header><span>보완/ 수정 사항</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
+                    <header><span>수정({selectedStaffImprovementShare.toFixed(1)}%)</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars" key={`improvement-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffImprovementKeywords.length ? (
                         <>
