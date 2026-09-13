@@ -10,6 +10,7 @@ import sys
 import tempfile
 from collections import defaultdict
 from datetime import date, datetime
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -27,6 +28,36 @@ LOGIN_URL = (
 TARGET_ROLES = {"영업직원", "영업팀장"}
 MINIMUM_REPORT_ROWS = 5_000
 MINIMUM_MATCHED_SALES = 1_000
+
+
+class SpreadsheetHtmlParser(HTMLParser):
+    """Read the HTML-table .xls format exported by the legacy DMS."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.rows: list[list[str]] = []
+        self._row: list[str] | None = None
+        self._cell: list[str] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() == "tr":
+            self._row = []
+        elif tag.lower() in {"th", "td"} and self._row is not None:
+            self._cell = []
+
+    def handle_data(self, data: str) -> None:
+        if self._cell is not None:
+            self._cell.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        normalized = tag.lower()
+        if normalized in {"th", "td"} and self._row is not None and self._cell is not None:
+            self._row.append(text("".join(self._cell)))
+            self._cell = None
+        elif normalized == "tr" and self._row is not None:
+            if self._row:
+                self.rows.append(self._row)
+            self._row = None
 
 
 def text(value: Any) -> str:
@@ -201,6 +232,36 @@ def header_map(values: tuple[Any, ...]) -> dict[str, int]:
     }
 
 
+def load_sales_rows(report_path: Path) -> tuple[dict[str, int], list[list[Any]]]:
+    signature = report_path.read_bytes()[:8]
+    if signature.startswith(b"PK"):
+        workbook = openpyxl.load_workbook(report_path, read_only=True, data_only=True)
+        worksheet = workbook.active
+        rows = [list(row) for row in worksheet.iter_rows(values_only=True)]
+        workbook.close()
+    else:
+        payload = report_path.read_bytes()
+        decoded: str | None = None
+        for encoding in ("utf-8-sig", "cp949", "euc-kr"):
+            try:
+                decoded = payload.decode(encoding)
+                break
+            except UnicodeDecodeError:
+                continue
+        if decoded is None:
+            raise RuntimeError("Sales-DMS 다운로드의 문자 인코딩을 확인할 수 없습니다.")
+        parser = SpreadsheetHtmlParser()
+        parser.feed(decoded)
+        rows = parser.rows
+
+    required = {"Delivery Date", "출고여부", "Dealer", "고객명", "영업직원"}
+    for index, values in enumerate(rows):
+        headers = header_map(tuple(values))
+        if required <= set(headers):
+            return headers, rows[index + 1 :]
+    raise RuntimeError(f"Actual Monthly Sales 필수 열이 없습니다: {sorted(required)}")
+
+
 def default_activity(name: str) -> dict[str, Any]:
     return {
         "name": name,
@@ -243,18 +304,17 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
         lambda: [0] * month_count
     )
     customers_by_staff: dict[tuple[str, str], set[str]] = defaultdict(set)
-    workbook = openpyxl.load_workbook(report_path, read_only=True, data_only=True)
-    worksheet = workbook.active
-    headers = header_map(next(worksheet.iter_rows(min_row=3, max_row=3, values_only=True)))
-    required = {"Delivery Date", "출고여부", "Dealer", "고객명", "영업직원"}
-    if missing := required - set(headers):
-        workbook.close()
-        raise RuntimeError(f"Actual Monthly Sales 필수 열이 없습니다: {sorted(missing)}")
-
-    raw_rows = max(0, worksheet.max_row - 3)
+    headers, report_rows = load_sales_rows(report_path)
+    raw_rows = len(report_rows)
     eligible_sales = 0
     report_codes: set[str] = set()
-    for values in worksheet.iter_rows(min_row=4, values_only=True):
+    last_required_index = max(
+        headers[label]
+        for label in ("Delivery Date", "출고여부", "Dealer", "고객명", "영업직원")
+    )
+    for values in report_rows:
+        if len(values) <= last_required_index:
+            continue
         delivery_date = parse_date(values[headers["Delivery Date"]])
         shipped = text(values[headers["출고여부"]])
         dealer_code = text(values[headers["Dealer"]])
@@ -275,8 +335,6 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
         customer = text(values[headers["고객명"]]).casefold()
         if customer:
             customers_by_staff[key].add(customer)
-    workbook.close()
-
     if raw_rows < MINIMUM_REPORT_ROWS or eligible_sales < MINIMUM_REPORT_ROWS // 2:
         raise RuntimeError(
             f"판매 원본이 비정상적으로 적어 중단했습니다: 원본 {raw_rows}행, 출고 {eligible_sales}건"
