@@ -75,9 +75,12 @@ def sales_report_frame(page: Any) -> tuple[Any, Any] | None:
                 body = frame.locator("body").inner_text(timeout=3_000)
             except Exception:
                 continue
+            # The report title/menu and the query form are rendered in
+            # different legacy frames. Identify the actionable Area Total
+            # frame by its unique query controls; the downloaded workbook is
+            # validated independently before any dashboard data is written.
             if (
-                "Actual Monthly Sales" in body
-                and "출고기간" in body
+                "출고기간" in body
                 and "검색" in body
                 and "다운로드" in body
                 and len(date_inputs(frame)) >= 2
