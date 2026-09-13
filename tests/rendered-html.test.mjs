@@ -5308,6 +5308,10 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   );
   assert.match(
     css,
+    /\.analysis-workspace\s*\{[^}]*grid-template-columns: minmax\(0, 2fr\) minmax\(360px, 1fr\);[^}]*gap: var\(--dashboard-card-gap\);/,
+  );
+  assert.match(
+    css,
     /\.analysis-ranking-list\s*\{[^}]*min-height: 0[^}]*overflow-y: auto[^}]*scrollbar-gutter: stable/,
   );
   assert.match(

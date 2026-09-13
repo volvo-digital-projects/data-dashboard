@@ -14528,7 +14528,7 @@ body {
 .analysis-workspace {
   grid-template-columns: minmax(0, 2fr) minmax(360px, 1fr);
   align-items: stretch;
-  gap: var(--space-3);
+  gap: var(--dashboard-card-gap);
 }
 
 .analysis-scatter-card,
