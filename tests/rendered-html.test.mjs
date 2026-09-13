@@ -584,6 +584,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const growthNavigationDetailRef = useRef<HTMLDivElement>\(null\);/);
   assert.doesNotMatch(navigation, /scrollTo\(\{[\s\S]*?top: 0/);
   assert.match(css, /\.growth-navigation-pinned-headings\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);[^}]*border-bottom: 1px solid #d5e3e9;/);
+  assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*padding: 3px 6px;/);
+  assert.match(css, /\.growth-navigation-detail\s*\{[^}]*padding: 3px 6px 6px;/);
+  assert.match(source, /const detailPaddingTop =\s*Number\.parseFloat\(window\.getComputedStyle\(detail\)\.paddingTop\) \|\| 0;[\s\S]*?scatterBounds\.top - detailBounds\.top - detailPaddingTop/);
   assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-staff-roster\s*\{[^}]*height: 100%;[^}]*align-self: stretch;[^}]*overflow: hidden;[^}]*background: #ffffff;/);
   assert.doesNotMatch(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*max-height: calc\([\s\S]*?100dvh[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 6px/);

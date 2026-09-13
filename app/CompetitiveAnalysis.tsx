@@ -1107,9 +1107,11 @@ export default function CompetitiveAnalysis({
     const consultationScatterTop = () => {
       const detailBounds = detail.getBoundingClientRect();
       const scatterBounds = consultationScatter.getBoundingClientRect();
+      const detailPaddingTop =
+        Number.parseFloat(window.getComputedStyle(detail).paddingTop) || 0;
       return Math.max(
         0,
-        detail.scrollTop + scatterBounds.top - detailBounds.top - 6,
+        detail.scrollTop + scatterBounds.top - detailBounds.top - detailPaddingTop,
       );
     };
 
