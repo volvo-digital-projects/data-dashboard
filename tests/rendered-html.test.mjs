@@ -568,7 +568,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}[\s\S]*?className="growth-navigation-pinned-headings"/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?role="region"[\s\S]*?tabIndex=\{0\}[\s\S]*?onPointerDown=\{beginGrowthNavigationDetailDrag\}[\s\S]*?onPointerMove=\{moveGrowthNavigationDetailDrag\}[\s\S]*?onPointerUp=\{endGrowthNavigationDetailDrag\}/);
   assert.match(source, /event\.currentTarget\.scrollTop\s*=\s*drag\.originScrollTop - \(event\.clientY - drag\.originY\)/);
-  assert.doesNotMatch(source, /growthNavigationDetailRef|scrollTo\(\{[\s\S]*?top: 0/);
+  assert.doesNotMatch(source, /growthNavigationDetailRef/);
+  assert.doesNotMatch(navigation, /scrollTo\(\{[\s\S]*?top: 0/);
   assert.match(css, /\.growth-navigation-pinned-headings\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);[^}]*border-bottom: 1px solid #d5e3e9;/);
   assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-staff-roster\s*\{[^}]*height: 100%;[^}]*align-self: stretch;[^}]*overflow: hidden;[^}]*background: #ffffff;/);
   assert.doesNotMatch(css, /\.growth-staff-roster\s*\{[^}]*position: sticky;[^}]*top: calc/);
@@ -621,6 +622,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /\(staff\.average \?\? 0\) \* staff\.responses/);
   assert.match(navigation, /className="growth-position-benchmarks"[\s\S]*?className="showroom-average"[\s\S]*?displayShowroomNameWithoutBrand\(selected\.showroom\)\} 평균 \{selectedShowroomStaffAverage/);
   assert.match(navigation, /className="growth-gauge-showroom-average-marker"[\s\S]*?--growth-showroom-average-angle/);
+  assert.match(navigation, /<line x1="34" x2="210" y1="190" y2="190" \/>[\s\S]*?<circle cx="38" cy="190" r="2\.5" \/>/);
   assert.match(navigation, /전시장 평균 \{selectedShowroomStaffAverage\?\.toFixed\(1\)\}점/);
   assert.match(css, /\.growth-position-benchmarks \.showroom-average\s*\{[^}]*color:\s*#075f49;[^}]*font-weight:\s*700;/);
   assert.match(css, /\.growth-position-benchmarks \.showroom-average i\s*\{[^}]*width:\s*13px;[^}]*border-top:\s*1\.5px dashed #087a58;/);
@@ -3110,6 +3112,30 @@ test("ships project metadata and removes the disposable starter", async () => {
   );
 });
 
+test("starts page 1 and page 2 at the top when using header navigation", async () => {
+  const [dashboardSource, analysisSource] = await Promise.all([
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(
+    dashboardSource,
+    /const resetPageScrollForHeaderNavigation = \(\) => \{\s*window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\);/,
+  );
+  assert.equal(
+    (dashboardSource.match(/resetPageScrollForHeaderNavigation\(\);/g) ?? []).length,
+    3,
+  );
+  assert.match(
+    analysisSource,
+    /const resetPageScrollForHeaderNavigation = \([\s\S]*?window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\);/,
+  );
+  assert.equal(
+    (analysisSource.match(/onClick=\{resetPageScrollForHeaderNavigation\}/g) ?? []).length,
+    4,
+  );
+});
+
 test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {
   const [source, css] = await Promise.all([
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
@@ -4075,12 +4101,12 @@ test("limits header hover feedback to pointer devices", async () => {
     /@media \(min-width: 761px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.dashboard-identity-header \.identity-analysis-entry:hover/,
   );
   assert.equal(
-    (dashboardSource.match(/onClick=\{\(event\) => event\.currentTarget\.blur\(\)\}/g) ?? [])
+    (dashboardSource.match(/resetPageScrollForHeaderNavigation\(\);/g) ?? [])
       .length,
     3,
   );
   assert.equal(
-    (analysisSource.match(/onClick=\{\(event\) => event\.currentTarget\.blur\(\)\}/g) ?? [])
+    (analysisSource.match(/onClick=\{resetPageScrollForHeaderNavigation\}/g) ?? [])
       .length,
     4,
   );

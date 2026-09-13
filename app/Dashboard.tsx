@@ -2967,6 +2967,10 @@ export default function Dashboard({
   const warningCount = kpis.filter((item) => item.value < item.average).length;
   const integratedDelta = selectedIntegratedScore - selectedIntegratedAverage;
 
+  const resetPageScrollForHeaderNavigation = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
+
   return (
     <main className="dashboard" ref={dashboardRootRef}>
       <div className="dashboard-sticky-anchor" ref={stickyAnchorRef}>
@@ -2983,7 +2987,10 @@ export default function Dashboard({
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=dealer`}
                 aria-label={`${selected.dealer} 딜러사별 경쟁력 분석`}
-                onClick={(event) => event.currentTarget.blur()}
+                onClick={(event) => {
+                  event.currentTarget.blur();
+                  resetPageScrollForHeaderNavigation();
+                }}
               />
               <span
                 className="identity-icon identity-icon--dealer"
@@ -2997,7 +3004,10 @@ export default function Dashboard({
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=region`}
                 aria-label={`${selected.region} 권역별 경쟁력 분석`}
-                onClick={(event) => event.currentTarget.blur()}
+                onClick={(event) => {
+                  event.currentTarget.blur();
+                  resetPageScrollForHeaderNavigation();
+                }}
               />
               <span
                 className="identity-icon identity-icon--region"
@@ -3011,7 +3021,10 @@ export default function Dashboard({
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=size`}
                 aria-label={`${selected.size} 사이즈별 경쟁력 분석`}
-                onClick={(event) => event.currentTarget.blur()}
+                onClick={(event) => {
+                  event.currentTarget.blur();
+                  resetPageScrollForHeaderNavigation();
+                }}
               />
               <span
                 className="identity-icon identity-icon--size"

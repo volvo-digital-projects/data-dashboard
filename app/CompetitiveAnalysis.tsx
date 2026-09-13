@@ -2075,6 +2075,13 @@ export default function CompetitiveAnalysis({
     }
   };
 
+  const resetPageScrollForHeaderNavigation = (
+    event: ReactMouseEvent<HTMLAnchorElement>,
+  ) => {
+    event.currentTarget.blur();
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
+
   const toggleLinkedShowroom = (cdsid: string) => {
     setPinnedCdsid((current) => (current === cdsid ? null : cdsid));
   };
@@ -2096,7 +2103,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={(event) => event.currentTarget.blur()}
+            onClick={resetPageScrollForHeaderNavigation}
           >
             <span
               className="identity-icon identity-icon--dealer"
@@ -2109,7 +2116,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={(event) => event.currentTarget.blur()}
+            onClick={resetPageScrollForHeaderNavigation}
           >
             <span
               className="identity-icon identity-icon--region"
@@ -2122,7 +2129,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={(event) => event.currentTarget.blur()}
+            onClick={resetPageScrollForHeaderNavigation}
           >
             <span
               className="identity-icon identity-icon--size"
@@ -2135,7 +2142,7 @@ export default function CompetitiveAnalysis({
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={(event) => event.currentTarget.blur()}
+            onClick={resetPageScrollForHeaderNavigation}
           >
             <span className="identity-profile-icon" aria-hidden="true" />
             <small>지점장</small>
@@ -2670,8 +2677,8 @@ export default function CompetitiveAnalysis({
                             style={{ "--growth-showroom-average-angle": `${selectedShowroomGrowthAngle}deg` } as CSSProperties}
                             aria-label={`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`}
                           >
-                            <line x1="48" x2="102" y1="190" y2="190" />
-                            <circle cx="55" cy="190" r="2.5" />
+                            <line x1="34" x2="210" y1="190" y2="190" />
+                            <circle cx="38" cy="190" r="2.5" />
                             <title>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 {selectedShowroomStaffAverage?.toFixed(1)}점</title>
                           </g>
                         )}
