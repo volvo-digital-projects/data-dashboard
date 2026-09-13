@@ -53,7 +53,9 @@ def visible(locator: Any) -> bool:
 
 
 def click_visible_text(page: Any, label: str) -> None:
-    pattern = re.compile(rf"^\s*{re.escape(label)}\s*$", re.IGNORECASE)
+    # Sales-DMS decorates some menu labels with counters/arrows, so match the
+    # stable label text instead of requiring the entire rendered string.
+    pattern = re.compile(re.escape(label), re.IGNORECASE)
     for candidate_page in reversed(page.context.pages):
         for frame in candidate_page.frames:
             matches = frame.get_by_text(pattern)
@@ -75,9 +77,10 @@ def sales_report_frame(page: Any) -> tuple[Any, Any] | None:
                 continue
             if (
                 "Actual Monthly Sales" in body
-                and "Delivery Date" in body
-                and "영업직원" in body
+                and "출고기간" in body
+                and "검색" in body
                 and "다운로드" in body
+                and len(date_inputs(frame)) >= 2
             ):
                 return candidate_page, frame
     return None
@@ -115,6 +118,7 @@ def open_sales_report(page: Any) -> tuple[Any, Any]:
         "Actual Monthly Sales",
         "Area Total",
     ):
+        print(f"Sales-DMS 메뉴 여는 중: {label}", flush=True)
         click_visible_text(page, label)
         if found := sales_report_frame(page):
             return found
