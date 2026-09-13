@@ -479,7 +479,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
   assert.match(salesActivity.source.salesAsOf, /^2026-\d{2}-\d{2}$/);
-  assert.equal(salesActivity.source.salesUpdateSchedule, "매일 09:00 KST · 1일 1회");
+  assert.match(salesActivity.source.salesSyncedAt, /^2026-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/);
+  assert.equal(salesActivity.source.salesUpdateSchedule, "매일 07:00·09:00 KST · 1일 2회");
   assert.doesNotMatch(navigation, /salesActivitySource\.salesAsOf\.replaceAll/);
   assert.equal(salesActivity.showrooms["6KR6834"].salesDealerCode, "HMGD");
   assert.equal(salesActivity.showrooms["6KR6834"].summary.activityStaffCount, 0);
@@ -1121,6 +1122,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeSource, /nextRelease\.id !== __DASHBOARD_RELEASE_ID__/);
   assert.match(noticeSource, /requestedReleaseId !== nextRelease\.id/);
   assert.match(releaseBuildSource, /sales\.source\?\.salesAsOf/);
+  assert.match(releaseBuildSource, /sales\.source\?\.salesSyncedAt/);
   assert.match(releaseBuildSource, /roster\.source\?\.rosterCheckedAt/);
   assert.match(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}\\n\$\{sales\.source\?\.salesAsOf/);
   assert.match(pagesBuildSource, /const releaseSeed = `\$\{JSON\.stringify\(releaseNote\)\}\\n\$\{salesSource\?\.salesAsOf/);
@@ -1168,7 +1170,9 @@ test("downloads privacy-safe Sales-DMS staff sales every day at 09:00 KST", asyn
 
   assert.match(workflow, /workflow_dispatch:/);
   assert.match(workflow, /schedule:/);
+  assert.match(workflow, /cron: "0 22 \* \* \*"/);
   assert.match(workflow, /cron: "0 0 \* \* \*"/);
+  assert.match(workflow, /for attempt in 1 2 3/);
   assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
   assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
   assert.match(workflow, /python scripts\/sync-sales-dms-sales\.py/);
@@ -1182,7 +1186,8 @@ test("downloads privacy-safe Sales-DMS staff sales every day at 09:00 KST", asyn
   assert.match(source, /required = \{"Delivery Date", "출고여부", "Dealer", "고객명", "영업직원"\}/);
   assert.match(source, /if key not in \{"deliveredSales", "deliveredCustomers", "monthlyDeliveredSales"\}/);
   assert.doesNotMatch(source, /output\[[^\n]*고객명/);
-  assert.match(source, /"salesUpdateSchedule": "매일 09:00 KST · 1일 1회"/);
+  assert.match(source, /"salesSyncedAt": datetime\.now\(ZoneInfo\("Asia\/Seoul"\)\)\.isoformat/);
+  assert.match(source, /"salesUpdateSchedule": "매일 07:00·09:00 KST · 1일 2회"/);
 });
 
 test("keeps GitHub Pages analysis tab changes inside the app URL", async () => {

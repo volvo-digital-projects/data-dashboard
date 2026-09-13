@@ -25,7 +25,7 @@ const salesSource = JSON.parse(
 const rosterSource = JSON.parse(
   readFileSync(path.join(projectRoot, "app", "data", "voc-staff-analysis.json"), "utf8"),
 ).source;
-const releaseSeed = `${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}`;
+const releaseSeed = `${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${salesSource?.salesSyncedAt ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}`;
 const releaseId = createHash("sha256")
   .update(releaseSeed)
   .digest("hex")

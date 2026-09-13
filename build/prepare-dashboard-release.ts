@@ -53,7 +53,7 @@ export async function prepareDashboardRelease() {
   const note = JSON.parse(await readFile(notePath, "utf8")) as ReleaseNote;
   const sales = JSON.parse(
     await readFile(path.join(root, "app", "data", "sales-activity-analysis.json"), "utf8"),
-  ) as { source?: { salesAsOf?: string } };
+  ) as { source?: { salesAsOf?: string; salesSyncedAt?: string } };
   const roster = JSON.parse(
     await readFile(path.join(root, "app", "data", "voc-staff-analysis.json"), "utf8"),
   ) as { source?: { rosterCheckedAt?: string } };
@@ -63,7 +63,7 @@ export async function prepareDashboardRelease() {
   // using the current time here gives the client bundle and published JSON
   // different ids and can trap long-lived iPad tabs in a reload loop. Include
   // data as-of timestamps so unattended updates also refresh those clients.
-  const seed = `${JSON.stringify(note)}\n${sales.source?.salesAsOf ?? ""}\n${roster.source?.rosterCheckedAt ?? ""}`;
+  const seed = `${JSON.stringify(note)}\n${sales.source?.salesAsOf ?? ""}\n${sales.source?.salesSyncedAt ?? ""}\n${roster.source?.rosterCheckedAt ?? ""}`;
   const id = createHash("sha256").update(seed).digest("hex").slice(0, 16);
 
   await writeDashboardRelease(id, note, builtAt, outputPath);

@@ -2,6 +2,8 @@ name: Sync Sales-DMS staff sales
 
 on:
   schedule:
+    # 07:00 KST = 22:00 UTC (previous UTC date)
+    - cron: "0 22 * * *"
     # 09:00 KST = 00:00 UTC
     - cron: "0 0 * * *"
   workflow_dispatch:
@@ -16,7 +18,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
       - run: git pull --ff-only origin main
@@ -32,7 +34,17 @@ jobs:
           VOLVO_SALES_URL: ${{ secrets.VOLVO_SALES_URL }}
           VOLVO_SALES_ID: ${{ secrets.VOLVO_SALES_ID }}
           VOLVO_SALES_PASSWORD: ${{ secrets.VOLVO_SALES_PASSWORD }}
-        run: python scripts/sync-sales-dms-sales.py
+        run: |
+          for attempt in 1 2 3; do
+            if python scripts/sync-sales-dms-sales.py; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              exit 1
+            fi
+            echo "Sales-DMS 동기화 재시도 대기: ${attempt}/3"
+            sleep 60
+          done
       - name: Publish privacy-safe sales totals
         run: |
           git config user.name "Data Dashboard Auto Update"

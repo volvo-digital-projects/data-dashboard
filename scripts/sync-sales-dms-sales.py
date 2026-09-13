@@ -399,10 +399,13 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
     output["source"].update(
         {
             "salesAsOf": as_of.isoformat(),
+            "salesSyncedAt": datetime.now(ZoneInfo("Asia/Seoul")).isoformat(
+                timespec="seconds"
+            ),
             "salesPeriod": f"{as_of.year}-01-01~{as_of.isoformat()}",
             "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
             "salesJoin": "현재 Sales-DMS 재직자의 직원명과 판매 전시장 코드를 함께 연결",
-            "salesUpdateSchedule": "매일 09:00 KST · 1일 1회",
+            "salesUpdateSchedule": "매일 07:00·09:00 KST · 1일 2회",
         }
     )
     output_path.write_text(
