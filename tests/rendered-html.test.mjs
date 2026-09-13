@@ -4507,12 +4507,24 @@ test("aligns both sticky shells themselves with their lower panels at every zoom
     assert.match(source, /new ResizeObserver\(queueAnchorHeightSync\)/);
   }
   assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-anchor,[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 356px/,
+  );
+  assert.match(
+    css,
+    /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.dashboard-sticky-shell,[\s\S]*?\.analysis-sticky-shell\s*\{[^}]*height: 342px[^}]*min-height: 342px/,
+  );
+  assert.match(
+    css,
+    /\.analysis-sticky-shell \.analysis-summary-card\s*\{[^}]*height: 150px[^}]*min-height: 150px/,
+  );
+  assert.match(
     analysisSource,
-    /anchor\.style\.height = `\$\{shellHeight\}px`;[\s\S]*?anchor\.style\.minHeight = `\$\{shellHeight\}px`;/,
+    /anchor\.style\.height = `\$\{shellHeight\}px`;[\s\S]*?anchor\.style\.removeProperty\("min-height"\);/,
   );
   assert.equal(
     (analysisSource.match(/anchor\.style\.removeProperty\("min-height"\)/g) ?? []).length,
-    3,
+    4,
   );
 });
 

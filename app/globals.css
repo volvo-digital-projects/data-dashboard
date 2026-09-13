@@ -14615,12 +14615,17 @@ body {
 }
 
 @media (min-width: 1241px) {
-  .dashboard-sticky-anchor {
+  .dashboard-sticky-anchor,
+  .analysis-sticky-anchor {
     min-height: 356px;
   }
 
-  .analysis-sticky-anchor {
-    min-height: 356px;
+  /* Page 1 is the immutable reference: 122px header + 8px gap +
+     204px summary + 8px lower padding = a 342px visible shell. */
+  .dashboard-sticky-shell,
+  .analysis-sticky-shell {
+    height: 342px;
+    min-height: 342px;
   }
 
   .analysis-workspace {
@@ -15464,8 +15469,8 @@ button.header-status-item {
   }
 
   .analysis-sticky-shell .analysis-summary-card {
-    height: 136px;
-    min-height: 136px;
+    height: 150px;
+    min-height: 150px;
   }
 }
 

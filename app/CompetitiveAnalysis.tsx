@@ -1445,11 +1445,10 @@ export default function CompetitiveAnalysis({
         anchor.style.removeProperty("min-height");
       } else {
         anchor.style.height = `${shellHeight}px`;
-        // The desktop CSS min-height is only a first-paint fallback. Once the
-        // fixed shell is measured, override it as well so page 2 has the same
-        // single 8px content gap as page 1 instead of retaining extra blank
-        // space when the analysis header happens to be shorter.
-        anchor.style.minHeight = `${shellHeight}px`;
+        // Keep the shared desktop min-height as the canonical page-1 boundary.
+        // The shell is still measured for sticky descendants, but page 2 must
+        // never pull the first content row above page 1's fixed end position.
+        anchor.style.removeProperty("min-height");
       }
       page?.style.setProperty("--growth-navigation-sticky-top", `${shellHeight}px`);
       page?.style.setProperty(
