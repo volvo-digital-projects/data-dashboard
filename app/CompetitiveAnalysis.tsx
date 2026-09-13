@@ -168,7 +168,7 @@ const staffProfilePhotosByCdsid = staffProfilePhotosJson.showrooms as Record<
   StaffProfileShowroom
 >;
 const staffFallbackProfileImage = "/staff-profiles/neutral-human-silhouette.png";
-const staffFemaleFallbackProfileImage = "/staff-profiles/female-human-silhouette.svg";
+const staffFemaleFallbackProfileImage = "/staff-profiles/female-human-silhouette.png";
 const staffCertificationRecords =
   staffCertificationsJson.records as StaffCertificationRecord[];
 const salesActivityByCdsid = salesActivityAnalysisJson.showrooms as Record<
