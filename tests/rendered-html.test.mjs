@@ -1116,7 +1116,10 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeSource, /currentId !== nextRelease\.id[\s\S]*?reloadForRelease/);
   assert.match(noticeSource, /nextRelease\.id !== __DASHBOARD_RELEASE_ID__/);
   assert.match(noticeSource, /requestedReleaseId !== nextRelease\.id/);
-  assert.match(releaseBuildSource, /const seed = JSON\.stringify\(note\);/);
+  assert.match(releaseBuildSource, /sales\.source\?\.salesAsOf/);
+  assert.match(releaseBuildSource, /roster\.source\?\.rosterCheckedAt/);
+  assert.match(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}\\n\$\{sales\.source\?\.salesAsOf/);
+  assert.match(pagesBuildSource, /const releaseSeed = `\$\{JSON\.stringify\(releaseNote\)\}\\n\$\{salesSource\?\.salesAsOf/);
   assert.doesNotMatch(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}:\$\{builtAt\.toISOString\(\)\}`/);
   assert.match(noticeSource, /searchParams\.set\("release", nextRelease\.id\)/);
   assert.match(pagesBuildSource, /"\/dashboard-release\.json"/);
@@ -1151,6 +1154,30 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.ok(noticeChunkName);
   const noticeChunk = await readFile(new URL(noticeChunkName, clientAssets), "utf8");
   assert.match(noticeChunk, new RegExp(release.id));
+});
+
+test("downloads privacy-safe Sales-DMS staff sales with a manual production gate", async () => {
+  const [workflow, source] = await Promise.all([
+    readFile(new URL("../.github/workflows/sync-sales-dms-sales.yml", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/sync-sales-dms-sales.py", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.doesNotMatch(workflow, /schedule:/);
+  assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
+  assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
+  assert.match(workflow, /python scripts\/sync-sales-dms-sales\.py/);
+  assert.match(workflow, /git add app\/data\/sales-activity-analysis\.json/);
+  assert.match(source, /"Report Management",[\s\S]*?"리포트관리",[\s\S]*?"Actual Monthly Sales",[\s\S]*?"Area Total"/);
+  assert.match(source, /inputs\[0\]\.fill\(f"\{as_of\.year\}-01-01"\)/);
+  assert.match(source, /inputs\[1\]\.fill\(as_of\.isoformat\(\)\)/);
+  assert.match(source, /visible_control\(frame, "검색"\)\.click/);
+  assert.match(source, /expect_download\(timeout=900_000\)/);
+  assert.match(source, /visible_control\(frame, "다운로드"\)\.click/);
+  assert.match(source, /required = \{"Delivery Date", "출고여부", "Dealer", "고객명", "영업직원"\}/);
+  assert.match(source, /if key not in \{"deliveredSales", "deliveredCustomers", "monthlyDeliveredSales"\}/);
+  assert.doesNotMatch(source, /output\[[^\n]*고객명/);
+  assert.match(source, /"salesUpdateSchedule": "매일 09:00 KST · 1일 1회"/);
 });
 
 test("keeps GitHub Pages analysis tab changes inside the app URL", async () => {

@@ -1,0 +1,45 @@
+name: Sync Sales-DMS staff sales
+
+on:
+  # The 09:00 KST schedule is enabled only after one manual production run succeeds.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sales-dms-sales-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - run: git pull --ff-only origin main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install Sales-DMS browser dependencies
+        run: |
+          python -m pip install --disable-pip-version-check openpyxl==3.1.5 playwright==1.54.0
+          python -m playwright install --with-deps chromium
+      - name: Download and aggregate Actual Monthly Sales
+        env:
+          VOLVO_SALES_URL: ${{ secrets.VOLVO_SALES_URL }}
+          VOLVO_SALES_ID: ${{ secrets.VOLVO_SALES_ID }}
+          VOLVO_SALES_PASSWORD: ${{ secrets.VOLVO_SALES_PASSWORD }}
+        run: python scripts/sync-sales-dms-sales.py
+      - name: Publish privacy-safe sales totals
+        run: |
+          git config user.name "Data Dashboard Auto Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add app/data/sales-activity-analysis.json
+          if git diff --cached --quiet; then
+            echo "No staff sales change."
+            exit 0
+          fi
+          git commit -m "Auto update Sales-DMS staff sales"
+          git pull --rebase origin main
+          git push origin main

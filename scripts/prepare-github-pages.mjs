@@ -19,8 +19,15 @@ const pagesBasePath = "/data-dashboard/";
 const releaseNote = JSON.parse(
   readFileSync(path.join(projectRoot, "app", "data", "release-note.json"), "utf8"),
 );
+const salesSource = JSON.parse(
+  readFileSync(path.join(projectRoot, "app", "data", "sales-activity-analysis.json"), "utf8"),
+).source;
+const rosterSource = JSON.parse(
+  readFileSync(path.join(projectRoot, "app", "data", "voc-staff-analysis.json"), "utf8"),
+).source;
+const releaseSeed = `${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}`;
 const releaseId = createHash("sha256")
-  .update(JSON.stringify(releaseNote))
+  .update(releaseSeed)
   .digest("hex")
   .slice(0, 16);
 
