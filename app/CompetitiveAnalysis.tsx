@@ -18,6 +18,7 @@ import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
+import { forcePageScrollToTop } from "./pageScroll";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1083,6 +1084,10 @@ export default function CompetitiveAnalysis({
     };
   }, [initialCdsid]);
 
+  useLayoutEffect(() => {
+    forcePageScrollToTop();
+  }, [initialCdsid]);
+
   const beginGrowthNavigationDetailDrag = (
     event: ReactPointerEvent<HTMLDivElement>,
   ) => {
@@ -2096,7 +2101,7 @@ export default function CompetitiveAnalysis({
     event: ReactMouseEvent<HTMLAnchorElement>,
   ) => {
     event.currentTarget.blur();
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    forcePageScrollToTop();
   };
 
   const toggleLinkedShowroom = (cdsid: string) => {
@@ -2119,6 +2124,7 @@ export default function CompetitiveAnalysis({
           <Link
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
+            scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
             onClick={resetPageScrollForHeaderNavigation}
           >
@@ -2132,6 +2138,7 @@ export default function CompetitiveAnalysis({
           <Link
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
+            scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
             onClick={resetPageScrollForHeaderNavigation}
           >
@@ -2145,6 +2152,7 @@ export default function CompetitiveAnalysis({
           <Link
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
+            scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
             onClick={resetPageScrollForHeaderNavigation}
           >
@@ -2158,6 +2166,7 @@ export default function CompetitiveAnalysis({
           <Link
             className="analysis-context-item"
             href={`/dashboard/${selected.cdsid}`}
+            scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
             onClick={resetPageScrollForHeaderNavigation}
           >

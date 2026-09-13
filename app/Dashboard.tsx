@@ -18,6 +18,7 @@ import weeklyJson from "./data/weekly.json";
 import v3sQuarterSummaryStyles from "./V3SQuarterSummary.module.css";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import { formatSizeFullName } from "./sizeLabels";
+import { forcePageScrollToTop } from "./pageScroll";
 import {
   getV3sEvidence,
   V3SEvidenceGallery,
@@ -2727,6 +2728,10 @@ export default function Dashboard({
     };
   }, []);
 
+  useLayoutEffect(() => {
+    forcePageScrollToTop();
+  }, [initialCdsid]);
+
   const selected =
     dashboard.showrooms.find((item) => item.cdsid === selectedCode) ??
     dashboard.showrooms[0];
@@ -2968,7 +2973,7 @@ export default function Dashboard({
   const integratedDelta = selectedIntegratedScore - selectedIntegratedAverage;
 
   const resetPageScrollForHeaderNavigation = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    forcePageScrollToTop();
   };
 
   return (
@@ -2986,6 +2991,7 @@ export default function Dashboard({
               <Link
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=dealer`}
+                scroll={false}
                 aria-label={`${selected.dealer} 딜러사별 경쟁력 분석`}
                 onClick={(event) => {
                   event.currentTarget.blur();
@@ -3003,6 +3009,7 @@ export default function Dashboard({
               <Link
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=region`}
+                scroll={false}
                 aria-label={`${selected.region} 권역별 경쟁력 분석`}
                 onClick={(event) => {
                   event.currentTarget.blur();
@@ -3020,6 +3027,7 @@ export default function Dashboard({
               <Link
                 className="identity-analysis-hit"
                 href={`/dashboard/${selected.cdsid}/analysis?view=size`}
+                scroll={false}
                 aria-label={`${selected.size} 사이즈별 경쟁력 분석`}
                 onClick={(event) => {
                   event.currentTarget.blur();

@@ -3157,14 +3157,15 @@ test("ships project metadata and removes the disposable starter", async () => {
 });
 
 test("starts page 1 and page 2 at the top when using header navigation", async () => {
-  const [dashboardSource, analysisSource] = await Promise.all([
+  const [dashboardSource, analysisSource, pageScrollSource] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/pageScroll.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(
     dashboardSource,
-    /const resetPageScrollForHeaderNavigation = \(\) => \{\s*window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\);/,
+    /const resetPageScrollForHeaderNavigation = \(\) => \{\s*forcePageScrollToTop\(\);/,
   );
   assert.equal(
     (dashboardSource.match(/resetPageScrollForHeaderNavigation\(\);/g) ?? []).length,
@@ -3172,12 +3173,25 @@ test("starts page 1 and page 2 at the top when using header navigation", async (
   );
   assert.match(
     analysisSource,
-    /const resetPageScrollForHeaderNavigation = \([\s\S]*?window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\);/,
+    /const resetPageScrollForHeaderNavigation = \([\s\S]*?forcePageScrollToTop\(\);/,
   );
   assert.equal(
     (analysisSource.match(/onClick=\{resetPageScrollForHeaderNavigation\}/g) ?? []).length,
     4,
   );
+  assert.equal((dashboardSource.match(/scroll=\{false\}/g) ?? []).length, 3);
+  assert.equal((analysisSource.match(/scroll=\{false\}/g) ?? []).length, 4);
+  for (const source of [dashboardSource, analysisSource]) {
+    assert.match(
+      source,
+      /useLayoutEffect\(\(\) => \{\s*forcePageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
+    );
+  }
+  assert.match(pageScrollSource, /document\.scrollingElement/);
+  assert.match(pageScrollSource, /document\.documentElement\.scrollTop = 0/);
+  assert.match(pageScrollSource, /document\.body\.scrollTop = 0/);
+  assert.match(pageScrollSource, /window\.requestAnimationFrame\(\(\) =>/);
+  assert.match(pageScrollSource, /window\.setTimeout\(resetPageScrollToTop, 240\)/);
 });
 
 test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {
