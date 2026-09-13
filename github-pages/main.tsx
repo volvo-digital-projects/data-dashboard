@@ -8,12 +8,16 @@ import CompetitiveAnalysis from "../app/CompetitiveAnalysis";
 import MetricDetails from "../app/MetricDetails";
 import ReleaseUpdateNotice from "../app/ReleaseUpdateNotice";
 import { canAccessDashboard, getDashboardAccess } from "../app/dashboard-access";
+import { resetPageScrollToTop } from "../app/pageScroll";
 import "../app/globals.css";
 
 const BASE_PATH = "/data-dashboard/";
 const SESSION_KEY = "volvo-dashboard-pages-session";
 if (/Edg\//.test(navigator.userAgent)) {
   document.documentElement.dataset.browser = "edge-desktop";
+}
+if ("scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
 }
 const nativeFetch = window.fetch.bind(window);
 
@@ -83,7 +87,12 @@ function routeFromHash() {
 function useHashRoute() {
   const [route, setRoute] = useState(routeFromHash);
   useEffect(() => {
-    const update = () => setRoute(routeFromHash());
+    const update = () => {
+      // Reset the outgoing page before React swaps routes. This prevents a
+      // previously visited lower position from flashing for one frame.
+      resetPageScrollToTop();
+      setRoute(routeFromHash());
+    };
     window.addEventListener("hashchange", update);
     return () => window.removeEventListener("hashchange", update);
   }, []);

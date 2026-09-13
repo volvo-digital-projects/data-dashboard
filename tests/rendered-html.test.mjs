@@ -3161,11 +3161,12 @@ test("ships project metadata and removes the disposable starter", async () => {
   );
 });
 
-test("starts page 1 and page 2 at the top when using header navigation", async () => {
-  const [dashboardSource, analysisSource, pageScrollSource] = await Promise.all([
+test("starts page 1 and page 2 at the top before the destination paints", async () => {
+  const [dashboardSource, analysisSource, pageScrollSource, githubPagesSource] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/pageScroll.ts", import.meta.url), "utf8"),
+    readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(
@@ -3197,6 +3198,11 @@ test("starts page 1 and page 2 at the top when using header navigation", async (
   assert.match(pageScrollSource, /document\.body\.scrollTop = 0/);
   assert.match(pageScrollSource, /window\.requestAnimationFrame\(\(\) =>/);
   assert.match(pageScrollSource, /window\.setTimeout\(resetPageScrollToTop, 240\)/);
+  assert.match(githubPagesSource, /window\.history\.scrollRestoration = "manual";/);
+  assert.match(
+    githubPagesSource,
+    /const update = \(\) => \{[\s\S]*?resetPageScrollToTop\(\);[\s\S]*?setRoute\(routeFromHash\(\)\);/,
+  );
 });
 
 test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {
