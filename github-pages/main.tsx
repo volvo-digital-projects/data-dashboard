@@ -1,6 +1,7 @@
 import { StrictMode, useEffect, useMemo, useState } from "react";
 
 // Client-only GitHub Pages entry. Keep this outside Next.js's reserved pages directory.
+import { flushSync } from "react-dom";
 import { createRoot } from "react-dom/client";
 import LoginHome from "../app/LoginHome";
 import Dashboard, { CriteriaGuide } from "../app/Dashboard";
@@ -88,10 +89,13 @@ function useHashRoute() {
   const [route, setRoute] = useState(routeFromHash);
   useEffect(() => {
     const update = () => {
-      // Reset the outgoing page before React swaps routes. This prevents a
-      // previously visited lower position from flashing for one frame.
+      const nextRoute = routeFromHash();
+      // Commit the destination while the document is already at the origin.
+      // A synchronous commit prevents the previously visited lower position
+      // from painting for one frame between hash navigation and route render.
       resetPageScrollToTop();
-      setRoute(routeFromHash());
+      flushSync(() => setRoute(nextRoute));
+      resetPageScrollToTop();
     };
     window.addEventListener("hashchange", update);
     return () => window.removeEventListener("hashchange", update);

@@ -3165,11 +3165,12 @@ test("ships project metadata and removes the disposable starter", async () => {
 });
 
 test("starts page 1 and page 2 at the top before the destination paints", async () => {
-  const [dashboardSource, analysisSource, pageScrollSource, githubPagesSource] = await Promise.all([
+  const [dashboardSource, analysisSource, pageScrollSource, githubPagesSource, css] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/pageScroll.ts", import.meta.url), "utf8"),
     readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(
@@ -3202,10 +3203,13 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.match(pageScrollSource, /window\.requestAnimationFrame\(\(\) =>/);
   assert.match(pageScrollSource, /window\.setTimeout\(resetPageScrollToTop, 240\)/);
   assert.match(githubPagesSource, /window\.history\.scrollRestoration = "manual";/);
+  assert.match(githubPagesSource, /import \{ flushSync \} from "react-dom";/);
   assert.match(
     githubPagesSource,
-    /const update = \(\) => \{[\s\S]*?resetPageScrollToTop\(\);[\s\S]*?setRoute\(routeFromHash\(\)\);/,
+    /const update = \(\) => \{[\s\S]*?const nextRoute = routeFromHash\(\);[\s\S]*?resetPageScrollToTop\(\);[\s\S]*?flushSync\(\(\) => setRoute\(nextRoute\)\);[\s\S]*?resetPageScrollToTop\(\);/,
   );
+  assert.match(css, /html\s*\{[^}]*scroll-behavior: auto;/);
+  assert.doesNotMatch(css, /html\s*\{[^}]*scroll-behavior: smooth;/);
 });
 
 test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {
