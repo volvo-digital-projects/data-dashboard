@@ -14526,9 +14526,25 @@ body {
 }
 
 .analysis-workspace {
-  grid-template-columns: minmax(0, 2fr) minmax(360px, 1fr);
+  /* Reuse the summary's exact 3-column tracks inside the existing 21px overhang. */
+  grid-template-columns:
+    var(--dashboard-sticky-content-gutter)
+    minmax(0, 1fr)
+    var(--dashboard-card-gap)
+    minmax(0, 1fr)
+    var(--dashboard-card-gap)
+    minmax(0, 1fr)
+    var(--dashboard-sticky-content-gutter);
   align-items: stretch;
-  gap: var(--dashboard-card-gap);
+  gap: 0;
+}
+
+.analysis-scatter-card {
+  grid-column: 1 / 5;
+}
+
+.analysis-ranking-card {
+  grid-column: 6 / 8;
 }
 
 .analysis-scatter-card,
@@ -15471,6 +15487,18 @@ button.header-status-item {
   .analysis-sticky-shell .analysis-summary-card {
     height: 150px;
     min-height: 150px;
+  }
+}
+
+@media (max-width: 760px) {
+  .analysis-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--dashboard-card-gap);
+  }
+
+  .analysis-scatter-card,
+  .analysis-ranking-card {
+    grid-column: 1;
   }
 }
 

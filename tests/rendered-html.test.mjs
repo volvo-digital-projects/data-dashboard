@@ -5308,10 +5308,9 @@ test("ships the premium neutral design system and Paperlogy typography", async (
     css,
     /@media \(min-width: 1241px\)\s*\{[\s\S]*?\.analysis-sticky-anchor\s*\{[^}]*min-height: 356px[^}]*\}[\s\S]*?\.analysis-workspace\s*\{[^}]*height: 480px[^}]*min-height: 480px[^}]*contain: layout/,
   );
-  assert.match(
-    css,
-    /\.analysis-workspace\s*\{[^}]*grid-template-columns: minmax\(0, 2fr\) minmax\(360px, 1fr\);[^}]*gap: var\(--dashboard-card-gap\);/,
-  );
+  assert.match(css, /\.analysis-workspace\s*\{[^}]*var\(--dashboard-sticky-content-gutter\)[^}]*minmax\(0, 1fr\)[^}]*var\(--dashboard-card-gap\)[^}]*minmax\(0, 1fr\)[^}]*var\(--dashboard-card-gap\)[^}]*minmax\(0, 1fr\)[^}]*var\(--dashboard-sticky-content-gutter\)[^}]*gap: 0;/);
+  assert.match(css, /\.analysis-scatter-card\s*\{[^}]*grid-column: 1 \/ 5;/);
+  assert.match(css, /\.analysis-ranking-card\s*\{[^}]*grid-column: 6 \/ 8;/);
   assert.match(
     css,
     /\.analysis-ranking-list\s*\{[^}]*min-height: 0[^}]*overflow-y: auto[^}]*scrollbar-gutter: stable/,
