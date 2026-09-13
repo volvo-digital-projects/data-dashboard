@@ -15490,6 +15490,55 @@ button.header-status-item {
   }
 }
 
+/* PC wheel flow: one viewport each for overview, staff navigator, and awards. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .competitive-analysis-page {
+    --growth-navigation-sticky-top: 0px;
+    padding-bottom: calc(100dvh - 148px);
+  }
+
+  .competitive-analysis-page .analysis-sticky-shell {
+    position: static;
+    width: auto;
+    right: auto;
+    left: auto;
+  }
+
+  .competitive-analysis-page > .growth-navigation-sticky-summary {
+    position: static;
+    top: auto;
+  }
+
+  .competitive-analysis-page > .growth-navigation {
+    margin-top: calc(-1 * var(--dashboard-card-gap));
+    scroll-margin-top: var(--growth-navigation-summary-height, 152px);
+  }
+
+  .competitive-analysis-page .growth-navigation-workspace,
+  .competitive-analysis-page .growth-navigation-detail {
+    height: calc(100vh - var(--growth-navigation-summary-height, 152px));
+    height: calc(100dvh - var(--growth-navigation-summary-height, 152px));
+    max-height: none;
+  }
+
+  .competitive-analysis-page .growth-navigation-detail {
+    padding-bottom: 1px;
+    overflow-y: hidden;
+    cursor: default;
+  }
+
+  .competitive-analysis-page .growth-staff-roster-list {
+    max-height: calc(100vh - var(--growth-navigation-summary-height, 152px) - 6px);
+    max-height: calc(100dvh - var(--growth-navigation-summary-height, 152px) - 6px);
+  }
+
+  .competitive-analysis-page > .v3s-award-card {
+    scroll-margin-top: 8px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
 @media (max-width: 760px) {
   .analysis-workspace {
     grid-template-columns: minmax(0, 1fr);

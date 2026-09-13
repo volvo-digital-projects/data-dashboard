@@ -814,6 +814,7 @@ export default function CompetitiveAnalysis({
   const growthStaffRosterRef = useRef<HTMLDivElement>(null);
   const growthNavigationDetailRef = useRef<HTMLDivElement>(null);
   const growthConsultationScatterRef = useRef<HTMLElement>(null);
+  const v3sAwardRef = useRef<HTMLElement>(null);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -889,7 +890,10 @@ export default function CompetitiveAnalysis({
     const workspace = analysisWorkspaceRef.current;
     const growthSummary = growthNavigationSummaryRef.current;
     if (!workspace || !growthSummary) return;
-    if (CSS.supports("scroll-snap-type: y proximity")) return;
+    const usesPcSectionFlow = window.matchMedia(
+      "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
+    ).matches;
+    if (CSS.supports("scroll-snap-type: y proximity") && !usesPcSectionFlow) return;
 
     let entrySnapFrame = 0;
     let wheelQuietTimer = 0;
@@ -952,7 +956,7 @@ export default function CompetitiveAnalysis({
       const startTop = window.scrollY;
       const targetTop = Math.max(
         0,
-        growthSummaryFlowTop - fixedHeaderBottom() - 8,
+        growthSummaryFlowTop - fixedHeaderBottom() - (usesPcSectionFlow ? 0 : 8),
       );
       const startedAt = performance.now();
       const motionDuration = window.matchMedia(
@@ -1083,6 +1087,135 @@ export default function CompetitiveAnalysis({
       window.removeEventListener("touchend", clearEntryTouch);
       window.removeEventListener("touchcancel", clearEntryTouch);
       window.removeEventListener("scroll", handleEntryScroll);
+    };
+  }, [initialCdsid]);
+
+  useEffect(() => {
+    const growthSummary = growthNavigationSummaryRef.current;
+    const award = v3sAwardRef.current;
+    if (!growthSummary || !award) return;
+    if (
+      !window.matchMedia(
+        "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
+      ).matches
+    ) {
+      return;
+    }
+
+    let motionFrame = 0;
+    let motionActive = false;
+    let wheelQuietTimer = 0;
+    let upwardDecisionTimer = 0;
+    let upwardIntent = 0;
+
+    const flowTop = (element: HTMLElement) =>
+      window.scrollY + element.getBoundingClientRect().top;
+
+    const normalizeWheelDistance = (event: WheelEvent) => {
+      if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
+      if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
+        return event.deltaY * window.innerHeight;
+      }
+      return event.deltaY;
+    };
+
+    const moveTo = (targetTop: number) => {
+      const startTop = window.scrollY;
+      const boundedTarget = Math.max(
+        0,
+        Math.min(targetTop, document.documentElement.scrollHeight - window.innerHeight),
+      );
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const duration = reduceMotion ? 0 : 260;
+      const startedAt = performance.now();
+
+      motionActive = true;
+      window.cancelAnimationFrame(motionFrame);
+
+      const alignSection = (timestamp: number) => {
+        const progress = duration
+          ? Math.min(1, (timestamp - startedAt) / duration)
+          : 1;
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const nextTop =
+          progress < 1
+            ? startTop + (boundedTarget - startTop) * easedProgress
+            : boundedTarget;
+        window.scrollTo({ top: nextTop, left: window.scrollX, behavior: "auto" });
+
+        if (progress < 1) {
+          motionFrame = window.requestAnimationFrame(alignSection);
+          return;
+        }
+
+        window.scrollTo({ top: boundedTarget, left: window.scrollX, behavior: "auto" });
+        window.clearTimeout(wheelQuietTimer);
+        wheelQuietTimer = window.setTimeout(() => {
+          motionActive = false;
+        }, 110);
+      };
+
+      motionFrame = window.requestAnimationFrame(alignSection);
+    };
+
+    const handlePcSectionWheel = (event: WheelEvent) => {
+      if (event.ctrlKey || event.metaKey) return;
+      const wheelDistance = normalizeWheelDistance(event);
+      if (wheelDistance === 0) return;
+
+      if (motionActive) {
+        event.preventDefault();
+        return;
+      }
+
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest(".growth-staff-roster-list")) return;
+
+      const summaryBounds = growthSummary.getBoundingClientRect();
+      const awardBounds = award.getBoundingClientRect();
+      const staffSectionAligned = Math.abs(summaryBounds.top) <= 28;
+      const staffSectionApproaching =
+        summaryBounds.top > 28 && summaryBounds.top < window.innerHeight * 0.75;
+      const awardSectionVisible =
+        awardBounds.top <= Math.min(96, window.innerHeight * 0.18) ||
+        window.scrollY >= flowTop(award) - 32;
+
+      if (wheelDistance > 0 && staffSectionApproaching) {
+        event.preventDefault();
+        moveTo(flowTop(growthSummary));
+        return;
+      }
+
+      if (wheelDistance > 0 && staffSectionAligned) {
+        event.preventDefault();
+        moveTo(flowTop(award) - 8);
+        return;
+      }
+
+      if (wheelDistance >= 0 || !awardSectionVisible) return;
+
+      event.preventDefault();
+      upwardIntent += Math.abs(wheelDistance);
+      window.clearTimeout(upwardDecisionTimer);
+      upwardDecisionTimer = window.setTimeout(() => {
+        const strongUpwardGesture = upwardIntent >= 1800;
+        upwardIntent = 0;
+        moveTo(strongUpwardGesture ? 0 : flowTop(growthSummary));
+      }, 55);
+    };
+
+    window.addEventListener("wheel", handlePcSectionWheel, {
+      capture: true,
+      passive: false,
+    });
+
+    return () => {
+      window.clearTimeout(wheelQuietTimer);
+      window.clearTimeout(upwardDecisionTimer);
+      window.cancelAnimationFrame(motionFrame);
+      window.removeEventListener("wheel", handlePcSectionWheel, true);
     };
   }, [initialCdsid]);
 
@@ -3994,7 +4127,11 @@ export default function CompetitiveAnalysis({
         </section>
       ) : null}
 
-      <section className="v3s-award-card" aria-label="V3S 인센티브 수상기록">
+      <section
+        className="v3s-award-card"
+        ref={v3sAwardRef}
+        aria-label="V3S 인센티브 수상기록"
+      >
         <header className="v3s-award-heading">
           <h2>
             <span className="v3s-award-heading-title">
