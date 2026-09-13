@@ -1279,6 +1279,7 @@ export default function CompetitiveAnalysis({
       ).matches;
       if (isPhoneViewport) {
         anchor.style.removeProperty("height");
+        anchor.style.removeProperty("min-height");
         page?.style.removeProperty("--growth-navigation-sticky-top");
         page?.style.removeProperty("--growth-navigation-summary-height");
         staffCard?.style.removeProperty(
@@ -1300,8 +1301,14 @@ export default function CompetitiveAnalysis({
       );
       if (isNarrowTabletViewport) {
         anchor.style.removeProperty("height");
+        anchor.style.removeProperty("min-height");
       } else {
         anchor.style.height = `${shellHeight}px`;
+        // The desktop CSS min-height is only a first-paint fallback. Once the
+        // fixed shell is measured, override it as well so page 2 has the same
+        // single 8px content gap as page 1 instead of retaining extra blank
+        // space when the analysis header happens to be shorter.
+        anchor.style.minHeight = `${shellHeight}px`;
       }
       page?.style.setProperty("--growth-navigation-sticky-top", `${shellHeight}px`);
       page?.style.setProperty(
@@ -1352,6 +1359,8 @@ export default function CompetitiveAnalysis({
       anchor
         .closest<HTMLElement>(".competitive-analysis-page")
         ?.style.removeProperty("--growth-navigation-summary-height");
+      anchor.style.removeProperty("height");
+      anchor.style.removeProperty("min-height");
       staffAnalysisCardRef.current?.style.removeProperty(
         "--analysis-staff-heading-sticky-top",
       );

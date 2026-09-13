@@ -4430,6 +4430,14 @@ test("aligns both sticky shells themselves with their lower panels at every zoom
     assert.match(source, /document\.fonts\?\.ready\.then\(queueAnchorHeightSync\)/);
     assert.match(source, /new ResizeObserver\(queueAnchorHeightSync\)/);
   }
+  assert.match(
+    analysisSource,
+    /anchor\.style\.height = `\$\{shellHeight\}px`;[\s\S]*?anchor\.style\.minHeight = `\$\{shellHeight\}px`;/,
+  );
+  assert.equal(
+    (analysisSource.match(/anchor\.style\.removeProperty\("min-height"\)/g) ?? []).length,
+    3,
+  );
 });
 
 test("squares and tightens the desktop summary while matching its right rail", async () => {
