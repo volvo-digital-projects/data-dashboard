@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -46,14 +47,22 @@ jobs:
             sleep 60
           done
       - name: Publish privacy-safe sales totals
+        id: publish
         run: |
           git config user.name "Data Dashboard Auto Update"
           git config user.email "actions@users.noreply.github.com"
           git add app/data/sales-activity-analysis.json
           if git diff --cached --quiet; then
             echo "No staff sales change."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "Auto update Sales-DMS staff sales"
           git pull --rebase origin main
           git push origin main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy the latest sales data
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

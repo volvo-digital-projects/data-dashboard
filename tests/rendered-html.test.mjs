@@ -1173,6 +1173,10 @@ test("downloads privacy-safe Sales-DMS staff sales every day at 09:00 KST", asyn
   assert.match(workflow, /cron: "0 22 \* \* \*"/);
   assert.match(workflow, /cron: "0 0 \* \* \*"/);
   assert.match(workflow, /for attempt in 1 2 3/);
+  assert.match(workflow, /actions: write/);
+  assert.match(workflow, /echo "changed=true" >> "\$GITHUB_OUTPUT"/);
+  assert.match(workflow, /if: steps\.publish\.outputs\.changed == 'true'/);
+  assert.match(workflow, /gh workflow run deploy-pages\.yml --ref main/);
   assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
   assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
   assert.match(workflow, /python scripts\/sync-sales-dms-sales\.py/);
