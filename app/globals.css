@@ -663,8 +663,7 @@ html {
 .growth-profile-photo img:not(.staff-profile-silhouette),
 .analysis-staff-profile-photo img:not(.staff-profile-silhouette) {
   object-position: center top;
-  transform: scale(1.25);
-  transform-origin: center top;
+  transform: none;
 }
 
 .growth-profile-photo img.staff-profile-silhouette,
@@ -673,9 +672,9 @@ html {
   height: 100%;
   display: block;
   box-sizing: border-box;
-  object-fit: contain;
-  object-position: center bottom;
-  padding: 2px 2px 0;
+  object-fit: cover;
+  object-position: center top;
+  padding: 0;
 }
 
 .growth-profile-person > span:last-child,

@@ -22,6 +22,8 @@ from urllib.parse import quote, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
+import cv2
+import numpy as np
 from PIL import Image, ImageOps
 
 
@@ -29,6 +31,12 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_JSON = ROOT / "app" / "data" / "staff-profile-photos.json"
 PUBLIC_ROOT = ROOT / "public"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) VolvoDataDashboard/1.0"
+PORTRAIT_SIZE = (420, 440)
+PORTRAIT_FACE_WIDTH_RATIO = 0.56
+PORTRAIT_FACE_CENTER_Y_RATIO = 0.40
+FACE_CLASSIFIER = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
 
 SOURCES = [
     {
@@ -217,12 +225,110 @@ def portrait_path(cdsid: str, dealer_dir: str, showroom_dir: str, name: str) -> 
     return PUBLIC_ROOT / "staff-profiles" / dealer_dir / showroom_dir / f"consultant-{digest}.jpg"
 
 
-def save_portrait(content: bytes, destination: Path) -> None:
+def normalized_portrait(image: Image.Image) -> Image.Image | None:
+    source = np.asarray(image.convert("RGB"))
+    gray = cv2.cvtColor(source, cv2.COLOR_RGB2GRAY)
+    min_face = (max(18, image.width // 12), max(18, image.height // 12))
+    faces = FACE_CLASSIFIER.detectMultiScale(
+        gray,
+        scaleFactor=1.08,
+        minNeighbors=5,
+        minSize=min_face,
+    )
+    if len(faces) == 0:
+        return None
+
+    face_x, face_y, face_width, face_height = max(
+        faces,
+        key=lambda box: int(box[2]) * int(box[3]),
+    )
+    crop_width = face_width / PORTRAIT_FACE_WIDTH_RATIO
+    crop_height = crop_width / (PORTRAIT_SIZE[0] / PORTRAIT_SIZE[1])
+    face_center_x = face_x + face_width / 2
+    face_center_y = face_y + face_height / 2
+    crop_left = max(
+        0,
+        min(image.width - crop_width, face_center_x - crop_width / 2),
+    )
+    crop_top = max(
+        0,
+        min(
+            image.height - crop_height,
+            face_center_y - PORTRAIT_FACE_CENTER_Y_RATIO * crop_height,
+        ),
+    )
+    crop_box = (
+        round(crop_left),
+        round(crop_top),
+        round(crop_left + crop_width),
+        round(crop_top + crop_height),
+    )
+    return image.crop(crop_box).resize(PORTRAIT_SIZE, Image.Resampling.LANCZOS)
+
+
+def save_portrait(content: bytes, destination: Path) -> bool:
     destination.parent.mkdir(parents=True, exist_ok=True)
     with Image.open(io.BytesIO(content)) as source:
         image = ImageOps.exif_transpose(source).convert("RGB")
         image.thumbnail((720, 960), Image.Resampling.LANCZOS)
-        image.save(destination, "JPEG", quality=84, optimize=True, progressive=True)
+        normalized = normalized_portrait(image)
+        if normalized is None:
+            return False
+        normalized.save(destination, "JPEG", quality=88, optimize=True, progressive=True)
+    return True
+
+
+def normalize_portrait_file(portrait: Path) -> bool:
+    with Image.open(portrait) as source:
+        image = ImageOps.exif_transpose(source).convert("RGB")
+    if image.size == PORTRAIT_SIZE:
+        return True
+    normalized = normalized_portrait(image)
+    if normalized is None:
+        return False
+    normalized.save(portrait, "JPEG", quality=88, optimize=True, progressive=True)
+    return True
+
+
+def normalize_existing_portraits() -> int:
+    normalized_count = 0
+    skipped_count = 0
+    for portrait in sorted((PUBLIC_ROOT / "staff-profiles").rglob("*.jpg")):
+        with Image.open(portrait) as source:
+            current_size = source.size
+        if current_size == PORTRAIT_SIZE:
+            continue
+        if not normalize_portrait_file(portrait):
+            skipped_count += 1
+            print(f"얼굴 미검출, 기본 실루엣 적용 대상: {portrait.relative_to(ROOT)}")
+            continue
+        normalized_count += 1
+
+    for silhouette_name in (
+        "neutral-human-silhouette.png",
+        "female-human-silhouette.png",
+    ):
+        silhouette_path = PUBLIC_ROOT / "staff-profiles" / silhouette_name
+        with Image.open(silhouette_path) as source:
+            silhouette = source.convert("RGBA")
+        if silhouette.size == PORTRAIT_SIZE:
+            continue
+        crop_width = silhouette.width * 0.655
+        crop_height = crop_width / (PORTRAIT_SIZE[0] / PORTRAIT_SIZE[1])
+        crop_left = (silhouette.width - crop_width) / 2
+        crop_top = min(30, silhouette.height - crop_height)
+        normalized_silhouette = silhouette.crop(
+            (
+                round(crop_left),
+                round(crop_top),
+                round(crop_left + crop_width),
+                round(crop_top + crop_height),
+            )
+        ).resize(PORTRAIT_SIZE, Image.Resampling.LANCZOS)
+        normalized_silhouette.save(silhouette_path, "PNG", optimize=True)
+
+    print(f"기존 프로필 정규화: {normalized_count}개, 얼굴 미검출: {skipped_count}개")
+    return 0
 
 
 def dashboard_showrooms() -> set[str]:
@@ -263,8 +369,16 @@ def main() -> int:
                     showroom_dir,
                     name,
                 )
-                if not local_file.exists() or local_file.stat().st_size == 0:
-                    save_portrait(fetch_bytes(image_url, page_url), local_file)
+                portrait_available = False
+                if local_file.exists() and local_file.stat().st_size > 0:
+                    portrait_available = normalize_portrait_file(local_file)
+                else:
+                    portrait_available = save_portrait(
+                        fetch_bytes(image_url, page_url),
+                        local_file,
+                    )
+                if not portrait_available:
+                    continue
                 employees[name] = {
                     **existing_profile(cdsid, name),
                     "image": "/" + local_file.relative_to(PUBLIC_ROOT).as_posix(),
@@ -296,6 +410,8 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
+        if "--normalize-existing" in sys.argv:
+            raise SystemExit(normalize_existing_portraits())
         raise SystemExit(main())
     except Exception as error:
         print(f"사진 동기화 실패: {error}", file=sys.stderr)

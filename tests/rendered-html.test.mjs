@@ -439,8 +439,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source, /(?:src|href)=\{staffFallbackProfileImage\}/);
   assert.doesNotMatch(navigation, /selectedStaffInitials/);
   assert.doesNotMatch(navigation, /<span className="staff-profile-silhouette"/);
-  assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: contain;[\s\S]*?object-position: center bottom;/);
-  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*transform: scale\(1\.25\);[^}]*transform-origin: center top;/);
+  assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?padding: 0;/);
+  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*transform: none;/);
+  assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 4);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
@@ -2900,7 +2901,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
     new URL("../app/data/staff-profile-photos.json", import.meta.url),
     "utf8",
   );
+  const staffPhotoSyncSource = await readFile(
+    new URL("../scripts/sync-staff-profile-photos.py", import.meta.url),
+    "utf8",
+  );
   assert.doesNotMatch(staffPhotoData, /@hvolvo\.com|010-\d{4}-\d{4}/);
+  assert.doesNotMatch(staffPhotoData, /consultant-cb79d612fa5b\.jpg/);
+  assert.match(staffPhotoSyncSource, /PORTRAIT_SIZE = \(420, 440\)/);
+  assert.match(staffPhotoSyncSource, /PORTRAIT_FACE_WIDTH_RATIO = 0\.56/);
+  assert.match(staffPhotoSyncSource, /FACE_CLASSIFIER\.detectMultiScale/);
   const staffPhotoJson = JSON.parse(staffPhotoData);
   assert.equal(staffPhotoJson.showroomCount, 39);
   assert.equal(Object.keys(staffPhotoJson.showrooms).length, 39);
@@ -2912,11 +2921,34 @@ test("serves the dual-metric competitive analysis sample", async () => {
     (showroom) => Object.values(showroom.employees),
   );
   assert.equal(staffPortraits.length, staffPhotoJson.consultantCount);
-  await Promise.all(
-    staffPortraits.map((profile) =>
-      access(new URL(`../public${profile.image}`, import.meta.url)),
-    ),
-  );
+  const readJpegSize = (buffer) => {
+    const startOfFrameMarkers = new Set([
+      0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7,
+      0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
+    ]);
+    let offset = 2;
+    while (offset + 8 < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1;
+        continue;
+      }
+      const marker = buffer[offset + 1];
+      if (startOfFrameMarkers.has(marker)) {
+        return {
+          height: buffer.readUInt16BE(offset + 5),
+          width: buffer.readUInt16BE(offset + 7),
+        };
+      }
+      offset += 2 + buffer.readUInt16BE(offset + 2);
+    }
+    throw new Error("JPEG 크기를 읽을 수 없습니다.");
+  };
+  await Promise.all(staffPortraits.map(async (profile) => {
+    const portrait = await readFile(
+      new URL(`../public${profile.image}`, import.meta.url),
+    );
+    assert.deepEqual(readJpegSize(portrait), { width: 420, height: 440 });
+  }));
 
   const staffAnalysisData = await readFile(
     new URL("../app/data/voc-staff-analysis.json", import.meta.url),
