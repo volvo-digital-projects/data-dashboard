@@ -79,8 +79,8 @@ window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
   return nativeFetch(input, init);
 };
 
-function routeFromHash() {
-  const raw = window.location.hash.replace(/^#/, "") || "/";
+function routeFromHash(hash = window.location.hash) {
+  const raw = hash.replace(/^#/, "") || "/";
   const [pathname, query = ""] = raw.split("?", 2);
   return { pathname, query: new URLSearchParams(query) };
 }
@@ -88,17 +88,57 @@ function routeFromHash() {
 function useHashRoute() {
   const [route, setRoute] = useState(routeFromHash);
   useEffect(() => {
-    const update = () => {
-      const nextRoute = routeFromHash();
-      // Commit the destination while the document is already at the origin.
-      // A synchronous commit prevents the previously visited lower position
-      // from painting for one frame between hash navigation and route render.
-      resetPageScrollToTop();
+    let lastCommittedHref = window.location.href;
+    const commitRouteAtTop = (nextRoute: ReturnType<typeof routeFromHash>) => {
       flushSync(() => setRoute(nextRoute));
+      // The destination and scroll origin are committed in the same browser
+      // task, so the previously visited lower page can never paint in between.
       resetPageScrollToTop();
     };
+    const update = () => {
+      if (window.location.href === lastCommittedHref) return;
+      lastCommittedHref = window.location.href;
+      commitRouteAtTop(routeFromHash());
+    };
+    const navigateDashboardRoute = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest<HTMLAnchorElement>("a[href]");
+      if (!anchor || anchor.target || anchor.hasAttribute("download")) return;
+      const targetUrl = new URL(anchor.href, window.location.href);
+      if (
+        targetUrl.origin !== window.location.origin ||
+        targetUrl.pathname !== BASE_PATH ||
+        !targetUrl.hash.startsWith("#/dashboard/")
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      const nextUrl = new URL(window.location.href);
+      nextUrl.hash = targetUrl.hash;
+      window.history.pushState(null, "", nextUrl);
+      lastCommittedHref = window.location.href;
+      commitRouteAtTop(routeFromHash(nextUrl.hash));
+    };
+    document.addEventListener("click", navigateDashboardRoute, true);
     window.addEventListener("hashchange", update);
-    return () => window.removeEventListener("hashchange", update);
+    window.addEventListener("popstate", update);
+    return () => {
+      document.removeEventListener("click", navigateDashboardRoute, true);
+      window.removeEventListener("hashchange", update);
+      window.removeEventListener("popstate", update);
+    };
   }, []);
   return route;
 }

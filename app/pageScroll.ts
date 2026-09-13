@@ -10,15 +10,3 @@ export const resetPageScrollToTop = () => {
   document.body.scrollLeft = 0;
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 };
-
-export const forcePageScrollToTop = () => {
-  resetPageScrollToTop();
-  window.requestAnimationFrame(() => {
-    resetPageScrollToTop();
-    window.requestAnimationFrame(resetPageScrollToTop);
-  });
-  // Hash routing, Next navigation and Safari history restoration can each run
-  // after the click handler. Reassert the page origin after those phases.
-  window.setTimeout(resetPageScrollToTop, 80);
-  window.setTimeout(resetPageScrollToTop, 240);
-};

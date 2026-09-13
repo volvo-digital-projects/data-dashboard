@@ -3207,40 +3207,36 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(
-    dashboardSource,
-    /const resetPageScrollForHeaderNavigation = \(\) => \{\s*forcePageScrollToTop\(\);/,
-  );
-  assert.equal(
-    (dashboardSource.match(/resetPageScrollForHeaderNavigation\(\);/g) ?? []).length,
-    3,
-  );
-  assert.match(
-    analysisSource,
-    /const resetPageScrollForHeaderNavigation = \([\s\S]*?forcePageScrollToTop\(\);/,
-  );
-  assert.equal(
-    (analysisSource.match(/onClick=\{resetPageScrollForHeaderNavigation\}/g) ?? []).length,
-    4,
-  );
+  assert.doesNotMatch(dashboardSource, /forcePageScrollToTop|resetPageScrollForHeaderNavigation/);
+  assert.doesNotMatch(analysisSource, /forcePageScrollToTop|resetPageScrollForHeaderNavigation/);
   assert.equal((dashboardSource.match(/scroll=\{false\}/g) ?? []).length, 3);
   assert.equal((analysisSource.match(/scroll=\{false\}/g) ?? []).length, 4);
   for (const source of [dashboardSource, analysisSource]) {
     assert.match(
       source,
-      /useLayoutEffect\(\(\) => \{\s*forcePageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
+      /useLayoutEffect\(\(\) => \{\s*resetPageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
     );
   }
   assert.match(pageScrollSource, /document\.scrollingElement/);
   assert.match(pageScrollSource, /document\.documentElement\.scrollTop = 0/);
   assert.match(pageScrollSource, /document\.body\.scrollTop = 0/);
-  assert.match(pageScrollSource, /window\.requestAnimationFrame\(\(\) =>/);
-  assert.match(pageScrollSource, /window\.setTimeout\(resetPageScrollToTop, 240\)/);
+  assert.match(pageScrollSource, /window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\)/);
+  assert.doesNotMatch(pageScrollSource, /requestAnimationFrame|setTimeout|forcePageScrollToTop/);
   assert.match(githubPagesSource, /window\.history\.scrollRestoration = "manual";/);
   assert.match(githubPagesSource, /import \{ flushSync \} from "react-dom";/);
+  assert.match(githubPagesSource, /function routeFromHash\(hash = window\.location\.hash\)/);
   assert.match(
     githubPagesSource,
-    /const update = \(\) => \{[\s\S]*?const nextRoute = routeFromHash\(\);[\s\S]*?resetPageScrollToTop\(\);[\s\S]*?flushSync\(\(\) => setRoute\(nextRoute\)\);[\s\S]*?resetPageScrollToTop\(\);/,
+    /const commitRouteAtTop = \(nextRoute:[\s\S]*?flushSync\(\(\) => setRoute\(nextRoute\)\);[\s\S]*?resetPageScrollToTop\(\);/,
+  );
+  assert.match(githubPagesSource, /const navigateDashboardRoute = \(event: MouseEvent\) =>/);
+  assert.match(githubPagesSource, /event\.preventDefault\(\);[\s\S]*?window\.history\.pushState\(null, "", nextUrl\);[\s\S]*?commitRouteAtTop\(routeFromHash\(nextUrl\.hash\)\);/);
+  assert.match(githubPagesSource, /document\.addEventListener\("click", navigateDashboardRoute, true\)/);
+  assert.match(githubPagesSource, /window\.addEventListener\("hashchange", update\)/);
+  assert.match(githubPagesSource, /window\.addEventListener\("popstate", update\)/);
+  assert.doesNotMatch(
+    githubPagesSource,
+    /resetPageScrollToTop\(\);\s*flushSync\(\(\) => setRoute/,
   );
   assert.match(css, /html\s*\{[^}]*scroll-behavior: auto;/);
   assert.doesNotMatch(css, /html\s*\{[^}]*scroll-behavior: smooth;/);
@@ -4210,16 +4206,8 @@ test("limits header hover feedback to pointer devices", async () => {
     css,
     /@media \(min-width: 761px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.dashboard-identity-header \.identity-analysis-entry:hover/,
   );
-  assert.equal(
-    (dashboardSource.match(/resetPageScrollForHeaderNavigation\(\);/g) ?? [])
-      .length,
-    3,
-  );
-  assert.equal(
-    (analysisSource.match(/onClick=\{resetPageScrollForHeaderNavigation\}/g) ?? [])
-      .length,
-    4,
-  );
+  assert.doesNotMatch(dashboardSource, /resetPageScrollForHeaderNavigation/);
+  assert.doesNotMatch(analysisSource, /resetPageScrollForHeaderNavigation/);
 });
 
 test("keeps the four header context cells free of internal cross dividers", async () => {

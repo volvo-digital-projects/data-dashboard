@@ -18,7 +18,7 @@ import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
-import { forcePageScrollToTop } from "./pageScroll";
+import { resetPageScrollToTop } from "./pageScroll";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1221,7 +1221,7 @@ export default function CompetitiveAnalysis({
   }, [initialCdsid]);
 
   useLayoutEffect(() => {
-    forcePageScrollToTop();
+    resetPageScrollToTop();
   }, [initialCdsid]);
 
   const beginGrowthNavigationDetailDrag = (
@@ -2232,13 +2232,6 @@ export default function CompetitiveAnalysis({
     }
   };
 
-  const resetPageScrollForHeaderNavigation = (
-    event: ReactMouseEvent<HTMLAnchorElement>,
-  ) => {
-    event.currentTarget.blur();
-    forcePageScrollToTop();
-  };
-
   const toggleLinkedShowroom = (cdsid: string) => {
     setPinnedCdsid((current) => (current === cdsid ? null : cdsid));
   };
@@ -2261,7 +2254,6 @@ export default function CompetitiveAnalysis({
             href={`/dashboard/${selected.cdsid}`}
             scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={resetPageScrollForHeaderNavigation}
           >
             <span
               className="identity-icon identity-icon--dealer"
@@ -2275,7 +2267,6 @@ export default function CompetitiveAnalysis({
             href={`/dashboard/${selected.cdsid}`}
             scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={resetPageScrollForHeaderNavigation}
           >
             <span
               className="identity-icon identity-icon--region"
@@ -2289,7 +2280,6 @@ export default function CompetitiveAnalysis({
             href={`/dashboard/${selected.cdsid}`}
             scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={resetPageScrollForHeaderNavigation}
           >
             <span
               className="identity-icon identity-icon--size"
@@ -2303,7 +2293,6 @@ export default function CompetitiveAnalysis({
             href={`/dashboard/${selected.cdsid}`}
             scroll={false}
             aria-label={`${displayShowroomName(selected.showroom)} 현황으로 이동`}
-            onClick={resetPageScrollForHeaderNavigation}
           >
             <span className="identity-profile-icon" aria-hidden="true" />
             <small>지점장</small>
