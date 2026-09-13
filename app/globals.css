@@ -900,9 +900,33 @@ html {
 }
 
 .growth-position-card {
+  position: relative;
   height: 244px;
   box-sizing: border-box;
   padding: 7px;
+}
+
+.growth-under-construction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  min-width: 76px;
+  box-sizing: border-box;
+  padding: 7px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 5px;
+  background: rgba(43, 84, 104, 0.72);
+  box-shadow: 0 4px 12px rgba(26, 60, 76, 0.12);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .growth-position-card > header,
@@ -1561,6 +1585,7 @@ html {
 }
 
 .growth-sales-funnel-card {
+  position: relative;
   height: 244px;
   box-sizing: border-box;
 }

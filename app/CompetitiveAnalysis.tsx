@@ -3000,6 +3000,7 @@ export default function CompetitiveAnalysis({
                         <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="209">{selectedStaffGrowthCalculation}</text>
                       </svg>
                     </div>
+                    <div className="growth-under-construction">공사중</div>
                   </article>
 
                   <article className="growth-scatter-card" ref={growthConsultationScatterRef}>
@@ -3250,6 +3251,7 @@ export default function CompetitiveAnalysis({
                         <b>활동 기록 연결 완료</b><span>동일 고객·직원 조합의 단계 이동으로 계산</span>
                       </footer>
                     ) : null}
+                    <div className="growth-under-construction">공사중</div>
                   </article>
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>
