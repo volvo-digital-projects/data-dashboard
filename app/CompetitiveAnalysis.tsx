@@ -803,6 +803,7 @@ export default function CompetitiveAnalysis({
   const [selectedStaffName, setSelectedStaffName] = useState<string | null>(null);
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
   const [staffAnalysisInView, setStaffAnalysisInView] = useState(false);
+  const [tabletGrowthMode, setTabletGrowthMode] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
   );
@@ -815,6 +816,7 @@ export default function CompetitiveAnalysis({
   const growthNavigationDetailRef = useRef<HTMLDivElement>(null);
   const growthConsultationScatterRef = useRef<HTMLElement>(null);
   const v3sAwardRef = useRef<HTMLElement>(null);
+  const tabletGrowthMotionFrameRef = useRef(0);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -885,6 +887,31 @@ export default function CompetitiveAnalysis({
       document.removeEventListener("keydown", preventKeyboardZoom);
     };
   }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("analysis-tablet-growth-active", tabletGrowthMode);
+
+    const restoreOverviewAtTop = () => {
+      if (
+        window.scrollY <= 2 &&
+        tabletGrowthMotionFrameRef.current === 0
+      ) {
+        setTabletGrowthMode(false);
+      }
+    };
+    window.addEventListener("scroll", restoreOverviewAtTop, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", restoreOverviewAtTop);
+      root.classList.remove("analysis-tablet-growth-active");
+    };
+  }, [tabletGrowthMode]);
+
+  useEffect(
+    () => () => window.cancelAnimationFrame(tabletGrowthMotionFrameRef.current),
+    [],
+  );
 
   useEffect(() => {
     const workspace = analysisWorkspaceRef.current;
@@ -2339,6 +2366,64 @@ export default function CompetitiveAnalysis({
     });
   };
 
+  const revealTabletGrowthNavigation = (event: ReactMouseEvent<HTMLElement>) => {
+    if (
+      tabletGrowthMode ||
+      !window.matchMedia(
+        "(hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 761px) and (max-width: 1400px)",
+      ).matches
+    ) {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (target.closest("a, button, input, select")) return;
+
+    setTabletGrowthMode(true);
+    window.cancelAnimationFrame(tabletGrowthMotionFrameRef.current);
+    tabletGrowthMotionFrameRef.current = window.requestAnimationFrame(() => {
+      tabletGrowthMotionFrameRef.current = window.requestAnimationFrame(() => {
+        const summary = growthNavigationSummaryRef.current;
+        const header = stickyShellRef.current?.querySelector<HTMLElement>(
+          ".analysis-header",
+        );
+        if (!summary || !header) return;
+
+        const startTop = window.scrollY;
+        const targetTop = Math.max(
+          0,
+          window.scrollY + summary.getBoundingClientRect().top -
+            header.getBoundingClientRect().height,
+        );
+        const startedAt = performance.now();
+        const motionDuration = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches
+          ? 0
+          : 340;
+
+        const move = (timestamp: number) => {
+          const progress = motionDuration
+            ? Math.min(1, (timestamp - startedAt) / motionDuration)
+            : 1;
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+          window.scrollTo({
+            top: startTop + (targetTop - startTop) * easedProgress,
+            left: window.scrollX,
+            behavior: "auto",
+          });
+          if (progress < 1) {
+            tabletGrowthMotionFrameRef.current = window.requestAnimationFrame(move);
+          } else {
+            tabletGrowthMotionFrameRef.current = 0;
+          }
+        };
+
+        tabletGrowthMotionFrameRef.current = window.requestAnimationFrame(move);
+      });
+    });
+  };
+
   const changeView = (nextView: AnalysisView) => {
     revealAnalysisWorkspace();
     if (nextView === view) return;
@@ -2372,7 +2457,7 @@ export default function CompetitiveAnalysis({
   const linkedCdsid = hoveredCdsid ?? pinnedCdsid;
 
   return (
-    <main className="competitive-analysis-page">
+    <main className={`competitive-analysis-page${tabletGrowthMode ? " tablet-growth-mode" : ""}`}>
       <div className="analysis-sticky-anchor" ref={stickyAnchorRef}>
       <div className="analysis-sticky-shell" ref={stickyShellRef}>
         <header className="dashboard-identity-header analysis-header">
@@ -2550,7 +2635,11 @@ export default function CompetitiveAnalysis({
       </div>
       </div>
 
-      <section className="analysis-workspace" ref={analysisWorkspaceRef}>
+      <section
+        className="analysis-workspace"
+        ref={analysisWorkspaceRef}
+        onClick={revealTabletGrowthNavigation}
+      >
         <article className="analysis-scatter-card">
           <header className="analysis-card-heading">
             <div>

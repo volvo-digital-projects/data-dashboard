@@ -2160,6 +2160,63 @@ html.analysis-viewport-locked .competitive-analysis-page {
   }
 }
 
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 761px) and (max-width: 1400px) {
+  html.analysis-tablet-growth-active,
+  html.analysis-tablet-growth-active body {
+    scroll-snap-type: none;
+  }
+
+  .competitive-analysis-page.tablet-growth-mode {
+    --growth-navigation-sticky-top: var(--dashboard-header-height);
+  }
+
+  .competitive-analysis-page.tablet-growth-mode .analysis-sticky-shell {
+    height: var(--dashboard-header-height);
+    min-height: var(--dashboard-header-height);
+    gap: 0;
+    padding-bottom: 0;
+  }
+
+  .competitive-analysis-page .analysis-sticky-shell > .analysis-tabs,
+  .competitive-analysis-page .analysis-sticky-shell > .analysis-summary-grid {
+    transition:
+      opacity 180ms ease,
+      transform 220ms ease;
+  }
+
+  .competitive-analysis-page.tablet-growth-mode .analysis-sticky-shell > .analysis-tabs,
+  .competitive-analysis-page.tablet-growth-mode .analysis-sticky-shell > .analysis-summary-grid {
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .competitive-analysis-page.tablet-growth-mode > .growth-navigation-sticky-summary {
+    top: var(--dashboard-header-height);
+  }
+
+  .competitive-analysis-page.tablet-growth-mode .growth-navigation-workspace,
+  .competitive-analysis-page.tablet-growth-mode .growth-navigation-detail {
+    height: calc(
+      100dvh - var(--dashboard-header-height) -
+        var(--growth-navigation-summary-height, 152px) - 8px
+    );
+    max-height: none;
+  }
+
+  .competitive-analysis-page.tablet-growth-mode .growth-navigation-detail {
+    overflow-y: hidden;
+  }
+
+  .competitive-analysis-page.tablet-growth-mode .growth-staff-roster-list {
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 button,
 select,
 input {
