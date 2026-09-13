@@ -2908,9 +2908,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffPhotoData, /@hvolvo\.com|010-\d{4}-\d{4}/);
   assert.doesNotMatch(staffPhotoData, /consultant-cb79d612fa5b\.jpg/);
   assert.match(staffPhotoSyncSource, /PORTRAIT_SIZE = \(420, 440\)/);
-  assert.match(staffPhotoSyncSource, /PORTRAIT_FACE_WIDTH_RATIO = 0\.46/);
+  assert.match(staffPhotoSyncSource, /PORTRAIT_FACE_WIDTH_RATIO = 0\.38/);
   assert.match(staffPhotoSyncSource, /PORTRAIT_SAFE_MARGIN = 16/);
-  assert.match(staffPhotoSyncSource, /scale = min\(face_scale, contain_scale\)/);
+  assert.match(staffPhotoSyncSource, /scale = min\(face_scale, protected_scale\)/);
+  assert.match(staffPhotoSyncSource, /protected_right/);
   assert.match(staffPhotoSyncSource, /FACE_CLASSIFIER\.detectMultiScale/);
   const staffPhotoJson = JSON.parse(staffPhotoData);
   assert.equal(staffPhotoJson.showroomCount, 39);

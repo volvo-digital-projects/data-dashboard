@@ -32,8 +32,8 @@ OUTPUT_JSON = ROOT / "app" / "data" / "staff-profile-photos.json"
 PUBLIC_ROOT = ROOT / "public"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) VolvoDataDashboard/1.0"
 PORTRAIT_SIZE = (420, 440)
-PORTRAIT_FACE_WIDTH_RATIO = 0.46
-PORTRAIT_FACE_CENTER_Y_RATIO = 0.42
+PORTRAIT_FACE_WIDTH_RATIO = 0.38
+PORTRAIT_FACE_CENTER_Y_RATIO = 0.36
 PORTRAIT_SAFE_MARGIN = 16
 FACE_CLASSIFIER = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
@@ -248,13 +248,68 @@ def normalized_portrait(image: Image.Image) -> Image.Image | None:
     target_width, target_height = PORTRAIT_SIZE
     target_face_width = target_width * PORTRAIT_FACE_WIDTH_RATIO
     face_scale = target_face_width / face_width
-    contain_scale = min(
-        (target_width - PORTRAIT_SAFE_MARGIN * 2) / image.width,
-        (target_height - PORTRAIT_SAFE_MARGIN * 2) / image.height,
+
+    # The dealer portraits have generous, inconsistent background margins. Keep
+    # the person's head and both shoulders, but allow unused background and the
+    # lower torso to leave the frame so faces can be shown at a consistent size.
+    lab = cv2.cvtColor(source, cv2.COLOR_RGB2LAB).astype(np.int16)
+    border = np.concatenate(
+        (lab[:4].reshape(-1, 3), lab[-4:].reshape(-1, 3),
+         lab[:, :4].reshape(-1, 3), lab[:, -4:].reshape(-1, 3))
     )
-    # Never crop the source portrait. Face size and eye line are normalized only
-    # as far as the complete source can remain inside the safety margin.
-    scale = min(face_scale, contain_scale)
+    background = np.median(border, axis=0)
+    foreground = np.linalg.norm(lab - background, axis=2) > 14
+    foreground = cv2.morphologyEx(
+        foreground.astype(np.uint8),
+        cv2.MORPH_CLOSE,
+        np.ones((7, 7), np.uint8),
+    ).astype(bool)
+
+    protected_top_fallback = max(0, face_y - face_height * 0.8)
+    protected_bottom = min(image.height, face_y + face_height * 2.45)
+    band_top = max(0, round(protected_top_fallback))
+    band_bottom = max(band_top + 1, round(protected_bottom))
+    band_y, band_x = np.nonzero(foreground[band_top:band_bottom])
+    band_y = band_y + band_top
+    near_person = (
+        (band_x >= face_center_x - face_width * 1.7)
+        & (band_x <= face_center_x + face_width * 1.7)
+    )
+    band_x = band_x[near_person]
+    band_y = band_y[near_person]
+
+    if band_x.size >= 50:
+        protected_left = min(face_x, float(np.quantile(band_x, 0.005)))
+        protected_right = max(
+            face_x + face_width,
+            float(np.quantile(band_x, 0.995) + 1),
+        )
+        head_pixels = band_y[
+            (band_x >= face_center_x - face_width * 1.15)
+            & (band_x <= face_center_x + face_width * 1.15)
+            & (band_y <= face_y + face_height * 0.35)
+        ]
+        protected_top = (
+            float(np.quantile(head_pixels, 0.01))
+            if head_pixels.size >= 10
+            else protected_top_fallback
+        )
+    else:
+        protected_left = max(0, face_center_x - face_width * 1.65)
+        protected_right = min(image.width, face_center_x + face_width * 1.65)
+        protected_top = protected_top_fallback
+
+    protected_left = max(0, protected_left - face_width * 0.12)
+    protected_right = min(image.width, protected_right + face_width * 0.12)
+    protected_top = max(0, protected_top - face_height * 0.12)
+    protected_bottom = min(image.height, protected_bottom)
+    protected_width = max(1, protected_right - protected_left)
+    protected_height = max(1, protected_bottom - protected_top)
+    protected_scale = min(
+        (target_width - PORTRAIT_SAFE_MARGIN * 2) / protected_width,
+        (target_height - PORTRAIT_SAFE_MARGIN * 2) / protected_height,
+    )
+    scale = min(face_scale, protected_scale)
     resized_width = max(1, round(image.width * scale))
     resized_height = max(1, round(image.height * scale))
     resized = image.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
@@ -263,14 +318,20 @@ def normalized_portrait(image: Image.Image) -> Image.Image | None:
     desired_top = round(
         target_height * PORTRAIT_FACE_CENTER_Y_RATIO - face_center_y * scale
     )
-    left = max(
-        PORTRAIT_SAFE_MARGIN,
-        min(target_width - PORTRAIT_SAFE_MARGIN - resized_width, desired_left),
-    )
-    top = max(
-        PORTRAIT_SAFE_MARGIN,
-        min(target_height - PORTRAIT_SAFE_MARGIN - resized_height, desired_top),
-    )
+    left = round(max(
+        PORTRAIT_SAFE_MARGIN - protected_left * scale,
+        min(
+            target_width - PORTRAIT_SAFE_MARGIN - protected_right * scale,
+            desired_left,
+        ),
+    ))
+    top = round(max(
+        PORTRAIT_SAFE_MARGIN - protected_top * scale,
+        min(
+            target_height - PORTRAIT_SAFE_MARGIN - protected_bottom * scale,
+            desired_top,
+        ),
+    ))
     canvas = Image.new("RGB", PORTRAIT_SIZE, (245, 248, 250))
     canvas.paste(resized, (left, top))
     return canvas
