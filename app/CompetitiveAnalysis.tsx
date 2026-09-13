@@ -812,6 +812,8 @@ export default function CompetitiveAnalysis({
   const stickyShellRef = useRef<HTMLDivElement>(null);
   const growthNavigationSummaryRef = useRef<HTMLDivElement>(null);
   const growthStaffRosterRef = useRef<HTMLDivElement>(null);
+  const growthNavigationDetailRef = useRef<HTMLDivElement>(null);
+  const growthConsultationScatterRef = useRef<HTMLElement>(null);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -1081,6 +1083,138 @@ export default function CompetitiveAnalysis({
       window.removeEventListener("touchend", clearEntryTouch);
       window.removeEventListener("touchcancel", clearEntryTouch);
       window.removeEventListener("scroll", handleEntryScroll);
+    };
+  }, [initialCdsid]);
+
+  useEffect(() => {
+    const detail = growthNavigationDetailRef.current;
+    const consultationScatter = growthConsultationScatterRef.current;
+    if (!detail || !consultationScatter) return;
+
+    let snapFrame = 0;
+    let snapActive = false;
+    let downwardIntent = 0;
+    let touchY: number | null = null;
+
+    const normalizedWheelDistance = (event: WheelEvent) => {
+      if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
+      if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
+        return event.deltaY * detail.clientHeight;
+      }
+      return event.deltaY;
+    };
+
+    const consultationScatterTop = () => {
+      const detailBounds = detail.getBoundingClientRect();
+      const scatterBounds = consultationScatter.getBoundingClientRect();
+      return Math.max(
+        0,
+        detail.scrollTop + scatterBounds.top - detailBounds.top - 6,
+      );
+    };
+
+    const canSettleAtConsultationScatter = () => {
+      if (!window.matchMedia("(min-width: 600px)").matches) return false;
+      const targetTop = consultationScatterTop();
+      return targetTop > detail.scrollTop + 8;
+    };
+
+    const settleAtConsultationScatter = () => {
+      const startTop = detail.scrollTop;
+      const targetTop = consultationScatterTop();
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const motionDuration = reduceMotion ? 0 : 280;
+      const startedAt = performance.now();
+
+      snapActive = true;
+      downwardIntent = 0;
+      window.cancelAnimationFrame(snapFrame);
+
+      const alignScatter = (timestamp: number) => {
+        const progress = motionDuration
+          ? Math.min(1, (timestamp - startedAt) / motionDuration)
+          : 1;
+        const easedProgress = 1 - Math.pow(1 - progress, 4);
+        detail.scrollTop =
+          progress < 1
+            ? startTop + (targetTop - startTop) * easedProgress
+            : targetTop;
+
+        if (progress < 1) {
+          snapFrame = window.requestAnimationFrame(alignScatter);
+          return;
+        }
+
+        detail.scrollTop = targetTop;
+        snapActive = false;
+      };
+
+      snapFrame = window.requestAnimationFrame(alignScatter);
+    };
+
+    const handleDetailWheel = (event: WheelEvent) => {
+      if (event.ctrlKey || event.metaKey || event.deltaY <= 0) {
+        downwardIntent = 0;
+        return;
+      }
+      if (snapActive) {
+        event.preventDefault();
+        return;
+      }
+      if (!canSettleAtConsultationScatter()) return;
+
+      downwardIntent += Math.max(0, normalizedWheelDistance(event));
+      if (downwardIntent < 18) return;
+      event.preventDefault();
+      settleAtConsultationScatter();
+    };
+
+    const handleDetailTouchStart = (event: TouchEvent) => {
+      touchY = event.touches[0]?.clientY ?? null;
+      downwardIntent = 0;
+    };
+
+    const handleDetailTouchMove = (event: TouchEvent) => {
+      const nextTouchY = event.touches[0]?.clientY ?? null;
+      if (touchY === null || nextTouchY === null) return;
+      const downwardDistance = touchY - nextTouchY;
+      touchY = nextTouchY;
+      if (downwardDistance <= 0) {
+        downwardIntent = 0;
+        return;
+      }
+      if (snapActive) {
+        event.preventDefault();
+        return;
+      }
+      if (!canSettleAtConsultationScatter()) return;
+
+      downwardIntent += downwardDistance;
+      if (downwardIntent < 18) return;
+      event.preventDefault();
+      settleAtConsultationScatter();
+    };
+
+    const clearDetailTouch = () => {
+      touchY = null;
+      downwardIntent = 0;
+    };
+
+    detail.addEventListener("wheel", handleDetailWheel, { passive: false });
+    detail.addEventListener("touchstart", handleDetailTouchStart, { passive: true });
+    detail.addEventListener("touchmove", handleDetailTouchMove, { passive: false });
+    detail.addEventListener("touchend", clearDetailTouch, { passive: true });
+    detail.addEventListener("touchcancel", clearDetailTouch, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(snapFrame);
+      detail.removeEventListener("wheel", handleDetailWheel);
+      detail.removeEventListener("touchstart", handleDetailTouchStart);
+      detail.removeEventListener("touchmove", handleDetailTouchMove);
+      detail.removeEventListener("touchend", clearDetailTouch);
+      detail.removeEventListener("touchcancel", clearDetailTouch);
     };
   }, [initialCdsid]);
 
@@ -2659,6 +2793,7 @@ export default function CompetitiveAnalysis({
 
             <div
               className="growth-navigation-detail"
+              ref={growthNavigationDetailRef}
               role="region"
               aria-label="선택 영업직원의 상담 및 영업활동 분석 세부정보"
               tabIndex={0}
@@ -2744,7 +2879,7 @@ export default function CompetitiveAnalysis({
                     </div>
                   </article>
 
-                  <article className="growth-scatter-card">
+                  <article className="growth-scatter-card" ref={growthConsultationScatterRef}>
                     <header>
                       <div><strong>근속기간 × 고객상담 평균만족도</strong></div>
                     </header>

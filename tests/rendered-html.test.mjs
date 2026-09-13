@@ -302,6 +302,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const handleEntryTouchMove = [\s\S]*?downwardPageDistance[\s\S]*?shouldSettleAtGrowthNavigation\(downwardPageDistance\)[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtGrowthNavigation\(\);/);
   assert.match(source, /window\.addEventListener\("touchmove", handleEntryTouchMove, \{ passive: false \}\)/);
   assert.match(source, /const alignEntry = \(timestamp: number\) => \{[\s\S]*?window\.scrollTo\(\{ top: nextTop, left: window\.scrollX, behavior: "auto" \}\);[\s\S]*?if \(progress < 1\)/);
+  assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?ref=\{growthNavigationDetailRef\}[\s\S]*?className="growth-scatter-card" ref=\{growthConsultationScatterRef\}/);
+  assert.match(source, /const settleAtConsultationScatter = \(\) => \{[\s\S]*?const motionDuration = reduceMotion \? 0 : 280;[\s\S]*?Math\.pow\(1 - progress, 4\)[\s\S]*?detail\.scrollTop =/);
+  assert.match(source, /const handleDetailWheel = \(event: WheelEvent\) => \{[\s\S]*?downwardIntent < 18[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtConsultationScatter\(\);/);
+  assert.match(source, /const handleDetailTouchMove = \(event: TouchEvent\) => \{[\s\S]*?downwardDistance[\s\S]*?downwardIntent < 18[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtConsultationScatter\(\);/);
+  assert.match(source, /detail\.addEventListener\("wheel", handleDetailWheel, \{ passive: false \}\)[\s\S]*?detail\.addEventListener\("touchmove", handleDetailTouchMove, \{ passive: false \}\)/);
   assert.match(source, /if \(!event\.isPrimary \|\| \(event\.pointerType === "mouse" && event\.button !== 0\)\)/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*scroll-snap-type: y proximity;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*scroll-snap-align: start;/);
@@ -576,7 +581,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-navigation-sticky-summary"\s*ref=\{growthNavigationSummaryRef\}[\s\S]*?className="growth-navigation-pinned-headings"/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?role="region"[\s\S]*?tabIndex=\{0\}[\s\S]*?onPointerDown=\{beginGrowthNavigationDetailDrag\}[\s\S]*?onPointerMove=\{moveGrowthNavigationDetailDrag\}[\s\S]*?onPointerUp=\{endGrowthNavigationDetailDrag\}/);
   assert.match(source, /event\.currentTarget\.scrollTop\s*=\s*drag\.originScrollTop - \(event\.clientY - drag\.originY\)/);
-  assert.doesNotMatch(source, /growthNavigationDetailRef/);
+  assert.match(source, /const growthNavigationDetailRef = useRef<HTMLDivElement>\(null\);/);
   assert.doesNotMatch(navigation, /scrollTo\(\{[\s\S]*?top: 0/);
   assert.match(css, /\.growth-navigation-pinned-headings\s*\{[^}]*grid-template-columns: 288px minmax\(0, 1fr\);[^}]*border-bottom: 1px solid #d5e3e9;/);
   assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-staff-roster\s*\{[^}]*height: 100%;[^}]*align-self: stretch;[^}]*overflow: hidden;[^}]*background: #ffffff;/);
