@@ -1127,7 +1127,7 @@ export default function CompetitiveAnalysis({
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const motionDuration = reduceMotion ? 0 : 280;
+      const motionDuration = reduceMotion ? 0 : 320;
       const startedAt = performance.now();
 
       snapActive = true;
@@ -1138,7 +1138,7 @@ export default function CompetitiveAnalysis({
         const progress = motionDuration
           ? Math.min(1, (timestamp - startedAt) / motionDuration)
           : 1;
-        const easedProgress = 1 - Math.pow(1 - progress, 4);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
         detail.scrollTop =
           progress < 1
             ? startTop + (targetTop - startTop) * easedProgress
@@ -1167,9 +1167,9 @@ export default function CompetitiveAnalysis({
       }
       if (!canSettleAtConsultationScatter()) return;
 
+      event.preventDefault();
       downwardIntent += Math.max(0, normalizedWheelDistance(event));
       if (downwardIntent < 18) return;
-      event.preventDefault();
       settleAtConsultationScatter();
     };
 
@@ -1193,9 +1193,9 @@ export default function CompetitiveAnalysis({
       }
       if (!canSettleAtConsultationScatter()) return;
 
+      event.preventDefault();
       downwardIntent += downwardDistance;
       if (downwardIntent < 18) return;
-      event.preventDefault();
       settleAtConsultationScatter();
     };
 

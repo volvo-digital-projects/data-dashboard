@@ -303,9 +303,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /window\.addEventListener\("touchmove", handleEntryTouchMove, \{ passive: false \}\)/);
   assert.match(source, /const alignEntry = \(timestamp: number\) => \{[\s\S]*?window\.scrollTo\(\{ top: nextTop, left: window\.scrollX, behavior: "auto" \}\);[\s\S]*?if \(progress < 1\)/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?ref=\{growthNavigationDetailRef\}[\s\S]*?className="growth-scatter-card" ref=\{growthConsultationScatterRef\}/);
-  assert.match(source, /const settleAtConsultationScatter = \(\) => \{[\s\S]*?const motionDuration = reduceMotion \? 0 : 280;[\s\S]*?Math\.pow\(1 - progress, 4\)[\s\S]*?detail\.scrollTop =/);
-  assert.match(source, /const handleDetailWheel = \(event: WheelEvent\) => \{[\s\S]*?downwardIntent < 18[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtConsultationScatter\(\);/);
-  assert.match(source, /const handleDetailTouchMove = \(event: TouchEvent\) => \{[\s\S]*?downwardDistance[\s\S]*?downwardIntent < 18[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtConsultationScatter\(\);/);
+  assert.match(source, /const settleAtConsultationScatter = \(\) => \{[\s\S]*?const motionDuration = reduceMotion \? 0 : 320;[\s\S]*?Math\.pow\(1 - progress, 3\)[\s\S]*?detail\.scrollTop =/);
+  assert.match(source, /if \(!canSettleAtConsultationScatter\(\)\) return;\s*event\.preventDefault\(\);\s*downwardIntent \+= downwardDistance;/);
+  assert.match(source, /const handleDetailWheel = \(event: WheelEvent\) => \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?downwardIntent < 18[\s\S]*?settleAtConsultationScatter\(\);/);
+  assert.match(source, /const handleDetailTouchMove = \(event: TouchEvent\) => \{[\s\S]*?downwardDistance[\s\S]*?event\.preventDefault\(\);[\s\S]*?downwardIntent < 18[\s\S]*?settleAtConsultationScatter\(\);/);
   assert.match(source, /detail\.addEventListener\("wheel", handleDetailWheel, \{ passive: false \}\)[\s\S]*?detail\.addEventListener\("touchmove", handleDetailTouchMove, \{ passive: false \}\)/);
   assert.match(source, /if \(!event\.isPrimary \|\| \(event\.pointerType === "mouse" && event\.button !== 0\)\)/);
   assert.match(css, /\.growth-staff-roster-list\s*\{[^}]*scroll-snap-type: y proximity;/);
