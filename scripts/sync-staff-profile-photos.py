@@ -24,7 +24,7 @@ from zoneinfo import ZoneInfo
 
 import cv2
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image, ImageFilter, ImageOps
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,8 +33,8 @@ PUBLIC_ROOT = ROOT / "public"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) VolvoDataDashboard/1.0"
 PORTRAIT_SIZE = (420, 440)
 PORTRAIT_FACE_WIDTH_RATIO = 0.38
-PORTRAIT_FACE_CENTER_Y_RATIO = 0.36
-PORTRAIT_SAFE_MARGIN = 16
+PORTRAIT_SIDE_MARGIN = 10
+PORTRAIT_TOP_MARGIN = 8
 FACE_CLASSIFIER = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
@@ -221,9 +221,62 @@ def existing_profile(cdsid: str, name: str) -> dict[str, str]:
 def portrait_path(cdsid: str, dealer_dir: str, showroom_dir: str, name: str) -> Path:
     old_image = existing_profile(cdsid, name).get("image")
     if old_image:
-        return PUBLIC_ROOT / old_image.lstrip("/")
+        return (PUBLIC_ROOT / old_image.lstrip("/")).with_suffix(".webp")
     digest = hashlib.sha1(f"{cdsid}:{name}".encode("utf-8")).hexdigest()[:12]
-    return PUBLIC_ROOT / "staff-profiles" / dealer_dir / showroom_dir / f"consultant-{digest}.jpg"
+    return PUBLIC_ROOT / "staff-profiles" / dealer_dir / showroom_dir / f"consultant-{digest}.webp"
+
+
+def remove_uniform_light_background(image: Image.Image) -> tuple[Image.Image, bool]:
+    """Remove only a light, nearly uniform background connected to the image edge.
+
+    Dealer portraits commonly use white studio backgrounds. Restricting removal to
+    edge-connected pixels preserves white shirts, badges and highlights inside the
+    subject while still retaining soft anti-aliased hair and shoulder edges.
+    """
+
+    source = np.asarray(image.convert("RGB"))
+    lab = cv2.cvtColor(source, cv2.COLOR_RGB2LAB).astype(np.float32)
+    border = np.concatenate(
+        (
+            lab[:4].reshape(-1, 3),
+            lab[-4:].reshape(-1, 3),
+            lab[:, :4].reshape(-1, 3),
+            lab[:, -4:].reshape(-1, 3),
+        )
+    )
+    background = np.median(border, axis=0)
+    border_spread = np.median(np.linalg.norm(border - background, axis=1))
+    border_rgb = cv2.cvtColor(
+        np.uint8([[np.clip(background, 0, 255)]]),
+        cv2.COLOR_LAB2RGB,
+    )[0, 0]
+    if float(np.mean(border_rgb)) < 218 or float(border_spread) > 13:
+        return image.convert("RGBA"), False
+
+    distance = np.linalg.norm(lab - background, axis=2)
+    lightness = np.min(source, axis=2)
+    candidate = ((distance < 30) & (lightness > 198)).astype(np.uint8)
+    component_count, labels = cv2.connectedComponents(candidate, connectivity=8)
+    if component_count <= 1:
+        return image.convert("RGBA"), False
+
+    edge_labels = np.unique(
+        np.concatenate((labels[0], labels[-1], labels[:, 0], labels[:, -1]))
+    )
+    edge_labels = edge_labels[edge_labels != 0]
+    background_region = np.isin(labels, edge_labels).astype(np.uint8)
+    if np.count_nonzero(background_region) < source.shape[0] * source.shape[1] * 0.08:
+        return image.convert("RGBA"), False
+
+    feather_region = cv2.dilate(background_region, np.ones((3, 3), np.uint8)) > 0
+    alpha = np.full(distance.shape, 255, dtype=np.float32)
+    feather_alpha = np.clip((distance - 5) / 20, 0, 1) * 255
+    alpha[feather_region] = np.minimum(alpha[feather_region], feather_alpha[feather_region])
+    alpha[background_region > 0] = 0
+    alpha = cv2.GaussianBlur(alpha, (0, 0), 0.55)
+
+    rgba = np.dstack((source, np.clip(alpha, 0, 255).astype(np.uint8)))
+    return Image.fromarray(rgba), True
 
 
 def normalized_portrait(image: Image.Image) -> Image.Image | None:
@@ -243,97 +296,45 @@ def normalized_portrait(image: Image.Image) -> Image.Image | None:
         faces,
         key=lambda box: int(box[2]) * int(box[3]),
     )
-    face_center_x = face_x + face_width / 2
-    face_center_y = face_y + face_height / 2
+    cutout, _ = remove_uniform_light_background(image)
+    alpha = np.asarray(cutout.getchannel("A"))
+    foreground_y, foreground_x = np.nonzero(alpha > 18)
+    if foreground_x.size < 50:
+        return None
+
+    # The complete detected subject is the protected box. It is never cropped:
+    # face enlargement stops as soon as either arm, the hair or the torso would
+    # leave the portrait frame.
+    subject_left = int(foreground_x.min())
+    subject_top = int(foreground_y.min())
+    subject_right = int(foreground_x.max()) + 1
+    subject_bottom = int(foreground_y.max()) + 1
+    subject = cutout.crop((subject_left, subject_top, subject_right, subject_bottom))
+
     target_width, target_height = PORTRAIT_SIZE
-    target_face_width = target_width * PORTRAIT_FACE_WIDTH_RATIO
-    face_scale = target_face_width / face_width
-
-    # The dealer portraits have generous, inconsistent background margins. Keep
-    # the person's head and both shoulders, but allow unused background and the
-    # lower torso to leave the frame so faces can be shown at a consistent size.
-    lab = cv2.cvtColor(source, cv2.COLOR_RGB2LAB).astype(np.int16)
-    border = np.concatenate(
-        (lab[:4].reshape(-1, 3), lab[-4:].reshape(-1, 3),
-         lab[:, :4].reshape(-1, 3), lab[:, -4:].reshape(-1, 3))
+    face_scale = target_width * PORTRAIT_FACE_WIDTH_RATIO / face_width
+    width_scale = (target_width - PORTRAIT_SIDE_MARGIN * 2) / subject.width
+    height_scale = (target_height - PORTRAIT_TOP_MARGIN) / subject.height
+    scale = min(face_scale, width_scale, height_scale)
+    resized_size = (
+        max(1, round(subject.width * scale)),
+        max(1, round(subject.height * scale)),
     )
-    background = np.median(border, axis=0)
-    foreground = np.linalg.norm(lab - background, axis=2) > 14
-    foreground = cv2.morphologyEx(
-        foreground.astype(np.uint8),
-        cv2.MORPH_CLOSE,
-        np.ones((7, 7), np.uint8),
-    ).astype(bool)
-
-    protected_top_fallback = max(0, face_y - face_height * 0.8)
-    protected_bottom = min(image.height, face_y + face_height * 2.45)
-    band_top = max(0, round(protected_top_fallback))
-    band_bottom = max(band_top + 1, round(protected_bottom))
-    band_y, band_x = np.nonzero(foreground[band_top:band_bottom])
-    band_y = band_y + band_top
-    near_person = (
-        (band_x >= face_center_x - face_width * 1.7)
-        & (band_x <= face_center_x + face_width * 1.7)
-    )
-    band_x = band_x[near_person]
-    band_y = band_y[near_person]
-
-    if band_x.size >= 50:
-        protected_left = min(face_x, float(np.quantile(band_x, 0.005)))
-        protected_right = max(
-            face_x + face_width,
-            float(np.quantile(band_x, 0.995) + 1),
+    resized = subject.resize(resized_size, Image.Resampling.LANCZOS)
+    if scale > 1 or image.width < 500:
+        rgb = resized.convert("RGB").filter(
+            ImageFilter.UnsharpMask(radius=1.15, percent=115, threshold=3)
         )
-        head_pixels = band_y[
-            (band_x >= face_center_x - face_width * 1.15)
-            & (band_x <= face_center_x + face_width * 1.15)
-            & (band_y <= face_y + face_height * 0.35)
-        ]
-        protected_top = (
-            float(np.quantile(head_pixels, 0.01))
-            if head_pixels.size >= 10
-            else protected_top_fallback
-        )
-    else:
-        protected_left = max(0, face_center_x - face_width * 1.65)
-        protected_right = min(image.width, face_center_x + face_width * 1.65)
-        protected_top = protected_top_fallback
+        rgb.putalpha(resized.getchannel("A"))
+        resized = rgb
 
-    protected_left = max(0, protected_left - face_width * 0.12)
-    protected_right = min(image.width, protected_right + face_width * 0.12)
-    protected_top = max(0, protected_top - face_height * 0.12)
-    protected_bottom = min(image.height, protected_bottom)
-    protected_width = max(1, protected_right - protected_left)
-    protected_height = max(1, protected_bottom - protected_top)
-    protected_scale = min(
-        (target_width - PORTRAIT_SAFE_MARGIN * 2) / protected_width,
-        (target_height - PORTRAIT_SAFE_MARGIN * 2) / protected_height,
-    )
-    scale = min(face_scale, protected_scale)
-    resized_width = max(1, round(image.width * scale))
-    resized_height = max(1, round(image.height * scale))
-    resized = image.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
-
-    desired_left = round(target_width / 2 - face_center_x * scale)
-    desired_top = round(
-        target_height * PORTRAIT_FACE_CENTER_Y_RATIO - face_center_y * scale
-    )
-    left = round(max(
-        PORTRAIT_SAFE_MARGIN - protected_left * scale,
-        min(
-            target_width - PORTRAIT_SAFE_MARGIN - protected_right * scale,
-            desired_left,
-        ),
-    ))
-    top = round(max(
-        PORTRAIT_SAFE_MARGIN - protected_top * scale,
-        min(
-            target_height - PORTRAIT_SAFE_MARGIN - protected_bottom * scale,
-            desired_top,
-        ),
-    ))
-    canvas = Image.new("RGB", PORTRAIT_SIZE, (245, 248, 250))
-    canvas.paste(resized, (left, top))
+    # Anchor the visible torso to the lower edge so the employee never floats.
+    # Centering the full protected box also gives every portrait the same body
+    # axis without sacrificing either shoulder.
+    left = round((target_width - resized.width) / 2)
+    top = target_height - resized.height
+    canvas = Image.new("RGBA", PORTRAIT_SIZE, (0, 0, 0, 0))
+    canvas.alpha_composite(resized, (left, top))
     return canvas
 
 
@@ -341,11 +342,10 @@ def save_portrait(content: bytes, destination: Path) -> bool:
     destination.parent.mkdir(parents=True, exist_ok=True)
     with Image.open(io.BytesIO(content)) as source:
         image = ImageOps.exif_transpose(source).convert("RGB")
-        image.thumbnail((720, 960), Image.Resampling.LANCZOS)
         normalized = normalized_portrait(image)
         if normalized is None:
             return False
-        normalized.save(destination, "JPEG", quality=88, optimize=True, progressive=True)
+        normalized.save(destination, "WEBP", quality=92, method=6, exact=True)
     return True
 
 
@@ -357,7 +357,7 @@ def normalize_portrait_file(portrait: Path) -> bool:
     normalized = normalized_portrait(image)
     if normalized is None:
         return False
-    normalized.save(portrait, "JPEG", quality=88, optimize=True, progressive=True)
+    normalized.save(portrait, "WEBP", quality=92, method=6, exact=True)
     return True
 
 

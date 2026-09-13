@@ -2897,7 +2897,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
 
   await access(
     new URL(
-      "../public/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.jpg",
+      "../public/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.webp",
       import.meta.url,
     ),
   );
@@ -2912,10 +2912,13 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffPhotoData, /@hvolvo\.com|010-\d{4}-\d{4}/);
   assert.doesNotMatch(staffPhotoData, /consultant-cb79d612fa5b\.jpg/);
   assert.match(staffPhotoSyncSource, /PORTRAIT_SIZE = \(420, 440\)/);
+  assert.match(staffPhotoSyncSource, /remove_uniform_light_background/);
+  assert.match(staffPhotoSyncSource, /top = target_height - resized\.height/);
+  assert.match(staffPhotoSyncSource, /\.with_suffix\("\.webp"\)/);
   assert.match(staffPhotoSyncSource, /PORTRAIT_FACE_WIDTH_RATIO = 0\.38/);
-  assert.match(staffPhotoSyncSource, /PORTRAIT_SAFE_MARGIN = 16/);
-  assert.match(staffPhotoSyncSource, /scale = min\(face_scale, protected_scale\)/);
-  assert.match(staffPhotoSyncSource, /protected_right/);
+  assert.match(staffPhotoSyncSource, /PORTRAIT_SIDE_MARGIN = 10/);
+  assert.match(staffPhotoSyncSource, /scale = min\(face_scale, width_scale, height_scale\)/);
+  assert.match(staffPhotoSyncSource, /subject_right/);
   assert.match(staffPhotoSyncSource, /FACE_CLASSIFIER\.detectMultiScale/);
   const staffPhotoJson = JSON.parse(staffPhotoData);
   assert.equal(staffPhotoJson.showroomCount, 39);
@@ -2928,33 +2931,21 @@ test("serves the dual-metric competitive analysis sample", async () => {
     (showroom) => Object.values(showroom.employees),
   );
   assert.equal(staffPortraits.length, staffPhotoJson.consultantCount);
-  const readJpegSize = (buffer) => {
-    const startOfFrameMarkers = new Set([
-      0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7,
-      0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
-    ]);
-    let offset = 2;
-    while (offset + 8 < buffer.length) {
-      if (buffer[offset] !== 0xff) {
-        offset += 1;
-        continue;
-      }
-      const marker = buffer[offset + 1];
-      if (startOfFrameMarkers.has(marker)) {
-        return {
-          height: buffer.readUInt16BE(offset + 5),
-          width: buffer.readUInt16BE(offset + 7),
-        };
-      }
-      offset += 2 + buffer.readUInt16BE(offset + 2);
-    }
-    throw new Error("JPEG 크기를 읽을 수 없습니다.");
+  const readWebpSize = (buffer) => {
+    assert.equal(buffer.toString("ascii", 0, 4), "RIFF");
+    assert.equal(buffer.toString("ascii", 8, 12), "WEBP");
+    assert.equal(buffer.toString("ascii", 12, 16), "VP8X");
+    assert.ok((buffer[20] & 0x10) !== 0, "프로필 WebP에 투명 채널이 필요합니다.");
+    return {
+      width: buffer.readUIntLE(24, 3) + 1,
+      height: buffer.readUIntLE(27, 3) + 1,
+    };
   };
   await Promise.all(staffPortraits.map(async (profile) => {
     const portrait = await readFile(
       new URL(`../public${profile.image}`, import.meta.url),
     );
-    assert.deepEqual(readJpegSize(portrait), { width: 420, height: 440 });
+    assert.deepEqual(readWebpSize(portrait), { width: 420, height: 440 });
   }));
 
   const staffAnalysisData = await readFile(
