@@ -32,8 +32,9 @@ OUTPUT_JSON = ROOT / "app" / "data" / "staff-profile-photos.json"
 PUBLIC_ROOT = ROOT / "public"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) VolvoDataDashboard/1.0"
 PORTRAIT_SIZE = (420, 440)
-PORTRAIT_FACE_WIDTH_RATIO = 0.56
-PORTRAIT_FACE_CENTER_Y_RATIO = 0.40
+PORTRAIT_FACE_WIDTH_RATIO = 0.46
+PORTRAIT_FACE_CENTER_Y_RATIO = 0.42
+PORTRAIT_SAFE_MARGIN = 16
 FACE_CLASSIFIER = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
@@ -242,28 +243,37 @@ def normalized_portrait(image: Image.Image) -> Image.Image | None:
         faces,
         key=lambda box: int(box[2]) * int(box[3]),
     )
-    crop_width = face_width / PORTRAIT_FACE_WIDTH_RATIO
-    crop_height = crop_width / (PORTRAIT_SIZE[0] / PORTRAIT_SIZE[1])
     face_center_x = face_x + face_width / 2
     face_center_y = face_y + face_height / 2
-    crop_left = max(
-        0,
-        min(image.width - crop_width, face_center_x - crop_width / 2),
+    target_width, target_height = PORTRAIT_SIZE
+    target_face_width = target_width * PORTRAIT_FACE_WIDTH_RATIO
+    face_scale = target_face_width / face_width
+    contain_scale = min(
+        (target_width - PORTRAIT_SAFE_MARGIN * 2) / image.width,
+        (target_height - PORTRAIT_SAFE_MARGIN * 2) / image.height,
     )
-    crop_top = max(
-        0,
-        min(
-            image.height - crop_height,
-            face_center_y - PORTRAIT_FACE_CENTER_Y_RATIO * crop_height,
-        ),
+    # Never crop the source portrait. Face size and eye line are normalized only
+    # as far as the complete source can remain inside the safety margin.
+    scale = min(face_scale, contain_scale)
+    resized_width = max(1, round(image.width * scale))
+    resized_height = max(1, round(image.height * scale))
+    resized = image.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
+
+    desired_left = round(target_width / 2 - face_center_x * scale)
+    desired_top = round(
+        target_height * PORTRAIT_FACE_CENTER_Y_RATIO - face_center_y * scale
     )
-    crop_box = (
-        round(crop_left),
-        round(crop_top),
-        round(crop_left + crop_width),
-        round(crop_top + crop_height),
+    left = max(
+        PORTRAIT_SAFE_MARGIN,
+        min(target_width - PORTRAIT_SAFE_MARGIN - resized_width, desired_left),
     )
-    return image.crop(crop_box).resize(PORTRAIT_SIZE, Image.Resampling.LANCZOS)
+    top = max(
+        PORTRAIT_SAFE_MARGIN,
+        min(target_height - PORTRAIT_SAFE_MARGIN - resized_height, desired_top),
+    )
+    canvas = Image.new("RGB", PORTRAIT_SIZE, (245, 248, 250))
+    canvas.paste(resized, (left, top))
+    return canvas
 
 
 def save_portrait(content: bytes, destination: Path) -> bool:
@@ -337,6 +347,7 @@ def dashboard_showrooms() -> set[str]:
 
 
 def main() -> int:
+    refresh_portraits = "--refresh-portraits" in sys.argv
     expected_cdsids = dashboard_showrooms()
     configured_cdsids = {
         branch[0] for source in SOURCES for branch in source["branches"]
@@ -370,7 +381,11 @@ def main() -> int:
                     name,
                 )
                 portrait_available = False
-                if local_file.exists() and local_file.stat().st_size > 0:
+                if (
+                    not refresh_portraits
+                    and local_file.exists()
+                    and local_file.stat().st_size > 0
+                ):
                     portrait_available = normalize_portrait_file(local_file)
                 else:
                     portrait_available = save_portrait(

@@ -439,9 +439,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source, /(?:src|href)=\{staffFallbackProfileImage\}/);
   assert.doesNotMatch(navigation, /selectedStaffInitials/);
   assert.doesNotMatch(navigation, /<span className="staff-profile-silhouette"/);
-  assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?padding: 0;/);
+  assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: contain;[\s\S]*?object-position: center center;[\s\S]*?padding: 0;/);
   assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*transform: none;/);
-  assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 4);
+  assert.equal((navigation.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
@@ -2908,7 +2908,9 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.doesNotMatch(staffPhotoData, /@hvolvo\.com|010-\d{4}-\d{4}/);
   assert.doesNotMatch(staffPhotoData, /consultant-cb79d612fa5b\.jpg/);
   assert.match(staffPhotoSyncSource, /PORTRAIT_SIZE = \(420, 440\)/);
-  assert.match(staffPhotoSyncSource, /PORTRAIT_FACE_WIDTH_RATIO = 0\.56/);
+  assert.match(staffPhotoSyncSource, /PORTRAIT_FACE_WIDTH_RATIO = 0\.46/);
+  assert.match(staffPhotoSyncSource, /PORTRAIT_SAFE_MARGIN = 16/);
+  assert.match(staffPhotoSyncSource, /scale = min\(face_scale, contain_scale\)/);
   assert.match(staffPhotoSyncSource, /FACE_CLASSIFIER\.detectMultiScale/);
   const staffPhotoJson = JSON.parse(staffPhotoData);
   assert.equal(staffPhotoJson.showroomCount, 39);

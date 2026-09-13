@@ -640,7 +640,7 @@ html {
 }
 
 .growth-profile-photo {
-  width: 36px;
+  width: 42px;
   height: 44px;
   flex: 0 0 auto;
   display: grid;
@@ -656,13 +656,13 @@ html {
 .growth-profile-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center center;
 }
 
 .growth-profile-photo img:not(.staff-profile-silhouette),
 .analysis-staff-profile-photo img:not(.staff-profile-silhouette) {
-  object-position: center top;
+  object-position: center center;
   transform: none;
 }
 
@@ -672,8 +672,8 @@ html {
   height: 100%;
   display: block;
   box-sizing: border-box;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center center;
   padding: 0;
 }
 
@@ -7173,8 +7173,8 @@ input:focus-visible {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center center;
   transition: opacity 160ms ease-out;
   user-select: none;
 }
