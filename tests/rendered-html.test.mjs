@@ -498,7 +498,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-sales-monthly-chart::before\s*\{/);
   assert.match(css, /\.growth-sales-monthly-legend\s*\{[^}]*align-items: center;[^}]*justify-content: center;/);
   assert.match(css, /\.growth-sales-share-panel\s*\{[^}]*flex-direction: column;[^}]*border-left: 1px solid #c9d8de;/);
-  assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*display: grid;[^}]*grid-template-columns: 78px minmax\(0, 1fr\);[^}]*overflow: hidden;/);
+  assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*display: grid;[^}]*grid-template-columns: 82px minmax\(0, 1fr\);[^}]*overflow: hidden;/);
+  assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*width: 78px;[^}]*height: 78px;[^}]*flex: 0 0 78px;/);
+  assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*width: 50px;[^}]*height: 50px;/);
+  assert.match(css, /\.growth-sales-share-donut span\s*\{[^}]*font-size: 8px;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*conic-gradient\([^}]*#74aec5[^}]*#3d7f9e[^}]*#174662[^}]*#e9794f/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*margin-top: 10px;[^}]*justify-self: start;/);
   assert.match(navigation, /key=\{`sales-share-\$\{selectedStaffEmployee\?\.cdsid \?\? selectedStaffEmployee\?\.name \?\? "none"\}`\}/);
@@ -510,7 +513,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /growth-sales-share-label-enter/);
   assert.match(css, /\.growth-sales-share-callout\s*\{[^}]*width: calc\(100% - 11px\);[^}]*margin: 3px 0 0 11px;[^}]*overflow: hidden;[^}]*transform: translateY\(-7px\);/);
   assert.match(navigation, /className="growth-sales-share-leader"[\s\S]*?pathLength="1"[\s\S]*?selectedStaffSalesShareLeaderX\.toFixed\(1\)/);
-  assert.match(navigation, /selectedStaffSalesShareLeaderBendX\.toFixed\(1\)\},10 86,10/);
+  assert.match(navigation, /selectedStaffSalesShareLeaderBendX\.toFixed\(1\)\},10 90,10/);
   assert.match(css, /\.growth-sales-share-leader polyline\s*\{[^}]*stroke: #3d7f9e;[^}]*stroke-dasharray: 1;[^}]*stroke-dashoffset: 1;[^}]*animation: growth-sales-share-leader-draw 720ms ease-out 420ms forwards;/);
   assert.match(css, /@keyframes growth-sales-share-leader-draw\s*\{[^}]*stroke-dashoffset: 0;/);
   assert.match(css, /\.growth-sales-share-callout > span\s*\{[^}]*font-size: 9\.5px;/);

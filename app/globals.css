@@ -1889,7 +1889,7 @@ html {
   position: relative;
   min-height: 84px;
   display: grid;
-  grid-template-columns: 78px minmax(0, 1fr);
+  grid-template-columns: 82px minmax(0, 1fr);
   align-items: flex-start;
   overflow: hidden;
 }
@@ -1907,9 +1907,9 @@ html {
 }
 
 .growth-sales-share-donut {
-  width: 74px;
-  height: 74px;
-  flex: 0 0 74px;
+  width: 78px;
+  height: 78px;
+  flex: 0 0 78px;
   margin-top: 10px;
   justify-self: start;
   display: grid;
@@ -1939,8 +1939,8 @@ html {
 }
 
 .growth-sales-share-donut > div {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1959,7 +1959,7 @@ html {
 }
 
 .growth-sales-share-donut span {
-  font-size: 7px;
+  font-size: 8px;
   color: #708791;
 }
 
@@ -1998,7 +1998,7 @@ html {
   z-index: 2;
   top: 0;
   left: 0;
-  width: 86px;
+  width: 90px;
   height: 24px;
   overflow: visible;
   pointer-events: none;

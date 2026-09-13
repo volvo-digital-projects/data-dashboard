@@ -1498,9 +1498,9 @@ export default function CompetitiveAnalysis({
     : null;
   const selectedStaffSalesShareClamped = Math.max(0, Math.min(100, selectedStaffSalesShare ?? 0));
   const selectedStaffSalesShareLeaderRadians = ((selectedStaffSalesShareClamped * 1.8) - 90) * (Math.PI / 180);
-  const selectedStaffSalesShareLeaderX = 37 + Math.cos(selectedStaffSalesShareLeaderRadians) * 34;
-  const selectedStaffSalesShareLeaderY = 47 + Math.sin(selectedStaffSalesShareLeaderRadians) * 34;
-  const selectedStaffSalesShareLeaderBendX = Math.min(80, Math.max(70, selectedStaffSalesShareLeaderX + 8));
+  const selectedStaffSalesShareLeaderX = 39 + Math.cos(selectedStaffSalesShareLeaderRadians) * 36;
+  const selectedStaffSalesShareLeaderY = 49 + Math.sin(selectedStaffSalesShareLeaderRadians) * 36;
+  const selectedStaffSalesShareLeaderBendX = Math.min(84, Math.max(74, selectedStaffSalesShareLeaderX + 8));
   const selectedStaffMonthlyDeliveredSales = Array.from(
     { length: 12 },
     (_, index) => selectedStaffSalesActivity?.monthlyDeliveredSales[index] ?? null,
@@ -3162,13 +3162,13 @@ export default function CompetitiveAnalysis({
                           </div>
                           <svg
                             className="growth-sales-share-leader"
-                            viewBox="0 0 86 24"
+                            viewBox="0 0 90 24"
                             aria-hidden="true"
                             key={`sales-share-leader-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}
                           >
                             <polyline
                               pathLength="1"
-                              points={`${selectedStaffSalesShareLeaderX.toFixed(1)},${selectedStaffSalesShareLeaderY.toFixed(1)} ${selectedStaffSalesShareLeaderBendX.toFixed(1)},10 86,10`}
+                              points={`${selectedStaffSalesShareLeaderX.toFixed(1)},${selectedStaffSalesShareLeaderY.toFixed(1)} ${selectedStaffSalesShareLeaderBendX.toFixed(1)},10 90,10`}
                             />
                           </svg>
                           <div className="growth-sales-share-callout">
