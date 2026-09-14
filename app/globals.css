@@ -2622,6 +2622,11 @@ html.analysis-entry-top-locked body {
     width: 44%;
   }
 
+  .competitive-analysis-page .growth-sales-share-visual,
+  .competitive-analysis-page .growth-sales-share-meta {
+    transform: translateY(-3px);
+  }
+
   .competitive-analysis-page .growth-sales-monthly-legend {
     min-height: 16px;
     padding-top: 0;
