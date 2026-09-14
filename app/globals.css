@@ -2508,7 +2508,7 @@ html.analysis-entry-top-locked body {
 
   .competitive-analysis-page .growth-scatter-card {
     padding-right: 14px;
-    padding-bottom: 14px;
+    padding-bottom: 8px;
     padding-left: 14px;
   }
 
@@ -2526,7 +2526,8 @@ html.analysis-entry-top-locked body {
   }
 
   .competitive-analysis-page .growth-evidence-grid {
-    height: 215px;
+    height: 209px;
+    padding-top: 0;
   }
 
   .competitive-analysis-page .growth-sales-monthly-card {
