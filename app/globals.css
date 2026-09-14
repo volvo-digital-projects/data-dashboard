@@ -2606,7 +2606,7 @@ html.analysis-entry-top-locked body {
   }
 
   .competitive-analysis-page .growth-sales-monthly-trend {
-    transform: translateY(-3px);
+    transform: translateY(-6px);
   }
 
   .competitive-analysis-page .growth-sales-month {
@@ -2629,7 +2629,17 @@ html.analysis-entry-top-locked body {
 
   .competitive-analysis-page .growth-sales-share-visual,
   .competitive-analysis-page .growth-sales-share-meta {
-    transform: translateY(-3px);
+    transform: translateY(-6px);
+  }
+
+  .competitive-analysis-page .growth-sales-share-meta {
+    width: 100%;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .competitive-analysis-page .growth-sales-share-rank {
+    justify-content: center;
   }
 
   .competitive-analysis-page .growth-sales-monthly-legend {
