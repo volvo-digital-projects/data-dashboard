@@ -28,12 +28,14 @@ export default function DscGuideViewer({ onClose }: DscGuideViewerProps) {
     const previousBodyOverscrollBehavior = document.body.style.overscrollBehavior;
     const previousHtmlOverflow = document.documentElement.style.overflow;
 
+    document.documentElement.classList.add("dsc-guide-open");
     document.body.style.overflow = "hidden";
     document.body.style.overscrollBehavior = "none";
     document.documentElement.style.overflow = "hidden";
     closeButtonRef.current?.focus({ preventScroll: true });
 
     return () => {
+      document.documentElement.classList.remove("dsc-guide-open");
       document.body.style.overflow = previousBodyOverflow;
       document.body.style.overscrollBehavior = previousBodyOverscrollBehavior;
       document.documentElement.style.overflow = previousHtmlOverflow;

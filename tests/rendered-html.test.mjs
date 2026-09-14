@@ -5968,10 +5968,11 @@ test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape v
 });
 
 test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
-  const [headerSource, viewerSource, viewerCss] = await Promise.all([
+  const [headerSource, viewerSource, viewerCss, globalCss] = await Promise.all([
     readFile(new URL("../app/DashboardHeaderLead.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/DscGuideViewer.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/DscGuideViewer.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
   await access(
@@ -5997,10 +5998,13 @@ test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
   assert.match(viewerSource, /aria-label="DSC 가이드 닫기"/);
   assert.match(viewerSource, /event\.key === "Escape"/);
   assert.match(viewerSource, /IntersectionObserver/);
+  assert.match(viewerSource, /document\.documentElement\.classList\.add\("dsc-guide-open"\)/);
+  assert.match(viewerSource, /document\.documentElement\.classList\.remove\("dsc-guide-open"\)/);
   assert.match(viewerCss, /\.backdrop[\s\S]*?position: fixed;[\s\S]*?z-index: 12000/);
   assert.match(viewerCss, /\.pages\s*\{[^}]*scroll-snap-type: y mandatory/);
   assert.match(viewerCss, /\.page\s*\{[^}]*height: 100dvh[^}]*scroll-snap-stop: always/);
   assert.match(viewerCss, /\.closeButton\s*\{[^}]*justify-self: end/);
+  assert.match(globalCss, /html\.dsc-guide-open \.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?html\.dsc-guide-open \.dashboard-identity-header > \.analysis-admin-entry,[\s\S]*?html\.dsc-guide-open \.dashboard-identity-header > \.analysis-context\s*\{[^}]*visibility: hidden;[^}]*pointer-events: none;/);
 });
 
 test("keeps the dense score rail stable when Edge enforces a minimum font size", async () => {

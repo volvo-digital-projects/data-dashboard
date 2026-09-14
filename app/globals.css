@@ -813,6 +813,13 @@ html {
 .dealer-analysis-roadmap > span { padding: 7px 10px; color: #8b6b30; border: 1px solid #ead7ac; border-radius: 999px; background: #fff8e9; font-size: 8px; }
 .dealer-analysis-data-note { margin: 0; padding: 0 4px; color: #778c96; font-size: 8px; line-height: 1.5; }
 
+html.dsc-guide-open .dashboard-identity-header > .identity-detail-rail,
+html.dsc-guide-open .dashboard-identity-header > .analysis-admin-entry,
+html.dsc-guide-open .dashboard-identity-header > .analysis-context {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 @media (min-width: 761px) and (max-width: 1240px) {
   .dashboard-identity-header.analysis-header.has-admin-entry {
     flex-direction: row;
