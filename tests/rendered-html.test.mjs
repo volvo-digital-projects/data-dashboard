@@ -4476,10 +4476,11 @@ test("shows the showroom switcher only within the authenticated scope", async ()
 });
 
 test("limits header hover feedback to pointer devices", async () => {
-  const [css, dashboardSource, analysisSource] = await Promise.all([
+  const [css, dashboardSource, analysisSource, headerLeadSource] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/DashboardHeaderLead.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(
@@ -4497,6 +4498,14 @@ test("limits header hover feedback to pointer devices", async () => {
   assert.match(
     css,
     /@media \(min-width: 761px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.dashboard-identity-header \.identity-analysis-entry:hover/,
+  );
+  assert.match(
+    css,
+    /@media \(hover: hover\) and \(pointer: fine\)\s*\{\s*\.header-status-row \.dashboard-logout-button:hover,[\s\S]*?\.header-status-row \.header-status-item--guide:hover[\s\S]*?\.header-status-row \.header-status-item:active/,
+  );
+  assert.match(
+    headerLeadSource,
+    /className="header-status-item header-status-item--dashboard-return"[\s\S]*?onClick=\{\(\) => setIsGuideOpen\(false\)\}/,
   );
   assert.doesNotMatch(dashboardSource, /resetPageScrollForHeaderNavigation/);
   assert.doesNotMatch(analysisSource, /resetPageScrollForHeaderNavigation/);

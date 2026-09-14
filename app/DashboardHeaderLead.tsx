@@ -51,6 +51,7 @@ export default function DashboardHeaderLead({
               href={dashboardReturn.href}
               scroll={false}
               aria-label={dashboardReturn.ariaLabel}
+              onClick={() => setIsGuideOpen(false)}
             >
               <span className="header-status-icon header-status-icon--dashboard" aria-hidden="true" />
               <span>{dashboardReturn.label}</span>
