@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
   type WheelEvent as ReactWheelEvent,
@@ -122,6 +123,20 @@ type ScatterViewport = {
   height: number;
 };
 
+type StaffScatterPreview = {
+  instance: number;
+  chart: "consultation" | "sales";
+  key: string;
+  name: string;
+  showroom: string;
+  tenureYears: number;
+  metricLabel: string;
+  metricValue: string;
+  detail: string;
+  x: number;
+  y: number;
+};
+
 const scatterViewportBase: ScatterViewport = { x: 0, y: 0, width: 470, height: 210 };
 const scatterViewportMaximumScale = 5;
 
@@ -204,6 +219,8 @@ const useScatterViewportZoom = (resetKey: string) => {
     };
 
     const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest("[data-scatter-point]")) return;
       const current = viewportRef.current;
       const currentScale = scatterViewportBase.width / current.width;
       if (currentScale <= 1.001 || !event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
@@ -325,6 +342,7 @@ const useScatterViewportZoom = (resetKey: string) => {
 
   return {
     svgRef,
+    viewport,
     viewBox: `${viewport.x} ${viewport.y} ${viewport.width} ${viewport.height}`,
     scale: scatterViewportBase.width / viewport.width,
     reset,
@@ -1018,6 +1036,7 @@ export default function CompetitiveAnalysis({
   const [pinnedCdsid, setPinnedCdsid] = useState<string | null>(null);
   const [selectedStaffName, setSelectedStaffName] = useState<string | null>(null);
   const [smilingStaffName, setSmilingStaffName] = useState<string | null>(null);
+  const [staffScatterPreview, setStaffScatterPreview] = useState<StaffScatterPreview | null>(null);
   const [staffAnalysisInView, setStaffAnalysisInView] = useState(false);
   const [accessDate, setAccessDate] = useState(() =>
     formatAnalysisDate(new Date()),
@@ -1032,6 +1051,8 @@ export default function CompetitiveAnalysis({
   const growthConsultationScatterRef = useRef<HTMLElement>(null);
   const consultationScatterZoom = useScatterViewportZoom(`${initialCdsid}-${selectedStaffName ?? "default"}-consultation`);
   const salesScatterZoom = useScatterViewportZoom(`${initialCdsid}-${selectedStaffName ?? "default"}-sales`);
+  const staffScatterPreviewTimerRef = useRef<number | null>(null);
+  const staffScatterPreviewInstanceRef = useRef(0);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -1605,13 +1626,60 @@ export default function CompetitiveAnalysis({
     return lockPageScrollToTop();
   }, [initialCdsid]);
 
+  useEffect(() => {
+    setStaffScatterPreview(null);
+    if (staffScatterPreviewTimerRef.current !== null) {
+      window.clearTimeout(staffScatterPreviewTimerRef.current);
+      staffScatterPreviewTimerRef.current = null;
+    }
+    return () => {
+      if (staffScatterPreviewTimerRef.current !== null) {
+        window.clearTimeout(staffScatterPreviewTimerRef.current);
+      }
+    };
+  }, [initialCdsid, selectedStaffName]);
+
+  const revealStaffScatterPreview = (preview: StaffScatterPreview) => {
+    if (staffScatterPreviewTimerRef.current !== null) {
+      window.clearTimeout(staffScatterPreviewTimerRef.current);
+    }
+    staffScatterPreviewInstanceRef.current += 1;
+    setStaffScatterPreview({
+      ...preview,
+      instance: staffScatterPreviewInstanceRef.current,
+    });
+    staffScatterPreviewTimerRef.current = window.setTimeout(() => {
+      setStaffScatterPreview(null);
+      staffScatterPreviewTimerRef.current = null;
+    }, 3000);
+  };
+
+  const activateStaffScatterPoint = (
+    event: ReactPointerEvent<SVGCircleElement>,
+    preview: StaffScatterPreview,
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    revealStaffScatterPreview(preview);
+  };
+
+  const activateStaffScatterPointByKeyboard = (
+    event: ReactKeyboardEvent<SVGCircleElement>,
+    preview: StaffScatterPreview,
+  ) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    event.stopPropagation();
+    revealStaffScatterPreview(preview);
+  };
+
   const beginGrowthNavigationDetailDrag = (
     event: ReactPointerEvent<HTMLDivElement>,
   ) => {
     if (
       event.pointerType !== "mouse" ||
       event.button !== 0 ||
-      (event.target as HTMLElement).closest("button, a, input, select, textarea")
+      (event.target as HTMLElement).closest("button, a, input, select, textarea, [data-scatter-point]")
     ) {
       return;
     }
@@ -2438,6 +2506,52 @@ export default function CompetitiveAnalysis({
     { length: 6 },
     (_, index) => index * staffSalesTickStep,
   );
+  const staffScatterShowroomLabel = (cdsid: string) =>
+    displayShowroomNameWithoutBrand(
+      showrooms.find((showroom) => showroom.cdsid === cdsid)?.showroom ?? cdsid,
+    );
+  const staffScatterPreviewStyle = (
+    preview: StaffScatterPreview,
+    viewport: ScatterViewport,
+  ) => {
+    const left = ((preview.x - viewport.x) / viewport.width) * 100;
+    const top = ((preview.y - viewport.y) / viewport.height) * 100;
+    return {
+      "--scatter-point-left": `${Math.min(96, Math.max(4, left))}%`,
+      "--scatter-point-top": `${Math.min(94, Math.max(6, top))}%`,
+      "--scatter-popup-left": `${Math.min(76, Math.max(24, left))}%`,
+      "--scatter-popup-top": `${Math.min(88, Math.max(8, top))}%`,
+      "--scatter-popup-transform": top < 34
+        ? "translate(-50%, 11px)"
+        : "translate(-50%, calc(-100% - 11px))",
+    } as CSSProperties;
+  };
+  const consultationPreviewFor = (point: StaffTenureScatterPoint): StaffScatterPreview => ({
+    instance: 0,
+    chart: "consultation",
+    key: point.key,
+    name: point.name,
+    showroom: staffScatterShowroomLabel(point.cdsid),
+    tenureYears: point.tenureYears,
+    metricLabel: "고객상담 평균만족도",
+    metricValue: `${(point.finalScore / 10).toFixed(1)}점`,
+    detail: `회신 ${point.responses}건`,
+    x: staffScatterX(point.tenureYears),
+    y: staffScatterY(point.finalScore),
+  });
+  const salesPreviewFor = (point: StaffSalesScatterPoint): StaffScatterPreview => ({
+    instance: 0,
+    chart: "sales",
+    key: point.key,
+    name: point.name,
+    showroom: staffScatterShowroomLabel(point.cdsid),
+    tenureYears: point.tenureYears,
+    metricLabel: "26년 누적판매",
+    metricValue: `${point.deliveredSales}대`,
+    detail: "Sales-DMS 누적 기준",
+    x: staffScatterX(point.tenureYears),
+    y: staffSalesScatterY(point.deliveredSales),
+  });
   const groupVocAverage = averageOf(groupItems, "vocScore");
   const groupHappyAverage = averageOf(groupItems, "happyScore");
   const groupCombinedAverage = averageOf(groupItems, "combined");
@@ -3371,20 +3485,34 @@ export default function CompetitiveAnalysis({
                       <g className="growth-scatter-population">
                         {otherStaffScatterPoints.map((point) => (
                           <circle
+                            className={`growth-scatter-point${staffScatterPreview?.chart === "consultation" && staffScatterPreview.key === point.key ? " is-inspected" : ""}`}
+                            data-scatter-point="true"
                             cx={staffScatterX(point.tenureYears)}
                             cy={staffScatterY(point.finalScore)}
                             r={Math.min(5.2, 2.2 + Math.sqrt(point.responses) * 0.42)}
                             key={point.key}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`${point.name}, ${staffScatterShowroomLabel(point.cdsid)}, 근속 ${point.tenureYears.toFixed(1)}년, 만족도 ${(point.finalScore / 10).toFixed(1)}점`}
+                            onPointerDown={(event) => activateStaffScatterPoint(event, consultationPreviewFor(point))}
+                            onKeyDown={(event) => activateStaffScatterPointByKeyboard(event, consultationPreviewFor(point))}
                           ><title>{`${point.name} · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
                         ))}
                       </g>
                       <g className="growth-scatter-showroom">
                         {sameShowroomStaffScatterPoints.map((point) => (
                           <circle
+                            className={`growth-scatter-point${staffScatterPreview?.chart === "consultation" && staffScatterPreview.key === point.key ? " is-inspected" : ""}`}
+                            data-scatter-point="true"
                             cx={staffScatterX(point.tenureYears)}
                             cy={staffScatterY(point.finalScore)}
                             r={Math.min(6, 2.8 + Math.sqrt(point.responses) * 0.46)}
                             key={point.key}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`${point.name}, ${staffScatterShowroomLabel(point.cdsid)}, 근속 ${point.tenureYears.toFixed(1)}년, 만족도 ${(point.finalScore / 10).toFixed(1)}점`}
+                            onPointerDown={(event) => activateStaffScatterPoint(event, consultationPreviewFor(point))}
+                            onKeyDown={(event) => activateStaffScatterPointByKeyboard(event, consultationPreviewFor(point))}
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
                         ))}
                       </g>
@@ -3434,6 +3562,24 @@ export default function CompetitiveAnalysis({
                         </g>
                       ) : null}
                     </svg>
+                    {staffScatterPreview?.chart === "consultation" ? (
+                      <div
+                        className="growth-scatter-point-preview"
+                        style={staffScatterPreviewStyle(staffScatterPreview, consultationScatterZoom.viewport)}
+                        role="status"
+                        aria-live="polite"
+                        key={`consultation-preview-${staffScatterPreview.instance}`}
+                      >
+                        <i className="growth-scatter-point-touch" aria-hidden="true" />
+                        <span className="growth-scatter-coordinate-y">{staffScatterPreview.metricValue}</span>
+                        <span className="growth-scatter-coordinate-x">{staffScatterPreview.tenureYears.toFixed(1)}년</span>
+                        <div className="growth-scatter-point-popover">
+                          <strong>{staffScatterPreview.name}</strong>
+                          <span>{staffScatterPreview.showroom} SC</span>
+                          <small>근속 {staffScatterPreview.tenureYears.toFixed(1)}년 · {staffScatterPreview.metricLabel} {staffScatterPreview.metricValue} · {staffScatterPreview.detail}</small>
+                        </div>
+                      </div>
+                    ) : null}
                     {consultationScatterZoom.scale > 1.001 ? (
                       <div className="growth-scatter-fixed-axes" aria-hidden="true">
                         <span className="growth-scatter-fixed-y-axis">고객상담 평균만족도</span>
@@ -3629,20 +3775,34 @@ export default function CompetitiveAnalysis({
                       <g className="growth-scatter-population">
                         {otherStaffSalesScatterPoints.map((point) => (
                           <circle
+                            className={`growth-scatter-point${staffScatterPreview?.chart === "sales" && staffScatterPreview.key === point.key ? " is-inspected" : ""}`}
+                            data-scatter-point="true"
                             cx={staffScatterX(point.tenureYears)}
                             cy={staffSalesScatterY(point.deliveredSales)}
                             r="3.2"
                             key={point.key}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`${point.name}, ${staffScatterShowroomLabel(point.cdsid)}, 근속 ${point.tenureYears.toFixed(1)}년, 누적판매 ${point.deliveredSales}대`}
+                            onPointerDown={(event) => activateStaffScatterPoint(event, salesPreviewFor(point))}
+                            onKeyDown={(event) => activateStaffScatterPointByKeyboard(event, salesPreviewFor(point))}
                           ><title>{`${point.name} · 누적판매 ${point.deliveredSales}대 · 근속 ${point.tenureYears.toFixed(1)}년`}</title></circle>
                         ))}
                       </g>
                       <g className="growth-scatter-showroom">
                         {sameShowroomStaffSalesScatterPoints.map((point) => (
                           <circle
+                            className={`growth-scatter-point${staffScatterPreview?.chart === "sales" && staffScatterPreview.key === point.key ? " is-inspected" : ""}`}
+                            data-scatter-point="true"
                             cx={staffScatterX(point.tenureYears)}
                             cy={staffSalesScatterY(point.deliveredSales)}
                             r="4.2"
                             key={point.key}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`${point.name}, ${staffScatterShowroomLabel(point.cdsid)}, 근속 ${point.tenureYears.toFixed(1)}년, 누적판매 ${point.deliveredSales}대`}
+                            onPointerDown={(event) => activateStaffScatterPoint(event, salesPreviewFor(point))}
+                            onKeyDown={(event) => activateStaffScatterPointByKeyboard(event, salesPreviewFor(point))}
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 누적판매 ${point.deliveredSales}대`}</title></circle>
                         ))}
                       </g>
@@ -3692,6 +3852,24 @@ export default function CompetitiveAnalysis({
                         </g>
                       ) : null}
                     </svg>
+                    {staffScatterPreview?.chart === "sales" ? (
+                      <div
+                        className="growth-scatter-point-preview"
+                        style={staffScatterPreviewStyle(staffScatterPreview, salesScatterZoom.viewport)}
+                        role="status"
+                        aria-live="polite"
+                        key={`sales-preview-${staffScatterPreview.instance}`}
+                      >
+                        <i className="growth-scatter-point-touch" aria-hidden="true" />
+                        <span className="growth-scatter-coordinate-y">{staffScatterPreview.metricValue}</span>
+                        <span className="growth-scatter-coordinate-x">{staffScatterPreview.tenureYears.toFixed(1)}년</span>
+                        <div className="growth-scatter-point-popover">
+                          <strong>{staffScatterPreview.name}</strong>
+                          <span>{staffScatterPreview.showroom} SC</span>
+                          <small>근속 {staffScatterPreview.tenureYears.toFixed(1)}년 · {staffScatterPreview.metricLabel} {staffScatterPreview.metricValue} · {staffScatterPreview.detail}</small>
+                        </div>
+                      </div>
+                    ) : null}
                     {salesScatterZoom.scale > 1.001 ? (
                       <div className="growth-scatter-fixed-axes" aria-hidden="true">
                         <span className="growth-scatter-fixed-y-axis">2026 누적판매(대)</span>
