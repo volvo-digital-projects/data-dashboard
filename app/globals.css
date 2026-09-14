@@ -2321,15 +2321,31 @@ html {
 
 .growth-sales-share-rank {
   display: grid;
-  gap: 2px;
+  grid-template-columns: max-content max-content max-content;
+  column-gap: 6px;
+  row-gap: 2px;
+  justify-content: start;
 }
 
 .growth-sales-share-rank > span {
-  display: block;
+  display: contents;
+}
+
+.growth-sales-share-rank > span > b,
+.growth-sales-share-rank > span > em,
+.growth-sales-share-rank > span > span {
+  min-width: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.growth-sales-share-rank em {
+  color: inherit;
+  font-style: normal;
 }
 
 .growth-sales-share-rank i {
-  margin: 0 4px;
+  margin-right: 4px;
   color: #9aabb3;
   font-style: normal;
 }

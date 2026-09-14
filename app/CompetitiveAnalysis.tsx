@@ -3976,14 +3976,14 @@ export default function CompetitiveAnalysis({
                         <div className="growth-sales-share-meta">
                           <small className="growth-sales-share-rank">
                             <span>
-                              <b>{selectedDealerRankName}</b> {selectedStaffDealerSalesRank ?? "―"}위
-                              <i aria-hidden="true">/</i>
-                              전체 {selectedStaffDealerSalesPopulation.length}
+                              <b>{selectedDealerRankName}</b>
+                              <em>{selectedStaffDealerSalesRank ?? "―"}위</em>
+                              <span><i aria-hidden="true">/</i>전체 {selectedStaffDealerSalesPopulation.length}</span>
                             </span>
                             <span>
-                              <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b> {selectedStaffSalesRank ?? "―"}위
-                              <i aria-hidden="true">/</i>
-                              전체 {selectedShowroomSalesPopulationCount}
+                              <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b>
+                              <em>{selectedStaffSalesRank ?? "―"}위</em>
+                              <span><i aria-hidden="true">/</i>전체 {selectedShowroomSalesPopulationCount}</span>
                             </span>
                           </small>
                           <small>

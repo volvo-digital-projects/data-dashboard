@@ -557,11 +557,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /selectedStaffDealerSalesPopulation\.filter\([\s\S]*?staff\.deliveredSales > selectedStaffDeliveredSales[\s\S]*?\.length \+ 1/);
   assert.match(source, /selectedStaffSalesRank = selectedStaffSalesActivity[\s\S]*?staff\.deliveredSales > selectedStaffSalesActivity\.deliveredSales[\s\S]*?\.length \+ 1/);
   assert.match(source, /selectedShowroomSalesPopulationCount = selectedSalesActivityShowroom\?\.staff\.length \?\? 0/);
-  assert.match(navigation, /className="growth-sales-share-rank"[\s\S]*?<span>[\s\S]*?<b>\{selectedDealerRankName\}<\/b> \{selectedStaffDealerSalesRank \?\? "―"\}위[\s\S]*?<i aria-hidden="true">\/<\/i>[\s\S]*?전체 \{selectedStaffDealerSalesPopulation\.length\}[\s\S]*?<\/span>[\s\S]*?<span>[\s\S]*?<b>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\}<\/b> \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?<i aria-hidden="true">\/<\/i>[\s\S]*?전체 \{selectedShowroomSalesPopulationCount\}/);
+  assert.match(navigation, /className="growth-sales-share-rank"[\s\S]*?<b>\{selectedDealerRankName\}<\/b>[\s\S]*?<em>\{selectedStaffDealerSalesRank \?\? "―"\}위<\/em>[\s\S]*?<span><i aria-hidden="true">\/<\/i>전체 \{selectedStaffDealerSalesPopulation\.length\}<\/span>[\s\S]*?<b>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\}<\/b>[\s\S]*?<em>\{selectedStaffSalesRank \?\? "―"\}위<\/em>[\s\S]*?<span><i aria-hidden="true">\/<\/i>전체 \{selectedShowroomSalesPopulationCount\}<\/span>/);
   assert.doesNotMatch(navigation, /className="growth-sales-share-rank"[\s\S]*?selectedStaffEmployee/);
-  assert.match(css, /\.growth-sales-share-rank i\s*\{[^}]*margin: 0 4px;[^}]*color: #9aabb3;[^}]*font-style: normal;/);
+  assert.match(css, /\.growth-sales-share-rank i\s*\{[^}]*margin-right: 4px;[^}]*color: #9aabb3;[^}]*font-style: normal;/);
   assert.match(css, /\.growth-sales-share-meta\s*\{[^}]*text-align: left;/);
-  assert.match(css, /\.growth-sales-share-rank\s*\{[^}]*display: grid;[^}]*gap: 2px;/);
+  assert.match(css, /\.growth-sales-share-rank\s*\{[^}]*display: grid;[^}]*grid-template-columns: max-content max-content max-content;[^}]*column-gap: 6px;[^}]*row-gap: 2px;[^}]*justify-content: start;/);
+  assert.match(css, /\.growth-sales-share-rank > span\s*\{[^}]*display: contents;/);
+  assert.match(css, /\.growth-sales-share-rank > span > b,[\s\S]*?\.growth-sales-share-rank > span > em,[\s\S]*?\.growth-sales-share-rank > span > span\s*\{[^}]*text-align: left;[^}]*white-space: nowrap;/);
   assert.doesNotMatch(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
   assert.match(navigation, /1인 평균 \{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}대 대비/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
