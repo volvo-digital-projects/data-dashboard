@@ -3040,7 +3040,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(regionVisibleHtml, /aria-label="V3S 인센티브 1회 수상 \/ 총 12회: 21년 하반기"/);
   assert.equal((regionVisibleHtml.match(/class="analysis-title-award"/g) ?? []).length, 1);
   assert.match(regionVisibleHtml, /class="analysis-title-award"[\s\S]*?<small><span>21년<\/span><span>하반기<\/span><\/small>/);
-  assert.match(regionVisibleHtml, /class="analysis-title-award-count"><strong>1회<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
+  assert.match(regionVisibleHtml, /class="analysis-title-award-count"><strong>1회 수상<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
 
   const wonjuResponse = await render(
     "/dashboard/6KR6851/analysis?view=size",
@@ -3056,7 +3056,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     wonjuHtml,
     /<small><span>22년<\/span><span>상반기<\/span><\/small>[\s\S]*?<small><span>22년<\/span><span>하반기<\/span><\/small>/,
   );
-  assert.match(wonjuHtml, /class="analysis-title-award-count"><strong>9회<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
+  assert.match(wonjuHtml, /class="analysis-title-award-count"><strong>9회 수상<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
+  assert.match(css, /\.analysis-title-award-count\s*\{[^}]*align-self:\s*flex-end;[^}]*font-size:\s*13px;[^}]*line-height:\s*1\.05;/);
   assert.match(
     wonjuHtml,
     /<small><span>26년<\/span><span>상반기<\/span><\/small>/,

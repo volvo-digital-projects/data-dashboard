@@ -5605,15 +5605,15 @@ input:focus-visible {
   min-width: max-content;
   display: inline-flex;
   align-items: center;
-  align-self: center;
+  align-self: flex-end;
   gap: 3px;
   margin-left: 3px;
   color: rgba(232, 242, 247, 0.84);
   font-family: var(--font-korean);
-  font-size: 8px;
+  font-size: 13px;
   font-weight: 650;
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 1.05;
   white-space: nowrap;
 }
 
