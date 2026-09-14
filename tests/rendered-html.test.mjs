@@ -313,7 +313,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const keepMotionLockedUntilWheelQuiet = \(\) => \{[\s\S]*?wheelQuietTimer = window\.setTimeout\(\(\) => \{[\s\S]*?motionActive = false;[\s\S]*?\}, 140\);/);
   assert.match(source, /if \(motionActive\) \{\s*event\.preventDefault\(\);\s*keepMotionLockedUntilWheelQuiet\(\);\s*return;/);
   assert.doesNotMatch(source, /className="v3s-award-card"|v3sAwardRef/);
-  assert.match(source, /titleAdornment=\{selectedAwardCount > 0[\s\S]*?className="analysis-title-awards"[\s\S]*?className="analysis-title-award"[\s\S]*?<span>\{period\.year\.slice\(2\)\}년<\/span>[\s\S]*?<span>\{period\.half\}<\/span>/);
+  assert.match(source, /titleAdornment=\{selectedAwardCount > 0[\s\S]*?className="analysis-title-awards"[\s\S]*?className="analysis-title-award"[\s\S]*?<span>\{period\.year\.slice\(2\)\}년<\/span>[\s\S]*?<span>\{period\.half\}<\/span>[\s\S]*?className="analysis-title-award-count"[\s\S]*?\{selectedAwardCount\}회[\s\S]*?총 \{v3sAwardPeriods\.length\}/);
   assert.match(css, /@media \(min-width: 1024px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.competitive-analysis-page\s*\{[^}]*--growth-navigation-sticky-top: 122px;[^}]*padding-bottom: 0;[^}]*\}[\s\S]*?\.competitive-analysis-page > \.analysis-sticky-anchor\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-sticky-shell\s*\{[^}]*position: static;[^}]*padding-top: calc\(var\(--growth-navigation-sticky-top, 122px\) \+ 8px\);[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-header\s*\{[^}]*position: fixed;[^}]*top: 0;[^}]*width: auto;[^}]*z-index: 70;[^}]*\}[\s\S]*?\.growth-navigation-sticky-summary\s*\{[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 122px\);[^}]*\}[\s\S]*?\.growth-navigation-detail\s*\{[^}]*padding-bottom: 6px;[^}]*overflow-y: auto;/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?ref=\{growthNavigationDetailRef\}[\s\S]*?className="growth-scatter-card" ref=\{growthConsultationScatterRef\}/);
   assert.match(source, /const settleAtConsultationScatter = \(\) => \{[\s\S]*?const motionDuration = reduceMotion \? 0 : 320;[\s\S]*?Math\.pow\(1 - progress, 3\)[\s\S]*?detail\.scrollTop =/);
@@ -3035,16 +3035,17 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /동일 권역 소재 전시장 안에서 현재 위치와 균형을 확인합니다/,
   );
   assert.doesNotMatch(regionVisibleHtml, /V3S 인센티브 수상기록|v3s-award-timeline/);
-  assert.match(regionVisibleHtml, /aria-label="V3S 인센티브 1회 수상: 21년 하반기"/);
+  assert.match(regionVisibleHtml, /aria-label="V3S 인센티브 1회 수상 \/ 총 12회: 21년 하반기"/);
   assert.equal((regionVisibleHtml.match(/class="analysis-title-award"/g) ?? []).length, 1);
   assert.match(regionVisibleHtml, /class="analysis-title-award"[\s\S]*?<small><span>21년<\/span><span>하반기<\/span><\/small>/);
+  assert.match(regionVisibleHtml, /class="analysis-title-award-count"><strong>1회<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
 
   const wonjuResponse = await render(
     "/dashboard/6KR6851/analysis?view=size",
   );
   assert.equal(wonjuResponse.status, 200);
   const wonjuHtml = (await wonjuResponse.text()).replaceAll("<!-- -->", "");
-  assert.match(wonjuHtml, /aria-label="V3S 인센티브 9회 수상:/);
+  assert.match(wonjuHtml, /aria-label="V3S 인센티브 9회 수상 \/ 총 12회:/);
   assert.equal(
     (wonjuHtml.match(/class="analysis-title-award"/g) ?? []).length,
     9,
@@ -3053,6 +3054,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     wonjuHtml,
     /<small><span>22년<\/span><span>상반기<\/span><\/small>[\s\S]*?<small><span>22년<\/span><span>하반기<\/span><\/small>/,
   );
+  assert.match(wonjuHtml, /class="analysis-title-award-count"><strong>9회<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
   assert.match(
     wonjuHtml,
     /<small><span>26년<\/span><span>상반기<\/span><\/small>/,

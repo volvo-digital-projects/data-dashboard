@@ -2423,7 +2423,7 @@ export default function CompetitiveAnalysis({
             titleAdornment={selectedAwardCount > 0 ? (
               <div
                 className="analysis-title-awards"
-                aria-label={`V3S 인센티브 ${selectedAwardCount}회 수상: ${selectedAwardPeriods
+                aria-label={`V3S 인센티브 ${selectedAwardCount}회 수상 / 총 ${v3sAwardPeriods.length}회: ${selectedAwardPeriods
                   .map((period) => `${period.year.slice(2)}년 ${period.half}`)
                   .join(", ")}`}
               >
@@ -2440,6 +2440,11 @@ export default function CompetitiveAnalysis({
                     </small>
                   </span>
                 ))}
+                <span className="analysis-title-award-count">
+                  <strong>{selectedAwardCount}회</strong>
+                  <i aria-hidden="true">/</i>
+                  <span>총 {v3sAwardPeriods.length}</span>
+                </span>
               </div>
             ) : null}
           />

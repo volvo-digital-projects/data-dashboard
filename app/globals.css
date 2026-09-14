@@ -5596,6 +5596,33 @@ input:focus-visible {
   text-align: center;
 }
 
+.analysis-title-award-count {
+  min-width: max-content;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 3px;
+  margin-left: 3px;
+  color: rgba(232, 242, 247, 0.84);
+  font-family: var(--font-korean);
+  font-size: 8px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.analysis-title-award-count strong,
+.analysis-title-award-count span {
+  color: inherit;
+  font: inherit;
+}
+
+.analysis-title-award-count i {
+  color: rgba(232, 242, 247, 0.55);
+  font-style: normal;
+}
+
 .analysis-title .update-status {
   margin: 0;
 }
