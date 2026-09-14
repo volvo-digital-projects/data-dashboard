@@ -2186,6 +2186,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
   .competitive-analysis-page .analysis-header {
     position: fixed;
     top: 0;
+    width: auto;
     right: var(--dashboard-page-gutter);
     left: var(--dashboard-page-gutter);
     z-index: 70;
