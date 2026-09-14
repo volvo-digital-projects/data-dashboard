@@ -432,12 +432,12 @@ html {
 
 /* Seven-dealer administrator dashboard. */
 .dealer-analysis-page {
-  width: min(1480px, calc(100% - 40px));
+  width: min(var(--dashboard-page-max), 100%);
   min-height: 100vh;
   display: grid;
-  gap: 12px;
+  gap: 8px;
   margin: 0 auto;
-  padding: 20px 0 34px;
+  padding: 0 var(--dashboard-page-gutter) 34px;
   color: #17384b;
 }
 
@@ -643,7 +643,7 @@ html {
     flex-direction: row;
     align-items: center;
   }
-  .dealer-analysis-page { width: calc(100% - 32px); padding-top: 16px; }
+  .dealer-analysis-page { width: min(var(--dashboard-page-max), 100%); padding-top: 0; }
   .dealer-analysis-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
@@ -651,7 +651,7 @@ html {
   .analysis-header.has-admin-entry { flex-direction: row; flex-wrap: wrap; }
   .analysis-header.has-admin-entry > .analysis-title { flex-basis: 100%; }
   .analysis-admin-entry { width: 96px; min-width: 96px; height: 96px; min-height: 96px; flex-basis: 96px; margin-left: auto; }
-  .dealer-analysis-page { width: calc(100% - 24px); padding-top: 12px; }
+  .dealer-analysis-page { width: 100%; padding: 12px 14px 28px; }
   .dealer-analysis-hero { min-height: 150px; padding: 18px; }
   .dealer-analysis-hero h1 { font-size: 23px; }
   .dealer-analysis-hero-mark { width: 72px; }
@@ -2989,6 +2989,11 @@ html.analysis-entry-top-locked body {
 
   .dashboard .dashboard-identity-header.identity-strip,
   .competitive-analysis-page .dashboard-identity-header.analysis-header {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .dealer-analysis-page .dashboard-identity-header.analysis-header {
     align-items: center;
     flex-direction: row;
   }

@@ -1,12 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import DashboardHeaderLead from "./DashboardHeaderLead";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 
-type Showroom = { cdsid: string; showroom: string; dealer: string };
+type Showroom = {
+  cdsid: string;
+  showroom: string;
+  dealer: string;
+  manager: string;
+  region: string;
+  size: string;
+};
 type Certification = {
   year: number;
   name: string;
@@ -112,26 +120,53 @@ const totalStaff = dealerRows.reduce((sum, row) => sum + row.currentStaff, 0);
 const totalCertifications = dealerRows.reduce((sum, row) => sum + row.certificationCount, 0);
 
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
+  const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
   const rosterDate = (vocStaffAnalysisJson.source as { rosterCheckedAt?: string }).rosterCheckedAt;
   const salesDate = (salesActivityAnalysisJson.source as { salesAsOf?: string }).salesAsOf;
+  const accessDate = new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date()).replace(/\.\s?/g, ".").replace(/\.$/, "");
 
   return (
     <main className="dealer-analysis-page">
-      <header className="dealer-analysis-hero">
-        <div className="dealer-analysis-hero-copy">
-          <Link href={`/dashboard/${initialCdsid}/analysis?view=size`} scroll={false}>
-            <span aria-hidden="true">←</span> 페이지 2로 돌아가기
-          </Link>
-          <small>ADMINISTRATOR ANALYTICS</small>
-          <h1>7개 딜러사별 분석자료</h1>
-          <p>인증직원 배출 추이와 현재 재직 명단, 판매 실적을 한 화면에서 비교합니다.</p>
-        </div>
-        <div className="dealer-analysis-hero-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48">
-            <path d="M24 4.8 39 10.5v11.1c0 9.5-6.2 17.7-15 21.6C15.2 39.3 9 31.1 9 21.6V10.5L24 4.8Z" />
-            <path d="M17 31v-8m7 8V16m7 15V20" />
+      <header className="dashboard-identity-header analysis-header has-admin-entry dealer-analysis-header">
+        <DashboardHeaderLead
+          title="딜러사별 분석자료"
+          accessDate={accessDate}
+          titleClassName="analysis-title"
+        />
+        <Link
+          className="analysis-admin-entry is-active"
+          href={`/dashboard/${selected.cdsid}/analysis?view=size`}
+          scroll={false}
+          aria-label="페이지 2로 돌아가기"
+        >
+          <span className="analysis-admin-badge">MASTER</span>
+          <svg className="analysis-admin-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M16 3.2 26 7v7.4c0 6.3-4.1 11.8-10 14.4-5.9-2.6-10-8.1-10-14.4V7l10-3.8Z" />
+            <path d="M11.2 20.4v-4.1m4.8 4.1v-8.8m4.8 8.8v-6.2" />
           </svg>
-          <span>MASTER</span>
+          <strong><span>딜러사별</span><span>분석자료</span></strong>
+        </Link>
+        <div className="analysis-context" aria-label="현재 전시장 정보">
+          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
+            <span className="identity-icon identity-icon--dealer" aria-hidden="true" />
+            <small>딜러사</small><strong>{selected.dealer}</strong>
+          </Link>
+          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
+            <span className="identity-icon identity-icon--region" aria-hidden="true" />
+            <small>권역별</small><strong>{selected.region}</strong>
+          </Link>
+          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
+            <span className="identity-icon identity-icon--size" aria-hidden="true" />
+            <small>사이즈</small><strong>{selected.size}</strong>
+          </Link>
+          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
+            <span className="identity-profile-icon" aria-hidden="true" />
+            <small>지점장</small><strong>{selected.manager}</strong>
+          </Link>
         </div>
       </header>
 
