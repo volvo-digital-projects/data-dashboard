@@ -5607,17 +5607,18 @@ input:focus-visible {
 
 .analysis-title-award-count {
   min-width: max-content;
-  display: inline-flex;
-  align-items: center;
+  display: grid;
+  justify-items: start;
   align-self: flex-end;
-  gap: 3px;
+  gap: 0;
   margin-left: 3px;
   color: rgba(232, 242, 247, 0.84);
   font-family: var(--font-korean);
-  font-size: 16px;
+  font-size: 8px;
   font-weight: 650;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1.05;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -5625,6 +5626,18 @@ input:focus-visible {
 .analysis-title-award-count span {
   color: inherit;
   font: inherit;
+}
+
+.analysis-title-award-count-label {
+  display: block;
+  text-align: left;
+}
+
+.analysis-title-award-count-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  text-align: left;
 }
 
 .analysis-title-award-count i {

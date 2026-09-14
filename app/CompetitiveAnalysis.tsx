@@ -2441,9 +2441,12 @@ export default function CompetitiveAnalysis({
                   </span>
                 ))}
                 <span className="analysis-title-award-count">
-                  <strong>{selectedAwardCount}회 수상</strong>
-                  <i aria-hidden="true">/</i>
-                  <span>총 {v3sAwardPeriods.length}</span>
+                  <span className="analysis-title-award-count-label">V3S 인센티브</span>
+                  <span className="analysis-title-award-count-total">
+                    <strong>{selectedAwardCount}회 수상</strong>
+                    <i aria-hidden="true">/</i>
+                    <span>총 {v3sAwardPeriods.length}</span>
+                  </span>
                 </span>
               </div>
             ) : null}
