@@ -3486,6 +3486,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /@keyframes dealer-bar-fill/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);
+  assert.match(css, /\.dealer-analysis-page\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {
