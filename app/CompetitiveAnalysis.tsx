@@ -1136,6 +1136,13 @@ export default function CompetitiveAnalysis({
       return event.deltaY;
     };
 
+    const keepMotionLockedUntilWheelQuiet = () => {
+      window.clearTimeout(wheelQuietTimer);
+      wheelQuietTimer = window.setTimeout(() => {
+        motionActive = false;
+      }, 140);
+    };
+
     const moveTo = (targetTop: number) => {
       const startTop = window.scrollY;
       const boundedTarget = Math.max(
@@ -1168,10 +1175,7 @@ export default function CompetitiveAnalysis({
         }
 
         window.scrollTo({ top: boundedTarget, left: window.scrollX, behavior: "auto" });
-        window.clearTimeout(wheelQuietTimer);
-        wheelQuietTimer = window.setTimeout(() => {
-          motionActive = false;
-        }, 110);
+        keepMotionLockedUntilWheelQuiet();
       };
 
       motionFrame = window.requestAnimationFrame(alignSection);
@@ -1184,6 +1188,7 @@ export default function CompetitiveAnalysis({
 
       if (motionActive) {
         event.preventDefault();
+        keepMotionLockedUntilWheelQuiet();
         return;
       }
 
@@ -1205,14 +1210,12 @@ export default function CompetitiveAnalysis({
       const awardBounds = award.getBoundingClientRect();
       const bannerBottom = persistentBannerBottom();
       const staffSectionAligned = Math.abs(summaryBounds.top - bannerBottom) <= 28;
-      const staffSectionApproaching =
-        summaryBounds.top > bannerBottom + 28 &&
-        summaryBounds.top < window.innerHeight * 0.75;
+      const staffSectionBelow = summaryBounds.top > bannerBottom + 28;
       const awardSectionVisible =
         awardBounds.top <= bannerBottom + Math.min(96, window.innerHeight * 0.18) ||
         window.scrollY >= flowTop(award) - bannerBottom - 32;
 
-      if (wheelDistance > 0 && staffSectionApproaching) {
+      if (wheelDistance > 0 && staffSectionBelow) {
         event.preventDefault();
         moveTo(flowTop(growthSummary) - bannerBottom);
         return;
