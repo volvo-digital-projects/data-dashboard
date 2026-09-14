@@ -2954,7 +2954,7 @@ export default function CompetitiveAnalysis({
                         role="img"
                         aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}${selectedStaffPeerDelta === null ? "" : `, 동일연차 평균 대비 ${(selectedStaffPeerDelta / 10).toFixed(1)}점 위치`}`}
                       >
-                        <title>상담 역량 타코미터: {selectedStaffGrowthLabel}</title>
+                        <title>{`상담 역량 타코미터: ${selectedStaffGrowthLabel}`}</title>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L156 96.5 A108 108 0 0 0 102 190 Z" />
                           <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L264 96.5 A108 108 0 0 0 156 96.5 Z" />
@@ -2968,7 +2968,7 @@ export default function CompetitiveAnalysis({
                           >
                             <line x1="34" x2="210" y1="190" y2="190" />
                             <circle cx="38" cy="190" r="2.5" />
-                            <title>{displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 {selectedShowroomStaffAverage?.toFixed(1)}점</title>
+                            <title>{`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`}</title>
                           </g>
                         )}
                         <g className="growth-gauge-ticks" aria-hidden="true">

@@ -303,6 +303,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const usesTabletSectionFlow = window\.matchMedia\([\s\S]*?\(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1400px\)[\s\S]*?const usesStaticAnalysisShell =[\s\S]*?isNarrowTabletViewport \|\| usesTabletSectionFlow;/);
   assert.match(source, /const shellHeight = usesStaticAnalysisShell[\s\S]*?Math\.ceil\(shell\.getBoundingClientRect\(\)\.height\);/);
   assert.doesNotMatch(source, /tabletGrowthMode|revealTabletGrowthNavigation|analysis-tablet-growth-active/);
+  assert.match(source, /<title>\{`상담 역량 타코미터: \$\{selectedStaffGrowthLabel\}`\}<\/title>/);
+  assert.doesNotMatch(source, /<title>상담 역량 타코미터: \{selectedStaffGrowthLabel\}<\/title>/);
   assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1400px\)\s*\{[\s\S]*?html\.analysis-viewport-locked body\s*\{[^}]*scroll-snap-type: y mandatory;[\s\S]*?\.competitive-analysis-page > \.analysis-sticky-anchor\s*\{[^}]*scroll-snap-align: start;[^}]*scroll-snap-stop: always;[\s\S]*?\.competitive-analysis-page \.analysis-sticky-shell\s*\{[^}]*position: static;[\s\S]*?\.competitive-analysis-page > \.growth-navigation-sticky-summary\s*\{[^}]*top: 0;[\s\S]*?\.competitive-analysis-page \.growth-navigation-detail\s*\{[^}]*overflow-y: hidden;[\s\S]*?\.competitive-analysis-page \.growth-staff-roster-list\s*\{[^}]*overflow-y: auto;/);
   assert.match(source, /window\.addEventListener\("touchmove", handleEntryTouchMove, \{ passive: false \}\)/);
   assert.match(source, /const alignEntry = \(timestamp: number\) => \{[\s\S]*?window\.scrollTo\(\{ top: nextTop, left: window\.scrollX, behavior: "auto" \}\);[\s\S]*?if \(progress < 1\)/);
@@ -650,7 +652,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-position-benchmarks"[\s\S]*?className="showroom-average"[\s\S]*?displayShowroomNameWithoutBrand\(selected\.showroom\)\} 평균 \{selectedShowroomStaffAverage/);
   assert.match(navigation, /className="growth-gauge-showroom-average-marker"[\s\S]*?--growth-showroom-average-angle/);
   assert.match(navigation, /<line x1="34" x2="210" y1="190" y2="190" \/>[\s\S]*?<circle cx="38" cy="190" r="2\.5" \/>/);
-  assert.match(navigation, /전시장 평균 \{selectedShowroomStaffAverage\?\.toFixed\(1\)\}점/);
+  assert.match(navigation, /전시장 평균 \$\{selectedShowroomStaffAverage\?\.toFixed\(1\)\}점/);
   assert.match(css, /\.growth-position-benchmarks \.showroom-average\s*\{[^}]*color:\s*#075f49;[^}]*font-weight:\s*700;/);
   assert.match(css, /\.growth-position-benchmarks \.showroom-average i\s*\{[^}]*width:\s*13px;[^}]*border-top:\s*1\.5px dashed #087a58;/);
   assert.match(css, /\.growth-gauge-showroom-average-marker\s*\{[^}]*rotate\(var\(--growth-showroom-average-angle\)\);[^}]*color:\s*#087a58;/);
