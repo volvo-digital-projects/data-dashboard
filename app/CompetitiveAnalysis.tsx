@@ -3435,15 +3435,10 @@ export default function CompetitiveAnalysis({
                       ) : null}
                     </svg>
                     {consultationScatterZoom.scale > 1.001 ? (
-                      <>
-                        <div className="growth-scatter-fixed-axes" aria-hidden="true">
-                          <span className="growth-scatter-fixed-y-axis">고객상담 평균만족도</span>
-                          <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
-                        </div>
-                        <button type="button" className="growth-scatter-zoom-reset" onClick={consultationScatterZoom.reset}>
-                          원상복귀
-                        </button>
-                      </>
+                      <div className="growth-scatter-fixed-axes" aria-hidden="true">
+                        <span className="growth-scatter-fixed-y-axis">고객상담 평균만족도</span>
+                        <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
+                      </div>
                     ) : null}
                     </div>
                     <footer>
@@ -3698,15 +3693,10 @@ export default function CompetitiveAnalysis({
                       ) : null}
                     </svg>
                     {salesScatterZoom.scale > 1.001 ? (
-                      <>
-                        <div className="growth-scatter-fixed-axes" aria-hidden="true">
-                          <span className="growth-scatter-fixed-y-axis">2026 누적판매(대)</span>
-                          <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
-                        </div>
-                        <button type="button" className="growth-scatter-zoom-reset" onClick={salesScatterZoom.reset}>
-                          원상복귀
-                        </button>
-                      </>
+                      <div className="growth-scatter-fixed-axes" aria-hidden="true">
+                        <span className="growth-scatter-fixed-y-axis">2026 누적판매(대)</span>
+                        <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
+                      </div>
                     ) : null}
                     </div>
                     <footer>

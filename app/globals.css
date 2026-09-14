@@ -1199,30 +1199,6 @@ html {
   transform: translateX(-50%);
 }
 
-.growth-scatter-zoom-reset {
-  position: absolute;
-  right: 6px;
-  bottom: 6px;
-  z-index: 2;
-  min-width: 54px;
-  height: 22px;
-  padding: 0 8px;
-  border: 1px solid rgba(35, 91, 111, 0.28);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 2px 7px rgba(20, 55, 68, 0.12);
-  color: #315f70;
-  font: 650 9px/1 var(--font-paperlogy);
-  white-space: nowrap;
-  cursor: pointer;
-  backdrop-filter: blur(3px);
-}
-
-.growth-scatter-zoom-reset:focus-visible {
-  outline: 2px solid #2d7187;
-  outline-offset: 1px;
-}
-
 .growth-scatter-grid line {
   stroke: #e0e9ed;
   stroke-width: 1;

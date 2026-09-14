@@ -437,7 +437,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
   assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
   assert.equal((navigation.match(/className="growth-scatter-zoom-surface"/g) ?? []).length, 2);
-  assert.equal((navigation.match(/className="growth-scatter-zoom-reset"/g) ?? []).length, 2);
+  assert.doesNotMatch(navigation, /growth-scatter-zoom-reset|원상복귀/);
   assert.match(source, /const scatterViewportMaximumScale = 5;/);
   assert.match(source, /if \(!event\.ctrlKey && !event\.metaKey\) return;[\s\S]*?event\.preventDefault\(\);[\s\S]*?Math\.exp\(-event\.deltaY \* 0\.0025\)/);
   assert.match(source, /svg\.addEventListener\("wheel", handleWheel, \{ passive: false \}\)/);
@@ -447,7 +447,6 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /svg\.addEventListener\("touchstart", handleTouchStart, \{ passive: false \}\)[\s\S]*?svg\.addEventListener\("touchmove", handleTouchMove, \{ passive: false \}\)/);
   assert.match(source, /if \(event\.touches\.length !== 1\) \{[\s\S]*?touchY = null;[\s\S]*?downwardIntent = 0;/);
   assert.match(source, /svg\.addEventListener\("dblclick", handleDoubleClick\)/);
-  assert.equal((navigation.match(/>\s*원상복귀\s*<\/button>/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-fixed-axes"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-fixed-x-axis">근속기간\(년\)<\/span>/g) ?? []).length, 2);
   assert.match(navigation, /className="growth-scatter-fixed-y-axis">고객상담 평균만족도<\/span>/);
