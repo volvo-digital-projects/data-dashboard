@@ -5407,6 +5407,10 @@ test("matches analysis headings to the ES90 performance-comparison title at 70 p
 
   assert.match(analysisSource, /className="analysis-title-awards"/);
   assert.match(analysisSource, /className="analysis-title-award"/);
+  const awardGroupRule = css.match(/\.analysis-title-awards\s*\{([^}]*)\}/);
+  assert.ok(awardGroupRule);
+  assert.match(awardGroupRule[1], /align-self: flex-end;/);
+  assert.doesNotMatch(awardGroupRule[1], /transform:/);
   assert.match(
     analysisSource,
     /<span className="english-title">\{selected\.size\}<\/span> 사이즈 내 순위/,
