@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState, type CSSProperties } from "react";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
@@ -23,6 +24,8 @@ type VocShowroom = {
   dealer: string;
   employees: { name: string }[];
 };
+type CertificationLevel = Certification["level"];
+type DealerSortKey = "default" | "total-desc" | "rate-desc" | "rate-asc" | "current-desc";
 const dealerOrder = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"];
 const showrooms = dashboardJson.showrooms as Showroom[];
 const certifications = staffCertificationsJson.records as Certification[];
@@ -95,11 +98,7 @@ const dealerRows = dealerOrder.map((dealer) => {
     currentCertified,
     levelCounts,
   };
-}).sort(
-  (a, b) =>
-    b.certificationCount - a.certificationCount ||
-    dealerOrder.indexOf(a.dealer) - dealerOrder.indexOf(b.dealer),
-);
+});
 
 const totalCertifications = certifications.length;
 const totalLevels = {
@@ -114,8 +113,103 @@ function percentage(value: number, total: number) {
   return total > 0 ? `${((value / total) * 100).toFixed(1)}%` : "0.0%";
 }
 
+const levelLabels: Record<CertificationLevel, string> = {
+  Grand: "Grand",
+  Advanced: "Advanced",
+  Certified: "Certified",
+};
+
+function CertificationMixBar({
+  levelCounts,
+  total,
+  animationDelay,
+}: {
+  levelCounts: Record<CertificationLevel, number>;
+  total: number;
+  animationDelay: number;
+}) {
+  return (
+    <div className="dealer-mix" role="cell">
+      <div className="dealer-mix-bar" aria-label={`Grand ${levelCounts.Grand}명, Advanced ${levelCounts.Advanced}명, Certified ${levelCounts.Certified}명`}>
+        {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => {
+          const share = percentage(levelCounts[level], total);
+          return (
+            <span
+              className={`dealer-mix-segment level-${level.toLowerCase()}`}
+              data-tooltip={`${levelLabels[level]} · ${levelCounts[level]}명 · ${share}`}
+              key={level}
+              style={{
+                width: share,
+                "--bar-delay": `${animationDelay}ms`,
+              } as CSSProperties}
+              tabIndex={0}
+            />
+          );
+        })}
+      </div>
+      <div className="dealer-mix-values">
+        {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => (
+          <span className={`level-${level.toLowerCase()}`} key={level}>
+            <i aria-hidden="true" />
+            <small>{levelLabels[level]}</small>
+            <strong>{levelCounts[level]}<em>명</em></strong>
+            <b>{percentage(levelCounts[level], total)}</b>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EmploymentProgressBar({
+  current,
+  total,
+  animationDelay,
+}: {
+  current: number;
+  total: number;
+  animationDelay: number;
+}) {
+  const rate = percentage(current, total);
+  const remaining = Math.max(0, total - current);
+  return (
+    <div className="dealer-employment" role="cell">
+      <div className="dealer-employment-metrics">
+        <span>현재 재직 <strong>{current}<small>명</small><i>/ {total}명</i></strong></span>
+        <b>{rate}</b>
+      </div>
+      <div
+        className="dealer-employment-bar"
+        data-tooltip={`현재 재직 ${current}명 / 전체 인증 ${total}명 · 재직률 ${rate}`}
+        aria-label={`현재 재직 ${current}명, 전체 인증 ${total}명, 재직률 ${rate}`}
+        tabIndex={0}
+      >
+        <i style={{ width: rate, "--bar-delay": `${animationDelay}ms` } as CSSProperties} />
+      </div>
+      <span className="dealer-employment-gap">Gap · 현재 재직 외 <strong>{remaining}명</strong></span>
+    </div>
+  );
+}
+
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
+  const [sortKey, setSortKey] = useState<DealerSortKey>("total-desc");
+  const displayedDealerRows = useMemo(() => {
+    const rows = [...dealerRows];
+    const stableOrder = (dealer: string) => dealerOrder.indexOf(dealer);
+    if (sortKey === "default") return rows.sort((a, b) => stableOrder(a.dealer) - stableOrder(b.dealer));
+    if (sortKey === "rate-desc" || sortKey === "rate-asc") {
+      const direction = sortKey === "rate-desc" ? -1 : 1;
+      return rows.sort((a, b) => {
+        const difference = a.currentCertified / a.certificationCount - b.currentCertified / b.certificationCount;
+        return difference * direction || stableOrder(a.dealer) - stableOrder(b.dealer);
+      });
+    }
+    if (sortKey === "current-desc") {
+      return rows.sort((a, b) => b.currentCertified - a.currentCertified || stableOrder(a.dealer) - stableOrder(b.dealer));
+    }
+    return rows.sort((a, b) => b.certificationCount - a.certificationCount || stableOrder(a.dealer) - stableOrder(b.dealer));
+  }, [sortKey]);
   const accessDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "2-digit",
@@ -145,19 +239,48 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             <small>DEALER COMPARISON</small>
             <h2 id="dealer-analysis-board-title">딜러사별 레벨별 인증인원 및 비율</h2>
           </div>
+          <div className="dealer-sort-controls" aria-label="딜러사 정렬 방식">
+            {([
+              ["default", "기본순"],
+              ["total-desc", "전체 인증 많은 순"],
+              ["rate-desc", "재직률 높은 순"],
+              ["rate-asc", "재직률 낮은 순"],
+              ["current-desc", "현재 재직 많은 순"],
+            ] as [DealerSortKey, string][]).map(([value, label]) => (
+              <button
+                className={sortKey === value ? "is-active" : ""}
+                type="button"
+                aria-pressed={sortKey === value}
+                onClick={() => setSortKey(value)}
+                key={value}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
+
+        <section className="dealer-kpi-strip" aria-label="인증 및 재직 핵심 지표">
+          <article><small>전체 인증</small><strong>{totalCertifications}<i>명</i></strong></article>
+          {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => (
+            <article className={`level-${level.toLowerCase()}`} key={level}>
+              <small>{levelLabels[level]}</small>
+              <strong>{totalLevels[level]}<i>명</i></strong>
+              <span>{percentage(totalLevels[level], totalCertifications)}</span>
+            </article>
+          ))}
+          <article className="employment"><small>현재 재직 확인</small><strong>{totalCurrentCertified}<i>명</i></strong></article>
+          <article className="retention"><small>재직률</small><strong>{percentage(totalCurrentCertified, totalCertifications)}</strong></article>
+        </section>
 
         <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원과 비율">
           <div className="dealer-certification-row dealer-certification-head" role="row">
             <span role="columnheader">딜러사</span>
             <span role="columnheader">전체 인증</span>
-            <span role="columnheader">Grand</span>
-            <span role="columnheader">Advanced</span>
-            <span role="columnheader">Certified</span>
-            <span role="columnheader">현재 재직 확인</span>
-            <span role="columnheader">재직률</span>
+            <span role="columnheader">인증 레벨 구성</span>
+            <span role="columnheader">현재 재직 · 재직률</span>
           </div>
-          <article className="dealer-certification-row dealer-certification-aggregate" role="row">
+          <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
             <div className="dealer-certification-name" role="cell">
               <div><h3>전체</h3></div>
               <b>7개사</b>
@@ -165,20 +288,16 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             <div className="dealer-certification-total" role="cell">
               <strong>{totalCertifications}<i>명</i></strong>
             </div>
-            {(["Grand", "Advanced", "Certified"] as const).map((level) => (
-              <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
-                <span><strong>{totalLevels[level]}</strong><i>명</i><b>{percentage(totalLevels[level], totalCertifications)}</b></span>
-              </div>
-            ))}
-            <div className="dealer-certification-current" role="cell">
-              <strong>{totalCurrentCertified}<i>명</i></strong>
-            </div>
-            <div className="dealer-certification-rate" role="cell">
-              <strong>{percentage(totalCurrentCertified, totalCertifications)}</strong>
-            </div>
+            <CertificationMixBar levelCounts={totalLevels} total={totalCertifications} animationDelay={80} />
+            <EmploymentProgressBar current={totalCurrentCertified} total={totalCertifications} animationDelay={120} />
           </article>
-          {dealerRows.map((row) => (
-            <article className="dealer-certification-row" role="row" key={row.dealer}>
+          {displayedDealerRows.map((row, index) => (
+            <article
+              className="dealer-certification-row"
+              role="row"
+              key={row.dealer}
+              style={{ "--row-delay": `${60 + index * 50}ms` } as CSSProperties}
+            >
               <div className="dealer-certification-name" role="cell">
                 <div><h3>{row.dealer}</h3></div>
                 <b>{row.showroomCount}개소</b>
@@ -186,17 +305,8 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               <div className="dealer-certification-total" role="cell">
                 <strong>{row.certificationCount}<i>명</i></strong>
               </div>
-              {(["Grand", "Advanced", "Certified"] as const).map((level) => (
-                <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
-                  <span><strong>{row.levelCounts[level]}</strong><i>명</i><b>{percentage(row.levelCounts[level], row.certificationCount)}</b></span>
-                </div>
-              ))}
-              <div className="dealer-certification-current" role="cell">
-                <strong>{row.currentCertified}<i>명</i></strong>
-              </div>
-              <div className="dealer-certification-rate" role="cell">
-                <strong>{percentage(row.currentCertified, row.certificationCount)}</strong>
-              </div>
+              <CertificationMixBar levelCounts={row.levelCounts} total={row.certificationCount} animationDelay={120 + index * 50} />
+              <EmploymentProgressBar current={row.currentCertified} total={row.certificationCount} animationDelay={160 + index * 50} />
             </article>
           ))}
         </div>

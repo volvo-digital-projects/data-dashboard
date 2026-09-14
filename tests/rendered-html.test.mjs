@@ -3454,12 +3454,18 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>전체<\/h3>/);
   assert.doesNotMatch(html, /VOLVO DEALER|ALL DEALERS/);
   assert.doesNotMatch(html, />0[1-7]<\/span>/);
-  assert.doesNotMatch(html, /dealer-certification-level[^>]*>[\s\S]*?<em>/);
-  assert.match(html, /<span role="columnheader">재직률<\/span>/);
-  assert.equal((html.match(/class="dealer-certification-rate"/g) ?? []).length, 8);
+  assert.match(html, /<span role="columnheader">인증 레벨 구성<\/span>/);
+  assert.match(html, /<span role="columnheader">현재 재직 · 재직률<\/span>/);
+  assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
+  assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
+  assert.equal((html.match(/class="dealer-employment-gap"/g) ?? []).length, 8);
+  assert.match(html, /현재 재직 67명 \/ 전체 인증 180명 · 재직률 37\.2%/);
+  for (const sortLabel of ["기본순", "전체 인증 많은 순", "재직률 높은 순", "재직률 낮은 순", "현재 재직 많은 순"]) {
+    assert.match(html, new RegExp(`>${sortLabel}<\\/button>`));
+  }
   assert.match(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
   assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
-  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><\/strong>[\s\S]*?<strong>40<\/strong>[\s\S]*?<strong>60<\/strong>[\s\S]*?<strong>80<\/strong>/);
+  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
   assert.match(html, /딜러사별 레벨별 인증인원 및 비율/);
   assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);
   assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
@@ -3476,8 +3482,10 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
-  assert.match(css, /\.dealer-certification-row\s*\{[^}]*min-height: 48px;/);
-  assert.match(css, /\.dealer-certification-aggregate\s*\{[^}]*min-height: 52px;/);
+  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:[^;]*minmax\(390px, 2\.35fr\)/);
+  assert.match(css, /@keyframes dealer-bar-fill/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /font-variant-numeric: tabular-nums;/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {
