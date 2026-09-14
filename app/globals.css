@@ -559,10 +559,10 @@ html {
 }
 
 .growth-staff-roster-list button > span strong {
-  width: 5.5em;
-  flex: 0 0 5.5em;
+  width: 5.25em;
+  flex: 0 0 5.25em;
   display: inline-grid;
-  grid-template-columns: 3em repeat(2, 13px);
+  grid-template-columns: 3em 13px;
   align-items: center;
   column-gap: 2px;
   font-size: 12px;
@@ -594,18 +594,26 @@ html {
   transform: none;
 }
 
-.growth-staff-youtube-badge {
+.growth-profile-role {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 4px;
+  line-height: 1;
+}
+
+.growth-profile-youtube-badge {
   position: relative;
   width: 13px;
   height: 9px;
+  flex: 0 0 13px;
   display: inline-block;
-  align-self: center;
   border-radius: 2.5px;
   background: #ff0033;
   box-shadow: 0 1px 2px rgba(139, 0, 28, 0.22);
 }
 
-.growth-staff-youtube-badge::before {
+.growth-profile-youtube-badge::before {
   content: "";
   position: absolute;
   top: 50%;

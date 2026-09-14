@@ -286,7 +286,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /면담 직원 선택|총 <strong>\{rankedSalesStaff\.length\}<\/strong>명/);
   assert.doesNotMatch(css, /\.growth-staff-roster > header/);
   assert.doesNotMatch(profile, /displayShowroomNameWithoutBrand\(selected\.showroom\)/);
-  assert.match(navigation, /<small>영업직원<\/small>/);
+  assert.match(navigation, /className="growth-profile-role"[\s\S]*?<span>영업직원<\/span>/);
   assert.doesNotMatch(navigation, /<small>선택 영업직원<\/small>/);
   assert.match(navigation, /selectedStaffEmployee\?\.jobTitle \?\? ""\} · \{displayTwoDigitCount\(selectedStaffTenureYears \?\? 0\)\}년 \{displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월/);
   assert.match(source, /const selectedStaffCommentTotalMentions =\s*selectedStaffStrengthTotalMentions \+ selectedStaffImprovementTotalMentions;/);
@@ -373,12 +373,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal((youtubeStaffBlock.match(/6KR\d+:/g) ?? []).length, expectedYoutubeStaffKeys.length);
   expectedYoutubeStaffKeys.forEach((key) => assert.match(youtubeStaffBlock, new RegExp(`"${key}"`)));
   assert.doesNotMatch(youtubeStaffBlock, /6KR6834:박준수/);
-  assert.match(navigation, /const hasYoutubeBadge = STAFF_YOUTUBE_BADGE_KEYS\.has\([\s\S]*?`\$\{selected\.cdsid\}:\$\{employee\.name\}`/);
-  assert.match(navigation, /hasYoutubeBadge \? \([\s\S]*?className="growth-staff-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동"/);
-  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.5em;[\s\S]*?flex:\s*0 0 5\.5em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em repeat\(2, 13px\);[\s\S]*?white-space:\s*nowrap;/);
+  assert.match(source, /const selectedStaffHasYoutubeBadge = selectedStaffEmployee[\s\S]*?STAFF_YOUTUBE_BADGE_KEYS\.has\(`\$\{selected\.cdsid\}:\$\{selectedStaffEmployee\.name\}`\)/);
+  assert.match(navigation, /selectedStaffHasYoutubeBadge \? \([\s\S]*?className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동"/);
+  assert.doesNotMatch(navigation, /className="growth-staff-youtube-badge"/);
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em 13px;[\s\S]*?white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-lead-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*13px;[^}]*border-radius:\s*50%;[^}]*background:\s*#176f8a;[^}]*transform:\s*none;/);
-  assert.match(css, /\.growth-staff-youtube-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*9px;[^}]*border-radius:\s*2\.5px;[^}]*background:\s*#ff0033;/);
-  assert.match(css, /\.growth-staff-youtube-badge::before\s*\{[^}]*border-left:\s*4px solid #fff;/);
+  assert.match(css, /\.growth-profile-role\s*\{[^}]*display:\s*inline-flex;[^}]*align-items:\s*center;[^}]*gap:\s*4px;/);
+  assert.match(css, /\.growth-profile-youtube-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*9px;[^}]*border-radius:\s*2\.5px;[^}]*background:\s*#ff0033;/);
+  assert.match(css, /\.growth-profile-youtube-badge::before\s*\{[^}]*border-left:\s*4px solid #fff;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*30px;/);
   assert.match(css, /\.growth-staff-roster-columns span:not\(:first-child\)\s*\{[^}]*text-align:\s*right;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*padding:\s*0 10px 0 8px;/);
@@ -903,7 +905,7 @@ test("orders review staff by hire date with the newest hire last", async () => {
     analysisSource,
     /\.sort\(\(a, b\) => compareStaffHireDateAscending\(a\.employee, b\.employee\)\)/,
   );
-  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 5\.5em;[^}]*flex: 0 0 5\.5em;/);
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 5\.25em;[^}]*flex: 0 0 5\.25em;/);
 });
 
 test("averages Q1-Q2 metrics before combining and keeps staff scores legible", async () => {

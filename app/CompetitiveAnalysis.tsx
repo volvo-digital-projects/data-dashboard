@@ -2150,6 +2150,9 @@ export default function CompetitiveAnalysis({
   const selectedStaffEmployee =
     rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
       ?.employee ?? rankedSalesStaff[0]?.employee;
+  const selectedStaffHasYoutubeBadge = selectedStaffEmployee
+    ? STAFF_YOUTUBE_BADGE_KEYS.has(`${selected.cdsid}:${selectedStaffEmployee.name}`)
+    : false;
   const selectedStaffScoring = rankedSalesStaff.find(
     ({ employee }) => employee.name === selectedStaffEmployee?.name,
   );
@@ -3293,7 +3296,12 @@ export default function CompetitiveAnalysis({
                   )}
                 </span>
                 <span>
-                  <small>영업직원</small>
+                  <small className="growth-profile-role">
+                    <span>영업직원</span>
+                    {selectedStaffHasYoutubeBadge ? (
+                      <i className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동" />
+                    ) : null}
+                  </small>
                   <strong>
                     {selectedStaffEmployee?.name ?? "―"}
                     <i>
@@ -3387,9 +3395,6 @@ export default function CompetitiveAnalysis({
                 {rankedSalesStaff.map(({ employee, average, deliveredSales }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
                   const isTeamLeader = employee.role === "영업팀장" || employee.jobTitle === "팀장";
-                  const hasYoutubeBadge = STAFF_YOUTUBE_BADGE_KEYS.has(
-                    `${selected.cdsid}:${employee.name}`,
-                  );
                   return (
                     <button
                       type="button"
@@ -3406,9 +3411,6 @@ export default function CompetitiveAnalysis({
                           <span className="growth-staff-name">{employee.name}</span>
                           {isTeamLeader ? (
                             <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>
-                          ) : null}
-                          {hasYoutubeBadge ? (
-                            <i className="growth-staff-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동" />
                           ) : null}
                         </strong>
                         <small>{formatStaffShortDate(employee.hireDate)}</small>
