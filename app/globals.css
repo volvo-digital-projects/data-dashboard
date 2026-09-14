@@ -374,6 +374,10 @@ html {
   color: #25495a;
 }
 
+.growth-navigation-pinned-heading.sales {
+  border-left: 1px solid #d5e3e9;
+}
+
 .growth-navigation-workspace {
   min-width: 0;
   display: grid;
