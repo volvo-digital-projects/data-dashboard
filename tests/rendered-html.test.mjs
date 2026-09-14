@@ -3451,6 +3451,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
     );
   }
   assert.doesNotMatch(html, /class="dealer-analysis-summary"/);
+  assert.doesNotMatch(html, /class="dealer-kpi-strip"/);
   assert.doesNotMatch(html, /딜러사 배출 연인원|현재 \d+명 중 인증이력 연결/);
   assert.match(html, /dealer-certification-row dealer-certification-aggregate/);
   assert.match(html, /<h3>전체<\/h3>/);
@@ -3465,14 +3466,19 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-mix-segment\.level-advanced\s*\{[^}]*linear-gradient\(90deg, #4ba399 0%, #3e978d 58%, #34867e 100%\)/);
   assert.match(css, /\.dealer-mix-segment\.level-certified\s*\{[^}]*linear-gradient\(90deg, #ed945c 0%, #e4813e 58%, #d97435 100%\)/);
   assert.match(css, /\.dealer-employment-bar > i\s*\{[^}]*linear-gradient\(90deg, #1d5d7d 0%, #164f70 60%, #10445f 100%\)/);
-  assert.match(css, /\.dealer-kpi-strip article::after\s*\{[^}]*top:\s*11px;[^}]*bottom:\s*11px;[^}]*background:\s*#dfe8ec;/);
-  assert.doesNotMatch(css, /\.dealer-kpi-strip article\s*\{[^}]*border-right:/);
+  assert.doesNotMatch(css, /\.dealer-kpi-strip/);
+  assert.match(css, /\.dealer-certification-aggregate\s*\{[^}]*border-bottom:\s*2px solid #267ea4;[^}]*box-shadow:/);
   assert.match(html, /현재 재직 67명 \/ 전체 인증 180명 · 재직률 37\.2%/);
-  for (const sortLabel of ["기본순", "전체 인증 많은 순", "재직률 높은 순", "재직률 낮은 순", "현재 재직 많은 순"]) {
+  for (const sortLabel of ["기본순", "전체 인증 많은 순", "재직률 높은 순", "현재 재직 많은 순"]) {
     assert.match(html, new RegExp(`>${sortLabel}<\\/button>`));
   }
+  assert.doesNotMatch(html, /재직률 낮은 순/);
+  assert.match(css, /\.dealer-sort-controls button\s*\{[^}]*min-height:\s*21px;[^}]*border-radius:\s*999px;[^}]*background:\s*rgba\(244, 248, 250, 0\.9\);/);
   assert.match(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
   assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
+  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<b>7개사 \/ 39개소 \/ 100%<\/b>/);
+  assert.match(html, /<h3>에이치<\/h3>[\s\S]*?<b>7개소 \/ 17\.9%<\/b>/);
+  assert.match(html, /<h3>천하<\/h3>[\s\S]*?<b>4개소 \/ 10\.3%<\/b>/);
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
   assert.match(html, /딜러사별 레벨별 인증인원 및 비율/);
   assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);

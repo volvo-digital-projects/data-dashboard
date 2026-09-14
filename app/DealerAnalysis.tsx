@@ -25,7 +25,7 @@ type VocShowroom = {
   employees: { name: string }[];
 };
 type CertificationLevel = Certification["level"];
-type DealerSortKey = "default" | "total-desc" | "rate-desc" | "rate-asc" | "current-desc";
+type DealerSortKey = "default" | "total-desc" | "rate-desc" | "current-desc";
 const dealerOrder = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"];
 const showrooms = dashboardJson.showrooms as Showroom[];
 const certifications = staffCertificationsJson.records as Certification[];
@@ -101,6 +101,7 @@ const dealerRows = dealerOrder.map((dealer) => {
 });
 
 const totalCertifications = certifications.length;
+const totalShowrooms = showrooms.length;
 const totalLevels = {
   Grand: certifications.filter((record) => record.level === "Grand").length,
   Advanced: certifications.filter((record) => record.level === "Advanced").length,
@@ -196,11 +197,10 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
     const rows = [...dealerRows];
     const stableOrder = (dealer: string) => dealerOrder.indexOf(dealer);
     if (sortKey === "default") return rows.sort((a, b) => stableOrder(a.dealer) - stableOrder(b.dealer));
-    if (sortKey === "rate-desc" || sortKey === "rate-asc") {
-      const direction = sortKey === "rate-desc" ? -1 : 1;
+    if (sortKey === "rate-desc") {
       return rows.sort((a, b) => {
-        const difference = a.currentCertified / a.certificationCount - b.currentCertified / b.certificationCount;
-        return difference * direction || stableOrder(a.dealer) - stableOrder(b.dealer);
+        const difference = b.currentCertified / b.certificationCount - a.currentCertified / a.certificationCount;
+        return difference || stableOrder(a.dealer) - stableOrder(b.dealer);
       });
     }
     if (sortKey === "current-desc") {
@@ -242,7 +242,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               ["default", "기본순"],
               ["total-desc", "전체 인증 많은 순"],
               ["rate-desc", "재직률 높은 순"],
-              ["rate-asc", "재직률 낮은 순"],
               ["current-desc", "현재 재직 많은 순"],
             ] as [DealerSortKey, string][]).map(([value, label]) => (
               <button
@@ -258,19 +257,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
         </div>
 
-        <section className="dealer-kpi-strip" aria-label="인증 및 재직 핵심 지표">
-          <article><small>전체 인증</small><strong>{totalCertifications}<i>명</i></strong></article>
-          {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => (
-            <article className={`level-${level.toLowerCase()}`} key={level}>
-              <small>{levelLabels[level]}</small>
-              <strong>{totalLevels[level]}<i>명</i></strong>
-              <span>{percentage(totalLevels[level], totalCertifications)}</span>
-            </article>
-          ))}
-          <article className="employment"><small>현재 재직 확인</small><strong>{totalCurrentCertified}<i>명</i></strong></article>
-          <article className="retention"><small>재직률</small><strong>{percentage(totalCurrentCertified, totalCertifications)}</strong></article>
-        </section>
-
         <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원과 비율">
           <div className="dealer-certification-row dealer-certification-head" role="row">
             <span role="columnheader">딜러사</span>
@@ -281,7 +267,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
             <div className="dealer-certification-name" role="cell">
               <div><h3>전체</h3></div>
-              <b>7개사</b>
+              <b>7개사 / {totalShowrooms}개소 / 100%</b>
             </div>
             <div className="dealer-certification-total" role="cell">
               <strong>{totalCertifications}<i>명</i></strong>
@@ -298,7 +284,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             >
               <div className="dealer-certification-name" role="cell">
                 <div><h3>{row.dealer}</h3></div>
-                <b>{row.showroomCount}개소</b>
+                <b>{row.showroomCount}개소 / {percentage(row.showroomCount, totalShowrooms)}</b>
               </div>
               <div className="dealer-certification-total" role="cell">
                 <strong>{row.certificationCount}<i>명</i></strong>
