@@ -389,8 +389,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /간결한 설명필요/);
   assert.match(staffAnalysisGenerator, /응대 태도 불량/);
   assert.match(staffAnalysisGenerator, /상담자료·도구 활용/);
-  assert.match(staffAnalysisGenerator, /전시차량 다양화/);
-  assert.match(staffAnalysisGenerator, /시승모델 다양화/);
+  assert.match(staffAnalysisGenerator, /전시차량 다양화 필요/);
+  assert.match(staffAnalysisGenerator, /시승모델 다양화 필요/);
+  assert.match(staffAnalysisGenerator, /가격혜택 안내부족/);
   assert.match(staffAnalysisGenerator, /시승기회·시간 확대/);
   assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
   const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
@@ -402,10 +403,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
       "대기·예약 운영",
       "간결한 설명필요",
       "상담자료·도구 활용",
-      "전시차량 다양화",
+      "전시차량 다양화 필요",
       "설명 구체성·범위",
       "자율 관람·압박 완화",
-      "가격·혜택 안내",
+      "가격혜택 안내부족",
       "시설 편의 미제공",
     ],
   );
