@@ -3435,6 +3435,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<header class="dashboard-identity-header analysis-header dealer-analysis-header">/);
   assert.match(html, /class="dealer-analysis-command-shell"/);
   assert.match(html, /<h1>딜러사별 분석자료<\/h1>/);
+  assert.doesNotMatch(html, /DEALER COMPARISON/);
   assert.match(html, /class="header-status-item header-status-item--dashboard-return"/);
   assert.match(html, /기존 페이지 2 분석자료로 돌아가기/);
   assert.doesNotMatch(html, /dashboard-logout-form|dashboard-logout-button|>로그아웃</);
