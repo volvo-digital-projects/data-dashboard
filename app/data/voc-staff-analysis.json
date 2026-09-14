@@ -170,11 +170,11 @@
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
+              "label": "비교·장단점 안내",
               "mentions": 5
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
@@ -212,7 +212,7 @@
               "mentions": 3
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -271,11 +271,11 @@
               "mentions": 4
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "전문지식·정확성",
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
@@ -542,15 +542,15 @@
               "mentions": 1
             },
             {
-              "label": "가격·혜택 안내",
-              "mentions": 1
-            },
-            {
               "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "가격·혜택 안내",
+              "mentions": 1
+            },
+            {
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -647,7 +647,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -851,11 +851,11 @@
           "commentResponses": 2,
           "strengthKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -1980,7 +1980,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -2173,7 +2173,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -2449,7 +2449,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -2683,11 +2683,11 @@
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "전시·시승차 구성",
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시승 경험",
               "mentions": 2
             },
             {
@@ -2738,11 +2738,11 @@
               "mentions": 10
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 7
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 7
             },
             {
@@ -2935,11 +2935,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -3320,11 +3320,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -3561,11 +3561,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
@@ -3640,11 +3640,11 @@
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
@@ -3802,11 +3802,11 @@
               "mentions": 6
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "비교·장단점 안내",
               "mentions": 3
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "신뢰·솔직한 상담",
               "mentions": 3
             },
             {
@@ -3822,11 +3822,11 @@
               "mentions": 2
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "부담 없는 상담",
               "mentions": 2
             },
             {
-              "label": "부담 없는 상담",
+              "label": "적극·성실한 응대",
               "mentions": 2
             },
             {
@@ -3932,15 +3932,15 @@
               "mentions": 2
             },
             {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 2
+            },
+            {
               "label": "신뢰·솔직한 상담",
               "mentions": 2
             },
             {
               "label": "구매결정 지원",
-              "mentions": 2
-            },
-            {
-              "label": "이해하기 쉬운 설명",
               "mentions": 2
             },
             {
@@ -4024,11 +4024,11 @@
               "mentions": 1
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             }
           ],
@@ -4929,11 +4929,11 @@
           "commentResponses": 2,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "비교·장단점 안내",
               "mentions": 2
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "친절·예의",
               "mentions": 2
             },
             {
@@ -5014,7 +5014,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -5107,7 +5107,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -5250,11 +5250,11 @@
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "구매결정 지원",
               "mentions": 1
             },
             {
@@ -5475,7 +5475,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 2
             },
             {
@@ -5627,17 +5627,17 @@
               "mentions": 1
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "구매결정 지원",
               "mentions": 1
             },
             {
-              "label": "구매결정 지원",
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -5952,15 +5952,11 @@
               "mentions": 2
             },
             {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
               "label": "니즈 맞춤 상담",
-              "mentions": 1
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            },
-            {
-              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
@@ -5972,7 +5968,11 @@
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
@@ -6126,11 +6126,11 @@
               "mentions": 2
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             },
             {
@@ -6409,11 +6409,11 @@
               "mentions": 2
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             }
           ],
@@ -6537,11 +6537,11 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "후속 연락·진행안내",
               "mentions": 2
             },
             {
-              "label": "후속 연락·진행안내",
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
@@ -6675,19 +6675,19 @@
           "commentResponses": 3,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
-              "mentions": 2
-            },
-            {
               "label": "적극·성실한 응대",
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
-              "mentions": 1
+              "label": "친절·예의",
+              "mentions": 2
             },
             {
               "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
               "mentions": 1
             },
             {
@@ -7377,11 +7377,11 @@
               "mentions": 5
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "부담 없는 상담",
               "mentions": 4
             },
             {
-              "label": "부담 없는 상담",
+              "label": "시승·차량체험 지원",
               "mentions": 4
             },
             {
@@ -7489,11 +7489,11 @@
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -7785,11 +7785,11 @@
               "mentions": 13
             },
             {
-              "label": "전문지식·정확성",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 5
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
@@ -8071,11 +8071,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "설명 간결성",
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -8459,7 +8459,11 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "설명 구체성·범위",
+              "mentions": 1
+            },
+            {
+              "label": "대기·예약 운영",
               "mentions": 1
             },
             {
@@ -8467,11 +8471,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
-              "mentions": 1
-            },
-            {
-              "label": "대기·예약 운영",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -8673,7 +8673,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -8867,7 +8867,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -9085,11 +9085,11 @@
               "mentions": 7
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "부담 없는 상담",
               "mentions": 3
             },
             {
-              "label": "부담 없는 상담",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
@@ -9212,7 +9212,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -9283,11 +9283,11 @@
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "부담 없는 상담",
               "mentions": 3
             },
             {
-              "label": "부담 없는 상담",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
@@ -9309,15 +9309,15 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
               "label": "전시·시승차 구성",
+              "mentions": 1
+            },
+            {
+              "label": "시승 경험",
               "mentions": 1
             },
             {
@@ -9497,11 +9497,11 @@
               "mentions": 12
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 6
             },
             {
@@ -9660,11 +9660,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -10005,7 +10005,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -10735,11 +10735,11 @@
               "mentions": 4
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "부담 없는 상담",
               "mentions": 3
             },
             {
-              "label": "부담 없는 상담",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
@@ -10812,11 +10812,11 @@
               "mentions": 7
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
@@ -10858,11 +10858,11 @@
               "mentions": 2
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "상담자료·도구 활용",
               "mentions": 1
             },
             {
-              "label": "상담자료·도구 활용",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
@@ -11092,11 +11092,11 @@
               "mentions": 3
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
@@ -11364,7 +11364,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -11423,11 +11423,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -11586,11 +11586,11 @@
           "commentResponses": 13,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 9
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 9
             },
             {
@@ -11724,7 +11724,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -12422,8 +12422,12 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 3
+            },
+            {
+              "label": "설명 구체성·범위",
+              "mentions": 1
             },
             {
               "label": "제품·옵션·출고 안내",
@@ -12431,10 +12435,6 @@
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 1
-            },
-            {
-              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
@@ -12505,11 +12505,11 @@
               "mentions": 4
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "신속한 응답",
               "mentions": 2
             },
             {
-              "label": "신속한 응답",
+              "label": "신뢰·솔직한 상담",
               "mentions": 2
             }
           ],
@@ -12980,11 +12980,11 @@
               "mentions": 4
             },
             {
-              "label": "구매결정 지원",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "구매결정 지원",
               "mentions": 3
             },
             {
@@ -13234,11 +13234,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "적극·성실한 응대",
               "mentions": 1
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -13421,11 +13421,11 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -13860,11 +13860,11 @@
               "mentions": 5
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "신속한 응답",
               "mentions": 2
             },
             {
-              "label": "신속한 응답",
+              "label": "신뢰·솔직한 상담",
               "mentions": 2
             },
             {
@@ -14277,7 +14277,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -15687,11 +15687,11 @@
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 2
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 2
             },
             {
@@ -16060,7 +16060,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -16582,11 +16582,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "전시·시승차 구성",
               "mentions": 1
             }
           ],
@@ -16958,7 +16958,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -17338,7 +17338,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 2
             },
             {
@@ -18012,7 +18012,7 @@
               "mentions": 3
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 3
             },
             {
@@ -18206,15 +18206,15 @@
               "mentions": 1
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            },
-            {
               "label": "신속한 응답",
               "mentions": 1
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             }
           ],
@@ -18292,7 +18292,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 2
             },
             {
@@ -18337,11 +18337,11 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 1
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -18904,11 +18904,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -19013,11 +19013,11 @@
               "mentions": 1
             },
             {
-              "label": "상담자료·도구 활용",
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "상담자료·도구 활용",
               "mentions": 1
             },
             {
@@ -19029,7 +19029,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -19126,7 +19126,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -19429,11 +19429,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "적극·성실한 응대",
               "mentions": 1
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -19640,11 +19640,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -19944,7 +19944,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -20122,11 +20122,11 @@
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
@@ -20500,19 +20500,19 @@
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 5
-            },
-            {
               "label": "비교·장단점 안내",
               "mentions": 5
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 4
+              "label": "전문지식·정확성",
+              "mentions": 5
             },
             {
               "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
               "mentions": 4
             },
             {
@@ -20686,11 +20686,11 @@
               "mentions": 3
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "구매결정 지원",
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
+              "label": "신뢰·솔직한 상담",
               "mentions": 2
             },
             {
@@ -20790,11 +20790,11 @@
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -20850,11 +20850,11 @@
               "mentions": 6
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 6
             },
             {
-              "label": "전문지식·정확성",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
@@ -21289,11 +21289,11 @@
               "mentions": 1
             },
             {
-              "label": "가격·혜택 안내",
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "가격·혜택 안내",
               "mentions": 1
             },
             {
@@ -21546,11 +21546,11 @@
               "mentions": 3
             },
             {
-              "label": "구매결정 지원",
+              "label": "신속한 응답",
               "mentions": 2
             },
             {
-              "label": "신속한 응답",
+              "label": "구매결정 지원",
               "mentions": 2
             },
             {
@@ -21940,11 +21940,11 @@
               "mentions": 1
             },
             {
-              "label": "지속적 후속관리",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "지속적 후속관리",
               "mentions": 1
             },
             {
@@ -22471,11 +22471,11 @@
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -23603,11 +23603,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -23671,19 +23671,19 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 1
-            },
-            {
               "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
-              "label": "구매결정 지원",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
               "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
@@ -23750,11 +23750,11 @@
               "mentions": 1
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
@@ -23832,15 +23832,15 @@
               "mentions": 3
             },
             {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
               "label": "이해하기 쉬운 설명",
               "mentions": 3
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 3
-            },
-            {
-              "label": "신속한 응답",
               "mentions": 3
             },
             {
@@ -23877,15 +23877,15 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
               "label": "신속한 응답",
               "mentions": 1
             },
             {
               "label": "친절·예의",
-              "mentions": 1
-            },
-            {
-              "label": "비교·장단점 안내",
               "mentions": 1
             }
           ],
@@ -24187,11 +24187,11 @@
               "mentions": 4
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "이해하기 쉬운 설명",
               "mentions": 3
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
@@ -24763,11 +24763,11 @@
               "mentions": 26
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 10
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 10
             },
             {
@@ -25209,11 +25209,11 @@
               "mentions": 2
             },
             {
-              "label": "지속적 후속관리",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "지속적 후속관리",
               "mentions": 1
             },
             {
@@ -25251,11 +25251,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -25686,7 +25686,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -25753,15 +25753,15 @@
               "mentions": 2
             },
             {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
               "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
               "label": "구매결정 지원",
-              "mentions": 1
-            },
-            {
-              "label": "부담 없는 상담",
               "mentions": 1
             }
           ],
@@ -26209,11 +26209,11 @@
               "mentions": 11
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 6
             },
             {
-              "label": "전문지식·정확성",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
@@ -26322,11 +26322,11 @@
               "mentions": 2
             },
             {
-              "label": "지속적 후속관리",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "지속적 후속관리",
               "mentions": 1
             }
           ],
@@ -26527,15 +26527,15 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
-              "mentions": 1
-            },
-            {
               "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 1
+            },
+            {
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -26586,11 +26586,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -26861,7 +26861,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             },
             {
@@ -26940,19 +26940,19 @@
               "mentions": 1
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            },
-            {
               "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             },
             {
               "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -27036,11 +27036,11 @@
               "mentions": 1
             },
             {
-              "label": "지속적 후속관리",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "지속적 후속관리",
               "mentions": 1
             }
           ],
@@ -27095,11 +27095,11 @@
               "mentions": 2
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
@@ -27158,11 +27158,11 @@
               "mentions": 6
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "적극·성실한 응대",
               "mentions": 3
             },
             {
@@ -27336,11 +27336,11 @@
               "mentions": 8
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "비교·장단점 안내",
               "mentions": 8
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "이해하기 쉬운 설명",
               "mentions": 8
             },
             {
@@ -27768,7 +27768,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 2
             },
             {
@@ -27839,11 +27839,11 @@
           "commentResponses": 6,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 4
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 4
             },
             {
@@ -27872,11 +27872,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -28109,7 +28109,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
