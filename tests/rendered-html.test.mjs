@@ -395,28 +395,38 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /가격혜택 안내부족/);
   assert.match(staffAnalysisGenerator, /시승기회·시간 확대/);
   assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
+  assert.match(staffAnalysisGenerator, /대기시간 관리 미흡/);
+  assert.match(staffAnalysisGenerator, /예약절차 운영 미흡/);
+  assert.doesNotMatch(staffAnalysisGenerator, /대기·예약 운영/);
   const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
   assert.equal(kimNaehwan.commentResponses, 36);
   assert.deepEqual(
     kimNaehwan.improvementKeywords.map(({ label }) => label),
     [
       "전문지식 정확성 부족",
-      "대기·예약 운영",
       "간결한 설명필요",
       "상담자료 활용 미흡",
+      "대기시간 관리 미흡",
       "전시차량 다양화 필요",
       "구체적 설명 부족",
       "자율 관람·압박 완화",
       "가격혜택 안내부족",
+      "예약절차 운영 미흡",
       "시설 편의 미제공",
     ],
   );
   const analyzedEmployees = Object.values(staffAnalysis.showrooms).flatMap(({ employees }) => employees);
+  const waitAndReservationMentions = analyzedEmployees.flatMap(({ improvementKeywords }) =>
+    improvementKeywords.filter(({ label }) =>
+      ["대기시간 관리 미흡", "예약절차 운영 미흡"].includes(label),
+    ),
+  );
+  assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 61);
   assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
   assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
   assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 13));
-  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 15));
-  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/15개 보완 주제/);
+  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 16));
+  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/16개 보완 주제/);
   const baekJongYoon = staffAnalysis.showrooms["6KR6854"].employees.find(({ name }) => name === "백종윤");
   assert.ok(baekJongYoon.improvementKeywords.some(({ label, mentions }) => label === "상담공간 편의제공" && mentions === 1));
   assert.ok(!baekJongYoon.improvementKeywords.some(({ label }) => label === "시설 편의 미제공"));

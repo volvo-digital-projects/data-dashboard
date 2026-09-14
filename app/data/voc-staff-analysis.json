@@ -13,7 +13,7 @@
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-08-24",
-    "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/15개 보완 주제",
+    "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/16개 보완 주제",
     "commentAnalysisEmployees": 383
   },
   "nationalYears": {
@@ -522,15 +522,15 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
-              "mentions": 2
-            },
-            {
               "label": "간결한 설명필요",
               "mentions": 1
             },
             {
               "label": "상담자료 활용 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -547,6 +547,10 @@
             },
             {
               "label": "가격혜택 안내부족",
+              "mentions": 1
+            },
+            {
+              "label": "예약절차 운영 미흡",
               "mentions": 1
             },
             {
@@ -643,7 +647,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -1733,7 +1737,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 2
             },
             {
@@ -2388,7 +2392,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -2590,7 +2594,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -2683,7 +2687,7 @@
               "mentions": 5
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 4
             },
             {
@@ -3429,7 +3433,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -3568,7 +3572,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -3835,7 +3839,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -4206,7 +4210,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -4637,15 +4641,19 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
-              "mentions": 2
-            },
-            {
               "label": "시승기회·시간 확대",
               "mentions": 2
             },
             {
               "label": "시승모델 다양화 필요",
+              "mentions": 1
+            },
+            {
+              "label": "예약절차 운영 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -5098,7 +5106,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -7037,7 +7045,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -7712,7 +7720,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -8432,7 +8440,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -8525,7 +8533,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -8622,7 +8630,7 @@
               "mentions": 4
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 2
             },
             {
@@ -9266,7 +9274,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 2
             },
             {
@@ -9491,7 +9499,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -9944,7 +9952,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -10213,7 +10221,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -11671,7 +11679,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -13263,7 +13271,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -13627,7 +13635,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -14411,7 +14419,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -14959,7 +14967,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -15258,7 +15266,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -15361,7 +15369,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -15884,7 +15892,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 2
             },
             {
@@ -15993,7 +16001,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -17263,7 +17271,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -18205,7 +18213,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -19038,7 +19046,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -19205,7 +19213,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -20128,7 +20136,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 2
             },
             {
@@ -20321,7 +20329,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -20429,7 +20437,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -20603,7 +20611,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -20779,7 +20787,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -21176,7 +21184,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -21621,7 +21629,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -21752,7 +21760,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -22913,7 +22921,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -23923,7 +23931,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -24016,7 +24024,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -24164,7 +24172,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 2
             },
             {
@@ -24904,7 +24912,7 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -26719,7 +26727,7 @@
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
@@ -27240,7 +27248,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -27823,7 +27831,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "대기·예약 운영",
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
