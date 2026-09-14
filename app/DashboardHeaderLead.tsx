@@ -1,25 +1,35 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import DscGuideViewer from "./DscGuideViewer";
 
 type DashboardHeaderLeadProps = {
   title: string;
   accessDate: string;
   titleClassName?: string;
+  titleAdornment?: ReactNode;
 };
 
 export default function DashboardHeaderLead({
   title,
   accessDate,
   titleClassName = "",
+  titleAdornment,
 }: DashboardHeaderLeadProps) {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
 
   return (
     <>
       <div className={`identity-title ${titleClassName}`.trim()}>
-        <h1>{title}</h1>
+        {titleAdornment ? (
+          <div className="identity-heading-line">
+            <h1>{title}</h1>
+            {titleAdornment}
+          </div>
+        ) : (
+          <h1>{title}</h1>
+        )}
         <div
           className="header-status-row"
           aria-label="DSC 가이드, 로그아웃"

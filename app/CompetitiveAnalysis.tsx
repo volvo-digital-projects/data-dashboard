@@ -814,7 +814,6 @@ export default function CompetitiveAnalysis({
   const growthStaffRosterRef = useRef<HTMLDivElement>(null);
   const growthNavigationDetailRef = useRef<HTMLDivElement>(null);
   const growthConsultationScatterRef = useRef<HTMLElement>(null);
-  const v3sAwardRef = useRef<HTMLElement>(null);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -1101,8 +1100,7 @@ export default function CompetitiveAnalysis({
 
   useEffect(() => {
     const growthSummary = growthNavigationSummaryRef.current;
-    const award = v3sAwardRef.current;
-    if (!growthSummary || !award) return;
+    if (!growthSummary) return;
     if (
       !window.matchMedia(
         "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
@@ -1207,13 +1205,9 @@ export default function CompetitiveAnalysis({
       }
 
       const summaryBounds = growthSummary.getBoundingClientRect();
-      const awardBounds = award.getBoundingClientRect();
       const bannerBottom = persistentBannerBottom();
       const staffSectionAligned = Math.abs(summaryBounds.top - bannerBottom) <= 28;
       const staffSectionBelow = summaryBounds.top > bannerBottom + 28;
-      const awardSectionVisible =
-        awardBounds.top <= bannerBottom + Math.min(96, window.innerHeight * 0.18) ||
-        window.scrollY >= flowTop(award) - bannerBottom - 32;
 
       if (wheelDistance > 0 && staffSectionBelow) {
         event.preventDefault();
@@ -1223,23 +1217,17 @@ export default function CompetitiveAnalysis({
 
       if (wheelDistance > 0 && staffSectionAligned) {
         event.preventDefault();
-        moveTo(flowTop(award) - bannerBottom - 8);
         return;
       }
 
-      if (wheelDistance >= 0 || !awardSectionVisible) return;
+      if (wheelDistance >= 0 || !staffSectionAligned) return;
 
       event.preventDefault();
       upwardIntent += Math.abs(wheelDistance);
       window.clearTimeout(upwardDecisionTimer);
       upwardDecisionTimer = window.setTimeout(() => {
-        const strongUpwardGesture = upwardIntent >= 1800;
         upwardIntent = 0;
-        moveTo(
-          strongUpwardGesture
-            ? 0
-            : flowTop(growthSummary) - persistentBannerBottom(),
-        );
+        moveTo(0);
       }, 55);
     };
 
@@ -1729,13 +1717,10 @@ export default function CompetitiveAnalysis({
     typeof selected.voc === "number" && typeof selected.happyCall === "number"
       ? selected.voc + selected.happyCall
       : null;
-  const selectedAwardPeriods = v3sAwardPeriods
-    .filter((period) =>
-      v3sAwardWinnersByPeriod[period.id]?.includes(selected.cdsid),
-    )
-    .map((period) => period.id);
+  const selectedAwardPeriods = v3sAwardPeriods.filter((period) =>
+    v3sAwardWinnersByPeriod[period.id]?.includes(selected.cdsid),
+  );
   const selectedAwardCount = selectedAwardPeriods.length;
-  const selectedAwardName = displayShowroomNameWithoutBrand(selected.showroom);
   const selectedStaffAnalysis = staffAnalysisByCdsid[selected.cdsid];
   const currentSalesStaff = useMemo(
     () =>
@@ -2435,6 +2420,25 @@ export default function CompetitiveAnalysis({
             title={`${displayShowroomName(selected.showroom)} 분석`}
             accessDate={accessDate}
             titleClassName="analysis-title"
+            titleAdornment={selectedAwardCount > 0 ? (
+              <div
+                className="analysis-title-awards"
+                aria-label={`V3S 인센티브 ${selectedAwardCount}회 수상: ${selectedAwardPeriods
+                  .map((period) => `${period.year.slice(2)}년 ${period.half}`)
+                  .join(", ")}`}
+              >
+                {selectedAwardPeriods.map((period) => (
+                  <span className="analysis-title-award" key={period.id}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path className="trophy-cup" d="M7 3.5h10v3.8c0 3.2-2.2 5.7-5 5.7S7 10.5 7 7.3V3.5Z" />
+                      <path className="trophy-handle" d="M7 5H4.5v1.8c0 2 1.3 3.5 3.2 3.7M17 5h2.5v1.8c0 2-1.3 3.5-3.2 3.7" />
+                      <path className="trophy-stand" d="M12 13v4m-3 3h6m-5.2-3h4.4" />
+                    </svg>
+                    <small>{period.year.slice(2)}년 {period.half}</small>
+                  </span>
+                ))}
+              </div>
+            ) : null}
           />
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <Link
@@ -4184,74 +4188,6 @@ export default function CompetitiveAnalysis({
         </section>
       ) : null}
 
-      <section
-        className="v3s-award-card"
-        ref={v3sAwardRef}
-        aria-label="V3S 인센티브 수상기록"
-      >
-        <header className="v3s-award-heading">
-          <h2>
-            <span className="v3s-award-heading-title">
-              <span className="english-title">V3S</span> 인센티브 수상기록
-            </span>
-            <span
-              className="v3s-award-heading-summary"
-              aria-label={`${selectedAwardName} ${selectedAwardCount}회 수상`}
-            >
-              <span aria-hidden="true">/</span>
-              <span>{selectedAwardName}</span>
-              <strong>{selectedAwardCount}</strong>
-              <span>회 수상</span>
-            </span>
-          </h2>
-        </header>
-
-        <div className="v3s-award-timeline">
-          {["2021", "2022", "2023", "2024", "2025", "2026"].map(
-            (year) => (
-              <article className="v3s-award-year" key={year}>
-                <h3>{year}</h3>
-                <div>
-                  {v3sAwardPeriods
-                    .filter((period) => period.year === year)
-                    .map((period) => {
-                      const isAwarded = selectedAwardPeriods.includes(period.id);
-                      return (
-                        <div
-                          className={`v3s-award-period ${
-                            isAwarded ? "awarded" : "empty"
-                          }`}
-                          key={period.id}
-                        >
-                          <span>{period.half}</span>
-                          {isAwarded ? (
-                            <>
-                              <span
-                                className="v3s-award-prize-icon"
-                                aria-hidden="true"
-                              >
-                                <svg viewBox="0 0 24 24" focusable="false">
-                                  <path className="trophy-cup" d="M7 3.5h10v3.8c0 3.2-2.2 5.7-5 5.7S7 10.5 7 7.3V3.5Z" />
-                                  <path className="trophy-handle" d="M7 5H4.5v1.8c0 2 1.3 3.5 3.2 3.7M17 5h2.5v1.8c0 2-1.3 3.5-3.2 3.7" />
-                                  <path className="trophy-stand" d="M12 13v4m-3 3h6m-5.2-3h4.4" />
-                                  <path className="trophy-sparkle sparkle-one" d="m4 1 .6 1.4L6 3l-1.4.6L4 5l-.6-1.4L2 3l1.4-.6L4 1Z" />
-                                  <path className="trophy-sparkle sparkle-two" d="m20 10 .45 1.05 1.05.45-1.05.45L20 13l-.45-1.05-1.05-.45 1.05-.45L20 10Z" />
-                                </svg>
-                              </span>
-                              <strong>{selectedAwardName}</strong>
-                            </>
-                          ) : (
-                            <i className="sr-only">수상 기록 없음</i>
-                          )}
-                        </div>
-                      );
-                    })}
-                </div>
-              </article>
-            ),
-          )}
-        </div>
-      </section>
     </main>
   );
 }

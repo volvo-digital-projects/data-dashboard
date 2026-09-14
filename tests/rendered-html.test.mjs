@@ -309,11 +309,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1240px\)\s*\{[\s\S]*?html\.analysis-viewport-locked \.competitive-analysis-page\s*\{[^}]*--dashboard-page-gutter: 24px;[^}]*\}[\s\S]*?\.dashboard \.dashboard-identity-header\.identity-strip,[\s\S]*?\.competitive-analysis-page \.dashboard-identity-header\.analysis-header\s*\{[^}]*align-items: center;[^}]*flex-direction: row;[^}]*\}[\s\S]*?\.competitive-analysis-page > \.analysis-sticky-anchor\s*\{[^}]*margin-inline: 0;[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-header\s*\{[^}]*right: calc\(24px \+ var\(--dashboard-sticky-content-gutter\)\);[^}]*left: calc\(24px \+ var\(--dashboard-sticky-content-gutter\)\);/);
   assert.match(source, /window\.addEventListener\("touchmove", handleEntryTouchMove, \{ passive: false \}\)/);
   assert.match(source, /const alignEntry = \(timestamp: number\) => \{[\s\S]*?window\.scrollTo\(\{ top: nextTop, left: window\.scrollX, behavior: "auto" \}\);[\s\S]*?if \(progress < 1\)/);
-  assert.match(source, /const handlePcSectionWheel = \(event: WheelEvent\) => \{[\s\S]*?target\?\.closest\("\.growth-staff-roster-list"\)[\s\S]*?detailTarget\.scrollTop \+ detailTarget\.clientHeight <[\s\S]*?detailTarget\.scrollHeight - 1[\s\S]*?if \(canScrollDown \|\| canScrollUp\) return;[\s\S]*?const bannerBottom = persistentBannerBottom\(\);[\s\S]*?staffSectionBelow = summaryBounds\.top > bannerBottom \+ 28[\s\S]*?wheelDistance > 0 && staffSectionBelow[\s\S]*?moveTo\(flowTop\(growthSummary\) - bannerBottom\)[\s\S]*?wheelDistance > 0 && staffSectionAligned[\s\S]*?moveTo\(flowTop\(award\) - bannerBottom - 8\)[\s\S]*?strongUpwardGesture = upwardIntent >= 1800[\s\S]*?: flowTop\(growthSummary\) - persistentBannerBottom\(\)/);
+  assert.match(source, /const handlePcSectionWheel = \(event: WheelEvent\) => \{[\s\S]*?target\?\.closest\("\.growth-staff-roster-list"\)[\s\S]*?detailTarget\.scrollTop \+ detailTarget\.clientHeight <[\s\S]*?detailTarget\.scrollHeight - 1[\s\S]*?if \(canScrollDown \|\| canScrollUp\) return;[\s\S]*?const bannerBottom = persistentBannerBottom\(\);[\s\S]*?staffSectionBelow = summaryBounds\.top > bannerBottom \+ 28[\s\S]*?wheelDistance > 0 && staffSectionBelow[\s\S]*?moveTo\(flowTop\(growthSummary\) - bannerBottom\)[\s\S]*?wheelDistance > 0 && staffSectionAligned[\s\S]*?event\.preventDefault\(\);[\s\S]*?if \(wheelDistance >= 0 \|\| !staffSectionAligned\) return;[\s\S]*?moveTo\(0\)/);
   assert.match(source, /const keepMotionLockedUntilWheelQuiet = \(\) => \{[\s\S]*?wheelQuietTimer = window\.setTimeout\(\(\) => \{[\s\S]*?motionActive = false;[\s\S]*?\}, 140\);/);
   assert.match(source, /if \(motionActive\) \{\s*event\.preventDefault\(\);\s*keepMotionLockedUntilWheelQuiet\(\);\s*return;/);
-  assert.match(source, /className="v3s-award-card"[\s\S]*?ref=\{v3sAwardRef\}[\s\S]*?aria-label="V3S 인센티브 수상기록"/);
-  assert.match(css, /@media \(min-width: 1024px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.competitive-analysis-page\s*\{[^}]*--growth-navigation-sticky-top: 122px;[^}]*padding-bottom: calc\(100dvh - 148px\);[^}]*\}[\s\S]*?\.competitive-analysis-page > \.analysis-sticky-anchor\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-sticky-shell\s*\{[^}]*position: static;[^}]*padding-top: calc\(var\(--growth-navigation-sticky-top, 122px\) \+ 8px\);[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-header\s*\{[^}]*position: fixed;[^}]*top: 0;[^}]*width: auto;[^}]*z-index: 70;[^}]*\}[\s\S]*?\.growth-navigation-sticky-summary\s*\{[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 122px\);[^}]*\}[\s\S]*?\.growth-navigation-detail\s*\{[^}]*padding-bottom: 6px;[^}]*overflow-y: auto;[^}]*\}[\s\S]*?\.v3s-award-card\s*\{[^}]*scroll-snap-stop: always;/);
+  assert.doesNotMatch(source, /className="v3s-award-card"|v3sAwardRef/);
+  assert.match(source, /titleAdornment=\{selectedAwardCount > 0[\s\S]*?className="analysis-title-awards"[\s\S]*?className="analysis-title-award"[\s\S]*?\{period\.year\.slice\(2\)\}년 \{period\.half\}/);
+  assert.match(css, /@media \(min-width: 1024px\) and \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.competitive-analysis-page\s*\{[^}]*--growth-navigation-sticky-top: 122px;[^}]*padding-bottom: 0;[^}]*\}[\s\S]*?\.competitive-analysis-page > \.analysis-sticky-anchor\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-sticky-shell\s*\{[^}]*position: static;[^}]*padding-top: calc\(var\(--growth-navigation-sticky-top, 122px\) \+ 8px\);[^}]*\}[\s\S]*?\.competitive-analysis-page \.analysis-header\s*\{[^}]*position: fixed;[^}]*top: 0;[^}]*width: auto;[^}]*z-index: 70;[^}]*\}[\s\S]*?\.growth-navigation-sticky-summary\s*\{[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 122px\);[^}]*\}[\s\S]*?\.growth-navigation-detail\s*\{[^}]*padding-bottom: 6px;[^}]*overflow-y: auto;/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?ref=\{growthNavigationDetailRef\}[\s\S]*?className="growth-scatter-card" ref=\{growthConsultationScatterRef\}/);
   assert.match(source, /const settleAtConsultationScatter = \(\) => \{[\s\S]*?const motionDuration = reduceMotion \? 0 : 320;[\s\S]*?Math\.pow\(1 - progress, 3\)[\s\S]*?detail\.scrollTop =/);
   assert.match(source, /if \(!canSettleAtConsultationScatter\(\)\) return;\s*event\.preventDefault\(\);\s*downwardIntent \+= downwardDistance;/);
@@ -2393,7 +2394,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(kolonVisibleHtml, /코오롱 9개소/);
   assert.match(
     visibleHtml,
-    /<header class="dashboard-identity-header analysis-header"><div class="identity-title analysis-title"><h1>볼보 강남대치 분석<\/h1>/,
+    /<header class="dashboard-identity-header analysis-header"><div class="identity-title analysis-title"><div class="identity-heading-line"><h1>볼보 강남대치 분석<\/h1>/,
   );
   assert.match(
     visibleHtml,
@@ -3033,50 +3034,30 @@ test("serves the dual-metric competitive analysis sample", async () => {
     regionVisibleHtml,
     /동일 권역 소재 전시장 안에서 현재 위치와 균형을 확인합니다/,
   );
-  assert.match(regionVisibleHtml, /V3S 인센티브 수상기록/);
-  assert.match(
-    regionVisibleHtml,
-    /class="v3s-award-timeline"[\s\S]*?2021[\s\S]*?상반기[\s\S]*?하반기[\s\S]*?2026/,
-  );
-  assert.doesNotMatch(
-    regionVisibleHtml,
-    /2021년 상반기부터 2026년 하반기까지의 반기별 수상 이력/,
-  );
-  assert.match(
-    regionVisibleHtml,
-    /aria-label="강남대치 1회 수상"/,
-  );
-  assert.match(
-    regionVisibleHtml,
-    /2021[\s\S]*?상반기[\s\S]*?수상 기록 없음[\s\S]*?하반기[\s\S]*?강남대치/,
-  );
-  assert.match(
-    regionVisibleHtml,
-    /2026[\s\S]*?상반기[\s\S]*?수상 기록 없음[\s\S]*?하반기[\s\S]*?수상 기록 없음/,
-  );
-  assert.doesNotMatch(
-    regionVisibleHtml,
-    /v3s-award-period awarded[\s\S]*?볼보 강남대치/,
-  );
+  assert.doesNotMatch(regionVisibleHtml, /V3S 인센티브 수상기록|v3s-award-timeline/);
+  assert.match(regionVisibleHtml, /aria-label="V3S 인센티브 1회 수상: 21년 하반기"/);
+  assert.equal((regionVisibleHtml.match(/class="analysis-title-award"/g) ?? []).length, 1);
+  assert.match(regionVisibleHtml, /class="analysis-title-award"[\s\S]*?<small>21년 하반기<\/small>/);
 
   const wonjuResponse = await render(
     "/dashboard/6KR6851/analysis?view=size",
   );
   assert.equal(wonjuResponse.status, 200);
   const wonjuHtml = (await wonjuResponse.text()).replaceAll("<!-- -->", "");
-  assert.match(wonjuHtml, /aria-label="원주 9회 수상"/);
+  assert.match(wonjuHtml, /aria-label="V3S 인센티브 9회 수상:/);
   assert.equal(
-    (wonjuHtml.match(/class="v3s-award-period awarded"/g) ?? []).length,
+    (wonjuHtml.match(/class="analysis-title-award"/g) ?? []).length,
     9,
   );
   assert.match(
     wonjuHtml,
-    /2022[\s\S]*?상반기[\s\S]*?원주[\s\S]*?하반기[\s\S]*?원주/,
+    /<small>22년 상반기<\/small>[\s\S]*?<small>22년 하반기<\/small>/,
   );
   assert.match(
     wonjuHtml,
-    /2026[\s\S]*?상반기[\s\S]*?원주[\s\S]*?하반기[\s\S]*?수상 기록 없음/,
+    /<small>26년 상반기<\/small>/,
   );
+  assert.doesNotMatch(wonjuHtml, /26년 하반기|V3S 인센티브 수상기록/);
 
   const sizeResponse = await render(
     "/dashboard/6KR6842/analysis?view=size",
@@ -5415,7 +5396,7 @@ test("matches analysis headings to the ES90 performance-comparison title at 70 p
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
   const titleRule = css.match(
-    /\/\* ES90 performance-comparison title typography at 70% of the prior size \*\/[\s\S]*?\.analysis-card-heading h2,[\s\S]*?\.v3s-award-heading h2\s*\{([^}]*)\}/,
+    /\/\* ES90 performance-comparison title typography at 70% of the prior size \*\/[\s\S]*?\.analysis-card-heading h2,[\s\S]*?\.analysis-staff-heading h2\s*\{([^}]*)\}/,
   );
 
   assert.ok(titleRule);
@@ -5424,16 +5405,14 @@ test("matches analysis headings to the ES90 performance-comparison title at 70 p
   assert.match(titleRule[1], /font-weight: 600;/);
   assert.match(titleRule[1], /letter-spacing: -0\.25px;/);
 
-  assert.match(
-    analysisSource,
-    /<span className="english-title">V3S<\/span> 인센티브 수상기록/,
-  );
+  assert.match(analysisSource, /className="analysis-title-awards"/);
+  assert.match(analysisSource, /className="analysis-title-award"/);
   assert.match(
     analysisSource,
     /<span className="english-title">\{selected\.size\}<\/span> 사이즈 내 순위/,
   );
   const mixedEnglishRule = css.match(
-    /\/\* Volvo Centum for English inside mixed Korean analysis titles \*\/[\s\S]*?\.analysis-card-heading \.english-title,[\s\S]*?\.v3s-award-heading \.english-title\s*\{([^}]*)\}/,
+    /\/\* Volvo Centum for English inside mixed Korean analysis titles \*\/[\s\S]*?\.analysis-card-heading \.english-title,[\s\S]*?\.analysis-staff-heading \.english-title\s*\{([^}]*)\}/,
   );
   assert.ok(mixedEnglishRule);
   assert.match(mixedEnglishRule[1], /font-family: var\(--font-latin\);/);

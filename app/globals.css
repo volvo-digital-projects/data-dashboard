@@ -5496,6 +5496,66 @@ input:focus-visible {
   white-space: nowrap;
 }
 
+.analysis-title .identity-heading-line {
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.analysis-title .identity-heading-line > h1 {
+  width: max-content;
+  flex: 0 1 auto;
+}
+
+.analysis-title-awards {
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  padding-bottom: 1px;
+}
+
+.analysis-title-award {
+  width: 33px;
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  color: rgba(232, 242, 247, 0.84);
+  line-height: 1;
+}
+
+.analysis-title-award svg {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.28));
+}
+
+.analysis-title-award .trophy-cup {
+  fill: #f3c451;
+  stroke: #fff0a9;
+  stroke-width: 0.75;
+}
+
+.analysis-title-award .trophy-handle,
+.analysis-title-award .trophy-stand {
+  fill: none;
+  stroke: #f8d775;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.analysis-title-award small {
+  font-family: var(--font-korean);
+  font-size: 7px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
 .analysis-title .update-status {
   margin: 0;
 }
@@ -14601,8 +14661,7 @@ body {
 
 /* ES90 performance-comparison title typography at 70% of the prior size */
 .analysis-card-heading h2,
-.analysis-staff-heading h2,
-.v3s-award-heading h2 {
+.analysis-staff-heading h2 {
   font-family: var(--font-korean);
   font-size: 14px;
   font-weight: 600;
@@ -14612,8 +14671,7 @@ body {
 
 /* Volvo Centum for English inside mixed Korean analysis titles */
 .analysis-card-heading .english-title,
-.analysis-staff-heading .english-title,
-.v3s-award-heading .english-title {
+.analysis-staff-heading .english-title {
   font-family: var(--font-latin);
   font-weight: inherit;
   letter-spacing: 0;
@@ -15615,11 +15673,11 @@ button.header-status-item {
   }
 }
 
-/* PC wheel flow: one viewport each for overview, staff navigator, and awards. */
+/* PC wheel flow: overview settles directly on the staff navigator. */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   .competitive-analysis-page {
     --growth-navigation-sticky-top: 122px;
-    padding-bottom: calc(100dvh - 148px);
+    padding-bottom: 0;
   }
 
   .competitive-analysis-page > .analysis-sticky-anchor {
@@ -15706,11 +15764,6 @@ button.header-status-item {
     );
   }
 
-  .competitive-analysis-page > .v3s-award-card {
-    scroll-margin-top: calc(var(--growth-navigation-sticky-top, 122px) + 8px);
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
 }
 
 @media (max-width: 760px) {
