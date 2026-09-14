@@ -386,18 +386,20 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
   assert.match(staffAnalysisGenerator, /설명 간결성/);
   assert.match(staffAnalysisGenerator, /상담자료·도구 활용/);
-  assert.match(staffAnalysisGenerator, /전시·시승차 구성/);
+  assert.match(staffAnalysisGenerator, /전시차량 다양화/);
+  assert.match(staffAnalysisGenerator, /시승모델 다양화/);
+  assert.match(staffAnalysisGenerator, /시승기회·시간 확대/);
   assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
   const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
   assert.equal(kimNaehwan.commentResponses, 36);
   assert.deepEqual(
     kimNaehwan.improvementKeywords.map(({ label }) => label),
     [
-      "전시·시승차 구성",
       "전문지식·정확성",
       "대기·예약 운영",
-      "상담자료·도구 활용",
       "설명 간결성",
+      "상담자료·도구 활용",
+      "전시차량 다양화",
       "설명 구체성·범위",
       "자율 관람·압박 완화",
       "가격·혜택 안내",
@@ -408,8 +410,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
   assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
   assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 13));
-  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 14));
-  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/14개 보완 주제/);
+  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 15));
+  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/15개 보완 주제/);
   const baekJongYoon = staffAnalysis.showrooms["6KR6854"].employees.find(({ name }) => name === "백종윤");
   assert.ok(baekJongYoon.improvementKeywords.some(({ label, mentions }) => label === "상담공간 편의제공" && mentions === 1));
   assert.ok(!baekJongYoon.improvementKeywords.some(({ label }) => label === "시설·편의 제공"));

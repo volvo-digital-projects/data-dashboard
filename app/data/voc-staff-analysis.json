@@ -13,7 +13,7 @@
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-08-24",
-    "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/14개 보완 주제",
+    "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/15개 보완 주제",
     "commentAnalysisEmployees": 383
   },
   "nationalYears": {
@@ -170,11 +170,11 @@
               "mentions": 7
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
+              "label": "비교·장단점 안내",
               "mentions": 5
             },
             {
@@ -271,11 +271,11 @@
               "mentions": 4
             },
             {
-              "label": "전문지식·정확성",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "전문지식·정확성",
               "mentions": 3
             },
             {
@@ -293,7 +293,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -374,8 +374,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 3
+              "label": "전시차량 다양화",
+              "mentions": 2
             },
             {
               "label": "설명 구체성·범위",
@@ -420,11 +420,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -518,10 +518,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 3
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 2
             },
@@ -530,11 +526,15 @@
               "mentions": 2
             },
             {
+              "label": "설명 간결성",
+              "mentions": 1
+            },
+            {
               "label": "상담자료·도구 활용",
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -644,6 +644,10 @@
             },
             {
               "label": "대기·예약 운영",
+              "mentions": 1
+            },
+            {
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -804,19 +808,19 @@
           "commentResponses": 2,
           "strengthKeywords": [
             {
-              "label": "비교·장단점 안내",
-              "mentions": 1
-            },
-            {
               "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
               "label": "친절·예의",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
               "mentions": 1
             }
           ],
@@ -1035,7 +1039,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 2
             },
             {
@@ -1221,7 +1225,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -1548,12 +1552,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
-            },
-            {
-              "label": "시승 경험",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
               "label": "가격·혜택 안내",
@@ -1561,6 +1561,14 @@
             },
             {
               "label": "설명 구체성·범위",
+              "mentions": 1
+            },
+            {
+              "label": "시승모델 다양화",
+              "mentions": 1
+            },
+            {
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -1717,7 +1725,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 3
             },
             {
@@ -2084,7 +2092,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -2169,7 +2177,7 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -2431,11 +2439,11 @@
               "mentions": 2
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
@@ -2570,15 +2578,15 @@
               "mentions": 4
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
-              "label": "제품·옵션·출고 안내",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "제품·옵션·출고 안내",
               "mentions": 1
             },
             {
@@ -2683,11 +2691,11 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 2
             },
             {
@@ -2738,11 +2746,11 @@
               "mentions": 10
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 7
             },
             {
@@ -2768,15 +2776,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
-              "mentions": 1
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "응대 태도",
               "mentions": 1
             }
           ],
@@ -2890,12 +2894,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-06-09"
         },
         {
@@ -2935,11 +2934,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             }
           ],
@@ -3019,11 +3018,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -3300,11 +3299,11 @@
           "commentResponses": 9,
           "strengthKeywords": [
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 7
             },
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 7
             },
             {
@@ -3418,7 +3417,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -3561,11 +3560,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 구체성·범위",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
@@ -3794,11 +3793,11 @@
               "mentions": 12
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 6
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
@@ -3822,11 +3821,11 @@
               "mentions": 2
             },
             {
-              "label": "부담 없는 상담",
+              "label": "적극·성실한 응대",
               "mentions": 2
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "부담 없는 상담",
               "mentions": 2
             },
             {
@@ -4034,15 +4033,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시승모델 다양화",
               "mentions": 2
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -4126,7 +4121,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -4219,11 +4214,11 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "응대 태도",
               "mentions": 1
             }
           ],
@@ -4642,15 +4637,15 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
-            },
-            {
               "label": "대기·예약 운영",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
+              "mentions": 2
+            },
+            {
+              "label": "시승모델 다양화",
               "mentions": 1
             },
             {
@@ -4794,7 +4789,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -4929,11 +4924,11 @@
           "commentResponses": 2,
           "strengthKeywords": [
             {
-              "label": "비교·장단점 안내",
+              "label": "친절·예의",
               "mentions": 2
             },
             {
-              "label": "친절·예의",
+              "label": "비교·장단점 안내",
               "mentions": 2
             },
             {
@@ -5181,12 +5176,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2025-10-03"
         },
         {
@@ -5276,7 +5266,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -5361,8 +5351,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
               "label": "자율 관람·압박 완화",
@@ -5471,10 +5461,6 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
-            },
-            {
               "label": "시설·편의 제공",
               "mentions": 2
             },
@@ -5556,7 +5542,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시승모델 다양화",
               "mentions": 1
             }
           ],
@@ -5627,11 +5613,11 @@
               "mentions": 1
             },
             {
-              "label": "구매결정 지원",
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
@@ -5862,10 +5848,6 @@
             {
               "label": "상담자료·도구 활용",
               "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2025-10-31"
@@ -5952,18 +5934,6 @@
               "mentions": 2
             },
             {
-              "label": "부담 없는 상담",
-              "mentions": 1
-            },
-            {
-              "label": "니즈 맞춤 상담",
-              "mentions": 1
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 1
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 1
             },
@@ -5976,16 +5946,23 @@
               "mentions": 1
             },
             {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
               "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2025-07-07"
         },
         {
@@ -6024,11 +6001,11 @@
               "mentions": 5
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 3
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 3
             },
             {
@@ -6221,7 +6198,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -6275,11 +6252,11 @@
               "mentions": 3
             },
             {
-              "label": "신속한 응답",
+              "label": "전문지식·정확성",
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "신속한 응답",
               "mentions": 3
             },
             {
@@ -6301,7 +6278,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -6537,16 +6514,12 @@
               "mentions": 2
             },
             {
-              "label": "후속 연락·진행안내",
-              "mentions": 2
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
+              "label": "후속 연락·진행안내",
+              "mentions": 2
             },
             {
               "label": "설명 구체성·범위",
@@ -6675,19 +6648,19 @@
           "commentResponses": 3,
           "strengthKeywords": [
             {
-              "label": "적극·성실한 응대",
-              "mentions": 2
-            },
-            {
               "label": "친절·예의",
               "mentions": 2
             },
             {
-              "label": "시승·차량체험 지원",
-              "mentions": 1
+              "label": "적극·성실한 응대",
+              "mentions": 2
             },
             {
               "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
@@ -6890,7 +6863,7 @@
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -6971,7 +6944,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -7233,11 +7206,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "시승모델 다양화",
               "mentions": 1
             }
           ],
@@ -7288,11 +7261,11 @@
               "mentions": 5
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 4
             },
             {
-              "label": "전문지식·정확성",
+              "label": "이해하기 쉬운 설명",
               "mentions": 4
             },
             {
@@ -7405,10 +7378,6 @@
             {
               "label": "설명 구체성·범위",
               "mentions": 2
-            },
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-05-07"
@@ -7489,17 +7458,17 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -7745,10 +7714,6 @@
             {
               "label": "대기·예약 운영",
               "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-08-08"
@@ -7982,11 +7947,11 @@
               "mentions": 5
             },
             {
-              "label": "구매결정 지원",
+              "label": "전문지식·정확성",
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "구매결정 지원",
               "mentions": 3
             },
             {
@@ -8071,11 +8036,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 간결성",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "설명 간결성",
               "mentions": 1
             }
           ],
@@ -8265,7 +8230,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -8358,7 +8323,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -8447,15 +8412,15 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "가격·혜택 안내",
               "mentions": 1
             },
             {
-              "label": "가격·혜택 안내",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
@@ -8463,15 +8428,11 @@
               "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
-              "mentions": 1
-            },
-            {
               "label": "설명 간결성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "대기·예약 운영",
               "mentions": 1
             }
           ],
@@ -8568,7 +8529,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -8669,7 +8630,7 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -8770,7 +8731,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -8997,11 +8958,11 @@
               "mentions": 7
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "시승·차량체험 지원",
               "mentions": 2
             },
             {
@@ -9200,15 +9161,15 @@
           ],
           "improvementKeywords": [
             {
-              "label": "가격·혜택 안내",
-              "mentions": 2
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 2
             },
             {
               "label": "설명 구체성·범위",
+              "mentions": 2
+            },
+            {
+              "label": "가격·혜택 안내",
               "mentions": 2
             },
             {
@@ -9313,11 +9274,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
+              "label": "시승모델 다양화",
               "mentions": 1
             },
             {
@@ -9448,12 +9405,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-06-10"
         },
         {
@@ -9497,11 +9449,11 @@
               "mentions": 12
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 6
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
@@ -9586,11 +9538,11 @@
               "mentions": 8
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "적극·성실한 응대",
               "mentions": 4
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "시승·차량체험 지원",
               "mentions": 4
             },
             {
@@ -9902,12 +9854,7 @@
               "mentions": 2
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 2
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-08-05"
         },
         {
@@ -9993,7 +9940,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -10010,10 +9957,6 @@
             },
             {
               "label": "상담자료·도구 활용",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
               "mentions": 1
             }
           ],
@@ -10266,7 +10209,7 @@
               "mentions": 3
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -10364,6 +10307,10 @@
           "improvementKeywords": [
             {
               "label": "후속 연락·진행안내",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -10599,11 +10546,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "응대 태도",
               "mentions": 1
             }
           ],
@@ -10858,11 +10805,11 @@
               "mentions": 2
             },
             {
-              "label": "상담자료·도구 활용",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "상담자료·도구 활용",
               "mentions": 1
             },
             {
@@ -11092,11 +11039,11 @@
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
@@ -11298,11 +11245,11 @@
               "mentions": 3
             },
             {
-              "label": "부담 없는 상담",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "부담 없는 상담",
               "mentions": 1
             }
           ],
@@ -11586,11 +11533,11 @@
           "commentResponses": 13,
           "strengthKeywords": [
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 9
             },
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 9
             },
             {
@@ -11709,10 +11656,6 @@
           "improvementKeywords": [
             {
               "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -11892,7 +11835,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시승모델 다양화",
               "mentions": 1
             }
           ],
@@ -11985,7 +11928,7 @@
               "mentions": 3
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -12157,7 +12100,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -12250,12 +12193,12 @@
               "mentions": 5
             },
             {
-              "label": "시승 경험",
-              "mentions": 4
+              "label": "전시차량 다양화",
+              "mentions": 3
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 3
+              "label": "시승기회·시간 확대",
+              "mentions": 2
             },
             {
               "label": "상담자료·도구 활용",
@@ -12426,15 +12369,15 @@
               "mentions": 3
             },
             {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
               "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
               "label": "제품·옵션·출고 안내",
-              "mentions": 1
-            },
-            {
-              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
@@ -12747,7 +12690,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -12835,10 +12778,6 @@
             }
           ],
           "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
             {
               "label": "전문지식·정확성",
               "mentions": 1
@@ -12980,11 +12919,11 @@
               "mentions": 4
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "구매결정 지원",
               "mentions": 3
             },
             {
-              "label": "구매결정 지원",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
@@ -13018,11 +12957,11 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "응대 태도",
               "mentions": 1
             }
           ],
@@ -13234,11 +13173,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "적극·성실한 응대",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "적극·성실한 응대",
               "mentions": 1
             }
           ],
@@ -13325,10 +13264,6 @@
             },
             {
               "label": "대기·예약 운영",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -13425,15 +13360,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
               "label": "가격·혜택 안내",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -13603,7 +13530,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -13696,7 +13623,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -13797,11 +13724,15 @@
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -13967,11 +13898,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -14068,12 +13999,12 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "설명 구체성·범위",
               "mentions": 2
             },
             {
-              "label": "설명 구체성·범위",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
               "label": "응대 태도",
@@ -14161,11 +14092,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "설명 구체성·범위",
               "mentions": 1
             },
             {
-              "label": "설명 구체성·범위",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -14481,10 +14412,6 @@
           "improvementKeywords": [
             {
               "label": "대기·예약 운영",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -14846,10 +14773,6 @@
               "mentions": 3
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
               "label": "자율 관람·압박 완화",
               "mentions": 1
             }
@@ -14935,11 +14858,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "설명 간결성",
+              "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -15032,7 +14955,7 @@
               "mentions": 4
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -15044,7 +14967,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -15228,7 +15151,12 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "시승모델 다양화",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-04-14"
         },
         {
@@ -15326,15 +15254,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
               "label": "대기·예약 운영",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -15437,15 +15361,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
-              "mentions": 1
-            },
-            {
               "label": "대기·예약 운영",
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -15559,11 +15479,11 @@
               "mentions": 3
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "비교·장단점 안내",
               "mentions": 2
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "적극·성실한 응대",
               "mentions": 2
             }
           ],
@@ -15639,7 +15559,12 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "전시차량 다양화",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2025-02-17"
         },
         {
@@ -15818,18 +15743,18 @@
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 3
+              "label": "전시차량 다양화",
+              "mentions": 2
             },
             {
               "label": "자율 관람·압박 완화",
@@ -16048,7 +15973,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -16064,7 +15989,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -16202,8 +16127,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
               "label": "설명 구체성·범위",
@@ -16316,11 +16241,11 @@
               "mentions": 16
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 11
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 11
             },
             {
@@ -16350,11 +16275,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
-            },
-            {
-              "label": "시승 경험",
+              "label": "시승모델 다양화",
               "mentions": 1
             },
             {
@@ -16582,11 +16503,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시승모델 다양화",
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시설·편의 제공",
               "mentions": 1
             }
           ],
@@ -17005,11 +16926,11 @@
               "mentions": 22
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 9
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "비교·장단점 안내",
               "mentions": 9
             },
             {
@@ -17051,7 +16972,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -17141,10 +17062,6 @@
           "improvementKeywords": [
             {
               "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -17342,15 +17259,11 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
               "label": "대기·예약 운영",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -17523,10 +17436,6 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
               "label": "상담자료·도구 활용",
               "mentions": 1
             }
@@ -17626,7 +17535,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -17759,10 +17668,6 @@
             {
               "label": "설명 구체성·범위",
               "mentions": 2
-            },
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-07-20"
@@ -18024,11 +17929,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -18108,19 +18013,23 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "시승모델 다양화",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
             },
             {
               "label": "제품·옵션·출고 안내",
               "mentions": 1
             },
             {
-              "label": "시승 경험",
-              "mentions": 1
-            },
-            {
-              "label": "전문지식·정확성",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -18206,11 +18115,11 @@
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
@@ -18337,11 +18246,11 @@
               "mentions": 2
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 1
             }
           ],
@@ -18449,11 +18358,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -18618,12 +18527,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-05-23"
         },
         {
@@ -18738,11 +18642,11 @@
               "mentions": 51
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 28
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "이해하기 쉬운 설명",
               "mentions": 28
             },
             {
@@ -18900,15 +18804,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
               "label": "시설·편의 제공",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -19005,19 +18905,23 @@
           ],
           "improvementKeywords": [
             {
+              "label": "시승기회·시간 확대",
+              "mentions": 2
+            },
+            {
               "label": "설명 구체성·범위",
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
               "label": "상담자료·도구 활용",
+              "mentions": 1
+            },
+            {
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
@@ -19034,10 +18938,6 @@
             },
             {
               "label": "가격·혜택 안내",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -19429,11 +19329,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "적극·성실한 응대",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "적극·성실한 응대",
               "mentions": 1
             }
           ],
@@ -19581,7 +19481,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             }
           ],
@@ -19640,11 +19540,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             }
           ],
@@ -19734,7 +19634,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -20078,12 +19978,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-02-28"
         },
         {
@@ -20122,11 +20017,11 @@
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
@@ -20134,11 +20029,11 @@
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "구매결정 지원",
               "mentions": 1
             },
             {
@@ -20156,7 +20051,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -20235,6 +20130,10 @@
             {
               "label": "대기·예약 운영",
               "mentions": 2
+            },
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-01-17"
@@ -20317,10 +20216,6 @@
             }
           ],
           "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
             {
               "label": "상담자료·도구 활용",
               "mentions": 1
@@ -20422,7 +20317,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -20500,11 +20395,11 @@
               "mentions": 5
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
+              "label": "비교·장단점 안내",
               "mentions": 5
             },
             {
@@ -20530,7 +20425,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -20605,17 +20500,21 @@
               "mentions": 2
             },
             {
-              "label": "신속한 응답",
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "신속한 응답",
               "mentions": 2
             }
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
+              "mentions": 1
+            },
+            {
+              "label": "시승모델 다양화",
               "mentions": 1
             }
           ],
@@ -20686,11 +20585,11 @@
               "mentions": 3
             },
             {
-              "label": "구매결정 지원",
+              "label": "신뢰·솔직한 상담",
               "mentions": 2
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "구매결정 지원",
               "mentions": 2
             },
             {
@@ -20709,10 +20608,6 @@
             },
             {
               "label": "설명 간결성",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
               "mentions": 1
             },
             {
@@ -20790,11 +20685,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -20846,15 +20741,15 @@
               "mentions": 7
             },
             {
-              "label": "적극·성실한 응대",
-              "mentions": 6
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 6
             },
             {
               "label": "이해하기 쉬운 설명",
+              "mentions": 6
+            },
+            {
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
@@ -20876,7 +20771,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -20973,11 +20868,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 3
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -21082,7 +20977,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -21151,7 +21046,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -21281,10 +21176,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
-            },
-            {
               "label": "대기·예약 운영",
               "mentions": 1
             },
@@ -21297,11 +21188,15 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -21475,7 +21370,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -21530,11 +21425,11 @@
               "mentions": 8
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
+              "label": "이해하기 쉬운 설명",
               "mentions": 7
             },
             {
@@ -21645,8 +21540,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 4
+              "label": "전시차량 다양화",
+              "mentions": 2
             },
             {
               "label": "응대 태도",
@@ -21755,11 +21650,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "이해하기 쉬운 설명",
               "mentions": 1
             }
           ],
@@ -21863,10 +21758,6 @@
             {
               "label": "전문지식·정확성",
               "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-04-24"
@@ -21958,7 +21849,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -22074,7 +21965,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시승모델 다양화",
               "mentions": 1
             }
           ],
@@ -22175,11 +22066,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -22261,10 +22148,6 @@
             },
             {
               "label": "설명 간결성",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
               "mentions": 1
             }
           ],
@@ -22730,7 +22613,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -23034,7 +22917,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -23135,11 +23018,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
-              "mentions": 1
-            },
-            {
-              "label": "전시·시승차 구성",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -23228,7 +23107,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -23354,15 +23233,15 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
-              "mentions": 3
+              "label": "시승기회·시간 확대",
+              "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "시승모델 다양화",
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
@@ -23471,19 +23350,15 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
               "label": "응대 태도",
-              "mentions": 1
-            },
-            {
-              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -23560,11 +23435,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -23603,11 +23478,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "시승·차량체험 지원",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -23671,11 +23546,11 @@
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
@@ -23750,11 +23625,11 @@
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
@@ -23832,7 +23707,7 @@
               "mentions": 3
             },
             {
-              "label": "신속한 응답",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
@@ -23840,7 +23715,7 @@
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "신속한 응답",
               "mentions": 3
             },
             {
@@ -23877,15 +23752,15 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
+              "label": "친절·예의",
+              "mentions": 1
+            },
+            {
               "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
               "label": "신속한 응답",
-              "mentions": 1
-            },
-            {
-              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -24048,11 +23923,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "대기·예약 운영",
+              "mentions": 1
             },
             {
-              "label": "대기·예약 운영",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -24099,11 +23974,11 @@
               "mentions": 6
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 4
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 4
             },
             {
@@ -24133,7 +24008,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -24187,11 +24062,11 @@
               "mentions": 4
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "이해하기 쉬운 설명",
               "mentions": 3
             },
             {
@@ -24207,12 +24082,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-04-14"
         },
         {
@@ -24298,7 +24168,7 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -24398,7 +24268,7 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 2
             },
             {
@@ -24449,7 +24319,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -24721,7 +24591,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -24806,6 +24676,10 @@
             },
             {
               "label": "응대 태도",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -24996,11 +24870,11 @@
               "mentions": 9
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 7
             },
             {
@@ -25026,7 +24900,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -25115,8 +24989,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-07-15"
@@ -25227,7 +25101,7 @@
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -25354,8 +25228,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
+              "label": "전시차량 다양화",
+              "mentions": 2
             }
           ],
           "latestResponseDate": "2026-02-22"
@@ -25593,10 +25467,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
               "label": "설명 구체성·범위",
               "mentions": 1
             }
@@ -25682,7 +25552,7 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -25753,11 +25623,11 @@
               "mentions": 2
             },
             {
-              "label": "부담 없는 상담",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
@@ -26103,7 +25973,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -26332,8 +26202,8 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 2
+              "label": "시승모델 다양화",
+              "mentions": 1
             },
             {
               "label": "응대 태도",
@@ -26421,7 +26291,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시승모델 다양화",
               "mentions": 1
             },
             {
@@ -26527,7 +26397,7 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "비교·장단점 안내",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
@@ -26535,7 +26405,7 @@
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "비교·장단점 안내",
               "mentions": 1
             }
           ],
@@ -26578,11 +26448,11 @@
               "mentions": 2
             },
             {
-              "label": "부담 없는 상담",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
@@ -26676,11 +26546,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 1
-            },
-            {
-              "label": "시승 경험",
+              "label": "시승기회·시간 확대",
               "mentions": 1
             },
             {
@@ -26729,11 +26595,11 @@
               "mentions": 1
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 1
             }
           ],
@@ -26849,10 +26715,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
-              "mentions": 3
-            },
-            {
               "label": "전문지식·정확성",
               "mentions": 2
             },
@@ -26862,6 +26724,10 @@
             },
             {
               "label": "시설·편의 제공",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화",
               "mentions": 1
             },
             {
@@ -26948,11 +26814,11 @@
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -27046,12 +26912,12 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시승모델 다양화",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
               "label": "전문지식·정확성",
@@ -27158,11 +27024,11 @@
               "mentions": 6
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "적극·성실한 응대",
               "mentions": 3
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
@@ -27336,11 +27202,11 @@
               "mentions": 8
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "이해하기 쉬운 설명",
               "mentions": 8
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "비교·장단점 안내",
               "mentions": 8
             },
             {
@@ -27607,7 +27473,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "전시차량 다양화",
               "mentions": 1
             }
           ],
@@ -27670,11 +27536,11 @@
               "mentions": 2
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
@@ -27764,12 +27630,12 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시설·편의 제공",
               "mentions": 2
             },
             {
-              "label": "시설·편의 제공",
-              "mentions": 2
+              "label": "전시차량 다양화",
+              "mentions": 1
             },
             {
               "label": "가격·혜택 안내",
@@ -27839,11 +27705,11 @@
           "commentResponses": 6,
           "strengthKeywords": [
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·예의",
               "mentions": 4
             },
             {
-              "label": "친절·예의",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 4
             },
             {
@@ -27931,11 +27797,11 @@
               "mentions": 7
             },
             {
-              "label": "구매결정 지원",
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
+              "label": "구매결정 지원",
               "mentions": 5
             },
             {
@@ -28179,7 +28045,12 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "전시차량 다양화",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-07-20"
         }
       ],
