@@ -600,7 +600,7 @@ html {
 
 .dealer-certification-row {
   min-width: 1000px;
-  min-height: 70px;
+  min-height: 48px;
   display: grid;
   grid-template-columns: minmax(190px, 1.15fr) minmax(110px, 0.68fr) repeat(3, minmax(145px, 1fr)) minmax(160px, 1fr) minmax(105px, 0.66fr);
   align-items: stretch;
@@ -613,22 +613,22 @@ html {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 10px 14px;
+  padding: 5px 14px;
   border-right: 1px solid #e7eef1;
 }
 .dealer-certification-row > *:last-child { border-right: 0; }
 
 .dealer-certification-head {
-  min-height: 32px;
+  min-height: 27px;
   color: #67818e;
   background: #edf4f6;
   font-size: 9px;
   font-weight: 700;
 }
-.dealer-certification-head > * { padding-block: 7px; }
+.dealer-certification-head > * { padding-block: 4px; }
 
 .dealer-certification-aggregate {
-  min-height: 74px;
+  min-height: 52px;
   background: #f5fafb;
   box-shadow: inset 0 -1px 0 #cadde4;
 }

@@ -3476,6 +3476,8 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
+  assert.match(css, /\.dealer-certification-row\s*\{[^}]*min-height: 48px;/);
+  assert.match(css, /\.dealer-certification-aggregate\s*\{[^}]*min-height: 52px;/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {
