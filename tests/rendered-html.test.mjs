@@ -514,7 +514,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-evidence-note\s*\{[^}]*font-size:\s*8\.5px;/);
   assert.match(css, /\.growth-sales-monthly-legend\s*\{[^}]*font-size:\s*9px;/);
   assert.match(css, /\.growth-sales-share-meta > small\s*\{[^}]*font-size:\s*9\.5px;/);
-  assert.match(css, /\.growth-sales-share-meta\s*\{[^}]*gap: 2px;[^}]*margin-top: 6px;[^}]*text-align: left;/);
+  assert.match(css, /\.growth-sales-share-meta\s*\{[^}]*gap: 2px;[^}]*margin-top: 6px;[^}]*text-align: center;/);
   assert.match(navigation, /className="growth-scatter-average-line"/);
   assert.equal((navigation.match(/className="growth-scatter-average-label"/g) ?? []).length, 2);
   assert.equal((navigation.match(/staffScatterPlot\.right - 32/g) ?? []).length, 2);
@@ -656,8 +656,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const displayTwoDigitRank = \(value: number \| null\) => value === null \? "―" : displayTwoDigitCount\(value\);/);
   assert.doesNotMatch(navigation, /className="growth-sales-share-rank"[\s\S]*?selectedStaffEmployee/);
   assert.match(css, /\.growth-sales-share-rank i\s*\{[^}]*margin-right: 4px;[^}]*color: #9aabb3;[^}]*font-style: normal;/);
-  assert.match(css, /\.growth-sales-share-meta\s*\{[^}]*text-align: left;/);
-  assert.match(css, /\.growth-sales-share-rank\s*\{[^}]*display: grid;[^}]*grid-template-columns: max-content max-content max-content;[^}]*column-gap: 6px;[^}]*row-gap: 2px;[^}]*justify-content: start;/);
+  assert.match(css, /\.growth-sales-share-meta\s*\{[^}]*width: 100%;[^}]*justify-items: center;[^}]*text-align: center;/);
+  assert.match(css, /\.growth-sales-share-rank\s*\{[^}]*display: grid;[^}]*grid-template-columns: max-content max-content max-content;[^}]*column-gap: 6px;[^}]*row-gap: 2px;[^}]*justify-content: center;/);
   assert.match(css, /\.growth-sales-share-rank > span\s*\{[^}]*display: contents;/);
   assert.match(css, /\.growth-sales-share-rank > span > b,[\s\S]*?\.growth-sales-share-rank > span > em,[\s\S]*?\.growth-sales-share-rank > span > span\s*\{[^}]*text-align: left;[^}]*white-space: nowrap;/);
   assert.doesNotMatch(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
