@@ -130,6 +130,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
 
   return (
     <main className="dealer-analysis-page">
+      <div className="dealer-analysis-command-shell">
       <header className="dashboard-identity-header analysis-header dealer-analysis-header">
         <DashboardHeaderLead
           title="딜러사별 분석자료"
@@ -142,6 +143,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           }}
         />
       </header>
+      </div>
 
       <section className="dealer-analysis-summary" aria-label="전국 통합 요약">
         <article><small>분석 대상</small><strong>7</strong><span>딜러사 · 39개 전시장</span></article>

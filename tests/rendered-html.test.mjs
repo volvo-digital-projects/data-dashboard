@@ -3433,6 +3433,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   ]);
 
   assert.match(html, /<header class="dashboard-identity-header analysis-header dealer-analysis-header">/);
+  assert.match(html, /class="dealer-analysis-command-shell"/);
   assert.match(html, /<h1>딜러사별 분석자료<\/h1>/);
   assert.match(html, /class="header-status-item header-status-item--dashboard-return"/);
   assert.match(html, /기존 페이지 2 분석자료로 돌아가기/);
@@ -3446,6 +3447,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(routeSource, /access\.role !== "master"/);
   assert.match(pagesSource, /segments\[2\] === "dealer-analysis"[\s\S]*?access\.role !== "master"/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*width: 92px;[^}]*height: 92px;/);
+  assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: 0;/);
 });
 
