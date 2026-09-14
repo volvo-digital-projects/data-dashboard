@@ -24,7 +24,6 @@ type VocShowroom = {
   employees: { name: string }[];
 };
 const dealerOrder = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"];
-const years = staffCertificationsJson.sourceYears as number[];
 const showrooms = dashboardJson.showrooms as Showroom[];
 const certifications = staffCertificationsJson.records as Certification[];
 const vocShowrooms = vocStaffAnalysisJson.showrooms as Record<string, VocShowroom>;
@@ -144,9 +143,8 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
         <div className="dealer-analysis-section-title">
           <div>
             <small>DEALER COMPARISON</small>
-            <h2 id="dealer-analysis-board-title">딜러사별 인증 레벨 인원 및 비율</h2>
+            <h2 id="dealer-analysis-board-title">딜러사별 레벨별 인증인원 및 비율</h2>
           </div>
-          <p>2021–2026 인증 결과 180명 기준 · 동일 인물의 연도별 수상은 각각 포함</p>
         </div>
 
         <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원과 비율">

@@ -3460,7 +3460,8 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
   assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><\/strong>[\s\S]*?<strong>40<\/strong>[\s\S]*?<strong>60<\/strong>[\s\S]*?<strong>80<\/strong>/);
-  assert.match(html, /딜러사별 인증 레벨 인원 및 비율/);
+  assert.match(html, /딜러사별 레벨별 인증인원 및 비율/);
+  assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);
   assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
   assert.match(html, /딜러사 미확인 <strong>2명<\/strong>/);
   assert.doesNotMatch(html, /누적판매/);
