@@ -212,7 +212,7 @@
               "mentions": 3
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -518,7 +518,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -550,7 +550,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -651,7 +651,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -950,7 +950,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -1792,7 +1792,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -1988,7 +1988,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -2088,7 +2088,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -2181,7 +2181,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -2384,7 +2384,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -2457,7 +2457,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -2465,7 +2465,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -2582,7 +2582,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -2699,7 +2699,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -2776,7 +2776,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -3260,7 +3260,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             }
           ],
@@ -3421,7 +3421,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -3560,7 +3560,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -3843,7 +3843,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -4037,7 +4037,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -4125,7 +4125,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -4458,7 +4458,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -5009,7 +5009,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -5102,7 +5102,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -5461,7 +5461,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 2
             },
             {
@@ -5623,7 +5623,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -6514,7 +6514,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -6948,7 +6948,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -7868,7 +7868,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -8036,7 +8036,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -8234,7 +8234,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -8420,7 +8420,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -8634,11 +8634,11 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -8828,7 +8828,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -9068,7 +9068,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -9161,7 +9161,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -9173,7 +9173,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -9270,7 +9270,7 @@
               "mentions": 2
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -9286,7 +9286,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -9952,7 +9952,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -10793,7 +10793,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 3
             },
             {
@@ -11311,7 +11311,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -11667,7 +11667,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -12209,7 +12209,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -12365,11 +12365,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -12779,7 +12779,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -12953,7 +12953,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -13135,7 +13135,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -13441,7 +13441,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -13728,7 +13728,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -14208,7 +14208,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -15052,7 +15052,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -15977,7 +15977,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -15985,7 +15985,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -16279,7 +16279,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -16410,7 +16410,7 @@
               "mentions": 2
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -16507,7 +16507,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -16701,7 +16701,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -16879,7 +16879,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -17255,7 +17255,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 2
             },
             {
@@ -17917,7 +17917,7 @@
               "mentions": 3
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 3
             },
             {
@@ -18021,7 +18021,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -18201,7 +18201,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 2
             },
             {
@@ -18808,7 +18808,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -18929,11 +18929,11 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -19026,11 +19026,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -19844,7 +19844,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -20313,7 +20313,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -20965,7 +20965,7 @@
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -21192,7 +21192,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -21756,7 +21756,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -22054,7 +22054,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -22143,7 +22143,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -22524,7 +22524,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -22798,7 +22798,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -23014,7 +23014,7 @@
               "mentions": 3
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -23111,7 +23111,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -23241,7 +23241,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -23350,7 +23350,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
@@ -24172,7 +24172,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -24671,7 +24671,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -25556,7 +25556,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -26109,7 +26109,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -26715,7 +26715,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 2
             },
             {
@@ -26723,7 +26723,7 @@
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             },
             {
@@ -26920,7 +26920,7 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -27630,7 +27630,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 2
             },
             {
@@ -27971,11 +27971,11 @@
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             },
             {
-              "label": "시설·편의 제공",
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],

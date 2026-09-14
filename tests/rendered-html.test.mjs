@@ -384,6 +384,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal((staffAnalysisGenerator.match(/len\(IMPROVEMENT_PATTERNS\)/g) ?? []).length, 3);
   assert.match(staffAnalysisGenerator, /exclude_negative_context=True/);
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
+  assert.match(staffAnalysisGenerator, /전문지식 정확성 부족/);
+  assert.match(staffAnalysisGenerator, /시설 편의 미제공/);
   assert.match(staffAnalysisGenerator, /간결한 설명필요/);
   assert.match(staffAnalysisGenerator, /응대 태도 불량/);
   assert.match(staffAnalysisGenerator, /상담자료·도구 활용/);
@@ -396,7 +398,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.deepEqual(
     kimNaehwan.improvementKeywords.map(({ label }) => label),
     [
-      "전문지식·정확성",
+      "전문지식 정확성 부족",
       "대기·예약 운영",
       "간결한 설명필요",
       "상담자료·도구 활용",
@@ -404,7 +406,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
       "설명 구체성·범위",
       "자율 관람·압박 완화",
       "가격·혜택 안내",
-      "시설·편의 제공",
+      "시설 편의 미제공",
     ],
   );
   const analyzedEmployees = Object.values(staffAnalysis.showrooms).flatMap(({ employees }) => employees);
@@ -415,7 +417,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/15개 보완 주제/);
   const baekJongYoon = staffAnalysis.showrooms["6KR6854"].employees.find(({ name }) => name === "백종윤");
   assert.ok(baekJongYoon.improvementKeywords.some(({ label, mentions }) => label === "상담공간 편의제공" && mentions === 1));
-  assert.ok(!baekJongYoon.improvementKeywords.some(({ label }) => label === "시설·편의 제공"));
+  assert.ok(!baekJongYoon.improvementKeywords.some(({ label }) => label === "시설 편의 미제공"));
   assert.match(navigation, /keyword\.mentions \/ selectedStaffStrengthTotalMentions/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffImprovementTotalMentions/);
   assert.match(navigation, /displayTwoDigitCount\(keyword\.mentions\)\}회 <em>\(\{displayTwoDigitCount\(Math\.round\(\(keyword\.mentions \/ selectedStaffStrengthTotalMentions\) \* 100\)\)\}%\)/);
