@@ -157,6 +157,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             <span role="columnheader">Advanced</span>
             <span role="columnheader">Certified</span>
             <span role="columnheader">현재 재직 확인</span>
+            <span role="columnheader">재직률</span>
           </div>
           <article className="dealer-certification-row dealer-certification-aggregate" role="row">
             <div className="dealer-certification-name" role="cell">
@@ -173,6 +174,9 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             ))}
             <div className="dealer-certification-current" role="cell">
               <strong>{totalCurrentCertified}<i>명</i></strong>
+            </div>
+            <div className="dealer-certification-rate" role="cell">
+              <strong>{percentage(totalCurrentCertified, totalCertifications)}</strong>
             </div>
           </article>
           {dealerRows.map((row) => (
@@ -191,6 +195,9 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               ))}
               <div className="dealer-certification-current" role="cell">
                 <strong>{row.currentCertified}<i>명</i></strong>
+              </div>
+              <div className="dealer-certification-rate" role="cell">
+                <strong>{percentage(row.currentCertified, row.certificationCount)}</strong>
               </div>
             </article>
           ))}
@@ -213,7 +220,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       </section>
 
       <p className="dealer-analysis-data-note">
-        현재 재직 확인은 인증 이력과 현재 Sales-DMS 명단의 이름을 연결한 값이며, 명단에서 확인되지 않는 과거 인증자를 퇴사자로 단정하지 않습니다. 딜러사 미확인 2명은 원자료에 전시장 정보가 없어 별도로 보존했습니다.
+        재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값입니다. 현재 명단에서 확인되지 않는 과거 인증자를 퇴사자로 단정하지 않으며, 딜러사 미확인 2명은 원자료에 전시장 정보가 없어 별도로 보존했습니다.
       </p>
     </main>
   );

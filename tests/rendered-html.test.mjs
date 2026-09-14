@@ -3455,6 +3455,9 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.doesNotMatch(html, /VOLVO DEALER|ALL DEALERS/);
   assert.doesNotMatch(html, />0[1-7]<\/span>/);
   assert.doesNotMatch(html, /dealer-certification-level[^>]*>[\s\S]*?<em>/);
+  assert.match(html, /<span role="columnheader">재직률<\/span>/);
+  assert.equal((html.match(/class="dealer-certification-rate"/g) ?? []).length, 8);
+  assert.match(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
   assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><\/strong>[\s\S]*?<strong>40<\/strong>[\s\S]*?<strong>60<\/strong>[\s\S]*?<strong>80<\/strong>/);
   assert.match(html, /딜러사별 인증 레벨 인원 및 비율/);
