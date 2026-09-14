@@ -388,7 +388,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
   assert.match(staffAnalysisGenerator, /전문지식 정확성 부족/);
   assert.match(staffAnalysisGenerator, /시설 편의 미제공/);
-  assert.match(staffAnalysisGenerator, /간결한 설명필요/);
+  assert.match(staffAnalysisGenerator, /간결한 설명 필요/);
   assert.match(staffAnalysisGenerator, /구체적 설명 부족/);
   assert.match(staffAnalysisGenerator, /응대 태도 불량/);
   assert.match(staffAnalysisGenerator, /상담자료 활용 미흡/);
@@ -413,7 +413,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     kimNaehwan.improvementKeywords.map(({ label }) => label),
     [
       "전문지식 정확성 부족",
-      "간결한 설명필요",
+      "간결한 설명 필요",
       "상담자료 활용 미흡",
       "대기시간 관리 미흡",
       "전시차량 다양화 필요",
