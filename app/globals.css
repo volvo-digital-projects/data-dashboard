@@ -2551,8 +2551,13 @@ html.analysis-entry-top-locked body {
     padding-left: 14px;
   }
 
+  .competitive-analysis-page .growth-scatter-card > header {
+    width: calc(100% + 7px);
+    margin-left: -7px;
+  }
+
   .competitive-analysis-page .growth-scatter-card > header > :first-child {
-    transform: translateX(-7px);
+    transform: none;
   }
 
   .competitive-analysis-page .growth-comment-evidence > header > :first-child {
