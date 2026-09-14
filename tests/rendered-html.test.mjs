@@ -400,7 +400,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
   assert.match(staffAnalysisGenerator, /대기시간 관리 미흡/);
   assert.match(staffAnalysisGenerator, /예약절차 운영 미흡/);
-  assert.match(staffAnalysisGenerator, /진행상황 중간안내 미흡/);
+  assert.match(staffAnalysisGenerator, /진행상황 안내 미흡/);
+  assert.doesNotMatch(staffAnalysisGenerator, /진행상황 중간안내 미흡/);
+  assert.match(source, /"진행상황 중간안내 미흡": "진행상황 안내 미흡"/);
   assert.match(staffAnalysisGenerator, /자율관람 방해/);
   assert.match(staffAnalysisGenerator, /구매·계약 압박/);
   assert.match(staffAnalysisGenerator, /과도한 응대 부담/);

@@ -461,6 +461,7 @@ const staffHistoryChartHeight = (score: number) =>
   );
 const staffImprovementKeywordLabel: Record<string, string | null> = {
   "진행상황 선제 안내": null,
+  "진행상황 중간안내 미흡": "진행상황 안내 미흡",
   "서비스 품목 안내": "보증·정비 안내",
   "제품 강점 설명 확장": "제품 강점 설명",
 };
