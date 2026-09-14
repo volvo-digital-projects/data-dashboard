@@ -15593,6 +15593,7 @@ button.header-status-item {
   .competitive-analysis-page .analysis-header {
     position: fixed;
     top: 0;
+    width: auto;
     right: max(
       calc(
         var(--dashboard-page-gutter) - var(--dashboard-content-overhang) +
