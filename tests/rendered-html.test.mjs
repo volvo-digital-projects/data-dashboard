@@ -3057,7 +3057,8 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /<small><span>22년<\/span><span>상반기<\/span><\/small>[\s\S]*?<small><span>22년<\/span><span>하반기<\/span><\/small>/,
   );
   assert.match(wonjuHtml, /class="analysis-title-award-count"><strong>9회 수상<\/strong><i aria-hidden="true">\/<\/i><span>총 12<\/span><\/span>/);
-  assert.match(css, /\.analysis-title-award-count\s*\{[^}]*align-self:\s*flex-end;[^}]*font-size:\s*13px;[^}]*line-height:\s*1\.05;/);
+  assert.match(css, /\.analysis-title-award small\s*\{[^}]*font-size:\s*8px;[^}]*line-height:\s*1\.05;/);
+  assert.match(css, /\.analysis-title-award-count\s*\{[^}]*align-self:\s*flex-end;[^}]*font-size:\s*16px;[^}]*line-height:\s*1\.05;/);
   assert.match(
     wonjuHtml,
     /<small><span>26년<\/span><span>상반기<\/span><\/small>/,

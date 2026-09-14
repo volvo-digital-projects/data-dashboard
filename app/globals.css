@@ -5588,7 +5588,7 @@ input:focus-visible {
   justify-items: center;
   gap: 0;
   font-family: var(--font-korean);
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 650;
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -5611,7 +5611,7 @@ input:focus-visible {
   margin-left: 3px;
   color: rgba(232, 242, 247, 0.84);
   font-family: var(--font-korean);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 650;
   letter-spacing: -0.03em;
   line-height: 1.05;
