@@ -18,7 +18,7 @@ import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
-import { resetPageScrollToTop } from "./pageScroll";
+import { lockPageScrollToTop } from "./pageScroll";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1379,7 +1379,7 @@ export default function CompetitiveAnalysis({
   }, [initialCdsid]);
 
   useLayoutEffect(() => {
-    resetPageScrollToTop();
+    return lockPageScrollToTop();
   }, [initialCdsid]);
 
   const beginGrowthNavigationDetailDrag = (

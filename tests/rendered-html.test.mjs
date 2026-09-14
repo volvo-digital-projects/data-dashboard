@@ -3212,17 +3212,27 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.doesNotMatch(analysisSource, /forcePageScrollToTop|resetPageScrollForHeaderNavigation/);
   assert.equal((dashboardSource.match(/scroll=\{false\}/g) ?? []).length, 3);
   assert.equal((analysisSource.match(/scroll=\{false\}/g) ?? []).length, 4);
-  for (const source of [dashboardSource, analysisSource]) {
-    assert.match(
-      source,
-      /useLayoutEffect\(\(\) => \{\s*resetPageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
-    );
-  }
+  assert.match(
+    dashboardSource,
+    /useLayoutEffect\(\(\) => \{\s*resetPageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
+  );
+  assert.match(
+    analysisSource,
+    /useLayoutEffect\(\(\) => \{\s*return lockPageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
+  );
   assert.match(pageScrollSource, /document\.scrollingElement/);
   assert.match(pageScrollSource, /document\.documentElement\.scrollTop = 0/);
   assert.match(pageScrollSource, /document\.body\.scrollTop = 0/);
   assert.match(pageScrollSource, /window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\)/);
-  assert.doesNotMatch(pageScrollSource, /requestAnimationFrame|setTimeout|forcePageScrollToTop/);
+  assert.match(pageScrollSource, /export const lockPageScrollToTop = \(holdMilliseconds = 320\)/);
+  assert.match(pageScrollSource, /event\.preventDefault\(\);[\s\S]*?event\.stopImmediatePropagation\(\);[\s\S]*?resetPageScrollToTop\(\);/);
+  assert.match(pageScrollSource, /addEventListener\("wheel", blockResidualScroll, \{ capture: true, passive: false \}\)/);
+  assert.match(pageScrollSource, /addEventListener\("touchmove", blockResidualScroll, \{ capture: true, passive: false \}\)/);
+  assert.match(pageScrollSource, /requestAnimationFrame\(keepAtTop\)/);
+  assert.match(pageScrollSource, /setTimeout\(release, holdMilliseconds\)/);
+  assert.match(pageScrollSource, /removeEventListener\("wheel", blockResidualScroll, true\)/);
+  assert.match(pageScrollSource, /removeEventListener\("touchmove", blockResidualScroll, true\)/);
+  assert.doesNotMatch(pageScrollSource, /forcePageScrollToTop/);
   assert.match(githubPagesSource, /window\.history\.scrollRestoration = "manual";/);
   assert.match(githubPagesSource, /import \{ flushSync \} from "react-dom";/);
   assert.match(githubPagesSource, /function routeFromHash\(hash = window\.location\.hash\)/);
