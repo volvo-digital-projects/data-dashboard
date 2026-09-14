@@ -2171,6 +2171,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
   }
 
   .competitive-analysis-page > .analysis-sticky-anchor {
+    margin-inline: calc(-1 * var(--dashboard-content-overhang));
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
@@ -2187,8 +2188,14 @@ html.analysis-viewport-locked .competitive-analysis-page {
     position: fixed;
     top: 0;
     width: auto;
-    right: var(--dashboard-page-gutter);
-    left: var(--dashboard-page-gutter);
+    right: calc(
+      var(--dashboard-page-gutter) - var(--dashboard-content-overhang) +
+        var(--dashboard-sticky-content-gutter)
+    );
+    left: calc(
+      var(--dashboard-page-gutter) - var(--dashboard-content-overhang) +
+        var(--dashboard-sticky-content-gutter)
+    );
     z-index: 70;
   }
 
@@ -2214,6 +2221,42 @@ html.analysis-viewport-locked .competitive-analysis-page {
     overflow-y: auto;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* iPad landscape keeps the page 1 command-banner geometry: one horizontal
+   header row, with the 24px outer rail used by page 1 below 1241px. */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 761px) and (max-width: 1240px) {
+  html.analysis-viewport-locked .competitive-analysis-page {
+    --dashboard-page-gutter: 24px;
+  }
+
+  .dashboard .dashboard-identity-header.identity-strip,
+  .competitive-analysis-page .dashboard-identity-header.analysis-header {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .dashboard-identity-header > .identity-title,
+  .dashboard-identity-header > .identity-title:not(.analysis-title),
+  .dashboard-identity-header > .identity-title.analysis-title {
+    width: auto;
+    flex: 1 1 auto;
+    align-self: center;
+  }
+
+  .dashboard-identity-header > .identity-detail-rail,
+  .dashboard-identity-header > .analysis-context {
+    align-self: center;
+  }
+
+  .competitive-analysis-page > .analysis-sticky-anchor {
+    margin-inline: 0;
+  }
+
+  .competitive-analysis-page .analysis-header {
+    right: calc(24px + var(--dashboard-sticky-content-gutter));
+    left: calc(24px + var(--dashboard-sticky-content-gutter));
   }
 }
 
