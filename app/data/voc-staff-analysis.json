@@ -216,7 +216,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -224,7 +224,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -526,7 +526,7 @@
               "mentions": 2
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -946,7 +946,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -1741,7 +1741,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -2687,7 +2687,7 @@
               "mentions": 4
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 2
             },
             {
@@ -2780,7 +2780,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -3104,7 +3104,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -3572,7 +3572,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -3839,7 +3839,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -4210,7 +4210,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -4218,7 +4218,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -4454,7 +4454,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -6615,7 +6615,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -6859,7 +6859,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 2
             },
             {
@@ -7033,7 +7033,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -7291,7 +7291,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -7788,7 +7788,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -8040,7 +8040,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -8129,7 +8129,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -8428,7 +8428,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -8626,7 +8626,7 @@
               "mentions": 2
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 2
             },
             {
@@ -8824,7 +8824,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 2
             },
             {
@@ -9177,7 +9177,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -9282,7 +9282,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -9702,7 +9702,7 @@
               "mentions": 2
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -10221,7 +10221,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -10550,7 +10550,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -10708,7 +10708,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -10813,7 +10813,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -11734,7 +11734,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -12961,7 +12961,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -13139,7 +13139,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -13526,7 +13526,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -13631,7 +13631,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -14007,7 +14007,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -14322,7 +14322,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -14500,7 +14500,7 @@
               "mentions": 4
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -14601,7 +14601,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -14858,7 +14858,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -15064,11 +15064,11 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -15246,7 +15246,7 @@
               "mentions": 3
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 2
             },
             {
@@ -16406,7 +16406,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 2
             },
             {
@@ -17065,7 +17065,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -17162,7 +17162,7 @@
               "mentions": 2
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -17432,7 +17432,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -17755,7 +17755,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -17921,7 +17921,7 @@
               "mentions": 3
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -18209,7 +18209,7 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -18925,7 +18925,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -19300,7 +19300,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -20607,11 +20607,11 @@
               "mentions": 1
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -20876,7 +20876,7 @@
               "mentions": 2
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -20969,7 +20969,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -21544,7 +21544,7 @@
               "mentions": 2
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -22062,7 +22062,7 @@
               "mentions": 2
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             },
             {
@@ -22147,7 +22147,7 @@
               "mentions": 2
             },
             {
-              "label": "설명 간결성",
+              "label": "간결한 설명필요",
               "mentions": 1
             }
           ],
@@ -22364,7 +22364,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -23245,7 +23245,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -23358,7 +23358,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             }
           ],
@@ -24675,7 +24675,7 @@
               "mentions": 2
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -26206,7 +26206,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {
@@ -27380,7 +27380,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 2
             },
             {
@@ -27827,7 +27827,7 @@
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "응대 태도 불량",
               "mentions": 1
             },
             {

@@ -384,7 +384,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal((staffAnalysisGenerator.match(/len\(IMPROVEMENT_PATTERNS\)/g) ?? []).length, 3);
   assert.match(staffAnalysisGenerator, /exclude_negative_context=True/);
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
-  assert.match(staffAnalysisGenerator, /설명 간결성/);
+  assert.match(staffAnalysisGenerator, /간결한 설명필요/);
+  assert.match(staffAnalysisGenerator, /응대 태도 불량/);
   assert.match(staffAnalysisGenerator, /상담자료·도구 활용/);
   assert.match(staffAnalysisGenerator, /전시차량 다양화/);
   assert.match(staffAnalysisGenerator, /시승모델 다양화/);
@@ -397,7 +398,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     [
       "전문지식·정확성",
       "대기·예약 운영",
-      "설명 간결성",
+      "간결한 설명필요",
       "상담자료·도구 활용",
       "전시차량 다양화",
       "설명 구체성·범위",
