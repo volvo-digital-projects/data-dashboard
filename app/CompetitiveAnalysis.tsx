@@ -20,6 +20,7 @@ import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import { lockPageScrollToTop } from "./pageScroll";
+import type { DashboardRole } from "./dashboard-access";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1063,9 +1064,11 @@ const buildScatterCalloutLayout = (
 export default function CompetitiveAnalysis({
   initialCdsid,
   initialView,
+  accessRole,
 }: {
   initialCdsid: string;
   initialView: AnalysisView;
+  accessRole: DashboardRole;
 }) {
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
@@ -2848,7 +2851,7 @@ export default function CompetitiveAnalysis({
     <main className="competitive-analysis-page">
       <div className="analysis-sticky-anchor" ref={stickyAnchorRef}>
       <div className="analysis-sticky-shell" ref={stickyShellRef}>
-        <header className="dashboard-identity-header analysis-header">
+        <header className={`dashboard-identity-header analysis-header${accessRole === "master" ? " has-admin-entry" : ""}`}>
           <DashboardHeaderLead
             title={`${displayShowroomName(selected.showroom)} 분석`}
             accessDate={accessDate}
@@ -2884,6 +2887,21 @@ export default function CompetitiveAnalysis({
               </div>
             ) : null}
           />
+        {accessRole === "master" ? (
+          <Link
+            className="analysis-admin-entry"
+            href={`/dashboard/${selected.cdsid}/dealer-analysis`}
+            scroll={false}
+            aria-label="관리자용 7개 딜러사별 분석자료 열기"
+          >
+            <span className="analysis-admin-badge">ADMIN</span>
+            <svg className="analysis-admin-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <path d="M16 3.2 26 7v7.4c0 6.3-4.1 11.8-10 14.4-5.9-2.6-10-8.1-10-14.4V7l10-3.8Z" />
+              <path d="M11.2 20.4v-4.1m4.8 4.1v-8.8m4.8 8.8v-6.2" />
+            </svg>
+            <strong><span>딜러사별</span><span>분석자료</span></strong>
+          </Link>
+        ) : null}
         <div className="analysis-context" aria-label="현재 전시장 정보">
           <Link
             className="analysis-context-item"

@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import LoginHome from "../app/LoginHome";
 import Dashboard, { CriteriaGuide } from "../app/Dashboard";
 import CompetitiveAnalysis from "../app/CompetitiveAnalysis";
+import DealerAnalysis from "../app/DealerAnalysis";
 import MetricDetails from "../app/MetricDetails";
 import ReleaseUpdateNotice from "../app/ReleaseUpdateNotice";
 import { canAccessDashboard, getDashboardAccess } from "../app/dashboard-access";
@@ -197,13 +198,23 @@ function PagesApp() {
     return null;
   }
 
+  if (segments[2] === "dealer-analysis") {
+    if (access.role !== "master") {
+      window.location.replace(
+        `${BASE_PATH}#/dashboard/${encodeURIComponent(access.dashboardCdsid)}`,
+      );
+      return null;
+    }
+    return <DealerAnalysis initialCdsid={cdsid} />;
+  }
+
   if (segments[2] === "analysis") {
     const view = route.query.get("view");
     const initialView =
       view === "showroom" || view === "region" || view === "size"
         ? view
         : "dealer";
-    return <CompetitiveAnalysis initialCdsid={cdsid} initialView={initialView} />;
+    return <CompetitiveAnalysis initialCdsid={cdsid} initialView={initialView} accessRole={access.role} />;
   }
 
   if (segments[2] === "criteria") return <CriteriaGuide cdsid={cdsid} />;

@@ -2564,8 +2564,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(kolonVisibleHtml, /코오롱 9개소/);
   assert.match(
     visibleHtml,
-    /<header class="dashboard-identity-header analysis-header"><div class="identity-title analysis-title"><div class="identity-heading-line"><h1>볼보 강남대치 분석<\/h1>/,
+    /<header class="dashboard-identity-header analysis-header has-admin-entry"><div class="identity-title analysis-title"><div class="identity-heading-line"><h1>볼보 강남대치 분석<\/h1>/,
   );
+  assert.match(visibleHtml, /href="\/dashboard\/6KR6834\/dealer-analysis" class="analysis-admin-entry"/);
+  assert.match(visibleHtml, /<span>딜러사별<\/span><span>분석자료<\/span>/);
   assert.match(
     visibleHtml,
     /href="\/dashboard\/6KR6834" class="analysis-context-item" aria-label="볼보 강남대치 현황으로 이동"/,
@@ -3373,7 +3375,7 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.doesNotMatch(dashboardSource, /forcePageScrollToTop|resetPageScrollForHeaderNavigation/);
   assert.doesNotMatch(analysisSource, /forcePageScrollToTop|resetPageScrollForHeaderNavigation/);
   assert.equal((dashboardSource.match(/scroll=\{false\}/g) ?? []).length, 3);
-  assert.equal((analysisSource.match(/scroll=\{false\}/g) ?? []).length, 4);
+  assert.equal((analysisSource.match(/scroll=\{false\}/g) ?? []).length, 5);
   assert.match(
     dashboardSource,
     /useLayoutEffect\(\(\) => \{\s*resetPageScrollToTop\(\);\s*\}, \[initialCdsid\]\);/,
@@ -3417,6 +3419,29 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.match(css, /html\s*\{[^}]*scroll-behavior: auto;/);
   assert.doesNotMatch(css, /html\s*\{[^}]*scroll-behavior: smooth;/);
   assert.match(css, /html\.analysis-entry-top-locked,\s*html\.analysis-entry-top-locked body\s*\{[^}]*scroll-behavior: auto !important;[^}]*scroll-snap-type: none !important;/);
+});
+
+test("serves a master-only seven-dealer administrator analysis", async () => {
+  const response = await render("/dashboard/6KR6834/dealer-analysis");
+  assert.equal(response.status, 200);
+  const html = (await response.text()).replaceAll("<!-- -->", "");
+  const [source, routeSource, pagesSource, css] = await Promise.all([
+    readFile(new URL("../app/DealerAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/dashboard/[cdsid]/dealer-analysis/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../github-pages/main.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(html, /7개 딜러사별 분석자료/);
+  for (const dealer of ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"]) {
+    assert.match(html, new RegExp(`<h3>${dealer}<\\/h3>`));
+  }
+  assert.match(html, /현재 재직 확인/);
+  assert.match(html, /현 명단 미확인/);
+  assert.doesNotMatch(source, /현 명단 미확인[^\n]*퇴사자/);
+  assert.match(routeSource, /access\.role !== "master"/);
+  assert.match(pagesSource, /segments\[2\] === "dealer-analysis"[\s\S]*?access\.role !== "master"/);
+  assert.match(css, /\.analysis-admin-entry\s*\{[^}]*width: 92px;[^}]*height: 92px;/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {

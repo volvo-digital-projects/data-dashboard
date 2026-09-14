@@ -42,6 +42,7 @@ export default async function CompetitiveAnalysisPage({
     <CompetitiveAnalysis
       initialCdsid={cdsid}
       initialView={initialView}
+      accessRole={access.role}
     />
   );
 }
