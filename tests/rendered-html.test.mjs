@@ -397,7 +397,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
   assert.match(staffAnalysisGenerator, /대기시간 관리 미흡/);
   assert.match(staffAnalysisGenerator, /예약절차 운영 미흡/);
+  assert.match(staffAnalysisGenerator, /후속연락·진행상황 안내 미흡/);
   assert.doesNotMatch(staffAnalysisGenerator, /대기·예약 운영/);
+  assert.doesNotMatch(staffAnalysisGenerator, /후속 연락·진행안내/);
   const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
   assert.equal(kimNaehwan.commentResponses, 36);
   assert.deepEqual(
