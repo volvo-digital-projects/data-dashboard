@@ -374,8 +374,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /중복포함 총 \{displayTwoDigitCount\(selectedStaffStrengthTotalMentions\)\}회/);
   assert.match(navigation, /중복포함 총 \{displayTwoDigitCount\(selectedStaffImprovementTotalMentions\)\}회/);
   assert.doesNotMatch(navigation, /중복 포함 총/);
-  assert.match(navigation, /selectedStaffStrengthKeywords\.slice\(3, 6\)/);
-  assert.match(navigation, /selectedStaffImprovementKeywords\.slice\(3, 6\)/);
+  assert.match(navigation, /selectedStaffStrengthKeywords\.slice\(0, 8\)\.map/);
+  assert.match(navigation, /selectedStaffImprovementKeywords\.slice\(0, 8\)\.map/);
+  assert.doesNotMatch(navigation, /slice\(3, 6\)/);
+  assert.equal((staffAnalysisGenerator.match(/len\(STRENGTH_PATTERNS\)/g) ?? []).length, 2);
+  assert.equal((staffAnalysisGenerator.match(/len\(IMPROVEMENT_PATTERNS\)/g) ?? []).length, 2);
   assert.match(staffAnalysisGenerator, /exclude_negative_context=True/);
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
   assert.match(staffAnalysisGenerator, /설명 간결성/);
@@ -392,8 +395,16 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
       "상담자료·도구 활용",
       "설명 간결성",
       "설명 구체성·범위",
+      "가격·혜택 안내",
+      "자율 관람·압박 완화",
+      "시설·편의",
     ],
   );
+  const analyzedEmployees = Object.values(staffAnalysis.showrooms).flatMap(({ employees }) => employees);
+  assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
+  assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
+  assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 13));
+  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 13));
   assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/13개 보완 주제/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffStrengthTotalMentions/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffImprovementTotalMentions/);

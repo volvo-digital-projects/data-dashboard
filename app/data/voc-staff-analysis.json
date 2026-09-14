@@ -14,7 +14,7 @@
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-08-24",
     "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/13개 보완 주제",
-    "commentAnalysisEmployees": 382
+    "commentAnalysisEmployees": 383
   },
   "nationalYears": {
     "2023": {
@@ -170,12 +170,40 @@
               "mentions": 7
             },
             {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
               "label": "비교·장단점 안내",
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 5
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -257,6 +285,10 @@
             {
               "label": "구매결정 지원",
               "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -322,6 +354,22 @@
             {
               "label": "부담 없는 상담",
               "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -372,11 +420,11 @@
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             }
           ],
@@ -438,6 +486,34 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 6
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -463,6 +539,18 @@
             },
             {
               "label": "설명 구체성·범위",
+              "mentions": 1
+            },
+            {
+              "label": "가격·혜택 안내",
+              "mentions": 1
+            },
+            {
+              "label": "자율 관람·압박 완화",
+              "mentions": 1
+            },
+            {
+              "label": "시설·편의",
               "mentions": 1
             }
           ],
@@ -523,6 +611,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 11
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -640,6 +752,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 7
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -790,6 +922,22 @@
             {
               "label": "구매결정 지원",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -859,6 +1007,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 7
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -928,6 +1100,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1001,6 +1193,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 9
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 9
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1070,6 +1286,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 9
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -1292,6 +1524,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1364,6 +1616,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1429,6 +1693,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1561,6 +1845,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -1656,6 +1952,22 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1748,6 +2060,18 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1821,6 +2145,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -1932,6 +2272,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -1992,6 +2352,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2051,15 +2431,19 @@
               "mentions": 2
             },
             {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 1
-            },
-            {
               "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 1
+            },
+            {
               "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             }
           ],
@@ -2158,6 +2542,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 8
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2243,6 +2647,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 11
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -2259,11 +2683,11 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시승 경험",
               "mentions": 2
             },
             {
-              "label": "시승 경험",
+              "label": "전시·시승차 구성",
               "mentions": 2
             },
             {
@@ -2314,11 +2738,11 @@
               "mentions": 10
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 7
             },
             {
@@ -2328,6 +2752,18 @@
             {
               "label": "신속한 응답",
               "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2436,6 +2872,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2567,11 +3019,11 @@
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             }
           ],
@@ -2633,6 +3085,22 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2688,6 +3156,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2753,6 +3237,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -2818,6 +3322,10 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -2878,6 +3386,34 @@
             {
               "label": "전문지식·정확성",
               "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3005,6 +3541,22 @@
             {
               "label": "부담 없는 상담",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3082,6 +3634,18 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -3230,24 +3794,44 @@
               "mentions": 12
             },
             {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 6
-            },
-            {
               "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
-              "label": "비교·장단점 안내",
-              "mentions": 3
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 6
             },
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 3
             },
             {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
               "label": "구매결정 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3346,6 +3930,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -3406,6 +4014,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3474,6 +4098,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3543,6 +4191,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3775,6 +4439,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -3938,15 +4618,35 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "대기·예약 운영",
               "mentions": 2
             },
             {
-              "label": "대기·예약 운영",
+              "label": "전시·시승차 구성",
               "mentions": 2
             },
             {
@@ -4014,6 +4714,10 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4074,6 +4778,22 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4282,6 +5002,18 @@
             {
               "label": "부담 없는 상담",
               "mentions": 2
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4347,6 +5079,30 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4415,6 +5171,18 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4480,6 +5248,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4553,6 +5345,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4639,6 +5447,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 6
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4716,6 +5544,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -4780,6 +5620,22 @@
             },
             {
               "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
@@ -4901,6 +5757,14 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -5096,7 +5960,15 @@
               "mentions": 2
             },
             {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
               "mentions": 1
             },
             {
@@ -5108,7 +5980,11 @@
               "mentions": 1
             },
             {
-              "label": "구매결정 지원",
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -5156,11 +6032,11 @@
               "mentions": 5
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 3
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 3
             },
             {
@@ -5169,6 +6045,14 @@
             },
             {
               "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -5244,6 +6128,22 @@
             {
               "label": "신속한 응답",
               "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -5317,6 +6217,14 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -5377,6 +6285,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -5432,6 +6360,14 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -5481,11 +6417,11 @@
               "mentions": 2
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "니즈 맞춤 상담",
               "mentions": 1
             },
             {
-              "label": "니즈 맞춤 상담",
+              "label": "비교·장단점 안내",
               "mentions": 1
             }
           ],
@@ -5577,6 +6513,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 7
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -5658,6 +6618,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -5822,6 +6806,10 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -5882,6 +6870,26 @@
             {
               "label": "구매결정 지원",
               "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -5955,6 +6963,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6024,6 +7044,26 @@
             {
               "label": "신속한 응답",
               "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6097,6 +7137,26 @@
             {
               "label": "부담 없는 상담",
               "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -6157,6 +7217,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6216,16 +7296,32 @@
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
+              "label": "이해하기 쉬운 설명",
               "mentions": 4
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 4
             },
             {
               "label": "비교·장단점 안내",
               "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6289,8 +7385,28 @@
               "mentions": 5
             },
             {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -6381,11 +7497,11 @@
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -6479,6 +7595,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6539,6 +7667,14 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6599,6 +7735,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6645,11 +7793,11 @@
               "mentions": 13
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
-              "label": "전문지식·정확성",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 5
             },
             {
@@ -6663,6 +7811,22 @@
             {
               "label": "구매결정 지원",
               "mentions": 2
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6723,6 +7887,26 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6808,6 +7992,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -6849,11 +8057,11 @@
               "mentions": 7
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "비교·장단점 안내",
               "mentions": 3
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "적극·성실한 응대",
               "mentions": 3
             },
             {
@@ -6862,6 +8070,10 @@
             },
             {
               "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
@@ -6932,6 +8144,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -6997,6 +8233,34 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 13
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -7074,6 +8338,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 7
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -7147,6 +8431,26 @@
             {
               "label": "신속한 응답",
               "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -7163,15 +8467,19 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 1
-            },
-            {
               "label": "대기·예약 운영",
               "mentions": 1
             },
             {
               "label": "설명 간결성",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "설명 구체성·범위",
               "mentions": 1
             }
           ],
@@ -7232,6 +8540,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -7305,6 +8637,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -7330,6 +8686,14 @@
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "후속 연락·진행안내",
+              "mentions": 1
+            },
+            {
+              "label": "가격·혜택 안내",
               "mentions": 1
             }
           ],
@@ -7390,6 +8754,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 14
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 8
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -7459,6 +8843,30 @@
             {
               "label": "신속한 응답",
               "mentions": 8
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 7
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -7536,6 +8944,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -7590,6 +9022,14 @@
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -7651,6 +9091,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -7716,15 +9176,43 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 8
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
-              "label": "전문지식·정확성",
+              "label": "가격·혜택 안내",
               "mentions": 2
             },
             {
-              "label": "가격·혜택 안내",
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
@@ -7797,6 +9285,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 7
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -7809,11 +9321,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시승 경험",
               "mentions": 1
             },
             {
-              "label": "시승 경험",
+              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -7822,6 +9334,10 @@
             },
             {
               "label": "응대 태도",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -7922,6 +9438,22 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 4
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -7973,11 +9505,11 @@
               "mentions": 12
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 6
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
@@ -7987,6 +9519,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 3
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8056,6 +9608,18 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -8104,11 +9668,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 1
             }
           ],
@@ -8170,6 +9734,22 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8312,6 +9892,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -8377,6 +9973,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8397,11 +10017,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "상담자료·도구 활용",
               "mentions": 1
             },
             {
-              "label": "상담자료·도구 활용",
+              "label": "전시·시승차 구성",
               "mentions": 1
             }
           ],
@@ -8462,6 +10082,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8522,6 +10166,26 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -8582,6 +10246,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8667,6 +10351,26 @@
             {
               "label": "부담 없는 상담",
               "mentions": 3
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8802,6 +10506,30 @@
             {
               "label": "부담 없는 상담",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8867,6 +10595,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8936,6 +10676,18 @@
             {
               "label": "부담 없는 상담",
               "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -8995,12 +10747,28 @@
               "mentions": 4
             },
             {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
               "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
-              "label": "부담 없는 상담",
+              "label": "이해하기 쉬운 설명",
               "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9056,16 +10824,36 @@
               "mentions": 7
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9151,6 +10939,18 @@
             {
               "label": "부담 없는 상담",
               "mentions": 4
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 2
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9216,6 +11016,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9284,11 +11104,11 @@
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
@@ -9354,6 +11174,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9419,6 +11251,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9466,11 +11310,11 @@
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "부담 없는 상담",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             }
           ],
@@ -9588,6 +11432,10 @@
             },
             {
               "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
               "mentions": 1
             },
             {
@@ -9772,6 +11620,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -9832,6 +11692,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -9906,6 +11790,14 @@
             },
             {
               "label": "적극·성실한 응대",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -9992,6 +11884,22 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10057,6 +11965,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 7
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10140,6 +12072,10 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10205,6 +12141,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10274,6 +12230,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 16
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 11
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 11
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 9
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 7
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 3
             }
           ],
           "improvementKeywords": [
@@ -10299,6 +12279,10 @@
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "제품·옵션·출고 안내",
               "mentions": 1
             }
           ],
@@ -10354,6 +12338,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -10414,6 +12410,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 7
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -10495,6 +12511,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -10619,6 +12647,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -10679,6 +12727,34 @@
             {
               "label": "부담 없는 상담",
               "mentions": 7
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10748,6 +12824,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10817,6 +12913,22 @@
             {
               "label": "부담 없는 상담",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10880,8 +12992,32 @@
               "mentions": 4
             },
             {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
               "label": "구매결정 지원",
               "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -10959,6 +13095,30 @@
             {
               "label": "구매결정 지원",
               "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 6
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11024,6 +13184,22 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11136,6 +13312,22 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11209,6 +13401,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11221,11 +13433,11 @@
               "mentions": 2
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -11294,6 +13506,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11363,6 +13591,22 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
             }
           ],
           "improvementKeywords": [
@@ -11432,6 +13676,34 @@
             {
               "label": "부담 없는 상담",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11505,6 +13777,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11578,6 +13874,18 @@
             {
               "label": "신속한 응답",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11643,6 +13951,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -11716,6 +14048,34 @@
             {
               "label": "전문지식·정확성",
               "mentions": 14
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 8
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11789,6 +14149,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11893,6 +14273,18 @@
             {
               "label": "부담 없는 상담",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -11983,6 +14375,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 9
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12048,6 +14464,30 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 12
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12117,6 +14557,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 10
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 7
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12190,6 +14650,30 @@
             {
               "label": "신속한 응답",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12258,6 +14742,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -12318,6 +14822,34 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12391,6 +14923,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12464,6 +15016,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -12545,6 +15117,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -12626,6 +15218,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 9
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -12686,6 +15298,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 12
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12801,6 +15437,14 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -12993,6 +15637,18 @@
             {
               "label": "신속한 응답",
               "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -13053,6 +15709,10 @@
             {
               "label": "전문지식·정확성",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -13160,6 +15820,22 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -13231,6 +15907,10 @@
             },
             {
               "label": "적극·성실한 응대",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -13346,16 +16026,36 @@
               "mentions": 10
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 8
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "비교·장단점 안내",
               "mentions": 8
             },
             {
               "label": "적극·성실한 응대",
               "mentions": 7
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -13486,6 +16186,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 10
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -13614,6 +16338,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 9
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -13725,6 +16469,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 16
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -13802,15 +16570,35 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 9
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
-              "label": "전시·시승차 구성",
+              "label": "시설·편의",
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "전시·시승차 구성",
               "mentions": 1
             }
           ],
@@ -13916,6 +16704,10 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -13976,6 +16768,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14074,6 +16882,10 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -14134,6 +16946,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 8
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14203,6 +17035,26 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14272,6 +17124,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14345,6 +17221,34 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14414,6 +17318,34 @@
             {
               "label": "전문지식·정확성",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14571,6 +17503,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14658,6 +17614,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14765,6 +17741,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14834,6 +17834,30 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 11
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -14968,6 +17992,30 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 10
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 8
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15048,6 +18096,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 7
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15144,6 +18212,22 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -15204,6 +18288,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15253,11 +18349,11 @@
               "mentions": 2
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 1
             }
           ],
@@ -15365,11 +18461,11 @@
               "mentions": 1
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             }
           ],
@@ -15431,6 +18527,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15496,6 +18612,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15636,6 +18768,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 8
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -15728,6 +18884,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15736,11 +18916,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "시설·편의",
               "mentions": 1
             },
             {
-              "label": "시설·편의",
+              "label": "전시·시승차 구성",
               "mentions": 1
             },
             {
@@ -15805,6 +18985,34 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -15817,11 +19025,11 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "상담자료·도구 활용",
               "mentions": 1
             },
             {
-              "label": "상담자료·도구 활용",
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
@@ -15830,6 +19038,18 @@
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "시설·편의",
+              "mentions": 1
+            },
+            {
+              "label": "가격·혜택 안내",
+              "mentions": 1
+            },
+            {
+              "label": "시승 경험",
               "mentions": 1
             }
           ],
@@ -15890,6 +19110,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 9
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -16043,11 +19287,11 @@
               "mentions": 8
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 6
             },
             {
@@ -16057,6 +19301,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -16136,6 +19392,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -16230,6 +19502,18 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [],
@@ -16285,6 +19569,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -16414,6 +19718,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -16540,6 +19864,14 @@
             {
               "label": "신속한 응답",
               "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -16600,6 +19932,26 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 5
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -16724,6 +20076,18 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -16770,11 +20134,11 @@
               "mentions": 3
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 3
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 3
             },
             {
@@ -16783,6 +20147,22 @@
             },
             {
               "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 1
             }
           ],
@@ -16849,6 +20229,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -16914,6 +20306,26 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17002,6 +20414,18 @@
             {
               "label": "전문지식·정확성",
               "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17094,6 +20518,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17163,6 +20607,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -17228,6 +20688,30 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17318,11 +20802,11 @@
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -17374,6 +20858,10 @@
               "mentions": 7
             },
             {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 6
+            },
+            {
               "label": "전문지식·정확성",
               "mentions": 6
             },
@@ -17382,8 +20870,20 @@
               "mentions": 6
             },
             {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 6
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17461,6 +20961,26 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17534,6 +21054,26 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17729,6 +21269,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17741,11 +21301,11 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "가격·혜택 안내",
               "mentions": 1
             },
             {
-              "label": "가격·혜택 안내",
+              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
@@ -17814,6 +21374,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -17879,6 +21463,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -17948,6 +21552,22 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18017,6 +21637,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -18086,6 +21722,18 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -18185,6 +21833,30 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 7
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18266,6 +21938,34 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18350,6 +22050,34 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 8
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18419,6 +22147,30 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -18500,6 +22252,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18573,6 +22337,26 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18638,6 +22422,10 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -18761,6 +22549,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18821,6 +22625,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18890,6 +22714,26 @@
             {
               "label": "구매결정 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -18974,6 +22818,22 @@
             {
               "label": "전문지식·정확성",
               "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -19039,6 +22899,30 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 8
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19134,6 +23018,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19207,6 +23111,30 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19284,6 +23212,30 @@
             {
               "label": "구매결정 지원",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19398,6 +23350,18 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19495,6 +23459,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -19507,11 +23491,11 @@
               "mentions": 1
             },
             {
-              "label": "전시·시승차 구성",
+              "label": "응대 태도",
               "mentions": 1
             },
             {
-              "label": "응대 태도",
+              "label": "전시·시승차 구성",
               "mentions": 1
             }
           ],
@@ -19572,6 +23556,18 @@
             {
               "label": "부담 없는 상담",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19619,11 +23615,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "친절·예의",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "친절·예의",
               "mentions": 1
             }
           ],
@@ -19693,6 +23689,14 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -19748,6 +23752,26 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19820,12 +23844,28 @@
               "mentions": 3
             },
             {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
               "label": "신속한 응답",
               "mentions": 3
             },
             {
               "label": "상세·꼼꼼한 설명",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -19849,11 +23889,11 @@
           "commentResponses": 1,
           "strengthKeywords": [
             {
-              "label": "비교·장단점 안내",
+              "label": "친절·예의",
               "mentions": 1
             },
             {
-              "label": "친절·예의",
+              "label": "비교·장단점 안내",
               "mentions": 1
             },
             {
@@ -19919,6 +23959,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -19984,6 +24036,26 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20039,11 +24111,11 @@
               "mentions": 6
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 4
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 4
             },
             {
@@ -20053,6 +24125,22 @@
             {
               "label": "신속한 응답",
               "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20125,6 +24213,10 @@
             {
               "label": "구매결정 지원",
               "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20190,6 +24282,22 @@
             {
               "label": "부담 없는 상담",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20286,6 +24394,14 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20580,6 +24696,10 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -20655,11 +24775,11 @@
               "mentions": 26
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 10
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 10
             },
             {
@@ -20669,6 +24789,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -20738,6 +24878,26 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20848,12 +25008,32 @@
               "mentions": 9
             },
             {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
               "label": "적극·성실한 응대",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 7
+              "label": "신속한 응답",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -20923,6 +25103,26 @@
             {
               "label": "신속한 응답",
               "mentions": 3
+            },
+            {
+              "label": "적극·성실한 응대",
+              "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -21007,6 +25207,30 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 4
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -21118,6 +25342,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -21182,6 +25426,18 @@
             },
             {
               "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -21269,6 +25525,14 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -21329,6 +25593,14 @@
             {
               "label": "니즈 맞춤 상담",
               "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -21388,16 +25660,32 @@
               "mentions": 11
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 10
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 10
             },
             {
               "label": "전문지식·정확성",
               "mentions": 7
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 6
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -21471,6 +25759,22 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -21787,6 +26091,26 @@
             {
               "label": "적극·성실한 응대",
               "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -21897,16 +26221,28 @@
               "mentions": 11
             },
             {
-              "label": "전문지식·정확성",
+              "label": "이해하기 쉬운 설명",
               "mentions": 6
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 6
             },
             {
               "label": "시승·차량체험 지원",
               "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -21976,6 +26312,34 @@
             {
               "label": "신속한 응답",
               "mentions": 8
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -22053,6 +26417,18 @@
             {
               "label": "시승·차량체험 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -22214,19 +26590,19 @@
               "mentions": 2
             },
             {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 1
-            },
-            {
               "label": "부담 없는 상담",
               "mentions": 1
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
               "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
               "mentions": 1
             }
           ],
@@ -22288,6 +26664,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 6
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -22345,11 +26741,11 @@
               "mentions": 1
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "전문지식·정확성",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "적극·성실한 응대",
               "mentions": 1
             }
           ],
@@ -22419,11 +26815,11 @@
               "mentions": 36
             },
             {
-              "label": "적극·성실한 응대",
+              "label": "이해하기 쉬운 설명",
               "mentions": 20
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "적극·성실한 응대",
               "mentions": 20
             },
             {
@@ -22433,6 +26829,34 @@
             {
               "label": "전문지식·정확성",
               "mentions": 12
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 7
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -22536,11 +26960,11 @@
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -22602,6 +27026,34 @@
             {
               "label": "전문지식·정확성",
               "mentions": 16
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 9
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 9
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "니즈 맞춤 상담",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -22665,6 +27117,14 @@
             {
               "label": "니즈 맞춤 상담",
               "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
@@ -22720,6 +27180,18 @@
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -22876,11 +27348,11 @@
               "mentions": 8
             },
             {
-              "label": "비교·장단점 안내",
+              "label": "이해하기 쉬운 설명",
               "mentions": 8
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "비교·장단점 안내",
               "mentions": 8
             },
             {
@@ -22890,6 +27362,26 @@
             {
               "label": "구매결정 지원",
               "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -23014,6 +27506,22 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -23087,6 +27595,26 @@
             {
               "label": "비교·장단점 안내",
               "mentions": 10
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 8
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -23154,11 +27682,11 @@
               "mentions": 2
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 1
             },
             {
@@ -23224,6 +27752,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 12
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 8
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -23397,6 +27945,26 @@
             {
               "label": "전문지식·정확성",
               "mentions": 5
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 5
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [
@@ -23525,6 +28093,26 @@
             {
               "label": "구매결정 지원",
               "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "부담 없는 상담",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -23588,6 +28176,18 @@
             },
             {
               "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            },
+            {
+              "label": "부담 없는 상담",
               "mentions": 1
             }
           ],

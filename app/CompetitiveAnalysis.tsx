@@ -3629,26 +3629,22 @@ export default function CompetitiveAnalysis({
                     <header><span>유지/강화<small className="growth-comment-share">({selectedStaffStrengthShare.toFixed(1)}%)</small></span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars" key={`strength-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffStrengthKeywords.length ? (
-                        <>
-                          {[selectedStaffStrengthKeywords.slice(0, 3), selectedStaffStrengthKeywords.slice(3, 6)].map((column, columnIndex) => (
-                            <div className="growth-comment-bar-column" key={`strength-${columnIndex}`}>
-                              {column.map((keyword, index) => (
-                                <div
-                                  className="growth-comment-bar"
-                                  key={keyword.label}
-                                  style={{
-                                    "--growth-comment-bar-ratio": `${selectedStaffStrengthTotalMentions > 0 ? (keyword.mentions / selectedStaffStrengthTotalMentions) * 100 : 0}%`,
-                                    "--growth-comment-bar-index": columnIndex * 3 + index,
-                                  } as CSSProperties}
-                                >
-                                  <span>{keyword.label}</span>
-                                  <i aria-hidden="true"><b /></i>
-                                  <small>{displayTwoDigitCount(keyword.mentions)}회 <em>({displayTwoDigitCount(Math.round((keyword.mentions / selectedStaffStrengthTotalMentions) * 100))}%)</em></small>
-                                </div>
-                              ))}
+                        <div className="growth-comment-bar-column">
+                          {selectedStaffStrengthKeywords.slice(0, 8).map((keyword, index) => (
+                            <div
+                              className="growth-comment-bar"
+                              key={keyword.label}
+                              style={{
+                                "--growth-comment-bar-ratio": `${selectedStaffStrengthTotalMentions > 0 ? (keyword.mentions / selectedStaffStrengthTotalMentions) * 100 : 0}%`,
+                                "--growth-comment-bar-index": index,
+                              } as CSSProperties}
+                            >
+                              <span>{keyword.label}</span>
+                              <i aria-hidden="true"><b /></i>
+                              <small>{displayTwoDigitCount(keyword.mentions)}회 <em>({displayTwoDigitCount(Math.round((keyword.mentions / selectedStaffStrengthTotalMentions) * 100))}%)</em></small>
                             </div>
                           ))}
-                        </>
+                        </div>
                       ) : <em>분석 가능한 긍정 코멘트가 없습니다.</em>}
                     </div>
                   </article>
@@ -3656,26 +3652,22 @@ export default function CompetitiveAnalysis({
                     <header><span>수정/보완<small className="growth-comment-share">({selectedStaffImprovementShare.toFixed(1)}%)</small></span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars" key={`improvement-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffImprovementKeywords.length ? (
-                        <>
-                          {[selectedStaffImprovementKeywords.slice(0, 3), selectedStaffImprovementKeywords.slice(3, 6)].map((column, columnIndex) => (
-                            <div className="growth-comment-bar-column" key={`improvement-${columnIndex}`}>
-                              {column.map((keyword, index) => (
-                                <div
-                                  className="growth-comment-bar"
-                                  key={keyword.label}
-                                  style={{
-                                    "--growth-comment-bar-ratio": `${selectedStaffImprovementTotalMentions > 0 ? (keyword.mentions / selectedStaffImprovementTotalMentions) * 100 : 0}%`,
-                                    "--growth-comment-bar-index": columnIndex * 3 + index,
-                                  } as CSSProperties}
-                                >
-                                  <span>{keyword.label}</span>
-                                  <i aria-hidden="true"><b /></i>
-                                  <small>{displayTwoDigitCount(keyword.mentions)}회 <em>({displayTwoDigitCount(Math.round((keyword.mentions / selectedStaffImprovementTotalMentions) * 100))}%)</em></small>
-                                </div>
-                              ))}
+                        <div className="growth-comment-bar-column">
+                          {selectedStaffImprovementKeywords.slice(0, 8).map((keyword, index) => (
+                            <div
+                              className="growth-comment-bar"
+                              key={keyword.label}
+                              style={{
+                                "--growth-comment-bar-ratio": `${selectedStaffImprovementTotalMentions > 0 ? (keyword.mentions / selectedStaffImprovementTotalMentions) * 100 : 0}%`,
+                                "--growth-comment-bar-index": index,
+                              } as CSSProperties}
+                            >
+                              <span>{keyword.label}</span>
+                              <i aria-hidden="true"><b /></i>
+                              <small>{displayTwoDigitCount(keyword.mentions)}회 <em>({displayTwoDigitCount(Math.round((keyword.mentions / selectedStaffImprovementTotalMentions) * 100))}%)</em></small>
                             </div>
                           ))}
-                        </>
+                        </div>
                       ) : <em>반복 확인된 보완 코멘트가 없습니다.</em>}
                     </div>
                   </article>

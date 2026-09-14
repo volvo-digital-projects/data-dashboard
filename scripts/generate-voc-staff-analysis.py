@@ -471,11 +471,11 @@ def build_payload(
                     "strengthKeywords": keyword_summary(
                         comments,
                         STRENGTH_PATTERNS,
-                        6,
+                        len(STRENGTH_PATTERNS),
                         exclude_negative_context=True,
                     ),
                     "improvementKeywords": keyword_summary(
-                        comments, IMPROVEMENT_PATTERNS, 6
+                        comments, IMPROVEMENT_PATTERNS, len(IMPROVEMENT_PATTERNS)
                     ),
                 }
             )
@@ -534,13 +534,13 @@ def refresh_comment_analysis(payload: dict[str, Any], voc_path: Path) -> None:
             employee["strengthKeywords"] = keyword_summary(
                 comments,
                 STRENGTH_PATTERNS,
-                6,
+                len(STRENGTH_PATTERNS),
                 exclude_negative_context=True,
             )
             employee["improvementKeywords"] = keyword_summary(
                 comments,
                 IMPROVEMENT_PATTERNS,
-                6,
+                len(IMPROVEMENT_PATTERNS),
             )
             refreshed_employees += 1
     payload.setdefault("source", {})["commentAnalysis"] = (
