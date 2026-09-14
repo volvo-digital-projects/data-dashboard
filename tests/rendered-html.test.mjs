@@ -448,9 +448,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 61);
   assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
   assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
-  assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 13));
+  assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 14));
   assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 18));
-  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/18개 보완 주제/);
+  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 14개 강점\/18개 보완 주제/);
   const baekJongYoon = staffAnalysis.showrooms["6KR6854"].employees.find(({ name }) => name === "백종윤");
   assert.ok(baekJongYoon.improvementKeywords.some(({ label, mentions }) => label === "상담공간 편의제공" && mentions === 1));
   assert.ok(!baekJongYoon.improvementKeywords.some(({ label }) => label === "시설 편의 미제공"));
@@ -3378,6 +3378,27 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.match(css, /html\s*\{[^}]*scroll-behavior: auto;/);
   assert.doesNotMatch(css, /html\s*\{[^}]*scroll-behavior: smooth;/);
   assert.match(css, /html\.analysis-entry-top-locked,\s*html\.analysis-entry-top-locked body\s*\{[^}]*scroll-behavior: auto !important;[^}]*scroll-snap-type: none !important;/);
+});
+
+test("splits courtesy feedback into short, actionable strength labels", async () => {
+  const [generator, staffAnalysis] = await Promise.all([
+    readFile(new URL("../scripts/generate-voc-staff-analysis.py", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
+  const labels = new Set(
+    Object.values(staffAnalysis.showrooms).flatMap((showroom) =>
+      showroom.employees.flatMap((employee) =>
+        employee.strengthKeywords.map((keyword) => keyword.label),
+      ),
+    ),
+  );
+  for (const label of ["친절·정중 응대", "편안한 상담", "맞춤형 설명", "성실한 답변"]) {
+    assert.ok(labels.has(label), `${label} 분류가 생성되어야 합니다.`);
+  }
+  assert.equal(labels.has("친절·예의"), false);
+  assert.equal(labels.has("부담 없는 상담"), false);
+  assert.equal(labels.has("니즈 맞춤 상담"), false);
+  assert.match(generator, /matched_labels\.intersection\(\{"편안한 상담", "맞춤형 설명", "성실한 답변"\}\)/);
 });
 
 test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {
