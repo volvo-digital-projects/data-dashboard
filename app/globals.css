@@ -2172,6 +2172,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
 
   .competitive-analysis-page {
     --growth-navigation-sticky-top: 122px;
+    padding-bottom: 20px;
   }
 
   .competitive-analysis-page > .analysis-sticky-anchor {
@@ -2211,7 +2212,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
   .competitive-analysis-page .growth-navigation-detail {
     height: calc(
       100dvh - var(--growth-navigation-sticky-top, 122px) -
-        var(--growth-navigation-summary-height, 152px) - 24px
+        var(--growth-navigation-summary-height, 152px) - 36px
     );
     max-height: none;
   }
@@ -15753,7 +15754,7 @@ button.header-status-item {
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   .competitive-analysis-page {
     --growth-navigation-sticky-top: 122px;
-    padding-bottom: 0;
+    padding-bottom: 20px;
   }
 
   .competitive-analysis-page > .analysis-sticky-anchor {
@@ -15814,17 +15815,17 @@ button.header-status-item {
   .competitive-analysis-page .growth-navigation-detail {
     height: calc(
       100vh - var(--growth-navigation-sticky-top, 122px) -
-        var(--growth-navigation-summary-height, 152px)
+        var(--growth-navigation-summary-height, 152px) - 36px
     );
     height: calc(
       100dvh - var(--growth-navigation-sticky-top, 122px) -
-        var(--growth-navigation-summary-height, 152px)
+        var(--growth-navigation-summary-height, 152px) - 36px
     );
     max-height: none;
   }
 
   .competitive-analysis-page .growth-navigation-detail {
-    padding-bottom: 6px;
+    padding-bottom: 10px;
     overflow-y: auto;
     cursor: default;
   }
