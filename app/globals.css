@@ -2525,7 +2525,15 @@ html.analysis-entry-top-locked body {
   }
 
   .competitive-analysis-page .growth-navigation-detail {
+    padding-bottom: 0;
     overflow-y: auto;
+  }
+
+  /* Keep the final card borders inside the actual scrollable content. The
+     detail grid's own bottom padding can be consumed by its 100%-high child. */
+  .competitive-analysis-page .growth-capability-grid,
+  .competitive-analysis-page .growth-sales-dashboard {
+    padding-bottom: 6px;
   }
 
   .competitive-analysis-page .growth-staff-roster-list {
