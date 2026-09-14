@@ -1405,7 +1405,6 @@ html {
 }
 
 .growth-scatter-showroom circle {
-  fill: #087a58;
   fill-opacity: 0.94;
   stroke: #fff;
   stroke-width: 1;
@@ -1629,7 +1628,9 @@ html {
   background: #f08b66;
 }
 
-.growth-scatter-card footer .showroom i { background: #087a58; }
+.growth-scatter-card footer .showroom i {
+  background: linear-gradient(135deg, #7fe0bd 0%, #18a578 48%, #05684c 100%);
+}
 .growth-scatter-card footer .selected i { background: #177493; box-shadow: 0 0 0 2px #a7d6e3; }
 
 .growth-scatter-evidence-note {

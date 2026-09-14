@@ -3458,6 +3458,11 @@ export default function CompetitiveAnalysis({
                         <clipPath id="consultation-selected-staff-photo">
                           <circle r="7.5" />
                         </clipPath>
+                        <radialGradient id="consultation-showroom-gradient" cx="32%" cy="28%" r="72%">
+                          <stop offset="0%" stopColor="#7fe0bd" />
+                          <stop offset="48%" stopColor="#18a578" />
+                          <stop offset="100%" stopColor="#05684c" />
+                        </radialGradient>
                       </defs>
                       {staffScatterYTicks.map((tick) => {
                         const y = staffScatterY(tick);
@@ -3545,6 +3550,7 @@ export default function CompetitiveAnalysis({
                             cx={staffScatterX(point.tenureYears)}
                             cy={staffScatterY(point.finalScore)}
                             r={Math.min(6, 2.8 + Math.sqrt(point.responses) * 0.46)}
+                            fill="url(#consultation-showroom-gradient)"
                             key={point.key}
                             role="button"
                             tabIndex={0}
@@ -3740,6 +3746,11 @@ export default function CompetitiveAnalysis({
                         <clipPath id="sales-selected-staff-photo">
                           <circle r="7.5" />
                         </clipPath>
+                        <radialGradient id="sales-showroom-gradient" cx="32%" cy="28%" r="72%">
+                          <stop offset="0%" stopColor="#7fe0bd" />
+                          <stop offset="48%" stopColor="#18a578" />
+                          <stop offset="100%" stopColor="#05684c" />
+                        </radialGradient>
                       </defs>
                       {staffSalesYTicks.map((tick) => {
                         const y = staffSalesScatterY(tick);
@@ -3827,6 +3838,7 @@ export default function CompetitiveAnalysis({
                             cx={staffScatterX(point.tenureYears)}
                             cy={staffSalesScatterY(point.deliveredSales)}
                             r="4.2"
+                            fill="url(#sales-showroom-gradient)"
                             key={point.key}
                             role="button"
                             tabIndex={0}

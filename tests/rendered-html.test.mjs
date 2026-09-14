@@ -565,8 +565,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} 전시장<\/span>/);
   assert.match(css, /\.growth-position-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
   assert.match(css, /\.growth-sales-funnel-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
-  assert.match(css, /\.growth-scatter-showroom circle\s*\{[^}]*fill:\s*#087a58;[^}]*fill-opacity:\s*0\.94;/);
-  assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{\s*background:\s*#087a58;/);
+  assert.equal((navigation.match(/<radialGradient id="(?:consultation|sales)-showroom-gradient" cx="32%" cy="28%" r="72%">/g) ?? []).length, 2);
+  assert.equal((navigation.match(/<stop offset="0%" stopColor="#7fe0bd" \/>/g) ?? []).length, 2);
+  assert.equal((navigation.match(/<stop offset="48%" stopColor="#18a578" \/>/g) ?? []).length, 2);
+  assert.equal((navigation.match(/<stop offset="100%" stopColor="#05684c" \/>/g) ?? []).length, 2);
+  assert.match(navigation, /fill="url\(#consultation-showroom-gradient\)"/);
+  assert.match(navigation, /fill="url\(#sales-showroom-gradient\)"/);
+  assert.match(css, /\.growth-scatter-showroom circle\s*\{[^}]*fill-opacity:\s*0\.94;[^}]*stroke:\s*#fff;/);
+  assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{[^}]*linear-gradient\(135deg, #7fe0bd 0%, #18a578 48%, #05684c 100%\);/);
   assert.doesNotMatch(navigation, /<span>2026 월별 출고 실적<\/span>/);
   assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\} 누적판매 <span className="growth-sales-heading-number">\{selectedStaffDeliveredSales\}<\/span>대<\/strong>/);
   assert.match(css, /\.growth-scatter-card > header strong > \.growth-sales-heading-number,[\s\S]*?\.growth-sales-monthly-card > header strong > \.growth-sales-heading-number\s*\{[^}]*display: inline;[^}]*margin: 0;[^}]*font-family: var\(--font-volvo\);[^}]*font-size: inherit;[^}]*line-height: inherit;[^}]*color: inherit;[^}]*font-variant-numeric: tabular-nums;/);
