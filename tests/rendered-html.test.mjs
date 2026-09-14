@@ -431,12 +431,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-under-construction\s*\{[^}]*position:\s*absolute;[^}]*top:\s*50%;[^}]*left:\s*50%;[^}]*background:\s*rgba\(43, 84, 104, 0\.72\);[^}]*color:\s*#fff;/);
   assert.match(css, /\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;/);
   assert.match(css, /\.growth-position-card > header strong,[\s\S]*?\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;[^}]*color: #244f64;/);
-  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적판매/);
+  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적 판매/);
   assert.doesNotMatch(navigation, /근속기간 × 2026 누적판매/);
   assert.match(navigation, /근속기간 × 고객상담 평균만족도/);
   assert.doesNotMatch(navigation, /근속기간 × 상담만족/);
-  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적판매대수/);
-  assert.match(navigation, /전국 영업직원 근속기간별 2026년 누적판매대수 분포/);
+  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적 판매대수/);
+  assert.match(navigation, /전국 영업직원 근속기간별 2026년 누적 판매대수 분포/);
   assert.match(navigation, /2026 누적판매\(대\)/);
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
   assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
