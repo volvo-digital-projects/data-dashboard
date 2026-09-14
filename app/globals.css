@@ -5516,9 +5516,10 @@ input:focus-visible {
 .analysis-title-awards {
   min-width: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 3px;
   padding-bottom: 1px;
+  transform: translateY(-4px);
 }
 
 .analysis-title-award {
@@ -5553,11 +5554,23 @@ input:focus-visible {
 }
 
 .analysis-title-award small {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 0;
   font-family: var(--font-korean);
   font-size: 7px;
   font-weight: 650;
   letter-spacing: -0.04em;
+  line-height: 1.05;
+  text-align: center;
   white-space: nowrap;
+}
+
+.analysis-title-award small span {
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .analysis-title .update-status {

@@ -2434,7 +2434,10 @@ export default function CompetitiveAnalysis({
                       <path className="trophy-handle" d="M7 5H4.5v1.8c0 2 1.3 3.5 3.2 3.7M17 5h2.5v1.8c0 2-1.3 3.5-3.2 3.7" />
                       <path className="trophy-stand" d="M12 13v4m-3 3h6m-5.2-3h4.4" />
                     </svg>
-                    <small>{period.year.slice(2)}년 {period.half}</small>
+                    <small>
+                      <span>{period.year.slice(2)}년</span>
+                      <span>{period.half}</span>
+                    </small>
                   </span>
                 ))}
               </div>
