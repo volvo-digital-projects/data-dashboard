@@ -3979,12 +3979,12 @@ export default function CompetitiveAnalysis({
                             <span>
                               <b>{selectedDealerRankName}</b>
                               <em>{displayTwoDigitRank(selectedStaffDealerSalesRank)}위</em>
-                              <span><i aria-hidden="true">/</i>전체 {selectedStaffDealerSalesPopulation.length}</span>
+                              <span><i aria-hidden="true">/</i>전체 {displayTwoDigitCount(selectedStaffDealerSalesPopulation.length)}</span>
                             </span>
                             <span>
                               <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b>
                               <em>{displayTwoDigitRank(selectedStaffSalesRank)}위</em>
-                              <span><i aria-hidden="true">/</i>전체 {selectedShowroomSalesPopulationCount}</span>
+                              <span><i aria-hidden="true">/</i>전체 {displayTwoDigitCount(selectedShowroomSalesPopulationCount)}</span>
                             </span>
                           </small>
                           <small>
