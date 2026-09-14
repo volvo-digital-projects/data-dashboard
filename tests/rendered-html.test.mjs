@@ -3462,6 +3462,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<span role="columnheader">현재 재직 · 재직률<\/span>/);
   assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
+  assert.match(source, /className="dealer-employment"[\s\S]*?className="dealer-employment-bar"[\s\S]*?className="dealer-employment-metrics"/);
   assert.doesNotMatch(html, /dealer-employment-gap|Gap · 현재 재직 외/);
   assert.match(css, /\.dealer-mix-segment\.level-grand\s*\{[^}]*linear-gradient\(90deg, #3189ad 0%, #267ea4 58%, #217493 100%\)/);
   assert.match(css, /\.dealer-mix-segment\.level-advanced\s*\{[^}]*linear-gradient\(90deg, #4ba399 0%, #3e978d 58%, #34867e 100%\)/);
@@ -3469,6 +3470,10 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-employment-bar > i\s*\{[^}]*linear-gradient\(90deg, #1d5d7d 0%, #164f70 60%, #10445f 100%\)/);
   assert.doesNotMatch(css, /\.dealer-kpi-strip/);
   assert.match(css, /\.dealer-certification-aggregate\s*\{[^}]*border-bottom:\s*2px solid #267ea4;[^}]*box-shadow:/);
+  assert.match(css, /\.dealer-certification-total\s*\{[^}]*align-items:\s*flex-end;[^}]*text-align:\s*right;/);
+  assert.match(css, /\.dealer-mix,[\s\S]*?\.dealer-employment\s*\{[^}]*display:\s*grid;[^}]*grid-template-rows:\s*12px 18px;[^}]*align-content:\s*center;[^}]*justify-content:\s*stretch;/);
+  assert.match(css, /\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*width:\s*1px;[^}]*top:\s*9px;[^}]*bottom:\s*9px;[^}]*background:\s*#dce7ec;/);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*display:\s*none;/);
   assert.match(html, /현재 재직 67명 \/ 전체 인증 180명 · 재직률 37\.2%/);
   for (const sortLabel of ["기본순", "전체 인증 많은 순", "재직률 높은 순", "현재 재직 많은 순"]) {
     assert.match(html, new RegExp(`>${sortLabel}<\\/button>`));

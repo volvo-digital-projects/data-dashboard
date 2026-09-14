@@ -174,10 +174,6 @@ function EmploymentProgressBar({
   const rate = percentage(current, total);
   return (
     <div className="dealer-employment" role="cell">
-      <div className="dealer-employment-metrics">
-        <span>현재 재직 <strong>{current}<small>명</small><i>/ {total}명</i></strong></span>
-        <b>{rate}</b>
-      </div>
       <div
         className="dealer-employment-bar"
         data-tooltip={`현재 재직 ${current}명 / 전체 인증 ${total}명 · 재직률 ${rate}`}
@@ -185,6 +181,10 @@ function EmploymentProgressBar({
         tabIndex={0}
       >
         <i style={{ width: rate, "--bar-delay": `${animationDelay}ms` } as CSSProperties} />
+      </div>
+      <div className="dealer-employment-metrics">
+        <span>현재 재직 <strong>{current}<small>명</small><i>/ {total}명</i></strong></span>
+        <b>{rate}</b>
       </div>
     </div>
   );
