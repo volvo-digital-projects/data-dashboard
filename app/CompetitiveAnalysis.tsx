@@ -1518,6 +1518,27 @@ export default function CompetitiveAnalysis({
       return targetTop > detail.scrollTop + 8;
     };
 
+    const compactPcOverviewIfNeeded = () => {
+      const isPcViewport = window.matchMedia(
+        "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
+      ).matches;
+      if (
+        !isPcViewport ||
+        detail.classList.contains("is-overview-compacted") ||
+        detail.scrollTop > 1 ||
+        detail.scrollHeight <= detail.clientHeight + 2
+      ) {
+        return false;
+      }
+
+      detail.classList.add("is-overview-compacted");
+      detail.scrollTop = 0;
+      window.requestAnimationFrame(() => {
+        detail.scrollTop = 0;
+      });
+      return true;
+    };
+
     const settleAtConsultationScatter = () => {
       const startTop = detail.scrollTop;
       const targetTop = consultationScatterTop();
@@ -1567,6 +1588,10 @@ export default function CompetitiveAnalysis({
       event.preventDefault();
       downwardIntent += Math.max(0, normalizedWheelDistance(event));
       if (downwardIntent < 18) return;
+      if (compactPcOverviewIfNeeded()) {
+        downwardIntent = 0;
+        return;
+      }
       settleAtConsultationScatter();
     };
 
