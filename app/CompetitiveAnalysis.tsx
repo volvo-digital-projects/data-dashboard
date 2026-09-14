@@ -2998,8 +2998,7 @@ export default function CompetitiveAnalysis({
                   <article className="growth-position-card">
                     <header>
                       <div>
-                        <span>역량진단</span>
-                        <strong>{selectedStaffGrowthLabel}</strong>
+                        <strong>역량진단 결과</strong>
                       </div>
                       <small className="growth-position-benchmarks">
                         <span className="showroom-average"><i aria-hidden="true" />{displayShowroomNameWithoutBrand(selected.showroom)} 평균 {selectedShowroomStaffAverage === null ? "―" : selectedShowroomStaffAverage.toFixed(1)}점</span>

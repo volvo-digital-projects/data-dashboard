@@ -1617,6 +1617,7 @@ html {
   color: #728995;
 }
 
+.growth-position-card > header strong,
 .growth-sales-funnel-card > header strong,
 .growth-sales-monthly-card > header strong {
   font-size: 13px;

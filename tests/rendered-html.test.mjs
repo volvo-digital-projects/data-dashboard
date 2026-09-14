@@ -420,11 +420,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong>상담\/ 시승\/ 계약 전환율<\/strong>/);
-  assert.match(navigation, /<span>역량진단<\/span>[\s\S]*?<strong>\{selectedStaffGrowthLabel\}<\/strong>/);
+  assert.match(navigation, /<article className="growth-position-card">[\s\S]*?<header>[\s\S]*?<strong>역량진단 결과<\/strong>/);
+  assert.doesNotMatch(navigation, /<span>역량진단<\/span>[\s\S]*?<strong>\{selectedStaffGrowthLabel\}<\/strong>/);
   assert.doesNotMatch(navigation, /<span>상담 역량 위치<\/span>/);
   assert.equal((navigation.match(/className="growth-under-construction">공사중<\/div>/g) ?? []).length, 2);
   assert.match(css, /\.growth-under-construction\s*\{[^}]*position:\s*absolute;[^}]*top:\s*50%;[^}]*left:\s*50%;[^}]*background:\s*rgba\(43, 84, 104, 0\.72\);[^}]*color:\s*#fff;/);
   assert.match(css, /\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;/);
+  assert.match(css, /\.growth-position-card > header strong,[\s\S]*?\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;[^}]*color: #244f64;/);
   assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">26<\/span>년 누적판매/);
   assert.doesNotMatch(navigation, /근속기간 × 2026 누적판매/);
   assert.match(navigation, /근속기간 × 고객상담 평균만족도/);
