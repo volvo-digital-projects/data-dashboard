@@ -58,6 +58,15 @@ type AnalysisPoint = AnalysisShowroom & {
 type StaffYear = "2023" | "2024" | "2025" | "2026";
 type StaffYearMetric = { responses: number; scoreSum: number; sent?: number };
 type StaffKeyword = { label: string; mentions: number };
+const SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS = new Set([
+  "전시차량 다양화 필요",
+  "시승모델 다양화 필요",
+  "대기시간 관리 미흡",
+  "예약절차 운영 미흡",
+  "상담공간 편의제공",
+  "시설 편의 미제공",
+  "시승기회·시간 확대",
+]);
 type StaffEmployee = {
   name: string;
   gender?: "female" | "male";
@@ -3671,7 +3680,7 @@ export default function CompetitiveAnalysis({
                         <div className="growth-comment-bar-column">
                           {selectedStaffImprovementKeywords.slice(0, 8).map((keyword, index) => (
                             <div
-                              className="growth-comment-bar"
+                              className={`growth-comment-bar${SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS.has(keyword.label) ? " environment" : ""}`}
                               key={keyword.label}
                               style={{
                                 "--growth-comment-bar-ratio": `${selectedStaffImprovementTotalMentions > 0 ? (keyword.mentions / selectedStaffImprovementTotalMentions) * 100 : 0}%`,

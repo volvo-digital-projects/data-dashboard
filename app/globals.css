@@ -1760,6 +1760,20 @@ html {
   background: linear-gradient(90deg, #f2c1c0 0%, #df7b78 58%, #bd4548 100%);
 }
 
+.growth-comment-evidence.improvement .growth-comment-bar.environment > span,
+.growth-comment-evidence.improvement .growth-comment-bar.environment > small {
+  color: #8a5508;
+}
+
+.growth-comment-evidence.improvement .growth-comment-bar.environment > i {
+  border-color: #dfc58f;
+  background: #fff8e8;
+}
+
+.growth-comment-evidence.improvement .growth-comment-bar.environment > i > b {
+  background: linear-gradient(90deg, #ecd69f 0%, #c58a2b 58%, #8f5908 100%);
+}
+
 .growth-comment-bar > small {
   min-width: 0;
   font-size: 9px;
