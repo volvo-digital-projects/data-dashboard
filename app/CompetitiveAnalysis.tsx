@@ -58,6 +58,22 @@ type AnalysisPoint = AnalysisShowroom & {
 type StaffYear = "2023" | "2024" | "2025" | "2026";
 type StaffYearMetric = { responses: number; scoreSum: number; sent?: number };
 type StaffKeyword = { label: string; mentions: number };
+const easePcScrollWithSoftLanding = (progress: number) => {
+  const landingStart = 0.68;
+  const initialTravelRate = 1.18;
+  if (progress <= landingStart) return progress * initialTravelRate;
+
+  const landingProgress = (progress - landingStart) / (1 - landingStart);
+  const landingStartPosition = landingStart * initialTravelRate;
+  const remainingDistance = 1 - landingStartPosition;
+  const landingStartSlope =
+    (initialTravelRate * (1 - landingStart)) / remainingDistance;
+  const easedLanding =
+    (landingStartSlope - 2) * landingProgress ** 3 +
+    (3 - 2 * landingStartSlope) * landingProgress ** 2 +
+    landingStartSlope * landingProgress;
+  return landingStartPosition + remainingDistance * easedLanding;
+};
 const SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS = new Set([
   "전시차량 다양화 필요",
   "시승모델 다양화 필요",
@@ -1216,17 +1232,22 @@ export default function CompetitiveAnalysis({
           (usesPcSectionFlow ? 0 : 8),
       );
       const startedAt = performance.now();
-      const motionDuration = window.matchMedia(
+      const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
-      ).matches
+      ).matches;
+      const motionDuration = reduceMotion
         ? 0
-        : 420;
+        : usesPcSectionFlow
+          ? 380
+          : 420;
 
       const alignEntry = (timestamp: number) => {
         const progress = motionDuration
           ? Math.min(1, (timestamp - startedAt) / motionDuration)
           : 1;
-        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const easedProgress = usesPcSectionFlow
+          ? easePcScrollWithSoftLanding(progress)
+          : 1 - Math.pow(1 - progress, 3);
         const nextTop =
           progress < 1
             ? startTop + (targetTop - startTop) * easedProgress
@@ -1399,7 +1420,7 @@ export default function CompetitiveAnalysis({
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const duration = reduceMotion ? 0 : 260;
+      const duration = reduceMotion ? 0 : 340;
       const startedAt = performance.now();
 
       motionActive = true;
@@ -1409,7 +1430,7 @@ export default function CompetitiveAnalysis({
         const progress = duration
           ? Math.min(1, (timestamp - startedAt) / duration)
           : 1;
-        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const easedProgress = easePcScrollWithSoftLanding(progress);
         const nextTop =
           progress < 1
             ? startTop + (boundedTarget - startTop) * easedProgress
