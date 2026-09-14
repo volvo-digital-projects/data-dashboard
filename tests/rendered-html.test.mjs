@@ -3448,10 +3448,12 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
       "딜러사는 전체 인증 인원의 내림차순이어야 합니다.",
     );
   }
-  assert.match(html, /6개년 인증 배출<\/small><strong>180<\/strong>/);
-  assert.match(html, /Grand<\/small><strong>40<\/strong>/);
-  assert.match(html, /Advanced<\/small><strong>60<\/strong>/);
-  assert.match(html, /Certified<\/small><strong>80<\/strong>/);
+  assert.doesNotMatch(html, /class="dealer-analysis-summary"/);
+  assert.doesNotMatch(html, /딜러사 배출 연인원|현재 \d+명 중 인증이력 연결/);
+  assert.match(html, /dealer-certification-row dealer-certification-aggregate/);
+  assert.match(html, /<h3>전체<\/h3>/);
+  assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
+  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><\/strong>[\s\S]*?<strong>40<\/strong>[\s\S]*?<strong>60<\/strong>[\s\S]*?<strong>80<\/strong>/);
   assert.match(html, /딜러사별 인증 레벨 인원 및 비율/);
   assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
   assert.match(html, /딜러사 미확인 <strong>2명<\/strong>/);

@@ -92,7 +92,6 @@ const dealerRows = dealerOrder.map((dealer) => {
   return {
     dealer,
     showroomCount: dealerShowrooms.length,
-    currentStaff: currentNames.size,
     certificationCount: dealerCertifications.length,
     currentCertified,
     levelCounts,
@@ -109,6 +108,7 @@ const totalLevels = {
   Advanced: certifications.filter((record) => record.level === "Advanced").length,
   Certified: certifications.filter((record) => record.level === "Certified").length,
 };
+const totalCurrentCertified = dealerRows.reduce((sum, row) => sum + row.currentCertified, 0);
 const unmatchedCertifications = certifications.filter((record) => !certificationDealer(record));
 
 function percentage(value: number, total: number) {
@@ -140,13 +140,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       </header>
       </div>
 
-      <section className="dealer-analysis-summary" aria-label="전국 통합 요약">
-        <article><small>6개년 인증 배출</small><strong>{totalCertifications}</strong><span>{years[0]}–{years.at(-1)} · 매년 30명</span></article>
-        <article className="level-grand"><small>Grand</small><strong>{totalLevels.Grand}</strong><span>전체의 {percentage(totalLevels.Grand, totalCertifications)}</span></article>
-        <article className="level-advanced"><small>Advanced</small><strong>{totalLevels.Advanced}</strong><span>전체의 {percentage(totalLevels.Advanced, totalCertifications)}</span></article>
-        <article className="level-certified"><small>Certified</small><strong>{totalLevels.Certified}</strong><span>전체의 {percentage(totalLevels.Certified, totalCertifications)}</span></article>
-      </section>
-
       <section className="dealer-analysis-board" aria-labelledby="dealer-analysis-board-title">
         <div className="dealer-analysis-section-title">
           <div>
@@ -165,6 +158,25 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             <span role="columnheader">Certified</span>
             <span role="columnheader">현재 재직 확인</span>
           </div>
+          <article className="dealer-certification-row dealer-certification-aggregate" role="row">
+            <div className="dealer-certification-name" role="cell">
+              <span>합계</span>
+              <div><small>ALL DEALERS</small><h3>전체</h3></div>
+              <b>7개사</b>
+            </div>
+            <div className="dealer-certification-total" role="cell">
+              <strong>{totalCertifications}<i>명</i></strong>
+            </div>
+            {(["Grand", "Advanced", "Certified"] as const).map((level) => (
+              <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
+                <span><strong>{totalLevels[level]}</strong><i>명</i><b>{percentage(totalLevels[level], totalCertifications)}</b></span>
+                <em><i style={{ width: percentage(totalLevels[level], totalCertifications) }} /></em>
+              </div>
+            ))}
+            <div className="dealer-certification-current" role="cell">
+              <strong>{totalCurrentCertified}<i>명</i></strong>
+            </div>
+          </article>
           {dealerRows.map((row, index) => (
             <article className="dealer-certification-row" role="row" key={row.dealer}>
               <div className="dealer-certification-name" role="cell">
@@ -174,7 +186,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               </div>
               <div className="dealer-certification-total" role="cell">
                 <strong>{row.certificationCount}<i>명</i></strong>
-                <small>딜러사 배출 연인원</small>
               </div>
               {(["Grand", "Advanced", "Certified"] as const).map((level) => (
                 <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
@@ -184,7 +195,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               ))}
               <div className="dealer-certification-current" role="cell">
                 <strong>{row.currentCertified}<i>명</i></strong>
-                <small>현재 {row.currentStaff}명 중 인증이력 연결</small>
               </div>
             </article>
           ))}
