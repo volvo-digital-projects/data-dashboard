@@ -10,6 +10,7 @@ type DashboardHeaderLeadProps = {
   accessDate: string;
   titleClassName?: string;
   titleAdornment?: ReactNode;
+  hideLogout?: boolean;
   dashboardReturn?: {
     href: string;
     label: string;
@@ -22,6 +23,7 @@ export default function DashboardHeaderLead({
   accessDate,
   titleClassName = "",
   titleAdornment,
+  hideLogout = false,
   dashboardReturn,
 }: DashboardHeaderLeadProps) {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
@@ -39,7 +41,9 @@ export default function DashboardHeaderLead({
         )}
         <div
           className="header-status-row"
-          aria-label={dashboardReturn ? `${dashboardReturn.label}, 로그아웃` : "DSC 가이드, 로그아웃"}
+          aria-label={dashboardReturn
+            ? `${dashboardReturn.label}${hideLogout ? "" : ", 로그아웃"}`
+            : `DSC 가이드${hideLogout ? "" : ", 로그아웃"}`}
         >
           {dashboardReturn ? (
             <Link
@@ -67,19 +71,21 @@ export default function DashboardHeaderLead({
               <span>DSC 가이드</span>
             </button>
           )}
-          <form className="dashboard-logout-form" action="/api/logout" method="post">
-            <button
-              className="dashboard-logout-button"
-              type="submit"
-              title="로그아웃"
-              aria-label="로그아웃"
-            >
-              <span className="dashboard-logout-icon" aria-hidden="true">
-                <i />
-              </span>
-              <span>로그아웃</span>
-            </button>
-          </form>
+          {!hideLogout ? (
+            <form className="dashboard-logout-form" action="/api/logout" method="post">
+              <button
+                className="dashboard-logout-button"
+                type="submit"
+                title="로그아웃"
+                aria-label="로그아웃"
+              >
+                <span className="dashboard-logout-icon" aria-hidden="true">
+                  <i />
+                </span>
+                <span>로그아웃</span>
+              </button>
+            </form>
+          ) : null}
         </div>
       </div>
       {!dashboardReturn && isGuideOpen ? (

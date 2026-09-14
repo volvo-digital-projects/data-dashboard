@@ -222,6 +222,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           title="딜러사별 분석자료"
           accessDate={accessDate}
           titleClassName="analysis-title"
+          hideLogout
           dashboardReturn={{
             href: `/dashboard/${selected.cdsid}/analysis?view=size`,
             label: "분석자료",
