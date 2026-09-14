@@ -1276,6 +1276,7 @@ html {
   color: #536f7b;
   font-size: 7.5px;
   line-height: 1.35;
+  word-break: keep-all;
 }
 
 @keyframes growth-scatter-touch-confirm {

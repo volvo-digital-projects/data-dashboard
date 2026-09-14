@@ -2548,7 +2548,7 @@ export default function CompetitiveAnalysis({
     tenureYears: point.tenureYears,
     metricLabel: "26년 누적판매",
     metricValue: `${point.deliveredSales}대`,
-    detail: "Sales-DMS 누적 기준",
+    detail: "Sales-DMS 누적기준",
     x: staffScatterX(point.tenureYears),
     y: staffSalesScatterY(point.deliveredSales),
   });

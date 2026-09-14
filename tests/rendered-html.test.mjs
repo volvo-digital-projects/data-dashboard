@@ -456,6 +456,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-scatter-fixed-y-axis">고객상담 평균만족도<\/span>/);
   assert.match(navigation, /className="growth-scatter-fixed-y-axis">2026 누적판매\(대\)<\/span>/);
   assert.equal((navigation.match(/data-scatter-point="true"/g) ?? []).length, 4);
+  assert.match(source, /detail: "Sales-DMS 누적기준"/);
   assert.equal((navigation.match(/className="growth-scatter-point-preview"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-coordinate-x"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-coordinate-y"/g) ?? []).length, 2);
@@ -468,6 +469,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-fixed-axes\s*\{[^}]*pointer-events:\s*none;[^}]*font-size:\s*7\.5px;/);
   assert.match(css, /\.growth-scatter-point\.is-inspected\s*\{[^}]*stroke: #177493;[^}]*animation: growth-scatter-point-confirm/);
   assert.match(css, /\.growth-scatter-point-preview\s*\{[^}]*pointer-events: none;[^}]*animation: growth-scatter-preview-life 3s ease both;/);
+  assert.match(css, /\.growth-scatter-point-popover small\s*\{[^}]*word-break: keep-all;/s);
   assert.match(css, /\.growth-scatter-coordinate-x,[\s\S]*?\.growth-scatter-coordinate-y\s*\{[^}]*background: rgba\(250, 253, 254, 0\.92\);[^}]*font-size: 7\.5px;/);
   assert.match(css, /@keyframes growth-scatter-preview-life\s*\{[\s\S]*?82%[\s\S]*?100% \{ opacity: 0; \}/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*image-rendering:\s*auto;/);
