@@ -2605,13 +2605,18 @@ html.analysis-entry-top-locked body {
     margin-top: 3px;
   }
 
+  .competitive-analysis-page .growth-sales-monthly-trend {
+    transform: translateY(-3px);
+  }
+
   .competitive-analysis-page .growth-sales-month {
     min-height: 78px;
     grid-template-rows: 13px 1fr 15px;
   }
 
   .competitive-analysis-page .growth-sales-month > i {
-    min-height: 40px;
+    height: calc(100% - 6px);
+    min-height: 34px;
   }
 
   .competitive-analysis-page .growth-sales-month > i span {
