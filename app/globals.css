@@ -610,7 +610,7 @@ html {
   min-width: 0;
   min-height: 68px;
   display: grid;
-  grid-template-columns: minmax(130px, 0.8fr) minmax(78px, 0.45fr) minmax(390px, 2.35fr) minmax(270px, 1.55fr);
+  grid-template-columns: minmax(130px, 0.8fr) minmax(96px, 0.56fr) minmax(350px, 2.05fr) minmax(285px, 1.7fr);
   align-items: stretch;
   border-bottom: 1px solid #dce7ec;
   animation: dealer-row-enter 360ms ease-out both;
@@ -657,8 +657,9 @@ html {
 .dealer-certification-name > b { padding: 3px 6px; color: #3b778d; border-radius: 999px; background: #e8f1f4; font-size: 8px; font-weight: 600; white-space: nowrap; }
 .dealer-certification-aggregate .dealer-certification-name h3 { color: #0d5875; font-size: 17px; font-weight: 750; }
 .dealer-certification-total { align-items: flex-end; text-align: right; }
-.dealer-certification-total strong { color: #12384d; font-size: 19px; font-weight: 620; font-variant-numeric: tabular-nums; }
+.dealer-certification-total strong { display: inline-flex; align-items: baseline; color: #12384d; font-size: 19px; font-weight: 620; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .dealer-certification-total strong i { margin-left: 2px; color: #637985; font-family: var(--font-korean); font-size: 8px; font-style: normal; font-weight: 500; }
+.dealer-certification-total strong b { min-width: 4.1ch; margin-left: 7px; color: #607985; font-size: 9px; font-weight: 600; text-align: right; }
 .dealer-certification-aggregate .dealer-certification-total strong { color: #0d5875; font-size: 22px; font-weight: 750; }
 
 .dealer-mix,
@@ -677,12 +678,12 @@ html {
   border-radius: 3px;
   background: #e7eef2;
 }
-.dealer-mix-segment { height: 100%; position: relative; transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
+.dealer-mix-segment { height: 100%; position: relative; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -1px 0 rgba(10, 51, 68, 0.08); transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
 .dealer-mix-segment:first-child { border-radius: 3px 0 0 3px; }
 .dealer-mix-segment:last-child { border-radius: 0 3px 3px 0; }
-.dealer-mix-segment.level-grand { background: linear-gradient(90deg, #3189ad 0%, #267ea4 58%, #217493 100%); }
-.dealer-mix-segment.level-advanced { background: linear-gradient(90deg, #4ba399 0%, #3e978d 58%, #34867e 100%); }
-.dealer-mix-segment.level-certified { background: linear-gradient(90deg, #ed945c 0%, #e4813e 58%, #d97435 100%); }
+.dealer-mix-segment.level-grand { background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%, rgba(8, 55, 75, 0.09) 100%), linear-gradient(90deg, #3b98bb 0%, #2b85aa 46%, #1f7092 100%); }
+.dealer-mix-segment.level-advanced { background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%, rgba(8, 55, 75, 0.09) 100%), linear-gradient(90deg, #59aea5 0%, #41998f 46%, #2f7f77 100%); }
+.dealer-mix-segment.level-certified { background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%, rgba(91, 43, 16, 0.1) 100%), linear-gradient(90deg, #f1a169 0%, #e58442 46%, #cf692c 100%); }
 .dealer-mix-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
 .dealer-mix-values > span { min-width: 0; display: grid; grid-template-columns: 5px auto 1fr auto; align-items: baseline; gap: 3px; color: #637985; }
 .dealer-mix-values > span > i { width: 5px; height: 5px; align-self: center; border-radius: 50%; background: #267ea4; }
@@ -699,8 +700,8 @@ html {
 .dealer-employment-metrics strong small { margin-left: 1px; font-family: var(--font-korean); font-size: 7px; font-weight: 500; }
 .dealer-employment-metrics strong i { margin-left: 4px; color: #637985; font-size: 9px; font-style: normal; font-weight: 520; }
 .dealer-employment-metrics > b { color: #164f70; font-size: 16px; font-weight: 750; font-variant-numeric: tabular-nums; }
-.dealer-employment-bar { height: 8px; overflow: visible; position: relative; border-radius: 2px; background: #e7eef2; }
-.dealer-employment-bar > i { height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, #1d5d7d 0%, #164f70 60%, #10445f 100%); transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
+.dealer-employment-bar { height: 12px; overflow: visible; position: relative; border-radius: 3px; background: #e7eef2; }
+.dealer-employment-bar > i { height: 100%; display: block; border-radius: inherit; background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%, rgba(4, 35, 51, 0.14) 100%), linear-gradient(90deg, #28779d 0%, #195b7c 48%, #0d405b 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -1px 0 rgba(4, 35, 51, 0.12); transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
 .dealer-analysis-board [data-tooltip]::after {
   position: absolute;
   left: 50%;
@@ -809,7 +810,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   }
   .dealer-analysis-command-shell { margin-inline: 0; }
   .dealer-analysis-board { padding: 14px; }
-  .dealer-certification-row { grid-template-columns: minmax(90px, 0.7fr) 64px minmax(0, 2.1fr) minmax(180px, 1.45fr); }
+  .dealer-certification-row { grid-template-columns: minmax(90px, 0.7fr) 82px minmax(0, 1.85fr) minmax(190px, 1.55fr); }
   .dealer-certification-row > * { padding-inline: 9px; }
   .dealer-mix-values { gap: 5px; }
   .dealer-mix-values > span { grid-template-columns: 5px 1fr auto; }

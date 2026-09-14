@@ -270,7 +270,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               <b>7개사 / {totalShowrooms}개소 / 100%</b>
             </div>
             <div className="dealer-certification-total" role="cell">
-              <strong>{totalCertifications}<i>명</i></strong>
+              <strong>{totalCertifications}<i>명</i><b>{percentage(totalCertifications, totalCertifications)}</b></strong>
             </div>
             <CertificationMixBar levelCounts={totalLevels} total={totalCertifications} animationDelay={80} />
             <EmploymentProgressBar current={totalCurrentCertified} total={totalCertifications} animationDelay={120} />
@@ -287,7 +287,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
                 <b>{row.showroomCount}개소 / {percentage(row.showroomCount, totalShowrooms)}</b>
               </div>
               <div className="dealer-certification-total" role="cell">
-                <strong>{row.certificationCount}<i>명</i></strong>
+                <strong>{row.certificationCount}<i>명</i><b>{percentage(row.certificationCount, totalCertifications)}</b></strong>
               </div>
               <CertificationMixBar levelCounts={row.levelCounts} total={row.certificationCount} animationDelay={120 + index * 50} />
               <EmploymentProgressBar current={row.currentCertified} total={row.certificationCount} animationDelay={160 + index * 50} />
