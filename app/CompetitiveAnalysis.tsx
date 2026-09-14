@@ -83,6 +83,20 @@ const SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS = new Set([
   "시설 편의 미제공",
   "시승기회·시간 확대",
 ]);
+const STAFF_YOUTUBE_BADGE_KEYS = new Set([
+  "6KR6867:송민경",
+  "6KR6830:진주현",
+  "6KR6858:나수연",
+  "6KR6870:이정훈",
+  "6KR6849:신수경",
+  "6KR6846:신승희",
+  "6KR6847:김정호",
+  "6KR6861:곽지명",
+  "6KR6846:박형진",
+  "6KR6858:조선별",
+  "6KR6852:이규환",
+  "6KR6839:박준수",
+]);
 type StaffEmployee = {
   name: string;
   gender?: "female" | "male";
@@ -3373,6 +3387,9 @@ export default function CompetitiveAnalysis({
                 {rankedSalesStaff.map(({ employee, average, deliveredSales }) => {
                   const isSelected = employee.name === selectedStaffEmployee?.name;
                   const isTeamLeader = employee.role === "영업팀장" || employee.jobTitle === "팀장";
+                  const hasYoutubeBadge = STAFF_YOUTUBE_BADGE_KEYS.has(
+                    `${selected.cdsid}:${employee.name}`,
+                  );
                   return (
                     <button
                       type="button"
@@ -3389,6 +3406,9 @@ export default function CompetitiveAnalysis({
                           <span className="growth-staff-name">{employee.name}</span>
                           {isTeamLeader ? (
                             <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>
+                          ) : null}
+                          {hasYoutubeBadge ? (
+                            <i className="growth-staff-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동" />
                           ) : null}
                         </strong>
                         <small>{formatStaffShortDate(employee.hireDate)}</small>

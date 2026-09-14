@@ -364,8 +364,21 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(navigation, /const isTeamLeader = employee\.role === "영업팀장" \|\| employee\.jobTitle === "팀장";/);
   assert.match(navigation, /className="growth-staff-name">\{employee\.name\}<\/span>[\s\S]*?className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L<\/i>/);
-  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em 13px;[\s\S]*?white-space:\s*nowrap;/);
+  const youtubeStaffBlock = source.match(/const STAFF_YOUTUBE_BADGE_KEYS = new Set\(\[([\s\S]*?)\]\);/)?.[1] ?? "";
+  const expectedYoutubeStaffKeys = [
+    "6KR6867:송민경", "6KR6830:진주현", "6KR6858:나수연", "6KR6870:이정훈",
+    "6KR6849:신수경", "6KR6846:신승희", "6KR6847:김정호", "6KR6861:곽지명",
+    "6KR6846:박형진", "6KR6858:조선별", "6KR6852:이규환", "6KR6839:박준수",
+  ];
+  assert.equal((youtubeStaffBlock.match(/6KR\d+:/g) ?? []).length, expectedYoutubeStaffKeys.length);
+  expectedYoutubeStaffKeys.forEach((key) => assert.match(youtubeStaffBlock, new RegExp(`"${key}"`)));
+  assert.doesNotMatch(youtubeStaffBlock, /6KR6834:박준수/);
+  assert.match(navigation, /const hasYoutubeBadge = STAFF_YOUTUBE_BADGE_KEYS\.has\([\s\S]*?`\$\{selected\.cdsid\}:\$\{employee\.name\}`/);
+  assert.match(navigation, /hasYoutubeBadge \? \([\s\S]*?className="growth-staff-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동"/);
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.5em;[\s\S]*?flex:\s*0 0 5\.5em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em repeat\(2, 13px\);[\s\S]*?white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-lead-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*13px;[^}]*border-radius:\s*50%;[^}]*background:\s*#176f8a;[^}]*transform:\s*none;/);
+  assert.match(css, /\.growth-staff-youtube-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*9px;[^}]*border-radius:\s*2\.5px;[^}]*background:\s*#ff0033;/);
+  assert.match(css, /\.growth-staff-youtube-badge::before\s*\{[^}]*border-left:\s*4px solid #fff;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*30px;/);
   assert.match(css, /\.growth-staff-roster-columns span:not\(:first-child\)\s*\{[^}]*text-align:\s*right;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*padding:\s*0 10px 0 8px;/);
@@ -890,7 +903,7 @@ test("orders review staff by hire date with the newest hire last", async () => {
     analysisSource,
     /\.sort\(\(a, b\) => compareStaffHireDateAscending\(a\.employee, b\.employee\)\)/,
   );
-  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 5\.25em;[^}]*flex: 0 0 5\.25em;/);
+  assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 5\.5em;[^}]*flex: 0 0 5\.5em;/);
 });
 
 test("averages Q1-Q2 metrics before combining and keeps staff scores legible", async () => {
