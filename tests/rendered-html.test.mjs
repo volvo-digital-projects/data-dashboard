@@ -4619,6 +4619,10 @@ test("locks dashboard and analysis sticky shells to the lower content edges", as
   assert.match(css, /\.content-grid\s*\{[^}]*margin-top: 8px[^}]*scroll-margin-top: 8px/);
   assert.match(
     css,
+    /@media \(min-width: 761px\)\s*\{\s*\.competitive-analysis-page > \.analysis-workspace\s*\{[^}]*position: relative;[^}]*top: -1px;/,
+  );
+  assert.match(
+    css,
     /\.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?\.dashboard-identity-header > \.analysis-context\s*\{[^}]*margin-left: auto/,
   );
 });

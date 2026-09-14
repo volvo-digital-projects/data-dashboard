@@ -15155,6 +15155,15 @@ body {
   scroll-margin-top: var(--dashboard-card-gap);
 }
 
+/* Page 1 is the vertical reference. Nudge only page 2's second section so its
+   top border lands on the same rendered pixel without changing any x geometry. */
+@media (min-width: 761px) {
+  .competitive-analysis-page > .analysis-workspace {
+    position: relative;
+    top: -1px;
+  }
+}
+
 .score-stack {
   gap: var(--dashboard-section-gap);
   margin-top: var(--space-3);
