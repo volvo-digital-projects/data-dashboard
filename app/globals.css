@@ -347,7 +347,7 @@ html {
 }
 
 .growth-navigation-pinned-headings .growth-staff-roster-columns {
-  border-right: 1px solid #d5e3e9;
+  border-right: 0;
   border-bottom: 0;
 }
 
@@ -374,18 +374,27 @@ html {
   color: #25495a;
 }
 
+.growth-navigation-pinned-heading.consultation,
 .growth-navigation-pinned-heading.sales {
   position: relative;
 }
 
+.growth-navigation-pinned-heading.consultation::before,
 .growth-navigation-pinned-heading.sales::before {
   content: "";
   position: absolute;
   top: 7px;
   bottom: 7px;
-  left: 0;
   width: 1px;
   background: rgba(181, 202, 211, 0.52);
+}
+
+.growth-navigation-pinned-heading.consultation::before {
+  left: -6px;
+}
+
+.growth-navigation-pinned-heading.sales::before {
+  left: -8px;
 }
 
 .growth-navigation-workspace {

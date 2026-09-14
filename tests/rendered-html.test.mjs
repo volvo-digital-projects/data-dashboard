@@ -361,7 +361,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, />영업활동 역량<\/span>/);
   assert.doesNotMatch(navigation, /01 ·|02 ·/);
   assert.match(css, /\.growth-navigation-pinned-heading\s*\{[^}]*font-size: 11px;[^}]*color: #25495a;/);
-  assert.match(css, /\.growth-navigation-pinned-heading\.sales\s*\{[^}]*position: relative;[\s\S]*?\.growth-navigation-pinned-heading\.sales::before\s*\{[^}]*top: 7px;[^}]*bottom: 7px;[^}]*left: 0;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
+  assert.match(css, /\.growth-navigation-pinned-headings \.growth-staff-roster-columns\s*\{[^}]*border-right: 0;/);
+  assert.match(css, /\.growth-navigation-pinned-heading\.consultation,[\s\S]*?\.growth-navigation-pinned-heading\.sales\s*\{[^}]*position: relative;[\s\S]*?\.growth-navigation-pinned-heading\.consultation::before,[\s\S]*?\.growth-navigation-pinned-heading\.sales::before\s*\{[^}]*top: 7px;[^}]*bottom: 7px;[^}]*background: rgba\(181, 202, 211, 0\.52\);[\s\S]*?\.growth-navigation-pinned-heading\.consultation::before\s*\{[^}]*left: -6px;[\s\S]*?\.growth-navigation-pinned-heading\.sales::before\s*\{[^}]*left: -8px;/);
   assert.doesNotMatch(css, /\.growth-navigation-pinned-heading\.sales\s*\{[^}]*border-left:/);
   assert.doesNotMatch(navigation, /<h3>고객상담 역량<\/h3>|<h3>영업활동 역량<\/h3>/);
   assert.doesNotMatch(navigation, /01 · 상담 영역|02 · 영업 영역/);
