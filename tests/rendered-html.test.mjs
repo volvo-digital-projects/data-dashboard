@@ -474,13 +474,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-photo\s*\{[^}]*width: 42px;[^}]*height: auto;[^}]*aspect-ratio: 21 \/ 22;/);
   assert.match(css, /\.growth-profile-photo img\s*\{[^}]*display: block;[^}]*width: 100%;[^}]*height: auto;[^}]*object-fit: cover;/);
   assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?transform: scale\(1\.04\);/);
-  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*object-fit: cover;[^}]*object-position: center 18%;[^}]*transform: none;/);
+  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center top;[^}]*transform: scale\(1\.35\);[^}]*transform-origin: center top;[^}]*image-rendering: auto;/);
   assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 4);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
   assert.equal((navigation.match(/<circle className="photo-backdrop" r="9\.4" \/>/g) ?? []).length, 2);
-  assert.equal((navigation.match(/width="15"[\s\S]*?height="15"/g) ?? []).length, 4);
+  assert.equal((navigation.match(/x="-10\.125"[\s\S]*?y="-7\.5"[\s\S]*?width="20\.25"[\s\S]*?height="20\.25"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/x="-7\.5"[\s\S]*?y="-7\.5"[\s\S]*?width="15"[\s\S]*?height="15"/g) ?? []).length, 2);
   assert.equal((navigation.match(/<circle className="photo-ring" r="8" \/>/g) ?? []).length, 2);
   assert.match(css, /\.growth-scatter-selected-photo \.photo-backdrop\s*\{[^}]*stroke: #a9c4ce;[^}]*stroke-width: 1\.5;/);
   assert.match(css, /\.growth-scatter-selected-photo \.photo-ring\s*\{[^}]*stroke: #2d7187;[^}]*stroke-width: 1\.2;/);

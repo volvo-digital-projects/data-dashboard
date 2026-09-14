@@ -3337,10 +3337,10 @@ export default function CompetitiveAnalysis({
                             {selectedStaffProfile ? (
                               <image
                                 href={selectedStaffProfile.image}
-                                x="-7.5"
+                                x="-10.125"
                                 y="-7.5"
-                                width="15"
-                                height="15"
+                                width="20.25"
+                                height="20.25"
                                 preserveAspectRatio="xMidYMin slice"
                                 clipPath="url(#consultation-selected-staff-photo)"
                               />
@@ -3594,10 +3594,10 @@ export default function CompetitiveAnalysis({
                             {selectedStaffProfile ? (
                               <image
                                 href={selectedStaffProfile.image}
-                                x="-7.5"
+                                x="-10.125"
                                 y="-7.5"
-                                width="15"
-                                height="15"
+                                width="20.25"
+                                height="20.25"
                                 preserveAspectRatio="xMidYMin slice"
                                 clipPath="url(#sales-selected-staff-photo)"
                               />
