@@ -45,6 +45,25 @@ test("keeps the 2021-2026 certification results complete and cumulative", async 
     ),
     { Grand: 40, Advanced: 60, Certified: 80 },
   );
+  const certifications2022 = certifications.records
+    .filter((record) => record.year === 2022)
+    .map((record) => `${record.name}:${record.level}`);
+  assert.deepEqual(certifications2022, [
+    "진주현:Grand", "안재현:Grand", "김형권:Grand", "김충현:Grand",
+    "김태환:Grand", "김대준:Grand", "김호연:Grand", "이정환:Grand",
+    "유성권:Grand", "박상혁:Grand", "백광현:Advanced", "문은지:Advanced",
+    "홍국표:Advanced", "윤종현:Advanced", "안희철:Advanced", "이희도:Advanced",
+    "권순영:Advanced", "임지운:Advanced", "김민지:Advanced", "최재형:Advanced",
+    "김준성:Certified", "이강일:Certified", "엄재상:Certified", "장길호:Certified",
+    "장호영:Certified", "이동담:Certified", "송민경:Certified", "김형선:Certified",
+    "정기훈:Certified", "임태우:Certified",
+  ]);
+  assert.equal(
+    certifications.records.some(
+      (record) => record.year === 2022 && record.name === "이종인",
+    ),
+    false,
+  );
   assert.equal(
     certifications.records.filter(
       (record) =>

@@ -226,8 +226,8 @@
     {
       "year": 2022,
       "rank": 1,
-      "name": "백광현",
-      "showroom": "송파",
+      "name": "진주현",
+      "showroom": "분당서현",
       "level": "Grand"
     },
     {
@@ -240,197 +240,197 @@
     {
       "year": 2022,
       "rank": 3,
-      "name": "이정환",
-      "showroom": "천안",
+      "name": "김형권",
+      "showroom": "대치",
       "level": "Grand"
     },
     {
       "year": 2022,
       "rank": 4,
-      "name": "장지혁",
-      "showroom": "일산",
+      "name": "김충현",
+      "showroom": "분당서현",
       "level": "Grand"
     },
     {
       "year": 2022,
       "rank": 5,
-      "name": "최재형",
-      "showroom": "대전",
+      "name": "김태환",
+      "showroom": "부천",
       "level": "Grand"
     },
     {
       "year": 2022,
       "rank": 6,
-      "name": "장원익",
-      "showroom": "수원",
-      "level": "Grand"
-    },
-    {
-      "year": 2022,
-      "rank": 7,
-      "name": "이호경",
-      "showroom": "해운대",
-      "level": "Grand"
-    },
-    {
-      "year": 2022,
-      "rank": 8,
       "name": "김대준",
       "showroom": "대치",
       "level": "Grand"
     },
     {
       "year": 2022,
+      "rank": 7,
+      "name": "김호연",
+      "showroom": "목동",
+      "level": "Grand"
+    },
+    {
+      "year": 2022,
+      "rank": 8,
+      "name": "이정환",
+      "showroom": "천안",
+      "level": "Grand"
+    },
+    {
+      "year": 2022,
       "rank": 9,
-      "name": "김경희",
-      "showroom": "전주",
+      "name": "유성권",
+      "showroom": "창원",
       "level": "Grand"
     },
     {
       "year": 2022,
       "rank": 10,
-      "name": "이종인",
-      "showroom": "대치",
+      "name": "박상혁",
+      "showroom": "서초",
       "level": "Grand"
     },
     {
       "year": 2022,
       "rank": 11,
-      "name": "김정석",
-      "showroom": "수원",
-      "level": "Advanced"
-    },
-    {
-      "year": 2022,
-      "rank": 12,
-      "name": "김준성",
-      "showroom": "울산",
-      "level": "Advanced"
-    },
-    {
-      "year": 2022,
-      "rank": 13,
-      "name": "윤덕인",
+      "name": "백광현",
       "showroom": "송파",
       "level": "Advanced"
     },
     {
       "year": 2022,
-      "rank": 14,
+      "rank": 12,
       "name": "문은지",
       "showroom": "울산",
       "level": "Advanced"
     },
     {
       "year": 2022,
-      "rank": 15,
-      "name": "김홍상",
-      "showroom": "송파",
+      "rank": 13,
+      "name": "홍국표",
+      "showroom": "하남",
       "level": "Advanced"
     },
     {
       "year": 2022,
-      "rank": 16,
-      "name": "양현석",
+      "rank": 14,
+      "name": "윤종현",
+      "showroom": "",
+      "level": "Advanced"
+    },
+    {
+      "year": 2022,
+      "rank": 15,
+      "name": "안희철",
       "showroom": "신사",
       "level": "Advanced"
     },
     {
       "year": 2022,
+      "rank": 16,
+      "name": "이희도",
+      "showroom": "대치",
+      "level": "Advanced"
+    },
+    {
+      "year": 2022,
       "rank": 17,
-      "name": "양현준",
-      "showroom": "대구",
+      "name": "권순영",
+      "showroom": "울산",
       "level": "Advanced"
     },
     {
       "year": 2022,
       "rank": 18,
-      "name": "민경민",
-      "showroom": "원주",
+      "name": "임지운",
+      "showroom": "안양",
       "level": "Advanced"
     },
     {
       "year": 2022,
       "rank": 19,
-      "name": "김은구",
-      "showroom": "동대문",
+      "name": "김민지",
+      "showroom": "용산",
       "level": "Advanced"
     },
     {
       "year": 2022,
       "rank": 20,
-      "name": "유성권",
-      "showroom": "창원",
+      "name": "최재형",
+      "showroom": "대전",
       "level": "Advanced"
     },
     {
       "year": 2022,
       "rank": 21,
-      "name": "박용어",
-      "showroom": "동대문",
+      "name": "김준성",
+      "showroom": "울산",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 22,
-      "name": "성재백",
-      "showroom": "일산",
+      "name": "이강일",
+      "showroom": "수원",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 23,
-      "name": "황성수",
-      "showroom": "서초",
+      "name": "엄재상",
+      "showroom": "대전",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 24,
-      "name": "임지윤",
-      "showroom": "일산",
+      "name": "장길호",
+      "showroom": "대치",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 25,
-      "name": "이경호",
-      "showroom": "광주",
+      "name": "장호영",
+      "showroom": "서수원",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 26,
-      "name": "박상혁",
-      "showroom": "서초",
+      "name": "이동담",
+      "showroom": "송파",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 27,
-      "name": "김성일",
-      "showroom": "수원",
-      "level": "Certified"
-    },
-    {
-      "year": 2022,
-      "rank": 28,
-      "name": "장진혁",
+      "name": "송민경",
       "showroom": "일산",
       "level": "Certified"
     },
     {
       "year": 2022,
+      "rank": 28,
+      "name": "김형선",
+      "showroom": "",
+      "level": "Certified"
+    },
+    {
+      "year": 2022,
       "rank": 29,
-      "name": "이충규",
-      "showroom": "분당서현",
+      "name": "정기훈",
+      "showroom": "고양",
       "level": "Certified"
     },
     {
       "year": 2022,
       "rank": 30,
-      "name": "김상민",
-      "showroom": "수원",
+      "name": "임태우",
+      "showroom": "창원",
       "level": "Certified"
     },
     {
