@@ -148,6 +148,12 @@ const useScatterViewportZoom = (resetKey: string) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const viewportRef = useRef<ScatterViewport>(scatterViewportBase);
   const [viewport, setViewport] = useState<ScatterViewport>(scatterViewportBase);
+  const panRef = useRef<{
+    pointerId: number;
+    clientX: number;
+    clientY: number;
+    viewport: ScatterViewport;
+  } | null>(null);
   const pinchRef = useRef<{
     distance: number;
     viewport: ScatterViewport;
@@ -160,7 +166,11 @@ const useScatterViewportZoom = (resetKey: string) => {
     setViewport(next);
   };
 
-  const reset = () => updateViewport(scatterViewportBase);
+  const reset = () => {
+    panRef.current = null;
+    svgRef.current?.classList.remove("is-panning");
+    updateViewport(scatterViewportBase);
+  };
 
   useEffect(() => {
     reset();
@@ -193,10 +203,52 @@ const useScatterViewportZoom = (resetKey: string) => {
       ));
     };
 
+    const handlePointerDown = (event: PointerEvent) => {
+      const current = viewportRef.current;
+      const currentScale = scatterViewportBase.width / current.width;
+      if (currentScale <= 1.001 || !event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      panRef.current = {
+        pointerId: event.pointerId,
+        clientX: event.clientX,
+        clientY: event.clientY,
+        viewport: current,
+      };
+      svg.setPointerCapture(event.pointerId);
+      svg.classList.add("is-panning");
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const pan = panRef.current;
+      if (!pan || pan.pointerId !== event.pointerId) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const bounds = svg.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      const x = pan.viewport.x - ((event.clientX - pan.clientX) / bounds.width) * pan.viewport.width;
+      const y = pan.viewport.y - ((event.clientY - pan.clientY) / bounds.height) * pan.viewport.height;
+      updateViewport({
+        ...pan.viewport,
+        x: Math.min(scatterViewportBase.width - pan.viewport.width, Math.max(0, x)),
+        y: Math.min(scatterViewportBase.height - pan.viewport.height, Math.max(0, y)),
+      });
+    };
+
+    const clearPan = (event: PointerEvent) => {
+      const pan = panRef.current;
+      if (!pan || pan.pointerId !== event.pointerId) return;
+      panRef.current = null;
+      if (svg.hasPointerCapture(event.pointerId)) svg.releasePointerCapture(event.pointerId);
+      svg.classList.remove("is-panning");
+    };
+
     const handleTouchStart = (event: TouchEvent) => {
       if (event.touches.length !== 2) return;
       event.preventDefault();
       event.stopPropagation();
+      panRef.current = null;
+      svg.classList.remove("is-panning");
       const first = event.touches[0];
       const second = event.touches[1];
       const midpointX = (first.clientX + second.clientX) / 2;
@@ -248,6 +300,10 @@ const useScatterViewportZoom = (resetKey: string) => {
     };
 
     svg.addEventListener("wheel", handleWheel, { passive: false });
+    svg.addEventListener("pointerdown", handlePointerDown);
+    svg.addEventListener("pointermove", handlePointerMove);
+    svg.addEventListener("pointerup", clearPan);
+    svg.addEventListener("pointercancel", clearPan);
     svg.addEventListener("touchstart", handleTouchStart, { passive: false });
     svg.addEventListener("touchmove", handleTouchMove, { passive: false });
     svg.addEventListener("touchend", clearPinch, { passive: true });
@@ -255,6 +311,10 @@ const useScatterViewportZoom = (resetKey: string) => {
     svg.addEventListener("dblclick", handleDoubleClick);
     return () => {
       svg.removeEventListener("wheel", handleWheel);
+      svg.removeEventListener("pointerdown", handlePointerDown);
+      svg.removeEventListener("pointermove", handlePointerMove);
+      svg.removeEventListener("pointerup", clearPan);
+      svg.removeEventListener("pointercancel", clearPan);
       svg.removeEventListener("touchstart", handleTouchStart);
       svg.removeEventListener("touchmove", handleTouchMove);
       svg.removeEventListener("touchend", clearPinch);
@@ -3240,7 +3300,7 @@ export default function CompetitiveAnalysis({
                       <div><strong>근속기간 × 고객상담 평균만족도</strong></div>
                     </header>
                     <div className="growth-scatter-zoom-surface" data-zoomed={consultationScatterZoom.scale > 1.001}>
-                    <svg ref={consultationScatterZoom.svgRef} viewBox={consultationScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 고객상담 평균만족도 분포, 상단 점수 구간 확대. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소합니다.">
+                    <svg ref={consultationScatterZoom.svgRef} viewBox={consultationScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 고객상담 평균만족도 분포, 상단 점수 구간 확대. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소하고, 확대 후 드래그하여 이동합니다.">
                       <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
                       <defs>
                         <clipPath id="consultation-selected-staff-photo">
@@ -3375,9 +3435,15 @@ export default function CompetitiveAnalysis({
                       ) : null}
                     </svg>
                     {consultationScatterZoom.scale > 1.001 ? (
-                      <button type="button" className="growth-scatter-zoom-reset" onClick={consultationScatterZoom.reset}>
-                        원상복귀
-                      </button>
+                      <>
+                        <div className="growth-scatter-fixed-axes" aria-hidden="true">
+                          <span className="growth-scatter-fixed-y-axis">고객상담 평균만족도</span>
+                          <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
+                        </div>
+                        <button type="button" className="growth-scatter-zoom-reset" onClick={consultationScatterZoom.reset}>
+                          원상복귀
+                        </button>
+                      </>
                     ) : null}
                     </div>
                     <footer>
@@ -3497,7 +3563,7 @@ export default function CompetitiveAnalysis({
                       <div><strong>근속기간 × <span className="growth-sales-heading-number">26</span>년 누적판매대수</strong></div>
                     </header>
                     <div className="growth-scatter-zoom-surface" data-zoomed={salesScatterZoom.scale > 1.001}>
-                    <svg ref={salesScatterZoom.svgRef} viewBox={salesScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매대수 분포. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소합니다.">
+                    <svg ref={salesScatterZoom.svgRef} viewBox={salesScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매대수 분포. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소하고, 확대 후 드래그하여 이동합니다.">
                       <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>
                       <defs>
                         <clipPath id="sales-selected-staff-photo">
@@ -3632,9 +3698,15 @@ export default function CompetitiveAnalysis({
                       ) : null}
                     </svg>
                     {salesScatterZoom.scale > 1.001 ? (
-                      <button type="button" className="growth-scatter-zoom-reset" onClick={salesScatterZoom.reset}>
-                        원상복귀
-                      </button>
+                      <>
+                        <div className="growth-scatter-fixed-axes" aria-hidden="true">
+                          <span className="growth-scatter-fixed-y-axis">2026 누적판매(대)</span>
+                          <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
+                        </div>
+                        <button type="button" className="growth-scatter-zoom-reset" onClick={salesScatterZoom.reset}>
+                          원상복귀
+                        </button>
+                      </>
                     ) : null}
                     </div>
                     <footer>

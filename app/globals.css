@@ -1159,7 +1159,44 @@ html {
 }
 
 .growth-scatter-zoom-surface[data-zoomed="true"] {
-  cursor: zoom-out;
+  cursor: grab;
+  touch-action: none;
+}
+
+.growth-scatter-zoom-surface[data-zoomed="true"] > svg.is-panning {
+  cursor: grabbing;
+}
+
+.growth-scatter-fixed-axes {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  color: rgba(36, 79, 100, 0.72);
+  font-size: 7.5px;
+  font-weight: 550;
+  line-height: 1;
+}
+
+.growth-scatter-fixed-axes span {
+  position: absolute;
+  padding: 2px 3px;
+  border-radius: 2px;
+  background: rgba(247, 251, 252, 0.78);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+.growth-scatter-fixed-y-axis {
+  left: 9px;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.growth-scatter-fixed-x-axis {
+  left: 50%;
+  bottom: 3px;
+  transform: translateX(-50%);
 }
 
 .growth-scatter-zoom-reset {
