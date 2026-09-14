@@ -3244,7 +3244,7 @@ test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () 
   assert.match(source, /root\.classList\.remove\("analysis-viewport-locked"\)/);
   assert.match(css, /html\.analysis-viewport-locked \.competitive-analysis-page\s*\{[^}]*touch-action:\s*pan-x pan-y;/);
   assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 1180px\) and \(max-width: 1400px\)\s*\{[\s\S]*?--dashboard-page-max:\s*1376px;[\s\S]*?--dashboard-page-gutter:\s*32px;[\s\S]*?width:\s*min\(1376px, 100vw\);/);
-  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1400px\)\s*\{[\s\S]*?\.competitive-analysis-page \.growth-navigation-workspace,[\s\S]*?100dvh - var\(--growth-navigation-sticky-top, 122px\) -[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 10px/);
+  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1400px\)\s*\{[\s\S]*?\.competitive-analysis-page \.growth-navigation-workspace,[\s\S]*?100dvh - var\(--growth-navigation-sticky-top, 122px\) -[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 24px[\s\S]*?\.competitive-analysis-page \.growth-position-card,[\s\S]*?height: 238px;[\s\S]*?\.competitive-analysis-page \.growth-evidence-grid\s*\{[\s\S]*?height: 196px;[\s\S]*?\.competitive-analysis-page \.growth-sales-monthly-card\s*\{[\s\S]*?height: 190px;/);
 });
 
 test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1-Q4", async () => {

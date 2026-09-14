@@ -2211,9 +2211,32 @@ html.analysis-viewport-locked .competitive-analysis-page {
   .competitive-analysis-page .growth-navigation-detail {
     height: calc(
       100dvh - var(--growth-navigation-sticky-top, 122px) -
-        var(--growth-navigation-summary-height, 152px) - 10px
+        var(--growth-navigation-summary-height, 152px) - 24px
     );
     max-height: none;
+  }
+
+  .competitive-analysis-page .growth-position-card,
+  .competitive-analysis-page .growth-sales-funnel-card {
+    height: 238px;
+  }
+
+  .competitive-analysis-page .growth-zone-gauge {
+    width: min(100%, 368px);
+  }
+
+  .competitive-analysis-page .growth-scatter-card {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .competitive-analysis-page .growth-evidence-grid {
+    height: 196px;
+  }
+
+  .competitive-analysis-page .growth-sales-monthly-card {
+    height: 190px;
+    min-height: 190px;
   }
 
   .competitive-analysis-page .growth-navigation-detail {
