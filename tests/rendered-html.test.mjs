@@ -5756,6 +5756,10 @@ test("keeps the dense score rail stable when Edge enforces a minimum font size",
   );
   assert.match(
     css,
+    /html\[data-browser="edge-desktop"\] \.analysis-title-award-count\s*\{[^}]*margin-left: 6px;[^}]*font-size: 16px;[^}]*line-height: 1\.05;[^}]*zoom: 0\.5;/,
+  );
+  assert.match(
+    css,
     /html\[data-browser="edge-desktop"\] \.metric-stat-chips > span\s*\{[^}]*width: 100%;[^}]*min-height: 33\.6px;[^}]*font-size: 12px;[^}]*zoom: 0\.625;/,
   );
   assert.match(

@@ -16647,6 +16647,13 @@ html[data-browser="edge-desktop"] {
   text-size-adjust: 100%;
 }
 
+html[data-browser="edge-desktop"] .analysis-title-award-count {
+  margin-left: 6px;
+  font-size: 16px;
+  line-height: 1.05;
+  zoom: 0.5;
+}
+
 html[data-browser="edge-desktop"] .metric-max-note,
 html[data-browser="edge-desktop"]
   .combat-scoreboard
