@@ -692,9 +692,9 @@ html {
 .dealer-mix-segment { height: 100%; position: relative; transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
 .dealer-mix-segment:first-child { border-radius: 3px 0 0 3px; }
 .dealer-mix-segment:last-child { border-radius: 0 3px 3px 0; }
-.dealer-mix-segment.level-grand { background: #267ea4; }
-.dealer-mix-segment.level-advanced { background: #3e978d; }
-.dealer-mix-segment.level-certified { background: #e4813e; }
+.dealer-mix-segment.level-grand { background: linear-gradient(90deg, #3189ad 0%, #267ea4 58%, #217493 100%); }
+.dealer-mix-segment.level-advanced { background: linear-gradient(90deg, #4ba399 0%, #3e978d 58%, #34867e 100%); }
+.dealer-mix-segment.level-certified { background: linear-gradient(90deg, #ed945c 0%, #e4813e 58%, #d97435 100%); }
 .dealer-mix-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
 .dealer-mix-values > span { min-width: 0; display: grid; grid-template-columns: 5px auto 1fr auto; align-items: baseline; gap: 3px; color: #637985; }
 .dealer-mix-values > span > i { width: 5px; height: 5px; align-self: center; border-radius: 50%; background: #267ea4; }
@@ -713,7 +713,7 @@ html {
 .dealer-employment-metrics strong i { margin-left: 4px; color: #637985; font-size: 9px; font-style: normal; font-weight: 520; }
 .dealer-employment-metrics > b { color: #164f70; font-size: 16px; font-weight: 750; font-variant-numeric: tabular-nums; }
 .dealer-employment-bar { height: 8px; overflow: visible; position: relative; border-radius: 2px; background: #e7eef2; }
-.dealer-employment-bar > i { height: 100%; display: block; border-radius: inherit; background: #164f70; transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
+.dealer-employment-bar > i { height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, #1d5d7d 0%, #164f70 60%, #10445f 100%); transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
 .dealer-analysis-board [data-tooltip]::after {
   position: absolute;
   left: 50%;
