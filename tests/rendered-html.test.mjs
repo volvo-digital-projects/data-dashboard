@@ -353,13 +353,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /01 · 상담 영역|02 · 영업 영역/);
   assert.match(navigation, /성장 가속/);
   assert.match(navigation, /성과 확산/);
-  assert.match(navigation, /강화\(\{selectedStaffStrengthShare\.toFixed\(1\)\}%\)/);
-  assert.match(navigation, /수정\(\{selectedStaffImprovementShare\.toFixed\(1\)\}%\)/);
+  assert.match(navigation, /유지\/강화<small className="growth-comment-share">\(\{selectedStaffStrengthShare\.toFixed\(1\)\}%\)<\/small>/);
+  assert.match(navigation, /수정\/보완<small className="growth-comment-share">\(\{selectedStaffImprovementShare\.toFixed\(1\)\}%\)<\/small>/);
   assert.doesNotMatch(navigation, /유지\/ 강화 사항|보완\/ 수정 사항/);
   assert.match(source, /selectedStaffStrengthTotalMentions \/ selectedStaffCommentTotalMentions/);
   assert.match(source, /100 - selectedStaffStrengthShare/);
   assert.doesNotMatch(navigation, /유지·강화 포인트|보완·수정 포인트/);
   assert.match(css, /\.growth-comment-evidence > header span\s*\{[^}]*font-size:\s*14px;[^}]*font-weight:\s*700;[^}]*line-height:\s*1\.2;/);
+  assert.match(css, /\.growth-comment-evidence > header \.growth-comment-share\s*\{[^}]*font-size:\s*10\.5px;[^}]*font-weight:\s*700;[^}]*font-variant-numeric:\s*tabular-nums;/);
   assert.match(navigation, /className="growth-comment-bars"/);
   assert.match(navigation, /--growth-comment-bar-ratio/);
   assert.match(source, /const displayTwoDigitCount = \(value: number\) => String\(value\)\.padStart\(2, "0"\);/);

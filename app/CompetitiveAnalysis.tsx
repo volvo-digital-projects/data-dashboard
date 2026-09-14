@@ -3598,7 +3598,7 @@ export default function CompetitiveAnalysis({
 
                 <div className="growth-evidence-grid">
                   <article className="growth-comment-evidence strength">
-                    <header><span>강화({selectedStaffStrengthShare.toFixed(1)}%)</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
+                    <header><span>유지/강화<small className="growth-comment-share">({selectedStaffStrengthShare.toFixed(1)}%)</small></span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffStrengthTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars" key={`strength-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffStrengthKeywords.length ? (
                         <>
@@ -3625,7 +3625,7 @@ export default function CompetitiveAnalysis({
                     </div>
                   </article>
                   <article className="growth-comment-evidence improvement">
-                    <header><span>수정({selectedStaffImprovementShare.toFixed(1)}%)</span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
+                    <header><span>수정/보완<small className="growth-comment-share">({selectedStaffImprovementShare.toFixed(1)}%)</small></span><strong>중복포함 총 {displayTwoDigitCount(selectedStaffImprovementTotalMentions)}회</strong></header>
                     <div className="growth-comment-bars" key={`improvement-bars-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`}>
                       {selectedStaffImprovementKeywords.length ? (
                         <>
