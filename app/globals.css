@@ -2486,6 +2486,12 @@ html.analysis-entry-top-locked body {
     padding-left: 14px;
   }
 
+  .competitive-analysis-page .growth-capability-grid,
+  .competitive-analysis-page .growth-sales-dashboard {
+    height: 100%;
+    grid-template-rows: auto minmax(auto, 1fr) auto;
+  }
+
   .competitive-analysis-page .growth-evidence-grid {
     height: 196px;
   }
