@@ -3448,7 +3448,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(pagesSource, /segments\[2\] === "dealer-analysis"[\s\S]*?access\.role !== "master"/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*width: 92px;[^}]*height: 92px;/);
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\);/);
-  assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: 0;/);
+  assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {
