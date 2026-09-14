@@ -3,7 +3,6 @@
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
-import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 
 type Showroom = {
@@ -24,16 +23,19 @@ type VocShowroom = {
   dealer: string;
   employees: { name: string }[];
 };
-type SalesShowroom = {
-  summary: { deliveredSales: number };
-};
-
 const dealerOrder = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"];
 const years = staffCertificationsJson.sourceYears as number[];
 const showrooms = dashboardJson.showrooms as Showroom[];
 const certifications = staffCertificationsJson.records as Certification[];
 const vocShowrooms = vocStaffAnalysisJson.showrooms as Record<string, VocShowroom>;
-const salesShowrooms = salesActivityAnalysisJson.showrooms as Record<string, SalesShowroom>;
+const certificationDealerOverrides: Record<string, string> = {
+  "2025:장석우": "에이치",
+  "2025:주재홍": "에이치",
+  "2025:강민성": "코오롱",
+  "2025:백승국": "코오롱",
+  "2025:이동담": "코오롱",
+  "2025:김승곤": "아이비",
+};
 
 const showroomAliases: Record<string, string> = {
   대치: "강남대치",
@@ -45,11 +47,6 @@ const showroomAliases: Record<string, string> = {
 function normalizeShowroom(value: string) {
   const normalized = value.replace(/^볼보\s*/, "").replace(/\s+/g, "");
   return showroomAliases[normalized] ?? normalized;
-}
-
-function formatCompactDate(value?: string) {
-  if (!value) return "기준일 확인 중";
-  return `${value.slice(2, 4)}.${value.slice(5, 7)}.${value.slice(8, 10)} 기준`;
 }
 
 const showroomDealer = new Map(
@@ -66,6 +63,8 @@ for (const showroom of Object.values(vocShowrooms)) {
 }
 
 function certificationDealer(record: Certification) {
+  const verifiedOverride = certificationDealerOverrides[`${record.year}:${record.name}`];
+  if (verifiedOverride) return verifiedOverride;
   const mapped = showroomDealer.get(normalizeShowroom(record.showroom));
   if (mapped) return mapped;
   const currentDealers = currentDealersByName.get(record.name);
@@ -74,7 +73,6 @@ function certificationDealer(record: Certification) {
 
 const dealerRows = dealerOrder.map((dealer) => {
   const dealerShowrooms = showrooms.filter((showroom) => showroom.dealer === dealer);
-  const cdsids = new Set(dealerShowrooms.map((showroom) => showroom.cdsid));
   const currentNames = new Set(
     dealerShowrooms.flatMap((showroom) =>
       (vocShowrooms[showroom.cdsid]?.employees ?? []).map((employee) => employee.name),
@@ -83,45 +81,38 @@ const dealerRows = dealerOrder.map((dealer) => {
   const dealerCertifications = certifications.filter(
     (record) => certificationDealer(record) === dealer,
   );
-  const certifiedNames = new Set(dealerCertifications.map((record) => record.name));
   const currentCertified = [...currentNames].filter((name) =>
     certifications.some((record) => record.name === name),
   ).length;
-  const currentUnmatched = [...certifiedNames].filter((name) => !currentNames.has(name)).length;
   const levelCounts = {
     Grand: dealerCertifications.filter((record) => record.level === "Grand").length,
     Advanced: dealerCertifications.filter((record) => record.level === "Advanced").length,
     Certified: dealerCertifications.filter((record) => record.level === "Certified").length,
   };
-  const annual = years.map((year) =>
-    dealerCertifications.filter((record) => record.year === year).length,
-  );
-  const sales = [...cdsids].reduce(
-    (sum, cdsid) => sum + (salesShowrooms[cdsid]?.summary.deliveredSales ?? 0),
-    0,
-  );
   return {
     dealer,
     showroomCount: dealerShowrooms.length,
     currentStaff: currentNames.size,
-    sales,
     certificationCount: dealerCertifications.length,
     currentCertified,
-    currentUnmatched,
     levelCounts,
-    annual,
   };
 });
 
-const annualMaximum = Math.max(1, ...dealerRows.flatMap((row) => row.annual));
-const totalSales = dealerRows.reduce((sum, row) => sum + row.sales, 0);
-const totalStaff = dealerRows.reduce((sum, row) => sum + row.currentStaff, 0);
-const totalCertifications = dealerRows.reduce((sum, row) => sum + row.certificationCount, 0);
+const totalCertifications = certifications.length;
+const totalLevels = {
+  Grand: certifications.filter((record) => record.level === "Grand").length,
+  Advanced: certifications.filter((record) => record.level === "Advanced").length,
+  Certified: certifications.filter((record) => record.level === "Certified").length,
+};
+const unmatchedCertifications = certifications.filter((record) => !certificationDealer(record));
+
+function percentage(value: number, total: number) {
+  return total > 0 ? `${((value / total) * 100).toFixed(1)}%` : "0.0%";
+}
 
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
-  const rosterDate = (vocStaffAnalysisJson.source as { rosterCheckedAt?: string }).rosterCheckedAt;
-  const salesDate = (salesActivityAnalysisJson.source as { salesAsOf?: string }).salesAsOf;
   const accessDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "2-digit",
@@ -146,54 +137,58 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       </div>
 
       <section className="dealer-analysis-summary" aria-label="전국 통합 요약">
-        <article><small>분석 대상</small><strong>7</strong><span>딜러사 · 39개 전시장</span></article>
-        <article><small>현재 재직 명단</small><strong>{totalStaff}</strong><span>{formatCompactDate(rosterDate)}</span></article>
-        <article><small>2026 누적판매</small><strong>{totalSales.toLocaleString()}</strong><span>{formatCompactDate(salesDate)} · 대</span></article>
-        <article><small>인증 배출 이력</small><strong>{totalCertifications}</strong><span>{years[0]}–{years.at(-1)} · 연인원</span></article>
+        <article><small>6개년 인증 배출</small><strong>{totalCertifications}</strong><span>{years[0]}–{years.at(-1)} · 매년 30명</span></article>
+        <article className="level-grand"><small>Grand</small><strong>{totalLevels.Grand}</strong><span>전체의 {percentage(totalLevels.Grand, totalCertifications)}</span></article>
+        <article className="level-advanced"><small>Advanced</small><strong>{totalLevels.Advanced}</strong><span>전체의 {percentage(totalLevels.Advanced, totalCertifications)}</span></article>
+        <article className="level-certified"><small>Certified</small><strong>{totalLevels.Certified}</strong><span>전체의 {percentage(totalLevels.Certified, totalCertifications)}</span></article>
       </section>
 
       <section className="dealer-analysis-board" aria-labelledby="dealer-analysis-board-title">
         <div className="dealer-analysis-section-title">
           <div>
             <small>DEALER COMPARISON</small>
-            <h2 id="dealer-analysis-board-title">딜러사별 인증·재직·판매 현황</h2>
+            <h2 id="dealer-analysis-board-title">딜러사별 인증 레벨 인원 및 비율</h2>
           </div>
-          <p>G · A · C는 Grand · Advanced · Certified 인증 배출 연인원입니다.</p>
+          <p>2021–2026 인증 결과 180명 기준 · 동일 인물의 연도별 수상은 각각 포함</p>
         </div>
 
-        <div className="dealer-analysis-grid">
+        <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원과 비율">
+          <div className="dealer-certification-row dealer-certification-head" role="row">
+            <span role="columnheader">딜러사</span>
+            <span role="columnheader">전체 인증</span>
+            <span role="columnheader">Grand</span>
+            <span role="columnheader">Advanced</span>
+            <span role="columnheader">Certified</span>
+            <span role="columnheader">현재 재직 확인</span>
+          </div>
           {dealerRows.map((row, index) => (
-            <article className="dealer-analysis-card" key={row.dealer}>
-              <header>
+            <article className="dealer-certification-row" role="row" key={row.dealer}>
+              <div className="dealer-certification-name" role="cell">
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div><small>VOLVO DEALER</small><h3>{row.dealer}</h3></div>
                 <b>{row.showroomCount}개소</b>
-              </header>
-              <div className="dealer-analysis-card-kpis">
-                <div><small>재직 명단</small><strong>{row.currentStaff}<i>명</i></strong></div>
-                <div><small>누적판매</small><strong>{row.sales.toLocaleString()}<i>대</i></strong></div>
-                <div><small>인증 배출</small><strong>{row.certificationCount}<i>명</i></strong></div>
               </div>
-              <div className="dealer-analysis-levels" aria-label={`${row.dealer} 인증 등급별 배출`}>
-                <span><i>G</i><strong>{row.levelCounts.Grand}</strong></span>
-                <span><i>A</i><strong>{row.levelCounts.Advanced}</strong></span>
-                <span><i>C</i><strong>{row.levelCounts.Certified}</strong></span>
+              <div className="dealer-certification-total" role="cell">
+                <strong>{row.certificationCount}<i>명</i></strong>
+                <small>딜러사 배출 연인원</small>
               </div>
-              <div className="dealer-analysis-trend" aria-label={`${row.dealer} 연도별 인증 배출 추이`}>
-                {row.annual.map((count, yearIndex) => (
-                  <span key={years[yearIndex]}>
-                    <b>{count || "–"}</b>
-                    <i style={{ height: `${Math.max(count ? 10 : 2, (count / annualMaximum) * 48)}px` }} />
-                    <small>{String(years[yearIndex]).slice(2)}</small>
-                  </span>
-                ))}
+              {(["Grand", "Advanced", "Certified"] as const).map((level) => (
+                <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
+                  <span><strong>{row.levelCounts[level]}</strong><i>명</i><b>{percentage(row.levelCounts[level], row.certificationCount)}</b></span>
+                  <em><i style={{ width: percentage(row.levelCounts[level], row.certificationCount) }} /></em>
+                </div>
+              ))}
+              <div className="dealer-certification-current" role="cell">
+                <strong>{row.currentCertified}<i>명</i></strong>
+                <small>현재 {row.currentStaff}명 중 인증이력 연결</small>
               </div>
-              <footer>
-                <span>현재 재직 확인 <strong>{row.currentCertified}명</strong></span>
-                <span>현 명단 미확인 <strong>{row.currentUnmatched}명</strong></span>
-              </footer>
             </article>
           ))}
+        </div>
+        <div className="dealer-certification-reconcile">
+          <span>딜러사 확인 <strong>{totalCertifications - unmatchedCertifications.length}명</strong></span>
+          <span>딜러사 미확인 <strong>{unmatchedCertifications.length}명</strong> · 윤종현(Advanced), 김형선(Certified)</span>
+          <span>전국 총계 <strong>{totalCertifications}명</strong></span>
         </div>
       </section>
 
@@ -208,7 +203,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       </section>
 
       <p className="dealer-analysis-data-note">
-        ‘현 명단 미확인’은 과거 인증 이력 중 현재 Sales-DMS 재직 명단에서 일치하지 않는 인원이며, 퇴사 확정 수치가 아닙니다. 퇴사 이력 데이터 연결 후 재직·퇴사로 확정 구분합니다.
+        현재 재직 확인은 인증 이력과 현재 Sales-DMS 명단의 이름을 연결한 값이며, 명단에서 확인되지 않는 과거 인증자를 퇴사자로 단정하지 않습니다. 딜러사 미확인 2명은 원자료에 전시장 정보가 없어 별도로 보존했습니다.
       </p>
     </main>
   );

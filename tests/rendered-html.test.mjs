@@ -3441,9 +3441,18 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   for (const dealer of ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"]) {
     assert.match(html, new RegExp(`<h3>${dealer}<\\/h3>`));
   }
+  assert.match(html, /6개년 인증 배출<\/small><strong>180<\/strong>/);
+  assert.match(html, /Grand<\/small><strong>40<\/strong>/);
+  assert.match(html, /Advanced<\/small><strong>60<\/strong>/);
+  assert.match(html, /Certified<\/small><strong>80<\/strong>/);
+  assert.match(html, /딜러사별 인증 레벨 인원 및 비율/);
+  assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
+  assert.match(html, /딜러사 미확인 <strong>2명<\/strong>/);
+  assert.doesNotMatch(html, /누적판매/);
   assert.match(html, /현재 재직 확인/);
-  assert.match(html, /현 명단 미확인/);
-  assert.doesNotMatch(source, /현 명단 미확인[^\n]*퇴사자/);
+  assert.match(source, /"2025:장석우": "에이치"/);
+  assert.match(source, /"2025:이동담": "코오롱"/);
+  assert.match(source, /const totalCertifications = certifications\.length;/);
   assert.match(routeSource, /access\.role !== "master"/);
   assert.match(pagesSource, /segments\[2\] === "dealer-analysis"[\s\S]*?access\.role !== "master"/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*width: 92px;[^}]*height: 92px;/);
