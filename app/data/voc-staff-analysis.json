@@ -13,7 +13,7 @@
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-08-24",
-    "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/16개 보완 주제",
+    "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/18개 보완 주제",
     "commentAnalysisEmployees": 383
   },
   "nationalYears": {
@@ -542,7 +542,7 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "자율관람 방해",
               "mentions": 1
             },
             {
@@ -783,10 +783,6 @@
             }
           ],
           "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
             {
               "label": "구체적 설명 부족",
               "mentions": 1
@@ -1131,10 +1127,6 @@
             }
           ],
           "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
             {
               "label": "구체적 설명 부족",
               "mentions": 1
@@ -1642,12 +1634,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-03-27"
         },
         {
@@ -2595,10 +2582,6 @@
             },
             {
               "label": "대기시간 관리 미흡",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             }
           ],
@@ -5270,10 +5253,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
               "label": "전시차량 다양화 필요",
               "mentions": 1
             },
@@ -5360,10 +5339,6 @@
           "improvementKeywords": [
             {
               "label": "전시차량 다양화 필요",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
@@ -5464,10 +5439,6 @@
             }
           ],
           "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 2
-            },
             {
               "label": "시설 편의 미제공",
               "mentions": 2
@@ -6625,10 +6596,6 @@
             {
               "label": "응대 태도 불량",
               "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-08-09"
@@ -7046,10 +7013,6 @@
             },
             {
               "label": "대기시간 관리 미흡",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             }
           ],
@@ -7580,7 +7543,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "자율 관람·압박 완화",
+              "label": "과도한 응대 부담",
               "mentions": 1
             }
           ],
@@ -8327,10 +8290,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
               "label": "전시차량 다양화 필요",
               "mentions": 1
             },
@@ -8740,10 +8699,6 @@
           "improvementKeywords": [
             {
               "label": "전시차량 다양화 필요",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             }
           ],
@@ -10225,10 +10180,6 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
               "label": "응대 태도 불량",
               "mentions": 1
             }
@@ -10805,7 +10756,7 @@
               "mentions": 3
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "구매·계약 압박",
               "mentions": 2
             },
             {
@@ -10896,12 +10847,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-04-03"
         },
         {
@@ -11662,10 +11608,6 @@
             }
           ],
           "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
             {
               "label": "진행상황 중간안내 미흡",
               "mentions": 1
@@ -13056,12 +12998,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-06-28"
         },
         {
@@ -13362,10 +13299,6 @@
             {
               "label": "구체적 설명 부족",
               "mentions": 2
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
             },
             {
               "label": "가격혜택 안내부족",
@@ -13815,12 +13748,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 2
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-08-04"
         },
         {
@@ -14779,10 +14707,6 @@
             {
               "label": "구체적 설명 부족",
               "mentions": 3
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-04-10"
@@ -15066,10 +14990,6 @@
             {
               "label": "구체적 설명 부족",
               "mentions": 2
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
             },
             {
               "label": "간결한 설명필요",
@@ -15648,10 +15568,6 @@
             {
               "label": "진행상황 중간안내 미흡",
               "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-08-09"
@@ -15763,10 +15679,6 @@
             {
               "label": "전시차량 다양화 필요",
               "mentions": 2
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-05-14"
@@ -17069,10 +16981,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
               "label": "응대 태도 불량",
               "mentions": 1
             }
@@ -17579,7 +17487,7 @@
           ],
           "improvementKeywords": [
             {
-              "label": "자율 관람·압박 완화",
+              "label": "과도한 응대 부담",
               "mentions": 1
             }
           ],
@@ -17767,7 +17675,7 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "과도한 응대 부담",
               "mentions": 1
             }
           ],
@@ -18454,12 +18362,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-02-22"
         },
         {
@@ -18926,10 +18829,6 @@
             },
             {
               "label": "상담자료 활용 미흡",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             },
             {
@@ -21188,11 +21087,11 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "가격혜택 안내부족",
               "mentions": 1
             },
             {
-              "label": "가격혜택 안내부족",
+              "label": "과도한 응대 부담",
               "mentions": 1
             },
             {
@@ -21754,10 +21653,6 @@
             {
               "label": "구체적 설명 부족",
               "mentions": 3
-            },
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 2
             },
             {
               "label": "대기시간 관리 미흡",
@@ -22617,10 +22512,6 @@
           ],
           "improvementKeywords": [
             {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            },
-            {
               "label": "전시차량 다양화 필요",
               "mentions": 1
             }
@@ -22926,10 +22817,6 @@
             },
             {
               "label": "전시차량 다양화 필요",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             }
           ],
@@ -23844,12 +23731,7 @@
               "mentions": 1
             }
           ],
-          "improvementKeywords": [
-            {
-              "label": "자율 관람·압박 완화",
-              "mentions": 1
-            }
-          ],
+          "improvementKeywords": [],
           "latestResponseDate": "2026-04-17"
         },
         {
@@ -25238,6 +25120,10 @@
             {
               "label": "전시차량 다양화 필요",
               "mentions": 2
+            },
+            {
+              "label": "과도한 응대 부담",
+              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-02-22"
@@ -26558,7 +26444,7 @@
               "mentions": 1
             },
             {
-              "label": "자율 관람·압박 완화",
+              "label": "과도한 응대 부담",
               "mentions": 1
             }
           ],
@@ -26736,10 +26622,6 @@
             },
             {
               "label": "전시차량 다양화 필요",
-              "mentions": 1
-            },
-            {
-              "label": "자율 관람·압박 완화",
               "mentions": 1
             }
           ],
