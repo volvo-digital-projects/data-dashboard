@@ -265,12 +265,12 @@ html {
 }
 
 .growth-navigation-heading {
-  min-height: 46px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 8px 16px;
+  padding: 6px 16px;
   border-bottom: 1px solid #d8e5ea;
   background: #fff;
 }
