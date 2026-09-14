@@ -16118,6 +16118,29 @@ button.header-status-item {
     margin-top: 2px;
   }
 
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed + .growth-navigation .growth-navigation-workspace,
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed + .growth-navigation .growth-navigation-detail {
+    height: calc(
+      100vh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px) - 24px
+    );
+    height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px) - 24px
+    );
+  }
+
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed + .growth-navigation .growth-staff-roster-list {
+    max-height: calc(
+      100vh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px) + 6px
+    );
+    max-height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px) + 6px
+    );
+  }
+
   .competitive-analysis-page .growth-staff-roster-list {
     max-height: calc(
       100vh - var(--growth-navigation-sticky-top, 122px) -
@@ -16166,6 +16189,18 @@ button.header-status-item {
     height: calc(
       100dvh - var(--growth-navigation-sticky-top, 122px) -
         var(--growth-navigation-summary-height, 146px) - 20px
+    );
+  }
+
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed + .growth-navigation .growth-navigation-workspace,
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed + .growth-navigation .growth-navigation-detail {
+    height: calc(
+      100vh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 146px) - 8px
+    );
+    height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 146px) - 8px
     );
   }
 }

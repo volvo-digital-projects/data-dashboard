@@ -1529,16 +1529,18 @@ export default function CompetitiveAnalysis({
       if (
         !isPcViewport ||
         growthSummary.classList.contains("is-space-reclaimed") ||
-        detail.scrollTop > 1 ||
         detail.scrollHeight <= detail.clientHeight + 2
       ) {
         return false;
       }
 
+      const preservedScrollTop = detail.scrollTop;
       growthSummary.classList.add("is-space-reclaimed");
-      detail.scrollTop = 0;
       window.requestAnimationFrame(() => {
-        detail.scrollTop = 0;
+        detail.scrollTop = Math.min(
+          preservedScrollTop,
+          Math.max(0, detail.scrollHeight - detail.clientHeight),
+        );
       });
       return true;
     };
@@ -1587,15 +1589,19 @@ export default function CompetitiveAnalysis({
         event.preventDefault();
         return;
       }
-      if (!canSettleAtConsultationScatter()) return;
-
-      event.preventDefault();
       downwardIntent += Math.max(0, normalizedWheelDistance(event));
       if (downwardIntent < 18) return;
       if (reclaimPcSummarySpaceIfNeeded()) {
+        event.preventDefault();
         downwardIntent = 0;
         return;
       }
+      if (!canSettleAtConsultationScatter()) {
+        downwardIntent = 0;
+        return;
+      }
+
+      event.preventDefault();
       settleAtConsultationScatter();
     };
 
