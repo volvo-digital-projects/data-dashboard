@@ -455,9 +455,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(source, /(?:src|href)=\{staffFallbackProfileImage\}/);
   assert.doesNotMatch(navigation, /selectedStaffInitials/);
   assert.doesNotMatch(navigation, /<span className="staff-profile-silhouette"/);
-  assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: contain;[\s\S]*?object-position: center center;[\s\S]*?padding: 0;/);
-  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*transform: none;/);
-  assert.equal((navigation.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 4);
+  assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?transform: scale\(1\.04\);/);
+  assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*object-fit: cover;[^}]*object-position: center 18%;[^}]*transform: none;/);
+  assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 4);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);

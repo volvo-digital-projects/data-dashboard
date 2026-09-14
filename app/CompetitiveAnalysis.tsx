@@ -3167,7 +3167,7 @@ export default function CompetitiveAnalysis({
                                 y="-7.5"
                                 width="15"
                                 height="15"
-                                preserveAspectRatio="xMidYMid meet"
+                                preserveAspectRatio="xMidYMin slice"
                                 clipPath="url(#consultation-selected-staff-photo)"
                               />
                             ) : (
@@ -3178,7 +3178,7 @@ export default function CompetitiveAnalysis({
                                 y="-7.5"
                                 width="15"
                                 height="15"
-                                preserveAspectRatio="xMidYMid meet"
+                                preserveAspectRatio="xMidYMin slice"
                                 clipPath="url(#consultation-selected-staff-photo)"
                               />
                             )}
@@ -3417,7 +3417,7 @@ export default function CompetitiveAnalysis({
                                 y="-7.5"
                                 width="15"
                                 height="15"
-                                preserveAspectRatio="xMidYMid meet"
+                                preserveAspectRatio="xMidYMin slice"
                                 clipPath="url(#sales-selected-staff-photo)"
                               />
                             ) : (
@@ -3428,7 +3428,7 @@ export default function CompetitiveAnalysis({
                                 y="-7.5"
                                 width="15"
                                 height="15"
-                                preserveAspectRatio="xMidYMid meet"
+                                preserveAspectRatio="xMidYMin slice"
                                 clipPath="url(#sales-selected-staff-photo)"
                               />
                             )}
