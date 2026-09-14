@@ -3423,12 +3423,12 @@ export default function CompetitiveAnalysis({
                       {staffScatterNationalAverage !== null ? (
                         <g
                           className="growth-scatter-average-label"
-                          transform={`translate(${staffScatterPlot.right - 28} ${staffScatterY(staffScatterNationalAverage) - 36})`}
+                          transform={`translate(${staffScatterPlot.right - 32} ${staffScatterY(staffScatterNationalAverage) - 36})`}
                         >
-                          <path className="pointer" d="M 20 28 L 28 36 L 36 28 Z" />
-                          <rect width="56" height="30" rx="4" />
-                          <text x="28" y="11" textAnchor="middle">전국 평균</text>
-                          <text className="score" x="28" y="23" textAnchor="middle">
+                          <path className="pointer" d="M 25 28 L 32 36 L 39 28 Z" />
+                          <rect width="50" height="30" rx="4" />
+                          <text x="25" y="11" textAnchor="middle">전국 평균</text>
+                          <text className="score" x="25" y="23" textAnchor="middle">
                             {(staffScatterNationalAverage / 10).toFixed(1)}점
                           </text>
                         </g>
@@ -3681,12 +3681,12 @@ export default function CompetitiveAnalysis({
                       {staffSalesNationalAverage !== null ? (
                         <g
                           className="growth-scatter-average-label"
-                          transform={`translate(${staffScatterPlot.right - 28} ${staffSalesScatterY(staffSalesNationalAverage) - 36})`}
+                          transform={`translate(${staffScatterPlot.right - 32} ${staffSalesScatterY(staffSalesNationalAverage) - 36})`}
                         >
-                          <path className="pointer" d="M 20 28 L 28 36 L 36 28 Z" />
-                          <rect width="56" height="30" rx="4" />
-                          <text x="28" y="11" textAnchor="middle">전국 평균</text>
-                          <text className="score" x="28" y="23" textAnchor="middle">
+                          <path className="pointer" d="M 25 28 L 32 36 L 39 28 Z" />
+                          <rect width="50" height="30" rx="4" />
+                          <text x="25" y="11" textAnchor="middle">전국 평균</text>
+                          <text className="score" x="25" y="23" textAnchor="middle">
                             {staffSalesNationalAverage.toFixed(1)}대
                           </text>
                         </g>

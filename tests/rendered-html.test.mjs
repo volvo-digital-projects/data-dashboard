@@ -407,8 +407,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-meta > small\s*\{[^}]*font-size:\s*9\.5px;/);
   assert.match(css, /\.growth-sales-share-meta\s*\{[^}]*gap: 2px;[^}]*margin-top: 6px;[^}]*text-align: left;/);
   assert.match(navigation, /className="growth-scatter-average-line"/);
-  assert.match(navigation, /className="growth-scatter-average-label"[\s\S]*?staffScatterPlot\.right - 28[\s\S]*?staffScatterY\(staffScatterNationalAverage\) - 36/);
-  assert.match(navigation, /<text x="28" y="11" textAnchor="middle">전국 평균<\/text>/);
+  assert.equal((navigation.match(/className="growth-scatter-average-label"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/staffScatterPlot\.right - 32/g) ?? []).length, 2);
+  assert.equal((navigation.match(/<rect width="50" height="30" rx="4" \/>/g) ?? []).length, 2);
+  assert.equal((navigation.match(/<path className="pointer" d="M 25 28 L 32 36 L 39 28 Z" \/>/g) ?? []).length, 2);
+  assert.match(navigation, /<text x="25" y="11" textAnchor="middle">전국 평균<\/text>/);
   assert.match(navigation, /\{\(staffScatterNationalAverage \/ 10\)\.toFixed\(1\)\}점/);
   assert.doesNotMatch(navigation, /textAnchor="end">전국 \{\(staffScatterNationalAverage \/ 10\)\.toFixed\(1\)\}/);
   assert.match(css, /\.growth-scatter-average-line\s*\{[^}]*stroke:\s*#c63d45;[^}]*stroke-width:\s*1\.2;[^}]*stroke-dasharray:\s*5 4;/);
