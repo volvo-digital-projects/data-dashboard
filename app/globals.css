@@ -16056,34 +16056,29 @@ button.header-status-item {
     cursor: default;
   }
 
-  .competitive-analysis-page .growth-position-card,
-  .competitive-analysis-page .growth-sales-funnel-card,
-  .competitive-analysis-page .growth-zone-gauge,
-  .competitive-analysis-page .growth-sales-stage {
+  .competitive-analysis-page > .growth-navigation-sticky-summary,
+  .competitive-analysis-page .growth-navigation-heading,
+  .competitive-analysis-page .growth-profile-strip,
+  .competitive-analysis-page .growth-navigation-pinned-headings {
     transition:
-      height 180ms ease,
-      width 180ms ease,
-      margin 180ms ease,
-      gap 180ms ease;
+      min-height 180ms ease,
+      padding 180ms ease,
+      margin 180ms ease;
   }
 
-  .competitive-analysis-page .growth-navigation-detail.is-overview-compacted .growth-position-card,
-  .competitive-analysis-page .growth-navigation-detail.is-overview-compacted .growth-sales-funnel-card {
-    height: 180px;
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed {
+    margin-top: 0;
   }
 
-  .competitive-analysis-page .growth-navigation-detail.is-overview-compacted .growth-zone-gauge {
-    width: min(100%, 292px);
-    margin-top: -8px;
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed .growth-navigation-heading {
+    min-height: 30px;
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
 
-  .competitive-analysis-page .growth-navigation-detail.is-overview-compacted .growth-sales-funnel {
-    margin-top: 4px;
-  }
-
-  .competitive-analysis-page .growth-navigation-detail.is-overview-compacted .growth-sales-stage {
-    height: 70px;
-    gap: 5px;
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed .growth-profile-strip,
+  .competitive-analysis-page > .growth-navigation-sticky-summary.is-space-reclaimed .growth-navigation-pinned-headings {
+    margin-top: 2px;
   }
 
   .competitive-analysis-page .growth-staff-roster-list {
@@ -16100,10 +16095,10 @@ button.header-status-item {
 }
 
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .competitive-analysis-page .growth-position-card,
-  .competitive-analysis-page .growth-sales-funnel-card,
-  .competitive-analysis-page .growth-zone-gauge,
-  .competitive-analysis-page .growth-sales-stage {
+  .competitive-analysis-page > .growth-navigation-sticky-summary,
+  .competitive-analysis-page .growth-navigation-heading,
+  .competitive-analysis-page .growth-profile-strip,
+  .competitive-analysis-page .growth-navigation-pinned-headings {
     transition: none;
   }
 }

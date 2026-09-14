@@ -1466,6 +1466,7 @@ export default function CompetitiveAnalysis({
       window.clearTimeout(upwardDecisionTimer);
       upwardDecisionTimer = window.setTimeout(() => {
         upwardIntent = 0;
+        growthSummary.classList.remove("is-space-reclaimed");
         moveTo(0);
       }, 55);
     };
@@ -1479,6 +1480,7 @@ export default function CompetitiveAnalysis({
       window.clearTimeout(wheelQuietTimer);
       window.clearTimeout(upwardDecisionTimer);
       window.cancelAnimationFrame(motionFrame);
+      growthSummary.classList.remove("is-space-reclaimed");
       window.removeEventListener("wheel", handlePcSectionWheel, true);
     };
   }, [initialCdsid]);
@@ -1486,7 +1488,8 @@ export default function CompetitiveAnalysis({
   useEffect(() => {
     const detail = growthNavigationDetailRef.current;
     const consultationScatter = growthConsultationScatterRef.current;
-    if (!detail || !consultationScatter) return;
+    const growthSummary = growthNavigationSummaryRef.current;
+    if (!detail || !consultationScatter || !growthSummary) return;
 
     let snapFrame = 0;
     let snapActive = false;
@@ -1518,20 +1521,20 @@ export default function CompetitiveAnalysis({
       return targetTop > detail.scrollTop + 8;
     };
 
-    const compactPcOverviewIfNeeded = () => {
+    const reclaimPcSummarySpaceIfNeeded = () => {
       const isPcViewport = window.matchMedia(
         "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
       ).matches;
       if (
         !isPcViewport ||
-        detail.classList.contains("is-overview-compacted") ||
+        growthSummary.classList.contains("is-space-reclaimed") ||
         detail.scrollTop > 1 ||
         detail.scrollHeight <= detail.clientHeight + 2
       ) {
         return false;
       }
 
-      detail.classList.add("is-overview-compacted");
+      growthSummary.classList.add("is-space-reclaimed");
       detail.scrollTop = 0;
       window.requestAnimationFrame(() => {
         detail.scrollTop = 0;
@@ -1588,7 +1591,7 @@ export default function CompetitiveAnalysis({
       event.preventDefault();
       downwardIntent += Math.max(0, normalizedWheelDistance(event));
       if (downwardIntent < 18) return;
-      if (compactPcOverviewIfNeeded()) {
+      if (reclaimPcSummarySpaceIfNeeded()) {
         downwardIntent = 0;
         return;
       }

@@ -318,11 +318,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@media \(min-width: 1024px\) and \(hover: hover\) and \(pointer: fine\) and \(max-height: 820px\)\s*\{[\s\S]*?--growth-navigation-summary-height: 146px;[\s\S]*?\.competitive-analysis-page > \.growth-navigation-sticky-summary\s*\{[^}]*margin-top: 4px;[\s\S]*?\.competitive-analysis-page \.growth-navigation-heading\s*\{[^}]*min-height: 34px;[^}]*padding-top: 3px;[^}]*padding-bottom: 3px;[\s\S]*?\.competitive-analysis-page \.growth-navigation-workspace,[\s\S]*?100dvh - var\(--growth-navigation-sticky-top, 122px\) -[\s\S]*?var\(--growth-navigation-summary-height, 146px\) - 20px/);
   assert.match(navigation, /className="growth-navigation-detail"[\s\S]*?ref=\{growthNavigationDetailRef\}[\s\S]*?className="growth-scatter-card" ref=\{growthConsultationScatterRef\}/);
   assert.match(source, /const settleAtConsultationScatter = \(\) => \{[\s\S]*?const motionDuration = reduceMotion \? 0 : 320;[\s\S]*?Math\.pow\(1 - progress, 3\)[\s\S]*?detail\.scrollTop =/);
-  assert.match(source, /const compactPcOverviewIfNeeded = \(\) => \{[\s\S]*?\(min-width: 1024px\) and \(hover: hover\) and \(pointer: fine\)[\s\S]*?detail\.scrollHeight <= detail\.clientHeight \+ 2[\s\S]*?detail\.classList\.add\("is-overview-compacted"\)[\s\S]*?detail\.scrollTop = 0;/);
-  assert.match(source, /if \(compactPcOverviewIfNeeded\(\)\) \{[\s\S]*?downwardIntent = 0;[\s\S]*?return;[\s\S]*?\}[\s\S]*?settleAtConsultationScatter\(\);/);
-  assert.match(css, /\.growth-navigation-detail\.is-overview-compacted \.growth-position-card,[\s\S]*?\.growth-navigation-detail\.is-overview-compacted \.growth-sales-funnel-card\s*\{[^}]*height:\s*180px;/);
-  assert.match(css, /\.growth-navigation-detail\.is-overview-compacted \.growth-zone-gauge\s*\{[^}]*width:\s*min\(100%, 292px\);[^}]*margin-top:\s*-8px;/);
-  assert.match(css, /\.growth-navigation-detail\.is-overview-compacted \.growth-sales-stage\s*\{[^}]*height:\s*70px;[^}]*gap:\s*5px;/);
+  assert.match(source, /const growthSummary = growthNavigationSummaryRef\.current;[\s\S]*?const reclaimPcSummarySpaceIfNeeded = \(\) => \{[\s\S]*?\(min-width: 1024px\) and \(hover: hover\) and \(pointer: fine\)[\s\S]*?detail\.scrollHeight <= detail\.clientHeight \+ 2[\s\S]*?growthSummary\.classList\.add\("is-space-reclaimed"\)[\s\S]*?detail\.scrollTop = 0;/);
+  assert.match(source, /if \(reclaimPcSummarySpaceIfNeeded\(\)\) \{[\s\S]*?downwardIntent = 0;[\s\S]*?return;[\s\S]*?\}[\s\S]*?settleAtConsultationScatter\(\);/);
+  assert.match(css, /> \.growth-navigation-sticky-summary\.is-space-reclaimed\s*\{[^}]*margin-top:\s*0;/);
+  assert.match(css, /> \.growth-navigation-sticky-summary\.is-space-reclaimed \.growth-navigation-heading\s*\{[^}]*min-height:\s*30px;[^}]*padding-top:\s*2px;[^}]*padding-bottom:\s*2px;/);
+  assert.match(css, /> \.growth-navigation-sticky-summary\.is-space-reclaimed \.growth-profile-strip,[\s\S]*?> \.growth-navigation-sticky-summary\.is-space-reclaimed \.growth-navigation-pinned-headings\s*\{[^}]*margin-top:\s*2px;/);
+  assert.doesNotMatch(css, /is-overview-compacted/);
+  assert.doesNotMatch(source, /compactPcOverviewIfNeeded/);
   assert.match(source, /if \(!canSettleAtConsultationScatter\(\)\) return;\s*event\.preventDefault\(\);\s*downwardIntent \+= downwardDistance;/);
   assert.match(source, /const handleDetailWheel = \(event: WheelEvent\) => \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?downwardIntent < 18[\s\S]*?settleAtConsultationScatter\(\);/);
   assert.match(source, /const handleDetailTouchMove = \(event: TouchEvent\) => \{[\s\S]*?downwardDistance[\s\S]*?event\.preventDefault\(\);[\s\S]*?downwardIntent < 18[\s\S]*?settleAtConsultationScatter\(\);/);
