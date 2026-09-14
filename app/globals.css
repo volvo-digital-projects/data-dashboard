@@ -819,7 +819,7 @@ html {
   .dealer-analysis-command-shell { margin-inline: 0; }
   .dealer-analysis-board { padding: 14px; }
   .dealer-kpi-strip article { padding-inline: 8px; }
-  .dealer-certification-row { grid-template-columns: minmax(110px, 0.7fr) 72px minmax(330px, 2.1fr) minmax(235px, 1.45fr); }
+  .dealer-certification-row { grid-template-columns: minmax(90px, 0.7fr) 64px minmax(0, 2.1fr) minmax(180px, 1.45fr); }
   .dealer-certification-row > * { padding-inline: 9px; }
   .dealer-mix-values { gap: 5px; }
   .dealer-mix-values > span { grid-template-columns: 5px 1fr auto; }

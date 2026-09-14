@@ -3487,6 +3487,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
+  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(90px,\s*0\.7fr\)\s*64px\s*minmax\(0,\s*2\.1fr\)\s*minmax\(180px,\s*1\.45fr\)/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {
