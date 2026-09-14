@@ -16059,6 +16059,36 @@ button.header-status-item {
 
 }
 
+/* Short, wide PC displays trade decorative headroom for analysis space.
+   Taller monitors retain the more generous summary rhythm above. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (max-height: 820px) {
+  .competitive-analysis-page {
+    --growth-navigation-summary-height: 146px;
+  }
+
+  .competitive-analysis-page > .growth-navigation-sticky-summary {
+    margin-top: 4px;
+  }
+
+  .competitive-analysis-page .growth-navigation-heading {
+    min-height: 34px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .competitive-analysis-page .growth-navigation-workspace,
+  .competitive-analysis-page .growth-navigation-detail {
+    height: calc(
+      100vh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 146px) - 20px
+    );
+    height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 146px) - 20px
+    );
+  }
+}
+
 @media (max-width: 760px) {
   .analysis-workspace {
     grid-template-columns: minmax(0, 1fr);
