@@ -153,7 +153,7 @@ html {
 .growth-navigation-sticky-summary {
   margin-top: 12px;
   overflow: visible;
-  border: 1px solid #c9dce4;
+  border: 0;
   border-bottom: 0;
   border-radius: 5px 5px 0 0;
   background: #f5f9fb;

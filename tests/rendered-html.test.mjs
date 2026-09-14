@@ -580,6 +580,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-certification strong b\s*\{[^}]*min-width: 4\.2ch;[^}]*justify-content: flex-start;/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(css, /\.competitive-analysis-page > \.growth-navigation-sticky-summary,[\s\S]*?\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
+  assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*border: 0;[^}]*border-bottom: 0;/);
+  assert.match(css, /\.growth-navigation-heading\s*\{[^}]*border-bottom: 1px solid #d8e5ea;/);
   assert.match(css, /\.growth-navigation-sticky-summary\s*\{[^}]*position: -webkit-sticky;[^}]*position: sticky;[^}]*top: var\(--growth-navigation-sticky-top, 356px\);[^}]*z-index: 44;[^}]*align-self: start;[^}]*background: #f5f9fb;[^}]*0 -18px 0 #ffffff,/);
   assert.match(css, /@media \(min-width: 600px\)[\s\S]*?\.growth-navigation-sticky-summary\s*\{/);
   assert.match(css, /@media \(min-width: 600px\) and \(max-width: 760px\)\s*\{[\s\S]*?--growth-navigation-sticky-top: 0px;/);
