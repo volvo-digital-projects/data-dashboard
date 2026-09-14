@@ -160,8 +160,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
           <article className="dealer-certification-row dealer-certification-aggregate" role="row">
             <div className="dealer-certification-name" role="cell">
-              <span>합계</span>
-              <div><small>ALL DEALERS</small><h3>전체</h3></div>
+              <div><h3>전체</h3></div>
               <b>7개사</b>
             </div>
             <div className="dealer-certification-total" role="cell">
@@ -170,18 +169,16 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             {(["Grand", "Advanced", "Certified"] as const).map((level) => (
               <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
                 <span><strong>{totalLevels[level]}</strong><i>명</i><b>{percentage(totalLevels[level], totalCertifications)}</b></span>
-                <em><i style={{ width: percentage(totalLevels[level], totalCertifications) }} /></em>
               </div>
             ))}
             <div className="dealer-certification-current" role="cell">
               <strong>{totalCurrentCertified}<i>명</i></strong>
             </div>
           </article>
-          {dealerRows.map((row, index) => (
+          {dealerRows.map((row) => (
             <article className="dealer-certification-row" role="row" key={row.dealer}>
               <div className="dealer-certification-name" role="cell">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <div><small>VOLVO DEALER</small><h3>{row.dealer}</h3></div>
+                <div><h3>{row.dealer}</h3></div>
                 <b>{row.showroomCount}개소</b>
               </div>
               <div className="dealer-certification-total" role="cell">
@@ -190,7 +187,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               {(["Grand", "Advanced", "Certified"] as const).map((level) => (
                 <div className={`dealer-certification-level level-${level.toLowerCase()}`} role="cell" key={level}>
                   <span><strong>{row.levelCounts[level]}</strong><i>명</i><b>{percentage(row.levelCounts[level], row.certificationCount)}</b></span>
-                  <em><i style={{ width: percentage(row.levelCounts[level], row.certificationCount) }} /></em>
                 </div>
               ))}
               <div className="dealer-certification-current" role="cell">

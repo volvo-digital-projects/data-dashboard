@@ -633,20 +633,17 @@ html {
   box-shadow: inset 0 -1px 0 #cadde4;
 }
 .dealer-certification-aggregate .dealer-certification-name h3 { color: #0d5875; }
-.dealer-certification-aggregate .dealer-certification-name > span { color: #377d95; font-weight: 700; }
 .dealer-certification-aggregate .dealer-certification-total strong,
 .dealer-certification-aggregate .dealer-certification-current strong { font-size: 22px; font-weight: 750; }
 .dealer-certification-aggregate .dealer-certification-level span > strong { font-size: 22px; font-weight: 750; }
 
 .dealer-certification-name {
   display: grid;
-  grid-template-columns: 26px 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 8px;
 }
-.dealer-certification-name > span { color: #9cb0ba; font-family: var(--font-latin); font-size: 10px; }
-.dealer-certification-name small { color: #88a0ab; font-family: var(--font-latin); font-size: 6px; letter-spacing: 0.12em; }
-.dealer-certification-name h3 { margin: 1px 0 0; color: #103d53; font-size: 17px; }
+.dealer-certification-name h3 { margin: 0; color: #103d53; font-size: 17px; }
 .dealer-certification-name > b { padding: 4px 7px; color: #3b778d; border-radius: 999px; background: #edf5f7; font-size: 9px; }
 
 .dealer-certification-total,
@@ -662,12 +659,8 @@ html {
 .dealer-certification-level span { display: flex; align-items: baseline; }
 .dealer-certification-level span > strong { color: #247d9b; font-family: var(--font-latin); font-size: 20px; }
 .dealer-certification-level span > b { margin-left: auto; color: #617b87; font-family: var(--font-latin); font-size: 10px; }
-.dealer-certification-level em { height: 5px; display: block; margin-top: 7px; overflow: hidden; border-radius: 999px; background: #e8f0f3; }
-.dealer-certification-level em > i { height: 100%; display: block; border-radius: inherit; background: #2785a2; }
 .dealer-certification-level.level-advanced span > strong { color: #438f88; }
-.dealer-certification-level.level-advanced em > i { background: #4b9890; }
 .dealer-certification-level.level-certified span > strong { color: #d9824b; }
-.dealer-certification-level.level-certified em > i { background: #df925e; }
 
 .dealer-certification-reconcile {
   display: flex;
