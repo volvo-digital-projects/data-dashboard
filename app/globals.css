@@ -714,9 +714,6 @@ html {
 .dealer-employment-metrics > b { color: #164f70; font-size: 16px; font-weight: 750; font-variant-numeric: tabular-nums; }
 .dealer-employment-bar { height: 8px; overflow: visible; position: relative; border-radius: 2px; background: #e7eef2; }
 .dealer-employment-bar > i { height: 100%; display: block; border-radius: inherit; background: #164f70; transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }
-.dealer-employment-gap { color: #637985; font-size: 7px; }
-.dealer-employment-gap strong { color: #496b7b; font-size: 8px; font-weight: 650; font-variant-numeric: tabular-nums; }
-
 .dealer-analysis-board [data-tooltip]::after {
   position: absolute;
   left: 50%;

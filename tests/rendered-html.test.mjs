@@ -3458,7 +3458,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<span role="columnheader">현재 재직 · 재직률<\/span>/);
   assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
-  assert.equal((html.match(/class="dealer-employment-gap"/g) ?? []).length, 8);
+  assert.doesNotMatch(html, /dealer-employment-gap|Gap · 현재 재직 외/);
   assert.match(html, /현재 재직 67명 \/ 전체 인증 180명 · 재직률 37\.2%/);
   for (const sortLabel of ["기본순", "전체 인증 많은 순", "재직률 높은 순", "재직률 낮은 순", "현재 재직 많은 순"]) {
     assert.match(html, new RegExp(`>${sortLabel}<\\/button>`));

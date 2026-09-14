@@ -171,7 +171,6 @@ function EmploymentProgressBar({
   animationDelay: number;
 }) {
   const rate = percentage(current, total);
-  const remaining = Math.max(0, total - current);
   return (
     <div className="dealer-employment" role="cell">
       <div className="dealer-employment-metrics">
@@ -186,7 +185,6 @@ function EmploymentProgressBar({
       >
         <i style={{ width: rate, "--bar-delay": `${animationDelay}ms` } as CSSProperties} />
       </div>
-      <span className="dealer-employment-gap">Gap · 현재 재직 외 <strong>{remaining}명</strong></span>
     </div>
   );
 }
