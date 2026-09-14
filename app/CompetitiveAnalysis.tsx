@@ -639,6 +639,7 @@ const displayQuarterNumber = (value: number | null | undefined) =>
   typeof value === "number" ? displayNumber(value) : "―";
 
 const displayTwoDigitCount = (value: number) => String(value).padStart(2, "0");
+const displayTwoDigitRank = (value: number | null) => value === null ? "―" : displayTwoDigitCount(value);
 
 const displayRankingNumber = (value: number) => value.toFixed(1);
 
@@ -3977,12 +3978,12 @@ export default function CompetitiveAnalysis({
                           <small className="growth-sales-share-rank">
                             <span>
                               <b>{selectedDealerRankName}</b>
-                              <em>{selectedStaffDealerSalesRank ?? "―"}위</em>
+                              <em>{displayTwoDigitRank(selectedStaffDealerSalesRank)}위</em>
                               <span><i aria-hidden="true">/</i>전체 {selectedStaffDealerSalesPopulation.length}</span>
                             </span>
                             <span>
                               <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b>
-                              <em>{selectedStaffSalesRank ?? "―"}위</em>
+                              <em>{displayTwoDigitRank(selectedStaffSalesRank)}위</em>
                               <span><i aria-hidden="true">/</i>전체 {selectedShowroomSalesPopulationCount}</span>
                             </span>
                           </small>
