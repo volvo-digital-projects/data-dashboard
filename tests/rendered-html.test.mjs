@@ -415,7 +415,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-average-label rect,[\s\S]*?\.growth-scatter-average-label \.pointer\s*\{[^}]*fill:\s*rgba\(255, 246, 247, 0\.97\);[^}]*stroke:\s*rgba\(198, 61, 69, 0\.42\);/);
   assert.match(css, /\.growth-scatter-average-label text\s*\{[^}]*fill:\s*#a42f38;[^}]*font-size:\s*7\.5px;[^}]*font-weight:\s*650;/);
   assert.match(css, /\.growth-scatter-average-label text\.score\s*\{[^}]*font-size:\s*9px;[^}]*font-weight:\s*750;/);
-  assert.match(navigation, /viewBox="0 0 470 210"/);
+  assert.equal((navigation.match(/viewBox=\{(?:consultation|sales)ScatterZoom\.viewBox\}/g) ?? []).length, 2);
   assert.match(navigation, /전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다\./);
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
@@ -436,6 +436,18 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /2026 누적판매\(대\)/);
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
   assert.match(navigation, /평균 = 전국 \{nationalStaffSalesPopulation\.length\}명 누적판매 합계 ÷ 인원/);
+  assert.equal((navigation.match(/className="growth-scatter-zoom-surface"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/className="growth-scatter-zoom-reset"/g) ?? []).length, 2);
+  assert.match(source, /const scatterViewportMaximumScale = 5;/);
+  assert.match(source, /if \(!event\.ctrlKey && !event\.metaKey\) return;[\s\S]*?event\.preventDefault\(\);[\s\S]*?Math\.exp\(-event\.deltaY \* 0\.0025\)/);
+  assert.match(source, /svg\.addEventListener\("wheel", handleWheel, \{ passive: false \}\)/);
+  assert.match(source, /if \(event\.touches\.length !== 2\) return;[\s\S]*?Math\.hypot\(second\.clientX - first\.clientX, second\.clientY - first\.clientY\)/);
+  assert.match(source, /svg\.addEventListener\("touchstart", handleTouchStart, \{ passive: false \}\)[\s\S]*?svg\.addEventListener\("touchmove", handleTouchMove, \{ passive: false \}\)/);
+  assert.match(source, /if \(event\.touches\.length !== 1\) \{[\s\S]*?touchY = null;[\s\S]*?downwardIntent = 0;/);
+  assert.match(source, /svg\.addEventListener\("dblclick", handleDoubleClick\)/);
+  assert.equal((navigation.match(/>\s*원상복귀\s*<\/button>/g) ?? []).length, 2);
+  assert.match(css, /\.growth-scatter-zoom-surface\s*\{[^}]*position:\s*relative;[^}]*aspect-ratio:\s*470 \/ 210;[^}]*overflow:\s*hidden;[^}]*touch-action:\s*pan-y;/);
+  assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*image-rendering:\s*auto;/);
   assert.equal((navigation.match(/className="growth-scatter-selected-photo"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-selected-guides is-targeting"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-selected-guides is-targeting"[\s\S]*?className="growth-scatter-population"/g) ?? []).length, 2);

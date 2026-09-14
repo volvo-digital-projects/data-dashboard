@@ -115,6 +115,162 @@ type StaffCertificationRecord = {
   level: StaffCertificationLevel;
 };
 
+type ScatterViewport = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+const scatterViewportBase: ScatterViewport = { x: 0, y: 0, width: 470, height: 210 };
+const scatterViewportMaximumScale = 5;
+
+const clampScatterViewport = (
+  viewport: ScatterViewport,
+  focalXRatio: number,
+  focalYRatio: number,
+  requestedScale: number,
+) => {
+  const scale = Math.min(scatterViewportMaximumScale, Math.max(1, requestedScale));
+  const width = scatterViewportBase.width / scale;
+  const height = scatterViewportBase.height / scale;
+  const focalX = viewport.x + viewport.width * focalXRatio;
+  const focalY = viewport.y + viewport.height * focalYRatio;
+  return {
+    x: Math.min(scatterViewportBase.width - width, Math.max(0, focalX - width * focalXRatio)),
+    y: Math.min(scatterViewportBase.height - height, Math.max(0, focalY - height * focalYRatio)),
+    width,
+    height,
+  };
+};
+
+const useScatterViewportZoom = (resetKey: string) => {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const viewportRef = useRef<ScatterViewport>(scatterViewportBase);
+  const [viewport, setViewport] = useState<ScatterViewport>(scatterViewportBase);
+  const pinchRef = useRef<{
+    distance: number;
+    viewport: ScatterViewport;
+    focalX: number;
+    focalY: number;
+  } | null>(null);
+
+  const updateViewport = (next: ScatterViewport) => {
+    viewportRef.current = next;
+    setViewport(next);
+  };
+
+  const reset = () => updateViewport(scatterViewportBase);
+
+  useEffect(() => {
+    reset();
+  }, [resetKey]);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    const ratiosAt = (clientX: number, clientY: number) => {
+      const bounds = svg.getBoundingClientRect();
+      return {
+        x: Math.min(1, Math.max(0, (clientX - bounds.left) / bounds.width)),
+        y: Math.min(1, Math.max(0, (clientY - bounds.top) / bounds.height)),
+      };
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (!event.ctrlKey && !event.metaKey) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const focal = ratiosAt(event.clientX, event.clientY);
+      const current = viewportRef.current;
+      const currentScale = scatterViewportBase.width / current.width;
+      updateViewport(clampScatterViewport(
+        current,
+        focal.x,
+        focal.y,
+        currentScale * Math.exp(-event.deltaY * 0.0025),
+      ));
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      if (event.touches.length !== 2) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const first = event.touches[0];
+      const second = event.touches[1];
+      const midpointX = (first.clientX + second.clientX) / 2;
+      const midpointY = (first.clientY + second.clientY) / 2;
+      const focal = ratiosAt(midpointX, midpointY);
+      const current = viewportRef.current;
+      pinchRef.current = {
+        distance: Math.hypot(second.clientX - first.clientX, second.clientY - first.clientY),
+        viewport: current,
+        focalX: current.x + current.width * focal.x,
+        focalY: current.y + current.height * focal.y,
+      };
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const pinch = pinchRef.current;
+      if (!pinch || event.touches.length !== 2) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const first = event.touches[0];
+      const second = event.touches[1];
+      const distance = Math.hypot(second.clientX - first.clientX, second.clientY - first.clientY);
+      const midpoint = ratiosAt(
+        (first.clientX + second.clientX) / 2,
+        (first.clientY + second.clientY) / 2,
+      );
+      const startingScale = scatterViewportBase.width / pinch.viewport.width;
+      const scale = Math.min(
+        scatterViewportMaximumScale,
+        Math.max(1, startingScale * (distance / Math.max(1, pinch.distance))),
+      );
+      const width = scatterViewportBase.width / scale;
+      const height = scatterViewportBase.height / scale;
+      updateViewport({
+        x: Math.min(scatterViewportBase.width - width, Math.max(0, pinch.focalX - width * midpoint.x)),
+        y: Math.min(scatterViewportBase.height - height, Math.max(0, pinch.focalY - height * midpoint.y)),
+        width,
+        height,
+      });
+    };
+
+    const clearPinch = (event: TouchEvent) => {
+      if (event.touches.length < 2) pinchRef.current = null;
+    };
+
+    const handleDoubleClick = (event: MouseEvent) => {
+      event.preventDefault();
+      reset();
+    };
+
+    svg.addEventListener("wheel", handleWheel, { passive: false });
+    svg.addEventListener("touchstart", handleTouchStart, { passive: false });
+    svg.addEventListener("touchmove", handleTouchMove, { passive: false });
+    svg.addEventListener("touchend", clearPinch, { passive: true });
+    svg.addEventListener("touchcancel", clearPinch, { passive: true });
+    svg.addEventListener("dblclick", handleDoubleClick);
+    return () => {
+      svg.removeEventListener("wheel", handleWheel);
+      svg.removeEventListener("touchstart", handleTouchStart);
+      svg.removeEventListener("touchmove", handleTouchMove);
+      svg.removeEventListener("touchend", clearPinch);
+      svg.removeEventListener("touchcancel", clearPinch);
+      svg.removeEventListener("dblclick", handleDoubleClick);
+    };
+  }, []);
+
+  return {
+    svgRef,
+    viewBox: `${viewport.x} ${viewport.y} ${viewport.width} ${viewport.height}`,
+    scale: scatterViewportBase.width / viewport.width,
+    reset,
+  };
+};
+
 type SalesActivityStaff = {
   name: string;
   activityStatus: "available" | "missing" | "ambiguous-name";
@@ -814,6 +970,8 @@ export default function CompetitiveAnalysis({
   const growthStaffRosterRef = useRef<HTMLDivElement>(null);
   const growthNavigationDetailRef = useRef<HTMLDivElement>(null);
   const growthConsultationScatterRef = useRef<HTMLElement>(null);
+  const consultationScatterZoom = useScatterViewportZoom(`${initialCdsid}-${selectedStaffName ?? "default"}-consultation`);
+  const salesScatterZoom = useScatterViewportZoom(`${initialCdsid}-${selectedStaffName ?? "default"}-sales`);
   const growthStaffRosterDragRef = useRef<{
     pointerId: number;
     originY: number;
@@ -1337,6 +1495,11 @@ export default function CompetitiveAnalysis({
     };
 
     const handleDetailTouchMove = (event: TouchEvent) => {
+      if (event.touches.length !== 1) {
+        touchY = null;
+        downwardIntent = 0;
+        return;
+      }
       const nextTouchY = event.touches[0]?.clientY ?? null;
       if (touchY === null || nextTouchY === null) return;
       const downwardDistance = touchY - nextTouchY;
@@ -3076,7 +3239,8 @@ export default function CompetitiveAnalysis({
                     <header>
                       <div><strong>근속기간 × 고객상담 평균만족도</strong></div>
                     </header>
-                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 고객상담 평균만족도 분포, 상단 점수 구간 확대">
+                    <div className="growth-scatter-zoom-surface" data-zoomed={consultationScatterZoom.scale > 1.001}>
+                    <svg ref={consultationScatterZoom.svgRef} viewBox={consultationScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 고객상담 평균만족도 분포, 상단 점수 구간 확대. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소합니다.">
                       <desc>전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다.</desc>
                       <defs>
                         <clipPath id="consultation-selected-staff-photo">
@@ -3210,6 +3374,12 @@ export default function CompetitiveAnalysis({
                         </g>
                       ) : null}
                     </svg>
+                    {consultationScatterZoom.scale > 1.001 ? (
+                      <button type="button" className="growth-scatter-zoom-reset" onClick={consultationScatterZoom.reset}>
+                        원상복귀
+                      </button>
+                    ) : null}
+                    </div>
                     <footer>
                       <span><i />전국 SC</span>
                       <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
@@ -3326,7 +3496,8 @@ export default function CompetitiveAnalysis({
                     <header>
                       <div><strong>근속기간 × <span className="growth-sales-heading-number">26</span>년 누적판매대수</strong></div>
                     </header>
-                    <svg viewBox="0 0 470 210" role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매대수 분포">
+                    <div className="growth-scatter-zoom-surface" data-zoomed={salesScatterZoom.scale > 1.001}>
+                    <svg ref={salesScatterZoom.svgRef} viewBox={salesScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 2026년 누적판매대수 분포. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소합니다.">
                       <desc>현재 재직 중인 전국 영업직원의 2026년 누적 출고 실적과 근속기간을 비교합니다.</desc>
                       <defs>
                         <clipPath id="sales-selected-staff-photo">
@@ -3460,6 +3631,12 @@ export default function CompetitiveAnalysis({
                         </g>
                       ) : null}
                     </svg>
+                    {salesScatterZoom.scale > 1.001 ? (
+                      <button type="button" className="growth-scatter-zoom-reset" onClick={salesScatterZoom.reset}>
+                        원상복귀
+                      </button>
+                    ) : null}
+                    </div>
                     <footer>
                       <span><i />전국 SC</span>
                       <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
