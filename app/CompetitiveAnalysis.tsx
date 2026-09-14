@@ -1526,6 +1526,9 @@ export default function CompetitiveAnalysis({
     let snapActive = false;
     let downwardIntent = 0;
     let touchY: number | null = null;
+    const usesTabletSectionFlow = window.matchMedia(
+      "(hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 761px) and (max-width: 1400px)",
+    ).matches;
 
     const normalizedWheelDistance = (event: WheelEvent) => {
       if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
@@ -1546,9 +1549,19 @@ export default function CompetitiveAnalysis({
       );
     };
 
+    const consultationScatterSettleTop = () => {
+      const scatterTop = consultationScatterTop();
+      if (!usesTabletSectionFlow) return scatterTop;
+
+      return Math.max(
+        scatterTop,
+        Math.max(0, detail.scrollHeight - detail.clientHeight),
+      );
+    };
+
     const canSettleAtConsultationScatter = () => {
       if (!window.matchMedia("(min-width: 600px)").matches) return false;
-      const targetTop = consultationScatterTop();
+      const targetTop = consultationScatterSettleTop();
       return targetTop > detail.scrollTop + 8;
     };
 
@@ -1577,7 +1590,7 @@ export default function CompetitiveAnalysis({
 
     const settleAtConsultationScatter = () => {
       const startTop = detail.scrollTop;
-      const targetTop = consultationScatterTop();
+      const targetTop = consultationScatterSettleTop();
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
