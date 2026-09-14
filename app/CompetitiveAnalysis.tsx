@@ -3286,7 +3286,10 @@ export default function CompetitiveAnalysis({
             <div className="growth-staff-roster-columns" aria-hidden="true">
               <span>영업직원 / 입사일자</span>
               <span>고객상담 평균만족도</span>
-              <span>26년 누적 판매대수</span>
+              <span className="growth-roster-sales-heading">
+                <b>누적 판매대수</b>
+                <i>26년 누적 판매대수</i>
+              </span>
             </div>
             <div className="growth-navigation-pinned-capabilities" aria-hidden="true">
               <div className="growth-navigation-pinned-heading consultation">

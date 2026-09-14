@@ -415,6 +415,19 @@ html {
   text-align: right;
 }
 
+.growth-roster-sales-heading b,
+.growth-roster-sales-heading i {
+  font: inherit;
+}
+
+.growth-roster-sales-heading b {
+  display: none;
+}
+
+.growth-roster-sales-heading i {
+  display: inline;
+}
+
 .growth-staff-roster-list {
   position: relative;
   max-width: 100%;
@@ -426,6 +439,14 @@ html {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .growth-roster-sales-heading b {
+    display: inline;
+  }
+
+  .growth-roster-sales-heading i {
+    display: none;
+  }
+
   .growth-staff-roster-columns {
     grid-template-columns: minmax(0, 1fr) 76px 56px;
     padding-right: 24px;
