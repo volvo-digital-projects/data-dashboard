@@ -3225,7 +3225,7 @@ export default function CompetitiveAnalysis({
                 </strong>
               </div>
               <div className="growth-profile-metric growth-profile-sales">
-                <span>누적 판매대수</span>
+                <span>26년 누적 판매대수</span>
                 <strong>
                   {selectedStaffDeliveredSales}<small>대</small>
                   <small className="growth-profile-sales-context">
@@ -3258,7 +3258,7 @@ export default function CompetitiveAnalysis({
             <div className="growth-staff-roster-columns" aria-hidden="true">
               <span>영업직원 / 입사일자</span>
               <span>고객상담 평균만족도</span>
-              <span>누적 판매대수</span>
+              <span>26년 누적 판매대수</span>
             </div>
             <div className="growth-navigation-pinned-capabilities" aria-hidden="true">
               <div className="growth-navigation-pinned-heading consultation">
