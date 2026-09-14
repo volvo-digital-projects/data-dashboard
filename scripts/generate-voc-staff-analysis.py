@@ -108,9 +108,12 @@ IMPROVEMENT_PATTERNS = (
     ("가격·혜택 안내", (
         r"(가격|비용|견적|할인|혜택|프로모션).{0,12}(부담|높|비싸|부족|아쉽|명확하지)",
     )),
+    ("상담공간 편의제공", (
+        r"상담.{0,12}공간.{0,10}(불편|부족|좁|아쉽)",
+    )),
     ("시설·편의", (
         r"주차.{0,10}(불편|부족|좁|어렵)|서비스\s*센터.{0,12}(없|아쉽|부족)",
-        r"(공간|시설|다과|화장실|접근성).{0,10}(불편|부족|좁|아쉽)|판매점만\s*남",
+        r"(시설|다과|화장실|접근성).{0,10}(불편|부족|좁|아쉽)|판매점만\s*남",
     )),
     ("응대 태도", (r"불친절|무성의|태도.{0,8}(아쉽|불만|별로)|응대.{0,8}(부족|미흡|아쉽)",)),
     ("제품·옵션·출고 안내", (
@@ -544,7 +547,8 @@ def refresh_comment_analysis(payload: dict[str, Any], voc_path: Path) -> None:
             )
             refreshed_employees += 1
     payload.setdefault("source", {})["commentAnalysis"] = (
-        "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 13개 강점/13개 보완 주제"
+        "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · "
+        f"{len(STRENGTH_PATTERNS)}개 강점/{len(IMPROVEMENT_PATTERNS)}개 보완 주제"
     )
     payload["source"]["commentAnalysisEmployees"] = refreshed_employees
 

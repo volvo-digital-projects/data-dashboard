@@ -377,13 +377,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /selectedStaffStrengthKeywords\.slice\(0, 8\)\.map/);
   assert.match(navigation, /selectedStaffImprovementKeywords\.slice\(0, 8\)\.map/);
   assert.doesNotMatch(navigation, /slice\(3, 6\)/);
-  assert.equal((staffAnalysisGenerator.match(/len\(STRENGTH_PATTERNS\)/g) ?? []).length, 2);
-  assert.equal((staffAnalysisGenerator.match(/len\(IMPROVEMENT_PATTERNS\)/g) ?? []).length, 2);
+  assert.equal((staffAnalysisGenerator.match(/len\(STRENGTH_PATTERNS\)/g) ?? []).length, 3);
+  assert.equal((staffAnalysisGenerator.match(/len\(IMPROVEMENT_PATTERNS\)/g) ?? []).length, 3);
   assert.match(staffAnalysisGenerator, /exclude_negative_context=True/);
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
   assert.match(staffAnalysisGenerator, /설명 간결성/);
   assert.match(staffAnalysisGenerator, /상담자료·도구 활용/);
   assert.match(staffAnalysisGenerator, /전시·시승차 구성/);
+  assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
   const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
   assert.equal(kimNaehwan.commentResponses, 36);
   assert.deepEqual(
@@ -404,8 +405,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
   assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
   assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 13));
-  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 13));
-  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/13개 보완 주제/);
+  assert.ok(analyzedEmployees.every(({ improvementKeywords }) => improvementKeywords.length <= 14));
+  assert.match(staffAnalysis.source.commentAnalysis, /문장별 긍정·부정 맥락 분리 · 13개 강점\/14개 보완 주제/);
+  const baekJongYoon = staffAnalysis.showrooms["6KR6854"].employees.find(({ name }) => name === "백종윤");
+  assert.ok(baekJongYoon.improvementKeywords.some(({ label, mentions }) => label === "상담공간 편의제공" && mentions === 1));
+  assert.ok(!baekJongYoon.improvementKeywords.some(({ label }) => label === "시설·편의"));
   assert.match(navigation, /keyword\.mentions \/ selectedStaffStrengthTotalMentions/);
   assert.match(navigation, /keyword\.mentions \/ selectedStaffImprovementTotalMentions/);
   assert.match(navigation, /displayTwoDigitCount\(keyword\.mentions\)\}회 <em>\(\{displayTwoDigitCount\(Math\.round\(\(keyword\.mentions \/ selectedStaffStrengthTotalMentions\) \* 100\)\)\}%\)/);
