@@ -383,17 +383,6 @@ html {
   margin-left: 0;
 }
 
-.analysis-admin-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  color: #f0c56e;
-  font-family: var(--font-latin);
-  font-size: 6px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
 .analysis-admin-icon {
   width: 27px;
   height: 27px;

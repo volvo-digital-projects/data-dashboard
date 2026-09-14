@@ -2894,7 +2894,6 @@ export default function CompetitiveAnalysis({
             scroll={false}
             aria-label="관리자용 7개 딜러사별 분석자료 열기"
           >
-            <span className="analysis-admin-badge">ADMIN</span>
             <svg className="analysis-admin-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
               <path d="M16 3.2 26 7v7.4c0 6.3-4.1 11.8-10 14.4-5.9-2.6-10-8.1-10-14.4V7l10-3.8Z" />
               <path d="M11.2 20.4v-4.1m4.8 4.1v-8.8m4.8 8.8v-6.2" />

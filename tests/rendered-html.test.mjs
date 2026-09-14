@@ -2567,6 +2567,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     /<header class="dashboard-identity-header analysis-header has-admin-entry"><div class="identity-title analysis-title"><div class="identity-heading-line"><h1>볼보 강남대치 분석<\/h1>/,
   );
   assert.match(visibleHtml, /href="\/dashboard\/6KR6834\/dealer-analysis" class="analysis-admin-entry"/);
+  assert.doesNotMatch(visibleHtml, /analysis-admin-badge|>ADMIN</);
   assert.match(visibleHtml, /<span>딜러사별<\/span><span>분석자료<\/span>/);
   assert.match(
     visibleHtml,
