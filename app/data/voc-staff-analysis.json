@@ -2,14 +2,14 @@
   "source": {
     "workbook": "2026 Volvo Car Korea_VOC Raw Data_회신 건수 포함 260824.xlsx",
     "vocThrough": "2026-08-24",
-    "rosterCheckedAt": "2026-09-14",
+    "rosterCheckedAt": "2026-09-15",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-09-14",
+    "jobTitleSourceDate": "2026-09-15",
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-08-24",
@@ -239,7 +239,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2022-03-15",
-          "tenureMonths": 53,
+          "tenureMonths": 54,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -1698,7 +1698,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2022-09-15",
-          "tenureMonths": 47,
+          "tenureMonths": 48,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -2563,7 +2563,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2025-01-15",
-          "tenureMonths": 19,
+          "tenureMonths": 20,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -4641,7 +4641,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-04-15",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -6267,7 +6267,7 @@
           "role": "영업직원",
           "jobTitle": "팀장",
           "hireDate": "2024-01-15",
-          "tenureMonths": 31,
+          "tenureMonths": 32,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -6675,7 +6675,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2019-03-15",
-          "tenureMonths": 89,
+          "tenureMonths": 90,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -7492,7 +7492,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-12-15",
-          "tenureMonths": 104,
+          "tenureMonths": 105,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -9089,7 +9089,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2016-02-15",
-          "tenureMonths": 126,
+          "tenureMonths": 127,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -13203,7 +13203,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2022-09-15",
-          "tenureMonths": 47,
+          "tenureMonths": 48,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -13377,7 +13377,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-11-15",
-          "tenureMonths": 93,
+          "tenureMonths": 94,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -20745,82 +20745,6 @@
           "latestResponseDate": "2026-02-28"
         },
         {
-          "name": "김성민",
-          "role": "영업직원",
-          "jobTitle": "주임",
-          "hireDate": "2024-02-14",
-          "tenureMonths": 31,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
-          "years": {
-            "2024": {
-              "responses": 5,
-              "scoreSum": 45.0,
-              "sent": 42
-            },
-            "2025": {
-              "responses": 2,
-              "scoreSum": 18.0,
-              "sent": 6
-            },
-            "2026": {
-              "responses": 1,
-              "scoreSum": 10.0,
-              "sent": 7
-            }
-          },
-          "commentResponses": 8,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 6
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 3
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 3
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 2
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 1
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 1
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "시승기회·시간 확대",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-05-01"
-        },
-        {
           "name": "김종천",
           "role": "영업직원",
           "jobTitle": "과장",
@@ -21897,7 +21821,86 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "김성민",
+          "role": "영업직원",
+          "jobTitle": "주임",
+          "hireDate": "2024-02-14",
+          "tenureMonths": 31,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
+          "years": {
+            "2024": {
+              "responses": 5,
+              "scoreSum": 45.0,
+              "sent": 42
+            },
+            "2025": {
+              "responses": 2,
+              "scoreSum": 18.0,
+              "sent": 6
+            },
+            "2026": {
+              "responses": 1,
+              "scoreSum": 10.0,
+              "sent": 7
+            }
+          },
+          "commentResponses": 8,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 6
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-05-01",
+          "archivedAt": "2026-09-15",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR6848": {
       "showroom": "볼보 천안",
@@ -22016,7 +22019,7 @@
         {
           "name": "김현수",
           "role": "영업직원",
-          "jobTitle": "대리",
+          "jobTitle": "과장",
           "hireDate": "2022-05-09",
           "tenureMonths": 52,
           "tenureBucket": "3-5y",
@@ -22471,7 +22474,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2025-09-15",
-          "tenureMonths": 11,
+          "tenureMonths": 12,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -24683,7 +24686,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2019-04-15",
-          "tenureMonths": 88,
+          "tenureMonths": 89,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -26881,7 +26884,7 @@
           "role": "영업직원",
           "jobTitle": "부장",
           "hireDate": "2017-02-15",
-          "tenureMonths": 114,
+          "tenureMonths": 115,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {

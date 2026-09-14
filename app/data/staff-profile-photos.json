@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-15",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 361,
+  "consultantCount": 364,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -534,9 +534,6 @@
         "이은섭": {
           "image": "/staff-profiles/cheonha/dongdaemun/consultant-60c24e898997.webp"
         },
-        "정승현": {
-          "image": "/staff-profiles/cheonha/dongdaemun/consultant-1e6d086b7f5c.webp"
-        },
         "정지윤": {
           "image": "/staff-profiles/cheonha/dongdaemun/consultant-70c5563002f1.webp"
         }
@@ -666,6 +663,9 @@
         },
         "김용상": {
           "image": "/staff-profiles/kolon/songpa/consultant-db3f4ba9aede.webp"
+        },
+        "김정호": {
+          "image": "/staff-profiles/kolon/songpa/consultant-cb79d612fa5b.webp"
         },
         "김종민": {
           "image": "/staff-profiles/kolon/songpa/consultant-0879123dedec.webp"
@@ -831,6 +831,9 @@
       "showroom": "서초",
       "sourcePage": "https://kolon.volvocars.co.kr/sales/sales_consultant.asp?branchCd=100004",
       "employees": {
+        "김범준": {
+          "image": "/staff-profiles/kolon/seocho/consultant-dc2b79e3f18f.webp"
+        },
         "김상우": {
           "image": "/staff-profiles/kolon/seocho/consultant-36b3313bd649.webp"
         },
@@ -843,8 +846,14 @@
         "나희진": {
           "image": "/staff-profiles/kolon/seocho/consultant-6d899226514c.webp"
         },
+        "박두경": {
+          "image": "/staff-profiles/kolon/seocho/consultant-22ed632bed99.webp"
+        },
         "설동명": {
           "image": "/staff-profiles/kolon/seocho/consultant-4f9a374dc5f0.webp"
+        },
+        "유민우": {
+          "image": "/staff-profiles/kolon/seocho/consultant-682cbf2c16a3.webp"
         },
         "이규환": {
           "image": "/staff-profiles/kolon/seocho/consultant-8eb5185dd381.webp"
