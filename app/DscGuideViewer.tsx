@@ -101,10 +101,6 @@ export default function DscGuideViewer({ onClose }: DscGuideViewerProps) {
         aria-label="DSC 가이드 PDF"
       >
         <header className={styles.toolbar}>
-          <div className={styles.guideIdentity}>
-            <span className={styles.bookIcon} aria-hidden="true" />
-            <strong>DSC 가이드</strong>
-          </div>
           <span className={styles.pageCounter} aria-live="polite">
             {currentPage} / {PAGE_COUNT}
           </span>

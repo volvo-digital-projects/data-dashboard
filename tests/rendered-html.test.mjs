@@ -5996,6 +5996,10 @@ test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
   assert.match(headerSource, /aria-haspopup="dialog"/);
   assert.match(viewerSource, /const PAGE_COUNT = 13/);
   assert.match(viewerSource, /aria-label="DSC 가이드 닫기"/);
+  assert.doesNotMatch(
+    viewerSource,
+    /styles\.guideIdentity|styles\.bookIcon|<strong>DSC 가이드<\/strong>/,
+  );
   assert.match(viewerSource, /event\.key === "Escape"/);
   assert.match(viewerSource, /IntersectionObserver/);
   assert.match(viewerSource, /document\.documentElement\.classList\.add\("dsc-guide-open"\)/);
@@ -6003,7 +6007,15 @@ test("opens the 13-page DSC guide in a full-screen snap viewer", async () => {
   assert.match(viewerCss, /\.backdrop[\s\S]*?position: fixed;[\s\S]*?z-index: 12000/);
   assert.match(viewerCss, /\.pages\s*\{[^}]*scroll-snap-type: y mandatory/);
   assert.match(viewerCss, /\.page\s*\{[^}]*height: 100dvh[^}]*scroll-snap-stop: always/);
-  assert.match(viewerCss, /\.closeButton\s*\{[^}]*justify-self: end/);
+  assert.doesNotMatch(viewerCss, /\.guideIdentity|\.bookIcon/);
+  assert.match(
+    viewerCss,
+    /\.pageCounter\s*\{[^}]*grid-column: 2;[^}]*justify-self: center/,
+  );
+  assert.match(
+    viewerCss,
+    /\.closeButton\s*\{[^}]*grid-column: 3;[^}]*justify-self: end/,
+  );
   assert.match(globalCss, /html\.dsc-guide-open \.dashboard-identity-header > \.identity-detail-rail,[\s\S]*?html\.dsc-guide-open \.dashboard-identity-header > \.analysis-admin-entry,[\s\S]*?html\.dsc-guide-open \.dashboard-identity-header > \.analysis-context\s*\{[^}]*visibility: hidden;[^}]*pointer-events: none;/);
 });
 
