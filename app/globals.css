@@ -2205,7 +2205,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
   }
 
   .competitive-analysis-page .growth-navigation-detail {
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 
   .competitive-analysis-page .growth-staff-roster-list {
@@ -15574,7 +15574,7 @@ button.header-status-item {
 /* PC wheel flow: one viewport each for overview, staff navigator, and awards. */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   .competitive-analysis-page {
-    --growth-navigation-sticky-top: 0px;
+    --growth-navigation-sticky-top: 122px;
     padding-bottom: calc(100dvh - 148px);
   }
 
@@ -15587,38 +15587,82 @@ button.header-status-item {
     width: auto;
     right: auto;
     left: auto;
+    padding-top: calc(var(--growth-navigation-sticky-top, 122px) + 8px);
+  }
+
+  .competitive-analysis-page .analysis-header {
+    position: fixed;
+    top: 0;
+    right: max(
+      calc(
+        var(--dashboard-page-gutter) - var(--dashboard-content-overhang) +
+          var(--dashboard-sticky-content-gutter)
+      ),
+      calc(
+        (100% - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+          var(--dashboard-content-overhang) +
+          var(--dashboard-sticky-content-gutter)
+      )
+    );
+    left: max(
+      calc(
+        var(--dashboard-page-gutter) - var(--dashboard-content-overhang) +
+          var(--dashboard-sticky-content-gutter)
+      ),
+      calc(
+        (100% - var(--dashboard-page-max)) / 2 + var(--dashboard-page-gutter) -
+          var(--dashboard-content-overhang) +
+          var(--dashboard-sticky-content-gutter)
+      )
+    );
+    z-index: 70;
   }
 
   .competitive-analysis-page > .growth-navigation-sticky-summary {
-    position: static;
-    top: auto;
+    position: sticky;
+    top: var(--growth-navigation-sticky-top, 122px);
   }
 
   .competitive-analysis-page > .growth-navigation {
     margin-top: calc(-1 * var(--dashboard-card-gap));
-    scroll-margin-top: var(--growth-navigation-summary-height, 152px);
+    scroll-margin-top: calc(
+      var(--growth-navigation-sticky-top, 122px) +
+        var(--growth-navigation-summary-height, 152px) + 8px
+    );
   }
 
   .competitive-analysis-page .growth-navigation-workspace,
   .competitive-analysis-page .growth-navigation-detail {
-    height: calc(100vh - var(--growth-navigation-summary-height, 152px));
-    height: calc(100dvh - var(--growth-navigation-summary-height, 152px));
+    height: calc(
+      100vh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px)
+    );
+    height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px)
+    );
     max-height: none;
   }
 
   .competitive-analysis-page .growth-navigation-detail {
-    padding-bottom: 1px;
-    overflow-y: hidden;
+    padding-bottom: 6px;
+    overflow-y: auto;
     cursor: default;
   }
 
   .competitive-analysis-page .growth-staff-roster-list {
-    max-height: calc(100vh - var(--growth-navigation-summary-height, 152px) - 6px);
-    max-height: calc(100dvh - var(--growth-navigation-summary-height, 152px) - 6px);
+    max-height: calc(
+      100vh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px) - 6px
+    );
+    max-height: calc(
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px) - 6px
+    );
   }
 
   .competitive-analysis-page > .v3s-award-card {
-    scroll-margin-top: 8px;
+    scroll-margin-top: calc(var(--growth-navigation-sticky-top, 122px) + 8px);
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }

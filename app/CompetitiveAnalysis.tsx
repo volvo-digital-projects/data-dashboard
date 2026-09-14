@@ -928,6 +928,14 @@ export default function CompetitiveAnalysis({
     const fixedHeaderBottom = () =>
       Math.max(0, stickyShellRef.current?.getBoundingClientRect().bottom ?? 0);
 
+    const persistentBannerBottom = () =>
+      Math.max(
+        0,
+        stickyShellRef.current
+          ?.querySelector<HTMLElement>(".analysis-header")
+          ?.getBoundingClientRect().bottom ?? 0,
+      );
+
     const workspacePassedRatio = (projectedDistance = 0) => {
       const workspaceBounds = workspace.getBoundingClientRect();
       const passedDistance =
@@ -956,7 +964,8 @@ export default function CompetitiveAnalysis({
       const startTop = window.scrollY;
       const targetTop = Math.max(
         0,
-        growthSummaryFlowTop - fixedHeaderBottom() - (usesPcSectionFlow ? 0 : 8),
+        growthSummaryFlowTop - persistentBannerBottom() -
+          (usesPcSectionFlow ? 0 : 8),
       );
       const startedAt = performance.now();
       const motionDuration = window.matchMedia(
@@ -1111,6 +1120,14 @@ export default function CompetitiveAnalysis({
     const flowTop = (element: HTMLElement) =>
       window.scrollY + element.getBoundingClientRect().top;
 
+    const persistentBannerBottom = () =>
+      Math.max(
+        0,
+        stickyShellRef.current
+          ?.querySelector<HTMLElement>(".analysis-header")
+          ?.getBoundingClientRect().bottom ?? 0,
+      );
+
     const normalizeWheelDistance = (event: WheelEvent) => {
       if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
       if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
@@ -1172,25 +1189,38 @@ export default function CompetitiveAnalysis({
 
       const target = event.target instanceof Element ? event.target : null;
       if (target?.closest(".growth-staff-roster-list")) return;
+      const detailTarget = target?.closest<HTMLElement>(
+        ".growth-navigation-detail",
+      );
+      if (detailTarget) {
+        const canScrollDown =
+          wheelDistance > 0 &&
+          detailTarget.scrollTop + detailTarget.clientHeight <
+            detailTarget.scrollHeight - 1;
+        const canScrollUp = wheelDistance < 0 && detailTarget.scrollTop > 1;
+        if (canScrollDown || canScrollUp) return;
+      }
 
       const summaryBounds = growthSummary.getBoundingClientRect();
       const awardBounds = award.getBoundingClientRect();
-      const staffSectionAligned = Math.abs(summaryBounds.top) <= 28;
+      const bannerBottom = persistentBannerBottom();
+      const staffSectionAligned = Math.abs(summaryBounds.top - bannerBottom) <= 28;
       const staffSectionApproaching =
-        summaryBounds.top > 28 && summaryBounds.top < window.innerHeight * 0.75;
+        summaryBounds.top > bannerBottom + 28 &&
+        summaryBounds.top < window.innerHeight * 0.75;
       const awardSectionVisible =
-        awardBounds.top <= Math.min(96, window.innerHeight * 0.18) ||
-        window.scrollY >= flowTop(award) - 32;
+        awardBounds.top <= bannerBottom + Math.min(96, window.innerHeight * 0.18) ||
+        window.scrollY >= flowTop(award) - bannerBottom - 32;
 
       if (wheelDistance > 0 && staffSectionApproaching) {
         event.preventDefault();
-        moveTo(flowTop(growthSummary));
+        moveTo(flowTop(growthSummary) - bannerBottom);
         return;
       }
 
       if (wheelDistance > 0 && staffSectionAligned) {
         event.preventDefault();
-        moveTo(flowTop(award) - 8);
+        moveTo(flowTop(award) - bannerBottom - 8);
         return;
       }
 
@@ -1202,7 +1232,11 @@ export default function CompetitiveAnalysis({
       upwardDecisionTimer = window.setTimeout(() => {
         const strongUpwardGesture = upwardIntent >= 1800;
         upwardIntent = 0;
-        moveTo(strongUpwardGesture ? 0 : flowTop(growthSummary));
+        moveTo(
+          strongUpwardGesture
+            ? 0
+            : flowTop(growthSummary) - persistentBannerBottom(),
+        );
       }, 55);
     };
 
@@ -1554,6 +1588,9 @@ export default function CompetitiveAnalysis({
       const usesTabletSectionFlow = window.matchMedia(
         "(hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 761px) and (max-width: 1400px)",
       ).matches;
+      const usesPcSectionFlow = window.matchMedia(
+        "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
+      ).matches;
       const usesStaticAnalysisShell =
         isNarrowTabletViewport || usesTabletSectionFlow;
       if (isPhoneViewport) {
@@ -1572,7 +1609,7 @@ export default function CompetitiveAnalysis({
       const shellHeight = usesStaticAnalysisShell
         ? 0
         : Math.ceil(shell.getBoundingClientRect().height);
-      const analysisHeaderHeight = usesTabletSectionFlow
+      const analysisHeaderHeight = usesTabletSectionFlow || usesPcSectionFlow
         ? Math.ceil(
             shell
               .querySelector<HTMLElement>(".analysis-header")
