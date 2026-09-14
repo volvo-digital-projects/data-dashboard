@@ -2614,6 +2614,14 @@ html.analysis-entry-top-locked body {
     min-height: 40px;
   }
 
+  .competitive-analysis-page .growth-sales-month > i span {
+    width: 74%;
+  }
+
+  .competitive-analysis-page .growth-sales-month > i b {
+    width: 44%;
+  }
+
   .competitive-analysis-page .growth-sales-monthly-legend {
     min-height: 16px;
     padding-top: 0;
