@@ -3432,9 +3432,11 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(html, /<header class="dashboard-identity-header analysis-header has-admin-entry dealer-analysis-header">/);
+  assert.match(html, /<header class="dashboard-identity-header analysis-header dealer-analysis-header">/);
   assert.match(html, /<h1>딜러사별 분석자료<\/h1>/);
-  assert.match(html, /class="analysis-admin-entry is-active"/);
+  assert.match(html, /class="header-status-item header-status-item--dashboard-return"/);
+  assert.match(html, /기존 페이지 2 분석자료로 돌아가기/);
+  assert.doesNotMatch(html, /class="analysis-admin-entry is-active"|aria-label="현재 전시장 정보"/);
   for (const dealer of ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"]) {
     assert.match(html, new RegExp(`<h3>${dealer}<\\/h3>`));
   }

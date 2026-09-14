@@ -16641,6 +16641,37 @@ button.header-status-item {
 
 }
 
+.header-status-item--dashboard-return {
+  text-decoration: none;
+}
+
+.header-status-icon--dashboard {
+  position: relative;
+  border: 1px solid rgba(194, 224, 236, 0.74);
+  border-radius: 2px;
+}
+
+.header-status-icon--dashboard::before,
+.header-status-icon--dashboard::after {
+  position: absolute;
+  background: rgba(194, 224, 236, 0.74);
+  content: "";
+}
+
+.header-status-icon--dashboard::before {
+  width: 1px;
+  top: 3px;
+  bottom: 3px;
+  left: 50%;
+}
+
+.header-status-icon--dashboard::after {
+  height: 1px;
+  right: 3px;
+  bottom: 5px;
+  left: 3px;
+}
+
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
   .competitive-analysis-page > .growth-navigation-sticky-summary,
   .competitive-analysis-page .growth-navigation-heading,

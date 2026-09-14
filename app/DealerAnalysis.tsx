@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import dashboardJson from "./data/showrooms.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
@@ -131,43 +130,17 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
 
   return (
     <main className="dealer-analysis-page">
-      <header className="dashboard-identity-header analysis-header has-admin-entry dealer-analysis-header">
+      <header className="dashboard-identity-header analysis-header dealer-analysis-header">
         <DashboardHeaderLead
           title="딜러사별 분석자료"
           accessDate={accessDate}
           titleClassName="analysis-title"
+          dashboardReturn={{
+            href: `/dashboard/${selected.cdsid}/analysis?view=size`,
+            label: "분석자료",
+            ariaLabel: "기존 페이지 2 분석자료로 돌아가기",
+          }}
         />
-        <Link
-          className="analysis-admin-entry is-active"
-          href={`/dashboard/${selected.cdsid}/analysis?view=size`}
-          scroll={false}
-          aria-label="페이지 2로 돌아가기"
-        >
-          <span className="analysis-admin-badge">MASTER</span>
-          <svg className="analysis-admin-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-            <path d="M16 3.2 26 7v7.4c0 6.3-4.1 11.8-10 14.4-5.9-2.6-10-8.1-10-14.4V7l10-3.8Z" />
-            <path d="M11.2 20.4v-4.1m4.8 4.1v-8.8m4.8 8.8v-6.2" />
-          </svg>
-          <strong><span>딜러사별</span><span>분석자료</span></strong>
-        </Link>
-        <div className="analysis-context" aria-label="현재 전시장 정보">
-          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
-            <span className="identity-icon identity-icon--dealer" aria-hidden="true" />
-            <small>딜러사</small><strong>{selected.dealer}</strong>
-          </Link>
-          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
-            <span className="identity-icon identity-icon--region" aria-hidden="true" />
-            <small>권역별</small><strong>{selected.region}</strong>
-          </Link>
-          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
-            <span className="identity-icon identity-icon--size" aria-hidden="true" />
-            <small>사이즈</small><strong>{selected.size}</strong>
-          </Link>
-          <Link className="analysis-context-item" href={`/dashboard/${selected.cdsid}`} scroll={false}>
-            <span className="identity-profile-icon" aria-hidden="true" />
-            <small>지점장</small><strong>{selected.manager}</strong>
-          </Link>
-        </div>
       </header>
 
       <section className="dealer-analysis-summary" aria-label="전국 통합 요약">
