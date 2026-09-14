@@ -439,6 +439,7 @@ html {
   margin: 0 auto;
   padding: 0 var(--dashboard-page-gutter) 34px;
   color: #17384b;
+  font-family: var(--font-latin);
 }
 
 .dealer-analysis-command-shell {

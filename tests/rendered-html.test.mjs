@@ -3441,6 +3441,13 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   for (const dealer of ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"]) {
     assert.match(html, new RegExp(`<h3>${dealer}<\\/h3>`));
   }
+  const sortedDealers = ["에이치", "코오롱", "아이언", "아주", "아이비", "태영", "천하"];
+  for (let index = 1; index < sortedDealers.length; index += 1) {
+    assert.ok(
+      html.indexOf(`<h3>${sortedDealers[index - 1]}</h3>`) < html.indexOf(`<h3>${sortedDealers[index]}</h3>`),
+      "딜러사는 전체 인증 인원의 내림차순이어야 합니다.",
+    );
+  }
   assert.match(html, /6개년 인증 배출<\/small><strong>180<\/strong>/);
   assert.match(html, /Grand<\/small><strong>40<\/strong>/);
   assert.match(html, /Advanced<\/small><strong>60<\/strong>/);
@@ -3453,11 +3460,13 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(source, /"2025:장석우": "에이치"/);
   assert.match(source, /"2025:이동담": "코오롱"/);
   assert.match(source, /const totalCertifications = certifications\.length;/);
+  assert.match(source, /b\.certificationCount - a\.certificationCount/);
   assert.match(routeSource, /access\.role !== "master"/);
   assert.match(pagesSource, /segments\[2\] === "dealer-analysis"[\s\S]*?access\.role !== "master"/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*width: 92px;[^}]*height: 92px;/);
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
+  assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {

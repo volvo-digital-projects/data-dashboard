@@ -97,7 +97,11 @@ const dealerRows = dealerOrder.map((dealer) => {
     currentCertified,
     levelCounts,
   };
-});
+}).sort(
+  (a, b) =>
+    b.certificationCount - a.certificationCount ||
+    dealerOrder.indexOf(a.dealer) - dealerOrder.indexOf(b.dealer),
+);
 
 const totalCertifications = certifications.length;
 const totalLevels = {
