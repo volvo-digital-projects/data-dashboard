@@ -12,9 +12,20 @@ export const resetPageScrollToTop = () => {
 };
 
 export const lockPageScrollToTop = (holdMilliseconds = 320) => {
+  const root = document.documentElement;
+  const usesTouchSectionSnap = window.matchMedia(
+    "(hover: none) and (pointer: coarse) and (min-width: 761px) and (max-width: 1400px)",
+  ).matches;
   let released = false;
   let frame = 0;
   let releaseTimer = 0;
+
+  // iPad landscape uses mandatory section snapping on page 2. Temporarily
+  // suspend it while Safari settles the new route at scrollTop 0; otherwise
+  // the snap correction and this top lock can fight each other visibly.
+  if (usesTouchSectionSnap) {
+    root.classList.add("analysis-entry-top-locked");
+  }
 
   const blockResidualScroll = (event: Event) => {
     event.preventDefault();
@@ -34,6 +45,9 @@ export const lockPageScrollToTop = (holdMilliseconds = 320) => {
     window.removeEventListener("wheel", blockResidualScroll, true);
     window.removeEventListener("touchmove", blockResidualScroll, true);
     resetPageScrollToTop();
+    if (usesTouchSectionSnap) {
+      root.classList.remove("analysis-entry-top-locked");
+    }
   };
 
   resetPageScrollToTop();

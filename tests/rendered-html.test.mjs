@@ -3248,6 +3248,8 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.match(pageScrollSource, /document\.body\.scrollTop = 0/);
   assert.match(pageScrollSource, /window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\)/);
   assert.match(pageScrollSource, /export const lockPageScrollToTop = \(holdMilliseconds = 320\)/);
+  assert.match(pageScrollSource, /const usesTouchSectionSnap = window\.matchMedia\([\s\S]*?\(hover: none\) and \(pointer: coarse\)[\s\S]*?\)\.matches;/);
+  assert.match(pageScrollSource, /if \(usesTouchSectionSnap\) \{\s*root\.classList\.add\("analysis-entry-top-locked"\);\s*\}/);
   assert.match(pageScrollSource, /event\.preventDefault\(\);[\s\S]*?event\.stopImmediatePropagation\(\);[\s\S]*?resetPageScrollToTop\(\);/);
   assert.match(pageScrollSource, /addEventListener\("wheel", blockResidualScroll, \{ capture: true, passive: false \}\)/);
   assert.match(pageScrollSource, /addEventListener\("touchmove", blockResidualScroll, \{ capture: true, passive: false \}\)/);
@@ -3255,6 +3257,7 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   assert.match(pageScrollSource, /setTimeout\(release, holdMilliseconds\)/);
   assert.match(pageScrollSource, /removeEventListener\("wheel", blockResidualScroll, true\)/);
   assert.match(pageScrollSource, /removeEventListener\("touchmove", blockResidualScroll, true\)/);
+  assert.match(pageScrollSource, /resetPageScrollToTop\(\);\s*if \(usesTouchSectionSnap\) \{\s*root\.classList\.remove\("analysis-entry-top-locked"\);/);
   assert.doesNotMatch(pageScrollSource, /forcePageScrollToTop/);
   assert.match(githubPagesSource, /window\.history\.scrollRestoration = "manual";/);
   assert.match(githubPagesSource, /import \{ flushSync \} from "react-dom";/);
@@ -3274,6 +3277,7 @@ test("starts page 1 and page 2 at the top before the destination paints", async 
   );
   assert.match(css, /html\s*\{[^}]*scroll-behavior: auto;/);
   assert.doesNotMatch(css, /html\s*\{[^}]*scroll-behavior: smooth;/);
+  assert.match(css, /html\.analysis-entry-top-locked,\s*html\.analysis-entry-top-locked body\s*\{[^}]*scroll-behavior: auto !important;[^}]*scroll-snap-type: none !important;/);
 });
 
 test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () => {

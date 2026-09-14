@@ -2207,6 +2207,14 @@ html.analysis-viewport-locked .competitive-analysis-page {
   touch-action: pan-x pan-y;
 }
 
+/* Prevent iPad Safari's mandatory section snap from competing with the
+   page-2 entry scroll lock. The class is removed as soon as the top settles. */
+html.analysis-entry-top-locked,
+html.analysis-entry-top-locked body {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+}
+
 @media (hover: none) and (pointer: coarse) and (orientation: landscape) and (min-width: 1180px) and (max-width: 1400px) {
   html.analysis-viewport-locked,
   html.analysis-viewport-locked body {
