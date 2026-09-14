@@ -2488,6 +2488,19 @@ html.analysis-entry-top-locked body {
     padding-left: 14px;
   }
 
+  .competitive-analysis-page .growth-scatter-card > header > :first-child {
+    transform: translateX(-7px);
+  }
+
+  .competitive-analysis-page .growth-comment-evidence > header > :first-child {
+    transform: translateX(-3px);
+  }
+
+  .competitive-analysis-page .growth-sales-funnel-card > header > :first-child,
+  .competitive-analysis-page .growth-sales-monthly-card > header > :first-child {
+    transform: translateX(-1px);
+  }
+
   .competitive-analysis-page .growth-evidence-grid {
     height: 215px;
   }
