@@ -413,7 +413,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /selectedStaffPrimaryStrength|selectedStaffPrimaryImprovement/);
   assert.doesNotMatch(navigation, /지점장 면담 가이드|다음 행동 1개 합의/);
   assert.doesNotMatch(navigation, /전체 상담 분포/);
-  assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거<\/small>/);
+  assert.match(navigation, /className="growth-scatter-evidence-note">원 크기 = 실제 회신건수<\/small>/);
+  assert.match(navigation, /r=\{Math\.min\(5\.2, 2\.2 \+ Math\.sqrt\(point\.responses\) \* 0\.42\)\}/);
+  assert.match(navigation, /r=\{Math\.min\(6, 2\.8 \+ Math\.sqrt\(point\.responses\) \* 0\.46\)\}/);
   assert.match(navigation, /className="growth-scatter-y-label"[^>]*>고객상담 평균만족도<\/text>/);
   assert.match(navigation, /className="growth-scatter-x-label"[^>]*>근속기간\(년\)<\/text>/);
   assert.doesNotMatch(navigation, />상담만족\(10점\)<\/text>/);

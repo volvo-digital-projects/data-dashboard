@@ -3623,7 +3623,7 @@ export default function CompetitiveAnalysis({
                       <span><i />전국 SC</span>
                       <span className="showroom"><i />{displayShowroomNameWithoutBrand(selected.showroom)} SC</span>
                       <span className="selected"><i />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
-                      <small className="growth-scatter-evidence-note">원 크기 = 실제 회신 근거</small>
+                      <small className="growth-scatter-evidence-note">원 크기 = 실제 회신건수</small>
                     </footer>
                   </article>
                 </div>
