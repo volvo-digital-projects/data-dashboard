@@ -2218,11 +2218,16 @@ html.analysis-viewport-locked .competitive-analysis-page {
 
   .competitive-analysis-page .growth-position-card,
   .competitive-analysis-page .growth-sales-funnel-card {
-    height: 238px;
+    height: 228px;
   }
 
   .competitive-analysis-page .growth-zone-gauge {
-    width: min(100%, 368px);
+    width: min(100%, 350px);
+  }
+
+  .competitive-analysis-page .growth-sales-stage {
+    height: 88px;
+    gap: 6px;
   }
 
   .competitive-analysis-page .growth-scatter-card {

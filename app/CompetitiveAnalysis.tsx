@@ -2998,7 +2998,7 @@ export default function CompetitiveAnalysis({
                   <article className="growth-position-card">
                     <header>
                       <div>
-                        <span>상담 역량 위치</span>
+                        <span>역량진단</span>
                         <strong>{selectedStaffGrowthLabel}</strong>
                       </div>
                       <small className="growth-position-benchmarks">

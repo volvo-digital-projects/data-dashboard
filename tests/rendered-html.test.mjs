@@ -420,6 +420,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong>상담\/ 시승\/ 계약 전환율<\/strong>/);
+  assert.match(navigation, /<span>역량진단<\/span>[\s\S]*?<strong>\{selectedStaffGrowthLabel\}<\/strong>/);
+  assert.doesNotMatch(navigation, /<span>상담 역량 위치<\/span>/);
   assert.equal((navigation.match(/className="growth-under-construction">공사중<\/div>/g) ?? []).length, 2);
   assert.match(css, /\.growth-under-construction\s*\{[^}]*position:\s*absolute;[^}]*top:\s*50%;[^}]*left:\s*50%;[^}]*background:\s*rgba\(43, 84, 104, 0\.72\);[^}]*color:\s*#fff;/);
   assert.match(css, /\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;/);
@@ -3246,7 +3248,7 @@ test("locks page 2 zoom and fits the iPad 13-inch landscape viewport", async () 
   assert.match(source, /root\.classList\.remove\("analysis-viewport-locked"\)/);
   assert.match(css, /html\.analysis-viewport-locked \.competitive-analysis-page\s*\{[^}]*touch-action:\s*pan-x pan-y;/);
   assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 1180px\) and \(max-width: 1400px\)\s*\{[\s\S]*?--dashboard-page-max:\s*1376px;[\s\S]*?--dashboard-page-gutter:\s*32px;[\s\S]*?width:\s*min\(1376px, 100vw\);/);
-  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1400px\)\s*\{[\s\S]*?\.competitive-analysis-page \.growth-navigation-workspace,[\s\S]*?100dvh - var\(--growth-navigation-sticky-top, 122px\) -[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 24px[\s\S]*?\.competitive-analysis-page \.growth-position-card,[\s\S]*?height: 238px;[\s\S]*?\.competitive-analysis-page \.growth-evidence-grid\s*\{[\s\S]*?height: 196px;[\s\S]*?\.competitive-analysis-page \.growth-sales-monthly-card\s*\{[\s\S]*?height: 190px;/);
+  assert.match(css, /@media \(hover: none\) and \(pointer: coarse\) and \(orientation: landscape\) and \(min-width: 761px\) and \(max-width: 1400px\)\s*\{[\s\S]*?\.competitive-analysis-page \.growth-navigation-workspace,[\s\S]*?100dvh - var\(--growth-navigation-sticky-top, 122px\) -[\s\S]*?var\(--growth-navigation-summary-height, 152px\) - 24px[\s\S]*?\.competitive-analysis-page \.growth-position-card,[\s\S]*?height: 228px;[\s\S]*?\.competitive-analysis-page \.growth-zone-gauge\s*\{[\s\S]*?width: min\(100%, 350px\);[\s\S]*?\.competitive-analysis-page \.growth-sales-stage\s*\{[\s\S]*?height: 88px;[\s\S]*?\.competitive-analysis-page \.growth-evidence-grid\s*\{[\s\S]*?height: 196px;[\s\S]*?\.competitive-analysis-page \.growth-sales-monthly-card\s*\{[\s\S]*?height: 190px;/);
 });
 
 test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1-Q4", async () => {
