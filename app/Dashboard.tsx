@@ -2483,9 +2483,9 @@ export default function Dashboard({
   const quarterScrollFrameRef = useRef<number | null>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
-    carHandoverScore: 94.4,
-    testDriveScore: 89.2,
-    capturedAt: "2026-09-11T00:00:00+09:00",
+    carHandoverScore: 94.2,
+    testDriveScore: 89.3,
+    capturedAt: "2026-09-14T00:00:00+09:00",
   });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
