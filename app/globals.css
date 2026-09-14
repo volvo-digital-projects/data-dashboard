@@ -2565,18 +2565,18 @@ html.analysis-entry-top-locked body {
   }
 
   .competitive-analysis-page .growth-evidence-grid {
-    height: 188px;
+    height: 180px;
     padding-top: 0;
   }
 
   .competitive-analysis-page .growth-sales-monthly-card {
-    height: 188px;
-    min-height: 188px;
+    height: 180px;
+    min-height: 180px;
   }
 
   .competitive-analysis-page .growth-comment-evidence {
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .competitive-analysis-page .growth-comment-evidence > header strong {
@@ -2585,11 +2585,11 @@ html.analysis-entry-top-locked body {
   }
 
   .competitive-analysis-page .growth-comment-bars {
-    margin-top: 6px;
+    margin-top: 5px;
   }
 
   .competitive-analysis-page .growth-comment-bar-column {
-    gap: 3px;
+    gap: 2px;
   }
 
   .competitive-analysis-page .growth-comment-bar > i {
@@ -2597,21 +2597,21 @@ html.analysis-entry-top-locked body {
   }
 
   .competitive-analysis-page .growth-sales-monthly-body {
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   .competitive-analysis-page .growth-sales-month {
-    min-height: 86px;
-    grid-template-rows: 14px 1fr 16px;
+    min-height: 78px;
+    grid-template-rows: 13px 1fr 15px;
   }
 
   .competitive-analysis-page .growth-sales-month > i {
-    min-height: 48px;
+    min-height: 40px;
   }
 
   .competitive-analysis-page .growth-sales-monthly-legend {
-    min-height: 18px;
-    padding-top: 1px;
+    min-height: 16px;
+    padding-top: 0;
   }
 
   .competitive-analysis-page .growth-navigation-detail {
