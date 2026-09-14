@@ -2211,7 +2211,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
   .competitive-analysis-page .growth-navigation-detail {
     height: calc(
       100dvh - var(--growth-navigation-sticky-top, 122px) -
-        var(--growth-navigation-summary-height, 152px)
+        var(--growth-navigation-summary-height, 152px) - 10px
     );
     max-height: none;
   }
