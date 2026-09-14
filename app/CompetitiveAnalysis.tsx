@@ -1572,6 +1572,13 @@ export default function CompetitiveAnalysis({
       const shellHeight = usesStaticAnalysisShell
         ? 0
         : Math.ceil(shell.getBoundingClientRect().height);
+      const analysisHeaderHeight = usesTabletSectionFlow
+        ? Math.ceil(
+            shell
+              .querySelector<HTMLElement>(".analysis-header")
+              ?.getBoundingClientRect().height ?? 122,
+          )
+        : shellHeight;
       const growthSummaryHeight = Math.ceil(
         growthNavigationSummaryRef.current?.getBoundingClientRect().height ?? 152,
       );
@@ -1588,7 +1595,10 @@ export default function CompetitiveAnalysis({
         // never pull the first content row above page 1's fixed end position.
         anchor.style.removeProperty("min-height");
       }
-      page?.style.setProperty("--growth-navigation-sticky-top", `${shellHeight}px`);
+      page?.style.setProperty(
+        "--growth-navigation-sticky-top",
+        `${analysisHeaderHeight}px`,
+      );
       page?.style.setProperty(
         "--growth-navigation-summary-height",
         `${growthSummaryHeight}px`,

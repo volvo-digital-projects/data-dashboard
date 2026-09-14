@@ -2167,7 +2167,7 @@ html.analysis-viewport-locked .competitive-analysis-page {
   }
 
   .competitive-analysis-page {
-    --growth-navigation-sticky-top: 0px;
+    --growth-navigation-sticky-top: 122px;
   }
 
   .competitive-analysis-page > .analysis-sticky-anchor {
@@ -2180,16 +2180,26 @@ html.analysis-viewport-locked .competitive-analysis-page {
     width: auto;
     right: auto;
     left: auto;
+    padding-top: calc(var(--growth-navigation-sticky-top, 122px) + 10px);
+  }
+
+  .competitive-analysis-page .analysis-header {
+    position: fixed;
+    top: 0;
+    right: var(--dashboard-page-gutter);
+    left: var(--dashboard-page-gutter);
+    z-index: 70;
   }
 
   .competitive-analysis-page > .growth-navigation-sticky-summary {
-    top: 0;
+    top: var(--growth-navigation-sticky-top, 122px);
   }
 
   .competitive-analysis-page .growth-navigation-workspace,
   .competitive-analysis-page .growth-navigation-detail {
     height: calc(
-      100dvh - var(--growth-navigation-summary-height, 152px)
+      100dvh - var(--growth-navigation-sticky-top, 122px) -
+        var(--growth-navigation-summary-height, 152px)
     );
     max-height: none;
   }
