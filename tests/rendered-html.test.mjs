@@ -3463,6 +3463,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   }
   assert.match(css, /\.dealer-certification-head > :nth-child\(2\)\s*\{[^}]*align-items:\s*flex-start;[^}]*text-align:\s*left;/);
   assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
+  assert.equal((html.match(/class="dealer-mix-guides"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-sales-comparison"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-satisfaction-comparison"/g) ?? []).length, 8);
@@ -3480,6 +3481,13 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-mix-segment\.level-grand\s*\{[^}]*linear-gradient\(180deg,[^}]*linear-gradient\(90deg, #3b98bb 0%, #2b85aa 46%, #1f7092 100%\)/);
   assert.match(css, /\.dealer-mix-segment\.level-advanced\s*\{[^}]*linear-gradient\(180deg,[^}]*linear-gradient\(90deg, #59aea5 0%, #41998f 46%, #2f7f77 100%\)/);
   assert.match(css, /\.dealer-mix-segment\.level-certified\s*\{[^}]*linear-gradient\(180deg,[^}]*linear-gradient\(90deg, #f1a169 0%, #e58442 46%, #cf692c 100%\)/);
+  assert.match(source, /const grandEnd = percentage\(levelCounts\.Grand, total\)/);
+  assert.match(source, /const advancedEnd = percentage\(levelCounts\.Grand \+ levelCounts\.Advanced, total\)/);
+  assert.match(source, /"--grand-end": grandEnd,[\s\S]*?"--advanced-end": advancedEnd/);
+  assert.match(css, /\.dealer-mix-guides\s*\{[^}]*position:\s*absolute;[^}]*inset:\s*12px 0 0;/);
+  assert.match(css, /\.dealer-mix-guides > i\.level-grand\s*\{[^}]*left:\s*var\(--grand-end\);/);
+  assert.match(css, /\.dealer-mix-guides > i\.level-advanced\s*\{[^}]*left:\s*var\(--advanced-end\);/);
+  assert.match(css, /repeating-linear-gradient\(to bottom, rgba\(31, 112, 146, 0\.48\) 0 2px, transparent 2px 5px\)/);
   assert.match(css, /\.dealer-employment-bar\s*\{[^}]*height:\s*12px;/);
   assert.match(css, /\.dealer-employment-bar > i\s*\{[^}]*linear-gradient\(180deg,[^}]*linear-gradient\(90deg, #28779d 0%, #195b7c 48%, #0d405b 100%\)/);
   assert.doesNotMatch(css, /\.dealer-kpi-strip/);

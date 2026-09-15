@@ -235,8 +235,18 @@ function CertificationMixBar({
   total: number;
   animationDelay: number;
 }) {
+  const grandEnd = percentage(levelCounts.Grand, total);
+  const advancedEnd = percentage(levelCounts.Grand + levelCounts.Advanced, total);
+
   return (
-    <div className="dealer-mix" role="cell">
+    <div
+      className="dealer-mix"
+      role="cell"
+      style={{
+        "--grand-end": grandEnd,
+        "--advanced-end": advancedEnd,
+      } as CSSProperties}
+    >
       <div className="dealer-mix-bar" aria-label={`Grand ${levelCounts.Grand}명, Advanced ${levelCounts.Advanced}명, Certified ${levelCounts.Certified}명`}>
         {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => {
           const share = percentage(levelCounts[level], total);
@@ -253,6 +263,10 @@ function CertificationMixBar({
             />
           );
         })}
+      </div>
+      <div className="dealer-mix-guides" aria-hidden="true">
+        <i className="level-grand" />
+        <i className="level-advanced" />
       </div>
       <div className="dealer-mix-values">
         {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => (
