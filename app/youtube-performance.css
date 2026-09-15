@@ -43,3 +43,5 @@
 .yt-row-person .yt-gender-icon{font-size:12px;line-height:1;color:#536e7a}
 .yt-compact .yt-comparison-table th:first-child{width:26%}.yt-compact .yt-comparison-table th:nth-child(3){width:10%}.yt-compact .yt-comparison-table th:nth-child(9){width:10%}
 .yt-compact .yt-row-person{gap:5px}.yt-compact .yt-row-person strong{gap:4px}
+.yt-compact .yt-comparison-table tr > :not(:first-child){position:relative;padding-inline:9px}
+.yt-compact .yt-comparison-table tr > :not(:first-child)::before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:1px;background:#dce7ec;pointer-events:none}
