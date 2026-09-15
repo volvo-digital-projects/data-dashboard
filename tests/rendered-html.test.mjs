@@ -3482,7 +3482,9 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*width:\s*1px;[^}]*top:\s*9px;[^}]*bottom:\s*9px;[^}]*background:\s*#dce7ec;/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*display:\s*none;/);
   assert.match(html, /현재 재직 67명 \/ 전체 인증 180명 · 재직률 37\.2%/);
-  for (const sortLabel of ["기본순", "전체 인증 많은 순", "재직률 높은 순", "현재 재직 많은 순"]) {
+  assert.doesNotMatch(html, />기본순<\/button>/);
+  assert.match(source, /useState<DealerSortKey>\("total-desc"\)/);
+  for (const sortLabel of ["전체 인증 많은 순", "재직률 높은 순", "현재 재직 많은 순"]) {
     assert.match(html, new RegExp(`>${sortLabel}<\\/button>`));
   }
   assert.doesNotMatch(html, /재직률 낮은 순/);

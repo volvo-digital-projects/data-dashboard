@@ -25,7 +25,7 @@ type VocShowroom = {
   employees: { name: string }[];
 };
 type CertificationLevel = Certification["level"];
-type DealerSortKey = "default" | "total-desc" | "rate-desc" | "current-desc";
+type DealerSortKey = "total-desc" | "rate-desc" | "current-desc";
 const dealerOrder = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"];
 const showrooms = dashboardJson.showrooms as Showroom[];
 const certifications = staffCertificationsJson.records as Certification[];
@@ -196,7 +196,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
   const displayedDealerRows = useMemo(() => {
     const rows = [...dealerRows];
     const stableOrder = (dealer: string) => dealerOrder.indexOf(dealer);
-    if (sortKey === "default") return rows.sort((a, b) => stableOrder(a.dealer) - stableOrder(b.dealer));
     if (sortKey === "rate-desc") {
       return rows.sort((a, b) => {
         const difference = b.currentCertified / b.certificationCount - a.currentCertified / a.certificationCount;
@@ -239,7 +238,6 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
           <div className="dealer-sort-controls" aria-label="딜러사 정렬 방식">
             {([
-              ["default", "기본순"],
               ["total-desc", "전체 인증 많은 순"],
               ["rate-desc", "재직률 높은 순"],
               ["current-desc", "현재 재직 많은 순"],
