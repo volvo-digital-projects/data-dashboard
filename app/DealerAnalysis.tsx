@@ -3,6 +3,7 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import dashboardJson from "./data/showrooms.json";
+import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
 
@@ -24,12 +25,27 @@ type VocShowroom = {
   dealer: string;
   employees: { name: string }[];
 };
+type SalesStaff = {
+  name: string;
+  deliveredSales: number;
+  monthlyDeliveredSales: number[];
+};
+type SalesShowroom = {
+  staff: SalesStaff[];
+};
+type SalesPerformance = {
+  certifiedAverage: number;
+  nonCertifiedAverage: number;
+  difference: number;
+};
 type CertificationLevel = Certification["level"];
 type DealerSortKey = "total-desc" | "rate-desc" | "current-desc";
 const dealerOrder = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"];
 const showrooms = dashboardJson.showrooms as Showroom[];
 const certifications = staffCertificationsJson.records as Certification[];
+const certifiedNames = new Set(certifications.map((record) => record.name));
 const vocShowrooms = vocStaffAnalysisJson.showrooms as Record<string, VocShowroom>;
+const salesShowrooms = salesActivityAnalysisJson.showrooms as Record<string, SalesShowroom>;
 const certificationDealerOverrides: Record<string, string> = {
   "2025:장석우": "에이치",
   "2025:주재홍": "에이치",
@@ -73,6 +89,30 @@ function certificationDealer(record: Certification) {
   return currentDealers?.size === 1 ? [...currentDealers][0] : null;
 }
 
+function salesPerformanceForShowrooms(dealerShowrooms: Showroom[]): SalesPerformance {
+  const staffByDealerAndName = new Map<string, { name: string; sales: number; months: number }>();
+  for (const showroom of dealerShowrooms) {
+    for (const staff of salesShowrooms[showroom.cdsid]?.staff ?? []) {
+      const key = `${showroom.dealer}:${staff.name}`;
+      const aggregate = staffByDealerAndName.get(key) ?? { name: staff.name, sales: 0, months: 0 };
+      aggregate.sales += staff.deliveredSales;
+      aggregate.months = Math.max(aggregate.months, staff.monthlyDeliveredSales.length);
+      staffByDealerAndName.set(key, aggregate);
+    }
+  }
+  const staff = [...staffByDealerAndName.values()];
+  const groupAverage = (members: typeof staff) => members.length > 0
+    ? members.reduce((sum, member) => sum + member.sales / Math.max(member.months, 1), 0) / members.length
+    : 0;
+  const certifiedAverage = groupAverage(staff.filter((member) => certifiedNames.has(member.name)));
+  const nonCertifiedAverage = groupAverage(staff.filter((member) => !certifiedNames.has(member.name)));
+  return {
+    certifiedAverage,
+    nonCertifiedAverage,
+    difference: certifiedAverage - nonCertifiedAverage,
+  };
+}
+
 const dealerRows = dealerOrder.map((dealer) => {
   const dealerShowrooms = showrooms.filter((showroom) => showroom.dealer === dealer);
   const currentNames = new Set(
@@ -97,6 +137,7 @@ const dealerRows = dealerOrder.map((dealer) => {
     certificationCount: dealerCertifications.length,
     currentCertified,
     levelCounts,
+    salesPerformance: salesPerformanceForShowrooms(dealerShowrooms),
   };
 });
 
@@ -108,10 +149,22 @@ const totalLevels = {
   Certified: certifications.filter((record) => record.level === "Certified").length,
 };
 const totalCurrentCertified = dealerRows.reduce((sum, row) => sum + row.currentCertified, 0);
+const totalSalesPerformance = salesPerformanceForShowrooms(showrooms);
 const unmatchedCertifications = certifications.filter((record) => !certificationDealer(record));
 
 function percentage(value: number, total: number) {
   return total > 0 ? `${((value / total) * 100).toFixed(1)}%` : "0.0%";
+}
+
+function monthlySales(value: number) {
+  return value.toFixed(1);
+}
+
+function signedMonthlySales(value: number) {
+  const rounded = Number(value.toFixed(1));
+  if (rounded > 0) return `+${rounded.toFixed(1)}`;
+  if (rounded < 0) return `−${Math.abs(rounded).toFixed(1)}`;
+  return "±0.0";
 }
 
 const levelLabels: Record<CertificationLevel, string> = {
@@ -190,6 +243,22 @@ function EmploymentProgressBar({
   );
 }
 
+function SalesPerformanceComparison({ performance }: { performance: SalesPerformance }) {
+  const roundedDifference = Number(performance.difference.toFixed(1));
+  const differenceTone = roundedDifference > 0 ? "positive" : roundedDifference < 0 ? "negative" : "neutral";
+  return (
+    <div
+      className="dealer-sales-comparison"
+      role="cell"
+      aria-label={`2026년 인증직원 월 판매평균 ${monthlySales(performance.certifiedAverage)}대, 비인증직원 월 판매평균 ${monthlySales(performance.nonCertifiedAverage)}대, 차이 ${signedMonthlySales(performance.difference)}대`}
+    >
+      <span><small>인증 월평균</small><strong>{monthlySales(performance.certifiedAverage)}<i>대</i></strong></span>
+      <span><small>비인증 월평균</small><strong>{monthlySales(performance.nonCertifiedAverage)}<i>대</i></strong></span>
+      <span className={`difference ${differenceTone}`}><small>차이</small><strong>{signedMonthlySales(performance.difference)}<i>대</i></strong></span>
+    </div>
+  );
+}
+
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
   const [sortKey, setSortKey] = useState<DealerSortKey>("total-desc");
@@ -255,12 +324,13 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
         </div>
 
-        <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원과 비율">
+        <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 성과 비교">
           <div className="dealer-certification-row dealer-certification-head" role="row">
             <span role="columnheader">딜러사 / 전시장 / %</span>
             <span role="columnheader">전체 인증 / %</span>
             <span role="columnheader">인증 레벨별 구성 / %</span>
             <span role="columnheader">현재 재직인원 / 재직율(%)</span>
+            <span role="columnheader">2026년 인증직원 vs 비인증직원 성과비교</span>
           </div>
           <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
             <div className="dealer-certification-name" role="cell">
@@ -272,6 +342,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             </div>
             <CertificationMixBar levelCounts={totalLevels} total={totalCertifications} animationDelay={80} />
             <EmploymentProgressBar current={totalCurrentCertified} total={totalCertifications} animationDelay={120} />
+            <SalesPerformanceComparison performance={totalSalesPerformance} />
           </article>
           {displayedDealerRows.map((row, index) => (
             <article
@@ -289,6 +360,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               </div>
               <CertificationMixBar levelCounts={row.levelCounts} total={row.certificationCount} animationDelay={120 + index * 50} />
               <EmploymentProgressBar current={row.currentCertified} total={row.certificationCount} animationDelay={160 + index * 50} />
+              <SalesPerformanceComparison performance={row.salesPerformance} />
             </article>
           ))}
         </div>
