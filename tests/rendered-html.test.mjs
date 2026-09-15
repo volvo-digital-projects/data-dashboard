@@ -3458,17 +3458,21 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>전체<\/h3>/);
   assert.doesNotMatch(html, /VOLVO DEALER|ALL DEALERS/);
   assert.doesNotMatch(html, />0[1-7]<\/span>/);
-  for (const heading of ["딜러사 / 전시장 / %", "전체 인증 / %", "인증 레벨별 구성 / %", "현재 재직인원 / 재직율(%)", "2026년 인증직원 vs 비인증직원 판매성과 비교"]) {
+  for (const heading of ["딜러사 / 전시장 / %", "전체 인증 / %", "인증 레벨별 구성 / %", "현재 재직인원 / 재직율(%)", "2026 인증직원 vs 비인증직원 고객상담 만족도 비교", "2026년 인증직원 vs 비인증직원 판매성과 비교"]) {
     assert.match(html, new RegExp(`<span role="columnheader">${heading.replace(/[()]/g, "\\$&")}<\\/span>`));
   }
   assert.match(css, /\.dealer-certification-head > :nth-child\(2\)\s*\{[^}]*align-items:\s*flex-start;[^}]*text-align:\s*left;/);
   assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-sales-comparison"/g) ?? []).length, 8);
+  assert.equal((html.match(/class="dealer-satisfaction-comparison"/g) ?? []).length, 8);
+  assert.match(html, /aria-label="2026년 인증직원 고객상담 만족도 \d+\.\d점, \d+건; 비인증직원 \d+\.\d점, \d+건; 차이 [＋+−±-]\d+\.\d점"/);
+  assert.match(source, /const result = employee\.years\?\.\["2026"\]/);
+  assert.match(source, /average: responses > 0 \? scoreSum \/ responses : 0/);
   assert.match(html, /aria-label="2026년 인증직원 월 판매평균 \d+\.\d대, 비인증직원 월 판매평균 \d+\.\d대, 차이 [＋+−±-]\d+\.\d대"/);
   assert.match(source, /member\.sales \/ Math\.max\(member\.months, 1\)/);
   assert.match(source, /difference:\s*certifiedAverage - nonCertifiedAverage/);
-  assert.match(css, /\.dealer-sales-comparison\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.dealer-sales-comparison,\s*\.dealer-satisfaction-comparison\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(source, /className="dealer-employment"[\s\S]*?className="dealer-employment-bar"[\s\S]*?className="dealer-employment-metrics"/);
   assert.match(source, /className="dealer-employment-current">\{current\}<\/span><small>명<\/small>/);
   assert.match(css, /\.dealer-employment-current\s*\{[^}]*min-width:\s*2ch;[^}]*display:\s*inline-block;[^}]*text-align:\s*right;/);
@@ -3519,13 +3523,15 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /@media \(min-width:\s*1241px\)\s*\{[\s\S]*?\.dealer-analysis-board,[\s\S]*?\.dealer-analysis-roadmap,[\s\S]*?\.dealer-analysis-data-note\s*\{[^}]*margin-inline:\s*calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
-  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(150px, 0\.82fr\)\s*minmax\(96px, 0\.5fr\)\s*minmax\(300px, 1\.7fr\)\s*minmax\(230px, 1\.35fr\)\s*minmax\(260px, 1\.45fr\)/);
+  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(132px, 0\.72fr\)\s*minmax\(84px, 0\.42fr\)\s*minmax\(250px, 1\.32fr\)\s*minmax\(180px, 1fr\)\s*repeat\(2, minmax\(225px, 1\.18fr\)\)/);
   assert.match(css, /@keyframes dealer-bar-fill/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
-  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(100px,\s*0\.68fr\)\s*82px\s*minmax\(230px,\s*1\.5fr\)\s*minmax\(175px,\s*1\.2fr\)\s*minmax\(220px,\s*1\.35fr\)/);
+  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(88px,\s*0\.62fr\)\s*72px\s*minmax\(200px,\s*1\.35fr\)\s*minmax\(155px,\s*1\.05fr\)\s*repeat\(2,\s*minmax\(195px,\s*1\.25fr\)\)/);
+  assert.match(css, /\.dealer-satisfaction-comparison\s*\{[^}]*background:\s*linear-gradient\(90deg, rgba\(248, 225, 190, 0\.12\), rgba\(246, 206, 163, 0\.04\)\);/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-sales-comparison\s*\{[^}]*grid-column:\s*1 \/ -1;/);
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-satisfaction-comparison\s*\{[^}]*grid-column:\s*1 \/ -1;/);
 });
 
 test("splits courtesy feedback into short, actionable strength labels", async () => {

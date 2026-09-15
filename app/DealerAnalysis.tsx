@@ -23,7 +23,10 @@ type Certification = {
 };
 type VocShowroom = {
   dealer: string;
-  employees: { name: string }[];
+  employees: {
+    name: string;
+    years?: Record<string, { responses: number; scoreSum: number }>;
+  }[];
 };
 type SalesStaff = {
   name: string;
@@ -37,6 +40,13 @@ type SalesPerformance = {
   certifiedAverage: number;
   nonCertifiedAverage: number;
   difference: number;
+};
+type SatisfactionPerformance = {
+  certifiedAverage: number;
+  nonCertifiedAverage: number;
+  difference: number;
+  certifiedResponses: number;
+  nonCertifiedResponses: number;
 };
 type CertificationLevel = Certification["level"];
 type DealerSortKey = "total-desc" | "rate-desc" | "current-desc";
@@ -113,6 +123,36 @@ function salesPerformanceForShowrooms(dealerShowrooms: Showroom[]): SalesPerform
   };
 }
 
+function satisfactionPerformanceForShowrooms(dealerShowrooms: Showroom[]): SatisfactionPerformance {
+  const staffByDealerAndName = new Map<string, { name: string; responses: number; scoreSum: number }>();
+  for (const showroom of dealerShowrooms) {
+    for (const employee of vocShowrooms[showroom.cdsid]?.employees ?? []) {
+      const result = employee.years?.["2026"];
+      if (!result || result.responses <= 0) continue;
+      const key = `${showroom.dealer}:${employee.name}`;
+      const aggregate = staffByDealerAndName.get(key) ?? { name: employee.name, responses: 0, scoreSum: 0 };
+      aggregate.responses += result.responses;
+      aggregate.scoreSum += result.scoreSum;
+      staffByDealerAndName.set(key, aggregate);
+    }
+  }
+  const staff = [...staffByDealerAndName.values()];
+  const groupResult = (members: typeof staff) => {
+    const responses = members.reduce((sum, member) => sum + member.responses, 0);
+    const scoreSum = members.reduce((sum, member) => sum + member.scoreSum, 0);
+    return { average: responses > 0 ? scoreSum / responses : 0, responses };
+  };
+  const certified = groupResult(staff.filter((member) => certifiedNames.has(member.name)));
+  const nonCertified = groupResult(staff.filter((member) => !certifiedNames.has(member.name)));
+  return {
+    certifiedAverage: certified.average,
+    nonCertifiedAverage: nonCertified.average,
+    difference: certified.average - nonCertified.average,
+    certifiedResponses: certified.responses,
+    nonCertifiedResponses: nonCertified.responses,
+  };
+}
+
 const dealerRows = dealerOrder.map((dealer) => {
   const dealerShowrooms = showrooms.filter((showroom) => showroom.dealer === dealer);
   const currentNames = new Set(
@@ -137,6 +177,7 @@ const dealerRows = dealerOrder.map((dealer) => {
     certificationCount: dealerCertifications.length,
     currentCertified,
     levelCounts,
+    satisfactionPerformance: satisfactionPerformanceForShowrooms(dealerShowrooms),
     salesPerformance: salesPerformanceForShowrooms(dealerShowrooms),
   };
 });
@@ -149,6 +190,7 @@ const totalLevels = {
   Certified: certifications.filter((record) => record.level === "Certified").length,
 };
 const totalCurrentCertified = dealerRows.reduce((sum, row) => sum + row.currentCertified, 0);
+const totalSatisfactionPerformance = satisfactionPerformanceForShowrooms(showrooms);
 const totalSalesPerformance = salesPerformanceForShowrooms(showrooms);
 const unmatchedCertifications = certifications.filter((record) => !certificationDealer(record));
 
@@ -161,6 +203,17 @@ function monthlySales(value: number) {
 }
 
 function signedMonthlySales(value: number) {
+  const rounded = Number(value.toFixed(1));
+  if (rounded > 0) return `+${rounded.toFixed(1)}`;
+  if (rounded < 0) return `−${Math.abs(rounded).toFixed(1)}`;
+  return "±0.0";
+}
+
+function satisfactionScore(value: number) {
+  return value.toFixed(1);
+}
+
+function signedSatisfactionScore(value: number) {
   const rounded = Number(value.toFixed(1));
   if (rounded > 0) return `+${rounded.toFixed(1)}`;
   if (rounded < 0) return `−${Math.abs(rounded).toFixed(1)}`;
@@ -259,6 +312,22 @@ function SalesPerformanceComparison({ performance }: { performance: SalesPerform
   );
 }
 
+function SatisfactionPerformanceComparison({ performance }: { performance: SatisfactionPerformance }) {
+  const roundedDifference = Number(performance.difference.toFixed(1));
+  const differenceTone = roundedDifference > 0 ? "positive" : roundedDifference < 0 ? "negative" : "neutral";
+  return (
+    <div
+      className="dealer-satisfaction-comparison"
+      role="cell"
+      aria-label={`2026년 인증직원 고객상담 만족도 ${satisfactionScore(performance.certifiedAverage)}점, ${performance.certifiedResponses}건; 비인증직원 ${satisfactionScore(performance.nonCertifiedAverage)}점, ${performance.nonCertifiedResponses}건; 차이 ${signedSatisfactionScore(performance.difference)}점`}
+    >
+      <span><small>인증 평균</small><strong>{satisfactionScore(performance.certifiedAverage)}<i>점</i></strong></span>
+      <span><small>비인증 평균</small><strong>{satisfactionScore(performance.nonCertifiedAverage)}<i>점</i></strong></span>
+      <span className={`difference ${differenceTone}`}><small>차이</small><strong>{signedSatisfactionScore(performance.difference)}<i>점</i></strong></span>
+    </div>
+  );
+}
+
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
   const [sortKey, setSortKey] = useState<DealerSortKey>("total-desc");
@@ -324,12 +393,13 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
         </div>
 
-        <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 판매성과 비교">
+        <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 고객상담 만족도·판매성과 비교">
           <div className="dealer-certification-row dealer-certification-head" role="row">
             <span role="columnheader">딜러사 / 전시장 / %</span>
             <span role="columnheader">전체 인증 / %</span>
             <span role="columnheader">인증 레벨별 구성 / %</span>
             <span role="columnheader">현재 재직인원 / 재직율(%)</span>
+            <span role="columnheader">2026 인증직원 vs 비인증직원 고객상담 만족도 비교</span>
             <span role="columnheader">2026년 인증직원 vs 비인증직원 판매성과 비교</span>
           </div>
           <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
@@ -342,6 +412,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             </div>
             <CertificationMixBar levelCounts={totalLevels} total={totalCertifications} animationDelay={80} />
             <EmploymentProgressBar current={totalCurrentCertified} total={totalCertifications} animationDelay={120} />
+            <SatisfactionPerformanceComparison performance={totalSatisfactionPerformance} />
             <SalesPerformanceComparison performance={totalSalesPerformance} />
           </article>
           {displayedDealerRows.map((row, index) => (
@@ -360,6 +431,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               </div>
               <CertificationMixBar levelCounts={row.levelCounts} total={row.certificationCount} animationDelay={120 + index * 50} />
               <EmploymentProgressBar current={row.currentCertified} total={row.certificationCount} animationDelay={160 + index * 50} />
+              <SatisfactionPerformanceComparison performance={row.satisfactionPerformance} />
               <SalesPerformanceComparison performance={row.salesPerformance} />
             </article>
           ))}
