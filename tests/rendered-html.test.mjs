@@ -3523,7 +3523,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /@media \(min-width:\s*1241px\)\s*\{[\s\S]*?\.dealer-analysis-board,[\s\S]*?\.dealer-analysis-roadmap,[\s\S]*?\.dealer-analysis-data-note\s*\{[^}]*margin-inline:\s*calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
-  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(125px, 0\.66fr\)\s*minmax\(120px, 0\.58fr\)\s*minmax\(240px, 1\.25fr\)\s*minmax\(190px, 1\.02fr\)\s*repeat\(2, minmax\(210px, 1\.08fr\)\)/);
+  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(145px, 0\.76fr\)\s*minmax\(120px, 0\.58fr\)\s*minmax\(230px, 1\.2fr\)\s*minmax\(180px, 0\.96fr\)\s*repeat\(2, minmax\(210px, 1\.08fr\)\)/);
   assert.match(css, /@keyframes dealer-bar-fill/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);

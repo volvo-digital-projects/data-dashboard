@@ -610,7 +610,7 @@ html {
   min-width: 0;
   min-height: 68px;
   display: grid;
-  grid-template-columns: minmax(125px, 0.66fr) minmax(120px, 0.58fr) minmax(240px, 1.25fr) minmax(190px, 1.02fr) repeat(2, minmax(210px, 1.08fr));
+  grid-template-columns: minmax(145px, 0.76fr) minmax(120px, 0.58fr) minmax(230px, 1.2fr) minmax(180px, 0.96fr) repeat(2, minmax(210px, 1.08fr));
   align-items: stretch;
   border-bottom: 1px solid #dce7ec;
   animation: dealer-row-enter 360ms ease-out both;
