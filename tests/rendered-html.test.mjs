@@ -3516,6 +3516,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(pagesSource, /segments\[2\] === "dealer-analysis"[\s\S]*?access\.role !== "master"/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*width: 92px;[^}]*height: 92px;/);
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*margin-inline: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*padding-inline: var\(--dashboard-sticky-content-gutter\);/);
+  assert.match(css, /@media \(min-width:\s*1241px\)\s*\{[\s\S]*?\.dealer-analysis-board,[\s\S]*?\.dealer-analysis-roadmap,[\s\S]*?\.dealer-analysis-data-note\s*\{[^}]*margin-inline:\s*calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
   assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(150px, 0\.82fr\)\s*minmax\(96px, 0\.5fr\)\s*minmax\(300px, 1\.7fr\)\s*minmax\(230px, 1\.35fr\)\s*minmax\(260px, 1\.45fr\)/);
