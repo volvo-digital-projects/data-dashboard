@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type RefObject } from "react";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import dashboardJson from "./data/showrooms.json";
 import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
@@ -239,15 +239,13 @@ function CertificationMixBar({
   const advancedEnd = percentage(levelCounts.Grand + levelCounts.Advanced, total);
 
   return (
-    <div
-      className="dealer-mix"
-      role="cell"
-      style={{
-        "--grand-end": grandEnd,
-        "--advanced-end": advancedEnd,
-      } as CSSProperties}
-    >
-      <div className="dealer-mix-bar" aria-label={`Grand ${levelCounts.Grand}명, Advanced ${levelCounts.Advanced}명, Certified ${levelCounts.Certified}명`}>
+    <div className="dealer-mix" role="cell">
+      <div
+        className="dealer-mix-bar"
+        data-grand-end={grandEnd}
+        data-advanced-end={advancedEnd}
+        aria-label={`Grand ${levelCounts.Grand}명, Advanced ${levelCounts.Advanced}명, Certified ${levelCounts.Certified}명`}
+      >
         {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => {
           const share = percentage(levelCounts[level], total);
           return (
@@ -264,10 +262,6 @@ function CertificationMixBar({
           );
         })}
       </div>
-      <div className="dealer-mix-guides" aria-hidden="true">
-        <i className="level-grand" />
-        <i className="level-advanced" />
-      </div>
       <div className="dealer-mix-values">
         {(Object.keys(levelLabels) as CertificationLevel[]).map((level) => (
           <span className={`level-${level.toLowerCase()}`} key={level}>
@@ -279,6 +273,84 @@ function CertificationMixBar({
         ))}
       </div>
     </div>
+  );
+}
+
+type CertificationConnectorGeometry = {
+  width: number;
+  height: number;
+  grandPath: string;
+  advancedPath: string;
+};
+
+function CertificationTrendConnectors({
+  tableRef,
+  layoutKey,
+}: {
+  tableRef: RefObject<HTMLDivElement | null>;
+  layoutKey: string;
+}) {
+  const [geometry, setGeometry] = useState<CertificationConnectorGeometry | null>(null);
+
+  useEffect(() => {
+    const table = tableRef.current;
+    if (!table) return;
+
+    let frame = 0;
+    let cancelled = false;
+    const update = () => {
+      frame = 0;
+      if (cancelled) return;
+      const tableRect = table.getBoundingClientRect();
+      const bars = Array.from(table.querySelectorAll<HTMLElement>(".dealer-mix-bar"));
+      const points = bars.map((bar) => {
+        const barRect = bar.getBoundingClientRect();
+        const grandEnd = Number.parseFloat(bar.dataset.grandEnd ?? "0") / 100;
+        const advancedEnd = Number.parseFloat(bar.dataset.advancedEnd ?? "0") / 100;
+        return {
+          grandX: barRect.left - tableRect.left + barRect.width * grandEnd,
+          advancedX: barRect.left - tableRect.left + barRect.width * advancedEnd,
+          y: barRect.top - tableRect.top + barRect.height / 2,
+        };
+      });
+      const pathFor = (key: "grandX" | "advancedX") =>
+        points.map((point, index) => `${index === 0 ? "M" : "L"} ${point[key].toFixed(2)} ${point.y.toFixed(2)}`).join(" ");
+
+      setGeometry({
+        width: tableRect.width,
+        height: tableRect.height,
+        grandPath: pathFor("grandX"),
+        advancedPath: pathFor("advancedX"),
+      });
+    };
+    const scheduleUpdate = () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(table);
+    table.querySelectorAll<HTMLElement>(".dealer-mix-bar").forEach((bar) => observer.observe(bar));
+    scheduleUpdate();
+    document.fonts?.ready.then(scheduleUpdate);
+
+    return () => {
+      cancelled = true;
+      if (frame) cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [layoutKey, tableRef]);
+
+  if (!geometry || !geometry.grandPath || !geometry.advancedPath) return null;
+  return (
+    <svg
+      className="dealer-certification-connectors"
+      viewBox={`0 0 ${geometry.width} ${geometry.height}`}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path className="level-grand" d={geometry.grandPath} vectorEffect="non-scaling-stroke" />
+      <path className="level-advanced" d={geometry.advancedPath} vectorEffect="non-scaling-stroke" />
+    </svg>
   );
 }
 
@@ -345,6 +417,7 @@ function SatisfactionPerformanceComparison({ performance }: { performance: Satis
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
   const [sortKey, setSortKey] = useState<DealerSortKey>("total-desc");
+  const certificationTableRef = useRef<HTMLDivElement>(null);
   const displayedDealerRows = useMemo(() => {
     const rows = [...dealerRows];
     const stableOrder = (dealer: string) => dealerOrder.indexOf(dealer);
@@ -407,7 +480,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
         </div>
 
-        <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 고객상담 만족도·판매성과 비교">
+        <div ref={certificationTableRef} className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 고객상담 만족도·판매성과 비교">
           <div className="dealer-certification-row dealer-certification-head" role="row">
             <span role="columnheader">딜러사 / 전시장 / %</span>
             <span role="columnheader">전체 인증 / %</span>
@@ -449,6 +522,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
               <SalesPerformanceComparison performance={row.salesPerformance} />
             </article>
           ))}
+          <CertificationTrendConnectors tableRef={certificationTableRef} layoutKey={sortKey} />
         </div>
         <div className="dealer-certification-reconcile">
           <span>딜러사 확인 <strong>{totalCertifications - unmatchedCertifications.length}명</strong></span>
