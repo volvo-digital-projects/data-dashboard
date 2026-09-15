@@ -673,6 +673,24 @@ html {
   justify-content: stretch;
   gap: 6px;
 }
+
+.analysis-admin-icon rect {
+  fill: currentColor;
+  stroke: none;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: analysis-admin-bars 3.6s ease-in-out infinite;
+}
+.analysis-admin-icon rect:nth-child(2) { animation-delay: -0.9s; }
+.analysis-admin-icon rect:nth-child(3) { animation-delay: -2.4s; }
+.analysis-admin-icon rect:nth-child(4) { animation-delay: -1.6s; }
+@keyframes analysis-admin-bars {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.74); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .analysis-admin-icon rect { animation: none; }
+}
 .dealer-mix-bar {
   height: 12px;
   display: flex;

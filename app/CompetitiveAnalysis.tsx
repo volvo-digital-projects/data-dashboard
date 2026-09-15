@@ -2895,8 +2895,10 @@ export default function CompetitiveAnalysis({
             aria-label="관리자용 7개 딜러사별 분석자료 열기"
           >
             <svg className="analysis-admin-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-              <path d="M16 3.2 26 7v7.4c0 6.3-4.1 11.8-10 14.4-5.9-2.6-10-8.1-10-14.4V7l10-3.8Z" />
-              <path d="M11.2 20.4v-4.1m4.8 4.1v-8.8m4.8 8.8v-6.2" />
+              <rect x="4" y="15" width="4" height="12" rx="1.2" />
+              <rect x="11" y="6" width="4" height="21" rx="1.2" />
+              <rect x="18" y="11" width="4" height="16" rx="1.2" />
+              <rect x="25" y="3" width="4" height="24" rx="1.2" />
             </svg>
             <strong><span>딜러사별</span><span>분석자료</span></strong>
           </Link>
