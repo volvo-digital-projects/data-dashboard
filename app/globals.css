@@ -465,7 +465,7 @@ html:has(.dealer-analysis-page) {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 8px;
+  scroll-padding-top: 0;
   padding: 0 var(--dashboard-content-overhang) 16px;
   margin-inline: calc(-1 * var(--dashboard-content-overhang));
 }
@@ -478,7 +478,7 @@ html:has(.dealer-analysis-page) {
 .dealer-analysis-scroll .yt-hero {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  scroll-margin-top: 17px;
+  scroll-margin-top: var(--yt-snap-inset, 17px);
 }
 .dealer-analysis-scroll .yt-detail-disclosure[open] { scroll-snap-align: start; }
 .dealer-analysis-scroll .yt-method { scroll-snap-align: end; }

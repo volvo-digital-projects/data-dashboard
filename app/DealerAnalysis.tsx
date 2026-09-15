@@ -435,7 +435,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       clearTimeout(timer);
       const section = area.querySelector<HTMLElement>(".youtube-performance");
       if (!section) return;
-      const target = area.scrollTop + section.getBoundingClientRect().top - area.getBoundingClientRect().top - 8;
+      const target = area.scrollTop + section.getBoundingClientRect().top - area.getBoundingClientRect().top;
       const current = area.scrollTop;
       // A long wheel/touch gesture must first reveal the creator heading.
       // Subsequent gestures remain free to reach the last row and details.
@@ -562,16 +562,8 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           ))}
           <CertificationTrendConnectors tableRef={certificationTableRef} layoutKey={sortKey} />
         </div>
-        <div className="dealer-certification-reconcile">
-          <span>딜러사 확인 <strong>{totalCertifications - unmatchedCertifications.length}명</strong></span>
-          <span>딜러사 미확인 <strong>{unmatchedCertifications.length}명</strong> · 윤종현(Advanced), 김형선(Certified)</span>
-          <span>전국 총계 <strong>{totalCertifications}명</strong></span>
-        </div>
       </section>
 
-      <p className="dealer-analysis-data-note">
-        재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값입니다. 현재 명단에서 확인되지 않는 과거 인증자를 퇴사자로 단정하지 않으며, 딜러사 미확인 2명은 원자료에 전시장 정보가 없어 별도로 보존했습니다.
-      </p>
       <YouTubePerformance />
       </div>
     </main>

@@ -1,7 +1,6 @@
 """Read public channel pages from the supplied roster; never assume missing metrics are zero."""
 import concurrent.futures, datetime, json, re, sys, urllib.request
 from pathlib import Path
-import openpyxl
 sys.stdout.reconfigure(encoding='utf-8')
 ROOT = Path(__file__).resolve().parents[1]
 def nodes(v, key):
@@ -11,7 +10,9 @@ def nodes(v, key):
     elif isinstance(v, list):
         for x in v: yield from nodes(x, key)
 def page(url):
-    html = urllib.request.urlopen(url, timeout=30).read().decode()
+    localized = url + ('&' if '?' in url else '?') + 'hl=ko&gl=KR'
+    request = urllib.request.Request(localized, headers={'Accept-Language':'ko-KR,ko;q=0.9'})
+    html = urllib.request.urlopen(request, timeout=30).read().decode()
     m = re.search(r'var ytInitialData = (.*?);</script>',html)
     data=json.loads(m.group(1))
     version=re.search(r'"INNERTUBE_CLIENT_VERSION":"([^"]+)"',html)
@@ -64,6 +65,7 @@ def collect(url):
     except Exception as e: result['errors'].append(str(e))
     return result
 if __name__=='__main__':
+    import openpyxl
     workbook=openpyxl.load_workbook(sys.argv[1],data_only=True)
     rows=[r for r in list(workbook.active.values)[3:] if r[2]]
     roster=[{'dealer':r[0],'showroom':r[1],'name':r[2],'gender':r[3],'channelUrl':r[4]} for r in rows]

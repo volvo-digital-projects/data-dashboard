@@ -1,0 +1,52 @@
+name: Refresh YouTube metrics hourly
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: youtube-metrics-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.0'
+          cache: npm
+      - run: npm ci
+      - name: Collect and validate all public channels
+        run: python scripts/refresh-youtube-metrics.py
+      - name: Verify dashboard and data
+        run: |
+          python -m unittest discover -s tests -p test_youtube_refresh.py
+          npm test
+      - name: Save verified snapshot on main
+        run: |
+          git config user.name "Data Dashboard Auto Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add app/data/youtube-creators.json public/dashboard-release.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto update hourly YouTube channel metrics"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      # GITHUB_TOKEN pushes do not trigger other push workflows.
+      - name: Deploy updated snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

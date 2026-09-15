@@ -1,5 +1,21 @@
 # YouTube creator snapshot
 
+## Hourly public metrics
+
+`refresh-youtube.yml` runs every hour at minute 17 (GitHub schedules may be delayed),
+or via workflow_dispatch. It reads the existing 12-person roster / 11 unique channels,
+collects complete public long/short catalogs, and rejects the entire refresh if any
+channel identity or count is missing. The previous snapshot stays intact on failure.
+It preserves reviewed comments and known presenter attribution; new shared videos
+remain unassigned. Sales/VOC are NOT refreshed by this workflow.
+
+After tests pass it commits only the metrics/release files to canonical main and
+explicitly dispatches deploy-pages.yml (GITHUB_TOKEN pushes do not trigger push CI).
+UPDATE in the heading is the last complete successful collection time in KST,
+not the current clock or the workflow's scheduled time.
+
+Run locally: `python scripts/refresh-youtube-metrics.py` (Python standard library).
+
 The original roster workbook and raw public comment samples remain outside this repository.
 The published artifact contains roster fields, channel metrics, explicit-text shared-video
 attribution and manually reviewed comment paraphrases with source links. Never publish

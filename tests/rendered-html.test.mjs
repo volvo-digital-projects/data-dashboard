@@ -255,9 +255,15 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(table, /aria-label="여성"/);
   assert.doesNotMatch(html, /<label>성별/);
   assert.match(html, /class="dealer-analysis-scroll"/);
+  assert.match(html, /class="yt-title-icon"/);
+  assert.match(html, /class="yt-update-stamp"/);
+  assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|구독자 많은 순/);
+  assert.match(html, /구독자 순/);
   const roster = JSON.parse(await readFile(new URL("../app/data/youtube-creators.json", import.meta.url), "utf8"));
   const voc = JSON.parse(await readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8"));
   const rows = [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map(match => match[1]).filter(row => row.includes('scope="row"'));
+  const sortedNames = [...roster.creators].sort((a,b)=>(roster.channels.find(c=>c.id===b.channelId).subscribers ?? -1)-(roster.channels.find(c=>c.id===a.channelId).subscribers ?? -1)).map(person=>person.name);
+  rows.forEach((row,index)=>assert.ok(row.includes(sortedNames[index]), "default subscriber descending order"));
   for (const person of roster.creators) {
     const row = rows.find(row => row.includes(person.name));
     const years = voc.showrooms[person.cdsid].employees.find(employee => employee.name === person.name).years;
@@ -3570,7 +3576,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   }
   assert.doesNotMatch(html, /재직률 낮은 순/);
   assert.match(css, /\.dealer-sort-controls button\s*\{[^}]*min-height:\s*21px;[^}]*border-radius:\s*999px;[^}]*background:\s*rgba\(244, 248, 250, 0\.9\);/);
-  assert.match(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
+  assert.doesNotMatch(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
   assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<b>39개소<em>\/<\/em>100%<\/b>/);
   assert.doesNotMatch(html, /7개사/);
@@ -3579,10 +3585,10 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><em>\/<\/em><b>100\.0%<\/b><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
   assert.match(html, /딜러사별 인증레벨별 인원 및 비율/);
   assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);
-  assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
-  assert.match(html, /딜러사 미확인 <strong>2명<\/strong>/);
+  assert.doesNotMatch(html, /딜러사 확인 <strong>178명<\/strong>/);
+  assert.doesNotMatch(html, /딜러사 미확인 <strong>2명<\/strong>/);
   assert.doesNotMatch(html, /누적판매/);
-  assert.match(html, /현재 재직 확인/);
+  assert.doesNotMatch(html, /class="dealer-analysis-data-note"/);
   assert.match(source, /"2025:장석우": "에이치"/);
   assert.match(source, /"2025:이동담": "코오롱"/);
   assert.match(source, /const totalCertifications = certifications\.length;/);
