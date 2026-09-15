@@ -245,7 +245,23 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.ok(table);
   assert.equal((table.match(/scope="row"/g) ?? []).length, 12);
   assert.equal((table.match(/scope="col"/g) ?? []).length, 9);
-  for (const heading of ["채널 개설일", "롱폼", "숏츠", "2026 상담", "2026 판매", "댓글 근거"]) assert.ok(table.includes(heading));
+  for (const heading of ["채널 개설일", "롱폼", "숏츠", "누적 고객만족도 평균", "2026 판매", "댓글 근거"]) assert.ok(table.includes(heading));
+  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 12);
+  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 12);
+  assert.match(table, /aria-label="남성"/);
+  assert.match(table, /aria-label="여성"/);
+  assert.doesNotMatch(html, /<label>성별/);
+  assert.match(html, /class="dealer-analysis-scroll"/);
+  const roster = JSON.parse(await readFile(new URL("../app/data/youtube-creators.json", import.meta.url), "utf8"));
+  const voc = JSON.parse(await readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8"));
+  const rows = [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map(match => match[1]).filter(row => row.includes('scope="row"'));
+  for (const person of roster.creators) {
+    const row = rows.find(row => row.includes(person.name));
+    const years = voc.showrooms[person.cdsid].employees.find(employee => employee.name === person.name).years;
+    const totals = Object.values(years).reduce((sum, year) => ({responses:sum.responses+year.responses, score:sum.score+year.scoreSum}), {responses:0,score:0});
+    const score = totals.responses ? (totals.score / totals.responses).toFixed(1) : "—";
+    assert.ok(row.includes(`<td class="yt-cell-voc"><strong>${score}</strong>`), person.name);
+  }
   assert.match(html, /<details class="yt-detail yt-detail-disclosure" id="yt-channel-detail">/);
   assert.doesNotMatch(table, /yt-person-results|yt-score/);
 });

@@ -36,3 +36,10 @@
 .yt-row-avatar{display:block;width:27px;height:30px;overflow:hidden;border-radius:3px;flex-shrink:0}
 .yt-row-avatar img[src*="kim-jeongho-channel-20260915"]{object-position:center;transform:scale(2);transform-origin:80% 32%}
 @media(min-width:761px){.yt-row-avatar{width:24px;height:26px}}
+.yt-row-person .yt-dealer-code{width:24px;height:24px;flex:0 0 24px;display:grid;place-items:center;border:1px solid #c9d8dd;border-radius:3px;background:#eaf1f3;color:#23586b;font-size:9px;font-weight:650}
+.yt-row-person .yt-row-avatar,.yt-row-person .yt-row-avatar img{width:24px;height:24px}
+.yt-row-person .yt-certifications{display:inline-flex;gap:3px;font-size:7px;font-weight:500;white-space:nowrap}
+.yt-certifications span:nth-child(1){color:#247d9b}.yt-certifications span:nth-child(2){color:#438f88}.yt-certifications span:nth-child(3){color:#b76742}
+.yt-row-person .yt-gender-icon{font-size:12px;line-height:1;color:#536e7a}
+.yt-compact .yt-comparison-table th:first-child{width:26%}.yt-compact .yt-comparison-table th:nth-child(3){width:10%}.yt-compact .yt-comparison-table th:nth-child(9){width:10%}
+.yt-compact .yt-row-person{gap:5px}.yt-compact .yt-row-person strong{gap:4px}

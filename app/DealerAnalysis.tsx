@@ -425,6 +425,33 @@ function SatisfactionPerformanceComparison({ performance }: { performance: Satis
 }
 
 export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
+  const scrollArea = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const area = scrollArea.current;
+    if (!area) return;
+    let settledTop = area.scrollTop;
+    let timer: ReturnType<typeof setTimeout>;
+    const settle = () => {
+      clearTimeout(timer);
+      const section = area.querySelector<HTMLElement>(".youtube-performance");
+      if (!section) return;
+      const target = area.scrollTop + section.getBoundingClientRect().top - area.getBoundingClientRect().top - 8;
+      const current = area.scrollTop;
+      // A long wheel/touch gesture must first reveal the creator heading.
+      // Subsequent gestures remain free to reach the last row and details.
+      if (settledTop < target - 24 && current > target + 8) {
+        settledTop = target;
+        area.scrollTo({top: target, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"});
+      } else settledTop = current;
+    };
+    const onScroll = () => {
+      clearTimeout(timer);
+      timer = setTimeout(settle, 140);
+    };
+    area.addEventListener("scroll", onScroll, {passive: true});
+    area.addEventListener("scrollend", settle);
+    return () => { clearTimeout(timer); area.removeEventListener("scroll", onScroll); area.removeEventListener("scrollend", settle); };
+  }, []);
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
   const [sortKey, setSortKey] = useState<DealerSortKey>("total-desc");
   const certificationTableRef = useRef<HTMLDivElement>(null);
@@ -466,6 +493,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       </header>
       </div>
 
+      <div ref={scrollArea} className="dealer-analysis-scroll" tabIndex={0} role="region" aria-label="딜러사 및 크리에이터 분석 스크롤">
       <section className="dealer-analysis-board" aria-labelledby="dealer-analysis-board-title">
         <div className="dealer-analysis-section-title">
           <div>
@@ -545,6 +573,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
         재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값입니다. 현재 명단에서 확인되지 않는 과거 인증자를 퇴사자로 단정하지 않으며, 딜러사 미확인 2명은 원자료에 전시장 정보가 없어 별도로 보존했습니다.
       </p>
       <YouTubePerformance />
+      </div>
     </main>
   );
 }
