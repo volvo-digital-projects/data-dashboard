@@ -3467,10 +3467,16 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-sales-comparison"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-satisfaction-comparison"/g) ?? []).length, 8);
-  assert.match(html, /aria-label="2026년 인증직원 고객상담 만족도 \d+\.\d점, \d+건; 비인증직원 \d+\.\d점, \d+건; 차이 [＋+−±-]\d+\.\d점"/);
+  assert.match(html, /aria-label="2026년 인증직원 고객상담 만족도 \d+\.\d점, \d+건; 비인증직원 \d+\.\d점, \d+건; 차이 [▲▼―] \d+\.\d점"/);
+  const comparisonDifferences = [...html.matchAll(/class="difference (positive|negative|neutral)"><small>차이<\/small><strong>([^<]+)<i>(점|대)<\/i><\/strong>/g)];
+  assert.equal(comparisonDifferences.length, 16);
+  for (const [, tone, value] of comparisonDifferences) {
+    const symbol = { positive: "▲", negative: "▼", neutral: "―" }[tone];
+    assert.match(value, new RegExp(`^${symbol} \\d+\\.\\d$`));
+  }
   assert.match(source, /const result = employee\.years\?\.\["2026"\]/);
   assert.match(source, /average: responses > 0 \? scoreSum \/ responses : 0/);
-  assert.match(html, /aria-label="2026년 인증직원 월 판매평균 \d+\.\d대, 비인증직원 월 판매평균 \d+\.\d대, 차이 [＋+−±-]\d+\.\d대"/);
+  assert.match(html, /aria-label="2026년 인증직원 월 판매평균 \d+\.\d대, 비인증직원 월 판매평균 \d+\.\d대, 차이 [▲▼―] \d+\.\d대"/);
   assert.match(source, /member\.sales \/ Math\.max\(member\.months, 1\)/);
   assert.match(source, /difference:\s*certifiedAverage - nonCertifiedAverage/);
   assert.match(css, /\.dealer-sales-comparison,\s*\.dealer-satisfaction-comparison\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/);

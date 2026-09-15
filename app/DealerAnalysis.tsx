@@ -205,9 +205,9 @@ function monthlySales(value: number) {
 
 function signedMonthlySales(value: number) {
   const rounded = Number(value.toFixed(1));
-  if (rounded > 0) return `+${rounded.toFixed(1)}`;
-  if (rounded < 0) return `−${Math.abs(rounded).toFixed(1)}`;
-  return "±0.0";
+  if (rounded > 0) return `▲ ${rounded.toFixed(1)}`;
+  if (rounded < 0) return `▼ ${Math.abs(rounded).toFixed(1)}`;
+  return "― 0.0";
 }
 
 function satisfactionScore(value: number) {
@@ -216,9 +216,9 @@ function satisfactionScore(value: number) {
 
 function signedSatisfactionScore(value: number) {
   const rounded = Number(value.toFixed(1));
-  if (rounded > 0) return `+${rounded.toFixed(1)}`;
-  if (rounded < 0) return `−${Math.abs(rounded).toFixed(1)}`;
-  return "±0.0";
+  if (rounded > 0) return `▲ ${rounded.toFixed(1)}`;
+  if (rounded < 0) return `▼ ${Math.abs(rounded).toFixed(1)}`;
+  return "― 0.0";
 }
 
 const levelLabels: Record<CertificationLevel, string> = {
