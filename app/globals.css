@@ -682,6 +682,7 @@ html {
   background: #e7eef2;
 }
 .dealer-certification-connectors {
+  animation: dealer-connectors-enter 320ms ease-out 1080ms both;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -773,6 +774,7 @@ html {
 
 @keyframes dealer-bar-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes dealer-row-enter { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dealer-connectors-enter { from { opacity: 0; } to { opacity: 1; } }
 
 .dealer-analysis-grid {
   display: grid;
@@ -898,6 +900,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .dealer-certification-connectors,
   .dealer-certification-row,
   .dealer-mix-segment,
   .dealer-employment-bar > i { animation: none; }

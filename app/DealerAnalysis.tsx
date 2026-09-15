@@ -324,6 +324,7 @@ function CertificationTrendConnectors({
       });
     };
     const scheduleUpdate = () => {
+      if (cancelled) return;
       if (frame) cancelAnimationFrame(frame);
       frame = requestAnimationFrame(update);
     };
@@ -331,12 +332,14 @@ function CertificationTrendConnectors({
     observer.observe(table);
     table.querySelectorAll<HTMLElement>(".dealer-mix-bar").forEach((bar) => observer.observe(bar));
     scheduleUpdate();
+    table.addEventListener("animationend", scheduleUpdate);
     document.fonts?.ready.then(scheduleUpdate);
 
     return () => {
       cancelled = true;
       if (frame) cancelAnimationFrame(frame);
       observer.disconnect();
+      table.removeEventListener("animationend", scheduleUpdate);
     };
   }, [layoutKey, tableRef]);
 
@@ -480,7 +483,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           </div>
         </div>
 
-        <div ref={certificationTableRef} className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 고객상담 만족도·판매성과 비교">
+        <div key={sortKey} ref={certificationTableRef} className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원·비율과 2026년 인증직원 고객상담 만족도·판매성과 비교">
           <div className="dealer-certification-row dealer-certification-head" role="row">
             <span role="columnheader">딜러사 / 전시장 / %</span>
             <span role="columnheader">전체 인증 / %</span>
