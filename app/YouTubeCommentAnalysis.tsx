@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import raw from "./data/youtube-comments.json";
 import reviewed from "./data/youtube-creators.json";
 
@@ -7,8 +7,9 @@ type Entry = {id:string;category:string;topic:string;summary:string;url:string;v
 type ChannelComments = {status?:string;total:number;videos:number;completeVideos:number;partialVideos:number;unavailableVideos:number;counts:Record<string,number>;entries:Entry[];coverage:{id:string;kind:string;status:string;reported:number|null}[]};
 export const commentData = raw as {checkedAt:string|null;method:string;channels:Record<string,ChannelComments>};
 
-export default function YouTubeCommentAnalysis({channelId, shared}:{channelId:string;shared:boolean}) {
+export default function YouTubeCommentAnalysis({channelId, shared, onTopicChange}:{channelId:string;shared:boolean;onTopicChange?:()=>void}) {
   const [topic, setTopic] = useState<string|null>(null);
+  useEffect(()=>{if(topic) onTopicChange?.();},[topic,onTopicChange]);
   const sampleOnly = !commentData.channels[channelId];
   const names = reviewed.creators.filter(person=>person.channelId===channelId).map(person=>person.name);
   const evidence = reviewed.evidence.filter(entry=>names.includes(entry.name));

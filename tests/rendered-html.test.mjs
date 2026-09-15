@@ -259,6 +259,10 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(html, /class="dealer-analysis-scroll"/);
   assert.match(html, /class="yt-title-icon"/);
   assert.match(html, /class="yt-update-stamp"/);
+  assert.match(html, /class="yt-staff-total"/);
+  assert.match(html, /class="yt-gender-summary"/);
+  assert.doesNotMatch(html, /class="yt-gender-ring"|class="yt-channel-facts"|class="yt-sales-mini"/);
+  assert.match(html, /신수경<!-- --> · 댓글 분석/);
   assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|구독자 많은 순/);
   assert.match(html, /구독자 순/);
   const roster = JSON.parse(await readFile(new URL("../app/data/youtube-creators.json", import.meta.url), "utf8"));

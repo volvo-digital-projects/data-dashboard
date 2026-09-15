@@ -459,12 +459,13 @@ html:has(.dealer-analysis-page) {
 }
 .dealer-analysis-scroll {
   min-height: 0;
+  overflow-anchor: none;
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
   scroll-padding-top: 0;
   padding: 0 var(--dashboard-content-overhang) 16px;
   margin-inline: calc(-1 * var(--dashboard-content-overhang));
@@ -480,8 +481,8 @@ html:has(.dealer-analysis-page) {
   scroll-snap-stop: always;
   scroll-margin-top: var(--yt-snap-inset, 17px);
 }
-.dealer-analysis-scroll .yt-detail-disclosure[open] { scroll-snap-align: start; }
-.dealer-analysis-scroll .yt-method { scroll-snap-align: end; }
+.dealer-analysis-scroll .yt-detail-disclosure[open] { scroll-snap-align: none; }
+.dealer-analysis-scroll .yt-method { scroll-snap-align: none; }
 .dealer-analysis-scroll:focus-visible { outline: 2px solid #247d9b; outline-offset: -2px; }
 
 @media (prefers-reduced-motion: reduce) {

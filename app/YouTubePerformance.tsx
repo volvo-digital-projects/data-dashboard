@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import data from "./data/youtube-creators.json";
 import salesData from "./data/sales-activity-analysis.json";
 import vocData from "./data/voc-staff-analysis.json";
@@ -43,6 +43,9 @@ const male = creators.filter(person=>person.gender === "남성").length;
 const lastChannelUpdate = new Date(Math.min(...data.channels.map(channel => Date.parse(channel.checkedAt))));
 const updateLabel = formatDates(new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hour12:false}).format(lastChannelUpdate));
 
+function GenderIcon({gender}:{gender:string}) {
+  return <svg className="yt-gender-icon" viewBox="0 0 16 20" role="img" aria-label={gender} fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="8" cy="9" r="4"/>{gender==="남성"?<path d="M8 5V0M5 3 8 0l3 3"/>:<path d="M8 13v7M5 17h6"/>}</svg>;
+}
 export default function YouTubePerformance() {
   const [dealer, setDealer] = useState("전체");
   const [selectedName, setSelectedName] = useState("신수경");
@@ -68,13 +71,59 @@ export default function YouTubePerformance() {
     return ()=>observer.disconnect();
   }, []);
 
-  return <section ref={root} className={`youtube-performance yt-compact ${entered ? "has-entered" : ""}`} aria-labelledby="yt-heading">
+  useEffect(() => {
+    const section = root.current;
+    const scroller = section?.closest<HTMLElement>(".dealer-analysis-scroll");
+    if (!section || !scroller) return;
+    const resize = () => section.style.setProperty("--yt-available", `${scroller.clientHeight}px`);
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(scroller);
+    let timer: ReturnType<typeof setTimeout>;
+    let frame = 0, touching = false, direction = 0, previous = scroller.scrollTop;
+    const target = () => (section.getBoundingClientRect().top - scroller.getBoundingClientRect().top) / (scroller.getBoundingClientRect().height / scroller.offsetHeight) + scroller.scrollTop;
+    const cancel = () => { clearTimeout(timer); cancelAnimationFrame(frame); frame = 0; };
+    const settle = () => {
+      const end = target(), from = scroller.scrollTop;
+      if (touching || end <= from + 2 || end - from > Math.min(400, scroller.clientHeight * .65)) return;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) { scroller.scrollTop = end; return; }
+      const started = performance.now();
+      const step = (now:number) => {
+        const t = Math.min(1, (now-started)/320);
+        scroller.scrollTop = from + (end-from)*(1-Math.pow(1-t,3));
+        if(t<1) frame=requestAnimationFrame(step); else frame=0;
+      };
+      frame=requestAnimationFrame(step);
+    };
+    const scroll = () => {
+      const down = scroller.scrollTop > previous;
+      direction = down ? 1 : -1;
+      previous = scroller.scrollTop;
+      if(frame || touching) return;
+      clearTimeout(timer);
+      if(down) timer=setTimeout(settle, 90);
+    };
+    const touchStart = () => { touching=true; cancel(); };
+    const touchEnd = () => { touching=false; if(direction>0) timer=setTimeout(settle,90); };
+    scroller.addEventListener("scroll",scroll,{passive:true});
+    scroller.addEventListener("wheel",cancel,{passive:true});
+    scroller.addEventListener("touchstart",touchStart,{passive:true});
+    scroller.addEventListener("touchend",touchEnd,{passive:true});
+    scroller.addEventListener("keydown",cancel);
+    return () => {cancel(); observer.disconnect(); scroller.removeEventListener("scroll",scroll); scroller.removeEventListener("wheel",cancel); scroller.removeEventListener("touchstart",touchStart); scroller.removeEventListener("touchend",touchEnd); scroller.removeEventListener("keydown",cancel);};
+  }, []);
+  useEffect(() => {
+    if (!detailOpen) return;
+    const section=root.current, scroller=section?.closest<HTMLElement>(".dealer-analysis-scroll");
+    if(section && scroller) scroller.scrollTo({top:(section.getBoundingClientRect().top-scroller.getBoundingClientRect().top)/(scroller.getBoundingClientRect().height/scroller.offsetHeight)+scroller.scrollTop,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+  }, [detailOpen]);
+  return <section ref={root} className={`youtube-performance yt-compact ${entered ? "has-entered" : ""} ${detailOpen ? "has-comment-detail" : ""}`} aria-labelledby="yt-heading">
     <header className="yt-hero">
       <div className="yt-hero-copy">
         <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title="공개 채널 지표 매시간 수집 예정 · 마지막 전체 수집 성공 시각 (KST)"><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
       </div>
       <div className="yt-headline-stats">
-        <div><span>활동 영업직원</span><strong>{creators.length}<small>명</small></strong><p>채널 {data.channels.length}개 · 공동 운영 1개 포함</p></div>
+        <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><strong>{creators.length}<small>명</small></strong><div className="yt-gender-summary">{["남성","여성"].map(gender=>{const count=gender==="남성"?male:creators.length-male;return <span key={gender}><GenderIcon gender={gender}/>{count}명 <small>{(count/creators.length*100).toFixed(1)}%</small></span>})}</div></div></div>
         <div><span>합산 구독자</span><strong>{number(sumSubscribers)}<small>명</small></strong><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
         <div><span>공개 영상</span><strong>{number(videoTotal)}<small>개</small></strong><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>
@@ -86,7 +135,6 @@ export default function YouTubePerformance() {
           <span>{name}</span><strong>{count}<small>명</small></strong><em>{(count / creators.length * 100).toFixed(1)}%</em><i aria-hidden="true">{Array.from({length:count},(_,i)=><b key={i}/>)}</i>
         </button>;})}
       </div>
-      <div className="yt-gender"><span className="yt-gender-ring" style={{"--male":`${male / creators.length * 100}%`} as CSSProperties}><b>{creators.length}<small>명</small></b></span><div><strong>남성 {male}명 <small>{(male/creators.length*100).toFixed(1)}%</small></strong><strong>여성 {creators.length-male}명 <small>{((creators.length-male)/creators.length*100).toFixed(1)}%</small></strong><p>제공 명단 기준</p></div></div>
     </div>
     <div className="yt-matrix-heading"><div className="yt-section-label"><button className="yt-subscriber-sort" type="button" aria-pressed={sort==="subscribers"} onClick={()=>setSort("subscribers")}>구독자 순</button></div>
       <div className="yt-filters"><button type="button" aria-pressed={dealer==="전체"} onClick={()=>setDealer("전체")}>전체 보기</button><label>정렬 <select value={sort} onChange={event=>setSort(event.target.value)}><option value="subscribers" hidden disabled>기본정렬</option><option value="dealer">딜러사별</option><option value="views">평균 조회 높은 순</option><option value="sales">월판매 높은 순</option><option value="voc">누적 만족도 높은 순</option></select></label></div>
@@ -99,7 +147,7 @@ export default function YouTubePerformance() {
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
-          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image ?? "/staff-profiles/neutral-human-silhouette.png"} alt="" loading="lazy"/></span><span><strong>{person.name} <svg className="yt-gender-icon" viewBox="0 0 16 20" role="img" aria-label={person.gender} fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="8" cy="9" r="4"/>{person.gender==="남성"?<path d="M8 5V0M5 3 8 0l3 3"/>:<path d="M8 13v7M5 17h6"/>}</svg></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image ?? "/staff-profiles/neutral-human-silhouette.png"} alt="" loading="lazy"/></span><span><strong>{person.name} <GenderIcon gender={person.gender}/></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td><strong>{number(person.channel.subscribers)}</strong></td>
           <td><strong>≈{number(person.channel.averageViews)}</strong><small>{number(person.channel.totalViews)}</small></td>
@@ -113,13 +161,12 @@ export default function YouTubePerformance() {
       })}</tbody></table>
     </div> : <div className="yt-empty"><strong>{dealer}의 등록 직원이 없습니다.</strong><p>첨부 명단 기준이며 실제 채널 부재를 단정하지 않습니다.</p></div>}
     <p className="yt-period">판매 {formatDates(salesData.source.salesPeriod)} · 월평균은 집계 월수로 나눔(진행 중인 9월 포함) / 누적 VOC {vocData.source.historyRange} (~{formatDates(vocData.source.vocThrough)}) · 총 점수 ÷ 총 회신 수 · 회신 0건은 점수 미표시 / 인증 2021–2026 누적 횟수</p>
-    {selected && channel && <details className="yt-detail yt-detail-disclosure" id="yt-channel-detail" open={detailOpen} onToggle={event=>setDetailOpen(event.currentTarget.open)}>
-      <summary>{selected.name} · 댓글 근거 / 월별 판매 / 채널 상세 <span>{detailOpen?"접기":"펼치기"}</span></summary>
-      <div className="yt-detail-heading"><div className="yt-section-label"><span>03 / CHANNEL DEEP DIVE</span><h3>{selected.name} <small>{channel.title}</small></h3></div><a href={channel.url} target="_blank" rel="noreferrer">채널에서 보기 ↗</a></div>
-      {selected.shared && <p className="yt-shared-note">조선별 × 곽지명 공동 운영 · 아래 구독자·조회·영상 수는 채널 전체 값이며 개인별 성과가 아닙니다.</p>}
-      <div className="yt-channel-facts"><div><span>채널 개설일</span><strong>{formatDates(channel.joined)}</strong><small>영업 활동 시작일과 다를 수 있음</small></div><div><span>롱폼</span><strong>{channel.long.count}<small>개</small></strong><small>평균 약 {number(channel.long.averageViews)}회</small></div><div><span>숏츠</span><strong>{channel.short.count}<small>개</small></strong><small>평균 약 {number(channel.short.averageViews)}회</small></div><div><span>채널 누적 조회</span><strong>{number(channel.totalViews)}<small>회</small></strong><small>현재 공개 영상 조회 합계와 다를 수 있음</small></div></div>
-      <div className="yt-detail-body"><YouTubeCommentAnalysis key={channel.id} channelId={channel.id} shared={selected.shared}/><section className="yt-sales-mini"><h4>2026 판매 리듬 <small>월별 출고 대수</small></h4><div className="yt-months" role="img" aria-label={selected.months.map((value,index)=>`${index+1}월 ${value}대`).join(", ")}>{selected.months.map((value,index)=><div key={index}><strong>{value}</strong><i style={{height:`${Math.max(3, value / Math.max(1,...selected.months) * 80)}px`}}/><span>{index+1}월{index===selected.months.length-1?"*":""}</span></div>)}</div><p className="yt-muted">* 9월 진행 중 · 채널 개설 전 판매 포함.<br/>유튜브를 통한 판매 전환으로 해석하지 않습니다.</p><a href={photos[selected.cdsid]?.sourcePage} target="_blank" rel="noreferrer">공식 프로필 출처 ↗</a></section></div>
-      {selected.shared && <details className="yt-attribution"><summary>공동 채널 영상별 출연자 확인 <span>조선별 4 · 곽지명 2 · 미확인 8</span></summary><p>영상 설명란의 명시적 출연자 소개 기준. 이름 근거가 없는 숏츠는 얼굴만으로 식별하거나 롱폼과 자동 매칭하지 않았습니다.</p><div>{channel.sharedVideos.map(video=><a key={video.id} href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer"><span>{video.kind==="long"?"롱폼":"숏츠"}</span><strong>{video.title}</strong><em>{video.names.length?video.names.join(" · "):"담당자 미확인"}</em><small>{video.basis}</small></a>)}</div></details>}
+    {selected && channel && <details className="yt-detail yt-detail-disclosure" id="yt-channel-detail" open={detailOpen}>
+      <summary onClick={event=>{event.preventDefault();setDetailOpen(open=>!open);}}>{selected.name} · 댓글 분석 <span>{detailOpen?"접기":"펼치기"}</span></summary>
+      <YouTubeCommentAnalysis key={channel.id} channelId={channel.id} shared={selected.shared} onTopicChange={()=>{
+        const section=root.current, scroller=section?.closest<HTMLElement>(".dealer-analysis-scroll");
+        if(section && scroller) scroller.scrollTop+=(section.getBoundingClientRect().top-scroller.getBoundingClientRect().top)/(scroller.getBoundingClientRect().height/scroller.offsetHeight);
+      }}/>
     </details>}
     <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계합니다. 얼굴은 기존 공식 딜러사 프로필과 이름·전시장으로 연결했습니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
   </section>;

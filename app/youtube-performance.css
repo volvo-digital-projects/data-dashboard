@@ -49,3 +49,31 @@
 .yt-compact .yt-comparison-table{min-width:920px}.yt-compact .yt-comparison-table th:first-child{width:20%}.yt-compact .yt-comparison-table th:nth-child(2){width:9%}.yt-compact .yt-comparison-table th:nth-child(3){width:6%}.yt-compact .yt-comparison-table th:nth-child(4){width:9%}.yt-compact .yt-comparison-table th:nth-child(5){width:10%}.yt-compact .yt-comparison-table th:nth-child(6),.yt-compact .yt-comparison-table th:nth-child(7),.yt-compact .yt-comparison-table th:nth-child(8),.yt-compact .yt-comparison-table th:nth-child(9){width:9%}.yt-compact .yt-comparison-table th:nth-child(10){width:10%}
 .yt-cert-cell .yt-certifications{display:flex;justify-content:center;gap:4px;font-size:11px;font-weight:650;white-space:nowrap}.yt-row-person .yt-gender-icon{display:inline-block;width:11px;height:15px;font-style:normal;transform:none;flex-shrink:0}.yt-cell-comments button{border:0;background:transparent;color:#245d71;font-size:12px;font-weight:650;padding:1px 0;cursor:pointer}.yt-compact .yt-detail-body{grid-template-columns:minmax(0,1fr)}
 .yt-comment-panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.yt-comment-panel{border:1px solid #d9e6e9;border-top:3px solid #489e87;background:#f7fbfb;padding:12px;border-radius:5px}.yt-comment-panel.suggestion{border-top-color:#cb6b5e;background:#fffaf4}.yt-comment-panel h5{display:flex;justify-content:space-between;color:#17766e;font-size:13px;margin:0 0 12px}.yt-comment-panel.suggestion h5{color:#b35d47}.yt-comment-panel button{display:grid;grid-template-columns:minmax(110px,1fr) 70px 34px 42px;gap:7px;width:100%;align-items:center;border:0;background:transparent;padding:7px 0;text-align:left;font-size:10px;color:#416778}.yt-comment-panel button i{height:7px;background:#e4eeee;border-radius:3px;overflow:hidden}.yt-comment-panel button b{display:block;height:100%;background:linear-gradient(90deg,#a3dbcc,#398c75)}.yt-comment-panel.suggestion button b{background:linear-gradient(90deg,#eacd8a,#ad7b23)}.yt-comment-panel button em{font-style:normal;text-align:right}.yt-comment-panel button small{font-size:8px;color:#62818d}.yt-comment-panel button[aria-pressed=true]{background:#e7f0f1}.yt-comment-drilldown{margin-top:12px;border:1px solid #dce7ec;border-radius:5px;padding:12px}.yt-comment-drilldown h5{margin:0;font-size:13px}.yt-comment-drilldown h5 button{float:right}.yt-comment-drilldown ol{max-height:320px;overflow:auto;margin:10px 0;padding-left:22px}.yt-comment-drilldown li{padding:8px;border-bottom:1px solid #e4ebed;font-size:11px}.yt-comment-drilldown p,.yt-comment-other p{font-size:10px;color:#6c808a;margin:7px 0}.yt-comment-drilldown li span{font-size:9px;color:#5a8093}.yt-comment-other,.yt-comment-coverage{font-size:10px;padding:8px 0}.yt-comment-other button{border:1px solid #dce7ec;background:#f6f9fa;padding:5px 8px;margin:6px 5px 0 0}.yt-comment-coverage ul{max-height:200px;overflow:auto}@media(max-width:760px){.yt-comment-panels{grid-template-columns:1fr}}
+/* A full-width dealer strip and a comments-first, viewport-sized workspace. */
+.yt-compact .yt-distribution{grid-template-columns:minmax(0,1fr)}
+.yt-compact .yt-dealers{grid-template-columns:repeat(7,minmax(0,1fr));width:100%}
+.yt-compact .yt-dealers button em{text-align:right;justify-self:end}
+.yt-staff-total{display:flex;align-items:center;gap:8px}
+.yt-compact .yt-headline-stats .yt-gender-summary{display:grid;gap:3px;padding:0;border:0}
+.yt-compact .yt-gender-summary>span{display:flex;align-items:center;gap:3px;font-size:8px;white-space:nowrap;color:#426b7e}
+.yt-compact .yt-gender-summary>span:last-child{color:#b76742}
+.yt-compact .yt-gender-summary small{font-size:7px}
+.yt-gender-icon{width:10px;height:13px;flex-shrink:0;transform:none}
+.yt-compact .yt-headline-stats{grid-template-columns:1.3fr 1fr 1fr}
+.yt-compact .yt-comparison-table tbody tr{height:42px}
+.yt-compact .yt-comparison-table tbody td,.yt-compact .yt-comparison-table tbody th{padding-block:5px}
+.dealer-analysis-scroll>.youtube-performance.yt-compact{min-height:var(--yt-available,0px);box-sizing:border-box}
+.yt-compact.has-comment-detail{height:var(--yt-available,auto);display:flex;flex-direction:column;gap:0}
+.yt-compact.has-comment-detail>.yt-hero,.yt-compact.has-comment-detail>.yt-distribution,.yt-compact.has-comment-detail>.yt-matrix-heading,.yt-compact.has-comment-detail>.yt-period,.yt-compact.has-comment-detail>.yt-method{flex-shrink:0}
+.yt-compact.has-comment-detail>.yt-table-wrap{flex:1 1 auto;min-height:100px;overflow:auto;overscroll-behavior:contain}
+.yt-compact.has-comment-detail .yt-comparison-table thead{position:sticky;top:0;z-index:2}
+.yt-compact.has-comment-detail>.yt-detail-disclosure{flex:0 0 auto;max-height:43%;overflow:auto;overscroll-behavior:contain}
+.yt-compact .yt-detail-disclosure[open]{padding:0 12px 8px}
+.yt-compact .yt-detail-disclosure[open]>summary{margin:0 -12px 6px;padding:6px 12px}
+.yt-compact .yt-all-comments>h4{display:none}
+.yt-compact .yt-comment-panels{margin:6px 0;gap:10px}
+.yt-compact .yt-comment-panel{padding:8px 10px}
+.yt-compact .yt-comment-panel h5{margin-bottom:5px}
+.yt-compact .yt-comment-panel button{padding-block:4px}
+.yt-compact .yt-comment-drilldown{margin-top:6px;padding:8px}
+@media(max-width:760px){.yt-compact.has-comment-detail{height:auto;min-height:var(--yt-available,0px)}.yt-compact.has-comment-detail>.yt-table-wrap{max-height:260px;flex:none}.yt-compact.has-comment-detail>.yt-detail-disclosure{max-height:none}.yt-staff-total{flex-wrap:wrap}.yt-compact .yt-gender-summary>span{font-size:7px}}
