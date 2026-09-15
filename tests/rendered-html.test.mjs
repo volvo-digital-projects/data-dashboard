@@ -3507,7 +3507,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>에이치<\/h3>[\s\S]*?<b>7개소 \/ 17\.9%<\/b>/);
   assert.match(html, /<h3>천하<\/h3>[\s\S]*?<b>4개소 \/ 10\.3%<\/b>/);
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><em>\/<\/em><b>100\.0%<\/b><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
-  assert.match(html, /딜러사별 레벨별 인증인원 및 비율/);
+  assert.match(html, /딜러사별 인증레벨별 인원 및 비율/);
   assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);
   assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
   assert.match(html, /딜러사 미확인 <strong>2명<\/strong>/);

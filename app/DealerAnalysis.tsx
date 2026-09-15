@@ -372,7 +372,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       <section className="dealer-analysis-board" aria-labelledby="dealer-analysis-board-title">
         <div className="dealer-analysis-section-title">
           <div>
-            <h2 id="dealer-analysis-board-title">딜러사별 레벨별 인증인원 및 비율</h2>
+            <h2 id="dealer-analysis-board-title">딜러사별 인증레벨별 인원 및 비율</h2>
           </div>
           <div className="dealer-sort-controls" aria-label="딜러사 정렬 방식">
             {([
