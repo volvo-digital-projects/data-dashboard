@@ -3524,12 +3524,12 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /@media \(min-width:\s*1241px\)\s*\{[\s\S]*?\.dealer-analysis-board,[\s\S]*?\.dealer-analysis-roadmap,[\s\S]*?\.dealer-analysis-data-note\s*\{[^}]*margin-inline:\s*calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
-  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(145px, 0\.76fr\)\s*minmax\(120px, 0\.58fr\)\s*minmax\(230px, 1\.2fr\)\s*minmax\(180px, 0\.96fr\)\s*repeat\(2, minmax\(210px, 1\.08fr\)\)/);
+  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(125px, 0\.62fr\)\s*minmax\(120px, 0\.58fr\)\s*minmax\(250px, 1\.34fr\)\s*minmax\(180px, 0\.96fr\)\s*repeat\(2, minmax\(210px, 1\.08fr\)\)/);
   assert.match(css, /@keyframes dealer-bar-fill/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
-  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(88px,\s*0\.6fr\)\s*105px\s*minmax\(190px,\s*1\.28fr\)\s*minmax\(170px,\s*1\.1fr\)\s*repeat\(2,\s*minmax\(175px,\s*1\.12fr\)\)/);
+  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(82px,\s*0\.56fr\)\s*105px\s*minmax\(196px,\s*1\.32fr\)\s*minmax\(170px,\s*1\.1fr\)\s*repeat\(2,\s*minmax\(175px,\s*1\.12fr\)\)/);
   assert.match(css, /\.dealer-satisfaction-comparison\s*\{[^}]*background:\s*linear-gradient\(90deg, rgba\(248, 225, 190, 0\.12\), rgba\(246, 206, 163, 0\.04\)\);/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-sales-comparison\s*\{[^}]*grid-column:\s*1 \/ -1;/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-satisfaction-comparison\s*\{[^}]*grid-column:\s*1 \/ -1;/);

@@ -610,7 +610,7 @@ html {
   min-width: 0;
   min-height: 68px;
   display: grid;
-  grid-template-columns: minmax(145px, 0.76fr) minmax(120px, 0.58fr) minmax(230px, 1.2fr) minmax(180px, 0.96fr) repeat(2, minmax(210px, 1.08fr));
+  grid-template-columns: minmax(125px, 0.62fr) minmax(120px, 0.58fr) minmax(250px, 1.34fr) minmax(180px, 0.96fr) repeat(2, minmax(210px, 1.08fr));
   align-items: stretch;
   border-bottom: 1px solid #dce7ec;
   animation: dealer-row-enter 360ms ease-out both;
@@ -845,7 +845,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   }
   .dealer-analysis-command-shell { margin-inline: 0; }
   .dealer-analysis-board { padding: 14px; }
-  .dealer-certification-row { grid-template-columns: minmax(88px, 0.6fr) 105px minmax(190px, 1.28fr) minmax(170px, 1.1fr) repeat(2, minmax(175px, 1.12fr)); }
+  .dealer-certification-row { grid-template-columns: minmax(82px, 0.56fr) 105px minmax(196px, 1.32fr) minmax(170px, 1.1fr) repeat(2, minmax(175px, 1.12fr)); }
   .dealer-certification-row > * { padding-inline: 9px; }
   .dealer-mix-values { gap: 5px; }
   .dealer-mix-values > span { grid-template-columns: 5px 1fr auto; }
