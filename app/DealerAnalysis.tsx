@@ -405,7 +405,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
             <div className="dealer-certification-name" role="cell">
               <div><h3>전체</h3></div>
-              <b>7개사 / {totalShowrooms}개소 / 100%</b>
+              <b>{totalShowrooms}개소 / 100%</b>
             </div>
             <div className="dealer-certification-total" role="cell">
               <strong>{totalCertifications}<i>명</i><em>/</em><b>{percentage(totalCertifications, totalCertifications)}</b></strong>

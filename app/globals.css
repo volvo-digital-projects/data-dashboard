@@ -653,7 +653,7 @@ html {
   box-shadow: 0 2px 0 rgba(38, 126, 164, 0.1);
 }
 .dealer-certification-name { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 5px; }
-.dealer-certification-name h3 { margin: 0; color: #12384d; font-size: 16px; font-weight: 680; }
+.dealer-certification-name h3 { margin: 0; color: #12384d; font-size: 16px; font-weight: 680; white-space: nowrap; }
 .dealer-certification-name > b { padding: 3px 6px; color: #3b778d; border-radius: 999px; background: #e8f1f4; font-size: 8px; font-weight: 600; white-space: nowrap; }
 .dealer-certification-aggregate .dealer-certification-name h3 { color: #0d5875; font-size: 17px; font-weight: 750; }
 .dealer-certification-total { align-items: flex-end; text-align: right; }
