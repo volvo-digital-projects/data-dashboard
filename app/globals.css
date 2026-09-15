@@ -654,12 +654,13 @@ html {
 }
 .dealer-certification-name { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 5px; }
 .dealer-certification-name h3 { margin: 0; color: #12384d; font-size: 16px; font-weight: 680; white-space: nowrap; }
-.dealer-certification-name > b { padding: 3px 6px; color: #3b778d; border-radius: 999px; background: #e8f1f4; font-size: 8px; font-weight: 600; white-space: nowrap; }
+.dealer-certification-name > b { width: 64px; min-width: 64px; display: inline-flex; align-items: baseline; justify-content: center; padding: 3px 4px; color: #3b778d; border-radius: 999px; background: #e8f1f4; font-size: 8px; font-weight: 600; white-space: nowrap; }
+.dealer-certification-name > b em { margin-inline: 3px; color: #91a7b0; font-style: normal; font-weight: 500; }
 .dealer-certification-aggregate .dealer-certification-name h3 { color: #0d5875; font-size: 17px; font-weight: 750; }
 .dealer-certification-total { align-items: flex-end; text-align: right; }
 .dealer-certification-total strong { display: inline-flex; align-items: baseline; color: #12384d; font-size: 19px; font-weight: 620; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .dealer-certification-total strong i { margin-left: 2px; color: #637985; font-family: var(--font-korean); font-size: 8px; font-style: normal; font-weight: 500; }
-.dealer-certification-total strong em { margin-inline: 6px; color: #9aabb3; font-size: 9px; font-style: normal; font-weight: 500; }
+.dealer-certification-total strong em { margin-inline: 3px; color: #9aabb3; font-size: 9px; font-style: normal; font-weight: 500; }
 .dealer-certification-total strong b { min-width: 4.1ch; color: #607985; font-size: 9px; font-weight: 600; text-align: right; }
 .dealer-certification-aggregate .dealer-certification-total strong { color: #0d5875; font-size: 22px; font-weight: 750; }
 
@@ -700,7 +701,8 @@ html {
 .dealer-employment-metrics strong { margin-left: 5px; color: #164f70; font-family: var(--font-latin); font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .dealer-employment-current { min-width: 2ch; display: inline-block; text-align: right; }
 .dealer-employment-metrics strong small { margin-left: 1px; font-family: var(--font-korean); font-size: 7px; font-weight: 500; }
-.dealer-employment-metrics strong i { margin-left: 4px; color: #637985; font-size: 9px; font-style: normal; font-weight: 520; }
+.dealer-employment-metrics strong i { margin-left: 0; color: #637985; font-size: 9px; font-style: normal; font-weight: 520; }
+.dealer-employment-metrics strong i em { margin-inline: 3px; color: #9aabb3; font-style: normal; font-weight: 500; }
 .dealer-employment-metrics > b { color: #164f70; font-size: 16px; font-weight: 750; font-variant-numeric: tabular-nums; }
 .dealer-employment-bar { height: 12px; overflow: visible; position: relative; border-radius: 3px; background: #e7eef2; }
 .dealer-employment-bar > i { height: 100%; display: block; border-radius: inherit; background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%, rgba(4, 35, 51, 0.14) 100%), linear-gradient(90deg, #28779d 0%, #195b7c 48%, #0d405b 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -1px 0 rgba(4, 35, 51, 0.12); transform-origin: left; animation: dealer-bar-fill 620ms ease-out both; animation-delay: var(--bar-delay, 0ms); }

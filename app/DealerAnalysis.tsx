@@ -289,7 +289,7 @@ function EmploymentProgressBar({
         <i style={{ width: rate, "--bar-delay": `${animationDelay}ms` } as CSSProperties} />
       </div>
       <div className="dealer-employment-metrics">
-        <span>현재 재직 <strong><span className="dealer-employment-current">{current}</span><small>명</small><i>/ {total}명</i></strong></span>
+        <span>현재 재직 <strong><span className="dealer-employment-current">{current}</span><small>명</small><i><em>/</em>{total}명</i></strong></span>
         <b>{rate}</b>
       </div>
     </div>
@@ -405,7 +405,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
           <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
             <div className="dealer-certification-name" role="cell">
               <div><h3>전체</h3></div>
-              <b>{totalShowrooms}개소 / 100%</b>
+              <b>{totalShowrooms}개소<em>/</em>100%</b>
             </div>
             <div className="dealer-certification-total" role="cell">
               <strong>{totalCertifications}<i>명</i><em>/</em><b>{percentage(totalCertifications, totalCertifications)}</b></strong>
@@ -424,7 +424,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
             >
               <div className="dealer-certification-name" role="cell">
                 <div><h3>{row.dealer}</h3></div>
-                <b>{row.showroomCount}개소 / {percentage(row.showroomCount, totalShowrooms)}</b>
+                <b>{row.showroomCount}개소<em>/</em>{percentage(row.showroomCount, totalShowrooms)}</b>
               </div>
               <div className="dealer-certification-total" role="cell">
                 <strong>{row.certificationCount}<i>명</i><em>/</em><b>{percentage(row.certificationCount, totalCertifications)}</b></strong>

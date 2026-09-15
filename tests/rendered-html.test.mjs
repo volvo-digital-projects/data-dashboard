@@ -3502,10 +3502,10 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-sort-controls button\s*\{[^}]*min-height:\s*21px;[^}]*border-radius:\s*999px;[^}]*background:\s*rgba\(244, 248, 250, 0\.9\);/);
   assert.match(html, /재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값/);
   assert.ok(html.indexOf("<h3>전체</h3>") < html.indexOf("<h3>에이치</h3>"));
-  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<b>39개소 \/ 100%<\/b>/);
+  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<b>39개소<em>\/<\/em>100%<\/b>/);
   assert.doesNotMatch(html, /7개사/);
-  assert.match(html, /<h3>에이치<\/h3>[\s\S]*?<b>7개소 \/ 17\.9%<\/b>/);
-  assert.match(html, /<h3>천하<\/h3>[\s\S]*?<b>4개소 \/ 10\.3%<\/b>/);
+  assert.match(html, /<h3>에이치<\/h3>[\s\S]*?<b>7개소<em>\/<\/em>17\.9%<\/b>/);
+  assert.match(html, /<h3>천하<\/h3>[\s\S]*?<b>4개소<em>\/<\/em>10\.3%<\/b>/);
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><em>\/<\/em><b>100\.0%<\/b><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
   assert.match(html, /딜러사별 인증레벨별 인원 및 비율/);
   assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);
@@ -3525,6 +3525,10 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
   assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(125px, 0\.62fr\)\s*minmax\(120px, 0\.58fr\)\s*minmax\(250px, 1\.34fr\)\s*minmax\(180px, 0\.96fr\)\s*repeat\(2, minmax\(210px, 1\.08fr\)\)/);
+  assert.match(css, /\.dealer-certification-name > b\s*\{[^}]*width:\s*64px;[^}]*min-width:\s*64px;[^}]*display:\s*inline-flex;[^}]*justify-content:\s*center;/);
+  assert.match(css, /\.dealer-certification-name > b em\s*\{[^}]*margin-inline:\s*3px;/);
+  assert.match(css, /\.dealer-certification-total strong em\s*\{[^}]*margin-inline:\s*3px;/);
+  assert.match(css, /\.dealer-employment-metrics strong i em\s*\{[^}]*margin-inline:\s*3px;/);
   assert.match(css, /@keyframes dealer-bar-fill/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);
