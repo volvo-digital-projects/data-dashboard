@@ -3458,8 +3458,10 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>전체<\/h3>/);
   assert.doesNotMatch(html, /VOLVO DEALER|ALL DEALERS/);
   assert.doesNotMatch(html, />0[1-7]<\/span>/);
-  assert.match(html, /<span role="columnheader">인증 레벨 구성<\/span>/);
-  assert.match(html, /<span role="columnheader">현재 재직 · 재직률<\/span>/);
+  for (const heading of ["딜러사 / 전시장 / %", "전체 인증 / %", "인증 레벨별 구성 / %", "현재 재직인원 / 재직율(%)"]) {
+    assert.match(html, new RegExp(`<span role="columnheader">${heading.replace(/[()]/g, "\\$&")}<\\/span>`));
+  }
+  assert.match(css, /\.dealer-certification-head > :nth-child\(2\)\s*\{[^}]*align-items:\s*flex-start;[^}]*text-align:\s*left;/);
   assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
   assert.match(source, /className="dealer-employment"[\s\S]*?className="dealer-employment-bar"[\s\S]*?className="dealer-employment-metrics"/);

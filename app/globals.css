@@ -644,7 +644,7 @@ html {
 }
 .dealer-certification-head > * { padding-block: 5px; }
 .dealer-certification-head > * + *::before { top: 6px; bottom: 6px; }
-.dealer-certification-head > :nth-child(2) { align-items: flex-end; text-align: right; }
+.dealer-certification-head > :nth-child(2) { align-items: flex-start; text-align: left; }
 .dealer-certification-aggregate {
   min-height: 72px;
   border-top-color: #bcd2dc;

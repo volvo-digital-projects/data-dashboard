@@ -259,10 +259,10 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
 
         <div className="dealer-certification-table" role="table" aria-label="7개 딜러사 인증 레벨별 인원과 비율">
           <div className="dealer-certification-row dealer-certification-head" role="row">
-            <span role="columnheader">딜러사</span>
-            <span role="columnheader">전체 인증</span>
-            <span role="columnheader">인증 레벨 구성</span>
-            <span role="columnheader">현재 재직 · 재직률</span>
+            <span role="columnheader">딜러사 / 전시장 / %</span>
+            <span role="columnheader">전체 인증 / %</span>
+            <span role="columnheader">인증 레벨별 구성 / %</span>
+            <span role="columnheader">현재 재직인원 / 재직율(%)</span>
           </div>
           <article className="dealer-certification-row dealer-certification-aggregate" role="row" style={{ "--row-delay": "0ms" } as CSSProperties}>
             <div className="dealer-certification-name" role="cell">
