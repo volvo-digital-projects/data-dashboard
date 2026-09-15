@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type RefObject } from "react";
 import DashboardHeaderLead from "./DashboardHeaderLead";
+import YouTubePerformance from "./YouTubePerformance";
 import dashboardJson from "./data/showrooms.json";
 import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
@@ -540,19 +541,10 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
         </div>
       </section>
 
-      <section className="dealer-analysis-roadmap">
-        <div className="dealer-analysis-roadmap-icon" aria-hidden="true">▶</div>
-        <div>
-          <small>YOUTUBE PERFORMANCE</small>
-          <h2>채널 활동 × 판매 추이 분석</h2>
-          <p>채널 주소를 연결하면 개설일을 기준으로 롱폼·쇼츠 업로드 수와 판매대수 추이를 딜러사별로 같은 화면에 확장합니다.</p>
-        </div>
-        <span>데이터 연결 대기</span>
-      </section>
-
       <p className="dealer-analysis-data-note">
         재직률은 현재 재직 확인 인원을 전체 인증 인원으로 나눈 값입니다. 현재 명단에서 확인되지 않는 과거 인증자를 퇴사자로 단정하지 않으며, 딜러사 미확인 2명은 원자료에 전시장 정보가 없어 별도로 보존했습니다.
       </p>
+      <YouTubePerformance />
     </main>
   );
 }

@@ -1,0 +1,607 @@
+{
+  "rosterDate": "2026-09-15",
+  "source": "사용자 제공 볼보 유튜브 영업직원 명단 · 공개 YouTube 채널/영상",
+  "creators": [
+    {
+      "dealer": "코오롱",
+      "showroom": "서수원",
+      "name": "이정훈",
+      "gender": "남성",
+      "cdsid": "6KR6870",
+      "channelId": "UCcV36lNLeotgr02P605R2yA"
+    },
+    {
+      "dealer": "코오롱",
+      "showroom": "분당판교",
+      "name": "나수연",
+      "gender": "여성",
+      "cdsid": "6KR6858",
+      "channelId": "UCq4Nmcrr-dEmZqT-NhbSdpQ"
+    },
+    {
+      "dealer": "코오롱",
+      "showroom": "분당판교",
+      "name": "조선별",
+      "gender": "여성",
+      "cdsid": "6KR6858",
+      "channelId": "UC7ab9iDdrs3cLnW_zACCcIg"
+    },
+    {
+      "dealer": "코오롱",
+      "showroom": "서초",
+      "name": "이규환",
+      "gender": "남성",
+      "cdsid": "6KR6852",
+      "channelId": "UCLLQ98a0tBqu2SoTI_IqmwQ"
+    },
+    {
+      "dealer": "코오롱",
+      "showroom": "송파",
+      "name": "김정호",
+      "gender": "남성",
+      "cdsid": "6KR6847",
+      "channelId": "UCk1BctjD6nPVTIEA52FACcw"
+    },
+    {
+      "dealer": "코오롱",
+      "showroom": "하남",
+      "name": "곽지명",
+      "gender": "여성",
+      "cdsid": "6KR6861",
+      "channelId": "UC7ab9iDdrs3cLnW_zACCcIg"
+    },
+    {
+      "dealer": "에이치",
+      "showroom": "분당",
+      "name": "진주현",
+      "gender": "남성",
+      "cdsid": "6KR6830",
+      "channelId": "UC0QgBtIY01DBw2UC4v_I2eA"
+    },
+    {
+      "dealer": "아주",
+      "showroom": "안양",
+      "name": "신수경",
+      "gender": "여성",
+      "cdsid": "6KR6849",
+      "channelId": "UCUGnMnHdpXTdEI_j8-Vk7Eg"
+    },
+    {
+      "dealer": "아주",
+      "showroom": "고양",
+      "name": "송민경",
+      "gender": "여성",
+      "cdsid": "6KR6867",
+      "channelId": "UCBB6SFAvxC756EpH93qWSSg"
+    },
+    {
+      "dealer": "아주",
+      "showroom": "목동",
+      "name": "신승희",
+      "gender": "남성",
+      "cdsid": "6KR6846",
+      "channelId": "UCurMOPSGnB1qrFabcfzu7Ig"
+    },
+    {
+      "dealer": "아주",
+      "showroom": "목동",
+      "name": "박형진",
+      "gender": "남성",
+      "cdsid": "6KR6846",
+      "channelId": "UC6LM-e4xY2PkXzE1-f3qSrg"
+    },
+    {
+      "dealer": "천하",
+      "showroom": "용산",
+      "name": "박준수",
+      "gender": "남성",
+      "cdsid": "6KR6839",
+      "channelId": "UCatA_IUpH_m1ihLDjU8u38g"
+    }
+  ],
+  "channels": [
+    {
+      "id": "UCcV36lNLeotgr02P605R2yA",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EC%99%95%EC%9E%90%EC%9D%B4%EC%A0%95%ED%9B%88",
+      "title": "볼보왕자 이훈둥 - 이정훈 팀장",
+      "checkedAt": "2026-09-15T04:34:28.063730+00:00",
+      "joined": "2026. 5. 15.",
+      "subscribers": 405,
+      "totalViews": 171669,
+      "videoCount": 45,
+      "averageViews": 3640,
+      "viewsSample": 45,
+      "long": {
+        "count": 8,
+        "averageViews": 10288,
+        "viewsSample": 8
+      },
+      "short": {
+        "count": 37,
+        "averageViews": 2202,
+        "viewsSample": 37
+      },
+      "sampledVideos": 6,
+      "commentSamples": 31,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UCq4Nmcrr-dEmZqT-NhbSdpQ",
+      "url": "https://www.youtube.com/@volvo_nasubari",
+      "title": "볼보나수바리",
+      "checkedAt": "2026-09-15T04:34:28.063730+00:00",
+      "joined": "2026. 5. 27.",
+      "subscribers": 190,
+      "totalViews": 139521,
+      "videoCount": 57,
+      "averageViews": 2440,
+      "viewsSample": 57,
+      "long": {
+        "count": 16,
+        "averageViews": 2311,
+        "viewsSample": 16
+      },
+      "short": {
+        "count": 41,
+        "averageViews": 2491,
+        "viewsSample": 41
+      },
+      "sampledVideos": 6,
+      "commentSamples": 7,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UC7ab9iDdrs3cLnW_zACCcIg",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EB%9F%AC%EA%B0%80%EC%9E%90-g8p",
+      "title": "VOLVO l 볼보러가자",
+      "checkedAt": "2026-09-15T04:34:28.064730+00:00",
+      "joined": "2021. 5. 24.",
+      "subscribers": 131,
+      "totalViews": 75768,
+      "videoCount": 14,
+      "averageViews": 5380,
+      "viewsSample": 14,
+      "long": {
+        "count": 6,
+        "averageViews": 10655,
+        "viewsSample": 6
+      },
+      "short": {
+        "count": 8,
+        "averageViews": 1424,
+        "viewsSample": 8
+      },
+      "sampledVideos": 14,
+      "commentSamples": 50,
+      "availableCommentVideos": 14,
+      "sharedVideos": [
+        {
+          "id": "IXy0Iu6kAEI",
+          "title": "볼보 EX90 직접 시승해 보면 다른 차 못 탈지도?!🤩 | EX90 Part 2",
+          "kind": "long",
+          "views": null,
+          "names": [
+            "조선별"
+          ],
+          "basis": "영상 설명란의 출연자 소개"
+        },
+        {
+          "id": "9O5QGxCcuEw",
+          "title": "볼보 플래그십 전기 SUV EX90 그럴 만한 이유가 다 있었습니다!!🤩 | EX90 part 1",
+          "kind": "long",
+          "views": null,
+          "names": [
+            "조선별"
+          ],
+          "basis": "영상 설명란의 출연자 소개"
+        },
+        {
+          "id": "YxShHQUP5q0",
+          "title": "7,000만 원대에 이게 다 된다고요?😱 볼보 ES90 출시 당일 딜러가 직접 확인했습니다!!",
+          "kind": "long",
+          "views": null,
+          "names": [
+            "곽지명"
+          ],
+          "basis": "영상 설명란의 출연자 소개"
+        },
+        {
+          "id": "y2Ak71FfQRU",
+          "title": "운전하면 무조건 공감하는 최악의 운전빌런 TOP1은?",
+          "kind": "long",
+          "views": null,
+          "names": [
+            "조선별"
+          ],
+          "basis": "영상 설명란의 출연자 소개"
+        },
+        {
+          "id": "xKmkfdqbBqs",
+          "title": "볼보 XC60 출고 당일! 볼보 딜러는 이렇게까지 합니다!",
+          "kind": "long",
+          "views": null,
+          "names": [
+            "곽지명"
+          ],
+          "basis": "영상 설명란의 출연자 소개"
+        },
+        {
+          "id": "cfEB7f4Fe3c",
+          "title": "🚗 VOLVO 구매할 때 꼭 봐야하는 혜택이 있다?!",
+          "kind": "long",
+          "views": null,
+          "names": [
+            "조선별"
+          ],
+          "basis": "영상 설명란의 출연자 소개"
+        },
+        {
+          "id": "jja3vjYEQ0E",
+          "title": "VOLVO EX90 이런 게 중요한 분들은 꼭 사세요!",
+          "kind": "short",
+          "views": 1600,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "8hSlC0LSlt4",
+          "title": "단 22분이면 충전 끝!?🤩  ES90 주행거리는 몇 km일까?",
+          "kind": "short",
+          "views": 1800,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "OlOHk3EyUL8",
+          "title": "이 기능 없었으면 통장이 텅장될 뻔...💸",
+          "kind": "short",
+          "views": 1300,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "P7m_VoT_920",
+          "title": "볼보 딜러가 준비한 출고 혜택은?!",
+          "kind": "short",
+          "views": 1800,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "9oqQx4AptXw",
+          "title": "볼보 차주라면 관리까지 알아서 해준다고?!",
+          "kind": "short",
+          "views": 2400,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "Tctur3oMOXQ",
+          "title": "내 차가 다쳤을 뿐인데 자기부담금까지 지원해 준다고?!",
+          "kind": "short",
+          "views": 634,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "UU1TqzUNSCQ",
+          "title": "신차 뽑았는데 여행을 보내준다고?!",
+          "kind": "short",
+          "views": 857,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        },
+        {
+          "id": "DVYAR2_3GSo",
+          "title": "볼보 계약했는데 공항 라운지 이용권을 받았습니다?!",
+          "kind": "short",
+          "views": 1000,
+          "names": [],
+          "basis": "출연자 이름 근거 미확인"
+        }
+      ]
+    },
+    {
+      "id": "UCLLQ98a0tBqu2SoTI_IqmwQ",
+      "url": "https://www.youtube.com/@%EC%9D%B4%EA%B7%9C%ED%99%98-volkyou",
+      "title": "볼보이규환",
+      "checkedAt": "2026-09-15T04:34:29.968865+00:00",
+      "joined": "2026. 3. 24.",
+      "subscribers": 333,
+      "totalViews": 288832,
+      "videoCount": 104,
+      "averageViews": 2722,
+      "viewsSample": 104,
+      "long": {
+        "count": 33,
+        "averageViews": 4124,
+        "viewsSample": 33
+      },
+      "short": {
+        "count": 71,
+        "averageViews": 2071,
+        "viewsSample": 71
+      },
+      "sampledVideos": 6,
+      "commentSamples": 19,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UCk1BctjD6nPVTIEA52FACcw",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B9%80%EB%8C%80%EB%A6%AC",
+      "title": "Hi, VOLVO | 볼보 김정호 대리",
+      "checkedAt": "2026-09-15T04:34:30.092912+00:00",
+      "joined": "2011. 5. 4.",
+      "subscribers": 520,
+      "totalViews": 408609,
+      "videoCount": 56,
+      "averageViews": 7117,
+      "viewsSample": 56,
+      "long": {
+        "count": 28,
+        "averageViews": 8281,
+        "viewsSample": 28
+      },
+      "short": {
+        "count": 28,
+        "averageViews": 5953,
+        "viewsSample": 28
+      },
+      "sampledVideos": 6,
+      "commentSamples": 39,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UC0QgBtIY01DBw2UC4v_I2eA",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EB%B9%85%EB%A7%A8",
+      "title": "볼보빅맨",
+      "checkedAt": "2026-09-15T04:35:03.757714+00:00",
+      "joined": "2026. 7. 5.",
+      "subscribers": 60,
+      "totalViews": 38241,
+      "videoCount": 17,
+      "averageViews": 2236,
+      "viewsSample": 17,
+      "long": {
+        "count": 5,
+        "averageViews": 2903,
+        "viewsSample": 5
+      },
+      "short": {
+        "count": 12,
+        "averageViews": 1958,
+        "viewsSample": 12
+      },
+      "sampledVideos": 6,
+      "commentSamples": 21,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UCUGnMnHdpXTdEI_j8-Vk7Eg",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B3%B5%EC%A3%BC-%EC%8B%A0%EC%88%98%EA%B2%BD%ED%8C%80%EC%9E%A5",
+      "title": "볼보 공주 - 신수경 팀장",
+      "checkedAt": "2026-09-15T04:34:31.344969+00:00",
+      "joined": "2026. 2. 25.",
+      "subscribers": 1280,
+      "totalViews": 539586,
+      "videoCount": 96,
+      "averageViews": 5523,
+      "viewsSample": 96,
+      "long": {
+        "count": 18,
+        "averageViews": 15863,
+        "viewsSample": 18
+      },
+      "short": {
+        "count": 78,
+        "averageViews": 3137,
+        "viewsSample": 78
+      },
+      "sampledVideos": 6,
+      "commentSamples": 53,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UCBB6SFAvxC756EpH93qWSSg",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EC%86%A1%EB%AF%BC%EA%B2%BD",
+      "title": "볼보 송민경팀장",
+      "checkedAt": "2026-09-15T04:34:31.711956+00:00",
+      "joined": "2026. 5. 22.",
+      "subscribers": 274,
+      "totalViews": 168626,
+      "videoCount": 53,
+      "averageViews": 3077,
+      "viewsSample": 53,
+      "long": {
+        "count": 6,
+        "averageViews": 13633,
+        "viewsSample": 6
+      },
+      "short": {
+        "count": 47,
+        "averageViews": 1730,
+        "viewsSample": 47
+      },
+      "sampledVideos": 6,
+      "commentSamples": 32,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UCurMOPSGnB1qrFabcfzu7Ig",
+      "url": "https://www.youtube.com/@volvogodseunghee",
+      "title": "볼보의신승희",
+      "checkedAt": "2026-09-15T04:34:32.388507+00:00",
+      "joined": "2012. 6. 29.",
+      "subscribers": 150,
+      "totalViews": 131722,
+      "videoCount": 67,
+      "averageViews": 1943,
+      "viewsSample": 67,
+      "long": {
+        "count": 18,
+        "averageViews": 4825,
+        "viewsSample": 18
+      },
+      "short": {
+        "count": 49,
+        "averageViews": 884,
+        "viewsSample": 49
+      },
+      "sampledVideos": 6,
+      "commentSamples": 9,
+      "availableCommentVideos": 5,
+      "sharedVideos": []
+    },
+    {
+      "id": "UC6LM-e4xY2PkXzE1-f3qSrg",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4PARK",
+      "title": "볼보 PARK",
+      "checkedAt": "2026-09-15T04:34:33.482811+00:00",
+      "joined": "2026. 5. 23.",
+      "subscribers": 78,
+      "totalViews": 49054,
+      "videoCount": 18,
+      "averageViews": 2707,
+      "viewsSample": 18,
+      "long": {
+        "count": 7,
+        "averageViews": 5686,
+        "viewsSample": 7
+      },
+      "short": {
+        "count": 11,
+        "averageViews": 812,
+        "viewsSample": 11
+      },
+      "sampledVideos": 6,
+      "commentSamples": 9,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    },
+    {
+      "id": "UCatA_IUpH_m1ihLDjU8u38g",
+      "url": "https://www.youtube.com/@volvodesk",
+      "title": "볼보데스크 VolvoDesk",
+      "checkedAt": "2026-09-15T04:34:33.548564+00:00",
+      "joined": "2026. 4. 9.",
+      "subscribers": 289,
+      "totalViews": 341654,
+      "videoCount": 58,
+      "averageViews": 5779,
+      "viewsSample": 58,
+      "long": {
+        "count": 11,
+        "averageViews": 9727,
+        "viewsSample": 11
+      },
+      "short": {
+        "count": 47,
+        "averageViews": 4855,
+        "viewsSample": 47
+      },
+      "sampledVideos": 6,
+      "commentSamples": 48,
+      "availableCommentVideos": 6,
+      "sharedVideos": []
+    }
+  ],
+  "evidence": [
+    {
+      "name": "조선별",
+      "videoId": "IXy0Iu6kAEI",
+      "commentId": "UgyV1qLru7OxhpYX36B4AaABAg",
+      "kind": "positive",
+      "topic": "이해하기 쉬운 설명",
+      "summary": "시승 중에도 내용을 이해하기 쉽게 설명한다는 시청자 의견.",
+      "videoTitle": "볼보 EX90 직접 시승해 보면 다른 차 못 탈지도?!🤩 | EX90 Part 2",
+      "url": "https://www.youtube.com/watch?v=IXy0Iu6kAEI&lc=UgyV1qLru7OxhpYX36B4AaABAg"
+    },
+    {
+      "name": "곽지명",
+      "videoId": "YxShHQUP5q0",
+      "commentId": "UgxtuxCTtwMRfnkNkuV4AaABAg",
+      "kind": "positive",
+      "topic": "설명 전달력",
+      "summary": "차량 설명을 잘한다는 짧은 긍정 의견.",
+      "videoTitle": "7,000만 원대에 이게 다 된다고요?😱 볼보 ES90 출시 당일 딜러가 직접 확인했습니다!!",
+      "url": "https://www.youtube.com/watch?v=YxShHQUP5q0&lc=UgxtuxCTtwMRfnkNkuV4AaABAg"
+    },
+    {
+      "name": "김정호",
+      "videoId": "XMjsqm2BF4w",
+      "commentId": "UgxwEs7gVaCWRN8GfjJ4AaABAg",
+      "kind": "positive",
+      "topic": "꾸준한 정보 공유",
+      "summary": "실시간으로 정보를 공유하는 성실함을 긍정적으로 언급.",
+      "videoTitle": "볼보 ES90 보조금 얼마 나올까? #볼보es90 #es90 #es90보조금",
+      "url": "https://www.youtube.com/watch?v=XMjsqm2BF4w&lc=UgxwEs7gVaCWRN8GfjJ4AaABAg"
+    },
+    {
+      "name": "진주현",
+      "videoId": "PucUoGQfxhs",
+      "commentId": "UgyvO8jb8WftBhBURnN4AaABAg",
+      "kind": "positive",
+      "topic": "명확한 설명",
+      "summary": "차량 설명이 명확하고 귀에 잘 들어온다는 의견.",
+      "videoTitle": "EX90 분당전시장 시승코스 짧은 시승기",
+      "url": "https://www.youtube.com/watch?v=PucUoGQfxhs&lc=UgyvO8jb8WftBhBURnN4AaABAg"
+    },
+    {
+      "name": "신수경",
+      "videoId": "ZmJfe27b8ag",
+      "commentId": "UgxRncZdsOJOUKP2QE94AaABAg",
+      "kind": "positive",
+      "topic": "상담 응대",
+      "summary": "주말 상담에 대한 만족을 표현한 의견. 실제 고객 여부는 별도 검증하지 않음.",
+      "videoTitle": "부담없이 살 수 있는 핫카 + 9월 볼보 역대급 프로모션 I🎁구독자 이벤트🎁 공지 포함",
+      "url": "https://www.youtube.com/watch?v=ZmJfe27b8ag&lc=UgxRncZdsOJOUKP2QE94AaABAg"
+    },
+    {
+      "name": "신수경",
+      "videoId": "1OcMqH0fDDY",
+      "commentId": "UgweEy3hq0tZwaBJbad4AaABAg",
+      "kind": "positive",
+      "topic": "궁금증 해소",
+      "summary": "영상 속 차량 설명으로 궁금한 점이 해소되었다는 의견.",
+      "videoTitle": "볼보 ES90이 매력적일 수밖에 없는 이유",
+      "url": "https://www.youtube.com/watch?v=1OcMqH0fDDY&lc=UgweEy3hq0tZwaBJbad4AaABAg"
+    },
+    {
+      "name": "신수경",
+      "videoId": "ZmJfe27b8ag",
+      "commentId": "UgzaGHp48vuTcmWyDat4AaABAg",
+      "kind": "suggestion",
+      "topic": "콘텐츠 확장 요청",
+      "summary": "순정 액세서리·전시장 소개와 출고 과정 영상 제작을 요청. 불만이나 능력 부족의 근거는 아님.",
+      "videoTitle": "부담없이 살 수 있는 핫카 + 9월 볼보 역대급 프로모션 I🎁구독자 이벤트🎁 공지 포함",
+      "url": "https://www.youtube.com/watch?v=ZmJfe27b8ag&lc=UgzaGHp48vuTcmWyDat4AaABAg"
+    },
+    {
+      "name": "송민경",
+      "videoId": "1sp_WtjTOfs",
+      "commentId": "UgzMyBbFkI8u9-WLyRV4AaABAg",
+      "kind": "positive",
+      "topic": "친절한 비교 상담",
+      "summary": "계약했다고 밝힌 시청자가 친절한 설명과 비교 상담을 긍정적으로 언급. 고객 신원·계약 여부는 별도 검증하지 않음.",
+      "videoTitle": "ES90 플러스 울트라 옵션차이,가격,옵션,보조금까지 구매하시기 전 이 영상만 보시면 됩니다!",
+      "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=UgzMyBbFkI8u9-WLyRV4AaABAg"
+    },
+    {
+      "name": "송민경",
+      "videoId": "1sp_WtjTOfs",
+      "commentId": "UgwR_WpwwRbpo22wDwF4AaABAg",
+      "kind": "suggestion",
+      "topic": "반복되는 말끝맺음",
+      "summary": "상세한 설명은 긍정적으로 평가하면서, 반복되는 말끝맺음을 줄이면 좋겠다는 개선 의견.",
+      "videoTitle": "ES90 플러스 울트라 옵션차이,가격,옵션,보조금까지 구매하시기 전 이 영상만 보시면 됩니다!",
+      "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=UgwR_WpwwRbpo22wDwF4AaABAg"
+    }
+  ]
+}

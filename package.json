@@ -12,7 +12,7 @@
     "start": "vinext start",
     "sync:weekly": "node scripts/sync-google-sheet-data.mjs",
     "sync:staff-photos": "python scripts/sync-staff-profile-photos.py",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/youtube-creators.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "onevoice:collect": "node scripts/one-voice/collect.mjs",
