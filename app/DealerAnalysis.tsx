@@ -403,7 +403,7 @@ function SalesPerformanceComparison({ performance }: { performance: SalesPerform
     >
       <span><small>인증 월평균</small><strong>{monthlySales(performance.certifiedAverage)}<i>대</i></strong></span>
       <span><small>비인증 월평균</small><strong>{monthlySales(performance.nonCertifiedAverage)}<i>대</i></strong></span>
-      <span className={`difference ${differenceTone}`}><small>차이</small><strong>{signedMonthlySales(performance.difference)}<i>대</i></strong></span>
+      <span className={`difference ${differenceTone}`}><small>GAP 차이</small><strong>{signedMonthlySales(performance.difference)}<i>대</i></strong></span>
     </div>
   );
 }
@@ -419,7 +419,7 @@ function SatisfactionPerformanceComparison({ performance }: { performance: Satis
     >
       <span><small>인증 평균</small><strong>{satisfactionScore(performance.certifiedAverage)}<i>점</i></strong></span>
       <span><small>비인증 평균</small><strong>{satisfactionScore(performance.nonCertifiedAverage)}<i>점</i></strong></span>
-      <span className={`difference ${differenceTone}`}><small>차이</small><strong>{signedSatisfactionScore(performance.difference)}<i>점</i></strong></span>
+      <span className={`difference ${differenceTone}`}><small>GAP 차이</small><strong>{signedSatisfactionScore(performance.difference)}<i>점</i></strong></span>
     </div>
   );
 }

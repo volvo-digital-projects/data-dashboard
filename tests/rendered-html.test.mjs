@@ -3468,7 +3468,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.equal((html.match(/class="dealer-sales-comparison"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-satisfaction-comparison"/g) ?? []).length, 8);
   assert.match(html, /aria-label="2026년 인증직원 고객상담 만족도 \d+\.\d점, \d+건; 비인증직원 \d+\.\d점, \d+건; 차이 [▲▼―] \d+\.\d점"/);
-  const comparisonDifferences = [...html.matchAll(/class="difference (positive|negative|neutral)"><small>차이<\/small><strong>([^<]+)<i>(점|대)<\/i><\/strong>/g)];
+  const comparisonDifferences = [...html.matchAll(/class="difference (positive|negative|neutral)"><small>GAP 차이<\/small><strong>([^<]+)<i>(점|대)<\/i><\/strong>/g)];
   assert.equal(comparisonDifferences.length, 16);
   for (const [, tone, value] of comparisonDifferences) {
     const symbol = { positive: "▲", negative: "▼", neutral: "―" }[tone];
