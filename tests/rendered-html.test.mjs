@@ -3485,8 +3485,8 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(source, /const advancedEnd = percentage\(levelCounts\.Grand \+ levelCounts\.Advanced, total\)/);
   assert.match(source, /data-grand-end=\{grandEnd\}[\s\S]*?data-advanced-end=\{advancedEnd\}/);
   assert.match(source, /querySelectorAll<HTMLElement>\("\.dealer-mix-bar"\)/);
-  assert.match(source, /barRect\.left - tableRect\.left \+ barRect\.width \* grandEnd/);
-  assert.match(source, /barRect\.left - tableRect\.left \+ barRect\.width \* advancedEnd/);
+  assert.match(source, /grandRect\.right - svgRect\.left/);
+  assert.match(source, /advancedRect\.right - svgRect\.left/);
   assert.match(source, /<CertificationTrendConnectors tableRef=\{certificationTableRef\} layoutKey=\{sortKey\} \/>/);
   assert.match(css, /\.dealer-certification-connectors\s*\{[^}]*position:\s*absolute;[^}]*inset:\s*0;/);
   assert.match(css, /\.dealer-certification-connectors path\s*\{[^}]*stroke-width:\s*1px;[^}]*stroke-dasharray:\s*2 4;/);

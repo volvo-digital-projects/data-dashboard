@@ -291,6 +291,7 @@ function CertificationTrendConnectors({
   layoutKey: string;
 }) {
   const [geometry, setGeometry] = useState<CertificationConnectorGeometry | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const table = tableRef.current;
@@ -301,24 +302,29 @@ function CertificationTrendConnectors({
     const update = () => {
       frame = 0;
       if (cancelled) return;
-      const tableRect = table.getBoundingClientRect();
+      const svgRect = svgRef.current?.getBoundingClientRect();
+      if (!svgRect || !svgRect.width || !svgRect.height) return;
       const bars = Array.from(table.querySelectorAll<HTMLElement>(".dealer-mix-bar"));
       const points = bars.map((bar) => {
         const barRect = bar.getBoundingClientRect();
-        const grandEnd = Number.parseFloat(bar.dataset.grandEnd ?? "0") / 100;
-        const advancedEnd = Number.parseFloat(bar.dataset.advancedEnd ?? "0") / 100;
+        const grandRect = bar.querySelector<HTMLElement>(".level-grand")!.getBoundingClientRect();
+        const advancedRect = bar.querySelector<HTMLElement>(".level-advanced")!.getBoundingClientRect();
         return {
-          grandX: barRect.left - tableRect.left + barRect.width * grandEnd,
-          advancedX: barRect.left - tableRect.left + barRect.width * advancedEnd,
-          y: barRect.top - tableRect.top + barRect.height / 2,
+          grandX: grandRect.right - svgRect.left,
+          advancedX: advancedRect.right - svgRect.left,
+          top: barRect.top - svgRect.top,
+          bottom: barRect.bottom - svgRect.top,
         };
       });
       const pathFor = (key: "grandX" | "advancedX") =>
-        points.map((point, index) => `${index === 0 ? "M" : "L"} ${point[key].toFixed(2)} ${point.y.toFixed(2)}`).join(" ");
+        points.slice(0, -1).map((point, index) => {
+          const next = points[index + 1];
+          return `M ${point[key].toFixed(2)} ${point.bottom.toFixed(2)} L ${next[key].toFixed(2)} ${next.top.toFixed(2)}`;
+        }).join(" ");
 
       setGeometry({
-        width: tableRect.width,
-        height: tableRect.height,
+        width: svgRect.width,
+        height: svgRect.height,
         grandPath: pathFor("grandX"),
         advancedPath: pathFor("advancedX"),
       });
@@ -343,16 +349,16 @@ function CertificationTrendConnectors({
     };
   }, [layoutKey, tableRef]);
 
-  if (!geometry || !geometry.grandPath || !geometry.advancedPath) return null;
   return (
     <svg
+      ref={svgRef}
       className="dealer-certification-connectors"
-      viewBox={`0 0 ${geometry.width} ${geometry.height}`}
+      viewBox={geometry ? `0 0 ${geometry.width} ${geometry.height}` : undefined}
       preserveAspectRatio="none"
       aria-hidden="true"
     >
-      <path className="level-grand" d={geometry.grandPath} vectorEffect="non-scaling-stroke" />
-      <path className="level-advanced" d={geometry.advancedPath} vectorEffect="non-scaling-stroke" />
+      <path className="level-grand" d={geometry?.grandPath} vectorEffect="non-scaling-stroke" />
+      <path className="level-advanced" d={geometry?.advancedPath} vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }
