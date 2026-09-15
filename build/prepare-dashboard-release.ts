@@ -59,12 +59,13 @@ export async function prepareDashboardRelease() {
   ) as { source?: { rosterCheckedAt?: string } };
   const builtAt = new Date();
   const youtube = JSON.parse(await readFile(path.join(root, "app/data/youtube-creators.json"), "utf8")) as { channels: {checkedAt: string}[] };
+  const comments = JSON.parse(await readFile(path.join(root, "app/data/youtube-comments.json"), "utf8"));
   // Every Vinext environment evaluates the Vite config independently. The
   // release id therefore has to depend only on shared, deterministic inputs;
   // using the current time here gives the client bundle and published JSON
   // different ids and can trap long-lived iPad tabs in a reload loop. Include
   // data as-of timestamps so unattended updates also refresh those clients.
-  const seed = `${JSON.stringify(note)}\n${sales.source?.salesAsOf ?? ""}\n${sales.source?.salesSyncedAt ?? ""}\n${roster.source?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}`;
+  const seed = `${JSON.stringify(note)}\n${sales.source?.salesAsOf ?? ""}\n${sales.source?.salesSyncedAt ?? ""}\n${roster.source?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}\n${comments.checkedAt ?? ""}`;
   const id = createHash("sha256").update(seed).digest("hex").slice(0, 16);
 
   await writeDashboardRelease(id, note, builtAt, outputPath);

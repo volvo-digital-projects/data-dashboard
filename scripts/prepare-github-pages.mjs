@@ -26,7 +26,8 @@ const rosterSource = JSON.parse(
   readFileSync(path.join(projectRoot, "app", "data", "voc-staff-analysis.json"), "utf8"),
 ).source;
 const youtube = JSON.parse(readFileSync(path.join(projectRoot, "app/data/youtube-creators.json"), "utf8"));
-const releaseSeed = `${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${salesSource?.salesSyncedAt ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}`;
+const comments = JSON.parse(readFileSync(path.join(projectRoot, "app/data/youtube-comments.json"), "utf8"));
+const releaseSeed = `${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${salesSource?.salesSyncedAt ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}\n${comments.checkedAt ?? ""}`;
 const releaseId = createHash("sha256")
   .update(releaseSeed)
   .digest("hex")

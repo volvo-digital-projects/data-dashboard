@@ -31,15 +31,24 @@ jobs:
       - run: npm ci
       - name: Collect and validate all public channels
         run: python scripts/refresh-youtube-metrics.py
+      - name: Refresh public comments when API is configured
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          if [ -n "$YOUTUBE_API_KEY" ]; then
+            python scripts/refresh-youtube-comments.py
+          else
+            echo "YouTube API key not configured; retaining reviewed sample / last snapshot."
+          fi
       - name: Verify dashboard and data
         run: |
-          python -m unittest discover -s tests -p test_youtube_refresh.py
+          python -m unittest discover -s tests -p "test_youtube*.py"
           npm test
       - name: Save verified snapshot on main
         run: |
           git config user.name "Data Dashboard Auto Update"
           git config user.email "actions@users.noreply.github.com"
-          git add app/data/youtube-creators.json public/dashboard-release.json
+          git add app/data/youtube-creators.json app/data/youtube-comments.json public/dashboard-release.json
           if ! git diff --cached --quiet; then
             git commit -m "Auto update hourly YouTube channel metrics"
             git pull --rebase origin main
