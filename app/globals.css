@@ -433,10 +433,25 @@ html {
 }
 
 .dealer-analysis-command-shell {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: 100;
+  background: var(--color-bg, #f4f7f9);
   min-width: 0;
   display: grid;
   margin-inline: calc(-1 * var(--dashboard-content-overhang));
   padding-inline: var(--dashboard-sticky-content-gutter);
+}
+
+/* Keep wheel/touch momentum native: no input capture, forced snap or delay. */
+html:has(.dealer-analysis-page) {
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.dealer-analysis-page) { scroll-behavior: auto; }
 }
 
 .dealer-analysis-hero {

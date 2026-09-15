@@ -235,6 +235,10 @@ test("expands the four staff analysis panels after removing their outer frame", 
 });
 
 test("shows every creator metric together with detail collapsed by default", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*position: sticky;[^}]*top: 0;[^}]*align-self: start;[^}]*z-index: 100;/);
+  assert.match(css, /html:has\(\.dealer-analysis-page\)\s*\{[^}]*scroll-behavior: smooth;[^}]*scroll-snap-type: none;/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*html:has\(\.dealer-analysis-page\)\s*\{ scroll-behavior: auto;/);
   const response = await render("/dashboard/6KR6834/dealer-analysis");
   const html = await response.text();
   const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1];
