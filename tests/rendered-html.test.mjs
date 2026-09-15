@@ -234,6 +234,18 @@ test("expands the four staff analysis panels after removing their outer frame", 
   assert.match(css, /\.analysis-staff-insights article\s*\{[^}]*border:\s*1px solid #e2e9ec;/);
 });
 
+test("shows every creator metric together with detail collapsed by default", async () => {
+  const response = await render("/dashboard/6KR6834/dealer-analysis");
+  const html = await response.text();
+  const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1];
+  assert.ok(table);
+  assert.equal((table.match(/scope="row"/g) ?? []).length, 12);
+  assert.equal((table.match(/scope="col"/g) ?? []).length, 9);
+  for (const heading of ["채널 개설일", "롱폼", "숏츠", "2026 상담", "2026 판매", "댓글 근거"]) assert.ok(table.includes(heading));
+  assert.match(html, /<details class="yt-detail yt-detail-disclosure" id="yt-channel-detail">/);
+  assert.doesNotMatch(table, /yt-person-results|yt-score/);
+});
+
 async function render(
   pathname = "/",
   { authenticated = true, cookie = null } = {},
