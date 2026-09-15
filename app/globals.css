@@ -610,7 +610,7 @@ html {
   min-width: 0;
   min-height: 68px;
   display: grid;
-  grid-template-columns: minmax(132px, 0.72fr) minmax(84px, 0.42fr) minmax(250px, 1.32fr) minmax(180px, 1fr) repeat(2, minmax(225px, 1.18fr));
+  grid-template-columns: minmax(125px, 0.66fr) minmax(120px, 0.58fr) minmax(240px, 1.25fr) minmax(190px, 1.02fr) repeat(2, minmax(210px, 1.08fr));
   align-items: stretch;
   border-bottom: 1px solid #dce7ec;
   animation: dealer-row-enter 360ms ease-out both;
@@ -659,7 +659,8 @@ html {
 .dealer-certification-total { align-items: flex-end; text-align: right; }
 .dealer-certification-total strong { display: inline-flex; align-items: baseline; color: #12384d; font-size: 19px; font-weight: 620; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .dealer-certification-total strong i { margin-left: 2px; color: #637985; font-family: var(--font-korean); font-size: 8px; font-style: normal; font-weight: 500; }
-.dealer-certification-total strong b { min-width: 4.1ch; margin-left: 7px; color: #607985; font-size: 9px; font-weight: 600; text-align: right; }
+.dealer-certification-total strong em { margin-inline: 6px; color: #9aabb3; font-size: 9px; font-style: normal; font-weight: 500; }
+.dealer-certification-total strong b { min-width: 4.1ch; color: #607985; font-size: 9px; font-weight: 600; text-align: right; }
 .dealer-certification-aggregate .dealer-certification-total strong { color: #0d5875; font-size: 22px; font-weight: 750; }
 
 .dealer-mix,
@@ -844,7 +845,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   }
   .dealer-analysis-command-shell { margin-inline: 0; }
   .dealer-analysis-board { padding: 14px; }
-  .dealer-certification-row { grid-template-columns: minmax(88px, 0.62fr) 72px minmax(200px, 1.35fr) minmax(155px, 1.05fr) repeat(2, minmax(195px, 1.25fr)); }
+  .dealer-certification-row { grid-template-columns: minmax(88px, 0.6fr) 105px minmax(190px, 1.28fr) minmax(170px, 1.1fr) repeat(2, minmax(175px, 1.12fr)); }
   .dealer-certification-row > * { padding-inline: 9px; }
   .dealer-mix-values { gap: 5px; }
   .dealer-mix-values > span { grid-template-columns: 5px 1fr auto; }

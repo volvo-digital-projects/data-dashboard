@@ -3485,9 +3485,9 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.doesNotMatch(css, /\.dealer-kpi-strip/);
   assert.match(css, /\.dealer-certification-aggregate\s*\{[^}]*border-bottom:\s*2px solid #267ea4;[^}]*box-shadow:/);
   assert.match(css, /\.dealer-certification-total\s*\{[^}]*align-items:\s*flex-end;[^}]*text-align:\s*right;/);
-  assert.match(html, />180<[^>]*>명<\/i><b>100\.0%<\/b>/);
+  assert.match(html, />180<[^>]*>명<\/i><em>\/<\/em><b>100\.0%<\/b>/);
   for (const [count, share] of [[44, "24.4%"], [42, "23.3%"], [31, "17.2%"], [28, "15.6%"], [14, "7.8%"], [12, "6.7%"], [7, "3.9%"]]) {
-    assert.match(html, new RegExp(`>${count}<[^>]*>명<\\/i><b>${share.replace(".", "[.]")}<\\/b>`));
+    assert.match(html, new RegExp(`>${count}<[^>]*>명<\\/i><em>\\/<\\/em><b>${share.replace(".", "[.]")}<\\/b>`));
   }
   assert.match(css, /\.dealer-mix,[\s\S]*?\.dealer-employment\s*\{[^}]*display:\s*grid;[^}]*grid-template-rows:\s*12px 18px;[^}]*align-content:\s*center;[^}]*justify-content:\s*stretch;/);
   assert.match(css, /\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*width:\s*1px;[^}]*top:\s*9px;[^}]*bottom:\s*9px;[^}]*background:\s*#dce7ec;/);
@@ -3505,7 +3505,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>전체<\/h3>[\s\S]*?<b>7개사 \/ 39개소 \/ 100%<\/b>/);
   assert.match(html, /<h3>에이치<\/h3>[\s\S]*?<b>7개소 \/ 17\.9%<\/b>/);
   assert.match(html, /<h3>천하<\/h3>[\s\S]*?<b>4개소 \/ 10\.3%<\/b>/);
-  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><b>100\.0%<\/b><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
+  assert.match(html, /<h3>전체<\/h3>[\s\S]*?<strong>180<i>명<\/i><em>\/<\/em><b>100\.0%<\/b><\/strong>[\s\S]*?<strong>40<em>명<\/em><\/strong>[\s\S]*?<strong>60<em>명<\/em><\/strong>[\s\S]*?<strong>80<em>명<\/em><\/strong>/);
   assert.match(html, /딜러사별 레벨별 인증인원 및 비율/);
   assert.doesNotMatch(html, /동일 인물의 연도별 수상은 각각 포함/);
   assert.match(html, /딜러사 확인 <strong>178명<\/strong>/);
@@ -3523,12 +3523,12 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /@media \(min-width:\s*1241px\)\s*\{[\s\S]*?\.dealer-analysis-board,[\s\S]*?\.dealer-analysis-roadmap,[\s\S]*?\.dealer-analysis-data-note\s*\{[^}]*margin-inline:\s*calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
   assert.match(css, /\.analysis-admin-entry\s*\{[^}]*margin-right: -4px;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*font-family: var\(--font-latin\);/);
-  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(132px, 0\.72fr\)\s*minmax\(84px, 0\.42fr\)\s*minmax\(250px, 1\.32fr\)\s*minmax\(180px, 1fr\)\s*repeat\(2, minmax\(225px, 1\.18fr\)\)/);
+  assert.match(css, /\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(125px, 0\.66fr\)\s*minmax\(120px, 0\.58fr\)\s*minmax\(240px, 1\.25fr\)\s*minmax\(190px, 1\.02fr\)\s*repeat\(2, minmax\(210px, 1\.08fr\)\)/);
   assert.match(css, /@keyframes dealer-bar-fill/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.dealer-analysis-page\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
-  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(88px,\s*0\.62fr\)\s*72px\s*minmax\(200px,\s*1\.35fr\)\s*minmax\(155px,\s*1\.05fr\)\s*repeat\(2,\s*minmax\(195px,\s*1\.25fr\)\)/);
+  assert.match(css, /@media \(min-width:\s*761px\) and \(max-width:\s*1240px\)[\s\S]*?\.dealer-certification-row\s*\{[^}]*grid-template-columns:\s*minmax\(88px,\s*0\.6fr\)\s*105px\s*minmax\(190px,\s*1\.28fr\)\s*minmax\(170px,\s*1\.1fr\)\s*repeat\(2,\s*minmax\(175px,\s*1\.12fr\)\)/);
   assert.match(css, /\.dealer-satisfaction-comparison\s*\{[^}]*background:\s*linear-gradient\(90deg, rgba\(248, 225, 190, 0\.12\), rgba\(246, 206, 163, 0\.04\)\);/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-sales-comparison\s*\{[^}]*grid-column:\s*1 \/ -1;/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-satisfaction-comparison\s*\{[^}]*grid-column:\s*1 \/ -1;/);
