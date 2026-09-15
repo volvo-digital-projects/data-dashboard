@@ -183,7 +183,7 @@ function EmploymentProgressBar({
         <i style={{ width: rate, "--bar-delay": `${animationDelay}ms` } as CSSProperties} />
       </div>
       <div className="dealer-employment-metrics">
-        <span>현재 재직 <strong>{current}<small>명</small><i>/ {total}명</i></strong></span>
+        <span>현재 재직 <strong><span className="dealer-employment-current">{current}</span><small>명</small><i>/ {total}명</i></strong></span>
         <b>{rate}</b>
       </div>
     </div>

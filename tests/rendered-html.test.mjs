@@ -3465,6 +3465,8 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.equal((html.match(/class="dealer-mix-bar"/g) ?? []).length, 8);
   assert.equal((html.match(/class="dealer-employment-bar"/g) ?? []).length, 8);
   assert.match(source, /className="dealer-employment"[\s\S]*?className="dealer-employment-bar"[\s\S]*?className="dealer-employment-metrics"/);
+  assert.match(source, /className="dealer-employment-current">\{current\}<\/span><small>명<\/small>/);
+  assert.match(css, /\.dealer-employment-current\s*\{[^}]*min-width:\s*2ch;[^}]*display:\s*inline-block;[^}]*text-align:\s*right;/);
   assert.doesNotMatch(html, /dealer-employment-gap|Gap · 현재 재직 외/);
   assert.match(css, /\.dealer-mix-segment\.level-grand\s*\{[^}]*linear-gradient\(180deg,[^}]*linear-gradient\(90deg, #3b98bb 0%, #2b85aa 46%, #1f7092 100%\)/);
   assert.match(css, /\.dealer-mix-segment\.level-advanced\s*\{[^}]*linear-gradient\(180deg,[^}]*linear-gradient\(90deg, #59aea5 0%, #41998f 46%, #2f7f77 100%\)/);

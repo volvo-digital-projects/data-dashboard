@@ -697,6 +697,7 @@ html {
 .dealer-employment-metrics { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .dealer-employment-metrics > span { color: #637985; font-family: var(--font-korean); font-size: 8px; }
 .dealer-employment-metrics strong { margin-left: 5px; color: #164f70; font-family: var(--font-latin); font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dealer-employment-current { min-width: 2ch; display: inline-block; text-align: right; }
 .dealer-employment-metrics strong small { margin-left: 1px; font-family: var(--font-korean); font-size: 7px; font-weight: 500; }
 .dealer-employment-metrics strong i { margin-left: 4px; color: #637985; font-size: 9px; font-style: normal; font-weight: 520; }
 .dealer-employment-metrics > b { color: #164f70; font-size: 16px; font-weight: 750; font-variant-numeric: tabular-nums; }
