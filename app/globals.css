@@ -1320,6 +1320,14 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   image-rendering: auto;
 }
 
+/* Genuine channel portrait: crop the original scene, never synthesize a face. */
+.growth-profile-photo img[src*="kim-jeongho-channel-20260915"],
+.analysis-staff-profile-photo img[src*="kim-jeongho-channel-20260915"] {
+  object-position: center;
+  transform: scale(2);
+  transform-origin: 80% 32%;
+}
+
 .growth-profile-photo img.staff-profile-silhouette,
 .analysis-staff-profile-photo img.staff-profile-silhouette {
   width: 100%;

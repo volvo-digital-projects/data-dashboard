@@ -435,6 +435,15 @@ def main() -> int:
                 if not name or name in employees:
                     raise RuntimeError(f"직원명 누락 또는 중복: {showroom} / {name!r}")
                 image_url = urljoin(page_url, html.unescape(image_src))
+                previous = existing_profile(cdsid, name)
+                # Reviewed channel portraits replace blurred dealer originals.
+                # Keep their original pixels and CSS crop on subsequent syncs.
+                if previous.get("sourceOverride"):
+                    override_file = PUBLIC_ROOT / previous["image"].lstrip("/")
+                    if not override_file.is_file():
+                        raise RuntimeError(f"프로필 대체 사진 누락: {cdsid} / {name}")
+                    employees[name] = previous
+                    continue
                 local_file = portrait_path(
                     cdsid,
                     source["directory"],

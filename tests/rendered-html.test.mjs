@@ -3142,6 +3142,24 @@ test("serves the dual-metric competitive analysis sample", async () => {
     const portrait = await readFile(
       new URL(`../public${profile.image}`, import.meta.url),
     );
+    if (profile.sourceOverride) {
+      assert.match(profile.sourceOverride, /^https:\/\/www\.youtube\.com\/@/);
+      assert.equal(profile.image, "/staff-profiles/kolon/songpa/kim-jeongho-channel-20260915.jpeg");
+      assert.equal(portrait.readUInt16BE(0), 0xffd8);
+      let offset = 2;
+      let size;
+      while (offset < portrait.length) {
+        const marker = portrait.readUInt16BE(offset);
+        const length = portrait.readUInt16BE(offset + 2);
+        if ([0xffc0, 0xffc1, 0xffc2].includes(marker)) {
+          size = { width: portrait.readUInt16BE(offset + 7), height: portrait.readUInt16BE(offset + 5) };
+          break;
+        }
+        offset += 2 + length;
+      }
+      assert.deepEqual(size, { width: 900, height: 900 });
+      return;
+    }
     assert.deepEqual(readWebpSize(portrait), { width: 420, height: 440 });
   }));
 
