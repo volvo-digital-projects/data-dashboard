@@ -3458,7 +3458,7 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(html, /<h3>전체<\/h3>/);
   assert.doesNotMatch(html, /VOLVO DEALER|ALL DEALERS/);
   assert.doesNotMatch(html, />0[1-7]<\/span>/);
-  for (const heading of ["딜러사 / 전시장 / %", "전체 인증 / %", "인증 레벨별 구성 / %", "현재 재직인원 / 재직율(%)", "2026년 인증직원 vs 비인증직원 성과비교"]) {
+  for (const heading of ["딜러사 / 전시장 / %", "전체 인증 / %", "인증 레벨별 구성 / %", "현재 재직인원 / 재직율(%)", "2026년 인증직원 vs 비인증직원 판매성과 비교"]) {
     assert.match(html, new RegExp(`<span role="columnheader">${heading.replace(/[()]/g, "\\$&")}<\\/span>`));
   }
   assert.match(css, /\.dealer-certification-head > :nth-child\(2\)\s*\{[^}]*align-items:\s*flex-start;[^}]*text-align:\s*left;/);
