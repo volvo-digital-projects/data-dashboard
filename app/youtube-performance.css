@@ -78,3 +78,4 @@
 .yt-compact .yt-comment-drilldown{margin-top:6px;padding:8px}
 @media(max-width:760px){.yt-compact.has-comment-detail{height:auto;min-height:var(--yt-available,0px)}.yt-compact.has-comment-detail>.yt-table-wrap{max-height:260px;flex:none}.yt-compact.has-comment-detail>.yt-detail-disclosure{max-height:none}.yt-staff-total{flex-wrap:wrap}.yt-compact .yt-gender-summary>span{font-size:7px}}
 .yt-compact .yt-row-avatar,.yt-compact .yt-row-avatar img{width:42px;height:44px}.yt-compact .yt-row-avatar{border:1px solid #c8dce5;border-radius:6px;background:linear-gradient(145deg,#e2edf2,#cbdde5)}.yt-compact .yt-row-avatar img{object-fit:cover;object-position:center 18%}.yt-compact .yt-comparison-table tbody tr{height:52px}.yt-compact .yt-row-person{min-height:44px}
+.dealer-analysis-scroll>.youtube-performance.yt-compact{width:100%;margin-inline:0;margin-top:16px;border-radius:5px;border-color:#d9e3e6}
