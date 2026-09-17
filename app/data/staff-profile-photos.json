@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 365,
+  "consultantCount": 366,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -35,6 +35,9 @@
         },
         "옥수찬": {
           "image": "/staff-profiles/h-motors/gangnam-sinsa/consultant-e6d59ca60196.webp"
+        },
+        "이민웅": {
+          "image": "/staff-profiles/h-motors/gangnam-sinsa/consultant-856fc432e9dd.webp"
         },
         "이병현": {
           "image": "/staff-profiles/h-motors/gangnam-sinsa/consultant-e7d0a3823cde.webp"
