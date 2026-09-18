@@ -31,12 +31,18 @@ const creators = data.creators.map(person => {
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
     months: result?.monthlyDeliveredSales ?? [], responses: survey?.responses ?? 0,
     score: survey?.responses ? survey.scoreSum / survey.responses : null,
+    hireDate: voc[person.cdsid]?.employees.find(employee => employee.name === person.name)?.hireDate,
     certifications, shared: data.creators.filter(staff => staff.channelId === person.channelId).length > 1,
   };
 });
 const number = (value: number | null) => value === null ? "—" : value.toLocaleString("ko-KR");
 const decimal = (value: number | null) => value === null ? "—" : value.toFixed(1);
 const formatDates = (value: string) => value.replace(/(\d{4})[-.]\s*(\d{1,2})[-.]\s*(\d{1,2})\.?/g, (_, year, month, day) => `${year}.${month.padStart(2,"0")}.${day.padStart(2,"0")}`);
+const formatCompactDate = (value: string | undefined) => {
+  if (!value) return "—";
+  const match = value.match(/(\d{4})[-.]\s*(\d{1,2})[-.]\s*(\d{1,2})/);
+  return match ? `${match[1].slice(2)}${match[2].padStart(2,"0")}${match[3].padStart(2,"0")}` : value;
+};
 const sumSubscribers = data.channels.reduce((sum, channel) => sum + (channel.subscribers ?? 0), 0);
 const videoTotal = data.channels.reduce((sum, channel) => sum + channel.videoCount, 0);
 const male = creators.filter(person=>person.gender === "남성").length;
@@ -141,17 +147,18 @@ export default function YouTubePerformance() {
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">
       <table className="yt-comparison-table"><caption className="yt-table-caption">12명 채널·상담·판매 정량 지표. 조회수 평균은 공개 표시값 기준 근삿값.</caption><thead><tr>
-        <th scope="col">딜러사 / 직원</th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">채널 개설일<small>년도.월.일</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
+        <th scope="col">딜러사 / 직원</th><th scope="col">입사일자<small>YYMMDD</small></th><th scope="col">채널 개설일<small>YYMMDD</small></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
       </tr></thead><tbody>{visible.map((person,index)=>{
         const comments=commentData.channels[person.channelId];
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
           <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image ?? "/staff-profiles/neutral-human-silhouette.png"} alt="" loading="lazy"/></span><span><strong>{person.name} <GenderIcon gender={person.gender}/></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <td className="yt-hire-date">{formatCompactDate(person.hireDate)}</td>
+          <td className="yt-joined">{formatCompactDate(person.channel.joined)}</td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td><strong>{number(person.channel.subscribers)}</strong></td>
           <td><strong>≈{number(person.channel.averageViews)}</strong><small>{number(person.channel.totalViews)}</small></td>
-          <td className="yt-joined">{formatDates(person.channel.joined)}</td>
           <td><strong>{person.channel.long.count}<i>개</i></strong><small>≈{number(person.channel.long.averageViews)}회</small></td>
           <td><strong>{person.channel.short.count}<i>개</i></strong><small>≈{number(person.channel.short.averageViews)}회</small></td>
           <td className="yt-cell-voc"><strong>{decimal(person.score)}</strong><small>{person.responses?`${person.responses}건 회신`:"회신 없음"}</small></td>
