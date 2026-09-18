@@ -132,7 +132,7 @@ export default function YouTubePerformance() {
       <div className="yt-section-label"><span>01 / NETWORK</span><h3>딜러사별 크리에이터 분포</h3><p>비율 기준: 첨부 명단의 전체 {creators.length}명</p></div>
       <div className="yt-dealers" aria-label="딜러사 필터">
         {dealers.map(name=>{const count=creators.filter(person=>person.dealer===name).length;return <button key={name} type="button" aria-pressed={dealer===name} onClick={()=>setDealer(dealer===name ? "전체" : name)} className={count===0?"is-zero":""}>
-          <span>{name}</span><strong>{count}<small>명</small></strong><em>{count}명 / {creators.length}</em><i aria-hidden="true">{Array.from({length:count},(_,i)=><b key={i}/>)}</i>
+          <span>{name}</span><strong>{count}<small>명 / {creators.length}</small></strong><em>{(count / creators.length * 100).toFixed(1)}%</em><i aria-hidden="true">{Array.from({length:count},(_,i)=><b key={i}/>)}</i>
         </button>;})}
       </div>
     </div>
