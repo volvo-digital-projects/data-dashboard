@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-18",
+  "updatedAt": "2026-09-19",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 366,
+  "consultantCount": 365,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -1272,14 +1272,8 @@
         "박수정": {
           "image": "/staff-profiles/kolon/seosuwon/consultant-fa1a43099db2.webp"
         },
-        "이성진": {
-          "image": "/staff-profiles/kolon/seosuwon/consultant-f7882b046e10.webp"
-        },
         "이정훈": {
           "image": "/staff-profiles/kolon/seosuwon/consultant-60ac22d9b10c.webp"
-        },
-        "한필성": {
-          "image": "/staff-profiles/kolon/seosuwon/consultant-901511dd8bdf.webp"
         },
         "황준원": {
           "image": "/staff-profiles/kolon/seosuwon/consultant-7e1d9d248eeb.webp"
@@ -1318,6 +1312,9 @@
       "employees": {
         "강인식": {
           "image": "/staff-profiles/h-motors/cheongju/consultant-5277207bf917.webp"
+        },
+        "고태영": {
+          "image": "/staff-profiles/h-motors/cheongju/consultant-8cfeabf4f2e2.webp"
         },
         "김기민": {
           "image": "/staff-profiles/h-motors/cheongju/consultant-3d7d2ffb18f1.webp"
