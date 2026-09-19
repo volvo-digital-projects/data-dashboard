@@ -162,8 +162,8 @@ export default function YouTubePerformance() {
       </div>
       <div className="yt-headline-stats">
         <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
-        <div><span className="yt-metric-title">합산 구독자 <em>전일 최종 마감 대비</em></span><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
-        <div><span className="yt-metric-title">공개 영상 수 <em>전일 최종 마감 대비</em></span><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
+        <div><span className="yt-metric-title">합산 구독자 <em>전일 최종 마감 대비</em></span><div className="yt-metric-value"><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p></div><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
+        <div><span className="yt-metric-title">공개 영상 수 <em>전일 최종 마감 대비</em></span><div className="yt-metric-value"><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p></div><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>
     </header>
     <div className="yt-distribution">
