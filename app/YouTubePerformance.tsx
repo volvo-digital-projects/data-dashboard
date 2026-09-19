@@ -37,10 +37,14 @@ const creators = data.creators.map(person => {
 });
 const number = (value: number | null) => value === null ? "—" : value.toLocaleString("ko-KR");
 const decimal = (value: number | null) => value === null ? "—" : value.toFixed(1);
+const changeRate = (current: number, previous: number) => {
+  const rate = Math.abs(current - previous) / previous * 100;
+  return `${rate > 0 && rate < .1 ? rate.toFixed(2) : rate.toFixed(1)}%`;
+};
 const subscriberChange = (current: number | null, previous: number | null) => {
   if (current === null || previous === null || previous === 0) return "직전 대비 —";
   const difference = current - previous;
-  return `직전 대비 ${difference > 0 ? "▲" : difference < 0 ? "▼" : "―"} ${(Math.abs(difference) / previous * 100).toFixed(1)}%`;
+  return `직전 대비 ${difference > 0 ? "▲" : difference < 0 ? "▼" : "―"} ${Math.abs(difference).toLocaleString("ko-KR")}명 · ${changeRate(current, previous)}`;
 };
 const formatDates = (value: string) => value.replace(/(\d{4})[-.]\s*(\d{1,2})[-.]\s*(\d{1,2})\.?/g, (_, year, month, day) => `${year}.${month.padStart(2,"0")}.${day.padStart(2,"0")}`);
 const formatCompactDate = (value: string | undefined) => {
@@ -54,7 +58,7 @@ const male = creators.filter(person=>person.gender === "남성").length;
 const lastChannelUpdate = new Date(Math.min(...data.channels.map(channel => Date.parse(channel.checkedAt))));
 const updateLabel = formatDates(new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hour12:false}).format(lastChannelUpdate));
 const kstDate = () => new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
-const changeLabel = (current:number, previous:number|null, unit:string) => previous === null ? "마감 기록 없음" : `${current > previous ? "▲" : current < previous ? "▼" : "―"} ${Math.abs(current-previous).toLocaleString("ko-KR")}${unit} · ${previous === 0 ? (current === 0 ? "0.0%" : "비율 —") : `${(Math.abs(current-previous)/previous*100).toFixed(1)}%`}`;
+const changeLabel = (current:number, previous:number|null, unit:string) => previous === null ? "마감 기록 없음" : `${current > previous ? "▲" : current < previous ? "▼" : "―"} ${Math.abs(current-previous).toLocaleString("ko-KR")}${unit} · ${previous === 0 ? (current === 0 ? "0.0%" : "비율 —") : changeRate(current, previous)}`;
 
 function GenderDonut() {
   const total = creators.length;
