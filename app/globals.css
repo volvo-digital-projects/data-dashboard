@@ -802,17 +802,21 @@ html:has(.dealer-analysis-page) {
 .dealer-satisfaction-comparison strong i { margin-left: 2px; color: #6c828d; font-family: var(--font-korean); font-size: 7px; font-style: normal; font-weight: 500; }
 .dealer-sales-comparison .difference,
 .dealer-satisfaction-comparison .difference { padding-block: 5px; padding-right: 6px; border-radius: 3px; }
-.dealer-sales-comparison .difference { background: linear-gradient(135deg, rgba(38, 126, 164, 0.08), rgba(62, 151, 141, 0.04)); }
-.dealer-sales-comparison .difference.positive strong { color: #17735f; }
-.dealer-sales-comparison .difference.negative strong { color: #c5683d; }
-.dealer-sales-comparison .difference.neutral strong { color: #607985; }
+.dealer-sales-comparison .difference.positive,
+.dealer-satisfaction-comparison .difference.positive { background: linear-gradient(135deg, rgba(38, 126, 164, 0.12), rgba(55, 143, 176, 0.05)); box-shadow: inset 0 2px 0 rgba(38, 126, 164, 0.24); }
+.dealer-sales-comparison .difference.negative,
+.dealer-satisfaction-comparison .difference.negative { background: linear-gradient(135deg, rgba(201, 95, 85, 0.14), rgba(201, 95, 85, 0.05)); box-shadow: inset 0 2px 0 rgba(201, 95, 85, 0.24); }
+.dealer-sales-comparison .difference.neutral,
+.dealer-satisfaction-comparison .difference.neutral { background: linear-gradient(135deg, rgba(96, 121, 133, 0.08), rgba(96, 121, 133, 0.03)); box-shadow: inset 0 2px 0 rgba(96, 121, 133, 0.16); }
+.dealer-sales-comparison .difference.positive strong,
+.dealer-satisfaction-comparison .difference.positive strong { color: #247d9b; }
+.dealer-sales-comparison .difference.negative strong,
+.dealer-satisfaction-comparison .difference.negative strong { color: #c95f55; }
+.dealer-sales-comparison .difference.neutral strong,
+.dealer-satisfaction-comparison .difference.neutral strong { color: #607985; }
 .dealer-satisfaction-comparison { background: linear-gradient(90deg, rgba(248, 225, 190, 0.12), rgba(246, 206, 163, 0.04)); }
 .dealer-satisfaction-comparison > span + span { border-left-color: #eadfd3; }
 .dealer-satisfaction-comparison strong { color: #9a6235; }
-.dealer-satisfaction-comparison .difference { background: linear-gradient(135deg, rgba(231, 166, 93, 0.15), rgba(196, 113, 82, 0.07)); box-shadow: inset 0 2px 0 rgba(211, 137, 72, 0.28); }
-.dealer-satisfaction-comparison .difference.positive strong { color: #a35e2b; }
-.dealer-satisfaction-comparison .difference.negative strong { color: #b05e52; }
-.dealer-satisfaction-comparison .difference.neutral strong { color: #866f5e; }
 .dealer-analysis-board [data-tooltip]::after {
   position: absolute;
   left: 50%;

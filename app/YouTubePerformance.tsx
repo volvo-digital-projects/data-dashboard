@@ -42,10 +42,11 @@ const changeRate = (current: number, previous: number) => {
   return `${rate > 0 && rate < .1 ? rate.toFixed(2) : rate.toFixed(1)}%`;
 };
 const subscriberChange = (current: number | null, previous: number | null) => {
-  if (current === null || previous === null || previous === 0) return "직전 대비 —";
+  if (current === null || previous === null || previous === 0) return "—";
   const difference = current - previous;
-  return `직전 대비 ${difference > 0 ? "▲" : difference < 0 ? "▼" : "―"} ${Math.abs(difference).toLocaleString("ko-KR")}명 · ${changeRate(current, previous)}`;
+  return `${difference > 0 ? "▲" : difference < 0 ? "▼" : "―"} ${Math.abs(difference).toLocaleString("ko-KR")}명 · ${changeRate(current, previous)}`;
 };
+const subscriberChangeTone = (current: number | null, previous: number | null) => current === null || previous === null || current === previous ? "neutral" : current > previous ? "positive" : "negative";
 const formatDates = (value: string) => value.replace(/(\d{4})[-.]\s*(\d{1,2})[-.]\s*(\d{1,2})\.?/g, (_, year, month, day) => `${year}.${month.padStart(2,"0")}.${day.padStart(2,"0")}`);
 const formatCompactDate = (value: string | undefined) => {
   if (!value) return "—";
@@ -161,7 +162,7 @@ export default function YouTubePerformance() {
           <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image ?? "/staff-profiles/neutral-human-silhouette.png"} alt="" loading="lazy"/></span><span><strong>{person.name} <GenderIcon gender={person.gender}/></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
-          <td><strong>{number(person.channel.subscribers)}<i>명</i></strong><small title={`직전 수집: ${person.channel.previousCheckedAt}`}>{subscriberChange(person.channel.subscribers, person.channel.previousSubscribers)}</small></td>
+          <td><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={`직전 수집: ${person.channel.previousCheckedAt}`}>직전 대비 <b className={subscriberChangeTone(person.channel.subscribers, person.channel.previousSubscribers)}>{subscriberChange(person.channel.subscribers, person.channel.previousSubscribers)}</b></small></td>
           <td><strong>≈{number(person.channel.averageViews)}</strong><small>{number(person.channel.totalViews)}</small></td>
           <td><strong>{person.channel.long.count}<i>개</i></strong><small>≈{number(person.channel.long.averageViews)}회</small></td>
           <td><strong>{person.channel.short.count}<i>개</i></strong><small>≈{number(person.channel.short.averageViews)}회</small></td>

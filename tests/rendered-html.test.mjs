@@ -304,15 +304,21 @@ test("stops fast wheel and touch scrolling at the creator section before continu
 });
 
 test("shows subscriber count and percentage changes and keeps metric refresh commits data-only", async () => {
-  const [creatorSource, workflow] = await Promise.all([
+  const [creatorSource, workflow, creatorCss, globalCss] = await Promise.all([
     readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8"),
     readFile(new URL("../.github/workflows/refresh-youtube.yml", import.meta.url), "utf8"),
+    readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
   assert.match(creatorSource, /const changeRate = [\s\S]*?rate > 0 && rate < \.1 \? rate\.toFixed\(2\) : rate\.toFixed\(1\)/);
   assert.match(creatorSource, /Math\.abs\(difference\)\.toLocaleString\("ko-KR"\)\}명 · \$\{changeRate\(current, previous\)\}/);
+  assert.match(creatorSource, /className="yt-subscriber-change"[\s\S]*?className=\{subscriberChangeTone/);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
   assert.match(workflow, /git commit -m "Auto update hourly YouTube channel metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
+  assert.match(creatorCss, /\.yt-subscriber-change b\.positive\{color:#247d9b\}[\s\S]*?\.yt-subscriber-change b\.negative\{color:#c95f55\}/);
+  assert.match(globalCss, /\.dealer-sales-comparison \.difference\.positive,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.positive[\s\S]*?color: #247d9b;/);
+  assert.match(globalCss, /\.dealer-sales-comparison \.difference\.negative,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.negative[\s\S]*?color: #c95f55;/);
 });
 
 async function render(
