@@ -113,7 +113,8 @@
 .yt-compact .yt-metric-value{display:flex;align-items:baseline;justify-content:space-between;gap:6px;white-space:nowrap}
 .yt-compact .yt-headline-stats .yt-metric-value .yt-close-change{margin:0 0 0 auto;font-size:8px}
 .yt-compact .yt-headline-stats{align-items:stretch}
-.yt-compact .yt-headline-stats>div{display:flex;flex-direction:column;justify-content:center}
+.yt-compact .yt-headline-stats>div{display:flex;position:relative;flex-direction:column;justify-content:center;border-left:0}
+.yt-compact .yt-headline-stats>div::before{content:"";position:absolute;left:0;top:50%;width:1px;height:56px;background:#ddccc1;transform:translateY(-50%)}
 .yt-compact .yt-gender-donut{width:194px;margin-left:8px}
 .yt-compact .yt-hero{padding-bottom:4px}
 .yt-compact .yt-donut-total{font-family:var(--font-volvo),Arial,sans-serif}

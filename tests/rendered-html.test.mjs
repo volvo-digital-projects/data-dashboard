@@ -238,6 +238,8 @@ test("shows every creator metric together with detail collapsed by default", asy
   const creatorCss = await readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8");
   assert.match(creatorCss, /tr > :not\(:first-child\)::before\{[^}]*top:7px;bottom:7px;width:1px;background:#dce7ec;pointer-events:none/);
   assert.match(creatorCss, /tr > :not\(:first-child\)\{position:relative;padding-inline:9px/);
+  assert.match(creatorCss, /\.yt-compact \.yt-headline-stats>div\{[^}]*position:relative;[^}]*border-left:0\}/);
+  assert.match(creatorCss, /\.yt-compact \.yt-headline-stats>div::before\{[^}]*top:50%;[^}]*height:56px;[^}]*transform:translateY\(-50%\)\}/);
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*position: sticky;[^}]*top: 0;[^}]*align-self: start;[^}]*z-index: 100;/);
   assert.match(css, /html:has\(\.dealer-analysis-page\)\s*\{[^}]*scroll-behavior: smooth;[^}]*scroll-snap-type: none;/);
