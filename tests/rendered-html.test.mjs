@@ -290,15 +290,17 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.doesNotMatch(table, /yt-person-results|yt-score/);
 });
 
-test("stops fast wheel and touch scrolling at the creator section before continuing", async () => {
+test("softly lands fast wheel and touch scrolling at the creator section before continuing", async () => {
   const [dealerSource, creatorSource] = await Promise.all([
     readFile(new URL("../app/DealerAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8"),
   ]);
-  assert.match(dealerSource, /const settleAtCreatorHeader = \(\) => \{[\s\S]*?Math\.pow\(1 - progress, 3\)[\s\S]*?area\.scrollTop = target;/);
+  assert.match(dealerSource, /const easeCreatorScrollWithSoftLanding = \(progress: number\) => \{[\s\S]*?const landingStart = 0\.68;[\s\S]*?const initialTravelRate = 1\.18;[\s\S]*?return landingStartPosition \+ remainingDistance \* easedLanding;/);
+  assert.match(dealerSource, /const settleAtCreatorHeader = \(requestedStart = area\.scrollTop\) => \{[\s\S]*?\? 380[\s\S]*?: 420;[\s\S]*?easeCreatorScrollWithSoftLanding\(progress\)[\s\S]*?area\.scrollTop = progress < 1 \? from \+ distance \* easedProgress : target;/);
   assert.match(dealerSource, /const onWheel = \(event: WheelEvent\) => \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtCreatorHeader\(\);/);
   assert.match(dealerSource, /const onTouchMove = \(event: TouchEvent\) => \{[\s\S]*?downwardDistance[\s\S]*?event\.preventDefault\(\);[\s\S]*?settleAtCreatorHeader\(\);/);
-  assert.match(dealerSource, /entryReady && previousTop < target && current >= target[\s\S]*?area\.scrollTop = target;[\s\S]*?settleAtCreatorHeader\(\);/);
+  assert.match(dealerSource, /entryReady && previousTop < target && current >= target[\s\S]*?const approachTop = previousTop;[\s\S]*?settleAtCreatorHeader\(approachTop\);/);
+  assert.doesNotMatch(dealerSource, /entryReady && previousTop < target && current >= target[\s\S]{0,120}?area\.scrollTop = target;/);
   assert.match(dealerSource, /addEventListener\("wheel", onWheel, \{passive: false\}\)[\s\S]*?addEventListener\("touchmove", onTouchMove, \{passive: false\}\)/);
   assert.doesNotMatch(creatorSource, /scroller\.addEventListener\("(?:scroll|wheel|touchmove)"/);
 });

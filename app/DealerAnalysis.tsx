@@ -57,6 +57,22 @@ const certifications = staffCertificationsJson.records as Certification[];
 const certifiedNames = new Set(certifications.map((record) => record.name));
 const vocShowrooms = vocStaffAnalysisJson.showrooms as Record<string, VocShowroom>;
 const salesShowrooms = salesActivityAnalysisJson.showrooms as Record<string, SalesShowroom>;
+const easeCreatorScrollWithSoftLanding = (progress: number) => {
+  const landingStart = 0.68;
+  const initialTravelRate = 1.18;
+  if (progress <= landingStart) return progress * initialTravelRate;
+
+  const landingProgress = (progress - landingStart) / (1 - landingStart);
+  const landingStartPosition = landingStart * initialTravelRate;
+  const remainingDistance = 1 - landingStartPosition;
+  const landingStartSlope =
+    (initialTravelRate * (1 - landingStart)) / remainingDistance;
+  const easedLanding =
+    (landingStartSlope - 2) * landingProgress ** 3 +
+    (3 - 2 * landingStartSlope) * landingProgress ** 2 +
+    landingStartSlope * landingProgress;
+  return landingStartPosition + remainingDistance * easedLanding;
+};
 const certificationDealerOverrides: Record<string, string> = {
   "2025:장석우": "에이치",
   "2025:주재홍": "에이치",
@@ -450,21 +466,26 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       clearTimeout(releaseTimer);
       releaseTimer = setTimeout(releaseLanding, 150);
     };
-    const settleAtCreatorHeader = () => {
+    const settleAtCreatorHeader = (requestedStart = area.scrollTop) => {
       const target = targetTop();
       if (target === null || landing) return;
       entryReady = false;
       landing = true;
       animating = true;
       cancelAnimationFrame(frame);
-      const from = Math.min(area.scrollTop, target);
-      if (area.scrollTop > target) area.scrollTop = target;
+      const from = Math.max(0, Math.min(requestedStart, target));
+      if (Math.abs(area.scrollTop - from) > 0.5) area.scrollTop = from;
       const distance = Math.max(0, target - from);
-      const duration = reduceMotion ? 0 : Math.min(400, 210 + distance * .32);
+      const duration = reduceMotion
+        ? 0
+        : window.matchMedia("(hover: hover) and (pointer: fine)").matches
+          ? 380
+          : 420;
       const started = performance.now();
       const step = (now: number) => {
         const progress = duration === 0 ? 1 : Math.min(1, (now - started) / duration);
-        area.scrollTop = from + distance * (1 - Math.pow(1 - progress, 3));
+        const easedProgress = easeCreatorScrollWithSoftLanding(progress);
+        area.scrollTop = progress < 1 ? from + distance * easedProgress : target;
         if (progress < 1) frame = requestAnimationFrame(step);
         else {
           frame = 0;
@@ -528,9 +549,9 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
       }
       if (!entryReady && current < target - 48) entryReady = true;
       if (entryReady && previousTop < target && current >= target) {
-        area.scrollTop = target;
-        settleAtCreatorHeader();
-        previousTop = target;
+        const approachTop = previousTop;
+        settleAtCreatorHeader(approachTop);
+        previousTop = approachTop;
         return;
       }
       previousTop = current;
