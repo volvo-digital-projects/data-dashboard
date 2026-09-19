@@ -80,3 +80,13 @@
 .yt-compact .yt-row-avatar,.yt-compact .yt-row-avatar img{width:28px;height:30px}.yt-compact .yt-row-avatar{border:1px solid #c8dce5;border-radius:5px;background:linear-gradient(145deg,#e2edf2,#cbdde5)}.yt-compact .yt-row-avatar img{object-fit:cover;object-position:center 18%}.yt-compact .yt-comparison-table tbody tr{height:42px}.yt-compact .yt-row-person{min-height:30px}
 .dealer-analysis-scroll>.youtube-performance.yt-compact{width:100%;margin-inline:calc(-1 * var(--dashboard-content-overhang));margin-top:16px;border-radius:5px;border-color:#d9e3e6}
 .yt-compact .yt-comparison-table th:nth-child(2),.yt-compact .yt-comparison-table th:nth-child(3),.yt-compact .yt-comparison-table th:nth-child(4){width:8%}.yt-compact .yt-comparison-table th:nth-child(5){width:6%}.yt-compact .yt-comparison-table th:nth-child(6){width:9%}.yt-compact .yt-comparison-table th:nth-child(7),.yt-compact .yt-comparison-table th:nth-child(8){width:8%}.yt-compact .yt-comparison-table th:nth-child(9){width:9%}.yt-compact .yt-comparison-table th:nth-child(10){width:9%}.yt-compact .yt-comparison-table th:nth-child(11){width:10%}.yt-compact .yt-hire-date,.yt-compact .yt-joined{font-size:9px;white-space:nowrap;color:#73838a}
+.yt-compact .yt-dealer-code{width:30px;height:30px;flex-basis:30px;font-size:10px}
+.yt-compact .yt-row-person{gap:7px;min-height:30px}
+.yt-compact .yt-row-person strong{font-size:13px;gap:5px}
+.yt-compact .yt-row-person small{font-size:10px;line-height:1.25}
+.yt-compact .yt-row-person .yt-gender-icon{width:14px;height:18px}
+.yt-compact .yt-cert-cell .yt-certifications{font-size:12px}
+.yt-compact .yt-comparison-table td>strong{font-size:15px}
+.yt-compact .yt-comparison-table small{font-size:9px}
+.yt-compact .yt-dealers button>span{font-size:10px}.yt-compact .yt-dealers button strong{font-size:15px}.yt-compact .yt-dealers button em{font-size:9px}
+.yt-compact .yt-filters{gap:6px}.yt-compact .yt-filters>span{font-size:10px;color:#74868d}.yt-compact .yt-filters button{font-size:10px;padding:6px 10px;white-space:nowrap}.yt-compact .yt-filters button[aria-pressed=true]{font-weight:650}

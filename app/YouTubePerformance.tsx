@@ -143,7 +143,7 @@ export default function YouTubePerformance() {
       </div>
     </div>
     <div className="yt-matrix-heading"><div className="yt-section-label"><button className="yt-subscriber-sort" type="button" aria-pressed={sort==="subscribers"} onClick={()=>setSort("subscribers")}>구독자 순</button></div>
-      <div className="yt-filters"><button type="button" aria-pressed={dealer==="전체"} onClick={()=>setDealer("전체")}>전체 보기</button><label>정렬 <select value={sort} onChange={event=>setSort(event.target.value)}><option value="subscribers" hidden disabled>기본정렬</option><option value="dealer">딜러사별</option><option value="views">평균 조회 높은 순</option><option value="sales">월판매 높은 순</option><option value="voc">누적 만족도 높은 순</option></select></label></div>
+      <div className="yt-filters" aria-label="크리에이터 정렬"><button type="button" aria-pressed={dealer==="전체"} onClick={()=>setDealer("전체")}>전체 보기</button><span>정렬</span>{([["subscribers","기본정렬"],["dealer","딜러사별"],["views","평균 조회 높은 순"],["sales","월판매 높은 순"],["voc","누적 만족도 높은 순"]] as const).map(([value,label])=><button key={value} type="button" aria-pressed={sort===value} onClick={()=>setSort(value)}>{label}</button>)}</div>
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">
       <table className="yt-comparison-table"><caption className="yt-table-caption">12명 채널·상담·판매 정량 지표. 조회수 평균은 공개 표시값 기준 근삿값.</caption><thead><tr>
