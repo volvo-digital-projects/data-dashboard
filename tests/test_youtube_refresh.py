@@ -3,7 +3,9 @@ import runpy
 import unittest
 from pathlib import Path
 
-merge = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'scripts/refresh-youtube-metrics.py'))['merge_channel']
+refresh_module = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'scripts/refresh-youtube-metrics.py'))
+merge = refresh_module['merge_channel']
+validate_refresh_scope = refresh_module['validate_refresh_scope']
 
 class RefreshTests(unittest.TestCase):
     def setUp(self):
@@ -22,5 +24,13 @@ class RefreshTests(unittest.TestCase):
             fresh=copy.deepcopy(self.fresh)
             fresh[field]=value
             with self.assertRaises(ValueError): merge(self.old, fresh)
+    def test_requires_all_twelve_creator_entries(self):
+        payload = dict(
+            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(12)],
+            channels=[dict(id='shared')] + [dict(id=f'channel-{index}') for index in range(2, 12)],
+        )
+        self.assertEqual(validate_refresh_scope(payload), (12, 11))
+        payload['creators'].pop()
+        with self.assertRaises(ValueError): validate_refresh_scope(payload)
 
 if __name__ == '__main__': unittest.main()

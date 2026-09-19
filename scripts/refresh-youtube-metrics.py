@@ -8,6 +8,20 @@ import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "app/data/youtube-creators.json"
+EXPECTED_CREATOR_ENTRIES = 12
+
+def validate_refresh_scope(payload):
+    creators = payload.get('creators', [])
+    channels = payload.get('channels', [])
+    if len(creators) != EXPECTED_CREATOR_ENTRIES:
+        raise ValueError(f"Expected {EXPECTED_CREATOR_ENTRIES} creator entries, found {len(creators)}")
+    channel_ids = [channel.get('id') for channel in channels]
+    if not channel_ids or len(channel_ids) != len(set(channel_ids)):
+        raise ValueError("Channel IDs must be present and unique")
+    referenced_ids = {creator.get('channelId') for creator in creators}
+    if None in referenced_ids or referenced_ids != set(channel_ids):
+        raise ValueError("Every creator entry must reference exactly one collected channel")
+    return len(creators), len(channels)
 
 def merge_channel(old, fresh, shared=False):
     if fresh.get("errors") or fresh.get("channelId") != old["id"]:
@@ -50,6 +64,7 @@ def daily_close(original, checked):
 
 def main():
     original = json.loads(TARGET.read_text(encoding='utf-8'))
+    creator_count, channel_count = validate_refresh_scope(original)
     collect = runpy.run_path(str(ROOT / 'scripts/collect-youtube-channels.py'))['collect']
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
         results = list(pool.map(lambda channel: collect(channel['url']), original['channels']))
@@ -58,12 +73,13 @@ def main():
                            for old, fresh in zip(original['channels'], results)]
     checked = datetime.datetime.now(datetime.timezone.utc).isoformat()
     updated['dailyClose'] = daily_close(original, checked)
+    updated['lastSuccessfulRefreshAt'] = checked
     for channel in updated['channels']:
         channel['checkedAt'] = checked
     assert updated['creators'] == original['creators'] and updated['evidence'] == original['evidence']
     # Only publish after EVERY channel has passed validation. Errors leave the file untouched.
     TARGET.write_text(json.dumps(updated, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-    print(f"Verified {len(updated['channels'])} unique channels for {len(updated['creators'])} creators at {checked}")
+    print(f"Verified all {creator_count} creator entries across {channel_count} unique channels at {checked}")
 
 if __name__ == '__main__':
     main()

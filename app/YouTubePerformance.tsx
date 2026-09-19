@@ -56,7 +56,7 @@ const formatCompactDate = (value: string | undefined) => {
 const sumSubscribers = data.channels.reduce((sum, channel) => sum + (channel.subscribers ?? 0), 0);
 const videoTotal = data.channels.reduce((sum, channel) => sum + channel.long.count + channel.short.count, 0);
 const male = creators.filter(person=>person.gender === "남성").length;
-const lastChannelUpdate = new Date(Math.min(...data.channels.map(channel => Date.parse(channel.checkedAt))));
+const lastChannelUpdate = new Date(data.lastSuccessfulRefreshAt);
 const updateLabel = formatDates(new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hour12:false}).format(lastChannelUpdate));
 const kstDate = () => new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
 const changeLabel = (current:number, previous:number|null, unit:string) => previous === null ? "마감 기록 없음" : `${current > previous ? "▲" : current < previous ? "▼" : "―"} ${Math.abs(current-previous).toLocaleString("ko-KR")}${unit} · ${previous === 0 ? (current === 0 ? "0.0%" : "비율 —") : changeRate(current, previous)}`;
@@ -132,7 +132,7 @@ export default function YouTubePerformance() {
   return <section ref={root} className={`youtube-performance yt-compact ${entered ? "has-entered" : ""} ${detailOpen ? "has-comment-detail" : ""}`} aria-labelledby="yt-heading">
     <header className="yt-hero">
       <div className="yt-hero-copy">
-        <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title="공개 채널 지표 매시간 수집 예정 · 마지막 전체 수집 성공 시각 (KST)"><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
+        <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title="12명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 (KST)"><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
       </div>
       <div className="yt-headline-stats">
         <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
