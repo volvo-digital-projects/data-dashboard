@@ -49,14 +49,12 @@ const formatCompactDate = (value: string | undefined) => {
   return match ? `${match[1].slice(2)}${match[2].padStart(2,"0")}${match[3].padStart(2,"0")}` : value;
 };
 const sumSubscribers = data.channels.reduce((sum, channel) => sum + (channel.subscribers ?? 0), 0);
-const videoTotal = data.channels.reduce((sum, channel) => sum + channel.videoCount, 0);
+const videoTotal = data.channels.reduce((sum, channel) => sum + channel.long.count + channel.short.count, 0);
 const male = creators.filter(person=>person.gender === "남성").length;
 const lastChannelUpdate = new Date(Math.min(...data.channels.map(channel => Date.parse(channel.checkedAt))));
 const updateLabel = formatDates(new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hour12:false}).format(lastChannelUpdate));
-type DailyClose = {date:string; lastSubscribers:number; lastVideos:number; previousSubscribers:number|null; previousVideos:number|null};
-const dailyCloseKey = "volvo-youtube-daily-close";
 const kstDate = () => new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
-const changeLabel = (current:number, previous:number|null) => previous === null || previous === 0 ? "전일 최종마감 대비 —" : `전일 최종마감 대비 ${current >= previous ? "+" : ""}${((current - previous) / previous * 100).toFixed(1)}%`;
+const changeLabel = (current:number, previous:number|null, unit:string) => previous === null ? "마감 기록 없음" : `${current > previous ? "▲" : current < previous ? "▼" : "―"} ${Math.abs(current-previous).toLocaleString("ko-KR")}${unit} · ${previous === 0 ? (current === 0 ? "0.0%" : "비율 —") : `${(Math.abs(current-previous)/previous*100).toFixed(1)}%`}`;
 
 function GenderDonut() {
   const total = creators.length;
@@ -84,19 +82,8 @@ export default function YouTubePerformance() {
   const [entered, setEntered] = useState(false);
   const [sort, setSort] = useState("subscribers");
   const [detailOpen, setDetailOpen] = useState(false);
-  const [dailyClose, setDailyClose] = useState<DailyClose | null>(null);
   const root = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const today = kstDate();
-    const current = {subscribers:sumSubscribers, videos:videoTotal};
-    let saved: DailyClose | null = null;
-    try { saved = JSON.parse(localStorage.getItem(dailyCloseKey) ?? "null") as DailyClose | null; } catch {}
-    const next: DailyClose = saved?.date === today
-      ? {...saved, lastSubscribers:current.subscribers, lastVideos:current.videos}
-      : {date:today, lastSubscribers:current.subscribers, lastVideos:current.videos, previousSubscribers:saved?.lastSubscribers ?? null, previousVideos:saved?.lastVideos ?? null};
-    try { localStorage.setItem(dailyCloseKey, JSON.stringify(next)); } catch {}
-    setDailyClose(next);
-  }, []);
+  const dailyClose = data.dailyClose.date === kstDate() ? data.dailyClose : null;
   const visible = creators.filter(person=>(dealer === "전체" || person.dealer === dealer)).sort((a,b)=>{
     if (sort === "subscribers") return (b.channel.subscribers ?? -1) - (a.channel.subscribers ?? -1);
     if (sort === "views") return (b.channel.averageViews ?? -1) - (a.channel.averageViews ?? -1);
@@ -168,8 +155,8 @@ export default function YouTubePerformance() {
       </div>
       <div className="yt-headline-stats">
         <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
-        <div><span>합산 구독자</span><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.previousSubscribers ?? null)}</p><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
-        <div><span>공개 영상</span><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.previousVideos ?? null)}</p><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
+        <div><span className="yt-metric-title">합산 구독자 <em>전일 최종 마감 대비</em></span><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
+        <div><span className="yt-metric-title">공개 영상 수 <em>전일 최종 마감 대비</em></span><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>
     </header>
     <div className="yt-distribution">

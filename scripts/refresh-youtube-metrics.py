@@ -36,6 +36,18 @@ def merge_channel(old, fresh, shared=False):
             basis=reviewed.get(v['id'], {}).get('basis', '출연자 이름 근거 미확인')) for v in videos]
     return result
 
+def daily_close(original, checked):
+    kst = datetime.timezone(datetime.timedelta(hours=9))
+    date = datetime.datetime.fromisoformat(checked).astimezone(kst).date()
+    saved = original.get('dailyClose')
+    if saved and saved.get('date') == date.isoformat():
+        return saved
+    latest = min(datetime.datetime.fromisoformat(c['checkedAt']) for c in original['channels'])
+    if latest.astimezone(kst).date() != date - datetime.timedelta(days=1):
+        return dict(date=date.isoformat(), subscribers=None, videos=None, checkedAt=None)
+    return dict(date=date.isoformat(), subscribers=sum(c['subscribers'] for c in original['channels']),
+                videos=sum(c['long']['count'] + c['short']['count'] for c in original['channels']), checkedAt=latest.isoformat())
+
 def main():
     original = json.loads(TARGET.read_text(encoding='utf-8'))
     collect = runpy.run_path(str(ROOT / 'scripts/collect-youtube-channels.py'))['collect']
@@ -45,6 +57,7 @@ def main():
     updated['channels'] = [merge_channel(old, fresh, sum(p['channelId']==old['id'] for p in original['creators'])>1)
                            for old, fresh in zip(original['channels'], results)]
     checked = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    updated['dailyClose'] = daily_close(original, checked)
     for channel in updated['channels']:
         channel['checkedAt'] = checked
     assert updated['creators'] == original['creators'] and updated['evidence'] == original['evidence']

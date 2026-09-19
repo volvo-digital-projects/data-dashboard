@@ -104,4 +104,5 @@
 .yt-gender-donut{display:block;width:200px;max-width:100%;height:auto;overflow:visible;font-family:var(--font-ui)}
 .yt-donut-caption{font-size:8px;fill:#677d86}.yt-donut-total{font-size:15px;font-weight:650;fill:#173e50}
 .yt-donut-label{font-size:10px}.yt-donut-value{font-size:11px;font-weight:650}
+.yt-metric-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}.yt-metric-title em{font-style:normal;font-size:7px;color:#b76742}
 .yt-compact .yt-headline-stats .yt-gender-summary{width:100%}
