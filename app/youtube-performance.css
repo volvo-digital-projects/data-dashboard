@@ -91,6 +91,6 @@
 .yt-compact .yt-dealers button>span{font-size:10px}.yt-compact .yt-dealers button strong{font-size:15px}.yt-compact .yt-dealers button em{font-size:9px}
 .yt-compact .yt-filters{gap:6px}.yt-compact .yt-filters>span{font-size:10px;color:#74868d}.yt-compact .yt-filters button{font-size:10px;padding:6px 10px;white-space:nowrap}.yt-compact .yt-filters button[aria-pressed=true]{font-weight:650}
 .yt-compact .yt-headline-stats .yt-close-change{display:block!important;margin:0 0 2px;color:#b76742;font-size:8px;white-space:nowrap}
-.yt-compact .yt-icon-filter{width:30px;height:26px;padding:0!important;display:grid;place-items:center;border:1px solid #ccdadf;border-radius:999px;background:#fff;color:#275064;font-size:14px;line-height:1}
-.yt-compact .yt-icon-filter[aria-pressed=true]{background:#234e60;color:#fff;border-color:#234e60}
+.yt-compact .yt-sort-filter{min-height:21px;padding:4px 9px!important;overflow:hidden;border:1px solid #dde8ec;border-radius:999px;background:rgba(244,248,250,.9);color:#607581;font-family:var(--font-korean);font-size:7.5px!important;font-weight:650;line-height:1;text-overflow:ellipsis;white-space:nowrap}
+.yt-compact .yt-sort-filter:hover{background:#f2f7f9}.yt-compact .yt-sort-filter[aria-pressed=true]{border-color:#164f70;background:#164f70;color:#fff;font-weight:650}
 .yt-compact .yt-row-avatar img{image-rendering:auto;backface-visibility:hidden;transform:translateZ(0);filter:none}

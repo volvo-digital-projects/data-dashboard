@@ -264,8 +264,11 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(html, /class="yt-gender-summary"/);
   assert.doesNotMatch(html, /class="yt-gender-ring"|class="yt-channel-facts"|class="yt-sales-mini"/);
   assert.match(html, /신수경<!-- --> · 댓글 분석/);
-  assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|구독자 많은 순/);
-  assert.match(html, /구독자 순/);
+  assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|class="yt-icon-filter"/);
+  for (const label of ["구독자 많은 순", "평균 만족도 높은 순", "월평균 판매 높은 순", "평균 조회 높은 순", "딜러사별"]) assert.match(html, new RegExp(`>${label}<\\/button>`));
+  assert.match(html, /class="yt-sort-filter" aria-pressed="true">구독자 많은 순<\/button>/);
+  assert.match(creatorCss, /\.yt-compact \.yt-sort-filter\{[^}]*border-radius:999px;[^}]*font-family:var\(--font-korean\)/);
+  assert.match(creatorCss, /\.yt-compact \.yt-sort-filter\[aria-pressed=true\]\{[^}]*background:#164f70;[^}]*color:#fff/);
   const roster = JSON.parse(await readFile(new URL("../app/data/youtube-creators.json", import.meta.url), "utf8"));
   const voc = JSON.parse(await readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8"));
   const rows = [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map(match => match[1]).filter(row => row.includes('scope="row"'));
