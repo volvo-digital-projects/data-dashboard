@@ -447,6 +447,7 @@ html {
 /* Native wheel/touch scrolling, with section stops inside the fixed shell. */
 html:has(.dealer-analysis-page) {
   overflow: hidden;
+  scrollbar-gutter: auto;
   scroll-behavior: smooth;
   scroll-snap-type: none;
 }
@@ -475,7 +476,7 @@ html:has(.dealer-analysis-page) {
   scroll-snap-stop: always;
   scroll-margin-top: 0;
 }
-.dealer-analysis-scroll > .youtube-performance.yt-compact { margin-inline: 0; scroll-margin-top: 0; overflow: clip; }
+.dealer-analysis-scroll > .youtube-performance.yt-compact { scroll-margin-top: 0; overflow: clip; }
 .dealer-analysis-scroll .yt-hero {
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -19007,4 +19008,33 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   .dashboard #score-voc .voc-consultation-comparison > em {
     column-gap: 3px;
   }
+}
+
+/* Keep the scroll rail at the viewport edge; both cards share one content rail. */
+main.dealer-analysis-page {
+  --dealer-outer-gutter: 22px;
+  --dealer-card-padding: 18px;
+  width: 100%;
+  padding: 0;
+}
+.dealer-analysis-page > .dealer-analysis-command-shell {
+  width: min(calc(var(--dashboard-page-max) - 44px), calc(100% - 2 * var(--dealer-outer-gutter)));
+  margin-inline: auto;
+}
+.dealer-analysis-page > .dealer-analysis-scroll {
+  margin-inline: 0;
+  padding: 0 max(var(--dealer-outer-gutter), calc((100% - var(--dashboard-page-max)) / 2 + 22px)) 16px;
+  scrollbar-gutter: stable;
+}
+.dealer-analysis-page > .dealer-analysis-scroll > .dealer-analysis-board,
+.dealer-analysis-page > .dealer-analysis-scroll > .youtube-performance.yt-compact {
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: var(--dealer-card-padding);
+}
+@media (min-width: 761px) and (max-width: 1240px) {
+  main.dealer-analysis-page { --dealer-outer-gutter: 24px; --dealer-card-padding: 14px; }
+}
+@media (max-width: 760px) {
+  main.dealer-analysis-page { --dealer-outer-gutter: 14px; --dealer-card-padding: 12px; }
 }
