@@ -164,19 +164,18 @@ export default function YouTubePerformance() {
       </div>
     </div>
     <div className="yt-matrix-heading"><div className="yt-section-label"><h3>크리에이터 명단</h3></div>
-      <div className="yt-filters" aria-label="크리에이터 정렬">{([["subscribers","구독자 많은 순"],["voc","평균 만족도 높은 순"],["sales","월평균 판매 높은 순"],["views","평균 조회 높은 순"],["dealer","딜러사별"]] as const).map(([value,label])=><button key={value} type="button" className="yt-sort-filter" aria-pressed={sort===value} onClick={()=>setSort(value)}>{label}</button>)}</div>
+      <div className="yt-filters" aria-label="크리에이터 정렬">{([["subscribers","구독자 많은 순"],["voc","평균 만족도 높은 순"],["sales","월평균 판매 높은 순"],["views","평균 조회 높은 순"]] as const).map(([value,label])=><button key={value} type="button" className="yt-sort-filter" aria-pressed={sort===value} onClick={()=>setSort(value)}>{label}</button>)}</div>
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">
       <table className="yt-comparison-table"><caption className="yt-table-caption">12명 채널·상담·판매 정량 지표. 조회수 평균은 공개 표시값 기준 근삿값.</caption><thead><tr>
-        <th scope="col">딜러사 / 직원</th><th scope="col">입사일자<small>YYMMDD</small></th><th scope="col">채널 개설일<small>YYMMDD</small></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
+        <th scope="col">딜러사 / 직원</th><th scope="col" className="yt-date-heading"><span>볼보 입사일</span><span>채널 개설일</span></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
       </tr></thead><tbody>{visible.map((person,index)=>{
         const comments=commentData.channels[person.channelId];
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
           <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image ?? "/staff-profiles/neutral-human-silhouette.png"} alt="" loading="lazy"/></span><span><strong>{person.name} <GenderIcon gender={person.gender}/></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
-          <td className="yt-hire-date">{formatCompactDate(person.hireDate)}</td>
-          <td className="yt-joined">{formatCompactDate(person.channel.joined)}</td>
+          <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td><strong>{number(person.channel.subscribers)}<i>명</i></strong><small title={`직전 수집: ${person.channel.previousCheckedAt}`}>{subscriberChange(person.channel.subscribers, person.channel.previousSubscribers)}</small></td>
           <td><strong>≈{number(person.channel.averageViews)}</strong><small>{number(person.channel.totalViews)}</small></td>

@@ -247,8 +247,8 @@ test("shows every creator metric together with detail collapsed by default", asy
   const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1];
   assert.ok(table);
   assert.equal((table.match(/scope="row"/g) ?? []).length, 12);
-  assert.equal((table.match(/scope="col"/g) ?? []).length, 11);
-  for (const heading of ["입사일자", "채널 개설일", "롱폼", "숏츠", "누적 고객만족도 평균", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수", "YYMMDD"]) assert.ok(table.includes(heading));
+  assert.equal((table.match(/scope="col"/g) ?? []).length, 10);
+  for (const heading of ["볼보 입사일", "채널 개설일", "롱폼", "숏츠", "누적 고객만족도 평균", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수"]) assert.ok(table.includes(heading));
   assert.match(table, /260225/);
   assert.match(table, /260225/);
   assert.match(table, /class="yt-cert-cell"/);
@@ -265,7 +265,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.doesNotMatch(html, /class="yt-gender-ring"|class="yt-channel-facts"|class="yt-sales-mini"/);
   assert.match(html, /신수경<!-- --> · 댓글 분석/);
   assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|class="yt-icon-filter"/);
-  for (const label of ["구독자 많은 순", "평균 만족도 높은 순", "월평균 판매 높은 순", "평균 조회 높은 순", "딜러사별"]) assert.match(html, new RegExp(`>${label}<\\/button>`));
+  for (const label of ["구독자 많은 순", "평균 만족도 높은 순", "월평균 판매 높은 순", "평균 조회 높은 순"]) assert.match(html, new RegExp(`>${label}<\\/button>`));
   assert.match(html, /class="yt-sort-filter" aria-pressed="true">구독자 많은 순<\/button>/);
   assert.match(creatorCss, /\.yt-compact \.yt-sort-filter\{[^}]*border-radius:999px;[^}]*font-family:var\(--font-korean\)/);
   assert.match(creatorCss, /\.yt-compact \.yt-sort-filter\[aria-pressed=true\]\{[^}]*background:#164f70;[^}]*color:#fff/);
