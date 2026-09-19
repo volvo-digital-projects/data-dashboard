@@ -172,7 +172,7 @@ export default function YouTubePerformance() {
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">
       <table className="yt-comparison-table"><caption className="yt-table-caption">12명 채널·상담·판매 정량 지표. 조회수 평균은 공개 표시값 기준 근삿값.</caption><thead><tr>
-        <th scope="col">딜러사 / 직원</th><th scope="col" className="yt-date-heading"><span>볼보 입사일</span><span>채널 개설일</span></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
+        <th scope="col">딜러사 / 직원<small>전시장 / 성별</small></th><th scope="col" className="yt-date-heading"><span>볼보 입사일</span><span>채널 개설일</span></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
       </tr></thead><tbody>{visible.map((person,index)=>{
         const comments=commentData.channels[person.channelId];
 
