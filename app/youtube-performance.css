@@ -93,7 +93,7 @@
 .yt-compact .yt-headline-stats .yt-close-change{display:block!important;margin:0 0 2px;color:#b76742;font-size:8px;white-space:nowrap}
 .yt-compact .yt-sort-filter{min-height:21px;padding:4px 9px!important;overflow:hidden;border:1px solid #dde8ec;border-radius:999px;background:rgba(244,248,250,.9);color:#607581;font-family:var(--font-korean);font-size:7.5px!important;font-weight:650;line-height:1;text-overflow:ellipsis;white-space:nowrap}
 .yt-compact .yt-sort-filter:hover{background:#f2f7f9}.yt-compact .yt-sort-filter[aria-pressed=true]{border-color:#164f70;background:#164f70;color:#fff;font-weight:650}
-.yt-compact .yt-row-avatar img{image-rendering:auto;backface-visibility:hidden;transform:translateZ(0);filter:none}
+.yt-compact .yt-row-avatar img{display:block;image-rendering:auto;backface-visibility:visible;filter:none}
 .yt-compact .yt-comparison-table th:first-child{width:20%}
 .yt-compact .yt-comparison-table th:nth-child(2){width:7%}
 .yt-compact .yt-comparison-table th:nth-child(3){width:5%}

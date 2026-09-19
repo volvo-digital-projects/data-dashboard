@@ -1359,6 +1359,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   object-position: center 18%;
 }
 
+.youtube-performance.yt-compact .yt-row-avatar img:not([src*="neutral-human-silhouette"]),
 .growth-profile-photo img:not(.staff-profile-silhouette),
 .analysis-staff-profile-photo img:not(.staff-profile-silhouette) {
   width: 100%;
