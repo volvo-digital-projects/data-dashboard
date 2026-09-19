@@ -58,6 +58,23 @@ const dailyCloseKey = "volvo-youtube-daily-close";
 const kstDate = () => new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
 const changeLabel = (current:number, previous:number|null) => previous === null || previous === 0 ? "전일 최종마감 대비 —" : `전일 최종마감 대비 ${current >= previous ? "+" : ""}${((current - previous) / previous * 100).toFixed(1)}%`;
 
+function GenderDonut() {
+  const total = creators.length;
+  const maleShare = total ? male / total : 0;
+  const circumference = 2 * Math.PI * 24;
+  return <svg className="yt-gender-donut" viewBox="0 0 200 80" role="img" aria-label={`전체 ${total}명, 남성 ${male}명 ${(maleShare*100).toFixed(1)}%, 여성 ${total-male}명 ${((1-maleShare)*100).toFixed(1)}%`}>
+    <circle cx="34" cy="40" r="24" fill="none" stroke="#df8eab" strokeWidth="10"/>
+    <circle cx="34" cy="40" r="24" fill="none" stroke="#287a9d" strokeWidth="10" strokeDasharray={`${maleShare*circumference} ${circumference}`} transform="rotate(-90 34 40)"/>
+    <text x="34" y="36" textAnchor="middle" className="yt-donut-caption">전체</text>
+    <text x="34" y="51" textAnchor="middle" className="yt-donut-total">{total}명</text>
+    {[{label:"여성",count:total-male,angle:maleShare*Math.PI*2+(1-maleShare)*Math.PI-Math.PI/2,y:18,color:"#bb6484"},{label:"남성",count:male,angle:maleShare*Math.PI-Math.PI/2,y:58,color:"#287a9d"}].map(item=>{
+      const x=34+29*Math.cos(item.angle), y=40+29*Math.sin(item.angle);
+      const outsideX=34+36*Math.cos(item.angle), outsideY=40+36*Math.sin(item.angle);
+      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${outsideX},${outsideY} ${item.label === "여성" ? `${outsideX},3 76,3` : ""} 76,${item.y-4} 86,${item.y-4}`} fill="none" stroke={item.color} strokeWidth=".8"/><text x="90" y={item.y} className="yt-donut-label">{item.label}</text><text x="90" y={item.y+13} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
+    })}
+  </svg>;
+}
+
 function GenderIcon({gender}:{gender:string}) {
   return <svg className="yt-gender-icon" viewBox="0 0 16 20" role="img" aria-label={gender} fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="8" cy="9" r="4"/>{gender==="남성"?<path d="M8 5V0M5 3 8 0l3 3"/>:<path d="M8 13v7M5 17h6"/>}</svg>;
 }
@@ -150,7 +167,7 @@ export default function YouTubePerformance() {
         <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title="공개 채널 지표 매시간 수집 예정 · 마지막 전체 수집 성공 시각 (KST)"><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
       </div>
       <div className="yt-headline-stats">
-        <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><strong>{creators.length}<small>명</small></strong><div className="yt-gender-summary">{["남성","여성"].map(gender=>{const count=gender==="남성"?male:creators.length-male;return <span key={gender}><GenderIcon gender={gender}/>{count}명 <small>{(count/creators.length*100).toFixed(1)}%</small></span>})}</div></div></div>
+        <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
         <div><span>합산 구독자</span><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.previousSubscribers ?? null)}</p><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
         <div><span>공개 영상</span><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.previousVideos ?? null)}</p><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>
