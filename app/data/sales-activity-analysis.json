@@ -2,9 +2,9 @@
   "source": {
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
-    "salesAsOf": "2026-09-19",
-    "salesSyncedAt": "2026-09-19T13:18:37+09:00",
-    "salesPeriod": "2026-01-01~2026-09-19",
+    "salesAsOf": "2026-09-20",
+    "salesSyncedAt": "2026-09-20T08:59:23+09:00",
+    "salesPeriod": "2026-01-01~2026-09-20",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
     "salesJoin": "현재 Sales-DMS 재직자의 직원명과 판매 전시장 코드를 함께 연결",
