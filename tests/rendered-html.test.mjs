@@ -279,7 +279,7 @@ test("shows every creator metric together with detail collapsed by default", asy
     const years = voc.showrooms[person.cdsid].employees.find(employee => employee.name === person.name).years;
     const totals = Object.values(years).reduce((sum, year) => ({responses:sum.responses+year.responses, score:sum.score+year.scoreSum}), {responses:0,score:0});
     const score = totals.responses ? (totals.score / totals.responses).toFixed(1) : "—";
-    assert.ok(row.includes(`<td class="yt-cell-voc"><strong>${score}</strong>`), person.name);
+    assert.ok(row.includes(`<td class="yt-cell-voc"><strong>${score}<i>점</i></strong>`), person.name);
   }
   assert.match(html, /<details class="yt-detail yt-detail-disclosure" id="yt-channel-detail">/);
   assert.doesNotMatch(table, /yt-person-results|yt-score/);

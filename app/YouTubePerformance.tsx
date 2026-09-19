@@ -37,6 +37,11 @@ const creators = data.creators.map(person => {
 });
 const number = (value: number | null) => value === null ? "—" : value.toLocaleString("ko-KR");
 const decimal = (value: number | null) => value === null ? "—" : value.toFixed(1);
+const subscriberChange = (current: number | null, previous: number | null) => {
+  if (current === null || previous === null || previous === 0) return "직전 대비 —";
+  const difference = current - previous;
+  return `직전 대비 ${difference > 0 ? "▲" : difference < 0 ? "▼" : "―"} ${(Math.abs(difference) / previous * 100).toFixed(1)}%`;
+};
 const formatDates = (value: string) => value.replace(/(\d{4})[-.]\s*(\d{1,2})[-.]\s*(\d{1,2})\.?/g, (_, year, month, day) => `${year}.${month.padStart(2,"0")}.${day.padStart(2,"0")}`);
 const formatCompactDate = (value: string | undefined) => {
   if (!value) return "—";
@@ -173,17 +178,16 @@ export default function YouTubePerformance() {
           <td className="yt-hire-date">{formatCompactDate(person.hireDate)}</td>
           <td className="yt-joined">{formatCompactDate(person.channel.joined)}</td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
-          <td><strong>{number(person.channel.subscribers)}</strong></td>
+          <td><strong>{number(person.channel.subscribers)}<i>명</i></strong><small title={`직전 수집: ${person.channel.previousCheckedAt}`}>{subscriberChange(person.channel.subscribers, person.channel.previousSubscribers)}</small></td>
           <td><strong>≈{number(person.channel.averageViews)}</strong><small>{number(person.channel.totalViews)}</small></td>
           <td><strong>{person.channel.long.count}<i>개</i></strong><small>≈{number(person.channel.long.averageViews)}회</small></td>
           <td><strong>{person.channel.short.count}<i>개</i></strong><small>≈{number(person.channel.short.averageViews)}회</small></td>
-          <td className="yt-cell-voc"><strong>{decimal(person.score)}</strong><small>{person.responses?`${person.responses}건 회신`:"회신 없음"}</small></td>
-          <td className="yt-cell-sales"><strong>{decimal(person.monthly)}</strong><small>누적 {number(person.delivered)}대</small></td>
+          <td className="yt-cell-voc"><strong>{decimal(person.score)}<i>점</i></strong><small>{person.responses?`${person.responses}건 회신`:"회신 없음"}</small></td>
+          <td className="yt-cell-sales"><strong>{decimal(person.monthly)}<i>대</i></strong><small>누적 {number(person.delivered)}대</small></td>
           <td className="yt-cell-comments"><button type="button" onClick={()=>{setSelectedName(person.name);setDetailOpen(true);}} aria-controls="yt-channel-detail">{comments && comments.status==="complete"?`${number(comments.total)}건`:"전체 미확인"}<small>상세보기</small></button>{!comments && <small>기존 표본 {person.channel.commentSamples}건</small>}{comments && <small>{comments.status==="complete"?"공개 순회 완료":`미완료 ${comments.videos-comments.completeVideos}개 영상`}</small>}</td>
         </tr>;
       })}</tbody></table>
     </div> : <div className="yt-empty"><strong>{dealer}의 등록 직원이 없습니다.</strong><p>첨부 명단 기준이며 실제 채널 부재를 단정하지 않습니다.</p></div>}
-    <p className="yt-period">판매 {formatDates(salesData.source.salesPeriod)} · 월평균은 집계 월수로 나눔(진행 중인 9월 포함) / 누적 VOC {vocData.source.historyRange} (~{formatDates(vocData.source.vocThrough)}) · 총 점수 ÷ 총 회신 수 · 회신 0건은 점수 미표시 / 인증 2021–2026 누적 횟수</p>
     {selected && channel && <details className="yt-detail yt-detail-disclosure" id="yt-channel-detail" open={detailOpen}>
       <summary onClick={event=>{event.preventDefault();setDetailOpen(open=>!open);}}>{selected.name} · 댓글 분석 <span>{detailOpen?"접기":"펼치기"}</span></summary>
       <YouTubeCommentAnalysis key={channel.id} channelId={channel.id} shared={selected.shared} onTopicChange={()=>{
