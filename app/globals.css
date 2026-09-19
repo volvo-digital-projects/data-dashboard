@@ -19018,20 +19018,23 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   .dashboard-identity-header .identity-icon::after,
   .dashboard-identity-header .identity-profile-icon::before,
   .dashboard-identity-header .identity-profile-icon::after {
-    animation: identity-glyph-drift 7s ease-in-out infinite;
+    animation: identity-note-sway 4.8s ease-in-out infinite;
+    transform-origin: 50% 50%;
   }
+  .dashboard-identity-header .identity-icon--dealer::before { transform-origin: 5.5px 2.5px; }
+  .dashboard-identity-header .identity-icon--dealer::after { transform-origin: 6.5px 5.5px; }
   .dashboard-identity-header .identity-icon--region::before,
-  .dashboard-identity-header .identity-icon--region::after { animation-delay: -1.75s; }
-  .dashboard-identity-header .identity-icon--size::before,
-  .dashboard-identity-header .identity-icon--size::after { animation-delay: -3.5s; }
+  .dashboard-identity-header .identity-icon--region::after { animation: identity-pin-bounce 3.2s ease-in-out infinite; }
+  .dashboard-identity-header .identity-icon--size::before { animation: identity-corners-in 4s ease-in-out infinite; }
+  .dashboard-identity-header .identity-icon--size::after { animation: identity-corners-out 4s ease-in-out infinite; }
   .dashboard-identity-header .identity-profile-icon::before,
-  .dashboard-identity-header .identity-profile-icon::after { animation-delay: -5.25s; }
+  .dashboard-identity-header .identity-profile-icon::after { animation: identity-person-sway 4.2s ease-in-out infinite; }
 }
-@keyframes identity-glyph-drift {
-  0%, 18%, 62%, 100% { translate: 0 0; }
-  38% { translate: 0 -1px; }
-  48% { translate: 0 -.65px; }
-}
+@keyframes identity-note-sway { 0%,20%,80%,100%{rotate:0deg;translate:0 0} 40%{rotate:-6deg;translate:-.5px -1px} 60%{rotate:6deg;translate:.5px -1px} }
+@keyframes identity-pin-bounce { 0%,65%,100%{translate:0 0} 30%{translate:0 -2.5px} 48%{translate:0 .5px} }
+@keyframes identity-person-sway { 0%,100%{translate:0 0} 25%{translate:-1.5px 0} 75%{translate:1.5px 0} }
+@keyframes identity-corners-in { 0%,15%,85%,100%{translate:0 0} 50%{translate:1.5px 1.5px} }
+@keyframes identity-corners-out { 0%,15%,85%,100%{translate:0 0} 50%{translate:-1.5px -1.5px} }
 
 main.dealer-analysis-page {
   --dealer-outer-gutter: 22px;
