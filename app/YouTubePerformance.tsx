@@ -59,16 +59,23 @@ const changeLabel = (current:number, previous:number|null, unit:string) => previ
 function GenderDonut() {
   const total = creators.length;
   const maleShare = total ? male / total : 0;
-  const circumference = 2 * Math.PI * 24;
-  return <svg className="yt-gender-donut" viewBox="0 0 200 80" role="img" aria-label={`전체 ${total}명, 남성 ${male}명 ${(maleShare*100).toFixed(1)}%, 여성 ${total-male}명 ${((1-maleShare)*100).toFixed(1)}%`}>
-    <circle cx="34" cy="40" r="24" fill="none" stroke="#df8eab" strokeWidth="10"/>
-    <circle cx="34" cy="40" r="24" fill="none" stroke="#287a9d" strokeWidth="10" strokeDasharray={`${maleShare*circumference} ${circumference}`} transform="rotate(-90 34 40)"/>
-    <text x="34" y="36" textAnchor="middle" className="yt-donut-caption">전체</text>
-    <text x="34" y="51" textAnchor="middle" className="yt-donut-total">{total}명</text>
-    {[{label:"여성",count:total-male,angle:maleShare*Math.PI*2+(1-maleShare)*Math.PI-Math.PI/2,y:18,color:"#bb6484"},{label:"남성",count:male,angle:maleShare*Math.PI-Math.PI/2,y:58,color:"#287a9d"}].map(item=>{
-      const x=34+29*Math.cos(item.angle), y=40+29*Math.sin(item.angle);
-      const outsideX=34+36*Math.cos(item.angle), outsideY=40+36*Math.sin(item.angle);
-      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${outsideX},${outsideY} ${item.label === "여성" ? `${outsideX},3 76,3` : ""} 76,${item.y-4} 86,${item.y-4}`} fill="none" stroke={item.color} strokeWidth=".8"/><text x="90" y={item.y} className="yt-donut-label">{item.label}</text><text x="90" y={item.y+13} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
+  return <svg className="yt-gender-donut" viewBox="0 0 220 76" role="img" aria-label={`전체 ${total}명, 남성 ${male}명 ${(maleShare*100).toFixed(1)}%, 여성 ${total-male}명 ${((1-maleShare)*100).toFixed(1)}%`}>
+    <defs>
+      <linearGradient id="yt-gender-blue" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#78b7ca"/><stop offset="1" stopColor="#216985"/></linearGradient>
+      <linearGradient id="yt-gender-orange" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f5af79"/><stop offset="1" stopColor="#ec734a"/></linearGradient>
+      <mask id="yt-gender-reveal"><circle className="yt-donut-reveal" cx="110" cy="38" r="24" pathLength="100" fill="none" stroke="white" strokeWidth="12" transform="rotate(-90 110 38)"/></mask>
+    </defs>
+    <g mask="url(#yt-gender-reveal)">
+      <circle cx="110" cy="38" r="24" fill="none" stroke="url(#yt-gender-orange)" strokeWidth="10"/>
+      <circle cx="110" cy="38" r="24" pathLength="100" fill="none" stroke="url(#yt-gender-blue)" strokeWidth="10" strokeDasharray={`${maleShare*100} 100`} transform="rotate(-90 110 38)"/>
+    </g>
+    <text x="110" y="34" textAnchor="middle" className="yt-donut-caption">전체</text>
+    <text x="110" y="47" textAnchor="middle" className="yt-donut-total">{total}명</text>
+    {[{label:"여성",count:total-male,angle:maleShare*Math.PI*2+(1-maleShare)*Math.PI-Math.PI/2,left:true,color:"#c7764c"},{label:"남성",count:male,angle:maleShare*Math.PI-Math.PI/2,left:false,color:"#287a9d"}].map(item=>{
+      const x=110+29*Math.cos(item.angle), y=38+29*Math.sin(item.angle);
+      const bendX=110+35*Math.cos(item.angle), bendY=38+35*Math.sin(item.angle);
+      const endX=item.left?60:160;
+      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${bendX},${bendY} ${endX},${bendY}`} fill="none" stroke={item.color} strokeWidth=".8"/><text x={endX} y={bendY-5} textAnchor={item.left?"end":"start"} className="yt-donut-label">{item.label}</text><text x={endX} y={bendY+10} textAnchor={item.left?"end":"start"} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
     })}
   </svg>;
 }
