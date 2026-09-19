@@ -106,3 +106,5 @@
 .yt-donut-label{font-size:10px}.yt-donut-value{font-size:11px;font-weight:650}
 .yt-metric-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}.yt-metric-title em{font-style:normal;font-size:7px;color:#b76742}
 .yt-compact .yt-headline-stats .yt-gender-summary{width:100%}
+.youtube-performance.yt-compact .yt-row-person .yt-row-avatar img[src*="kim-jeongho-kolon.jpg"]{transform:scale(1);object-position:center top;transform-origin:center top}
+.youtube-performance.yt-compact .yt-row-person .yt-row-avatar img[src*="consultant-8eb5185dd381.webp"]{transform:scale(1.65);object-position:center top;transform-origin:48% top}
