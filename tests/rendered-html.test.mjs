@@ -312,6 +312,7 @@ test("shows subscriber count and percentage changes and keeps metric refresh com
   assert.match(creatorSource, /Math\.abs\(difference\)\.toLocaleString\("ko-KR"\)\}명 · \$\{changeRate\(current, previous\)\}/);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
+  assert.match(workflow, /git commit -m "Auto update hourly YouTube channel metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
 });
 
 async function render(
