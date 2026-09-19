@@ -665,8 +665,6 @@ html:has(.dealer-analysis-page) {
   grid-template-columns: minmax(125px, 0.62fr) minmax(120px, 0.58fr) minmax(250px, 1.34fr) minmax(180px, 0.96fr) repeat(2, minmax(210px, 1.08fr));
   align-items: stretch;
   border-bottom: 1px solid #dce7ec;
-  animation: dealer-row-enter 360ms ease-out both;
-  animation-delay: var(--row-delay, 0ms);
 }
 .dealer-certification-row:last-child { border-bottom: 0; }
 .dealer-certification-row > * {
