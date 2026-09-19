@@ -19011,6 +19011,27 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
 }
 
 /* Keep the scroll rail at the viewport edge; both cards share one content rail. */
+/* Animate only the interior strokes, preserving the icon boxes and pin rotation. */
+@media (prefers-reduced-motion: no-preference) {
+  .dashboard-identity-header .identity-icon::before,
+  .dashboard-identity-header .identity-icon::after,
+  .dashboard-identity-header .identity-profile-icon::before,
+  .dashboard-identity-header .identity-profile-icon::after {
+    animation: identity-glyph-drift 7s ease-in-out infinite;
+  }
+  .dashboard-identity-header .identity-icon--region::before,
+  .dashboard-identity-header .identity-icon--region::after { animation-delay: -1.75s; }
+  .dashboard-identity-header .identity-icon--size::before,
+  .dashboard-identity-header .identity-icon--size::after { animation-delay: -3.5s; }
+  .dashboard-identity-header .identity-profile-icon::before,
+  .dashboard-identity-header .identity-profile-icon::after { animation-delay: -5.25s; }
+}
+@keyframes identity-glyph-drift {
+  0%, 18%, 62%, 100% { translate: 0 0; }
+  38% { translate: 0 -1px; }
+  48% { translate: 0 -.65px; }
+}
+
 main.dealer-analysis-page {
   --dealer-outer-gutter: 22px;
   --dealer-card-padding: 18px;
