@@ -4893,7 +4893,7 @@ test("aligns both sticky shells themselves with their lower panels at every zoom
   assert.doesNotMatch(css, /100vw - var\(--dashboard-page-max\)/);
   assert.equal(
     (css.match(/100% - var\(--dashboard-page-max\)/g) ?? []).length,
-    6,
+    7,
   );
   for (const selector of ["dashboard", "analysis"]) {
     assert.match(
