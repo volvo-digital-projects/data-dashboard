@@ -3180,7 +3180,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     );
     if (profile.sourceOverride) {
       assert.match(profile.sourceOverride, /^https:\/\/www\.youtube\.com\/@/);
-      assert.equal(profile.image, "/staff-profiles/kolon/songpa/kim-jeongho-channel-20260915.jpeg");
+      assert.equal(profile.image, "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg");
       assert.equal(portrait.readUInt16BE(0), 0xffd8);
       let offset = 2;
       let size;
@@ -3193,7 +3193,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
         }
         offset += 2 + length;
       }
-      assert.deepEqual(size, { width: 900, height: 900 });
+      assert.deepEqual(size, { width: 354, height: 508 });
       return;
     }
     assert.deepEqual(readWebpSize(portrait), { width: 420, height: 440 });
