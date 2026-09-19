@@ -158,8 +158,8 @@ export default function YouTubePerformance() {
         </button>;})}
       </div>
     </div>
-    <div className="yt-matrix-heading"><div className="yt-section-label"><button className="yt-subscriber-sort" type="button" aria-pressed={sort==="subscribers"} onClick={()=>setSort("subscribers")}>구독자 순</button></div>
-      <div className="yt-filters" aria-label="크리에이터 정렬"><button type="button" aria-pressed={dealer==="전체"} onClick={()=>setDealer("전체")}>전체 보기</button><span>정렬</span>{([["subscribers","기본정렬"],["dealer","딜러사별"],["views","평균 조회 높은 순"],["sales","월판매 높은 순"],["voc","누적 만족도 높은 순"]] as const).map(([value,label])=><button key={value} type="button" aria-pressed={sort===value} onClick={()=>setSort(value)}>{label}</button>)}</div>
+    <div className="yt-matrix-heading"><div className="yt-section-label"><h3>크리에이터 명단</h3></div>
+      <div className="yt-filters" aria-label="크리에이터 정렬"><button type="button" className="yt-icon-filter" aria-label="전체 보기" title="전체 보기" aria-pressed={dealer==="전체"} onClick={()=>setDealer("전체")}><span aria-hidden="true">◉</span></button>{([["subscribers","구독자 순","↕"],["dealer","딜러사별","▦"],["views","평균 조회 높은 순","⌁"],["sales","월판매 높은 순","↗"],["voc","누적 만족도 높은 순","★"]] as const).map(([value,label,icon])=><button key={value} type="button" className="yt-icon-filter" aria-label={label} title={label} aria-pressed={sort===value} onClick={()=>setSort(value)}><span aria-hidden="true">{icon}</span></button>)}</div>
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">
       <table className="yt-comparison-table"><caption className="yt-table-caption">12명 채널·상담·판매 정량 지표. 조회수 평균은 공개 표시값 기준 근삿값.</caption><thead><tr>
