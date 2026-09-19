@@ -108,12 +108,13 @@
 .yt-donut-label{font-size:8px}.yt-donut-value{font-size:9px;font-weight:650}
 .yt-donut-reveal{stroke-dasharray:100 100;stroke-dashoffset:0}
 @media(prefers-reduced-motion:no-preference){.yt-compact.has-entered .yt-donut-reveal{animation:yt-donut-fill 1.1s ease-out both}@keyframes yt-donut-fill{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}}
-.yt-metric-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}.yt-metric-title em{font-style:normal;font-size:7px;color:#b76742}
+.yt-metric-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}.yt-metric-title i{font-style:normal;color:#9aabb2}.yt-metric-title em{font-style:normal;font-size:7px;color:#b76742}
 .yt-compact .yt-headline-stats .yt-gender-summary{width:100%}
 .yt-compact .yt-metric-value{display:flex;align-items:baseline;justify-content:space-between;gap:6px;white-space:nowrap}
 .yt-compact .yt-headline-stats .yt-metric-value .yt-close-change{margin:0 0 0 auto;font-size:8px}
-.yt-compact .yt-headline-stats{align-items:center}
-.yt-compact .yt-gender-donut{width:180px}
+.yt-compact .yt-headline-stats{align-items:stretch}
+.yt-compact .yt-headline-stats>div{display:flex;flex-direction:column;justify-content:center}
+.yt-compact .yt-gender-donut{width:194px;margin-left:8px}
 .yt-compact .yt-hero{padding-bottom:4px}
 .yt-compact .yt-donut-total{font-family:var(--font-volvo),Arial,sans-serif}
 .youtube-performance.yt-compact .yt-row-person .yt-row-avatar img[src*="kim-jeongho-kolon.jpg"]{transform:scale(1);object-position:center top;transform-origin:center top}
