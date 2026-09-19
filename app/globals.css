@@ -641,7 +641,7 @@ html:has(.dealer-analysis-page) {
   color: #607581;
   background: rgba(244, 248, 250, 0.9);
   font-family: var(--font-korean);
-  font-size: 7.5px;
+  font-size: 8.5px;
   font-weight: 650;
   line-height: 1;
   text-overflow: ellipsis;
