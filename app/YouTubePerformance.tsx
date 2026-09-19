@@ -117,38 +117,7 @@ export default function YouTubePerformance() {
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(scroller);
-    let timer: ReturnType<typeof setTimeout>;
-    let frame = 0, touching = false, direction = 0, previous = scroller.scrollTop;
-    const target = () => (section.getBoundingClientRect().top - scroller.getBoundingClientRect().top) / (scroller.getBoundingClientRect().height / scroller.offsetHeight) + scroller.scrollTop;
-    const cancel = () => { clearTimeout(timer); cancelAnimationFrame(frame); frame = 0; };
-    const settle = () => {
-      const end = target(), from = scroller.scrollTop;
-      if (touching || end <= from + 2 || end - from > Math.min(400, scroller.clientHeight * .65)) return;
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) { scroller.scrollTop = end; return; }
-      const started = performance.now();
-      const step = (now:number) => {
-        const t = Math.min(1, (now-started)/320);
-        scroller.scrollTop = from + (end-from)*(1-Math.pow(1-t,3));
-        if(t<1) frame=requestAnimationFrame(step); else frame=0;
-      };
-      frame=requestAnimationFrame(step);
-    };
-    const scroll = () => {
-      const down = scroller.scrollTop > previous;
-      direction = down ? 1 : -1;
-      previous = scroller.scrollTop;
-      if(frame || touching) return;
-      clearTimeout(timer);
-      if(down) timer=setTimeout(settle, 90);
-    };
-    const touchStart = () => { touching=true; cancel(); };
-    const touchEnd = () => { touching=false; if(direction>0) timer=setTimeout(settle,90); };
-    scroller.addEventListener("scroll",scroll,{passive:true});
-    scroller.addEventListener("wheel",cancel,{passive:true});
-    scroller.addEventListener("touchstart",touchStart,{passive:true});
-    scroller.addEventListener("touchend",touchEnd,{passive:true});
-    scroller.addEventListener("keydown",cancel);
-    return () => {cancel(); observer.disconnect(); scroller.removeEventListener("scroll",scroll); scroller.removeEventListener("wheel",cancel); scroller.removeEventListener("touchstart",touchStart); scroller.removeEventListener("touchend",touchEnd); scroller.removeEventListener("keydown",cancel);};
+    return () => observer.disconnect();
   }, []);
   useEffect(() => {
     if (!detailOpen) return;

@@ -429,28 +429,128 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
   useEffect(() => {
     const area = scrollArea.current;
     if (!area) return;
-    let settledTop = area.scrollTop;
-    let timer: ReturnType<typeof setTimeout>;
-    const settle = () => {
-      clearTimeout(timer);
+    let frame = 0;
+    let releaseTimer: ReturnType<typeof setTimeout>;
+    let entryReady = true;
+    let landing = false;
+    let animating = false;
+    let previousTop = area.scrollTop;
+    let touchStartY: number | null = null;
+    let touchStartTop = area.scrollTop;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const targetTop = () => {
       const section = area.querySelector<HTMLElement>(".youtube-performance");
-      if (!section) return;
-      const target = area.scrollTop + section.getBoundingClientRect().top - area.getBoundingClientRect().top;
-      const current = area.scrollTop;
-      // A long wheel/touch gesture must first reveal the creator heading.
-      // Subsequent gestures remain free to reach the last row and details.
-      if (settledTop < target - 24 && current > target + 8) {
-        settledTop = target;
-        area.scrollTo({top: target, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"});
-      } else settledTop = current;
+      return section ? area.scrollTop + section.getBoundingClientRect().top - area.getBoundingClientRect().top : null;
+    };
+    const releaseLanding = () => {
+      landing = false;
+      previousTop = area.scrollTop;
+    };
+    const holdUntilGestureEnds = () => {
+      clearTimeout(releaseTimer);
+      releaseTimer = setTimeout(releaseLanding, 150);
+    };
+    const settleAtCreatorHeader = () => {
+      const target = targetTop();
+      if (target === null || landing) return;
+      entryReady = false;
+      landing = true;
+      animating = true;
+      cancelAnimationFrame(frame);
+      const from = Math.min(area.scrollTop, target);
+      if (area.scrollTop > target) area.scrollTop = target;
+      const distance = Math.max(0, target - from);
+      const duration = reduceMotion ? 0 : Math.min(400, 210 + distance * .32);
+      const started = performance.now();
+      const step = (now: number) => {
+        const progress = duration === 0 ? 1 : Math.min(1, (now - started) / duration);
+        area.scrollTop = from + distance * (1 - Math.pow(1 - progress, 3));
+        if (progress < 1) frame = requestAnimationFrame(step);
+        else {
+          frame = 0;
+          animating = false;
+          area.scrollTop = target;
+          holdUntilGestureEnds();
+        }
+      };
+      frame = requestAnimationFrame(step);
+    };
+    const wheelDistance = (event: WheelEvent) => event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? area.clientHeight : 1);
+    const onWheel = (event: WheelEvent) => {
+      const distance = wheelDistance(event);
+      if (landing) {
+        event.preventDefault();
+        holdUntilGestureEnds();
+        return;
+      }
+      const target = targetTop();
+      if (target === null || !entryReady || distance <= 0 || area.scrollTop >= target) return;
+      if (area.scrollTop + distance >= target - 1) {
+        event.preventDefault();
+        settleAtCreatorHeader();
+      }
+    };
+    const onTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0]?.clientY ?? null;
+      touchStartTop = area.scrollTop;
+    };
+    const onTouchMove = (event: TouchEvent) => {
+      if (landing) {
+        event.preventDefault();
+        holdUntilGestureEnds();
+        return;
+      }
+      const target = targetTop();
+      const currentY = event.touches[0]?.clientY;
+      if (target === null || !entryReady || touchStartY === null || currentY === undefined) return;
+      const downwardDistance = touchStartY - currentY;
+      if (downwardDistance > 0 && touchStartTop + downwardDistance >= target - 1) {
+        event.preventDefault();
+        settleAtCreatorHeader();
+      }
+    };
+    const onTouchEnd = () => {
+      touchStartY = null;
+      if (landing) holdUntilGestureEnds();
     };
     const onScroll = () => {
-      clearTimeout(timer);
-      timer = setTimeout(settle, 140);
+      const target = targetTop();
+      if (target === null) return;
+      const current = area.scrollTop;
+      if (animating) {
+        previousTop = current;
+        return;
+      }
+      if (landing) {
+        if (Math.abs(current - target) > 1) area.scrollTop = target;
+        previousTop = target;
+        return;
+      }
+      if (!entryReady && current < target - 48) entryReady = true;
+      if (entryReady && previousTop < target && current >= target) {
+        area.scrollTop = target;
+        settleAtCreatorHeader();
+        previousTop = target;
+        return;
+      }
+      previousTop = current;
     };
+    area.addEventListener("wheel", onWheel, {passive: false});
+    area.addEventListener("touchstart", onTouchStart, {passive: true});
+    area.addEventListener("touchmove", onTouchMove, {passive: false});
+    area.addEventListener("touchend", onTouchEnd, {passive: true});
+    area.addEventListener("touchcancel", onTouchEnd, {passive: true});
     area.addEventListener("scroll", onScroll, {passive: true});
-    area.addEventListener("scrollend", settle);
-    return () => { clearTimeout(timer); area.removeEventListener("scroll", onScroll); area.removeEventListener("scrollend", settle); };
+    return () => {
+      cancelAnimationFrame(frame);
+      clearTimeout(releaseTimer);
+      area.removeEventListener("wheel", onWheel);
+      area.removeEventListener("touchstart", onTouchStart);
+      area.removeEventListener("touchmove", onTouchMove);
+      area.removeEventListener("touchend", onTouchEnd);
+      area.removeEventListener("touchcancel", onTouchEnd);
+      area.removeEventListener("scroll", onScroll);
+    };
   }, []);
   const selected = showrooms.find((showroom) => showroom.cdsid === initialCdsid) ?? showrooms[0];
   const [sortKey, setSortKey] = useState<DealerSortKey>("total-desc");
