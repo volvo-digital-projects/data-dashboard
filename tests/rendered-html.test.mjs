@@ -241,7 +241,8 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(creatorCss, /\.yt-compact \.yt-headline-stats\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\);[^}]*gap:0\}/);
   assert.match(creatorCss, /\.yt-compact \.yt-headline-stats>div\{[^}]*position:relative;[^}]*padding-inline:12px;[^}]*border-left:0\}/);
   assert.match(creatorCss, /\.yt-compact \.yt-headline-stats>div::before\{[^}]*top:50%;[^}]*height:56px;[^}]*transform:translateY\(-50%\)\}/);
-  assert.match(creatorCss, /\.yt-compact \.yt-staff-total\{justify-content:center\}/);
+  assert.match(creatorCss, /\.yt-compact \.yt-staff-stat\{align-items:center;justify-content:center\}/);
+  assert.match(creatorCss, /\.yt-compact \.yt-staff-total\{width:100%;justify-content:center\}/);
   assert.match(creatorCss, /\.yt-compact \.yt-gender-donut\{width:190px;margin-inline:auto\}/);
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.dealer-analysis-command-shell\s*\{[^}]*position: sticky;[^}]*top: 0;[^}]*align-self: start;[^}]*z-index: 100;/);
@@ -267,6 +268,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(html, /class="yt-update-stamp"/);
   assert.match(html, /class="yt-staff-total"/);
   assert.match(html, /class="yt-gender-summary"/);
+  assert.doesNotMatch(html, /class="yt-staff-stat"><span>활동 영업직원<\/span>/);
   assert.doesNotMatch(html, /class="yt-gender-ring"|class="yt-channel-facts"|class="yt-sales-mini"/);
   assert.match(html, /신수경<!-- --> · 댓글 분석/);
   assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|class="yt-icon-filter"/);

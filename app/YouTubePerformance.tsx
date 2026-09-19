@@ -135,7 +135,7 @@ export default function YouTubePerformance() {
         <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title="12명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 (KST)"><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
       </div>
       <div className="yt-headline-stats">
-        <div className="yt-staff-stat"><span>활동 영업직원</span><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
+        <div className="yt-staff-stat"><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
         <div><span className="yt-metric-title">합산 구독자 <i aria-hidden="true">/</i> <em>전일 최종 마감 대비</em></span><div className="yt-metric-value"><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p></div><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
         <div><span className="yt-metric-title">공개 영상 수 <i aria-hidden="true">/</i> <em>전일 최종 마감 대비</em></span><div className="yt-metric-value"><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p></div><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>

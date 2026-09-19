@@ -115,7 +115,8 @@
 .yt-compact .yt-headline-stats{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:0}
 .yt-compact .yt-headline-stats>div{display:flex;position:relative;flex-direction:column;justify-content:center;box-sizing:border-box;padding-inline:12px;border-left:0}
 .yt-compact .yt-headline-stats>div::before{content:"";position:absolute;left:0;top:50%;width:1px;height:56px;background:#ddccc1;transform:translateY(-50%)}
-.yt-compact .yt-staff-total{justify-content:center}
+.yt-compact .yt-staff-stat{align-items:center;justify-content:center}
+.yt-compact .yt-staff-total{width:100%;justify-content:center}
 .yt-compact .yt-gender-donut{width:190px;margin-inline:auto}
 .yt-compact .yt-hero{padding-bottom:4px}
 .yt-compact .yt-donut-total{font-family:var(--font-volvo),Arial,sans-serif}
