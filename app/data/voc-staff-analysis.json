@@ -2,14 +2,14 @@
   "source": {
     "workbook": "2026 Volvo Car Korea_VOC Raw Data_회신 건수 포함 260824.xlsx",
     "vocThrough": "2026-08-24",
-    "rosterCheckedAt": "2026-09-20",
+    "rosterCheckedAt": "2026-09-21",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-09-20",
+    "jobTitleSourceDate": "2026-09-21",
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-08-24",
@@ -1183,7 +1183,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-07-21",
-          "tenureMonths": 73,
+          "tenureMonths": 74,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -2389,7 +2389,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2020-07-21",
-          "tenureMonths": 73,
+          "tenureMonths": 74,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -15360,7 +15360,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2022-03-21",
-          "tenureMonths": 53,
+          "tenureMonths": 54,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -22211,7 +22211,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2017-08-21",
-          "tenureMonths": 108,
+          "tenureMonths": 109,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
