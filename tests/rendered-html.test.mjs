@@ -317,9 +317,12 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /const changeRate = [\s\S]*?rate > 0 && rate < \.1 \? rate\.toFixed\(2\) : rate\.toFixed\(1\)/);
   assert.match(creatorSource, /count: `\$\{difference > 0[\s\S]*?Math\.abs\(difference\)\.toLocaleString\("ko-KR"\)\}명`/);
   assert.match(creatorSource, /rate: changeRate\(current, previous\)/);
-  assert.match(creatorSource, /className="yt-subscriber-change"[\s\S]*?className=\{subscriberChangeTone/);
+  assert.match(creatorSource, /className="yt-subscriber-change"[\s\S]*?className=\{subscriberDeltaTone/);
   assert.match(creatorSource, /const priorDaySubscribers=dailyClose\?\.channelSubscribers\[person\.channelId\] \?\? null;/);
-  assert.match(creatorSource, /<span>전일 대비<\/span><b className=\{subscriberChangeTone\(person\.channel\.subscribers, priorDaySubscribers\)\}><span>\{subscriberDelta\.count\}<\/span>/);
+  assert.match(creatorSource, /subscriberChangeOwnerByChannel\.get\(person\.channelId\)/);
+  assert.match(creatorSource, /includesSubscriberChange[\s\S]*?\{count:"합산 제외",rate:""\}/);
+  assert.match(creatorSource, /공동 채널 증감은 \$\{subscriberChangeOwner\} 행에서 한 번만 합산/);
+  assert.match(creatorSource, /<span>전일 대비<\/span><b className=\{subscriberDeltaTone\}><span>\{subscriberDelta\.count\}<\/span>/);
   assert.doesNotMatch(creatorSource, />직전 대비 /);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
   assert.match(workflow, /cron: "7,37 \* \* \* \*"/);

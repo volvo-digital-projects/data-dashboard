@@ -73,6 +73,15 @@ test('Per-channel subscriber changes share the previous-day final close baseline
  assert.equal(new Set(Object.keys(data.dailyClose.channelSubscribers)).size,data.channels.length);
  assert.equal(Object.values(data.dailyClose.channelSubscribers).reduce((sum,value)=>sum+value,0),data.dailyClose.subscribers);
  for(const channel of data.channels)assert.ok(Number.isFinite(data.dailyClose.channelSubscribers[channel.id]),channel.id);
+ const totalDelta=data.channels.reduce((sum,channel)=>sum+channel.subscribers-data.dailyClose.channelSubscribers[channel.id],0);
+ const uniqueCreatorDelta=data.creators.reduce((state,person)=>{
+  if(state.seen.has(person.channelId))return state;
+  state.seen.add(person.channelId);
+  const channel=data.channels.find(channel=>channel.id===person.channelId);
+  state.total+=channel.subscribers-data.dailyClose.channelSubscribers[channel.id];
+  return state;
+ },{seen:new Set(),total:0}).total;
+ assert.equal(uniqueCreatorDelta,totalDelta);
 });
 test('Curated comments retain evidence links without raw author identities or ability scores',()=>{
  for(const item of data.evidence){

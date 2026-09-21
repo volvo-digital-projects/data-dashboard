@@ -56,6 +56,12 @@ const creators = data.creators.map(person => {
     certifications, shared,
   };
 });
+const subscriberChangeOwnerByChannel = new Map<string, string>();
+for (const person of data.creators) {
+  if (!subscriberChangeOwnerByChannel.has(person.channelId)) {
+    subscriberChangeOwnerByChannel.set(person.channelId, person.name);
+  }
+}
 const number = (value: number | null) => value === null ? "—" : value.toLocaleString("ko-KR");
 const decimal = (value: number | null) => value === null ? "—" : value.toFixed(1);
 const changeRate = (current: number, previous: number) => {
@@ -181,14 +187,26 @@ export default function YouTubePerformance() {
       </tr></thead><tbody>{visible.map((person,index)=>{
         const comments=commentData.channels[person.channelId];
         const priorDaySubscribers=dailyClose?.channelSubscribers[person.channelId] ?? null;
-        const subscriberDelta=subscriberChange(person.channel.subscribers, priorDaySubscribers);
+        const subscriberChangeOwner=subscriberChangeOwnerByChannel.get(person.channelId);
+        const includesSubscriberChange=subscriberChangeOwner===person.name;
+        const subscriberDelta=includesSubscriberChange
+          ? subscriberChange(person.channel.subscribers, priorDaySubscribers)
+          : {count:"합산 제외",rate:""};
+        const subscriberDeltaTone=includesSubscriberChange
+          ? subscriberChangeTone(person.channel.subscribers, priorDaySubscribers)
+          : "neutral";
+        const subscriberDeltaTitle=includesSubscriberChange
+          ? dailyClose?.checkedAt
+            ? `전일 최종 마감: ${dailyClose.checkedAt}`
+            : "전일 최종 마감 기록 없음"
+          : `공동 채널 증감은 ${subscriberChangeOwner} 행에서 한 번만 합산`;
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
           <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image ?? "/staff-profiles/neutral-human-silhouette.png"} alt="" loading="lazy"/></span><span><strong>{person.name} <GenderIcon gender={person.gender}/></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
-          <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={dailyClose?.checkedAt ? `전일 최종 마감: ${dailyClose.checkedAt}` : "전일 최종 마감 기록 없음"}><span>전일 대비</span><b className={subscriberChangeTone(person.channel.subscribers, priorDaySubscribers)}><span>{subscriberDelta.count}</span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
+          <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={subscriberDeltaTitle}><span>전일 대비</span><b className={subscriberDeltaTone}><span>{subscriberDelta.count}</span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
           <td><strong>≈{number(person.channel.averageViews)}</strong><small>{number(person.channel.totalViews)}</small></td>
           <td><strong>{person.channel.long.count}<i>개</i></strong><small>≈{number(person.channel.long.averageViews)}회</small></td>
           <td><strong>{person.channel.short.count}<i>개</i></strong><small>≈{number(person.channel.short.averageViews)}회</small></td>
