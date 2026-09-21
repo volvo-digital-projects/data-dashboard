@@ -1,0 +1,63 @@
+name: Sync weekly VOC and CX dashboard data
+
+on:
+  schedule:
+    # 10:25 KST on weekdays. The public source workbook is updated weekly,
+    # while a daily check recovers delayed or corrected rows automatically.
+    - cron: "25 1 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: weekly-dashboard-data-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: git pull --ff-only origin main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - name: Read and validate the latest public workbook
+        id: sync
+        run: |
+          node scripts/sync-google-sheet-data.mjs
+          if git diff --quiet -- app/data/weekly.json app/data/weekly-details.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          elif git diff -I '"syncedAt":' --quiet -- app/data/weekly.json app/data/weekly-details.json; then
+            git restore --worktree app/data/weekly.json app/data/weekly-details.json
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Verify dashboard
+        if: steps.sync.outputs.changed == 'true'
+        run: npm test
+      - name: Save verified weekly data
+        id: publish
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "Data Dashboard Auto Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add app/data/weekly.json app/data/weekly-details.json
+          git commit -m "Auto update weekly VOC and CX data"
+          git restore --worktree public/dashboard-release.json
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy updated weekly data
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

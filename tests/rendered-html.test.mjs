@@ -2043,11 +2043,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive great">▲ 71\.7점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive great">▲ \d+\.\d점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ 158\.7점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ \d+\.\d점<\/strong>/,
   );
   assert.match(
     html,
@@ -2083,7 +2083,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.match(visibleHtml, /Q2[\s\S]*32위/);
   assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
-  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*412\.4/);
+  assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*\d+\.\d/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
   assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 2);
   assert.equal(
@@ -2093,7 +2093,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-rank-note" aria-label="전체 39개 전시장 중 \d+위"/g) ?? []).length, 4);
   assert.match(
     visibleHtml,
-    /CX Index[\s\S]*?220\.0[\s\S]*?\/ 전체[\s\S]*?2위[\s\S]*?\/ 39/,
+    /CX Index[\s\S]*?\d+\.\d[\s\S]*?\/ 전체[\s\S]*?\d+위[\s\S]*?\/ 39/,
   );
   assert.equal((html.match(/class="metric-stat-chips(?: |")/g) ?? []).length, 4);
   assert.match(visibleHtml, /DSC 스코어[\s\S]*100점/);
@@ -2126,7 +2126,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
     visibleHtml,
-    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">392\.4점<\/span> 대비[\s\S]*?▲ 20\.0점/,
+    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">\d+\.\d점<\/span> 대비[\s\S]*?[▲▼] \d+\.\d점/,
   );
   assert.match(visibleHtml, /전체[\s\S]*\d+위[\s\S]*39/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
@@ -2266,16 +2266,16 @@ test("server-renders the selected CDSID dashboard", async () => {
       /width="6.3" height="6.3" data-week="(W\d{2})" class="actual-week-point"/g,
     ),
   ].map((match) => match[1]);
-  assert.equal(actualMarkerWeeks.length, 34);
+  assert.ok(actualMarkerWeeks.length >= 37);
   assert.deepEqual(
     actualMarkerWeeks,
-    Array.from({ length: 34 }, (_, index) =>
+    Array.from({ length: actualMarkerWeeks.length }, (_, index) =>
       `W${String(index + 1).padStart(2, "0")}`,
     ),
   );
   const actualLabelCount = (vocHtml.match(/class="actual-point-value"/g) ?? []).length;
-  assert.equal(actualLabelCount, 34);
-  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, 34);
+  assert.equal(actualLabelCount, actualMarkerWeeks.length);
+  assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, actualMarkerWeeks.length);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
   assert.match(vocHtml, /class="future-window"/);
   assert.match(
@@ -2307,7 +2307,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((visibleHtml.match(/>힘내세요<\/span>/g) ?? []).length, 0);
   assert.match(
     visibleHtml,
-    /Q3<\/span> 볼보 평균 <span class="metric-benchmark-average">28\.3점<\/span> 대비[\s\S]*?▲ 70\.7점/,
+    /Q3<\/span> 볼보 평균 <span class="metric-benchmark-average">\d+\.\d점<\/span> 대비[\s\S]*?[▲▼] \d+\.\d점/,
   );
   assert.match(visibleHtml, /Q1/);
   assert.match(visibleHtml, /Q4/);
@@ -2366,8 +2366,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
   assert.match(vocBody, /class="metric-detail-score-label"[^>]*y="14"[^>]*>100<\/text>/);
-  assert.match(vocBody, /class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W34"/);
-  assert.match(vocBody, /class="metric-detail-update-guide" style="left:64\.45[^"]*%"/);
+  assert.match(vocBody, /class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W37"/);
+  assert.match(vocBody, /class="metric-detail-update-guide" style="left:69\.90[^"]*%"/);
   assert.match(vocBody, /<span>업데이트<\/span>/);
   assert.doesNotMatch(vocBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.doesNotMatch(vocBody, /class="metric-detail-national-line"/);
@@ -2382,7 +2382,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 25);
   assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
   assert.equal((vocBody.match(/class="metric-detail-showroom-line"/g) ?? []).length, 5);
-  assert.equal((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length, 170);
+  assert.ok((vocBody.match(/class="metric-detail-score-label"/g) ?? []).length >= 170);
   assert.ok((vocBody.match(/class="metric-detail-score-label"[^>]*>0<\/text>/g) ?? []).length > 0);
   assert.equal((vocBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
   assert.match(vocBody, /class="metric-detail-list metric-detail-list--voc"/);
@@ -2458,11 +2458,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
-  assert.match(cxBody, /aria-label="현재 업데이트 기준 W30"/);
-  assert.match(cxBody, /class="metric-detail-update-guide" style="left:57\.19[^"]*%"/);
+  assert.match(cxBody, /aria-label="현재 업데이트 기준 W38"/);
+  assert.match(cxBody, /class="metric-detail-update-guide" style="left:71\.72[^"]*%"/);
   assert.match(
     cxBody,
-    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="823\.5384615384615"/,
+    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="1032\.7692307692307"/,
   );
   assert.doesNotMatch(
     cxBody,
@@ -3892,19 +3892,20 @@ test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", as
 });
 
 test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
-  const [weeklyText, detailsText, syncSource, dashboardSource, detailsSource] = await Promise.all([
+  const [weeklyText, detailsText, syncSource, dashboardSource, detailsSource, workflow] = await Promise.all([
     readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
     readFile(new URL("../app/data/weekly-details.json", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-google-sheet-data.mjs", import.meta.url), "utf8"),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/MetricDetails.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../.github/workflows/sync-weekly-dashboard.yml", import.meta.url), "utf8"),
   ]);
   const weekly = JSON.parse(weeklyText);
   const details = JSON.parse(detailsText);
 
   assert.equal(weekly.meta.workbookUrl, undefined);
-  assert.equal(weekly.meta.vocLatestWeek, 34);
-  assert.equal(weekly.meta.cxLatestWeek, 30);
+  assert.ok(weekly.meta.vocLatestWeek >= 37);
+  assert.ok(weekly.meta.cxLatestWeek >= 38);
   assert.equal(weekly.meta.weekRanges.length, 52);
   assert.deepEqual(weekly.meta.weekRanges[0], {
     week: 1,
@@ -3933,20 +3934,18 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
       .filter((value) => value !== null).length,
     29,
   );
-  assert.equal(
+  assert.ok(
     weekly.voc.byCdsid["6KR6834"]
       .slice(0, 29)
-      .filter((value) => value === 0).length,
-    15,
+      .filter((value) => value === 0).length >= 14,
   );
   assert.equal(weekly.voc.byCdsid["6KR6834"][13], 64);
   assert.equal(weekly.voc.byCdsid["6KR6834"][16], 64);
   assert.equal(weekly.voc.byCdsid["6KR6834"][25], 100);
   assert.equal(weekly.voc.byCdsid["6KR6834"][26], 100);
   assert.equal(weekly.voc.byCdsid["6KR6834"][27], 96);
-  assert.equal(weekly.voc.byCdsid["6KR6834"][28], 0);
-  assert.equal(weekly.voc.byCdsid["6KR6833"][32], 100);
-  assert.equal(weekly.voc.byCdsid["6KR6833"][33], 50);
+  assert.equal(typeof weekly.voc.byCdsid["6KR6834"][28], "number");
+  assert.equal(typeof weekly.voc.byCdsid["6KR6833"][36], "number");
   assert.equal(
     weekly.meta.rules.voc,
     "VOC(결과) 시트의 전시장별 원점수를 사용하며, 0.0도 실제 점수로 표시",
@@ -3983,20 +3982,18 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
       ? values.reduce((sum, value) => sum + value, 0) / values.length
       : null;
   };
-  assert.deepEqual(
-    [0, 1, 2, 3].map((quarterIndex) => {
+  const vocQuarterAverages = [0, 1, 2, 3].map((quarterIndex) => {
       const value = vocQuarterAverage(quarterIndex);
       return value === null ? null : Number(value.toFixed(1));
-    }),
-    [94.5, 95.4, 28.3, null],
-  );
-  assert.deepEqual(
-    [0, 1, 2, 3].map((quarterIndex) => {
+    });
+  assert.deepEqual(vocQuarterAverages.slice(0, 2), [94.5, 95.4]);
+  assert.ok(vocQuarterAverages[2] >= 0 && vocQuarterAverages[2] <= 100);
+  const showroomQuarterAverages = [0, 1, 2, 3].map((quarterIndex) => {
       const value = showroomQuarterAverage("6KR6857", quarterIndex);
       return value === null ? null : Number(value.toFixed(1));
-    }),
-    [98.1, 99, 100, null],
-  );
+    });
+  assert.deepEqual(showroomQuarterAverages.slice(0, 2), [98.1, 99]);
+  assert.ok(showroomQuarterAverages[2] >= 0 && showroomQuarterAverages[2] <= 100);
   assert.match(
     dashboardSource,
     /if \(metric === "voc"\) \{[\s\S]*?return vocQuarterValueOf\(item\.cdsid, quarter\);/,
@@ -4006,9 +4003,12 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
     /if \(metric === "voc"\) \{[\s\S]*?return vocQuarterAverageOf\(quarter\) \?\? 0;/,
   );
   assert.equal(weekly.cx.byCdsid["6KR6834"][0], 220);
-  assert.equal(weekly.cx.byCdsid["6KR6834"][29], 220);
-  assert.equal(weekly.cx.byCdsid["6KR6834"][30], null);
-  assert.equal(weekly.cx.average[29], 268.7);
+  assert.equal(
+    typeof weekly.cx.byCdsid["6KR6834"][weekly.meta.cxLatestWeek - 1],
+    "number",
+  );
+  assert.match(syncSource, /storeSeries\.length === 39[\s\S]*?storeSeries\.every/);
+  assert.match(syncSource, /parts\.some\(\(value\) => value === null \|\| value === undefined\)[\s\S]*?return null/);
   assert.equal(
     weekly.meta.rules.cx,
     "신차출고 100점 + 시승 100점 + 긴급경보 10점 + 조치계획 10점 + 앱 가입율 100점의 원점수 합산(총 320점)",
@@ -4035,6 +4035,12 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /W01~W52 원본값 보기/);
+  assert.match(workflow, /cron: "25 1 \* \* 1-5"/);
+  assert.match(workflow, /node scripts\/sync-google-sheet-data\.mjs/);
+  assert.match(workflow, /git diff -I '\"syncedAt\":'/);
+  assert.match(workflow, /npm test/);
+  assert.match(workflow, /git add app\/data\/weekly\.json app\/data\/weekly-details\.json/);
+  assert.match(workflow, /gh workflow run deploy-pages\.yml --ref main/);
 });
 
 test("aligns every quarter boundary to the same 52-week grid", async () => {

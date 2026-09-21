@@ -135,14 +135,25 @@ function weeklyResult(rows, { zeroIsMissing = false } = {}) {
   const byCdsid = Object.fromEntries(
     storeRows.map((row) => [clean(row[0]), normalize(row)]),
   );
-  const latestWeek =
+  const nationalLatestWeek =
     average.reduce(
       (latest, value, index) => (value === null ? latest : index + 1),
       0,
     );
+  const storeSeries = Object.values(byCdsid);
+  const storeLatestWeek = Array.from({ length: 52 }, (_, index) => index)
+    .reduce(
+      (latest, index) =>
+        storeSeries.length === 39 &&
+        storeSeries.every((values) => values[index] !== null)
+          ? index + 1
+          : latest,
+      0,
+    );
 
   return {
-    latestWeek,
+    latestWeek: Math.max(nationalLatestWeek, storeLatestWeek),
+    nationalLatestWeek,
     average,
     byCdsid,
   };
@@ -231,15 +242,16 @@ const cxByCdsid = Object.fromEntries(
       const quarterIndex =
         week <= 13 ? 0 : week <= 26 ? 1 : week <= 39 ? 2 : 3;
       const actionScore = actionPlan.byCdsid[cdsid]?.[quarterIndex] ?? 0;
-      const alertScore = emergency.byCdsid[cdsid]?.[index] ?? 0;
+      const parts = [
+        delivery.byCdsid[cdsid]?.[index],
+        testDrive.byCdsid[cdsid]?.[index],
+        emergency.byCdsid[cdsid]?.[index],
+        actionScore,
+        app.byCdsid[cdsid]?.[index],
+      ];
+      if (parts.some((value) => value === null || value === undefined)) return null;
 
-      return round1(
-        (delivery.byCdsid[cdsid]?.[index] ?? 0) +
-        (testDrive.byCdsid[cdsid]?.[index] ?? 0) +
-        alertScore +
-        actionScore +
-        (app.byCdsid[cdsid]?.[index] ?? 0)
-      );
+      return round1(parts.reduce((sum, value) => sum + value, 0));
     });
 
     return [cdsid, values];
@@ -251,14 +263,16 @@ const cxAverage = Array.from({ length: 52 }, (_, index) => {
   const week = index + 1;
   const quarterIndex =
     week <= 13 ? 0 : week <= 26 ? 1 : week <= 39 ? 2 : 3;
+  const parts = [
+    delivery.average[index],
+    testDrive.average[index],
+    emergency.average[index],
+    actionPlan.average[quarterIndex],
+    app.average[index],
+  ];
+  if (parts.some((value) => value === null || value === undefined)) return null;
 
-  return round1(
-    (delivery.average[index] ?? 0) +
-      (testDrive.average[index] ?? 0) +
-      (emergency.average[index] ?? 0) +
-      (actionPlan.average[quarterIndex] ?? 0) +
-      (app.average[index] ?? 0),
-  );
+  return round1(parts.reduce((sum, value) => sum + value, 0));
 });
 
 const output = {
