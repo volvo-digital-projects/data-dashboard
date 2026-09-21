@@ -17,8 +17,29 @@ const voc = vocData.showrooms as Record<string, Voc>;
 const photos = photoData.showrooms as Record<string, Photos>;
 const dealers = ["코오롱", "아주", "에이치", "천하", "태영", "아이언", "아이비"];
 const dealerCodes: Record<string, string> = {에이치:"H", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
+type SharedVideo = { id: string; title: string; kind: string; views: number; names: string[]; basis: string };
+const assignedVideoSummary = (videos: SharedVideo[]) => ({
+  count: videos.length,
+  viewsSample: videos.length,
+  averageViews: videos.length ? Math.round(videos.reduce((sum, video) => sum + video.views, 0) / videos.length) : null,
+});
+const channelMetricsForCreator = (channel: (typeof data.channels)[number], name: string, shared: boolean) => {
+  if (!shared) return channel;
+  const assigned = (channel.sharedVideos as SharedVideo[]).filter(video => video.names.includes(name));
+  const totalViews = assigned.reduce((sum, video) => sum + video.views, 0);
+  return {
+    ...channel,
+    videoCount: assigned.length,
+    viewsSample: assigned.length,
+    totalViews,
+    averageViews: assigned.length ? Math.round(totalViews / assigned.length) : null,
+    long: assignedVideoSummary(assigned.filter(video => video.kind === "long")),
+    short: assignedVideoSummary(assigned.filter(video => video.kind === "short")),
+  };
+};
 const creators = data.creators.map(person => {
   const channel = data.channels.find(channel => channel.id === person.channelId)!;
+  const shared = data.creators.filter(staff => staff.channelId === person.channelId).length > 1;
   const staff = sales[person.cdsid]?.staff.filter(staff => staff.name === person.name);
   // Require an unambiguous name + showroom join. Missing data is not zero.
   const result = staff?.length === 1 ? staff[0] : undefined;
@@ -26,13 +47,13 @@ const creators = data.creators.map(person => {
   const survey = Object.values(history ?? {}).reduce((sum, year) => ({responses: sum.responses + year.responses, scoreSum: sum.scoreSum + year.scoreSum}), {responses:0, scoreSum:0});
   const nameCount = Object.values(sales).flatMap(showroom => showroom.staff).filter(staff => staff.name === person.name).length;
   const certifications = ["Grand", "Advanced", "Certified"].map(level => certificationData.records.filter(record => record.name === person.name && (nameCount === 1 || record.showroom === person.showroom) && record.level === level).length);
-  return {...person, channel, image: photos[person.cdsid]?.employees[person.name]?.image,
+  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: photos[person.cdsid]?.employees[person.name]?.image,
     delivered: result?.deliveredSales ?? null,
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
     months: result?.monthlyDeliveredSales ?? [], responses: survey?.responses ?? 0,
     score: survey?.responses ? survey.scoreSum / survey.responses : null,
     hireDate: voc[person.cdsid]?.employees.find(employee => employee.name === person.name)?.hireDate,
-    certifications, shared: data.creators.filter(staff => staff.channelId === person.channelId).length > 1,
+    certifications, shared,
   };
 });
 const number = (value: number | null) => value === null ? "—" : value.toLocaleString("ko-KR");
@@ -179,6 +200,6 @@ export default function YouTubePerformance() {
         if(section && scroller) scroller.scrollTop+=(section.getBoundingClientRect().top-scroller.getBoundingClientRect().top)/(scroller.getBoundingClientRect().height/scroller.offsetHeight);
       }}/>
     </details>}
-    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계합니다. 얼굴은 기존 공식 딜러사 프로필과 이름·전시장으로 연결했습니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
+    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 얼굴은 기존 공식 딜러사 프로필과 이름·전시장으로 연결했습니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
   </section>;
 }
