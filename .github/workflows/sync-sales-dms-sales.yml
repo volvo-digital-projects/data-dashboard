@@ -1,11 +1,8 @@
 name: Sync Sales-DMS staff sales
 
 on:
-  schedule:
-    # 07:00 KST = 22:00 UTC (previous UTC date)
-    - cron: "0 22 * * *"
-    # 09:00 KST = 00:00 UTC
-    - cron: "0 0 * * *"
+  # Scheduled sales collection is owned by refresh-youtube.yml so both
+  # snapshots are verified, committed, and deployed together each hour.
   workflow_dispatch:
 
 permissions:

@@ -93,7 +93,11 @@ def click_visible_text(page: Any, label: str) -> None:
             for index in range(matches.count()):
                 match = matches.nth(index)
                 if visible(match):
-                    match.click(timeout=20_000)
+                    # Legacy menu links schedule frame navigations that can
+                    # keep Playwright's implicit navigation wait open even
+                    # after the click succeeded. The next step explicitly
+                    # discovers and waits for the destination report frame.
+                    match.click(timeout=20_000, no_wait_after=True)
                     candidate_page.wait_for_timeout(700)
                     return
     raise RuntimeError(f"Sales-DMS 메뉴를 찾지 못했습니다: {label}")
@@ -405,7 +409,7 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
             "salesPeriod": f"{as_of.year}-01-01~{as_of.isoformat()}",
             "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
             "salesJoin": "현재 Sales-DMS 재직자의 직원명과 판매 전시장 코드를 함께 연결",
-            "salesUpdateSchedule": "매일 07:00·09:00 KST · 1일 2회",
+            "salesUpdateSchedule": "유튜브 지표 갱신과 함께 매시간",
         }
     )
     output_path.write_text(

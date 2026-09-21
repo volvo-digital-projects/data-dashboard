@@ -332,7 +332,7 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
   assert.match(creatorSource, /12명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 \(KST\)/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
-  assert.match(workflow, /git commit -m "Auto update hourly YouTube channel metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
+  assert.match(workflow, /git commit -m "Auto update hourly YouTube and staff sales metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
   assert.match(creatorCss, /\.yt-subscriber-change\{display:grid;grid-template-columns:34px 68px[\s\S]*?width:105px[\s\S]*?\.yt-subscriber-change b\{display:grid;grid-template-columns:26px 3px minmax\(0,1fr\)[\s\S]*?width:68px[\s\S]*?\.yt-subscriber-count\{display:grid;grid-template-columns:7px minmax\(0,1fr\)[\s\S]*?\.yt-subscriber-count>em\{text-align:right\}[\s\S]*?b>span:last-child\{text-align:right\}[\s\S]*?\.yt-subscriber-change b\.positive\{color:#247d9b;background:linear-gradient\(135deg,rgba\(38,126,164,\.12\)[\s\S]*?\.yt-subscriber-change b\.negative\{color:#c95f55;background:linear-gradient\(135deg,rgba\(201,95,85,\.14\)/);
   assert.match(globalCss, /\.dealer-sales-comparison \.difference\.positive,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.positive[\s\S]*?color: #247d9b;/);
   assert.match(globalCss, /\.dealer-sales-comparison \.difference\.negative,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.negative[\s\S]*?color: #c95f55;/);
@@ -770,7 +770,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
   assert.match(salesActivity.source.salesAsOf, /^2026-\d{2}-\d{2}$/);
   assert.match(salesActivity.source.salesSyncedAt, /^2026-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/);
-  assert.equal(salesActivity.source.salesUpdateSchedule, "매일 07:00·09:00 KST · 1일 2회");
+  assert.equal(salesActivity.source.salesUpdateSchedule, "유튜브 지표 갱신과 함께 매시간");
   assert.doesNotMatch(navigation, /salesActivitySource\.salesAsOf\.replaceAll/);
   assert.equal(salesActivity.showrooms["6KR6834"].salesDealerCode, "HMGD");
   assert.equal(salesActivity.showrooms["6KR6834"].summary.activityStaffCount, 0);
@@ -1464,26 +1464,29 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeChunk, new RegExp(release.id));
 });
 
-test("downloads privacy-safe Sales-DMS staff sales every day at 09:00 KST", async () => {
-  const [workflow, source] = await Promise.all([
+test("downloads privacy-safe Sales-DMS staff sales with every hourly YouTube refresh", async () => {
+  const [workflow, hourlyWorkflow, source] = await Promise.all([
     readFile(new URL("../.github/workflows/sync-sales-dms-sales.yml", import.meta.url), "utf8"),
+    readFile(new URL("../.github/workflows/refresh-youtube.yml", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-sales-dms-sales.py", import.meta.url), "utf8"),
   ]);
 
   assert.match(workflow, /workflow_dispatch:/);
-  assert.match(workflow, /schedule:/);
-  assert.match(workflow, /cron: "0 22 \* \* \*"/);
-  assert.match(workflow, /cron: "0 0 \* \* \*"/);
-  assert.match(workflow, /for attempt in 1 2 3/);
+  assert.doesNotMatch(workflow, /cron:/);
+  assert.match(hourlyWorkflow, /cron: "7,37 \* \* \* \*"/);
+  assert.match(hourlyWorkflow, /Refresh staff sales with the hourly YouTube snapshot/);
+  assert.match(hourlyWorkflow, /if: steps\.collect\.outputs\.refreshed == 'true'/);
+  assert.match(hourlyWorkflow, /for attempt in 1 2 3/);
   assert.match(workflow, /actions: write/);
-  assert.match(workflow, /echo "changed=true" >> "\$GITHUB_OUTPUT"/);
-  assert.match(workflow, /if: steps\.publish\.outputs\.changed == 'true'/);
-  assert.match(workflow, /gh workflow run deploy-pages\.yml --ref main/);
-  assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
-  assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
-  assert.match(workflow, /python scripts\/sync-sales-dms-sales\.py/);
-  assert.match(workflow, /git add app\/data\/sales-activity-analysis\.json/);
+  assert.match(hourlyWorkflow, /echo "changed=true" >> "\$GITHUB_OUTPUT"/);
+  assert.match(hourlyWorkflow, /if: steps\.publish\.outputs\.changed == 'true'/);
+  assert.match(hourlyWorkflow, /gh workflow run deploy-pages\.yml --ref main/);
+  assert.match(hourlyWorkflow, /secrets\.VOLVO_SALES_ID/);
+  assert.match(hourlyWorkflow, /secrets\.VOLVO_SALES_PASSWORD/);
+  assert.match(hourlyWorkflow, /python scripts\/sync-sales-dms-sales\.py/);
+  assert.match(hourlyWorkflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json app\/data\/sales-activity-analysis\.json/);
   assert.match(source, /"Report Management",[\s\S]*?"리포트관리",[\s\S]*?"Actual Monthly Sales",[\s\S]*?"Area Total"/);
+  assert.match(source, /match\.click\(timeout=20_000, no_wait_after=True\)/);
   assert.match(source, /inputs\[0\]\.fill\(f"\{as_of\.year\}-01-01"\)/);
   assert.match(source, /inputs\[1\]\.fill\(as_of\.isoformat\(\)\)/);
   assert.match(source, /visible_control\(frame, "검색"\)\.click/);
@@ -1493,7 +1496,7 @@ test("downloads privacy-safe Sales-DMS staff sales every day at 09:00 KST", asyn
   assert.match(source, /if key not in \{"deliveredSales", "deliveredCustomers", "monthlyDeliveredSales"\}/);
   assert.doesNotMatch(source, /output\[[^\n]*고객명/);
   assert.match(source, /"salesSyncedAt": datetime\.now\(ZoneInfo\("Asia\/Seoul"\)\)\.isoformat/);
-  assert.match(source, /"salesUpdateSchedule": "매일 07:00·09:00 KST · 1일 2회"/);
+  assert.match(source, /"salesUpdateSchedule": "유튜브 지표 갱신과 함께 매시간"/);
 });
 
 test("keeps GitHub Pages analysis tab changes inside the app URL", async () => {
