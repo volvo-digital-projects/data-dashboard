@@ -4007,8 +4007,18 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
     typeof weekly.cx.byCdsid["6KR6834"][weekly.meta.cxLatestWeek - 1],
     "number",
   );
+  assert.equal(
+    typeof weekly.cx.average[weekly.meta.cxLatestWeek - 1],
+    "number",
+  );
   assert.match(syncSource, /storeSeries\.length === 39[\s\S]*?storeSeries\.every/);
   assert.match(syncSource, /parts\.some\(\(value\) => value === null \|\| value === undefined\)[\s\S]*?return null/);
+  assert.match(syncSource, /08☆헤이볼보 앱 가입고객수/);
+  assert.match(syncSource, /09☆헤이볼보 앱 전체고객 수/);
+  assert.match(
+    syncSource,
+    /fillNationalRateFromCounts\([\s\S]*?numeratorValue \/ denominatorValue[\s\S]*?\* 100/,
+  );
   assert.equal(
     weekly.meta.rules.cx,
     "신차출고 100점 + 시승 100점 + 긴급경보 10점 + 조치계획 10점 + 앱 가입율 100점의 원점수 합산(총 320점)",
@@ -4029,6 +4039,13 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
         component.average.length === 52 &&
         component.byCdsid["6KR6834"].length === 52,
     ),
+  );
+  const appComponent = details.cx.components.find(
+    (component) => component.key === "app",
+  );
+  assert.equal(
+    typeof appComponent.average[weekly.meta.cxLatestWeek - 1],
+    "number",
   );
   assert.match(syncSource, /01☆VOC종합만족도\(60%\)/);
   assert.match(syncSource, /04☆VOC해피콜\(10%\)/);

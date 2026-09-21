@@ -1,6 +1,6 @@
 {
   "meta": {
-    "syncedAt": "2026-09-21T13:09:24.399Z",
+    "syncedAt": "2026-09-21T13:48:37.118Z",
     "weekRanges": [
       {
         "week": 1,
@@ -19827,7 +19827,7 @@
         "unit": "점",
         "cadence": "weekly",
         "latestWeek": 39,
-        "nationalLatestWeek": 33,
+        "nationalLatestWeek": 38,
         "average": [
           96.5,
           95.9,
@@ -19862,11 +19862,11 @@
           95.7,
           41.2,
           93.1,
-          null,
-          null,
-          null,
-          null,
-          null,
+          96,
+          87.5,
+          94.9,
+          91.2,
+          80.5,
           null,
           null,
           null,

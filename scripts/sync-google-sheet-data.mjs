@@ -15,6 +15,8 @@ const sheets = {
   emergency: "③-3긴급경보 처리여부(결과)",
   actionPlan: "③-4조치 계획(결과)",
   app: "③-5헤이볼보 앱 가입율(결과)",
+  appRegistered: "08☆헤이볼보 앱 가입고객수",
+  appEligible: "09☆헤이볼보 앱 전체고객 수",
 };
 
 const clean = (value) =>
@@ -159,6 +161,35 @@ function weeklyResult(rows, { zeroIsMissing = false } = {}) {
   };
 }
 
+function fillNationalRateFromCounts(result, numerator, denominator) {
+  const average = result.average.map((value, index) => {
+    if (value !== null) return value;
+
+    const numeratorValue = numerator.average[index];
+    const denominatorValue = denominator.average[index];
+    if (
+      numeratorValue === null ||
+      denominatorValue === null ||
+      denominatorValue <= 0
+    ) {
+      return null;
+    }
+
+    return round1((numeratorValue / denominatorValue) * 100);
+  });
+  const nationalLatestWeek = average.reduce(
+    (latest, value, index) => (value === null ? latest : index + 1),
+    0,
+  );
+
+  return {
+    ...result,
+    average,
+    nationalLatestWeek,
+    latestWeek: Math.max(result.latestWeek, nationalLatestWeek),
+  };
+}
+
 function quarterlyResult(rows) {
   const headerIndex = rows.findIndex((row) => clean(row[0]) === "RDM코드");
   if (headerIndex < 0) throw new Error("RDM코드 헤더를 찾지 못했습니다.");
@@ -220,7 +251,13 @@ const vocSentMax = Math.max(
 const delivery = weeklyResult(loaded.delivery);
 const testDrive = weeklyResult(loaded.testDrive);
 const emergency = weeklyResult(loaded.emergency);
-const app = weeklyResult(loaded.app);
+const appRegistered = weeklyResult(loaded.appRegistered);
+const appEligible = weeklyResult(loaded.appEligible);
+const app = fillNationalRateFromCounts(
+  weeklyResult(loaded.app),
+  appRegistered,
+  appEligible,
+);
 const actionPlan = quarterlyResult(loaded.actionPlan);
 const actionPlanWeekly = expandQuarterlyResult(actionPlan);
 const syncedAt = new Date().toISOString();
