@@ -2523,7 +2523,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.header-status-row \.header-status-item:active\s*\{[^}]*border-color:\s*rgba\(139, 197, 223, 0\.78\);[^}]*background:\s*rgba\(54, 142, 184, 0\.46\);/,
+    /\.header-status-row \.header-status-item:active,[\s\S]*?\.header-status-row \.dashboard-logout-button:active\s*\{[^}]*border-color:\s*rgba\(139, 197, 223, 0\.78\);[^}]*background:\s*rgba\(54, 142, 184, 0\.46\);[^}]*transform:\s*scale\(0\.975\);/,
   );
   assert.match(
     detailCss,
@@ -4697,7 +4697,19 @@ test("limits header hover feedback to pointer devices", async () => {
   );
   assert.match(
     css,
-    /@media \(hover: hover\) and \(pointer: fine\)\s*\{\s*\.header-status-row \.dashboard-logout-button:hover,[\s\S]*?\.header-status-row \.header-status-item--guide:hover[\s\S]*?\.header-status-row \.header-status-item:active/,
+    /@media \(hover: hover\) and \(pointer: fine\)\s*\{\s*\.header-status-row \.dashboard-logout-button:hover,[\s\S]*?\.header-status-row \.header-status-item--guide:hover/,
+  );
+  assert.match(
+    css,
+    /\.header-status-item,[\s\S]*?\.dashboard-logout-button\s*\{[^}]*touch-action:\s*manipulation;[^}]*transform 90ms ease;/,
+  );
+  assert.match(
+    css,
+    /\.header-status-row \.header-status-item:active,[\s\S]*?\.dashboard-logout-button:active\s*\{[^}]*box-shadow:[^}]*transform:\s*scale\(0\.975\);/,
+  );
+  assert.match(
+    css,
+    /\.analysis-admin-entry:active\s*\{[^}]*box-shadow:[^}]*transform:\s*scale\(0\.975\);[\s\S]*?\.analysis-admin-entry:active \.analysis-admin-icon\s*\{[^}]*transform:\s*scale\(0\.9\);/,
   );
   assert.match(
     headerLeadSource,

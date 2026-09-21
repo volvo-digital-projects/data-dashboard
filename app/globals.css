@@ -376,7 +376,14 @@ html {
     linear-gradient(145deg, rgba(18, 65, 86, 0.88), rgba(6, 36, 52, 0.94));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   text-decoration: none;
-  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+  transform-origin: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease,
+    box-shadow 120ms ease,
+    transform 90ms ease;
 }
 
 .analysis-header.has-admin-entry > .analysis-context {
@@ -407,6 +414,22 @@ html {
 .analysis-admin-entry:focus-visible {
   outline: 2px solid #f0c56e;
   outline-offset: 2px;
+}
+
+.analysis-admin-entry:active {
+  border-color: rgba(240, 197, 110, 0.72);
+  box-shadow:
+    inset 0 0 0 1px rgba(240, 197, 110, 0.18),
+    inset 0 4px 10px rgba(2, 21, 33, 0.28);
+  transform: scale(0.975);
+}
+
+.analysis-admin-entry .analysis-admin-icon {
+  transition: transform 90ms ease;
+}
+
+.analysis-admin-entry:active .analysis-admin-icon {
+  transform: scale(0.9);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -16624,11 +16647,15 @@ body {
   font-weight: 620;
   letter-spacing: -0.015em;
   white-space: nowrap;
+  transform-origin: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     border-color 90ms ease,
     color 90ms ease,
     background-color 90ms ease,
-    box-shadow 90ms ease;
+    box-shadow 90ms ease,
+    transform 90ms ease;
 }
 
 button.header-status-item {
@@ -16739,6 +16766,11 @@ button.header-status-item {
   height: 5px;
 }
 
+.header-status-row .header-status-icon,
+.header-status-row .dashboard-logout-icon {
+  transition: transform 90ms ease;
+}
+
 .header-status-row .dashboard-logout-button:focus-visible,
 .header-status-row .header-status-item--guide:focus-visible {
   border-color: rgba(215, 239, 248, 0.42);
@@ -16754,14 +16786,22 @@ button.header-status-item {
     background: rgba(225, 242, 249, 0.1);
   }
 
-  .header-status-row .header-status-item:active {
-    border-color: rgba(139, 197, 223, 0.78);
-    color: #ffffff;
-    background: rgba(54, 142, 184, 0.46);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 0 0 1px rgba(91, 169, 205, 0.18);
-  }
+}
+
+.header-status-row .header-status-item:active,
+.header-status-row .dashboard-logout-button:active {
+  border-color: rgba(139, 197, 223, 0.78);
+  color: #ffffff;
+  background: rgba(54, 142, 184, 0.46);
+  box-shadow:
+    inset 0 0 0 1px rgba(194, 225, 238, 0.2),
+    inset 0 4px 10px rgba(2, 21, 33, 0.2);
+  transform: scale(0.975);
+}
+
+.header-status-row .header-status-item:active .header-status-icon,
+.header-status-row .dashboard-logout-button:active .dashboard-logout-icon {
+  transform: scale(0.9);
 }
 
 @media (max-width: 760px) {
