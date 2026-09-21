@@ -1599,8 +1599,8 @@ function WeeklyTrend({
     { label: "Q3", range: "W27–W39(13주)" },
     { label: "Q4", range: "W40–W52(13주)" },
   ];
-  const averageAt = (week: number) =>
-    averageSeries?.[week - 1] ?? average;
+  const averageAt = (week: number): number | null =>
+    averageSeries ? (averageSeries[week - 1] ?? null) : average;
   const actualAt = (week: number) => weeklySeries?.[week - 1] ?? null;
   const labelBaselineY = (
     pointY: number,
@@ -1631,11 +1631,12 @@ function WeeklyTrend({
   };
   const actualValueLabelY = (point: { week: number; value: number }) => {
     const pointY = actualY(point.value);
-    const pairedPointY = y(averageAt(point.week));
+    const pairedAverage = averageAt(point.week);
+    const pairedPointY = pairedAverage === null ? null : y(pairedAverage);
     return labelBaselineY(
       pointY,
       pairedPointY,
-      pointY <= pairedPointY ? "above" : "below",
+      pairedPointY === null || pointY <= pairedPointY ? "above" : "below",
     );
   };
   const nationalValueLabelY = (point: { week: number; value: number }) => {
@@ -1909,9 +1910,11 @@ function WeeklyTrend({
                         <title>
                           {`${point.label} ${displayShowroomName(
                             showroom.showroom,
-                          )} 실제값 ${displayTrendNumber(point.value)}점 · 전국 평균 ${displayTrendNumber(
-                            averageAt(point.week),
-                          )}점`}
+                          )} 실제값 ${displayTrendNumber(point.value)}점${
+                            averageAt(point.week) === null
+                              ? ""
+                              : ` · 전국 평균 ${displayTrendNumber(averageAt(point.week))}점`
+                          }`}
                         </title>
                       </rect>
                     ) : (
@@ -1922,9 +1925,11 @@ function WeeklyTrend({
                         className="actual-quarter-point"
                       >
                         <title>
-                          {`${point.label} ${displayTrendNumber(point.value)}점 · 전국 평균 ${displayTrendNumber(
-                            averageAt(point.week),
-                          )}점`}
+                          {`${point.label} ${displayTrendNumber(point.value)}점${
+                            averageAt(point.week) === null
+                              ? ""
+                              : ` · 전국 평균 ${displayTrendNumber(averageAt(point.week))}점`
+                          }`}
                         </title>
                       </circle>
                     )}
@@ -2037,8 +2042,9 @@ function WeeklyTrend({
                 null;
               const isEntered = value !== null;
               const isMissing = week <= latestWeek && value === null;
+              const weekAverage = averageAt(week);
               const isWarning =
-                value !== null && value < averageAt(week);
+                value !== null && weekAverage !== null && value < weekAverage;
               const status = isWarning
                 ? "warning"
                 : isEntered
@@ -2055,9 +2061,11 @@ function WeeklyTrend({
                   title={
                     value === null
                       ? `${label} ${isMissing ? "데이터 없음" : "입력 예정"}`
-                      : `${label} ${displayTrendNumber(value)}점 · 전국 평균 ${displayTrendNumber(
-                          averageAt(week),
-                        )}점`
+                      : `${label} ${displayTrendNumber(value)}점${
+                          weekAverage === null
+                            ? ""
+                            : ` · 전국 평균 ${displayTrendNumber(weekAverage)}점`
+                        }`
                   }
                 >
                   {label}

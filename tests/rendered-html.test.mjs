@@ -6263,3 +6263,19 @@ test("keeps ranking metadata one pixel larger without changing row geometry", as
     /\.analysis-ranking-list > div\s*\{[^}]*min-height:\s*40px;[^}]*padding:\s*5px 8px;/,
   );
 });
+
+test("does not substitute the quarter average for missing weekly national CX data", async () => {
+  const dashboardSource = await readFile(
+    new URL("../app/Dashboard.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(
+    dashboardSource,
+    /averageSeries \? \(averageSeries\[week - 1\] \?\? null\) : average/,
+  );
+  assert.doesNotMatch(
+    dashboardSource,
+    /averageSeries\?\.\[week - 1\] \?\? average/,
+  );
+});
