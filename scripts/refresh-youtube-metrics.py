@@ -3,12 +3,15 @@ import concurrent.futures
 import copy
 import datetime
 import json
+import os
+import time
 from pathlib import Path
 import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "app/data/youtube-creators.json"
 EXPECTED_CREATOR_ENTRIES = 12
+MINIMUM_REFRESH_INTERVAL = datetime.timedelta(minutes=55)
 
 def validate_refresh_scope(payload):
     creators = payload.get('creators', [])
@@ -22,6 +25,26 @@ def validate_refresh_scope(payload):
     if None in referenced_ids or referenced_ids != set(channel_ids):
         raise ValueError("Every creator entry must reference exactly one collected channel")
     return len(creators), len(channels)
+
+def refresh_due(payload, now=None, force=False):
+    if force:
+        return True
+    checked_at = payload.get('lastSuccessfulRefreshAt')
+    if not checked_at:
+        return True
+    current = now or datetime.datetime.now(datetime.timezone.utc)
+    previous = datetime.datetime.fromisoformat(checked_at)
+    return current - previous.astimezone(datetime.timezone.utc) >= MINIMUM_REFRESH_INTERVAL
+
+def collect_with_retry(channel, collect, attempts=3, pause=time.sleep):
+    fresh = None
+    for attempt in range(attempts):
+        fresh = collect(channel['url'])
+        if not fresh.get('errors') and fresh.get('channelId') == channel['id']:
+            return fresh
+        if attempt + 1 < attempts:
+            pause(2 ** attempt)
+    return fresh
 
 def merge_channel(old, fresh, shared=False):
     if fresh.get("errors") or fresh.get("channelId") != old["id"]:
@@ -65,13 +88,18 @@ def daily_close(original, checked):
 def main():
     original = json.loads(TARGET.read_text(encoding='utf-8'))
     creator_count, channel_count = validate_refresh_scope(original)
+    checked_at = datetime.datetime.now(datetime.timezone.utc)
+    force = os.environ.get('FORCE_YOUTUBE_REFRESH') == '1'
+    if not refresh_due(original, checked_at, force):
+        print(f"Latest complete snapshot is less than {MINIMUM_REFRESH_INTERVAL.seconds // 60} minutes old; skipping.")
+        return
     collect = runpy.run_path(str(ROOT / 'scripts/collect-youtube-channels.py'))['collect']
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        results = list(pool.map(lambda channel: collect(channel['url']), original['channels']))
+        results = list(pool.map(lambda channel: collect_with_retry(channel, collect), original['channels']))
     updated = copy.deepcopy(original)
     updated['channels'] = [merge_channel(old, fresh, sum(p['channelId']==old['id'] for p in original['creators'])>1)
                            for old, fresh in zip(original['channels'], results)]
-    checked = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    checked = checked_at.isoformat()
     updated['dailyClose'] = daily_close(original, checked)
     updated['lastSuccessfulRefreshAt'] = checked
     for channel in updated['channels']:

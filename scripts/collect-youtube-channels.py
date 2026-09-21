@@ -11,7 +11,10 @@ def nodes(v, key):
         for x in v: yield from nodes(x, key)
 def page(url):
     localized = url + ('&' if '?' in url else '?') + 'hl=ko&gl=KR'
-    request = urllib.request.Request(localized, headers={'Accept-Language':'ko-KR,ko;q=0.9'})
+    request = urllib.request.Request(localized, headers={
+        'Accept-Language':'ko-KR,ko;q=0.9',
+        'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140.0 Safari/537.36',
+    })
     html = urllib.request.urlopen(request, timeout=30).read().decode()
     m = re.search(r'var ytInitialData = (.*?);</script>',html)
     data=json.loads(m.group(1))

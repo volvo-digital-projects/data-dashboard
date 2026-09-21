@@ -1,4 +1,5 @@
 import copy
+import datetime
 import runpy
 import unittest
 from pathlib import Path
@@ -6,6 +7,8 @@ from pathlib import Path
 refresh_module = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'scripts/refresh-youtube-metrics.py'))
 merge = refresh_module['merge_channel']
 validate_refresh_scope = refresh_module['validate_refresh_scope']
+refresh_due = refresh_module['refresh_due']
+collect_with_retry = refresh_module['collect_with_retry']
 
 class RefreshTests(unittest.TestCase):
     def setUp(self):
@@ -32,5 +35,25 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(validate_refresh_scope(payload), (12, 11))
         payload['creators'].pop()
         with self.assertRaises(ValueError): validate_refresh_scope(payload)
+    def test_refreshes_hourly_without_duplicate_watchdog_runs(self):
+        now = datetime.datetime(2026, 9, 21, 9, 0, tzinfo=datetime.timezone.utc)
+        payload = dict(lastSuccessfulRefreshAt=(now - datetime.timedelta(minutes=54)).isoformat())
+        self.assertFalse(refresh_due(payload, now))
+        payload['lastSuccessfulRefreshAt'] = (now - datetime.timedelta(minutes=55)).isoformat()
+        self.assertTrue(refresh_due(payload, now))
+        self.assertTrue(refresh_due(payload, now, force=True))
+    def test_retries_transient_channel_identity_failures(self):
+        responses = iter([
+            dict(channelId=None, errors=[]),
+            dict(channelId='channel', errors=[]),
+        ])
+        calls = []
+        result = collect_with_retry(
+            dict(id='channel', url='https://www.youtube.com/@channel'),
+            lambda _url: next(responses),
+            pause=lambda delay: calls.append(delay),
+        )
+        self.assertEqual(result['channelId'], 'channel')
+        self.assertEqual(calls, [1])
 
 if __name__ == '__main__': unittest.main()

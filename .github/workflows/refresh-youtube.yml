@@ -2,7 +2,9 @@ name: Refresh YouTube metrics hourly
 
 on:
   schedule:
-    - cron: "17 * * * *"
+    # Two watchdog opportunities per hour compensate for delayed/dropped GitHub
+    # schedules. The collector itself enforces a 55-minute minimum interval.
+    - cron: "7,37 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,14 +26,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Collect and validate all public channels
+        id: collect
+        env:
+          FORCE_YOUTUBE_REFRESH: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+        run: |
+          python scripts/refresh-youtube-metrics.py
+          if git diff --quiet -- app/data/youtube-creators.json; then
+            echo "refreshed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "refreshed=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-node@v4
+        if: steps.collect.outputs.refreshed == 'true'
         with:
           node-version: '22.13.0'
           cache: npm
-      - run: npm ci
-      - name: Collect and validate all public channels
-        run: python scripts/refresh-youtube-metrics.py
+      - if: steps.collect.outputs.refreshed == 'true'
+        run: npm ci
       - name: Refresh public comments when API is configured
+        if: steps.collect.outputs.refreshed == 'true'
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
@@ -41,10 +55,13 @@ jobs:
             echo "YouTube API key not configured; retaining reviewed sample / last snapshot."
           fi
       - name: Verify dashboard and data
+        if: steps.collect.outputs.refreshed == 'true'
         run: |
           python -m unittest discover -s tests -p "test_youtube*.py"
           npm test
       - name: Save verified snapshot on main
+        id: publish
+        if: steps.collect.outputs.refreshed == 'true'
         run: |
           git config user.name "Data Dashboard Auto Update"
           git config user.email "actions@users.noreply.github.com"
@@ -56,9 +73,13 @@ jobs:
             git restore --worktree public/dashboard-release.json
             git pull --rebase origin main
             git push origin HEAD:main
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
       # GITHUB_TOKEN pushes do not trigger other push workflows.
       - name: Deploy updated snapshot
+        if: steps.publish.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy-pages.yml --ref main

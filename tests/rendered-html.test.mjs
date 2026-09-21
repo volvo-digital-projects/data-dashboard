@@ -318,6 +318,9 @@ test("shows subscriber count and percentage changes and keeps metric refresh com
   assert.match(creatorSource, /Math\.abs\(difference\)\.toLocaleString\("ko-KR"\)\}명 · \$\{changeRate\(current, previous\)\}/);
   assert.match(creatorSource, /className="yt-subscriber-change"[\s\S]*?className=\{subscriberChangeTone/);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
+  assert.match(workflow, /cron: "7,37 \* \* \* \*"/);
+  assert.match(workflow, /steps\.collect\.outputs\.refreshed == 'true'/);
+  assert.match(workflow, /steps\.publish\.outputs\.changed == 'true'/);
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
   assert.match(creatorSource, /12명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 \(KST\)/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);

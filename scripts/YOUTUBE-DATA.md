@@ -2,7 +2,7 @@
 
 ## Hourly public metrics
 
-`refresh-youtube.yml` runs every hour at minute 17 (GitHub schedules may be delayed),
+`refresh-youtube.yml` has watchdog opportunities at minutes 7 and 37 because GitHub schedules may be delayed or dropped. The collector enforces a 55-minute minimum interval, so verified data is still published at most once per hour,
 or via workflow_dispatch. It reads the existing 12-person roster / 11 unique channels,
 collects complete public long/short catalogs, and rejects the entire refresh if any
 channel identity or count is missing. The previous snapshot stays intact on failure.
