@@ -43,9 +43,14 @@ class RefreshTests(unittest.TestCase):
         self.assertTrue(refresh_due(payload, now))
         self.assertTrue(refresh_due(payload, now, force=True))
     def test_retries_transient_channel_identity_failures(self):
+        complete = dict(
+            channelId='channel', errors=[], longComplete=True, shortComplete=True,
+            videoCount=1, videos=[dict(id='video')],
+        )
         responses = iter([
             dict(channelId=None, errors=[]),
-            dict(channelId='channel', errors=[]),
+            dict(complete, longComplete=False),
+            complete,
         ])
         calls = []
         result = collect_with_retry(
@@ -54,6 +59,6 @@ class RefreshTests(unittest.TestCase):
             pause=lambda delay: calls.append(delay),
         )
         self.assertEqual(result['channelId'], 'channel')
-        self.assertEqual(calls, [1])
+        self.assertEqual(calls, [1, 2])
 
 if __name__ == '__main__': unittest.main()

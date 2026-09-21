@@ -36,11 +36,22 @@ def refresh_due(payload, now=None, force=False):
     previous = datetime.datetime.fromisoformat(checked_at)
     return current - previous.astimezone(datetime.timezone.utc) >= MINIMUM_REFRESH_INTERVAL
 
+def collection_complete(channel, fresh):
+    videos = fresh.get('videos', [])
+    return (
+        not fresh.get('errors')
+        and fresh.get('channelId') == channel['id']
+        and fresh.get('longComplete') is True
+        and fresh.get('shortComplete') is True
+        and len(videos) == fresh.get('videoCount')
+        and len({video.get('id') for video in videos}) == len(videos)
+    )
+
 def collect_with_retry(channel, collect, attempts=3, pause=time.sleep):
     fresh = None
     for attempt in range(attempts):
         fresh = collect(channel['url'])
-        if not fresh.get('errors') and fresh.get('channelId') == channel['id']:
+        if collection_complete(channel, fresh):
             return fresh
         if attempt + 1 < attempts:
             pause(2 ** attempt)
