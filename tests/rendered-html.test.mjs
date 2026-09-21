@@ -318,7 +318,7 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /Math\.abs\(difference\)\.toLocaleString\("ko-KR"\)\}명 · \$\{changeRate\(current, previous\)\}/);
   assert.match(creatorSource, /className="yt-subscriber-change"[\s\S]*?className=\{subscriberChangeTone/);
   assert.match(creatorSource, /const priorDaySubscribers=dailyClose\?\.channelSubscribers\[person\.channelId\] \?\? null;/);
-  assert.match(creatorSource, />전일 대비 <b className=\{subscriberChangeTone\(person\.channel\.subscribers, priorDaySubscribers\)\}/);
+  assert.match(creatorSource, /<span>전일 대비<\/span><b className=\{subscriberChangeTone\(person\.channel\.subscribers, priorDaySubscribers\)\}/);
   assert.doesNotMatch(creatorSource, />직전 대비 /);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
   assert.match(workflow, /cron: "7,37 \* \* \* \*"/);
@@ -328,7 +328,7 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /12명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 \(KST\)/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
   assert.match(workflow, /git commit -m "Auto update hourly YouTube channel metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
-  assert.match(creatorCss, /\.yt-subscriber-change b\.positive\{color:#247d9b\}[\s\S]*?\.yt-subscriber-change b\.negative\{color:#c95f55\}/);
+  assert.match(creatorCss, /\.yt-subscriber-change\{display:grid;grid-template-columns:34px 61px[\s\S]*?width:98px[\s\S]*?\.yt-subscriber-change b\.positive\{color:#247d9b;background:linear-gradient\(135deg,rgba\(38,126,164,\.12\)[\s\S]*?\.yt-subscriber-change b\.negative\{color:#c95f55;background:linear-gradient\(135deg,rgba\(201,95,85,\.14\)/);
   assert.match(globalCss, /\.dealer-sales-comparison \.difference\.positive,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.positive[\s\S]*?color: #247d9b;/);
   assert.match(globalCss, /\.dealer-sales-comparison \.difference\.negative,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.negative[\s\S]*?color: #c95f55;/);
 });
