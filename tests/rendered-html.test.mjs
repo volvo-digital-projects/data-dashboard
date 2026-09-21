@@ -307,7 +307,7 @@ test("softly lands fast wheel and touch scrolling at the creator section before 
   assert.doesNotMatch(creatorSource, /scroller\.addEventListener\("(?:scroll|wheel|touchmove)"/);
 });
 
-test("shows subscriber count and percentage changes and keeps metric refresh commits data-only", async () => {
+test("shows previous-day subscriber changes and keeps metric refresh commits data-only", async () => {
   const [creatorSource, workflow, creatorCss, globalCss] = await Promise.all([
     readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8"),
     readFile(new URL("../.github/workflows/refresh-youtube.yml", import.meta.url), "utf8"),
@@ -317,6 +317,9 @@ test("shows subscriber count and percentage changes and keeps metric refresh com
   assert.match(creatorSource, /const changeRate = [\s\S]*?rate > 0 && rate < \.1 \? rate\.toFixed\(2\) : rate\.toFixed\(1\)/);
   assert.match(creatorSource, /Math\.abs\(difference\)\.toLocaleString\("ko-KR"\)\}명 · \$\{changeRate\(current, previous\)\}/);
   assert.match(creatorSource, /className="yt-subscriber-change"[\s\S]*?className=\{subscriberChangeTone/);
+  assert.match(creatorSource, /const priorDaySubscribers=dailyClose\?\.channelSubscribers\[person\.channelId\] \?\? null;/);
+  assert.match(creatorSource, />전일 대비 <b className=\{subscriberChangeTone\(person\.channel\.subscribers, priorDaySubscribers\)\}/);
+  assert.doesNotMatch(creatorSource, />직전 대비 /);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
   assert.match(workflow, /cron: "7,37 \* \* \* \*"/);
   assert.match(workflow, /steps\.collect\.outputs\.refreshed == 'true'/);

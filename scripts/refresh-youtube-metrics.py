@@ -92,9 +92,10 @@ def daily_close(original, checked):
         return saved
     latest = min(datetime.datetime.fromisoformat(c['checkedAt']) for c in original['channels'])
     if latest.astimezone(kst).date() != date - datetime.timedelta(days=1):
-        return dict(date=date.isoformat(), subscribers=None, videos=None, checkedAt=None)
+        return dict(date=date.isoformat(), subscribers=None, videos=None, checkedAt=None, channelSubscribers={})
     return dict(date=date.isoformat(), subscribers=sum(c['subscribers'] for c in original['channels']),
-                videos=sum(c['long']['count'] + c['short']['count'] for c in original['channels']), checkedAt=latest.isoformat())
+                videos=sum(c['long']['count'] + c['short']['count'] for c in original['channels']), checkedAt=latest.isoformat(),
+                channelSubscribers={c['id']:c['subscribers'] for c in original['channels']})
 
 def main():
     original = json.loads(TARGET.read_text(encoding='utf-8'))

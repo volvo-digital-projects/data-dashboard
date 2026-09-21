@@ -9,6 +9,7 @@ merge = refresh_module['merge_channel']
 validate_refresh_scope = refresh_module['validate_refresh_scope']
 refresh_due = refresh_module['refresh_due']
 collect_with_retry = refresh_module['collect_with_retry']
+daily_close = refresh_module['daily_close']
 
 class RefreshTests(unittest.TestCase):
     def setUp(self):
@@ -60,5 +61,22 @@ class RefreshTests(unittest.TestCase):
         )
         self.assertEqual(result['channelId'], 'channel')
         self.assertEqual(calls, [1, 2])
+    def test_daily_close_freezes_each_channel_at_the_previous_day_final_snapshot(self):
+        checked = '2026-09-21T01:00:00+00:00'
+        prior_checked = '2026-09-20T14:50:00+00:00'
+        original = dict(
+            dailyClose=dict(date='2026-09-20'),
+            channels=[
+                dict(id='a', checkedAt=prior_checked, subscribers=10, long=dict(count=1), short=dict(count=2)),
+                dict(id='b', checkedAt=prior_checked, subscribers=20, long=dict(count=3), short=dict(count=4)),
+            ],
+        )
+        close = daily_close(original, checked)
+        self.assertEqual(close['subscribers'], 30)
+        self.assertEqual(close['videos'], 10)
+        self.assertEqual(close['channelSubscribers'], {'a':10, 'b':20})
+        original['dailyClose'] = close
+        original['channels'][0]['subscribers'] = 99
+        self.assertEqual(daily_close(original, '2026-09-21T05:00:00+00:00'), close)
 
 if __name__ == '__main__': unittest.main()

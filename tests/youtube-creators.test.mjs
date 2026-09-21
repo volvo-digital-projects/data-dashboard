@@ -68,6 +68,12 @@ test('Dealer and gender distribution reconcile to the supplied roster',()=>{
  assert.equal(data.creators.filter(p=>p.gender==='남성').length,7);
  assert.equal(data.creators.filter(p=>p.gender==='여성').length,5);
 });
+test('Per-channel subscriber changes share the previous-day final close baseline',()=>{
+ assert.equal(Object.keys(data.dailyClose.channelSubscribers).length,data.channels.length);
+ assert.equal(new Set(Object.keys(data.dailyClose.channelSubscribers)).size,data.channels.length);
+ assert.equal(Object.values(data.dailyClose.channelSubscribers).reduce((sum,value)=>sum+value,0),data.dailyClose.subscribers);
+ for(const channel of data.channels)assert.ok(Number.isFinite(data.dailyClose.channelSubscribers[channel.id]),channel.id);
+});
 test('Curated comments retain evidence links without raw author identities or ability scores',()=>{
  for(const item of data.evidence){
   assert.ok(data.creators.some(p=>p.name===item.name));
