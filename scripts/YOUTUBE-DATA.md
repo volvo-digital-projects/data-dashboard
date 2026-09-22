@@ -3,9 +3,10 @@
 ## Hourly public metrics
 
 `refresh-youtube.yml` has staggered watchdog opportunities at minutes 7, 22, 37 and 52 because GitHub schedules may be delayed or dropped. The collector enforces a 55-minute minimum interval, so verified data is still published at most once per hour,
-or via workflow_dispatch. It reads the existing 12-person roster / 11 unique channels,
+or via workflow_dispatch. It reads the existing 13-person roster / 12 unique channels,
 collects complete public long/short catalogs, and rejects the entire refresh if any
 channel identity or count is missing after three per-channel retries. The previous snapshot stays intact on failure.
+The Kim Yeso channel contains historical MINI material; only titles that explicitly identify Volvo or a Volvo model are included in its video, view and comment metrics.
 It preserves reviewed comments and known presenter attribution; new shared videos
 remain unassigned. The verified Sales-DMS staff-sales snapshot is refreshed and published
 atomically with YouTube; VOC is not refreshed by this workflow.

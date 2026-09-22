@@ -4,14 +4,27 @@ import copy
 import datetime
 import json
 import os
+import re
 import time
 from pathlib import Path
 import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "app/data/youtube-creators.json"
-EXPECTED_CREATOR_ENTRIES = 12
+EXPECTED_CREATOR_ENTRIES = 13
 MINIMUM_REFRESH_INTERVAL = datetime.timedelta(minutes=55)
+VOLVO_VIDEO_TITLE = re.compile(
+    r'(?:볼보|VOLVO|\b(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60|V90|C40)\b)',
+    re.IGNORECASE,
+)
+
+def scoped_videos(channel, videos):
+    scope = channel.get('videoBrandFilter')
+    if not scope:
+        return videos
+    if scope != 'volvo':
+        raise ValueError(f"Unknown video brand filter: {scope}")
+    return [video for video in videos if VOLVO_VIDEO_TITLE.search(video.get('title', ''))]
 
 def validate_refresh_scope(payload):
     creators = payload.get('creators', [])
@@ -24,6 +37,8 @@ def validate_refresh_scope(payload):
     referenced_ids = {creator.get('channelId') for creator in creators}
     if None in referenced_ids or referenced_ids != set(channel_ids):
         raise ValueError("Every creator entry must reference exactly one collected channel")
+    if any(channel.get('videoBrandFilter') not in (None, 'volvo') for channel in channels):
+        raise ValueError("Unknown video brand filter")
     return len(creators), len(channels)
 
 def refresh_due(payload, now=None, force=False):
@@ -38,7 +53,10 @@ def refresh_due(payload, now=None, force=False):
 
 def collection_complete(channel, fresh):
     videos = fresh.get('videos', [])
-    public_counts = [fresh.get('subscribers'), fresh.get('totalViews'), *[video.get('views') for video in videos]]
+    selected = scoped_videos(channel, videos)
+    public_counts = [fresh.get('subscribers'), *[video.get('views') for video in selected]]
+    if not channel.get('videoBrandFilter'):
+        public_counts.append(fresh.get('totalViews'))
     return (
         not fresh.get('errors')
         and fresh.get('channelId') == channel['id']
@@ -62,23 +80,30 @@ def collect_with_retry(channel, collect, attempts=3, pause=time.sleep):
 def merge_channel(old, fresh, shared=False):
     if fresh.get("errors") or fresh.get("channelId") != old["id"]:
         raise ValueError(f"Channel unavailable or identity mismatch: {old['id']}")
-    videos = fresh.get("videos", [])
-    if not fresh.get("longComplete") or not fresh.get("shortComplete") or len(videos) != fresh.get("videoCount"):
+    all_videos = fresh.get("videos", [])
+    if not fresh.get("longComplete") or not fresh.get("shortComplete") or len(all_videos) != fresh.get("videoCount"):
         raise ValueError(f"Incomplete public catalog: {old['id']}")
-    if len({v['id'] for v in videos}) != len(videos):
+    if len({v['id'] for v in all_videos}) != len(all_videos):
         raise ValueError("Duplicate public video IDs")
-    for value in [fresh.get("subscribers"), fresh.get("totalViews"), *[v.get("views") for v in videos]]:
+    videos = scoped_videos(old, all_videos)
+    values = [fresh.get("subscribers"), *[v.get("views") for v in videos]]
+    if not old.get('videoBrandFilter'):
+        values.append(fresh.get("totalViews"))
+    for value in values:
         if not isinstance(value, (int, float)) or value < 0:
             raise ValueError(f"Missing public counts: {old['id']}")
     if any(v.get("kind") not in ("long", "short") for v in videos):
         raise ValueError("Unknown video format")
     result = copy.deepcopy(old)
     result.update(previousSubscribers=old.get('subscribers'), previousCheckedAt=old.get('checkedAt'))
-    result.update(subscribers=fresh['subscribers'], totalViews=fresh['totalViews'], videoCount=len(videos), viewsSample=len(videos),
+    total_views = sum(v['views'] for v in videos) if old.get('videoBrandFilter') else fresh['totalViews']
+    result.update(subscribers=fresh['subscribers'], totalViews=total_views, videoCount=len(videos), viewsSample=len(videos),
                   averageViews=round(sum(v['views'] for v in videos)/len(videos)) if videos else None)
     for kind in ('long', 'short'):
         group = [v for v in videos if v['kind'] == kind]
         result[kind] = dict(count=len(group), viewsSample=len(group), averageViews=round(sum(v['views'] for v in group)/len(group)) if group else None)
+    if old.get('videoBrandFilter'):
+        result['scopeVideoIds'] = [v['id'] for v in videos]
     if shared:
         reviewed = {v['id']:v for v in old['sharedVideos']}
         result['sharedVideos'] = [dict(id=v['id'], title=v['title'], kind=v['kind'], views=v['views'],

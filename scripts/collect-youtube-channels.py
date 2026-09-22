@@ -71,8 +71,10 @@ if __name__=='__main__':
     import openpyxl
     workbook=openpyxl.load_workbook(sys.argv[1],data_only=True)
     rows=[r for r in list(workbook.active.values)[3:] if r[2]]
-    roster=[{'dealer':r[0],'showroom':r[1],'name':r[2],'gender':r[3],'channelUrl':r[4]} for r in rows]
+    roster=[{'dealer':r[0],'showroom':r[1],'name':r[2],'gender':'여성' if r[3]=='예성' else r[3],'channelUrl':r[5].removesuffix('/shorts')} for r in rows]
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool: channels=list(pool.map(collect,dict.fromkeys(r['channelUrl'] for r in roster)))
-    result={'rosterSource':Path(sys.argv[1]).name,'rosterDate':'2026-09-15','roster':roster,'channels':channels}
+    supplied_date=workbook.active['F1'].value
+    roster_date=supplied_date.date().isoformat() if isinstance(supplied_date, datetime.datetime) else str(supplied_date)
+    result={'rosterSource':Path(sys.argv[1]).name,'rosterDate':roster_date,'roster':roster,'channels':channels}
     out=Path(sys.argv[2]);out.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     for c in channels: print(c.get('title'),c.get('subscribers'),c.get('videoCount'),len(c['videos']),c.get('longComplete'),c.get('shortComplete'),c['errors'])

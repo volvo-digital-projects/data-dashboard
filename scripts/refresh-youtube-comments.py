@@ -66,7 +66,7 @@ def pages(api, endpoint, **params):
         seen.add(token)
         params["pageToken"] = token
 
-def collect_channel(api, channel_id):
+def collect_channel(api, channel_id, allowed_video_ids=None):
     found = {}
     coverage = {}
     def add(comment, video_id):
@@ -84,6 +84,8 @@ def collect_channel(api, channel_id):
         snippet = thread["snippet"]
         video_id = snippet.get("videoId")
         if not video_id:  # Exclude legacy channel discussion, which is not a video.
+            continue
+        if allowed_video_ids is not None and video_id not in allowed_video_ids:
             continue
         top = snippet["topLevelComment"]
         add(top, video_id)
@@ -108,7 +110,8 @@ def refresh(key, source, destination):
     api = Api(key)
     channels = {}
     for channel in source["channels"]:
-        channels[channel["id"]] = collect_channel(api, channel["id"])
+        allowed = set(channel.get("scopeVideoIds", [])) if channel.get("videoBrandFilter") else None
+        channels[channel["id"]] = collect_channel(api, channel["id"], allowed)
     output = dict(checkedAt=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                   method="YouTube Data API · 채널 전체 공개 댓글 페이지 및 답글 페이지 순회 · 자동 키워드 분류",
                   channels=channels, apiCalls=api.calls)
@@ -127,4 +130,3 @@ if __name__ == "__main__":
     except RuntimeError as error:
         print(str(error), file=sys.stderr)
         sys.exit(1)
-

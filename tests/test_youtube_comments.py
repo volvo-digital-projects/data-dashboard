@@ -41,6 +41,17 @@ class CommentsTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             module.collect_channel(api, "channel")
 
+    def test_mixed_brand_channel_comments_only_count_scoped_videos(self):
+        def api(endpoint, **params):
+            return {"items":[
+                {"snippet":{"videoId":"volvo", "topLevelComment":comment("v"), "totalReplyCount":0}},
+                {"snippet":{"videoId":"mini", "topLevelComment":comment("m"), "totalReplyCount":0}},
+            ]}
+        result = module.collect_channel(api, "channel", {"volvo"})
+        self.assertEqual(result["total"], 1)
+        self.assertEqual(result["videos"], 1)
+        self.assertEqual(result["coverage"][0]["id"], "volvo")
+
     def test_missing_key_preserves_snapshot(self):
         with tempfile.TemporaryDirectory() as directory:
             destination = Path(directory) / "snapshot.json"
@@ -62,4 +73,3 @@ class CommentsTest(unittest.TestCase):
         self.assertEqual(module.classify("상담 불친절")[0], "suggestion")
         self.assertEqual(module.classify("영상 감사합니다 하지만 아쉽네요")[0], "review")
         self.assertEqual(module.classify("안녕하세요")[0], "other")
-

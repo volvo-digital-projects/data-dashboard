@@ -28,12 +28,12 @@ class RefreshTests(unittest.TestCase):
             fresh=copy.deepcopy(self.fresh)
             fresh[field]=value
             with self.assertRaises(ValueError): merge(self.old, fresh)
-    def test_requires_all_twelve_creator_entries(self):
+    def test_requires_all_thirteen_creator_entries(self):
         payload = dict(
-            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(12)],
-            channels=[dict(id='shared')] + [dict(id=f'channel-{index}') for index in range(2, 12)],
+            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(13)],
+            channels=[dict(id='shared')] + [dict(id=f'channel-{index}') for index in range(2, 13)],
         )
-        self.assertEqual(validate_refresh_scope(payload), (12, 11))
+        self.assertEqual(validate_refresh_scope(payload), (13, 12))
         payload['creators'].pop()
         with self.assertRaises(ValueError): validate_refresh_scope(payload)
     def test_refreshes_hourly_without_duplicate_watchdog_runs(self):
@@ -80,6 +80,23 @@ class RefreshTests(unittest.TestCase):
         )
         self.assertEqual(result['subscribers'], 10)
         self.assertEqual(calls, [1])
+    def test_mixed_brand_channel_counts_only_volvo_titles(self):
+        old = dict(id='channel', checkedAt='old', videoBrandFilter='volvo', sharedVideos=[], commentSamples=0)
+        fresh = dict(
+            channelId='channel', errors=[], longComplete=True, shortComplete=True,
+            videoCount=3, subscribers=873, totalViews=999999,
+            videos=[
+                dict(id='volvo-1', title='볼보 EX90 시승', kind='long', views=2600),
+                dict(id='volvo-2', title='EX30 기능 소개', kind='short', views=1700),
+                dict(id='mini', title='미니쿠퍼 JCW 출고', kind='short', views=70000),
+            ],
+        )
+        output = merge(old, fresh)
+        self.assertEqual(output['videoCount'], 2)
+        self.assertEqual(output['totalViews'], 4300)
+        self.assertEqual(output['long']['count'], 1)
+        self.assertEqual(output['short']['count'], 1)
+        self.assertEqual(output['scopeVideoIds'], ['volvo-1', 'volvo-2'])
     def test_daily_close_freezes_each_channel_at_the_previous_day_final_snapshot(self):
         checked = '2026-09-21T01:00:00+00:00'
         prior_checked = '2026-09-20T14:50:00+00:00'

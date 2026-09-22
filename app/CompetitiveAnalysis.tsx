@@ -94,6 +94,7 @@ const STAFF_YOUTUBE_BADGE_KEYS = new Set([
   "6KR6847:김정호",
   "6KR6861:곽지명",
   "6KR6846:박형진",
+  "6KR6846:김예소",
   "6KR6858:조선별",
   "6KR6852:이규환",
   "6KR6839:박준수",
