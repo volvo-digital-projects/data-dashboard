@@ -17,6 +17,9 @@ const sheets = {
   app: "③-5헤이볼보 앱 가입율(결과)",
   appRegistered: "08☆헤이볼보 앱 가입고객수",
   appEligible: "09☆헤이볼보 앱 전체고객 수",
+  newCarHappyCall: "10☆신차해피콜 이행율",
+  newCarHappyCallResponses: "11☆신차해피콜 총회신건수",
+  newCarHappyCallIssued: "12☆신차해피콜 총발행건수",
 };
 
 const clean = (value) =>
@@ -258,6 +261,15 @@ const app = fillNationalRateFromCounts(
   appRegistered,
   appEligible,
 );
+const newCarHappyCallResponses = weeklyResult(
+  loaded.newCarHappyCallResponses,
+);
+const newCarHappyCallIssued = weeklyResult(loaded.newCarHappyCallIssued);
+const newCarHappyCall = fillNationalRateFromCounts(
+  weeklyResult(loaded.newCarHappyCall),
+  newCarHappyCallResponses,
+  newCarHappyCallIssued,
+);
 const actionPlan = quarterlyResult(loaded.actionPlan);
 const actionPlanWeekly = expandQuarterlyResult(actionPlan);
 const syncedAt = new Date().toISOString();
@@ -329,6 +341,20 @@ const output = {
     average: voc.average,
     byCdsid: voc.byCdsid,
   },
+  happyCall: {
+    newCar: {
+      average: newCarHappyCall.average,
+      byCdsid: newCarHappyCall.byCdsid,
+      responses: {
+        average: newCarHappyCallResponses.average,
+        byCdsid: newCarHappyCallResponses.byCdsid,
+      },
+      issued: {
+        average: newCarHappyCallIssued.average,
+        byCdsid: newCarHappyCallIssued.byCdsid,
+      },
+    },
+  },
   cx: {
     average: cxAverage,
     byCdsid: cxByCdsid,
@@ -387,6 +413,20 @@ const detailsOutput = {
         unit: "건",
         cadence: "weekly",
         ...vocSent,
+      },
+    ],
+  },
+  happyCall: {
+    label: "신차 해피콜 이행률",
+    components: [
+      {
+        key: "newCar",
+        label: "ONE Voice 출고 후 해피콜",
+        weight: "",
+        max: 100,
+        unit: "%",
+        cadence: "weekly",
+        ...newCarHappyCall,
       },
     ],
   },

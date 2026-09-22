@@ -62,6 +62,16 @@ type WeeklyMetricData = {
   voc: {
     byCdsid: Record<string, Array<number | null>>;
   };
+  happyCall: {
+    newCar: {
+      responses: {
+        byCdsid: Record<string, Array<number | null>>;
+      };
+      issued: {
+        byCdsid: Record<string, Array<number | null>>;
+      };
+    };
+  };
 };
 
 type StaffYear = "2023" | "2024" | "2025" | "2026";
@@ -553,6 +563,27 @@ const q3VocScoreOf = (cdsid: string): number | null => {
     ? values.reduce((sum, value) => sum + value, 0) / values.length
     : null;
 };
+const q3HappyCallScoreOf = (cdsid: string): number | null => {
+  const responses = weeklyDashboard.happyCall.newCar.responses.byCdsid[cdsid] ?? [];
+  const issued = weeklyDashboard.happyCall.newCar.issued.byCdsid[cdsid] ?? [];
+  let responseTotal = 0;
+  let issuedTotal = 0;
+
+  for (let index = q3WeekStartIndex; index < q3WeekEndIndex; index += 1) {
+    const responseCount = responses[index];
+    const issuedCount = issued[index];
+    if (
+      typeof responseCount !== "number" ||
+      typeof issuedCount !== "number"
+    ) {
+      continue;
+    }
+    responseTotal += responseCount;
+    issuedTotal += issuedCount;
+  }
+
+  return issuedTotal > 0 ? (responseTotal / issuedTotal) * 100 : null;
+};
 const analysisDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Seoul",
   year: "numeric",
@@ -866,6 +897,8 @@ const cumulativeAnalysisPoint = (item: AnalysisShowroom): AnalysisPoint => {
   const happyQuarterScores = [item.q1?.happyCall, item.happyCall].filter(
     (score): score is number => typeof score === "number",
   );
+  const q3HappyCall = q3HappyCallScoreOf(item.cdsid);
+  if (typeof q3HappyCall === "number") happyQuarterScores.push(q3HappyCall);
   // Average the available quarters for each 100-point metric, then add the two.
   const vocScore = vocQuarterScores.length
     ? vocQuarterScores.reduce((sum, score) => sum + score, 0) / vocQuarterScores.length
@@ -2132,6 +2165,12 @@ export default function CompetitiveAnalysis({
       ? selected.voc + selected.happyCall
       : null;
   const selectedQ3Voc = q3VocScoreOf(selected.cdsid);
+  const selectedQ3HappyCall = q3HappyCallScoreOf(selected.cdsid);
+  const selectedQ3Combined =
+    typeof selectedQ3Voc === "number" &&
+    typeof selectedQ3HappyCall === "number"
+      ? selectedQ3Voc + selectedQ3HappyCall
+      : null;
   const selectedAwardPeriods = v3sAwardPeriods.filter((period) =>
     v3sAwardWinnersByPeriod[period.id]?.includes(selected.cdsid),
   );
@@ -3052,10 +3091,10 @@ export default function CompetitiveAnalysis({
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
-          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.happyCall)}, Q2 ${displayQuarterNumber(selected.happyCall)}, Q3 집계 중, Q4 미집계`}>
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.happyCall)}, Q2 ${displayQuarterNumber(selected.happyCall)}, Q3 ${displayQuarterNumber(selectedQ3HappyCall)}, Q4 미집계`}>
             <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.happyCall)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selected.happyCall)}</strong></span>
-            <span className="pending"><b>Q3</b><strong>집계중</strong></span>
+            <span className="current"><b>Q3</b><strong>{displayQuarterNumber(selectedQ3HappyCall)}</strong></span>
             <span><b>Q4</b></span>
           </p>
           <em
@@ -3079,17 +3118,17 @@ export default function CompetitiveAnalysis({
           <div>
             <span className="analysis-summary-title">
               합산 경쟁력
-              <span className="analysis-quarter-badges" aria-label="Q1, Q2 누적">
-                <b>Q1</b><b>Q2</b>
+              <span className="analysis-quarter-badges" aria-label="Q1, Q2, Q3 누적">
+                <b>Q1</b><b>Q2</b><b>Q3</b>
               </span>
             </span>
             <small>분기별 합산점수 평균</small>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.combined} sequence={2} />
-          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selectedQ1Combined)}, Q2 ${displayQuarterNumber(selectedQ2Combined)}, Q3 집계 중, Q4 미집계`}>
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selectedQ1Combined)}, Q2 ${displayQuarterNumber(selectedQ2Combined)}, Q3 ${displayQuarterNumber(selectedQ3Combined)}, Q4 미집계`}>
             <span><b>Q1</b><strong>{displayQuarterNumber(selectedQ1Combined)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selectedQ2Combined)}</strong></span>
-            <span className="pending"><b>Q3</b><strong>집계중</strong></span>
+            <span className="current"><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Combined)}</strong></span>
             <span><b>Q4</b></span>
           </p>
           <em>

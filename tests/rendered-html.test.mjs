@@ -1052,7 +1052,7 @@ test("orders review staff by hire date with the newest hire last", async () => {
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[^}]*width: 5\.25em;[^}]*flex: 0 0 5\.25em;/);
 });
 
-test("includes the available Q3 VOC score before combining and keeps staff scores legible", async () => {
+test("includes the available Q3 VOC and happy-call scores before combining", async () => {
   const [{ showrooms }, weekly] = await Promise.all([
     readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8").then(JSON.parse),
@@ -1066,8 +1066,17 @@ test("includes the available Q3 VOC score before combining and keeps staff score
       .slice(26, 39)
       .filter((value) => typeof value === "number" && value !== 0);
     const q3Voc = q3Values.length ? mean(q3Values) : null;
+    const q3Responses = weekly.happyCall.newCar.responses.byCdsid[showroom.cdsid]
+      .slice(26, 39)
+      .filter((value) => typeof value === "number")
+      .reduce((sum, value) => sum + value, 0);
+    const q3Issued = weekly.happyCall.newCar.issued.byCdsid[showroom.cdsid]
+      .slice(26, 39)
+      .filter((value) => typeof value === "number")
+      .reduce((sum, value) => sum + value, 0);
+    const q3HappyCall = q3Issued > 0 ? q3Responses / q3Issued * 100 : null;
     const satisfaction = mean([showroom.q1?.voc, showroom.voc, q3Voc]);
-    const happycall = mean([showroom.q1?.happyCall, showroom.happyCall]);
+    const happycall = mean([showroom.q1?.happyCall, showroom.happyCall, q3HappyCall]);
     return { ...showroom, satisfaction, happycall, combined: satisfaction + happycall };
   }).sort((a, b) => b.combined - a.combined || b.satisfaction - a.satisfaction || a.showroom.localeCompare(b.showroom, "ko"));
   for (const [index, showroom] of expected.entries()) {
@@ -1136,7 +1145,7 @@ test("uses the selected showroom's actual comparison values in footer labels", a
   const footer = html.match(/<footer><span>U[^]*?<\/footer>/)?.[0];
   assert.ok(footer);
   assert.match(footer, /<span>U<strong>/);
-  assert.match(footer, /<span>강남대치<strong>190\.1<\/strong>/);
+  assert.match(footer, /<span>강남대치<strong>186\.6<\/strong>/);
   assert.doesNotMatch(footer, /동일 사이즈|누적평균|볼보|합산점수/);
 });
 
@@ -2675,11 +2684,11 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="pending"><b>Q3<\/b><strong>집계중<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>89\.5<\/strong><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
     visibleHtml,
-    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span class="pending"><b>Q3<\/b><strong>집계중<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>179\.1<\/strong><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
     css,
@@ -2706,7 +2715,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /<footer><span>에이치<strong>186\.3<\/strong><\/span><span>강남대치<strong>190\.1<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 3\.8점<\/strong><\/span><\/footer>/,
+    /<footer><span>에이치<strong>184\.7<\/strong><\/span><span>강남대치<strong>186\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 1\.9점<\/strong><\/span><\/footer>/,
   );
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
@@ -2757,15 +2766,15 @@ test("serves the dual-metric competitive analysis sample", async () => {
     visibleHtml,
     /에이치 누적평균 93\.6점 대비 ▼ 3\.6점/,
   );
-  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE Voice 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>100\.0<[^]*?점/);
+  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE Voice 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>96\.5<[^]*?점/);
   assert.match(
     visibleHtml,
-    /에이치 누적평균 92\.7점 대비 ▲ 7\.3점/,
+    /에이치 누적평균 91\.0점 대비 ▲ 5\.5점/,
   );
-  assert.match(visibleHtml, /합산 경쟁력[\s\S]*분기별 합산점수 평균[\s\S]*190\.1/);
+  assert.match(visibleHtml, /합산 경쟁력[\s\S]*분기별 합산점수 평균[\s\S]*186\.6/);
   assert.doesNotMatch(visibleHtml, /2개 분기 · 200점 만점|Q1 93\.1점 \+ Q2 87\.5점|400점 만점/);
-  assert.equal((visibleHtml.match(/aria-label="Q1, Q2 누적"/g) ?? []).length, 1);
-  assert.match(visibleHtml, /에이치 내 2위 \/ 전체 7/);
+  assert.equal((visibleHtml.match(/aria-label="Q1, Q2, Q3 누적"/g) ?? []).length, 1);
+  assert.match(visibleHtml, /에이치 내 4위 \/ 전체 7/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
   assert.match(html, /class="analysis-scatter scatter-motion-settled"/);
@@ -3466,7 +3475,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const showroomHtml = await showroomResponse.text();
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /<footer><span>전국 전시장<strong>186\.9<\/strong><\/span><span>강남대치<strong>190\.1<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 3\.2점<\/strong><\/span><\/footer>/,
+    /<footer><span>전국 전시장<strong>186\.5<\/strong><\/span><span>강남대치<strong>186\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 0\.1점<\/strong><\/span><\/footer>/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
@@ -3484,11 +3493,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
         /class="analysis-rank"><strong>(\d+)<\/strong>/g,
       ),
     ].map((match) => Number(match[1])),
-    [11, 12, 13, 14, 15, 16, 17],
+    [18, 19, 20, 21, 22, 23, 24],
   );
   assert.match(
     showroomRankingHtml,
-    /class="selected"[\s\S]*?class="analysis-rank"><strong>14<\/strong>[\s\S]*?<em>강남대치<\/em>/,
+    /class="selected"[\s\S]*?class="analysis-rank"><strong>21<\/strong>[\s\S]*?<em>강남대치<\/em>/,
   );
   assert.equal(
     (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,
@@ -3499,14 +3508,14 @@ test("serves the dual-metric competitive analysis sample", async () => {
     39,
   );
   assert.doesNotMatch(showroomHtml, /scatter-callout-leader|--leader-angle/);
-  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 14위 \/ 전체 39/);
+  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 21위 \/ 전체 39/);
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 전시장 누적평균 94\.4점 대비 ▼ 4\.3점/,
+    /전국 전시장 누적평균 94\.5점 대비 ▼ 4\.4점/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 전시장 누적평균 92\.5점 대비 ▲ 7\.5점/,
+    /전국 전시장 누적평균 92\.1점 대비 ▲ 4\.4점/,
   );
 });
 
@@ -4089,11 +4098,12 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   );
   assert.equal(details.meta.weekRanges.length, 52);
   assert.equal(details.voc.components.length, 5);
+  assert.equal(details.happyCall.components.length, 1);
   assert.equal(details.cx.components.length, 5);
   assert.equal(Object.keys(details.voc.components[0].byCdsid).length, 39);
   assert.equal(Object.keys(details.cx.components[0].byCdsid).length, 39);
   assert.ok(
-    [...details.voc.components, ...details.cx.components].every(
+    [...details.voc.components, ...details.happyCall.components, ...details.cx.components].every(
       (component) =>
         component.average.length === 52 &&
         component.byCdsid["6KR6834"].length === 52,
@@ -4108,6 +4118,13 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   );
   assert.match(syncSource, /01☆VOC종합만족도\(60%\)/);
   assert.match(syncSource, /04☆VOC해피콜\(10%\)/);
+  assert.match(syncSource, /10☆신차해피콜 이행율/);
+  assert.match(syncSource, /11☆신차해피콜 총회신건수/);
+  assert.match(syncSource, /12☆신차해피콜 총발행건수/);
+  assert.equal(Object.keys(weekly.happyCall.newCar.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.happyCall.newCar.responses.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.happyCall.newCar.issued.byCdsid).length, 39);
+  assert.equal(weekly.happyCall.newCar.average[37], 75);
   assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /W01~W52 원본값 보기/);
