@@ -38,6 +38,7 @@ def refresh_due(payload, now=None, force=False):
 
 def collection_complete(channel, fresh):
     videos = fresh.get('videos', [])
+    public_counts = [fresh.get('subscribers'), fresh.get('totalViews'), *[video.get('views') for video in videos]]
     return (
         not fresh.get('errors')
         and fresh.get('channelId') == channel['id']
@@ -45,6 +46,7 @@ def collection_complete(channel, fresh):
         and fresh.get('shortComplete') is True
         and len(videos) == fresh.get('videoCount')
         and len({video.get('id') for video in videos}) == len(videos)
+        and all(isinstance(value, (int, float)) and value >= 0 for value in public_counts)
     )
 
 def collect_with_retry(channel, collect, attempts=3, pause=time.sleep):

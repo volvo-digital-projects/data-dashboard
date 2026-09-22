@@ -2,12 +2,13 @@
 
 ## Hourly public metrics
 
-`refresh-youtube.yml` has watchdog opportunities at minutes 7 and 37 because GitHub schedules may be delayed or dropped. The collector enforces a 55-minute minimum interval, so verified data is still published at most once per hour,
+`refresh-youtube.yml` has staggered watchdog opportunities at minutes 7, 22, 37 and 52 because GitHub schedules may be delayed or dropped. The collector enforces a 55-minute minimum interval, so verified data is still published at most once per hour,
 or via workflow_dispatch. It reads the existing 12-person roster / 11 unique channels,
 collects complete public long/short catalogs, and rejects the entire refresh if any
-channel identity or count is missing. The previous snapshot stays intact on failure.
+channel identity or count is missing after three per-channel retries. The previous snapshot stays intact on failure.
 It preserves reviewed comments and known presenter attribution; new shared videos
-remain unassigned. Sales/VOC are NOT refreshed by this workflow.
+remain unassigned. The verified Sales-DMS staff-sales snapshot is refreshed and published
+atomically with YouTube; VOC is not refreshed by this workflow.
 
 After tests pass it commits only the metrics/release files to canonical main and
 explicitly dispatches deploy-pages.yml (GITHUB_TOKEN pushes do not trigger push CI).

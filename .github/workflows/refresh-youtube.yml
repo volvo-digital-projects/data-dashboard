@@ -2,9 +2,9 @@ name: Refresh YouTube metrics hourly
 
 on:
   schedule:
-    # Two watchdog opportunities per hour compensate for delayed/dropped GitHub
+    # Four staggered watchdog opportunities compensate for delayed/dropped GitHub
     # schedules. The collector itself enforces a 55-minute minimum interval.
-    - cron: "7,37 * * * *"
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
 
 permissions:

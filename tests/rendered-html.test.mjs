@@ -326,7 +326,7 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /<span>전일 대비<\/span><b className=\{subscriberDeltaTone\}><span className=\{`yt-subscriber-count\$\{includesSubscriberChange \? "" : " is-excluded"\}`\}>\{includesSubscriberChange&&<i>\{subscriberDelta\.direction\}<\/i>\}<em>\{subscriberDelta\.count\}<\/em><\/span>/);
   assert.doesNotMatch(creatorSource, />직전 대비 /);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
-  assert.match(workflow, /cron: "7,37 \* \* \* \*"/);
+  assert.match(workflow, /cron: "7,22,37,52 \* \* \* \*"/);
   assert.match(workflow, /steps\.collect\.outputs\.refreshed == 'true'/);
   assert.match(workflow, /steps\.publish\.outputs\.changed == 'true'/);
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
@@ -1473,7 +1473,7 @@ test("downloads privacy-safe Sales-DMS staff sales with every hourly YouTube ref
 
   assert.match(workflow, /workflow_dispatch:/);
   assert.doesNotMatch(workflow, /cron:/);
-  assert.match(hourlyWorkflow, /cron: "7,37 \* \* \* \*"/);
+  assert.match(hourlyWorkflow, /cron: "7,22,37,52 \* \* \* \*"/);
   assert.match(hourlyWorkflow, /Refresh staff sales with the hourly YouTube snapshot/);
   assert.match(hourlyWorkflow, /if: steps\.collect\.outputs\.refreshed == 'true'/);
   assert.match(hourlyWorkflow, /for attempt in 1 2 3/);

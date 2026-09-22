@@ -46,7 +46,8 @@ class RefreshTests(unittest.TestCase):
     def test_retries_transient_channel_identity_failures(self):
         complete = dict(
             channelId='channel', errors=[], longComplete=True, shortComplete=True,
-            videoCount=1, videos=[dict(id='video')],
+            videoCount=1, subscribers=10, totalViews=100,
+            videos=[dict(id='video', views=25)],
         )
         responses = iter([
             dict(channelId=None, errors=[]),
@@ -61,6 +62,24 @@ class RefreshTests(unittest.TestCase):
         )
         self.assertEqual(result['channelId'], 'channel')
         self.assertEqual(calls, [1, 2])
+    def test_retries_transient_missing_public_counts(self):
+        complete = dict(
+            channelId='channel', errors=[], longComplete=True, shortComplete=True,
+            videoCount=1, subscribers=10, totalViews=100,
+            videos=[dict(id='video', views=25)],
+        )
+        responses = iter([
+            dict(complete, subscribers=None),
+            complete,
+        ])
+        calls = []
+        result = collect_with_retry(
+            dict(id='channel', url='https://www.youtube.com/@channel'),
+            lambda _url: next(responses),
+            pause=lambda delay: calls.append(delay),
+        )
+        self.assertEqual(result['subscribers'], 10)
+        self.assertEqual(calls, [1])
     def test_daily_close_freezes_each_channel_at_the_previous_day_final_snapshot(self):
         checked = '2026-09-21T01:00:00+00:00'
         prior_checked = '2026-09-20T14:50:00+00:00'
