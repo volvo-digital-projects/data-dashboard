@@ -15,7 +15,7 @@ type Photos = { sourcePage: string; employees: Record<string, {image: string}> }
 const sales = salesData.showrooms as Record<string, Sales>;
 const voc = vocData.showrooms as Record<string, Voc>;
 const photos = photoData.showrooms as Record<string, Photos>;
-const dealers = ["코오롱", "아주", "에이치", "천하", "태영", "아이언", "아이비"];
+const dealers = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
 const dealerCodes: Record<string, string> = {에이치:"H", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
 type SharedVideo = { id: string; title: string; kind: string; views: number; names: string[]; basis: string };
 const assignedVideoSummary = (videos: SharedVideo[]) => ({
@@ -56,6 +56,8 @@ const creators = data.creators.map(person => {
     certifications, shared,
   };
 });
+const dealerCounts = Object.fromEntries(dealers.map(name => [name, creators.filter(person => person.dealer === name).length])) as Record<string, number>;
+const rankedDealers = [...dealers].sort((a, b) => dealerCounts[b] - dealerCounts[a] || dealers.indexOf(a) - dealers.indexOf(b));
 const subscriberChangeOwnerByChannel = new Map<string, string>();
 for (const person of data.creators) {
   if (!subscriberChangeOwnerByChannel.has(person.channelId)) {
@@ -174,7 +176,7 @@ export default function YouTubePerformance() {
     <div className="yt-distribution">
       <div className="yt-section-label"><span>01 / NETWORK</span><h3>딜러사별 크리에이터 분포</h3><p>비율 기준: 첨부 명단의 전체 {creators.length}명</p></div>
       <div className="yt-dealers" aria-label="딜러사 필터">
-        {dealers.map(name=>{const count=creators.filter(person=>person.dealer===name).length;return <button key={name} type="button" aria-pressed={dealer===name} onClick={()=>setDealer(dealer===name ? "전체" : name)} className={count===0?"is-zero":""}>
+        {rankedDealers.map(name=>{const count=dealerCounts[name];return <button key={name} type="button" aria-pressed={dealer===name} onClick={()=>setDealer(dealer===name ? "전체" : name)} className={count===0?"is-zero":""}>
           <span>{name}</span><strong>{count}<small>명 / {creators.length}</small></strong><em>{(count / creators.length * 100).toFixed(1)}%</em><i aria-hidden="true">{Array.from({length:count},(_,i)=><b key={i}/>)}</i>
         </button>;})}
       </div>

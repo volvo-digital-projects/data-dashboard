@@ -268,6 +268,12 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(html, /class="yt-update-stamp"/);
   assert.match(html, /class="yt-staff-total"/);
   assert.match(html, /class="yt-gender-summary"/);
+  const dealerDistribution = html.match(/<div class="yt-dealers" aria-label="딜러사 필터">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(dealerDistribution);
+  const expectedDealerOrder = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
+  const dealerPositions = expectedDealerOrder.map(name => dealerDistribution.indexOf(`>${name}</span>`));
+  assert.ok(dealerPositions.every(position => position >= 0), "every dealer appears in the distribution");
+  assert.deepEqual([...dealerPositions].sort((a, b) => a - b), dealerPositions, "dealer distribution follows creator-count rank and tie order");
   assert.doesNotMatch(html, /class="yt-staff-stat"><span>활동 영업직원<\/span>/);
   assert.doesNotMatch(html, /class="yt-gender-ring"|class="yt-channel-facts"|class="yt-sales-mini"/);
   assert.match(html, /신수경<!-- --> · 댓글 분석/);
