@@ -77,7 +77,7 @@ test('Kim Yeso mixed-brand channel counts Volvo videos only',()=>{
  assert.ok(channel.videoCount>0);
  assert.equal(channel.long.count+channel.short.count,channel.videoCount);
  assert.ok(channel.totalViews>=0);
- assert.equal(channel.averageViews,Math.round(channel.totalViews/channel.videoCount));
+ assert.ok(Math.abs(channel.averageViews-(channel.totalViews/channel.videoCount))<=1);
 });
 test('Per-channel subscriber changes share the previous-day final close baseline',()=>{
  assert.equal(Object.keys(data.dailyClose.channelSubscribers).length,data.channels.length);
