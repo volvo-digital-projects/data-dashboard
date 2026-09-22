@@ -64,6 +64,10 @@ type WeeklyMetricData = {
   };
   happyCall: {
     newCar: {
+      quarters: {
+        average: Array<number | null>;
+        byCdsid: Record<string, Array<number | null>>;
+      };
       responses: {
         byCdsid: Record<string, Array<number | null>>;
       };
@@ -564,25 +568,16 @@ const q3VocScoreOf = (cdsid: string): number | null => {
     : null;
 };
 const q3HappyCallScoreOf = (cdsid: string): number | null => {
-  const responses = weeklyDashboard.happyCall.newCar.responses.byCdsid[cdsid] ?? [];
-  const issued = weeklyDashboard.happyCall.newCar.issued.byCdsid[cdsid] ?? [];
-  let responseTotal = 0;
-  let issuedTotal = 0;
-
-  for (let index = q3WeekStartIndex; index < q3WeekEndIndex; index += 1) {
-    const responseCount = responses[index];
-    const issuedCount = issued[index];
-    if (
-      typeof responseCount !== "number" ||
-      typeof issuedCount !== "number"
-    ) {
-      continue;
-    }
-    responseTotal += responseCount;
-    issuedTotal += issuedCount;
-  }
-
-  return issuedTotal > 0 ? (responseTotal / issuedTotal) * 100 : null;
+  const score = weeklyDashboard.happyCall.newCar.quarters.byCdsid[cdsid]?.[2];
+  return typeof score === "number" ? score : null;
+};
+const happyCallQuarterScoreOf = (
+  cdsid: string,
+  quarterIndex: number,
+): number | null => {
+  const score =
+    weeklyDashboard.happyCall.newCar.quarters.byCdsid[cdsid]?.[quarterIndex];
+  return typeof score === "number" ? score : null;
 };
 const analysisDateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Seoul",
@@ -894,11 +889,9 @@ const cumulativeAnalysisPoint = (item: AnalysisShowroom): AnalysisPoint => {
     item.voc,
     q3VocScoreOf(item.cdsid),
   ].filter((score): score is number => typeof score === "number");
-  const happyQuarterScores = [item.q1?.happyCall, item.happyCall].filter(
-    (score): score is number => typeof score === "number",
-  );
-  const q3HappyCall = q3HappyCallScoreOf(item.cdsid);
-  if (typeof q3HappyCall === "number") happyQuarterScores.push(q3HappyCall);
+  const happyQuarterScores = [0, 1, 2, 3]
+    .map((quarterIndex) => happyCallQuarterScoreOf(item.cdsid, quarterIndex))
+    .filter((score): score is number => typeof score === "number");
   // Average the available quarters for each 100-point metric, then add the two.
   const vocScore = vocQuarterScores.length
     ? vocQuarterScores.reduce((sum, score) => sum + score, 0) / vocQuarterScores.length
@@ -2155,14 +2148,18 @@ export default function CompetitiveAnalysis({
   const selectedPoint =
     groupItems.find((item) => item.cdsid === selected.cdsid) ??
     cumulativeAnalysisPoint(selected);
+  const selectedQ1HappyCall = happyCallQuarterScoreOf(selected.cdsid, 0);
+  const selectedQ2HappyCall = happyCallQuarterScoreOf(selected.cdsid, 1);
+  const selectedQ4HappyCall = happyCallQuarterScoreOf(selected.cdsid, 3);
   const selectedQ1Combined =
     typeof selected.q1?.voc === "number" &&
-    typeof selected.q1?.happyCall === "number"
-      ? selected.q1.voc + selected.q1.happyCall
+    typeof selectedQ1HappyCall === "number"
+      ? selected.q1.voc + selectedQ1HappyCall
       : null;
   const selectedQ2Combined =
-    typeof selected.voc === "number" && typeof selected.happyCall === "number"
-      ? selected.voc + selected.happyCall
+    typeof selected.voc === "number" &&
+    typeof selectedQ2HappyCall === "number"
+      ? selected.voc + selectedQ2HappyCall
       : null;
   const selectedQ3Voc = q3VocScoreOf(selected.cdsid);
   const selectedQ3HappyCall = q3HappyCallScoreOf(selected.cdsid);
@@ -3091,11 +3088,11 @@ export default function CompetitiveAnalysis({
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
-          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.happyCall)}, Q2 ${displayQuarterNumber(selected.happyCall)}, Q3 ${displayQuarterNumber(selectedQ3HappyCall)}, Q4 미집계`}>
-            <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.happyCall)}</strong></span>
-            <span><b>Q2</b><strong>{displayQuarterNumber(selected.happyCall)}</strong></span>
-            <span className="current"><b>Q3</b><strong>{displayQuarterNumber(selectedQ3HappyCall)}</strong></span>
-            <span><b>Q4</b></span>
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selectedQ1HappyCall)}, Q2 ${displayQuarterNumber(selectedQ2HappyCall)}, Q3 ${displayQuarterNumber(selectedQ3HappyCall)}, Q4 ${displayQuarterNumber(selectedQ4HappyCall)}`}>
+            <span><b>Q1</b><strong>{displayQuarterNumber(selectedQ1HappyCall)}</strong></span>
+            <span><b>Q2</b><strong>{displayQuarterNumber(selectedQ2HappyCall)}</strong></span>
+            <span className={typeof selectedQ4HappyCall === "number" ? undefined : "current"}><b>Q3</b><strong>{displayQuarterNumber(selectedQ3HappyCall)}</strong></span>
+            <span className={typeof selectedQ4HappyCall === "number" ? "current" : undefined}><b>Q4</b><strong>{displayQuarterNumber(selectedQ4HappyCall)}</strong></span>
           </p>
           <em
             className={

@@ -193,8 +193,10 @@ function fillNationalRateFromCounts(result, numerator, denominator) {
   };
 }
 
-function quarterlyResult(rows) {
-  const headerIndex = rows.findIndex((row) => clean(row[0]) === "RDM코드");
+function quarterlyResult(rows, { useLastHeader = false } = {}) {
+  const headerIndex = useLastHeader
+    ? rows.findLastIndex((row) => clean(row[0]) === "RDM코드")
+    : rows.findIndex((row) => clean(row[0]) === "RDM코드");
   if (headerIndex < 0) throw new Error("RDM코드 헤더를 찾지 못했습니다.");
   const nationalRow = rows[headerIndex + 1];
   const storeRows = rows
@@ -270,6 +272,9 @@ const newCarHappyCall = fillNationalRateFromCounts(
   newCarHappyCallResponses,
   newCarHappyCallIssued,
 );
+const newCarHappyCallQuarters = quarterlyResult(loaded.newCarHappyCall, {
+  useLastHeader: true,
+});
 const actionPlan = quarterlyResult(loaded.actionPlan);
 const actionPlanWeekly = expandQuarterlyResult(actionPlan);
 const syncedAt = new Date().toISOString();
@@ -345,6 +350,7 @@ const output = {
     newCar: {
       average: newCarHappyCall.average,
       byCdsid: newCarHappyCall.byCdsid,
+      quarters: newCarHappyCallQuarters,
       responses: {
         average: newCarHappyCallResponses.average,
         byCdsid: newCarHappyCallResponses.byCdsid,

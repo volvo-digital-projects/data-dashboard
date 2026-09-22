@@ -1079,17 +1079,10 @@ test("includes the available Q3 VOC and happy-call scores before combining", asy
       .slice(26, 39)
       .filter((value) => typeof value === "number" && value !== 0);
     const q3Voc = q3Values.length ? mean(q3Values) : null;
-    const q3Responses = weekly.happyCall.newCar.responses.byCdsid[showroom.cdsid]
-      .slice(26, 39)
-      .filter((value) => typeof value === "number")
-      .reduce((sum, value) => sum + value, 0);
-    const q3Issued = weekly.happyCall.newCar.issued.byCdsid[showroom.cdsid]
-      .slice(26, 39)
-      .filter((value) => typeof value === "number")
-      .reduce((sum, value) => sum + value, 0);
-    const q3HappyCall = q3Issued > 0 ? q3Responses / q3Issued * 100 : null;
+    const happyCallQuarters = weekly.happyCall.newCar.quarters.byCdsid[showroom.cdsid];
+    const q3HappyCall = happyCallQuarters[2];
     const satisfaction = mean([showroom.q1?.voc, showroom.voc, q3Voc]);
-    const happycall = mean([showroom.q1?.happyCall, showroom.happyCall, q3HappyCall]);
+    const happycall = mean(happyCallQuarters);
     return { ...showroom, satisfaction, happycall, combined: satisfaction + happycall };
   }).sort((a, b) => b.combined - a.combined || b.satisfaction - a.satisfaction || a.showroom.localeCompare(b.showroom, "ko"));
   for (const [index, showroom] of expected.entries()) {
@@ -1100,11 +1093,18 @@ test("includes the available Q3 VOC and happy-call scores before combining", asy
       const card = html.match(new RegExp(`<article class="analysis-summary-card ${kind}">([\\s\\S]*?)</article>`))?.[1];
       assert.ok(card, `${showroom.cdsid} ${kind}`);
       const actual = Number(card.match(/aria-label="([\d.]+)점"/)?.[1]);
-      assert.equal(actual, Number(score.toFixed(1)), `${showroom.cdsid} ${kind}`);
+      assert.equal(
+        actual,
+        Number((score + Number.EPSILON).toFixed(1)),
+        `${showroom.cdsid} ${kind}`,
+      );
     }
     assert.ok(html.includes(`전국 전시장 내 ${index + 1}위 / 전체 ${expected.length}`));
     assert.ok(html.includes("VOC 상담 만족도") && html.includes("ONE Voice 시승 만족도") && html.includes("ONE Voice 출고 만족도"));
     assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE Voice 출고 후 해피콜(24시간 이내 시행)"));
+    if (showroom.cdsid === "6KR6834") {
+      assert.ok(html.includes('aria-label="Q1 100, Q2 100, Q3 89.5, Q4 ―"'));
+    }
     assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
   }
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
@@ -2697,7 +2697,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>89\.5<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>89\.5<\/strong><\/span><span><b>Q4<\/b><strong>―<\/strong><\/span>/,
   );
   assert.match(
     visibleHtml,
@@ -3973,11 +3973,12 @@ test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", as
 });
 
 test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
-  const [weeklyText, detailsText, syncSource, dashboardSource, detailsSource, workflow] = await Promise.all([
+  const [weeklyText, detailsText, syncSource, dashboardSource, analysisSource, detailsSource, workflow] = await Promise.all([
     readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
     readFile(new URL("../app/data/weekly-details.json", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-google-sheet-data.mjs", import.meta.url), "utf8"),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/MetricDetails.tsx", import.meta.url), "utf8"),
     readFile(new URL("../.github/workflows/sync-weekly-dashboard.yml", import.meta.url), "utf8"),
   ]);
@@ -4135,9 +4136,20 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.match(syncSource, /11☆신차해피콜 총회신건수/);
   assert.match(syncSource, /12☆신차해피콜 총발행건수/);
   assert.equal(Object.keys(weekly.happyCall.newCar.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.happyCall.newCar.quarters.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.happyCall.newCar.responses.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.happyCall.newCar.issued.byCdsid).length, 39);
+  assert.deepEqual(weekly.happyCall.newCar.quarters.average, [91.8, 92.3, 90.7, null]);
+  assert.deepEqual(
+    weekly.happyCall.newCar.quarters.byCdsid["6KR6834"],
+    [100, 100, 89.5, null],
+  );
   assert.equal(weekly.happyCall.newCar.average[37], 75);
+  assert.match(syncSource, /quarterlyResult\(loaded\.newCarHappyCall, \{[\s\S]*?useLastHeader: true/);
+  assert.doesNotMatch(
+    analysisSource,
+    /responseTotal \/ issuedTotal|q3Responses \/ q3Issued/,
+  );
   assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /W01~W52 원본값 보기/);
