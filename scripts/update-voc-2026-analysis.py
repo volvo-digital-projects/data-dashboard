@@ -20,6 +20,9 @@ header_map = GENERATOR["header_map"]
 keyword_summary = GENERATOR["keyword_summary"]
 load_voc = GENERATOR["load_voc"]
 normalise_showroom_name = GENERATOR["normalise_showroom_name"]
+merged_staff_comments = GENERATOR["merged_staff_comments"]
+merged_staff_metrics = GENERATOR["merged_staff_metrics"]
+staff_source_keys = GENERATOR["staff_source_keys"]
 
 
 def date_value(value: Any) -> datetime | None:
@@ -138,8 +141,10 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
         showroom_name = normalise_showroom_name(showroom["showroom"])
         for employee in showroom["employees"]:
             key = (showroom_name, str(employee["name"]).strip())
+            source_keys = staff_source_keys(*key)
+            refreshed_years = merged_staff_metrics(staff_metrics, source_keys)
             previous_2026 = employee["years"].get("2026", {})
-            refreshed_2026 = dict(staff_metrics.get(key, {}).get("2026", {}))
+            refreshed_2026 = dict(refreshed_years["2026"])
             if refreshed_2026.get("responses"):
                 if "sent" in previous_2026:
                     refreshed_2026["sent"] = previous_2026["sent"]
@@ -149,13 +154,26 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
             else:
                 employee["years"].pop("2026", None)
 
+            if len(source_keys) > 1:
+                for year in YEARS:
+                    refreshed_year = dict(refreshed_years[year])
+                    if not refreshed_year.get("responses"):
+                        employee["years"].pop(year, None)
+                        continue
+                    previous_year = employee["years"].get(year, {})
+                    if "sent" in previous_year:
+                        refreshed_year["sent"] = previous_year["sent"]
+                    if "rateResponses" in previous_year:
+                        refreshed_year["rateResponses"] = previous_year["rateResponses"]
+                    employee["years"][year] = refreshed_year
+
             latest = latest_by_employee.get(key)
             if latest:
                 employee["latestResponseDate"] = latest
             elif employee.get("latestResponseDate", "").startswith("2026-"):
                 employee.pop("latestResponseDate", None)
 
-            comments = staff_comments.get(key, [])
+            comments = merged_staff_comments(staff_comments, source_keys)
             employee["commentResponses"] = len(comments)
             employee["strengthKeywords"] = keyword_summary(
                 comments,
@@ -197,7 +215,10 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
         f"{len(STRENGTH_PATTERNS)}개 강점/{len(IMPROVEMENT_PATTERNS)}개 보완 주제"
     )
     source["commentAnalysisEmployees"] = refreshed_employees
-    source["refreshScope"] = "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신"
+    source["refreshScope"] = (
+        "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신 · "
+        "확인된 직원 이력 연결 보정"
+    )
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         f"staff analysis: 2026 national {national_responses:,} responses; "

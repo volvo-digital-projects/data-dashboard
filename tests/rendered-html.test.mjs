@@ -232,7 +232,20 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
     ),
     0,
   );
-  assert.equal(currentEmployeeResponses, 1941);
+  assert.equal(currentEmployeeResponses, 2052);
+  const kimDaeJun = staffAnalysis.showrooms["6KR6834"].employees.find(
+    (employee) => employee.name === "김대준",
+  );
+  assert.deepEqual(
+    Object.fromEntries(
+      Object.entries(kimDaeJun.years).map(([year, values]) => [
+        year,
+        values.responses,
+      ]),
+    ),
+    { 2023: 14, 2024: 5, 2025: 3, 2026: 7 },
+  );
+  assert.equal(kimDaeJun.commentResponses, 29);
   assert.equal(consultation.updatedThrough, "2026-09-13");
   assert.deepEqual(consultation.national.slice(-2), [9.237779, 2107]);
   assert.equal(consultation.responseRateThrough, "2026-08-24");

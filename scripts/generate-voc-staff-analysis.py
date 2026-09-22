@@ -161,6 +161,13 @@ IMPROVEMENT_EXCLUSION_PATTERNS = {
     ),
 }
 
+# A small number of survey rows belong to the same person under a former or
+# mistyped showroom. Keep these explicit so identical names at other stores are
+# never merged by name alone.
+STAFF_HISTORY_ALIASES = {
+    ("강남대치", "김대준"): (("강남신사", "김대준"),),
+}
+
 NEGATIVE_CONTEXT_PATTERN = re.compile(
     r"부족|미흡|아쉽|불편|불만|별로|늦|지연|오래|기다|못|어렵|문제|과도|"
     r"부담|원하|바라|했으면|좋겠|필요|tmi|강요|재촉|불친절|모르|없었|안\s*됐|되지\s*않",
@@ -180,6 +187,43 @@ def normalise_header(value: Any) -> str:
 
 def normalise_showroom_name(value: Any) -> str:
     return str(value or "").strip().removeprefix("볼보 ").replace(" ", "")
+
+
+def staff_source_keys(showroom: Any, name: Any) -> tuple[tuple[str, str], ...]:
+    key = (normalise_showroom_name(showroom), str(name or "").strip())
+    aliases = STAFF_HISTORY_ALIASES.get(key, ())
+    normalized_aliases = tuple(
+        (normalise_showroom_name(alias_showroom), alias_name)
+        for alias_showroom, alias_name in aliases
+    )
+    return (key, *normalized_aliases)
+
+
+def merged_staff_metrics(
+    staff_metrics: dict[tuple[str, str], dict[str, dict[str, float | int]]],
+    source_keys: tuple[tuple[str, str], ...],
+) -> dict[str, dict[str, float | int]]:
+    merged = {year: metric() for year in YEARS}
+    for source_key in source_keys:
+        for year, values in staff_metrics.get(source_key, {}).items():
+            merged[year]["responses"] = int(merged[year]["responses"]) + int(
+                values["responses"]
+            )
+            merged[year]["scoreSum"] = round(
+                float(merged[year]["scoreSum"]) + float(values["scoreSum"]), 1
+            )
+    return merged
+
+
+def merged_staff_comments(
+    staff_comments: dict[tuple[str, str], list[dict[str, Any]]],
+    source_keys: tuple[tuple[str, str], ...],
+) -> list[dict[str, Any]]:
+    return [
+        entry
+        for source_key in source_keys
+        for entry in staff_comments.get(source_key, [])
+    ]
 
 
 def header_map(row: tuple[Any, ...]) -> dict[str, int]:
@@ -358,7 +402,7 @@ def load_voc(path: Path) -> tuple[
             add_metric(national[year], score)
             if not showroom or not name:
                 continue
-            key = (str(showroom).strip(), str(name).strip())
+            key = (normalise_showroom_name(showroom), str(name).strip())
             add_metric(staff_metrics[key][year], score)
             texts = [
                 str(row[index]).strip()
@@ -389,7 +433,7 @@ def build_payload(
     voc_showrooms = {str(showroom) for showroom, _ in staff_metrics}
     dashboard_names = set(showroom_by_voc_name)
     mapped_dms = set(DMS_TO_VOC_SHOWROOM)
-    mapped_voc = set(DMS_TO_VOC_SHOWROOM.values())
+    mapped_voc = {normalise_showroom_name(name) for name in DMS_TO_VOC_SHOWROOM.values()}
     mapped_dashboard_names = {normalise_showroom_name(name) for name in mapped_voc}
     validation_errors: list[str] = []
     if len(dashboard_showrooms) != 39:
@@ -412,7 +456,7 @@ def build_payload(
     roster_by_key: dict[tuple[str, str], dict[str, Any]] = {}
     duplicate_roster_keys: set[tuple[str, str]] = set()
     for person in roster:
-        voc_showroom = DMS_TO_VOC_SHOWROOM[str(person["dmsShowroom"])]
+        voc_showroom = normalise_showroom_name(DMS_TO_VOC_SHOWROOM[str(person["dmsShowroom"])])
         key = (voc_showroom, str(person["name"]))
         if key in roster_by_key:
             duplicate_roster_keys.add(key)
@@ -462,10 +506,10 @@ def build_payload(
     }
     for person in roster:
         cohort_totals[str(person["tenureBucket"])]["employeeCount"] += 1
-    for (showroom, name), by_year in staff_metrics.items():
-        person = roster_by_key.get((showroom, name))
-        if not person:
-            continue
+    for person in roster:
+        showroom = normalise_showroom_name(DMS_TO_VOC_SHOWROOM[str(person["dmsShowroom"])])
+        name = str(person["name"])
+        by_year = merged_staff_metrics(staff_metrics, staff_source_keys(showroom, name))
         responses = sum(int(values["responses"]) for values in by_year.values())
         if not responses:
             continue
@@ -494,19 +538,21 @@ def build_payload(
 
     showrooms_payload: dict[str, Any] = {}
     for dms_showroom, voc_showroom in DMS_TO_VOC_SHOWROOM.items():
-        dashboard_showroom = showroom_by_voc_name[normalise_showroom_name(voc_showroom)]
+        normalized_voc_showroom = normalise_showroom_name(voc_showroom)
+        dashboard_showroom = showroom_by_voc_name[normalized_voc_showroom]
         target_roster = [
             item for item in roster if item["dmsShowroom"] == dms_showroom
         ]
         employees: list[dict[str, Any]] = []
         for person in target_roster:
-            key = (voc_showroom, str(person["name"]))
+            source_keys = staff_source_keys(normalized_voc_showroom, person["name"])
+            person_metrics = merged_staff_metrics(staff_metrics, source_keys)
             years = {
                 year: values
-                for year, values in staff_metrics.get(key, {}).items()
+                for year, values in person_metrics.items()
                 if values["responses"]
             }
-            comments = staff_comments.get(key, [])
+            comments = merged_staff_comments(staff_comments, source_keys)
             employees.append(
                 {
                     "name": person["name"],
@@ -535,8 +581,19 @@ def build_payload(
 
         target_name_set = {str(item["name"]) for item in target_roster}
         excluded_counts: Counter[str] = Counter()
+        claimed_source_keys = {
+            source_key
+            for item in roster
+            for source_key in staff_source_keys(
+                DMS_TO_VOC_SHOWROOM[str(item["dmsShowroom"])], item["name"]
+            )
+        }
         for (raw_showroom, name), by_year in staff_metrics.items():
-            if raw_showroom != voc_showroom or name in target_name_set:
+            if (
+                raw_showroom != normalized_voc_showroom
+                or name in target_name_set
+                or (raw_showroom, name) in claimed_source_keys
+            ):
                 continue
             excluded_counts[name] += sum(
                 int(values["responses"]) for values in by_year.values()
@@ -579,7 +636,10 @@ def refresh_comment_analysis(payload: dict[str, Any], voc_path: Path) -> None:
     for showroom in payload.get("showrooms", {}).values():
         voc_showroom = normalise_showroom_name(showroom.get("showroom"))
         for employee in showroom.get("employees", []):
-            comments = staff_comments.get((voc_showroom, str(employee.get("name", ""))), [])
+            comments = merged_staff_comments(
+                staff_comments,
+                staff_source_keys(voc_showroom, employee.get("name", "")),
+            )
             employee["commentResponses"] = len(comments)
             employee["strengthKeywords"] = keyword_summary(
                 comments,
