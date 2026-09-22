@@ -2,14 +2,14 @@
   "source": {
     "workbook": "2026 Volvo Car Korea_VOC Raw Data_260922.xlsx",
     "vocThrough": "2026-09-13",
-    "rosterCheckedAt": "2026-09-22",
+    "rosterCheckedAt": "2026-09-23",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-09-22",
+    "jobTitleSourceDate": "2026-09-23",
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
     "sentThrough": "2026-08-24",
     "latestResponseThrough": "2026-09-13",
@@ -1500,7 +1500,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2026-03-23",
-          "tenureMonths": 5,
+          "tenureMonths": 6,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -5276,7 +5276,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2023-10-23",
-          "tenureMonths": 34,
+          "tenureMonths": 35,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -7487,7 +7487,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-02-23",
-          "tenureMonths": 6,
+          "tenureMonths": 7,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -10439,7 +10439,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2016-11-23",
-          "tenureMonths": 117,
+          "tenureMonths": 118,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -12776,7 +12776,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2016-09-23",
-          "tenureMonths": 119,
+          "tenureMonths": 120,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -14411,7 +14411,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2018-04-23",
-          "tenureMonths": 100,
+          "tenureMonths": 101,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -22831,7 +22831,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-12-23",
-          "tenureMonths": 20,
+          "tenureMonths": 21,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -27010,7 +27010,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-06-23",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -27225,7 +27225,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2020-07-23",
-          "tenureMonths": 73,
+          "tenureMonths": 74,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28616,7 +28616,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-06-23",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -28960,7 +28960,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-03-23",
-          "tenureMonths": 77,
+          "tenureMonths": 78,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -30708,6 +30708,19 @@
             }
           ],
           "latestResponseDate": "2026-08-14"
+        },
+        {
+          "years": {},
+          "commentResponses": 0,
+          "strengthKeywords": [],
+          "improvementKeywords": [],
+          "name": "이상진",
+          "role": "영업직원",
+          "jobTitle": "주임",
+          "hireDate": "2026-09-15",
+          "tenureMonths": 0,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내"
         },
         {
           "name": "이승규",
