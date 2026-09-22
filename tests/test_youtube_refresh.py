@@ -28,12 +28,12 @@ class RefreshTests(unittest.TestCase):
             fresh=copy.deepcopy(self.fresh)
             fresh[field]=value
             with self.assertRaises(ValueError): merge(self.old, fresh)
-    def test_requires_all_thirteen_creator_entries(self):
+    def test_requires_all_fourteen_creator_entries(self):
         payload = dict(
-            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(13)],
-            channels=[dict(id='shared')] + [dict(id=f'channel-{index}') for index in range(2, 13)],
+            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(14)],
+            channels=[dict(id='shared')] + [dict(id=f'channel-{index}') for index in range(2, 14)],
         )
-        self.assertEqual(validate_refresh_scope(payload), (13, 12))
+        self.assertEqual(validate_refresh_scope(payload), (14, 13))
         payload['creators'].pop()
         with self.assertRaises(ValueError): validate_refresh_scope(payload)
     def test_refreshes_hourly_without_duplicate_watchdog_runs(self):
@@ -97,6 +97,22 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(output['long']['count'], 1)
         self.assertEqual(output['short']['count'], 1)
         self.assertEqual(output['scopeVideoIds'], ['volvo-1', 'volvo-2'])
+    def test_automotive_filter_excludes_food_and_lifestyle_titles(self):
+        old = dict(id='channel', checkedAt='old', videoBrandFilter='volvo', videoContentFilter='automotive', sharedVideos=[], commentSamples=0)
+        fresh = dict(
+            channelId='channel', errors=[], longComplete=True, shortComplete=True,
+            videoCount=5, subscribers=126, totalViews=999999,
+            videos=[
+                dict(id='volvo-model', title='볼보 S90 출고', kind='long', views=3000),
+                dict(id='volvo-brand', title='볼보는 왜 유리창이 클까?', kind='short', views=1800),
+                dict(id='food', title='창원 소고기맛집', kind='short', views=9000),
+                dict(id='lifestyle', title='볼보영업사원의 일상 - 대구 동성로 마실 편', kind='short', views=7000),
+                dict(id='bmw', title='BMW X5 출고', kind='short', views=12000),
+            ],
+        )
+        output = merge(old, fresh)
+        self.assertEqual(output['scopeVideoIds'], ['volvo-model', 'volvo-brand'])
+        self.assertEqual(output['totalViews'], 4800)
     def test_daily_close_freezes_each_channel_at_the_previous_day_final_snapshot(self):
         checked = '2026-09-21T01:00:00+00:00'
         prior_checked = '2026-09-20T14:50:00+00:00'

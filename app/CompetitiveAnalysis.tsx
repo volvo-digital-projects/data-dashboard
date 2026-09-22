@@ -98,6 +98,7 @@ const STAFF_YOUTUBE_BADGE_KEYS = new Set([
   "6KR6858:조선별",
   "6KR6852:이규환",
   "6KR6839:박준수",
+  "6KR6838:이유성",
 ]);
 type StaffEmployee = {
   name: string;

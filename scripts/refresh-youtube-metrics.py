@@ -11,10 +11,22 @@ import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "app/data/youtube-creators.json"
-EXPECTED_CREATOR_ENTRIES = 13
+EXPECTED_CREATOR_ENTRIES = 14
 MINIMUM_REFRESH_INTERVAL = datetime.timedelta(minutes=55)
 VOLVO_VIDEO_TITLE = re.compile(
     r'(?:볼보|VOLVO|\b(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60|V90|C40)\b)',
+    re.IGNORECASE,
+)
+VOLVO_MODEL_TITLE = re.compile(
+    r'\b(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60|V90|C40)\b',
+    re.IGNORECASE,
+)
+AUTOMOTIVE_TITLE = re.compile(
+    r'(?:출고|전시장|사전계약|차량|브랜드|안전|SUV|세단|전기차|내연기관|가격|오너|유리창)',
+    re.IGNORECASE,
+)
+LIFESTYLE_TITLE = re.compile(
+    r'(?:맛집|먹거리|여행|마실|데이트|요리|러닝|트레킹|축제|커버|cover|노래|밴드|카레|떡볶이|카페|coffee|콘서트)',
     re.IGNORECASE,
 )
 
@@ -24,7 +36,14 @@ def scoped_videos(channel, videos):
         return videos
     if scope != 'volvo':
         raise ValueError(f"Unknown video brand filter: {scope}")
-    return [video for video in videos if VOLVO_VIDEO_TITLE.search(video.get('title', ''))]
+    selected = [video for video in videos if VOLVO_VIDEO_TITLE.search(video.get('title', ''))]
+    if channel.get('videoContentFilter') == 'automotive':
+        selected = [video for video in selected if (
+            not LIFESTYLE_TITLE.search(video.get('title', ''))
+            or VOLVO_MODEL_TITLE.search(video.get('title', ''))
+            or AUTOMOTIVE_TITLE.search(video.get('title', ''))
+        )]
+    return selected
 
 def validate_refresh_scope(payload):
     creators = payload.get('creators', [])
@@ -39,6 +58,8 @@ def validate_refresh_scope(payload):
         raise ValueError("Every creator entry must reference exactly one collected channel")
     if any(channel.get('videoBrandFilter') not in (None, 'volvo') for channel in channels):
         raise ValueError("Unknown video brand filter")
+    if any(channel.get('videoContentFilter') not in (None, 'automotive') for channel in channels):
+        raise ValueError("Unknown video content filter")
     return len(creators), len(channels)
 
 def refresh_due(payload, now=None, force=False):

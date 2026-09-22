@@ -252,14 +252,14 @@ test("shows every creator metric together with detail collapsed by default", asy
   const html = await response.text();
   const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1];
   assert.ok(table);
-  assert.equal((table.match(/scope="row"/g) ?? []).length, 13);
+  assert.equal((table.match(/scope="row"/g) ?? []).length, 14);
   assert.equal((table.match(/scope="col"/g) ?? []).length, 10);
   for (const heading of ["볼보 입사일", "채널 개설일", "롱폼", "숏츠", "누적 고객만족도 평균", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수"]) assert.ok(table.includes(heading));
   assert.match(table, /260225/);
   assert.match(table, /260225/);
   assert.match(table, /class="yt-cert-cell"/);
-  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 13);
-  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 13);
+  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 14);
+  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 14);
   assert.match(table, /aria-label="남성"/);
   assert.match(table, /aria-label="여성"/);
   assert.doesNotMatch(html, /<label>성별/);
@@ -332,6 +332,7 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
   assert.match(creatorSource, /`\$\{creators\.length\}명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 \(KST\)`/);
   assert.match(creatorSource, /김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만/);
+  assert.match(creatorSource, /이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
   assert.match(workflow, /git commit -m "Auto update hourly YouTube and staff sales metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
   assert.match(creatorCss, /\.yt-subscriber-change\{display:grid;grid-template-columns:34px 68px[\s\S]*?width:105px[\s\S]*?\.yt-subscriber-change b\{display:grid;grid-template-columns:26px 3px minmax\(0,1fr\)[\s\S]*?width:68px[\s\S]*?\.yt-subscriber-count\{display:grid;grid-template-columns:7px minmax\(0,1fr\)[\s\S]*?\.yt-subscriber-count>em\{text-align:right\}[\s\S]*?b>span:last-child\{text-align:right\}[\s\S]*?\.yt-subscriber-change b\.positive\{color:#247d9b;background:linear-gradient\(135deg,rgba\(38,126,164,\.12\)[\s\S]*?\.yt-subscriber-change b\.negative\{color:#c95f55;background:linear-gradient\(135deg,rgba\(201,95,85,\.14\)/);
@@ -473,7 +474,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   const expectedYoutubeStaffKeys = [
     "6KR6867:송민경", "6KR6830:진주현", "6KR6858:나수연", "6KR6870:이정훈",
     "6KR6849:신수경", "6KR6846:신승희", "6KR6847:김정호", "6KR6861:곽지명",
-    "6KR6846:박형진", "6KR6846:김예소", "6KR6858:조선별", "6KR6852:이규환", "6KR6839:박준수",
+    "6KR6846:박형진", "6KR6846:김예소", "6KR6858:조선별", "6KR6852:이규환", "6KR6839:박준수", "6KR6838:이유성",
   ];
   assert.equal((youtubeStaffBlock.match(/6KR\d+:/g) ?? []).length, expectedYoutubeStaffKeys.length);
   expectedYoutubeStaffKeys.forEach((key) => assert.match(youtubeStaffBlock, new RegExp(`"${key}"`)));
