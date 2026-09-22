@@ -57,7 +57,7 @@ type AnalysisPoint = AnalysisShowroom & {
 };
 
 type StaffYear = "2023" | "2024" | "2025" | "2026";
-type StaffYearMetric = { responses: number; scoreSum: number; sent?: number };
+type StaffYearMetric = { responses: number; scoreSum: number; sent?: number; rateResponses?: number };
 type StaffKeyword = { label: string; mentions: number };
 const easePcScrollWithSoftLanding = (progress: number) => {
   const landingStart = 0.68;
@@ -2401,7 +2401,7 @@ export default function CompetitiveAnalysis({
       sent: metrics.sent ?? 0,
       responseRate:
         (metrics.sent ?? 0) > 0
-          ? (metrics.responses / (metrics.sent ?? 1)) * 100
+          ? ((metrics.rateResponses ?? metrics.responses) / (metrics.sent ?? 1)) * 100
           : 0,
       responses: metrics.responses,
       scoreSum: metrics.scoreSum,

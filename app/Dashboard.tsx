@@ -1230,6 +1230,10 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
   const selected = vocConsultation.showrooms[showroom.cdsid] ?? national;
   const nationalSent = vocSent.national;
   const selectedSent = vocSent.showrooms[showroom.cdsid] ?? nationalSent;
+  const nationalRateResponses = vocConsultation.responseRateResponses?.national;
+  const selectedRateResponses =
+    vocConsultation.responseRateResponses?.showrooms[showroom.cdsid] ??
+    nationalRateResponses;
   const cumulativeAverage = selected[0];
   const nationalCumulativeAverage = national[0];
   const cumulativeDelta =
@@ -1247,6 +1251,8 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
   const yearly = vocConsultation.years.map((year, index) => {
     const showroomResponses = selected[3 + index * 2] as number;
     const nationalResponses = national[3 + index * 2] as number;
+    const showroomRateResponses = selectedRateResponses?.[index] ?? showroomResponses;
+    const nationalRateResponseCount = nationalRateResponses?.[index] ?? nationalResponses;
     const showroomSent = selectedSent[index] ?? 0;
     const nationalSentCount = nationalSent[index] ?? 0;
 
@@ -1259,10 +1265,10 @@ function ConsultationSatisfactionHistory({ showroom }: { showroom: Showroom }) {
       showroomSent,
       nationalSent: nationalSentCount,
       showroomRate:
-        showroomSent > 0 ? (showroomResponses / showroomSent) * 100 : null,
+        showroomSent > 0 ? (showroomRateResponses / showroomSent) * 100 : null,
       nationalRate:
         nationalSentCount > 0
-          ? (nationalResponses / nationalSentCount) * 100
+          ? (nationalRateResponseCount / nationalSentCount) * 100
           : null,
     };
   });

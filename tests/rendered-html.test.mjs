@@ -191,11 +191,11 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
   );
   assert.deepEqual(restoredResponseCounts, {
     "볼보 의정부|정병준": 19,
-    "볼보 분당|이종인": 14,
-    "볼보 분당|조정민": 32,
+    "볼보 분당|이종인": 17,
+    "볼보 분당|조정민": 34,
     "볼보 인천|서재현": 24,
-    "볼보 수원|이영빈": 1,
-    "볼보 동대문|정승현": 31,
+    "볼보 수원|이영빈": 5,
+    "볼보 동대문|정승현": 32,
   });
   assert.ok(
     Object.values(staffAnalysis.showrooms).flatMap(
@@ -209,6 +209,38 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
     ),
     /직원 CDSID|직원 ID|E-mail|휴대폰번호/,
   );
+});
+
+test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggregate", async () => {
+  const [staffAnalysis, consultation, dashboardSource, analysisSource, refreshScript] = await Promise.all([
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/voc-consultation.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/update-voc-2026-analysis.py", import.meta.url), "utf8"),
+  ]);
+  assert.equal(staffAnalysis.source.vocThrough, "2026-09-13");
+  assert.equal(staffAnalysis.source.latestResponseThrough, "2026-09-13");
+  assert.equal(staffAnalysis.nationalYears["2026"].responses, 2107);
+  assert.equal(staffAnalysis.nationalYears["2026"].scoreSum, 19464);
+  assert.equal(staffAnalysis.nationalYears["2026"].average, 9.238);
+  assert.match(staffAnalysis.source.refreshScope, /2023-2025 집계 보존 · 2026/);
+  const currentEmployeeResponses = Object.values(staffAnalysis.showrooms).reduce(
+    (showroomTotal, showroom) => showroomTotal + showroom.employees.reduce(
+      (employeeTotal, employee) => employeeTotal + (employee.years["2026"]?.responses ?? 0),
+      0,
+    ),
+    0,
+  );
+  assert.equal(currentEmployeeResponses, 1941);
+  assert.equal(consultation.updatedThrough, "2026-09-13");
+  assert.deepEqual(consultation.national.slice(-2), [9.237779, 2107]);
+  assert.equal(consultation.responseRateThrough, "2026-08-24");
+  assert.equal(consultation.responseRateResponses.national.at(-1), 1642);
+  assert.match(dashboardSource, /showroomRateResponses = selectedRateResponses\?\.\[index\] \?\? showroomResponses/);
+  assert.match(analysisSource, /metrics\.rateResponses \?\? metrics\.responses/);
+  assert.match(refreshScript, /기존 2023-2025 집계 보존 · 2026 점수\/회신\/원문 분석 갱신/);
+  assert.doesNotMatch(refreshScript, /고객명|연락처|계약번호/);
 });
 
 test("expands the four staff analysis panels after removing their outer frame", async () => {
@@ -288,7 +320,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   const sortedNames = [...roster.creators].sort((a,b)=>(roster.channels.find(c=>c.id===b.channelId).subscribers ?? -1)-(roster.channels.find(c=>c.id===a.channelId).subscribers ?? -1)).map(person=>person.name);
   rows.forEach((row,index)=>assert.ok(row.includes(sortedNames[index]), "default subscriber descending order"));
   for (const person of roster.creators) {
-    const row = rows.find(row => row.includes(person.name));
+    const row = rows.find(row => row.includes(`<strong>${person.name}`));
     const years = voc.showrooms[person.cdsid].employees.find(employee => employee.name === person.name).years;
     const totals = Object.values(years).reduce((sum, year) => ({responses:sum.responses+year.responses, score:sum.score+year.scoreSum}), {responses:0,score:0});
     const score = totals.responses ? (totals.score / totals.responses).toFixed(1) : "—";
@@ -559,7 +591,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(staffAnalysisGenerator, /후속 연락·진행안내/);
   assert.doesNotMatch(staffAnalysisGenerator, /후속연락·진행상황 안내 미흡/);
   const kimNaehwan = staffAnalysis.showrooms["6KR6849"].employees.find(({ name }) => name === "김내환");
-  assert.equal(kimNaehwan.commentResponses, 36);
+  assert.equal(kimNaehwan.commentResponses, 38);
   assert.deepEqual(
     kimNaehwan.improvementKeywords.map(({ label }) => label),
     [
@@ -588,7 +620,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   );
   assert.deepEqual(splitPressureMentions, {
     "자율관람 방해": 1,
-    "구매·계약 압박": 2,
+    "구매·계약 압박": 3,
     "과도한 응대 부담": 6,
   });
   const waitAndReservationMentions = analyzedEmployees.flatMap(({ improvementKeywords }) =>
@@ -596,7 +628,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
       ["대기시간 관리 미흡", "예약절차 운영 미흡"].includes(label),
     ),
   );
-  assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 61);
+  assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 65);
   assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
   assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
   assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 14));
@@ -1866,6 +1898,10 @@ test("server-renders the selected CDSID dashboard", async () => {
     new URL("../app/Dashboard.tsx", import.meta.url),
     "utf8",
   );
+  const [consultation, sent] = await Promise.all([
+    readFile(new URL("../app/data/voc-consultation.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/voc-sent.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
   const seoulToday = new Intl.DateTimeFormat("sv-SE", {
     timeZone: "Asia/Seoul",
     dateStyle: "short",
@@ -1873,10 +1909,11 @@ test("server-renders the selected CDSID dashboard", async () => {
     .format(new Date())
     .replaceAll("-", ".");
   const compactSeoulToday = seoulToday.replaceAll(".", "").slice(-6);
-  assert.match(
-    visibleHtml,
-    /class="voc-response-rate-axis middle">20%<\/span>/,
+  const responseRates = consultation.responseRateResponses.showrooms["6KR6834"].map(
+    (responses, index) => responses / sent.showrooms["6KR6834"][index] * 100,
   );
+  const responseRateCeiling = Math.max(40, Math.ceil(Math.max(...responseRates) / 10) * 10);
+  assert.match(visibleHtml, new RegExp(`class="voc-response-rate-axis middle">${responseRateCeiling / 2}%<\\/span>`));
   assert.match(css, /\.voc-response-rate-axis\.middle\s*\{\s*top:\s*48px/);
   assert.match(html, /DSC COMMAND/);
   assert.doesNotMatch(
