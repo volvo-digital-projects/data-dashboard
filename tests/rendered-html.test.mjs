@@ -831,6 +831,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-rank\s*\{[^}]*display: grid;[^}]*grid-template-columns: max-content max-content max-content;[^}]*column-gap: 6px;[^}]*row-gap: 2px;[^}]*justify-content: center;/);
   assert.match(css, /\.growth-sales-share-rank > span\s*\{[^}]*display: contents;/);
   assert.match(css, /\.growth-sales-share-rank > span > b,[\s\S]*?\.growth-sales-share-rank > span > em,[\s\S]*?\.growth-sales-share-rank > span > span\s*\{[^}]*text-align: left;[^}]*white-space: nowrap;/);
+  assert.match(css, /\.growth-sales-share-rank em,[\s\S]*?\.growth-sales-share-rank > span > span\s*\{[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-variant-numeric: tabular-nums;[^}]*font-feature-settings: "tnum" 1;[^}]*line-height: inherit;/);
   assert.doesNotMatch(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
   assert.match(navigation, /1인 평균 \{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}대 대비/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);

@@ -3069,6 +3069,14 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-style: normal;
 }
 
+.growth-sales-share-rank em,
+.growth-sales-share-rank > span > span {
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  line-height: inherit;
+}
+
 .growth-sales-share-rank i {
   margin-right: 4px;
   color: #9aabb3;
