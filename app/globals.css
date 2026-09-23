@@ -3088,6 +3088,35 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-weight: 750;
 }
 
+.growth-sales-share-meta .growth-sales-meta-number {
+  display: inline-block;
+  margin: 0;
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-size: inherit;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  line-height: inherit;
+  color: inherit;
+  vertical-align: baseline;
+}
+
+.growth-sales-meta-number.rank-number,
+.growth-sales-meta-number.count-number {
+  width: 2ch;
+  text-align: right;
+}
+
+.growth-sales-meta-number.single-number {
+  width: 1ch;
+  text-align: right;
+}
+
+.growth-sales-meta-number.average-number {
+  width: 4ch;
+  text-align: right;
+}
+
 .growth-sales-share-meta strong.positive { color: var(--comparison-positive-blue) !important; }
 .growth-sales-share-meta strong.negative { color: var(--warning) !important; }
 .growth-sales-share-meta strong.neutral { color: #536f7b !important; }

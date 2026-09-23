@@ -4145,17 +4145,17 @@ export default function CompetitiveAnalysis({
                           <small className="growth-sales-share-rank">
                             <span>
                               <b>{selectedDealerRankName}</b>
-                              <em>{displayTwoDigitRank(selectedStaffDealerSalesRank)}위</em>
-                              <span><i aria-hidden="true">/</i>전체 {displayTwoDigitCount(selectedStaffDealerSalesPopulation.length)}</span>
+                              <em><strong className="growth-sales-meta-number rank-number">{displayTwoDigitRank(selectedStaffDealerSalesRank)}</strong>위</em>
+                              <span><i aria-hidden="true">/</i>전체 <strong className="growth-sales-meta-number count-number">{displayTwoDigitCount(selectedStaffDealerSalesPopulation.length)}</strong></span>
                             </span>
                             <span>
                               <b>{displayShowroomNameWithoutBrand(selected.showroom)}</b>
-                              <em>{displayTwoDigitRank(selectedStaffSalesRank)}위</em>
-                              <span><i aria-hidden="true">/</i>전체 {displayTwoDigitCount(selectedShowroomSalesPopulationCount)}</span>
+                              <em><strong className="growth-sales-meta-number rank-number">{displayTwoDigitRank(selectedStaffSalesRank)}</strong>위</em>
+                              <span><i aria-hidden="true">/</i>전체 <strong className="growth-sales-meta-number count-number">{displayTwoDigitCount(selectedShowroomSalesPopulationCount)}</strong></span>
                             </span>
                           </small>
                           <small>
-                            {displayShowroomNameWithoutBrand(selected.showroom)} 1인 평균 {selectedShowroomAverageDeliveredSales.toFixed(1)}대 대비 {" "}
+                            {displayShowroomNameWithoutBrand(selected.showroom)} <strong className="growth-sales-meta-number single-number">1</strong>인 평균 <strong className="growth-sales-meta-number average-number">{selectedShowroomAverageDeliveredSales.toFixed(1)}</strong>대 대비 {" "}
                             <strong className={selectedStaffShowroomAverageDeltaTone}>
                               {selectedStaffShowroomAverageDeltaMark}{Math.abs(selectedStaffShowroomAverageDelta).toFixed(1)}대
                             </strong>

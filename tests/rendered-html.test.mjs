@@ -823,7 +823,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /selectedStaffDealerSalesPopulation\.filter\([\s\S]*?staff\.deliveredSales > selectedStaffDeliveredSales[\s\S]*?\.length \+ 1/);
   assert.match(source, /selectedStaffSalesRank = selectedStaffSalesActivity[\s\S]*?staff\.deliveredSales > selectedStaffSalesActivity\.deliveredSales[\s\S]*?\.length \+ 1/);
   assert.match(source, /selectedShowroomSalesPopulationCount = selectedSalesActivityShowroom\?\.staff\.length \?\? 0/);
-  assert.match(navigation, /className="growth-sales-share-rank"[\s\S]*?<b>\{selectedDealerRankName\}<\/b>[\s\S]*?<em>\{displayTwoDigitRank\(selectedStaffDealerSalesRank\)\}위<\/em>[\s\S]*?<span><i aria-hidden="true">\/<\/i>전체 \{displayTwoDigitCount\(selectedStaffDealerSalesPopulation\.length\)\}<\/span>[\s\S]*?<b>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\}<\/b>[\s\S]*?<em>\{displayTwoDigitRank\(selectedStaffSalesRank\)\}위<\/em>[\s\S]*?<span><i aria-hidden="true">\/<\/i>전체 \{displayTwoDigitCount\(selectedShowroomSalesPopulationCount\)\}<\/span>/);
+  assert.match(navigation, /className="growth-sales-share-rank"[\s\S]*?<b>\{selectedDealerRankName\}<\/b>[\s\S]*?<em><strong className="growth-sales-meta-number rank-number">\{displayTwoDigitRank\(selectedStaffDealerSalesRank\)\}<\/strong>위<\/em>[\s\S]*?<span><i aria-hidden="true">\/<\/i>전체 <strong className="growth-sales-meta-number count-number">\{displayTwoDigitCount\(selectedStaffDealerSalesPopulation\.length\)\}<\/strong><\/span>[\s\S]*?<b>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\}<\/b>[\s\S]*?<em><strong className="growth-sales-meta-number rank-number">\{displayTwoDigitRank\(selectedStaffSalesRank\)\}<\/strong>위<\/em>[\s\S]*?<span><i aria-hidden="true">\/<\/i>전체 <strong className="growth-sales-meta-number count-number">\{displayTwoDigitCount\(selectedShowroomSalesPopulationCount\)\}<\/strong><\/span>/);
   assert.match(source, /const displayTwoDigitRank = \(value: number \| null\) => value === null \? "―" : displayTwoDigitCount\(value\);/);
   assert.doesNotMatch(navigation, /className="growth-sales-share-rank"[\s\S]*?selectedStaffEmployee/);
   assert.match(css, /\.growth-sales-share-rank i\s*\{[^}]*margin-right: 4px;[^}]*color: #9aabb3;[^}]*font-style: normal;/);
@@ -832,8 +832,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-rank > span\s*\{[^}]*display: contents;/);
   assert.match(css, /\.growth-sales-share-rank > span > b,[\s\S]*?\.growth-sales-share-rank > span > em,[\s\S]*?\.growth-sales-share-rank > span > span\s*\{[^}]*text-align: left;[^}]*white-space: nowrap;/);
   assert.match(css, /\.growth-sales-share-rank em,[\s\S]*?\.growth-sales-share-rank > span > span\s*\{[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-variant-numeric: tabular-nums;[^}]*font-feature-settings: "tnum" 1;[^}]*line-height: inherit;/);
+  assert.match(navigation, /<strong className="growth-sales-meta-number single-number">1<\/strong>인 평균 <strong className="growth-sales-meta-number average-number">\{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}<\/strong>대 대비/);
+  assert.match(css, /\.growth-sales-share-meta \.growth-sales-meta-number\s*\{[^}]*display: inline-block;[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-weight: 750;[^}]*font-variant-numeric: tabular-nums;[^}]*font-feature-settings: "tnum" 1;[^}]*vertical-align: baseline;/);
+  assert.match(css, /\.growth-sales-meta-number\.rank-number,[\s\S]*?\.growth-sales-meta-number\.count-number\s*\{[^}]*width: 2ch;[^}]*text-align: right;/);
+  assert.match(css, /\.growth-sales-meta-number\.average-number\s*\{[^}]*width: 4ch;[^}]*text-align: right;/);
   assert.doesNotMatch(navigation, /전시장 \{selectedStaffSalesRank \?\? "―"\}위[\s\S]*?월 평균/);
-  assert.match(navigation, /1인 평균 \{selectedShowroomAverageDeliveredSales\.toFixed\(1\)\}대 대비/);
   assert.doesNotMatch(navigation, /영업활동 원자료 연결 후 활성화|산포도 표시 공간/);
   assert.equal(salesActivity.source.activityAsOf, "2026-09-07");
   assert.match(salesActivity.source.salesAsOf, /^2026-\d{2}-\d{2}$/);
