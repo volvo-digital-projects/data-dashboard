@@ -2733,7 +2733,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-segment-donut-values {
-  width: 68px;
+  width: 74px;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1px;
@@ -2742,11 +2742,11 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-values > span {
   min-width: 0;
   display: grid;
-  grid-template-columns: 6px 17px 38px;
+  grid-template-columns: 6px 19px 41px;
   align-items: center;
   gap: 2px;
   color: #58717e;
-  font-size: 8px;
+  font-size: 9px;
   line-height: 1.1;
   text-align: left;
   white-space: nowrap;
@@ -2760,7 +2760,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-segment-donut-values b {
   font-family: var(--font-volvo);
-  font-size: 9px;
+  font-size: 10px;
   color: #345b6d;
 }
 

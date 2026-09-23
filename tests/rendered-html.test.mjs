@@ -934,9 +934,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateY\(-4deg\) rotateZ\(-150deg\)[\s\S]*?rotateY\(-4deg\) rotateZ\(0deg\)/);
   assert.match(source, /"30": \{ label: "30", color: "#6f9fba", lightColor: "#9abed0" \}[\s\S]*?"40": \{ label: "40", color: "#6fa78e", lightColor: "#9ac5b3" \}[\s\S]*?"60": \{ label: "60", color: "#c5a05a", lightColor: "#dcc28e" \}[\s\S]*?"90": \{ label: "90", color: "#c97a78", lightColor: "#dfa4a2" \}/);
   assert.match(source, /salesSegmentMeta\[segment\]\.lightColor[\s\S]*?salesSegmentMeta\[segment\]\.color/);
-  assert.match(css, /\.growth-segment-donut-values\s*\{[^}]*width: 68px;[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap: 1px;/);
-  assert.match(css, /\.growth-segment-donut-values > span\s*\{[^}]*grid-template-columns: 6px 17px 38px;[^}]*gap: 2px;[^}]*font-size: 8px;[^}]*line-height: 1\.1;/);
-  assert.match(css, /\.growth-segment-donut-values b\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-size: 9px;/);
+  assert.match(css, /\.growth-segment-donut-values\s*\{[^}]*width: 74px;[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap: 1px;/);
+  assert.match(css, /\.growth-segment-donut-values > span\s*\{[^}]*grid-template-columns: 6px 19px 41px;[^}]*gap: 2px;[^}]*font-size: 9px;[^}]*line-height: 1\.1;/);
+  assert.match(css, /\.growth-segment-donut-values b\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-size: 10px;/);
   assert.match(css, /\.growth-segment-donut-values em\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
   assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계/);
