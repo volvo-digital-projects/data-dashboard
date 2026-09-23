@@ -662,17 +662,17 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /전문지식·정확성/);
   assert.match(staffAnalysisGenerator, /전문지식 정확성 부족/);
   assert.match(staffAnalysisGenerator, /시설 편의 미제공/);
-  assert.match(staffAnalysisGenerator, /간결한 설명 필요/);
+  assert.match(staffAnalysisGenerator, /간결한 설명필요/);
   assert.match(staffAnalysisGenerator, /구체적 설명 부족/);
   assert.match(staffAnalysisGenerator, /응대 태도 불량/);
-  assert.match(staffAnalysisGenerator, /상담자료 활용 미흡/);
+  assert.match(staffAnalysisGenerator, /상담자료 활용미흡/);
   assert.match(staffAnalysisGenerator, /전시차량 다양화 필요/);
   assert.match(staffAnalysisGenerator, /시승모델 다양화 필요/);
   assert.match(staffAnalysisGenerator, /가격혜택 안내부족/);
   assert.match(staffAnalysisGenerator, /시승기회·시간 확대/);
   assert.match(staffAnalysisGenerator, /상담공간 편의제공/);
-  assert.match(staffAnalysisGenerator, /대기시간 관리 미흡/);
-  assert.match(staffAnalysisGenerator, /예약절차 운영 미흡/);
+  assert.match(staffAnalysisGenerator, /대기시간 관리미흡/);
+  assert.match(staffAnalysisGenerator, /예약절차 운영미흡/);
   assert.match(staffAnalysisGenerator, /진행상황 안내 미흡/);
   assert.doesNotMatch(staffAnalysisGenerator, /진행상황 중간안내 미흡/);
   assert.match(source, /"진행상황 중간안내 미흡": "진행상황 안내 미흡"/);
@@ -697,14 +697,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     kimNaehwan.improvementKeywords.map(({ label }) => label),
     [
       "전문지식 정확성 부족",
-      "간결한 설명 필요",
-      "상담자료 활용 미흡",
-      "대기시간 관리 미흡",
+      "간결한 설명필요",
+      "상담자료 활용미흡",
+      "대기시간 관리미흡",
       "전시차량 다양화 필요",
       "구체적 설명 부족",
       "자율관람 방해",
       "가격혜택 안내부족",
-      "예약절차 운영 미흡",
+      "예약절차 운영미흡",
       "시설 편의 미제공",
     ],
   );
@@ -726,7 +726,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   });
   const waitAndReservationMentions = analyzedEmployees.flatMap(({ improvementKeywords }) =>
     improvementKeywords.filter(({ label }) =>
-      ["대기시간 관리 미흡", "예약절차 운영 미흡"].includes(label),
+      ["대기시간 관리미흡", "예약절차 운영미흡"].includes(label),
     ),
   );
   assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 71);

@@ -100,8 +100,8 @@ const easePcScrollWithSoftLanding = (progress: number) => {
 const SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS = new Set([
   "전시차량 다양화 필요",
   "시승모델 다양화 필요",
-  "대기시간 관리 미흡",
-  "예약절차 운영 미흡",
+  "대기시간 관리미흡",
+  "예약절차 운영미흡",
   "상담공간 편의제공",
   "시설 편의 미제공",
   "시승기회·시간 확대",
