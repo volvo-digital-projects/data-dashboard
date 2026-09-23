@@ -3,12 +3,13 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-09-23",
-    "salesSyncedAt": "2026-09-23T12:52:05+09:00",
+    "salesSyncedAt": "2026-09-23T14:06:20+09:00",
     "salesPeriod": "2026-01-01~2026-09-23",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
     "salesJoin": "현재 Sales-DMS 재직자의 직원명과 판매 전시장 코드를 함께 연결",
-    "salesUpdateSchedule": "유튜브 지표 갱신과 함께 매시간"
+    "salesUpdateSchedule": "유튜브 지표 갱신과 함께 매시간",
+    "salesSegmentBasis": "Actual Monthly Sales의 Model에서 30·40·60·90 세그먼트를 분류"
   },
   "showrooms": {
     "6KR6849": {
@@ -46,7 +47,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "김태형",
@@ -79,7 +86,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 14,
+            "40": 2,
+            "60": 12,
+            "90": 8
+          }
         },
         {
           "name": "전훈기",
@@ -100,8 +113,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 36,
+          "deliveredSales": 37,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -111,8 +124,14 @@
             5,
             4,
             5,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 6,
+            "60": 11,
+            "90": 15
+          }
         },
         {
           "name": "하지혁",
@@ -133,8 +152,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 33,
-          "deliveredCustomers": 33,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             1,
             3,
@@ -144,8 +163,14 @@
             10,
             4,
             0,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 16,
+            "40": 2,
+            "60": 10,
+            "90": 6
+          }
         },
         {
           "name": "함진호",
@@ -178,7 +203,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 6,
+            "90": 5
+          }
         },
         {
           "name": "김내환",
@@ -211,7 +242,13 @@
             0,
             1,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 10,
+            "90": 12
+          }
         },
         {
           "name": "신수경",
@@ -232,8 +269,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 89,
-          "deliveredCustomers": 89,
+          "deliveredSales": 90,
+          "deliveredCustomers": 90,
           "monthlyDeliveredSales": [
             4,
             5,
@@ -243,8 +280,14 @@
             20,
             12,
             7,
-            9
-          ]
+            10
+          ],
+          "segmentSales": {
+            "30": 18,
+            "40": 13,
+            "60": 31,
+            "90": 28
+          }
         }
       ],
       "summary": {
@@ -253,7 +296,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 245,
+        "deliveredSales": 248,
         "monthlyDeliveredSales": [
           13,
           20,
@@ -263,8 +306,14 @@
           57,
           22,
           17,
-          24
-        ]
+          27
+        ],
+        "segmentSales": {
+          "30": 63,
+          "40": 31,
+          "60": 80,
+          "90": 74
+        }
       }
     },
     "6KR6862": {
@@ -302,7 +351,13 @@
             2,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 6,
+            "90": 5
+          }
         },
         {
           "name": "김성준",
@@ -335,7 +390,13 @@
             2,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 1,
+            "60": 5,
+            "90": 1
+          }
         },
         {
           "name": "김종선",
@@ -368,7 +429,13 @@
             2,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 12,
+            "90": 8
+          }
         },
         {
           "name": "김종욱",
@@ -401,7 +468,13 @@
             2,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 1,
+            "60": 4,
+            "90": 9
+          }
         },
         {
           "name": "박형관",
@@ -434,7 +507,13 @@
             0,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 2,
+            "90": 3
+          }
         },
         {
           "name": "송호준",
@@ -455,8 +534,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -466,8 +545,14 @@
             2,
             2,
             2,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 1,
+            "60": 10,
+            "90": 8
+          }
         },
         {
           "name": "김태환",
@@ -500,7 +585,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 1,
+            "60": 7,
+            "90": 9
+          }
         },
         {
           "name": "송명석",
@@ -521,8 +612,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -532,8 +623,14 @@
             5,
             3,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 14,
+            "90": 5
+          }
         }
       ],
       "summary": {
@@ -542,7 +639,7 @@
         "consultationCustomers": 14,
         "testDriveCustomers": 3,
         "contractCustomers": 2,
-        "deliveredSales": 164,
+        "deliveredSales": 166,
         "monthlyDeliveredSales": [
           19,
           17,
@@ -552,8 +649,14 @@
           29,
           14,
           12,
-          12
-        ]
+          14
+        ],
+        "segmentSales": {
+          "30": 45,
+          "40": 13,
+          "60": 60,
+          "90": 48
+        }
       }
     },
     "6KR6867": {
@@ -591,7 +694,13 @@
             1,
             2,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 1,
+            "60": 5,
+            "90": 3
+          }
         },
         {
           "name": "김유수",
@@ -624,7 +733,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 2,
+            "60": 4,
+            "90": 1
+          }
         },
         {
           "name": "박재원",
@@ -657,7 +772,13 @@
             2,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 1,
+            "60": 2,
+            "90": 3
+          }
         },
         {
           "name": "양진호",
@@ -678,8 +799,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -689,8 +810,14 @@
             3,
             0,
             1,
-            5
-          ]
+            7
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 1,
+            "60": 7,
+            "90": 7
+          }
         },
         {
           "name": "최준영",
@@ -711,8 +838,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 44,
-          "deliveredCustomers": 44,
+          "deliveredSales": 46,
+          "deliveredCustomers": 46,
           "monthlyDeliveredSales": [
             3,
             6,
@@ -722,8 +849,14 @@
             8,
             4,
             4,
-            2
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 14,
+            "40": 5,
+            "60": 19,
+            "90": 8
+          }
         },
         {
           "name": "홍대현",
@@ -744,8 +877,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             0,
             4,
@@ -755,8 +888,14 @@
             7,
             1,
             1,
-            2
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 3,
+            "60": 10,
+            "90": 4
+          }
         },
         {
           "name": "송민경",
@@ -789,7 +928,13 @@
             9,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 8,
+            "60": 14,
+            "90": 11
+          }
         },
         {
           "name": "정기훈",
@@ -810,8 +955,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 28,
-          "deliveredCustomers": 27,
+          "deliveredSales": 29,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             5,
             4,
@@ -821,8 +966,14 @@
             5,
             2,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 5,
+            "60": 7,
+            "90": 7
+          }
         }
       ],
       "summary": {
@@ -831,7 +982,7 @@
         "consultationCustomers": 10,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 188,
+        "deliveredSales": 195,
         "monthlyDeliveredSales": [
           13,
           22,
@@ -841,8 +992,14 @@
           38,
           20,
           12,
-          17
-        ]
+          24
+        ],
+        "segmentSales": {
+          "30": 57,
+          "40": 26,
+          "60": 68,
+          "90": 44
+        }
       }
     },
     "6KR6845": {
@@ -880,7 +1037,13 @@
             1,
             3,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 6,
+            "90": 8
+          }
         },
         {
           "name": "김성준",
@@ -913,7 +1076,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "김형천",
@@ -934,8 +1103,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -945,8 +1114,14 @@
             2,
             2,
             4,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 10,
+            "90": 9
+          }
         },
         {
           "name": "박치영",
@@ -979,7 +1154,13 @@
             2,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 10,
+            "90": 6
+          }
         },
         {
           "name": "정병수",
@@ -1012,7 +1193,13 @@
             4,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 6,
+            "60": 6,
+            "90": 6
+          }
         },
         {
           "name": "최연승",
@@ -1033,8 +1220,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -1044,8 +1231,14 @@
             5,
             0,
             1,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 3,
+            "60": 5,
+            "90": 5
+          }
         },
         {
           "name": "최진원",
@@ -1066,8 +1259,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 29,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -1077,8 +1270,14 @@
             7,
             4,
             1,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 5,
+            "60": 12,
+            "90": 5
+          }
         },
         {
           "name": "최찬",
@@ -1111,7 +1310,13 @@
             1,
             2,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 3,
+            "60": 7,
+            "90": 9
+          }
         },
         {
           "name": "황선형",
@@ -1132,8 +1337,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             4,
             3,
@@ -1143,8 +1348,14 @@
             6,
             2,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 11,
+            "90": 7
+          }
         },
         {
           "name": "이윤재",
@@ -1165,8 +1376,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 34,
-          "deliveredCustomers": 34,
+          "deliveredSales": 37,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -1176,8 +1387,14 @@
             7,
             1,
             1,
-            4
-          ]
+            7
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 4,
+            "60": 10,
+            "90": 12
+          }
         },
         {
           "name": "이종우",
@@ -1210,7 +1427,13 @@
             2,
             4,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 12,
+            "40": 3,
+            "60": 8,
+            "90": 8
+          }
         },
         {
           "name": "정지성",
@@ -1243,7 +1466,13 @@
             3,
             2,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 6,
+            "60": 13,
+            "90": 11
+          }
         }
       ],
       "summary": {
@@ -1252,7 +1481,7 @@
         "consultationCustomers": 5,
         "testDriveCustomers": 1,
         "contractCustomers": 0,
-        "deliveredSales": 302,
+        "deliveredSales": 311,
         "monthlyDeliveredSales": [
           23,
           32,
@@ -1262,8 +1491,14 @@
           61,
           22,
           21,
-          31
-        ]
+          40
+        ],
+        "segmentSales": {
+          "30": 84,
+          "40": 42,
+          "60": 99,
+          "90": 86
+        }
       }
     },
     "6KR6846": {
@@ -1301,7 +1536,13 @@
             2,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 2,
+            "60": 14,
+            "90": 5
+          }
         },
         {
           "name": "김예소",
@@ -1334,7 +1575,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "박상현",
@@ -1367,7 +1614,13 @@
             2,
             0,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 7,
+            "90": 6
+          }
         },
         {
           "name": "신승희",
@@ -1388,8 +1641,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -1399,8 +1652,14 @@
             5,
             1,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 8,
+            "90": 9
+          }
         },
         {
           "name": "이재석",
@@ -1433,7 +1692,13 @@
             1,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 3,
+            "90": 3
+          }
         },
         {
           "name": "장민규",
@@ -1466,7 +1731,13 @@
             1,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "정나누리",
@@ -1499,7 +1770,13 @@
             0,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "천명현",
@@ -1532,7 +1809,13 @@
             1,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 0,
+            "60": 6,
+            "90": 3
+          }
         },
         {
           "name": "김호연",
@@ -1553,8 +1836,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 43,
-          "deliveredCustomers": 43,
+          "deliveredSales": 45,
+          "deliveredCustomers": 45,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -1564,8 +1847,14 @@
             6,
             2,
             3,
-            4
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 4,
+            "60": 12,
+            "90": 19
+          }
         },
         {
           "name": "박형진",
@@ -1598,7 +1887,13 @@
             2,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 2,
+            "60": 13,
+            "90": 8
+          }
         }
       ],
       "summary": {
@@ -1607,7 +1902,7 @@
         "consultationCustomers": 58,
         "testDriveCustomers": 8,
         "contractCustomers": 4,
-        "deliveredSales": 196,
+        "deliveredSales": 199,
         "monthlyDeliveredSales": [
           13,
           26,
@@ -1617,8 +1912,14 @@
           42,
           12,
           10,
-          15
-        ]
+          18
+        ],
+        "segmentSales": {
+          "30": 47,
+          "40": 18,
+          "60": 75,
+          "90": 59
+        }
       }
     },
     "6KR6841": {
@@ -1656,7 +1957,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 10,
+            "90": 4
+          }
         },
         {
           "name": "권하영",
@@ -1677,8 +1984,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             1,
             5,
@@ -1688,8 +1995,14 @@
             3,
             3,
             1,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 5,
+            "60": 11,
+            "90": 7
+          }
         },
         {
           "name": "김남서",
@@ -1722,7 +2035,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 1,
+            "60": 2,
+            "90": 2
+          }
         },
         {
           "name": "김찬양",
@@ -1743,8 +2062,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 37,
-          "deliveredCustomers": 37,
+          "deliveredSales": 38,
+          "deliveredCustomers": 38,
           "monthlyDeliveredSales": [
             7,
             5,
@@ -1754,8 +2073,14 @@
             6,
             6,
             3,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 14,
+            "90": 14
+          }
         },
         {
           "name": "박민성",
@@ -1776,8 +2101,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -1787,8 +2112,14 @@
             2,
             2,
             2,
-            5
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 10,
+            "90": 8
+          }
         },
         {
           "name": "서원빈",
@@ -1809,8 +2140,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 14,
+          "deliveredCustomers": 14,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -1820,8 +2151,14 @@
             4,
             3,
             0,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 1,
+            "90": 9
+          }
         },
         {
           "name": "윤도준",
@@ -1854,7 +2191,13 @@
             3,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 3,
+            "90": 0
+          }
         },
         {
           "name": "이은섭",
@@ -1887,7 +2230,13 @@
             2,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 21,
+            "90": 10
+          }
         },
         {
           "name": "정지윤",
@@ -1920,7 +2269,13 @@
             1,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "신은광",
@@ -1953,7 +2308,13 @@
             4,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 5,
+            "60": 11,
+            "90": 5
+          }
         },
         {
           "name": "윤원희",
@@ -1986,7 +2347,13 @@
             2,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 5,
+            "60": 4,
+            "90": 10
+          }
         },
         {
           "name": "이상민",
@@ -2007,8 +2374,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             3,
             3,
@@ -2018,8 +2385,14 @@
             5,
             1,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 7,
+            "90": 3
+          }
         },
         {
           "name": "정승현",
@@ -2052,7 +2425,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 3,
+            "60": 4,
+            "90": 13
+          }
         }
       ],
       "summary": {
@@ -2061,7 +2440,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 263,
+        "deliveredSales": 269,
         "monthlyDeliveredSales": [
           32,
           33,
@@ -2071,8 +2450,14 @@
           49,
           29,
           13,
-          17
-        ]
+          23
+        ],
+        "segmentSales": {
+          "30": 53,
+          "40": 32,
+          "60": 99,
+          "90": 85
+        }
       }
     },
     "6KR6864": {
@@ -2098,8 +2483,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             5,
             3,
@@ -2109,8 +2494,14 @@
             6,
             2,
             4,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 14,
+            "90": 9
+          }
         },
         {
           "name": "김도현",
@@ -2131,8 +2522,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -2142,8 +2533,14 @@
             2,
             2,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 1,
+            "60": 1,
+            "90": 6
+          }
         },
         {
           "name": "김성일",
@@ -2176,7 +2573,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 3,
+            "60": 4,
+            "90": 6
+          }
         },
         {
           "name": "박지성",
@@ -2209,7 +2612,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "은성욱",
@@ -2242,7 +2651,13 @@
             3,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 19,
+            "90": 7
+          }
         },
         {
           "name": "정충화",
@@ -2263,8 +2678,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             6,
             0,
@@ -2274,8 +2689,14 @@
             2,
             2,
             1,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 1,
+            "60": 12,
+            "90": 5
+          }
         },
         {
           "name": "김도윤",
@@ -2296,8 +2717,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -2307,8 +2728,14 @@
             5,
             2,
             2,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 6,
+            "90": 4
+          }
         },
         {
           "name": "윤지환",
@@ -2341,7 +2768,13 @@
             3,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 8,
+            "90": 8
+          }
         },
         {
           "name": "이용환",
@@ -2362,8 +2795,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 48,
-          "deliveredCustomers": 48,
+          "deliveredSales": 49,
+          "deliveredCustomers": 49,
           "monthlyDeliveredSales": [
             9,
             5,
@@ -2373,8 +2806,14 @@
             9,
             0,
             3,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 18,
+            "40": 7,
+            "60": 13,
+            "90": 11
+          }
         }
       ],
       "summary": {
@@ -2383,7 +2822,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 209,
+        "deliveredSales": 215,
         "monthlyDeliveredSales": [
           31,
           25,
@@ -2393,8 +2832,14 @@
           42,
           16,
           15,
-          12
-        ]
+          18
+        ],
+        "segmentSales": {
+          "30": 60,
+          "40": 22,
+          "60": 77,
+          "90": 56
+        }
       }
     },
     "6KR6857": {
@@ -2420,8 +2865,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 1,
-          "deliveredCustomers": 1,
+          "deliveredSales": 2,
+          "deliveredCustomers": 2,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -2431,8 +2876,14 @@
             0,
             0,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "박진영",
@@ -2453,8 +2904,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 16,
+          "deliveredSales": 17,
+          "deliveredCustomers": 17,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -2464,8 +2915,14 @@
             2,
             1,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 0,
+            "60": 10,
+            "90": 3
+          }
         },
         {
           "name": "방영민",
@@ -2498,7 +2955,13 @@
             1,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 5,
+            "90": 6
+          }
         },
         {
           "name": "백승환",
@@ -2531,7 +2994,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 2,
+            "90": 3
+          }
         },
         {
           "name": "오영재",
@@ -2552,8 +3021,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 23,
-          "deliveredCustomers": 23,
+          "deliveredSales": 24,
+          "deliveredCustomers": 24,
           "monthlyDeliveredSales": [
             5,
             2,
@@ -2563,8 +3032,14 @@
             5,
             3,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 3,
+            "60": 10,
+            "90": 5
+          }
         },
         {
           "name": "유병훈",
@@ -2597,7 +3072,13 @@
             1,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 2,
+            "90": 6
+          }
         },
         {
           "name": "이송봉",
@@ -2630,7 +3111,13 @@
             1,
             7,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 9,
+            "60": 11,
+            "90": 17
+          }
         },
         {
           "name": "정병준",
@@ -2663,7 +3150,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "황명하",
@@ -2696,7 +3189,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 1,
+            "60": 1,
+            "90": 4
+          }
         },
         {
           "name": "김현철",
@@ -2729,7 +3228,13 @@
             2,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 4,
+            "60": 6,
+            "90": 5
+          }
         },
         {
           "name": "김현호",
@@ -2762,7 +3267,13 @@
             3,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 5,
+            "90": 2
+          }
         },
         {
           "name": "최인영",
@@ -2783,8 +3294,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 16,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             3,
             3,
@@ -2794,8 +3305,14 @@
             4,
             0,
             1,
-            2
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 2,
+            "60": 3,
+            "90": 10
+          }
         }
       ],
       "summary": {
@@ -2804,7 +3321,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 191,
+        "deliveredSales": 197,
         "monthlyDeliveredSales": [
           18,
           20,
@@ -2814,8 +3331,14 @@
           32,
           14,
           12,
-          18
-        ]
+          24
+        ],
+        "segmentSales": {
+          "30": 49,
+          "40": 30,
+          "60": 57,
+          "90": 61
+        }
       }
     },
     "6KR6839": {
@@ -2841,8 +3364,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 15,
+          "deliveredCustomers": 15,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -2852,8 +3375,14 @@
             4,
             1,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 5,
+            "90": 3
+          }
         },
         {
           "name": "김명준",
@@ -2874,8 +3403,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 22,
+          "deliveredSales": 23,
+          "deliveredCustomers": 23,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -2885,8 +3414,14 @@
             7,
             1,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 6,
+            "60": 2,
+            "90": 5
+          }
         },
         {
           "name": "김선빈",
@@ -2919,7 +3454,13 @@
             1,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 3,
+            "60": 5,
+            "90": 4
+          }
         },
         {
           "name": "박준수",
@@ -2940,8 +3481,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 40,
-          "deliveredCustomers": 40,
+          "deliveredSales": 44,
+          "deliveredCustomers": 44,
           "monthlyDeliveredSales": [
             4,
             2,
@@ -2951,8 +3492,14 @@
             6,
             5,
             4,
-            6
-          ]
+            10
+          ],
+          "segmentSales": {
+            "30": 18,
+            "40": 2,
+            "60": 14,
+            "90": 10
+          }
         },
         {
           "name": "서준혁",
@@ -2973,8 +3520,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 16,
+          "deliveredSales": 17,
+          "deliveredCustomers": 17,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -2984,8 +3531,14 @@
             3,
             1,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 4,
+            "90": 6
+          }
         },
         {
           "name": "엄규식",
@@ -3006,8 +3559,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 20,
+          "deliveredSales": 22,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -3017,8 +3570,14 @@
             3,
             1,
             2,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 8,
+            "90": 10
+          }
         },
         {
           "name": "윤유진",
@@ -3039,8 +3598,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 11,
-          "deliveredCustomers": 11,
+          "deliveredSales": 12,
+          "deliveredCustomers": 12,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -3050,8 +3609,14 @@
             1,
             1,
             2,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 3,
+            "60": 5,
+            "90": 2
+          }
         },
         {
           "name": "이완",
@@ -3072,8 +3637,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -3083,8 +3648,14 @@
             3,
             0,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 4,
+            "90": 2
+          }
         },
         {
           "name": "임재환",
@@ -3117,7 +3688,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 2,
+            "60": 5,
+            "90": 4
+          }
         },
         {
           "name": "황인성",
@@ -3150,7 +3727,13 @@
             0,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 7,
+            "90": 1
+          }
         },
         {
           "name": "김민웅",
@@ -3183,7 +3766,13 @@
             1,
             4,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 14,
+            "90": 3
+          }
         },
         {
           "name": "김민지",
@@ -3216,7 +3805,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 1
+          }
         },
         {
           "name": "임승준",
@@ -3249,7 +3844,13 @@
             1,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 4,
+            "90": 4
+          }
         },
         {
           "name": "정요한",
@@ -3270,8 +3871,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 32,
-          "deliveredCustomers": 32,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             4,
             2,
@@ -3281,8 +3882,14 @@
             5,
             2,
             3,
-            3
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 5,
+            "60": 13,
+            "90": 8
+          }
         }
       ],
       "summary": {
@@ -3291,7 +3898,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 255,
+        "deliveredSales": 267,
         "monthlyDeliveredSales": [
           26,
           26,
@@ -3301,8 +3908,14 @@
           53,
           16,
           21,
-          22
-        ]
+          34
+        ],
+        "segmentSales": {
+          "30": 80,
+          "40": 34,
+          "60": 90,
+          "90": 63
+        }
       }
     },
     "6KR6830": {
@@ -3340,7 +3953,13 @@
             0,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 6,
+            "90": 5
+          }
         },
         {
           "name": "안정규",
@@ -3373,7 +3992,13 @@
             5,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 15,
+            "40": 3,
+            "60": 17,
+            "90": 11
+          }
         },
         {
           "name": "유현수",
@@ -3394,8 +4019,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -3405,8 +4030,14 @@
             3,
             0,
             1,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 8,
+            "60": 6,
+            "90": 2
+          }
         },
         {
           "name": "윤형원",
@@ -3427,8 +4058,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 4,
-          "deliveredCustomers": 4,
+          "deliveredSales": 6,
+          "deliveredCustomers": 6,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -3438,8 +4069,14 @@
             0,
             1,
             1,
-            2
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 0,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "이두원",
@@ -3472,7 +4109,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "이정인",
@@ -3493,8 +4136,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 7,
-          "deliveredCustomers": 7,
+          "deliveredSales": 8,
+          "deliveredCustomers": 8,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -3504,8 +4147,14 @@
             2,
             3,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 0,
+            "60": 5,
+            "90": 1
+          }
         },
         {
           "name": "이종인",
@@ -3538,7 +4187,13 @@
             1,
             0,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 0,
+            "60": 5,
+            "90": 6
+          }
         },
         {
           "name": "이진영",
@@ -3559,8 +4214,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 23,
-          "deliveredCustomers": 23,
+          "deliveredSales": 24,
+          "deliveredCustomers": 24,
           "monthlyDeliveredSales": [
             0,
             4,
@@ -3570,8 +4225,14 @@
             4,
             2,
             3,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 8,
+            "90": 7
+          }
         },
         {
           "name": "이충규",
@@ -3604,7 +4265,13 @@
             0,
             4,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 7,
+            "90": 5
+          }
         },
         {
           "name": "조정민",
@@ -3625,8 +4292,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 27,
+          "deliveredSales": 30,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -3636,8 +4303,14 @@
             4,
             3,
             0,
-            6
-          ]
+            7
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 1,
+            "60": 11,
+            "90": 8
+          }
         },
         {
           "name": "진주현",
@@ -3670,7 +4343,13 @@
             1,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 2,
+            "60": 7,
+            "90": 4
+          }
         },
         {
           "name": "김충현",
@@ -3691,8 +4370,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 46,
-          "deliveredCustomers": 33,
+          "deliveredSales": 51,
+          "deliveredCustomers": 38,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -3702,8 +4381,14 @@
             6,
             4,
             15,
-            0
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 9,
+            "60": 23,
+            "90": 12
+          }
         },
         {
           "name": "박원희",
@@ -3736,7 +4421,13 @@
             2,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 1,
+            "60": 7,
+            "90": 7
+          }
         },
         {
           "name": "이동규",
@@ -3757,8 +4448,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 32,
-          "deliveredCustomers": 32,
+          "deliveredSales": 33,
+          "deliveredCustomers": 33,
           "monthlyDeliveredSales": [
             4,
             5,
@@ -3768,8 +4459,14 @@
             6,
             4,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 1,
+            "60": 9,
+            "90": 14
+          }
         }
       ],
       "summary": {
@@ -3778,7 +4475,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 294,
+        "deliveredSales": 306,
         "monthlyDeliveredSales": [
           30,
           35,
@@ -3788,8 +4485,14 @@
           54,
           26,
           29,
-          23
-        ]
+          35
+        ],
+        "segmentSales": {
+          "30": 74,
+          "40": 35,
+          "60": 114,
+          "90": 83
+        }
       }
     },
     "6KR6872": {
@@ -3827,7 +4530,13 @@
             7,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 7,
+            "60": 9,
+            "90": 7
+          }
         },
         {
           "name": "고태영",
@@ -3860,7 +4569,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "김기민",
@@ -3881,8 +4596,8 @@
             "testDriveToContract": 2,
             "contractToDelivered": 2
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -3892,8 +4607,14 @@
             4,
             3,
             2,
-            2
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 6,
+            "90": 8
+          }
         },
         {
           "name": "원종필",
@@ -3926,7 +4647,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 0,
+            "60": 9,
+            "90": 8
+          }
         },
         {
           "name": "이학정",
@@ -3947,8 +4674,8 @@
             "testDriveToContract": 1,
             "contractToDelivered": 1
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 29,
+          "deliveredSales": 31,
+          "deliveredCustomers": 30,
           "monthlyDeliveredSales": [
             5,
             4,
@@ -3958,8 +4685,14 @@
             5,
             1,
             2,
-            5
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 9,
+            "90": 11
+          }
         },
         {
           "name": "최윤호",
@@ -3992,7 +4725,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 0,
+            "60": 8,
+            "90": 8
+          }
         },
         {
           "name": "이상원",
@@ -4025,7 +4764,13 @@
             4,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 7,
+            "60": 8,
+            "90": 9
+          }
         },
         {
           "name": "황보성",
@@ -4046,8 +4791,8 @@
             "testDriveToContract": 1,
             "contractToDelivered": 1
           },
-          "deliveredSales": 34,
-          "deliveredCustomers": 34,
+          "deliveredSales": 35,
+          "deliveredCustomers": 35,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -4057,8 +4802,14 @@
             9,
             5,
             0,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 16,
+            "40": 0,
+            "60": 13,
+            "90": 6
+          }
         }
       ],
       "summary": {
@@ -4067,7 +4818,7 @@
         "consultationCustomers": 166,
         "testDriveCustomers": 54,
         "contractCustomers": 51,
-        "deliveredSales": 186,
+        "deliveredSales": 192,
         "monthlyDeliveredSales": [
           18,
           24,
@@ -4077,8 +4828,14 @@
           37,
           22,
           7,
-          16
-        ]
+          22
+        ],
+        "segmentSales": {
+          "30": 52,
+          "40": 21,
+          "60": 62,
+          "90": 57
+        }
       }
     },
     "6KR6833": {
@@ -4116,7 +4873,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 3,
+            "60": 5,
+            "90": 4
+          }
         },
         {
           "name": "김정기",
@@ -4149,7 +4912,13 @@
             1,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 7,
+            "90": 9
+          }
         },
         {
           "name": "송승호",
@@ -4182,7 +4951,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 0,
+            "60": 1,
+            "90": 2
+          }
         },
         {
           "name": "이봉재",
@@ -4203,8 +4978,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 14
           },
-          "deliveredSales": 38,
-          "deliveredCustomers": 37,
+          "deliveredSales": 42,
+          "deliveredCustomers": 41,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -4214,8 +4989,14 @@
             6,
             5,
             2,
-            3
-          ]
+            7
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 7,
+            "60": 12,
+            "90": 16
+          }
         },
         {
           "name": "이상학",
@@ -4248,7 +5029,13 @@
             0,
             3,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 0,
+            "60": 7,
+            "90": 3
+          }
         },
         {
           "name": "이수현",
@@ -4269,8 +5056,8 @@
             "testDriveToContract": 16,
             "contractToDelivered": 16
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             4,
             1,
@@ -4280,8 +5067,14 @@
             5,
             2,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 12,
+            "40": 3,
+            "60": 9,
+            "90": 4
+          }
         },
         {
           "name": "장혁",
@@ -4314,7 +5107,13 @@
             1,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 2,
+            "60": 7,
+            "90": 2
+          }
         },
         {
           "name": "정호영",
@@ -4347,7 +5146,13 @@
             0,
             0,
             5
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 0,
+            "60": 7,
+            "90": 4
+          }
         },
         {
           "name": "조우진",
@@ -4380,7 +5185,13 @@
             0,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 1,
+            "60": 4,
+            "90": 6
+          }
         },
         {
           "name": "최재형",
@@ -4413,7 +5224,13 @@
             2,
             2,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 15,
+            "90": 11
+          }
         },
         {
           "name": "최재훈",
@@ -4446,7 +5263,13 @@
             2,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 8,
+            "90": 7
+          }
         },
         {
           "name": "한재필",
@@ -4467,8 +5290,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -4478,8 +5301,14 @@
             2,
             0,
             3,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 5,
+            "90": 6
+          }
         },
         {
           "name": "김정훈",
@@ -4512,7 +5341,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 1,
+            "60": 5,
+            "90": 1
+          }
         },
         {
           "name": "신영선",
@@ -4533,8 +5368,8 @@
             "testDriveToContract": 4,
             "contractToDelivered": 10
           },
-          "deliveredSales": 28,
-          "deliveredCustomers": 27,
+          "deliveredSales": 29,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             2,
             6,
@@ -4544,8 +5379,14 @@
             4,
             2,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 8,
+            "60": 7,
+            "90": 7
+          }
         },
         {
           "name": "함봉수",
@@ -4578,7 +5419,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 4,
+            "90": 5
+          }
         }
       ],
       "summary": {
@@ -4587,7 +5434,7 @@
         "consultationCustomers": 3072,
         "testDriveCustomers": 388,
         "contractCustomers": 363,
-        "deliveredSales": 312,
+        "deliveredSales": 320,
         "monthlyDeliveredSales": [
           37,
           43,
@@ -4597,8 +5444,14 @@
           57,
           16,
           14,
-          24
-        ]
+          32
+        ],
+        "segmentSales": {
+          "30": 90,
+          "40": 40,
+          "60": 103,
+          "90": 87
+        }
       }
     },
     "6KR6834": {
@@ -4636,7 +5489,13 @@
             4,
             2,
             5
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 11,
+            "60": 20,
+            "90": 12
+          }
         },
         {
           "name": "김성경",
@@ -4657,8 +5516,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 15,
+          "deliveredCustomers": 15,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -4668,8 +5527,14 @@
             2,
             1,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 3,
+            "60": 5,
+            "90": 5
+          }
         },
         {
           "name": "박영환",
@@ -4702,7 +5567,13 @@
             0,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 12,
+            "90": 4
+          }
         },
         {
           "name": "박준수",
@@ -4735,7 +5606,13 @@
             0,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 0,
+            "60": 2,
+            "90": 3
+          }
         },
         {
           "name": "송용주",
@@ -4756,8 +5633,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -4767,8 +5644,14 @@
             5,
             1,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 6,
+            "90": 6
+          }
         },
         {
           "name": "이민하",
@@ -4789,8 +5672,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -4800,8 +5683,14 @@
             5,
             1,
             0,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 4,
+            "60": 3,
+            "90": 8
+          }
         },
         {
           "name": "이진용",
@@ -4834,7 +5723,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 3,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "정지만",
@@ -4867,7 +5762,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 2,
+            "90": 0
+          }
         },
         {
           "name": "정한영",
@@ -4888,8 +5789,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             5,
             3,
@@ -4899,8 +5800,14 @@
             5,
             1,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 4,
+            "60": 7,
+            "90": 9
+          }
         },
         {
           "name": "조동조",
@@ -4933,7 +5840,13 @@
             1,
             4,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "강석",
@@ -4954,8 +5867,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             1,
             3,
@@ -4965,8 +5878,14 @@
             4,
             2,
             2,
-            4
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 0,
+            "60": 11,
+            "90": 5
+          }
         },
         {
           "name": "문정환",
@@ -4999,7 +5918,13 @@
             2,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 4,
+            "60": 5,
+            "90": 10
+          }
         },
         {
           "name": "변수민",
@@ -5032,7 +5957,13 @@
             3,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 2,
+            "60": 8,
+            "90": 6
+          }
         },
         {
           "name": "장길호",
@@ -5065,7 +5996,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 8,
+            "90": 1
+          }
         }
       ],
       "summary": {
@@ -5074,7 +6011,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 284,
+        "deliveredSales": 291,
         "monthlyDeliveredSales": [
           29,
           41,
@@ -5084,8 +6021,14 @@
           65,
           19,
           18,
-          16
-        ]
+          23
+        ],
+        "segmentSales": {
+          "30": 62,
+          "40": 44,
+          "60": 106,
+          "90": 79
+        }
       }
     },
     "6KR342": {
@@ -5111,8 +6054,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -5122,8 +6065,14 @@
             2,
             2,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 0,
+            "60": 7,
+            "90": 4
+          }
         },
         {
           "name": "권영진",
@@ -5156,7 +6105,13 @@
             1,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 6,
+            "90": 3
+          }
         },
         {
           "name": "김성현",
@@ -5189,7 +6144,13 @@
             2,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 1,
+            "60": 4,
+            "90": 5
+          }
         },
         {
           "name": "김정수",
@@ -5222,7 +6183,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 3,
+            "60": 7,
+            "90": 4
+          }
         },
         {
           "name": "김태현",
@@ -5255,7 +6222,13 @@
             2,
             2,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 9,
+            "90": 6
+          }
         },
         {
           "name": "민슬기",
@@ -5276,8 +6249,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 16,
+          "deliveredSales": 17,
+          "deliveredCustomers": 17,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -5287,8 +6260,14 @@
             5,
             2,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 2,
+            "90": 8
+          }
         },
         {
           "name": "옥수찬",
@@ -5321,7 +6300,13 @@
             1,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 0,
+            "60": 6,
+            "90": 7
+          }
         },
         {
           "name": "이민웅",
@@ -5354,7 +6339,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 0,
+            "90": 1
+          }
         },
         {
           "name": "이병현",
@@ -5387,7 +6378,13 @@
             3,
             10,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 8,
+            "60": 12,
+            "90": 6
+          }
         },
         {
           "name": "이충원",
@@ -5420,7 +6417,13 @@
             2,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 3,
+            "60": 4,
+            "90": 6
+          }
         },
         {
           "name": "이현우",
@@ -5453,7 +6456,13 @@
             0,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 2,
+            "60": 5,
+            "90": 6
+          }
         },
         {
           "name": "정형욱",
@@ -5486,7 +6495,13 @@
             3,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 4,
+            "90": 3
+          }
         },
         {
           "name": "박호영",
@@ -5519,7 +6534,13 @@
             1,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 5,
+            "90": 7
+          }
         },
         {
           "name": "안희철",
@@ -5540,8 +6561,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 39,
-          "deliveredCustomers": 22,
+          "deliveredSales": 40,
+          "deliveredCustomers": 23,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -5551,8 +6572,14 @@
             8,
             10,
             3,
-            5
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 8,
+            "60": 16,
+            "90": 11
+          }
         },
         {
           "name": "정성택",
@@ -5585,7 +6612,13 @@
             3,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 4,
+            "60": 13,
+            "90": 9
+          }
         }
       ],
       "summary": {
@@ -5594,7 +6627,7 @@
         "consultationCustomers": 119,
         "testDriveCustomers": 16,
         "contractCustomers": 17,
-        "deliveredSales": 288,
+        "deliveredSales": 291,
         "monthlyDeliveredSales": [
           33,
           28,
@@ -5604,8 +6637,14 @@
           59,
           34,
           25,
-          20
-        ]
+          23
+        ],
+        "segmentSales": {
+          "30": 66,
+          "40": 39,
+          "60": 100,
+          "90": 86
+        }
       }
     },
     "6KR6836": {
@@ -5643,7 +6682,13 @@
             0,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "김민지",
@@ -5664,8 +6709,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             1,
             0,
@@ -5675,8 +6720,14 @@
             4,
             5,
             2,
-            2
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 5,
+            "60": 12,
+            "90": 5
+          }
         },
         {
           "name": "김태환",
@@ -5709,7 +6760,13 @@
             2,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 4,
+            "60": 5,
+            "90": 4
+          }
         },
         {
           "name": "박한글",
@@ -5730,8 +6787,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 7
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             4,
             2,
@@ -5741,8 +6798,14 @@
             3,
             1,
             0,
-            4
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 13,
+            "40": 4,
+            "60": 9,
+            "90": 6
+          }
         },
         {
           "name": "복수빈",
@@ -5775,7 +6838,13 @@
             2,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 0,
+            "90": 2
+          }
         },
         {
           "name": "서재현",
@@ -5808,7 +6877,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 0,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "유병천",
@@ -5829,7 +6904,7 @@
             "testDriveToContract": 0,
             "contractToDelivered": 4
           },
-          "deliveredSales": 22,
+          "deliveredSales": 23,
           "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             1,
@@ -5840,8 +6915,14 @@
             2,
             2,
             2,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 11,
+            "90": 5
+          }
         },
         {
           "name": "정재성",
@@ -5862,8 +6943,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 15,
+          "deliveredSales": 18,
+          "deliveredCustomers": 17,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -5873,8 +6954,14 @@
             4,
             2,
             1,
-            3
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 3,
+            "60": 8,
+            "90": 4
+          }
         },
         {
           "name": "차종서",
@@ -5907,7 +6994,13 @@
             4,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 4,
+            "60": 8,
+            "90": 6
+          }
         },
         {
           "name": "한상진",
@@ -5940,7 +7033,13 @@
             3,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 2,
+            "60": 7,
+            "90": 5
+          }
         },
         {
           "name": "함성준",
@@ -5961,8 +7060,8 @@
             "testDriveToContract": 4,
             "contractToDelivered": 22
           },
-          "deliveredSales": 47,
-          "deliveredCustomers": 47,
+          "deliveredSales": 48,
+          "deliveredCustomers": 48,
           "monthlyDeliveredSales": [
             6,
             4,
@@ -5972,8 +7071,14 @@
             11,
             3,
             5,
-            5
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 5,
+            "60": 16,
+            "90": 17
+          }
         },
         {
           "name": "김규동",
@@ -6006,7 +7111,13 @@
             1,
             0,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 4,
+            "60": 9,
+            "90": 7
+          }
         },
         {
           "name": "유호연",
@@ -6039,7 +7150,13 @@
             2,
             2,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 10,
+            "60": 8,
+            "90": 12
+          }
         },
         {
           "name": "한경철",
@@ -6060,8 +7177,8 @@
             "testDriveToContract": 2,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 21,
+          "deliveredSales": 23,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -6071,8 +7188,14 @@
             8,
             4,
             2,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 3,
+            "60": 9,
+            "90": 5
+          }
         }
       ],
       "summary": {
@@ -6081,7 +7204,7 @@
         "consultationCustomers": 1093,
         "testDriveCustomers": 189,
         "contractCustomers": 273,
-        "deliveredSales": 314,
+        "deliveredSales": 324,
         "monthlyDeliveredSales": [
           24,
           29,
@@ -6091,8 +7214,14 @@
           62,
           31,
           17,
-          31
-        ]
+          41
+        ],
+        "segmentSales": {
+          "30": 94,
+          "40": 45,
+          "60": 106,
+          "90": 79
+        }
       }
     },
     "6KR6802": {
@@ -6130,7 +7259,13 @@
             1,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "김대헌",
@@ -6151,8 +7286,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 23,
-          "deliveredCustomers": 23,
+          "deliveredSales": 24,
+          "deliveredCustomers": 24,
           "monthlyDeliveredSales": [
             4,
             3,
@@ -6162,8 +7297,14 @@
             2,
             2,
             5,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 5,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "김상민",
@@ -6184,8 +7325,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 26,
+          "deliveredSales": 28,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -6195,8 +7336,14 @@
             7,
             1,
             2,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 11,
+            "90": 10
+          }
         },
         {
           "name": "김용주",
@@ -6217,8 +7364,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 15,
-          "deliveredCustomers": 15,
+          "deliveredSales": 16,
+          "deliveredCustomers": 16,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -6228,8 +7375,14 @@
             5,
             1,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 4,
+            "90": 4
+          }
         },
         {
           "name": "김효승",
@@ -6250,8 +7403,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 16,
+          "deliveredCustomers": 16,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -6261,8 +7414,14 @@
             6,
             0,
             0,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 0,
+            "60": 4,
+            "90": 1
+          }
         },
         {
           "name": "오영민",
@@ -6295,7 +7454,13 @@
             2,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 3,
+            "60": 8,
+            "90": 3
+          }
         },
         {
           "name": "유동규",
@@ -6316,8 +7481,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 26,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -6327,8 +7492,14 @@
             3,
             1,
             1,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 6,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "이강일",
@@ -6349,8 +7520,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 17,
+          "deliveredSales": 27,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -6360,8 +7531,14 @@
             9,
             0,
             2,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 8,
+            "90": 11
+          }
         },
         {
           "name": "이영빈",
@@ -6394,7 +7571,13 @@
             5,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 4,
+            "90": 6
+          }
         },
         {
           "name": "이준희",
@@ -6427,7 +7610,13 @@
             2,
             4,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 3,
+            "60": 14,
+            "90": 10
+          }
         },
         {
           "name": "장원익",
@@ -6460,7 +7649,13 @@
             4,
             3,
             5
-          ]
+          ],
+          "segmentSales": {
+            "30": 13,
+            "40": 3,
+            "60": 15,
+            "90": 13
+          }
         },
         {
           "name": "전성배",
@@ -6493,7 +7688,13 @@
             0,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 3,
+            "60": 5,
+            "90": 3
+          }
         },
         {
           "name": "주랑",
@@ -6526,7 +7727,13 @@
             1,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 1,
+            "60": 6,
+            "90": 4
+          }
         },
         {
           "name": "최중범",
@@ -6559,7 +7766,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 6,
+            "90": 6
+          }
         },
         {
           "name": "홍준기",
@@ -6580,8 +7793,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -6591,8 +7804,14 @@
             3,
             4,
             2,
-            2
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 13,
+            "90": 7
+          }
         },
         {
           "name": "김상일",
@@ -6625,7 +7844,13 @@
             2,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 5,
+            "60": 11,
+            "90": 9
+          }
         },
         {
           "name": "김용민",
@@ -6646,8 +7871,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -6657,8 +7882,14 @@
             7,
             0,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 0,
+            "60": 6,
+            "90": 3
+          }
         },
         {
           "name": "김정석",
@@ -6679,8 +7910,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 35,
-          "deliveredCustomers": 34,
+          "deliveredSales": 36,
+          "deliveredCustomers": 35,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -6690,8 +7921,14 @@
             4,
             2,
             2,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 15,
+            "40": 2,
+            "60": 12,
+            "90": 7
+          }
         },
         {
           "name": "이효석",
@@ -6724,7 +7961,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 2,
+            "60": 6,
+            "90": 8
+          }
         }
       ],
       "summary": {
@@ -6733,7 +7976,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 433,
+        "deliveredSales": 445,
         "monthlyDeliveredSales": [
           26,
           37,
@@ -6743,8 +7986,14 @@
           91,
           31,
           28,
-          29
-        ]
+          41
+        ],
+        "segmentSales": {
+          "30": 130,
+          "40": 47,
+          "60": 152,
+          "90": 116
+        }
       }
     },
     "6KR6873": {
@@ -6782,7 +8031,13 @@
             3,
             4,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 8,
+            "90": 3
+          }
         },
         {
           "name": "윤정현",
@@ -6815,7 +8070,13 @@
             2,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 7,
+            "60": 18,
+            "90": 6
+          }
         }
       ],
       "summary": {
@@ -6835,7 +8096,13 @@
           5,
           7,
           4
-        ]
+        ],
+        "segmentSales": {
+          "30": 14,
+          "40": 8,
+          "60": 26,
+          "90": 9
+        }
       }
     },
     "6KR6828": {
@@ -6861,8 +8128,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -6872,8 +8139,14 @@
             4,
             3,
             0,
-            2
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 5,
+            "90": 8
+          }
         },
         {
           "name": "김성광",
@@ -6894,8 +8167,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -6905,8 +8178,14 @@
             4,
             1,
             4,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 7,
+            "90": 11
+          }
         },
         {
           "name": "김양수",
@@ -6927,8 +8206,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 23,
-          "deliveredCustomers": 23,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -6938,8 +8217,14 @@
             5,
             2,
             0,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 7,
+            "90": 10
+          }
         },
         {
           "name": "김현호",
@@ -6960,8 +8245,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             0,
             1,
@@ -6971,8 +8256,14 @@
             4,
             3,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 3,
+            "60": 3,
+            "90": 5
+          }
         },
         {
           "name": "박진오",
@@ -7005,7 +8296,13 @@
             3,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 2,
+            "60": 4,
+            "90": 7
+          }
         },
         {
           "name": "이정현",
@@ -7038,7 +8335,13 @@
             2,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "조기상",
@@ -7059,8 +8362,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -7070,8 +8373,14 @@
             1,
             0,
             2,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 2,
+            "60": 6,
+            "90": 8
+          }
         },
         {
           "name": "천진호",
@@ -7092,8 +8401,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -7103,8 +8412,14 @@
             6,
             1,
             2,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 13,
+            "90": 4
+          }
         },
         {
           "name": "문종현",
@@ -7137,7 +8452,13 @@
             3,
             1,
             6
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 12,
+            "90": 12
+          }
         },
         {
           "name": "원효",
@@ -7170,7 +8491,13 @@
             3,
             3,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 2,
+            "60": 14,
+            "90": 9
+          }
         },
         {
           "name": "이경호",
@@ -7203,7 +8530,13 @@
             1,
             7,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 2,
+            "60": 10,
+            "90": 12
+          }
         }
       ],
       "summary": {
@@ -7212,7 +8545,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 267,
+        "deliveredSales": 276,
         "monthlyDeliveredSales": [
           18,
           31,
@@ -7222,8 +8555,14 @@
           54,
           22,
           22,
-          24
-        ]
+          33
+        ],
+        "segmentSales": {
+          "30": 68,
+          "40": 28,
+          "60": 89,
+          "90": 91
+        }
       }
     },
     "6KR6859": {
@@ -7261,7 +8600,13 @@
             0,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 10,
+            "90": 1
+          }
         },
         {
           "name": "김민성",
@@ -7282,8 +8627,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 19,
-          "deliveredCustomers": 19,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             0,
             1,
@@ -7293,8 +8638,14 @@
             8,
             0,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 4,
+            "60": 5,
+            "90": 3
+          }
         },
         {
           "name": "김승범",
@@ -7327,7 +8678,13 @@
             2,
             2,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 6,
+            "90": 7
+          }
         },
         {
           "name": "임경률",
@@ -7360,7 +8717,13 @@
             2,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 13,
+            "40": 1,
+            "60": 8,
+            "90": 1
+          }
         },
         {
           "name": "김보성",
@@ -7393,7 +8756,13 @@
             0,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 5,
+            "60": 13,
+            "90": 1
+          }
         }
       ],
       "summary": {
@@ -7402,7 +8771,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 108,
+        "deliveredSales": 109,
         "monthlyDeliveredSales": [
           9,
           12,
@@ -7412,8 +8781,14 @@
           28,
           4,
           7,
-          7
-        ]
+          8
+        ],
+        "segmentSales": {
+          "30": 39,
+          "40": 15,
+          "60": 42,
+          "90": 13
+        }
       }
     },
     "6KR6856": {
@@ -7439,8 +8814,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 22,
+          "deliveredSales": 24,
+          "deliveredCustomers": 24,
           "monthlyDeliveredSales": [
             1,
             3,
@@ -7450,8 +8825,14 @@
             5,
             3,
             2,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 2,
+            "60": 4,
+            "90": 10
+          }
         },
         {
           "name": "주재관",
@@ -7484,7 +8865,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "하석권",
@@ -7505,8 +8892,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 15,
+          "deliveredCustomers": 15,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -7516,8 +8903,14 @@
             4,
             0,
             1,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 2,
+            "90": 5
+          }
         },
         {
           "name": "한송담",
@@ -7538,8 +8931,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 39,
-          "deliveredCustomers": 38,
+          "deliveredSales": 41,
+          "deliveredCustomers": 40,
           "monthlyDeliveredSales": [
             9,
             7,
@@ -7549,8 +8942,14 @@
             4,
             1,
             2,
-            3
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 13,
+            "40": 2,
+            "60": 15,
+            "90": 11
+          }
         },
         {
           "name": "김도윤",
@@ -7583,7 +8982,13 @@
             1,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 0,
+            "60": 8,
+            "90": 6
+          }
         }
       ],
       "summary": {
@@ -7592,7 +8997,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 97,
+        "deliveredSales": 102,
         "monthlyDeliveredSales": [
           13,
           17,
@@ -7602,8 +9007,14 @@
           17,
           5,
           6,
-          12
-        ]
+          17
+        ],
+        "segmentSales": {
+          "30": 35,
+          "40": 5,
+          "60": 30,
+          "90": 32
+        }
       }
     },
     "6KR6840": {
@@ -7629,8 +9040,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -7640,8 +9051,14 @@
             7,
             0,
             2,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 16,
+            "40": 2,
+            "60": 6,
+            "90": 7
+          }
         },
         {
           "name": "배정우",
@@ -7674,7 +9091,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "신환욱",
@@ -7707,7 +9130,13 @@
             3,
             0,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 0,
+            "60": 2,
+            "90": 3
+          }
         },
         {
           "name": "이재명",
@@ -7728,8 +9157,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 13,
-          "deliveredCustomers": 13,
+          "deliveredSales": 14,
+          "deliveredCustomers": 14,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -7739,8 +9168,14 @@
             2,
             2,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 2,
+            "60": 6,
+            "90": 4
+          }
         },
         {
           "name": "임진호",
@@ -7761,8 +9196,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             4,
             0,
@@ -7772,8 +9207,14 @@
             6,
             3,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 8,
+            "90": 7
+          }
         },
         {
           "name": "김나란",
@@ -7806,7 +9247,13 @@
             1,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 7,
+            "60": 7,
+            "90": 11
+          }
         },
         {
           "name": "김성준",
@@ -7827,8 +9274,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -7838,8 +9285,14 @@
             5,
             0,
             4,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 5,
+            "60": 11,
+            "90": 13
+          }
         }
       ],
       "summary": {
@@ -7848,7 +9301,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 137,
+        "deliveredSales": 141,
         "monthlyDeliveredSales": [
           15,
           20,
@@ -7858,8 +9311,14 @@
           24,
           9,
           8,
-          14
-        ]
+          18
+        ],
+        "segmentSales": {
+          "30": 36,
+          "40": 20,
+          "60": 40,
+          "90": 45
+        }
       }
     },
     "6KR6838": {
@@ -7897,7 +9356,13 @@
             0,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 5,
+            "90": 3
+          }
         },
         {
           "name": "박진성",
@@ -7930,7 +9395,13 @@
             2,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 0,
+            "60": 6,
+            "90": 4
+          }
         },
         {
           "name": "이유성",
@@ -7963,7 +9434,13 @@
             2,
             4,
             6
-          ]
+          ],
+          "segmentSales": {
+            "30": 16,
+            "40": 0,
+            "60": 6,
+            "90": 6
+          }
         },
         {
           "name": "이재훈",
@@ -7984,8 +9461,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -7995,8 +9472,14 @@
             4,
             0,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "임태우",
@@ -8029,7 +9512,13 @@
             1,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 0,
+            "60": 3,
+            "90": 8
+          }
         },
         {
           "name": "정용호",
@@ -8062,7 +9551,13 @@
             1,
             1,
             6
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 3,
+            "60": 4,
+            "90": 11
+          }
         },
         {
           "name": "김기태",
@@ -8095,7 +9590,13 @@
             3,
             4,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 1,
+            "60": 10,
+            "90": 10
+          }
         },
         {
           "name": "박성훈",
@@ -8128,7 +9629,13 @@
             0,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 7,
+            "90": 8
+          }
         },
         {
           "name": "안성인",
@@ -8149,8 +9656,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -8160,8 +9667,14 @@
             6,
             1,
             3,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 4,
+            "90": 8
+          }
         }
       ],
       "summary": {
@@ -8170,7 +9683,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 214,
+        "deliveredSales": 216,
         "monthlyDeliveredSales": [
           13,
           19,
@@ -8180,8 +9693,14 @@
           45,
           10,
           18,
-          23
-        ]
+          25
+        ],
+        "segmentSales": {
+          "30": 82,
+          "40": 17,
+          "60": 54,
+          "90": 63
+        }
       }
     },
     "6KR6863": {
@@ -8219,7 +9738,13 @@
             2,
             3,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 5,
+            "60": 10,
+            "90": 7
+          }
         },
         {
           "name": "김준수",
@@ -8252,7 +9777,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "류수헌",
@@ -8273,8 +9804,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 22,
+          "deliveredSales": 23,
+          "deliveredCustomers": 23,
           "monthlyDeliveredSales": [
             5,
             2,
@@ -8284,8 +9815,14 @@
             4,
             1,
             2,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 8,
+            "90": 7
+          }
         },
         {
           "name": "전명훈",
@@ -8306,8 +9843,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 11,
-          "deliveredCustomers": 11,
+          "deliveredSales": 12,
+          "deliveredCustomers": 12,
           "monthlyDeliveredSales": [
             1,
             0,
@@ -8317,8 +9854,14 @@
             1,
             1,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 3,
+            "60": 4,
+            "90": 5
+          }
         },
         {
           "name": "최승호",
@@ -8351,7 +9894,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 1,
+            "60": 4,
+            "90": 1
+          }
         },
         {
           "name": "박현규",
@@ -8372,8 +9921,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 26,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -8383,8 +9932,14 @@
             7,
             1,
             5,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 6,
+            "60": 5,
+            "90": 10
+          }
         },
         {
           "name": "사공영환",
@@ -8417,7 +9972,13 @@
             1,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 7,
+            "60": 5,
+            "90": 3
+          }
         }
       ],
       "summary": {
@@ -8426,7 +9987,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 139,
+        "deliveredSales": 142,
         "monthlyDeliveredSales": [
           17,
           24,
@@ -8436,8 +9997,14 @@
           27,
           7,
           13,
-          12
-        ]
+          15
+        ],
+        "segmentSales": {
+          "30": 29,
+          "40": 30,
+          "60": 45,
+          "90": 38
+        }
       }
     },
     "6KR6850": {
@@ -8475,7 +10042,13 @@
             0,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 2,
+            "60": 2,
+            "90": 8
+          }
         },
         {
           "name": "김상영",
@@ -8508,7 +10081,13 @@
             1,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 2,
+            "60": 8,
+            "90": 0
+          }
         },
         {
           "name": "김성일",
@@ -8529,8 +10108,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 25,
+          "deliveredSales": 31,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -8540,8 +10119,14 @@
             12,
             2,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 6,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "김진석",
@@ -8562,8 +10147,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 29,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             1,
             3,
@@ -8573,8 +10158,14 @@
             7,
             3,
             4,
-            2
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 16,
+            "90": 7
+          }
         },
         {
           "name": "최준혁",
@@ -8595,8 +10186,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             0,
             6,
@@ -8606,8 +10197,14 @@
             7,
             1,
             2,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 0,
+            "60": 10,
+            "90": 5
+          }
         },
         {
           "name": "박성준",
@@ -8640,7 +10237,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 2,
+            "90": 9
+          }
         }
       ],
       "summary": {
@@ -8649,7 +10252,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 136,
+        "deliveredSales": 140,
         "monthlyDeliveredSales": [
           10,
           19,
@@ -8659,8 +10262,14 @@
           39,
           7,
           9,
-          8
-        ]
+          12
+        ],
+        "segmentSales": {
+          "30": 44,
+          "40": 15,
+          "60": 47,
+          "90": 34
+        }
       }
     },
     "6KR6842": {
@@ -8698,7 +10307,13 @@
             2,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 2,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "김훈",
@@ -8719,8 +10334,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 29,
+          "deliveredCustomers": 29,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -8730,8 +10345,14 @@
             5,
             1,
             6,
-            3
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 2,
+            "60": 12,
+            "90": 7
+          }
         },
         {
           "name": "박수용",
@@ -8752,8 +10373,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 21,
+          "deliveredSales": 25,
+          "deliveredCustomers": 24,
           "monthlyDeliveredSales": [
             4,
             1,
@@ -8763,8 +10384,14 @@
             4,
             1,
             2,
-            3
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 1,
+            "60": 8,
+            "90": 8
+          }
         },
         {
           "name": "서지수",
@@ -8797,7 +10424,13 @@
             1,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 0,
+            "60": 25,
+            "90": 8
+          }
         },
         {
           "name": "엄인섭",
@@ -8830,7 +10463,13 @@
             1,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 4,
+            "60": 7,
+            "90": 1
+          }
         },
         {
           "name": "오지후",
@@ -8863,7 +10502,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "이철",
@@ -8896,7 +10541,13 @@
             1,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 2,
+            "60": 5,
+            "90": 5
+          }
         },
         {
           "name": "조석원",
@@ -8929,7 +10580,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "최승호",
@@ -8962,7 +10619,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "한창우",
@@ -8995,7 +10658,13 @@
             1,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "양지승",
@@ -9016,8 +10685,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 36,
+          "deliveredSales": 37,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             3,
             6,
@@ -9027,8 +10696,14 @@
             8,
             1,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 6,
+            "60": 5,
+            "90": 17
+          }
         },
         {
           "name": "홍승찬",
@@ -9049,8 +10724,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 40,
-          "deliveredCustomers": 40,
+          "deliveredSales": 41,
+          "deliveredCustomers": 41,
           "monthlyDeliveredSales": [
             2,
             6,
@@ -9060,8 +10735,14 @@
             7,
             1,
             4,
-            5
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 2,
+            "60": 13,
+            "90": 16
+          }
         }
       ],
       "summary": {
@@ -9070,7 +10751,7 @@
         "consultationCustomers": 5,
         "testDriveCustomers": 3,
         "contractCustomers": 0,
-        "deliveredSales": 226,
+        "deliveredSales": 233,
         "monthlyDeliveredSales": [
           14,
           22,
@@ -9080,8 +10761,14 @@
           40,
           10,
           21,
-          19
-        ]
+          26
+        ],
+        "segmentSales": {
+          "30": 55,
+          "40": 23,
+          "60": 87,
+          "90": 68
+        }
       }
     },
     "6KR6871": {
@@ -9107,8 +10794,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -9118,8 +10805,14 @@
             6,
             0,
             5,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 6,
+            "60": 11,
+            "90": 12
+          }
         },
         {
           "name": "김승",
@@ -9152,7 +10845,13 @@
             3,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 0,
+            "60": 2,
+            "90": 1
+          }
         },
         {
           "name": "김종율",
@@ -9173,8 +10872,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -9184,8 +10883,14 @@
             5,
             2,
             0,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 5,
+            "90": 10
+          }
         },
         {
           "name": "박상오",
@@ -9218,7 +10923,13 @@
             2,
             2,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 4,
+            "60": 4,
+            "90": 4
+          }
         },
         {
           "name": "성재욱",
@@ -9239,8 +10950,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -9250,8 +10961,14 @@
             9,
             1,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "성지혜",
@@ -9284,7 +11001,13 @@
             1,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 1,
+            "60": 5,
+            "90": 9
+          }
         }
       ],
       "summary": {
@@ -9293,7 +11016,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 115,
+        "deliveredSales": 118,
         "monthlyDeliveredSales": [
           8,
           9,
@@ -9303,8 +11026,14 @@
           29,
           9,
           11,
-          7
-        ]
+          10
+        ],
+        "segmentSales": {
+          "30": 26,
+          "40": 15,
+          "60": 36,
+          "90": 41
+        }
       }
     },
     "6KR6874": {
@@ -9342,7 +11071,13 @@
             2,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "김용익",
@@ -9375,7 +11110,13 @@
             1,
             2,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 2,
+            "60": 2,
+            "90": 5
+          }
         },
         {
           "name": "노경효",
@@ -9408,7 +11149,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 1,
+            "60": 5,
+            "90": 1
+          }
         },
         {
           "name": "전규철",
@@ -9429,8 +11176,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -9440,8 +11187,14 @@
             8,
             1,
             1,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 7,
+            "90": 3
+          }
         },
         {
           "name": "정한영",
@@ -9474,7 +11227,13 @@
             3,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 4,
+            "90": 9
+          }
         },
         {
           "name": "조상현",
@@ -9507,7 +11266,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 6,
+            "90": 8
+          }
         }
       ],
       "summary": {
@@ -9516,7 +11281,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 104,
+        "deliveredSales": 105,
         "monthlyDeliveredSales": [
           12,
           14,
@@ -9526,8 +11291,14 @@
           26,
           8,
           5,
-          8
-        ]
+          9
+        ],
+        "segmentSales": {
+          "30": 31,
+          "40": 11,
+          "60": 32,
+          "90": 31
+        }
       }
     },
     "6KR6858": {
@@ -9553,8 +11324,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 48,
-          "deliveredCustomers": 45,
+          "deliveredSales": 51,
+          "deliveredCustomers": 47,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -9564,8 +11335,14 @@
             7,
             3,
             3,
-            5
-          ]
+            8
+          ],
+          "segmentSales": {
+            "30": 18,
+            "40": 5,
+            "60": 15,
+            "90": 13
+          }
         },
         {
           "name": "김종천",
@@ -9586,8 +11363,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             5,
             4,
@@ -9597,8 +11374,14 @@
             2,
             1,
             1,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 5,
+            "60": 14,
+            "90": 4
+          }
         },
         {
           "name": "김형주",
@@ -9619,8 +11402,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -9630,8 +11413,14 @@
             5,
             0,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 2,
+            "60": 9,
+            "90": 7
+          }
         },
         {
           "name": "나수연",
@@ -9652,8 +11441,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 6,
-          "deliveredCustomers": 6,
+          "deliveredSales": 7,
+          "deliveredCustomers": 7,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -9663,8 +11452,14 @@
             0,
             1,
             2,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 2,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "안종효",
@@ -9697,7 +11492,13 @@
             2,
             0,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 11,
+            "90": 5
+          }
         },
         {
           "name": "양원준",
@@ -9718,8 +11519,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -9729,8 +11530,14 @@
             6,
             3,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 2,
+            "60": 10,
+            "90": 3
+          }
         },
         {
           "name": "이병진",
@@ -9763,7 +11570,13 @@
             3,
             2,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 12,
+            "40": 3,
+            "60": 16,
+            "90": 14
+          }
         },
         {
           "name": "이태우",
@@ -9784,8 +11597,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 33,
-          "deliveredCustomers": 33,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             5,
             7,
@@ -9795,8 +11608,14 @@
             11,
             1,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 1,
+            "60": 10,
+            "90": 12
+          }
         },
         {
           "name": "정재헌",
@@ -9817,8 +11636,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -9828,8 +11647,14 @@
             1,
             1,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 5,
+            "90": 7
+          }
         },
         {
           "name": "조선별",
@@ -9850,8 +11675,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 32,
-          "deliveredCustomers": 32,
+          "deliveredSales": 33,
+          "deliveredCustomers": 33,
           "monthlyDeliveredSales": [
             2,
             0,
@@ -9861,8 +11686,14 @@
             4,
             2,
             2,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 15,
+            "40": 4,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "허민",
@@ -9895,7 +11726,13 @@
             1,
             0,
             6
-          ]
+          ],
+          "segmentSales": {
+            "30": 12,
+            "40": 1,
+            "60": 9,
+            "90": 7
+          }
         },
         {
           "name": "문승현",
@@ -9928,7 +11765,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 16,
+            "90": 7
+          }
         },
         {
           "name": "박서빈",
@@ -9949,8 +11792,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 34,
-          "deliveredCustomers": 34,
+          "deliveredSales": 35,
+          "deliveredCustomers": 35,
           "monthlyDeliveredSales": [
             4,
             1,
@@ -9960,8 +11803,14 @@
             7,
             3,
             1,
-            6
-          ]
+            7
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 0,
+            "60": 14,
+            "90": 10
+          }
         },
         {
           "name": "신동민",
@@ -9982,8 +11831,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 22,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -9993,8 +11842,14 @@
             3,
             4,
             2,
-            2
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 0,
+            "60": 10,
+            "90": 10
+          }
         },
         {
           "name": "조성원",
@@ -10027,7 +11882,13 @@
             2,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 12,
+            "90": 8
+          }
         }
       ],
       "summary": {
@@ -10036,7 +11897,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 1,
-        "deliveredSales": 413,
+        "deliveredSales": 428,
         "monthlyDeliveredSales": [
           45,
           50,
@@ -10046,8 +11907,14 @@
           67,
           28,
           18,
-          39
-        ]
+          54
+        ],
+        "segmentSales": {
+          "30": 116,
+          "40": 36,
+          "60": 163,
+          "90": 113
+        }
       }
     },
     "6KR6848": {
@@ -10085,7 +11952,13 @@
             3,
             1,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 1,
+            "60": 6,
+            "90": 9
+          }
         },
         {
           "name": "김현수",
@@ -10118,7 +11991,13 @@
             0,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 2,
+            "90": 8
+          }
         },
         {
           "name": "송찬우",
@@ -10151,7 +12030,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 4,
+            "60": 5,
+            "90": 1
+          }
         },
         {
           "name": "신동규",
@@ -10184,7 +12069,13 @@
             2,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 5,
+            "60": 6,
+            "90": 2
+          }
         },
         {
           "name": "안영민",
@@ -10217,7 +12108,13 @@
             3,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 1,
+            "60": 9,
+            "90": 4
+          }
         },
         {
           "name": "양동준",
@@ -10250,7 +12147,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 0,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "양태민",
@@ -10271,8 +12174,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -10282,8 +12185,14 @@
             2,
             1,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 1,
+            "60": 10,
+            "90": 5
+          }
         },
         {
           "name": "윤재필",
@@ -10316,7 +12225,13 @@
             3,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 1,
+            "60": 7,
+            "90": 5
+          }
         },
         {
           "name": "이정환",
@@ -10337,8 +12252,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 16,
+          "deliveredCustomers": 16,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -10348,8 +12263,14 @@
             5,
             2,
             1,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 3,
+            "60": 2,
+            "90": 5
+          }
         },
         {
           "name": "이진형",
@@ -10370,8 +12291,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -10381,8 +12302,14 @@
             2,
             0,
             1,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 6,
+            "90": 4
+          }
         },
         {
           "name": "최건우",
@@ -10415,7 +12342,13 @@
             1,
             2,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 8,
+            "90": 8
+          }
         },
         {
           "name": "허동환",
@@ -10436,8 +12369,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 15,
-          "deliveredCustomers": 15,
+          "deliveredSales": 16,
+          "deliveredCustomers": 16,
           "monthlyDeliveredSales": [
             0,
             4,
@@ -10447,8 +12380,14 @@
             2,
             3,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 2,
+            "90": 7
+          }
         },
         {
           "name": "김재범",
@@ -10481,7 +12420,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 2,
+            "60": 4,
+            "90": 7
+          }
         },
         {
           "name": "양덕우",
@@ -10514,7 +12459,13 @@
             5,
             2,
             7
-          ]
+          ],
+          "segmentSales": {
+            "30": 10,
+            "40": 12,
+            "60": 18,
+            "90": 10
+          }
         },
         {
           "name": "장경호",
@@ -10547,7 +12498,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 1,
+            "60": 7,
+            "90": 6
+          }
         }
       ],
       "summary": {
@@ -10556,7 +12513,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 293,
+        "deliveredSales": 298,
         "monthlyDeliveredSales": [
           29,
           37,
@@ -10566,8 +12523,14 @@
           50,
           25,
           17,
-          26
-        ]
+          31
+        ],
+        "segmentSales": {
+          "30": 69,
+          "40": 43,
+          "60": 100,
+          "90": 86
+        }
       }
     },
     "6KR6868": {
@@ -10605,7 +12568,13 @@
             0,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 0,
+            "90": 2
+          }
         },
         {
           "name": "이상헌",
@@ -10626,8 +12595,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 19,
-          "deliveredCustomers": 19,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -10637,8 +12606,14 @@
             5,
             1,
             0,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 6,
+            "90": 6
+          }
         },
         {
           "name": "장현두",
@@ -10659,8 +12634,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -10670,8 +12645,14 @@
             2,
             3,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 2,
+            "60": 9,
+            "90": 9
+          }
         },
         {
           "name": "김영곤",
@@ -10692,8 +12673,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 37,
-          "deliveredCustomers": 37,
+          "deliveredSales": 39,
+          "deliveredCustomers": 39,
           "monthlyDeliveredSales": [
             5,
             5,
@@ -10703,8 +12684,14 @@
             8,
             3,
             0,
-            2
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 13,
+            "40": 6,
+            "60": 11,
+            "90": 9
+          }
         }
       ],
       "summary": {
@@ -10713,7 +12700,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 86,
+        "deliveredSales": 90,
         "monthlyDeliveredSales": [
           9,
           9,
@@ -10723,8 +12710,14 @@
           20,
           7,
           2,
-          5
-        ]
+          9
+        ],
+        "segmentSales": {
+          "30": 25,
+          "40": 13,
+          "60": 26,
+          "90": 26
+        }
       }
     },
     "6KR6861": {
@@ -10762,7 +12755,13 @@
             2,
             0,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 8,
+            "90": 4
+          }
         },
         {
           "name": "김민석",
@@ -10783,8 +12782,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             2,
             6,
@@ -10794,8 +12793,14 @@
             4,
             2,
             2,
-            2
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 1,
+            "60": 7,
+            "90": 12
+          }
         },
         {
           "name": "김의영",
@@ -10816,8 +12821,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 32,
-          "deliveredCustomers": 32,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -10827,8 +12832,14 @@
             8,
             3,
             3,
-            1
-          ]
+            3
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 9,
+            "60": 8,
+            "90": 8
+          }
         },
         {
           "name": "김태평",
@@ -10861,7 +12872,13 @@
             4,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 18,
+            "90": 9
+          }
         },
         {
           "name": "문현수",
@@ -10894,7 +12911,13 @@
             3,
             3,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 14,
+            "40": 8,
+            "60": 13,
+            "90": 10
+          }
         },
         {
           "name": "임경욱",
@@ -10927,7 +12950,13 @@
             3,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 9,
+            "90": 5
+          }
         }
       ],
       "summary": {
@@ -10936,7 +12965,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 185,
+        "deliveredSales": 188,
         "monthlyDeliveredSales": [
           13,
           26,
@@ -10946,8 +12975,14 @@
           29,
           17,
           13,
-          14
-        ]
+          17
+        ],
+        "segmentSales": {
+          "30": 51,
+          "40": 26,
+          "60": 63,
+          "90": 48
+        }
       }
     },
     "6KR6869": {
@@ -10973,8 +13008,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 19,
-          "deliveredCustomers": 19,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -10984,8 +13019,14 @@
             5,
             2,
             2,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 0,
+            "60": 9,
+            "90": 6
+          }
         },
         {
           "name": "유재민",
@@ -11006,8 +13047,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 8,
-          "deliveredCustomers": 8,
+          "deliveredSales": 9,
+          "deliveredCustomers": 9,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -11017,8 +13058,14 @@
             1,
             2,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 1,
+            "60": 4,
+            "90": 2
+          }
         },
         {
           "name": "주장복",
@@ -11039,8 +13086,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -11050,8 +13097,14 @@
             5,
             2,
             2,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 3,
+            "60": 7,
+            "90": 2
+          }
         },
         {
           "name": "김영주",
@@ -11072,8 +13125,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 23,
+          "deliveredCustomers": 23,
           "monthlyDeliveredSales": [
             0,
             1,
@@ -11083,8 +13136,14 @@
             5,
             0,
             2,
-            3
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 3,
+            "60": 5,
+            "90": 4
+          }
         }
       ],
       "summary": {
@@ -11093,7 +13152,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 67,
+        "deliveredSales": 73,
         "monthlyDeliveredSales": [
           1,
           7,
@@ -11103,8 +13162,14 @@
           16,
           6,
           6,
-          9
-        ]
+          15
+        ],
+        "segmentSales": {
+          "30": 27,
+          "40": 7,
+          "60": 25,
+          "90": 14
+        }
       }
     },
     "6KR6852": {
@@ -11142,7 +13207,13 @@
             2,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 2,
+            "90": 1
+          }
         },
         {
           "name": "김상우",
@@ -11175,7 +13246,13 @@
             1,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 1,
+            "60": 7,
+            "90": 1
+          }
         },
         {
           "name": "김재식",
@@ -11208,7 +13285,13 @@
             1,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 4,
+            "60": 8,
+            "90": 4
+          }
         },
         {
           "name": "나희진",
@@ -11241,7 +13324,13 @@
             1,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 9,
+            "90": 4
+          }
         },
         {
           "name": "박두경",
@@ -11274,7 +13363,13 @@
             0,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 1
+          }
         },
         {
           "name": "설동명",
@@ -11307,7 +13402,13 @@
             2,
             2,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 5,
+            "60": 18,
+            "90": 10
+          }
         },
         {
           "name": "유민우",
@@ -11340,7 +13441,13 @@
             2,
             2,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 2,
+            "60": 0,
+            "90": 2
+          }
         },
         {
           "name": "이규환",
@@ -11373,7 +13480,13 @@
             0,
             1,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 7,
+            "90": 11
+          }
         },
         {
           "name": "이우석",
@@ -11406,7 +13519,13 @@
             1,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 6,
+            "90": 3
+          }
         },
         {
           "name": "이종성",
@@ -11439,7 +13558,13 @@
             2,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 4,
+            "60": 9,
+            "90": 7
+          }
         },
         {
           "name": "이주원",
@@ -11472,7 +13597,13 @@
             0,
             4,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 0,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "김수학",
@@ -11505,7 +13636,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 3,
+            "60": 8,
+            "90": 7
+          }
         },
         {
           "name": "이준호",
@@ -11526,8 +13663,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 39,
-          "deliveredCustomers": 36,
+          "deliveredSales": 40,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             6,
             4,
@@ -11537,8 +13674,14 @@
             7,
             2,
             6,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 4,
+            "60": 21,
+            "90": 10
+          }
         },
         {
           "name": "임현석",
@@ -11559,8 +13702,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 16,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -11570,8 +13713,14 @@
             4,
             0,
             1,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 3,
+            "60": 6,
+            "90": 6
+          }
         },
         {
           "name": "주선종",
@@ -11592,8 +13741,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             3,
             7,
@@ -11603,8 +13752,14 @@
             4,
             1,
             0,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 9,
+            "90": 9
+          }
         }
       ],
       "summary": {
@@ -11613,7 +13768,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 271,
+        "deliveredSales": 275,
         "monthlyDeliveredSales": [
           33,
           40,
@@ -11623,8 +13778,14 @@
           49,
           17,
           25,
-          17
-        ]
+          21
+        ],
+        "segmentSales": {
+          "30": 44,
+          "40": 31,
+          "60": 119,
+          "90": 81
+        }
       }
     },
     "6KR6870": {
@@ -11650,8 +13811,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 19,
-          "deliveredCustomers": 19,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -11661,8 +13822,14 @@
             3,
             2,
             1,
-            2
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 7,
+            "90": 5
+          }
         },
         {
           "name": "김여겸",
@@ -11695,7 +13862,13 @@
             4,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 4,
+            "60": 17,
+            "90": 6
+          }
         },
         {
           "name": "박수정",
@@ -11728,7 +13901,13 @@
             0,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 1,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "이성진",
@@ -11761,7 +13940,13 @@
             1,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 4,
+            "60": 13,
+            "90": 6
+          }
         },
         {
           "name": "한필성",
@@ -11794,7 +13979,13 @@
             1,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 3,
+            "90": 1
+          }
         },
         {
           "name": "황준원",
@@ -11827,7 +14018,13 @@
             5,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 1,
+            "60": 7,
+            "90": 12
+          }
         },
         {
           "name": "이정훈",
@@ -11848,8 +14045,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 73,
-          "deliveredCustomers": 70,
+          "deliveredSales": 76,
+          "deliveredCustomers": 73,
           "monthlyDeliveredSales": [
             7,
             8,
@@ -11859,8 +14056,14 @@
             24,
             2,
             5,
-            8
-          ]
+            11
+          ],
+          "segmentSales": {
+            "30": 29,
+            "40": 5,
+            "60": 27,
+            "90": 15
+          }
         }
       ],
       "summary": {
@@ -11869,7 +14072,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 196,
+        "deliveredSales": 201,
         "monthlyDeliveredSales": [
           18,
           25,
@@ -11879,8 +14082,14 @@
           47,
           15,
           10,
-          16
-        ]
+          21
+        ],
+        "segmentSales": {
+          "30": 61,
+          "40": 17,
+          "60": 77,
+          "90": 46
+        }
       }
     },
     "6KR6847": {
@@ -11906,8 +14115,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 26,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -11917,8 +14126,14 @@
             9,
             1,
             1,
-            1
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 4,
+            "60": 7,
+            "90": 7
+          }
         },
         {
           "name": "김용상",
@@ -11951,7 +14166,13 @@
             1,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 3,
+            "60": 9,
+            "90": 6
+          }
         },
         {
           "name": "김정호",
@@ -11972,8 +14193,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -11983,8 +14204,14 @@
             7,
             0,
             3,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 1,
+            "60": 8,
+            "90": 5
+          }
         },
         {
           "name": "김종민",
@@ -12005,8 +14232,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 16,
-          "deliveredCustomers": 14,
+          "deliveredSales": 20,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -12016,8 +14243,14 @@
             1,
             2,
             2,
-            1
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 2,
+            "60": 7,
+            "90": 7
+          }
         },
         {
           "name": "김형중",
@@ -12050,7 +14283,13 @@
             1,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 5,
+            "90": 3
+          }
         },
         {
           "name": "김훈철",
@@ -12083,7 +14322,13 @@
             0,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 1,
+            "90": 0
+          }
         },
         {
           "name": "변호석",
@@ -12104,8 +14349,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 28,
-          "deliveredCustomers": 28,
+          "deliveredSales": 29,
+          "deliveredCustomers": 29,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -12115,8 +14360,14 @@
             3,
             1,
             3,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 9,
+            "90": 9
+          }
         },
         {
           "name": "이진섭",
@@ -12149,7 +14400,13 @@
             0,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 2,
+            "60": 8,
+            "90": 4
+          }
         },
         {
           "name": "하재현",
@@ -12170,8 +14427,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 13,
-          "deliveredCustomers": 13,
+          "deliveredSales": 14,
+          "deliveredCustomers": 14,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -12181,8 +14438,14 @@
             7,
             0,
             1,
-            3
-          ]
+            4
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 2,
+            "60": 2,
+            "90": 5
+          }
         },
         {
           "name": "허재무",
@@ -12215,7 +14478,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "윤덕인",
@@ -12236,8 +14505,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 23,
+          "deliveredCustomers": 23,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -12247,8 +14516,14 @@
             2,
             3,
             3,
-            0
-          ]
+            2
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 5,
+            "60": 11,
+            "90": 6
+          }
         },
         {
           "name": "이인규",
@@ -12269,8 +14544,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 35,
-          "deliveredCustomers": 35,
+          "deliveredSales": 36,
+          "deliveredCustomers": 36,
           "monthlyDeliveredSales": [
             5,
             5,
@@ -12280,8 +14555,14 @@
             6,
             1,
             0,
-            6
-          ]
+            7
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 3,
+            "60": 11,
+            "90": 11
+          }
         },
         {
           "name": "최성환",
@@ -12302,8 +14583,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             4,
             3,
@@ -12313,8 +14594,14 @@
             2,
             2,
             2,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 2,
+            "60": 5,
+            "90": 11
+          }
         },
         {
           "name": "추헌진",
@@ -12335,8 +14622,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 56,
-          "deliveredCustomers": 35,
+          "deliveredSales": 57,
+          "deliveredCustomers": 36,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -12346,8 +14633,14 @@
             5,
             3,
             25,
-            5
-          ]
+            6
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 12,
+            "60": 30,
+            "90": 7
+          }
         }
       ],
       "summary": {
@@ -12356,7 +14649,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 297,
+        "deliveredSales": 310,
         "monthlyDeliveredSales": [
           24,
           29,
@@ -12366,8 +14659,14 @@
           51,
           15,
           45,
-          34
-        ]
+          47
+        ],
+        "segmentSales": {
+          "30": 74,
+          "40": 42,
+          "60": 113,
+          "90": 81
+        }
       }
     },
     "6KR6851": {
@@ -12393,8 +14692,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -12404,8 +14703,14 @@
             2,
             3,
             1,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 3,
+            "60": 5,
+            "90": 4
+          }
         },
         {
           "name": "신진솔",
@@ -12438,7 +14743,13 @@
             0,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 0,
+            "60": 0,
+            "90": 1
+          }
         },
         {
           "name": "원종호",
@@ -12459,8 +14770,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 15,
-          "deliveredCustomers": 15,
+          "deliveredSales": 16,
+          "deliveredCustomers": 16,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -12470,8 +14781,14 @@
             3,
             1,
             1,
-            0
-          ]
+            1
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 3,
+            "60": 6,
+            "90": 1
+          }
         },
         {
           "name": "인성환",
@@ -12504,7 +14821,13 @@
             1,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 6,
+            "60": 4,
+            "90": 5
+          }
         },
         {
           "name": "최희령",
@@ -12537,7 +14860,13 @@
             3,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 12,
+            "40": 2,
+            "60": 13,
+            "90": 8
+          }
         },
         {
           "name": "김정삼",
@@ -12570,7 +14899,13 @@
             3,
             1,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 5,
+            "60": 9,
+            "90": 8
+          }
         },
         {
           "name": "조효신",
@@ -12603,7 +14938,13 @@
             0,
             1,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 4,
+            "60": 7,
+            "90": 5
+          }
         }
       ],
       "summary": {
@@ -12612,7 +14953,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 147,
+        "deliveredSales": 149,
         "monthlyDeliveredSales": [
           8,
           16,
@@ -12622,8 +14963,14 @@
           32,
           11,
           7,
-          12
-        ]
+          14
+        ],
+        "segmentSales": {
+          "30": 50,
+          "40": 23,
+          "60": 44,
+          "90": 32
+        }
       }
     },
     "6KR6829": {
@@ -12661,7 +15008,13 @@
             3,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 8,
+            "60": 11,
+            "90": 8
+          }
         },
         {
           "name": "김광진",
@@ -12694,7 +15047,13 @@
             8,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 6,
+            "60": 10,
+            "90": 14
+          }
         },
         {
           "name": "김기대",
@@ -12727,7 +15086,13 @@
             1,
             3,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 5,
+            "60": 10,
+            "90": 9
+          }
         },
         {
           "name": "김대희",
@@ -12760,7 +15125,13 @@
             2,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 0,
+            "60": 12,
+            "90": 3
+          }
         },
         {
           "name": "김성민",
@@ -12793,7 +15164,13 @@
             2,
             2,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 0,
+            "60": 6,
+            "90": 4
+          }
         },
         {
           "name": "김신우",
@@ -12826,7 +15203,13 @@
             3,
             4,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 9,
+            "40": 2,
+            "60": 12,
+            "90": 8
+          }
         },
         {
           "name": "박종윤",
@@ -12859,7 +15242,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "안재현",
@@ -12892,7 +15281,13 @@
             2,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 1,
+            "60": 3,
+            "90": 2
+          }
         },
         {
           "name": "임효현",
@@ -12925,7 +15320,13 @@
             0,
             0,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 3,
+            "60": 5,
+            "90": 5
+          }
         },
         {
           "name": "조광래",
@@ -12958,7 +15359,13 @@
             4,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 3,
+            "60": 11,
+            "90": 9
+          }
         },
         {
           "name": "김진형",
@@ -12991,7 +15398,13 @@
             1,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 4,
+            "60": 19,
+            "90": 6
+          }
         },
         {
           "name": "방준호",
@@ -13024,7 +15437,13 @@
             1,
             1,
             4
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 2,
+            "60": 2,
+            "90": 7
+          }
         },
         {
           "name": "송용운",
@@ -13057,7 +15476,13 @@
             1,
             3,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 3,
+            "60": 9,
+            "90": 5
+          }
         }
       ],
       "summary": {
@@ -13077,7 +15502,13 @@
           28,
           22,
           19
-        ]
+        ],
+        "segmentSales": {
+          "30": 77,
+          "40": 37,
+          "60": 110,
+          "90": 80
+        }
       }
     },
     "6KR6854": {
@@ -13115,7 +15546,13 @@
             1,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 8,
+            "40": 3,
+            "60": 9,
+            "90": 5
+          }
         },
         {
           "name": "김하늘",
@@ -13148,7 +15585,13 @@
             5,
             1,
             5
-          ]
+          ],
+          "segmentSales": {
+            "30": 18,
+            "40": 8,
+            "60": 11,
+            "90": 7
+          }
         },
         {
           "name": "윤민상",
@@ -13181,7 +15624,13 @@
             2,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 11,
+            "40": 5,
+            "60": 4,
+            "90": 8
+          }
         },
         {
           "name": "백종윤",
@@ -13214,7 +15663,13 @@
             1,
             2,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 4,
+            "40": 4,
+            "60": 8,
+            "90": 6
+          }
         },
         {
           "name": "장재형",
@@ -13247,7 +15702,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 2,
+            "60": 13,
+            "90": 4
+          }
         }
       ],
       "summary": {
@@ -13267,7 +15728,13 @@
           10,
           7,
           14
-        ]
+        ],
+        "segmentSales": {
+          "30": 43,
+          "40": 22,
+          "60": 45,
+          "90": 30
+        }
       }
     },
     "6KR6865": {
@@ -13305,7 +15772,13 @@
             1,
             2,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 2,
+            "60": 5,
+            "90": 7
+          }
         },
         {
           "name": "변종민",
@@ -13338,7 +15811,13 @@
             4,
             1,
             2
-          ]
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 2,
+            "60": 9,
+            "90": 7
+          }
         },
         {
           "name": "이상진",
@@ -13371,7 +15850,13 @@
             0,
             0,
             0
-          ]
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
         },
         {
           "name": "이승규",
@@ -13404,7 +15889,13 @@
             1,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 0,
+            "60": 3,
+            "90": 7
+          }
         },
         {
           "name": "이영재",
@@ -13437,7 +15928,13 @@
             1,
             1,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 1,
+            "40": 2,
+            "60": 7,
+            "90": 5
+          }
         },
         {
           "name": "정재인",
@@ -13470,7 +15967,13 @@
             1,
             0,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 3,
+            "40": 0,
+            "60": 4,
+            "90": 3
+          }
         },
         {
           "name": "정호조",
@@ -13503,7 +16006,13 @@
             3,
             1,
             3
-          ]
+          ],
+          "segmentSales": {
+            "30": 6,
+            "40": 2,
+            "60": 5,
+            "90": 4
+          }
         },
         {
           "name": "조도흠",
@@ -13524,8 +16033,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 37,
-          "deliveredCustomers": 36,
+          "deliveredSales": 38,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             8,
             2,
@@ -13535,8 +16044,14 @@
             8,
             0,
             2,
-            4
-          ]
+            5
+          ],
+          "segmentSales": {
+            "30": 7,
+            "40": 3,
+            "60": 11,
+            "90": 17
+          }
         },
         {
           "name": "이지수",
@@ -13569,7 +16084,13 @@
             2,
             2,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 1,
+            "60": 13,
+            "90": 5
+          }
         },
         {
           "name": "정상호",
@@ -13602,7 +16123,13 @@
             2,
             0,
             1
-          ]
+          ],
+          "segmentSales": {
+            "30": 2,
+            "40": 5,
+            "60": 4,
+            "90": 4
+          }
         }
       ],
       "summary": {
@@ -13611,7 +16138,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 170,
+        "deliveredSales": 171,
         "monthlyDeliveredSales": [
           19,
           19,
@@ -13621,8 +16148,14 @@
           25,
           15,
           10,
-          18
-        ]
+          19
+        ],
+        "segmentSales": {
+          "30": 34,
+          "40": 17,
+          "60": 61,
+          "90": 59
+        }
       }
     }
   }
