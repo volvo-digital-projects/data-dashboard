@@ -474,6 +474,27 @@ const salesSegmentGradient = (counts: SalesSegmentCounts) => {
     return `${salesSegmentMeta[segment].lightColor} ${start.toFixed(2)}deg, ${salesSegmentMeta[segment].color} ${cursor.toFixed(2)}deg`;
   }).join(", ")})`;
 };
+const salesSegmentLabelPosition = (
+  counts: SalesSegmentCounts,
+  targetSegment: SalesSegmentKey,
+) => {
+  const total = salesSegmentTotal(counts);
+  if (!total) return { left: 56, top: 47 };
+  let cursor = 0;
+  for (const segment of salesSegmentKeys) {
+    const sweep = (counts[segment] / total) * 360;
+    if (segment === targetSegment) {
+      const midpointRadians = ((cursor + sweep / 2) * Math.PI) / 180;
+      const radius = 36;
+      return {
+        left: Math.round((56 + Math.sin(midpointRadians) * radius) * 100) / 100,
+        top: Math.round((47 - Math.cos(midpointRadians) * radius) * 100) / 100,
+      };
+    }
+    cursor += sweep;
+  }
+  return { left: 56, top: 47 };
+};
 
 type SalesActivityShowroom = {
   salesDealerCode: string | null;
@@ -3938,6 +3959,20 @@ export default function CompetitiveAnalysis({
                                   "--segment-donut-index": donutIndex,
                                 } as CSSProperties}
                               />
+                              <div className="growth-segment-donut-counts" aria-hidden="true">
+                                {salesSegmentKeys.map((segment) => {
+                                  if (!donut.counts[segment]) return null;
+                                  const position = salesSegmentLabelPosition(donut.counts, segment);
+                                  return (
+                                    <span
+                                      key={segment}
+                                      style={{ left: `${position.left}px`, top: `${position.top}px` }}
+                                    >
+                                      {donut.counts[segment]}
+                                    </span>
+                                  );
+                                })}
+                              </div>
                               <span><b>{total}</b><small>대</small></span>
                             </div>
                             <div className="growth-segment-donut-values">

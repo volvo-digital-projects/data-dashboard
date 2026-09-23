@@ -931,6 +931,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
   assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*width:\s*90px;[^}]*height:\s*90px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateY\(-4deg\) rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
   assert.match(css, /\.growth-segment-donut-disc::after\s*\{[^}]*inset:\s*19%;/);
+  assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 36;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(47 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
+  assert.match(navigation, /className="growth-segment-donut-counts" aria-hidden="true"[\s\S]*?salesSegmentLabelPosition\(donut\.counts, segment\)[\s\S]*?\{donut\.counts\[segment\]\}/);
+  assert.match(css, /\.growth-segment-donut-counts > span\s*\{[^}]*transform:\s*translate\(-50%, -50%\);[^}]*color:\s*#fff;[^}]*font-size:\s*7px;[^}]*text-shadow:/);
   assert.doesNotMatch(css.match(/\.growth-segment-donut-disc\s*\{[^}]*\}/)?.[0] ?? "", /rotateX/);
   assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateY\(-4deg\) rotateZ\(-150deg\)[\s\S]*?rotateY\(-4deg\) rotateZ\(0deg\)/);
   assert.match(source, /"30": \{ label: "30", color: "#6f9fba", lightColor: "#9abed0" \}[\s\S]*?"40": \{ label: "40", color: "#6fa78e", lightColor: "#9ac5b3" \}[\s\S]*?"60": \{ label: "60", color: "#c5a05a", lightColor: "#dcc28e" \}[\s\S]*?"90": \{ label: "90", color: "#c97a78", lightColor: "#dfa4a2" \}/);
