@@ -2712,9 +2712,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   border-radius: 50%;
   background: var(--segment-gradient);
   box-shadow:
-    5px 1px 0 rgba(56, 83, 94, 0.15),
-    7px 7px 16px rgba(55, 79, 90, 0.14),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    2px 2px 3px rgba(48, 76, 88, 0.16),
+    6px 7px 12px rgba(52, 78, 90, 0.14),
+    11px 13px 24px rgba(52, 78, 90, 0.08),
+    -3px -3px 10px rgba(255, 255, 255, 0.72),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5),
+    inset -1px -1px 3px rgba(42, 70, 82, 0.1);
   transform: rotateY(-4deg) rotateZ(0deg);
   transform-origin: center;
   transform-style: preserve-3d;

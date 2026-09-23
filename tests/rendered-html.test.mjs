@@ -941,6 +941,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
   assert.match(css, /\.growth-segment-donut-shell\s*\{[^}]*width:\s*112px;[^}]*height:\s*108px;/);
   assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*left:\s*8px;[^}]*width:\s*96px;[^}]*height:\s*96px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateY\(-4deg\) rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
+  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*2px 2px 3px rgba\(48, 76, 88, 0\.16\),[^}]*6px 7px 12px rgba\(52, 78, 90, 0\.14\),[^}]*11px 13px 24px rgba\(52, 78, 90, 0\.08\),[^}]*-3px -3px 10px rgba\(255, 255, 255, 0\.72\),[^}]*inset -1px -1px 3px rgba\(42, 70, 82, 0\.1\);/);
   assert.match(css, /\.growth-segment-donut-disc::after\s*\{[^}]*inset:\s*20%;/);
   assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 39;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(50 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
   assert.match(navigation, /className="growth-segment-donut-counts" aria-hidden="true"[\s\S]*?salesSegmentLabelPosition\(donut\.counts, segment\)[\s\S]*?\{donut\.counts\[segment\]\}/);
