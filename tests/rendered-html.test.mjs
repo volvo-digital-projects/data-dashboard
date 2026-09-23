@@ -530,6 +530,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /코멘트 \{selectedStaffEmployee\?\.commentResponses \?\? 0\}건/);
   assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단|자료 신뢰도|충분|참고/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
+  assert.match(css, /\.growth-profile-person-identity,\s*\.growth-profile-metric\s*\{[^}]*flex-direction:\s*column;[^}]*justify-content:\s*flex-end;/);
+  assert.match(css, /\.growth-profile-person-identity\s*\{[^}]*align-self:\s*end;/);
+  assert.match(css, /\.growth-profile-person small,\s*\.growth-profile-metric > span\s*\{[^}]*font-size:\s*10px;[^}]*line-height:\s*15px;/);
+  assert.match(css, /\.growth-profile-person strong\s*\{[^}]*font-size:\s*19px;[^}]*line-height:\s*20px;/);
+  assert.match(css, /\.growth-profile-metric strong\s*\{[^}]*min-height:\s*20px;[^}]*font-size:\s*20px;[^}]*line-height:\s*20px;/);
   assert.match(navigation, /VOC 고객상담 만족평균/);
   assert.equal((navigation.match(/<span>고객상담 평균만족도<\/span>/g) ?? []).length, 1);
   assert.doesNotMatch(navigation, /<span>평균 상담만족도<\/span>|<span>상담 만족도<\/span>/);
@@ -537,7 +542,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /sales\?\.deliveredSales \?\? null/);
   assert.match(navigation, /2026년 누적 판매 \$\{deliveredSales \?\? 0\}대/);
   assert.match(profile, /className="growth-profile-person-certification"[\s\S]*?<small>보유 인증레벨<\/small>[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
-  assert.match(css, /\.growth-profile-person-certification strong\s*\{[^}]*height:\s*20px;[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);[^}]*font-size:\s*14px;[^}]*line-height:\s*20px;/);
+  assert.match(css, /\.growth-profile-person-certification strong\s*\{[^}]*height:\s*23\.5px;[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);[^}]*align-items:\s*end;[^}]*font-size:\s*14px;[^}]*line-height:\s*20px;/);
+  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*align-self:\s*stretch;[^}]*justify-content:\s*flex-end;/);
   assert.match(css, /\.growth-profile-person-certification strong b i\s*\{[^}]*font-size:\s*0\.72em;[^}]*font-weight:\s*300;/);
   assert.doesNotMatch(navigation, /<span>지점장 코칭<\/span>/);
   assert.doesNotMatch(navigation, /<span>현재 면담 방향<\/span>/);
@@ -1017,7 +1023,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.growth-profile-strip > div:not\(:first-child\)::before\s*\{[^}]*top: 12px;[^}]*bottom: 12px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 120px;[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 120px;[^}]*padding: 0 8px 0 12px;[^}]*justify-content: center;/);
+  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 120px;[^}]*padding: 0 8px 0 12px;[^}]*justify-content: flex-end;/);
   assert.match(css, /\.growth-profile-person-certification::before\s*\{[^}]*top: 6px;[^}]*bottom: 6px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(css, /\.competitive-analysis-page > \.growth-navigation-sticky-summary,[\s\S]*?\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
