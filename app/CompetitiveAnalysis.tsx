@@ -3960,14 +3960,23 @@ export default function CompetitiveAnalysis({
                           <section className="growth-segment-donut" key={donut.key}>
                             <div className="growth-segment-donut-shell">
                               <div
-                                className="growth-segment-donut-disc"
+                                className={`growth-segment-donut-disc${donutIndex === 0 ? " has-staff-photo" : ""}`}
                                 role="img"
                                 aria-label={`${donut.label} 세그먼트 판매비중: ${salesSegmentKeys.map((segment) => `${segment} ${salesSegmentShare(donut.counts, segment).toFixed(1)}%`).join(", ")}`}
                                 style={{
                                   "--segment-gradient": salesSegmentGradient(donut.counts),
                                   "--segment-donut-index": donutIndex,
                                 } as CSSProperties}
-                              />
+                              >
+                                {donutIndex === 0 ? (
+                                  <img
+                                    className={selectedStaffProfile ? "" : "staff-profile-silhouette"}
+                                    src={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
+                                    alt=""
+                                    draggable={false}
+                                  />
+                                ) : null}
+                              </div>
                               <div className="growth-segment-donut-counts" aria-hidden="true">
                                 {salesSegmentKeys.map((segment) => {
                                   if (!donut.counts[segment]) return null;
@@ -3982,8 +3991,8 @@ export default function CompetitiveAnalysis({
                                   );
                                 })}
                               </div>
-                              <span className="growth-segment-donut-center">
-                                <em>{donut.label}</em>
+                              <span className={`growth-segment-donut-center${donutIndex === 0 ? " has-staff-photo" : ""}`}>
+                                {donutIndex === 0 ? null : <em>{donut.label}</em>}
                                 <span><b>{total}</b><small>대</small></span>
                               </span>
                             </div>

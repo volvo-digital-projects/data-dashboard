@@ -2739,6 +2739,23 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
     inset 0 1px 3px rgba(43, 75, 90, 0.14);
 }
 
+.growth-segment-donut-disc.has-staff-photo::after {
+  content: none;
+}
+
+.growth-segment-donut-disc.has-staff-photo > img {
+  position: absolute;
+  inset: 20%;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 18%;
+  box-shadow:
+    3px 0 0 rgba(56, 83, 94, 0.11),
+    inset 0 1px 3px rgba(43, 75, 90, 0.14);
+}
+
 .growth-segment-donut-counts {
   position: absolute;
   inset: 0;
@@ -2804,6 +2821,20 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-center small {
   margin-left: 1px;
   font-size: 7px;
+}
+
+.growth-segment-donut-center.has-staff-photo {
+  justify-content: flex-end;
+  padding-bottom: 1px;
+}
+
+.growth-segment-donut-center.has-staff-photo > span {
+  min-width: 35px;
+  padding: 2px 5px 3px;
+  border: 1px solid rgba(218, 229, 234, 0.9);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 3px rgba(25, 63, 81, 0.16);
 }
 
 .growth-segment-donut-values {
