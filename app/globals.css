@@ -1677,6 +1677,11 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   background: #fbfdfe;
 }
 
+.growth-position-card,
+.growth-scatter-card {
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+}
+
 .growth-position-card {
   position: relative;
   height: 244px;
