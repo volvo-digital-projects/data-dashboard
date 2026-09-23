@@ -613,11 +613,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     "6KR6867:송민경", "6KR6830:진주현", "6KR6858:나수연", "6KR6870:이정훈",
     "6KR6849:신수경", "6KR6846:신승희", "6KR6847:김정호", "6KR6861:곽지명",
     "6KR6846:박형진", "6KR6846:김예소", "6KR6858:조선별", "6KR6852:이규환", "6KR6839:박준수", "6KR6838:이유성",
+    "6KR6841:정지윤",
   ];
   assert.equal((youtubeStaffBlock.match(/6KR\d+:/g) ?? []).length, expectedYoutubeStaffKeys.length);
   expectedYoutubeStaffKeys.forEach((key) => assert.match(youtubeStaffBlock, new RegExp(`"${key}"`)));
   assert.doesNotMatch(youtubeStaffBlock, /6KR6834:박준수/);
   assert.match(source, /const selectedStaffHasYoutubeBadge = selectedStaffEmployee[\s\S]*?STAFF_YOUTUBE_BADGE_KEYS\.has\(`\$\{selected\.cdsid\}:\$\{selectedStaffEmployee\.name\}`\)/);
+  assert.match(source, /"6KR6841:정지윤"/);
   assert.match(navigation, /selectedStaffHasYoutubeBadge \? \([\s\S]*?className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동"/);
   assert.doesNotMatch(navigation, /className="growth-staff-youtube-badge"/);
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em 13px;[\s\S]*?white-space:\s*nowrap;/);
