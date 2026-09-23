@@ -527,7 +527,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /코멘트 \{selectedStaffEmployee\?\.commentResponses \?\? 0\}건/);
   assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
-  assert.equal((navigation.match(/<span>고객상담 평균만족도<\/span>/g) ?? []).length, 2);
+  assert.match(navigation, /<span>평균만족도\(23 ~ 26년 YTD\)<\/span>/);
+  assert.equal((navigation.match(/<span>고객상담 평균만족도<\/span>/g) ?? []).length, 1);
   assert.doesNotMatch(navigation, /<span>평균 상담만족도<\/span>|<span>상담 만족도<\/span>/);
   assert.match(navigation, /누적 판매대수/);
   assert.match(source, /sales\?\.deliveredSales \?\? null/);

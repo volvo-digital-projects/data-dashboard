@@ -3401,7 +3401,7 @@ export default function CompetitiveAnalysis({
                 </span>
               </div>
               <div className="growth-profile-metric">
-                <span>고객상담 평균만족도</span>
+                <span>평균만족도(23 ~ 26년 YTD)</span>
                 <strong>
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
