@@ -2478,8 +2478,16 @@ export default function CompetitiveAnalysis({
     ),
     ([label, mentions]) => ({ label, mentions }),
   ).sort(
-    (left, right) =>
-      right.mentions - left.mentions || left.label.localeCompare(right.label, "ko"),
+    (left, right) => {
+      const environmentOrder =
+        Number(SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS.has(left.label)) -
+        Number(SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS.has(right.label));
+      return (
+        environmentOrder ||
+        right.mentions - left.mentions ||
+        left.label.localeCompare(right.label, "ko")
+      );
+    },
   );
   const selectedStaffStrengthKeywords = [
     ...(selectedStaffEmployee?.strengthKeywords ?? []),

@@ -1106,6 +1106,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-comment-bar > i > b\s*\{[^}]*width: var\(--growth-comment-bar-ratio\);/);
   assert.match(css, /\.growth-comment-evidence\.improvement \.growth-comment-bar > i > b\s*\{[^}]*#bd4548/);
   assert.match(navigation, /SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS\.has\(keyword\.label\) \? " environment"/);
+  assert.match(source, /const environmentOrder =\s*Number\(SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS\.has\(left\.label\)\) -\s*Number\(SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS\.has\(right\.label\)\);[\s\S]*?environmentOrder \|\|\s*right\.mentions - left\.mentions/);
   assert.match(css, /\.growth-comment-evidence\.improvement \.growth-comment-bar\.environment > span,[\s\S]*?color:\s*#8a5508;/);
   assert.match(css, /\.growth-comment-evidence\.improvement \.growth-comment-bar\.environment > i\s*\{[^}]*background:\s*#fff8e8;/);
   assert.match(css, /\.growth-comment-evidence\.improvement \.growth-comment-bar\.environment > i > b\s*\{[^}]*#8f5908/);
