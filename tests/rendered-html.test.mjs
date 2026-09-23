@@ -949,9 +949,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, />소속 전시장 1인 평균<\/span>/);
   assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(12, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-sales-monthly-body\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 190px;/);
+  assert.match(css, /\.growth-sales-monthly-trend\s*\{[^}]*padding-bottom:\s*5px;[^}]*box-sizing:\s*border-box;/);
+  assert.match(css, /\.growth-sales-month\s*\{[^}]*height:\s*76%;[^}]*min-height:\s*84px;[^}]*align-self:\s*center;/);
   assert.doesNotMatch(css, /\.growth-sales-monthly-chart::before\s*\{/);
   assert.match(css, /\.growth-sales-monthly-legend\s*\{[^}]*align-items: center;[^}]*justify-content: center;/);
-  assert.match(css, /\.growth-sales-share-panel\s*\{[^}]*flex-direction: column;[^}]*border-left: 1px solid #c9d8de;/);
+  assert.match(css, /\.growth-sales-share-panel\s*\{[^}]*flex-direction: column;[^}]*justify-content: space-between;[^}]*border-left: 1px solid #c9d8de;/);
   assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*display: grid;[^}]*grid-template-columns: 82px minmax\(0, 1fr\);[^}]*overflow: hidden;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*width: 78px;[^}]*height: 78px;[^}]*flex: 0 0 78px;/);
   assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*width: 50px;[^}]*height: 50px;/);
