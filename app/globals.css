@@ -2675,17 +2675,11 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   background: rgba(190, 207, 214, 0.52);
 }
 
-.growth-segment-donut > strong {
-  font-size: 9px;
-  font-weight: 700;
-  color: #466777;
-}
-
 .growth-segment-donut-shell {
   position: relative;
   width: 112px;
   height: 102px;
-  margin-top: 1px;
+  margin-top: 12px;
   perspective: 520px;
 }
 
@@ -2713,7 +2707,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-disc::after {
   content: "";
   position: absolute;
-  inset: 19%;
+  inset: 16%;
   border-radius: 50%;
   background: #fbfdfe;
   box-shadow:
@@ -2742,24 +2736,48 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-variant-numeric: tabular-nums;
 }
 
-.growth-segment-donut-shell > span {
+.growth-segment-donut-center {
   position: absolute;
-  top: 42px;
+  top: 28px;
   right: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
   color: #244f64;
-  line-height: 1;
   pointer-events: none;
 }
 
-.growth-segment-donut-shell > span b {
+.growth-segment-donut-center > em {
+  max-width: 56px;
+  overflow: hidden;
+  color: #6e8491;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 650;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.growth-segment-donut-center > span {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  line-height: 1;
+}
+
+.growth-segment-donut-center b {
   font-family: var(--font-volvo);
   font-size: 17px;
   font-variant-numeric: tabular-nums;
 }
 
-.growth-segment-donut-shell > span small {
+.growth-segment-donut-center small {
   margin-left: 1px;
   font-size: 7px;
 }

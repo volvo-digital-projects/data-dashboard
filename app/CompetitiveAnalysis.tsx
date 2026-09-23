@@ -485,7 +485,7 @@ const salesSegmentLabelPosition = (
     const sweep = (counts[segment] / total) * 360;
     if (segment === targetSegment) {
       const midpointRadians = ((cursor + sweep / 2) * Math.PI) / 180;
-      const radius = 36;
+      const radius = 38;
       return {
         left: Math.round((56 + Math.sin(midpointRadians) * radius) * 100) / 100,
         top: Math.round((47 - Math.cos(midpointRadians) * radius) * 100) / 100,
@@ -3948,7 +3948,6 @@ export default function CompetitiveAnalysis({
                         const total = salesSegmentTotal(donut.counts);
                         return (
                           <section className="growth-segment-donut" key={donut.key}>
-                            <strong>{donut.label}</strong>
                             <div className="growth-segment-donut-shell">
                               <div
                                 className="growth-segment-donut-disc"
@@ -3973,7 +3972,10 @@ export default function CompetitiveAnalysis({
                                   );
                                 })}
                               </div>
-                              <span><b>{total}</b><small>대</small></span>
+                              <span className="growth-segment-donut-center">
+                                <em>{donut.label}</em>
+                                <span><b>{total}</b><small>대</small></span>
+                              </span>
                             </div>
                             <div className="growth-segment-donut-values">
                               {salesSegmentKeys.map((segment) => (
