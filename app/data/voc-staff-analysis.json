@@ -10,11 +10,11 @@
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
     "jobTitleSourceDate": "2026-09-23",
-    "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260824.xlsx",
-    "sentThrough": "2026-08-24",
+    "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260922.xlsx",
+    "sentThrough": "2026-09-13",
     "latestResponseThrough": "2026-09-13",
     "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 14개 강점/18개 보완 주제",
-    "commentAnalysisEmployees": 382,
+    "commentAnalysisEmployees": 383,
     "refreshScope": "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신 · 확인된 직원 이력 연결 보정"
   },
   "nationalYears": {
@@ -51,7 +51,7 @@
     {
       "id": "under-3m",
       "label": "3개월 이내",
-      "employeeCount": 23,
+      "employeeCount": 24,
       "respondingEmployees": 15,
       "responses": 80,
       "scoreSum": 744.0,
@@ -149,8 +149,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 74.0,
-              "sent": 6,
-              "rateResponses": 7
+              "sent": 59,
+              "rateResponses": 9
             }
           },
           "commentResponses": 42,
@@ -263,8 +263,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 37.0,
-              "sent": 1,
-              "rateResponses": 3
+              "sent": 32,
+              "rateResponses": 4
             }
           },
           "commentResponses": 16,
@@ -345,8 +345,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 42.0,
-              "sent": 4,
-              "rateResponses": 5
+              "sent": 36,
+              "rateResponses": 6
             }
           },
           "commentResponses": 35,
@@ -429,8 +429,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 18.0,
-              "sent": 4,
-              "rateResponses": 1
+              "sent": 13,
+              "rateResponses": 2
             },
             "2025": {
               "responses": 0,
@@ -495,8 +495,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 58.0,
-              "sent": 10,
-              "rateResponses": 5
+              "sent": 42,
+              "rateResponses": 6
             }
           },
           "commentResponses": 38,
@@ -629,8 +629,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 90.0,
-              "sent": 13,
-              "rateResponses": 9
+              "sent": 70,
+              "rateResponses": 10
             }
           },
           "commentResponses": 87,
@@ -783,7 +783,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 5,
+              "sent": 32,
               "rateResponses": 3
             }
           },
@@ -858,8 +858,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 4,
-              "rateResponses": 2
+              "sent": 48,
+              "rateResponses": 3
             }
           },
           "commentResponses": 3,
@@ -906,8 +906,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 35.0,
-              "sent": 1,
-              "rateResponses": 2
+              "sent": 34,
+              "rateResponses": 4
             }
           },
           "commentResponses": 6,
@@ -972,7 +972,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 18.0,
-              "sent": 3,
+              "sent": 34,
               "rateResponses": 2
             }
           },
@@ -1062,7 +1062,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 2,
+              "sent": 20,
               "rateResponses": 2
             }
           },
@@ -1160,7 +1160,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 18.0,
-              "sent": 1,
+              "sent": 45,
               "rateResponses": 2
             }
           },
@@ -1254,7 +1254,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 4,
+              "sent": 35,
               "rateResponses": 3
             }
           },
@@ -1352,8 +1352,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 49.0,
-              "sent": 2,
-              "rateResponses": 4
+              "sent": 47,
+              "rateResponses": 5
             }
           },
           "commentResponses": 49,
@@ -1507,8 +1507,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 24,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -1545,8 +1545,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 74.0,
-              "sent": 2,
-              "rateResponses": 7
+              "sent": 19,
+              "rateResponses": 8
             }
           },
           "commentResponses": 8,
@@ -1607,8 +1607,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 66.0,
-              "sent": 4,
-              "rateResponses": 6
+              "sent": 38,
+              "rateResponses": 7
             }
           },
           "commentResponses": 7,
@@ -1664,7 +1664,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 2,
+              "sent": 24,
               "rateResponses": 4
             }
           },
@@ -1765,7 +1765,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 4,
+              "sent": 24,
               "rateResponses": 5
             }
           },
@@ -1842,7 +1842,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 36.0,
-              "sent": 6,
+              "sent": 26,
               "rateResponses": 4
             }
           },
@@ -1938,8 +1938,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 67.0,
-              "sent": 9,
-              "rateResponses": 5
+              "sent": 36,
+              "rateResponses": 7
             }
           },
           "commentResponses": 14,
@@ -2012,7 +2012,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 12,
+              "sent": 30,
               "rateResponses": 4
             }
           },
@@ -2132,7 +2132,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 63.0,
-              "sent": 14,
+              "sent": 66,
               "rateResponses": 7
             }
           },
@@ -2219,7 +2219,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 36.0,
-              "sent": 2,
+              "sent": 22,
               "rateResponses": 4
             }
           },
@@ -2268,8 +2268,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 40.0,
-              "sent": 9,
-              "rateResponses": 3
+              "sent": 30,
+              "rateResponses": 4
             }
           },
           "commentResponses": 31,
@@ -2442,8 +2442,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 1,
-              "rateResponses": 3
+              "sent": 40,
+              "rateResponses": 5
             }
           },
           "commentResponses": 9,
@@ -2499,8 +2499,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 77.0,
-              "sent": 5,
-              "rateResponses": 6
+              "sent": 29,
+              "rateResponses": 8
             }
           },
           "commentResponses": 29,
@@ -2584,8 +2584,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 73.0,
-              "sent": 8,
-              "rateResponses": 6
+              "sent": 44,
+              "rateResponses": 8
             }
           },
           "commentResponses": 41,
@@ -2682,8 +2682,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 63.0,
-              "sent": 4,
-              "rateResponses": 5
+              "sent": 39,
+              "rateResponses": 7
             }
           },
           "commentResponses": 14,
@@ -2758,8 +2758,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 47,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -2812,8 +2812,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 70.0,
-              "sent": 5,
-              "rateResponses": 6
+              "sent": 67,
+              "rateResponses": 8
             }
           },
           "commentResponses": 61,
@@ -2918,8 +2918,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 53.0,
-              "sent": 12,
-              "rateResponses": 4
+              "sent": 71,
+              "rateResponses": 7
             }
           },
           "commentResponses": 61,
@@ -3028,8 +3028,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 53,
+              "rateResponses": 5
             }
           },
           "commentResponses": 37,
@@ -3149,8 +3149,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 87.0,
-              "sent": 19,
-              "rateResponses": 9
+              "sent": 46,
+              "rateResponses": 10
             }
           },
           "commentResponses": 26,
@@ -3229,8 +3229,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 18.0,
-              "sent": 3,
-              "rateResponses": 1
+              "sent": 28,
+              "rateResponses": 2
             },
             "2025": {
               "responses": 0,
@@ -3273,8 +3273,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 56.0,
-              "sent": 5,
-              "rateResponses": 4
+              "sent": 45,
+              "rateResponses": 6
             }
           },
           "commentResponses": 10,
@@ -3325,8 +3325,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 37.0,
-              "sent": 2,
-              "rateResponses": 4
+              "sent": 33,
+              "rateResponses": 5
             }
           },
           "commentResponses": 6,
@@ -3383,8 +3383,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 17,
-              "rateResponses": 2
+              "sent": 52,
+              "rateResponses": 5
             }
           },
           "commentResponses": 28,
@@ -3467,7 +3467,9 @@
             },
             "2026": {
               "responses": 6,
-              "scoreSum": 60.0
+              "scoreSum": 60.0,
+              "sent": 42,
+              "rateResponses": 6
             }
           },
           "commentResponses": 20,
@@ -3547,7 +3549,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 5,
+              "sent": 7,
               "rateResponses": 3
             },
             "2025": {
@@ -3637,8 +3639,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 2,
-              "rateResponses": 2
+              "sent": 37,
+              "rateResponses": 5
             },
             "2023": {
               "responses": 0,
@@ -3711,7 +3713,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 6,
+              "sent": 46,
               "rateResponses": 5
             }
           },
@@ -3871,7 +3873,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 5,
+              "sent": 11,
               "rateResponses": 1
             }
           },
@@ -3969,7 +3971,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 40.0,
-              "sent": 4,
+              "sent": 21,
               "rateResponses": 5
             }
           },
@@ -4026,7 +4028,9 @@
           "years": {
             "2026": {
               "responses": 5,
-              "scoreSum": 48.0
+              "scoreSum": 48.0,
+              "sent": 25,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -4072,8 +4076,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 1,
-              "rateResponses": 2
+              "sent": 12,
+              "rateResponses": 3
             }
           },
           "commentResponses": 4,
@@ -4102,8 +4106,8 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 1,
-              "rateResponses": 0
+              "sent": 17,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -4132,7 +4136,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 9.0,
-              "sent": 3,
+              "sent": 18,
               "rateResponses": 1
             }
           },
@@ -4158,7 +4162,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 8.0,
-              "sent": 1,
+              "sent": 12,
               "rateResponses": 1
             }
           },
@@ -4203,7 +4207,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 2,
+              "sent": 14,
               "rateResponses": 1
             }
           },
@@ -4290,8 +4294,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 65.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 21,
+              "rateResponses": 7
             }
           },
           "commentResponses": 7,
@@ -4364,8 +4368,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 40.0,
-              "sent": 1,
-              "rateResponses": 2
+              "sent": 16,
+              "rateResponses": 4
             }
           },
           "commentResponses": 17,
@@ -4453,8 +4457,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 7,
-              "rateResponses": 2
+              "sent": 18,
+              "rateResponses": 3
             }
           },
           "commentResponses": 19,
@@ -4538,8 +4542,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 70.0,
-              "sent": 7,
-              "rateResponses": 5
+              "sent": 30,
+              "rateResponses": 7
             }
           },
           "commentResponses": 28,
@@ -4640,7 +4644,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 19.0,
-              "sent": 5,
+              "sent": 8,
               "rateResponses": 2
             }
           },
@@ -4816,7 +4820,9 @@
             },
             "2026": {
               "responses": 1,
-              "scoreSum": 10.0
+              "scoreSum": 10.0,
+              "sent": 19,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -4855,8 +4861,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 4,
-              "rateResponses": 2
+              "sent": 31,
+              "rateResponses": 3
             }
           },
           "commentResponses": 12,
@@ -4920,8 +4926,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 51.0,
-              "sent": 7,
-              "rateResponses": 5
+              "sent": 29,
+              "rateResponses": 6
             }
           },
           "commentResponses": 35,
@@ -4994,7 +5000,9 @@
           "years": {
             "2026": {
               "responses": 3,
-              "scoreSum": 30.0
+              "scoreSum": 30.0,
+              "sent": 30,
+              "rateResponses": 3
             }
           },
           "commentResponses": 3,
@@ -5066,8 +5074,8 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 1,
-              "rateResponses": 0
+              "sent": 16,
+              "rateResponses": 1
             }
           },
           "commentResponses": 5,
@@ -5123,8 +5131,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 1,
-              "rateResponses": 0
+              "sent": 22,
+              "rateResponses": 2
             }
           },
           "commentResponses": 68,
@@ -5219,7 +5227,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 34.0,
-              "sent": 3,
+              "sent": 21,
               "rateResponses": 4
             },
             "2025": {
@@ -5293,8 +5301,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 68.0,
-              "sent": 3,
-              "rateResponses": 6
+              "sent": 18,
+              "rateResponses": 7
             }
           },
           "commentResponses": 29,
@@ -5440,7 +5448,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 1,
+              "sent": 6,
               "rateResponses": 1
             }
           },
@@ -5488,8 +5496,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 19.0,
-              "sent": 1,
-              "rateResponses": 1
+              "sent": 14,
+              "rateResponses": 2
             }
           },
           "commentResponses": 4,
@@ -5536,7 +5544,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 4,
+              "sent": 21,
               "rateResponses": 3
             }
           },
@@ -5609,8 +5617,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 32.0,
-              "sent": 6,
-              "rateResponses": 3
+              "sent": 30,
+              "rateResponses": 4
             },
             "2025": {
               "responses": 0,
@@ -5715,8 +5723,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 3,
-              "rateResponses": 1
+              "sent": 22,
+              "rateResponses": 2
             }
           },
           "commentResponses": 17,
@@ -5796,8 +5804,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 4,
-              "rateResponses": 1
+              "sent": 25,
+              "rateResponses": 2
             }
           },
           "commentResponses": 30,
@@ -5966,7 +5974,9 @@
           "years": {
             "2026": {
               "responses": 1,
-              "scoreSum": 10.0
+              "scoreSum": 10.0,
+              "sent": 15,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -6010,7 +6020,7 @@
             "2026": {
               "responses": 11,
               "scoreSum": 102.0,
-              "sent": 11,
+              "sent": 66,
               "rateResponses": 11
             }
           },
@@ -6104,8 +6114,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 33.0,
-              "sent": 2,
-              "rateResponses": 3
+              "sent": 29,
+              "rateResponses": 4
             }
           },
           "commentResponses": 29,
@@ -6190,8 +6200,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 3,
-              "rateResponses": 1
+              "sent": 29,
+              "rateResponses": 2
             }
           },
           "commentResponses": 31,
@@ -6331,7 +6341,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 45.0,
-              "sent": 6,
+              "sent": 27,
               "rateResponses": 5
             }
           },
@@ -6389,8 +6399,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 43.0,
-              "sent": 1,
-              "rateResponses": 3
+              "sent": 14,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -6440,7 +6450,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 2,
+              "sent": 7,
               "rateResponses": 3
             },
             "2025": {
@@ -6481,7 +6491,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 5,
+              "sent": 19,
               "rateResponses": 5
             }
           },
@@ -6554,8 +6564,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 1,
-              "rateResponses": 2
+              "sent": 7,
+              "rateResponses": 3
             }
           },
           "commentResponses": 10,
@@ -6613,7 +6623,9 @@
             },
             "2026": {
               "responses": 1,
-              "scoreSum": 9.0
+              "scoreSum": 9.0,
+              "sent": 4,
+              "rateResponses": 1
             }
           },
           "commentResponses": 5,
@@ -6684,8 +6696,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 10,
+              "rateResponses": 3
             }
           },
           "commentResponses": 10,
@@ -6738,8 +6750,8 @@
             "2026": {
               "responses": 1,
               "scoreSum": 9.0,
-              "sent": 1,
-              "rateResponses": 0
+              "sent": 10,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -6774,7 +6786,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 19.0,
-              "sent": 1,
+              "sent": 19,
               "rateResponses": 2
             }
           },
@@ -6848,7 +6860,9 @@
           "years": {
             "2026": {
               "responses": 2,
-              "scoreSum": 19.0
+              "scoreSum": 19.0,
+              "sent": 12,
+              "rateResponses": 2
             }
           },
           "commentResponses": 2,
@@ -6883,8 +6897,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 1,
-              "rateResponses": 2
+              "sent": 12,
+              "rateResponses": 3
             }
           },
           "commentResponses": 15,
@@ -7034,7 +7048,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 8.0,
-              "sent": 3,
+              "sent": 14,
               "rateResponses": 1
             }
           },
@@ -7106,8 +7120,8 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 1,
-              "rateResponses": 0
+              "sent": 5,
+              "rateResponses": 1
             }
           },
           "commentResponses": 10,
@@ -7201,8 +7215,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 60.0,
-              "sent": 11,
-              "rateResponses": 4
+              "sent": 44,
+              "rateResponses": 7
             }
           },
           "commentResponses": 59,
@@ -7307,8 +7321,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 101.0,
-              "sent": 12,
-              "rateResponses": 10
+              "sent": 51,
+              "rateResponses": 11
             }
           },
           "commentResponses": 66,
@@ -7395,8 +7409,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 56.0,
-              "sent": 2,
-              "rateResponses": 4
+              "sent": 26,
+              "rateResponses": 6
             }
           },
           "commentResponses": 8,
@@ -7448,7 +7462,9 @@
           "years": {
             "2026": {
               "responses": 7,
-              "scoreSum": 68.0
+              "scoreSum": 68.0,
+              "sent": 29,
+              "rateResponses": 7
             }
           },
           "commentResponses": 7,
@@ -7494,8 +7510,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 39.0,
-              "sent": 2,
-              "rateResponses": 4
+              "sent": 28,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -7543,8 +7559,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 67.0,
-              "sent": 10,
-              "rateResponses": 5
+              "sent": 35,
+              "rateResponses": 7
             }
           },
           "commentResponses": 17,
@@ -7612,8 +7628,8 @@
             "2026": {
               "responses": 15,
               "scoreSum": 145.0,
-              "sent": 25,
-              "rateResponses": 13
+              "sent": 37,
+              "rateResponses": 15
             }
           },
           "commentResponses": 42,
@@ -7714,7 +7730,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 23.0,
-              "sent": 8,
+              "sent": 13,
               "rateResponses": 3
             }
           },
@@ -7796,8 +7812,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 8,
-              "rateResponses": 1
+              "sent": 19,
+              "rateResponses": 2
             }
           },
           "commentResponses": 34,
@@ -7890,8 +7906,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 6,
-              "rateResponses": 2
+              "sent": 21,
+              "rateResponses": 3
             }
           },
           "commentResponses": 23,
@@ -7975,7 +7991,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 16,
+              "sent": 41,
               "rateResponses": 5
             }
           },
@@ -8073,8 +8089,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 4,
-              "rateResponses": 2
+              "sent": 16,
+              "rateResponses": 3
             }
           },
           "commentResponses": 22,
@@ -8159,8 +8175,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 89.0,
-              "sent": 18,
-              "rateResponses": 5
+              "sent": 58,
+              "rateResponses": 9
             }
           },
           "commentResponses": 31,
@@ -8283,8 +8299,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 1,
-              "rateResponses": 4
+              "sent": 30,
+              "rateResponses": 5
             },
             "2024": {
               "responses": 0,
@@ -8342,7 +8358,9 @@
           "years": {
             "2026": {
               "responses": 5,
-              "scoreSum": 49.0
+              "scoreSum": 49.0,
+              "sent": 29,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -8375,8 +8393,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 1,
-              "rateResponses": 0
+              "sent": 31,
+              "rateResponses": 2
             }
           },
           "commentResponses": 2,
@@ -8415,8 +8433,8 @@
             "2026": {
               "responses": 14,
               "scoreSum": 137.0,
-              "sent": 8,
-              "rateResponses": 12
+              "sent": 58,
+              "rateResponses": 14
             }
           },
           "commentResponses": 38,
@@ -8500,8 +8518,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 77.0,
-              "sent": 6,
-              "rateResponses": 5
+              "sent": 48,
+              "rateResponses": 9
             }
           },
           "commentResponses": 24,
@@ -8585,8 +8603,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 86.0,
-              "sent": 4,
-              "rateResponses": 3
+              "sent": 112,
+              "rateResponses": 10
             }
           },
           "commentResponses": 35,
@@ -8662,8 +8680,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 37.0,
-              "sent": 3,
-              "rateResponses": 3
+              "sent": 15,
+              "rateResponses": 4
             }
           },
           "commentResponses": 18,
@@ -8743,8 +8761,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 76.0,
-              "sent": 2,
-              "rateResponses": 5
+              "sent": 32,
+              "rateResponses": 8
             }
           },
           "commentResponses": 34,
@@ -8848,7 +8866,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 8,
+              "sent": 21,
               "rateResponses": 3
             },
             "2025": {
@@ -8937,8 +8955,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 92.0,
-              "sent": 10,
-              "rateResponses": 6
+              "sent": 87,
+              "rateResponses": 10
             }
           },
           "commentResponses": 25,
@@ -9019,8 +9037,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 112.0,
-              "sent": 9,
-              "rateResponses": 7
+              "sent": 29,
+              "rateResponses": 12
             }
           },
           "commentResponses": 54,
@@ -9113,8 +9131,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 103.0,
-              "sent": 22,
-              "rateResponses": 6
+              "sent": 80,
+              "rateResponses": 11
             }
           },
           "commentResponses": 82,
@@ -9223,8 +9241,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 63.0,
-              "sent": 6,
-              "rateResponses": 3
+              "sent": 27,
+              "rateResponses": 7
             }
           },
           "commentResponses": 60,
@@ -9321,8 +9339,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 77.0,
-              "sent": 21,
-              "rateResponses": 7
+              "sent": 51,
+              "rateResponses": 8
             }
           },
           "commentResponses": 60,
@@ -9435,8 +9453,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 62.0,
-              "sent": 2,
-              "rateResponses": 5
+              "sent": 25,
+              "rateResponses": 7
             }
           },
           "commentResponses": 58,
@@ -9537,8 +9555,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 35.0,
-              "sent": 5,
-              "rateResponses": 3
+              "sent": 59,
+              "rateResponses": 4
             }
           },
           "commentResponses": 77,
@@ -9659,8 +9677,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 9,
-              "rateResponses": 4
+              "sent": 14,
+              "rateResponses": 5
             }
           },
           "commentResponses": 76,
@@ -9753,8 +9771,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 40,
+              "rateResponses": 5
             }
           },
           "commentResponses": 60,
@@ -9859,8 +9877,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 97.0,
-              "sent": 9,
-              "rateResponses": 5
+              "sent": 77,
+              "rateResponses": 11
             }
           },
           "commentResponses": 40,
@@ -9943,8 +9961,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 111.0,
-              "sent": 8,
-              "rateResponses": 9
+              "sent": 69,
+              "rateResponses": 12
             }
           },
           "commentResponses": 17,
@@ -10024,8 +10042,8 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 3,
-              "rateResponses": 0
+              "sent": 24,
+              "rateResponses": 1
             }
           },
           "commentResponses": 42,
@@ -10114,8 +10132,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 83.0,
-              "sent": 8,
-              "rateResponses": 6
+              "sent": 85,
+              "rateResponses": 9
             }
           },
           "commentResponses": 58,
@@ -10228,8 +10246,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 103.0,
-              "sent": 11,
-              "rateResponses": 11
+              "sent": 26,
+              "rateResponses": 12
             }
           },
           "commentResponses": 66,
@@ -10381,7 +10399,9 @@
             },
             "2026": {
               "responses": 7,
-              "scoreSum": 66.0
+              "scoreSum": 66.0,
+              "sent": 49,
+              "rateResponses": 7
             }
           },
           "commentResponses": 29,
@@ -10460,7 +10480,9 @@
             },
             "2026": {
               "responses": 4,
-              "scoreSum": 39.0
+              "scoreSum": 39.0,
+              "sent": 18,
+              "rateResponses": 4
             }
           },
           "commentResponses": 25,
@@ -10552,7 +10574,9 @@
             },
             "2026": {
               "responses": 5,
-              "scoreSum": 48.0
+              "scoreSum": 48.0,
+              "sent": 26,
+              "rateResponses": 5
             }
           },
           "commentResponses": 18,
@@ -10620,7 +10644,9 @@
           "years": {
             "2026": {
               "responses": 5,
-              "scoreSum": 37.0
+              "scoreSum": 37.0,
+              "sent": 32,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -10660,7 +10686,9 @@
           "years": {
             "2026": {
               "responses": 1,
-              "scoreSum": 7.0
+              "scoreSum": 7.0,
+              "sent": 9,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -10703,7 +10731,9 @@
             },
             "2026": {
               "responses": 5,
-              "scoreSum": 49.0
+              "scoreSum": 49.0,
+              "sent": 28,
+              "rateResponses": 5
             }
           },
           "commentResponses": 25,
@@ -10795,7 +10825,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 18.0
+              "scoreSum": 18.0,
+              "sent": 6,
+              "rateResponses": 2
             }
           },
           "commentResponses": 9,
@@ -10843,7 +10875,9 @@
           "years": {
             "2026": {
               "responses": 17,
-              "scoreSum": 135.0
+              "scoreSum": 135.0,
+              "sent": 40,
+              "rateResponses": 17
             }
           },
           "commentResponses": 17,
@@ -10915,7 +10949,9 @@
             },
             "2026": {
               "responses": 6,
-              "scoreSum": 54.0
+              "scoreSum": 54.0,
+              "sent": 35,
+              "rateResponses": 6
             }
           },
           "commentResponses": 29,
@@ -10998,7 +11034,9 @@
             },
             "2026": {
               "responses": 8,
-              "scoreSum": 71.0
+              "scoreSum": 71.0,
+              "sent": 43,
+              "rateResponses": 8
             }
           },
           "commentResponses": 41,
@@ -11106,7 +11144,9 @@
             },
             "2026": {
               "responses": 6,
-              "scoreSum": 60.0
+              "scoreSum": 60.0,
+              "sent": 39,
+              "rateResponses": 6
             }
           },
           "commentResponses": 39,
@@ -11193,7 +11233,9 @@
             },
             "2026": {
               "responses": 1,
-              "scoreSum": 9.0
+              "scoreSum": 9.0,
+              "sent": 29,
+              "rateResponses": 1
             }
           },
           "commentResponses": 9,
@@ -11276,7 +11318,9 @@
             },
             "2026": {
               "responses": 6,
-              "scoreSum": 49.0
+              "scoreSum": 49.0,
+              "sent": 25,
+              "rateResponses": 6
             }
           },
           "commentResponses": 46,
@@ -11534,7 +11578,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 17.0
+              "scoreSum": 17.0,
+              "sent": 30,
+              "rateResponses": 2
             }
           },
           "commentResponses": 30,
@@ -11626,7 +11672,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 20.0
+              "scoreSum": 20.0,
+              "sent": 13,
+              "rateResponses": 2
             }
           },
           "commentResponses": 18,
@@ -11710,7 +11758,9 @@
             },
             "2026": {
               "responses": 1,
-              "scoreSum": 10.0
+              "scoreSum": 10.0,
+              "sent": 22,
+              "rateResponses": 1
             }
           },
           "commentResponses": 17,
@@ -11794,7 +11844,9 @@
             },
             "2026": {
               "responses": 4,
-              "scoreSum": 35.0
+              "scoreSum": 35.0,
+              "sent": 21,
+              "rateResponses": 4
             }
           },
           "commentResponses": 24,
@@ -11982,7 +12034,9 @@
             },
             "2026": {
               "responses": 3,
-              "scoreSum": 25.0
+              "scoreSum": 25.0,
+              "sent": 18,
+              "rateResponses": 3
             }
           },
           "commentResponses": 17,
@@ -12057,7 +12111,9 @@
             },
             "2026": {
               "responses": 3,
-              "scoreSum": 29.0
+              "scoreSum": 29.0,
+              "sent": 19,
+              "rateResponses": 3
             }
           },
           "commentResponses": 22,
@@ -12130,7 +12186,9 @@
           "years": {
             "2026": {
               "responses": 1,
-              "scoreSum": 10.0
+              "scoreSum": 10.0,
+              "sent": 7,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -12169,7 +12227,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 20.0
+              "scoreSum": 20.0,
+              "sent": 19,
+              "rateResponses": 2
             }
           },
           "commentResponses": 13,
@@ -12228,7 +12288,9 @@
             },
             "2026": {
               "responses": 4,
-              "scoreSum": 38.0
+              "scoreSum": 38.0,
+              "sent": 35,
+              "rateResponses": 4
             }
           },
           "commentResponses": 12,
@@ -12312,7 +12374,9 @@
             },
             "2026": {
               "responses": 3,
-              "scoreSum": 30.0
+              "scoreSum": 30.0,
+              "sent": 22,
+              "rateResponses": 3
             }
           },
           "commentResponses": 23,
@@ -12392,7 +12456,9 @@
             },
             "2026": {
               "responses": 5,
-              "scoreSum": 49.0
+              "scoreSum": 49.0,
+              "sent": 22,
+              "rateResponses": 5
             }
           },
           "commentResponses": 7,
@@ -12451,7 +12517,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 17.0
+              "scoreSum": 17.0,
+              "sent": 18,
+              "rateResponses": 2
             }
           },
           "commentResponses": 7,
@@ -12511,7 +12579,9 @@
             },
             "2026": {
               "responses": 4,
-              "scoreSum": 35.0
+              "scoreSum": 35.0,
+              "sent": 19,
+              "rateResponses": 4
             }
           },
           "commentResponses": 9,
@@ -12574,7 +12644,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 20.0
+              "scoreSum": 20.0,
+              "sent": 13,
+              "rateResponses": 2
             }
           },
           "commentResponses": 10,
@@ -12668,8 +12740,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 1,
-              "rateResponses": 1
+              "sent": 16,
+              "rateResponses": 3
             }
           },
           "commentResponses": 3,
@@ -12716,8 +12788,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 68.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 51,
+              "rateResponses": 7
             }
           },
           "commentResponses": 20,
@@ -12798,8 +12870,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 29,
+              "rateResponses": 5
             }
           },
           "commentResponses": 45,
@@ -12898,8 +12970,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 85.0,
-              "sent": 15,
-              "rateResponses": 7
+              "sent": 64,
+              "rateResponses": 10
             }
           },
           "commentResponses": 19,
@@ -12961,7 +13033,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 2,
+              "sent": 34,
               "rateResponses": 3
             }
           },
@@ -13096,8 +13168,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 60.0,
-              "sent": 9,
-              "rateResponses": 5
+              "sent": 49,
+              "rateResponses": 7
             }
           },
           "commentResponses": 49,
@@ -13179,7 +13251,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 17.0,
-              "sent": 4,
+              "sent": 27,
               "rateResponses": 2
             }
           },
@@ -13223,8 +13295,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 76.0,
-              "sent": 4,
-              "rateResponses": 7
+              "sent": 45,
+              "rateResponses": 10
             }
           },
           "commentResponses": 16,
@@ -13309,8 +13381,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 83.0,
-              "sent": 6,
-              "rateResponses": 6
+              "sent": 38,
+              "rateResponses": 9
             }
           },
           "commentResponses": 28,
@@ -13407,8 +13479,8 @@
             "2026": {
               "responses": 32,
               "scoreSum": 284.0,
-              "sent": 36,
-              "rateResponses": 25
+              "sent": 131,
+              "rateResponses": 32
             }
           },
           "commentResponses": 131,
@@ -13524,8 +13596,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 94.0,
-              "sent": 9,
-              "rateResponses": 7
+              "sent": 55,
+              "rateResponses": 10
             }
           },
           "commentResponses": 29,
@@ -13609,8 +13681,8 @@
             "2026": {
               "responses": 16,
               "scoreSum": 152.0,
-              "sent": 30,
-              "rateResponses": 13
+              "sent": 88,
+              "rateResponses": 16
             }
           },
           "commentResponses": 71,
@@ -13719,8 +13791,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 99.0,
-              "sent": 21,
-              "rateResponses": 6
+              "sent": 51,
+              "rateResponses": 10
             }
           },
           "commentResponses": 49,
@@ -13826,8 +13898,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 3,
-              "rateResponses": 1
+              "sent": 29,
+              "rateResponses": 3
             }
           },
           "commentResponses": 3,
@@ -13875,7 +13947,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 40.0,
-              "sent": 8,
+              "sent": 26,
               "rateResponses": 4
             }
           },
@@ -13960,7 +14032,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 33.0,
-              "sent": 11,
+              "sent": 30,
               "rateResponses": 4
             }
           },
@@ -14062,7 +14134,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 19.0,
-              "sent": 5,
+              "sent": 7,
               "rateResponses": 2
             }
           },
@@ -14152,8 +14224,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 10,
-              "rateResponses": 4
+              "sent": 30,
+              "rateResponses": 5
             }
           },
           "commentResponses": 29,
@@ -14238,8 +14310,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 35.0,
-              "sent": 4,
-              "rateResponses": 3
+              "sent": 20,
+              "rateResponses": 4
             }
           },
           "commentResponses": 33,
@@ -14344,7 +14416,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 69.0,
-              "sent": 15,
+              "sent": 40,
               "rateResponses": 7
             }
           },
@@ -14428,8 +14500,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 33.0,
-              "sent": 5,
-              "rateResponses": 4
+              "sent": 31,
+              "rateResponses": 5
             },
             "2025": {
               "responses": 0,
@@ -14526,8 +14598,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 34.0,
-              "sent": 1,
-              "rateResponses": 3
+              "sent": 29,
+              "rateResponses": 4
             }
           },
           "commentResponses": 5,
@@ -14595,8 +14667,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 67.0,
-              "sent": 12,
-              "rateResponses": 7
+              "sent": 32,
+              "rateResponses": 8
             }
           },
           "commentResponses": 45,
@@ -14689,8 +14761,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 56.0,
-              "sent": 11,
-              "rateResponses": 5
+              "sent": 40,
+              "rateResponses": 6
             }
           },
           "commentResponses": 54,
@@ -14791,7 +14863,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 10,
+              "sent": 18,
               "rateResponses": 1
             }
           },
@@ -14885,8 +14957,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 103.0,
-              "sent": 17,
-              "rateResponses": 10
+              "sent": 42,
+              "rateResponses": 11
             }
           },
           "commentResponses": 76,
@@ -14979,7 +15051,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 36.0,
-              "sent": 6,
+              "sent": 20,
               "rateResponses": 4
             }
           },
@@ -15085,8 +15157,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 92.0,
-              "sent": 13,
-              "rateResponses": 6
+              "sent": 41,
+              "rateResponses": 10
             }
           },
           "commentResponses": 60,
@@ -15191,8 +15263,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 106.0,
-              "sent": 12,
-              "rateResponses": 11
+              "sent": 35,
+              "rateResponses": 12
             }
           },
           "commentResponses": 32,
@@ -15272,8 +15344,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 9,
-              "rateResponses": 4
+              "sent": 31,
+              "rateResponses": 5
             }
           },
           "commentResponses": 44,
@@ -15374,8 +15446,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 99.0,
-              "sent": 22,
-              "rateResponses": 9
+              "sent": 66,
+              "rateResponses": 12
             }
           },
           "commentResponses": 91,
@@ -15488,8 +15560,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 62.0,
-              "sent": 8,
-              "rateResponses": 4
+              "sent": 22,
+              "rateResponses": 7
             }
           },
           "commentResponses": 52,
@@ -15596,8 +15668,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 72.0,
-              "sent": 4,
-              "rateResponses": 5
+              "sent": 55,
+              "rateResponses": 8
             }
           },
           "commentResponses": 8,
@@ -15643,7 +15715,9 @@
             },
             "2026": {
               "responses": 1,
-              "scoreSum": 10.0
+              "scoreSum": 10.0,
+              "sent": 28,
+              "rateResponses": 1
             }
           },
           "commentResponses": 13,
@@ -15749,8 +15823,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 83.0,
-              "sent": 21,
-              "rateResponses": 6
+              "sent": 92,
+              "rateResponses": 9
             }
           },
           "commentResponses": 56,
@@ -15843,7 +15917,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 68.0,
-              "sent": 15,
+              "sent": 48,
               "rateResponses": 7
             }
           },
@@ -15937,8 +16011,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 100.0,
-              "sent": 13,
-              "rateResponses": 8
+              "sent": 68,
+              "rateResponses": 11
             }
           },
           "commentResponses": 97,
@@ -16034,7 +16108,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 8,
+              "sent": 34,
               "rateResponses": 3
             },
             "2023": {
@@ -16136,7 +16210,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 36.0,
-              "sent": 11,
+              "sent": 30,
               "rateResponses": 4
             }
           },
@@ -16226,8 +16300,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 49.0,
-              "sent": 16,
-              "rateResponses": 3
+              "sent": 60,
+              "rateResponses": 5
             }
           },
           "commentResponses": 48,
@@ -16324,8 +16398,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 43.0,
-              "sent": 9,
-              "rateResponses": 2
+              "sent": 44,
+              "rateResponses": 5
             }
           },
           "commentResponses": 38,
@@ -16426,8 +16500,8 @@
             "2026": {
               "responses": 15,
               "scoreSum": 133.0,
-              "sent": 17,
-              "rateResponses": 11
+              "sent": 80,
+              "rateResponses": 15
             }
           },
           "commentResponses": 83,
@@ -16536,7 +16610,7 @@
             "2026": {
               "responses": 9,
               "scoreSum": 77.0,
-              "sent": 19,
+              "sent": 85,
               "rateResponses": 9
             }
           },
@@ -16638,8 +16712,8 @@
             "2026": {
               "responses": 13,
               "scoreSum": 119.0,
-              "sent": 20,
-              "rateResponses": 11
+              "sent": 87,
+              "rateResponses": 13
             }
           },
           "commentResponses": 84,
@@ -16732,7 +16806,7 @@
             "2026": {
               "responses": 10,
               "scoreSum": 96.0,
-              "sent": 17,
+              "sent": 69,
               "rateResponses": 10
             }
           },
@@ -16872,7 +16946,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 8,
+              "sent": 55,
               "rateResponses": 2
             }
           },
@@ -16957,7 +17031,7 @@
             "2026": {
               "responses": 8,
               "scoreSum": 75.0,
-              "sent": 5,
+              "sent": 42,
               "rateResponses": 8
             }
           },
@@ -17038,8 +17112,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 77.0,
-              "sent": 10,
-              "rateResponses": 5
+              "sent": 69,
+              "rateResponses": 8
             },
             "2023": {
               "responses": 0,
@@ -17121,8 +17195,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 91.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 84,
+              "rateResponses": 10
             }
           },
           "commentResponses": 27,
@@ -17211,7 +17285,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 40.0,
-              "sent": 13,
+              "sent": 39,
               "rateResponses": 4
             }
           },
@@ -17331,8 +17405,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 68.0,
-              "sent": 2,
-              "rateResponses": 6
+              "sent": 43,
+              "rateResponses": 7
             }
           },
           "commentResponses": 28,
@@ -17401,7 +17475,9 @@
           "years": {
             "2026": {
               "responses": 2,
-              "scoreSum": 20.0
+              "scoreSum": 20.0,
+              "sent": 12,
+              "rateResponses": 2
             }
           },
           "commentResponses": 2,
@@ -17431,8 +17507,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 62.0,
-              "sent": 11,
-              "rateResponses": 6
+              "sent": 64,
+              "rateResponses": 7
             }
           },
           "commentResponses": 11,
@@ -17499,8 +17575,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 101.0,
-              "sent": 12,
-              "rateResponses": 8
+              "sent": 42,
+              "rateResponses": 11
             }
           },
           "commentResponses": 17,
@@ -17581,8 +17657,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 93.0,
-              "sent": 8,
-              "rateResponses": 7
+              "sent": 51,
+              "rateResponses": 10
             }
           },
           "commentResponses": 50,
@@ -17736,8 +17812,8 @@
             "2026": {
               "responses": 17,
               "scoreSum": 159.0,
-              "sent": 11,
-              "rateResponses": 13
+              "sent": 70,
+              "rateResponses": 17
             }
           },
           "commentResponses": 77,
@@ -17841,8 +17917,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 95.0,
-              "sent": 13,
-              "rateResponses": 6
+              "sent": 60,
+              "rateResponses": 10
             }
           },
           "commentResponses": 12,
@@ -17910,7 +17986,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 19.0,
-              "sent": 5,
+              "sent": 6,
               "rateResponses": 2
             }
           },
@@ -17998,8 +18074,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 87.0,
-              "sent": 6,
-              "rateResponses": 7
+              "sent": 55,
+              "rateResponses": 9
             }
           },
           "commentResponses": 10,
@@ -18051,8 +18127,8 @@
             "2026": {
               "responses": 17,
               "scoreSum": 154.0,
-              "sent": 9,
-              "rateResponses": 13
+              "sent": 73,
+              "rateResponses": 17
             }
           },
           "commentResponses": 84,
@@ -18161,8 +18237,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 79.0,
-              "sent": 7,
-              "rateResponses": 7
+              "sent": 29,
+              "rateResponses": 8
             }
           },
           "commentResponses": 48,
@@ -18300,8 +18376,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 115.0,
-              "sent": 9,
-              "rateResponses": 10
+              "sent": 62,
+              "rateResponses": 12
             }
           },
           "commentResponses": 22,
@@ -18369,8 +18445,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 76.0,
-              "sent": 16,
-              "rateResponses": 7
+              "sent": 82,
+              "rateResponses": 8
             }
           },
           "commentResponses": 28,
@@ -18457,8 +18533,8 @@
             "2026": {
               "responses": 10,
               "scoreSum": 92.0,
-              "sent": 8,
-              "rateResponses": 9
+              "sent": 64,
+              "rateResponses": 10
             }
           },
           "commentResponses": 11,
@@ -18505,8 +18581,8 @@
             "2026": {
               "responses": 15,
               "scoreSum": 136.0,
-              "sent": 26,
-              "rateResponses": 12
+              "sent": 87,
+              "rateResponses": 15
             }
           },
           "commentResponses": 24,
@@ -18582,7 +18658,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 70.0,
-              "sent": 13,
+              "sent": 43,
               "rateResponses": 7
             }
           },
@@ -18680,8 +18756,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 10,
-              "rateResponses": 4
+              "sent": 51,
+              "rateResponses": 5
             }
           },
           "commentResponses": 30,
@@ -18774,8 +18850,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 86.0,
-              "sent": 14,
-              "rateResponses": 8
+              "sent": 63,
+              "rateResponses": 9
             }
           },
           "commentResponses": 55,
@@ -18872,8 +18948,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 66.0,
-              "sent": 11,
-              "rateResponses": 6
+              "sent": 52,
+              "rateResponses": 8
             }
           },
           "commentResponses": 55,
@@ -18974,8 +19050,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 78.0,
-              "sent": 21,
-              "rateResponses": 8
+              "sent": 73,
+              "rateResponses": 9
             }
           },
           "commentResponses": 54,
@@ -19155,8 +19231,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 82.0,
-              "sent": 6,
-              "rateResponses": 7
+              "sent": 51,
+              "rateResponses": 9
             },
             "2023": {
               "responses": 0,
@@ -19247,8 +19323,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 28,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -19303,8 +19379,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 89.0,
-              "sent": 10,
-              "rateResponses": 8
+              "sent": 54,
+              "rateResponses": 9
             }
           },
           "commentResponses": 33,
@@ -19378,8 +19454,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 77.0,
-              "sent": 2,
-              "rateResponses": 7
+              "sent": 49,
+              "rateResponses": 8
             }
           },
           "commentResponses": 8,
@@ -19418,7 +19494,13 @@
           "latestResponseDate": "2026-09-12"
         },
         {
-          "years": {},
+          "years": {
+            "2025": {
+              "responses": 0,
+              "scoreSum": 0,
+              "sent": 1
+            }
+          },
           "commentResponses": 1,
           "strengthKeywords": [
             {
@@ -19438,7 +19520,8 @@
           "hireDate": "2025-07-14",
           "tenureMonths": 14,
           "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년"
+          "tenureBucketLabel": "1~3년",
+          "latestResponseDate": "2025-09-16"
         },
         {
           "name": "박현규",
@@ -19467,8 +19550,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 75.0,
-              "sent": 13,
-              "rateResponses": 7
+              "sent": 43,
+              "rateResponses": 8
             }
           },
           "commentResponses": 72,
@@ -19561,8 +19644,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 109.0,
-              "sent": 10,
-              "rateResponses": 9
+              "sent": 47,
+              "rateResponses": 11
             }
           },
           "commentResponses": 64,
@@ -19719,7 +19802,7 @@
             "2026": {
               "responses": 6,
               "scoreSum": 57.0,
-              "sent": 11,
+              "sent": 13,
               "rateResponses": 6
             }
           },
@@ -19828,7 +19911,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 5,
+              "sent": 39,
               "rateResponses": 4
             }
           },
@@ -19924,8 +20007,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 60.0,
-              "sent": 1,
-              "rateResponses": 4
+              "sent": 38,
+              "rateResponses": 6
             }
           },
           "commentResponses": 6,
@@ -19972,7 +20055,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 27.0,
-              "sent": 4,
+              "sent": 35,
               "rateResponses": 3
             }
           },
@@ -20057,8 +20140,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 27.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 34,
+              "rateResponses": 3
             }
           },
           "commentResponses": 26,
@@ -20137,8 +20220,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 109.0,
-              "sent": 8,
-              "rateResponses": 10
+              "sent": 47,
+              "rateResponses": 11
             }
           },
           "commentResponses": 12,
@@ -20258,8 +20341,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 76.0,
-              "sent": 3,
-              "rateResponses": 6
+              "sent": 48,
+              "rateResponses": 8
             }
           },
           "commentResponses": 10,
@@ -20332,8 +20415,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 40.0,
-              "sent": 4,
-              "rateResponses": 2
+              "sent": 18,
+              "rateResponses": 4
             }
           },
           "commentResponses": 42,
@@ -20417,7 +20500,7 @@
             "2026": {
               "responses": 9,
               "scoreSum": 88.0,
-              "sent": 18,
+              "sent": 52,
               "rateResponses": 9
             }
           },
@@ -20510,7 +20593,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 1,
+              "sent": 20,
               "rateResponses": 2
             }
           },
@@ -20551,7 +20634,9 @@
           "years": {
             "2026": {
               "responses": 4,
-              "scoreSum": 40.0
+              "scoreSum": 40.0,
+              "sent": 13,
+              "rateResponses": 4
             }
           },
           "commentResponses": 4,
@@ -20611,7 +20696,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 20.0,
-              "sent": 10,
+              "sent": 34,
               "rateResponses": 2
             }
           },
@@ -20689,7 +20774,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 27.0,
-              "sent": 2,
+              "sent": 35,
               "rateResponses": 3
             }
           },
@@ -20747,7 +20832,7 @@
             "2026": {
               "responses": 6,
               "scoreSum": 59.0,
-              "sent": 13,
+              "sent": 47,
               "rateResponses": 6
             }
           },
@@ -20849,8 +20934,8 @@
             "2026": {
               "responses": 15,
               "scoreSum": 139.0,
-              "sent": 21,
-              "rateResponses": 14
+              "sent": 44,
+              "rateResponses": 15
             }
           },
           "commentResponses": 67,
@@ -20975,7 +21060,7 @@
             "2026": {
               "responses": 9,
               "scoreSum": 86.0,
-              "sent": 10,
+              "sent": 31,
               "rateResponses": 9
             }
           },
@@ -21171,8 +21256,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 82.0,
-              "sent": 6,
-              "rateResponses": 6
+              "sent": 56,
+              "rateResponses": 9
             }
           },
           "commentResponses": 29,
@@ -21250,8 +21335,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 45.0,
-              "sent": 1,
-              "rateResponses": 4
+              "sent": 44,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -21294,8 +21379,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 36.0,
-              "sent": 4,
-              "rateResponses": 3
+              "sent": 36,
+              "rateResponses": 4
             }
           },
           "commentResponses": 26,
@@ -21373,8 +21458,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 2,
-              "rateResponses": 3
+              "sent": 33,
+              "rateResponses": 5
             },
             "2025": {
               "responses": 0,
@@ -21426,8 +21511,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 51.0,
-              "sent": 4,
-              "rateResponses": 5
+              "sent": 45,
+              "rateResponses": 6
             }
           },
           "commentResponses": 34,
@@ -21502,8 +21587,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 113.0,
-              "sent": 8,
-              "rateResponses": 9
+              "sent": 50,
+              "rateResponses": 12
             }
           },
           "commentResponses": 33,
@@ -21611,7 +21696,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 4,
+              "sent": 27,
               "rateResponses": 3
             },
             "2025": {
@@ -21669,8 +21754,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 2,
-              "rateResponses": 4
+              "sent": 30,
+              "rateResponses": 5
             }
           },
           "commentResponses": 49,
@@ -21753,7 +21838,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 2,
+              "sent": 24,
               "rateResponses": 5
             }
           },
@@ -21800,8 +21885,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 1,
-              "rateResponses": 4
+              "sent": 26,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -21862,8 +21947,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 1,
-              "rateResponses": 2
+              "sent": 20,
+              "rateResponses": 3
             }
           },
           "commentResponses": 16,
@@ -21939,7 +22024,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 45.0,
-              "sent": 5,
+              "sent": 40,
               "rateResponses": 5
             }
           },
@@ -22092,8 +22177,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 4,
-              "rateResponses": 1
+              "sent": 33,
+              "rateResponses": 5
             }
           },
           "commentResponses": 25,
@@ -22169,8 +22254,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 25,
+              "rateResponses": 5
             }
           },
           "commentResponses": 35,
@@ -22255,8 +22340,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 66.0,
-              "sent": 4,
-              "rateResponses": 6
+              "sent": 36,
+              "rateResponses": 7
             }
           },
           "commentResponses": 32,
@@ -22330,8 +22415,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 2,
-              "rateResponses": 3
+              "sent": 41,
+              "rateResponses": 4
             }
           },
           "commentResponses": 4,
@@ -22449,8 +22534,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 81.0,
-              "sent": 3,
-              "rateResponses": 8
+              "sent": 43,
+              "rateResponses": 9
             }
           },
           "commentResponses": 9,
@@ -22523,8 +22608,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 60.0,
-              "sent": 4,
-              "rateResponses": 4
+              "sent": 40,
+              "rateResponses": 6
             }
           },
           "commentResponses": 42,
@@ -22705,7 +22790,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 10,
+              "sent": 33,
               "rateResponses": 3
             }
           },
@@ -22796,7 +22881,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 7,
+              "sent": 43,
               "rateResponses": 5
             }
           },
@@ -22843,7 +22928,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 30.0,
-              "sent": 9,
+              "sent": 47,
               "rateResponses": 4
             }
           },
@@ -22904,8 +22989,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 45.0,
-              "sent": 10,
-              "rateResponses": 4
+              "sent": 38,
+              "rateResponses": 5
             }
           },
           "commentResponses": 28,
@@ -23002,8 +23087,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 27.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 35,
+              "rateResponses": 3
             }
           },
           "commentResponses": 32,
@@ -23100,8 +23185,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 48.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 29,
+              "rateResponses": 5
             }
           },
           "commentResponses": 37,
@@ -23206,8 +23291,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 31,
+              "rateResponses": 5
             }
           },
           "commentResponses": 16,
@@ -23417,7 +23502,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 67.0,
-              "sent": 13,
+              "sent": 67,
               "rateResponses": 7
             }
           },
@@ -23527,8 +23612,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 68.0,
-              "sent": 6,
-              "rateResponses": 6
+              "sent": 38,
+              "rateResponses": 7
             }
           },
           "commentResponses": 67,
@@ -23621,8 +23706,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 38.0,
-              "sent": 8,
-              "rateResponses": 3
+              "sent": 31,
+              "rateResponses": 4
             }
           },
           "commentResponses": 37,
@@ -23719,7 +23804,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 38.0,
-              "sent": 8,
+              "sent": 32,
               "rateResponses": 4
             }
           },
@@ -23813,8 +23898,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 76.0,
-              "sent": 4,
-              "rateResponses": 6
+              "sent": 37,
+              "rateResponses": 8
             }
           },
           "commentResponses": 37,
@@ -23907,8 +23992,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 70.0,
-              "sent": 17,
-              "rateResponses": 7
+              "sent": 41,
+              "rateResponses": 8
             }
           },
           "commentResponses": 31,
@@ -23982,8 +24067,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 3,
-              "rateResponses": 2
+              "sent": 46,
+              "rateResponses": 3
             },
             "2025": {
               "responses": 0,
@@ -24036,8 +24121,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 53.0,
-              "sent": 7,
-              "rateResponses": 4
+              "sent": 46,
+              "rateResponses": 6
             }
           },
           "commentResponses": 48,
@@ -24138,7 +24223,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 67.0,
-              "sent": 12,
+              "sent": 44,
               "rateResponses": 7
             }
           },
@@ -24221,7 +24306,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 1,
+              "sent": 36,
               "rateResponses": 3
             }
           },
@@ -24266,8 +24351,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 78.0,
-              "sent": 20,
-              "rateResponses": 7
+              "sent": 51,
+              "rateResponses": 8
             }
           },
           "commentResponses": 55,
@@ -24368,8 +24453,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 45.0,
-              "sent": 13,
-              "rateResponses": 3
+              "sent": 50,
+              "rateResponses": 5
             }
           },
           "commentResponses": 38,
@@ -24474,7 +24559,7 @@
             "2026": {
               "responses": 6,
               "scoreSum": 58.0,
-              "sent": 13,
+              "sent": 49,
               "rateResponses": 6
             }
           },
@@ -24559,7 +24644,7 @@
             "2026": {
               "responses": 8,
               "scoreSum": 74.0,
-              "sent": 7,
+              "sent": 50,
               "rateResponses": 8
             },
             "2023": {
@@ -24658,8 +24743,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 46.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 28,
+              "rateResponses": 5
             }
           },
           "commentResponses": 20,
@@ -24742,8 +24827,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 83.0,
-              "sent": 7,
-              "rateResponses": 8
+              "sent": 53,
+              "rateResponses": 9
             }
           },
           "commentResponses": 9,
@@ -24799,7 +24884,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 31.0,
-              "sent": 7,
+              "sent": 25,
               "rateResponses": 4
             }
           },
@@ -24880,8 +24965,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 9,
-              "rateResponses": 3
+              "sent": 57,
+              "rateResponses": 4
             }
           },
           "commentResponses": 33,
@@ -24978,8 +25063,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 78.0,
-              "sent": 13,
-              "rateResponses": 6
+              "sent": 58,
+              "rateResponses": 8
             }
           },
           "commentResponses": 37,
@@ -25083,8 +25168,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 83.0,
-              "sent": 10,
-              "rateResponses": 8
+              "sent": 26,
+              "rateResponses": 9
             }
           },
           "commentResponses": 37,
@@ -25169,8 +25254,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 81.0,
-              "sent": 21,
-              "rateResponses": 7
+              "sent": 60,
+              "rateResponses": 9
             }
           },
           "commentResponses": 52,
@@ -25257,8 +25342,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 16.0,
-              "sent": 4,
-              "rateResponses": 1
+              "sent": 45,
+              "rateResponses": 2
             }
           },
           "commentResponses": 3,
@@ -25302,7 +25387,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 5,
+              "sent": 31,
               "rateResponses": 3
             }
           },
@@ -25396,8 +25481,8 @@
             "2026": {
               "responses": 14,
               "scoreSum": 116.0,
-              "sent": 19,
-              "rateResponses": 11
+              "sent": 65,
+              "rateResponses": 14
             }
           },
           "commentResponses": 48,
@@ -25502,8 +25587,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 19.0,
-              "sent": 9,
-              "rateResponses": 1
+              "sent": 38,
+              "rateResponses": 2
             }
           },
           "commentResponses": 29,
@@ -25645,8 +25730,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 40.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 31,
+              "rateResponses": 4
             }
           },
           "commentResponses": 33,
@@ -25724,7 +25809,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 1,
+              "sent": 36,
               "rateResponses": 3
             }
           },
@@ -25773,8 +25858,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 36.0,
-              "sent": 2,
-              "rateResponses": 3
+              "sent": 43,
+              "rateResponses": 4
             }
           },
           "commentResponses": 40,
@@ -25879,8 +25964,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 38.0,
-              "sent": 3,
-              "rateResponses": 3
+              "sent": 27,
+              "rateResponses": 4
             }
           },
           "commentResponses": 26,
@@ -25965,7 +26050,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 1,
+              "sent": 5,
               "rateResponses": 1
             }
           },
@@ -26018,7 +26103,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 8.0,
-              "sent": 8,
+              "sent": 16,
               "rateResponses": 1
             }
           },
@@ -26086,7 +26171,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 18.0,
-              "sent": 4,
+              "sent": 32,
               "rateResponses": 3
             }
           },
@@ -26189,8 +26274,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 14,
-              "rateResponses": 2
+              "sent": 22,
+              "rateResponses": 3
             }
           },
           "commentResponses": 13,
@@ -26255,7 +26340,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 8.0,
-              "sent": 1,
+              "sent": 3,
               "rateResponses": 1
             }
           },
@@ -26299,8 +26384,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 34.0,
-              "sent": 8,
-              "rateResponses": 3
+              "sent": 19,
+              "rateResponses": 4
             },
             "2025": {
               "responses": 0,
@@ -26381,8 +26466,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 37.0,
-              "sent": 16,
-              "rateResponses": 3
+              "sent": 29,
+              "rateResponses": 4
             }
           },
           "commentResponses": 27,
@@ -26483,8 +26568,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 71.0,
-              "sent": 8,
-              "rateResponses": 6
+              "sent": 62,
+              "rateResponses": 8
             }
           },
           "commentResponses": 24,
@@ -26576,7 +26661,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 9.0,
-              "sent": 3,
+              "sent": 8,
               "rateResponses": 1
             }
           },
@@ -26641,7 +26726,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 10.0,
-              "sent": 2,
+              "sent": 14,
               "rateResponses": 1
             }
           },
@@ -26724,8 +26809,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 38.0,
-              "sent": 8,
-              "rateResponses": 3
+              "sent": 31,
+              "rateResponses": 4
             }
           },
           "commentResponses": 4,
@@ -26777,8 +26862,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 25.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 17,
+              "rateResponses": 3
             }
           },
           "commentResponses": 23,
@@ -26853,7 +26938,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 25.0,
-              "sent": 6,
+              "sent": 24,
               "rateResponses": 3
             }
           },
@@ -27022,7 +27107,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 26.0,
-              "sent": 1,
+              "sent": 13,
               "rateResponses": 4
             }
           },
@@ -27069,7 +27154,9 @@
             },
             "2026": {
               "responses": 2,
-              "scoreSum": 19.0
+              "scoreSum": 19.0,
+              "sent": 14,
+              "rateResponses": 2
             }
           },
           "commentResponses": 2,
@@ -27107,7 +27194,7 @@
             "2026": {
               "responses": 1,
               "scoreSum": 9.0,
-              "sent": 1,
+              "sent": 18,
               "rateResponses": 1
             }
           },
@@ -27143,7 +27230,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 1,
+              "sent": 16,
               "rateResponses": 3
             }
           },
@@ -27197,7 +27284,7 @@
             "2026": {
               "responses": 2,
               "scoreSum": 15.0,
-              "sent": 14,
+              "sent": 18,
               "rateResponses": 2
             }
           },
@@ -27242,7 +27329,7 @@
             "2026": {
               "responses": 6,
               "scoreSum": 60.0,
-              "sent": 14,
+              "sent": 28,
               "rateResponses": 6
             }
           },
@@ -27339,8 +27426,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 60.0,
-              "sent": 4,
-              "rateResponses": 5
+              "sent": 28,
+              "rateResponses": 7
             },
             "2025": {
               "responses": 0,
@@ -27489,8 +27576,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 74.0,
-              "sent": 10,
-              "rateResponses": 6
+              "sent": 38,
+              "rateResponses": 8
             }
           },
           "commentResponses": 41,
@@ -27583,8 +27670,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 64.0,
-              "sent": 15,
-              "rateResponses": 6
+              "sent": 51,
+              "rateResponses": 7
             }
           },
           "commentResponses": 29,
@@ -27662,8 +27749,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 29.0,
-              "sent": 4,
-              "rateResponses": 3
+              "sent": 23,
+              "rateResponses": 4
             }
           },
           "commentResponses": 4,
@@ -27711,8 +27798,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 87.0,
-              "sent": 15,
-              "rateResponses": 8
+              "sent": 81,
+              "rateResponses": 9
             }
           },
           "commentResponses": 28,
@@ -27794,8 +27881,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 47.0,
-              "sent": 1,
-              "rateResponses": 3
+              "sent": 28,
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -27839,7 +27926,9 @@
           "years": {
             "2026": {
               "responses": 1,
-              "scoreSum": 10.0
+              "scoreSum": 10.0,
+              "sent": 9,
+              "rateResponses": 1
             }
           },
           "commentResponses": 1,
@@ -27883,7 +27972,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 49.0,
-              "sent": 9,
+              "sent": 38,
               "rateResponses": 5
             }
           },
@@ -27977,8 +28066,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 28.0,
-              "sent": 5,
-              "rateResponses": 2
+              "sent": 30,
+              "rateResponses": 4
             }
           },
           "commentResponses": 18,
@@ -28043,7 +28132,9 @@
           "years": {
             "2026": {
               "responses": 3,
-              "scoreSum": 28.0
+              "scoreSum": 28.0,
+              "sent": 48,
+              "rateResponses": 3
             }
           },
           "commentResponses": 3,
@@ -28116,8 +28207,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 27.0,
-              "sent": 9,
-              "rateResponses": 2
+              "sent": 20,
+              "rateResponses": 3
             }
           },
           "commentResponses": 19,
@@ -28189,8 +28280,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 84.0,
-              "sent": 13,
-              "rateResponses": 6
+              "sent": 45,
+              "rateResponses": 9
             }
           },
           "commentResponses": 25,
@@ -28271,8 +28362,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 45.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 45,
+              "rateResponses": 5
             }
           },
           "commentResponses": 48,
@@ -28365,8 +28456,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 36.0,
-              "sent": 4,
-              "rateResponses": 4
+              "sent": 22,
+              "rateResponses": 5
             }
           },
           "commentResponses": 20,
@@ -28633,8 +28724,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 7,
-              "rateResponses": 1
+              "sent": 31,
+              "rateResponses": 3
             }
           },
           "commentResponses": 7,
@@ -28682,7 +28773,9 @@
           "years": {
             "2026": {
               "responses": 6,
-              "scoreSum": 57.0
+              "scoreSum": 57.0,
+              "sent": 36,
+              "rateResponses": 6
             }
           },
           "commentResponses": 6,
@@ -28746,7 +28839,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 28.0,
-              "sent": 8,
+              "sent": 29,
               "rateResponses": 3
             }
           },
@@ -28831,8 +28924,8 @@
             "2026": {
               "responses": 2,
               "scoreSum": 16.0,
-              "sent": 1,
-              "rateResponses": 1
+              "sent": 8,
+              "rateResponses": 2
             }
           },
           "commentResponses": 9,
@@ -28896,8 +28989,8 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 12,
-              "rateResponses": 2
+              "sent": 44,
+              "rateResponses": 3
             }
           },
           "commentResponses": 30,
@@ -28982,8 +29075,8 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 4,
-              "rateResponses": 4
+              "sent": 26,
+              "rateResponses": 5
             }
           },
           "commentResponses": 36,
@@ -29087,7 +29180,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 12,
+              "sent": 22,
               "rateResponses": 4
             },
             "2025": {
@@ -29203,8 +29296,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 10,
-              "rateResponses": 3
+              "sent": 48,
+              "rateResponses": 4
             }
           },
           "commentResponses": 5,
@@ -29237,7 +29330,7 @@
             "2026": {
               "responses": 5,
               "scoreSum": 50.0,
-              "sent": 4,
+              "sent": 44,
               "rateResponses": 5
             },
             "2025": {
@@ -29289,8 +29382,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 70.0,
-              "sent": 3,
-              "rateResponses": 6
+              "sent": 40,
+              "rateResponses": 7
             },
             "2024": {
               "responses": 0,
@@ -29367,7 +29460,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 38.0,
-              "sent": 9,
+              "sent": 29,
               "rateResponses": 4
             }
           },
@@ -29451,7 +29544,7 @@
             "2026": {
               "responses": 9,
               "scoreSum": 75.0,
-              "sent": 11,
+              "sent": 29,
               "rateResponses": 9
             }
           },
@@ -29514,8 +29607,8 @@
             "2026": {
               "responses": 11,
               "scoreSum": 109.0,
-              "sent": 13,
-              "rateResponses": 10
+              "sent": 47,
+              "rateResponses": 11
             }
           },
           "commentResponses": 17,
@@ -29561,7 +29654,23 @@
           "latestResponseDate": "2026-08-29"
         },
         {
-          "years": {},
+          "years": {
+            "2023": {
+              "responses": 0,
+              "scoreSum": 0,
+              "sent": 153
+            },
+            "2024": {
+              "responses": 0,
+              "scoreSum": 0,
+              "sent": 113
+            },
+            "2025": {
+              "responses": 0,
+              "scoreSum": 0,
+              "sent": 3
+            }
+          },
           "commentResponses": 69,
           "strengthKeywords": [
             {
@@ -29645,7 +29754,8 @@
           "hireDate": "2026-09-07",
           "tenureMonths": 0,
           "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내"
+          "tenureBucketLabel": "3개월 이내",
+          "latestResponseDate": "2025-04-30"
         },
         {
           "name": "안재현",
@@ -29659,8 +29769,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 76.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 43,
+              "rateResponses": 8
             }
           },
           "commentResponses": 8,
@@ -29705,7 +29815,9 @@
           "years": {
             "2026": {
               "responses": 8,
-              "scoreSum": 69.0
+              "scoreSum": 69.0,
+              "sent": 34,
+              "rateResponses": 8
             }
           },
           "commentResponses": 8,
@@ -29764,7 +29876,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 4,
+              "sent": 22,
               "rateResponses": 3
             }
           },
@@ -29833,8 +29945,8 @@
             "2026": {
               "responses": 9,
               "scoreSum": 85.0,
-              "sent": 10,
-              "rateResponses": 6
+              "sent": 29,
+              "rateResponses": 9
             }
           },
           "commentResponses": 84,
@@ -29929,8 +30041,8 @@
             "2026": {
               "responses": 13,
               "scoreSum": 123.0,
-              "sent": 18,
-              "rateResponses": 11
+              "sent": 77,
+              "rateResponses": 13
             }
           },
           "commentResponses": 17,
@@ -30001,7 +30113,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 20,
+              "sent": 35,
               "rateResponses": 4
             }
           },
@@ -30183,8 +30295,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 59.0,
-              "sent": 5,
-              "rateResponses": 3
+              "sent": 30,
+              "rateResponses": 6
             }
           },
           "commentResponses": 31,
@@ -30263,7 +30375,7 @@
             "2026": {
               "responses": 7,
               "scoreSum": 66.0,
-              "sent": 9,
+              "sent": 35,
               "rateResponses": 7
             }
           },
@@ -30308,7 +30420,9 @@
           "years": {
             "2026": {
               "responses": 2,
-              "scoreSum": 20.0
+              "scoreSum": 20.0,
+              "sent": 17,
+              "rateResponses": 2
             }
           },
           "commentResponses": 2,
@@ -30356,7 +30470,7 @@
             "2026": {
               "responses": 4,
               "scoreSum": 37.0,
-              "sent": 5,
+              "sent": 27,
               "rateResponses": 4
             }
           },
@@ -30450,7 +30564,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 29.0,
-              "sent": 3,
+              "sent": 32,
               "rateResponses": 3
             }
           },
@@ -30564,8 +30678,8 @@
             "2026": {
               "responses": 4,
               "scoreSum": 39.0,
-              "sent": 5,
-              "rateResponses": 3
+              "sent": 38,
+              "rateResponses": 4
             }
           },
           "commentResponses": 4,
@@ -30626,7 +30740,7 @@
             "2026": {
               "responses": 10,
               "scoreSum": 92.0,
-              "sent": 13,
+              "sent": 46,
               "rateResponses": 10
             }
           },
@@ -30739,7 +30853,7 @@
             "2026": {
               "responses": 3,
               "scoreSum": 30.0,
-              "sent": 6,
+              "sent": 43,
               "rateResponses": 3
             }
           },
@@ -30782,8 +30896,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 59.0,
-              "sent": 3,
-              "rateResponses": 4
+              "sent": 37,
+              "rateResponses": 6
             }
           },
           "commentResponses": 10,
@@ -30824,8 +30938,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 74.0,
-              "sent": 4,
-              "rateResponses": 6
+              "sent": 49,
+              "rateResponses": 8
             }
           },
           "commentResponses": 8,
@@ -30876,8 +30990,8 @@
             "2026": {
               "responses": 6,
               "scoreSum": 56.0,
-              "sent": 8,
-              "rateResponses": 4
+              "sent": 46,
+              "rateResponses": 6
             }
           },
           "commentResponses": 48,
@@ -30959,8 +31073,8 @@
             "2026": {
               "responses": 8,
               "scoreSum": 74.0,
-              "sent": 9,
-              "rateResponses": 6
+              "sent": 41,
+              "rateResponses": 8
             },
             "2025": {
               "responses": 0,
@@ -31038,8 +31152,8 @@
             "2026": {
               "responses": 7,
               "scoreSum": 67.0,
-              "sent": 13,
-              "rateResponses": 6
+              "sent": 39,
+              "rateResponses": 7
             }
           },
           "commentResponses": 52,
@@ -31131,8 +31245,8 @@
             "2026": {
               "responses": 12,
               "scoreSum": 110.0,
-              "sent": 12,
-              "rateResponses": 10
+              "sent": 56,
+              "rateResponses": 12
             }
           },
           "commentResponses": 22,

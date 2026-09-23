@@ -11,6 +11,7 @@ import openpyxl
 
 
 YEARS = {"2023", "2024", "2025", "2026"}
+YEAR_ORDER = tuple(sorted(YEARS))
 
 
 def normalise(value: Any) -> str:
@@ -34,7 +35,10 @@ def response_date(value: Any) -> datetime | None:
     try:
         return datetime.fromisoformat(text)
     except ValueError:
-        return None
+        try:
+            return datetime.fromisoformat(text[:10])
+        except ValueError:
+            return None
 
 
 def main() -> None:
@@ -42,6 +46,11 @@ def main() -> None:
     parser.add_argument("--sent", required=True, type=Path)
     parser.add_argument("--voc", required=True, type=Path)
     parser.add_argument("--analysis", required=True, type=Path)
+    parser.add_argument(
+        "--sent-output",
+        type=Path,
+        default=Path(__file__).resolve().parents[1] / "app" / "data" / "voc-sent.json",
+    )
     args = parser.parse_args()
 
     payload = json.loads(args.analysis.read_text(encoding="utf-8"))
@@ -52,7 +61,7 @@ def main() -> None:
             employee_index[(showroom_name, normalise(employee["name"]))] = employee
 
     workbook = openpyxl.load_workbook(args.sent, read_only=True, data_only=True)
-    worksheet = workbook["Raw Data"]
+    worksheet = workbook["Raw Data"] if "Raw Data" in workbook.sheetnames else workbook[workbook.sheetnames[0]]
     headers = {
         str(value or "").strip(): index
         for index, value in enumerate(
@@ -65,12 +74,40 @@ def main() -> None:
     employee_index_column = headers["담당 영업직원"]
 
     counts: Counter[tuple[str, str, str]] = Counter()
+    national_counts: Counter[str] = Counter()
+    showroom_counts: Counter[tuple[str, str]] = Counter()
+    latest_sent_at: datetime | None = None
     for row in worksheet.iter_rows(min_row=3, values_only=True):
         year = sent_year(row[date_index])
         showroom = normalise(row[showroom_index])
         employee = normalise(row[employee_index_column])
-        if year and showroom and employee:
+        if not year:
+            continue
+        national_counts[year] += 1
+        if showroom:
+            showroom_counts[(showroom, year)] += 1
+        if showroom and employee:
             counts[(showroom, employee, year)] += 1
+        parsed_sent_at = response_date(row[date_index])
+        if parsed_sent_at is not None and (
+            latest_sent_at is None or parsed_sent_at > latest_sent_at
+        ):
+            latest_sent_at = parsed_sent_at
+
+    if latest_sent_at is None:
+        raise RuntimeError("VOC 발송 원본에서 유효한 전시장 방문일시를 찾지 못했습니다.")
+
+    showroom_cdsid = {
+        normalise(showroom["showroom"]).removeprefix("볼보"): cdsid
+        for cdsid, showroom in payload["showrooms"].items()
+    }
+    source_showrooms = {showroom for showroom, _ in showroom_counts}
+    if source_showrooms != set(showroom_cdsid):
+        raise RuntimeError(
+            "VOC 발송 전시장 매핑 불일치: "
+            f"누락={sorted(set(showroom_cdsid) - source_showrooms)}, "
+            f"초과={sorted(source_showrooms - set(showroom_cdsid))}"
+        )
 
     matched_rows = 0
     matched_employees: set[tuple[str, str]] = set()
@@ -118,17 +155,34 @@ def main() -> None:
         else:
             employee.pop("latestResponseDate", None)
 
+    sent_through = latest_sent_at.date().isoformat()
     payload["source"]["sentWorkbook"] = args.sent.name
-    payload["source"]["sentThrough"] = "2026-08-24"
+    payload["source"]["sentThrough"] = sent_through
     payload["source"]["latestResponseThrough"] = payload["source"]["vocThrough"]
     args.analysis.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+
+    sent_payload = {
+        "updatedThrough": sent_through,
+        "sourceWorkbook": args.sent.name,
+        "years": [int(year) for year in YEAR_ORDER],
+        "national": [national_counts[year] for year in YEAR_ORDER],
+        "showrooms": {
+            cdsid: [showroom_counts[(showroom, year)] for year in YEAR_ORDER]
+            for showroom, cdsid in showroom_cdsid.items()
+        },
+    }
+    args.sent_output.write_text(
+        json.dumps(sent_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     print(
         f"matched {matched_rows:,} sent rows across "
         f"{len(matched_employees):,} current employees; "
-        f"latest responses for {len(latest_response):,} employees"
+        f"latest responses for {len(latest_response):,} employees; "
+        f"sent through {sent_through}"
     )
 
 

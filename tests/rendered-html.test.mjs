@@ -212,12 +212,14 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
 });
 
 test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggregate", async () => {
-  const [staffAnalysis, consultation, dashboardSource, analysisSource, refreshScript] = await Promise.all([
+  const [staffAnalysis, consultation, sent, dashboardSource, analysisSource, refreshScript, sentSyncScript] = await Promise.all([
     readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/data/voc-consultation.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/voc-sent.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../scripts/update-voc-2026-analysis.py", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/sync-voc-sent-to-staff-analysis.py", import.meta.url), "utf8"),
   ]);
   assert.equal(staffAnalysis.source.vocThrough, "2026-09-13");
   assert.equal(staffAnalysis.source.latestResponseThrough, "2026-09-13");
@@ -248,12 +250,24 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
   assert.equal(kimDaeJun.commentResponses, 29);
   assert.equal(consultation.updatedThrough, "2026-09-13");
   assert.deepEqual(consultation.national.slice(-2), [9.237779, 2107]);
-  assert.equal(consultation.responseRateThrough, "2026-08-24");
-  assert.equal(consultation.responseRateResponses.national.at(-1), 1642);
+  assert.equal(consultation.responseRateThrough, "2026-09-13");
+  assert.equal(consultation.responseRateResponses.national.at(-1), 2107);
+  assert.equal(sent.updatedThrough, "2026-09-13");
+  assert.deepEqual(sent.national, [22697, 27004, 5542, 13413]);
+  assert.equal(Object.keys(sent.showrooms).length, 39);
+  assert.deepEqual(
+    sent.years.map((_, index) =>
+      Object.values(sent.showrooms).reduce((total, values) => total + values[index], 0),
+    ),
+    sent.national,
+  );
   assert.match(dashboardSource, /showroomRateResponses = selectedRateResponses\?\.\[index\] \?\? showroomResponses/);
   assert.match(analysisSource, /metrics\.rateResponses \?\? metrics\.responses/);
   assert.match(refreshScript, /기존 2023-2025 집계 보존 · 2026 점수\/회신\/원문 분석 갱신/);
   assert.doesNotMatch(refreshScript, /고객명|연락처|계약번호/);
+  assert.match(sentSyncScript, /sent_through = latest_sent_at\.date\(\)\.isoformat\(\)/);
+  assert.match(sentSyncScript, /"national": \[national_counts\[year\] for year in YEAR_ORDER\]/);
+  assert.doesNotMatch(sentSyncScript, /sentThrough"\] = "2026-08-24"/);
 });
 
 test("expands the four staff analysis panels after removing their outer frame", async () => {
