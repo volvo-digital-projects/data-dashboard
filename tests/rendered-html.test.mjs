@@ -928,7 +928,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(kimDaejunSales.deliveredSales >= 49);
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*background: var\(--segment-gradient\);[^}]*rotateX\(8deg\)[^}]*animation: growth-segment-donut-enter 760ms/);
+  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*width:\s*90px;[^}]*height:\s*90px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
+  assert.doesNotMatch(css.match(/\.growth-segment-donut-disc\s*\{[^}]*\}/)?.[0] ?? "", /rotateX/);
   assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateZ\(-150deg\)[\s\S]*?rotateZ\(0deg\)/);
   assert.match(source, /"30": \{ label: "30", color: "#6f9fba" \}[\s\S]*?"40": \{ label: "40", color: "#6fa78e" \}[\s\S]*?"60": \{ label: "60", color: "#c5a05a" \}[\s\S]*?"90": \{ label: "90", color: "#c97a78" \}/);
   assert.match(css, /\.growth-segment-donut-values\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
