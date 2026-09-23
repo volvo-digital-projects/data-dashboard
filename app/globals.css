@@ -2696,7 +2696,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-shell {
   position: relative;
   width: 112px;
-  height: 102px;
+  height: 108px;
   margin-top: 12px;
   perspective: 520px;
 }
@@ -2704,10 +2704,10 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-disc {
   position: absolute;
   top: 2px;
-  left: 11px;
+  left: 8px;
   z-index: 1;
-  width: 90px;
-  height: 90px;
+  width: 96px;
+  height: 96px;
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   background: var(--segment-gradient);
@@ -2725,7 +2725,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-disc::after {
   content: "";
   position: absolute;
-  inset: 18%;
+  inset: 20%;
   border-radius: 50%;
   background: #fbfdfe;
   box-shadow:
@@ -2756,7 +2756,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-segment-donut-center {
   position: absolute;
-  top: 28px;
+  top: 31px;
   right: 0;
   left: 0;
   z-index: 3;

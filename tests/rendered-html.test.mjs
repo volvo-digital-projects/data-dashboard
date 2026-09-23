@@ -939,12 +939,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(kimDaejunSales.deliveredSales >= 49);
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*width:\s*90px;[^}]*height:\s*90px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateY\(-4deg\) rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
-  assert.match(css, /\.growth-segment-donut-disc::after\s*\{[^}]*inset:\s*18%;/);
-  assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 37;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(47 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
+  assert.match(css, /\.growth-segment-donut-shell\s*\{[^}]*width:\s*112px;[^}]*height:\s*108px;/);
+  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*left:\s*8px;[^}]*width:\s*96px;[^}]*height:\s*96px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateY\(-4deg\) rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
+  assert.match(css, /\.growth-segment-donut-disc::after\s*\{[^}]*inset:\s*20%;/);
+  assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 39;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(50 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
   assert.match(navigation, /className="growth-segment-donut-counts" aria-hidden="true"[\s\S]*?salesSegmentLabelPosition\(donut\.counts, segment\)[\s\S]*?\{donut\.counts\[segment\]\}/);
   assert.match(navigation, /className="growth-segment-donut-center"[\s\S]*?<em>\{donut\.label\}<\/em>[\s\S]*?<span><b>\{total\}<\/b><small>대<\/small><\/span>/);
-  assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*1px;/);
+  assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*top:\s*31px;[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*1px;/);
   assert.match(css, /\.growth-segment-donut-center > em\s*\{[^}]*font-size:\s*8px;[^}]*line-height:\s*1;[^}]*white-space:\s*nowrap;/);
   assert.match(css, /\.growth-segment-donut-counts > span\s*\{[^}]*transform:\s*translate\(-50%, -50%\);[^}]*color:\s*#fff;[^}]*font-size:\s*8px;[^}]*font-weight:\s*500;[^}]*text-shadow:\s*none;/);
   assert.doesNotMatch(css.match(/\.growth-segment-donut-disc\s*\{[^}]*\}/)?.[0] ?? "", /rotateX/);
