@@ -49,12 +49,12 @@ test('YouTube shared channel is counted once and every video is attributed from 
  const expected=new Map([
   ['zh-E_v-PXFE','곽지명'],['IXy0Iu6kAEI','조선별'],['9O5QGxCcuEw','조선별'],['YxShHQUP5q0','곽지명'],
   ['y2Ak71FfQRU','조선별'],['xKmkfdqbBqs','곽지명'],['cfEB7f4Fe3c','조선별'],['kR3dQMIDRxk','조선별'],
-  ['jja3vjYEQ0E','조선별'],['8hSlC0LSlt4','곽지명'],['OlOHk3EyUL8','조선별'],['P7m_VoT_920','곽지명'],
+  ['jja3vjYEQ0E','조선별'],['8hSlC0LSlt4','곽지명'],['x_oF8Bf44Us','곽지명'],['OlOHk3EyUL8','조선별'],['P7m_VoT_920','곽지명'],
   ['9oqQx4AptXw','조선별'],['Tctur3oMOXQ','조선별'],['UU1TqzUNSCQ','조선별'],['DVYAR2_3GSo','조선별'],
  ]);
  assert.equal(expected.size,channel.videoCount);
  for(const video of channel.sharedVideos)assert.deepEqual(video.names,[expected.get(video.id)],video.id);
- assert.deepEqual(channel.sharedVideos.reduce((counts,video)=>{counts[video.names[0]][video.kind]++;return counts;},{조선별:{long:0,short:0},곽지명:{long:0,short:0}}),{조선별:{long:4,short:7},곽지명:{long:3,short:2}});
+ assert.deepEqual(channel.sharedVideos.reduce((counts,video)=>{counts[video.names[0]][video.kind]++;return counts;},{조선별:{long:0,short:0},곽지명:{long:0,short:0}}),{조선별:{long:4,short:7},곽지명:{long:3,short:3}});
  for(const v of channel.sharedVideos)for(const name of v.names)assert.ok(pair.some(p=>p.name===name));
  for(const c of data.channels){
   assert.equal(c.long.count+c.short.count,c.videoCount);
