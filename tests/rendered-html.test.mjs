@@ -537,7 +537,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /sales\?\.deliveredSales \?\? null/);
   assert.match(navigation, /2026년 누적 판매 \$\{deliveredSales \?\? 0\}대/);
   assert.match(profile, /className="growth-profile-person-certification"[\s\S]*?<small>보유 인증레벨<\/small>[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
-  assert.match(css, /\.growth-profile-person-certification strong\s*\{[^}]*flex-direction:\s*row;[^}]*justify-content:\s*space-between;[^}]*gap:\s*0;[^}]*font-size:\s*13px;/);
+  assert.match(css, /\.growth-profile-person-certification strong\s*\{[^}]*height:\s*20px;[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);[^}]*font-size:\s*14px;[^}]*line-height:\s*20px;/);
   assert.match(css, /\.growth-profile-person-certification strong b i\s*\{[^}]*font-size:\s*0\.72em;[^}]*font-weight:\s*300;/);
   assert.doesNotMatch(navigation, /<span>지점장 코칭<\/span>/);
   assert.doesNotMatch(navigation, /<span>현재 면담 방향<\/span>/);
@@ -990,8 +990,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   const satisfactionIndex = navigation.indexOf("VOC 고객상담 만족평균");
   const salesIndex = navigation.indexOf("2026 누적 판매대수");
   assert.ok(stabilityIndex > profileStart && satisfactionIndex > stabilityIndex && salesIndex > satisfactionIndex);
-  assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 460px repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(css, /@media \(max-width: 1180px\)[\s\S]*?\.growth-navigation-workspace \{ grid-template-columns: 260px minmax\(0, 1fr\); \}[\s\S]*?\.growth-profile-strip \{ grid-template-columns: 420px repeat\(3, minmax\(0, 1fr\)\); \}/);
+  assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 500px repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 1180px\)[\s\S]*?\.growth-navigation-workspace \{ grid-template-columns: 260px minmax\(0, 1fr\); \}[\s\S]*?\.growth-profile-strip \{ grid-template-columns: 455px repeat\(3, minmax\(0, 1fr\)\); \}/);
   assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 2px;[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-size: 10px;/);
   assert.match(css, /\.growth-profile-metric strong \.growth-profile-evidence-count\s*\{[^}]*margin-left: 7px;[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-size: 10px;/);
   assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);
@@ -1004,8 +1004,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*margin: 6px 6px 0;/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.growth-profile-strip > div:not\(:first-child\)::before\s*\{[^}]*top: 12px;[^}]*bottom: 12px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
-  assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 108px;[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 108px;[^}]*padding: 1px 10px 0 12px;[^}]*justify-content: flex-start;/);
+  assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 120px;[^}]*gap: 12px;/);
+  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 120px;[^}]*padding: 0 8px 0 12px;[^}]*justify-content: center;/);
   assert.match(css, /\.growth-profile-person-certification::before\s*\{[^}]*top: 6px;[^}]*bottom: 6px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(css, /\.competitive-analysis-page > \.growth-navigation-sticky-summary,[\s\S]*?\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
