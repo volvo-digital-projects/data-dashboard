@@ -89,8 +89,8 @@
       "label": "5~10년",
       "employeeCount": 131,
       "respondingEmployees": 131,
-      "responses": 4965,
-      "scoreSum": 45923.0,
+      "responses": 4999,
+      "scoreSum": 46240.0,
       "average": 9.25
     },
     {
@@ -1940,46 +1940,86 @@
               "scoreSum": 67.0,
               "sent": 36,
               "rateResponses": 7
+            },
+            "2023": {
+              "responses": 20,
+              "scoreSum": 185.0
+            },
+            "2024": {
+              "responses": 14,
+              "scoreSum": 132.0
             }
           },
-          "commentResponses": 14,
+          "commentResponses": 48,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 9
+              "mentions": 25
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 3
+              "mentions": 24
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 2
+              "mentions": 13
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 2
+              "mentions": 10
             },
             {
-              "label": "신속한 응답",
-              "mentions": 2
+              "label": "적극적 응대",
+              "mentions": 9
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 1
+              "mentions": 8
             },
             {
               "label": "성실한 답변",
-              "mentions": 1
+              "mentions": 6
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 4
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 4
             },
             {
               "label": "신뢰·솔직한 상담",
-              "mentions": 1
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 2
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
             {
               "label": "전문지식 정확성 부족",
+              "mentions": 2
+            },
+            {
+              "label": "전시차량 다양화 필요",
+              "mentions": 1
+            },
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "시승기회·시간 확대",
               "mentions": 1
             }
           ],
@@ -3092,11 +3132,6 @@
         {
           "name": "성재백",
           "responses": 41,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "송민경",
-          "responses": 34,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -12713,11 +12748,6 @@
         {
           "name": "김남연",
           "responses": 10,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김대준",
-          "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],

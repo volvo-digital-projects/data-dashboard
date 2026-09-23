@@ -166,6 +166,7 @@ IMPROVEMENT_EXCLUSION_PATTERNS = {
 # never merged by name alone.
 STAFF_HISTORY_ALIASES = {
     ("강남대치", "김대준"): (("강남신사", "김대준"),),
+    ("고양", "송민경"): (("일산", "송민경"),),
 }
 
 NEGATIVE_CONTEXT_PATTERN = re.compile(

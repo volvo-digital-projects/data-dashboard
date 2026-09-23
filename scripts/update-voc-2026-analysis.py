@@ -137,6 +137,12 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
 
     refreshed_employees = 0
     matched_responses = 0
+    claimed_source_keys = {
+        source_key
+        for showroom in payload["showrooms"].values()
+        for employee in showroom["employees"]
+        for source_key in staff_source_keys(showroom["showroom"], employee["name"])
+    }
     for showroom in payload["showrooms"].values():
         showroom_name = normalise_showroom_name(showroom["showroom"])
         for employee in showroom["employees"]:
@@ -191,7 +197,12 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
         target_names = {str(employee["name"]).strip() for employee in showroom["employees"]}
         excluded_counts: dict[str, int] = defaultdict(int)
         for (raw_showroom, name), by_year in staff_metrics.items():
-            if normalise_showroom_name(raw_showroom) != showroom_name or name in target_names:
+            source_key = (normalise_showroom_name(raw_showroom), name)
+            if (
+                source_key[0] != showroom_name
+                or name in target_names
+                or source_key in claimed_source_keys
+            ):
                 continue
             excluded_counts[name] += sum(int(values["responses"]) for values in by_year.values())
         showroom["excludedRawNames"] = [
