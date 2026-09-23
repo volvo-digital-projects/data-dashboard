@@ -2656,8 +2656,8 @@ export default function CompetitiveAnalysis({
     selectedStaffSatisfactionScore === null ||
     selectedStaffTenureFinalScore === null ||
     selectedStaffPeerDelta === null
-      ? "본인 점수와 동일연차 평균을 비교해 위치를 산출합니다"
-      : `본인 ${(selectedStaffSatisfactionScore / 10).toFixed(1)}점 − 동일연차 평균 ${(selectedStaffTenureFinalScore / 10).toFixed(1)}점 = ${selectedStaffGrowthDeltaMark} ${Math.abs(selectedStaffPeerDelta / 10).toFixed(1)}점`;
+      ? `${selectedStaffEmployee?.name ?? "영업직원"} 점수와 동일연차 평균을 비교해 위치를 산출합니다`
+      : `${selectedStaffEmployee?.name ?? "영업직원"} ${(selectedStaffSatisfactionScore / 10).toFixed(1)}점 − 동일연차 평균 ${(selectedStaffTenureFinalScore / 10).toFixed(1)}점 = ${selectedStaffGrowthDeltaMark} ${Math.abs(selectedStaffPeerDelta / 10).toFixed(1)}점`;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,

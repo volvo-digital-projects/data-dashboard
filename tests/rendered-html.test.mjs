@@ -1117,7 +1117,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-gauge-needle\s*\{[^}]*transform-origin:\s*210px 178px;/);
   assert.match(navigation, /className=\{`growth-gauge-current \$\{selectedStaffGrowthDeltaTone\}`\}[\s\S]*?\{selectedStaffGrowthCalculation\}/);
   assert.match(source, /selectedStaffPeerDelta > 0[\s\S]*?\? "▲"[\s\S]*?: "▼"/);
-  assert.match(source, /`본인 \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 = \$\{selectedStaffGrowthDeltaMark\} \$\{Math\.abs\(selectedStaffPeerDelta \/ 10\)\.toFixed\(1\)\}점`/);
+  assert.match(source, /`\$\{selectedStaffEmployee\?\.name \?\? "영업직원"\} \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 = \$\{selectedStaffGrowthDeltaMark\} \$\{Math\.abs\(selectedStaffPeerDelta \/ 10\)\.toFixed\(1\)\}점`/);
+  assert.doesNotMatch(source, /`본인 \$\{\(selectedStaffSatisfactionScore/);
   assert.doesNotMatch(source, /selectedStaffPeerDelta >= 0 \? "\+"/);
   assert.match(css, /--comparison-positive-blue:\s*#176f91;/);
   assert.match(css, /\.growth-gauge-current\.positive\s*\{[^}]*fill:\s*var\(--comparison-positive-blue\);/);
