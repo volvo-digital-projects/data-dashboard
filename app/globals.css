@@ -2706,7 +2706,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-disc::after {
   content: "";
   position: absolute;
-  inset: 25%;
+  inset: 19%;
   border-radius: 50%;
   background: #fbfdfe;
   box-shadow:
