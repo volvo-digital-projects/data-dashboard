@@ -2733,7 +2733,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-segment-donut-values {
-  width: 112px;
+  width: 68px;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 3px;
@@ -2742,7 +2742,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-segment-donut-values > span {
   min-width: 0;
   display: grid;
-  grid-template-columns: 6px 17px minmax(0, 1fr);
+  grid-template-columns: 6px 17px 38px;
   align-items: center;
   gap: 2px;
   color: #58717e;

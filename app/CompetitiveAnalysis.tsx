@@ -2387,22 +2387,19 @@ export default function CompetitiveAnalysis({
   );
   const selectedSegmentDonuts = [
     {
-      key: "showroom",
-      label: `${displayShowroomNameWithoutBrand(selected.showroom)} 전체`,
-      counts: selectedShowroomSegmentSales,
-      showCounts: false,
-    },
-    {
       key: "staff",
       label: selectedStaffEmployee?.name ?? "영업직원",
       counts: selectedStaffSegmentSales,
-      showCounts: true,
+    },
+    {
+      key: "showroom",
+      label: `${displayShowroomNameWithoutBrand(selected.showroom)} 전체`,
+      counts: selectedShowroomSegmentSales,
     },
     {
       key: "dealer",
       label: `${selected.dealer} 전체`,
       counts: selectedDealerSegmentSales,
-      showCounts: false,
     },
   ] as const;
   const selectedShowroomStaffResponses = rankedSalesStaff.reduce(
@@ -3949,7 +3946,6 @@ export default function CompetitiveAnalysis({
                                   <i style={{ background: salesSegmentMeta[segment].color }} />
                                   <b>{segment}</b>
                                   <em>
-                                    {donut.showCounts ? `${donut.counts[segment]}대 / ` : ""}
                                     {salesSegmentShare(donut.counts, segment).toFixed(1)}%
                                   </em>
                                 </span>
