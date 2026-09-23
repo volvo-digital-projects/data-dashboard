@@ -427,6 +427,52 @@ type SalesActivityStaff = {
   deliveredSales: number;
   deliveredCustomers: number;
   monthlyDeliveredSales: number[];
+  segmentSales?: SalesSegmentCounts;
+};
+
+type SalesSegmentKey = "30" | "40" | "60" | "90";
+type SalesSegmentCounts = Record<SalesSegmentKey, number>;
+
+const salesSegmentKeys: SalesSegmentKey[] = ["30", "40", "60", "90"];
+const salesSegmentMeta: Record<SalesSegmentKey, { label: string; color: string }> = {
+  "30": { label: "30", color: "#49a6e9" },
+  "40": { label: "40", color: "#35bf83" },
+  "60": { label: "60", color: "#edb144" },
+  "90": { label: "90", color: "#ef5157" },
+};
+const emptySalesSegmentCounts = (): SalesSegmentCounts => ({
+  "30": 0,
+  "40": 0,
+  "60": 0,
+  "90": 0,
+});
+const addSalesSegmentCounts = (
+  left: SalesSegmentCounts,
+  right?: SalesSegmentCounts,
+): SalesSegmentCounts => ({
+  "30": left["30"] + (right?.["30"] ?? 0),
+  "40": left["40"] + (right?.["40"] ?? 0),
+  "60": left["60"] + (right?.["60"] ?? 0),
+  "90": left["90"] + (right?.["90"] ?? 0),
+});
+const salesSegmentTotal = (counts: SalesSegmentCounts) =>
+  salesSegmentKeys.reduce((sum, segment) => sum + counts[segment], 0);
+const salesSegmentShare = (
+  counts: SalesSegmentCounts,
+  segment: SalesSegmentKey,
+) => {
+  const total = salesSegmentTotal(counts);
+  return total ? (counts[segment] / total) * 100 : 0;
+};
+const salesSegmentGradient = (counts: SalesSegmentCounts) => {
+  const total = salesSegmentTotal(counts);
+  if (!total) return "conic-gradient(#e5edf1 0deg 360deg)";
+  let cursor = 0;
+  return `conic-gradient(${salesSegmentKeys.map((segment) => {
+    const start = cursor;
+    cursor += (counts[segment] / total) * 360;
+    return `${salesSegmentMeta[segment].color} ${start.toFixed(2)}deg ${cursor.toFixed(2)}deg`;
+  }).join(", ")})`;
 };
 
 type SalesActivityShowroom = {
@@ -441,6 +487,7 @@ type SalesActivityShowroom = {
     contractCustomers: number;
     deliveredSales: number;
     monthlyDeliveredSales: number[];
+    segmentSales?: SalesSegmentCounts;
   };
 };
 
@@ -2240,14 +2287,6 @@ export default function CompetitiveAnalysis({
   const selectedStaffSalesActivity = selectedSalesActivityShowroom?.staff.find(
     (staff) => staff.name === selectedStaffEmployee?.name,
   );
-  const selectedStaffHasActivityFunnel =
-    selectedStaffSalesActivity?.activityStatus === "available";
-  const selectedStaffConsultationCustomers =
-    selectedStaffSalesActivity?.customers.consultation ?? 0;
-  const selectedStaffTestDriveCustomers =
-    selectedStaffSalesActivity?.customers.testDrive ?? 0;
-  const selectedStaffContractCustomers =
-    selectedStaffSalesActivity?.customers.contract ?? 0;
   const selectedStaffDeliveredSales = selectedStaffSalesActivity?.deliveredSales ?? 0;
   const selectedShowroomDeliveredSales =
     selectedSalesActivityShowroom?.summary.deliveredSales ?? 0;
@@ -2333,18 +2372,42 @@ export default function CompetitiveAnalysis({
       (count): count is number => count !== null,
     ),
   );
-  const selectedStaffConsultationToTestDriveRate = selectedStaffConsultationCustomers
-    ? ((selectedStaffSalesActivity?.transitions.consultationToTestDrive ?? 0) /
-        selectedStaffConsultationCustomers) * 100
-    : null;
-  const selectedStaffTestDriveToContractRate = selectedStaffTestDriveCustomers
-    ? ((selectedStaffSalesActivity?.transitions.testDriveToContract ?? 0) /
-        selectedStaffTestDriveCustomers) * 100
-    : null;
-  const selectedStaffContractToDeliveredRate = selectedStaffContractCustomers
-    ? ((selectedStaffSalesActivity?.transitions.contractToDelivered ?? 0) /
-        selectedStaffContractCustomers) * 100
-    : null;
+  const selectedStaffSegmentSales = selectedStaffSalesActivity?.segmentSales ??
+    emptySalesSegmentCounts();
+  const selectedDealerSegmentSales = Object.entries(salesActivityByCdsid).reduce(
+    (counts, [cdsid, showroomSales]) => {
+      const showroom = showrooms.find((item) => item.cdsid === cdsid);
+      return showroom?.dealer === selected.dealer
+        ? addSalesSegmentCounts(counts, showroomSales.summary.segmentSales)
+        : counts;
+    },
+    emptySalesSegmentCounts(),
+  );
+  const nationalSegmentSales = Object.values(salesActivityByCdsid).reduce(
+    (counts, showroomSales) =>
+      addSalesSegmentCounts(counts, showroomSales.summary.segmentSales),
+    emptySalesSegmentCounts(),
+  );
+  const selectedSegmentDonuts = [
+    {
+      key: "staff",
+      label: "영업직원",
+      counts: selectedStaffSegmentSales,
+      showCounts: true,
+    },
+    {
+      key: "dealer",
+      label: "소속 딜러사",
+      counts: selectedDealerSegmentSales,
+      showCounts: false,
+    },
+    {
+      key: "national",
+      label: "볼보 전체",
+      counts: nationalSegmentSales,
+      showCounts: false,
+    },
+  ] as const;
   const selectedShowroomStaffResponses = rankedSalesStaff.reduce(
     (sum, staff) => sum + staff.responses,
     0,
@@ -3859,45 +3922,47 @@ export default function CompetitiveAnalysis({
                   <article className="growth-sales-funnel-card">
                     <header>
                       <div>
-                        <strong>상담/ 시승/ 계약 전환율</strong>
+                        <strong><span className="growth-sales-heading-number">26</span>년 세그먼트별 판매</strong>
                       </div>
+                      <small>Sales-DMS 누적 출고 기준</small>
                     </header>
-                    <div className={`growth-sales-funnel${selectedStaffHasActivityFunnel ? "" : " unavailable"}`}>
-                      <div className="growth-sales-stage consultation">
-                        <span>상담 고객</span>
-                        <strong>{selectedStaffHasActivityFunnel ? selectedStaffConsultationCustomers : "―"}<small>{selectedStaffHasActivityFunnel ? "명" : ""}</small></strong>
-                      </div>
-                      <i className="growth-sales-transition">
-                        <b>{selectedStaffConsultationToTestDriveRate === null || !selectedStaffHasActivityFunnel ? "―" : `${Math.round(selectedStaffConsultationToTestDriveRate)}%`}</b>
-                        <span>시승 연결</span>
-                      </i>
-                      <div className="growth-sales-stage test-drive">
-                        <span>시승 고객</span>
-                        <strong>{selectedStaffHasActivityFunnel ? selectedStaffTestDriveCustomers : "―"}<small>{selectedStaffHasActivityFunnel ? "명" : ""}</small></strong>
-                      </div>
-                      <i className="growth-sales-transition">
-                        <b>{selectedStaffTestDriveToContractRate === null || !selectedStaffHasActivityFunnel ? "―" : `${Math.round(selectedStaffTestDriveToContractRate)}%`}</b>
-                        <span>계약 연결</span>
-                      </i>
-                      <div className="growth-sales-stage contract">
-                        <span>계약 고객</span>
-                        <strong>{selectedStaffHasActivityFunnel ? selectedStaffContractCustomers : "―"}<small>{selectedStaffHasActivityFunnel ? "명" : ""}</small></strong>
-                      </div>
-                      <i className="growth-sales-transition">
-                        <b>{selectedStaffContractToDeliveredRate === null || !selectedStaffHasActivityFunnel ? "―" : `${Math.round(selectedStaffContractToDeliveredRate)}%`}</b>
-                        <span>출고 연결</span>
-                      </i>
-                      <div className="growth-sales-stage delivered">
-                        <span>실제 출고</span>
-                        <strong>{selectedStaffDeliveredSales}<small>대</small></strong>
-                      </div>
+                    <div
+                      className="growth-segment-donuts"
+                      key={`segment-donuts-${selectedStaffEmployee?.name ?? "none"}`}
+                    >
+                      {selectedSegmentDonuts.map((donut, donutIndex) => {
+                        const total = salesSegmentTotal(donut.counts);
+                        return (
+                          <section className="growth-segment-donut" key={donut.key}>
+                            <strong>{donut.label}</strong>
+                            <div className="growth-segment-donut-shell">
+                              <div
+                                className="growth-segment-donut-disc"
+                                role="img"
+                                aria-label={`${donut.label} 세그먼트 판매비중: ${salesSegmentKeys.map((segment) => `${segment} ${salesSegmentShare(donut.counts, segment).toFixed(1)}%`).join(", ")}`}
+                                style={{
+                                  "--segment-gradient": salesSegmentGradient(donut.counts),
+                                  "--segment-donut-index": donutIndex,
+                                } as CSSProperties}
+                              />
+                              <span><b>{total}</b><small>대</small></span>
+                            </div>
+                            <div className="growth-segment-donut-values">
+                              {salesSegmentKeys.map((segment) => (
+                                <span key={segment}>
+                                  <i style={{ background: salesSegmentMeta[segment].color }} />
+                                  <b>{segment}</b>
+                                  <em>
+                                    {donut.showCounts ? `${donut.counts[segment]}대 / ` : ""}
+                                    {salesSegmentShare(donut.counts, segment).toFixed(1)}%
+                                  </em>
+                                </span>
+                              ))}
+                            </div>
+                          </section>
+                        );
+                      })}
                     </div>
-                    {selectedStaffHasActivityFunnel ? (
-                      <footer className="available">
-                        <b>활동 기록 연결 완료</b><span>동일 고객·직원 조합의 단계 이동으로 계산</span>
-                      </footer>
-                    ) : null}
-                    <div className="growth-under-construction">공사중</div>
                   </article>
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>

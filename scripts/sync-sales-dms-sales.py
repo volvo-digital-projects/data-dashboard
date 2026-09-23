@@ -28,6 +28,7 @@ LOGIN_URL = (
 TARGET_ROLES = {"영업직원", "영업팀장"}
 MINIMUM_REPORT_ROWS = 5_000
 MINIMUM_MATCHED_SALES = 1_000
+SALES_SEGMENTS = ("30", "40", "60", "90")
 
 
 class SpreadsheetHtmlParser(HTMLParser):
@@ -62,6 +63,16 @@ class SpreadsheetHtmlParser(HTMLParser):
 
 def text(value: Any) -> str:
     return " ".join(str(value or "").split())
+
+
+def empty_segment_sales() -> dict[str, int]:
+    return {segment: 0 for segment in SALES_SEGMENTS}
+
+
+def sales_segment(model: Any) -> str | None:
+    normalized = text(model).upper()
+    match = re.search(r"(?:^|[^0-9])(30|40|60|90)(?:[^0-9]|$)", normalized)
+    return match.group(1) if match else None
 
 
 def parse_date(value: Any) -> date | None:
@@ -258,7 +269,7 @@ def load_sales_rows(report_path: Path) -> tuple[dict[str, int], list[list[Any]]]
         parser.feed(decoded)
         rows = parser.rows
 
-    required = {"Delivery Date", "출고여부", "Dealer", "고객명", "영업직원"}
+    required = {"Delivery Date", "Model", "출고여부", "Dealer", "고객명", "영업직원"}
     for index, values in enumerate(rows):
         headers = header_map(tuple(values))
         if required <= set(headers):
@@ -307,6 +318,9 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
     monthly_by_staff: dict[tuple[str, str], list[int]] = defaultdict(
         lambda: [0] * month_count
     )
+    segments_by_staff: dict[tuple[str, str], dict[str, int]] = defaultdict(
+        empty_segment_sales
+    )
     customers_by_staff: dict[tuple[str, str], set[str]] = defaultdict(set)
     headers, report_rows = load_sales_rows(report_path)
     raw_rows = len(report_rows)
@@ -314,8 +328,9 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
     report_codes: set[str] = set()
     last_required_index = max(
         headers[label]
-        for label in ("Delivery Date", "출고여부", "Dealer", "고객명", "영업직원")
+        for label in ("Delivery Date", "Model", "출고여부", "Dealer", "고객명", "영업직원")
     )
+    unmapped_models: set[str] = set()
     for values in report_rows:
         if len(values) <= last_required_index:
             continue
@@ -323,6 +338,7 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
         shipped = text(values[headers["출고여부"]])
         dealer_code = text(values[headers["Dealer"]])
         staff_name = text(values[headers["영업직원"]])
+        model = text(values[headers["Model"]])
         if (
             delivery_date is None
             or delivery_date < date(as_of.year, 1, 1)
@@ -336,12 +352,22 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
         report_codes.add(dealer_code)
         key = (dealer_code, staff_name)
         monthly_by_staff[key][delivery_date.month - 1] += 1
+        segment = sales_segment(model)
+        if segment is None:
+            unmapped_models.add(model or "(blank)")
+        else:
+            segments_by_staff[key][segment] += 1
         customer = text(values[headers["고객명"]]).casefold()
         if customer:
             customers_by_staff[key].add(customer)
     if raw_rows < MINIMUM_REPORT_ROWS or eligible_sales < MINIMUM_REPORT_ROWS // 2:
         raise RuntimeError(
             f"판매 원본이 비정상적으로 적어 중단했습니다: 원본 {raw_rows}행, 출고 {eligible_sales}건"
+        )
+    if unmapped_models:
+        raise RuntimeError(
+            "30·40·60·90 세그먼트로 분류할 수 없는 Model이 있습니다: "
+            + ", ".join(sorted(unmapped_models)[:12])
         )
     missing_codes = set(codes) - report_codes
     if missing_codes:
@@ -360,23 +386,34 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
         previous_staff = {row["name"]: row for row in showroom.get("staff", [])}
         next_staff: list[dict[str, Any]] = []
         showroom_monthly = [0] * month_count
+        showroom_segments = empty_segment_sales()
         for name in names:
             row = {
                 key: value
                 for key, value in previous_staff.get(name, default_activity(name)).items()
-                if key not in {"deliveredSales", "deliveredCustomers", "monthlyDeliveredSales"}
+                if key not in {"deliveredSales", "deliveredCustomers", "monthlyDeliveredSales", "segmentSales"}
             }
             monthly = monthly_by_staff[(dealer_code, name)]
+            segment_counts = segments_by_staff[(dealer_code, name)]
             delivered_sales = sum(monthly)
+            if sum(segment_counts.values()) != delivered_sales:
+                raise RuntimeError(
+                    f"직원 세그먼트 합계가 판매대수와 다릅니다: {cdsid} {name}"
+                )
             matched_total += delivered_sales
             showroom_monthly = [
                 total + value for total, value in zip(showroom_monthly, monthly)
             ]
+            showroom_segments = {
+                segment: showroom_segments[segment] + segment_counts[segment]
+                for segment in SALES_SEGMENTS
+            }
             row.update(
                 {
                     "deliveredSales": delivered_sales,
                     "deliveredCustomers": len(customers_by_staff[(dealer_code, name)]),
                     "monthlyDeliveredSales": monthly,
+                    "segmentSales": segment_counts,
                 }
             )
             next_staff.append(row)
@@ -389,6 +426,7 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
                 ),
                 "deliveredSales": sum(showroom_monthly),
                 "monthlyDeliveredSales": showroom_monthly,
+                "segmentSales": showroom_segments,
             }
         )
 
@@ -409,6 +447,7 @@ def update_sales(report_path: Path, output_path: Path, as_of: date) -> dict[str,
             "salesPeriod": f"{as_of.year}-01-01~{as_of.isoformat()}",
             "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
             "salesJoin": "현재 Sales-DMS 재직자의 직원명과 판매 전시장 코드를 함께 연결",
+            "salesSegmentBasis": "Actual Monthly Sales의 Model에서 30·40·60·90 세그먼트를 분류",
             "salesUpdateSchedule": "유튜브 지표 갱신과 함께 매시간",
         }
     )

@@ -2586,6 +2586,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   color: #244f64;
 }
 
+.growth-sales-funnel-card > header strong > .growth-sales-heading-number,
 .growth-scatter-card > header strong > .growth-sales-heading-number,
 .growth-sales-monthly-card > header strong > .growth-sales-heading-number {
   display: inline;
@@ -2619,118 +2620,154 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   padding-right: 12px;
 }
 
-.growth-sales-funnel {
+.growth-segment-donuts {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(58px, 1fr) 44px minmax(58px, 1fr) 44px minmax(58px, 1fr) 44px minmax(58px, 1fr);
-  align-items: center;
-  gap: 3px;
-  margin-top: 7px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+  margin-top: 4px;
 }
 
-.growth-sales-stage {
+.growth-segment-donut {
+  position: relative;
   min-width: 0;
-  height: 94px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: 1px solid #d8e6eb;
-  border-radius: 6px;
-  background: #fff;
+  text-align: center;
 }
 
-.growth-sales-stage span {
+.growth-segment-donut:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 5px;
+  left: -6px;
+  width: 1px;
+  background: rgba(190, 207, 214, 0.52);
+}
+
+.growth-segment-donut > strong {
   font-size: 9px;
   font-weight: 700;
-  color: #607884;
+  color: #466777;
 }
 
-.growth-sales-stage strong {
+.growth-segment-donut-shell {
+  position: relative;
+  width: 104px;
+  height: 90px;
+  margin-top: 1px;
+}
+
+.growth-segment-donut-disc {
+  position: absolute;
+  top: -4px;
+  left: 12px;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: var(--segment-gradient);
+  box-shadow:
+    0 8px 0 rgba(32, 57, 69, 0.22),
+    0 12px 16px rgba(31, 59, 72, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transform: rotateX(55deg) rotateZ(0deg);
+  transform-origin: center;
+  animation: growth-segment-donut-enter 760ms cubic-bezier(0.2, 0.82, 0.28, 1) both;
+  animation-delay: calc(var(--segment-donut-index) * 90ms);
+}
+
+.growth-segment-donut-disc::after {
+  content: "";
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: #fbfdfe;
+  box-shadow:
+    0 5px 0 rgba(40, 67, 79, 0.16),
+    inset 0 1px 3px rgba(43, 75, 90, 0.14);
+}
+
+.growth-segment-donut-shell > span {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  color: #244f64;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.growth-segment-donut-shell > span b {
   font-family: var(--font-volvo);
-  font-size: 23px;
-  color: #214e62;
+  font-size: 15px;
   font-variant-numeric: tabular-nums;
 }
 
-.growth-sales-stage strong small {
-  margin-left: 2px;
-  font-family: var(--font-korean);
-  font-size: 9px;
-}
-
-.growth-sales-stage.consultation { border-top: 3px solid #e78a6d; }
-.growth-sales-stage.test-drive { border-top: 3px solid #e1ad65; }
-.growth-sales-stage.contract { border-top: 3px solid #5da6bd; }
-.growth-sales-stage.delivered { border-top: 3px solid #4a9c82; background: #f4faf8; }
-
-.growth-sales-transition {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  font-style: normal;
-  color: #7a8f98;
-}
-
-.growth-sales-transition::before {
-  content: "";
-  width: 100%;
-  height: 1px;
-  order: 2;
-  background: #c9d9df;
-}
-
-.growth-sales-transition::after {
-  content: "";
-  width: 5px;
-  height: 5px;
-  margin-top: -8px;
-  margin-left: auto;
-  order: 3;
-  border-top: 1px solid #9db2ba;
-  border-right: 1px solid #9db2ba;
-  transform: rotate(45deg);
-}
-
-.growth-sales-transition b {
-  font-size: 10px;
-  color: #496977;
-  font-variant-numeric: tabular-nums;
-}
-
-.growth-sales-transition span {
-  order: 4;
-  margin-top: -2px;
+.growth-segment-donut-shell > span small {
+  margin-left: 1px;
   font-size: 7px;
+}
+
+.growth-segment-donut-values {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 5px;
+}
+
+.growth-segment-donut-values > span {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 6px 15px minmax(0, 1fr);
+  align-items: center;
+  gap: 2px;
+  color: #58717e;
+  font-size: 7px;
+  text-align: left;
   white-space: nowrap;
 }
 
-.growth-sales-funnel.unavailable .growth-sales-stage:not(.delivered),
-.growth-sales-funnel.unavailable .growth-sales-transition {
-  opacity: 0.42;
+.growth-segment-donut-values i {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
 }
 
-.growth-sales-funnel-card > footer {
-  min-height: 27px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 7px;
-  border-radius: 4px;
+.growth-segment-donut-values b {
+  font-family: var(--font-volvo);
   font-size: 8px;
+  color: #345b6d;
 }
 
-.growth-sales-funnel-card > footer.available {
-  border: 1px solid #cfe5dd;
-  background: #f4faf8;
-  color: #447466;
+.growth-segment-donut-values em {
+  overflow: hidden;
+  font-style: normal;
+  text-overflow: ellipsis;
 }
 
-.growth-sales-funnel-card > footer b { font-size: 9px; }
-.growth-sales-funnel-card > footer span { margin-left: auto; }
+@keyframes growth-segment-donut-enter {
+  from {
+    opacity: 0;
+    transform: rotateX(55deg) rotateZ(-150deg) scale(0.78);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(55deg) rotateZ(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .growth-segment-donut-disc {
+    animation: none;
+  }
+}
 
 .growth-sales-monthly-chart {
   position: relative;
@@ -3252,11 +3289,6 @@ html.analysis-entry-top-locked body {
 
   .competitive-analysis-page .growth-zone-gauge {
     width: min(100%, 350px);
-  }
-
-  .competitive-analysis-page .growth-sales-stage {
-    height: 88px;
-    gap: 6px;
   }
 
   .competitive-analysis-page .growth-scatter-card {
