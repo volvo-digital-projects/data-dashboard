@@ -945,7 +945,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-segment-donut-counts" aria-hidden="true"[\s\S]*?salesSegmentLabelPosition\(donut\.counts, segment\)[\s\S]*?\{donut\.counts\[segment\]\}/);
   assert.match(navigation, /className="growth-segment-donut-center"[\s\S]*?<em>\{donut\.label\}<\/em>[\s\S]*?<span><b>\{total\}<\/b><small>대<\/small><\/span>/);
   assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*0;/);
-  assert.match(css, /\.growth-segment-donut-center > em\s*\{[^}]*font-size:\s*7px;[^}]*line-height:\s*1;[^}]*transform:\s*translateY\(2px\);/);
+  assert.match(css, /\.growth-segment-donut-center > em\s*\{[^}]*font-size:\s*8px;[^}]*line-height:\s*1;[^}]*transform:\s*translateY\(2px\);/);
   assert.match(css, /\.growth-segment-donut-counts > span\s*\{[^}]*transform:\s*translate\(-50%, -50%\);[^}]*color:\s*#fff;[^}]*font-size:\s*8px;[^}]*font-weight:\s*500;[^}]*text-shadow:\s*none;/);
   assert.doesNotMatch(css.match(/\.growth-segment-donut-disc\s*\{[^}]*\}/)?.[0] ?? "", /rotateX/);
   assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateY\(-4deg\) rotateZ\(-150deg\)[\s\S]*?rotateY\(-4deg\) rotateZ\(0deg\)/);
