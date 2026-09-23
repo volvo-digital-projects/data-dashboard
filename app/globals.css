@@ -1516,7 +1516,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-profile-metric strong .growth-profile-evidence-count {
-  margin-left: 7px;
+  margin-left: 3px;
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-size: 10px;
   font-weight: 500;
@@ -1548,6 +1548,10 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   color: #6e8491;
   font-size: 10px;
   line-height: 15px;
+  white-space: nowrap;
+}
+
+.growth-profile-stability strong {
   white-space: nowrap;
 }
 
