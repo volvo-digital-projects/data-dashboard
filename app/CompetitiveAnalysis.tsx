@@ -435,10 +435,10 @@ type SalesSegmentCounts = Record<SalesSegmentKey, number>;
 
 const salesSegmentKeys: SalesSegmentKey[] = ["30", "40", "60", "90"];
 const salesSegmentMeta: Record<SalesSegmentKey, { label: string; color: string }> = {
-  "30": { label: "30", color: "#49a6e9" },
-  "40": { label: "40", color: "#35bf83" },
-  "60": { label: "60", color: "#edb144" },
-  "90": { label: "90", color: "#ef5157" },
+  "30": { label: "30", color: "#6f9fba" },
+  "40": { label: "40", color: "#6fa78e" },
+  "60": { label: "60", color: "#c5a05a" },
+  "90": { label: "90", color: "#c97a78" },
 };
 const emptySalesSegmentCounts = (): SalesSegmentCounts => ({
   "30": 0,
@@ -2391,13 +2391,13 @@ export default function CompetitiveAnalysis({
   const selectedSegmentDonuts = [
     {
       key: "staff",
-      label: "영업직원",
+      label: selectedStaffEmployee?.name ?? "영업직원",
       counts: selectedStaffSegmentSales,
       showCounts: true,
     },
     {
       key: "dealer",
-      label: "소속 딜러사",
+      label: selected.dealer,
       counts: selectedDealerSegmentSales,
       showCounts: false,
     },

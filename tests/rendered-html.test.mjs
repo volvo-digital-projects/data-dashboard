@@ -778,7 +778,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
   assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong><span className="growth-sales-heading-number">26<\/span>년 세그먼트별 판매<\/strong>[\s\S]*?Sales-DMS 누적 출고 기준/);
   assert.equal((navigation.match(/className="growth-segment-donut"/g) ?? []).length, 1);
-  assert.match(source, /label: "영업직원"[\s\S]*?label: "소속 딜러사"[\s\S]*?label: "볼보 전체"/);
+  assert.match(source, /label: selectedStaffEmployee\?\.name \?\? "영업직원"[\s\S]*?label: selected\.dealer[\s\S]*?label: "볼보 전체"/);
   assert.match(navigation, /key=\{`segment-donuts-\$\{selectedStaffEmployee\?\.name \?\? "none"\}`\}/);
   assert.match(navigation, /donut\.showCounts \? `\$\{donut\.counts\[segment\]\}대 \/ ` : ""/);
   assert.match(navigation, /<article className="growth-position-card">[\s\S]*?<header>[\s\S]*?<strong>역량진단 결과<\/strong>/);
@@ -928,8 +928,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(kimDaejunSales.deliveredSales >= 49);
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*background: var\(--segment-gradient\);[^}]*rotateX\(55deg\)[^}]*animation: growth-segment-donut-enter 760ms/);
+  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*background: var\(--segment-gradient\);[^}]*rotateX\(8deg\)[^}]*animation: growth-segment-donut-enter 760ms/);
   assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateZ\(-150deg\)[\s\S]*?rotateZ\(0deg\)/);
+  assert.match(source, /"30": \{ label: "30", color: "#6f9fba" \}[\s\S]*?"40": \{ label: "40", color: "#6fa78e" \}[\s\S]*?"60": \{ label: "60", color: "#c5a05a" \}[\s\S]*?"90": \{ label: "90", color: "#c97a78" \}/);
   assert.match(css, /\.growth-segment-donut-values\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
   assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계/);
