@@ -3469,7 +3469,7 @@ export default function CompetitiveAnalysis({
                   </strong>
                 </span>
                 <div className="growth-profile-person-certification">
-                  <small>인증레벨</small>
+                  <small>보유 인증레벨</small>
                   <strong
                     aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
                   >

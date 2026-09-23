@@ -536,8 +536,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /누적 판매대수/);
   assert.match(source, /sales\?\.deliveredSales \?\? null/);
   assert.match(navigation, /2026년 누적 판매 \$\{deliveredSales \?\? 0\}대/);
-  assert.match(profile, /className="growth-profile-person-certification"[\s\S]*?<small>인증레벨<\/small>[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
-  assert.match(css, /\.growth-profile-person-certification strong\s*\{[^}]*flex-direction:\s*row;[^}]*gap:\s*5px;[^}]*font-size:\s*10px;/);
+  assert.match(profile, /className="growth-profile-person-certification"[\s\S]*?<small>보유 인증레벨<\/small>[\s\S]*?<b>G<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Grand\}<\/b>[\s\S]*?<b>A<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Advanced\}<\/b>[\s\S]*?<b>C<i aria-hidden="true">-<\/i>\{selectedStaffCertificationCounts\.Certified\}<\/b>/);
+  assert.match(css, /\.growth-profile-person-certification strong\s*\{[^}]*flex-direction:\s*row;[^}]*justify-content:\s*space-between;[^}]*gap:\s*0;[^}]*font-size:\s*13px;/);
   assert.match(css, /\.growth-profile-person-certification strong b i\s*\{[^}]*font-size:\s*0\.72em;[^}]*font-weight:\s*300;/);
   assert.doesNotMatch(navigation, /<span>지점장 코칭<\/span>/);
   assert.doesNotMatch(navigation, /<span>현재 면담 방향<\/span>/);
@@ -1000,8 +1000,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-navigation-sticky-summary"[\s\S]*?className="growth-navigation-heading"[\s\S]*?className="growth-profile-strip"[\s\S]*?className="growth-navigation-pinned-headings"[\s\S]*?className="growth-staff-roster-columns"[\s\S]*?className="growth-navigation-pinned-capabilities"[\s\S]*?className="growth-navigation-workspace"[\s\S]*?className="growth-staff-roster"[\s\S]*?className="growth-navigation-detail"/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*margin: 6px 6px 0;/);
   assert.match(css, /\.growth-profile-strip > div:not\(:first-child\)::before\s*\{[^}]*top: 12px;[^}]*bottom: 12px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
-  assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 92px;[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 92px;[^}]*padding: 1px 10px 0 12px;[^}]*justify-content: flex-start;/);
+  assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 108px;[^}]*gap: 12px;/);
+  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 108px;[^}]*padding: 1px 10px 0 12px;[^}]*justify-content: flex-start;/);
   assert.match(css, /\.growth-profile-person-certification::before\s*\{[^}]*top: 6px;[^}]*bottom: 6px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(css, /\.competitive-analysis-page > \.growth-navigation-sticky-summary,[\s\S]*?\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
