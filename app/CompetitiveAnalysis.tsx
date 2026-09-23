@@ -484,8 +484,6 @@ const staffCurrentNameFrequency = Object.values(staffAnalysisByCdsid).reduce(
   new Map<string, number>(),
 );
 const staffYears: StaffYear[] = ["2023", "2024", "2025", "2026"];
-const staffEvidenceConfidence = (responses: number) =>
-  responses >= 20 ? "충분" : responses >= 8 ? "보통" : responses > 0 ? "참고" : "없음";
 const staffHistoryChartMinScore = 7;
 const staffHistoryChartMaxScore = 10;
 const staffHistoryChartHeight = (score: number) =>
@@ -517,6 +515,31 @@ const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap
       )
       .map((employee) => ({ cdsid, employee })),
 );
+const staffResponsePopulation = staffCurrentSalesPopulation
+  .map(({ employee }) =>
+    staffYears.reduce(
+      (total, year) => total + (employee.years[year]?.responses ?? 0),
+      0,
+    ),
+  )
+  .sort((left, right) => left - right);
+const staffResponseQuartileCutoff = (fraction: number) =>
+  staffResponsePopulation[
+    Math.max(0, Math.ceil(staffResponsePopulation.length * fraction) - 1)
+  ] ?? 0;
+const staffResponseQuartileCutoffs = {
+  q1: staffResponseQuartileCutoff(0.25),
+  q2: staffResponseQuartileCutoff(0.5),
+  q3: staffResponseQuartileCutoff(0.75),
+};
+const staffResponseQuartile = (responses: number) =>
+  responses >= staffResponseQuartileCutoffs.q3
+    ? { label: "4분위", range: "상위 25%", tone: "q4" }
+    : responses >= staffResponseQuartileCutoffs.q2
+      ? { label: "3분위", range: "상위 25~50%", tone: "q3" }
+      : responses >= staffResponseQuartileCutoffs.q1
+        ? { label: "2분위", range: "하위 25~50%", tone: "q2" }
+        : { label: "1분위", range: "하위 25%", tone: "q1" };
 const nationalStaffSalesPopulation: StaffSalesScatterPoint[] =
   staffCurrentSalesPopulation.flatMap(({ cdsid, employee }) => {
     const sales = salesActivityByCdsid[cdsid]?.staff.find(
@@ -2531,7 +2554,7 @@ export default function CompetitiveAnalysis({
   const selectedStaffSatisfactionTopPercent = selectedStaffSatisfactionNationalRank === null
     ? null
     : (selectedStaffSatisfactionNationalRank / staffTenureScatterPopulation.length) * 100;
-  const selectedStaffEvidenceLevel = staffEvidenceConfidence(selectedStaffResponses);
+  const selectedStaffResponseQuartile = staffResponseQuartile(selectedStaffResponses);
   const selectedStaffTenurePeerRange = selectedStaffEmployee
     ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
     : null;
@@ -3424,10 +3447,10 @@ export default function CompetitiveAnalysis({
                 </strong>
               </div>
               <div className="growth-profile-metric">
-                <span>자료 신뢰도</span>
-                <strong className={`confidence-${selectedStaffEvidenceLevel}`}>
-                  {selectedStaffEvidenceLevel}
-                  <small className="growth-profile-evidence-count">회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
+                <span>VOC 고객 회신건수</span>
+                <strong className={`confidence-${selectedStaffResponseQuartile.tone}`}>
+                  {selectedStaffResponseQuartile.label}
+                  <small className="growth-profile-evidence-count">{selectedStaffResponseQuartile.range} · 누적 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
                 </strong>
               </div>
               <div className="growth-profile-metric growth-profile-certification">

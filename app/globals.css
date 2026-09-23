@@ -1556,19 +1556,24 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-weight: 500;
 }
 
-.growth-profile-metric strong.confidence-충분,
-.growth-staff-roster-list .confidence-충분 {
+.growth-profile-metric strong.confidence-q4,
+.growth-staff-roster-list .confidence-q4 {
   color: #21866f;
 }
 
-.growth-profile-metric strong.confidence-보통,
-.growth-staff-roster-list .confidence-보통 {
+.growth-profile-metric strong.confidence-q3,
+.growth-staff-roster-list .confidence-q3 {
   color: #367d98;
 }
 
-.growth-profile-metric strong.confidence-참고,
-.growth-staff-roster-list .confidence-참고 {
+.growth-profile-metric strong.confidence-q2,
+.growth-staff-roster-list .confidence-q2 {
   color: #c3764f;
+}
+
+.growth-profile-metric strong.confidence-q1,
+.growth-staff-roster-list .confidence-q1 {
+  color: #b65d56;
 }
 
 .growth-capability {

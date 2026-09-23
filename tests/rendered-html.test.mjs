@@ -523,9 +523,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<small>선택 영업직원<\/small>/);
   assert.match(navigation, /selectedStaffEmployee\?\.jobTitle \?\? ""\} · \{displayTwoDigitCount\(selectedStaffTenureYears \?\? 0\)\}년 \{displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월/);
   assert.match(source, /const selectedStaffCommentTotalMentions =\s*selectedStaffStrengthTotalMentions \+ selectedStaffImprovementTotalMentions;/);
-  assert.match(navigation, /growth-profile-evidence-count">회신 \{selectedStaffResponses\}건 · 코멘트 \{selectedStaffCommentTotalMentions\}건\(중복포함\)<\/small>/);
+  assert.match(navigation, /<span>VOC 고객 회신건수<\/span>/);
+  assert.match(navigation, /selectedStaffResponseQuartile\.label\}[\s\S]*?growth-profile-evidence-count">\{selectedStaffResponseQuartile\.range\} · 누적 \{selectedStaffResponses\}건 · 코멘트 \{selectedStaffCommentTotalMentions\}건\(중복포함\)<\/small>/);
+  assert.match(source, /staffResponseQuartileCutoff\(0\.25\)[\s\S]*?staffResponseQuartileCutoff\(0\.5\)[\s\S]*?staffResponseQuartileCutoff\(0\.75\)/);
+  assert.match(source, /label: "4분위", range: "상위 25%"[\s\S]*?label: "1분위", range: "하위 25%"/);
   assert.doesNotMatch(navigation, /코멘트 \{selectedStaffEmployee\?\.commentResponses \?\? 0\}건/);
-  assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단/);
+  assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단|자료 신뢰도|충분|보통|참고/);
   assert.match(css, /\.growth-profile-strip > div\s*\{[\s\S]*?min-height:\s*58px;[\s\S]*?padding:\s*6px 12px;/);
   assert.match(navigation, /<span>평균만족도\(23 ~ 26년 YTD\)<\/span>/);
   assert.equal((navigation.match(/<span>고객상담 평균만족도<\/span>/g) ?? []).length, 1);
