@@ -516,31 +516,16 @@ const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap
       )
       .map((employee) => ({ cdsid, employee })),
 );
-const staffResponsePopulation = staffCurrentSalesPopulation
-  .map(({ employee }) =>
-    staffYears.reduce(
-      (total, year) => total + (employee.years[year]?.responses ?? 0),
-      0,
-    ),
-  )
-  .sort((left, right) => left - right);
-const staffResponseQuartileCutoff = (fraction: number) =>
-  staffResponsePopulation[
-    Math.max(0, Math.ceil(staffResponsePopulation.length * fraction) - 1)
-  ] ?? 0;
-const staffResponseQuartileCutoffs = {
-  q1: staffResponseQuartileCutoff(0.25),
-  q2: staffResponseQuartileCutoff(0.5),
-  q3: staffResponseQuartileCutoff(0.75),
-};
-const staffResponseQuartile = (responses: number) =>
-  responses >= staffResponseQuartileCutoffs.q3
-    ? { label: "4분위", range: "상위 25%", tone: "q4" }
-    : responses >= staffResponseQuartileCutoffs.q2
-      ? { label: "3분위", range: "상위 25~50%", tone: "q3" }
-      : responses >= staffResponseQuartileCutoffs.q1
-        ? { label: "2분위", range: "하위 25~50%", tone: "q2" }
-        : { label: "1분위", range: "하위 25%", tone: "q1" };
+const staffScoreStability = (responses: number) =>
+  responses >= 50
+    ? { label: "매우 높음", tone: "very-high", note: "" }
+    : responses >= 30
+      ? { label: "높음", tone: "high", note: "" }
+      : responses >= 15
+        ? { label: "보통", tone: "moderate", note: "" }
+        : responses >= 8
+          ? { label: "낮음", tone: "low", note: "" }
+          : { label: "판단 유보", tone: "insufficient", note: "회신 부족 · " };
 const nationalStaffSalesPopulation: StaffSalesScatterPoint[] =
   staffCurrentSalesPopulation.flatMap(({ cdsid, employee }) => {
     const sales = salesActivityByCdsid[cdsid]?.staff.find(
@@ -2555,7 +2540,7 @@ export default function CompetitiveAnalysis({
   const selectedStaffSatisfactionTopPercent = selectedStaffSatisfactionNationalRank === null
     ? null
     : (selectedStaffSatisfactionNationalRank / staffTenureScatterPopulation.length) * 100;
-  const selectedStaffResponseQuartile = staffResponseQuartile(selectedStaffResponses);
+  const selectedStaffScoreStability = staffScoreStability(selectedStaffResponses);
   const selectedStaffTenurePeerRange = selectedStaffEmployee
     ? staffTenureHalfYearRange(selectedStaffEmployee.tenureMonths)
     : null;
@@ -3407,7 +3392,7 @@ export default function CompetitiveAnalysis({
                     />
                   )}
                 </span>
-                <span>
+                <span className="growth-profile-person-identity">
                   <small className="growth-profile-role">
                     <span>영업직원</span>
                     {selectedStaffHasYoutubeBadge ? (
@@ -3423,9 +3408,29 @@ export default function CompetitiveAnalysis({
                     </i>
                   </strong>
                 </span>
+                <div className="growth-profile-person-certification">
+                  <small>인증레벨</small>
+                  <strong
+                    aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
+                  >
+                    <b>G<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Grand}</b>
+                    <b>A<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Advanced}</b>
+                    <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
+                  </strong>
+                </div>
+              </div>
+              <div
+                className="growth-profile-metric growth-profile-stability"
+                title="누적 VOC 회신 기준: 50건 이상 매우 높음, 30~49건 높음, 15~29건 보통, 8~14건 낮음, 8건 미만 판단 유보"
+              >
+                <span>VOC 점수 안정성</span>
+                <strong className={`confidence-${selectedStaffScoreStability.tone}`}>
+                  {selectedStaffScoreStability.label}
+                  <small className="growth-profile-evidence-count">{selectedStaffScoreStability.note}누적 회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
+                </strong>
               </div>
               <div className="growth-profile-metric">
-                <span>평균만족도(23 ~ 26년 YTD)</span>
+                <span>VOC 고객상담 만족평균(23 ~ 26 YTD)</span>
                 <strong>
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
@@ -3445,25 +3450,6 @@ export default function CompetitiveAnalysis({
                     / 월 평균 {selectedStaffMonthlySalesAverage === null ? "―" : `${selectedStaffMonthlySalesAverage.toFixed(1)}대`}
                     {selectedStaffSalesTopPercent === null ? null : <i>(상위 {selectedStaffSalesTopPercent.toFixed(1)}%)</i>}
                   </small>
-                </strong>
-              </div>
-              <div className="growth-profile-metric">
-                <span>VOC 고객 회신건수</span>
-                <strong className={`confidence-${selectedStaffResponseQuartile.tone}`}>
-                  {selectedStaffResponseQuartile.label}
-                  <small className="growth-profile-evidence-count">{selectedStaffResponseQuartile.range} · 누적 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>
-                </strong>
-              </div>
-              <div className="growth-profile-metric growth-profile-certification">
-                <span>인증직원 선정</span>
-                <strong
-                  aria-label={`누적 인증 기록 Grand ${selectedStaffCertificationCounts.Grand}회, Advanced ${selectedStaffCertificationCounts.Advanced}회, Certified ${selectedStaffCertificationCounts.Certified}회`}
-                >
-                  <b>G<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Grand}</b>
-                  <em aria-hidden="true">/</em>
-                  <b>A<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Advanced}</b>
-                  <em aria-hidden="true">/</em>
-                  <b>C<i aria-hidden="true">-</i>{selectedStaffCertificationCounts.Certified}</b>
                 </strong>
               </div>
           </section>

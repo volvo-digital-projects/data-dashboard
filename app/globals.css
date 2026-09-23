@@ -1333,7 +1333,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   min-width: 0;
   margin: 6px 6px 0;
   display: grid;
-  grid-template-columns: 281px repeat(4, minmax(0, 1fr));
+  grid-template-columns: 390px repeat(3, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid #d4e2e8;
   border-radius: 6px;
@@ -1358,7 +1358,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-profile-person {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
 }
@@ -1420,7 +1421,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   transform-origin: center top;
 }
 
-.growth-profile-person > span:last-child,
+.growth-profile-person-identity,
 .growth-profile-metric {
   min-width: 0;
   display: flex;
@@ -1520,60 +1521,70 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   white-space: nowrap;
 }
 
-.growth-profile-certification strong {
+.growth-profile-person-certification {
+  align-self: stretch;
+  min-width: 54px;
+  padding-left: 10px;
   display: flex;
-  align-items: center;
-  gap: 4px;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(181, 202, 211, 0.52);
+}
+
+.growth-profile-person-certification > small {
+  color: #6e8491;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.growth-profile-person-certification strong {
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
   font-family: var(--font-latin), var(--font-korean), sans-serif;
-  font-size: 19px;
+  font-size: 11px;
+  line-height: 1.15;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   white-space: nowrap;
 }
 
-.growth-profile-certification strong b {
-  min-width: 4.2ch;
+.growth-profile-person-certification strong b {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 2px;
+  gap: 1px;
   font-weight: 700;
 }
 
-.growth-profile-certification strong b i {
-  margin: 0 1px;
+.growth-profile-person-certification strong b i {
+  margin: 0;
   color: #7f929c;
   font-size: 0.72em;
   font-style: normal;
   font-weight: 300;
 }
 
-.growth-profile-certification strong em {
-  margin: 0;
-  color: #a6b5bc;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 500;
-}
-
-.growth-profile-metric strong.confidence-q4,
-.growth-staff-roster-list .confidence-q4 {
+.growth-profile-metric strong.confidence-very-high {
   color: #21866f;
 }
 
-.growth-profile-metric strong.confidence-q3,
-.growth-staff-roster-list .confidence-q3 {
+.growth-profile-metric strong.confidence-high {
   color: #367d98;
 }
 
-.growth-profile-metric strong.confidence-q2,
-.growth-staff-roster-list .confidence-q2 {
+.growth-profile-metric strong.confidence-moderate {
   color: #c3764f;
 }
 
-.growth-profile-metric strong.confidence-q1,
-.growth-staff-roster-list .confidence-q1 {
+.growth-profile-metric strong.confidence-low {
   color: #b65d56;
+}
+
+.growth-profile-metric strong.confidence-insufficient {
+  color: #768c98;
 }
 
 .growth-capability {
@@ -3129,7 +3140,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 @media (max-width: 1180px) {
   .growth-navigation-workspace { grid-template-columns: 260px minmax(0, 1fr); }
   .growth-navigation-pinned-headings { grid-template-columns: 260px minmax(0, 1fr); }
-  .growth-profile-strip { grid-template-columns: 253px repeat(4, minmax(0, 1fr)); }
+  .growth-profile-strip { grid-template-columns: 345px repeat(3, minmax(0, 1fr)); }
   .growth-capability-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
