@@ -1333,7 +1333,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   min-width: 0;
   margin: 6px 6px 0;
   display: grid;
-  grid-template-columns: 390px repeat(3, minmax(0, 1fr));
+  grid-template-columns: 350px repeat(3, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid #d4e2e8;
   border-radius: 6px;
@@ -1522,13 +1522,23 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-profile-person-certification {
+  position: relative;
   align-self: stretch;
-  min-width: 54px;
-  padding-left: 10px;
+  min-width: 76px;
+  padding: 0 8px 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-left: 1px solid rgba(181, 202, 211, 0.52);
+}
+
+.growth-profile-person-certification::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 0;
+  width: 1px;
+  background: rgba(181, 202, 211, 0.52);
 }
 
 .growth-profile-person-certification > small {
@@ -1540,12 +1550,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-profile-person-certification strong {
   margin-top: 2px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 5px;
   font-family: var(--font-latin), var(--font-korean), sans-serif;
-  font-size: 11px;
-  line-height: 1.15;
+  font-size: 10px;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   white-space: nowrap;
