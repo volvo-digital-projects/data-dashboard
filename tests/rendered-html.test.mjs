@@ -373,14 +373,14 @@ test("shows every creator metric together with detail collapsed by default", asy
   const html = await response.text();
   const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1];
   assert.ok(table);
-  assert.equal((table.match(/scope="row"/g) ?? []).length, 14);
+  assert.equal((table.match(/scope="row"/g) ?? []).length, 15);
   assert.equal((table.match(/scope="col"/g) ?? []).length, 10);
   for (const heading of ["볼보 입사일", "채널 개설일", "롱폼", "숏츠", "누적 고객만족도 평균", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수"]) assert.ok(table.includes(heading));
   assert.match(table, /260225/);
   assert.match(table, /260225/);
   assert.match(table, /class="yt-cert-cell"/);
-  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 14);
-  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 14);
+  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 15);
+  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 15);
   assert.match(table, /aria-label="남성"/);
   assert.match(table, /aria-label="여성"/);
   assert.doesNotMatch(html, /<label>성별/);
@@ -391,7 +391,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(html, /class="yt-gender-summary"/);
   const dealerDistribution = html.match(/<div class="yt-dealers" aria-label="딜러사 필터">([\s\S]*?)<\/div>/)?.[1];
   assert.ok(dealerDistribution);
-  const expectedDealerOrder = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
+  const expectedDealerOrder = ["코오롱", "아주", "천하", "에이치", "아이언", "태영", "아이비"];
   const dealerPositions = expectedDealerOrder.map(name => dealerDistribution.indexOf(`>${name}</span>`));
   assert.ok(dealerPositions.every(position => position >= 0), "every dealer appears in the distribution");
   assert.deepEqual([...dealerPositions].sort((a, b) => a - b), dealerPositions, "dealer distribution follows creator-count rank and tie order");
