@@ -933,8 +933,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
   assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*width:\s*90px;[^}]*height:\s*90px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateY\(-4deg\) rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
-  assert.match(css, /\.growth-segment-donut-disc::after\s*\{[^}]*inset:\s*16%;/);
-  assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 38;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(47 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
+  assert.match(css, /\.growth-segment-donut-disc::after\s*\{[^}]*inset:\s*18%;/);
+  assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 37;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(47 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
   assert.match(navigation, /className="growth-segment-donut-counts" aria-hidden="true"[\s\S]*?salesSegmentLabelPosition\(donut\.counts, segment\)[\s\S]*?\{donut\.counts\[segment\]\}/);
   assert.match(navigation, /className="growth-segment-donut-center"[\s\S]*?<em>\{donut\.label\}<\/em>[\s\S]*?<span><b>\{total\}<\/b><small>대<\/small><\/span>/);
   assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*2px;/);

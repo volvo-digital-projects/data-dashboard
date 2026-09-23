@@ -485,7 +485,7 @@ const salesSegmentLabelPosition = (
     const sweep = (counts[segment] / total) * 360;
     if (segment === targetSegment) {
       const midpointRadians = ((cursor + sweep / 2) * Math.PI) / 180;
-      const radius = 38;
+      const radius = 37;
       return {
         left: Math.round((56 + Math.sin(midpointRadians) * radius) * 100) / 100,
         top: Math.round((47 - Math.cos(midpointRadians) * radius) * 100) / 100,
