@@ -200,6 +200,23 @@ def staff_source_keys(showroom: Any, name: Any) -> tuple[tuple[str, str], ...]:
     return (key, *normalized_aliases)
 
 
+def current_staff_source_keys(
+    showroom: Any,
+    name: Any,
+    available_source_keys: tuple[tuple[str, str], ...],
+    current_name_counts: Counter[str],
+) -> tuple[tuple[str, str], ...]:
+    normalized_name = str(name or "").strip()
+    source_keys = list(staff_source_keys(showroom, normalized_name))
+    if current_name_counts[normalized_name] == 1:
+        source_keys.extend(
+            source_key
+            for source_key in available_source_keys
+            if source_key[1] == normalized_name
+        )
+    return tuple(dict.fromkeys(source_keys))
+
+
 def merged_staff_metrics(
     staff_metrics: dict[tuple[str, str], dict[str, dict[str, float | int]]],
     source_keys: tuple[tuple[str, str], ...],
@@ -424,6 +441,8 @@ def build_payload(
 ) -> dict[str, Any]:
     roster = load_roster(roster_path, as_of)
     national, staff_metrics, staff_comments = load_voc(voc_path)
+    current_name_counts = Counter(str(person["name"]) for person in roster)
+    available_metric_keys = tuple(staff_metrics)
     dashboard = json.loads(showrooms_path.read_text(encoding="utf-8"))
     dashboard_showrooms = dashboard["showrooms"]
     showroom_by_voc_name = {
@@ -510,7 +529,15 @@ def build_payload(
     for person in roster:
         showroom = normalise_showroom_name(DMS_TO_VOC_SHOWROOM[str(person["dmsShowroom"])])
         name = str(person["name"])
-        by_year = merged_staff_metrics(staff_metrics, staff_source_keys(showroom, name))
+        by_year = merged_staff_metrics(
+            staff_metrics,
+            current_staff_source_keys(
+                showroom,
+                name,
+                available_metric_keys,
+                current_name_counts,
+            ),
+        )
         responses = sum(int(values["responses"]) for values in by_year.values())
         if not responses:
             continue
@@ -546,7 +573,12 @@ def build_payload(
         ]
         employees: list[dict[str, Any]] = []
         for person in target_roster:
-            source_keys = staff_source_keys(normalized_voc_showroom, person["name"])
+            source_keys = current_staff_source_keys(
+                normalized_voc_showroom,
+                person["name"],
+                available_metric_keys,
+                current_name_counts,
+            )
             person_metrics = merged_staff_metrics(staff_metrics, source_keys)
             years = {
                 year: values
@@ -585,8 +617,11 @@ def build_payload(
         claimed_source_keys = {
             source_key
             for item in roster
-            for source_key in staff_source_keys(
-                DMS_TO_VOC_SHOWROOM[str(item["dmsShowroom"])], item["name"]
+            for source_key in current_staff_source_keys(
+                DMS_TO_VOC_SHOWROOM[str(item["dmsShowroom"])],
+                item["name"],
+                available_metric_keys,
+                current_name_counts,
             )
         }
         for (raw_showroom, name), by_year in staff_metrics.items():
@@ -624,6 +659,7 @@ def build_payload(
             "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
             "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
             "historyRange": "2023-2026 YTD",
+            "staffHistoryMatchRule": "현재 재직 명단에서 이름이 유일한 직원은 2023-2026 전시장 이동 이력 통합 · 동명이인은 전시장 기준 분리",
         },
         "nationalYears": national_years,
         "tenureCohorts": tenure_cohorts,
@@ -633,13 +669,24 @@ def build_payload(
 
 def refresh_comment_analysis(payload: dict[str, Any], voc_path: Path) -> None:
     _, _, staff_comments = load_voc(voc_path)
+    current_name_counts = Counter(
+        str(employee.get("name", "")).strip()
+        for showroom in payload.get("showrooms", {}).values()
+        for employee in showroom.get("employees", [])
+    )
+    available_comment_keys = tuple(staff_comments)
     refreshed_employees = 0
     for showroom in payload.get("showrooms", {}).values():
         voc_showroom = normalise_showroom_name(showroom.get("showroom"))
         for employee in showroom.get("employees", []):
             comments = merged_staff_comments(
                 staff_comments,
-                staff_source_keys(voc_showroom, employee.get("name", "")),
+                current_staff_source_keys(
+                    voc_showroom,
+                    employee.get("name", ""),
+                    available_comment_keys,
+                    current_name_counts,
+                ),
             )
             employee["commentResponses"] = len(comments)
             employee["strengthKeywords"] = keyword_summary(

@@ -15,7 +15,8 @@
     "latestResponseThrough": "2026-09-13",
     "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 14개 강점/18개 보완 주제",
     "commentAnalysisEmployees": 383,
-    "refreshScope": "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신 · 확인된 직원 이력 연결 보정"
+    "refreshScope": "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신 · 이름이 유일한 재직 직원의 전시장 이동 이력 자동 통합",
+    "staffHistoryMatchRule": "현재 재직 명단에서 이름이 유일한 직원은 2023-2026 전시장 이동 이력 통합 · 동명이인은 전시장 기준 분리"
   },
   "nationalYears": {
     "2023": {
@@ -52,27 +53,27 @@
       "id": "under-3m",
       "label": "3개월 이내",
       "employeeCount": 24,
-      "respondingEmployees": 15,
-      "responses": 80,
-      "scoreSum": 744.0,
-      "average": 9.3
+      "respondingEmployees": 16,
+      "responses": 159,
+      "scoreSum": 1496.0,
+      "average": 9.41
     },
     {
       "id": "under-1y",
       "label": "1년 이내",
       "employeeCount": 37,
       "respondingEmployees": 36,
-      "responses": 209,
-      "scoreSum": 1935.0,
-      "average": 9.26
+      "responses": 247,
+      "scoreSum": 2278.0,
+      "average": 9.22
     },
     {
       "id": "1-3y",
       "label": "1~3년",
       "employeeCount": 99,
-      "respondingEmployees": 96,
-      "responses": 1457,
-      "scoreSum": 13594.0,
+      "respondingEmployees": 97,
+      "responses": 1611,
+      "scoreSum": 15029.0,
       "average": 9.33
     },
     {
@@ -80,26 +81,26 @@
       "label": "3~5년",
       "employeeCount": 67,
       "respondingEmployees": 67,
-      "responses": 2318,
-      "scoreSum": 21823.0,
-      "average": 9.41
+      "responses": 2460,
+      "scoreSum": 23131.0,
+      "average": 9.4
     },
     {
       "id": "5-10y",
       "label": "5~10년",
       "employeeCount": 131,
       "respondingEmployees": 131,
-      "responses": 4999,
-      "scoreSum": 46240.0,
-      "average": 9.25
+      "responses": 5207,
+      "scoreSum": 48199.0,
+      "average": 9.26
     },
     {
       "id": "over-10y",
       "label": "10년 이상",
       "employeeCount": 25,
       "respondingEmployees": 25,
-      "responses": 1197,
-      "scoreSum": 11018.0,
+      "responses": 1243,
+      "scoreSum": 11432.0,
       "average": 9.2
     }
   ],
@@ -132,8 +133,8 @@
           "tenureBucketLabel": "3~5년",
           "years": {
             "2023": {
-              "responses": 19,
-              "scoreSum": 161.0,
+              "responses": 27,
+              "scoreSum": 227.0,
               "sent": 101
             },
             "2024": {
@@ -153,23 +154,27 @@
               "rateResponses": 9
             }
           },
-          "commentResponses": 42,
+          "commentResponses": 50,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 21
+              "mentions": 23
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 13
+              "mentions": 18
             },
             {
               "label": "적극적 응대",
-              "mentions": 10
+              "mentions": 12
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 7
+              "mentions": 8
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 8
             },
             {
               "label": "전문지식·정확성",
@@ -180,15 +185,19 @@
               "mentions": 5
             },
             {
-              "label": "성실한 답변",
+              "label": "편안한 상담",
               "mentions": 5
             },
             {
-              "label": "편안한 상담",
+              "label": "시승·차량체험 지원",
               "mentions": 4
             },
             {
               "label": "맞춤형 설명",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
               "mentions": 3
             },
             {
@@ -200,14 +209,6 @@
               "mentions": 2
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 2
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 2
-            },
-            {
               "label": "지속적 후속관리",
               "mentions": 1
             }
@@ -215,7 +216,7 @@
           "improvementKeywords": [
             {
               "label": "구체적 설명 부족",
-              "mentions": 4
+              "mentions": 5
             },
             {
               "label": "시설 편의 미제공",
@@ -231,6 +232,10 @@
             },
             {
               "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "상담자료 활용 미흡",
               "mentions": 1
             }
           ],
@@ -1427,11 +1432,6 @@
           "name": "한진혁",
           "responses": 25,
           "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김광현",
-          "responses": 10,
-          "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
       "formerEmployees": [
@@ -2130,11 +2130,6 @@
         {
           "name": "유제우",
           "responses": 2,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "이윤재",
-          "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
@@ -2835,8 +2830,8 @@
           "tenureBucketLabel": "5~10년",
           "years": {
             "2023": {
-              "responses": 30,
-              "scoreSum": 259.0,
+              "responses": 31,
+              "scoreSum": 266.0,
               "sent": 122
             },
             "2024": {
@@ -2856,7 +2851,7 @@
               "rateResponses": 8
             }
           },
-          "commentResponses": 61,
+          "commentResponses": 62,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
@@ -2864,7 +2859,7 @@
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 26
+              "mentions": 27
             },
             {
               "label": "이해하기 쉬운 설명",
@@ -2872,7 +2867,7 @@
             },
             {
               "label": "적극적 응대",
-              "mentions": 13
+              "mentions": 14
             },
             {
               "label": "성실한 답변",
@@ -3662,63 +3657,92 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 6,
-              "scoreSum": 52.0,
+              "responses": 22,
+              "scoreSum": 204.0,
               "sent": 30
             },
             "2025": {
-              "responses": 2,
-              "scoreSum": 19.0,
+              "responses": 12,
+              "scoreSum": 113.0,
               "sent": 4
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 46.0,
+              "responses": 7,
+              "scoreSum": 64.0,
               "sent": 37,
-              "rateResponses": 5
+              "rateResponses": 7
             },
             "2023": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 19,
+              "scoreSum": 177.0,
               "sent": 3
             }
           },
-          "commentResponses": 13,
+          "commentResponses": 60,
           "strengthKeywords": [
             {
-              "label": "친절·정중 응대",
-              "mentions": 10
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 35
             },
             {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 9
+              "label": "친절·정중 응대",
+              "mentions": 32
             },
             {
               "label": "적극적 응대",
-              "mentions": 3
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 2
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 2
+              "mentions": 12
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 1
+              "mentions": 12
             },
             {
               "label": "성실한 답변",
-              "mentions": 1
+              "mentions": 11
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 9
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
             },
             {
               "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 1
+            },
+            {
+              "label": "편안한 상담",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "전시차량 다양화 필요",
+              "mentions": 1
+            },
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-09-10"
         },
         {
@@ -4797,11 +4821,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "정형욱",
-          "responses": 4,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "김성일",
           "responses": 2,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -4818,11 +4837,6 @@
         },
         {
           "name": "김도윤",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김민웅",
           "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
         },
@@ -5439,11 +5453,6 @@
           "name": "최미래",
           "responses": 7,
           "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "임승준",
-          "responses": 2,
-          "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
       "formerEmployees": []
@@ -5746,13 +5755,13 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 12,
-              "scoreSum": 118.0,
+              "responses": 32,
+              "scoreSum": 311.0,
               "sent": 63
             },
             "2025": {
-              "responses": 3,
-              "scoreSum": 28.0,
+              "responses": 5,
+              "scoreSum": 48.0,
               "sent": 21
             },
             "2026": {
@@ -5760,41 +5769,53 @@
               "scoreSum": 20.0,
               "sent": 22,
               "rateResponses": 2
+            },
+            "2023": {
+              "responses": 1,
+              "scoreSum": 10.0
             }
           },
-          "commentResponses": 17,
+          "commentResponses": 40,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 12
+              "mentions": 31
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 7
+              "mentions": 17
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 6
+              "mentions": 10
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 5
+              "mentions": 10
             },
             {
               "label": "적극적 응대",
-              "mentions": 4
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 3
+              "mentions": 9
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 2
+              "mentions": 8
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 6
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 1
+              "mentions": 4
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 2
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 2
             },
             {
               "label": "맞춤형 설명",
@@ -5803,13 +5824,14 @@
             {
               "label": "구매결정 지원",
               "mentions": 1
-            },
+            }
+          ],
+          "improvementKeywords": [
             {
-              "label": "성실한 답변",
+              "label": "구체적 설명 부족",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
           "latestResponseDate": "2026-09-12"
         },
         {
@@ -6038,18 +6060,18 @@
           "tenureBucketLabel": "5~10년",
           "years": {
             "2023": {
-              "responses": 19,
-              "scoreSum": 184.0,
+              "responses": 38,
+              "scoreSum": 372.0,
               "sent": 59
             },
             "2024": {
-              "responses": 23,
-              "scoreSum": 220.0,
+              "responses": 52,
+              "scoreSum": 492.0,
               "sent": 72
             },
             "2025": {
-              "responses": 4,
-              "scoreSum": 37.0,
+              "responses": 6,
+              "scoreSum": 57.0,
               "sent": 19
             },
             "2026": {
@@ -6059,64 +6081,68 @@
               "rateResponses": 11
             }
           },
-          "commentResponses": 57,
+          "commentResponses": 107,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 36
+              "mentions": 70
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 26
+              "mentions": 51
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 15
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 9
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 8
+              "mentions": 31
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 8
+              "mentions": 20
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 20
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 19
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 6
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 4
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 4
+              "mentions": 18
             },
             {
               "label": "신뢰·솔직한 상담",
-              "mentions": 3
+              "mentions": 9
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 7
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 5
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 2
+              "mentions": 4
             },
             {
               "label": "맞춤형 설명",
-              "mentions": 1
+              "mentions": 4
             }
           ],
           "improvementKeywords": [
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 3
+            },
             {
               "label": "시설 편의 미제공",
               "mentions": 2
             },
             {
-              "label": "구체적 설명 부족",
+              "label": "시승모델 다양화 필요",
               "mentions": 1
             }
           ],
@@ -6332,16 +6358,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "구현모",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김민웅",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "원유민",
           "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -6364,8 +6380,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 13,
-              "scoreSum": 116.0,
+              "responses": 14,
+              "scoreSum": 126.0,
               "sent": 56
             },
             "2025": {
@@ -6380,7 +6396,7 @@
               "rateResponses": 5
             }
           },
-          "commentResponses": 21,
+          "commentResponses": 22,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
@@ -6388,19 +6404,19 @@
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 9
+              "mentions": 10
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 7
+              "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
             },
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 6
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 5
             },
             {
               "label": "적극적 응대",
@@ -6408,11 +6424,11 @@
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 2
+              "mentions": 3
             },
             {
               "label": "성실한 답변",
-              "mentions": 2
+              "mentions": 3
             },
             {
               "label": "편안한 상담",
@@ -6920,8 +6936,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 9,
-              "scoreSum": 86.0,
+              "responses": 11,
+              "scoreSum": 104.0,
               "sent": 31
             },
             "2025": {
@@ -6936,23 +6952,23 @@
               "rateResponses": 3
             }
           },
-          "commentResponses": 15,
+          "commentResponses": 17,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 10
+              "mentions": 12
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 5
             },
             {
               "label": "적극적 응대",
               "mentions": 5
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 4
             },
             {
               "label": "시승·차량체험 지원",
@@ -6967,12 +6983,12 @@
               "mentions": 2
             },
             {
-              "label": "성실한 답변",
+              "label": "이해하기 쉬운 설명",
               "mentions": 2
             },
             {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
+              "label": "성실한 답변",
+              "mentions": 2
             },
             {
               "label": "비교·장단점 안내",
@@ -7076,8 +7092,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 12,
-              "scoreSum": 114.0,
+              "responses": 14,
+              "scoreSum": 134.0,
               "sent": 44
             },
             "2026": {
@@ -7087,30 +7103,30 @@
               "rateResponses": 1
             }
           },
-          "commentResponses": 13,
+          "commentResponses": 15,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 10
+              "mentions": 11
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 7
+              "mentions": 9
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 4
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 2
+              "mentions": 5
             },
             {
               "label": "적극적 응대",
-              "mentions": 2
+              "mentions": 3
             },
             {
               "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
@@ -7208,11 +7224,6 @@
         {
           "name": "한진수",
           "responses": 11,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "정형욱",
-          "responses": 4,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
@@ -10394,11 +10405,6 @@
           "name": "이상우",
           "responses": 10,
           "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김태형",
-          "responses": 8,
-          "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
       "formerEmployees": []
@@ -11777,8 +11783,8 @@
           "tenureBucketLabel": "3~5년",
           "years": {
             "2023": {
-              "responses": 5,
-              "scoreSum": 48.0,
+              "responses": 6,
+              "scoreSum": 55.0,
               "sent": 37
             },
             "2024": {
@@ -11798,14 +11804,14 @@
               "rateResponses": 1
             }
           },
-          "commentResponses": 17,
+          "commentResponses": 18,
           "strengthKeywords": [
             {
-              "label": "친절·정중 응대",
-              "mentions": 10
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 11
             },
             {
-              "label": "상세·꼼꼼한 설명",
+              "label": "친절·정중 응대",
               "mentions": 10
             },
             {
@@ -11818,10 +11824,14 @@
             },
             {
               "label": "성실한 답변",
-              "mentions": 2
+              "mentions": 3
             },
             {
               "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
@@ -11833,15 +11843,15 @@
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 1
-            },
-            {
               "label": "맞춤형 설명",
               "mentions": 1
             },
             {
               "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
               "mentions": 1
             }
           ],
@@ -12480,13 +12490,13 @@
               "sent": 3
             },
             "2023": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 3,
+              "scoreSum": 28.0,
               "sent": 1
             },
             "2024": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 5,
+              "scoreSum": 41.0,
               "sent": 5
             },
             "2026": {
@@ -12496,14 +12506,34 @@
               "rateResponses": 5
             }
           },
-          "commentResponses": 7,
+          "commentResponses": 15,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 3
+              "mentions": 6
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 5
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "적극적 응대",
               "mentions": 2
             },
             {
@@ -12511,19 +12541,20 @@
               "mentions": 1
             },
             {
-              "label": "성실한 답변",
+              "label": "신뢰·솔직한 상담",
               "mentions": 1
             },
             {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            },
-            {
-              "label": "비교·장단점 안내",
+              "label": "시승·차량체험 지원",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-09-12"
         },
         {
@@ -12768,28 +12799,64 @@
           "tenureBucketLabel": "3개월 이내",
           "years": {
             "2026": {
-              "responses": 3,
-              "scoreSum": 28.0,
+              "responses": 4,
+              "scoreSum": 38.0,
               "sent": 16,
-              "rateResponses": 3
+              "rateResponses": 4
+            },
+            "2024": {
+              "responses": 7,
+              "scoreSum": 69.0
+            },
+            "2025": {
+              "responses": 2,
+              "scoreSum": 19.0
             }
           },
-          "commentResponses": 3,
+          "commentResponses": 13,
           "strengthKeywords": [
             {
-              "label": "친절·정중 응대",
-              "mentions": 1
-            },
-            {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 1
+              "mentions": 6
             },
             {
-              "label": "시승·차량체험 지원",
-              "mentions": 1
+              "label": "친절·정중 응대",
+              "mentions": 5
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
             },
             {
               "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
@@ -13879,18 +13946,8 @@
       ],
       "excludedRawNames": [
         {
-          "name": "김호연",
-          "responses": 47,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "고건영",
           "responses": 38,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김진수",
-          "responses": 36,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -15700,28 +15757,89 @@
               "scoreSum": 72.0,
               "sent": 55,
               "rateResponses": 8
+            },
+            "2023": {
+              "responses": 24,
+              "scoreSum": 209.0
+            },
+            "2024": {
+              "responses": 12,
+              "scoreSum": 115.0
             }
           },
-          "commentResponses": 8,
+          "commentResponses": 44,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 4
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 2
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 1
+              "mentions": 22
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 17
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 13
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 11
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 10
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "편안한 상담",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 2
+            },
+            {
+              "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "대기시간 관리 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식 정확성 부족",
+              "mentions": 1
+            },
+            {
+              "label": "시설 편의 미제공",
+              "mentions": 1
+            },
+            {
+              "label": "상담자료 활용 미흡",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-09-13"
         },
         {
@@ -15734,14 +15852,9 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 12,
-              "scoreSum": 117.0,
+              "responses": 14,
+              "scoreSum": 132.0,
               "sent": 45
-            },
-            "2025": {
-              "responses": 0,
-              "scoreSum": 0,
-              "sent": 17
             },
             "2026": {
               "responses": 1,
@@ -15750,11 +15863,11 @@
               "rateResponses": 1
             }
           },
-          "commentResponses": 13,
+          "commentResponses": 15,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 8
+              "mentions": 10
             },
             {
               "label": "상세·꼼꼼한 설명",
@@ -15770,18 +15883,18 @@
             },
             {
               "label": "적극적 응대",
-              "mentions": 5
+              "mentions": 6
             },
             {
               "label": "성실한 답변",
               "mentions": 3
             },
             {
-              "label": "편안한 상담",
-              "mentions": 2
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
             },
             {
-              "label": "신뢰·솔직한 상담",
+              "label": "편안한 상담",
               "mentions": 2
             },
             {
@@ -15797,6 +15910,10 @@
             {
               "label": "시설 편의 미제공",
               "mentions": 1
+            },
+            {
+              "label": "전문지식 정확성 부족",
+              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-09-05"
@@ -15806,11 +15923,6 @@
         {
           "name": "최지석",
           "responses": 17,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김민수",
-          "responses": 7,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -16935,11 +17047,6 @@
           "name": "곽동훈",
           "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "신환욱",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
       "formerEmployees": []
@@ -17945,17 +18052,17 @@
               "sent": 2
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 95.0,
+              "responses": 11,
+              "scoreSum": 105.0,
               "sent": 60,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
-          "commentResponses": 12,
+          "commentResponses": 13,
           "strengthKeywords": [
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 6
+              "mentions": 7
             },
             {
               "label": "친절·정중 응대",
@@ -17983,6 +18090,10 @@
             },
             {
               "label": "신속한 응답",
+              "mentions": 1
+            },
+            {
+              "label": "적극적 응대",
               "mentions": 1
             }
           ],
@@ -18357,11 +18468,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "유병훈",
-          "responses": 23,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "양명걸",
           "responses": 20,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -18369,11 +18475,6 @@
         {
           "name": "서용문",
           "responses": 6,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "윤정현",
-          "responses": 2,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
@@ -19177,11 +19278,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "김명수",
-          "responses": 22,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "박건하",
           "responses": 21,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -19207,11 +19303,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "성지혜",
-          "responses": 9,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "조우성",
           "responses": 6,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -19219,16 +19310,6 @@
         {
           "name": "이승훈",
           "responses": 5,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김종율",
-          "responses": 3,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "성재욱",
-          "responses": 2,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
@@ -19526,8 +19607,8 @@
         {
           "years": {
             "2025": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 1,
+              "scoreSum": 9.0,
               "sent": 1
             }
           },
@@ -19943,57 +20024,61 @@
               "scoreSum": 39.0,
               "sent": 39,
               "rateResponses": 4
+            },
+            "2023": {
+              "responses": 35,
+              "scoreSum": 323.0
             }
           },
-          "commentResponses": 42,
+          "commentResponses": 77,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 30
+              "mentions": 53
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 22
+              "mentions": 45
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 11
+              "mentions": 27
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 11
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 7
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 7
+              "mentions": 20
             },
             {
               "label": "적극적 응대",
-              "mentions": 6
+              "mentions": 15
             },
             {
-              "label": "신속한 응답",
-              "mentions": 5
+              "label": "성실한 답변",
+              "mentions": 12
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 10
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 5
+              "mentions": 7
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 6
             },
             {
               "label": "신뢰·솔직한 상담",
-              "mentions": 1
+              "mentions": 4
             },
             {
               "label": "편안한 상담",
-              "mentions": 1
+              "mentions": 4
             },
             {
               "label": "구매결정 지원",
-              "mentions": 1
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -20015,6 +20100,14 @@
             },
             {
               "label": "시승기회·시간 확대",
+              "mentions": 1
+            },
+            {
+              "label": "시설 편의 미제공",
+              "mentions": 1
+            },
+            {
+              "label": "대기시간 관리 미흡",
               "mentions": 1
             }
           ],
@@ -20292,11 +20385,6 @@
       ],
       "excludedRawNames": [
         {
-          "name": "김재훈",
-          "responses": 47,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "박명서",
           "responses": 42,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -20317,18 +20405,8 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "엄인섭",
-          "responses": 23,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "박성우",
           "responses": 14,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "전규철",
-          "responses": 13,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -20364,8 +20442,8 @@
           "tenureBucketLabel": "5~10년",
           "years": {
             "2025": {
-              "responses": 2,
-              "scoreSum": 20.0,
+              "responses": 13,
+              "scoreSum": 129.0,
               "sent": 4
             },
             "2026": {
@@ -20373,39 +20451,71 @@
               "scoreSum": 76.0,
               "sent": 48,
               "rateResponses": 8
+            },
+            "2023": {
+              "responses": 16,
+              "scoreSum": 154.0
+            },
+            "2024": {
+              "responses": 20,
+              "scoreSum": 196.0
             }
           },
-          "commentResponses": 10,
+          "commentResponses": 57,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 7
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
+              "mentions": 37
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 2
+              "mentions": 25
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 16
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 2
+              "mentions": 11
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 1
+              "mentions": 11
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 10
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 10
             },
             {
               "label": "성실한 답변",
+              "mentions": 7
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
               "label": "대기시간 관리 미흡",
-              "mentions": 1
+              "mentions": 2
             },
             {
               "label": "전문지식 정확성 부족",
@@ -20413,6 +20523,18 @@
             },
             {
               "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화 필요",
+              "mentions": 1
+            },
+            {
+              "label": "시설 편의 미제공",
               "mentions": 1
             }
           ],
@@ -20611,13 +20733,13 @@
           "tenureBucketLabel": "3~5년",
           "years": {
             "2023": {
-              "responses": 1,
-              "scoreSum": 10.0,
+              "responses": 8,
+              "scoreSum": 78.0,
               "sent": 0
             },
             "2025": {
-              "responses": 2,
-              "scoreSum": 19.0,
+              "responses": 7,
+              "scoreSum": 65.0,
               "sent": 5
             },
             "2026": {
@@ -20625,32 +20747,73 @@
               "scoreSum": 20.0,
               "sent": 20,
               "rateResponses": 2
+            },
+            "2024": {
+              "responses": 11,
+              "scoreSum": 97.0
             }
           },
-          "commentResponses": 5,
+          "commentResponses": 28,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 4
+              "mentions": 15
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 1
+              "mentions": 7
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
             },
             {
               "label": "적극적 응대",
-              "mentions": 1
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 3
             },
             {
               "label": "신속한 응답",
               "mentions": 1
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "맞춤형 설명",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "대기시간 관리 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "가격혜택 안내부족",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-08-08"
         },
         {
@@ -21192,16 +21355,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "김상영",
-          "responses": 35,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "전규철",
-          "responses": 32,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "김재민",
           "responses": 26,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -21274,13 +21427,13 @@
           "tenureBucketLabel": "3~5년",
           "years": {
             "2024": {
-              "responses": 11,
-              "scoreSum": 98.0,
+              "responses": 43,
+              "scoreSum": 401.0,
               "sent": 84
             },
             "2025": {
-              "responses": 9,
-              "scoreSum": 89.0,
+              "responses": 14,
+              "scoreSum": 133.0,
               "sent": 14
             },
             "2026": {
@@ -21288,66 +21441,82 @@
               "scoreSum": 82.0,
               "sent": 56,
               "rateResponses": 9
+            },
+            "2023": {
+              "responses": 39,
+              "scoreSum": 355.0
             }
           },
-          "commentResponses": 29,
+          "commentResponses": 105,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 23
+              "mentions": 73
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 11
+              "mentions": 51
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 7
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 6
+              "mentions": 30
             },
             {
               "label": "적극적 응대",
-              "mentions": 5
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 5
+              "mentions": 18
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 2
+              "mentions": 18
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 16
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 14
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 10
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 6
             },
             {
               "label": "신뢰·솔직한 상담",
-              "mentions": 2
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
             },
             {
               "label": "지속적 후속관리",
               "mentions": 2
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 1
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 1
             }
           ],
           "improvementKeywords": [
+            {
+              "label": "응대 태도 불량",
+              "mentions": 2
+            },
             {
               "label": "대기시간 관리 미흡",
               "mentions": 1
             },
             {
               "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -21397,8 +21566,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 21,
-              "scoreSum": 192.0,
+              "responses": 24,
+              "scoreSum": 219.0,
               "sent": 101
             },
             "2025": {
@@ -21413,34 +21582,34 @@
               "rateResponses": 4
             }
           },
-          "commentResponses": 26,
+          "commentResponses": 29,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 14
+              "mentions": 17
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 11
+              "mentions": 13
             },
             {
               "label": "이해하기 쉬운 설명",
+              "mentions": 8
+            },
+            {
+              "label": "적극적 응대",
               "mentions": 7
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 6
+              "mentions": 7
             },
             {
-              "label": "적극적 응대",
+              "label": "시승·차량체험 지원",
               "mentions": 5
             },
             {
               "label": "성실한 답변",
-              "mentions": 4
-            },
-            {
-              "label": "시승·차량체험 지원",
               "mentions": 4
             },
             {
@@ -21529,8 +21698,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 26,
-              "scoreSum": 246.0,
+              "responses": 28,
+              "scoreSum": 264.0,
               "sent": 70
             },
             "2025": {
@@ -21545,15 +21714,15 @@
               "rateResponses": 6
             }
           },
-          "commentResponses": 34,
+          "commentResponses": 36,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 24
+              "mentions": 25
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 17
+              "mentions": 19
             },
             {
               "label": "이해하기 쉬운 설명",
@@ -21565,19 +21734,19 @@
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 5
+              "mentions": 6
             },
             {
               "label": "비교·장단점 안내",
               "mentions": 4
             },
             {
-              "label": "성실한 답변",
+              "label": "적극적 응대",
               "mentions": 4
             },
             {
-              "label": "적극적 응대",
-              "mentions": 3
+              "label": "성실한 답변",
+              "mentions": 4
             },
             {
               "label": "신속한 응답",
@@ -21590,9 +21759,18 @@
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-09-06"
         },
         {
@@ -21605,8 +21783,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 19,
-              "scoreSum": 177.0,
+              "responses": 28,
+              "scoreSum": 259.0,
               "sent": 111
             },
             "2025": {
@@ -21621,55 +21799,55 @@
               "rateResponses": 12
             }
           },
-          "commentResponses": 33,
+          "commentResponses": 42,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 24
+              "mentions": 28
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 15
+              "mentions": 19
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 10
             },
             {
               "label": "비교·장단점 안내",
               "mentions": 8
             },
             {
-              "label": "이해하기 쉬운 설명",
+              "label": "전문지식·정확성",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
-              "mentions": 6
-            },
-            {
               "label": "적극적 응대",
-              "mentions": 5
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 4
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 4
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 3
+              "mentions": 7
             },
             {
               "label": "편안한 상담",
-              "mentions": 2
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
             },
             {
               "label": "성실한 답변",
-              "mentions": 2
+              "mentions": 4
             },
             {
               "label": "신속한 응답",
-              "mentions": 1
+              "mentions": 2
             }
           ],
           "improvementKeywords": [
@@ -21679,7 +21857,7 @@
             },
             {
               "label": "구체적 설명 부족",
-              "mentions": 1
+              "mentions": 2
             }
           ],
           "latestResponseDate": "2026-09-12"
@@ -21913,38 +22091,106 @@
           "tenureBucketLabel": "10년 이상",
           "years": {
             "2026": {
-              "responses": 5,
-              "scoreSum": 46.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 26,
-              "rateResponses": 5
+              "rateResponses": 9
+            },
+            "2023": {
+              "responses": 13,
+              "scoreSum": 127.0
+            },
+            "2024": {
+              "responses": 19,
+              "scoreSum": 161.0
+            },
+            "2025": {
+              "responses": 9,
+              "scoreSum": 76.0
             }
           },
-          "commentResponses": 5,
+          "commentResponses": 50,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 2
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 1
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
+              "mentions": 25
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 20
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 7
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 5
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 2
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "맞춤형 설명",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
               "label": "구체적 설명 부족",
-              "mentions": 1
+              "mentions": 2
             },
             {
               "label": "전문지식 정확성 부족",
+              "mentions": 2
+            },
+            {
+              "label": "진행상황 안내 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "대기시간 관리 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화 필요",
               "mentions": 1
             }
           ],
@@ -22133,11 +22379,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "방준호",
-          "responses": 30,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "이진호",
           "responses": 23,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -22150,11 +22391,6 @@
         {
           "name": "권순영",
           "responses": 14,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "주장복",
-          "responses": 6,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -22195,8 +22431,8 @@
               "sent": 16
             },
             "2024": {
-              "responses": 13,
-              "scoreSum": 124.0,
+              "responses": 20,
+              "scoreSum": 192.0,
               "sent": 49
             },
             "2025": {
@@ -22211,30 +22447,34 @@
               "rateResponses": 5
             }
           },
-          "commentResponses": 25,
+          "commentResponses": 32,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 14
+              "mentions": 18
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 11
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 5
+              "mentions": 15
             },
             {
               "label": "적극적 응대",
-              "mentions": 5
+              "mentions": 9
             },
             {
-              "label": "비교·장단점 안내",
-              "mentions": 4
+              "label": "성실한 답변",
+              "mentions": 7
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 4
+            },
+            {
+              "label": "비교·장단점 안내",
               "mentions": 4
             },
             {
@@ -22242,12 +22482,8 @@
               "mentions": 3
             },
             {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 2
-            },
-            {
               "label": "맞춤형 설명",
-              "mentions": 1
+              "mentions": 2
             },
             {
               "label": "신뢰·솔직한 상담",
@@ -23401,16 +23637,6 @@
         {
           "name": "윤중희",
           "responses": 12,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "이정훈",
-          "responses": 11,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김성민",
-          "responses": 8,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -24831,11 +25057,6 @@
           "name": "강민성",
           "responses": 8,
           "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김영주",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
       "formerEmployees": []
@@ -24902,8 +25123,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 17,
-              "scoreSum": 159.0,
+              "responses": 18,
+              "scoreSum": 168.0,
               "sent": 79
             },
             "2025": {
@@ -24918,27 +25139,27 @@
               "rateResponses": 4
             }
           },
-          "commentResponses": 24,
+          "commentResponses": 25,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 17
+              "mentions": 18
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 12
+              "mentions": 13
             },
             {
               "label": "이해하기 쉬운 설명",
               "mentions": 7
             },
             {
-              "label": "전문지식·정확성",
+              "label": "비교·장단점 안내",
               "mentions": 4
             },
             {
-              "label": "비교·장단점 안내",
-              "mentions": 3
+              "label": "전문지식·정확성",
+              "mentions": 4
             },
             {
               "label": "성실한 답변",
@@ -24983,8 +25204,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 26,
-              "scoreSum": 253.0,
+              "responses": 27,
+              "scoreSum": 263.0,
               "sent": 122
             },
             "2025": {
@@ -24999,15 +25220,15 @@
               "rateResponses": 4
             }
           },
-          "commentResponses": 33,
+          "commentResponses": 34,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 22
+              "mentions": 23
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 16
+              "mentions": 17
             },
             {
               "label": "이해하기 쉬운 설명",
@@ -25711,11 +25932,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "황준원",
-          "responses": 4,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "유아현",
           "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -25871,8 +26087,8 @@
           "tenureBucketLabel": "3~5년",
           "years": {
             "2023": {
-              "responses": 2,
-              "scoreSum": 19.0,
+              "responses": 8,
+              "scoreSum": 77.0,
               "sent": 7
             },
             "2024": {
@@ -25892,26 +26108,34 @@
               "rateResponses": 4
             }
           },
-          "commentResponses": 40,
+          "commentResponses": 46,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 23
+              "mentions": 26
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 21
+              "mentions": 24
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 10
+              "mentions": 13
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 7
+              "mentions": 9
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 6
             },
             {
               "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "적극적 응대",
               "mentions": 6
             },
             {
@@ -25921,14 +26145,6 @@
             {
               "label": "편안한 상담",
               "mentions": 5
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 5
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 4
             },
             {
               "label": "신뢰·솔직한 상담",
@@ -25963,6 +26179,10 @@
             {
               "label": "구체적 설명 부족",
               "mentions": 1
+            },
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
             }
           ],
           "latestResponseDate": "2026-09-12"
@@ -25982,8 +26202,8 @@
               "sent": 13
             },
             "2024": {
-              "responses": 19,
-              "scoreSum": 173.0,
+              "responses": 20,
+              "scoreSum": 180.0,
               "sent": 133
             },
             "2025": {
@@ -25998,14 +26218,14 @@
               "rateResponses": 4
             }
           },
-          "commentResponses": 26,
+          "commentResponses": 27,
           "strengthKeywords": [
             {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 12
+              "label": "친절·정중 응대",
+              "mentions": 13
             },
             {
-              "label": "친절·정중 응대",
+              "label": "상세·꼼꼼한 설명",
               "mentions": 12
             },
             {
@@ -26038,6 +26258,10 @@
             },
             {
               "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
@@ -26189,8 +26413,8 @@
           "tenureBucketLabel": "5~10년",
           "years": {
             "2024": {
-              "responses": 9,
-              "scoreSum": 75.0,
+              "responses": 10,
+              "scoreSum": 83.0,
               "sent": 37
             },
             "2025": {
@@ -26203,24 +26427,32 @@
               "scoreSum": 18.0,
               "sent": 32,
               "rateResponses": 3
+            },
+            "2023": {
+              "responses": 4,
+              "scoreSum": 38.0
             }
           },
-          "commentResponses": 16,
+          "commentResponses": 21,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 10
+              "mentions": 13
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 8
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 5
+              "mentions": 10
             },
             {
               "label": "적극적 응대",
+              "mentions": 6
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
               "mentions": 5
             },
             {
@@ -26228,11 +26460,15 @@
               "mentions": 4
             },
             {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 3
+              "label": "시승·차량체험 지원",
+              "mentions": 2
             },
             {
-              "label": "시승·차량체험 지원",
+              "label": "성실한 답변",
+              "mentions": 2
+            },
+            {
+              "label": "편안한 상담",
               "mentions": 2
             },
             {
@@ -26240,15 +26476,7 @@
               "mentions": 1
             },
             {
-              "label": "성실한 답변",
-              "mentions": 1
-            },
-            {
               "label": "맞춤형 설명",
-              "mentions": 1
-            },
-            {
-              "label": "편안한 상담",
               "mentions": 1
             },
             {
@@ -26841,28 +27069,89 @@
               "scoreSum": 38.0,
               "sent": 31,
               "rateResponses": 4
+            },
+            "2023": {
+              "responses": 8,
+              "scoreSum": 71.0
+            },
+            "2024": {
+              "responses": 10,
+              "scoreSum": 95.0
+            },
+            "2025": {
+              "responses": 2,
+              "scoreSum": 20.0
             }
           },
-          "commentResponses": 4,
+          "commentResponses": 24,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 3
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 2
+              "mentions": 14
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 1
+              "mentions": 12
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 6
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 6
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "대기시간 관리 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "구매·계약 압박",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식 정확성 부족",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-08-25"
         },
         {
@@ -26961,8 +27250,8 @@
           "tenureBucketLabel": "5~10년",
           "years": {
             "2025": {
-              "responses": 4,
-              "scoreSum": 39.0,
+              "responses": 6,
+              "scoreSum": 58.0,
               "sent": 8
             },
             "2026": {
@@ -26970,34 +27259,78 @@
               "scoreSum": 25.0,
               "sent": 24,
               "rateResponses": 3
+            },
+            "2023": {
+              "responses": 17,
+              "scoreSum": 161.0
+            },
+            "2024": {
+              "responses": 10,
+              "scoreSum": 95.0
             }
           },
-          "commentResponses": 7,
+          "commentResponses": 36,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 4
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 3
+              "mentions": 20
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 1
+              "mentions": 15
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
+              "label": "전문지식·정확성",
+              "mentions": 9
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 8
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 8
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 7
             },
             {
               "label": "편안한 상담",
-              "mentions": 1
+              "mentions": 6
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 5
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
             }
           ],
           "improvementKeywords": [
             {
               "label": "시승기회·시간 확대",
+              "mentions": 1
+            },
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "가격혜택 안내부족",
               "mentions": 1
             }
           ],
@@ -27361,24 +27694,28 @@
               "scoreSum": 60.0,
               "sent": 28,
               "rateResponses": 6
+            },
+            "2023": {
+              "responses": 4,
+              "scoreSum": 38.0
             }
           },
-          "commentResponses": 50,
+          "commentResponses": 54,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 33
+              "mentions": 35
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 26
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 10
+              "mentions": 28
             },
             {
               "label": "적극적 응대",
+              "mentions": 12
+            },
+            {
+              "label": "이해하기 쉬운 설명",
               "mentions": 10
             },
             {
@@ -27387,15 +27724,19 @@
             },
             {
               "label": "성실한 답변",
-              "mentions": 7
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 5
+              "mentions": 9
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 5
+              "mentions": 8
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
             },
             {
               "label": "신속한 응답",
@@ -27410,7 +27751,7 @@
               "mentions": 2
             },
             {
-              "label": "구매결정 지원",
+              "label": "맞춤형 설명",
               "mentions": 2
             }
           ],
@@ -27444,13 +27785,13 @@
           "tenureBucketLabel": "5~10년",
           "years": {
             "2023": {
-              "responses": 1,
-              "scoreSum": 10.0,
+              "responses": 16,
+              "scoreSum": 144.0,
               "sent": 0
             },
             "2024": {
-              "responses": 25,
-              "scoreSum": 236.0,
+              "responses": 37,
+              "scoreSum": 346.0,
               "sent": 87
             },
             "2026": {
@@ -27460,69 +27801,77 @@
               "rateResponses": 7
             },
             "2025": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 2,
+              "scoreSum": 18.0,
               "sent": 5
             }
           },
-          "commentResponses": 33,
+          "commentResponses": 62,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 17
+              "mentions": 35
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 15
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 10
+              "mentions": 26
             },
             {
               "label": "적극적 응대",
-              "mentions": 10
+              "mentions": 17
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 15
             },
             {
               "label": "성실한 답변",
-              "mentions": 10
+              "mentions": 15
             },
             {
               "label": "전문지식·정확성",
+              "mentions": 8
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 7
+            },
+            {
+              "label": "비교·장단점 안내",
               "mentions": 7
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 3
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 3
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 1
+              "mentions": 5
             },
             {
               "label": "신뢰·솔직한 상담",
-              "mentions": 1
+              "mentions": 5
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 3
             },
             {
               "label": "맞춤형 설명",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
               "label": "구체적 설명 부족",
-              "mentions": 2
+              "mentions": 4
             },
             {
               "label": "진행상황 안내 미흡",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식 정확성 부족",
               "mentions": 1
             }
           ],
@@ -28548,11 +28897,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "주선종",
-          "responses": 29,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "김준호",
           "responses": 28,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -28560,11 +28904,6 @@
         {
           "name": "이동담",
           "responses": 23,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "이준호",
-          "responses": 20,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -28588,18 +28927,8 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "나희진",
-          "responses": 5,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "한정훈",
           "responses": 2,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김성현",
-          "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
@@ -29290,16 +29619,6 @@
           "name": "김기범",
           "responses": 4,
           "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "이상헌",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "장현두",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
       "formerEmployees": []
@@ -29567,42 +29886,58 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2025": {
-              "responses": 2,
-              "scoreSum": 17.0,
+              "responses": 4,
+              "scoreSum": 35.0,
               "sent": 4
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 75.0,
+              "responses": 10,
+              "scoreSum": 85.0,
               "sent": 29,
-              "rateResponses": 9
+              "rateResponses": 10
+            },
+            "2024": {
+              "responses": 5,
+              "scoreSum": 45.0
             }
           },
-          "commentResponses": 11,
+          "commentResponses": 19,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 6
+              "mentions": 12
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
               "mentions": 4
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 2
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 1
+              "mentions": 3
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 1
+              "mentions": 2
             },
             {
               "label": "신뢰·솔직한 상담",
-              "mentions": 1
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
             },
             {
               "label": "지속적 후속관리",
@@ -29613,11 +29948,16 @@
               "mentions": 1
             },
             {
-              "label": "신속한 응답",
+              "label": "구매결정 지원",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-08-23"
         },
         {
@@ -29686,18 +30026,18 @@
         {
           "years": {
             "2023": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 36,
+              "scoreSum": 343.0,
               "sent": 153
             },
             "2024": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 31,
+              "scoreSum": 293.0,
               "sent": 113
             },
             "2025": {
-              "responses": 0,
-              "scoreSum": 0,
+              "responses": 2,
+              "scoreSum": 18.0,
               "sent": 3
             }
           },
@@ -29801,16 +30141,24 @@
               "scoreSum": 76.0,
               "sent": 43,
               "rateResponses": 8
+            },
+            "2023": {
+              "responses": 2,
+              "scoreSum": 19.0
             }
           },
-          "commentResponses": 8,
+          "commentResponses": 10,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 5
+              "mentions": 6
             },
             {
               "label": "상세·꼼꼼한 설명",
+              "mentions": 2
+            },
+            {
+              "label": "전문지식·정확성",
               "mentions": 2
             },
             {
@@ -29823,6 +30171,18 @@
             },
             {
               "label": "지속적 후속관리",
+              "mentions": 1
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 1
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "적극적 응대",
               "mentions": 1
             }
           ],
@@ -30064,8 +30424,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2025": {
-              "responses": 4,
-              "scoreSum": 40.0,
+              "responses": 6,
+              "scoreSum": 56.0,
               "sent": 16
             },
             "2026": {
@@ -30073,52 +30433,81 @@
               "scoreSum": 123.0,
               "sent": 77,
               "rateResponses": 13
+            },
+            "2023": {
+              "responses": 15,
+              "scoreSum": 139.0
+            },
+            "2024": {
+              "responses": 13,
+              "scoreSum": 121.0
             }
           },
-          "commentResponses": 17,
+          "commentResponses": 47,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 10
+              "mentions": 26
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 8
+              "mentions": 23
             },
             {
               "label": "성실한 답변",
-              "mentions": 3
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 2
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
+              "mentions": 13
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 1
+              "mentions": 9
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 9
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 2
             },
             {
               "label": "맞춤형 설명",
               "mentions": 1
             },
             {
-              "label": "전문지식·정확성",
+              "label": "구매결정 지원",
               "mentions": 1
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "편안한 상담",
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
-          "improvementKeywords": [],
+          "improvementKeywords": [
+            {
+              "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "시승모델 다양화 필요",
+              "mentions": 1
+            }
+          ],
           "latestResponseDate": "2026-09-06"
         },
         {
@@ -30131,8 +30520,8 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2024": {
-              "responses": 8,
-              "scoreSum": 71.0,
+              "responses": 17,
+              "scoreSum": 157.0,
               "sent": 42
             },
             "2025": {
@@ -30145,54 +30534,66 @@
               "scoreSum": 39.0,
               "sent": 35,
               "rateResponses": 4
+            },
+            "2023": {
+              "responses": 12,
+              "scoreSum": 111.0
             }
           },
-          "commentResponses": 17,
+          "commentResponses": 38,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 13
+              "mentions": 27
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 7
+              "mentions": 16
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 6
+              "mentions": 12
             },
             {
               "label": "시승·차량체험 지원",
-              "mentions": 3
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 2
+              "mentions": 8
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 2
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
+              "mentions": 7
             },
             {
               "label": "비교·장단점 안내",
-              "mentions": 2
+              "mentions": 7
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 5
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 5
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 4
             },
             {
               "label": "신뢰·솔직한 상담",
               "mentions": 1
             },
             {
-              "label": "편안한 상담",
+              "label": "신속한 응답",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
               "label": "구체적 설명 부족",
+              "mentions": 2
+            },
+            {
+              "label": "간결한 설명 필요",
               "mentions": 1
             }
           ],
@@ -30206,11 +30607,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "김현철",
-          "responses": 46,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "김종윤",
           "responses": 40,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -30218,11 +30614,6 @@
         {
           "name": "박주언",
           "responses": 36,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김명수",
-          "responses": 34,
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
@@ -30282,11 +30673,6 @@
         },
         {
           "name": "곽보정",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "이지수",
           "responses": 1,
           "reason": "현재 DMS 재직 명단 미확인"
         }
@@ -30681,11 +31067,6 @@
         {
           "name": "오상하",
           "responses": 9,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "안재현",
-          "responses": 2,
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
@@ -31165,8 +31546,8 @@
           "tenureBucketLabel": "3~5년",
           "years": {
             "2023": {
-              "responses": 20,
-              "scoreSum": 198.0,
+              "responses": 21,
+              "scoreSum": 208.0,
               "sent": 65
             },
             "2024": {
@@ -31186,15 +31567,15 @@
               "rateResponses": 7
             }
           },
-          "commentResponses": 52,
+          "commentResponses": 53,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 34
+              "mentions": 35
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 28
+              "mentions": 29
             },
             {
               "label": "성실한 답변",
@@ -31202,7 +31583,7 @@
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 9
+              "mentions": 10
             },
             {
               "label": "적극적 응대",
@@ -31347,16 +31728,6 @@
           "reason": "현재 DMS 재직 명단 미확인"
         },
         {
-          "name": "송용운",
-          "responses": 21,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김명수",
-          "responses": 20,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
           "name": "성기석",
           "responses": 20,
           "reason": "현재 DMS 재직 명단 미확인"
@@ -31368,11 +31739,6 @@
         },
         {
           "name": "곽보정",
-          "responses": 18,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "이정훈",
           "responses": 18,
           "reason": "현재 DMS 재직 명단 미확인"
         },
@@ -31393,11 +31759,6 @@
         },
         {
           "name": "김지완",
-          "responses": 4,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김현철",
           "responses": 4,
           "reason": "현재 DMS 재직 명단 미확인"
         },

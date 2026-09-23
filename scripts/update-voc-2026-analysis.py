@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import runpy
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date, datetime
 from pathlib import Path
 from typing import Any
@@ -23,6 +23,7 @@ normalise_showroom_name = GENERATOR["normalise_showroom_name"]
 merged_staff_comments = GENERATOR["merged_staff_comments"]
 merged_staff_metrics = GENERATOR["merged_staff_metrics"]
 staff_source_keys = GENERATOR["staff_source_keys"]
+current_staff_source_keys = GENERATOR["current_staff_source_keys"]
 
 
 def date_value(value: Any) -> datetime | None:
@@ -137,43 +138,67 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
 
     refreshed_employees = 0
     matched_responses = 0
+    current_name_counts = Counter(
+        str(employee["name"]).strip()
+        for showroom in payload["showrooms"].values()
+        for employee in showroom["employees"]
+    )
+    available_metric_keys = tuple(staff_metrics)
     claimed_source_keys = {
         source_key
         for showroom in payload["showrooms"].values()
         for employee in showroom["employees"]
-        for source_key in staff_source_keys(showroom["showroom"], employee["name"])
+        for source_key in current_staff_source_keys(
+            showroom["showroom"],
+            employee["name"],
+            available_metric_keys,
+            current_name_counts,
+        )
     }
     for showroom in payload["showrooms"].values():
         showroom_name = normalise_showroom_name(showroom["showroom"])
         for employee in showroom["employees"]:
             key = (showroom_name, str(employee["name"]).strip())
-            source_keys = staff_source_keys(*key)
+            source_keys = current_staff_source_keys(
+                *key,
+                available_metric_keys,
+                current_name_counts,
+            )
             refreshed_years = merged_staff_metrics(staff_metrics, source_keys)
-            previous_2026 = employee["years"].get("2026", {})
-            refreshed_2026 = dict(refreshed_years["2026"])
-            if refreshed_2026.get("responses"):
-                if "sent" in previous_2026:
-                    refreshed_2026["sent"] = previous_2026["sent"]
-                    refreshed_2026["rateResponses"] = rate_responses.get(key, 0)
-                employee["years"]["2026"] = refreshed_2026
-                matched_responses += int(refreshed_2026["responses"])
-            else:
-                employee["years"].pop("2026", None)
-
-            if len(source_keys) > 1:
-                for year in YEARS:
-                    refreshed_year = dict(refreshed_years[year])
-                    if not refreshed_year.get("responses"):
-                        employee["years"].pop(year, None)
-                        continue
-                    previous_year = employee["years"].get(year, {})
+            for year in YEARS:
+                refreshed_year = dict(refreshed_years[year])
+                previous_year = employee["years"].get(year, {})
+                if not refreshed_year.get("responses"):
                     if "sent" in previous_year:
-                        refreshed_year["sent"] = previous_year["sent"]
-                    if "rateResponses" in previous_year:
-                        refreshed_year["rateResponses"] = previous_year["rateResponses"]
-                    employee["years"][year] = refreshed_year
+                        employee["years"][year] = {
+                            "responses": 0,
+                            "scoreSum": 0,
+                            "sent": previous_year["sent"],
+                        }
+                    else:
+                        employee["years"].pop(year, None)
+                    continue
+                if "sent" in previous_year:
+                    refreshed_year["sent"] = previous_year["sent"]
+                if year == "2026" and "sent" in previous_year:
+                    refreshed_year["rateResponses"] = sum(
+                        rate_responses.get(source_key, 0)
+                        for source_key in source_keys
+                    )
+                elif "rateResponses" in previous_year:
+                    refreshed_year["rateResponses"] = previous_year["rateResponses"]
+                employee["years"][year] = refreshed_year
+                if year == "2026":
+                    matched_responses += int(refreshed_year["responses"])
 
-            latest = latest_by_employee.get(key)
+            latest = max(
+                (
+                    latest_by_employee[source_key]
+                    for source_key in source_keys
+                    if source_key in latest_by_employee
+                ),
+                default=None,
+            )
             if latest:
                 employee["latestResponseDate"] = latest
             elif employee.get("latestResponseDate", "").startswith("2026-"):
@@ -228,7 +253,11 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
     source["commentAnalysisEmployees"] = refreshed_employees
     source["refreshScope"] = (
         "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신 · "
-        "확인된 직원 이력 연결 보정"
+        "이름이 유일한 재직 직원의 전시장 이동 이력 자동 통합"
+    )
+    source["staffHistoryMatchRule"] = (
+        "현재 재직 명단에서 이름이 유일한 직원은 2023-2026 전시장 이동 이력 통합 · "
+        "동명이인은 전시장 기준 분리"
     )
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(

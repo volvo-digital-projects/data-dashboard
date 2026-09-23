@@ -234,7 +234,7 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
     ),
     0,
   );
-  assert.equal(currentEmployeeResponses, 2052);
+  assert.equal(currentEmployeeResponses, 2061);
   const kimDaeJun = staffAnalysis.showrooms["6KR6834"].employees.find(
     (employee) => employee.name === "김대준",
   );
@@ -281,6 +281,34 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
     !staffAnalysis.showrooms["6KR6845"].excludedRawNames.some(
       (employee) => employee.name === "송민경",
     ),
+  );
+  const jeonGyuCheol = staffAnalysis.showrooms["6KR6874"].employees.find(
+    (employee) => employee.name === "전규철",
+  );
+  assert.deepEqual(
+    Object.fromEntries(
+      Object.entries(jeonGyuCheol.years).map(([year, values]) => [
+        year,
+        values.responses,
+      ]),
+    ),
+    { 2023: 13, 2024: 19, 2025: 9, 2026: 9 },
+  );
+  assert.equal(jeonGyuCheol.commentResponses, 50);
+  assert.equal(
+    Object.values(jeonGyuCheol.years).reduce(
+      (total, year) => total + year.scoreSum,
+      0,
+    ) / 50,
+    9,
+  );
+  assert.match(
+    staffAnalysis.source.staffHistoryMatchRule,
+    /이름이 유일한 직원은 2023-2026 전시장 이동 이력 통합.*동명이인은 전시장 기준 분리/,
+  );
+  assert.match(
+    refreshScript,
+    /current_name_counts = Counter\([\s\S]*?current_staff_source_keys\([\s\S]*?available_metric_keys,[\s\S]*?current_name_counts/,
   );
   assert.equal(consultation.updatedThrough, "2026-09-13");
   assert.deepEqual(consultation.national.slice(-2), [9.237779, 2107]);
@@ -689,7 +717,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   );
   assert.deepEqual(splitPressureMentions, {
     "자율관람 방해": 1,
-    "구매·계약 압박": 3,
+    "구매·계약 압박": 4,
     "과도한 응대 부담": 6,
   });
   const waitAndReservationMentions = analyzedEmployees.flatMap(({ improvementKeywords }) =>
@@ -697,7 +725,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
       ["대기시간 관리 미흡", "예약절차 운영 미흡"].includes(label),
     ),
   );
-  assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 65);
+  assert.equal(waitAndReservationMentions.reduce((total, { mentions }) => total + mentions, 0), 71);
   assert.ok(analyzedEmployees.some(({ strengthKeywords }) => strengthKeywords.length > 6));
   assert.ok(analyzedEmployees.some(({ improvementKeywords }) => improvementKeywords.length > 6));
   assert.ok(analyzedEmployees.every(({ strengthKeywords }) => strengthKeywords.length <= 14));
