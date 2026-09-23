@@ -2131,17 +2131,13 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   stroke-dasharray: 5 4;
 }
 
-.growth-scatter-average-label rect,
-.growth-scatter-average-label .pointer {
+.growth-scatter-average-label .callout-shape {
   fill: rgba(255, 246, 247, 0.97);
   stroke: rgba(198, 61, 69, 0.42);
   stroke-width: 1;
+  stroke-linejoin: round;
   filter: drop-shadow(0 2px 3px rgba(90, 64, 16, 0.08));
   vector-effect: non-scaling-stroke;
-}
-
-.growth-scatter-average-label .pointer {
-  stroke-linejoin: round;
 }
 
 .growth-scatter-average-label text {
@@ -9692,19 +9688,12 @@ input:focus-visible {
   vector-effect: non-scaling-stroke;
 }
 
-.analysis-staff-scatter-average .label rect {
+.analysis-staff-scatter-average .label .callout-shape {
   fill: rgba(255, 255, 255, 0.96);
   stroke: rgba(51, 65, 85, 0.48);
   stroke-width: 1;
-  filter: drop-shadow(0 1px 2px rgba(84, 42, 38, 0.12));
-  vector-effect: non-scaling-stroke;
-}
-
-.analysis-staff-scatter-average .label .pointer {
-  fill: #334155;
-  stroke: #334155;
-  stroke-width: 1.2;
   stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(84, 42, 38, 0.12));
   vector-effect: non-scaling-stroke;
 }
 

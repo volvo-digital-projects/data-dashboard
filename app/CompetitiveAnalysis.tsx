@@ -3847,8 +3847,10 @@ export default function CompetitiveAnalysis({
                           className="growth-scatter-average-label"
                           transform={`translate(${staffScatterPlot.right - 32} ${staffScatterY(staffScatterNationalAverage) - 36})`}
                         >
-                          <path className="pointer" d="M 25 28 L 32 36 L 39 28 Z" />
-                          <rect width="50" height="30" rx="4" />
+                          <path
+                            className="callout-shape"
+                            d="M 4 0 H 46 Q 50 0 50 4 V 26 Q 50 30 46 30 H 39 L 32 36 L 25 30 H 4 Q 0 30 0 26 V 4 Q 0 0 4 0 Z"
+                          />
                           <text x="25" y="11" textAnchor="middle">전국 평균</text>
                           <text className="score" x="25" y="23" textAnchor="middle">
                             {(staffScatterNationalAverage / 10).toFixed(1)}점
@@ -4151,8 +4153,10 @@ export default function CompetitiveAnalysis({
                           className="growth-scatter-average-label"
                           transform={`translate(${staffScatterPlot.right - 32} ${staffSalesScatterY(staffSalesNationalAverage) - 36})`}
                         >
-                          <path className="pointer" d="M 25 28 L 32 36 L 39 28 Z" />
-                          <rect width="50" height="30" rx="4" />
+                          <path
+                            className="callout-shape"
+                            d="M 4 0 H 46 Q 50 0 50 4 V 26 Q 50 30 46 30 H 39 L 32 36 L 25 30 H 4 Q 0 30 0 26 V 4 Q 0 0 4 0 Z"
+                          />
                           <text x="25" y="11" textAnchor="middle">전국 평균</text>
                           <text className="score" x="25" y="23" textAnchor="middle">
                             {staffSalesNationalAverage.toFixed(1)}대
@@ -4762,8 +4766,10 @@ export default function CompetitiveAnalysis({
                           y2={staffScatterY(staffScatterNationalAverage)}
                         />
                         <g className="label" transform={`translate(${staffScatterPlot.right - 30} ${staffScatterY(staffScatterNationalAverage) - 36})`}>
-                          <path className="pointer" d="M 22 28 L 30 36 L 38 28 Z" />
-                          <rect width="56" height="30" rx="6" />
+                          <path
+                            className="callout-shape"
+                            d="M 6 0 H 50 Q 56 0 56 6 V 24 Q 56 30 50 30 H 38 L 30 36 L 22 30 H 6 Q 0 30 0 24 V 6 Q 0 0 6 0 Z"
+                          />
                           <text x="28" y="11" textAnchor="middle">전국 평균</text>
                           <text className="score" x="28" y="23" textAnchor="middle">
                             {staffScatterNationalAverage.toFixed(1)}점
