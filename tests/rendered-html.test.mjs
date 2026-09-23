@@ -974,7 +974,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /staff\.finalScore > selectedStaffSatisfactionScore/);
   assert.match(source, /selectedStaffSatisfactionNationalRank \/ staffTenureScatterPopulation\.length/);
   assert.match(navigation, /<small className="growth-profile-satisfaction-rank">[\s\S]*?\(상위 \{selectedStaffSatisfactionTopPercent\.toFixed\(1\)\}%\)/);
-  assert.match(css, /\.growth-profile-metric strong \.growth-profile-satisfaction-rank\s*\{[^}]*margin-left: 0;[^}]*color: #3f7588;[^}]*font-family: var\(--font-ui\);[^}]*font-weight: 600;[^}]*white-space: nowrap;/);
+  assert.match(css, /\.growth-profile-metric strong \.growth-profile-satisfaction-rank\s*\{[^}]*margin-left: 0;[^}]*color: #3f7588;[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-weight: 600;[^}]*white-space: nowrap;/);
   assert.match(source, /employee\.tenureMonths > selectedStaffEmployee\.tenureMonths/);
   assert.match(source, /selectedStaffTenureRank \/ staffCurrentSalesPopulation\.length/);
   assert.doesNotMatch(profile, /growth-profile-person-label/);
@@ -990,7 +990,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(stabilityIndex > profileStart && satisfactionIndex > stabilityIndex && salesIndex > satisfactionIndex);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 460px repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /@media \(max-width: 1180px\)[\s\S]*?\.growth-navigation-workspace \{ grid-template-columns: 260px minmax\(0, 1fr\); \}[\s\S]*?\.growth-profile-strip \{ grid-template-columns: 420px repeat\(3, minmax\(0, 1fr\)\); \}/);
-  assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 2px;[^}]*font-size: 10px;/);
+  assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 2px;[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-size: 10px;/);
+  assert.match(css, /\.growth-profile-metric strong \.growth-profile-evidence-count\s*\{[^}]*margin-left: 7px;[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-size: 10px;/);
   assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);
   assert.doesNotMatch(source, /const staffScoreFreshnessWeight|const staffScorePriorResponses/);
   assert.doesNotMatch(source, /peerAverage \* staffScorePriorResponses/);
@@ -999,6 +1000,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-navigation-workspace\s*\{[^}]*grid-template-areas: "roster detail";/);
   assert.match(navigation, /className="growth-navigation-sticky-summary"[\s\S]*?className="growth-navigation-heading"[\s\S]*?className="growth-profile-strip"[\s\S]*?className="growth-navigation-pinned-headings"[\s\S]*?className="growth-staff-roster-columns"[\s\S]*?className="growth-navigation-pinned-capabilities"[\s\S]*?className="growth-navigation-workspace"[\s\S]*?className="growth-staff-roster"[\s\S]*?className="growth-navigation-detail"/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*margin: 6px 6px 0;/);
+  assert.match(css, /\.growth-profile-strip\s*\{[^}]*font-family: var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-variant-numeric: tabular-nums;/);
   assert.match(css, /\.growth-profile-strip > div:not\(:first-child\)::before\s*\{[^}]*top: 12px;[^}]*bottom: 12px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 108px;[^}]*gap: 12px;/);
   assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 108px;[^}]*padding: 1px 10px 0 12px;[^}]*justify-content: flex-start;/);

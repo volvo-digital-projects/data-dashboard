@@ -1338,6 +1338,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   border: 1px solid #d4e2e8;
   border-radius: 6px;
   background: #fff;
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-variant-numeric: tabular-nums;
 }
 
 .growth-profile-strip > div {
@@ -1488,7 +1490,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-profile-metric strong .growth-profile-satisfaction-rank {
   margin-left: 0;
   color: #3f7588;
-  font-family: var(--font-ui);
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -1501,7 +1503,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-profile-sales strong .growth-profile-sales-context {
   margin-left: 2px;
-  font-family: var(--font-ui);
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-size: 10px;
   font-weight: 500;
 }
@@ -1515,7 +1517,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-profile-metric strong .growth-profile-evidence-count {
   margin-left: 7px;
-  font-family: var(--font-ui);
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-size: 10px;
   font-weight: 500;
   white-space: nowrap;
