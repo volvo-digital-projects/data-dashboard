@@ -3589,7 +3589,7 @@ export default function CompetitiveAnalysis({
                             <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>
                           ) : null}
                         </strong>
-                        <small>{formatStaffShortDate(employee.hireDate)}</small>
+                        <small className="growth-staff-hire-date">{formatStaffShortDate(employee.hireDate)}</small>
                       </span>
                       <b>{average === null ? "―" : average.toFixed(1)}</b>
                       <em aria-label={`2026년 누적 판매 ${deliveredSales ?? 0}대`}>

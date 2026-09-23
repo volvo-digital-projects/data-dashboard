@@ -1283,6 +1283,11 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   white-space: nowrap;
 }
 
+.growth-staff-hire-date {
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-weight: 400;
+}
+
 .growth-staff-roster-list button > b {
   width: 100%;
   font-family: var(--font-volvo);

@@ -601,6 +601,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /자료 근거 -/);
   assert.match(navigation, /const isTeamLeader = employee\.role === "영업팀장" \|\| employee\.jobTitle === "팀장";/);
   assert.match(navigation, /className="growth-staff-name">\{employee\.name\}<\/span>[\s\S]*?className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L<\/i>/);
+  assert.match(navigation, /className="growth-staff-hire-date">\{formatStaffShortDate\(employee\.hireDate\)\}<\/small>/);
   const youtubeStaffBlock = source.match(/const STAFF_YOUTUBE_BADGE_KEYS = new Set\(\[([\s\S]*?)\]\);/)?.[1] ?? "";
   const expectedYoutubeStaffKeys = [
     "6KR6867:송민경", "6KR6830:진주현", "6KR6858:나수연", "6KR6870:이정훈",
@@ -615,6 +616,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /className="growth-staff-youtube-badge"/);
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em 13px;[\s\S]*?white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-lead-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*13px;[^}]*border-radius:\s*50%;[^}]*background:\s*#176f8a;[^}]*transform:\s*none;/);
+  assert.match(css, /\.growth-staff-hire-date\s*\{[^}]*font-family:\s*var\(--font-volvo\), var\(--font-korean\), sans-serif;[^}]*font-weight:\s*400;/);
   assert.match(css, /\.growth-profile-role\s*\{[^}]*display:\s*inline-flex;[^}]*align-items:\s*center;[^}]*gap:\s*4px;/);
   assert.match(css, /\.growth-profile-youtube-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*9px;[^}]*border-radius:\s*2\.5px;[^}]*background:\s*#ff0033;/);
   assert.match(css, /\.growth-profile-youtube-badge::before\s*\{[^}]*border-left:\s*4px solid #fff;/);
