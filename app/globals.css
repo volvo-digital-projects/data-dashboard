@@ -1333,7 +1333,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   min-width: 0;
   margin: 6px 6px 0;
   display: grid;
-  grid-template-columns: 350px repeat(3, minmax(0, 1fr));
+  grid-template-columns: 460px repeat(3, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid #d4e2e8;
   border-radius: 6px;
@@ -1359,9 +1359,9 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-profile-person {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) 92px;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .growth-profile-photo {
@@ -1524,11 +1524,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-profile-person-certification {
   position: relative;
   align-self: stretch;
-  min-width: 76px;
-  padding: 0 8px 0 10px;
+  width: 92px;
+  box-sizing: border-box;
+  padding: 1px 10px 0 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .growth-profile-person-certification::before {
@@ -3187,7 +3188,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 @media (max-width: 1180px) {
   .growth-navigation-workspace { grid-template-columns: 260px minmax(0, 1fr); }
   .growth-navigation-pinned-headings { grid-template-columns: 260px minmax(0, 1fr); }
-  .growth-profile-strip { grid-template-columns: 345px repeat(3, minmax(0, 1fr)); }
+  .growth-profile-strip { grid-template-columns: 420px repeat(3, minmax(0, 1fr)); }
   .growth-capability-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 

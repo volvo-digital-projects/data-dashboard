@@ -985,8 +985,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   const satisfactionIndex = navigation.indexOf("VOC 고객상담 만족평균");
   const salesIndex = navigation.indexOf("2026 누적 판매대수");
   assert.ok(stabilityIndex > profileStart && satisfactionIndex > stabilityIndex && salesIndex > satisfactionIndex);
-  assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 350px repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(css, /@media \(max-width: 1180px\)[\s\S]*?\.growth-navigation-workspace \{ grid-template-columns: 260px minmax\(0, 1fr\); \}[\s\S]*?\.growth-profile-strip \{ grid-template-columns: 345px repeat\(3, minmax\(0, 1fr\)\); \}/);
+  assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 460px repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 1180px\)[\s\S]*?\.growth-navigation-workspace \{ grid-template-columns: 260px minmax\(0, 1fr\); \}[\s\S]*?\.growth-profile-strip \{ grid-template-columns: 420px repeat\(3, minmax\(0, 1fr\)\); \}/);
   assert.match(css, /\.growth-profile-sales strong \.growth-profile-sales-context\s*\{[^}]*margin-left: 2px;[^}]*font-size: 10px;/);
   assert.doesNotMatch(navigation, /<b>최신성<\/b>|최신성\s*\(20%\)|전국 \d+명 중 \d+위/);
   assert.doesNotMatch(source, /const staffScoreFreshnessWeight|const staffScorePriorResponses/);
@@ -997,7 +997,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-navigation-sticky-summary"[\s\S]*?className="growth-navigation-heading"[\s\S]*?className="growth-profile-strip"[\s\S]*?className="growth-navigation-pinned-headings"[\s\S]*?className="growth-staff-roster-columns"[\s\S]*?className="growth-navigation-pinned-capabilities"[\s\S]*?className="growth-navigation-workspace"[\s\S]*?className="growth-staff-roster"[\s\S]*?className="growth-navigation-detail"/);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*margin: 6px 6px 0;/);
   assert.match(css, /\.growth-profile-strip > div:not\(:first-child\)::before\s*\{[^}]*top: 12px;[^}]*bottom: 12px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
-  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*min-width: 76px;[^}]*padding: 0 8px 0 10px;/);
+  assert.match(css, /\.growth-profile-person\s*\{[^}]*grid-template-columns: auto minmax\(0, 1fr\) 92px;[^}]*gap: 12px;/);
+  assert.match(css, /\.growth-profile-person-certification\s*\{[^}]*width: 92px;[^}]*padding: 1px 10px 0 12px;[^}]*justify-content: flex-start;/);
   assert.match(css, /\.growth-profile-person-certification::before\s*\{[^}]*top: 6px;[^}]*bottom: 6px;[^}]*background: rgba\(181, 202, 211, 0\.52\);/);
   assert.match(css, /\.growth-comment-bar > small\s*\{[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(css, /\.competitive-analysis-page > \.growth-navigation-sticky-summary,[\s\S]*?\.competitive-analysis-page > \.growth-navigation,[\s\S]*?\.competitive-analysis-page > \.v3s-award-card\s*\{[^}]*margin-right: calc\(-1 \* var\(--dashboard-content-overhang\)\);[^}]*margin-left: calc\(-1 \* var\(--dashboard-content-overhang\)\);/);
