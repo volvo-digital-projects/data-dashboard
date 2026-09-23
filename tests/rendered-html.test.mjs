@@ -776,7 +776,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /전체 점수 범위를 유지하면서 8~10점 구간을 넓게 표시합니다\./);
   assert.match(source, /const staffScatterUpperRangeExponent = 1\.7;/);
   assert.match(source, /Math\.pow\(scoreRatio, staffScatterUpperRangeExponent\)/);
-  assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong><span className="growth-sales-heading-number">26<\/span>년 세그먼트별 판매<\/strong>[\s\S]*?Sales-DMS 누적 출고 기준/);
+  assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong><span className="growth-sales-heading-number">26<\/span>년 세그먼트별 판매<\/strong>/);
+  assert.doesNotMatch(navigation, /Sales-DMS 누적 출고 기준/);
   assert.equal((navigation.match(/className="growth-segment-donut"/g) ?? []).length, 1);
   assert.match(source, /label: selectedStaffEmployee\?\.name \?\? "영업직원"[\s\S]*?label: selected\.dealer[\s\S]*?label: "볼보 전체"/);
   assert.match(navigation, /key=\{`segment-donuts-\$\{selectedStaffEmployee\?\.name \?\? "none"\}`\}/);

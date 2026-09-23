@@ -3924,7 +3924,6 @@ export default function CompetitiveAnalysis({
                       <div>
                         <strong><span className="growth-sales-heading-number">26</span>년 세그먼트별 판매</strong>
                       </div>
-                      <small>Sales-DMS 누적 출고 기준</small>
                     </header>
                     <div
                       className="growth-segment-donuts"
