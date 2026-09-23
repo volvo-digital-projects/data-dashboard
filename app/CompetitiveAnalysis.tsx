@@ -2801,7 +2801,7 @@ export default function CompetitiveAnalysis({
     name: point.name,
     showroom: staffScatterShowroomLabel(point.cdsid),
     tenureYears: point.tenureYears,
-    metricLabel: "26년 누적판매",
+    metricLabel: "2026년 누적판매",
     metricValue: `${point.deliveredSales}대`,
     detail: "Sales-DMS 누적기준",
     x: staffScatterX(point.tenureYears),
@@ -3521,7 +3521,7 @@ export default function CompetitiveAnalysis({
                 </strong>
               </div>
               <div className="growth-profile-metric growth-profile-sales">
-                <span>2026 누적 판매대수</span>
+                <span>2026년 누적 판매대수</span>
                 <strong>
                   {selectedStaffDeliveredSales}<small>대</small>
                   <small className="growth-profile-sales-context">
@@ -3537,7 +3537,7 @@ export default function CompetitiveAnalysis({
               <span>고객상담 평균만족도</span>
               <span className="growth-roster-sales-heading">
                 <b>누적 판매대수</b>
-                <i>2026 누적 판매대수</i>
+                <i>2026년 누적 판매대수</i>
               </span>
             </div>
             <div className="growth-navigation-pinned-capabilities" aria-hidden="true">
@@ -3937,7 +3937,7 @@ export default function CompetitiveAnalysis({
                   <article className="growth-sales-funnel-card">
                     <header>
                       <div>
-                        <strong><span className="growth-sales-heading-number">26</span>년 세그먼트별 판매</strong>
+                        <strong><span className="growth-sales-heading-number">2026</span>년 세그먼트별 판매</strong>
                       </div>
                     </header>
                     <div
@@ -3993,7 +3993,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>
-                      <div><strong>근속기간 × <span className="growth-sales-heading-number">26</span>년 누적 판매대수</strong></div>
+                      <div><strong>근속기간 × <span className="growth-sales-heading-number">2026</span>년 누적 판매대수</strong></div>
                     </header>
                     <div className="growth-scatter-zoom-surface" data-zoomed={salesScatterZoom.scale > 1.001}>
                     <svg ref={salesScatterZoom.svgRef} viewBox={salesScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 2026년 누적 판매대수 분포. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소하고, 확대 후 드래그하여 이동합니다.">
@@ -4022,7 +4022,7 @@ export default function CompetitiveAnalysis({
                           <text x={x} y={staffScatterPlot.bottom + 17} textAnchor="middle">{tick.toFixed(0)}</text>
                         </g>;
                       })}
-                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">2026 누적판매(대)</text>
+                      <text className="growth-scatter-y-label" x="12" y="93" textAnchor="middle">2026년 누적판매(대)</text>
                       <text className="growth-scatter-x-label" x="245" y="202" textAnchor="middle">근속기간(년)</text>
                       {selectedStaffSalesScatterPoint ? (
                         <g
@@ -4170,7 +4170,7 @@ export default function CompetitiveAnalysis({
                     ) : null}
                     {salesScatterZoom.scale > 1.001 ? (
                       <div className="growth-scatter-fixed-axes" aria-hidden="true">
-                        <span className="growth-scatter-fixed-y-axis">2026 누적판매(대)</span>
+                        <span className="growth-scatter-fixed-y-axis">2026년 누적판매(대)</span>
                         <span className="growth-scatter-fixed-x-axis">근속기간(년)</span>
                       </div>
                     ) : null}
