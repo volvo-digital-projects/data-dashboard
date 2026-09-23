@@ -504,6 +504,7 @@ const staffImprovementKeywordLabel: Record<string, string | null> = {
 };
 const displayStaffImprovementKeywordLabel = (label: string) =>
   label
+    .replaceAll("응대 태도", "응대태도")
     .replaceAll("설명 부족", "설명부족")
     .replaceAll("안내 미흡", "안내미흡");
 const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap(

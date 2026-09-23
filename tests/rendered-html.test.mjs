@@ -678,7 +678,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /"진행상황 중간안내 미흡": "진행상황 안내 미흡"/);
   assert.match(
     source,
-    /const displayStaffImprovementKeywordLabel = \(label: string\) =>[\s\S]*?\.replaceAll\("설명 부족", "설명부족"\)[\s\S]*?\.replaceAll\("안내 미흡", "안내미흡"\);/,
+    /const displayStaffImprovementKeywordLabel = \(label: string\) =>[\s\S]*?\.replaceAll\("응대 태도", "응대태도"\)[\s\S]*?\.replaceAll\("설명 부족", "설명부족"\)[\s\S]*?\.replaceAll\("안내 미흡", "안내미흡"\);/,
   );
   assert.match(
     source,
