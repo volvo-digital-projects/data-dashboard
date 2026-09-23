@@ -2598,6 +2598,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   position: relative;
   height: 244px;
   box-sizing: border-box;
+  padding-top: 7px;
 }
 
 .growth-sales-monthly-card {
@@ -2611,6 +2612,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+}
+
+.growth-position-card > header,
+.growth-sales-funnel-card > header {
+  min-height: 21px;
+  align-items: center;
 }
 
 .growth-sales-funnel-card > header span,

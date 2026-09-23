@@ -886,6 +886,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-position-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
   assert.match(css, /\.growth-position-card,\s*\.growth-scatter-card\s*\{[^}]*font-family:\s*var\(--font-volvo\), var\(--font-korean\), sans-serif;/);
   assert.match(css, /\.growth-sales-funnel-card\s*\{[^}]*height:\s*244px;[^}]*box-sizing:\s*border-box;/);
+  assert.match(css, /\.growth-sales-funnel-card\s*\{[^}]*padding-top:\s*7px;/);
+  assert.match(css, /\.growth-position-card > header,[\s\S]*?\.growth-sales-funnel-card > header\s*\{[^}]*min-height:\s*21px;[^}]*align-items:\s*center;/);
   assert.equal((navigation.match(/<radialGradient id="(?:consultation|sales)-showroom-gradient" cx="32%" cy="28%" r="72%">/g) ?? []).length, 2);
   assert.equal((navigation.match(/<stop offset="0%" stopColor="#7fe0bd" \/>/g) ?? []).length, 2);
   assert.equal((navigation.match(/<stop offset="48%" stopColor="#18a578" \/>/g) ?? []).length, 2);
