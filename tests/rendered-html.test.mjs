@@ -944,8 +944,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const salesSegmentLabelPosition = \([\s\S]*?const radius = 37;[\s\S]*?Math\.round\(\(56 \+ Math\.sin\(midpointRadians\) \* radius\) \* 100\) \/ 100[\s\S]*?Math\.round\(\(47 - Math\.cos\(midpointRadians\) \* radius\) \* 100\) \/ 100/);
   assert.match(navigation, /className="growth-segment-donut-counts" aria-hidden="true"[\s\S]*?salesSegmentLabelPosition\(donut\.counts, segment\)[\s\S]*?\{donut\.counts\[segment\]\}/);
   assert.match(navigation, /className="growth-segment-donut-center"[\s\S]*?<em>\{donut\.label\}<\/em>[\s\S]*?<span><b>\{total\}<\/b><small>대<\/small><\/span>/);
-  assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*0;/);
-  assert.match(css, /\.growth-segment-donut-center > em\s*\{[^}]*font-size:\s*8px;[^}]*line-height:\s*1;[^}]*transform:\s*translateY\(2px\);/);
+  assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*1px;/);
+  assert.match(css, /\.growth-segment-donut-center > em\s*\{[^}]*font-size:\s*8px;[^}]*line-height:\s*1;[^}]*white-space:\s*nowrap;/);
   assert.match(css, /\.growth-segment-donut-counts > span\s*\{[^}]*transform:\s*translate\(-50%, -50%\);[^}]*color:\s*#fff;[^}]*font-size:\s*8px;[^}]*font-weight:\s*500;[^}]*text-shadow:\s*none;/);
   assert.doesNotMatch(css.match(/\.growth-segment-donut-disc\s*\{[^}]*\}/)?.[0] ?? "", /rotateX/);
   assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateY\(-4deg\) rotateZ\(-150deg\)[\s\S]*?rotateY\(-4deg\) rotateZ\(0deg\)/);
@@ -969,8 +969,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-panel\s*\{[^}]*flex-direction: column;[^}]*justify-content: space-between;[^}]*border-left: 1px solid #c9d8de;/);
   assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*display: grid;[^}]*grid-template-columns: 82px minmax\(0, 1fr\);[^}]*overflow: hidden;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*width: 78px;[^}]*height: 78px;[^}]*flex: 0 0 78px;/);
-  assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*width: 50px;[^}]*height: 50px;/);
+  assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*width: 50px;[^}]*height: 50px;[^}]*gap: 1px;/);
   assert.match(css, /\.growth-sales-share-donut span\s*\{[^}]*font-size: 8px;/);
+  assert.match(css, /\.growth-sales-share-donut strong\s*\{[^}]*margin-top: 0;[^}]*font-size: 16px;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*conic-gradient\([^}]*#74aec5[^}]*#3d7f9e[^}]*#174662[^}]*#e9794f/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*margin-top: 10px;[^}]*justify-self: start;/);
   assert.match(navigation, /key=\{`sales-share-\$\{selectedStaffEmployee\?\.cdsid \?\? selectedStaffEmployee\?\.name \?\? "none"\}`\}/);

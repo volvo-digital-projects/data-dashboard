@@ -2765,7 +2765,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 1px;
   color: #244f64;
   pointer-events: none;
 }
@@ -2779,7 +2779,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-weight: 650;
   line-height: 1;
   text-overflow: ellipsis;
-  transform: translateY(2px);
   white-space: nowrap;
 }
 
@@ -3065,6 +3064,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1px;
   border-radius: 50%;
   background: #fff;
   box-shadow: inset 0 0 0 1px rgba(222, 232, 235, 0.9);
@@ -3084,7 +3084,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-sales-share-donut strong {
-  margin-top: 1px;
+  margin-top: 0;
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-size: 16px;
   color: #294f60;
