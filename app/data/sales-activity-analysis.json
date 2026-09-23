@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-09-23",
-    "salesSyncedAt": "2026-09-23T08:01:48+09:00",
+    "salesSyncedAt": "2026-09-23T09:17:19+09:00",
     "salesPeriod": "2026-01-01~2026-09-23",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -13341,6 +13341,39 @@
           ]
         },
         {
+          "name": "이상진",
+          "activityStatus": "missing",
+          "lastActivityDate": null,
+          "activityEvents": {
+            "consultation": 0,
+            "testDrive": 0,
+            "contract": 0
+          },
+          "customers": {
+            "consultation": 0,
+            "testDrive": 0,
+            "contract": 0
+          },
+          "transitions": {
+            "consultationToTestDrive": 0,
+            "testDriveToContract": 0,
+            "contractToDelivered": 0
+          },
+          "deliveredSales": 0,
+          "deliveredCustomers": 0,
+          "monthlyDeliveredSales": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
           "name": "이승규",
           "activityStatus": "missing",
           "lastActivityDate": null,
@@ -13573,7 +13606,7 @@
         }
       ],
       "summary": {
-        "staffCount": 9,
+        "staffCount": 10,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
