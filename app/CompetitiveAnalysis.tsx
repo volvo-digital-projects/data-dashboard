@@ -565,14 +565,14 @@ const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap
 );
 const staffScoreStability = (responses: number) =>
   responses >= 50
-    ? { label: "매우 높음", tone: "very-high", note: "" }
+    ? { label: "최고", tone: "very-high", note: "" }
     : responses >= 30
       ? { label: "높음", tone: "high", note: "" }
       : responses >= 15
         ? { label: "보통", tone: "moderate", note: "" }
         : responses >= 8
           ? { label: "낮음", tone: "low", note: "" }
-          : { label: "판단 유보", tone: "insufficient", note: "회신 부족 · " };
+          : { label: "보류", tone: "insufficient", note: "회신 부족 · " };
 const nationalStaffSalesPopulation: StaffSalesScatterPoint[] =
   staffCurrentSalesPopulation.flatMap(({ cdsid, employee }) => {
     const sales = salesActivityByCdsid[cdsid]?.staff.find(
@@ -3478,9 +3478,9 @@ export default function CompetitiveAnalysis({
               </div>
               <div
                 className="growth-profile-metric growth-profile-stability"
-                title="누적 VOC 회신 기준: 50건 이상 매우 높음, 30~49건 높음, 15~29건 보통, 8~14건 낮음, 8건 미만 판단 유보"
+                title="누적 VOC 회신 기준: 50건 이상 최고, 30~49건 높음, 15~29건 보통, 8~14건 낮음, 8건 미만 보류"
               >
-                <span>VOC 점수 안정성</span>
+                <span>VOC 점수 신뢰도</span>
                 <strong className={`confidence-${selectedStaffScoreStability.tone}`}>
                   {selectedStaffScoreStability.label}
                   <small className="growth-profile-evidence-count">{selectedStaffScoreStability.note}누적 회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>

@@ -523,9 +523,9 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<small>선택 영업직원<\/small>/);
   assert.match(navigation, /selectedStaffEmployee\?\.jobTitle \?\? ""\} · \{displayTwoDigitCount\(selectedStaffTenureYears \?\? 0\)\}년 \{displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월/);
   assert.match(source, /const selectedStaffCommentTotalMentions =\s*selectedStaffStrengthTotalMentions \+ selectedStaffImprovementTotalMentions;/);
-  assert.match(navigation, /<span>VOC 점수 안정성<\/span>/);
+  assert.match(navigation, /<span>VOC 점수 신뢰도<\/span>/);
   assert.match(navigation, /selectedStaffScoreStability\.label\}[\s\S]*?growth-profile-evidence-count">\{selectedStaffScoreStability\.note\}누적 회신 \{selectedStaffResponses\}건 · 코멘트 \{selectedStaffCommentTotalMentions\}건\(중복포함\)<\/small>/);
-  assert.match(source, /responses >= 50[\s\S]*?label: "매우 높음"[\s\S]*?responses >= 30[\s\S]*?label: "높음"[\s\S]*?responses >= 15[\s\S]*?label: "보통"[\s\S]*?responses >= 8[\s\S]*?label: "낮음"[\s\S]*?label: "판단 유보"/);
+  assert.match(source, /responses >= 50[\s\S]*?label: "최고"[\s\S]*?responses >= 30[\s\S]*?label: "높음"[\s\S]*?responses >= 15[\s\S]*?label: "보통"[\s\S]*?responses >= 8[\s\S]*?label: "낮음"[\s\S]*?label: "보류"/);
   assert.doesNotMatch(navigation, /4분위|상위 25%|1분위|하위 25%/);
   assert.doesNotMatch(navigation, /코멘트 \{selectedStaffEmployee\?\.commentResponses \?\? 0\}건/);
   assert.doesNotMatch(navigation, /실제 회신만 사용|동일연차 기준으로 진단|자료 신뢰도|충분|참고/);
@@ -986,7 +986,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading b\s*\{[^}]*display: inline;/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading i\s*\{[^}]*display: none;/);
   assert.match(navigation, /selectedStaffSalesTopPercent\.toFixed\(1\)\}%\)<\/i>/);
-  const stabilityIndex = navigation.indexOf("VOC 점수 안정성");
+  const stabilityIndex = navigation.indexOf("VOC 점수 신뢰도");
   const satisfactionIndex = navigation.indexOf("VOC 고객상담 만족평균");
   const salesIndex = navigation.indexOf("2026 누적 판매대수");
   assert.ok(stabilityIndex > profileStart && satisfactionIndex > stabilityIndex && salesIndex > satisfactionIndex);
