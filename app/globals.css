@@ -3090,6 +3090,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-sales-share-donut span {
   font-size: 8px;
+  line-height: 1;
   color: #708791;
 }
 
@@ -3097,6 +3098,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   margin-top: 0;
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
   font-size: 16px;
+  line-height: 1;
   color: #294f60;
   font-variant-numeric: tabular-nums;
 }

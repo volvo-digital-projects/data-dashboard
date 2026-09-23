@@ -974,8 +974,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-share-visual\s*\{[^}]*display: grid;[^}]*grid-template-columns: 82px minmax\(0, 1fr\);[^}]*overflow: hidden;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*width: 78px;[^}]*height: 78px;[^}]*flex: 0 0 78px;/);
   assert.match(css, /\.growth-sales-share-donut > div\s*\{[^}]*width: 50px;[^}]*height: 50px;[^}]*gap: 1px;/);
-  assert.match(css, /\.growth-sales-share-donut span\s*\{[^}]*font-size: 8px;/);
-  assert.match(css, /\.growth-sales-share-donut strong\s*\{[^}]*margin-top: 0;[^}]*font-size: 16px;/);
+  assert.match(css, /\.growth-sales-share-donut span\s*\{[^}]*font-size: 8px;[^}]*line-height: 1;/);
+  assert.match(css, /\.growth-sales-share-donut strong\s*\{[^}]*margin-top: 0;[^}]*font-size: 16px;[^}]*line-height: 1;/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*conic-gradient\([^}]*#74aec5[^}]*#3d7f9e[^}]*#174662[^}]*#e9794f/);
   assert.match(css, /\.growth-sales-share-donut\s*\{[^}]*margin-top: 10px;[^}]*justify-self: start;/);
   assert.match(navigation, /key=\{`sales-share-\$\{selectedStaffEmployee\?\.cdsid \?\? selectedStaffEmployee\?\.name \?\? "none"\}`\}/);
