@@ -504,6 +504,10 @@ const staffImprovementKeywordLabel: Record<string, string | null> = {
   "서비스 품목 안내": "보증·정비 안내",
   "제품 강점 설명 확장": "제품 강점 설명",
 };
+const displayStaffImprovementKeywordLabel = (label: string) =>
+  label
+    .replaceAll("설명 부족", "설명부족")
+    .replaceAll("안내 미흡", "안내미흡");
 const staffCurrentSalesPopulation = Object.entries(staffAnalysisByCdsid).flatMap(
   ([cdsid, showroom]) =>
     showroom.employees
@@ -2377,8 +2381,9 @@ export default function CompetitiveAnalysis({
     (selectedStaffEmployee?.improvementKeywords ?? []).reduce(
       (keywords, keyword) => {
         const mappedLabel = staffImprovementKeywordLabel[keyword.label];
-        const label = mappedLabel === undefined ? keyword.label : mappedLabel;
-        if (!label) return keywords;
+        const sourceLabel = mappedLabel === undefined ? keyword.label : mappedLabel;
+        if (!sourceLabel) return keywords;
+        const label = displayStaffImprovementKeywordLabel(sourceLabel);
         keywords.set(label, (keywords.get(label) ?? 0) + keyword.mentions);
         return keywords;
       },

@@ -644,6 +644,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(staffAnalysisGenerator, /진행상황 안내 미흡/);
   assert.doesNotMatch(staffAnalysisGenerator, /진행상황 중간안내 미흡/);
   assert.match(source, /"진행상황 중간안내 미흡": "진행상황 안내 미흡"/);
+  assert.match(
+    source,
+    /const displayStaffImprovementKeywordLabel = \(label: string\) =>[\s\S]*?\.replaceAll\("설명 부족", "설명부족"\)[\s\S]*?\.replaceAll\("안내 미흡", "안내미흡"\);/,
+  );
+  assert.match(
+    source,
+    /const label = displayStaffImprovementKeywordLabel\(sourceLabel\);/,
+  );
   assert.match(staffAnalysisGenerator, /자율관람 방해/);
   assert.match(staffAnalysisGenerator, /구매·계약 압박/);
   assert.match(staffAnalysisGenerator, /과도한 응대 부담/);
