@@ -2421,6 +2421,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-variant-numeric: tabular-nums;
 }
 
+.growth-comment-evidence > header strong,
+.growth-comment-evidence > header .growth-comment-share,
+.growth-comment-bar > small {
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+}
+
 .growth-comment-evidence > header span {
   font-size: 14px;
   font-weight: 700;
