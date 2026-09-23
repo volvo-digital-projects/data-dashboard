@@ -2671,6 +2671,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   width: 112px;
   height: 102px;
   margin-top: 1px;
+  perspective: 520px;
 }
 
 .growth-segment-donut-disc {
@@ -2684,11 +2685,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   border-radius: 50%;
   background: var(--segment-gradient);
   box-shadow:
-    4px 4px 0 rgba(56, 83, 94, 0.16),
-    2px 11px 17px rgba(55, 79, 90, 0.16),
+    5px 1px 0 rgba(56, 83, 94, 0.15),
+    7px 7px 16px rgba(55, 79, 90, 0.14),
     inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-  transform: rotateZ(0deg);
+  transform: rotateY(-4deg) rotateZ(0deg);
   transform-origin: center;
+  transform-style: preserve-3d;
   animation: growth-segment-donut-enter 760ms cubic-bezier(0.2, 0.82, 0.28, 1) both;
   animation-delay: calc(var(--segment-donut-index) * 90ms);
 }
@@ -2700,7 +2702,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   border-radius: 50%;
   background: #fbfdfe;
   box-shadow:
-    3px 2px 0 rgba(56, 83, 94, 0.12),
+    3px 0 0 rgba(56, 83, 94, 0.11),
     inset 0 1px 3px rgba(43, 75, 90, 0.14);
 }
 
@@ -2727,16 +2729,16 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-segment-donut-values {
-  width: 100%;
+  width: 112px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px 5px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3px;
 }
 
 .growth-segment-donut-values > span {
   min-width: 0;
   display: grid;
-  grid-template-columns: 6px 15px minmax(0, 1fr);
+  grid-template-columns: 6px 17px minmax(0, 1fr);
   align-items: center;
   gap: 2px;
   color: #58717e;
@@ -2758,19 +2760,20 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-segment-donut-values em {
-  overflow: hidden;
+  font-family: var(--font-volvo);
+  font-variant-numeric: tabular-nums;
   font-style: normal;
-  text-overflow: ellipsis;
+  text-align: right;
 }
 
 @keyframes growth-segment-donut-enter {
   from {
     opacity: 0;
-    transform: rotateZ(-150deg) scale(0.78);
+    transform: rotateY(-4deg) rotateZ(-150deg) scale(0.78);
   }
   to {
     opacity: 1;
-    transform: rotateZ(0deg) scale(1);
+    transform: rotateY(-4deg) rotateZ(0deg) scale(1);
   }
 }
 

@@ -779,7 +779,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /<article className="growth-sales-funnel-card">[\s\S]*?<header>[\s\S]*?<strong><span className="growth-sales-heading-number">26<\/span>년 세그먼트별 판매<\/strong>/);
   assert.doesNotMatch(navigation, /Sales-DMS 누적 출고 기준/);
   assert.equal((navigation.match(/className="growth-segment-donut"/g) ?? []).length, 1);
-  assert.match(source, /label: selectedStaffEmployee\?\.name \?\? "영업직원"[\s\S]*?label: selected\.dealer[\s\S]*?label: "볼보 전체"/);
+  assert.match(source, /label: `\$\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} 전체`[\s\S]*?label: selectedStaffEmployee\?\.name \?\? "영업직원"[\s\S]*?label: `\$\{selected\.dealer\} 전체`/);
   assert.match(navigation, /key=\{`segment-donuts-\$\{selectedStaffEmployee\?\.name \?\? "none"\}`\}/);
   assert.match(navigation, /donut\.showCounts \? `\$\{donut\.counts\[segment\]\}대 \/ ` : ""/);
   assert.match(navigation, /<article className="growth-position-card">[\s\S]*?<header>[\s\S]*?<strong>역량진단 결과<\/strong>/);
@@ -929,11 +929,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(kimDaejunSales.deliveredSales >= 49);
   assert.equal(kimDaejunSales.lastActivityDate, "2025-01-16");
   assert.match(css, /\.growth-segment-donuts\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[^}]*gap: 12px;/);
-  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*width:\s*90px;[^}]*height:\s*90px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
+  assert.match(css, /\.growth-segment-donut-disc\s*\{[^}]*width:\s*90px;[^}]*height:\s*90px;[^}]*background: var\(--segment-gradient\);[^}]*transform:\s*rotateY\(-4deg\) rotateZ\(0deg\);[^}]*animation: growth-segment-donut-enter 760ms/);
   assert.doesNotMatch(css.match(/\.growth-segment-donut-disc\s*\{[^}]*\}/)?.[0] ?? "", /rotateX/);
-  assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateZ\(-150deg\)[\s\S]*?rotateZ\(0deg\)/);
-  assert.match(source, /"30": \{ label: "30", color: "#6f9fba" \}[\s\S]*?"40": \{ label: "40", color: "#6fa78e" \}[\s\S]*?"60": \{ label: "60", color: "#c5a05a" \}[\s\S]*?"90": \{ label: "90", color: "#c97a78" \}/);
-  assert.match(css, /\.growth-segment-donut-values\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@keyframes growth-segment-donut-enter\s*\{[\s\S]*?rotateY\(-4deg\) rotateZ\(-150deg\)[\s\S]*?rotateY\(-4deg\) rotateZ\(0deg\)/);
+  assert.match(source, /"30": \{ label: "30", color: "#6f9fba", lightColor: "#9abed0" \}[\s\S]*?"40": \{ label: "40", color: "#6fa78e", lightColor: "#9ac5b3" \}[\s\S]*?"60": \{ label: "60", color: "#c5a05a", lightColor: "#dcc28e" \}[\s\S]*?"90": \{ label: "90", color: "#c97a78", lightColor: "#dfa4a2" \}/);
+  assert.match(source, /salesSegmentMeta\[segment\]\.lightColor[\s\S]*?salesSegmentMeta\[segment\]\.color/);
+  assert.match(css, /\.growth-segment-donut-values\s*\{[^}]*width: 112px;[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*gap: 3px;/);
+  assert.match(css, /\.growth-segment-donut-values em\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
   assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계/);
   assert.match(navigation, /<i className="staff" \/>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\}<\/span>/);

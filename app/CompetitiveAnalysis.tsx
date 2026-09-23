@@ -434,11 +434,11 @@ type SalesSegmentKey = "30" | "40" | "60" | "90";
 type SalesSegmentCounts = Record<SalesSegmentKey, number>;
 
 const salesSegmentKeys: SalesSegmentKey[] = ["30", "40", "60", "90"];
-const salesSegmentMeta: Record<SalesSegmentKey, { label: string; color: string }> = {
-  "30": { label: "30", color: "#6f9fba" },
-  "40": { label: "40", color: "#6fa78e" },
-  "60": { label: "60", color: "#c5a05a" },
-  "90": { label: "90", color: "#c97a78" },
+const salesSegmentMeta: Record<SalesSegmentKey, { label: string; color: string; lightColor: string }> = {
+  "30": { label: "30", color: "#6f9fba", lightColor: "#9abed0" },
+  "40": { label: "40", color: "#6fa78e", lightColor: "#9ac5b3" },
+  "60": { label: "60", color: "#c5a05a", lightColor: "#dcc28e" },
+  "90": { label: "90", color: "#c97a78", lightColor: "#dfa4a2" },
 };
 const emptySalesSegmentCounts = (): SalesSegmentCounts => ({
   "30": 0,
@@ -471,7 +471,7 @@ const salesSegmentGradient = (counts: SalesSegmentCounts) => {
   return `conic-gradient(${salesSegmentKeys.map((segment) => {
     const start = cursor;
     cursor += (counts[segment] / total) * 360;
-    return `${salesSegmentMeta[segment].color} ${start.toFixed(2)}deg ${cursor.toFixed(2)}deg`;
+    return `${salesSegmentMeta[segment].lightColor} ${start.toFixed(2)}deg, ${salesSegmentMeta[segment].color} ${cursor.toFixed(2)}deg`;
   }).join(", ")})`;
 };
 
@@ -2374,6 +2374,8 @@ export default function CompetitiveAnalysis({
   );
   const selectedStaffSegmentSales = selectedStaffSalesActivity?.segmentSales ??
     emptySalesSegmentCounts();
+  const selectedShowroomSegmentSales =
+    selectedSalesActivityShowroom?.summary.segmentSales ?? emptySalesSegmentCounts();
   const selectedDealerSegmentSales = Object.entries(salesActivityByCdsid).reduce(
     (counts, [cdsid, showroomSales]) => {
       const showroom = showrooms.find((item) => item.cdsid === cdsid);
@@ -2383,12 +2385,13 @@ export default function CompetitiveAnalysis({
     },
     emptySalesSegmentCounts(),
   );
-  const nationalSegmentSales = Object.values(salesActivityByCdsid).reduce(
-    (counts, showroomSales) =>
-      addSalesSegmentCounts(counts, showroomSales.summary.segmentSales),
-    emptySalesSegmentCounts(),
-  );
   const selectedSegmentDonuts = [
+    {
+      key: "showroom",
+      label: `${displayShowroomNameWithoutBrand(selected.showroom)} 전체`,
+      counts: selectedShowroomSegmentSales,
+      showCounts: false,
+    },
     {
       key: "staff",
       label: selectedStaffEmployee?.name ?? "영업직원",
@@ -2397,14 +2400,8 @@ export default function CompetitiveAnalysis({
     },
     {
       key: "dealer",
-      label: selected.dealer,
+      label: `${selected.dealer} 전체`,
       counts: selectedDealerSegmentSales,
-      showCounts: false,
-    },
-    {
-      key: "national",
-      label: "볼보 전체",
-      counts: nationalSegmentSales,
       showCounts: false,
     },
   ] as const;
