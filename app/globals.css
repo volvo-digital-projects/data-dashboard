@@ -14383,15 +14383,15 @@ button.quarter-score-row:disabled {
 }
 
 .voc-consultation-comparison > strong.above {
-  color: #21748f;
+  color: var(--trend-rise);
 }
 
 .voc-consultation-comparison > strong.below {
-  color: #bd3f34;
+  color: var(--trend-fall);
 }
 
 .voc-consultation-comparison > strong.neutral {
-  color: #758794;
+  color: #7b8796;
 }
 
 .voc-consultation-chart-wrap {
