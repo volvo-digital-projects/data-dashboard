@@ -462,9 +462,9 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
   assert.match(workflow, /git commit -m "Auto update hourly YouTube and staff sales metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
-  assert.match(creatorCss, /\.yt-subscriber-change\{display:grid;grid-template-columns:34px 68px[\s\S]*?width:105px[\s\S]*?\.yt-subscriber-change b\{display:grid;grid-template-columns:26px 3px minmax\(0,1fr\)[\s\S]*?width:68px[\s\S]*?\.yt-subscriber-count\{display:grid;grid-template-columns:7px minmax\(0,1fr\)[\s\S]*?\.yt-subscriber-count>em\{text-align:right\}[\s\S]*?b>span:last-child\{text-align:right\}[\s\S]*?\.yt-subscriber-change b\.positive\{color:#247d9b;background:linear-gradient\(135deg,rgba\(38,126,164,\.12\)[\s\S]*?\.yt-subscriber-change b\.negative\{color:#c95f55;background:linear-gradient\(135deg,rgba\(201,95,85,\.14\)/);
-  assert.match(globalCss, /\.dealer-sales-comparison \.difference\.positive,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.positive[\s\S]*?color: #247d9b;/);
-  assert.match(globalCss, /\.dealer-sales-comparison \.difference\.negative,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.negative[\s\S]*?color: #c95f55;/);
+  assert.match(creatorCss, /\.yt-subscriber-change\{display:grid;grid-template-columns:34px 68px[\s\S]*?width:105px[\s\S]*?\.yt-subscriber-change b\{display:grid;grid-template-columns:26px 3px minmax\(0,1fr\)[\s\S]*?width:68px[\s\S]*?\.yt-subscriber-count\{display:grid;grid-template-columns:7px minmax\(0,1fr\)[\s\S]*?\.yt-subscriber-count>em\{text-align:right\}[\s\S]*?b>span:last-child\{text-align:right\}[\s\S]*?\.yt-subscriber-change b\.positive\{color:var\(--trend-rise\);background:linear-gradient\(135deg,rgba\(240,68,82,\.13\)[\s\S]*?\.yt-subscriber-change b\.negative\{color:var\(--trend-fall\);background:linear-gradient\(135deg,rgba\(49,130,246,\.13\)/);
+  assert.match(globalCss, /\.dealer-sales-comparison \.difference\.positive,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.positive[\s\S]*?color: var\(--trend-rise\);/);
+  assert.match(globalCss, /\.dealer-sales-comparison \.difference\.negative,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.negative[\s\S]*?color: var\(--trend-fall\);/);
 });
 
 async function render(
@@ -1151,11 +1151,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /`\$\{selectedStaffEmployee\?\.name \?\? "영업직원"\} \$\{\(selectedStaffSatisfactionScore \/ 10\)\.toFixed\(1\)\}점 − 동일연차 평균 \$\{\(selectedStaffTenureFinalScore \/ 10\)\.toFixed\(1\)\}점 = \$\{selectedStaffGrowthDeltaMark\} \$\{Math\.abs\(selectedStaffPeerDelta \/ 10\)\.toFixed\(1\)\}점`/);
   assert.doesNotMatch(source, /`본인 \$\{\(selectedStaffSatisfactionScore/);
   assert.doesNotMatch(source, /selectedStaffPeerDelta >= 0 \? "\+"/);
-  assert.match(css, /--comparison-positive-blue:\s*#176f91;/);
-  assert.match(css, /\.growth-gauge-current\.positive\s*\{[^}]*fill:\s*var\(--comparison-positive-blue\);/);
-  assert.match(css, /\.growth-sales-share-meta strong\.positive\s*\{[^}]*color:\s*var\(--comparison-positive-blue\) !important;/);
-  assert.match(css, /\.analysis-summary-card > em\.positive\s*\{[^}]*color:\s*var\(--comparison-positive-blue\) !important;/);
-  assert.match(css, /\.growth-gauge-current\.negative\s*\{[^}]*fill:\s*var\(--warning\);/);
+  assert.match(css, /--trend-rise:\s*#f04452;/);
+  assert.match(css, /--trend-fall:\s*#3182f6;/);
+  assert.match(css, /\.growth-gauge-current\.positive\s*\{[^}]*fill:\s*var\(--trend-rise\);/);
+  assert.match(css, /\.growth-sales-share-meta strong\.positive\s*\{[^}]*color:\s*var\(--trend-rise\) !important;/);
+  assert.match(css, /\.analysis-summary-card > em\.positive\s*\{[^}]*color:\s*var\(--trend-rise\) !important;/);
+  assert.match(css, /\.growth-gauge-current\.negative\s*\{[^}]*fill:\s*var\(--trend-fall\);/);
   assert.match(css, /\.growth-gauge-current\.neutral\s*\{[^}]*fill:\s*#536f7b;/);
   assert.doesNotMatch(navigation, /className="growth-gauge-current"[^>]*>\{selectedStaffGrowthLabel\}/);
   assert.match(css, /@keyframes growth-gauge-sweep/);
@@ -5591,30 +5592,30 @@ test("ships the premium neutral design system and Paperlogy typography", async (
   assert.doesNotMatch(css, /\.signal-icon(?:\.|\s*\{)/);
   assert.match(
     css,
-    /\.metric-benchmark strong\.positive\s*\{\s*color: var\(--blue\) !important;/,
+    /\.metric-benchmark strong\.positive\s*\{\s*color: var\(--trend-rise\) !important;/,
   );
   assert.match(
     css,
-    /\.metric-benchmark strong\.negative\s*\{\s*color: var\(--status-danger\) !important;/,
+    /\.metric-benchmark strong\.negative\s*\{\s*color: var\(--trend-fall\) !important;/,
   );
   assert.match(
     css,
-    /\.metric-benchmark strong\.negative\.caution\s*\{\s*color: var\(--status-caution\) !important;/,
+    /\.metric-benchmark strong\.negative\.caution\s*\{\s*color: var\(--trend-fall\) !important;/,
   );
   assert.match(
     css,
-    /\.metric-benchmark strong\.negative\.warning\s*\{\s*color: var\(--status-danger\) !important;/,
+    /\.metric-benchmark strong\.negative\.warning\s*\{\s*color: var\(--trend-fall\) !important;/,
   );
   assert.match(
     css,
-    /\.analysis-summary-card > em\.positive\s*\{\s*color: var\(--comparison-positive-blue\) !important;/,
+    /\.analysis-summary-card > em\.positive\s*\{\s*color: var\(--trend-rise\) !important;/,
   );
   assert.match(
     css,
-    /\.analysis-summary-card > em\.negative\s*\{\s*color: var\(--warning\) !important;/,
+    /\.analysis-summary-card > em\.negative\s*\{\s*color: var\(--trend-fall\) !important;/,
   );
-  assert.match(css, /\.positive\s*\{\s*color: var\(--blue\) !important;/);
-  assert.match(css, /\.negative\s*\{\s*color: var\(--caution\) !important;/);
+  assert.match(css, /\.positive\s*\{\s*color: var\(--trend-rise\) !important;/);
+  assert.match(css, /\.negative\s*\{\s*color: var\(--trend-fall\) !important;/);
   assert.match(css, /--caution: #c58a1b/);
   assert.match(css, /--caution-soft: #fbf2df/);
   assert.match(
