@@ -524,6 +524,7 @@ function AnimatedScore({
       key={displayValue}
       className={`metric-card-value animated-score ${className}`.trim()}
       aria-label={displayValue}
+      data-score-motion="update"
       style={
         {
           "--score-value-delay": `${120 + sequence * 180}ms`,
@@ -2475,6 +2476,7 @@ export default function Dashboard({
 }) {
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
+  const [linkedMetric, setLinkedMetric] = useState<TrendMetricKey | null>(null);
   const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
   const [metricQuarters, setMetricQuarters] = useState<
     Record<TrendMetricKey, QuarterKey>
@@ -2495,6 +2497,7 @@ export default function Dashboard({
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const oneVoiceRef = useRef<HTMLElement>(null);
   const quarterScrollFrameRef = useRef<number | null>(null);
+  const linkedMetricTimerRef = useRef<number | null>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
     carHandoverScore: 94.2,
@@ -2518,6 +2521,27 @@ export default function Dashboard({
     const timer = window.setInterval(syncAccessDate, 60_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(
+    () => () => {
+      if (linkedMetricTimerRef.current !== null) {
+        window.clearTimeout(linkedMetricTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  const selectTrendMetric = (metric: TrendMetricKey) => {
+    setTrendMetric(metric);
+    setLinkedMetric(metric);
+    if (linkedMetricTimerRef.current !== null) {
+      window.clearTimeout(linkedMetricTimerRef.current);
+    }
+    linkedMetricTimerRef.current = window.setTimeout(() => {
+      setLinkedMetric(null);
+      linkedMetricTimerRef.current = null;
+    }, 520);
+  };
 
   useEffect(() => {
     let restored: string[] = [];
@@ -3201,7 +3225,7 @@ export default function Dashboard({
                 rank={item.rank}
                 quarter={item.quarter}
                 active={trendMetric === item.key}
-                onSelect={() => setTrendMetric(item.key)}
+                onSelect={() => selectTrendMetric(item.key)}
                 onQuarterSelect={(quarter) =>
                   selectMetricQuarter(item.key, quarter)
                 }
@@ -3376,7 +3400,7 @@ export default function Dashboard({
               id="score-v3s"
               className={`score-tier score-tier-v3s ${
                 trendMetric === "v3s" ? "active" : ""
-              }`}
+              } ${linkedMetric === "v3s" ? "linked-feedback" : ""}`}
             >
               <header className="score-tier-heading">
                 <strong className="english-title">V3S</strong>
@@ -3396,7 +3420,7 @@ export default function Dashboard({
               id="score-voc"
               className={`score-tier score-tier-weekly ${
                 trendMetric === "voc" ? "active" : ""
-              }`}
+              } ${linkedMetric === "voc" ? "linked-feedback" : ""}`}
             >
               <header className="score-tier-heading voc-score-heading">
                 <div className="score-tier-heading-title">
@@ -3433,7 +3457,7 @@ export default function Dashboard({
               id="score-cx"
               className={`score-tier score-tier-weekly ${
                 trendMetric === "cx" ? "active" : ""
-              }`}
+              } ${linkedMetric === "cx" ? "linked-feedback" : ""}`}
             >
               <header className="score-tier-heading cx-score-heading">
                 <div className="score-tier-heading-title">

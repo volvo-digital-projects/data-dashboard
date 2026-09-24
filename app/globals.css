@@ -128,6 +128,18 @@
   --dashboard-combat-share: 35%;
   --header-context-cell: 112px;
   --header-title-width: 310px;
+  --radius-small: 4px;
+  --radius-medium: 6px;
+  --radius-large: 10px;
+  --shadow-rest: 0 8px 20px -20px rgba(16, 51, 69, 0.42);
+  --shadow-hover: 0 12px 26px -20px rgba(16, 51, 69, 0.56);
+  --shadow-floating: 0 16px 34px -22px rgba(16, 51, 69, 0.62);
+  --motion-fast: 160ms;
+  --motion-standard: 220ms;
+  --motion-data: 420ms;
+  --motion-emphasis: 520ms;
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-emphasis: cubic-bezier(0.22, 1, 0.36, 1);
   --header-title-font-size: 36px;
   --font-ui:
     var(--font-volvo), var(--font-korean), "Noto Sans KR", "Apple SD Gothic Neo",
@@ -19329,4 +19341,138 @@ main.dealer-analysis-page {
 }
 @media (max-width: 760px) {
   main.dealer-analysis-page { --dealer-outer-gutter: 14px; --dealer-card-padding: 12px; }
+}
+
+/* Interaction refinement layer: existing geometry and palette stay intact. */
+.metric-card,
+.analysis-summary-card,
+.analysis-scatter-card,
+.analysis-ranking-card,
+.dealer-analysis-card,
+.dealer-certification-table,
+.youtube-performance.yt-compact { box-shadow: var(--shadow-rest); }
+
+.metric-card,
+.analysis-summary-card,
+.analysis-ranking-list > div,
+.dealer-analysis-card,
+.dealer-certification-row,
+.dealer-sort-controls button,
+.analysis-tabs button {
+  transition: border-color var(--motion-fast) var(--ease-standard), background-color var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .metric-card:hover,
+  .analysis-summary-card:hover,
+  .analysis-ranking-card:hover,
+  .dealer-analysis-card:hover {
+    border-color: rgba(57, 122, 155, 0.24);
+    box-shadow: var(--shadow-hover);
+  }
+  .dealer-certification-row:not(.dealer-certification-head):not(.dealer-certification-aggregate):hover { background: #f8fbfc; }
+}
+
+.metric-card:active,
+.analysis-tabs button:active,
+.dealer-sort-controls button:active,
+.analysis-ranking-list > div[role="button"]:active { transform: scale(0.992); }
+
+.metric-card:focus-within,
+.analysis-tabs button:focus-visible,
+.dealer-sort-controls button:focus-visible,
+.analysis-ranking-list > div:focus-visible,
+.scatter-point:focus-visible,
+.trend-scroll:focus-visible {
+  outline: 2px solid rgba(57, 122, 155, 0.72);
+  outline-offset: 2px;
+}
+
+/* Replace repeated long drops with one compact data-change swap. */
+.animated-score { animation: none; will-change: opacity, transform; }
+.animated-score[data-score-motion="entry"] { animation: metric-score-drop 1.05s var(--ease-emphasis) var(--score-value-delay, 0ms) both; }
+.animated-score[data-score-motion="update"] { animation: metric-score-update var(--motion-data) var(--ease-emphasis) both; }
+@keyframes metric-score-update {
+  from { opacity: 0.35; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* One-shot card-to-detail acknowledgement without layout movement. */
+.score-tier.linked-feedback { animation: score-tier-linked-feedback var(--motion-emphasis) var(--ease-standard) both; }
+.score-tier.linked-feedback .score-tier-heading > strong,
+.score-tier.linked-feedback .score-tier-heading-title > strong { animation: score-tier-title-feedback 360ms var(--ease-emphasis) both; }
+@keyframes score-tier-linked-feedback {
+  0%, 100% { box-shadow: none; }
+  38% { border-color: rgba(57, 122, 155, 0.34); box-shadow: inset 0 0 0 1px rgba(57, 122, 155, 0.12); }
+}
+@keyframes score-tier-title-feedback {
+  0%, 100% { transform: translateY(0); }
+  42% { transform: translateY(-2px); }
+}
+
+/* Alerts and selected points announce once, then settle. */
+.rtc-alert-siren::before,
+.rtc-alert-siren::after,
+.rtc-alert-siren__dome { animation-iteration-count: 3; }
+.rtc-chip:hover .rtc-alert-siren__dome,
+.rtc-chip:focus-within .rtc-alert-siren__dome { animation: rtc-siren-dome-pulse 520ms var(--ease-standard) 1; }
+
+.scatter-point { transition: left 300ms var(--ease-standard), top 300ms var(--ease-standard), transform 300ms var(--ease-standard); }
+.scatter-point.selected > i { animation: selected-scatter-point-arrival 340ms var(--ease-emphasis) 1 both; }
+@keyframes selected-scatter-point-arrival {
+  0% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(22, 121, 162, 0); }
+  58% { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(22, 121, 162, 0.28), 0 0 0 12px rgba(22, 121, 162, 0.06); }
+  100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(22, 121, 162, 0.42), 0 0 0 8px rgba(22, 121, 162, 0.12), 0 7px 14px rgba(7, 48, 69, 0.24); }
+}
+
+.analysis-ranking-list > div { animation: ranking-state-change 300ms var(--ease-standard) both; }
+@keyframes ranking-state-change {
+  from { opacity: 0.65; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Same-size final outcome card, with slightly stronger hierarchy. */
+.analysis-summary-card.balance {
+  border-color: rgba(18, 55, 71, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(18, 55, 71, 0.025), var(--shadow-rest);
+}
+.analysis-summary-card.balance::before { width: 4px; }
+.analysis-summary-card.balance > strong { color: var(--navy); font-size: 37px; }
+
+/* One pointer path for PC hover and iPad touch scrubbing. */
+.trend-chart { cursor: crosshair; touch-action: pan-y; }
+
+/* Page 3: retain all columns while grouping its analysis area. */
+.dealer-certification-head > :nth-child(n + 5) { color: #345f72; background: rgba(57, 122, 155, 0.055); }
+.dealer-certification-row > :nth-child(5) { border-left: 2px solid rgba(57, 122, 155, 0.2); }
+.dealer-certification-row > :nth-child(n + 5) { background-color: rgba(244, 248, 250, 0.34); }
+.dealer-certification-aggregate { border-color: rgba(38, 126, 164, 0.54); background: linear-gradient(90deg, #eef5f7 0%, #f5f9fa 100%); }
+.dealer-certification-aggregate strong,
+.dealer-certification-aggregate b { font-weight: 750; }
+
+.dealer-mix-segment,
+.dealer-employment-bar > i { animation-duration: 540ms; animation-timing-function: var(--ease-standard); }
+
+.youtube-performance.yt-compact { border-color: #d9e3e6; border-radius: var(--radius-medium); }
+.youtube-performance.yt-compact .yt-hero,
+.growth-navigation-heading { border-color: rgba(57, 122, 155, 0.16); }
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-score[data-score-motion],
+  .score-tier.linked-feedback,
+  .score-tier.linked-feedback .score-tier-heading > strong,
+  .score-tier.linked-feedback .score-tier-heading-title > strong,
+  .scatter-point.selected > i,
+  .analysis-ranking-list > div,
+  .dealer-mix-segment,
+  .dealer-employment-bar > i,
+  .dealer-certification-connectors { animation: none !important; }
+  .scatter-point,
+  .metric-card,
+  .analysis-summary-card,
+  .analysis-ranking-list > div,
+  .dealer-analysis-card,
+  .dealer-certification-row,
+  .dealer-sort-controls button,
+  .analysis-tabs button { transition: none !important; }
 }

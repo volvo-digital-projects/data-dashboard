@@ -831,6 +831,7 @@ function AnimatedAnalysisScore({
       key={displayValue}
       className="animated-score"
       aria-label={`${displayValue}점`}
+      data-score-motion="update"
       style={
         {
           "--score-value-delay": `${120 + sequence * 180}ms`,
@@ -3378,7 +3379,10 @@ export default function CompetitiveAnalysis({
             <span>해피콜 평균</span>
             <span>합산점수</span>
           </div>
-          <div className="analysis-ranking-list">
+          <div
+            className="analysis-ranking-list"
+            key={`ranking-${view}`}
+          >
             {rankRows.map((item) => {
               const rank =
                 groupItems.findIndex((groupItem) => groupItem.cdsid === item.cdsid) +
