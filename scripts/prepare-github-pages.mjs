@@ -27,7 +27,13 @@ const rosterSource = JSON.parse(
 ).source;
 const youtube = JSON.parse(readFileSync(path.join(projectRoot, "app/data/youtube-creators.json"), "utf8"));
 const comments = JSON.parse(readFileSync(path.join(projectRoot, "app/data/youtube-comments.json"), "utf8"));
-const releaseSeed = `${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${salesSource?.salesSyncedAt ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}\n${comments.checkedAt ?? ""}`;
+const releaseRevision =
+  process.env.GITHUB_SHA?.trim() ||
+  execFileSync("git", ["rev-parse", "HEAD"], {
+    cwd: projectRoot,
+    encoding: "utf8",
+  }).trim();
+const releaseSeed = `${releaseRevision}\n${JSON.stringify(releaseNote)}\n${salesSource?.salesAsOf ?? ""}\n${salesSource?.salesSyncedAt ?? ""}\n${rosterSource?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}\n${comments.checkedAt ?? ""}`;
 const releaseId = createHash("sha256")
   .update(releaseSeed)
   .digest("hex")

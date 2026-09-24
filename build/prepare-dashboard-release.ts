@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -65,7 +66,13 @@ export async function prepareDashboardRelease() {
   // using the current time here gives the client bundle and published JSON
   // different ids and can trap long-lived iPad tabs in a reload loop. Include
   // data as-of timestamps so unattended updates also refresh those clients.
-  const seed = `${JSON.stringify(note)}\n${sales.source?.salesAsOf ?? ""}\n${sales.source?.salesSyncedAt ?? ""}\n${roster.source?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}\n${comments.checkedAt ?? ""}`;
+  const releaseRevision =
+    process.env.GITHUB_SHA?.trim() ||
+    execFileSync("git", ["rev-parse", "HEAD"], {
+      cwd: root,
+      encoding: "utf8",
+    }).trim();
+  const seed = `${releaseRevision}\n${JSON.stringify(note)}\n${sales.source?.salesAsOf ?? ""}\n${sales.source?.salesSyncedAt ?? ""}\n${roster.source?.rosterCheckedAt ?? ""}\n${youtube.channels.map(channel => channel.checkedAt).join(",")}\n${comments.checkedAt ?? ""}`;
   const id = createHash("sha256").update(seed).digest("hex").slice(0, 16);
 
   await writeDashboardRelease(id, note, builtAt, outputPath);

@@ -1643,8 +1643,12 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(releaseBuildSource, /sales\.source\?\.salesAsOf/);
   assert.match(releaseBuildSource, /sales\.source\?\.salesSyncedAt/);
   assert.match(releaseBuildSource, /roster\.source\?\.rosterCheckedAt/);
-  assert.match(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}\\n\$\{sales\.source\?\.salesAsOf/);
-  assert.match(pagesBuildSource, /const releaseSeed = `\$\{JSON\.stringify\(releaseNote\)\}\\n\$\{salesSource\?\.salesAsOf/);
+  assert.match(releaseBuildSource, /process\.env\.GITHUB_SHA\?\.trim\(\)/);
+  assert.match(releaseBuildSource, /execFileSync\("git", \["rev-parse", "HEAD"\]/);
+  assert.match(releaseBuildSource, /const seed = `\$\{releaseRevision\}\\n\$\{JSON\.stringify\(note\)\}\\n\$\{sales\.source\?\.salesAsOf/);
+  assert.match(pagesBuildSource, /process\.env\.GITHUB_SHA\?\.trim\(\)/);
+  assert.match(pagesBuildSource, /execFileSync\("git", \["rev-parse", "HEAD"\]/);
+  assert.match(pagesBuildSource, /const releaseSeed = `\$\{releaseRevision\}\\n\$\{JSON\.stringify\(releaseNote\)\}\\n\$\{salesSource\?\.salesAsOf/);
   assert.doesNotMatch(releaseBuildSource, /const seed = `\$\{JSON\.stringify\(note\)\}:\$\{builtAt\.toISOString\(\)\}`/);
   assert.match(noticeSource, /searchParams\.set\("release", nextRelease\.id\)/);
   assert.match(pagesBuildSource, /"\/dashboard-release\.json"/);
