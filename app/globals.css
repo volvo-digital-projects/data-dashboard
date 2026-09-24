@@ -96,6 +96,10 @@
   --blue: #397a9b;
   --blue-soft: #dcebf1;
   --comparison-positive-blue: #176f91;
+  --trend-rise: #f04452;
+  --trend-fall: #3182f6;
+  --trend-rise-on-dark: #ff9aa5;
+  --trend-fall-on-dark: #83b6ff;
   --paper: #f4f6f5;
   --white: #ffffff;
   --line: #d9e0e3;
@@ -826,15 +830,15 @@ html:has(.dealer-analysis-page) {
 .dealer-sales-comparison .difference,
 .dealer-satisfaction-comparison .difference { padding-block: 5px; padding-right: 6px; border-radius: 3px; }
 .dealer-sales-comparison .difference.positive,
-.dealer-satisfaction-comparison .difference.positive { background: linear-gradient(135deg, rgba(38, 126, 164, 0.12), rgba(55, 143, 176, 0.05)); box-shadow: inset 0 2px 0 rgba(38, 126, 164, 0.24); }
+.dealer-satisfaction-comparison .difference.positive { background: linear-gradient(135deg, rgba(240, 68, 82, 0.13), rgba(240, 68, 82, 0.05)); box-shadow: inset 0 2px 0 rgba(240, 68, 82, 0.25); }
 .dealer-sales-comparison .difference.negative,
-.dealer-satisfaction-comparison .difference.negative { background: linear-gradient(135deg, rgba(201, 95, 85, 0.14), rgba(201, 95, 85, 0.05)); box-shadow: inset 0 2px 0 rgba(201, 95, 85, 0.24); }
+.dealer-satisfaction-comparison .difference.negative { background: linear-gradient(135deg, rgba(49, 130, 246, 0.13), rgba(49, 130, 246, 0.05)); box-shadow: inset 0 2px 0 rgba(49, 130, 246, 0.25); }
 .dealer-sales-comparison .difference.neutral,
 .dealer-satisfaction-comparison .difference.neutral { background: linear-gradient(135deg, rgba(96, 121, 133, 0.08), rgba(96, 121, 133, 0.03)); box-shadow: inset 0 2px 0 rgba(96, 121, 133, 0.16); }
 .dealer-sales-comparison .difference.positive strong,
-.dealer-satisfaction-comparison .difference.positive strong { color: #247d9b; }
+.dealer-satisfaction-comparison .difference.positive strong { color: var(--trend-rise); }
 .dealer-sales-comparison .difference.negative strong,
-.dealer-satisfaction-comparison .difference.negative strong { color: #c95f55; }
+.dealer-satisfaction-comparison .difference.negative strong { color: var(--trend-fall); }
 .dealer-sales-comparison .difference.neutral strong,
 .dealer-satisfaction-comparison .difference.neutral strong { color: #607985; }
 .dealer-satisfaction-comparison { background: linear-gradient(90deg, rgba(248, 225, 190, 0.12), rgba(246, 206, 163, 0.04)); }
@@ -1896,8 +1900,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   text-anchor: middle;
 }
 
-.growth-gauge-current.positive { fill: var(--comparison-positive-blue); }
-.growth-gauge-current.negative { fill: var(--warning); }
+.growth-gauge-current.positive { fill: var(--trend-rise); }
+.growth-gauge-current.negative { fill: var(--trend-fall); }
 .growth-gauge-current.neutral { fill: #536f7b; }
 
 .growth-zone-gauge.no-evidence .growth-gauge-segments path {
@@ -3295,8 +3299,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   text-align: right;
 }
 
-.growth-sales-share-meta strong.positive { color: var(--comparison-positive-blue) !important; }
-.growth-sales-share-meta strong.negative { color: var(--warning) !important; }
+.growth-sales-share-meta strong.positive { color: var(--trend-rise) !important; }
+.growth-sales-share-meta strong.negative { color: var(--trend-fall) !important; }
 .growth-sales-share-meta strong.neutral { color: #536f7b !important; }
 
 @media (max-width: 1180px) {
@@ -4391,11 +4395,11 @@ input:focus-visible {
 }
 
 .positive {
-  color: #78d3bd !important;
+  color: var(--trend-rise) !important;
 }
 
 .negative {
-  color: #ff9e94 !important;
+  color: var(--trend-fall) !important;
 }
 
 .kpi-column {
@@ -4541,19 +4545,19 @@ input:focus-visible {
 }
 
 .metric-benchmark strong.positive {
-  color: var(--blue) !important;
+  color: var(--trend-rise) !important;
 }
 
 .metric-benchmark strong.negative {
-  color: var(--status-danger) !important;
+  color: var(--trend-fall) !important;
 }
 
 .metric-benchmark strong.negative.caution {
-  color: var(--status-caution) !important;
+  color: var(--trend-fall) !important;
 }
 
 .metric-benchmark strong.negative.warning {
-  color: var(--status-danger) !important;
+  color: var(--trend-fall) !important;
 }
 
 .metric-track {
@@ -6228,11 +6232,11 @@ input:focus-visible {
   }
 
   .mobile-power .positive {
-    color: #a7e3d0;
+    color: var(--trend-rise-on-dark);
   }
 
   .mobile-power .negative {
-    color: #ffad99;
+    color: var(--trend-fall-on-dark);
   }
 
   .mobile-kpis {
@@ -7352,11 +7356,11 @@ input:focus-visible {
 }
 
 .analysis-summary-card > em.positive {
-  color: var(--comparison-positive-blue) !important;
+  color: var(--trend-rise) !important;
 }
 
 .analysis-summary-card > em.negative {
-  color: var(--warning) !important;
+  color: var(--trend-fall) !important;
 }
 
 .analysis-workspace {
@@ -8240,11 +8244,11 @@ input:focus-visible {
 }
 
 .analysis-ranking-card footer .analysis-average-delta.delta-positive strong {
-  color: var(--blue);
+  color: var(--trend-rise);
 }
 
 .analysis-ranking-card footer .analysis-average-delta.delta-negative strong {
-  color: var(--warning);
+  color: var(--trend-fall);
 }
 
 .analysis-ranking-card footer .analysis-average-delta.delta-neutral strong {
@@ -8989,11 +8993,11 @@ input:focus-visible {
 }
 
 .analysis-staff-year-axis span.delta-positive {
-  color: #0d8068;
+  color: var(--trend-rise);
 }
 
 .analysis-staff-year-axis span.delta-negative {
-  color: #cf493f;
+  color: var(--trend-fall);
 }
 
 .analysis-staff-year-axis small {
@@ -13148,19 +13152,19 @@ body:has(.login-home) {
 }
 
 .positive {
-  color: var(--blue) !important;
+  color: var(--trend-rise) !important;
 }
 
 .negative {
-  color: var(--caution) !important;
+  color: var(--trend-fall) !important;
 }
 
 .combat-footer span.positive {
-  color: #79b2cf !important;
+  color: var(--trend-rise-on-dark) !important;
 }
 
 .combat-footer span.negative {
-  color: #e0a33c !important;
+  color: var(--trend-fall-on-dark) !important;
 }
 
 .combat-footer span.positive strong,
@@ -13169,11 +13173,11 @@ body:has(.login-home) {
 }
 
 .mobile-power .positive {
-  color: #79b2cf !important;
+  color: var(--trend-rise-on-dark) !important;
 }
 
 .mobile-power .negative {
-  color: #e0a33c !important;
+  color: var(--trend-fall-on-dark) !important;
 }
 
 button.quarter-score-row {
@@ -17792,7 +17796,7 @@ button.header-status-item {
 }
 
 .scoreboard-benchmark > strong.positive {
-  color: #b8f0dc !important;
+  color: var(--trend-rise-on-dark) !important;
 }
 
 .metric-quarter-strip,
