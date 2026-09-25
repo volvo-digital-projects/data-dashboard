@@ -2,6 +2,8 @@ name: Refresh YouTube metrics hourly
 
 on:
   schedule:
+    # Capture the fixed daily baseline at 00:00 KST (15:00 UTC).
+    - cron: "0 15 * * *"
     # Four staggered watchdog opportunities compensate for delayed/dropped GitHub
     # schedules. The collector itself enforces a 55-minute minimum interval.
     - cron: "7,22,37,52 * * * *"
@@ -30,6 +32,7 @@ jobs:
         id: collect
         env:
           FORCE_YOUTUBE_REFRESH: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+          CAPTURE_YOUTUBE_DAILY_CLOSE: ${{ github.event.schedule == '0 15 * * *' && '1' || '0' }}
         run: |
           python scripts/refresh-youtube-metrics.py
           if git diff --quiet -- app/data/youtube-creators.json; then

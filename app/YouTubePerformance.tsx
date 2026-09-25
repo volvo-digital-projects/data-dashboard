@@ -169,8 +169,8 @@ export default function YouTubePerformance() {
       </div>
       <div className="yt-headline-stats">
         <div className="yt-staff-stat"><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
-        <div><span className="yt-metric-title">합산 구독자 <i aria-hidden="true">/</i> <em>전일 최종 마감 대비</em></span><div className="yt-metric-value"><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p></div><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
-        <div><span className="yt-metric-title">공개 영상 수 <i aria-hidden="true">/</i> <em>전일 최종 마감 대비</em></span><div className="yt-metric-value"><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p></div><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
+        <div><span className="yt-metric-title">합산 구독자 <i aria-hidden="true">/</i> <em>전일 24:00 마감 대비</em></span><div className="yt-metric-value"><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p></div><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
+        <div><span className="yt-metric-title">공개 영상 수 <i aria-hidden="true">/</i> <em>전일 24:00 마감 대비</em></span><div className="yt-metric-value"><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p></div><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>
     </header>
     <div className="yt-distribution">
@@ -200,8 +200,8 @@ export default function YouTubePerformance() {
           : "neutral";
         const subscriberDeltaTitle=includesSubscriberChange
           ? dailyClose?.checkedAt
-            ? `전일 최종 마감: ${dailyClose.checkedAt}`
-            : "전일 최종 마감 기록 없음"
+            ? `전일 24:00 마감 수집: ${dailyClose.checkedAt}`
+            : "전일 24:00 마감 기록 없음"
           : `공동 채널 증감은 ${subscriberChangeOwner} 행에서 한 번만 합산`;
 
 

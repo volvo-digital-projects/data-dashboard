@@ -132,24 +132,29 @@ def merge_channel(old, fresh, shared=False):
             basis=reviewed.get(v['id'], {}).get('basis', '출연자 이름 근거 미확인')) for v in videos]
     return result
 
-def daily_close(original, checked):
+def daily_close(original, checked, channels=None, capture=False):
     kst = datetime.timezone(datetime.timedelta(hours=9))
     date = datetime.datetime.fromisoformat(checked).astimezone(kst).date()
     saved = original.get('dailyClose')
+    if saved and saved.get('date') == date.isoformat() and saved.get('checkedAt'):
+        return saved
+    if capture:
+        snapshot = channels if channels is not None else original['channels']
+        return dict(date=date.isoformat(), subscribers=sum(c['subscribers'] for c in snapshot),
+                    videos=sum(c['long']['count'] + c['short']['count'] for c in snapshot), checkedAt=checked,
+                    channelSubscribers={c['id']:c['subscribers'] for c in snapshot})
     if saved and saved.get('date') == date.isoformat():
         return saved
-    latest = min(datetime.datetime.fromisoformat(c['checkedAt']) for c in original['channels'])
-    if latest.astimezone(kst).date() != date - datetime.timedelta(days=1):
-        return dict(date=date.isoformat(), subscribers=None, videos=None, checkedAt=None, channelSubscribers={})
-    return dict(date=date.isoformat(), subscribers=sum(c['subscribers'] for c in original['channels']),
-                videos=sum(c['long']['count'] + c['short']['count'] for c in original['channels']), checkedAt=latest.isoformat(),
-                channelSubscribers={c['id']:c['subscribers'] for c in original['channels']})
+    # Never substitute an arbitrary previous-day collection for the midnight close.
+    # The dedicated 00:00 KST workflow is the only writer of a populated baseline.
+    return dict(date=date.isoformat(), subscribers=None, videos=None, checkedAt=None, channelSubscribers={})
 
 def main():
     original = json.loads(TARGET.read_text(encoding='utf-8'))
     creator_count, channel_count = validate_refresh_scope(original)
     checked_at = datetime.datetime.now(datetime.timezone.utc)
-    force = os.environ.get('FORCE_YOUTUBE_REFRESH') == '1'
+    capture_close = os.environ.get('CAPTURE_YOUTUBE_DAILY_CLOSE') == '1'
+    force = os.environ.get('FORCE_YOUTUBE_REFRESH') == '1' or capture_close
     if not refresh_due(original, checked_at, force):
         print(f"Latest complete snapshot is less than {MINIMUM_REFRESH_INTERVAL.seconds // 60} minutes old; skipping.")
         return
@@ -160,7 +165,7 @@ def main():
     updated['channels'] = [merge_channel(old, fresh, sum(p['channelId']==old['id'] for p in original['creators'])>1)
                            for old, fresh in zip(original['channels'], results)]
     checked = checked_at.isoformat()
-    updated['dailyClose'] = daily_close(original, checked)
+    updated['dailyClose'] = daily_close(original, checked, updated['channels'], capture_close)
     updated['lastSuccessfulRefreshAt'] = checked
     for channel in updated['channels']:
         channel['checkedAt'] = checked

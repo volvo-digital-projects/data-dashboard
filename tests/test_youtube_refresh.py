@@ -113,7 +113,7 @@ class RefreshTests(unittest.TestCase):
         output = merge(old, fresh)
         self.assertEqual(output['scopeVideoIds'], ['volvo-model', 'volvo-brand'])
         self.assertEqual(output['totalViews'], 4800)
-    def test_daily_close_freezes_each_channel_at_the_previous_day_final_snapshot(self):
+    def test_daily_close_is_only_populated_by_the_midnight_capture(self):
         checked = '2026-09-21T01:00:00+00:00'
         prior_checked = '2026-09-20T14:50:00+00:00'
         original = dict(
@@ -123,12 +123,28 @@ class RefreshTests(unittest.TestCase):
                 dict(id='b', checkedAt=prior_checked, subscribers=20, long=dict(count=3), short=dict(count=4)),
             ],
         )
-        close = daily_close(original, checked)
-        self.assertEqual(close['subscribers'], 30)
-        self.assertEqual(close['videos'], 10)
-        self.assertEqual(close['channelSubscribers'], {'a':10, 'b':20})
+        missing = daily_close(original, checked)
+        self.assertIsNone(missing['subscribers'])
+        self.assertIsNone(missing['checkedAt'])
+        fresh = [
+            dict(id='a', subscribers=11, long=dict(count=1), short=dict(count=2)),
+            dict(id='b', subscribers=22, long=dict(count=4), short=dict(count=5)),
+        ]
+        close = daily_close(original, checked, fresh, capture=True)
+        self.assertEqual(close['subscribers'], 33)
+        self.assertEqual(close['videos'], 12)
+        self.assertEqual(close['checkedAt'], checked)
+        self.assertEqual(close['channelSubscribers'], {'a':11, 'b':22})
         original['dailyClose'] = close
         original['channels'][0]['subscribers'] = 99
         self.assertEqual(daily_close(original, '2026-09-21T05:00:00+00:00'), close)
+
+    def test_daily_close_does_not_replace_an_existing_midnight_baseline(self):
+        checked = '2026-09-21T06:00:00+00:00'
+        saved = dict(date='2026-09-21', subscribers=30, videos=10,
+                     checkedAt='2026-09-20T15:00:03+00:00', channelSubscribers={'a':10, 'b':20})
+        original = dict(dailyClose=saved, channels=[])
+        later = [dict(id='a', subscribers=99, long=dict(count=9), short=dict(count=9))]
+        self.assertEqual(daily_close(original, checked, later, capture=True), saved)
 
 if __name__ == '__main__': unittest.main()
