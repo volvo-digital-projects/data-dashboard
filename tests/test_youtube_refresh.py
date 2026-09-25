@@ -140,11 +140,18 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(daily_close(original, '2026-09-21T05:00:00+00:00'), close)
 
     def test_daily_close_does_not_replace_an_existing_midnight_baseline(self):
-        checked = '2026-09-21T06:00:00+00:00'
+        checked = '2026-09-21T01:00:00+00:00'
         saved = dict(date='2026-09-21', subscribers=30, videos=10,
                      checkedAt='2026-09-20T15:00:03+00:00', channelSubscribers={'a':10, 'b':20})
         original = dict(dailyClose=saved, channels=[])
         later = [dict(id='a', subscribers=99, long=dict(count=9), short=dict(count=9))]
         self.assertEqual(daily_close(original, checked, later, capture=True), saved)
+
+    def test_pre_midnight_close_is_assigned_to_the_following_day(self):
+        checked = '2026-09-25T14:59:00+00:00'
+        channels = [dict(id='a', subscribers=10, long=dict(count=1), short=dict(count=2))]
+        close = daily_close(dict(channels=channels), checked, channels, capture=True)
+        self.assertEqual(close['date'], '2026-09-26')
+        self.assertEqual(close['checkedAt'], checked)
 
 if __name__ == '__main__': unittest.main()

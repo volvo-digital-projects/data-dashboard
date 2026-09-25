@@ -101,6 +101,12 @@ test('Jeong Ji-yoon channel counts Volvo-identifying videos only',()=>{
  assert.ok(channel.totalViews>=0);
 });
 test('Per-channel subscriber changes share the previous-day final close baseline',()=>{
+ if(!data.dailyClose.checkedAt){
+  assert.equal(data.dailyClose.subscribers,null);
+  assert.equal(data.dailyClose.videos,null);
+  assert.deepEqual(data.dailyClose.channelSubscribers,{});
+  return;
+ }
  assert.equal(Object.keys(data.dailyClose.channelSubscribers).length,data.channels.length);
  assert.equal(new Set(Object.keys(data.dailyClose.channelSubscribers)).size,data.channels.length);
  assert.equal(Object.values(data.dailyClose.channelSubscribers).reduce((sum,value)=>sum+value,0),data.dailyClose.subscribers);

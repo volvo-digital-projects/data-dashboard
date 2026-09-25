@@ -134,7 +134,13 @@ def merge_channel(old, fresh, shared=False):
 
 def daily_close(original, checked, channels=None, capture=False):
     kst = datetime.timezone(datetime.timedelta(hours=9))
-    date = datetime.datetime.fromisoformat(checked).astimezone(kst).date()
+    local_checked = datetime.datetime.fromisoformat(checked).astimezone(kst)
+    date = local_checked.date()
+    # The close job is scheduled for 23:59 KST to avoid GitHub's busy top-of-hour
+    # window. If it starts before midnight it belongs to the following day; if
+    # GitHub delays it past midnight, it belongs to the current day.
+    if capture and local_checked.hour >= 12:
+        date += datetime.timedelta(days=1)
     saved = original.get('dailyClose')
     if saved and saved.get('date') == date.isoformat() and saved.get('checkedAt'):
         return saved

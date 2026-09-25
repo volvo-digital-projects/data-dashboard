@@ -453,8 +453,8 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /<span>전일 대비<\/span><b className=\{subscriberDeltaTone\}><span className=\{`yt-subscriber-count\$\{includesSubscriberChange \? "" : " is-excluded"\}`\}>\{includesSubscriberChange&&<i>\{subscriberDelta\.direction\}<\/i>\}<em>\{subscriberDelta\.count\}<\/em><\/span>/);
   assert.doesNotMatch(creatorSource, />직전 대비 /);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
-  assert.match(workflow, /cron: "0 15 \* \* \*"/);
-  assert.match(workflow, /CAPTURE_YOUTUBE_DAILY_CLOSE: \$\{\{ github\.event\.schedule == '0 15 \* \* \*' && '1' \|\| '0' \}\}/);
+  assert.match(workflow, /cron: "59 14 \* \* \*"/);
+  assert.match(workflow, /CAPTURE_YOUTUBE_DAILY_CLOSE: \$\{\{ github\.event\.schedule == '59 14 \* \* \*' && '1' \|\| '0' \}\}/);
   assert.match(workflow, /cron: "7,22,37,52 \* \* \* \*"/);
   assert.match(creatorSource, /전일 24:00 마감 대비/);
   assert.match(workflow, /steps\.collect\.outputs\.refreshed == 'true'/);
