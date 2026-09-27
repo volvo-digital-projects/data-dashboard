@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-27",
+  "updatedAt": "2026-09-28",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 366,
+  "consultantCount": 368,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -593,6 +593,9 @@
         "김광수": {
           "image": "/staff-profiles/aju/ilsan/consultant-1b24f0677def.webp"
         },
+        "김성준": {
+          "image": "/staff-profiles/aju/ilsan/consultant-ca403446e9d3.webp"
+        },
         "김형천": {
           "image": "/staff-profiles/aju/ilsan/consultant-06a9d9c5bfde.webp"
         },
@@ -632,6 +635,9 @@
       "employees": {
         "김동호": {
           "image": "/staff-profiles/aju/mokdong/consultant-d8ced19055c6.webp"
+        },
+        "김예소": {
+          "image": "/staff-profiles/aju/mokdong/consultant-ee2e271fd0db.webp"
         },
         "김호연": {
           "image": "/staff-profiles/aju/mokdong/consultant-25de965a6451.webp"
@@ -765,6 +771,9 @@
       "employees": {
         "김내환": {
           "image": "/staff-profiles/aju/anyang/consultant-a26b344c6b94.webp"
+        },
+        "김민성": {
+          "image": "/staff-profiles/aju/anyang/consultant-c2bd9e1bce25.webp"
         },
         "김태형": {
           "image": "/staff-profiles/aju/anyang/consultant-b324e7c3c165.webp"
@@ -1073,9 +1082,6 @@
       "showroom": "부천",
       "sourcePage": "https://aju.volvocars.co.kr/sales/sales_consultant.asp?branchCd=100004",
       "employees": {
-        "김광현": {
-          "image": "/staff-profiles/aju/bucheon/consultant-79584e11262c.webp"
-        },
         "김선민": {
           "image": "/staff-profiles/aju/bucheon/consultant-e881343e4616.webp"
         },
