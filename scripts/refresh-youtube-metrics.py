@@ -6,6 +6,7 @@ import json
 import os
 import re
 import time
+import unicodedata
 from pathlib import Path
 import runpy
 
@@ -13,22 +14,26 @@ ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "app/data/youtube-creators.json"
 EXPECTED_CREATOR_ENTRIES = 15
 MINIMUM_REFRESH_INTERVAL = datetime.timedelta(minutes=55)
+VOLVO_MODELS = r'(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60CC|V60|V90CC|V90|C40)'
 VOLVO_VIDEO_TITLE = re.compile(
-    r'(?:볼보|VOLVO|\b(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60|V90|C40)\b)',
+    rf'(?:볼보|VOLVO|(?<![A-Z0-9]){VOLVO_MODELS}(?![A-Z0-9]))',
     re.IGNORECASE,
 )
 VOLVO_MODEL_TITLE = re.compile(
-    r'\b(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60|V90|C40)\b',
+    rf'(?<![A-Z0-9]){VOLVO_MODELS}(?![A-Z0-9])',
     re.IGNORECASE,
 )
 AUTOMOTIVE_TITLE = re.compile(
-    r'(?:출고|전시장|사전계약|차량|브랜드|안전|SUV|세단|전기차|내연기관|가격|오너|유리창)',
+    r'(?:출고|전시장|사전계약|차량|자동차|안전|SUV|세단|전기차|내연기관|가격|오너|유리창|시승|주행|충전|배터리|옵션|트림|보증|서비스\s*센터|차박|트렁크|주차|운전|사고|프로모션|계약|상담|사운드|오디오|스피커)',
     re.IGNORECASE,
 )
 LIFESTYLE_TITLE = re.compile(
-    r'(?:맛집|먹거리|여행|마실|데이트|요리|러닝|트레킹|축제|커버|cover|노래|밴드|카레|떡볶이|카페|coffee|콘서트)',
+    r'(?:맛집|먹방|먹거리|순대국|닭갈비|갈비|소고기|삼겹살|여행|마실|데이트|요리|러닝|트레킹|축제|커버|cover|노래|밴드|카레|떡볶이|카페|coffee|콘서트|브이로그|vlog|결혼식|신랑입장|웨이팅|일상)',
     re.IGNORECASE,
 )
+
+def normalized_video_title(video):
+    return unicodedata.normalize('NFC', video.get('title', ''))
 
 def scoped_videos(channel, videos):
     scope = channel.get('videoBrandFilter')
@@ -36,12 +41,22 @@ def scoped_videos(channel, videos):
         return videos
     if scope != 'volvo':
         raise ValueError(f"Unknown video brand filter: {scope}")
-    selected = [video for video in videos if VOLVO_VIDEO_TITLE.search(video.get('title', ''))]
+    include_ids = set(channel.get('videoScopeIncludeIds', []))
+    exclude_ids = set(channel.get('videoScopeExcludeIds', []))
+    selected = []
+    for video in videos:
+        video_id = video.get('id')
+        if video_id in exclude_ids:
+            continue
+        title = normalized_video_title(video)
+        if video_id in include_ids or VOLVO_VIDEO_TITLE.search(title):
+            selected.append(video)
     if channel.get('videoContentFilter') == 'automotive':
         selected = [video for video in selected if (
-            not LIFESTYLE_TITLE.search(video.get('title', ''))
-            or VOLVO_MODEL_TITLE.search(video.get('title', ''))
-            or AUTOMOTIVE_TITLE.search(video.get('title', ''))
+            video.get('id') in include_ids
+            or not LIFESTYLE_TITLE.search(normalized_video_title(video))
+            or VOLVO_MODEL_TITLE.search(normalized_video_title(video))
+            or AUTOMOTIVE_TITLE.search(normalized_video_title(video))
         )]
     return selected
 
@@ -56,10 +71,20 @@ def validate_refresh_scope(payload):
     referenced_ids = {creator.get('channelId') for creator in creators}
     if None in referenced_ids or referenced_ids != set(channel_ids):
         raise ValueError("Every creator entry must reference exactly one collected channel")
-    if any(channel.get('videoBrandFilter') not in (None, 'volvo') for channel in channels):
-        raise ValueError("Unknown video brand filter")
-    if any(channel.get('videoContentFilter') not in (None, 'automotive') for channel in channels):
-        raise ValueError("Unknown video content filter")
+    if any(channel.get('videoBrandFilter') != 'volvo' for channel in channels):
+        raise ValueError("Every channel must use the Volvo-only video filter")
+    if any(channel.get('videoContentFilter') != 'automotive' for channel in channels):
+        raise ValueError("Every channel must exclude non-automotive lifestyle videos")
+    for channel in channels:
+        include_ids = channel.get('videoScopeIncludeIds', [])
+        exclude_ids = channel.get('videoScopeExcludeIds', [])
+        if not all(isinstance(ids, list) and all(isinstance(video_id, str) and video_id for video_id in ids)
+                   for ids in (include_ids, exclude_ids)):
+            raise ValueError("Video scope overrides must be lists of video IDs")
+        if len(include_ids) != len(set(include_ids)) or len(exclude_ids) != len(set(exclude_ids)):
+            raise ValueError("Video scope override IDs must be unique")
+        if set(include_ids) & set(exclude_ids):
+            raise ValueError("A video cannot be both included and excluded")
     return len(creators), len(channels)
 
 def refresh_due(payload, now=None, force=False):

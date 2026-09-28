@@ -71,6 +71,15 @@ test('Dealer and gender distribution reconcile to the supplied roster',()=>{
  assert.equal(data.creators.filter(p=>p.gender==='남성').length,8);
  assert.equal(data.creators.filter(p=>p.gender==='여성').length,7);
 });
+test('Every YouTube channel publishes only the reviewed Volvo automotive scope',()=>{
+ for(const channel of data.channels){
+  assert.equal(channel.videoBrandFilter,'volvo',channel.title);
+  assert.equal(channel.videoContentFilter,'automotive',channel.title);
+  assert.equal(channel.scopeVideoIds.length,channel.videoCount,channel.title);
+  assert.equal(new Set(channel.scopeVideoIds).size,channel.videoCount,channel.title);
+  assert.equal(channel.long.count+channel.short.count,channel.videoCount,channel.title);
+ }
+});
 test('Kim Yeso mixed-brand channel counts Volvo videos only',()=>{
  const person=data.creators.find(person=>person.name==='김예소');
  const channel=data.channels.find(channel=>channel.id===person.channelId);

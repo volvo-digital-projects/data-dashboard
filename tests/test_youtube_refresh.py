@@ -6,6 +6,7 @@ from pathlib import Path
 
 refresh_module = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'scripts/refresh-youtube-metrics.py'))
 merge = refresh_module['merge_channel']
+scoped_videos = refresh_module['scoped_videos']
 validate_refresh_scope = refresh_module['validate_refresh_scope']
 refresh_due = refresh_module['refresh_due']
 collect_with_retry = refresh_module['collect_with_retry']
@@ -31,7 +32,10 @@ class RefreshTests(unittest.TestCase):
     def test_requires_all_fifteen_creator_entries(self):
         payload = dict(
             creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(15)],
-            channels=[dict(id='shared')] + [dict(id=f'channel-{index}') for index in range(2, 15)],
+            channels=[dict(id='shared', videoBrandFilter='volvo', videoContentFilter='automotive')] + [
+                dict(id=f'channel-{index}', videoBrandFilter='volvo', videoContentFilter='automotive')
+                for index in range(2, 15)
+            ],
         )
         self.assertEqual(validate_refresh_scope(payload), (15, 14))
         payload['creators'].pop()
@@ -113,6 +117,31 @@ class RefreshTests(unittest.TestCase):
         output = merge(old, fresh)
         self.assertEqual(output['scopeVideoIds'], ['volvo-model', 'volvo-brand'])
         self.assertEqual(output['totalViews'], 4800)
+    def test_unicode_normalization_and_korean_suffixes_keep_volvo_models(self):
+        channel = dict(videoBrandFilter='volvo', videoContentFilter='automotive')
+        videos = [
+            dict(id='decomposed', title='볼보는 첫 차로 좋을까?'),
+            dict(id='suffix', title='XC90의 장점과 단점'),
+            dict(id='plain', title='EX90이랑 차박하고 싶어져'),
+            dict(id='cross-country', title='V60CC의 매력과 출고소식'),
+            dict(id='other-brand', title='BMW X5 출고'),
+        ]
+        self.assertEqual(
+            [video['id'] for video in scoped_videos(channel, videos)],
+            ['decomposed', 'suffix', 'plain', 'cross-country'],
+        )
+    def test_reviewed_overrides_are_explicit_and_exclusions_win(self):
+        channel = dict(
+            videoBrandFilter='volvo',
+            videoContentFilter='automotive',
+            videoScopeIncludeIds=['reviewed-volvo'],
+            videoScopeExcludeIds=['not-volvo'],
+        )
+        videos = [
+            dict(id='reviewed-volvo', title='고객 인도 현장'),
+            dict(id='not-volvo', title='볼보 딜러가 추천하는 맛집'),
+        ]
+        self.assertEqual([video['id'] for video in scoped_videos(channel, videos)], ['reviewed-volvo'])
     def test_daily_close_is_only_populated_by_the_midnight_capture(self):
         checked = '2026-09-21T01:00:00+00:00'
         prior_checked = '2026-09-20T14:50:00+00:00'

@@ -6,9 +6,13 @@
 or via workflow_dispatch. It reads the existing 15-person roster / 14 unique channels,
 collects complete public long/short catalogs, and rejects the entire refresh if any
 channel identity or count is missing after three per-channel retries. The previous snapshot stays intact on failure.
-The Kim Yeso channel contains historical MINI material; only titles that explicitly identify Volvo or a Volvo model are included in its video, view and comment metrics.
-The Lee Yu-seong channel contains historical BMW, food and lifestyle material; Volvo-identifying titles are required, and food/travel/lifestyle titles are excluded unless the title also identifies a Volvo model or automotive topic.
-The Jeong Ji-yoon channel is also explicitly scoped to titles that identify Volvo or a Volvo model, so future non-Volvo uploads do not enter dashboard video and view totals.
+Every channel uses the same Volvo-only scope: a title must identify Volvo or a Volvo
+model, while food, travel, daily-life, other-brand and other non-automotive uploads are
+excluded. Videos whose titles are ambiguous are included only through reviewed video-ID
+overrides after the public description or existing presenter review confirms Volvo content.
+This is especially important for channels that also contain historical MINI, BMW, food,
+travel or lifestyle material. Unicode-normalized Korean titles and Volvo Cross Country
+model names are recognized so decomposed text and Korean suffixes do not cause omissions.
 It preserves reviewed comments and known presenter attribution; new shared videos
 remain unassigned. The verified Sales-DMS staff-sales snapshot is refreshed and published
 atomically with YouTube; VOC is not refreshed by this workflow.
