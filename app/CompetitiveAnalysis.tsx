@@ -2745,16 +2745,38 @@ export default function CompetitiveAnalysis({
     selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
     195,
   );
-  const selectedShowroomComparisonLabelPoint = growthGaugeArcLabelPoint(
+  const selectedShowroomComparisonLabelAnchor = growthGaugeArcLabelPoint(
     selectedShowroomGrowthAngle,
     selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
     166,
   );
-  const selectedTenureComparisonLabelPoint = growthGaugeArcLabelPoint(
+  const selectedTenureComparisonLabelAnchor = growthGaugeArcLabelPoint(
     selectedStaffTenureFinalScore === null ? null : 90,
     selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
     198,
   );
+  const comparisonLabelsAreClose =
+    selectedShowroomComparisonLabelAnchor !== null &&
+    selectedTenureComparisonLabelAnchor !== null &&
+    Math.abs(selectedShowroomComparisonLabelAnchor.x - selectedTenureComparisonLabelAnchor.x) < 80 &&
+    Math.abs(selectedShowroomComparisonLabelAnchor.y - selectedTenureComparisonLabelAnchor.y) < 28;
+  const comparisonLabelOffset = comparisonLabelsAreClose
+    ? selectedShowroomComparisonLabelAnchor.x <= selectedTenureComparisonLabelAnchor.x
+      ? -10
+      : 10
+    : 0;
+  const selectedShowroomComparisonLabelPoint = selectedShowroomComparisonLabelAnchor === null
+    ? null
+    : {
+        ...selectedShowroomComparisonLabelAnchor,
+        x: Math.max(52, Math.min(368, selectedShowroomComparisonLabelAnchor.x + comparisonLabelOffset)),
+      };
+  const selectedTenureComparisonLabelPoint = selectedTenureComparisonLabelAnchor === null
+    ? null
+    : {
+        ...selectedTenureComparisonLabelAnchor,
+        x: Math.max(52, Math.min(368, selectedTenureComparisonLabelAnchor.x - comparisonLabelOffset)),
+      };
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
