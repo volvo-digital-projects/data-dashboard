@@ -3709,15 +3709,15 @@ export default function CompetitiveAnalysis({
                         </g>
                         <g className="growth-gauge-label coaching-label">
                           <text x="101" y="102">집중 코칭</text>
-                          <text className="detail" x="101" y="121">한 행동부터 교정</text>
+                          <text className="detail" x="101" y="121">취약 행동 집중 교정</text>
                         </g>
                         <g className="growth-gauge-label accelerating-label">
                           <text x="210" y="54">성장 가속</text>
-                          <text className="detail" x="210" y="73">강점 유지·전환 보완</text>
+                          <text className="detail" x="210" y="73">강점 유지·약점 보완</text>
                         </g>
                         <g className="growth-gauge-label expanding-label">
                           <text x="319" y="102">성과 확산</text>
-                          <text className="detail" x="319" y="121">우수 행동을 확산</text>
+                          <text className="detail" x="319" y="121">우수 행동 팀 내 확산</text>
                         </g>
                         {selectedStaffGrowthZone !== null && (
                           <g

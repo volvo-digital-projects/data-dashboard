@@ -1808,7 +1808,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-zone-gauge {
   --growth-needle-angle: 90deg;
   position: relative;
-  margin: -12px auto 0;
+  margin: -5px auto 0;
   width: min(100%, 380px);
 }
 

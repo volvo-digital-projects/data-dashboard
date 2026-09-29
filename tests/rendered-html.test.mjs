@@ -1138,7 +1138,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /이번 설계의 데이터 원칙|2025·2026 연도별 증감과 최신성은 판단에서 제외/);
   assert.doesNotMatch(css, /\.growth-data-policy\s*\{/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
-  assert.match(css, /\.growth-zone-gauge\s*\{[^}]*margin:\s*-12px auto 0;[^}]*width:\s*min\(100%, 380px\);/);
+  assert.match(css, /\.growth-zone-gauge\s*\{[^}]*margin:\s*-5px auto 0;[^}]*width:\s*min\(100%, 380px\);/);
+  assert.match(navigation, /집중 코칭[\s\S]*?취약 행동 집중 교정[\s\S]*?성장 가속[\s\S]*?강점 유지·약점 보완[\s\S]*?성과 확산[\s\S]*?우수 행동 팀 내 확산/);
   assert.match(source, /const selectedShowroomStaffResponses = rankedSalesStaff\.reduce\([\s\S]*?const selectedShowroomStaffAverage = selectedShowroomStaffResponses/);
   assert.match(source, /\(staff\.average \?\? 0\) \* staff\.responses/);
   assert.match(navigation, /className="growth-position-benchmarks"[\s\S]*?className="showroom-average"[\s\S]*?displayShowroomNameWithoutBrand\(selected\.showroom\)\} 평균 \{selectedShowroomStaffAverage/);
