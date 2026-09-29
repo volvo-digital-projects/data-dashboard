@@ -1148,6 +1148,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-gauge-comparison-arc showroom"[\s\S]*?className="growth-gauge-comparison-arc tenure"/);
   assert.match(navigation, /전시장 대비 \$\{formatGrowthGaugeDelta\(selectedStaffShowroomDelta\)\}/);
   assert.match(navigation, /연차 대비 \$\{formatGrowthGaugeDelta\(selectedStaffPeerDelta \/ 10\)\}/);
+  assert.match(source, /const selectedShowroomComparisonLabelPoint = growthGaugeArcLabelPoint\([\s\S]*?166,[\s\S]*?const selectedTenureComparisonLabelPoint = growthGaugeArcLabelPoint\([\s\S]*?198,/);
   assert.match(navigation, /className="growth-gauge-score-markers"[\s\S]*?<circle className="staff"[\s\S]*?<rect[\s\S]*?className="showroom"[\s\S]*?<rect[\s\S]*?className="tenure"/);
   assert.match(css, /\.growth-gauge-score-strip\s*\{[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.growth-gauge-comparison-arc\.showroom\s*\{[^}]*stroke:\s*#0a8a64;/);

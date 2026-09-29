@@ -2748,12 +2748,12 @@ export default function CompetitiveAnalysis({
   const selectedShowroomComparisonLabelPoint = growthGaugeArcLabelPoint(
     selectedShowroomGrowthAngle,
     selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
-    184,
+    166,
   );
   const selectedTenureComparisonLabelPoint = growthGaugeArcLabelPoint(
     selectedStaffTenureFinalScore === null ? null : 90,
     selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
-    195,
+    198,
   );
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
