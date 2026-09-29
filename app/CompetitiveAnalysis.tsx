@@ -2695,52 +2695,69 @@ export default function CompetitiveAnalysis({
     : Math.round(
         ((Math.max(-6, Math.min(6, selectedShowroomGrowthDelta)) + 6) / 12) * 1800,
       ) / 10;
-  const selectedStaffGaugeAngleRadians = selectedStaffGrowthNeedleAngle * Math.PI / 180;
-  const selectedStaffGaugeTip = {
-    x: 210 - Math.cos(selectedStaffGaugeAngleRadians) * 118,
-    y: 178 - Math.sin(selectedStaffGaugeAngleRadians) * 118,
+  const growthGaugePoint = (angle: number, radius: number) => {
+    const radians = angle * Math.PI / 180;
+    return {
+      x: Math.round((210 - Math.cos(radians) * radius) * 10) / 10,
+      y: Math.round((190 - Math.sin(radians) * radius) * 10) / 10,
+    };
   };
-  const selectedStaffGaugeLabelWidth = Math.max(
-    74,
-    ((selectedStaffEmployee?.name.length ?? 4) + 7) * 6.2,
-  );
-  const selectedStaffGaugeLabelX = Math.max(
-    selectedStaffGaugeLabelWidth / 2 + 4,
-    Math.min(
-      420 - selectedStaffGaugeLabelWidth / 2 - 4,
-      selectedStaffGaugeTip.x + (selectedStaffGrowthNeedleAngle <= 90 ? -48 : 48),
-    ),
-  );
-  const selectedShowroomGaugeAngleRadians =
-    (selectedShowroomGrowthAngle ?? 0) * Math.PI / 180;
-  const selectedShowroomGaugeTip = selectedShowroomGrowthAngle === null
+  const growthGaugeArcPath = (fromAngle: number | null, toAngle: number | null, radius: number) => {
+    if (fromAngle === null || toAngle === null || Math.abs(fromAngle - toAngle) < 0.1) return null;
+    const startAngle = Math.min(fromAngle, toAngle);
+    const endAngle = Math.max(fromAngle, toAngle);
+    const start = growthGaugePoint(startAngle, radius);
+    const end = growthGaugePoint(endAngle, radius);
+    return `M${start.x} ${start.y} A${radius} ${radius} 0 0 1 ${end.x} ${end.y}`;
+  };
+  const growthGaugeArcLabelPoint = (fromAngle: number | null, toAngle: number | null, radius: number) => {
+    if (fromAngle === null || toAngle === null) return null;
+    const point = growthGaugePoint((fromAngle + toAngle) / 2, radius);
+    return {
+      x: Math.max(52, Math.min(368, point.x)),
+      y: Math.max(14, point.y - 4),
+    };
+  };
+  const selectedStaffGaugeMarker = selectedStaffSatisfactionScore === null
     ? null
-    : {
-        x: 210 - Math.cos(selectedShowroomGaugeAngleRadians) * 170,
-        y: 190 - Math.sin(selectedShowroomGaugeAngleRadians) * 170,
-      };
-  const selectedShowroomGaugeLabel = `${displayShowroomNameWithoutBrand(selected.showroom)} 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`;
-  const selectedShowroomGaugeLabelWidth = Math.max(
-    82,
-    selectedShowroomGaugeLabel.length * 5.8,
+    : growthGaugePoint(selectedStaffGrowthNeedleAngle, 181);
+  const selectedShowroomGaugeMarker = selectedShowroomGrowthAngle === null
+    ? null
+    : growthGaugePoint(selectedShowroomGrowthAngle, 181);
+  const selectedTenureGaugeMarker = selectedStaffTenureFinalScore === null
+    ? null
+    : growthGaugePoint(90, 181);
+  const selectedStaffShowroomDelta =
+    selectedStaffSatisfactionScore === null || selectedShowroomStaffAverage === null
+      ? null
+      : selectedStaffSatisfactionScore / 10 - selectedShowroomStaffAverage;
+  const formatGrowthGaugeDelta = (delta: number | null) =>
+    delta === null
+      ? "―"
+      : `${delta > 0 ? "+" : delta < 0 ? "−" : "±"}${Math.abs(delta).toFixed(1)}`;
+  const selectedShowroomComparisonArc = growthGaugeArcPath(
+    selectedShowroomGrowthAngle,
+    selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
+    184,
   );
-  const selectedShowroomGaugeLabelX = selectedShowroomGaugeTip === null
-    ? 210
-    : Math.max(
-        selectedShowroomGaugeLabelWidth / 2 + 4,
-        Math.min(
-          420 - selectedShowroomGaugeLabelWidth / 2 - 4,
-          selectedShowroomGaugeTip.x + ((selectedShowroomGrowthAngle ?? 0) <= 90 ? 50 : -50),
-        ),
-      );
+  const selectedTenureComparisonArc = growthGaugeArcPath(
+    selectedStaffTenureFinalScore === null ? null : 90,
+    selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
+    195,
+  );
+  const selectedShowroomComparisonLabelPoint = growthGaugeArcLabelPoint(
+    selectedShowroomGrowthAngle,
+    selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
+    184,
+  );
+  const selectedTenureComparisonLabelPoint = growthGaugeArcLabelPoint(
+    selectedStaffTenureFinalScore === null ? null : 90,
+    selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
+    195,
+  );
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
-  const selectedStaffGrowthDeltaTone = selectedStaffPeerDelta === null || selectedStaffPeerDelta === 0
-    ? "neutral"
-    : selectedStaffPeerDelta > 0
-      ? "positive"
-      : "negative";
   const selectedStaffGrowthDeltaMark = selectedStaffPeerDelta === null || selectedStaffPeerDelta === 0
     ? "±"
     : selectedStaffPeerDelta > 0
@@ -3698,19 +3715,33 @@ export default function CompetitiveAnalysis({
                       <div>
                         <strong>역량진단 결과</strong>
                       </div>
-                      <small className="growth-position-benchmarks">
-                        <span>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</span>
-                      </small>
                     </header>
                     <div
                       className={`growth-zone-gauge${selectedStaffGrowthZone === null ? " no-evidence" : ""}`}
                       style={{ "--growth-needle-angle": `${selectedStaffGrowthNeedleAngle}deg` } as CSSProperties}
                       data-zone={selectedStaffGrowthZone ?? "none"}
                     >
+                      <div className="growth-gauge-score-strip" aria-hidden="true">
+                        <span className="staff">
+                          <i />
+                          {selectedStaffEmployee?.name ?? "개인"}
+                          <strong>{selectedStaffSatisfactionScore === null ? "―" : (selectedStaffSatisfactionScore / 10).toFixed(1)}</strong>
+                        </span>
+                        <span className="showroom">
+                          <i />
+                          {displayShowroomNameWithoutBrand(selected.showroom)}
+                          <strong>{selectedShowroomStaffAverage === null ? "―" : selectedShowroomStaffAverage.toFixed(1)}</strong>
+                        </span>
+                        <span className="tenure">
+                          <i />
+                          동일연차
+                          <strong>{selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}</strong>
+                        </span>
+                      </div>
                       <svg
                         viewBox="0 0 420 230"
                         role="img"
-                        aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}${selectedStaffPeerDelta === null ? "" : `, 동일연차 평균 대비 ${(selectedStaffPeerDelta / 10).toFixed(1)}점 위치`}`}
+                        aria-label={`상담 역량 타코미터. 개인 ${selectedStaffSatisfactionScore === null ? "자료 없음" : `${(selectedStaffSatisfactionScore / 10).toFixed(1)}점`}, ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage === null ? "자료 없음" : `${selectedShowroomStaffAverage.toFixed(1)}점`}, 동일연차 평균 ${selectedStaffTenureFinalScore === null ? "자료 없음" : `${(selectedStaffTenureFinalScore / 10).toFixed(1)}점`}. ${selectedStaffGrowthLabel}`}
                       >
                         <title>{`상담 역량 타코미터: ${selectedStaffGrowthLabel}`}</title>
                         <desc>{selectedStaffGrowthCalculation}</desc>
@@ -3742,17 +3773,28 @@ export default function CompetitiveAnalysis({
                             ))}
                           </g>
                         )}
-                        {selectedShowroomGrowthAngle === null ? null : (
-                          <g
-                            className="growth-gauge-showroom-average-marker"
-                            style={{ "--growth-showroom-average-angle": `${selectedShowroomGrowthAngle}deg` } as CSSProperties}
-                            aria-label={`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`}
-                          >
-                            <line x1="34" x2="210" y1="190" y2="190" />
-                            <circle cx="38" cy="190" r="2.5" />
-                            <title>{`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`}</title>
-                          </g>
-                        )}
+                        <g className="growth-gauge-comparisons" aria-hidden="true">
+                          {selectedShowroomComparisonArc !== null && (
+                            <path className="growth-gauge-comparison-arc showroom" d={selectedShowroomComparisonArc} />
+                          )}
+                          {selectedTenureComparisonArc !== null && (
+                            <path className="growth-gauge-comparison-arc tenure" d={selectedTenureComparisonArc} />
+                          )}
+                          {selectedShowroomComparisonLabelPoint !== null && selectedStaffShowroomDelta !== null && (
+                            <text
+                              className="growth-gauge-comparison-label showroom"
+                              x={selectedShowroomComparisonLabelPoint.x}
+                              y={selectedShowroomComparisonLabelPoint.y}
+                            >{`전시장 대비 ${formatGrowthGaugeDelta(selectedStaffShowroomDelta)}`}</text>
+                          )}
+                          {selectedTenureComparisonLabelPoint !== null && selectedStaffPeerDelta !== null && (
+                            <text
+                              className="growth-gauge-comparison-label tenure"
+                              x={selectedTenureComparisonLabelPoint.x}
+                              y={selectedTenureComparisonLabelPoint.y}
+                            >{`연차 대비 ${formatGrowthGaugeDelta(selectedStaffPeerDelta / 10)}`}</text>
+                          )}
+                        </g>
                         <g className="growth-gauge-label coaching-label">
                           <text x="95" y="124">집중 코칭</text>
                         </g>
@@ -3768,9 +3810,9 @@ export default function CompetitiveAnalysis({
                             key={`${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}-${selectedStaffGrowthZone}`}
                             aria-hidden="true"
                           >
-                            <path d="M220 171.5 L92 178 L220 184.5 Z" />
-                            <circle cx="210" cy="178" r="13" />
-                            <circle className="needle-cap" cx="210" cy="178" r="5" />
+                            <path d="M220 183.5 L34 190 L220 196.5 Z" />
+                            <circle cx="210" cy="190" r="13" />
+                            <circle className="needle-cap" cx="210" cy="190" r="5" />
                           </g>
                         )}
                         {selectedStaffGrowthZone !== null && (
@@ -3789,35 +3831,32 @@ export default function CompetitiveAnalysis({
                             <text x="0" y="0">{selectedStaffGrowthGuidance[selectedStaffGrowthZone].label}</text>
                           </g>
                         )}
-                        {selectedStaffGrowthZone !== null && selectedStaffSatisfactionScore !== null && (
-                          <>
-                            <circle
-                              className={`growth-gauge-staff-tip ${selectedStaffGrowthDeltaTone}`}
-                              cx={selectedStaffGaugeTip.x}
-                              cy={selectedStaffGaugeTip.y}
-                              r="3.4"
-                              aria-hidden="true"
+                        <g className="growth-gauge-score-markers" aria-hidden="true">
+                          {selectedStaffGaugeMarker !== null && (
+                            <circle className="staff" cx={selectedStaffGaugeMarker.x} cy={selectedStaffGaugeMarker.y} r="4.4" />
+                          )}
+                          {selectedShowroomGaugeMarker !== null && (
+                            <rect
+                              className="showroom"
+                              x={selectedShowroomGaugeMarker.x - 3.5}
+                              y={selectedShowroomGaugeMarker.y - 3.5}
+                              width="7"
+                              height="7"
+                              rx="1"
+                              transform={`rotate(45 ${selectedShowroomGaugeMarker.x} ${selectedShowroomGaugeMarker.y})`}
                             />
-                            <g
-                              className={`growth-gauge-end-label staff ${selectedStaffGrowthDeltaTone}`}
-                              transform={`translate(${selectedStaffGaugeLabelX} ${selectedStaffGaugeTip.y})`}
-                              aria-hidden="true"
-                            >
-                              <rect x={-selectedStaffGaugeLabelWidth / 2} y="-9" width={selectedStaffGaugeLabelWidth} height="18" rx="9" />
-                              <text x="0" y="0">{selectedStaffEmployee?.name ?? "영업직원"} {(selectedStaffSatisfactionScore / 10).toFixed(1)}점</text>
-                            </g>
-                          </>
-                        )}
-                        {selectedShowroomGaugeTip !== null && selectedShowroomStaffAverage !== null && (
-                          <g
-                            className="growth-gauge-end-label showroom"
-                            transform={`translate(${selectedShowroomGaugeLabelX} ${selectedShowroomGaugeTip.y})`}
-                            aria-hidden="true"
-                          >
-                            <rect x={-selectedShowroomGaugeLabelWidth / 2} y="-9" width={selectedShowroomGaugeLabelWidth} height="18" rx="9" />
-                            <text x="0" y="0">{selectedShowroomGaugeLabel}</text>
-                          </g>
-                        )}
+                          )}
+                          {selectedTenureGaugeMarker !== null && (
+                            <rect
+                              className="tenure"
+                              x={selectedTenureGaugeMarker.x - 3.5}
+                              y={selectedTenureGaugeMarker.y - 3.5}
+                              width="7"
+                              height="7"
+                              rx="1.5"
+                            />
+                          )}
+                        </g>
                       </svg>
                     </div>
                   </article>

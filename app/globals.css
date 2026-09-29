@@ -1762,13 +1762,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   color: #79909c;
 }
 
-.growth-position-benchmarks {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-}
-
 .growth-zone-gauge {
   --growth-needle-angle: 90deg;
   position: relative;
@@ -1776,10 +1769,52 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   width: min(100%, 380px);
 }
 
+.growth-gauge-score-strip {
+  height: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 5px;
+  padding: 0 5px;
+  font-family: var(--font-paperlogy), sans-serif;
+  font-size: 9px;
+  color: #426270;
+}
+
+.growth-gauge-score-strip span {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.growth-gauge-score-strip i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border: 2px solid currentColor;
+  background: #fff;
+}
+
+.growth-gauge-score-strip strong {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.growth-gauge-score-strip .staff { color: #d93242; }
+.growth-gauge-score-strip .staff i { border-radius: 50%; background: #f04452; }
+.growth-gauge-score-strip .showroom { color: #087a58; }
+.growth-gauge-score-strip .showroom i { transform: rotate(45deg); border-radius: 1px; }
+.growth-gauge-score-strip .tenure { color: #7654a4; }
+.growth-gauge-score-strip .tenure i { border-radius: 2px; }
+
 .growth-zone-gauge > svg {
   display: block;
-  width: 100%;
+  width: calc(100% - 20px);
   height: auto;
+  margin: -2px auto 0;
   overflow: visible;
 }
 
@@ -1839,29 +1874,49 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   dominant-baseline: middle;
 }
 
-.growth-gauge-showroom-average-marker {
-  transform: rotate(var(--growth-showroom-average-angle));
-  transform-origin: 210px 190px;
-  transform-box: view-box;
-  color: #087a58;
+.growth-gauge-comparisons,
+.growth-gauge-score-markers {
   pointer-events: none;
 }
 
-.growth-gauge-showroom-average-marker line {
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-dasharray: 3 3;
-  opacity: 0.92;
+.growth-gauge-comparison-arc {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
 
-.growth-gauge-showroom-average-marker circle {
-  fill: #f8fbfc;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  opacity: 1;
-  vector-effect: non-scaling-stroke;
+.growth-gauge-comparison-arc.showroom { stroke: #0a8a64; }
+.growth-gauge-comparison-arc.tenure {
+  stroke: #7654a4;
+  stroke-dasharray: 4 3;
 }
+
+.growth-gauge-comparison-label {
+  font-family: var(--font-paperlogy), sans-serif;
+  font-size: 8.5px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  paint-order: stroke;
+  stroke: rgba(251, 253, 254, 0.96);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+
+.growth-gauge-comparison-label.showroom { fill: #087a58; }
+.growth-gauge-comparison-label.tenure { fill: #7654a4; }
+
+.growth-gauge-score-markers > * {
+  fill: #fff;
+  stroke-width: 2.2;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 1px 2px rgba(22, 51, 62, 0.2));
+}
+
+.growth-gauge-score-markers .staff { fill: #f04452; stroke: #fff; }
+.growth-gauge-score-markers .showroom { stroke: #087a58; }
+.growth-gauge-score-markers .tenure { stroke: #7654a4; }
 
 .growth-gauge-label text {
   text-anchor: middle;
@@ -1885,7 +1940,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-needle {
   color: #162c37;
   transform: rotate(var(--growth-needle-angle));
-  transform-origin: 210px 178px;
+  transform-origin: 210px 190px;
   transform-box: view-box;
   filter: drop-shadow(0 3px 2px rgba(13, 43, 55, 0.24));
   animation: growth-gauge-sweep 1.9s cubic-bezier(0.12, 0.72, 0.16, 1) both;
@@ -1924,53 +1979,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   dominant-baseline: middle;
 }
 
-.growth-gauge-staff-tip {
-  fill: #fff;
-  stroke-width: 2.4;
-  filter: drop-shadow(0 2px 2px rgba(19, 50, 62, 0.2));
-}
-
-.growth-gauge-staff-tip.positive { stroke: var(--trend-rise); }
-.growth-gauge-staff-tip.negative { stroke: var(--trend-fall); }
-.growth-gauge-staff-tip.neutral { stroke: #536f7b; }
-
-.growth-gauge-end-label {
-  pointer-events: none;
-}
-
-.growth-gauge-end-label rect {
-  stroke-width: 1;
-  filter: drop-shadow(0 2px 4px rgba(20, 49, 61, 0.16));
-}
-
-.growth-gauge-end-label text {
-  font-family: var(--font-paperlogy), sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-
-.growth-gauge-end-label.staff {
-  opacity: 0;
-  animation: growth-gauge-guidance-pop 280ms 1.35s ease-out forwards;
-}
-
-.growth-gauge-end-label.staff rect {
-  fill: rgba(26, 52, 64, 0.92);
-  stroke: rgba(255, 255, 255, 0.48);
-}
-
-.growth-gauge-end-label.staff text { fill: #fff; }
-
-.growth-gauge-end-label.showroom rect {
-  fill: rgba(248, 252, 250, 0.96);
-  stroke: #087a58;
-}
-
-.growth-gauge-end-label.showroom text { fill: #075f49; }
-
 @keyframes growth-gauge-sweep {
   0% { transform: rotate(0deg); }
   72% { transform: rotate(calc(var(--growth-needle-angle) + 3deg)); }
@@ -1990,7 +1998,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 @media (prefers-reduced-motion: reduce) {
   .growth-gauge-needle { animation: none; }
   .growth-gauge-guidance { animation: none; opacity: 1; }
-  .growth-gauge-end-label.staff { animation: none; opacity: 1; }
 }
 
 .growth-scatter-card {
