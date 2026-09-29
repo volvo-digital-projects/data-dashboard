@@ -1769,21 +1769,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   white-space: nowrap;
 }
 
-.growth-position-benchmarks .showroom-average {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: #075f49;
-  font-weight: 700;
-}
-
-.growth-position-benchmarks .showroom-average i {
-  width: 13px;
-  height: 0;
-  display: inline-block;
-  border-top: 1.5px dashed #087a58;
-}
-
 .growth-zone-gauge {
   --growth-needle-angle: 90deg;
   position: relative;
@@ -1800,7 +1785,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-segments path {
   stroke: #fff;
-  stroke-width: 5;
+  stroke-width: 8;
   stroke-linejoin: round;
   transition: fill 180ms ease, filter 180ms ease, stroke 180ms ease;
 }
@@ -1808,13 +1793,24 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-segments .coaching { fill: #fbe5df; }
 .growth-gauge-segments .accelerating { fill: #e0f0f5; }
 .growth-gauge-segments .expanding { fill: #e1f2eb; }
-.growth-gauge-segments .coaching.active { fill: #ee9279; stroke: #c9654d; }
-.growth-gauge-segments .accelerating.active { fill: #62acc3; stroke: #247893; }
-.growth-gauge-segments .expanding.active { fill: #6bb79b; stroke: #2d8267; }
+.growth-gauge-segments .coaching.active { fill: #ee9279; }
+.growth-gauge-segments .accelerating.active { fill: #62acc3; }
+.growth-gauge-segments .expanding.active { fill: #6bb79b; }
 
 .growth-gauge-segments path.active {
   filter: drop-shadow(0 5px 5px rgba(29, 69, 84, 0.18));
 }
+
+.growth-gauge-active-outline {
+  fill: none;
+  stroke-width: 4.5;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.growth-gauge-active-outline.zone-0 { stroke: #c9654d; }
+.growth-gauge-active-outline.zone-1 { stroke: #247893; }
+.growth-gauge-active-outline.zone-2 { stroke: #2d8267; }
 
 .growth-gauge-scale {
   color: #607d89;
@@ -1869,6 +1865,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-label text {
   text-anchor: middle;
+  dominant-baseline: middle;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: -0.35px;
@@ -1927,6 +1924,53 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   dominant-baseline: middle;
 }
 
+.growth-gauge-staff-tip {
+  fill: #fff;
+  stroke-width: 2.4;
+  filter: drop-shadow(0 2px 2px rgba(19, 50, 62, 0.2));
+}
+
+.growth-gauge-staff-tip.positive { stroke: var(--trend-rise); }
+.growth-gauge-staff-tip.negative { stroke: var(--trend-fall); }
+.growth-gauge-staff-tip.neutral { stroke: #536f7b; }
+
+.growth-gauge-end-label {
+  pointer-events: none;
+}
+
+.growth-gauge-end-label rect {
+  stroke-width: 1;
+  filter: drop-shadow(0 2px 4px rgba(20, 49, 61, 0.16));
+}
+
+.growth-gauge-end-label text {
+  font-family: var(--font-paperlogy), sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.growth-gauge-end-label.staff {
+  opacity: 0;
+  animation: growth-gauge-guidance-pop 280ms 1.35s ease-out forwards;
+}
+
+.growth-gauge-end-label.staff rect {
+  fill: rgba(26, 52, 64, 0.92);
+  stroke: rgba(255, 255, 255, 0.48);
+}
+
+.growth-gauge-end-label.staff text { fill: #fff; }
+
+.growth-gauge-end-label.showroom rect {
+  fill: rgba(248, 252, 250, 0.96);
+  stroke: #087a58;
+}
+
+.growth-gauge-end-label.showroom text { fill: #075f49; }
+
 @keyframes growth-gauge-sweep {
   0% { transform: rotate(0deg); }
   72% { transform: rotate(calc(var(--growth-needle-angle) + 3deg)); }
@@ -1938,17 +1982,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   to { opacity: 1; }
 }
 
-.growth-gauge-current {
-  fill: #183f51;
-  font-size: 10.5px;
-  font-weight: 650;
-  text-anchor: middle;
-}
-
-.growth-gauge-current.positive { fill: var(--trend-rise); }
-.growth-gauge-current.negative { fill: var(--trend-fall); }
-.growth-gauge-current.neutral { fill: #536f7b; }
-
 .growth-zone-gauge.no-evidence .growth-gauge-segments path {
   fill: #edf2f4;
   stroke: #fff;
@@ -1957,6 +1990,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 @media (prefers-reduced-motion: reduce) {
   .growth-gauge-needle { animation: none; }
   .growth-gauge-guidance { animation: none; opacity: 1; }
+  .growth-gauge-end-label.staff { animation: none; opacity: 1; }
 }
 
 .growth-scatter-card {

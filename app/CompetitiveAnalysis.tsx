@@ -2655,9 +2655,9 @@ export default function CompetitiveAnalysis({
           : 1;
   const selectedStaffGrowthLabels = ["집중 코칭", "성장 가속", "성과 확산"] as const;
   const selectedStaffGrowthGuidance = [
-    { label: "취약 행동 집중 교정", x: 101, y: 122, width: 100 },
-    { label: "강점 유지·약점 보완", x: 210, y: 76, width: 104 },
-    { label: "우수 행동 팀 내 확산", x: 319, y: 122, width: 104 },
+    { label: "취약 행동 집중 교정", x: 95, width: 100 },
+    { label: "강점 유지·약점 보완", x: 210, width: 104 },
+    { label: "우수 행동 팀 내 확산", x: 325, width: 104 },
   ] as const;
   const selectedStaffGrowthNeedleAngle = selectedStaffGrowthZone === null
     ? 0
@@ -2695,6 +2695,44 @@ export default function CompetitiveAnalysis({
     : Math.round(
         ((Math.max(-6, Math.min(6, selectedShowroomGrowthDelta)) + 6) / 12) * 1800,
       ) / 10;
+  const selectedStaffGaugeAngleRadians = selectedStaffGrowthNeedleAngle * Math.PI / 180;
+  const selectedStaffGaugeTip = {
+    x: 210 - Math.cos(selectedStaffGaugeAngleRadians) * 118,
+    y: 178 - Math.sin(selectedStaffGaugeAngleRadians) * 118,
+  };
+  const selectedStaffGaugeLabelWidth = Math.max(
+    74,
+    ((selectedStaffEmployee?.name.length ?? 4) + 7) * 6.2,
+  );
+  const selectedStaffGaugeLabelX = Math.max(
+    selectedStaffGaugeLabelWidth / 2 + 4,
+    Math.min(
+      420 - selectedStaffGaugeLabelWidth / 2 - 4,
+      selectedStaffGaugeTip.x + (selectedStaffGrowthNeedleAngle <= 90 ? -48 : 48),
+    ),
+  );
+  const selectedShowroomGaugeAngleRadians =
+    (selectedShowroomGrowthAngle ?? 0) * Math.PI / 180;
+  const selectedShowroomGaugeTip = selectedShowroomGrowthAngle === null
+    ? null
+    : {
+        x: 210 - Math.cos(selectedShowroomGaugeAngleRadians) * 170,
+        y: 190 - Math.sin(selectedShowroomGaugeAngleRadians) * 170,
+      };
+  const selectedShowroomGaugeLabel = `${displayShowroomNameWithoutBrand(selected.showroom)} 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`;
+  const selectedShowroomGaugeLabelWidth = Math.max(
+    82,
+    selectedShowroomGaugeLabel.length * 5.8,
+  );
+  const selectedShowroomGaugeLabelX = selectedShowroomGaugeTip === null
+    ? 210
+    : Math.max(
+        selectedShowroomGaugeLabelWidth / 2 + 4,
+        Math.min(
+          420 - selectedShowroomGaugeLabelWidth / 2 - 4,
+          selectedShowroomGaugeTip.x + ((selectedShowroomGrowthAngle ?? 0) <= 90 ? 50 : -50),
+        ),
+      );
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
@@ -3661,7 +3699,6 @@ export default function CompetitiveAnalysis({
                         <strong>역량진단 결과</strong>
                       </div>
                       <small className="growth-position-benchmarks">
-                        <span className="showroom-average"><i aria-hidden="true" />{displayShowroomNameWithoutBrand(selected.showroom)} 평균 {selectedShowroomStaffAverage === null ? "―" : selectedShowroomStaffAverage.toFixed(1)}점</span>
                         <span>동일연차 평균 {selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1)}점</span>
                       </small>
                     </header>
@@ -3676,11 +3713,23 @@ export default function CompetitiveAnalysis({
                         aria-label={`집중 코칭, 성장 가속, 성과 확산 중 ${selectedStaffGrowthLabel}${selectedStaffPeerDelta === null ? "" : `, 동일연차 평균 대비 ${(selectedStaffPeerDelta / 10).toFixed(1)}점 위치`}`}
                       >
                         <title>{`상담 역량 타코미터: ${selectedStaffGrowthLabel}`}</title>
+                        <desc>{selectedStaffGrowthCalculation}</desc>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L160 103.4 A100 100 0 0 0 110 190 Z" />
                           <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L260 103.4 A100 100 0 0 0 160 103.4 Z" />
                           <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L310 190 A100 100 0 0 0 260 103.4 Z" />
                         </g>
+                        {selectedStaffGrowthZone !== null && (
+                          <path
+                            className={`growth-gauge-active-outline zone-${selectedStaffGrowthZone}`}
+                            d={selectedStaffGrowthZone === 0
+                              ? "M45 190 A165 165 0 0 1 127.5 47.1 L160 103.4 A100 100 0 0 0 110 190 Z"
+                              : selectedStaffGrowthZone === 1
+                                ? "M127.5 47.1 A165 165 0 0 1 292.5 47.1 L260 103.4 A100 100 0 0 0 160 103.4 Z"
+                                : "M292.5 47.1 A165 165 0 0 1 375 190 L310 190 A100 100 0 0 0 260 103.4 Z"}
+                            aria-hidden="true"
+                          />
+                        )}
                         {selectedStaffGrowthScaleTicks.length > 0 && (
                           <g className="growth-gauge-scale" aria-hidden="true">
                             {selectedStaffGrowthScaleTicks.map((tick) => (
@@ -3705,13 +3754,13 @@ export default function CompetitiveAnalysis({
                           </g>
                         )}
                         <g className="growth-gauge-label coaching-label">
-                          <text x="101" y="102">집중 코칭</text>
+                          <text x="95" y="124">집중 코칭</text>
                         </g>
                         <g className="growth-gauge-label accelerating-label">
-                          <text x="210" y="54">성장 가속</text>
+                          <text x="210" y="60">성장 가속</text>
                         </g>
                         <g className="growth-gauge-label expanding-label">
-                          <text x="319" y="102">성과 확산</text>
+                          <text x="325" y="124">성과 확산</text>
                         </g>
                         {selectedStaffGrowthZone !== null && (
                           <g
@@ -3727,7 +3776,7 @@ export default function CompetitiveAnalysis({
                         {selectedStaffGrowthZone !== null && (
                           <g
                             className="growth-gauge-guidance"
-                            transform={`translate(${selectedStaffGrowthGuidance[selectedStaffGrowthZone].x} ${selectedStaffGrowthGuidance[selectedStaffGrowthZone].y})`}
+                            transform={`translate(${selectedStaffGrowthGuidance[selectedStaffGrowthZone].x} ${selectedStaffGrowthZone === 1 ? 84 : 148})`}
                             aria-hidden="true"
                           >
                             <rect
@@ -3740,7 +3789,35 @@ export default function CompetitiveAnalysis({
                             <text x="0" y="0">{selectedStaffGrowthGuidance[selectedStaffGrowthZone].label}</text>
                           </g>
                         )}
-                        <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="209">{selectedStaffGrowthCalculation}</text>
+                        {selectedStaffGrowthZone !== null && selectedStaffSatisfactionScore !== null && (
+                          <>
+                            <circle
+                              className={`growth-gauge-staff-tip ${selectedStaffGrowthDeltaTone}`}
+                              cx={selectedStaffGaugeTip.x}
+                              cy={selectedStaffGaugeTip.y}
+                              r="3.4"
+                              aria-hidden="true"
+                            />
+                            <g
+                              className={`growth-gauge-end-label staff ${selectedStaffGrowthDeltaTone}`}
+                              transform={`translate(${selectedStaffGaugeLabelX} ${selectedStaffGaugeTip.y})`}
+                              aria-hidden="true"
+                            >
+                              <rect x={-selectedStaffGaugeLabelWidth / 2} y="-9" width={selectedStaffGaugeLabelWidth} height="18" rx="9" />
+                              <text x="0" y="0">{selectedStaffEmployee?.name ?? "영업직원"} {(selectedStaffSatisfactionScore / 10).toFixed(1)}점</text>
+                            </g>
+                          </>
+                        )}
+                        {selectedShowroomGaugeTip !== null && selectedShowroomStaffAverage !== null && (
+                          <g
+                            className="growth-gauge-end-label showroom"
+                            transform={`translate(${selectedShowroomGaugeLabelX} ${selectedShowroomGaugeTip.y})`}
+                            aria-hidden="true"
+                          >
+                            <rect x={-selectedShowroomGaugeLabelWidth / 2} y="-9" width={selectedShowroomGaugeLabelWidth} height="18" rx="9" />
+                            <text x="0" y="0">{selectedShowroomGaugeLabel}</text>
+                          </g>
+                        )}
                       </svg>
                     </div>
                   </article>
