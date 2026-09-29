@@ -7265,7 +7265,7 @@ input:focus-visible {
   border-radius: 2px;
   color: #295b73;
   background: #f7fbfc;
-  font-family: "Volvo Centum", var(--font-english), sans-serif;
+  font-family: "Volvo Centum Web", var(--font-korean), sans-serif;
   font-size: 7px;
   font-weight: 700;
   line-height: 1;
@@ -7301,6 +7301,7 @@ input:focus-visible {
   gap: 8px;
   margin: 0;
   color: var(--muted);
+  font-family: "Volvo Centum Web", var(--font-korean), sans-serif;
   font-size: 9px;
   font-weight: 500;
   line-height: 1;
@@ -7315,7 +7316,7 @@ input:focus-visible {
 
 .analysis-quarter-values strong {
   color: #5e7480;
-  font-family: var(--font-latin);
+  font-family: "Volvo Centum Web", var(--font-korean), sans-serif;
   font-size: 9px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -7361,9 +7362,11 @@ input:focus-visible {
   justify-self: end;
   max-width: 100%;
   color: var(--secondary);
+  font-family: "Volvo Centum Web", var(--font-korean), sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 650;
+  font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
