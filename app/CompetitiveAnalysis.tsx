@@ -2654,6 +2654,11 @@ export default function CompetitiveAnalysis({
           ? 2
           : 1;
   const selectedStaffGrowthLabels = ["집중 코칭", "성장 가속", "성과 확산"] as const;
+  const selectedStaffGrowthGuidance = [
+    { label: "취약 행동 집중 교정", x: 101, y: 122, width: 100 },
+    { label: "강점 유지·약점 보완", x: 210, y: 76, width: 104 },
+    { label: "우수 행동 팀 내 확산", x: 319, y: 122, width: 104 },
+  ] as const;
   const selectedStaffGrowthNeedleAngle = selectedStaffGrowthZone === null
     ? 0
     : selectedStaffPeerDelta === null
@@ -3672,9 +3677,9 @@ export default function CompetitiveAnalysis({
                       >
                         <title>{`상담 역량 타코미터: ${selectedStaffGrowthLabel}`}</title>
                         <g className="growth-gauge-segments">
-                          <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L156 96.5 A108 108 0 0 0 102 190 Z" />
-                          <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L264 96.5 A108 108 0 0 0 156 96.5 Z" />
-                          <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L318 190 A108 108 0 0 0 264 96.5 Z" />
+                          <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L160 103.4 A100 100 0 0 0 110 190 Z" />
+                          <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L260 103.4 A100 100 0 0 0 160 103.4 Z" />
+                          <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L310 190 A100 100 0 0 0 260 103.4 Z" />
                         </g>
                         {selectedStaffGrowthScaleTicks.length > 0 && (
                           <g className="growth-gauge-scale" aria-hidden="true">
@@ -3699,25 +3704,14 @@ export default function CompetitiveAnalysis({
                             <title>{`${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage?.toFixed(1)}점`}</title>
                           </g>
                         )}
-                        <g className="growth-gauge-ticks" aria-hidden="true">
-                          <circle cx="124" cy="168" r="2.4" /><circle cx="134" cy="146" r="2.4" />
-                          <circle cx="149" cy="128" r="2.4" /><circle cx="167" cy="114" r="2.4" />
-                          <circle cx="188" cy="105" r="2.4" /><circle cx="210" cy="102" r="2.4" />
-                          <circle cx="232" cy="105" r="2.4" /><circle cx="253" cy="114" r="2.4" />
-                          <circle cx="271" cy="128" r="2.4" /><circle cx="286" cy="146" r="2.4" />
-                          <circle cx="296" cy="168" r="2.4" />
-                        </g>
                         <g className="growth-gauge-label coaching-label">
                           <text x="101" y="102">집중 코칭</text>
-                          <text className="detail" x="101" y="121">취약 행동 집중 교정</text>
                         </g>
                         <g className="growth-gauge-label accelerating-label">
                           <text x="210" y="54">성장 가속</text>
-                          <text className="detail" x="210" y="73">강점 유지·약점 보완</text>
                         </g>
                         <g className="growth-gauge-label expanding-label">
                           <text x="319" y="102">성과 확산</text>
-                          <text className="detail" x="319" y="121">우수 행동 팀 내 확산</text>
                         </g>
                         {selectedStaffGrowthZone !== null && (
                           <g
@@ -3730,10 +3724,25 @@ export default function CompetitiveAnalysis({
                             <circle className="needle-cap" cx="210" cy="178" r="5" />
                           </g>
                         )}
+                        {selectedStaffGrowthZone !== null && (
+                          <g
+                            className="growth-gauge-guidance"
+                            transform={`translate(${selectedStaffGrowthGuidance[selectedStaffGrowthZone].x} ${selectedStaffGrowthGuidance[selectedStaffGrowthZone].y})`}
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x={-selectedStaffGrowthGuidance[selectedStaffGrowthZone].width / 2}
+                              y="-10"
+                              width={selectedStaffGrowthGuidance[selectedStaffGrowthZone].width}
+                              height="20"
+                              rx="10"
+                            />
+                            <text x="0" y="0">{selectedStaffGrowthGuidance[selectedStaffGrowthZone].label}</text>
+                          </g>
+                        )}
                         <text className={`growth-gauge-current ${selectedStaffGrowthDeltaTone}`} x="210" y="209">{selectedStaffGrowthCalculation}</text>
                       </svg>
                     </div>
-                    <div className="growth-under-construction">공사중</div>
                   </article>
 
                   <article className="growth-scatter-card" ref={growthConsultationScatterRef}>

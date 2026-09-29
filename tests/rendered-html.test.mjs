@@ -809,8 +809,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /<article className="growth-position-card">[\s\S]*?<header>[\s\S]*?<strong>역량진단 결과<\/strong>/);
   assert.doesNotMatch(navigation, /<span>역량진단<\/span>[\s\S]*?<strong>\{selectedStaffGrowthLabel\}<\/strong>/);
   assert.doesNotMatch(navigation, /<span>상담 역량 위치<\/span>/);
-  assert.equal((navigation.match(/className="growth-under-construction">공사중<\/div>/g) ?? []).length, 1);
-  assert.match(css, /\.growth-under-construction\s*\{[^}]*position:\s*absolute;[^}]*top:\s*50%;[^}]*left:\s*50%;[^}]*background:\s*rgba\(43, 84, 104, 0\.72\);[^}]*color:\s*#fff;/);
+  assert.doesNotMatch(navigation, /growth-under-construction|공사중/);
+  assert.doesNotMatch(css, /\.growth-under-construction\s*\{/);
   assert.match(css, /\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;/);
   assert.match(css, /\.growth-position-card > header strong,[\s\S]*?\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;[^}]*color: #244f64;/);
   assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">2026<\/span>년 누적 판매/);
@@ -1139,7 +1139,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-data-policy\s*\{/);
   assert.match(navigation, /className=\{`growth-zone-gauge/);
   assert.match(css, /\.growth-zone-gauge\s*\{[^}]*margin:\s*-5px auto 0;[^}]*width:\s*min\(100%, 380px\);/);
-  assert.match(navigation, /집중 코칭[\s\S]*?취약 행동 집중 교정[\s\S]*?성장 가속[\s\S]*?강점 유지·약점 보완[\s\S]*?성과 확산[\s\S]*?우수 행동 팀 내 확산/);
+  assert.match(source, /selectedStaffGrowthGuidance = \[[\s\S]*?취약 행동 집중 교정[\s\S]*?강점 유지·약점 보완[\s\S]*?우수 행동 팀 내 확산/);
   assert.match(source, /const selectedShowroomStaffResponses = rankedSalesStaff\.reduce\([\s\S]*?const selectedShowroomStaffAverage = selectedShowroomStaffResponses/);
   assert.match(source, /\(staff\.average \?\? 0\) \* staff\.responses/);
   assert.match(navigation, /className="growth-position-benchmarks"[\s\S]*?className="showroom-average"[\s\S]*?displayShowroomNameWithoutBrand\(selected\.showroom\)\} 평균 \{selectedShowroomStaffAverage/);
@@ -1156,7 +1156,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-sales-month > i b\s*\{[^}]*animation:\s*growth-sales-bar-enter 720ms/);
   assert.match(css, /@keyframes growth-sales-bar-enter/);
   assert.match(navigation, /상담 역량 타코미터/);
-  assert.match(navigation, /M45 190 A165 165/);
+  assert.match(navigation, /M45 190 A165 165[\s\S]*?A100 100/);
+  assert.doesNotMatch(navigation, /growth-gauge-ticks/);
+  assert.match(css, /\.growth-gauge-scale text\s*\{[^}]*font-size:\s*9\.5px;/);
+  assert.match(navigation, /className="growth-gauge-guidance"[\s\S]*?selectedStaffGrowthGuidance\[selectedStaffGrowthZone\]\.label/);
+  assert.match(css, /\.growth-gauge-guidance\s*\{[^}]*animation:\s*growth-gauge-guidance-pop 320ms 1\.35s/);
   assert.match(navigation, /M220 171\.5 L92 178 L220 184\.5 Z/);
   assert.match(navigation, /circle cx="210" cy="178" r="13"/);
   assert.match(navigation, /growth-gauge-current[\s\S]*?x="210" y="209"/);

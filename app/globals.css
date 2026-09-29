@@ -1731,29 +1731,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   padding: 7px;
 }
 
-.growth-under-construction {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 5;
-  transform: translate(-50%, -50%);
-  min-width: 76px;
-  box-sizing: border-box;
-  padding: 7px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 5px;
-  background: rgba(43, 84, 104, 0.72);
-  box-shadow: 0 4px 12px rgba(26, 60, 76, 0.12);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
-  text-align: center;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
 .growth-position-card > header,
 .growth-scatter-card > header,
 .growth-comment-evidence > header {
@@ -1859,7 +1836,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-scale text {
   fill: #496873;
   font-family: var(--font-volvo), Arial, sans-serif;
-  font-size: 8.5px;
+  font-size: 9.5px;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   text-anchor: middle;
@@ -1898,13 +1875,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   transition: fill 180ms ease;
 }
 
-.growth-gauge-label .detail {
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  opacity: 0.8;
-}
-
 .growth-gauge-label.coaching-label { fill: #924a39; }
 .growth-gauge-label.accelerating-label { fill: #1c6279; }
 .growth-gauge-label.expanding-label { fill: #286e59; }
@@ -1913,11 +1883,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-zone-gauge[data-zone="1"] .accelerating-label,
 .growth-zone-gauge[data-zone="2"] .expanding-label {
   fill: #ffffff;
-}
-
-.growth-gauge-ticks circle {
-  fill: #8ba1ab;
-  opacity: 0.58;
 }
 
 .growth-gauge-needle {
@@ -1940,10 +1905,37 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   stroke-width: 3;
 }
 
+.growth-gauge-guidance {
+  opacity: 0;
+  pointer-events: none;
+  animation: growth-gauge-guidance-pop 320ms 1.35s cubic-bezier(0.16, 0.8, 0.24, 1) forwards;
+}
+
+.growth-gauge-guidance rect {
+  fill: rgba(27, 49, 59, 0.88);
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 0.75;
+  filter: drop-shadow(0 3px 5px rgba(18, 43, 54, 0.2));
+}
+
+.growth-gauge-guidance text {
+  fill: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
 @keyframes growth-gauge-sweep {
   0% { transform: rotate(0deg); }
   72% { transform: rotate(calc(var(--growth-needle-angle) + 3deg)); }
   100% { transform: rotate(var(--growth-needle-angle)); }
+}
+
+@keyframes growth-gauge-guidance-pop {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .growth-gauge-current {
@@ -1964,6 +1956,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 @media (prefers-reduced-motion: reduce) {
   .growth-gauge-needle { animation: none; }
+  .growth-gauge-guidance { animation: none; opacity: 1; }
 }
 
 .growth-scatter-card {
