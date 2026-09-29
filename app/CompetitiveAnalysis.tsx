@@ -2661,6 +2661,26 @@ export default function CompetitiveAnalysis({
       : Math.round(
           ((Math.max(-6, Math.min(6, selectedStaffPeerDelta)) + 6) / 12) * 1800,
         ) / 10;
+  const selectedStaffGrowthScaleTicks = selectedStaffTenureFinalScore === null
+    ? []
+    : Array.from({ length: 13 }, (_, index) => {
+        const angle = (index / 12) * Math.PI;
+        const isMajor = index % 2 === 0;
+        const innerRadius = isMajor ? 168 : 171;
+        const outerRadius = 178;
+        const labelRadius = 188;
+        return {
+          index,
+          isMajor,
+          x1: 210 - Math.cos(angle) * innerRadius,
+          y1: 190 - Math.sin(angle) * innerRadius,
+          x2: 210 - Math.cos(angle) * outerRadius,
+          y2: 190 - Math.sin(angle) * outerRadius,
+          labelX: 210 - Math.cos(angle) * labelRadius,
+          labelY: 190 - Math.sin(angle) * labelRadius,
+          label: ((selectedStaffTenureFinalScore - 6 + index) / 10).toFixed(1),
+        };
+      });
   const selectedShowroomGrowthDelta =
     selectedShowroomStaffAverage === null || selectedStaffTenureFinalScore === null
       ? null
@@ -3654,6 +3674,18 @@ export default function CompetitiveAnalysis({
                           <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L264 96.5 A108 108 0 0 0 156 96.5 Z" />
                           <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L318 190 A108 108 0 0 0 264 96.5 Z" />
                         </g>
+                        {selectedStaffGrowthScaleTicks.length > 0 && (
+                          <g className="growth-gauge-scale" aria-hidden="true">
+                            {selectedStaffGrowthScaleTicks.map((tick) => (
+                              <g key={tick.index} className={tick.isMajor ? "major" : "minor"}>
+                                <line x1={tick.x1} y1={tick.y1} x2={tick.x2} y2={tick.y2} />
+                                {tick.isMajor && (
+                                  <text x={tick.labelX} y={tick.labelY}>{tick.label}</text>
+                                )}
+                              </g>
+                            ))}
+                          </g>
+                        )}
                         {selectedShowroomGrowthAngle === null ? null : (
                           <g
                             className="growth-gauge-showroom-average-marker"

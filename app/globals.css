@@ -1831,6 +1831,33 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   filter: drop-shadow(0 5px 5px rgba(29, 69, 84, 0.18));
 }
 
+.growth-gauge-scale {
+  color: #607d89;
+  pointer-events: none;
+}
+
+.growth-gauge-scale line {
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.62;
+  vector-effect: non-scaling-stroke;
+}
+
+.growth-gauge-scale .major line {
+  stroke-width: 1.5;
+  opacity: 0.92;
+}
+
+.growth-gauge-scale text {
+  fill: #496873;
+  font-family: var(--font-volvo), Arial, sans-serif;
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
 .growth-gauge-showroom-average-marker {
   transform: rotate(var(--growth-showroom-average-angle));
   transform-origin: 210px 190px;
