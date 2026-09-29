@@ -1144,14 +1144,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /\(staff\.average \?\? 0\) \* staff\.responses/);
   assert.doesNotMatch(navigation, /className="growth-position-benchmarks"/);
   assert.doesNotMatch(navigation, /className="showroom-average"/);
-  assert.match(navigation, /className="growth-gauge-score-strip"[\s\S]*?className="staff"[\s\S]*?selectedStaffSatisfactionScore[\s\S]*?className="showroom"[\s\S]*?selectedShowroomStaffAverage[\s\S]*?className="tenure"[\s\S]*?selectedStaffTenureFinalScore/);
+  assert.doesNotMatch(navigation, /growth-gauge-score-strip/);
   assert.match(navigation, /className="growth-gauge-comparison-arc showroom"[\s\S]*?className="growth-gauge-comparison-arc tenure"/);
-  assert.match(navigation, /전시장 대비 \$\{formatGrowthGaugeDelta\(selectedStaffShowroomDelta\)\}/);
-  assert.match(navigation, /연차 대비 \$\{formatGrowthGaugeDelta\(selectedStaffPeerDelta \/ 10\)\}/);
-  assert.match(source, /const selectedShowroomComparisonLabelAnchor = growthGaugeArcLabelPoint\([\s\S]*?166,[\s\S]*?const selectedTenureComparisonLabelAnchor = growthGaugeArcLabelPoint\([\s\S]*?198,/);
-  assert.match(source, /const comparisonLabelsAreClose =[\s\S]*?< 80[\s\S]*?< 28;[\s\S]*?const comparisonLabelOffset = comparisonLabelsAreClose/);
-  assert.match(navigation, /className="growth-gauge-score-markers"[\s\S]*?<circle className="staff"[\s\S]*?<rect[\s\S]*?className="showroom"[\s\S]*?<rect[\s\S]*?className="tenure"/);
-  assert.match(css, /\.growth-gauge-score-strip\s*\{[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.doesNotMatch(navigation, /growth-gauge-comparison-label|전시장 대비|연차 대비/);
+  assert.match(source, /const selectedGrowthGaugeScoreCalloutCandidates = \[[\s\S]*?key: "staff"[\s\S]*?key: "showroom"[\s\S]*?key: "tenure"[\s\S]*?\.sort\(\(left, right\) => left\.marker\.x - right\.marker\.x\)/);
+  assert.match(source, /growthGaugeScoreCalloutSlots[\s\S]*?\{ x: 60, y: 28 \}[\s\S]*?\{ x: 210, y: 11 \}[\s\S]*?\{ x: 360, y: 28 \}/);
+  assert.match(navigation, /className="growth-gauge-score-callouts"[\s\S]*?callout\.leaderPath[\s\S]*?callout\.label[\s\S]*?callout\.score/);
+  assert.match(css, /\.growth-gauge-score-callout > path\s*\{[^}]*stroke:\s*currentColor;[^}]*stroke-width:\s*1\.2;/);
   assert.match(css, /\.growth-gauge-comparison-arc\.showroom\s*\{[^}]*stroke:\s*#0a8a64;/);
   assert.match(css, /\.growth-gauge-comparison-arc\.tenure\s*\{[^}]*stroke:\s*#7654a4;[^}]*stroke-dasharray:\s*4 3;/);
   assert.equal((navigation.match(/key=\{`(?:strength|improvement)-bars-\$\{selectedStaffEmployee\?\.cdsid/g) ?? []).length, 2);
@@ -1167,6 +1166,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /growth-gauge-ticks/);
   assert.match(css, /\.growth-gauge-scale text\s*\{[^}]*font-size:\s*9\.5px;/);
   assert.match(navigation, /className="growth-gauge-guidance"[\s\S]*?selectedStaffGrowthGuidance\[selectedStaffGrowthZone\]\.label/);
+  assert.match(navigation, /className="growth-gauge-guidance"[\s\S]*?transform="translate\(210 151\)"/);
   assert.match(css, /\.growth-gauge-guidance\s*\{[^}]*animation:\s*growth-gauge-guidance-pop 320ms 1\.35s/);
   assert.match(navigation, /M220 183\.5 L34 190 L220 196\.5 Z/);
   assert.match(navigation, /circle cx="210" cy="190" r="13"/);
