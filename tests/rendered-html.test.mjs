@@ -1025,7 +1025,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /selectedStaffTenureRank \/ staffCurrentSalesPopulation\.length/);
   assert.doesNotMatch(profile, /growth-profile-person-label/);
   assert.match(navigation, /<small>점<\/small>[\s\S]*?<small>\/ 10점<\/small>/);
-  assert.match(navigation, /className="growth-profile-metric growth-profile-sales"[\s\S]*?<span>2026년 누적 판매대수<\/span>[\s\S]*?\{selectedStaffDeliveredSales\}<small>대<\/small>[\s\S]*?\/ 월 평균 \{selectedStaffMonthlySalesAverage[\s\S]*?toFixed\(1\)\}대`\}/);
+  assert.match(navigation, /className="growth-profile-metric growth-profile-sales"[\s\S]*?<span>2026년 누적 판매대수<\/span>[\s\S]*?\{selectedStaffDeliveredSales\}<small>대<\/small>[\s\S]*?\/ 월 평균 \{selectedStaffMonthlySalesAverage[\s\S]*?<b>\{selectedStaffMonthlySalesAverage\.toFixed\(1\)\}<\/b>대/);
+  assert.match(css, /\.growth-profile-sales-context b\s*\{[^}]*color: #155873;[^}]*font-family: var\(--font-volvo\);[^}]*font-weight: 700;/);
   assert.match(navigation, /className="growth-roster-sales-heading"[\s\S]*?<b>누적 판매대수<\/b>[\s\S]*?<i>2026년 누적 판매대수<\/i>/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading b\s*\{[^}]*display: inline;/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading i\s*\{[^}]*display: none;/);

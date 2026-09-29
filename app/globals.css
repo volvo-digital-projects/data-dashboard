@@ -1542,6 +1542,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-weight: 500;
 }
 
+.growth-profile-sales-context b {
+  color: #155873;
+  font-family: var(--font-volvo);
+  font-weight: 700;
+}
+
 .growth-profile-sales-context i {
   margin-left: 0;
   color: #3f7588;
