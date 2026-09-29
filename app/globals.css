@@ -1422,6 +1422,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   image-rendering: auto;
 }
 
+/* This portrait already includes more top canvas than the standard staff crop. */
+.growth-profile-photo img[src*="e1a6ccf5b1d1-framed"],
+.analysis-staff-profile-photo img[src*="e1a6ccf5b1d1-framed"] {
+  transform: translateY(-5px) scale(1.35);
+}
+
 /* Genuine channel portrait: crop the original scene, never synthesize a face. */
 .growth-profile-photo img[src*="kim-jeongho-channel-20260915"],
 .analysis-staff-profile-photo img[src*="kim-jeongho-channel-20260915"] {
