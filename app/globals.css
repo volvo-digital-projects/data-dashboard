@@ -1873,10 +1873,13 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-benchmark-position line {
   stroke: currentColor;
-  stroke-width: 1.2;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: 0.82;
   vector-effect: non-scaling-stroke;
 }
 
+.growth-gauge-benchmark-position.staff { color: #d93242; }
 .growth-gauge-benchmark-position.showroom { color: #087a58; }
 .growth-gauge-benchmark-position.tenure { color: #7654a4; }
 

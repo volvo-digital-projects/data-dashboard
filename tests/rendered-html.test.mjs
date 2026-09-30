@@ -1148,10 +1148,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /growth-gauge-score-strip/);
   assert.doesNotMatch(navigation, /growth-gauge-comparison-arc|growth-gauge-score-callouts|leaderPath/);
   assert.match(navigation, /className="growth-gauge-benchmark-legend"[\s\S]*?className="staff"[\s\S]*?className="showroom"[\s\S]*?className="tenure"/);
-  assert.match(navigation, /className="growth-gauge-benchmark-position showroom"[\s\S]*?y1="30"[\s\S]*?y2="36"/);
-  assert.match(navigation, /className="growth-gauge-benchmark-position tenure"[\s\S]*?y1="36"[\s\S]*?y2="42"/);
-  assert.match(navigation, /className="growth-gauge-gap showroom"[\s\S]*?x="72" y="57" width="132"[\s\S]*?전시장 GAP[\s\S]*?formatGrowthGaugeDelta\(selectedShowroomStaffAverage\)/);
-  assert.match(navigation, /className="growth-gauge-gap tenure"[\s\S]*?x="216" y="57" width="132"[\s\S]*?동일연차 GAP[\s\S]*?formatGrowthGaugeDelta\(selectedTenureGaugeScore\)/);
+  assert.match(source, /const selectedGrowthGaugeMarkerLayout = \(\(\) => \{[\s\S]*?const minimumMarkerGap = 22;[\s\S]*?clusterCenter - clusterWidth \/ 2/);
+  assert.match(navigation, /className="growth-gauge-benchmark-position staff"[\s\S]*?selectedGrowthGaugeMarkerLayout\.staff\.displayX[\s\S]*?selectedGrowthGaugeMarkerLayout\.staff\.anchorX[\s\S]*?cy="29"/);
+  assert.match(navigation, /className="growth-gauge-benchmark-position showroom"[\s\S]*?selectedGrowthGaugeMarkerLayout\.showroom\.displayX[\s\S]*?selectedGrowthGaugeMarkerLayout\.showroom\.anchorX/);
+  assert.match(navigation, /className="growth-gauge-benchmark-position tenure"[\s\S]*?selectedGrowthGaugeMarkerLayout\.tenure\.displayX[\s\S]*?selectedGrowthGaugeMarkerLayout\.tenure\.anchorX/);
+  assert.match(navigation, /className="growth-gauge-gap showroom"[\s\S]*?x="72" y="68" width="132"[\s\S]*?전시장 GAP[\s\S]*?formatGrowthGaugeDelta\(selectedShowroomStaffAverage\)/);
+  assert.match(navigation, /className="growth-gauge-gap tenure"[\s\S]*?x="216" y="68" width="132"[\s\S]*?동일연차 GAP[\s\S]*?formatGrowthGaugeDelta\(selectedTenureGaugeScore\)/);
   assert.match(source, /const displayedStaffScore = Number\(selectedStaffGaugeScore\.toFixed\(1\)\);[\s\S]*?const displayedComparisonScore = Number\(comparisonScore\.toFixed\(1\)\);/);
   assert.match(css, /\.growth-gauge-gap rect\s*\{[^}]*opacity:\s*0\.09;[^}]*stroke-width:\s*0\.8;/);
   assert.match(css, /\.growth-gauge-gap\.showroom\s*\{[^}]*color:\s*#087a58;[^}]*\}[\s\S]*?\.growth-gauge-gap\.tenure\s*\{[^}]*color:\s*#7654a4;/);

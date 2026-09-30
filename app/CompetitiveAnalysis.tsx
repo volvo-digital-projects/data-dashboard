@@ -2704,6 +2704,42 @@ export default function CompetitiveAnalysis({
   const selectedStaffGaugeScoreX = growthGaugeScoreX(selectedStaffGaugeScore);
   const selectedShowroomGaugeScoreX = growthGaugeScoreX(selectedShowroomStaffAverage);
   const selectedTenureGaugeScoreX = growthGaugeScoreX(selectedTenureGaugeScore);
+  const selectedGrowthGaugeMarkerLayout = (() => {
+    type MarkerKey = "staff" | "showroom" | "tenure";
+    const markers: Array<{ key: MarkerKey; anchorX: number; displayX: number }> = [];
+    if (selectedStaffGaugeScoreX !== null) markers.push({ key: "staff", anchorX: selectedStaffGaugeScoreX, displayX: selectedStaffGaugeScoreX });
+    if (selectedShowroomGaugeScoreX !== null) markers.push({ key: "showroom", anchorX: selectedShowroomGaugeScoreX, displayX: selectedShowroomGaugeScoreX });
+    if (selectedTenureGaugeScoreX !== null) markers.push({ key: "tenure", anchorX: selectedTenureGaugeScoreX, displayX: selectedTenureGaugeScoreX });
+    markers.sort((left, right) => left.anchorX - right.anchorX);
+
+    const minimumMarkerGap = 22;
+    let clusterStart = 0;
+    while (clusterStart < markers.length) {
+      let clusterEnd = clusterStart;
+      while (
+        clusterEnd + 1 < markers.length &&
+        markers[clusterEnd + 1].anchorX - markers[clusterEnd].anchorX < minimumMarkerGap
+      ) {
+        clusterEnd += 1;
+      }
+      const clusterSize = clusterEnd - clusterStart + 1;
+      if (clusterSize > 1) {
+        const clusterCenter = markers
+          .slice(clusterStart, clusterEnd + 1)
+          .reduce((sum, marker) => sum + marker.anchorX, 0) / clusterSize;
+        const clusterWidth = minimumMarkerGap * (clusterSize - 1);
+        const clusterLeft = Math.max(58, Math.min(362 - clusterWidth, clusterCenter - clusterWidth / 2));
+        for (let index = clusterStart; index <= clusterEnd; index += 1) {
+          markers[index].displayX = clusterLeft + (index - clusterStart) * minimumMarkerGap;
+        }
+      }
+      clusterStart = clusterEnd + 1;
+    }
+
+    return Object.fromEntries(
+      markers.map((marker) => [marker.key, marker]),
+    ) as Partial<Record<MarkerKey, { key: MarkerKey; anchorX: number; displayX: number }>>;
+  })();
   const formatGrowthGaugeDelta = (comparisonScore: number | null) => {
     if (selectedStaffGaugeScore === null || comparisonScore === null) return "자료 없음";
     const displayedStaffScore = Number(selectedStaffGaugeScore.toFixed(1));
@@ -3711,41 +3747,64 @@ export default function CompetitiveAnalysis({
                               <text><tspan>동일연차 평균</tspan><tspan className="score"> {selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
                             </g>
                           </g>
-                          <line className="growth-gauge-benchmark-axis" x1="58" y1="36" x2="362" y2="36" />
+                          <line className="growth-gauge-benchmark-axis" x1="58" y1="48" x2="362" y2="48" />
                           {[58, 210, 362].map((x, index) => (
                             <g key={x} className="growth-gauge-benchmark-tick">
-                              <line x1={x} y1="32" x2={x} y2="40" />
-                              <text x={x} y="49">{[
+                              <line x1={x} y1="44" x2={x} y2="52" />
+                              <text x={x} y="60">{[
                                 selectedGrowthGaugeScaleMin,
                                 selectedGrowthGaugeScaleMiddle,
                                 selectedGrowthGaugeScaleMax,
                               ][index].toFixed(1)}</text>
                             </g>
                           ))}
-                          {selectedStaffGaugeScoreX !== null && (
-                            <circle className="growth-gauge-benchmark-marker staff" cx={selectedStaffGaugeScoreX} cy="36" r="5" />
-                          )}
-                          {selectedShowroomGaugeScoreX !== null && (
-                            <g className="growth-gauge-benchmark-position showroom">
-                              <line x1={selectedShowroomGaugeScoreX} y1="30" x2={selectedShowroomGaugeScoreX} y2="36" />
-                              <rect
-                                className="growth-gauge-benchmark-marker showroom"
-                                x={selectedShowroomGaugeScoreX - 4}
-                                y="26"
-                                width="8"
-                                height="8"
-                                rx="1"
-                                transform={`rotate(45 ${selectedShowroomGaugeScoreX} 30)`}
+                          {selectedGrowthGaugeMarkerLayout.staff && (
+                            <g className="growth-gauge-benchmark-position staff">
+                              <line
+                                x1={selectedGrowthGaugeMarkerLayout.staff.displayX}
+                                y1="34"
+                                x2={selectedGrowthGaugeMarkerLayout.staff.anchorX}
+                                y2="48"
+                              />
+                              <circle
+                                className="growth-gauge-benchmark-marker staff"
+                                cx={selectedGrowthGaugeMarkerLayout.staff.displayX}
+                                cy="29"
+                                r="5"
                               />
                             </g>
                           )}
-                          {selectedTenureGaugeScoreX !== null && (
+                          {selectedGrowthGaugeMarkerLayout.showroom && (
+                            <g className="growth-gauge-benchmark-position showroom">
+                              <line
+                                x1={selectedGrowthGaugeMarkerLayout.showroom.displayX}
+                                y1="34"
+                                x2={selectedGrowthGaugeMarkerLayout.showroom.anchorX}
+                                y2="48"
+                              />
+                              <rect
+                                className="growth-gauge-benchmark-marker showroom"
+                                x={selectedGrowthGaugeMarkerLayout.showroom.displayX - 4}
+                                y="25"
+                                width="8"
+                                height="8"
+                                rx="1"
+                                transform={`rotate(45 ${selectedGrowthGaugeMarkerLayout.showroom.displayX} 29)`}
+                              />
+                            </g>
+                          )}
+                          {selectedGrowthGaugeMarkerLayout.tenure && (
                             <g className="growth-gauge-benchmark-position tenure">
-                              <line x1={selectedTenureGaugeScoreX} y1="36" x2={selectedTenureGaugeScoreX} y2="42" />
+                              <line
+                                x1={selectedGrowthGaugeMarkerLayout.tenure.displayX}
+                                y1="34"
+                                x2={selectedGrowthGaugeMarkerLayout.tenure.anchorX}
+                                y2="48"
+                              />
                               <rect
                                 className="growth-gauge-benchmark-marker tenure"
-                                x={selectedTenureGaugeScoreX - 4}
-                                y="38"
+                                x={selectedGrowthGaugeMarkerLayout.tenure.displayX - 4}
+                                y="25"
                                 width="8"
                                 height="8"
                                 rx="1.5"
@@ -3754,16 +3813,16 @@ export default function CompetitiveAnalysis({
                           )}
                           {selectedStaffGaugeScoreX !== null && selectedShowroomGaugeScoreX !== null && (
                             <g className="growth-gauge-gap showroom">
-                              <rect x="72" y="57" width="132" height="18" rx="9" />
-                              <text x="138" y="66">
+                              <rect x="72" y="68" width="132" height="18" rx="9" />
+                              <text x="138" y="77">
                                 전시장 GAP <tspan>{formatGrowthGaugeDelta(selectedShowroomStaffAverage)}</tspan>
                               </text>
                             </g>
                           )}
                           {selectedStaffGaugeScoreX !== null && selectedTenureGaugeScoreX !== null && (
                             <g className="growth-gauge-gap tenure">
-                              <rect x="216" y="57" width="132" height="18" rx="9" />
-                              <text x="282" y="66">
+                              <rect x="216" y="68" width="132" height="18" rx="9" />
+                              <text x="282" y="77">
                                 동일연차 GAP <tspan>{formatGrowthGaugeDelta(selectedTenureGaugeScore)}</tspan>
                               </text>
                             </g>
