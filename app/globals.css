@@ -1842,7 +1842,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-family: var(--font-paperlogy), sans-serif;
   font-size: 9.5px;
   font-weight: 700;
-  text-anchor: middle;
+  text-anchor: start;
   dominant-baseline: middle;
 }
 
@@ -1865,7 +1865,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-benchmark-legend .staff,
 .growth-gauge-benchmark-marker.staff { color: #d93242; }
 .growth-gauge-benchmark-legend .staff circle,
-.growth-gauge-benchmark-marker.staff { fill: #f04452; stroke: #ffffff; }
+.growth-gauge-benchmark-marker.staff { fill: #ffffff; stroke: #d93242; }
 .growth-gauge-benchmark-legend .showroom,
 .growth-gauge-benchmark-marker.showroom { color: #087a58; }
 .growth-gauge-benchmark-legend .tenure,
