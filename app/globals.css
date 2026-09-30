@@ -1806,99 +1806,103 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-active-outline.zone-1 { stroke: #247893; }
 .growth-gauge-active-outline.zone-2 { stroke: #2d8267; }
 
-.growth-gauge-scale {
-  color: #607d89;
+.growth-gauge-benchmark {
   pointer-events: none;
 }
 
-.growth-gauge-scale line {
-  stroke: currentColor;
-  stroke-width: 1;
-  opacity: 0.62;
+.growth-gauge-benchmark-axis {
+  stroke: #b9cbd2;
+  stroke-width: 2;
+  stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
 
-.growth-gauge-scale .major line {
-  stroke-width: 1.5;
-  opacity: 0.92;
+.growth-gauge-benchmark-tick line {
+  stroke: #8ba4ae;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
 }
 
-.growth-gauge-scale text {
-  fill: #496873;
+.growth-gauge-benchmark-tick text {
+  fill: #6a828d;
   font-family: var(--font-volvo), Arial, sans-serif;
-  font-size: 9.5px;
+  font-size: 9px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.growth-gauge-benchmark-legend > g {
+  color: #526d78;
+}
+
+.growth-gauge-benchmark-legend text {
+  fill: currentColor;
+  font-family: var(--font-paperlogy), sans-serif;
+  font-size: 9.5px;
   font-weight: 700;
   text-anchor: middle;
   dominant-baseline: middle;
 }
 
-.growth-gauge-comparisons,
-.growth-gauge-score-callouts {
-  pointer-events: none;
+.growth-gauge-benchmark-legend .score {
+  font-family: var(--font-volvo), Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-.growth-gauge-comparison-arc {
-  fill: none;
-  stroke-width: 3;
-  stroke-linecap: round;
+.growth-gauge-benchmark-legend circle,
+.growth-gauge-benchmark-legend rect,
+.growth-gauge-benchmark-marker {
+  fill: #fff;
+  stroke: currentColor;
+  stroke-width: 2;
   vector-effect: non-scaling-stroke;
 }
 
-.growth-gauge-comparison-arc.showroom { stroke: #0a8a64; }
-.growth-gauge-comparison-arc.tenure {
-  stroke: #7654a4;
-  stroke-dasharray: 4 3;
-}
+.growth-gauge-benchmark-legend .staff,
+.growth-gauge-benchmark-marker.staff { color: #d93242; }
+.growth-gauge-benchmark-legend .staff circle,
+.growth-gauge-benchmark-marker.staff { fill: #f04452; stroke: #ffffff; }
+.growth-gauge-benchmark-legend .showroom,
+.growth-gauge-benchmark-marker.showroom { color: #087a58; }
+.growth-gauge-benchmark-legend .tenure,
+.growth-gauge-benchmark-marker.tenure { color: #7654a4; }
 
-.growth-gauge-score-callout {
+.growth-gauge-gap {
   color: #536f7b;
 }
 
-.growth-gauge-score-callout > path {
-  fill: none;
+.growth-gauge-gap line {
   stroke: currentColor;
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
+  stroke-width: 1.5;
   vector-effect: non-scaling-stroke;
 }
 
-.growth-gauge-score-callout text {
+.growth-gauge-gap text {
   fill: currentColor;
   font-family: var(--font-paperlogy), sans-serif;
-  font-size: 9px;
+  font-size: 9.2px;
   font-weight: 700;
   text-anchor: middle;
   dominant-baseline: middle;
   paint-order: stroke;
-  stroke: rgba(251, 253, 254, 0.96);
-  stroke-width: 3px;
+  stroke: #fbfdfe;
+  stroke-width: 5px;
   stroke-linejoin: round;
 }
 
-.growth-gauge-score-callout text .score {
+.growth-gauge-gap text tspan {
   font-family: var(--font-volvo), Arial, sans-serif;
-  font-size: 10px;
+  font-size: 10.2px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
-.growth-gauge-score-callout circle,
-.growth-gauge-score-callout rect {
-  fill: #fff;
-  stroke-width: 2.2;
-  vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 1px 2px rgba(22, 51, 62, 0.2));
-}
-
-.growth-gauge-score-callout.staff { color: #d93242; }
-.growth-gauge-score-callout.staff circle { fill: #f04452; stroke: #fff; }
-.growth-gauge-score-callout.showroom { color: #087a58; }
-.growth-gauge-score-callout.showroom rect { stroke: #087a58; }
-.growth-gauge-score-callout.tenure { color: #7654a4; }
-.growth-gauge-score-callout.tenure rect { stroke: #7654a4; }
+.growth-gauge-gap.showroom { color: #087a58; }
+.growth-gauge-gap.tenure { color: #7654a4; }
 
 .growth-gauge-label text {
   text-anchor: middle;
@@ -1922,7 +1926,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-needle {
   color: #162c37;
   transform: rotate(var(--growth-needle-angle));
-  transform-origin: 210px 190px;
+  transform-origin: 210px 224px;
   transform-box: view-box;
   filter: drop-shadow(0 3px 2px rgba(13, 43, 55, 0.24));
   animation: growth-gauge-sweep 1.9s cubic-bezier(0.12, 0.72, 0.16, 1) both;

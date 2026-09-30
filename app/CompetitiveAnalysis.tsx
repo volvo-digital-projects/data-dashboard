@@ -2666,108 +2666,52 @@ export default function CompetitiveAnalysis({
       : Math.round(
           ((Math.max(-6, Math.min(6, selectedStaffPeerDelta)) + 6) / 12) * 1800,
         ) / 10;
-  const selectedStaffGrowthScaleTicks = selectedStaffTenureFinalScore === null
-    ? []
-    : Array.from({ length: 13 }, (_, index) => {
-        const angle = (index / 12) * Math.PI;
-        const isMajor = index % 2 === 0;
-        const innerRadius = isMajor ? 168 : 171;
-        const outerRadius = 178;
-        const labelRadius = 188;
-        return {
-          index,
-          isMajor,
-          x1: 210 - Math.cos(angle) * innerRadius,
-          y1: 190 - Math.sin(angle) * innerRadius,
-          x2: 210 - Math.cos(angle) * outerRadius,
-          y2: 190 - Math.sin(angle) * outerRadius,
-          labelX: 210 - Math.cos(angle) * labelRadius,
-          labelY: 190 - Math.sin(angle) * labelRadius,
-          label: ((selectedStaffTenureFinalScore - 6 + index) / 10).toFixed(1),
-        };
-      });
-  const selectedShowroomGrowthDelta =
-    selectedShowroomStaffAverage === null || selectedStaffTenureFinalScore === null
-      ? null
-      : selectedShowroomStaffAverage * 10 - selectedStaffTenureFinalScore;
-  const selectedShowroomGrowthAngle = selectedShowroomGrowthDelta === null
+  const selectedStaffGaugeScore = selectedStaffSatisfactionScore === null
     ? null
-    : Math.round(
-        ((Math.max(-6, Math.min(6, selectedShowroomGrowthDelta)) + 6) / 12) * 1800,
-      ) / 10;
-  const growthGaugePoint = (angle: number, radius: number) => {
-    const radians = angle * Math.PI / 180;
-    return {
-      x: Math.round((210 - Math.cos(radians) * radius) * 10) / 10,
-      y: Math.round((190 - Math.sin(radians) * radius) * 10) / 10,
-    };
-  };
-  const growthGaugeArcPath = (fromAngle: number | null, toAngle: number | null, radius: number) => {
-    if (fromAngle === null || toAngle === null || Math.abs(fromAngle - toAngle) < 0.1) return null;
-    const startAngle = Math.min(fromAngle, toAngle);
-    const endAngle = Math.max(fromAngle, toAngle);
-    const start = growthGaugePoint(startAngle, radius);
-    const end = growthGaugePoint(endAngle, radius);
-    return `M${start.x} ${start.y} A${radius} ${radius} 0 0 1 ${end.x} ${end.y}`;
-  };
-  const selectedStaffGaugeMarker = selectedStaffSatisfactionScore === null
+    : selectedStaffSatisfactionScore / 10;
+  const selectedTenureGaugeScore = selectedStaffTenureFinalScore === null
     ? null
-    : growthGaugePoint(selectedStaffGrowthNeedleAngle, 181);
-  const selectedShowroomGaugeMarker = selectedShowroomGrowthAngle === null
-    ? null
-    : growthGaugePoint(selectedShowroomGrowthAngle, 181);
-  const selectedTenureGaugeMarker = selectedStaffTenureFinalScore === null
-    ? null
-    : growthGaugePoint(90, 181);
-  const selectedShowroomComparisonArc = growthGaugeArcPath(
-    selectedShowroomGrowthAngle,
-    selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
-    184,
+    : selectedStaffTenureFinalScore / 10;
+  const selectedGrowthGaugeScores = [
+    selectedStaffGaugeScore,
+    selectedShowroomStaffAverage,
+    selectedTenureGaugeScore,
+  ].filter((score): score is number => score !== null);
+  const selectedGrowthGaugeRawMin = selectedGrowthGaugeScores.length > 0
+    ? Math.floor((Math.min(...selectedGrowthGaugeScores) - 0.2) * 5) / 5
+    : 8.8;
+  const selectedGrowthGaugeRawMax = selectedGrowthGaugeScores.length > 0
+    ? Math.ceil((Math.max(...selectedGrowthGaugeScores) + 0.2) * 5) / 5
+    : 9.8;
+  const selectedGrowthGaugeMidpoint = (selectedGrowthGaugeRawMin + selectedGrowthGaugeRawMax) / 2;
+  const selectedGrowthGaugeSpan = Math.max(1, selectedGrowthGaugeRawMax - selectedGrowthGaugeRawMin);
+  const selectedGrowthGaugeScaleMin = Math.max(
+    0,
+    Math.round((selectedGrowthGaugeMidpoint - selectedGrowthGaugeSpan / 2) * 10) / 10,
   );
-  const selectedTenureComparisonArc = growthGaugeArcPath(
-    selectedStaffTenureFinalScore === null ? null : 90,
-    selectedStaffSatisfactionScore === null ? null : selectedStaffGrowthNeedleAngle,
-    195,
+  const selectedGrowthGaugeScaleMax = Math.min(
+    10,
+    Math.round((selectedGrowthGaugeMidpoint + selectedGrowthGaugeSpan / 2) * 10) / 10,
   );
-  const selectedGrowthGaugeScoreCalloutCandidates = [
-    {
-      key: "staff" as const,
-      label: selectedStaffEmployee?.name ?? "개인",
-      score: selectedStaffSatisfactionScore === null ? "―" : (selectedStaffSatisfactionScore / 10).toFixed(1),
-      angle: selectedStaffGrowthNeedleAngle,
-      marker: selectedStaffGaugeMarker,
-    },
-    {
-      key: "showroom" as const,
-      label: displayShowroomNameWithoutBrand(selected.showroom),
-      score: selectedShowroomStaffAverage === null ? "―" : selectedShowroomStaffAverage.toFixed(1),
-      angle: selectedShowroomGrowthAngle ?? 90,
-      marker: selectedShowroomGaugeMarker,
-    },
-    {
-      key: "tenure" as const,
-      label: "동일연차",
-      score: selectedStaffTenureFinalScore === null ? "―" : (selectedStaffTenureFinalScore / 10).toFixed(1),
-      angle: 90,
-      marker: selectedTenureGaugeMarker,
-    },
-  ].flatMap((item) => item.marker === null ? [] : [{ ...item, marker: item.marker }])
-    .sort((left, right) => left.marker.x - right.marker.x);
-  const growthGaugeScoreCalloutSlots = selectedGrowthGaugeScoreCalloutCandidates.length === 3
-    ? [{ x: 60, y: 28 }, { x: 210, y: 11 }, { x: 360, y: 28 }]
-    : selectedGrowthGaugeScoreCalloutCandidates.length === 2
-      ? [{ x: 100, y: 20 }, { x: 320, y: 20 }]
-      : [{ x: 210, y: 11 }];
-  const selectedGrowthGaugeScoreCallouts = selectedGrowthGaugeScoreCalloutCandidates.map((item, index) => {
-    const slot = growthGaugeScoreCalloutSlots[index];
-    const outer = growthGaugePoint(item.angle, 195);
-    return {
-      ...item,
-      labelX: slot.x,
-      labelY: slot.y,
-      leaderPath: `M${item.marker.x} ${item.marker.y} L${outer.x} ${outer.y} H${slot.x} V${slot.y + 7}`,
-    };
-  });
+  const selectedGrowthGaugeScaleMiddle =
+    Math.round(((selectedGrowthGaugeScaleMin + selectedGrowthGaugeScaleMax) / 2) * 10) / 10;
+  const growthGaugeScoreX = (score: number | null) => {
+    if (score === null) return null;
+    const ratio = (score - selectedGrowthGaugeScaleMin) /
+      Math.max(0.1, selectedGrowthGaugeScaleMax - selectedGrowthGaugeScaleMin);
+    return Math.round((58 + Math.max(0, Math.min(1, ratio)) * 304) * 10) / 10;
+  };
+  const selectedStaffGaugeScoreX = growthGaugeScoreX(selectedStaffGaugeScore);
+  const selectedShowroomGaugeScoreX = growthGaugeScoreX(selectedShowroomStaffAverage);
+  const selectedTenureGaugeScoreX = growthGaugeScoreX(selectedTenureGaugeScore);
+  const formatGrowthGaugeDelta = (comparisonScore: number | null) => {
+    if (selectedStaffGaugeScore === null || comparisonScore === null) return "자료 없음";
+    const displayedStaffScore = Number(selectedStaffGaugeScore.toFixed(1));
+    const displayedComparisonScore = Number(comparisonScore.toFixed(1));
+    const delta = displayedStaffScore - displayedComparisonScore;
+    if (Math.abs(delta) < 0.05) return "±0.0";
+    return `${delta > 0 ? "+" : "−"}${Math.abs(delta).toFixed(1)}`;
+  };
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
@@ -3735,56 +3679,107 @@ export default function CompetitiveAnalysis({
                       data-zone={selectedStaffGrowthZone ?? "none"}
                     >
                       <svg
-                        viewBox="0 0 420 230"
+                        viewBox="0 0 420 240"
                         role="img"
                         aria-label={`상담 역량 타코미터. 개인 ${selectedStaffSatisfactionScore === null ? "자료 없음" : `${(selectedStaffSatisfactionScore / 10).toFixed(1)}점`}, ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 평균 ${selectedShowroomStaffAverage === null ? "자료 없음" : `${selectedShowroomStaffAverage.toFixed(1)}점`}, 동일연차 평균 ${selectedStaffTenureFinalScore === null ? "자료 없음" : `${(selectedStaffTenureFinalScore / 10).toFixed(1)}점`}. ${selectedStaffGrowthLabel}`}
                       >
                         <title>{`상담 역량 타코미터: ${selectedStaffGrowthLabel}`}</title>
                         <desc>{selectedStaffGrowthCalculation}</desc>
                         <g className="growth-gauge-segments">
-                          <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M45 190 A165 165 0 0 1 127.5 47.1 L160 103.4 A100 100 0 0 0 110 190 Z" />
-                          <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M127.5 47.1 A165 165 0 0 1 292.5 47.1 L260 103.4 A100 100 0 0 0 160 103.4 Z" />
-                          <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M292.5 47.1 A165 165 0 0 1 375 190 L310 190 A100 100 0 0 0 260 103.4 Z" />
+                          <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M75 224 A135 135 0 0 1 142.5 107.1 L169 153 A82 82 0 0 0 128 224 Z" />
+                          <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M142.5 107.1 A135 135 0 0 1 277.5 107.1 L251 153 A82 82 0 0 0 169 153 Z" />
+                          <path className={selectedStaffGrowthZone === 2 ? "expanding active" : "expanding"} d="M277.5 107.1 A135 135 0 0 1 345 224 L292 224 A82 82 0 0 0 251 153 Z" />
                         </g>
                         {selectedStaffGrowthZone !== null && (
                           <path
                             className={`growth-gauge-active-outline zone-${selectedStaffGrowthZone}`}
                             d={selectedStaffGrowthZone === 0
-                              ? "M45 190 A165 165 0 0 1 127.5 47.1 L160 103.4 A100 100 0 0 0 110 190 Z"
+                              ? "M75 224 A135 135 0 0 1 142.5 107.1 L169 153 A82 82 0 0 0 128 224 Z"
                               : selectedStaffGrowthZone === 1
-                                ? "M127.5 47.1 A165 165 0 0 1 292.5 47.1 L260 103.4 A100 100 0 0 0 160 103.4 Z"
-                                : "M292.5 47.1 A165 165 0 0 1 375 190 L310 190 A100 100 0 0 0 260 103.4 Z"}
+                                ? "M142.5 107.1 A135 135 0 0 1 277.5 107.1 L251 153 A82 82 0 0 0 169 153 Z"
+                                : "M277.5 107.1 A135 135 0 0 1 345 224 L292 224 A82 82 0 0 0 251 153 Z"}
                             aria-hidden="true"
                           />
                         )}
-                        {selectedStaffGrowthScaleTicks.length > 0 && (
-                          <g className="growth-gauge-scale" aria-hidden="true">
-                            {selectedStaffGrowthScaleTicks.map((tick) => (
-                              <g key={tick.index} className={tick.isMajor ? "major" : "minor"}>
-                                <line x1={tick.x1} y1={tick.y1} x2={tick.x2} y2={tick.y2} />
-                                {tick.isMajor && (
-                                  <text x={tick.labelX} y={tick.labelY}>{tick.label}</text>
-                                )}
-                              </g>
-                            ))}
+                        <g className="growth-gauge-benchmark" aria-hidden="true">
+                          <g className="growth-gauge-benchmark-legend">
+                            <g className="staff" transform="translate(65 13)">
+                              <circle cx="-7" cy="0" r="4" />
+                              <text><tspan>{selectedStaffEmployee?.name ?? "개인"}</tspan><tspan className="score"> {selectedStaffGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
+                            </g>
+                            <g className="showroom" transform="translate(210 13)">
+                              <rect x="-10" y="-3.5" width="7" height="7" rx="1" transform="rotate(45 -6.5 0)" />
+                              <text><tspan>{displayShowroomNameWithoutBrand(selected.showroom)} 평균</tspan><tspan className="score"> {selectedShowroomStaffAverage?.toFixed(1) ?? "―"}</tspan></text>
+                            </g>
+                            <g className="tenure" transform="translate(355 13)">
+                              <rect x="-10" y="-3.5" width="7" height="7" rx="1.5" />
+                              <text><tspan>동일연차 평균</tspan><tspan className="score"> {selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
+                            </g>
                           </g>
-                        )}
-                        <g className="growth-gauge-comparisons" aria-hidden="true">
-                          {selectedShowroomComparisonArc !== null && (
-                            <path className="growth-gauge-comparison-arc showroom" d={selectedShowroomComparisonArc} />
+                          <line className="growth-gauge-benchmark-axis" x1="58" y1="36" x2="362" y2="36" />
+                          {[58, 210, 362].map((x, index) => (
+                            <g key={x} className="growth-gauge-benchmark-tick">
+                              <line x1={x} y1="32" x2={x} y2="40" />
+                              <text x={x} y="49">{[
+                                selectedGrowthGaugeScaleMin,
+                                selectedGrowthGaugeScaleMiddle,
+                                selectedGrowthGaugeScaleMax,
+                              ][index].toFixed(1)}</text>
+                            </g>
+                          ))}
+                          {selectedStaffGaugeScoreX !== null && (
+                            <circle className="growth-gauge-benchmark-marker staff" cx={selectedStaffGaugeScoreX} cy="36" r="5" />
                           )}
-                          {selectedTenureComparisonArc !== null && (
-                            <path className="growth-gauge-comparison-arc tenure" d={selectedTenureComparisonArc} />
+                          {selectedShowroomGaugeScoreX !== null && (
+                            <rect
+                              className="growth-gauge-benchmark-marker showroom"
+                              x={selectedShowroomGaugeScoreX - 4}
+                              y="32"
+                              width="8"
+                              height="8"
+                              rx="1"
+                              transform={`rotate(45 ${selectedShowroomGaugeScoreX} 36)`}
+                            />
+                          )}
+                          {selectedTenureGaugeScoreX !== null && (
+                            <rect
+                              className="growth-gauge-benchmark-marker tenure"
+                              x={selectedTenureGaugeScoreX - 4}
+                              y="32"
+                              width="8"
+                              height="8"
+                              rx="1.5"
+                            />
+                          )}
+                          {selectedStaffGaugeScoreX !== null && selectedShowroomGaugeScoreX !== null && (
+                            <g className="growth-gauge-gap showroom">
+                              <line x1={selectedShowroomGaugeScoreX} y1="58" x2={selectedStaffGaugeScoreX} y2="58" />
+                              <line x1={selectedShowroomGaugeScoreX} y1="54" x2={selectedShowroomGaugeScoreX} y2="62" />
+                              <line x1={selectedStaffGaugeScoreX} y1="54" x2={selectedStaffGaugeScoreX} y2="62" />
+                              <text x={(selectedShowroomGaugeScoreX + selectedStaffGaugeScoreX) / 2} y="58">
+                                전시장 대비 <tspan>{formatGrowthGaugeDelta(selectedShowroomStaffAverage)}</tspan>
+                              </text>
+                            </g>
+                          )}
+                          {selectedStaffGaugeScoreX !== null && selectedTenureGaugeScoreX !== null && (
+                            <g className="growth-gauge-gap tenure">
+                              <line x1={selectedTenureGaugeScoreX} y1="73" x2={selectedStaffGaugeScoreX} y2="73" />
+                              <line x1={selectedTenureGaugeScoreX} y1="69" x2={selectedTenureGaugeScoreX} y2="77" />
+                              <line x1={selectedStaffGaugeScoreX} y1="69" x2={selectedStaffGaugeScoreX} y2="77" />
+                              <text x={(selectedTenureGaugeScoreX + selectedStaffGaugeScoreX) / 2} y="73">
+                                동일연차 대비 <tspan>{formatGrowthGaugeDelta(selectedTenureGaugeScore)}</tspan>
+                              </text>
+                            </g>
                           )}
                         </g>
                         <g className="growth-gauge-label coaching-label">
-                          <text x="95" y="124">집중 코칭</text>
+                          <text x="126" y="168">집중 코칭</text>
                         </g>
                         <g className="growth-gauge-label accelerating-label">
-                          <text x="210" y="60">성장 가속</text>
+                          <text x="210" y="121">성장 가속</text>
                         </g>
                         <g className="growth-gauge-label expanding-label">
-                          <text x="325" y="124">성과 확산</text>
+                          <text x="294" y="168">성과 확산</text>
                         </g>
                         {selectedStaffGrowthZone !== null && (
                           <g
@@ -3792,15 +3787,15 @@ export default function CompetitiveAnalysis({
                             key={`${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}-${selectedStaffGrowthZone}`}
                             aria-hidden="true"
                           >
-                            <path d="M220 183.5 L34 190 L220 196.5 Z" />
-                            <circle cx="210" cy="190" r="13" />
-                            <circle className="needle-cap" cx="210" cy="190" r="5" />
+                            <path d="M220 218 L70 224 L220 230 Z" />
+                            <circle cx="210" cy="224" r="13" />
+                            <circle className="needle-cap" cx="210" cy="224" r="5" />
                           </g>
                         )}
                         {selectedStaffGrowthZone !== null && (
                           <g
                             className="growth-gauge-guidance"
-                            transform="translate(210 151)"
+                            transform="translate(210 190)"
                             aria-hidden="true"
                           >
                             <rect
@@ -3813,29 +3808,6 @@ export default function CompetitiveAnalysis({
                             <text x="0" y="0">{selectedStaffGrowthGuidance[selectedStaffGrowthZone].label}</text>
                           </g>
                         )}
-                        <g className="growth-gauge-score-callouts" aria-hidden="true">
-                          {selectedGrowthGaugeScoreCallouts.map((callout) => (
-                            <g key={callout.key} className={`growth-gauge-score-callout ${callout.key}`}>
-                              <path d={callout.leaderPath} />
-                              <text x={callout.labelX} y={callout.labelY}>
-                                <tspan>{callout.label}</tspan>
-                                <tspan className="score"> {callout.score}</tspan>
-                              </text>
-                              {callout.key === "staff" ? (
-                                <circle cx={callout.marker.x} cy={callout.marker.y} r="4.4" />
-                              ) : (
-                                <rect
-                                  x={callout.marker.x - 3.5}
-                                  y={callout.marker.y - 3.5}
-                                  width="7"
-                                  height="7"
-                                  rx={callout.key === "showroom" ? "1" : "1.5"}
-                                  transform={callout.key === "showroom" ? `rotate(45 ${callout.marker.x} ${callout.marker.y})` : undefined}
-                                />
-                              )}
-                            </g>
-                          ))}
-                        </g>
                       </svg>
                     </div>
                   </article>
