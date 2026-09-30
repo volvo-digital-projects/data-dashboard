@@ -3726,43 +3726,45 @@ export default function CompetitiveAnalysis({
                             <circle className="growth-gauge-benchmark-marker staff" cx={selectedStaffGaugeScoreX} cy="36" r="5" />
                           )}
                           {selectedShowroomGaugeScoreX !== null && (
-                            <rect
-                              className="growth-gauge-benchmark-marker showroom"
-                              x={selectedShowroomGaugeScoreX - 4}
-                              y="32"
-                              width="8"
-                              height="8"
-                              rx="1"
-                              transform={`rotate(45 ${selectedShowroomGaugeScoreX} 36)`}
-                            />
+                            <g className="growth-gauge-benchmark-position showroom">
+                              <line x1={selectedShowroomGaugeScoreX} y1="30" x2={selectedShowroomGaugeScoreX} y2="36" />
+                              <rect
+                                className="growth-gauge-benchmark-marker showroom"
+                                x={selectedShowroomGaugeScoreX - 4}
+                                y="26"
+                                width="8"
+                                height="8"
+                                rx="1"
+                                transform={`rotate(45 ${selectedShowroomGaugeScoreX} 30)`}
+                              />
+                            </g>
                           )}
                           {selectedTenureGaugeScoreX !== null && (
-                            <rect
-                              className="growth-gauge-benchmark-marker tenure"
-                              x={selectedTenureGaugeScoreX - 4}
-                              y="32"
-                              width="8"
-                              height="8"
-                              rx="1.5"
-                            />
+                            <g className="growth-gauge-benchmark-position tenure">
+                              <line x1={selectedTenureGaugeScoreX} y1="36" x2={selectedTenureGaugeScoreX} y2="42" />
+                              <rect
+                                className="growth-gauge-benchmark-marker tenure"
+                                x={selectedTenureGaugeScoreX - 4}
+                                y="38"
+                                width="8"
+                                height="8"
+                                rx="1.5"
+                              />
+                            </g>
                           )}
                           {selectedStaffGaugeScoreX !== null && selectedShowroomGaugeScoreX !== null && (
                             <g className="growth-gauge-gap showroom">
-                              <line x1={selectedShowroomGaugeScoreX} y1="58" x2={selectedStaffGaugeScoreX} y2="58" />
-                              <line x1={selectedShowroomGaugeScoreX} y1="54" x2={selectedShowroomGaugeScoreX} y2="62" />
-                              <line x1={selectedStaffGaugeScoreX} y1="54" x2={selectedStaffGaugeScoreX} y2="62" />
-                              <text x={(selectedShowroomGaugeScoreX + selectedStaffGaugeScoreX) / 2} y="58">
-                                전시장 대비 <tspan>{formatGrowthGaugeDelta(selectedShowroomStaffAverage)}</tspan>
+                              <rect x="72" y="57" width="132" height="18" rx="9" />
+                              <text x="138" y="66">
+                                전시장 GAP <tspan>{formatGrowthGaugeDelta(selectedShowroomStaffAverage)}</tspan>
                               </text>
                             </g>
                           )}
                           {selectedStaffGaugeScoreX !== null && selectedTenureGaugeScoreX !== null && (
                             <g className="growth-gauge-gap tenure">
-                              <line x1={selectedTenureGaugeScoreX} y1="73" x2={selectedStaffGaugeScoreX} y2="73" />
-                              <line x1={selectedTenureGaugeScoreX} y1="69" x2={selectedTenureGaugeScoreX} y2="77" />
-                              <line x1={selectedStaffGaugeScoreX} y1="69" x2={selectedStaffGaugeScoreX} y2="77" />
-                              <text x={(selectedTenureGaugeScoreX + selectedStaffGaugeScoreX) / 2} y="73">
-                                동일연차 대비 <tspan>{formatGrowthGaugeDelta(selectedTenureGaugeScore)}</tspan>
+                              <rect x="216" y="57" width="132" height="18" rx="9" />
+                              <text x="282" y="66">
+                                동일연차 GAP <tspan>{formatGrowthGaugeDelta(selectedTenureGaugeScore)}</tspan>
                               </text>
                             </g>
                           )}

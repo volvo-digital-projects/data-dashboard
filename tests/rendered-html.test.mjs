@@ -1148,9 +1148,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /growth-gauge-score-strip/);
   assert.doesNotMatch(navigation, /growth-gauge-comparison-arc|growth-gauge-score-callouts|leaderPath/);
   assert.match(navigation, /className="growth-gauge-benchmark-legend"[\s\S]*?className="staff"[\s\S]*?className="showroom"[\s\S]*?className="tenure"/);
-  assert.match(navigation, /className="growth-gauge-gap showroom"[\s\S]*?전시장 대비[\s\S]*?formatGrowthGaugeDelta\(selectedShowroomStaffAverage\)/);
-  assert.match(navigation, /className="growth-gauge-gap tenure"[\s\S]*?동일연차 대비[\s\S]*?formatGrowthGaugeDelta\(selectedTenureGaugeScore\)/);
+  assert.match(navigation, /className="growth-gauge-benchmark-position showroom"[\s\S]*?y1="30"[\s\S]*?y2="36"/);
+  assert.match(navigation, /className="growth-gauge-benchmark-position tenure"[\s\S]*?y1="36"[\s\S]*?y2="42"/);
+  assert.match(navigation, /className="growth-gauge-gap showroom"[\s\S]*?x="72" y="57" width="132"[\s\S]*?전시장 GAP[\s\S]*?formatGrowthGaugeDelta\(selectedShowroomStaffAverage\)/);
+  assert.match(navigation, /className="growth-gauge-gap tenure"[\s\S]*?x="216" y="57" width="132"[\s\S]*?동일연차 GAP[\s\S]*?formatGrowthGaugeDelta\(selectedTenureGaugeScore\)/);
   assert.match(source, /const displayedStaffScore = Number\(selectedStaffGaugeScore\.toFixed\(1\)\);[\s\S]*?const displayedComparisonScore = Number\(comparisonScore\.toFixed\(1\)\);/);
+  assert.match(css, /\.growth-gauge-gap rect\s*\{[^}]*opacity:\s*0\.09;[^}]*stroke-width:\s*0\.8;/);
   assert.match(css, /\.growth-gauge-gap\.showroom\s*\{[^}]*color:\s*#087a58;[^}]*\}[\s\S]*?\.growth-gauge-gap\.tenure\s*\{[^}]*color:\s*#7654a4;/);
   assert.equal((navigation.match(/key=\{`(?:strength|improvement)-bars-\$\{selectedStaffEmployee\?\.cdsid/g) ?? []).length, 2);
   assert.match(navigation, /key=\{`monthly-sales-\$\{selectedStaffEmployee\?\.cdsid/);
