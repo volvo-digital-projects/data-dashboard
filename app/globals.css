@@ -1873,7 +1873,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-benchmark-position line {
   stroke: currentColor;
-  stroke-width: 1.1;
+  stroke-width: 0.75;
+  stroke-dasharray: 2 2;
   stroke-linecap: round;
   opacity: 0.82;
   vector-effect: non-scaling-stroke;
