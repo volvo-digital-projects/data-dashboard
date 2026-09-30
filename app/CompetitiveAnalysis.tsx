@@ -2695,11 +2695,17 @@ export default function CompetitiveAnalysis({
   );
   const selectedGrowthGaugeScaleMiddle =
     Math.round(((selectedGrowthGaugeScaleMin + selectedGrowthGaugeScaleMax) / 2) * 10) / 10;
+  const growthGaugeAxisStartX = 42;
+  const growthGaugeAxisMiddleX = 210;
+  const growthGaugeAxisEndX = 378;
   const growthGaugeScoreX = (score: number | null) => {
     if (score === null) return null;
     const ratio = (score - selectedGrowthGaugeScaleMin) /
       Math.max(0.1, selectedGrowthGaugeScaleMax - selectedGrowthGaugeScaleMin);
-    return Math.round((58 + Math.max(0, Math.min(1, ratio)) * 304) * 10) / 10;
+    return Math.round((
+      growthGaugeAxisStartX +
+      Math.max(0, Math.min(1, ratio)) * (growthGaugeAxisEndX - growthGaugeAxisStartX)
+    ) * 10) / 10;
   };
   const selectedStaffGaugeScoreX = growthGaugeScoreX(selectedStaffGaugeScore);
   const selectedShowroomGaugeScoreX = growthGaugeScoreX(selectedShowroomStaffAverage);
@@ -2728,7 +2734,10 @@ export default function CompetitiveAnalysis({
           .slice(clusterStart, clusterEnd + 1)
           .reduce((sum, marker) => sum + marker.anchorX, 0) / clusterSize;
         const clusterWidth = minimumMarkerGap * (clusterSize - 1);
-        const clusterLeft = Math.max(58, Math.min(362 - clusterWidth, clusterCenter - clusterWidth / 2));
+        const clusterLeft = Math.max(
+          growthGaugeAxisStartX,
+          Math.min(growthGaugeAxisEndX - clusterWidth, clusterCenter - clusterWidth / 2),
+        );
         for (let index = clusterStart; index <= clusterEnd; index += 1) {
           markers[index].displayX = clusterLeft + (index - clusterStart) * minimumMarkerGap;
         }
@@ -3747,8 +3756,14 @@ export default function CompetitiveAnalysis({
                               <text x="9" y="3.5"><tspan>동일연차 평균</tspan><tspan className="score"> {selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
                             </g>
                           </g>
-                          <line className="growth-gauge-benchmark-axis" x1="58" y1="48" x2="362" y2="48" />
-                          {[58, 210, 362].map((x, index) => (
+                          <line
+                            className="growth-gauge-benchmark-axis"
+                            x1={growthGaugeAxisStartX}
+                            y1="48"
+                            x2={growthGaugeAxisEndX}
+                            y2="48"
+                          />
+                          {[growthGaugeAxisStartX, growthGaugeAxisMiddleX, growthGaugeAxisEndX].map((x, index) => (
                             <g key={x} className="growth-gauge-benchmark-tick">
                               <line x1={x} y1="44" x2={x} y2="52" />
                               <text x={x} y="60">{[
