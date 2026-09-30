@@ -3814,7 +3814,7 @@ export default function CompetitiveAnalysis({
                           {selectedStaffGaugeScoreX !== null && selectedShowroomGaugeScoreX !== null && (
                             <g className="growth-gauge-gap showroom">
                               <rect x="72" y="68" width="132" height="18" rx="9" />
-                              <text x="138" y="77">
+                              <text x="138" y="80.2">
                                 전시장 GAP <tspan>{formatGrowthGaugeDelta(selectedShowroomStaffAverage)}</tspan>
                               </text>
                             </g>
@@ -3822,7 +3822,7 @@ export default function CompetitiveAnalysis({
                           {selectedStaffGaugeScoreX !== null && selectedTenureGaugeScoreX !== null && (
                             <g className="growth-gauge-gap tenure">
                               <rect x="216" y="68" width="132" height="18" rx="9" />
-                              <text x="282" y="77">
+                              <text x="282" y="80.2">
                                 동일연차 GAP <tspan>{formatGrowthGaugeDelta(selectedTenureGaugeScore)}</tspan>
                               </text>
                             </g>

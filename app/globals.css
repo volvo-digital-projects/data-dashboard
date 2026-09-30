@@ -1901,7 +1901,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-size: 9.2px;
   font-weight: 700;
   text-anchor: middle;
-  dominant-baseline: middle;
+  dominant-baseline: auto;
 }
 
 .growth-gauge-gap text tspan {
