@@ -1148,10 +1148,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /growth-gauge-score-strip/);
   assert.doesNotMatch(navigation, /growth-gauge-comparison-arc|growth-gauge-score-callouts|leaderPath/);
   assert.match(navigation, /className="growth-gauge-benchmark-legend"[\s\S]*?className="staff"[\s\S]*?className="showroom"[\s\S]*?className="tenure"/);
-  assert.match(navigation, /className="staff" transform="translate\(45 13\)"[\s\S]*?<circle cx="0" cy="0" r="4" \/>[\s\S]*?<text x="9">/);
-  assert.match(navigation, /className="showroom" transform="translate\(173 13\)"[\s\S]*?rotate\(45 0 0\)[\s\S]*?<text x="9">/);
-  assert.match(navigation, /className="tenure" transform="translate\(306 13\)"[\s\S]*?x="-3\.5"[\s\S]*?<text x="9">/);
-  assert.match(css, /\.growth-gauge-benchmark-legend text\s*\{[^}]*text-anchor:\s*start;/);
+  assert.match(navigation, /className="staff" transform="translate\(45 13\)"[\s\S]*?<circle cx="0" cy="0" r="4" \/>[\s\S]*?<text x="9" y="3\.5">/);
+  assert.match(navigation, /className="showroom" transform="translate\(173 13\)"[\s\S]*?rotate\(45 0 0\)[\s\S]*?<text x="9" y="3\.5">/);
+  assert.match(navigation, /className="tenure" transform="translate\(306 13\)"[\s\S]*?x="-3\.5"[\s\S]*?<text x="9" y="3\.5">/);
+  assert.match(css, /\.growth-gauge-benchmark-legend text\s*\{[^}]*text-anchor:\s*start;[^}]*dominant-baseline:\s*auto;/);
   assert.match(css, /\.growth-gauge-benchmark-legend \.staff circle,[\s\S]*?\.growth-gauge-benchmark-marker\.staff\s*\{[^}]*fill:\s*#ffffff;[^}]*stroke:\s*#d93242;/);
   assert.match(source, /const selectedGrowthGaugeMarkerLayout = \(\(\) => \{[\s\S]*?const minimumMarkerGap = 22;[\s\S]*?clusterCenter - clusterWidth \/ 2/);
   assert.match(navigation, /className="growth-gauge-benchmark-position staff"[\s\S]*?selectedGrowthGaugeMarkerLayout\.staff\.displayX[\s\S]*?selectedGrowthGaugeMarkerLayout\.staff\.anchorX[\s\S]*?cy="29"/);

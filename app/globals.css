@@ -1843,7 +1843,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   font-size: 9.5px;
   font-weight: 700;
   text-anchor: start;
-  dominant-baseline: middle;
+  dominant-baseline: auto;
 }
 
 .growth-gauge-benchmark-legend .score {

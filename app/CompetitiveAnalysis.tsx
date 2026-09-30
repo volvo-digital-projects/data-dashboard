@@ -3736,15 +3736,15 @@ export default function CompetitiveAnalysis({
                           <g className="growth-gauge-benchmark-legend">
                             <g className="staff" transform="translate(45 13)">
                               <circle cx="0" cy="0" r="4" />
-                              <text x="9"><tspan>{selectedStaffEmployee?.name ?? "개인"}</tspan><tspan className="score"> {selectedStaffGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
+                              <text x="9" y="3.5"><tspan>{selectedStaffEmployee?.name ?? "개인"}</tspan><tspan className="score"> {selectedStaffGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
                             </g>
                             <g className="showroom" transform="translate(173 13)">
                               <rect x="-3.5" y="-3.5" width="7" height="7" rx="1" transform="rotate(45 0 0)" />
-                              <text x="9"><tspan>{displayShowroomNameWithoutBrand(selected.showroom)} 평균</tspan><tspan className="score"> {selectedShowroomStaffAverage?.toFixed(1) ?? "―"}</tspan></text>
+                              <text x="9" y="3.5"><tspan>{displayShowroomNameWithoutBrand(selected.showroom)} 평균</tspan><tspan className="score"> {selectedShowroomStaffAverage?.toFixed(1) ?? "―"}</tspan></text>
                             </g>
                             <g className="tenure" transform="translate(306 13)">
                               <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.5" />
-                              <text x="9"><tspan>동일연차 평균</tspan><tspan className="score"> {selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
+                              <text x="9" y="3.5"><tspan>동일연차 평균</tspan><tspan className="score"> {selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
                             </g>
                           </g>
                           <line className="growth-gauge-benchmark-axis" x1="58" y1="48" x2="362" y2="48" />
