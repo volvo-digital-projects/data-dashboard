@@ -2715,17 +2715,12 @@ export default function CompetitiveAnalysis({
   const selectedStaffGrowthLabel = selectedStaffGrowthZone === null
     ? "자료 확인"
     : selectedStaffGrowthLabels[selectedStaffGrowthZone];
-  const selectedStaffGrowthDeltaMark = selectedStaffPeerDelta === null || selectedStaffPeerDelta === 0
-    ? "±"
-    : selectedStaffPeerDelta > 0
-      ? "▲"
-      : "▼";
   const selectedStaffGrowthCalculation =
-    selectedStaffSatisfactionScore === null ||
-    selectedStaffTenureFinalScore === null ||
+    selectedStaffGaugeScore === null ||
+    selectedTenureGaugeScore === null ||
     selectedStaffPeerDelta === null
       ? `${selectedStaffEmployee?.name ?? "영업직원"} 점수와 동일연차 평균을 비교해 위치를 산출합니다`
-      : `${selectedStaffEmployee?.name ?? "영업직원"} ${(selectedStaffSatisfactionScore / 10).toFixed(1)}점 − 동일연차 평균 ${(selectedStaffTenureFinalScore / 10).toFixed(1)}점 = ${selectedStaffGrowthDeltaMark} ${Math.abs(selectedStaffPeerDelta / 10).toFixed(1)}점`;
+      : `${selectedStaffEmployee?.name ?? "영업직원"} ${selectedStaffGaugeScore.toFixed(1)}점 − 동일연차 평균 ${selectedTenureGaugeScore.toFixed(1)}점 = ${formatGrowthGaugeDelta(selectedTenureGaugeScore)}점`;
   const selectedStaffScatterPoint = staffTenureScatterPopulation.find(
     (point) =>
       point.cdsid === selected.cdsid && point.name === selectedStaffEmployee?.name,
