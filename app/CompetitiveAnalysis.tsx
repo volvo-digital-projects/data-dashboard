@@ -3727,7 +3727,7 @@ export default function CompetitiveAnalysis({
                         <desc>{selectedStaffGrowthCalculation}</desc>
                         <defs>
                           <clipPath id="growth-gauge-selected-staff-photo">
-                            <circle cx="0" cy="0" r="6.2" />
+                            <circle cx="0" cy="0" r="7.5" />
                           </clipPath>
                         </defs>
                         <g className="growth-gauge-segments">
@@ -3782,7 +3782,7 @@ export default function CompetitiveAnalysis({
                             <g className="growth-gauge-benchmark-position staff">
                               <line
                                 x1={selectedGrowthGaugeMarkerLayout.staff.displayX}
-                                y1="36"
+                                y1="39"
                                 x2={selectedGrowthGaugeMarkerLayout.staff.anchorX}
                                 y2="48"
                               />
@@ -3790,18 +3790,19 @@ export default function CompetitiveAnalysis({
                                 className="growth-gauge-benchmark-staff-photo"
                                 transform={`translate(${selectedGrowthGaugeMarkerLayout.staff.displayX} 29)`}
                               >
-                                <circle className="photo-backdrop" r="7" />
+                                <circle className="photo-halo" r="9.8" />
+                                <circle className="photo-backdrop" r="9.4" />
                                 <image
                                   className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
                                   href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
-                                  x="-7.5"
-                                  y="-6.5"
-                                  width="15"
-                                  height="15"
+                                  x="-10.125"
+                                  y="-7.5"
+                                  width="20.25"
+                                  height="20.25"
                                   preserveAspectRatio="xMidYMin slice"
                                   clipPath="url(#growth-gauge-selected-staff-photo)"
                                 />
-                                <circle className="photo-ring" r="6.3" />
+                                <circle className="photo-ring" r="8" />
                               </g>
                             </g>
                           )}

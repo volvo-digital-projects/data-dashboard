@@ -1871,9 +1871,19 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-benchmark-legend .tenure,
 .growth-gauge-benchmark-marker.tenure { color: #7654a4; }
 
+.growth-gauge-benchmark-staff-photo .photo-halo {
+  fill: rgba(23, 116, 147, 0.16);
+  stroke: rgba(23, 116, 147, 0.42);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
 .growth-gauge-benchmark-staff-photo .photo-backdrop {
   fill: #fff;
-  stroke: none;
+  stroke: #a9c4ce;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 1px 2px rgba(14, 53, 69, 0.34));
+  vector-effect: non-scaling-stroke;
 }
 
 .growth-gauge-benchmark-staff-photo image {
@@ -1886,9 +1896,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-benchmark-staff-photo .photo-ring {
   fill: none;
-  stroke: #16708f;
-  stroke-width: 1.4;
-  filter: drop-shadow(0 1px 2px rgba(9, 47, 66, 0.2));
+  stroke: #2d7187;
+  stroke-width: 1.2;
   vector-effect: non-scaling-stroke;
 }
 
