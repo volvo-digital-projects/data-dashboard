@@ -1863,13 +1863,34 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 }
 
 .growth-gauge-benchmark-legend .staff,
-.growth-gauge-benchmark-marker.staff { color: #d93242; }
+.growth-gauge-benchmark-marker.staff { color: #16708f; }
 .growth-gauge-benchmark-legend .staff circle,
-.growth-gauge-benchmark-marker.staff { fill: #ffffff; stroke: #d93242; }
+.growth-gauge-benchmark-marker.staff { fill: #ffffff; stroke: #16708f; }
 .growth-gauge-benchmark-legend .showroom,
-.growth-gauge-benchmark-marker.showroom { color: #087a58; }
+.growth-gauge-benchmark-marker.showroom { color: #d93242; }
 .growth-gauge-benchmark-legend .tenure,
 .growth-gauge-benchmark-marker.tenure { color: #7654a4; }
+
+.growth-gauge-benchmark-staff-photo .photo-backdrop {
+  fill: #fff;
+  stroke: none;
+}
+
+.growth-gauge-benchmark-staff-photo image {
+  pointer-events: none;
+}
+
+.growth-gauge-benchmark-staff-photo .photo-fallback-silhouette {
+  opacity: 0.88;
+}
+
+.growth-gauge-benchmark-staff-photo .photo-ring {
+  fill: none;
+  stroke: #16708f;
+  stroke-width: 1.4;
+  filter: drop-shadow(0 1px 2px rgba(9, 47, 66, 0.2));
+  vector-effect: non-scaling-stroke;
+}
 
 .growth-gauge-benchmark-position line {
   stroke: currentColor;
@@ -1880,8 +1901,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   vector-effect: non-scaling-stroke;
 }
 
-.growth-gauge-benchmark-position.staff { color: #d93242; }
-.growth-gauge-benchmark-position.showroom { color: #087a58; }
+.growth-gauge-benchmark-position.staff { color: #16708f; }
+.growth-gauge-benchmark-position.showroom { color: #d93242; }
 .growth-gauge-benchmark-position.tenure { color: #7654a4; }
 
 .growth-gauge-gap {

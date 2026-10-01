@@ -3725,6 +3725,11 @@ export default function CompetitiveAnalysis({
                       >
                         <title>{`상담 역량 타코미터: ${selectedStaffGrowthLabel}`}</title>
                         <desc>{selectedStaffGrowthCalculation}</desc>
+                        <defs>
+                          <clipPath id="growth-gauge-selected-staff-photo">
+                            <circle cx="0" cy="0" r="6.2" />
+                          </clipPath>
+                        </defs>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M75 224 A135 135 0 0 1 142.5 107.1 L169 153 A82 82 0 0 0 128 224 Z" />
                           <path className={selectedStaffGrowthZone === 1 ? "accelerating active" : "accelerating"} d="M142.5 107.1 A135 135 0 0 1 277.5 107.1 L251 153 A82 82 0 0 0 169 153 Z" />
@@ -3777,16 +3782,27 @@ export default function CompetitiveAnalysis({
                             <g className="growth-gauge-benchmark-position staff">
                               <line
                                 x1={selectedGrowthGaugeMarkerLayout.staff.displayX}
-                                y1="34"
+                                y1="36"
                                 x2={selectedGrowthGaugeMarkerLayout.staff.anchorX}
                                 y2="48"
                               />
-                              <circle
-                                className="growth-gauge-benchmark-marker staff"
-                                cx={selectedGrowthGaugeMarkerLayout.staff.displayX}
-                                cy="29"
-                                r="5"
-                              />
+                              <g
+                                className="growth-gauge-benchmark-staff-photo"
+                                transform={`translate(${selectedGrowthGaugeMarkerLayout.staff.displayX} 29)`}
+                              >
+                                <circle className="photo-backdrop" r="7" />
+                                <image
+                                  className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
+                                  href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
+                                  x="-7.5"
+                                  y="-6.5"
+                                  width="15"
+                                  height="15"
+                                  preserveAspectRatio="xMidYMin slice"
+                                  clipPath="url(#growth-gauge-selected-staff-photo)"
+                                />
+                                <circle className="photo-ring" r="6.3" />
+                              </g>
                             </g>
                           )}
                           {selectedGrowthGaugeMarkerLayout.showroom && (
