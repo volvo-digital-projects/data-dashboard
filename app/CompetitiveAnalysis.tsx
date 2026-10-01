@@ -610,6 +610,15 @@ const nationalStaffSalesPopulation: StaffSalesScatterPoint[] =
         }]
       : [];
   });
+const nationalStaffSalesReportedMonthCount = staffCurrentSalesPopulation.reduce(
+  (maximum, { cdsid, employee }) => {
+    const sales = salesActivityByCdsid[cdsid]?.staff.find(
+      (staff) => staff.name === employee.name,
+    );
+    return Math.max(maximum, sales?.monthlyDeliveredSales.length ?? 0);
+  },
+  0,
+);
 type ScatterLabelPlacement =
   | "left-up"
   | "left-down"
@@ -2834,6 +2843,10 @@ export default function CompetitiveAnalysis({
         0,
       ) / nationalStaffSalesPopulation.length
     : null;
+  const staffSalesNationalMonthlyAverage =
+    staffSalesNationalAverage !== null && nationalStaffSalesReportedMonthCount > 0
+      ? staffSalesNationalAverage / nationalStaffSalesReportedMonthCount
+      : null;
   const staffSalesMax = Math.max(
     1,
     ...nationalStaffSalesPopulation.map((point) => point.deliveredSales),
@@ -4369,15 +4382,18 @@ export default function CompetitiveAnalysis({
                       {staffSalesNationalAverage !== null ? (
                         <g
                           className="growth-scatter-average-label"
-                          transform={`translate(${staffScatterPlot.right - 32} ${staffSalesScatterY(staffSalesNationalAverage) - 36})`}
+                          transform={`translate(${staffScatterPlot.right - 44} ${staffSalesScatterY(staffSalesNationalAverage) - 51})`}
                         >
                           <path
                             className="callout-shape"
-                            d="M 4 0 H 46 Q 50 0 50 4 V 26 Q 50 30 46 30 H 39 L 32 36 L 25 30 H 4 Q 0 30 0 26 V 4 Q 0 0 4 0 Z"
+                            d="M 4 0 H 66 Q 70 0 70 4 V 40 Q 70 44 66 44 H 52 L 44 51 L 36 44 H 4 Q 0 44 0 40 V 4 Q 0 0 4 0 Z"
                           />
-                          <text x="25" y="11" textAnchor="middle">전국 평균</text>
-                          <text className="score" x="25" y="23" textAnchor="middle">
-                            {staffSalesNationalAverage.toFixed(1)}대
+                          <text x="35" y="11" textAnchor="middle">전국 평균</text>
+                          <text className="score" x="35" y="24" textAnchor="middle">
+                            {staffSalesNationalAverage.toFixed(1)}대/년
+                          </text>
+                          <text className="monthly" x="35" y="36" textAnchor="middle">
+                            평균 {staffSalesNationalMonthlyAverage?.toFixed(1) ?? "―"}대/월
                           </text>
                         </g>
                       ) : null}
