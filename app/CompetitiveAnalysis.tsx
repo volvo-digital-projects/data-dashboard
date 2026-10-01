@@ -3727,7 +3727,7 @@ export default function CompetitiveAnalysis({
                         <desc>{selectedStaffGrowthCalculation}</desc>
                         <defs>
                           <clipPath id="growth-gauge-selected-staff-photo">
-                            <circle cx="0" cy="0" r="7.5" />
+                            <circle cx="0" cy="0" r="6.65" />
                           </clipPath>
                         </defs>
                         <g className="growth-gauge-segments">
@@ -3790,19 +3790,19 @@ export default function CompetitiveAnalysis({
                                 className="growth-gauge-benchmark-staff-photo"
                                 transform={`translate(${selectedGrowthGaugeMarkerLayout.staff.displayX} 29)`}
                               >
-                                <circle className="photo-halo" r="9.8" />
-                                <circle className="photo-backdrop" r="9.4" />
+                                <circle className="photo-halo" r="8.7" />
+                                <circle className="photo-backdrop" r="8.35" />
                                 <image
                                   className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
                                   href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
-                                  x="-10.125"
-                                  y="-7.5"
-                                  width="20.25"
-                                  height="20.25"
+                                  x="-9"
+                                  y="-6.65"
+                                  width="18"
+                                  height="18"
                                   preserveAspectRatio="xMidYMin slice"
                                   clipPath="url(#growth-gauge-selected-staff-photo)"
                                 />
-                                <circle className="photo-ring" r="8" />
+                                <circle className="photo-ring" r="7.1" />
                               </g>
                             </g>
                           )}
