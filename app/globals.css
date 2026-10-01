@@ -2273,8 +2273,8 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-scatter-average-label text.monthly {
   font-family: var(--font-volvo), var(--font-korean), sans-serif;
-  font-size: 7.5px;
-  font-weight: 700;
+  font-size: 9px;
+  font-weight: 750;
 }
 
 .growth-scatter-population circle {

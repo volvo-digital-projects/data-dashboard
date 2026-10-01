@@ -4382,7 +4382,7 @@ export default function CompetitiveAnalysis({
                       {staffSalesNationalAverage !== null ? (
                         <g
                           className="growth-scatter-average-label"
-                          transform={`translate(${staffScatterPlot.right - 44} ${staffSalesScatterY(staffSalesNationalAverage) - 51})`}
+                          transform={`translate(${staffScatterPlot.right - 52} ${staffSalesScatterY(staffSalesNationalAverage) - 51})`}
                         >
                           <path
                             className="callout-shape"
