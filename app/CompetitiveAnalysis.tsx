@@ -3779,7 +3779,10 @@ export default function CompetitiveAnalysis({
                             </g>
                           ))}
                           {selectedGrowthGaugeMarkerLayout.staff && (
-                            <g className="growth-gauge-benchmark-position staff">
+                            <g
+                              className="growth-gauge-benchmark-position staff"
+                              key={`growth-gauge-photo-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "selected"}`}
+                            >
                               <line
                                 x1={selectedGrowthGaugeMarkerLayout.staff.displayX}
                                 y1="39"
@@ -3787,22 +3790,25 @@ export default function CompetitiveAnalysis({
                                 y2="48"
                               />
                               <g
-                                className="growth-gauge-benchmark-staff-photo"
+                                className="growth-gauge-benchmark-staff-photo growth-scatter-selected-photo"
                                 transform={`translate(${selectedGrowthGaugeMarkerLayout.staff.displayX} 29)`}
                               >
-                                <circle className="photo-halo" r="8.7" />
-                                <circle className="photo-backdrop" r="8.35" />
-                                <image
-                                  className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
-                                  href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
-                                  x="-9"
-                                  y="-6.65"
-                                  width="18"
-                                  height="18"
-                                  preserveAspectRatio="xMidYMin slice"
-                                  clipPath="url(#growth-gauge-selected-staff-photo)"
-                                />
-                                <circle className="photo-ring" r="7.1" />
+                                <g className="photo-reveal">
+                                  <circle className="photo-acquire-flash" r="8.7" />
+                                  <circle className="photo-halo" r="8.7" />
+                                  <circle className="photo-backdrop" r="8.35" />
+                                  <image
+                                    className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
+                                    href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
+                                    x="-9"
+                                    y="-6.65"
+                                    width="18"
+                                    height="18"
+                                    preserveAspectRatio="xMidYMin slice"
+                                    clipPath="url(#growth-gauge-selected-staff-photo)"
+                                  />
+                                  <circle className="photo-ring" r="7.1" />
+                                </g>
                               </g>
                             </g>
                           )}
