@@ -4389,11 +4389,11 @@ export default function CompetitiveAnalysis({
                             d="M 4 0 H 66 Q 70 0 70 4 V 40 Q 70 44 66 44 H 52 L 44 51 L 36 44 H 4 Q 0 44 0 40 V 4 Q 0 0 4 0 Z"
                           />
                           <text x="35" y="11" textAnchor="middle">전국 평균</text>
-                          <text className="score" x="35" y="24" textAnchor="middle">
+                          <text className="score" x="61" y="24" textAnchor="end">
                             {staffSalesNationalAverage.toFixed(1)}대/년
                           </text>
-                          <text className="monthly" x="35" y="36" textAnchor="middle">
-                            평균 {staffSalesNationalMonthlyAverage?.toFixed(1) ?? "―"}대/월
+                          <text className="monthly" x="61" y="36" textAnchor="end">
+                            {staffSalesNationalMonthlyAverage?.toFixed(1) ?? "―"}대/월
                           </text>
                         </g>
                       ) : null}
