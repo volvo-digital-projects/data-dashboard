@@ -2,14 +2,14 @@
   "source": {
     "workbook": "2026 Volvo Car Korea_VOC Raw Data_260922.xlsx",
     "vocThrough": "2026-09-13",
-    "rosterCheckedAt": "2026-09-30",
+    "rosterCheckedAt": "2026-10-02",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-09-30",
+    "jobTitleSourceDate": "2026-10-02",
     "sentWorkbook": "2026 Volvo Car Korea_VOC 발송 건수_260922.xlsx",
     "sentThrough": "2026-09-13",
     "latestResponseThrough": "2026-09-13",
@@ -128,7 +128,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2022-09-01",
-          "tenureMonths": 48,
+          "tenureMonths": 49,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -612,7 +612,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2018-05-02",
-          "tenureMonths": 100,
+          "tenureMonths": 101,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -955,7 +955,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2020-11-01",
-          "tenureMonths": 70,
+          "tenureMonths": 71,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -1045,7 +1045,7 @@
           "role": "영업직원",
           "jobTitle": "팀장",
           "hireDate": "2020-11-01",
-          "tenureMonths": 70,
+          "tenureMonths": 71,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -1335,7 +1335,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-11-01",
-          "tenureMonths": 70,
+          "tenureMonths": 71,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -1538,7 +1538,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2026-02-02",
-          "tenureMonths": 7,
+          "tenureMonths": 8,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -2931,7 +2931,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-11-01",
-          "tenureMonths": 70,
+          "tenureMonths": 71,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -3243,7 +3243,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2026-09-01",
-          "tenureMonths": 0,
+          "tenureMonths": 1,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내"
         },
@@ -3391,7 +3391,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2023-06-01",
-          "tenureMonths": 39,
+          "tenureMonths": 40,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -3910,7 +3910,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2019-12-02",
-          "tenureMonths": 81,
+          "tenureMonths": 82,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -4081,9 +4081,9 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-06-01",
-          "tenureMonths": 3,
-          "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내",
+          "tenureMonths": 4,
+          "tenureBucket": "under-1y",
+          "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
               "responses": 5,
@@ -4158,7 +4158,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-10-01",
-          "tenureMonths": 11,
+          "tenureMonths": 12,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -4214,9 +4214,9 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-06-01",
-          "tenureMonths": 3,
-          "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내",
+          "tenureMonths": 4,
+          "tenureBucket": "under-1y",
+          "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
               "responses": 1,
@@ -4494,7 +4494,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2018-01-02",
-          "tenureMonths": 104,
+          "tenureMonths": 105,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -4584,7 +4584,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2024-01-02",
-          "tenureMonths": 32,
+          "tenureMonths": 33,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -4675,7 +4675,76 @@
             }
           ],
           "latestResponseDate": "2026-09-06"
+        }
+      ],
+      "excludedRawNames": [
+        {
+          "name": "김현주",
+          "responses": 40,
+          "reason": "현재 DMS 재직 명단 미확인"
         },
+        {
+          "name": "황보민",
+          "responses": 19,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "강신철",
+          "responses": 13,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "김은구",
+          "responses": 13,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "김민지",
+          "responses": 11,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "최정수",
+          "responses": 11,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "강명윤",
+          "responses": 5,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "정우성",
+          "responses": 5,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "김성일",
+          "responses": 2,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "김윤현",
+          "responses": 2,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "한진수",
+          "responses": 2,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "김도윤",
+          "responses": 1,
+          "reason": "현재 DMS 재직 명단 미확인"
+        },
+        {
+          "name": "박홍준",
+          "responses": 1,
+          "reason": "현재 DMS 재직 명단 미확인"
+        }
+      ],
+      "formerEmployees": [
         {
           "name": "정승현",
           "role": "영업팀장",
@@ -4776,77 +4845,11 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-06-28"
+          "latestResponseDate": "2026-06-28",
+          "archivedAt": "2026-10-02",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
         }
-      ],
-      "excludedRawNames": [
-        {
-          "name": "김현주",
-          "responses": 40,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "황보민",
-          "responses": 19,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "강신철",
-          "responses": 13,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김은구",
-          "responses": 13,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김민지",
-          "responses": 11,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "최정수",
-          "responses": 11,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "강명윤",
-          "responses": 5,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "정우성",
-          "responses": 5,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김성일",
-          "responses": 2,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김윤현",
-          "responses": 2,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "한진수",
-          "responses": 2,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "김도윤",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        },
-        {
-          "name": "박홍준",
-          "responses": 1,
-          "reason": "현재 DMS 재직 명단 미확인"
-        }
-      ],
-      "formerEmployees": []
+      ]
     },
     "6KR6864": {
       "showroom": "볼보 구리",
@@ -4858,7 +4861,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-08-01",
-          "tenureMonths": 13,
+          "tenureMonths": 14,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -4953,7 +4956,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2018-07-02",
-          "tenureMonths": 98,
+          "tenureMonths": 99,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -5111,7 +5114,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-02-01",
-          "tenureMonths": 31,
+          "tenureMonths": 32,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -5264,7 +5267,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2024-01-02",
-          "tenureMonths": 32,
+          "tenureMonths": 33,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -5571,7 +5574,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2024-01-02",
-          "tenureMonths": 32,
+          "tenureMonths": 33,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -5839,7 +5842,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2022-12-01",
-          "tenureMonths": 45,
+          "tenureMonths": 46,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -6025,7 +6028,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-04-01",
-          "tenureMonths": 5,
+          "tenureMonths": 6,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -6239,7 +6242,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2021-10-01",
-          "tenureMonths": 59,
+          "tenureMonths": 60,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -6375,7 +6378,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2024-02-01",
-          "tenureMonths": 31,
+          "tenureMonths": 32,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -6443,7 +6446,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-09-02",
-          "tenureMonths": 24,
+          "tenureMonths": 25,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -7443,7 +7446,7 @@
           "role": "영업직원",
           "jobTitle": "사원",
           "hireDate": "2025-07-01",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -7754,7 +7757,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2017-09-01",
-          "tenureMonths": 108,
+          "tenureMonths": 109,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -8333,7 +8336,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-07-01",
-          "tenureMonths": 26,
+          "tenureMonths": 27,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -8398,7 +8401,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-07-01",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -8432,7 +8435,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-12-01",
-          "tenureMonths": 9,
+          "tenureMonths": 10,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -8462,7 +8465,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2024-04-01",
-          "tenureMonths": 29,
+          "tenureMonths": 30,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -8547,7 +8550,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-04-01",
-          "tenureMonths": 29,
+          "tenureMonths": 30,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -8632,7 +8635,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-05-02",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -8709,7 +8712,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2024-05-02",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -8984,7 +8987,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2024-05-02",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -9061,7 +9064,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2021-04-01",
-          "tenureMonths": 65,
+          "tenureMonths": 66,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -10419,7 +10422,7 @@
           "role": "영업직원",
           "jobTitle": "부장",
           "hireDate": "2013-02-01",
-          "tenureMonths": 163,
+          "tenureMonths": 164,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -10751,7 +10754,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2018-06-01",
-          "tenureMonths": 99,
+          "tenureMonths": 100,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -10845,7 +10848,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2022-05-02",
-          "tenureMonths": 52,
+          "tenureMonths": 53,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -10910,7 +10913,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2026-07-01",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -11258,7 +11261,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2024-02-01",
-          "tenureMonths": 31,
+          "tenureMonths": 32,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -12058,7 +12061,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2022-05-02",
-          "tenureMonths": 52,
+          "tenureMonths": 53,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -12129,6 +12132,71 @@
           ],
           "improvementKeywords": [],
           "latestResponseDate": "2026-09-13"
+        },
+        {
+          "name": "안희철",
+          "role": "영업직원",
+          "jobTitle": "차장",
+          "hireDate": "2016-11-01",
+          "tenureMonths": 119,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2023": {
+              "responses": 2,
+              "scoreSum": 20.0,
+              "sent": 4
+            },
+            "2024": {
+              "responses": 2,
+              "scoreSum": 20.0,
+              "sent": 16
+            },
+            "2025": {
+              "responses": 1,
+              "scoreSum": 10.0,
+              "sent": 4
+            },
+            "2026": {
+              "responses": 4,
+              "scoreSum": 35.0,
+              "sent": 19,
+              "rateResponses": 4
+            }
+          },
+          "commentResponses": 9,
+          "strengthKeywords": [
+            {
+              "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "친절·정중 응대",
+              "mentions": 3
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-07"
         },
         {
           "name": "옥수찬",
@@ -12245,67 +12313,6 @@
           ],
           "improvementKeywords": [],
           "latestResponseDate": "2026-09-09"
-        },
-        {
-          "name": "이병현",
-          "role": "영업직원",
-          "jobTitle": "과장",
-          "hireDate": "2019-06-24",
-          "tenureMonths": 87,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 1,
-              "scoreSum": 9.0,
-              "sent": 6
-            },
-            "2024": {
-              "responses": 7,
-              "scoreSum": 67.0,
-              "sent": 30
-            },
-            "2025": {
-              "responses": 3,
-              "scoreSum": 27.0,
-              "sent": 8
-            },
-            "2026": {
-              "responses": 2,
-              "scoreSum": 20.0,
-              "sent": 19,
-              "rateResponses": 2
-            }
-          },
-          "commentResponses": 13,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 8
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 7
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 5
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 1
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 1
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [],
-          "latestResponseDate": "2026-06-05"
         },
         {
           "name": "이충원",
@@ -12620,69 +12627,65 @@
           "latestResponseDate": "2026-08-27"
         },
         {
-          "name": "안희철",
+          "name": "이병현",
           "role": "영업팀장",
           "jobTitle": "팀장",
-          "hireDate": "2016-11-01",
-          "tenureMonths": 118,
+          "hireDate": "2019-06-24",
+          "tenureMonths": 87,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
             "2023": {
-              "responses": 2,
-              "scoreSum": 20.0,
-              "sent": 4
+              "responses": 1,
+              "scoreSum": 9.0,
+              "sent": 6
             },
             "2024": {
-              "responses": 2,
-              "scoreSum": 20.0,
-              "sent": 16
+              "responses": 7,
+              "scoreSum": 67.0,
+              "sent": 30
             },
             "2025": {
-              "responses": 1,
-              "scoreSum": 10.0,
-              "sent": 4
+              "responses": 3,
+              "scoreSum": 27.0,
+              "sent": 8
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 35.0,
+              "responses": 2,
+              "scoreSum": 20.0,
               "sent": 19,
-              "rateResponses": 4
+              "rateResponses": 2
             }
           },
-          "commentResponses": 9,
+          "commentResponses": 13,
           "strengthKeywords": [
             {
-              "label": "성실한 답변",
-              "mentions": 3
-            },
-            {
               "label": "친절·정중 응대",
-              "mentions": 3
+              "mentions": 8
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 2
+              "mentions": 7
             },
             {
-              "label": "비교·장단점 안내",
-              "mentions": 2
+              "label": "성실한 답변",
+              "mentions": 5
             },
             {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            },
-            {
-              "label": "편안한 상담",
+              "label": "신속한 응답",
               "mentions": 1
             },
             {
               "label": "시승·차량체험 지원",
               "mentions": 1
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-08-07"
+          "latestResponseDate": "2026-06-05"
         },
         {
           "name": "정성택",
@@ -13055,7 +13058,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-11-01",
-          "tenureMonths": 22,
+          "tenureMonths": 23,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -13123,7 +13126,7 @@
           "role": "영업직원",
           "jobTitle": "사원",
           "hireDate": "2026-04-01",
-          "tenureMonths": 5,
+          "tenureMonths": 6,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -13375,7 +13378,7 @@
           "role": "영업직원",
           "jobTitle": "사원",
           "hireDate": "2024-07-01",
-          "tenureMonths": 26,
+          "tenureMonths": 27,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -13676,7 +13679,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2023-11-01",
-          "tenureMonths": 34,
+          "tenureMonths": 35,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -13866,7 +13869,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2021-08-02",
-          "tenureMonths": 61,
+          "tenureMonths": 62,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -14097,7 +14100,7 @@
           "role": "영업직원",
           "jobTitle": "부장",
           "hireDate": "2014-11-01",
-          "tenureMonths": 142,
+          "tenureMonths": 143,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -14289,7 +14292,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2022-08-01",
-          "tenureMonths": 49,
+          "tenureMonths": 50,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -15943,7 +15946,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2020-01-02",
-          "tenureMonths": 80,
+          "tenureMonths": 81,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -16131,7 +16134,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-07-02",
-          "tenureMonths": 98,
+          "tenureMonths": 99,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -16233,7 +16236,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2023-06-01",
-          "tenureMonths": 39,
+          "tenureMonths": 40,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -16420,7 +16423,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2021-02-01",
-          "tenureMonths": 67,
+          "tenureMonths": 68,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -17220,7 +17223,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2023-01-02",
-          "tenureMonths": 44,
+          "tenureMonths": 45,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -17635,7 +17638,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-01-02",
-          "tenureMonths": 20,
+          "tenureMonths": 21,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -17698,7 +17701,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-07-01",
-          "tenureMonths": 26,
+          "tenureMonths": 27,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -18045,7 +18048,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2015-05-01",
-          "tenureMonths": 136,
+          "tenureMonths": 137,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -18206,7 +18209,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-07-01",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -18249,7 +18252,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2022-05-02",
-          "tenureMonths": 52,
+          "tenureMonths": 53,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -18770,7 +18773,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2018-11-01",
-          "tenureMonths": 94,
+          "tenureMonths": 95,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -19162,7 +19165,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2018-11-01",
-          "tenureMonths": 94,
+          "tenureMonths": 95,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -19328,7 +19331,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2023-11-01",
-          "tenureMonths": 34,
+          "tenureMonths": 35,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -19642,7 +19645,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-06-01",
-          "tenureMonths": 75,
+          "tenureMonths": 76,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -20008,7 +20011,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2020-03-02",
-          "tenureMonths": 78,
+          "tenureMonths": 79,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -20334,7 +20337,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2014-06-01",
-          "tenureMonths": 147,
+          "tenureMonths": 148,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -20633,7 +20636,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2023-01-02",
-          "tenureMonths": 44,
+          "tenureMonths": 45,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -20731,7 +20734,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2023-01-02",
-          "tenureMonths": 44,
+          "tenureMonths": 45,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -20997,7 +21000,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-09-01",
-          "tenureMonths": 0,
+          "tenureMonths": 1,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내"
         },
@@ -21006,7 +21009,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2023-01-02",
-          "tenureMonths": 44,
+          "tenureMonths": 45,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -21564,7 +21567,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-02-01",
-          "tenureMonths": 31,
+          "tenureMonths": 32,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -21781,7 +21784,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2024-01-02",
-          "tenureMonths": 32,
+          "tenureMonths": 33,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -21900,7 +21903,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-04-01",
-          "tenureMonths": 17,
+          "tenureMonths": 18,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -22037,7 +22040,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-04-01",
-          "tenureMonths": 17,
+          "tenureMonths": 18,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -22281,7 +22284,7 @@
           "role": "영업직원",
           "jobTitle": "팀장",
           "hireDate": "2020-12-01",
-          "tenureMonths": 69,
+          "tenureMonths": 70,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -22587,7 +22590,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2022-06-02",
-          "tenureMonths": 51,
+          "tenureMonths": 52,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -23037,7 +23040,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2023-06-01",
-          "tenureMonths": 39,
+          "tenureMonths": 40,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -23143,9 +23146,9 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2021-09-01",
-          "tenureMonths": 60,
-          "tenureBucket": "3-5y",
-          "tenureBucketLabel": "3~5년",
+          "tenureMonths": 61,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
           "years": {
             "2026": {
               "responses": 5,
@@ -23334,9 +23337,9 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2023-09-01",
-          "tenureMonths": 36,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
+          "tenureMonths": 37,
+          "tenureBucket": "3-5y",
+          "tenureBucketLabel": "3~5년",
           "years": {
             "2023": {
               "responses": 2,
@@ -24135,7 +24138,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2016-11-01",
-          "tenureMonths": 118,
+          "tenureMonths": 119,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -24229,7 +24232,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-07-02",
-          "tenureMonths": 98,
+          "tenureMonths": 99,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -24358,9 +24361,9 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2016-09-01",
-          "tenureMonths": 120,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
+          "tenureMonths": 121,
+          "tenureBucket": "over-10y",
+          "tenureBucketLabel": "10년 이상",
           "years": {
             "2023": {
               "responses": 22,
@@ -24460,7 +24463,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-07-02",
-          "tenureMonths": 98,
+          "tenureMonths": 99,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -24588,7 +24591,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2020-07-01",
-          "tenureMonths": 74,
+          "tenureMonths": 75,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -24980,7 +24983,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2016-08-01",
-          "tenureMonths": 121,
+          "tenureMonths": 122,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -25486,7 +25489,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2021-03-02",
-          "tenureMonths": 66,
+          "tenureMonths": 67,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -26085,7 +26088,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2023-01-02",
-          "tenureMonths": 44,
+          "tenureMonths": 45,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -26330,7 +26333,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-12-01",
-          "tenureMonths": 9,
+          "tenureMonths": 10,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {},
@@ -26500,7 +26503,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-07-01",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {},
@@ -26594,9 +26597,9 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-06-01",
-          "tenureMonths": 3,
-          "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내",
+          "tenureMonths": 4,
+          "tenureBucket": "under-1y",
+          "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
               "responses": 1,
@@ -26705,7 +26708,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2022-09-01",
-          "tenureMonths": 48,
+          "tenureMonths": 49,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -26905,7 +26908,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-04-01",
-          "tenureMonths": 29,
+          "tenureMonths": 30,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -26965,7 +26968,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-03-02",
-          "tenureMonths": 78,
+          "tenureMonths": 79,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -27063,7 +27066,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2023-06-01",
-          "tenureMonths": 39,
+          "tenureMonths": 40,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -27575,105 +27578,6 @@
           "latestResponseDate": "2026-07-30"
         },
         {
-          "name": "이성진",
-          "role": "영업직원",
-          "jobTitle": "대리",
-          "hireDate": "2024-03-07",
-          "tenureMonths": 30,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
-          "years": {
-            "2024": {
-              "responses": 7,
-              "scoreSum": 56.0,
-              "sent": 22
-            },
-            "2025": {
-              "responses": 3,
-              "scoreSum": 29.0,
-              "sent": 7
-            },
-            "2026": {
-              "responses": 3,
-              "scoreSum": 28.0,
-              "sent": 16,
-              "rateResponses": 3
-            }
-          },
-          "commentResponses": 13,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 8
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 5
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 3
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 3
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 3
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 2
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [],
-          "latestResponseDate": "2026-08-20"
-        },
-        {
-          "name": "한필성",
-          "role": "영업직원",
-          "jobTitle": "과장",
-          "hireDate": "2017-07-10",
-          "tenureMonths": 110,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2026": {
-              "responses": 2,
-              "scoreSum": 15.0,
-              "sent": 18,
-              "rateResponses": 2
-            }
-          },
-          "commentResponses": 2,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 2
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "시승기회·시간 확대",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-06-29"
-        },
-        {
           "name": "황준원",
           "role": "영업직원",
           "jobTitle": "과장",
@@ -27923,6 +27827,109 @@
           "improvementKeywords": [],
           "archivedAt": "2026-09-06",
           "archiveReason": "Sales-DMS 현재 명단 제외"
+        },
+        {
+          "name": "이성진",
+          "role": "영업직원",
+          "jobTitle": "대리",
+          "hireDate": "2024-03-07",
+          "tenureMonths": 30,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
+          "years": {
+            "2024": {
+              "responses": 7,
+              "scoreSum": 56.0,
+              "sent": 22
+            },
+            "2025": {
+              "responses": 3,
+              "scoreSum": 29.0,
+              "sent": 7
+            },
+            "2026": {
+              "responses": 3,
+              "scoreSum": 28.0,
+              "sent": 16,
+              "rateResponses": 3
+            }
+          },
+          "commentResponses": 13,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 8
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 5
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 3
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-20",
+          "archivedAt": "2026-10-02",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        },
+        {
+          "name": "한필성",
+          "role": "영업직원",
+          "jobTitle": "과장",
+          "hireDate": "2017-07-10",
+          "tenureMonths": 110,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2026": {
+              "responses": 2,
+              "scoreSum": 15.0,
+              "sent": 18,
+              "rateResponses": 2
+            }
+          },
+          "commentResponses": 2,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 2
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-06-29",
+          "archivedAt": "2026-10-02",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
         }
       ]
     },
@@ -28030,7 +28037,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2017-04-01",
-          "tenureMonths": 113,
+          "tenureMonths": 114,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28124,7 +28131,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-12-01",
-          "tenureMonths": 9,
+          "tenureMonths": 10,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -28332,7 +28339,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2021-04-01",
-          "tenureMonths": 65,
+          "tenureMonths": 66,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28422,11 +28429,24 @@
           "latestResponseDate": "2026-08-08"
         },
         {
+          "years": {},
+          "commentResponses": 0,
+          "strengthKeywords": [],
+          "improvementKeywords": [],
+          "name": "이지수",
+          "role": "영업직원",
+          "jobTitle": "대리",
+          "hireDate": "2026-09-14",
+          "tenureMonths": 0,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내"
+        },
+        {
           "name": "이진섭",
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2022-12-01",
-          "tenureMonths": 45,
+          "tenureMonths": 46,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -28508,7 +28528,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-02-02",
-          "tenureMonths": 7,
+          "tenureMonths": 8,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -28554,7 +28574,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-08-01",
-          "tenureMonths": 13,
+          "tenureMonths": 14,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {},
@@ -28567,7 +28587,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2018-01-01",
-          "tenureMonths": 104,
+          "tenureMonths": 105,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28640,7 +28660,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2018-07-02",
-          "tenureMonths": 98,
+          "tenureMonths": 99,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -29129,9 +29149,9 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-06-01",
-          "tenureMonths": 3,
-          "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내",
+          "tenureMonths": 4,
+          "tenureBucket": "under-1y",
+          "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
               "responses": 6,
@@ -29329,7 +29349,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2021-11-01",
-          "tenureMonths": 58,
+          "tenureMonths": 59,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -29636,9 +29656,9 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-09-01",
-          "tenureMonths": 12,
-          "tenureBucket": "under-1y",
-          "tenureBucketLabel": "1년 이내",
+          "tenureMonths": 13,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
           "years": {
             "2025": {
               "responses": 1,
@@ -29722,7 +29742,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-08-01",
-          "tenureMonths": 25,
+          "tenureMonths": 26,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -29790,7 +29810,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2017-01-02",
-          "tenureMonths": 116,
+          "tenureMonths": 117,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -29968,7 +29988,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2025-06-02",
-          "tenureMonths": 15,
+          "tenureMonths": 16,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -30135,7 +30155,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2026-04-01",
-          "tenureMonths": 5,
+          "tenureMonths": 6,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -30202,7 +30222,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2025-12-01",
-          "tenureMonths": 9,
+          "tenureMonths": 10,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -30316,7 +30336,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2023-01-02",
-          "tenureMonths": 44,
+          "tenureMonths": 45,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -30782,7 +30802,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-04-01",
-          "tenureMonths": 17,
+          "tenureMonths": 18,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -31251,49 +31271,6 @@
           "tenureBucketLabel": "3개월 이내"
         },
         {
-          "name": "이승규",
-          "role": "영업직원",
-          "jobTitle": "대리",
-          "hireDate": "2025-03-04",
-          "tenureMonths": 18,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
-          "years": {
-            "2025": {
-              "responses": 3,
-              "scoreSum": 30.0,
-              "sent": 11
-            },
-            "2026": {
-              "responses": 3,
-              "scoreSum": 30.0,
-              "sent": 43,
-              "rateResponses": 3
-            }
-          },
-          "commentResponses": 6,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 4
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 1
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [],
-          "latestResponseDate": "2026-07-09"
-        },
-        {
           "name": "이영재",
           "role": "영업직원",
           "jobTitle": "대리",
@@ -31345,7 +31322,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-01-02",
-          "tenureMonths": 8,
+          "tenureMonths": 9,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -31544,9 +31521,9 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2021-09-01",
-          "tenureMonths": 60,
-          "tenureBucket": "3-5y",
-          "tenureBucketLabel": "3~5년",
+          "tenureMonths": 61,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
           "years": {
             "2023": {
               "responses": 21,
@@ -31771,7 +31748,53 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "이승규",
+          "role": "영업직원",
+          "jobTitle": "대리",
+          "hireDate": "2025-03-04",
+          "tenureMonths": 18,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
+          "years": {
+            "2025": {
+              "responses": 3,
+              "scoreSum": 30.0,
+              "sent": 11
+            },
+            "2026": {
+              "responses": 3,
+              "scoreSum": 30.0,
+              "sent": 43,
+              "rateResponses": 3
+            }
+          },
+          "commentResponses": 6,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 1
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-07-09",
+          "archivedAt": "2026-10-02",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     }
   }
 }
