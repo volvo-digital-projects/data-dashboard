@@ -34,7 +34,15 @@ jobs:
           VOLVO_SALES_PASSWORD: ${{ secrets.VOLVO_SALES_PASSWORD }}
         run: python scripts/sync-sales-dms-roster.py
       - name: Refresh public dealer portraits
+        id: refresh_portraits
+        continue-on-error: true
         run: python scripts/sync-staff-profile-photos.py
+      - name: Preserve verified portraits when the public source is unavailable
+        if: steps.refresh_portraits.outcome == 'failure'
+        run: |
+          git restore --source=HEAD --staged --worktree -- app/data/staff-profile-photos.json public/staff-profiles
+          git clean -fd -- public/staff-profiles
+          echo "::warning::Public portrait refresh failed; retained the previously verified portrait set."
       - name: Publish verified roster changes
         run: |
           git config user.name "Data Dashboard Auto Update"
