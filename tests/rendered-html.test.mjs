@@ -153,9 +153,11 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
   assert.doesNotMatch(syncScript, /status and status != "활성"/);
   assert.match(generatorScript, /has_departed/);
   assert.doesNotMatch(generatorScript, /status != "활성"/);
-  const restoredEmployees = Object.values(staffAnalysis.showrooms).flatMap(
+  const preservedEmployees = Object.values(staffAnalysis.showrooms).flatMap(
     (showroom) =>
-      showroom.employees.map((employee) => `${showroom.showroom}|${employee.name}`),
+      [...showroom.employees, ...(showroom.formerEmployees ?? [])].map(
+        (employee) => `${showroom.showroom}|${employee.name}`,
+      ),
   );
   assert.deepEqual(
     [
@@ -169,12 +171,12 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
       "볼보 송파|허재무",
       "볼보 동대문|정승현",
       "볼보 용산|김민지",
-    ].filter((employee) => !restoredEmployees.includes(employee)),
+    ].filter((employee) => !preservedEmployees.includes(employee)),
     [],
   );
-  const restoredResponseCounts = Object.fromEntries(
+  const preservedResponseCounts = Object.fromEntries(
     Object.values(staffAnalysis.showrooms).flatMap((showroom) =>
-      showroom.employees
+      [...showroom.employees, ...(showroom.formerEmployees ?? [])]
         .filter((employee) =>
           ["정병준", "이종인", "조정민", "서재현", "이영빈", "정승현"].includes(
             employee.name,
@@ -189,7 +191,7 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
         ]),
     ),
   );
-  assert.deepEqual(restoredResponseCounts, {
+  assert.deepEqual(preservedResponseCounts, {
     "볼보 의정부|정병준": 19,
     "볼보 분당|이종인": 17,
     "볼보 분당|조정민": 34,
