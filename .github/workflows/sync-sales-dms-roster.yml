@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: sales-dms-roster-sync
@@ -44,13 +45,23 @@ jobs:
           git clean -fd -- public/staff-profiles
           echo "::warning::Public portrait refresh failed; retained the previously verified portrait set."
       - name: Publish verified roster changes
+        id: publish
         run: |
           git config user.name "Data Dashboard Auto Update"
           git config user.email "actions@users.noreply.github.com"
           git add app/data/voc-staff-analysis.json app/data/staff-profile-photos.json public/staff-profiles
           if git diff --cached --quiet; then
             echo "No roster or portrait change."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "Auto update Sales-DMS staff roster"
-          git push origin main
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      # GITHUB_TOKEN pushes do not trigger other push workflows.
+      - name: Deploy updated roster
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main
