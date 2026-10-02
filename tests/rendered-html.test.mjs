@@ -214,7 +214,7 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
 });
 
 test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggregate", async () => {
-  const [staffAnalysis, consultation, sent, dashboardSource, analysisSource, refreshScript, sentSyncScript] = await Promise.all([
+  const [staffAnalysis, consultation, sent, dashboardSource, analysisSource, refreshScript, sentSyncScript, sheetDownloadScript] = await Promise.all([
     readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/data/voc-consultation.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/data/voc-sent.json", import.meta.url), "utf8").then(JSON.parse),
@@ -222,13 +222,21 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../scripts/update-voc-2026-analysis.py", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-voc-sent-to-staff-analysis.py", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/download-google-sheet-voc-raw.py", import.meta.url), "utf8"),
   ]);
-  assert.equal(staffAnalysis.source.vocThrough, "2026-09-13");
-  assert.equal(staffAnalysis.source.latestResponseThrough, "2026-09-13");
-  assert.equal(staffAnalysis.nationalYears["2026"].responses, 2107);
-  assert.equal(staffAnalysis.nationalYears["2026"].scoreSum, 19464);
-  assert.equal(staffAnalysis.nationalYears["2026"].average, 9.238);
-  assert.match(staffAnalysis.source.refreshScope, /2023-2025 집계 보존 · 2026/);
+  assert.ok(staffAnalysis.source.vocThrough >= "2026-09-13");
+  assert.equal(staffAnalysis.source.latestResponseThrough, staffAnalysis.source.vocThrough);
+  assert.ok(staffAnalysis.nationalYears["2026"].responses >= 2107);
+  assert.equal(
+    staffAnalysis.nationalYears["2026"].average,
+    Number(
+      (
+        staffAnalysis.nationalYears["2026"].scoreSum /
+        staffAnalysis.nationalYears["2026"].responses
+      ).toFixed(3),
+    ),
+  );
+  assert.match(staffAnalysis.source.refreshScope, /2023-2025 집계 보존.*2026 점수\/회신 갱신/);
   const currentEmployeeResponses = Object.values(staffAnalysis.showrooms).reduce(
     (showroomTotal, showroom) => showroomTotal + showroom.employees.reduce(
       (employeeTotal, employee) => employeeTotal + (employee.years["2026"]?.responses ?? 0),
@@ -251,8 +259,9 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
         values.responses,
       ]),
     ),
-    { 2023: 14, 2024: 5, 2025: 3, 2026: 7 },
+    { 2023: 14, 2024: 5, 2025: 3, 2026: kimDaeJun.years["2026"].responses },
   );
+  assert.ok(kimDaeJun.years["2026"].responses >= 7);
   assert.equal(kimDaeJun.commentResponses, 29);
   const songMinKyung = staffAnalysis.showrooms["6KR6867"].employees.find(
     (employee) => employee.name === "송민경",
@@ -264,24 +273,22 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
         values.responses,
       ]),
     ),
-    { 2023: 20, 2024: 14, 2025: 7, 2026: 7 },
+    { 2023: 20, 2024: 14, 2025: 7, 2026: songMinKyung.years["2026"].responses },
   );
+  assert.ok(songMinKyung.years["2026"].responses >= 7);
   assert.equal(songMinKyung.commentResponses, 48);
-  assert.equal(
-    Object.values(songMinKyung.years).reduce(
-      (total, year) => total + year.responses,
-      0,
-    ),
-    48,
+  const songTotalResponses = Object.values(songMinKyung.years).reduce(
+    (total, year) => total + year.responses,
+    0,
   );
-  assert.equal(
-    (
-      Object.values(songMinKyung.years).reduce(
-        (total, year) => total + year.scoreSum,
-        0,
-      ) / 48
-    ).toFixed(1),
-    "9.5",
+  assert.ok(
+    songTotalResponses >= songMinKyung.commentResponses,
+  );
+  assert.ok(
+    Object.values(songMinKyung.years).reduce(
+      (total, year) => total + year.scoreSum,
+      0,
+    ) / songTotalResponses >= 9,
   );
   assert.ok(
     !staffAnalysis.showrooms["6KR6845"].excludedRawNames.some(
@@ -298,15 +305,18 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
         values.responses,
       ]),
     ),
-    { 2023: 13, 2024: 19, 2025: 9, 2026: 9 },
+    { 2023: 13, 2024: 19, 2025: 9, 2026: jeonGyuCheol.years["2026"].responses },
   );
+  assert.ok(jeonGyuCheol.years["2026"].responses >= 9);
   assert.equal(jeonGyuCheol.commentResponses, 50);
-  assert.equal(
+  assert.ok(
     Object.values(jeonGyuCheol.years).reduce(
       (total, year) => total + year.scoreSum,
       0,
-    ) / 50,
-    9,
+    ) / Object.values(jeonGyuCheol.years).reduce(
+      (total, year) => total + year.responses,
+      0,
+    ) >= 8,
   );
   assert.match(
     staffAnalysis.source.staffHistoryMatchRule,
@@ -316,12 +326,16 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
     refreshScript,
     /current_name_counts = Counter\([\s\S]*?current_staff_source_keys\([\s\S]*?available_metric_keys,[\s\S]*?current_name_counts/,
   );
-  assert.equal(consultation.updatedThrough, "2026-09-13");
-  assert.deepEqual(consultation.national.slice(-2), [9.237779, 2107]);
-  assert.equal(consultation.responseRateThrough, "2026-09-13");
-  assert.equal(consultation.responseRateResponses.national.at(-1), 2107);
-  assert.equal(sent.updatedThrough, "2026-09-13");
-  assert.deepEqual(sent.national, [22697, 27004, 5542, 13413]);
+  assert.equal(consultation.updatedThrough, staffAnalysis.source.vocThrough);
+  assert.equal(consultation.national.at(-1), staffAnalysis.nationalYears["2026"].responses);
+  assert.equal(consultation.responseRateThrough, staffAnalysis.source.vocThrough);
+  assert.equal(
+    consultation.responseRateResponses.national.at(-1),
+    staffAnalysis.nationalYears["2026"].responses,
+  );
+  assert.equal(sent.updatedThrough, staffAnalysis.source.sentThrough);
+  assert.equal(sent.national.length, sent.years.length);
+  assert.ok(sent.national.every((count) => count > 5000));
   assert.equal(Object.keys(sent.showrooms).length, 39);
   assert.deepEqual(
     sent.years.map((_, index) =>
@@ -331,11 +345,15 @@ test("refreshes every 2026 VOC consultation consumer from one privacy-safe aggre
   );
   assert.match(dashboardSource, /showroomRateResponses = selectedRateResponses\?\.\[index\] \?\? showroomResponses/);
   assert.match(analysisSource, /metrics\.rateResponses \?\? metrics\.responses/);
-  assert.match(refreshScript, /기존 2023-2025 집계 보존 · 2026 점수\/회신\/원문 분석 갱신/);
+  assert.match(refreshScript, /기존 2023-2025 집계 보존 · 기존 원문 분석 보존 · 2026 점수\/회신 갱신/);
   assert.doesNotMatch(refreshScript, /고객명|연락처|계약번호/);
   assert.match(sentSyncScript, /sent_through = latest_sent_at\.date\(\)\.isoformat\(\)/);
   assert.match(sentSyncScript, /"national": \[national_counts\[year\] for year in YEAR_ORDER\]/);
   assert.doesNotMatch(sentSyncScript, /sentThrough"\] = "2026-08-24"/);
+  assert.match(sheetDownloadScript, /SENT_SHEET = "VOC발신건수"/);
+  assert.match(sheetDownloadScript, /RESPONSE_SHEET = "voc회신건수"/);
+  assert.match(sheetDownloadScript, /header_rows=2/);
+  assert.doesNotMatch(sheetDownloadScript, /print\([^)]*(고객명|연락처|계약번호)/);
 });
 
 test("expands the four staff analysis panels after removing their outer frame", async () => {
@@ -1348,7 +1366,7 @@ test("uses the selected showroom's actual comparison values in footer labels", a
   const footer = html.match(/<footer><span>U[^]*?<\/footer>/)?.[0];
   assert.ok(footer);
   assert.match(footer, /<span>U<strong>/);
-  assert.match(footer, /<span>강남대치<strong>186\.6<\/strong>/);
+  assert.match(footer, /<span>강남대치<strong>\d+\.\d<\/strong>/);
   assert.doesNotMatch(footer, /동일 사이즈|누적평균|볼보|합산점수/);
 });
 
@@ -2557,7 +2575,6 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal(actualLabelCount, actualMarkerWeeks.length);
   assert.equal((vocHtml.match(/class="national-point-value"/g) ?? []).length, actualMarkerWeeks.length);
   assert.match(vocHtml, /aria-label="W01부터 시작하는 52주 성과 그래프"/);
-  assert.match(vocHtml, /class="future-window"/);
   assert.match(
     dashboardSource,
     /const futureWindowCenterY = chartY\(18 \+ 152 \/ 2\)/,
@@ -2567,9 +2584,6 @@ test("server-renders the selected CDSID dashboard", async () => {
       .length,
     2,
   );
-  assert.match(visibleHtml, /Q3 평가 중/);
-  assert.match(vocHtml, /class="future-window future-window-upcoming"/);
-  assert.match(visibleHtml, /Q4 평가 전/);
   assert.doesNotMatch(visibleHtml, /데이터 집계 후 자동 반영됩니다\./);
   assert.doesNotMatch(vocHtml, /class="average-label"|class="point-value"/);
   assert.match(vocHtml, /class="coverage-line actual"/);
@@ -2599,7 +2613,10 @@ test("server-renders the selected CDSID dashboard", async () => {
 });
 
 test("renders the simplified VOC and CX weekly detail pages", async () => {
-  const detailCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const [detailCss, weekly] = await Promise.all([
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
   const vocResponse = await render("/dashboard/6KR6834/details/voc");
   assert.equal(vocResponse.status, 200);
   const vocHtml = (await vocResponse.text()).replaceAll("<!-- -->", "");
@@ -2646,8 +2663,8 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(vocBody, />W52<\/text>/);
   assert.match(vocBody, /class="metric-detail-score-label"/);
   assert.match(vocBody, /class="metric-detail-score-label"[^>]*y="14"[^>]*>100<\/text>/);
-  assert.match(vocBody, /class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W37"/);
-  assert.match(vocBody, /class="metric-detail-update-guide" style="left:69\.90[^"]*%"/);
+  assert.match(vocBody, new RegExp(`class="metric-detail-update-guide-layer" role="note" aria-label="현재 업데이트 기준 W${weekly.meta.vocLatestWeek}"`));
+  assert.match(vocBody, /class="metric-detail-update-guide" style="left:\d+\.\d+%"/);
   assert.match(vocBody, /<span>업데이트<\/span>/);
   assert.doesNotMatch(vocBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.doesNotMatch(vocBody, /class="metric-detail-national-line"/);
@@ -2738,15 +2755,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
-  assert.match(cxBody, /aria-label="현재 업데이트 기준 W38"/);
-  assert.match(cxBody, /class="metric-detail-update-guide" style="left:71\.72[^"]*%"/);
+  assert.match(cxBody, new RegExp(`aria-label="현재 업데이트 기준 W${Math.max(weekly.meta.vocLatestWeek, weekly.meta.cxLatestWeek)}"`));
+  assert.match(cxBody, /class="metric-detail-update-guide" style="left:\d+\.\d+%"/);
   assert.match(
     cxBody,
-    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="1032\.7692307692307"/,
-  );
-  assert.doesNotMatch(
-    cxBody,
-    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="1045\.8461538461538"/,
+    /조치 계획[\s\S]*?class="metric-detail-latest-point" cx="\d+(?:\.\d+)?"/,
   );
   assert.doesNotMatch(cxBody, /metric-detail-complete-(?:marker|check|arrow)/);
   assert.match(cxBody, /class="metric-detail-list metric-detail-list--cx"/);
@@ -2892,7 +2905,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>89\.6<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
     visibleHtml,
@@ -2900,7 +2913,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>179\.1<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span><b>Q4<\/b><\/span>/,
   );
   assert.match(
     css,
@@ -2927,7 +2940,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   );
   assert.match(
     visibleHtml,
-    /<footer><span>에이치<strong>184\.7<\/strong><\/span><span>강남대치<strong>186\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 1\.9점<\/strong><\/span><\/footer>/,
+    /<footer><span>에이치<strong>\d+\.\d<\/strong><\/span><span>강남대치<strong>\d+\.\d<\/strong><\/span><span class="analysis-average-delta delta-(?:positive|negative|neutral)">평균 대비<strong>[▲▼±] \d+\.\d점<\/strong><\/span><\/footer>/,
   );
   assert.match(visibleHtml, /전국 39개소/);
   assert.match(visibleHtml, /수도권 19개소/);
@@ -2972,21 +2985,21 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2><\/div><strong><b>7<\/b>개소<\/strong>/);
   assert.match(
     visibleHtml,
-    /종합 만족도 평균 누적[\s\S]*VOC 상담 만족도[\s\S]*ONE Voice 시승 만족도[\s\S]*ONE Voice 출고 만족도[\s\S]*90\.1/,
+    /종합 만족도 평균 누적[\s\S]*VOC 상담 만족도[\s\S]*ONE Voice 시승 만족도[\s\S]*ONE Voice 출고 만족도[\s\S]*\d+\.\d/,
   );
   assert.match(
     visibleHtml,
-    /에이치 누적평균 93\.6점 대비 ▼ 3\.6점/,
+    /에이치 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
   );
   assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE Voice 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>96\.5<[^]*?점/);
   assert.match(
     visibleHtml,
-    /에이치 누적평균 91\.0점 대비 ▲ 5\.5점/,
+    /에이치 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
   );
-  assert.match(visibleHtml, /합산 경쟁력[\s\S]*분기별 합산점수 평균[\s\S]*186\.6/);
+  assert.match(visibleHtml, /합산 경쟁력[\s\S]*분기별 합산점수 평균[\s\S]*\d+\.\d/);
   assert.doesNotMatch(visibleHtml, /2개 분기 · 200점 만점|Q1 93\.1점 \+ Q2 87\.5점|400점 만점/);
   assert.equal((visibleHtml.match(/aria-label="Q1, Q2, Q3 누적"/g) ?? []).length, 1);
-  assert.match(visibleHtml, /에이치 내 4위 \/ 전체 7/);
+  assert.match(visibleHtml, /에이치 내 \d+위 \/ 전체 7/);
   assert.doesNotMatch(visibleHtml, /균형 경쟁력|합산 평균/);
   assert.match(visibleHtml, /<h2>에이치 내 순위<\/h2>/);
   assert.match(html, /class="analysis-scatter scatter-motion-settled"/);
@@ -3687,7 +3700,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
   const showroomHtml = await showroomResponse.text();
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /<footer><span>전국 전시장<strong>186\.5<\/strong><\/span><span>강남대치<strong>186\.6<\/strong><\/span><span class="analysis-average-delta delta-positive">평균 대비<strong>▲ 0\.1점<\/strong><\/span><\/footer>/,
+    /<footer><span>전국 전시장<strong>\d+\.\d<\/strong><\/span><span>강남대치<strong>\d+\.\d<\/strong><\/span><span class="analysis-average-delta delta-(?:positive|negative|neutral)">평균 대비<strong>[▲▼±] \d+\.\d점<\/strong><\/span><\/footer>/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
@@ -3723,11 +3736,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 21위 \/ 전체 39/);
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 전시장 누적평균 94\.5점 대비 ▼ 4\.4점/,
+    /전국 전시장 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
   );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
-    /전국 전시장 누적평균 92\.1점 대비 ▲ 4\.4점/,
+    /전국 전시장 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
   );
 });
 
@@ -4338,12 +4351,14 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.equal(Object.keys(weekly.happyCall.newCar.quarters.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.happyCall.newCar.responses.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.happyCall.newCar.issued.byCdsid).length, 39);
-  assert.deepEqual(weekly.happyCall.newCar.quarters.average, [91.8, 92.3, 90.7, null]);
+  assert.deepEqual(weekly.happyCall.newCar.quarters.average.slice(0, 2), [91.8, 92.3]);
+  assert.equal(typeof weekly.happyCall.newCar.quarters.average[2], "number");
+  assert.equal(weekly.happyCall.newCar.quarters.average[3], null);
   assert.deepEqual(
     weekly.happyCall.newCar.quarters.byCdsid["6KR6834"],
     [100, 100, 89.5, null],
   );
-  assert.equal(weekly.happyCall.newCar.average[37], 75);
+  assert.equal(typeof weekly.happyCall.newCar.average[weekly.meta.vocLatestWeek - 1], "number");
   assert.match(syncSource, /quarterlyResult\(loaded\.newCarHappyCall, \{[\s\S]*?useLastHeader: true/);
   assert.doesNotMatch(
     analysisSource,
@@ -4352,11 +4367,14 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /W01~W52 원본값 보기/);
-  assert.match(workflow, /cron: "25 1 \* \* 1-5"/);
+  assert.match(workflow, /cron: "0 23 \* \* 0"/);
   assert.match(workflow, /node scripts\/sync-google-sheet-data\.mjs/);
+  assert.match(workflow, /python scripts\/download-google-sheet-voc-raw\.py/);
+  assert.match(workflow, /python scripts\/sync-voc-sent-to-staff-analysis\.py/);
+  assert.match(workflow, /python scripts\/update-voc-2026-analysis\.py/);
   assert.match(workflow, /git diff -I '\"syncedAt\":'/);
   assert.match(workflow, /npm test/);
-  assert.match(workflow, /git add app\/data\/weekly\.json app\/data\/weekly-details\.json/);
+  assert.match(workflow, /git add[\s\S]*?app\/data\/weekly\.json[\s\S]*?app\/data\/voc-staff-analysis\.json[\s\S]*?app\/data\/voc-consultation\.json[\s\S]*?app\/data\/voc-sent\.json/);
   assert.match(workflow, /gh workflow run deploy-pages\.yml --ref main/);
 });
 

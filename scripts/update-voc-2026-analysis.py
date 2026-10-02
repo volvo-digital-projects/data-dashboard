@@ -14,13 +14,9 @@ import openpyxl
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = runpy.run_path(str(Path(__file__).with_name("generate-voc-staff-analysis.py")))
 YEARS = tuple(GENERATOR["YEARS"])
-STRENGTH_PATTERNS = GENERATOR["STRENGTH_PATTERNS"]
-IMPROVEMENT_PATTERNS = GENERATOR["IMPROVEMENT_PATTERNS"]
 header_map = GENERATOR["header_map"]
-keyword_summary = GENERATOR["keyword_summary"]
 load_voc = GENERATOR["load_voc"]
 normalise_showroom_name = GENERATOR["normalise_showroom_name"]
-merged_staff_comments = GENERATOR["merged_staff_comments"]
 merged_staff_metrics = GENERATOR["merged_staff_metrics"]
 staff_source_keys = GENERATOR["staff_source_keys"]
 current_staff_source_keys = GENERATOR["current_staff_source_keys"]
@@ -118,7 +114,7 @@ def refresh_tenure_cohorts(payload: dict[str, Any]) -> None:
 
 def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
     payload = json.loads(output.read_text(encoding="utf-8"))
-    national, staff_metrics, staff_comments = load_voc(path)
+    national, staff_metrics, _ = load_voc(path)
     sent_through = payload["source"].get("sentThrough")
     rate_cutoff = date.fromisoformat(sent_through) if sent_through else None
     through, latest_by_employee, rate_responses = load_2026_controls(path, rate_cutoff)
@@ -136,7 +132,6 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
         "averageResponsesPerEmployee": round(national_responses / len(responding_2026), 1) if responding_2026 else None,
     }
 
-    refreshed_employees = 0
     matched_responses = 0
     current_name_counts = Counter(
         str(employee["name"]).strip()
@@ -144,17 +139,6 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
         for employee in showroom["employees"]
     )
     available_metric_keys = tuple(staff_metrics)
-    claimed_source_keys = {
-        source_key
-        for showroom in payload["showrooms"].values()
-        for employee in showroom["employees"]
-        for source_key in current_staff_source_keys(
-            showroom["showroom"],
-            employee["name"],
-            available_metric_keys,
-            current_name_counts,
-        )
-    }
     for showroom in payload["showrooms"].values():
         showroom_name = normalise_showroom_name(showroom["showroom"])
         for employee in showroom["employees"]:
@@ -164,32 +148,28 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
                 available_metric_keys,
                 current_name_counts,
             )
-            refreshed_years = merged_staff_metrics(staff_metrics, source_keys)
-            for year in YEARS:
-                refreshed_year = dict(refreshed_years[year])
-                previous_year = employee["years"].get(year, {})
-                if not refreshed_year.get("responses"):
-                    if "sent" in previous_year:
-                        employee["years"][year] = {
-                            "responses": 0,
-                            "scoreSum": 0,
-                            "sent": previous_year["sent"],
-                        }
-                    else:
-                        employee["years"].pop(year, None)
-                    continue
+            refreshed_year = dict(
+                merged_staff_metrics(staff_metrics, source_keys)["2026"]
+            )
+            previous_year = employee["years"].get("2026", {})
+            if not refreshed_year.get("responses"):
+                if "sent" in previous_year:
+                    employee["years"]["2026"] = {
+                        "responses": 0,
+                        "scoreSum": 0,
+                        "sent": previous_year["sent"],
+                    }
+                else:
+                    employee["years"].pop("2026", None)
+            else:
                 if "sent" in previous_year:
                     refreshed_year["sent"] = previous_year["sent"]
-                if year == "2026" and "sent" in previous_year:
                     refreshed_year["rateResponses"] = sum(
                         rate_responses.get(source_key, 0)
                         for source_key in source_keys
                     )
-                elif "rateResponses" in previous_year:
-                    refreshed_year["rateResponses"] = previous_year["rateResponses"]
-                employee["years"][year] = refreshed_year
-                if year == "2026":
-                    matched_responses += int(refreshed_year["responses"])
+                employee["years"]["2026"] = refreshed_year
+                matched_responses += int(refreshed_year["responses"])
 
             latest = max(
                 (
@@ -204,55 +184,13 @@ def refresh_staff_analysis(path: Path, output: Path) -> dict[str, Any]:
             elif employee.get("latestResponseDate", "").startswith("2026-"):
                 employee.pop("latestResponseDate", None)
 
-            comments = merged_staff_comments(staff_comments, source_keys)
-            employee["commentResponses"] = len(comments)
-            employee["strengthKeywords"] = keyword_summary(
-                comments,
-                STRENGTH_PATTERNS,
-                len(STRENGTH_PATTERNS),
-                exclude_negative_context=True,
-            )
-            employee["improvementKeywords"] = keyword_summary(
-                comments,
-                IMPROVEMENT_PATTERNS,
-                len(IMPROVEMENT_PATTERNS),
-            )
-            refreshed_employees += 1
-
-        target_names = {str(employee["name"]).strip() for employee in showroom["employees"]}
-        excluded_counts: dict[str, int] = defaultdict(int)
-        for (raw_showroom, name), by_year in staff_metrics.items():
-            source_key = (normalise_showroom_name(raw_showroom), name)
-            if (
-                source_key[0] != showroom_name
-                or name in target_names
-                or source_key in claimed_source_keys
-            ):
-                continue
-            excluded_counts[name] += sum(int(values["responses"]) for values in by_year.values())
-        showroom["excludedRawNames"] = [
-            {
-                "name": name,
-                "responses": responses,
-                "reason": "현재 DMS 재직 명단 미확인",
-            }
-            for name, responses in sorted(
-                excluded_counts.items(), key=lambda item: (-item[1], item[0])
-            )
-        ]
-
     refresh_tenure_cohorts(payload)
     source = payload["source"]
     source["workbook"] = path.name
     source["vocThrough"] = through
     source["latestResponseThrough"] = through
-    source["commentAnalysis"] = (
-        "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · "
-        f"{len(STRENGTH_PATTERNS)}개 강점/{len(IMPROVEMENT_PATTERNS)}개 보완 주제"
-    )
-    source["commentAnalysisEmployees"] = refreshed_employees
     source["refreshScope"] = (
-        "기존 2023-2025 집계 보존 · 2026 점수/회신/원문 분석 갱신 · "
+        "기존 2023-2025 집계 보존 · 기존 원문 분석 보존 · 2026 점수/회신 갱신 · "
         "이름이 유일한 재직 직원의 전시장 이동 이력 자동 통합"
     )
     source["staffHistoryMatchRule"] = (
