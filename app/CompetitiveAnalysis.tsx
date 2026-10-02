@@ -2719,9 +2719,9 @@ export default function CompetitiveAnalysis({
   const selectedStaffGaugeScoreX = growthGaugeScoreX(selectedStaffGaugeScore);
   const selectedShowroomGaugeScoreX = growthGaugeScoreX(selectedShowroomStaffAverage);
   const selectedTenureGaugeScoreX = growthGaugeScoreX(selectedTenureGaugeScore);
+  type GrowthGaugeMarkerKey = "staff" | "showroom" | "tenure";
   const selectedGrowthGaugeMarkerLayout = (() => {
-    type MarkerKey = "staff" | "showroom" | "tenure";
-    const markers: Array<{ key: MarkerKey; anchorX: number; displayX: number }> = [];
+    const markers: Array<{ key: GrowthGaugeMarkerKey; anchorX: number; displayX: number }> = [];
     if (selectedStaffGaugeScoreX !== null) markers.push({ key: "staff", anchorX: selectedStaffGaugeScoreX, displayX: selectedStaffGaugeScoreX });
     if (selectedShowroomGaugeScoreX !== null) markers.push({ key: "showroom", anchorX: selectedShowroomGaugeScoreX, displayX: selectedShowroomGaugeScoreX });
     if (selectedTenureGaugeScoreX !== null) markers.push({ key: "tenure", anchorX: selectedTenureGaugeScoreX, displayX: selectedTenureGaugeScoreX });
@@ -2756,8 +2756,13 @@ export default function CompetitiveAnalysis({
 
     return Object.fromEntries(
       markers.map((marker) => [marker.key, marker]),
-    ) as Partial<Record<MarkerKey, { key: MarkerKey; anchorX: number; displayX: number }>>;
+    ) as Partial<Record<GrowthGaugeMarkerKey, { key: GrowthGaugeMarkerKey; anchorX: number; displayX: number }>>;
   })();
+  const selectedGrowthGaugeLegendOrder = (["staff", "showroom", "tenure"] as const)
+    .filter((key) => selectedGrowthGaugeMarkerLayout[key])
+    .sort((left, right) => (
+      selectedGrowthGaugeMarkerLayout[left]!.displayX - selectedGrowthGaugeMarkerLayout[right]!.displayX
+    ));
   const formatGrowthGaugeDelta = (comparisonScore: number | null) => {
     if (selectedStaffGaugeScore === null || comparisonScore === null) return "자료 없음";
     const displayedStaffScore = Number(selectedStaffGaugeScore.toFixed(1));
@@ -3742,6 +3747,9 @@ export default function CompetitiveAnalysis({
                           <clipPath id="growth-gauge-selected-staff-photo">
                             <circle cx="0" cy="0" r="7.5" />
                           </clipPath>
+                          <clipPath id="growth-gauge-selected-staff-legend-photo">
+                            <circle cx="0" cy="0" r="4.25" />
+                          </clipPath>
                         </defs>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M75 224 A135 135 0 0 1 142.5 107.1 L169 153 A82 82 0 0 0 128 224 Z" />
@@ -3761,18 +3769,45 @@ export default function CompetitiveAnalysis({
                         )}
                         <g className="growth-gauge-benchmark" aria-hidden="true">
                           <g className="growth-gauge-benchmark-legend">
-                            <g className="staff" transform="translate(45 13)">
-                              <circle cx="0" cy="0" r="4" />
-                              <text x="9" y="3.5"><tspan>{selectedStaffEmployee?.name ?? "개인"}</tspan><tspan className="score"> {selectedStaffGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
-                            </g>
-                            <g className="showroom" transform="translate(173 13)">
-                              <rect x="-3.5" y="-3.5" width="7" height="7" rx="1" transform="rotate(45 0 0)" />
-                              <text x="9" y="3.5"><tspan>{displayShowroomNameWithoutBrand(selected.showroom)} 평균</tspan><tspan className="score"> {selectedShowroomStaffAverage?.toFixed(1) ?? "―"}</tspan></text>
-                            </g>
-                            <g className="tenure" transform="translate(306 13)">
-                              <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.5" />
-                              <text x="9" y="3.5"><tspan>동일연차 평균</tspan><tspan className="score"> {selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan></text>
-                            </g>
+                            {selectedGrowthGaugeLegendOrder.map((key, index) => {
+                              const x = [45, 173, 306][index];
+                              return (
+                                <g className={key} transform={`translate(${x} 13)`} key={`growth-gauge-legend-${key}`}>
+                                  {key === "staff" ? (
+                                    <g className="growth-gauge-benchmark-legend-photo">
+                                      <circle className="photo-backdrop" cx="0" cy="0" r="4.6" />
+                                      <image
+                                        className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
+                                        href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
+                                        x="-5.7"
+                                        y="-4.25"
+                                        width="11.4"
+                                        height="11.4"
+                                        preserveAspectRatio="xMidYMin slice"
+                                        clipPath="url(#growth-gauge-selected-staff-legend-photo)"
+                                      />
+                                      <circle className="photo-ring" cx="0" cy="0" r="4.25" />
+                                    </g>
+                                  ) : key === "showroom" ? (
+                                    <rect x="-3.5" y="-3.5" width="7" height="7" rx="1" transform="rotate(45 0 0)" />
+                                  ) : (
+                                    <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.5" />
+                                  )}
+                                  <text x="9" y="3.5">
+                                    <tspan>{key === "staff"
+                                      ? selectedStaffEmployee?.name ?? "개인"
+                                      : key === "showroom"
+                                        ? `${displayShowroomNameWithoutBrand(selected.showroom)} 평균`
+                                        : "동일연차 평균"}</tspan>
+                                    <tspan className="score"> {key === "staff"
+                                      ? selectedStaffGaugeScore?.toFixed(1) ?? "―"
+                                      : key === "showroom"
+                                        ? selectedShowroomStaffAverage?.toFixed(1) ?? "―"
+                                        : selectedTenureGaugeScore?.toFixed(1) ?? "―"}</tspan>
+                                  </text>
+                                </g>
+                              );
+                            })}
                           </g>
                           <line
                             className="growth-gauge-benchmark-axis"
