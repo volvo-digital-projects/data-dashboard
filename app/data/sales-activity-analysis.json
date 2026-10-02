@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-10-02",
-    "salesSyncedAt": "2026-10-02T09:10:00+09:00",
+    "salesSyncedAt": "2026-10-02T10:52:20+09:00",
     "salesPeriod": "2026-01-01~2026-10-02",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -2455,72 +2455,32 @@
             "60": 7,
             "90": 3
           }
-        },
-        {
-          "name": "정승현",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 23,
-          "deliveredCustomers": 22,
-          "monthlyDeliveredSales": [
-            3,
-            3,
-            5,
-            4,
-            3,
-            5,
-            0,
-            0,
-            0,
-            0
-          ],
-          "segmentSales": {
-            "30": 3,
-            "40": 3,
-            "60": 4,
-            "90": 13
-          }
         }
       ],
       "summary": {
-        "staffCount": 13,
+        "staffCount": 12,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 288,
+        "deliveredSales": 265,
         "monthlyDeliveredSales": [
-          32,
-          33,
-          33,
-          28,
           29,
-          49,
+          30,
+          28,
+          24,
+          26,
+          44,
           29,
           13,
           42,
           0
         ],
         "segmentSales": {
-          "30": 65,
-          "40": 33,
-          "60": 103,
-          "90": 87
+          "30": 62,
+          "40": 30,
+          "60": 99,
+          "90": 74
         }
       }
     },
@@ -6433,6 +6393,46 @@
           }
         },
         {
+          "name": "안희철",
+          "activityStatus": "available",
+          "lastActivityDate": "2026-09-06",
+          "activityEvents": {
+            "consultation": 18,
+            "testDrive": 2,
+            "contract": 3
+          },
+          "customers": {
+            "consultation": 14,
+            "testDrive": 2,
+            "contract": 3
+          },
+          "transitions": {
+            "consultationToTestDrive": 2,
+            "testDriveToContract": 0,
+            "contractToDelivered": 0
+          },
+          "deliveredSales": 41,
+          "deliveredCustomers": 24,
+          "monthlyDeliveredSales": [
+            3,
+            1,
+            1,
+            4,
+            4,
+            8,
+            10,
+            3,
+            7,
+            0
+          ],
+          "segmentSales": {
+            "30": 5,
+            "40": 8,
+            "60": 16,
+            "90": 12
+          }
+        },
+        {
           "name": "옥수찬",
           "activityStatus": "available",
           "lastActivityDate": "2026-08-31",
@@ -6510,46 +6510,6 @@
             "40": 0,
             "60": 1,
             "90": 1
-          }
-        },
-        {
-          "name": "이병현",
-          "activityStatus": "available",
-          "lastActivityDate": "2026-09-04",
-          "activityEvents": {
-            "consultation": 3,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 3,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 34,
-          "deliveredCustomers": 26,
-          "monthlyDeliveredSales": [
-            4,
-            3,
-            3,
-            1,
-            5,
-            3,
-            3,
-            10,
-            2,
-            0
-          ],
-          "segmentSales": {
-            "30": 8,
-            "40": 8,
-            "60": 12,
-            "90": 6
           }
         },
         {
@@ -6713,43 +6673,43 @@
           }
         },
         {
-          "name": "안희철",
+          "name": "이병현",
           "activityStatus": "available",
-          "lastActivityDate": "2026-09-06",
+          "lastActivityDate": "2026-09-04",
           "activityEvents": {
-            "consultation": 18,
-            "testDrive": 2,
-            "contract": 3
+            "consultation": 3,
+            "testDrive": 0,
+            "contract": 0
           },
           "customers": {
-            "consultation": 14,
-            "testDrive": 2,
-            "contract": 3
+            "consultation": 3,
+            "testDrive": 0,
+            "contract": 0
           },
           "transitions": {
-            "consultationToTestDrive": 2,
+            "consultationToTestDrive": 0,
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 41,
-          "deliveredCustomers": 24,
+          "deliveredSales": 34,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
+            4,
+            3,
             3,
             1,
-            1,
-            4,
-            4,
-            8,
+            5,
+            3,
+            3,
             10,
-            3,
-            7,
+            2,
             0
           ],
           "segmentSales": {
-            "30": 5,
+            "30": 8,
             "40": 8,
-            "60": 16,
-            "90": 12
+            "60": 12,
+            "90": 6
           }
         },
         {
@@ -14233,86 +14193,6 @@
           }
         },
         {
-          "name": "이성진",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
-          "monthlyDeliveredSales": [
-            2,
-            4,
-            6,
-            6,
-            3,
-            5,
-            1,
-            1,
-            2,
-            0
-          ],
-          "segmentSales": {
-            "30": 7,
-            "40": 4,
-            "60": 13,
-            "90": 6
-          }
-        },
-        {
-          "name": "한필성",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 5,
-          "deliveredCustomers": 5,
-          "monthlyDeliveredSales": [
-            0,
-            0,
-            0,
-            0,
-            1,
-            1,
-            1,
-            1,
-            1,
-            0
-          ],
-          "segmentSales": {
-            "30": 1,
-            "40": 0,
-            "60": 3,
-            "90": 1
-          }
-        },
-        {
           "name": "황준원",
           "activityStatus": "missing",
           "lastActivityDate": "2023-02-01",
@@ -14394,29 +14274,29 @@
         }
       ],
       "summary": {
-        "staffCount": 7,
+        "staffCount": 5,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 213,
+        "deliveredSales": 178,
         "monthlyDeliveredSales": [
-          18,
-          25,
-          27,
-          17,
+          16,
           21,
-          47,
-          15,
-          10,
-          33,
+          21,
+          11,
+          17,
+          41,
+          13,
+          8,
+          30,
           0
         ],
         "segmentSales": {
-          "30": 64,
-          "40": 18,
-          "60": 82,
-          "90": 49
+          "30": 56,
+          "40": 14,
+          "60": 66,
+          "90": 42
         }
       }
     },
@@ -14705,6 +14585,46 @@
           }
         },
         {
+          "name": "이지수",
+          "activityStatus": "missing",
+          "lastActivityDate": null,
+          "activityEvents": {
+            "consultation": 0,
+            "testDrive": 0,
+            "contract": 0
+          },
+          "customers": {
+            "consultation": 0,
+            "testDrive": 0,
+            "contract": 0
+          },
+          "transitions": {
+            "consultationToTestDrive": 0,
+            "testDriveToContract": 0,
+            "contractToDelivered": 0
+          },
+          "deliveredSales": 0,
+          "deliveredCustomers": 0,
+          "monthlyDeliveredSales": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
+        },
+        {
           "name": "이진섭",
           "activityStatus": "missing",
           "lastActivityDate": null,
@@ -14986,7 +14906,7 @@
         }
       ],
       "summary": {
-        "staffCount": 14,
+        "staffCount": 15,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
@@ -16233,46 +16153,6 @@
           }
         },
         {
-          "name": "이승규",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
-          "monthlyDeliveredSales": [
-            2,
-            1,
-            1,
-            2,
-            2,
-            1,
-            1,
-            1,
-            1,
-            0
-          ],
-          "segmentSales": {
-            "30": 2,
-            "40": 0,
-            "60": 3,
-            "90": 7
-          }
-        },
-        {
           "name": "이영재",
           "activityStatus": "missing",
           "lastActivityDate": null,
@@ -16514,29 +16394,29 @@
         }
       ],
       "summary": {
-        "staffCount": 10,
+        "staffCount": 9,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 178,
+        "deliveredSales": 166,
         "monthlyDeliveredSales": [
-          19,
-          19,
-          23,
+          17,
           18,
-          23,
+          22,
+          16,
+          21,
+          24,
+          14,
+          9,
           25,
-          15,
-          10,
-          26,
           0
         ],
         "segmentSales": {
-          "30": 38,
+          "30": 36,
           "40": 17,
-          "60": 62,
-          "90": 61
+          "60": 59,
+          "90": 54
         }
       }
     }
