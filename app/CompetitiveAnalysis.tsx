@@ -3747,9 +3747,6 @@ export default function CompetitiveAnalysis({
                           <clipPath id="growth-gauge-selected-staff-photo">
                             <circle cx="0" cy="0" r="7.5" />
                           </clipPath>
-                          <clipPath id="growth-gauge-selected-staff-legend-photo">
-                            <circle cx="0" cy="0" r="4.25" />
-                          </clipPath>
                         </defs>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M75 224 A135 135 0 0 1 142.5 107.1 L169 153 A82 82 0 0 0 128 224 Z" />
@@ -3774,20 +3771,7 @@ export default function CompetitiveAnalysis({
                               return (
                                 <g className={key} transform={`translate(${x} 13)`} key={`growth-gauge-legend-${key}`}>
                                   {key === "staff" ? (
-                                    <g className="growth-gauge-benchmark-legend-photo">
-                                      <circle className="photo-backdrop" cx="0" cy="0" r="4.6" />
-                                      <image
-                                        className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
-                                        href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
-                                        x="-5.7"
-                                        y="-4.25"
-                                        width="11.4"
-                                        height="11.4"
-                                        preserveAspectRatio="xMidYMin slice"
-                                        clipPath="url(#growth-gauge-selected-staff-legend-photo)"
-                                      />
-                                      <circle className="photo-ring" cx="0" cy="0" r="4.25" />
-                                    </g>
+                                    <circle cx="0" cy="0" r="4" />
                                   ) : key === "showroom" ? (
                                     <rect x="-3.5" y="-3.5" width="7" height="7" rx="1" transform="rotate(45 0 0)" />
                                   ) : (

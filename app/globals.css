@@ -1866,18 +1866,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-gauge-benchmark-marker.staff { color: #16708f; }
 .growth-gauge-benchmark-legend .staff circle,
 .growth-gauge-benchmark-marker.staff { fill: #ffffff; stroke: #16708f; }
-.growth-gauge-benchmark-legend-photo .photo-backdrop {
-  fill: #fff;
-  stroke: #a9c4ce;
-  stroke-width: 1;
-}
-.growth-gauge-benchmark-legend-photo .photo-ring {
-  fill: none;
-  stroke: #16708f;
-  stroke-width: 1.2;
-}
-.growth-gauge-benchmark-legend-photo image { pointer-events: none; }
-.growth-gauge-benchmark-legend-photo .photo-fallback-silhouette { opacity: 0.88; }
 .growth-gauge-benchmark-legend .showroom,
 .growth-gauge-benchmark-marker.showroom { color: #d93242; }
 .growth-gauge-benchmark-legend .tenure,

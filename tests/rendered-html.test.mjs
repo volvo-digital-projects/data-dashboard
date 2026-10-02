@@ -909,7 +909,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-photo img\s*\{[^}]*display: block;[^}]*width: 100%;[^}]*height: auto;[^}]*object-fit: cover;/);
   assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?transform: scale\(1\.04\);/);
   assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center top;[^}]*transform: scale\(1\.35\);[^}]*transform-origin: center top;[^}]*image-rendering: auto;/);
-  assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 6);
+  assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 5);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
@@ -1175,11 +1175,10 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /growth-gauge-comparison-arc|growth-gauge-score-callouts|leaderPath/);
   assert.match(source, /const selectedGrowthGaugeLegendOrder = \(\["staff", "showroom", "tenure"\] as const\)[\s\S]*?selectedGrowthGaugeMarkerLayout\[left\]!\.displayX - selectedGrowthGaugeMarkerLayout\[right\]!\.displayX/);
   assert.match(navigation, /className="growth-gauge-benchmark-legend"[\s\S]*?selectedGrowthGaugeLegendOrder\.map\(\(key, index\)[\s\S]*?const x = \[45, 173, 306\]\[index\]/);
-  assert.match(navigation, /className="growth-gauge-benchmark-legend-photo"[\s\S]*?selectedStaffProfile\?\.image \?\? selectedStaffFallbackProfileImage[\s\S]*?growth-gauge-selected-staff-legend-photo/);
+  assert.match(navigation, /key === "staff" \? \([\s\S]*?<circle cx="0" cy="0" r="4" \/>/);
   assert.match(navigation, /key === "showroom"[\s\S]*?rotate\(45 0 0\)[\s\S]*?key === "staff"[\s\S]*?selectedStaffGaugeScore\?\.toFixed\(1\)/);
   assert.match(css, /\.growth-gauge-benchmark-legend text\s*\{[^}]*text-anchor:\s*start;[^}]*dominant-baseline:\s*auto;/);
   assert.match(css, /\.growth-gauge-benchmark-legend \.staff circle,[\s\S]*?\.growth-gauge-benchmark-marker\.staff\s*\{[^}]*fill:\s*#ffffff;[^}]*stroke:\s*#16708f;/);
-  assert.match(css, /\.growth-gauge-benchmark-legend-photo \.photo-ring\s*\{[^}]*fill:\s*none;[^}]*stroke:\s*#16708f;/);
   assert.match(source, /const selectedGrowthGaugeMarkerLayout = \(\(\) => \{[\s\S]*?const minimumMarkerGap = 22;[\s\S]*?clusterCenter - clusterWidth \/ 2/);
   assert.match(navigation, /className="growth-gauge-benchmark-position staff"[\s\S]*?selectedGrowthGaugeMarkerLayout\.staff\.displayX[\s\S]*?selectedGrowthGaugeMarkerLayout\.staff\.anchorX[\s\S]*?className="growth-gauge-benchmark-staff-photo growth-scatter-selected-photo"[\s\S]*?translate\(\$\{selectedGrowthGaugeMarkerLayout\.staff\.displayX\} 29\)[\s\S]*?clipPath="url\(#growth-gauge-selected-staff-photo\)"/);
   assert.match(navigation, /className="growth-gauge-benchmark-position showroom"[\s\S]*?selectedGrowthGaugeMarkerLayout\.showroom\.displayX[\s\S]*?selectedGrowthGaugeMarkerLayout\.showroom\.anchorX/);
