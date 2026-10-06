@@ -19416,6 +19416,17 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
 /* Keep the scroll rail at the viewport edge; both cards share one content rail. */
 /* Animate only the interior strokes, preserving the icon boxes and pin rotation. */
 @media (prefers-reduced-motion: no-preference) {
+  .dashboard .dashboard-identity-header:not(.metric-detail-page-header) .identity-detail-rail > dl > .identity-analysis-entry,
+  .dashboard .dashboard-identity-header:not(.metric-detail-page-header) .identity-detail-rail > .identity-profile-menu,
+  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item {
+    animation: header-context-cell-enter 420ms cubic-bezier(0.2, 0.75, 0.24, 1) both;
+  }
+  .dashboard .dashboard-identity-header .identity-detail-rail > dl > .identity-analysis-entry:nth-child(2),
+  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item:nth-child(2) { animation-delay: 45ms; }
+  .dashboard .dashboard-identity-header .identity-detail-rail > dl > .identity-analysis-entry:nth-child(3),
+  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item:nth-child(3) { animation-delay: 90ms; }
+  .dashboard .dashboard-identity-header .identity-detail-rail > .identity-profile-menu,
+  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item:nth-child(4) { animation-delay: 135ms; }
   .dashboard-identity-header .identity-icon::before,
   .dashboard-identity-header .identity-icon::after,
   .dashboard-identity-header .identity-profile-icon::before,
@@ -19431,6 +19442,10 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   .dashboard-identity-header .identity-icon--size::after { animation: identity-corners-out 4s ease-in-out infinite; }
   .dashboard-identity-header .identity-profile-icon::before,
   .dashboard-identity-header .identity-profile-icon::after { animation: identity-person-sway 4.2s ease-in-out infinite; }
+}
+@keyframes header-context-cell-enter {
+  from { opacity: 0.72; transform: translateY(4px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes identity-note-sway { 0%,20%,80%,100%{rotate:0deg;translate:0 0} 40%{rotate:-6deg;translate:-.5px -1px} 60%{rotate:6deg;translate:.5px -1px} }
 @keyframes identity-pin-bounce { 0%,65%,100%{translate:0 0} 30%{translate:0 -2.5px} 48%{translate:0 .5px} }

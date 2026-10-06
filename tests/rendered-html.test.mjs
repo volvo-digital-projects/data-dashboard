@@ -2896,6 +2896,14 @@ test("uses Volvo Centum for English and numeric values in both 2x2 header grids"
     css,
     /\.dashboard-identity-header \.header-context-volvo-value\s*\{[^}]*font-family:\s*var\(--font-volvo\), var\(--font-korean\), sans-serif;/,
   );
+  assert.match(
+    css,
+    /@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\.dashboard \.dashboard-identity-header:not\(\.metric-detail-page-header\)[\s\S]*?\.competitive-analysis-page \.dashboard-identity-header \.analysis-context > \.analysis-context-item\s*\{[^}]*animation:\s*header-context-cell-enter 420ms cubic-bezier\(0\.2, 0\.75, 0\.24, 1\) both;/,
+  );
+  assert.match(
+    css,
+    /@keyframes header-context-cell-enter\s*\{[\s\S]*?opacity:\s*0\.72;[^}]*translateY\(4px\) scale\(0\.985\);[\s\S]*?opacity:\s*1;[^}]*translateY\(0\) scale\(1\);/,
+  );
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
