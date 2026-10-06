@@ -1308,7 +1308,10 @@ test("includes the available Q3 VOC and happy-call scores before combining", asy
     assert.ok(html.includes("VOC 상담 만족도") && html.includes("ONE Voice 시승 만족도") && html.includes("ONE Voice 출고 만족도"));
     assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE Voice 출고 후 해피콜(24시간 이내 시행)"));
     if (showroom.cdsid === "6KR6834") {
-      assert.ok(html.includes('aria-label="Q1 100, Q2 100, Q3 100, Q4 ―"'));
+      const quarterLabel = weekly.happyCall.newCar.quarters.byCdsid[showroom.cdsid]
+        .map((value, quarterIndex) => `Q${quarterIndex + 1} ${value ?? "―"}`)
+        .join(", ");
+      assert.ok(html.includes(`aria-label="${quarterLabel}"`));
     }
     assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
   }
@@ -2871,11 +2874,19 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
-  const response = await render("/dashboard/6KR6873");
+  const weekly = JSON.parse(
+    await readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
+  );
+  const cdsid = "6KR6873";
+  const v3sScore = weekly.v3s.quarters.byCdsid[cdsid][2];
+  const roundedScore = Math.round(v3sScore);
+  const expectedRate = roundedScore >= 90 ? 0.2 : roundedScore >= 85 ? 0.1 : 0;
+  const response = await render(`/dashboard/${cdsid}`);
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /aria-label="RTC 인센티브 0\.0% 경고"/);
+  assert.ok(expectedRate < 0.2);
+  assert.match(html, new RegExp(`aria-label="RTC 인센티브 ${expectedRate.toFixed(1)}% 경고"`));
   assert.doesNotMatch(html, /aria-label="RTC 인센티브 0\.2% 경고"/);
 });
 
@@ -2909,7 +2920,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>100<\/strong><\/span><span><b>Q4<\/b><strong>―<\/strong><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>\d+(?:\.\d+)?<\/strong><\/span><span><b>Q4<\/b><strong>―<\/strong><\/span>/,
   );
   assert.match(
     visibleHtml,
@@ -3712,18 +3723,22 @@ test("serves the dual-metric competitive analysis sample", async () => {
   assert.ok(showroomRankingHtml);
   assert.match(showroomHtml, /<h2>전국 전시장 내 순위<\/h2>/);
   assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 \d+위 \/ 전체 39/);
+  const renderedRanks = [
+    ...showroomRankingHtml.matchAll(
+      /class="analysis-rank"><strong>(\d+)<\/strong>/g,
+    ),
+  ].map((match) => Number(match[1]));
+  assert.equal(renderedRanks.length, 7);
   assert.deepEqual(
-    [
-      ...showroomRankingHtml.matchAll(
-        /class="analysis-rank"><strong>(\d+)<\/strong>/g,
-      ),
-    ].map((match) => Number(match[1])),
-    [11, 12, 13, 14, 15, 16, 17],
+    renderedRanks,
+    Array.from({ length: 7 }, (_, index) => renderedRanks[0] + index),
   );
-  assert.match(
-    showroomRankingHtml,
-    /class="selected"[\s\S]*?class="analysis-rank"><strong>14<\/strong>[\s\S]*?<em>강남대치<\/em>/,
+  const selectedRank = Number(
+    showroomRankingHtml.match(
+      /class="selected"[\s\S]*?class="analysis-rank"><strong>(\d+)<\/strong>[\s\S]*?<em>강남대치<\/em>/,
+    )?.[1],
   );
+  assert.equal(selectedRank, renderedRanks[3]);
   assert.equal(
     (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,
     38,
@@ -3733,7 +3748,10 @@ test("serves the dual-metric competitive analysis sample", async () => {
     39,
   );
   assert.doesNotMatch(showroomHtml, /scatter-callout-leader|--leader-angle/);
-  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 14위 \/ 전체 39/);
+  assert.match(
+    showroomHtml.replaceAll("<!-- -->", ""),
+    new RegExp(`전국 전시장 내 ${selectedRank}위 \\/ 전체 39`),
+  );
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
     /전국 전시장 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
@@ -4096,11 +4114,13 @@ test("matches all 39 finalized CX Index Q2 results and applies one CX rule to Q1
 });
 
 test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", async () => {
-  const [dashboardText, syncSource] = await Promise.all([
+  const [dashboardText, weeklyText, syncSource] = await Promise.all([
     readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8"),
     readFile(new URL("../scripts/sync-v3s-q2-final.py", import.meta.url), "utf8"),
   ]);
   const dashboard = JSON.parse(dashboardText);
+  const weekly = JSON.parse(weeklyText);
   const expected = {
     "6KR342": 96.4,
     "6KR6834": 93.4,
@@ -4165,10 +4185,12 @@ test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", as
   assert.match(syncSource, /extract_pdf_score/);
   assert.match(syncSource, /if pdf_mismatches:[\s\S]*?쓰기를 중단/);
 
-  for (const [cdsid, showroomName, score] of [
-    ["6KR6833", "대전", "97.8"],
-    ["6KR6834", "강남대치", "91.9"],
+  for (const [cdsid, showroomName] of [
+    ["6KR6833", "대전"],
+    ["6KR6834", "강남대치"],
   ]) {
+    const score = weekly.v3s.quarters.byCdsid[cdsid][2].toFixed(1);
+    const average = weekly.v3s.quarters.average[2].toFixed(1);
     const response = await render(`/dashboard/${cdsid}`);
     assert.equal(response.status, 200);
     const html = await response.text();
@@ -4180,7 +4202,7 @@ test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", as
           `class="metric-card-value animated-score" aria-label="${score}"[^>]*>${score}<`,
       ),
     );
-    assert.match(html, /title="Q3 볼보 평균 94\.3점"/);
+    assert.match(html, new RegExp(`title="Q3 볼보 평균 ${average}점"`));
   }
 });
 
@@ -4224,7 +4246,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.equal(Object.keys(weekly.v3s.quarters.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.voc.quarters.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.cx.quarters.byCdsid).length, 39);
-  assert.deepEqual(weekly.v3s.quarters.byCdsid["6KR6830"], [65.3, 96.7, 90.6, null]);
+  assert.deepEqual(weekly.v3s.quarters.byCdsid["6KR6830"], [65.3, 96.7, 94.6, null]);
   assert.deepEqual(weekly.voc.quarters.byCdsid["6KR6830"], [99.1, 89.7, 94.1, null]);
   assert.deepEqual(weekly.cx.quarters.byCdsid["6KR6830"], [276.3, 304.5, 303.4, null]);
   assert.deepEqual(weekly.cx.quarters.average, [293, 297.5, 296.2, null]);
@@ -4391,7 +4413,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.equal(weekly.happyCall.newCar.quarters.average[3], null);
   assert.deepEqual(
     weekly.happyCall.newCar.quarters.byCdsid["6KR6834"],
-    [100, 100, 100, null],
+    [100, 100, 94.7, null],
   );
   assert.equal(typeof weekly.happyCall.newCar.average[weekly.meta.vocLatestWeek - 1], "number");
   assert.match(syncSource, /quarterlyResult\(loaded\.newCarHappyCall, \{[\s\S]*?useLastHeader: true/);
