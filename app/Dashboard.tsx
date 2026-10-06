@@ -123,6 +123,9 @@ type LatestUpdate = {
 type WeeklyData = {
   meta: {
     syncedAt: string;
+    v3sClosedQuarter: number;
+    vocClosedQuarter: number;
+    cxClosedQuarter: number;
     vocLatestWeek: number;
     cxLatestWeek: number;
     weekRanges: {
@@ -135,13 +138,27 @@ type WeeklyData = {
       cx: string;
     };
   };
+  v3s: {
+    quarters: {
+      average: (number | null)[];
+      byCdsid: Record<string, (number | null)[]>;
+    };
+  };
   voc: {
     average: (number | null)[];
     byCdsid: Record<string, (number | null)[]>;
+    quarters: {
+      average: (number | null)[];
+      byCdsid: Record<string, (number | null)[]>;
+    };
   };
   cx: {
     average: (number | null)[];
     byCdsid: Record<string, (number | null)[]>;
+    quarters: {
+      average: (number | null)[];
+      byCdsid: Record<string, (number | null)[]>;
+    };
   };
 };
 
@@ -351,6 +368,14 @@ const vocQuarterValueOf = (
   cdsid: string,
   quarter: QuarterKey,
 ): number | null => {
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+  const finalized = weeklyDashboard.voc.quarters.byCdsid[cdsid]?.[quarterIndex];
+  if (
+    quarterIndex < weeklyDashboard.meta.vocClosedQuarter &&
+    typeof finalized === "number"
+  ) {
+    return finalized;
+  }
   const values = vocQuarterValuesOf(
     weeklyDashboard.voc.byCdsid[cdsid] ?? [],
     quarter,
@@ -364,6 +389,14 @@ const vocQuarterValueOf = (
 };
 
 const vocQuarterAverageOf = (quarter: QuarterKey): number | null => {
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+  const finalized = weeklyDashboard.voc.quarters.average[quarterIndex];
+  if (
+    quarterIndex < weeklyDashboard.meta.vocClosedQuarter &&
+    typeof finalized === "number"
+  ) {
+    return finalized;
+  }
   // ‘②VOC(결과)’ 전국 행은 Q1·Q2만 0을 제외하고 Q3·Q4는 기록된 0을 포함한다.
   const excludeZero = quarter === "q1" || quarter === "q2";
   const values = Object.values(weeklyDashboard.voc.byCdsid)
@@ -387,7 +420,24 @@ const quarterValueOf = (
     return vocQuarterValueOf(item.cdsid, quarter);
   }
 
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+
+  if (metric === "v3s") {
+    const value = weeklyDashboard.v3s.quarters.byCdsid[item.cdsid]?.[quarterIndex];
+    return quarterIndex < weeklyDashboard.meta.v3sClosedQuarter &&
+      typeof value === "number"
+      ? value
+      : null;
+  }
+
   if (metric === "cx") {
+    const value = weeklyDashboard.cx.quarters.byCdsid[item.cdsid]?.[quarterIndex];
+    if (
+      quarterIndex < weeklyDashboard.meta.cxClosedQuarter &&
+      typeof value === "number"
+    ) {
+      return value;
+    }
     if (quarter === "q1") return item.q1?.cx ?? null;
     if (quarter === "q2") return item.cx;
     return latestCxWeeklyValueOf(item.cdsid, quarter);
@@ -400,6 +450,28 @@ const quarterValueOf = (
 const quarterAverageOf = (metric: MetricKey, quarter: QuarterKey) => {
   if (metric === "voc") {
     return vocQuarterAverageOf(quarter) ?? 0;
+  }
+
+  const quarterIndex = ["q1", "q2", "q3", "q4"].indexOf(quarter);
+
+  if (metric === "v3s") {
+    const value = weeklyDashboard.v3s.quarters.average[quarterIndex];
+    if (
+      quarterIndex < weeklyDashboard.meta.v3sClosedQuarter &&
+      typeof value === "number"
+    ) {
+      return value;
+    }
+  }
+
+  if (metric === "cx") {
+    const value = weeklyDashboard.cx.quarters.average[quarterIndex];
+    if (
+      quarterIndex < weeklyDashboard.meta.cxClosedQuarter &&
+      typeof value === "number"
+    ) {
+      return value;
+    }
   }
 
   if (quarter === "q2") {
@@ -658,42 +730,28 @@ function MetricCard({
 }) {
   const signal = getSignal(value, average);
   const quarterLabel = quarter.toUpperCase();
-  const quarterScores = [
-    {
-      key: "q1" as const,
-      label: "Q1",
-      state: quarter === "q1" ? "current" : "complete",
-      available: true,
-      status: "평가완료",
-    },
-    {
-      key: "q2" as const,
-      label: "Q2",
-      state: quarter === "q2" ? "current" : "complete",
-      available: true,
-      status: "평가완료",
-    },
-    {
-      key: metric === "v3s" ? null : ("q3" as const),
-      label: "Q3",
-      state:
-        metric === "v3s"
-          ? "planned"
-          : quarter === "q3"
+  const closedQuarter =
+    metric === "v3s"
+      ? weeklyDashboard.meta.v3sClosedQuarter
+      : metric === "voc"
+        ? weeklyDashboard.meta.vocClosedQuarter
+        : weeklyDashboard.meta.cxClosedQuarter;
+  const quarterScores = (["q1", "q2", "q3", "q4"] as const).map(
+    (quarterKey, index) => {
+      const available = index < closedQuarter;
+      return {
+        key: available ? quarterKey : null,
+        label: quarterKey.toUpperCase(),
+        state: available
+          ? quarter === quarterKey
             ? "current"
-            : "complete",
-      available: metric !== "v3s",
-      status: metric === "v3s" ? "평가 전" : "평가 중",
+            : "complete"
+          : "planned",
+        available,
+        status: available ? "평가완료" : "평가 전",
+      };
     },
-    {
-      key: metric === "cx" ? ("q4" as const) : null,
-      label: "Q4",
-      state:
-        metric === "cx" && quarter === "q4" ? "current" : "planned",
-      available: metric === "cx",
-      status: "평가 전",
-    },
-  ];
+  );
   const resourceQuarters: QuarterKey[] = ["q1", "q2", "q3", "q4"];
 
   return (
@@ -906,27 +964,27 @@ function V3SPerformance({
   const quarterScores = [
     {
       label: "Q1",
-      value: showroom.q1?.v3s ?? null,
+      value: quarterValueOf(showroom, "v3s", "q1"),
       average: quarterAverageOf("v3s", "q1"),
       benchmarks: peerBenchmarks("q1"),
       statusText: null,
-      state: "complete",
+      state: highlightQuarter === "q1" ? "current" : "complete",
     },
     {
       label: "Q2",
-      value: showroom.v3s,
+      value: quarterValueOf(showroom, "v3s", "q2"),
       average: quarterAverageOf("v3s", "q2"),
       benchmarks: peerBenchmarks("q2"),
       statusText: null,
-      state: "current",
+      state: highlightQuarter === "q2" ? "current" : "complete",
     },
     {
       label: "Q3",
-      value: null,
-      average: null,
-      benchmarks: peerBenchmarks(null),
-      statusText: "평가\u00a0중",
-      state: "in-progress",
+      value: quarterValueOf(showroom, "v3s", "q3"),
+      average: quarterAverageOf("v3s", "q3"),
+      benchmarks: peerBenchmarks("q3"),
+      statusText: null,
+      state: highlightQuarter === "q3" ? "current" : "complete",
     },
     {
       label: "Q4",
@@ -1525,6 +1583,12 @@ function WeeklyTrend({
       : metric === "cx"
         ? weeklyDashboard.meta.cxLatestWeek
         : 26;
+  const closedQuarter =
+    metric === "v3s"
+      ? weeklyDashboard.meta.v3sClosedQuarter
+      : metric === "voc"
+        ? weeklyDashboard.meta.vocClosedQuarter
+        : weeklyDashboard.meta.cxClosedQuarter;
   const rawPoints = weeklySeries
     ? weeklySeries
         .slice(0, latestWeek)
@@ -1794,7 +1858,7 @@ function WeeklyTrend({
                 className="week-grid quarter-boundary-line"
               />
             ))}
-            {evaluationProgressWeek < 39 && (
+            {closedQuarter < 3 && evaluationProgressWeek < 39 && (
               <g className="future-window-group" aria-hidden="true">
                 <rect
                   x={activeQuarterStart}
@@ -1814,7 +1878,7 @@ function WeeklyTrend({
                 </text>
               </g>
             )}
-            {latestWeek < 39 && (
+            {closedQuarter < 4 && (
               <g className="future-window-group" aria-hidden="true">
                 <rect
                   x={upcomingQuarterStart}
@@ -2477,10 +2541,10 @@ export default function Dashboard({
   const [selectedCode, setSelectedCode] = useState(initialCdsid);
   const [trendMetric, setTrendMetric] = useState<TrendMetricKey>("voc");
   const [linkedMetric, setLinkedMetric] = useState<TrendMetricKey | null>(null);
-  const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q2");
+  const [selectedQuarter, setSelectedQuarter] = useState<QuarterKey>("q3");
   const [metricQuarters, setMetricQuarters] = useState<
     Record<TrendMetricKey, QuarterKey>
-  >({ v3s: "q2", voc: "q3", cx: "q3" });
+  >({ v3s: "q3", voc: "q3", cx: "q3" });
   const [profileOpen, setProfileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [reportQuarter, setReportQuarter] =
@@ -2511,7 +2575,7 @@ export default function Dashboard({
     oneVoiceScores.capturedAt,
   );
   const [, setLatestUpdate] = useState<LatestUpdate>({
-    title: "Q1, Q2 마감, 현재 Q3 평가 중",
+    title: "Q1~Q3 마감, Q4 평가 전",
     effectiveDate: dashboard.meta.updatedAt,
   });
 
@@ -2921,6 +2985,7 @@ export default function Dashboard({
   );
   const q1IntegratedScore = integratedQuarterScoreOf(selected, "q1") ?? 0;
   const q2IntegratedScore = integratedQuarterScoreOf(selected, "q2") ?? 0;
+  const q3IntegratedScore = integratedQuarterScoreOf(selected, "q3") ?? 0;
   const competitionRankOf = (scoreOf: (item: Showroom) => number) => {
     const selectedScore = scoreOf(selected);
     if (!Number.isFinite(selectedScore)) return dashboard.meta.showroomCount;
@@ -2941,6 +3006,7 @@ export default function Dashboard({
   const nationalRank = integratedRankOf(selectedQuarter);
   const q1IntegratedRank = integratedRankOf("q1");
   const q2IntegratedRank = integratedRankOf("q2");
+  const q3IntegratedRank = integratedRankOf("q3");
   const metricRankOf = (metric: TrendMetricKey, quarter: QuarterKey) =>
     competitionRankOf(
       (item) =>
@@ -3145,8 +3211,14 @@ export default function Dashboard({
           </div>
         </div>
         <div className="mobile-quarter-selector" aria-label="평가 분기 선택">
-          {(["q1", "q2", "q3", "q4"] as const).map((quarter) => {
-            const available = quarter === "q1" || quarter === "q2";
+          {(["q1", "q2", "q3", "q4"] as const).map((quarter, index) => {
+            const available =
+              index <
+              Math.min(
+                weeklyDashboard.meta.v3sClosedQuarter,
+                weeklyDashboard.meta.vocClosedQuarter,
+                weeklyDashboard.meta.cxClosedQuarter,
+              );
             return (
               <button
                 key={quarter}
@@ -3325,11 +3397,11 @@ export default function Dashboard({
                 status: "마감",
               },
               {
-                key: null,
+                key: "q3" as const,
                 label: "Q3",
-                integratedScore: null,
-                rank: null,
-                status: "평가 중",
+                integratedScore: q3IntegratedScore,
+                rank: q3IntegratedRank,
+                status: "마감",
               },
               {
                 key: null,

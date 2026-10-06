@@ -4,7 +4,9 @@ const workbookId = "1KZust31kwsHrv0VZEqyPhACza9R3rZibOdf467c6JXA";
 
 const sheets = {
   dates: "DB_날짜(참고)",
+  v3s: "①V3S(결과)",
   voc: "②VOC(결과)",
+  cxQuarterScore: "☆CX Index 분기별 점수",
   vocOverall: "01☆VOC종합만족도(60%)",
   vocGreeting: "02☆VOC첫인사(20%)",
   vocTablet: "03☆VOC태블릿(10%)",
@@ -231,6 +233,42 @@ function expandQuarterlyResult(result) {
   };
 }
 
+function completedQuarterCount(result) {
+  const storeSeries = Object.values(result.byCdsid);
+  return Array.from({ length: 4 }, (_, index) => index).reduce(
+    (latest, index) =>
+      result.average[index] !== null &&
+      storeSeries.length === 39 &&
+      storeSeries.every((values) => values[index] !== null)
+        ? index + 1
+        : latest,
+    0,
+  );
+}
+
+function combineQuarterlyResults(results, completedQuarters) {
+  const cdsids = Object.keys(results[0].byCdsid);
+  const combine = (series) =>
+    Array.from({ length: 4 }, (_, index) => {
+      if (index >= completedQuarters) return null;
+      const values = series.map((values) => values[index]);
+      if (values.some((value) => value === null || value === undefined)) {
+        return null;
+      }
+      return round1(values.reduce((sum, value) => sum + value, 0));
+    });
+
+  return {
+    average: combine(results.map((result) => result.average)),
+    byCdsid: Object.fromEntries(
+      cdsids.map((cdsid) => [
+        cdsid,
+        combine(results.map((result) => result.byCdsid[cdsid] ?? [])),
+      ]),
+    ),
+  };
+}
+
 const loaded = Object.fromEntries(
   await Promise.all(
     Object.entries(sheets).map(async ([key, sheetName]) => [
@@ -241,7 +279,9 @@ const loaded = Object.fromEntries(
 );
 
 const weekRanges = weekRangesResult(loaded.dates);
+const v3sQuarters = quarterlyResult(loaded.v3s);
 const voc = weeklyResult(loaded.voc);
+const vocQuarters = quarterlyResult(loaded.voc, { useLastHeader: true });
 const vocOverall = weeklyResult(loaded.vocOverall);
 const vocGreeting = weeklyResult(loaded.vocGreeting);
 const vocTablet = weeklyResult(loaded.vocTablet);
@@ -275,8 +315,32 @@ const newCarHappyCall = fillNationalRateFromCounts(
 const newCarHappyCallQuarters = quarterlyResult(loaded.newCarHappyCall, {
   useLastHeader: true,
 });
+const deliveryQuarters = quarterlyResult(loaded.delivery, {
+  useLastHeader: true,
+});
+const testDriveQuarters = quarterlyResult(loaded.testDrive, {
+  useLastHeader: true,
+});
+const emergencyQuarters = quarterlyResult(loaded.emergency, {
+  useLastHeader: true,
+});
 const actionPlan = quarterlyResult(loaded.actionPlan);
 const actionPlanWeekly = expandQuarterlyResult(actionPlan);
+const appQuarters = quarterlyResult(loaded.app, { useLastHeader: true });
+const cxQuarterScores = quarterlyResult(loaded.cxQuarterScore);
+const v3sClosedQuarter = completedQuarterCount(v3sQuarters);
+const vocClosedQuarter = completedQuarterCount(vocQuarters);
+const cxClosedQuarter = completedQuarterCount(cxQuarterScores);
+const cxQuarters = combineQuarterlyResults(
+  [
+    deliveryQuarters,
+    testDriveQuarters,
+    emergencyQuarters,
+    actionPlan,
+    appQuarters,
+  ],
+  cxClosedQuarter,
+);
 const syncedAt = new Date().toISOString();
 
 const cxLatestWeek = Math.min(
@@ -332,6 +396,9 @@ const cxAverage = Array.from({ length: 52 }, (_, index) => {
 const output = {
   meta: {
     syncedAt,
+    v3sClosedQuarter,
+    vocClosedQuarter,
+    cxClosedQuarter,
     vocLatestWeek: voc.latestWeek,
     cxLatestWeek,
     weekRanges,
@@ -342,9 +409,13 @@ const output = {
         "신차출고 100점 + 시승 100점 + 긴급경보 10점 + 조치계획 10점 + 앱 가입율 100점의 원점수 합산(총 320점)",
     },
   },
+  v3s: {
+    quarters: v3sQuarters,
+  },
   voc: {
     average: voc.average,
     byCdsid: voc.byCdsid,
+    quarters: vocQuarters,
   },
   happyCall: {
     newCar: {
@@ -364,6 +435,8 @@ const output = {
   cx: {
     average: cxAverage,
     byCdsid: cxByCdsid,
+    quarters: cxQuarters,
+    dscQuarters: cxQuarterScores,
   },
 };
 
@@ -446,6 +519,7 @@ const detailsOutput = {
         max: 100,
         unit: "점",
         cadence: "weekly",
+        quarters: deliveryQuarters,
         ...delivery,
       },
       {
@@ -455,6 +529,7 @@ const detailsOutput = {
         max: 100,
         unit: "점",
         cadence: "weekly",
+        quarters: testDriveQuarters,
         ...testDrive,
       },
       {
@@ -464,6 +539,7 @@ const detailsOutput = {
         max: 10,
         unit: "점",
         cadence: "weekly",
+        quarters: emergencyQuarters,
         ...emergency,
       },
       {
@@ -473,6 +549,7 @@ const detailsOutput = {
         max: 10,
         unit: "점",
         cadence: "quarterly",
+        quarters: actionPlan,
         ...actionPlanWeekly,
       },
       {
@@ -482,6 +559,7 @@ const detailsOutput = {
         max: 100,
         unit: "점",
         cadence: "weekly",
+        quarters: appQuarters,
         ...app,
       },
     ],
@@ -502,5 +580,7 @@ await writeFile(
 
 console.log(
   `Google Sheet weekly sync complete: VOC W${String(voc.latestWeek).padStart(2, "0")}, ` +
-    `CX W${String(cxLatestWeek).padStart(2, "0")}, ${cdsids.length} showrooms`,
+    `CX W${String(cxLatestWeek).padStart(2, "0")}, ` +
+    `Q${Math.min(v3sClosedQuarter, vocClosedQuarter, cxClosedQuarter)} closed, ` +
+    `${cdsids.length} showrooms`,
 );

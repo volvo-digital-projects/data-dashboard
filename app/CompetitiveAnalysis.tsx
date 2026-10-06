@@ -58,9 +58,12 @@ type AnalysisPoint = AnalysisShowroom & {
 };
 
 type WeeklyMetricData = {
-  meta: { vocLatestWeek: number };
+  meta: { vocLatestWeek: number; vocClosedQuarter: number };
   voc: {
     byCdsid: Record<string, Array<number | null>>;
+    quarters: {
+      byCdsid: Record<string, Array<number | null>>;
+    };
   };
   happyCall: {
     newCar: {
@@ -648,6 +651,13 @@ const q3WeekStartIndex = 26;
 const q3WeekEndIndex = 39;
 
 const q3VocScoreOf = (cdsid: string): number | null => {
+  const finalized = weeklyDashboard.voc.quarters.byCdsid[cdsid]?.[2];
+  if (
+    weeklyDashboard.meta.vocClosedQuarter >= 3 &&
+    typeof finalized === "number"
+  ) {
+    return finalized;
+  }
   const values = (weeklyDashboard.voc.byCdsid[cdsid] ?? [])
     .slice(q3WeekStartIndex, q3WeekEndIndex)
     .filter(
@@ -3253,7 +3263,7 @@ export default function CompetitiveAnalysis({
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.vocScore} sequence={0} />
-          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.voc)}, Q2 ${displayQuarterNumber(selected.voc)}, Q3 진행 중 ${displayQuarterNumber(selectedQ3Voc)}, Q4 미집계`}>
+          <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.voc)}, Q2 ${displayQuarterNumber(selected.voc)}, Q3 ${displayQuarterNumber(selectedQ3Voc)}, Q4 미집계`}>
             <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.voc)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selected.voc)}</strong></span>
             <span className="current"><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Voc)}</strong></span>

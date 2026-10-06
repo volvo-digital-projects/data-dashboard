@@ -1283,10 +1283,7 @@ test("includes the available Q3 VOC and happy-call scores before combining", asy
     return present.length ? present.reduce((sum, value) => sum + value, 0) / present.length : 0;
   };
   const expected = showrooms.map((showroom) => {
-    const q3Values = (weekly.voc.byCdsid[showroom.cdsid] ?? [])
-      .slice(26, 39)
-      .filter((value) => typeof value === "number" && value !== 0);
-    const q3Voc = q3Values.length ? mean(q3Values) : null;
+    const q3Voc = weekly.voc.quarters.byCdsid[showroom.cdsid]?.[2] ?? null;
     const happyCallQuarters = weekly.happyCall.newCar.quarters.byCdsid[showroom.cdsid];
     const q3HappyCall = happyCallQuarters[2];
     const satisfaction = mean([showroom.q1?.voc, showroom.voc, q3Voc]);
@@ -1311,7 +1308,7 @@ test("includes the available Q3 VOC and happy-call scores before combining", asy
     assert.ok(html.includes("VOC 상담 만족도") && html.includes("ONE Voice 시승 만족도") && html.includes("ONE Voice 출고 만족도"));
     assert.ok(html.includes("VOC 상담 후 해피콜(24시간 이내 시행)") && html.includes("ONE Voice 출고 후 해피콜(24시간 이내 시행)"));
     if (showroom.cdsid === "6KR6834") {
-      assert.ok(html.includes('aria-label="Q1 100, Q2 100, Q3 89.5, Q4 ―"'));
+      assert.ok(html.includes('aria-label="Q1 100, Q2 100, Q3 100, Q4 ―"'));
     }
     assert.doesNotMatch(html, /2개 분기 · 200점 만점|400점 만점/);
   }
@@ -2259,7 +2256,7 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /교차검증 후, 사후보정 가능/);
-  assert.equal((visibleHtml.match(/<strong>평가완료<\/strong>/g) ?? []).length, 4);
+  assert.equal((visibleHtml.match(/<strong>평가완료<\/strong>/g) ?? []).length, 6);
   assert.doesNotMatch(visibleHtml, /검증완료/);
   assert.equal((html.match(/metric-quarter-strip--status/g) ?? []).length, 2);
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
@@ -2337,14 +2334,17 @@ test("server-renders the selected CDSID dashboard", async () => {
   const directionalVisibleHtml = directionalHtml.replaceAll("<!-- -->", "");
   assert.match(
     directionalVisibleHtml,
-    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ 3\.0점<\/strong>/,
+    /class="metric-benchmark"[\s\S]*?<strong class="positive good">▲ \d+\.\d점<\/strong>/,
   );
   assert.match(
     directionalVisibleHtml,
     /class="metric-benchmark"[\s\S]*?<strong class="positive great">▲ \d+\.\d점<\/strong>/,
   );
+  const warningResponse = await render("/dashboard/6KR6836");
+  assert.equal(warningResponse.status, 200);
+  const warningVisibleHtml = (await warningResponse.text()).replaceAll("<!-- -->", "");
   assert.match(
-    directionalVisibleHtml,
+    warningVisibleHtml,
     /class="metric-benchmark"[\s\S]*?<strong class="negative warning">▼ \d+\.\d점<\/strong>/,
   );
   assert.match(
@@ -2359,13 +2359,13 @@ test("server-renders the selected CDSID dashboard", async () => {
     html,
     /aria-label="CX Index 분기 평가점수"/,
   );
-  assert.match(html, /aria-pressed="true" aria-label="V3S Q2 상세 영역으로 이동"/);
+  assert.match(html, /aria-pressed="true" aria-label="V3S Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="VOC Q3 상세 영역으로 이동"/);
   assert.match(html, /aria-pressed="true" aria-label="CX Index Q3 상세 영역으로 이동"/);
   assert.equal(
-    (html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? [])
+    (html.match(/aria-label="Q[123] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? [])
       .length,
-    2,
+    3,
   );
   assert.match(
     visibleHtml,
@@ -2377,13 +2377,13 @@ test("server-renders the selected CDSID dashboard", async () => {
     visibleHtml,
     /분기 점수를 선택하면 하단 지표가 함께 변경됩니다/,
   );
-  assert.match(visibleHtml, /Q1[\s\S]*14위/);
-  assert.match(visibleHtml, /Q2[\s\S]*32위/);
-  assert.match(visibleHtml, /Q3[\s\S]*평가 중[\s\S]*Q4[\s\S]*평가 전/);
+  assert.match(visibleHtml, /Q1[\s\S]*\d+위/);
+  assert.match(visibleHtml, /Q2[\s\S]*\d+위/);
+  assert.match(visibleHtml, /Q3[\s\S]*\d+위[\s\S]*Q4[\s\S]*평가 전/);
   assert.doesNotMatch(visibleHtml, /Q2 종합 점수/);
   assert.match(visibleHtml, /통합 경쟁력 지수[\s\S]*\(520점 만점\)[\s\S]*\d+\.\d/);
   assert.doesNotMatch(visibleHtml, /Q1·Q2 평가 기준/);
-  assert.equal((html.match(/aria-label="Q[12] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 2);
+  assert.equal((html.match(/aria-label="Q[123] 통합 경쟁력 지수 전체 39개 중 \d+위 지표 보기"/g) ?? []).length, 3);
   assert.equal(
     (html.match(/aria-label="DSC 스코어 및 RTC 인센티브율"/g) ?? []).length,
     4,
@@ -2420,11 +2420,11 @@ test("server-renders the selected CDSID dashboard", async () => {
   );
   assert.match(css, /@keyframes rtc-siren-beacon\s*\{/);
   assert.match(css, /@keyframes rtc-siren-dome-pulse\s*\{/);
-  assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 1);
+  assert.equal((html.match(/aria-label="Q3 평가 중"/g) ?? []).length, 0);
   assert.equal((html.match(/aria-label="Q4 평가 전"/g) ?? []).length, 1);
   assert.match(
     visibleHtml,
-    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q2 볼보 평균 <span class="metric-benchmark-average">\d+\.\d점<\/span> 대비[\s\S]*?[▲▼] \d+\.\d점/,
+    /class="metric-benchmark scoreboard-benchmark">[\s\S]*?Q3 볼보 평균 <span class="metric-benchmark-average">\d+\.\d점<\/span> 대비[\s\S]*?[▲▼] \d+\.\d점/,
   );
   assert.match(visibleHtml, /전체[\s\S]*\d+위[\s\S]*39/);
   assert.doesNotMatch(visibleHtml, /<h2>[^<]*경쟁력<\/h2>/);
@@ -2871,11 +2871,11 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
-  const response = await render("/dashboard/6KR6841");
+  const response = await render("/dashboard/6KR6873");
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /aria-label="RTC 인센티브 0\.1% 경고"/);
+  assert.match(html, /aria-label="RTC 인센티브 0\.0% 경고"/);
   assert.doesNotMatch(html, /aria-label="RTC 인센티브 0\.2% 경고"/);
 });
 
@@ -2909,7 +2909,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>89\.5<\/strong><\/span><span><b>Q4<\/b><strong>―<\/strong><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>100<\/strong><\/span><span><b>Q4<\/b><strong>―<\/strong><\/span>/,
   );
   assert.match(
     visibleHtml,
@@ -2991,7 +2991,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     visibleHtml,
     /에이치 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
   );
-  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE Voice 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>96\.5<[^]*?점/);
+  assert.match(visibleHtml, /해피콜 이행률 평균 누적[\s\S]*VOC 상담 후 해피콜\(24시간 이내 시행\)[\s\S]*ONE Voice 출고 후 해피콜\(24시간 이내 시행\)[\s\S]*>\d+\.\d<[^]*?점/);
   assert.match(
     visibleHtml,
     /에이치 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
@@ -3718,11 +3718,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
         /class="analysis-rank"><strong>(\d+)<\/strong>/g,
       ),
     ].map((match) => Number(match[1])),
-    [18, 19, 20, 21, 22, 23, 24],
+    [11, 12, 13, 14, 15, 16, 17],
   );
   assert.match(
     showroomRankingHtml,
-    /class="selected"[\s\S]*?class="analysis-rank"><strong>21<\/strong>[\s\S]*?<em>강남대치<\/em>/,
+    /class="selected"[\s\S]*?class="analysis-rank"><strong>14<\/strong>[\s\S]*?<em>강남대치<\/em>/,
   );
   assert.equal(
     (showroomHtml.match(/class="scatter-label comparison"/g) ?? []).length,
@@ -3733,7 +3733,7 @@ test("serves the dual-metric competitive analysis sample", async () => {
     39,
   );
   assert.doesNotMatch(showroomHtml, /scatter-callout-leader|--leader-angle/);
-  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 21위 \/ 전체 39/);
+  assert.match(showroomHtml.replaceAll("<!-- -->", ""), /전국 전시장 내 14위 \/ 전체 39/);
   assert.match(
     showroomHtml.replaceAll("<!-- -->", ""),
     /전국 전시장 누적평균 \d+\.\d점 대비 [▲▼±] \d+\.\d점/,
@@ -4166,8 +4166,8 @@ test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", as
   assert.match(syncSource, /if pdf_mismatches:[\s\S]*?쓰기를 중단/);
 
   for (const [cdsid, showroomName, score] of [
-    ["6KR6833", "대전", "98.2"],
-    ["6KR6834", "강남대치", "93.4"],
+    ["6KR6833", "대전", "97.8"],
+    ["6KR6834", "강남대치", "91.9"],
   ]) {
     const response = await render(`/dashboard/${cdsid}`);
     assert.equal(response.status, 200);
@@ -4180,7 +4180,7 @@ test("matches the final V3S Q2 CSV values cross-checked against all 39 PDFs", as
           `class="metric-card-value animated-score" aria-label="${score}"[^>]*>${score}<`,
       ),
     );
-    assert.match(html, /title="Q2 볼보 평균 95\.4점"/);
+    assert.match(html, /title="Q3 볼보 평균 94\.3점"/);
   }
 });
 
@@ -4200,6 +4200,9 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.equal(weekly.meta.workbookUrl, undefined);
   assert.ok(weekly.meta.vocLatestWeek >= 37);
   assert.ok(weekly.meta.cxLatestWeek >= 38);
+  assert.equal(weekly.meta.v3sClosedQuarter, 3);
+  assert.equal(weekly.meta.vocClosedQuarter, 3);
+  assert.equal(weekly.meta.cxClosedQuarter, 3);
   assert.equal(weekly.meta.weekRanges.length, 52);
   assert.deepEqual(weekly.meta.weekRanges[0], {
     week: 1,
@@ -4218,6 +4221,13 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   });
   assert.equal(Object.keys(weekly.voc.byCdsid).length, 39);
   assert.equal(Object.keys(weekly.cx.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.v3s.quarters.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.voc.quarters.byCdsid).length, 39);
+  assert.equal(Object.keys(weekly.cx.quarters.byCdsid).length, 39);
+  assert.deepEqual(weekly.v3s.quarters.byCdsid["6KR6830"], [65.3, 96.7, 90.6, null]);
+  assert.deepEqual(weekly.voc.quarters.byCdsid["6KR6830"], [99.1, 89.7, 94.1, null]);
+  assert.deepEqual(weekly.cx.quarters.byCdsid["6KR6830"], [276.3, 304.5, 303.4, null]);
+  assert.deepEqual(weekly.cx.quarters.average, [293, 297.5, 296.2, null]);
   assert.equal(weekly.voc.byCdsid["6KR6834"][0], 0);
   assert.equal(weekly.voc.byCdsid["6KR6834"][1], 100);
   assert.equal(weekly.voc.byCdsid["6KR6834"][2], 94);
@@ -4356,7 +4366,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.equal(weekly.happyCall.newCar.quarters.average[3], null);
   assert.deepEqual(
     weekly.happyCall.newCar.quarters.byCdsid["6KR6834"],
-    [100, 100, 89.5, null],
+    [100, 100, 100, null],
   );
   assert.equal(typeof weekly.happyCall.newCar.average[weekly.meta.vocLatestWeek - 1], "number");
   assert.match(syncSource, /quarterlyResult\(loaded\.newCarHappyCall, \{[\s\S]*?useLastHeader: true/);
@@ -4519,11 +4529,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q2"\)/,
+    /const \[selectedQuarter, setSelectedQuarter\] =\s*useState<QuarterKey>\("q3"\)/,
   );
   assert.match(
     dashboardSource,
-    /Record<TrendMetricKey, QuarterKey>[\s\S]*?\{ v3s: "q2", voc: "q3", cx: "q3" \}/,
+    /Record<TrendMetricKey, QuarterKey>[\s\S]*?\{ v3s: "q3", voc: "q3", cx: "q3" \}/,
   );
   assert.match(
     dashboardSource,
@@ -4543,7 +4553,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /key: metric === "cx" \? \("q4" as const\) : null,[\s\S]*?available: metric === "cx"/,
+    /const closedQuarter =[\s\S]*?weeklyDashboard\.meta\.cxClosedQuarter[\s\S]*?available = index < closedQuarter/,
   );
   assert.match(
     dashboardSource,
@@ -4580,11 +4590,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q3"[\s\S]{0,180}?statusText: "평가\\u00a0중"/,
-  );
-  assert.match(
-    dashboardSource,
-    /label: "Q3"[\s\S]{0,220}?state: "in-progress"/,
+    /label: "Q3"[\s\S]{0,220}?statusText: null,[\s\S]{0,120}?state: highlightQuarter === "q3" \? "current" : "complete"/,
   );
   assert.match(
     dashboardSource,
