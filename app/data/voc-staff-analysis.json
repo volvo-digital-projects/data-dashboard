@@ -2,14 +2,14 @@
   "source": {
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-09-27",
-    "rosterCheckedAt": "2026-10-05",
+    "rosterCheckedAt": "2026-10-06",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-10-05",
+    "jobTitleSourceDate": "2026-10-06",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-09-27",
     "latestResponseThrough": "2026-09-27",
@@ -3576,96 +3576,6 @@
           "latestResponseDate": "2026-09-27"
         },
         {
-          "name": "천명현",
-          "role": "영업직원",
-          "jobTitle": "매니저",
-          "hireDate": "2020-09-07",
-          "tenureMonths": 72,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 15,
-              "scoreSum": 138.0,
-              "sent": 36
-            },
-            "2024": {
-              "responses": 20,
-              "scoreSum": 187.0,
-              "sent": 53
-            },
-            "2026": {
-              "responses": 3,
-              "scoreSum": 30.0,
-              "sent": 7,
-              "rateResponses": 3
-            },
-            "2025": {
-              "responses": 0,
-              "scoreSum": 0,
-              "sent": 3
-            }
-          },
-          "commentResponses": 38,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 23
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 22
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 12
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 10
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 8
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 5
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 5
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 5
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 4
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 3
-            },
-            {
-              "label": "맞춤형 설명",
-              "mentions": 1
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "전문지식 정확성 부족",
-              "mentions": 2
-            }
-          ],
-          "latestResponseDate": "2026-07-01"
-        },
-        {
           "name": "김호연",
           "role": "영업팀장",
           "jobTitle": "팀장",
@@ -3916,7 +3826,100 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "천명현",
+          "role": "영업직원",
+          "jobTitle": "매니저",
+          "hireDate": "2020-09-07",
+          "tenureMonths": 72,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2023": {
+              "responses": 15,
+              "scoreSum": 138.0,
+              "sent": 36
+            },
+            "2024": {
+              "responses": 20,
+              "scoreSum": 187.0,
+              "sent": 53
+            },
+            "2026": {
+              "responses": 3,
+              "scoreSum": 30.0,
+              "sent": 7,
+              "rateResponses": 3
+            },
+            "2025": {
+              "responses": 0,
+              "scoreSum": 0,
+              "sent": 3
+            }
+          },
+          "commentResponses": 38,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 23
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 22
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 12
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 10
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 8
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 5
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "전문지식 정확성 부족",
+              "mentions": 2
+            }
+          ],
+          "latestResponseDate": "2026-07-01",
+          "archivedAt": "2026-10-06",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR6841": {
       "showroom": "볼보 동대문",
@@ -5513,7 +5516,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-01-06",
-          "tenureMonths": 20,
+          "tenureMonths": 21,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -5598,79 +5601,6 @@
           ],
           "improvementKeywords": [],
           "latestResponseDate": "2026-09-05"
-        },
-        {
-          "name": "백승환",
-          "role": "영업직원",
-          "jobTitle": "차장",
-          "hireDate": "2024-01-02",
-          "tenureMonths": 33,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
-          "years": {
-            "2024": {
-              "responses": 7,
-              "scoreSum": 68.0,
-              "sent": 42
-            },
-            "2025": {
-              "responses": 3,
-              "scoreSum": 28.0,
-              "sent": 13
-            },
-            "2026": {
-              "responses": 3,
-              "scoreSum": 30.0,
-              "sent": 21,
-              "rateResponses": 3
-            }
-          },
-          "commentResponses": 13,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 9
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 7
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 3
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 3
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 2
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 2
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 2
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "시설 편의 미제공",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-07-28"
         },
         {
           "name": "오영재",
@@ -6401,7 +6331,83 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "백승환",
+          "role": "영업직원",
+          "jobTitle": "차장",
+          "hireDate": "2024-01-02",
+          "tenureMonths": 33,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
+          "years": {
+            "2024": {
+              "responses": 7,
+              "scoreSum": 68.0,
+              "sent": 42
+            },
+            "2025": {
+              "responses": 3,
+              "scoreSum": 28.0,
+              "sent": 13
+            },
+            "2026": {
+              "responses": 3,
+              "scoreSum": 30.0,
+              "sent": 21,
+              "rateResponses": 3
+            }
+          },
+          "commentResponses": 13,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 9
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 7
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "시설 편의 미제공",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-07-28",
+          "archivedAt": "2026-10-06",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR6839": {
       "showroom": "볼보 용산",
@@ -6532,7 +6538,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2025-01-06",
-          "tenureMonths": 20,
+          "tenureMonths": 21,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -6768,7 +6774,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-02-06",
-          "tenureMonths": 31,
+          "tenureMonths": 32,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -16991,7 +16997,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2015-07-06",
-          "tenureMonths": 134,
+          "tenureMonths": 135,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -18179,7 +18185,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2017-03-06",
-          "tenureMonths": 114,
+          "tenureMonths": 115,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -20909,7 +20915,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-07-06",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -21622,7 +21628,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-05-06",
-          "tenureMonths": 4,
+          "tenureMonths": 5,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
