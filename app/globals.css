@@ -18652,7 +18652,10 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   .dashboard .score-stack-heading::before {
     content: "";
     position: absolute;
-    top: -20px;
+    top: calc(
+      var(--dashboard-sticky-offset, 356px) -
+        var(--score-heading-sticky-top, 376px)
+    );
     right: -16px;
     bottom: 100%;
     left: -16px;

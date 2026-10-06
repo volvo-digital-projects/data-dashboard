@@ -1128,7 +1128,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-navigation-detail \.growth-capability > header\s*\{[^}]*position: sticky;/);
   assert.doesNotMatch(css, /\.growth-navigation-workspace::before\s*\{[^}]*position: sticky;/);
   assert.match(css, /\.growth-capability\s*\{[^}]*overflow: visible;[^}]*border: 0;[^}]*border-radius: 0;[^}]*background: transparent;/);
-  assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: -20px;[^}]*bottom: 100%;[^}]*background: #ffffff;/);
+  assert.match(css, /\.dashboard \.score-stack-heading::before\s*\{[^}]*top: calc\([\s\S]*?var\(--dashboard-sticky-offset, 356px\)[\s\S]*?-\s*var\(--score-heading-sticky-top, 376px\)[\s\S]*?\);[^}]*bottom: 100%;[^}]*background: #ffffff;/);
   assert.match(css, /\.growth-navigation-heading\s*\{[^}]*min-height: 40px;[^}]*padding: 6px 16px;/);
   assert.match(css, /\.growth-navigation-source\s*\{[^}]*justify-content: flex-end;[^}]*margin-left: auto;/);
   assert.match(css, /\.growth-navigation-source span\s*\{[^}]*width: auto;[^}]*min-width: max-content;[^}]*height: 22px;[^}]*align-items: center;[^}]*justify-content: center;[^}]*padding: 1px 18px 0;[^}]*font-size: 7\.5px;/);
@@ -4573,11 +4573,11 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     css,
-    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-20px;[\s\S]*?right:\s*-16px;[\s\S]*?bottom:\s*100%;[\s\S]*?left:\s*-16px;[\s\S]*?background:\s*#ffffff;/,
+    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*calc\([\s\S]*?var\(--dashboard-sticky-offset, 356px\)[\s\S]*?-\s*var\(--score-heading-sticky-top, 376px\)[\s\S]*?\);[\s\S]*?right:\s*-16px;[\s\S]*?bottom:\s*100%;[\s\S]*?left:\s*-16px;[\s\S]*?background:\s*#ffffff;/,
   );
   assert.doesNotMatch(
     css,
-    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-64px;/,
+    /\.dashboard \.score-stack-heading::before\s*\{[\s\S]*?top:\s*-[0-9]+px;/,
   );
   assert.match(
     dashboardSource,
