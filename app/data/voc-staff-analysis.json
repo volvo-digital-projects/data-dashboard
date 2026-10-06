@@ -70,37 +70,37 @@
     {
       "id": "1-3y",
       "label": "1~3년",
-      "employeeCount": 97,
-      "respondingEmployees": 95,
-      "responses": 1632,
-      "scoreSum": 15250.0,
-      "average": 9.34
+      "employeeCount": 93,
+      "respondingEmployees": 91,
+      "responses": 1523,
+      "scoreSum": 14209.0,
+      "average": 9.33
     },
     {
       "id": "3-5y",
       "label": "3~5년",
-      "employeeCount": 66,
-      "respondingEmployees": 66,
-      "responses": 2481,
-      "scoreSum": 23285.0,
+      "employeeCount": 69,
+      "respondingEmployees": 69,
+      "responses": 2577,
+      "scoreSum": 24200.0,
       "average": 9.39
     },
     {
       "id": "5-10y",
       "label": "5~10년",
-      "employeeCount": 128,
-      "respondingEmployees": 128,
-      "responses": 5175,
-      "scoreSum": 47924.0,
+      "employeeCount": 126,
+      "respondingEmployees": 126,
+      "responses": 5096,
+      "scoreSum": 47187.0,
       "average": 9.26
     },
     {
       "id": "over-10y",
       "label": "10년 이상",
-      "employeeCount": 27,
-      "respondingEmployees": 27,
-      "responses": 1360,
-      "scoreSum": 12527.0,
+      "employeeCount": 28,
+      "respondingEmployees": 28,
+      "responses": 1401,
+      "scoreSum": 12909.0,
       "average": 9.21
     }
   ],
