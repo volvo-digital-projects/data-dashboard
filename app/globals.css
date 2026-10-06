@@ -18942,6 +18942,15 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   font-style: normal;
 }
 
+/* Keep Korean context labels in Paperlogy while rendering only the Latin and
+   numeric 2×2 header values in the Volvo brand face. */
+.dashboard-identity-header .header-context-volvo-value {
+  font-family: var(--font-volvo), var(--font-korean), sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
 .metric-detail-header-context .identity-analysis-entry::after {
   content: none;
 }

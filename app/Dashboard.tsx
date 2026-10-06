@@ -3129,7 +3129,7 @@ export default function Dashboard({
                 aria-hidden="true"
               />
               <dt>사이즈</dt>
-              <dd>{selected.size}</dd>
+              <dd className="header-context-volvo-value">{selected.size}</dd>
             </div>
           </dl>
           <div className="identity-profile-menu" ref={profileMenuRef}>

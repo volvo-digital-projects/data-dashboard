@@ -2695,7 +2695,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
     /href="\/dashboard\/6KR6834"[\s\S]*?viewBox="0 0 24 24"[\s\S]*?d="M4 19V9m5 10V5m5 14v-7m5 7V3"[\s\S]*?대시보드/,
   );
   assert.doesNotMatch(vocBody, /현황으로/);
-  assert.match(vocBody, /class="identity-profile-role">업데이트<\/span><strong>\d{6}<\/strong>/);
+  assert.match(vocBody, /class="identity-profile-role">업데이트<\/span><strong class="header-context-volvo-value">\d{6}<\/strong>/);
   assert.doesNotMatch(vocBody, /<dt>기준<\/dt>/);
   assert.equal((vocBody.match(/class="identity-analysis-entry"/g) ?? []).length, 3);
   assert.equal((vocBody.match(/class="metric-detail-context-icon"/g) ?? []).length, 4);
@@ -2870,6 +2870,31 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.match(
     detailCss,
     /\.metric-detail-header-context \.identity-analysis-entry::after\s*\{[^}]*content:\s*none;/,
+  );
+});
+
+test("uses Volvo Centum for English and numeric values in both 2x2 header grids", async () => {
+  const [dashboardResponse, analysisResponse, detailsResponse, css] = await Promise.all([
+    render("/dashboard/6KR6833"),
+    render("/dashboard/6KR6833/analysis?view=size"),
+    render("/dashboard/6KR6833/details/voc"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+  assert.equal(dashboardResponse.status, 200);
+  assert.equal(analysisResponse.status, 200);
+  assert.equal(detailsResponse.status, 200);
+
+  const dashboardHtml = (await dashboardResponse.text()).replaceAll("<!-- -->", "");
+  const analysisHtml = (await analysisResponse.text()).replaceAll("<!-- -->", "");
+  const detailsHtml = (await detailsResponse.text()).replaceAll("<!-- -->", "");
+  assert.match(dashboardHtml, /<dd class="header-context-volvo-value">U<\/dd>/);
+  assert.match(analysisHtml, /<strong class="header-context-volvo-value">U<\/strong>/);
+  assert.match(detailsHtml, /<dd class="header-context-volvo-value">VOC<\/dd>/);
+  assert.match(detailsHtml, /<dd class="header-context-volvo-value">W1–W52<\/dd>/);
+  assert.match(detailsHtml, /<strong class="header-context-volvo-value">\d{6}<\/strong>/);
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.header-context-volvo-value\s*\{[^}]*font-family:\s*var\(--font-volvo\), var\(--font-korean\), sans-serif;/,
   );
 });
 

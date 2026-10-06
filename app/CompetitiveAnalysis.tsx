@@ -3212,7 +3212,7 @@ export default function CompetitiveAnalysis({
               aria-hidden="true"
             />
             <small>사이즈</small>
-            <strong>{selected.size}</strong>
+            <strong className="header-context-volvo-value">{selected.size}</strong>
           </Link>
           <Link
             className="analysis-context-item"

@@ -429,7 +429,7 @@ export default function MetricDetails({
                   <path d="M3 16.5h14M4.5 15V11m3.7 4V7m3.7 8V9m3.6 6V4" />
                 </svg>
               </span>
-              <dt>지표</dt><dd>{group.label}</dd>
+              <dt>지표</dt><dd className="header-context-volvo-value">{group.label}</dd>
             </div>
             <div className="identity-analysis-entry">
               <span className="identity-icon metric-detail-context-icon-box showroom" aria-hidden="true">
@@ -445,7 +445,7 @@ export default function MetricDetails({
                   <path d="M4 6h12v11H4zM7 3v5m6-5v5M4 10h12m-9 3h1m3 0h1" />
                 </svg>
               </span>
-              <dt>주차</dt><dd>W1–W52</dd>
+              <dt>주차</dt><dd className="header-context-volvo-value">W1–W52</dd>
             </div>
           </dl>
           <time className="identity-profile identity-profile--static" dateTime={detailData.meta.syncedAt}>
@@ -455,7 +455,7 @@ export default function MetricDetails({
               </svg>
             </span>
             <span className="identity-profile-role">업데이트</span>
-            <strong>{formatSyncDate(detailData.meta.syncedAt)}</strong>
+            <strong className="header-context-volvo-value">{formatSyncDate(detailData.meta.syncedAt)}</strong>
           </time>
         </div>
       </header>
