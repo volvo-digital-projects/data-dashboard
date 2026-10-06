@@ -19244,7 +19244,7 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   transform: scaleX(0);
   transform-box: fill-box;
   transform-origin: left center;
-  animation: metric-detail-series-wipe 5.2s cubic-bezier(0.16, 0.72, 0.18, 1) both;
+  animation: metric-detail-series-wipe 5.2s cubic-bezier(0.16, 0.72, 0.18, 0.97) both;
   will-change: transform;
 }
 
