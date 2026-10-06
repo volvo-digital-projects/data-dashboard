@@ -860,7 +860,9 @@ function MetricCard({
             const isReportUnseen =
               unseenReportQuarters.includes(resourceQuarter);
             const isEvidenceUnseen =
-              unseenEvidenceQuarters.includes(resourceQuarter);
+              hasEvidence &&
+              (resourceQuarter === "q3" ||
+                unseenEvidenceQuarters.includes(resourceQuarter));
 
             return (
               <div className="metric-resource-group" key={resourceQuarter}>

@@ -4924,6 +4924,10 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.doesNotMatch(dashboardSource, /signal-pill|className="metric-track"|DSC 평가점수/);
   assert.match(dashboardSource, /V3S_REPORT_SEEN_KEY/);
   assert.match(dashboardSource, /V3S_EVIDENCE_SEEN_KEY[\s\S]*?metric-resource-new/);
+  assert.match(
+    dashboardSource,
+    /const isEvidenceUnseen =\s*hasEvidence &&\s*\(resourceQuarter === "q3" \|\|\s*unseenEvidenceQuarters\.includes\(resourceQuarter\)\);/,
+  );
   assert.doesNotMatch(dashboardSource, /2026 SCORE BOARD|scoreboard-quarter-table|scoreboard-summary/);
   assert.doesNotMatch(dashboardSource, /combatSummaryStyles/);
   assert.doesNotMatch(dashboardSource, /Q1·Q2 평가 기준/);
