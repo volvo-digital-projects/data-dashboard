@@ -33,6 +33,13 @@ const evidenceByShowroom: Record<
         caption: "브랜드매니저 손톱 (길고 화려함)",
       },
     ],
+    q3: [
+      {
+        src: "/evidence/6KR6802/v3s/2026-q3/valet-name-tag-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 수원 Q3 발레파커 네임택 미착용 증빙사진",
+        caption: "발레파커 네임택 미착용",
+      },
+    ],
   },
   "6KR6830": {
     q1: [
@@ -95,6 +102,18 @@ const evidenceByShowroom: Record<
         caption: "근무 직원 간 복장 착용 기준 상이 (상담 영업 직원 동계복)",
       },
     ],
+    q3: [
+      {
+        src: "/evidence/6KR6838/v3s/2026-q3/uniform-shirt-1-mosaic.jpg",
+        alt: "얼굴과 개인정보가 모자이크 처리된 볼보 창원 Q3 영업 직원 셔츠 착용 기준 상이 첫 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (영업 직원 셔츠) 1",
+      },
+      {
+        src: "/evidence/6KR6838/v3s/2026-q3/uniform-shirt-2-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 창원 Q3 영업 직원 셔츠 착용 기준 상이 두 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (영업 직원 셔츠) 2",
+      },
+    ],
   },
   "6KR6839": {
     q1: [
@@ -102,6 +121,13 @@ const evidenceByShowroom: Record<
         src: "/evidence/6KR6839/v3s/2026-q1/brand-manager-nails.jpg",
         alt: "볼보 용산 Q1 브랜드매니저 손톱 증빙사진",
         caption: "브랜드매니저 손톱 (길고 화려함)",
+      },
+    ],
+    q3: [
+      {
+        src: "/evidence/6KR6839/v3s/2026-q3/valet-arm-sleeves-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 용산 Q3 발레파커 팔토시와 흰색 내의 노출 증빙사진",
+        caption: "발레파커 팔토시 착용·흰색 내의 티셔츠 노출",
       },
     ],
   },
@@ -207,6 +233,18 @@ const evidenceByShowroom: Record<
         caption: "핸드폰 사용",
       },
     ],
+    q3: [
+      {
+        src: "/evidence/6KR6847/v3s/2026-q3/phone-use-employee.png",
+        alt: "볼보 송파 Q3 고객 시야 노출 공간에서 핸드폰을 사용하는 직원 증빙사진",
+        caption: "고객 시야에 쉽게 노출되는 공간에서 핸드폰 사용",
+      },
+      {
+        src: "/evidence/6KR6847/v3s/2026-q3/personal-cup-on-desk.png",
+        alt: "볼보 송파 Q3 데스크 위 개인 컵 방치 증빙사진",
+        caption: "데스크 위 개인 컵 방치",
+      },
+    ],
   },
   "6KR6852": {
     q1: [
@@ -283,12 +321,160 @@ const evidenceByShowroom: Record<
       },
     ],
   },
+  "6KR6828": {
+    q3: [
+      {
+        src: "/evidence/6KR6828/v3s/2026-q3/brand-manager-name-tag-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 광주 Q3 브랜드매니저 네임택 미착용 증빙사진",
+        caption: "브랜드매니저 네임택 미착용",
+      },
+      {
+        src: "/evidence/6KR6828/v3s/2026-q3/empty-vehicle-spec-board.png",
+        alt: "볼보 광주 Q3 전시 차량 스펙 보드가 비워진 채 방치된 증빙사진",
+        caption: "전시 차량 스펙 보드 비워진 채 방치",
+      },
+    ],
+  },
+  "6KR6829": {
+    q3: [
+      {
+        src: "/evidence/6KR6829/v3s/2026-q3/uniform-beige-suit-1-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 대구 Q3 영업 직원 베이지색 정장 첫 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (영업 직원 베이지색 정장) 1",
+      },
+      {
+        src: "/evidence/6KR6829/v3s/2026-q3/uniform-beige-suit-2-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 대구 Q3 영업 직원 베이지색 정장 두 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (영업 직원 베이지색 정장) 2",
+      },
+      {
+        src: "/evidence/6KR6829/v3s/2026-q3/uniform-beige-suit-3-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 대구 Q3 영업 직원 베이지색 정장 세 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (영업 직원 베이지색 정장) 3",
+      },
+    ],
+  },
+  "6KR6856": {
+    q3: [
+      {
+        src: "/evidence/6KR6856/v3s/2026-q3/uniform-noncompliance-mosaic.png",
+        alt: "얼굴이 모자이크 처리된 볼보 순천 Q3 근무 직원 복장 기준 상이 및 미준수 증빙사진",
+        caption: "근무 직원 간 복장 착용 상이 및 복장 착용 미준수",
+      },
+      {
+        src: "/evidence/6KR6856/v3s/2026-q3/boxes-near-parking-entrance.png",
+        alt: "볼보 순천 Q3 전시장 주차장 출입구 주변 박스 방치 증빙사진",
+        caption: "전시장 주차장 출입구 주변 박스 방치",
+      },
+    ],
+  },
+  "6KR6861": {
+    q3: [
+      {
+        src: "/evidence/6KR6861/v3s/2026-q3/brand-manager-nail-art.png",
+        alt: "볼보 하남 Q3 브랜드매니저 화려한 네일아트와 부적절한 손톱 길이 증빙사진",
+        caption: "브랜드매니저 화려한 네일아트 및 부적절한 손톱 길이",
+      },
+    ],
+  },
+  "6KR6862": {
+    q3: [
+      {
+        src: "/evidence/6KR6862/v3s/2026-q3/brand-manager-attire.jpg",
+        alt: "볼보 부천 Q3 브랜드매니저 의상 관리 미흡 증빙사진",
+        caption: "브랜드매니저 의상 관리 미흡",
+      },
+      {
+        src: "/evidence/6KR6862/v3s/2026-q3/table-maintenance.jpg",
+        alt: "볼보 부천 Q3 테이블 관리 미흡 증빙사진",
+        caption: "테이블 관리 미흡",
+      },
+    ],
+  },
+  "6KR6864": {
+    q3: [
+      {
+        src: "/evidence/6KR6864/v3s/2026-q3/uniform-season-mismatch-mosaic.png",
+        alt: "얼굴이 모자이크 처리된 볼보 구리 Q3 영업 직원과 브랜드매니저 복장 기준 상이 증빙사진",
+        caption: "근무 직원 간 복장 기준 상이 (영업 직원 하복·브랜드매니저 춘추복)",
+      },
+      {
+        src: "/evidence/6KR6864/v3s/2026-q3/brand-manager-name-tag-uniform-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 구리 Q3 브랜드매니저 네임택 위치 및 복장 기준 미준수 증빙사진",
+        caption: "브랜드매니저 네임택 착용 위치 미흡 및 복장 기준 미준수",
+      },
+    ],
+  },
+  "6KR6867": {
+    q3: [
+      {
+        src: "/evidence/6KR6867/v3s/2026-q3/uniform-differences-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 고양 Q3 근무 직원 복장 착용 기준 상이 첫 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (재킷 미착용·셔츠 상이·복장 기준 상이)",
+      },
+      {
+        src: "/evidence/6KR6867/v3s/2026-q3/uniform-differences-2.jpg",
+        alt: "볼보 고양 Q3 근무 직원 복장 착용 기준 상이 두 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (재킷 미착용·셔츠 상이) 2",
+      },
+      {
+        src: "/evidence/6KR6867/v3s/2026-q3/brand-manager-phone-use-mosaic.png",
+        alt: "얼굴이 모자이크 처리된 볼보 고양 Q3 브랜드매니저 핸드폰 사용 증빙사진",
+        caption: "브랜드매니저 핸드폰 사용",
+      },
+    ],
+  },
+  "6KR6871": {
+    q3: [
+      {
+        src: "/evidence/6KR6871/v3s/2026-q3/valet-arm-sleeves-mosaic.png",
+        alt: "얼굴이 모자이크 처리된 볼보 진주 Q3 발레파커 규정 외 팔토시 착용 증빙사진",
+        caption: "발레파커 복장 착용 가이드 미준수 (규정 외 팔토시)",
+      },
+      {
+        src: "/evidence/6KR6871/v3s/2026-q3/sales-uniform-noncompliance.png",
+        alt: "볼보 진주 Q3 복장 착용 미준수 영업 직원 근무 증빙사진",
+        caption: "복장 착용 미준수 영업 직원 근무",
+      },
+      {
+        src: "/evidence/6KR6871/v3s/2026-q3/brand-manager-nail-art.png",
+        alt: "볼보 진주 Q3 브랜드매니저 화려한 네일아트 증빙사진",
+        caption: "브랜드매니저 화려한 네일아트",
+      },
+      {
+        src: "/evidence/6KR6871/v3s/2026-q3/consultation-shoes.png",
+        alt: "볼보 진주 Q3 상담 영업 직원 테슬 구두 착화 주의 증빙사진",
+        caption: "상담 영업 직원 구두 착화 주의 (테슬 구두·점수 미차감)",
+      },
+    ],
+  },
+  "6KR6873": {
+    q3: [
+      {
+        src: "/evidence/6KR6873/v3s/2026-q3/sales-name-tag-mosaic.png",
+        alt: "얼굴이 모자이크 처리된 볼보 군산 Q3 상담 영업 직원 네임택 미착용 증빙사진",
+        caption: "상담 영업 직원 네임택 미착용",
+      },
+    ],
+  },
   "6KR6874": {
     q2: [
       {
         src: "/evidence/6KR6874/v3s/2026-q2/brand-manager-volvo-badge-mosaic.png",
         alt: "얼굴이 익명화된 울산 Q2 브랜드매니저 볼보 배지 미착용 증빙사진",
         caption: "브랜드매니저 볼보 배지 미착용",
+      },
+    ],
+    q3: [
+      {
+        src: "/evidence/6KR6874/v3s/2026-q3/uniform-season-mismatch-1-mosaic.jpg",
+        alt: "얼굴이 모자이크 처리된 볼보 울산 Q3 근무 직원 복장 착용 기준 상이 첫 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (재킷 미착용·셔츠 상이) 1",
+      },
+      {
+        src: "/evidence/6KR6874/v3s/2026-q3/uniform-season-mismatch-2.jpg",
+        alt: "볼보 울산 Q3 근무 직원 복장 착용 기준 상이 두 번째 증빙사진",
+        caption: "근무 직원 간 복장 착용 기준 상이 (재킷 미착용·셔츠 상이) 2",
       },
     ],
   },

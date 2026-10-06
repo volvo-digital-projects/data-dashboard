@@ -6298,7 +6298,7 @@ test("removes the V3S cumulative average label and aligns the expanded quarter c
   );
 });
 
-test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for every mapped showroom", async () => {
+test("provides accessible, privacy-safe V3S Q1 through Q3 evidence galleries for every mapped showroom", async () => {
   const [dashboardSource, gallerySource, galleryCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/V3SEvidenceGallery.tsx", import.meta.url), "utf8"),
@@ -6345,6 +6345,25 @@ test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for eve
   q2ShowroomIds.forEach((cdsid) => {
     assert.match(gallerySource, new RegExp(`"${cdsid}"[\\s\\S]*?q2:`));
   });
+  const q3ShowroomIds = [
+    "6KR6802",
+    "6KR6828",
+    "6KR6829",
+    "6KR6838",
+    "6KR6839",
+    "6KR6847",
+    "6KR6856",
+    "6KR6861",
+    "6KR6862",
+    "6KR6864",
+    "6KR6867",
+    "6KR6871",
+    "6KR6873",
+    "6KR6874",
+  ];
+  q3ShowroomIds.forEach((cdsid) => {
+    assert.match(gallerySource, new RegExp(`"${cdsid}"[\\s\\S]*?q3:`));
+  });
   const q1EvidenceAssets = [
     "6KR6802/v3s/2026-q1/uniform-brand-manager-spring-fall.jpg",
     "6KR6802/v3s/2026-q1/uniform-sales-winter-mosaic.jpg",
@@ -6390,10 +6409,45 @@ test("provides accessible, privacy-safe V3S Q1 and Q2 evidence galleries for eve
     "6KR6870/v3s/2026-q2/specialist-bottoms-mosaic.png",
     "6KR6874/v3s/2026-q2/brand-manager-volvo-badge-mosaic.png",
   ];
-  const evidenceAssets = [...q1EvidenceAssets, ...q2EvidenceAssets];
+  const q3EvidenceAssets = [
+    "6KR6802/v3s/2026-q3/valet-name-tag-mosaic.jpg",
+    "6KR6828/v3s/2026-q3/brand-manager-name-tag-mosaic.jpg",
+    "6KR6828/v3s/2026-q3/empty-vehicle-spec-board.png",
+    "6KR6829/v3s/2026-q3/uniform-beige-suit-1-mosaic.jpg",
+    "6KR6829/v3s/2026-q3/uniform-beige-suit-2-mosaic.jpg",
+    "6KR6829/v3s/2026-q3/uniform-beige-suit-3-mosaic.jpg",
+    "6KR6838/v3s/2026-q3/uniform-shirt-1-mosaic.jpg",
+    "6KR6838/v3s/2026-q3/uniform-shirt-2-mosaic.jpg",
+    "6KR6839/v3s/2026-q3/valet-arm-sleeves-mosaic.jpg",
+    "6KR6847/v3s/2026-q3/phone-use-employee.png",
+    "6KR6847/v3s/2026-q3/personal-cup-on-desk.png",
+    "6KR6856/v3s/2026-q3/uniform-noncompliance-mosaic.png",
+    "6KR6856/v3s/2026-q3/boxes-near-parking-entrance.png",
+    "6KR6861/v3s/2026-q3/brand-manager-nail-art.png",
+    "6KR6862/v3s/2026-q3/brand-manager-attire.jpg",
+    "6KR6862/v3s/2026-q3/table-maintenance.jpg",
+    "6KR6864/v3s/2026-q3/uniform-season-mismatch-mosaic.png",
+    "6KR6864/v3s/2026-q3/brand-manager-name-tag-uniform-mosaic.jpg",
+    "6KR6867/v3s/2026-q3/uniform-differences-mosaic.jpg",
+    "6KR6867/v3s/2026-q3/uniform-differences-2.jpg",
+    "6KR6867/v3s/2026-q3/brand-manager-phone-use-mosaic.png",
+    "6KR6871/v3s/2026-q3/valet-arm-sleeves-mosaic.png",
+    "6KR6871/v3s/2026-q3/sales-uniform-noncompliance.png",
+    "6KR6871/v3s/2026-q3/brand-manager-nail-art.png",
+    "6KR6871/v3s/2026-q3/consultation-shoes.png",
+    "6KR6873/v3s/2026-q3/sales-name-tag-mosaic.png",
+    "6KR6874/v3s/2026-q3/uniform-season-mismatch-1-mosaic.jpg",
+    "6KR6874/v3s/2026-q3/uniform-season-mismatch-2.jpg",
+  ];
+  const evidenceAssets = [
+    ...q1EvidenceAssets,
+    ...q2EvidenceAssets,
+    ...q3EvidenceAssets,
+  ];
   assert.equal(q1EvidenceAssets.length, 20);
   assert.equal(q2EvidenceAssets.length, 21);
-  assert.equal(evidenceAssets.length, 41);
+  assert.equal(q3EvidenceAssets.length, 28);
+  assert.equal(evidenceAssets.length, 69);
   evidenceAssets.forEach((asset) => {
     assert.match(gallerySource, new RegExp(asset.replaceAll(".", "\\.")));
   });
