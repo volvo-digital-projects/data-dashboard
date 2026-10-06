@@ -46,6 +46,8 @@ test('YouTube shared channel is counted once and every video is attributed from 
  const pair=data.creators.filter(p=>['조선별','곽지명'].includes(p.name));
  assert.equal(pair[0].channelId,pair[1].channelId);
  const channel=data.channels.find(c=>c.id===pair[0].channelId);
+ assert.ok(channel.videoScopeExcludeIds.includes('6u1rmo0xfCQ'));
+ assert.ok(!channel.scopeVideoIds.includes('6u1rmo0xfCQ'));
  assert.equal(channel.sharedVideos.length,channel.videoCount);
  const expected=new Map([
   ['zh-E_v-PXFE','곽지명'],['IXy0Iu6kAEI','조선별'],['9O5QGxCcuEw','조선별'],['YxShHQUP5q0','곽지명'],
