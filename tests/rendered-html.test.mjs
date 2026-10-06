@@ -4199,7 +4199,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
 
   assert.equal(weekly.meta.workbookUrl, undefined);
   assert.ok(weekly.meta.vocLatestWeek >= 37);
-  assert.ok(weekly.meta.cxLatestWeek >= 38);
+  assert.equal(weekly.meta.cxLatestWeek, 39);
   assert.equal(weekly.meta.v3sClosedQuarter, 3);
   assert.equal(weekly.meta.vocClosedQuarter, 3);
   assert.equal(weekly.meta.cxClosedQuarter, 3);
@@ -4315,6 +4315,11 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
     typeof weekly.cx.average[weekly.meta.cxLatestWeek - 1],
     "number",
   );
+  assert.ok(
+    Object.values(weekly.cx.byCdsid).every(
+      (series) => typeof series[weekly.meta.cxLatestWeek - 1] === "number",
+    ),
+  );
   assert.match(syncSource, /storeSeries\.length === 39[\s\S]*?storeSeries\.every/);
   assert.match(syncSource, /parts\.some\(\(value\) => value === null \|\| value === undefined\)[\s\S]*?return null/);
   assert.match(syncSource, /08☆헤이볼보 앱 가입고객수/);
@@ -4348,9 +4353,29 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   const appComponent = details.cx.components.find(
     (component) => component.key === "app",
   );
+  const emergencyComponent = details.cx.components.find(
+    (component) => component.key === "emergency",
+  );
   assert.equal(
     typeof appComponent.average[weekly.meta.cxLatestWeek - 1],
     "number",
+  );
+  assert.equal(
+    typeof emergencyComponent.average[weekly.meta.cxLatestWeek - 1],
+    "number",
+  );
+  assert.ok(
+    details.cx.components.every(
+      (component) =>
+        typeof component.average[weekly.meta.cxLatestWeek - 1] === "number" &&
+        Object.values(component.byCdsid).every(
+          (series) => typeof series[weekly.meta.cxLatestWeek - 1] === "number",
+        ),
+    ),
+  );
+  assert.match(
+    syncSource,
+    /fillClosedQuarterEndpoints\([\s\S]*?emergencyForDashboard/,
   );
   assert.match(syncSource, /01☆VOC종합만족도\(60%\)/);
   assert.match(syncSource, /04☆VOC해피콜\(10%\)/);

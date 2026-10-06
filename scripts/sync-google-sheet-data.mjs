@@ -246,6 +246,53 @@ function completedQuarterCount(result) {
   );
 }
 
+function fillClosedQuarterEndpoints(result, quarters, closedQuarterCount) {
+  const average = [...result.average];
+  const byCdsid = Object.fromEntries(
+    Object.entries(result.byCdsid).map(([cdsid, values]) => [cdsid, [...values]]),
+  );
+
+  for (let quarterIndex = 0; quarterIndex < closedQuarterCount; quarterIndex += 1) {
+    const endpointIndex = (quarterIndex + 1) * 13 - 1;
+    const previousIndex = endpointIndex - 1;
+
+    if (average[endpointIndex] === null) {
+      average[endpointIndex] =
+        quarters.average[quarterIndex] ?? average[previousIndex] ?? null;
+    }
+
+    for (const [cdsid, values] of Object.entries(byCdsid)) {
+      if (values[endpointIndex] !== null) continue;
+      values[endpointIndex] =
+        quarters.byCdsid[cdsid]?.[quarterIndex] ??
+        values[previousIndex] ??
+        null;
+    }
+  }
+
+  const nationalLatestWeek = average.reduce(
+    (latest, value, index) => (value === null ? latest : index + 1),
+    0,
+  );
+  const storeSeries = Object.values(byCdsid);
+  const storeLatestWeek = Array.from({ length: 52 }, (_, index) => index).reduce(
+    (latest, index) =>
+      storeSeries.length === 39 &&
+      storeSeries.every((values) => values[index] !== null)
+        ? index + 1
+        : latest,
+    0,
+  );
+
+  return {
+    ...result,
+    average,
+    byCdsid,
+    nationalLatestWeek,
+    latestWeek: Math.max(nationalLatestWeek, storeLatestWeek),
+  };
+}
+
 function combineQuarterlyResults(results, completedQuarters) {
   const cdsids = Object.keys(results[0].byCdsid);
   const combine = (series) =>
@@ -331,6 +378,11 @@ const cxQuarterScores = quarterlyResult(loaded.cxQuarterScore);
 const v3sClosedQuarter = completedQuarterCount(v3sQuarters);
 const vocClosedQuarter = completedQuarterCount(vocQuarters);
 const cxClosedQuarter = completedQuarterCount(cxQuarterScores);
+const emergencyForDashboard = fillClosedQuarterEndpoints(
+  emergency,
+  emergencyQuarters,
+  cxClosedQuarter,
+);
 const cxQuarters = combineQuarterlyResults(
   [
     deliveryQuarters,
@@ -346,7 +398,7 @@ const syncedAt = new Date().toISOString();
 const cxLatestWeek = Math.min(
   delivery.latestWeek,
   testDrive.latestWeek,
-  emergency.latestWeek,
+  emergencyForDashboard.latestWeek,
   app.latestWeek,
 );
 const cdsids = Object.keys(delivery.byCdsid);
@@ -363,7 +415,7 @@ const cxByCdsid = Object.fromEntries(
       const parts = [
         delivery.byCdsid[cdsid]?.[index],
         testDrive.byCdsid[cdsid]?.[index],
-        emergency.byCdsid[cdsid]?.[index],
+        emergencyForDashboard.byCdsid[cdsid]?.[index],
         actionScore,
         app.byCdsid[cdsid]?.[index],
       ];
@@ -384,7 +436,7 @@ const cxAverage = Array.from({ length: 52 }, (_, index) => {
   const parts = [
     delivery.average[index],
     testDrive.average[index],
-    emergency.average[index],
+    emergencyForDashboard.average[index],
     actionPlan.average[quarterIndex],
     app.average[index],
   ];
@@ -540,7 +592,7 @@ const detailsOutput = {
         unit: "점",
         cadence: "weekly",
         quarters: emergencyQuarters,
-        ...emergency,
+        ...emergencyForDashboard,
       },
       {
         key: "actionPlan",
