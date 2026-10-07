@@ -6582,7 +6582,7 @@ test("provides accessible, privacy-safe V3S Q1 through Q3 evidence galleries for
   );
 });
 
-test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape viewer", async () => {
+test("maps all 39 V3S Q1 through Q3 reports and presents them in an iPad landscape viewer", async () => {
   const [dashboardSource, viewerSource, viewerCss] = await Promise.all([
     readFile(new URL("../app/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/V3SReportViewer.tsx", import.meta.url), "utf8"),
@@ -6593,16 +6593,16 @@ test("maps all 39 V3S Q1 and Q2 reports and presents them in an iPad landscape v
   ]);
 
   const reportPageCounts = [
-    ...viewerSource.matchAll(/"(6KR\d+):(q[12])": (\d+)/g),
+    ...viewerSource.matchAll(/"(6KR\d+):(q[123])": (\d+)/g),
   ].map((match) => ({
     cdsid: match[1],
     quarter: match[2],
     pageCount: Number(match[3]),
   }));
-  assert.equal(reportPageCounts.length, 78);
+  assert.equal(reportPageCounts.length, 117);
   assert.equal(
     reportPageCounts.reduce((total, report) => total + report.pageCount, 0),
-    284,
+    430,
   );
   const reportCdsids = [...new Set(reportPageCounts.map((report) => report.cdsid))];
   assert.equal(new Set(reportCdsids).size, 39);
