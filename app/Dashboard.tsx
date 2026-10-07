@@ -46,6 +46,27 @@ type CxQ2DscData = {
 const V3S_EVIDENCE_SEEN_KEY = "volvo-dashboard-v3s-evidence-seen-v1";
 const V3S_REPORT_SEEN_KEY = "volvo-dashboard-v3s-report-seen-v1";
 
+function preserveSelectedShowroomInPagesUrl(cdsid: string) {
+  if (
+    typeof window === "undefined" ||
+    !window.location.hostname.endsWith(".github.io") ||
+    !window.location.pathname.startsWith("/data-dashboard/")
+  ) {
+    return;
+  }
+
+  const currentHash = window.location.hash;
+  const nextHash = currentHash.replace(
+    /^#\/dashboard\/[^/?#]+/,
+    `#/dashboard/${encodeURIComponent(cdsid)}`,
+  );
+  if (nextHash === currentHash) return;
+
+  const nextUrl = new URL(window.location.href);
+  nextUrl.hash = nextHash;
+  window.history.replaceState(null, "", nextUrl.toString());
+}
+
 type QuarterRecord = {
   cdsid: string;
   showroom: string;
@@ -2590,6 +2611,10 @@ export default function Dashboard({
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    setSelectedCode(initialCdsid);
+  }, [initialCdsid]);
+
   useEffect(
     () => () => {
       if (linkedMetricTimerRef.current !== null) {
@@ -3177,6 +3202,7 @@ export default function Dashboard({
                         role="menuitem"
                         className="profile-showroom-option"
                         onClick={() => {
+                          preserveSelectedShowroomInPagesUrl(item.cdsid);
                           setSelectedCode(item.cdsid);
                           setProfileOpen(false);
                         }}

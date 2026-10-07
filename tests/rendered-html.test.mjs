@@ -5073,6 +5073,18 @@ test("shows the showroom switcher only within the authenticated scope", async ()
     dashboardSource,
     /className="identity-profile-menu" ref=\{profileMenuRef\}/,
   );
+  assert.match(
+    dashboardSource,
+    /function preserveSelectedShowroomInPagesUrl\(cdsid: string\)[\s\S]*?hostname\.endsWith\("\.github\.io"\)[\s\S]*?currentHash\.replace\([\s\S]*?encodeURIComponent\(cdsid\)[\s\S]*?history\.replaceState\(null, "", nextUrl\.toString\(\)\)/,
+  );
+  assert.match(
+    dashboardSource,
+    /onClick=\{\(\) => \{[\s\S]*?preserveSelectedShowroomInPagesUrl\(item\.cdsid\);[\s\S]*?setSelectedCode\(item\.cdsid\);/,
+  );
+  assert.match(
+    dashboardSource,
+    /useEffect\(\(\) => \{\s*setSelectedCode\(initialCdsid\);\s*\}, \[initialCdsid\]\);/,
+  );
   assert.doesNotMatch(dashboardSource, /<select[\s\S]*?다른 전시장 선택/);
   assert.match(dashboardSource, /<strong>다른 전시장 선택<\/strong>/);
   assert.doesNotMatch(
