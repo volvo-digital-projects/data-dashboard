@@ -1290,6 +1290,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   transform: translate(-40%, -50%);
 }
 
+.growth-profile-youtube-first-upload {
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+}
+
 .growth-staff-roster-list button > span small {
   min-width: 0;
   overflow: hidden;

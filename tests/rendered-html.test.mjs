@@ -640,19 +640,25 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /const isTeamLeader = employee\.role === "영업팀장" \|\| employee\.jobTitle === "팀장";/);
   assert.match(navigation, /className="growth-staff-name">\{employee\.name\}<\/span>[\s\S]*?className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L<\/i>/);
   assert.match(navigation, /className="growth-staff-hire-date">\{formatStaffShortDate\(employee\.hireDate\)\}<\/small>/);
-  const youtubeStaffBlock = source.match(/const STAFF_YOUTUBE_BADGE_KEYS = new Set\(\[([\s\S]*?)\]\);/)?.[1] ?? "";
-  const expectedYoutubeStaffKeys = [
-    "6KR6867:송민경", "6KR6830:진주현", "6KR6858:나수연", "6KR6870:이정훈",
-    "6KR6849:신수경", "6KR6846:신승희", "6KR6847:김정호", "6KR6861:곽지명",
-    "6KR6846:박형진", "6KR6846:김예소", "6KR6858:조선별", "6KR6852:이규환", "6KR6839:박준수", "6KR6839:김명준", "6KR6838:이유성",
-    "6KR6841:정지윤",
-  ];
-  assert.equal((youtubeStaffBlock.match(/6KR\d+:/g) ?? []).length, expectedYoutubeStaffKeys.length);
-  expectedYoutubeStaffKeys.forEach((key) => assert.match(youtubeStaffBlock, new RegExp(`"${key}"`)));
+  const youtubeStaffBlock = source.match(/const STAFF_YOUTUBE_FIRST_UPLOADS = new Map\(\[([\s\S]*?)\]\);/)?.[1] ?? "";
+  const expectedYoutubeStaffUploads = new Map([
+    ["6KR6867:송민경", "260620"], ["6KR6830:진주현", "260706"],
+    ["6KR6858:나수연", "260529"], ["6KR6870:이정훈", "260515"],
+    ["6KR6849:신수경", "260225"], ["6KR6846:신승희", "260203"],
+    ["6KR6847:김정호", "260107"], ["6KR6861:곽지명", "260730"],
+    ["6KR6846:박형진", "260608"], ["6KR6846:김예소", "260902"],
+    ["6KR6858:조선별", "260730"], ["6KR6852:이규환", "260325"],
+    ["6KR6839:박준수", "260413"], ["6KR6839:김명준", "260405"],
+    ["6KR6838:이유성", "260218"], ["6KR6841:정지윤", "260410"],
+  ]);
+  assert.equal((youtubeStaffBlock.match(/6KR\d+:/g) ?? []).length, expectedYoutubeStaffUploads.size);
+  expectedYoutubeStaffUploads.forEach((date, key) => {
+    assert.match(youtubeStaffBlock, new RegExp(`\\["${key}", "${date}"\\]`));
+  });
   assert.doesNotMatch(youtubeStaffBlock, /6KR6834:박준수/);
-  assert.match(source, /const selectedStaffHasYoutubeBadge = selectedStaffEmployee[\s\S]*?STAFF_YOUTUBE_BADGE_KEYS\.has\(`\$\{selected\.cdsid\}:\$\{selectedStaffEmployee\.name\}`\)/);
+  assert.match(source, /const selectedStaffFirstYoutubeUpload = selectedStaffEmployee[\s\S]*?STAFF_YOUTUBE_FIRST_UPLOADS\.get\([\s\S]*?`\$\{selected\.cdsid\}:\$\{selectedStaffEmployee\.name\}`[\s\S]*?const selectedStaffHasYoutubeBadge = selectedStaffFirstYoutubeUpload !== null/);
   assert.match(source, /"6KR6841:정지윤"/);
-  assert.match(navigation, /selectedStaffHasYoutubeBadge \? \([\s\S]*?className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동"/);
+  assert.match(navigation, /selectedStaffHasYoutubeBadge \? \([\s\S]*?className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동"[\s\S]*?className="growth-profile-youtube-first-upload"[\s\S]*?볼보영상 첫 업로드 - \{selectedStaffFirstYoutubeUpload\}/);
   assert.doesNotMatch(navigation, /className="growth-staff-youtube-badge"/);
   assert.match(css, /\.growth-staff-roster-list button > span strong\s*\{[\s\S]*?width:\s*5\.25em;[\s\S]*?flex:\s*0 0 5\.25em;[\s\S]*?display:\s*inline-grid;[\s\S]*?grid-template-columns:\s*3em 13px;[\s\S]*?white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-lead-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*13px;[^}]*border-radius:\s*50%;[^}]*background:\s*#176f8a;[^}]*transform:\s*none;/);
@@ -660,6 +666,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-role\s*\{[^}]*display:\s*inline-flex;[^}]*align-items:\s*center;[^}]*gap:\s*4px;/);
   assert.match(css, /\.growth-profile-youtube-badge\s*\{[^}]*width:\s*13px;[^}]*height:\s*9px;[^}]*border-radius:\s*2\.5px;[^}]*background:\s*#ff0033;/);
   assert.match(css, /\.growth-profile-youtube-badge::before\s*\{[^}]*border-left:\s*4px solid #fff;/);
+  assert.match(css, /\.growth-profile-youtube-first-upload\s*\{[^}]*color:\s*inherit;[^}]*font:\s*inherit;[^}]*white-space:\s*nowrap;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*min-height:\s*30px;/);
   assert.match(css, /\.growth-staff-roster-columns span:not\(:first-child\)\s*\{[^}]*text-align:\s*right;/);
   assert.match(css, /\.growth-staff-roster-list button\s*\{[^}]*padding:\s*0 10px 0 8px;/);

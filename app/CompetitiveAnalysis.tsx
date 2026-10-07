@@ -109,23 +109,23 @@ const SHOWROOM_ENVIRONMENT_IMPROVEMENT_LABELS = new Set([
   "시설 편의 미제공",
   "시승기회·시간 확대",
 ]);
-const STAFF_YOUTUBE_BADGE_KEYS = new Set([
-  "6KR6867:송민경",
-  "6KR6830:진주현",
-  "6KR6858:나수연",
-  "6KR6870:이정훈",
-  "6KR6849:신수경",
-  "6KR6846:신승희",
-  "6KR6847:김정호",
-  "6KR6861:곽지명",
-  "6KR6846:박형진",
-  "6KR6846:김예소",
-  "6KR6858:조선별",
-  "6KR6852:이규환",
-  "6KR6839:박준수",
-  "6KR6839:김명준",
-  "6KR6838:이유성",
-  "6KR6841:정지윤",
+const STAFF_YOUTUBE_FIRST_UPLOADS = new Map([
+  ["6KR6867:송민경", "260620"],
+  ["6KR6830:진주현", "260706"],
+  ["6KR6858:나수연", "260529"],
+  ["6KR6870:이정훈", "260515"],
+  ["6KR6849:신수경", "260225"],
+  ["6KR6846:신승희", "260203"],
+  ["6KR6847:김정호", "260107"],
+  ["6KR6861:곽지명", "260730"],
+  ["6KR6846:박형진", "260608"],
+  ["6KR6846:김예소", "260902"],
+  ["6KR6858:조선별", "260730"],
+  ["6KR6852:이규환", "260325"],
+  ["6KR6839:박준수", "260413"],
+  ["6KR6839:김명준", "260405"],
+  ["6KR6838:이유성", "260218"],
+  ["6KR6841:정지윤", "260410"],
 ]);
 type StaffEmployee = {
   name: string;
@@ -2320,9 +2320,12 @@ export default function CompetitiveAnalysis({
   const selectedStaffEmployee =
     rankedSalesStaff.find(({ employee }) => employee.name === selectedStaffName)
       ?.employee ?? rankedSalesStaff[0]?.employee;
-  const selectedStaffHasYoutubeBadge = selectedStaffEmployee
-    ? STAFF_YOUTUBE_BADGE_KEYS.has(`${selected.cdsid}:${selectedStaffEmployee.name}`)
-    : false;
+  const selectedStaffFirstYoutubeUpload = selectedStaffEmployee
+    ? STAFF_YOUTUBE_FIRST_UPLOADS.get(
+        `${selected.cdsid}:${selectedStaffEmployee.name}`,
+      ) ?? null
+    : null;
+  const selectedStaffHasYoutubeBadge = selectedStaffFirstYoutubeUpload !== null;
   const selectedStaffScoring = rankedSalesStaff.find(
     ({ employee }) => employee.name === selectedStaffEmployee?.name,
   );
@@ -3593,7 +3596,12 @@ export default function CompetitiveAnalysis({
                   <small className="growth-profile-role">
                     <span>영업직원</span>
                     {selectedStaffHasYoutubeBadge ? (
-                      <i className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동" />
+                      <>
+                        <i className="growth-profile-youtube-badge" aria-label="유튜브 활동" title="유튜브 활동" />
+                        <span className="growth-profile-youtube-first-upload">
+                          볼보영상 첫 업로드 - {selectedStaffFirstYoutubeUpload}
+                        </span>
+                      </>
                     ) : null}
                   </small>
                   <strong>
