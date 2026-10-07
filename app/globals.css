@@ -19312,7 +19312,7 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
 }
 
 .metric-detail-week-label {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 680;
   text-anchor: middle;
 }
@@ -19337,7 +19337,7 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
 
 .metric-detail-quarter-range {
   fill: #84939b;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 650;
   letter-spacing: 0;
 }

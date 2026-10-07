@@ -2679,6 +2679,12 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((vocBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.equal((vocBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
+  for (const range of [
+    "W01–W13 (251228(일)–260323(월))",
+    "W14–W26 (260329(일)–260627(토))",
+    "W27–W39 (260628(일)–260926(토))",
+    "W40–W52 (260927(일)–261226(토))",
+  ]) assert.equal(vocBody.split(range).length - 1, 5);
   assert.equal((vocBody.match(/class="metric-detail-week-guide(?: major)?"/g) ?? []).length, 265);
   assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 25);
   assert.equal((vocBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
@@ -2753,6 +2759,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/viewBox="0 0 1440 104"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/preserveAspectRatio="xMidYMid meet"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-quarter-label"/g) ?? []).length, 20);
+  assert.match(cxBody, /W27–W39 \(260628\(일\)–260926\(토\)\)/);
   assert.equal((cxBody.match(/class="metric-detail-week-guide(?: major)?"/g) ?? []).length, 265);
   assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"/g) ?? []).length, 25);
   assert.equal((cxBody.match(/class="metric-detail-quarter-boundary"[^>]*y2="103"/g) ?? []).length, 25);
@@ -2838,8 +2845,9 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   );
   assert.match(
     detailCss,
-    /\.metric-detail-week-label\s*\{[^}]*font-size:\s*9px;[^}]*font-weight:\s*680;/,
+    /\.metric-detail-week-label\s*\{[^}]*font-size:\s*10px;[^}]*font-weight:\s*680;/,
   );
+  assert.match(detailCss, /\.metric-detail-quarter-range\s*\{[^}]*font-size:\s*9px;/);
   assert.match(
     detailCss,
     /\.metric-detail-quarter-boundary\s*\{[^}]*stroke:\s*#cad8dd;/,
