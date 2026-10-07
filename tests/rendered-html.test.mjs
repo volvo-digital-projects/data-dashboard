@@ -2912,6 +2912,14 @@ test("uses Volvo Centum for English and numeric values in both 2x2 header grids"
   assert.match(detailsHtml, /metric-detail-bar metric-detail-bar--1[\s\S]*?metric-detail-bar metric-detail-bar--2[\s\S]*?metric-detail-bar metric-detail-bar--3[\s\S]*?metric-detail-bar metric-detail-bar--4/);
   assert.match(css, /@keyframes metric-detail-icon-bar-pulse\s*\{[^}]*scaleY\(1\)[\s\S]*?48%\s*\{transform:scaleY\(\.78\)\}[\s\S]*?64%\s*\{transform:scaleY\(1\.05\)\}/);
   assert.match(css, /@keyframes metric-detail-icon-refresh\s*\{[\s\S]*?30%\s*\{rotate:14deg\}\s*48%\s*\{rotate:-3deg\}/);
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.identity-analysis-entry:has\(\.identity-analysis-hit:active\),[\s\S]*?\.dashboard-identity-header \.analysis-context-item:active\s*\{[^}]*transform:\s*none;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.dashboard-identity-header \.identity-analysis-entry:has\(\.identity-analysis-hit:active\),[\s\S]*?\.dashboard-identity-header \.analysis-context-item:active\s*\{[^}]*transform:\s*scale\(/,
+  );
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {

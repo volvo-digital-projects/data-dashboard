@@ -16646,8 +16646,7 @@ body {
     transition:
       background-color 120ms ease,
       border-color 120ms ease,
-      box-shadow 120ms ease,
-      transform 90ms ease;
+      box-shadow 120ms ease;
   }
 
   .dashboard-identity-header .identity-profile {
@@ -16688,7 +16687,7 @@ body {
     box-shadow:
       inset 0 0 0 1px rgba(194, 225, 238, 0.2),
       inset 0 4px 10px rgba(2, 21, 33, 0.2);
-    transform: scale(0.975);
+    transform: none;
   }
 
   .dashboard-identity-header .identity-analysis-entry:has(.identity-analysis-hit:active) .identity-icon,
