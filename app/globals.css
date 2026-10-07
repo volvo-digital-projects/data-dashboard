@@ -19424,9 +19424,14 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
     transform-box: fill-box;
     transform-origin: center;
   }
-  .metric-detail-context-icon-box.metric .metric-detail-context-icon {
-    animation: metric-detail-icon-bars 3.8s ease-in-out infinite;
+  .metric-detail-context-icon-box.metric .metric-detail-bar {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation: metric-detail-icon-bar-pulse 3.2s ease-in-out infinite;
   }
+  .metric-detail-context-icon-box.metric .metric-detail-bar--2 { animation-delay: -0.8s; }
+  .metric-detail-context-icon-box.metric .metric-detail-bar--3 { animation-delay: -1.6s; }
+  .metric-detail-context-icon-box.metric .metric-detail-bar--4 { animation-delay: -2.4s; }
   .metric-detail-context-icon-box.showroom .metric-detail-context-icon {
     animation: metric-detail-icon-showroom 4.4s ease-in-out infinite;
   }
@@ -19463,7 +19468,7 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   .dashboard-identity-header .identity-profile-icon::before,
   .dashboard-identity-header .identity-profile-icon::after { animation: identity-person-sway 4.2s ease-in-out infinite; }
 }
-@keyframes metric-detail-icon-bars { 0%,18%,82%,100%{translate:0 0} 46%{translate:0 -1px} }
+@keyframes metric-detail-icon-bar-pulse { 0%,18%,82%,100%{transform:scaleY(1)} 48%{transform:scaleY(.78)} 64%{transform:scaleY(1.05)} }
 @keyframes metric-detail-icon-showroom { 0%,18%,82%,100%{scale:1} 50%{scale:1.045} }
 @keyframes metric-detail-icon-calendar { 0%,65%,100%{translate:0 0} 30%{translate:0 -1px} 48%{translate:0 .5px} }
 @keyframes metric-detail-icon-refresh { 0%,65%,100%{rotate:0deg} 30%{rotate:14deg} 48%{rotate:-3deg} }

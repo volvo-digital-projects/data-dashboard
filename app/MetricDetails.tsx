@@ -426,7 +426,11 @@ export default function MetricDetails({
             <div className="identity-analysis-entry">
               <span className="identity-icon metric-detail-context-icon-box metric" aria-hidden="true">
                 <svg className="metric-detail-context-icon" viewBox="0 0 20 20">
-                  <path d="M3 16.5h14M4.5 15V11m3.7 4V7m3.7 8V9m3.6 6V4" />
+                  <path className="metric-detail-bar-baseline" d="M3 16.5h14" />
+                  <path className="metric-detail-bar metric-detail-bar--1" d="M4.5 15V11" />
+                  <path className="metric-detail-bar metric-detail-bar--2" d="M8.2 15V7" />
+                  <path className="metric-detail-bar metric-detail-bar--3" d="M11.9 15V9" />
+                  <path className="metric-detail-bar metric-detail-bar--4" d="M15.5 15V4" />
                 </svg>
               </span>
               <dt>지표</dt><dd className="header-context-volvo-value">{group.label}</dd>

@@ -2907,8 +2907,10 @@ test("uses Volvo Centum for English and numeric values in both 2x2 header grids"
   );
   assert.match(
     css,
-    /@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\.metric-detail-context-icon-box\.metric \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-bars 3\.8s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.showroom \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-showroom 4\.4s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.week \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-calendar 3\.8s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.update \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-refresh 3\.2s ease-in-out infinite;/,
+    /@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\.metric-detail-context-icon-box\.metric \.metric-detail-bar\s*\{[^}]*transform-origin:\s*center bottom;[^}]*animation:\s*metric-detail-icon-bar-pulse 3\.2s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.showroom \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-showroom 4\.4s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.week \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-calendar 3\.8s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.update \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-refresh 3\.2s ease-in-out infinite;/,
   );
+  assert.match(detailsHtml, /metric-detail-bar metric-detail-bar--1[\s\S]*?metric-detail-bar metric-detail-bar--2[\s\S]*?metric-detail-bar metric-detail-bar--3[\s\S]*?metric-detail-bar metric-detail-bar--4/);
+  assert.match(css, /@keyframes metric-detail-icon-bar-pulse\s*\{[^}]*scaleY\(1\)[\s\S]*?48%\s*\{transform:scaleY\(\.78\)\}[\s\S]*?64%\s*\{transform:scaleY\(1\.05\)\}/);
   assert.match(css, /@keyframes metric-detail-icon-refresh\s*\{[\s\S]*?30%\s*\{rotate:14deg\}\s*48%\s*\{rotate:-3deg\}/);
 });
 
