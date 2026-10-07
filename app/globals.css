@@ -19253,13 +19253,17 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   transform: scaleX(0);
   transform-box: fill-box;
   transform-origin: left center;
-  animation: metric-detail-series-wipe 5.2s cubic-bezier(0.16, 0.72, 0.18, 0.84) both;
+  animation: metric-detail-series-wipe 5.2s linear both;
   will-change: transform;
 }
 
 @keyframes metric-detail-series-wipe {
   from {
     transform: scaleX(0);
+  }
+  85% {
+    transform: scaleX(0.923);
+    animation-timing-function: cubic-bezier(0.2, 0.42, 0.55, 0.92);
   }
   to {
     transform: scaleX(1);
