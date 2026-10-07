@@ -2904,6 +2904,11 @@ test("uses Volvo Centum for English and numeric values in both 2x2 header grids"
     css,
     /@keyframes header-context-cell-enter\s*\{[\s\S]*?opacity:\s*0\.72;[^}]*translateY\(4px\) scale\(0\.985\);[\s\S]*?opacity:\s*1;[^}]*translateY\(0\) scale\(1\);/,
   );
+  assert.match(
+    css,
+    /@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\.metric-detail-context-icon-box\.metric \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-bars 3\.8s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.showroom \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-showroom 4\.4s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.week \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-calendar 3\.8s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.update \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-refresh 3\.2s ease-in-out infinite;/,
+  );
+  assert.match(css, /@keyframes metric-detail-icon-refresh\s*\{[\s\S]*?30%\s*\{rotate:14deg\}\s*48%\s*\{rotate:-3deg\}/);
 });
 
 test("shows a siren only when RTC incentive is below 0.2 percent", async () => {
