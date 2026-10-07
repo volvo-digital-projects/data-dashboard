@@ -50,10 +50,10 @@ const weekBoundaryX = (boundaryIndex: number) =>
   chart.left + boundaryIndex * weekCellWidth;
 
 const quarterRanges = [
-  { label: "Q1", start: 1, end: 13, range: "W01–W13", dates: "251228(일)–260323(월)" },
-  { label: "Q2", start: 14, end: 26, range: "W14–W26", dates: "260329(일)–260627(토)" },
-  { label: "Q3", start: 27, end: 39, range: "W27–W39", dates: "260628(일)–260926(토)" },
-  { label: "Q4", start: 40, end: 52, range: "W40–W52", dates: "260927(일)–261226(토)" },
+  { label: "Q1", start: 1, end: 13, range: "W01–W13", dates: "251228–260328" },
+  { label: "Q2", start: 14, end: 26, range: "W14–W26", dates: "260329–260627" },
+  { label: "Q3", start: 27, end: 39, range: "W27–W39", dates: "260628–260926" },
+  { label: "Q4", start: 40, end: 52, range: "W40–W52", dates: "260927–261226" },
 ];
 
 const vocContributionLabels: Record<string, string> = {
