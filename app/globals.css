@@ -19440,17 +19440,6 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
   .metric-detail-context-icon-box.update .metric-detail-context-icon {
     animation: metric-detail-icon-refresh 3.2s ease-in-out infinite;
   }
-  .dashboard .dashboard-identity-header:not(.metric-detail-page-header) .identity-detail-rail > dl > .identity-analysis-entry,
-  .dashboard .dashboard-identity-header:not(.metric-detail-page-header) .identity-detail-rail > .identity-profile-menu,
-  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item {
-    animation: header-context-cell-enter 420ms cubic-bezier(0.2, 0.75, 0.24, 1) both;
-  }
-  .dashboard .dashboard-identity-header .identity-detail-rail > dl > .identity-analysis-entry:nth-child(2),
-  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item:nth-child(2) { animation-delay: 45ms; }
-  .dashboard .dashboard-identity-header .identity-detail-rail > dl > .identity-analysis-entry:nth-child(3),
-  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item:nth-child(3) { animation-delay: 90ms; }
-  .dashboard .dashboard-identity-header .identity-detail-rail > .identity-profile-menu,
-  .competitive-analysis-page .dashboard-identity-header .analysis-context > .analysis-context-item:nth-child(4) { animation-delay: 135ms; }
   .dashboard-identity-header .identity-icon::before,
   .dashboard-identity-header .identity-icon::after,
   .dashboard-identity-header .identity-profile-icon::before,
@@ -19471,10 +19460,6 @@ html[data-browser="edge-desktop"] .metric-resource-new > span {
 @keyframes metric-detail-icon-showroom { 0%,18%,82%,100%{scale:1} 50%{scale:1.045} }
 @keyframes metric-detail-icon-calendar { 0%,65%,100%{translate:0 0} 30%{translate:0 -1px} 48%{translate:0 .5px} }
 @keyframes metric-detail-icon-refresh { 0%,65%,100%{rotate:0deg} 30%{rotate:14deg} 48%{rotate:-3deg} }
-@keyframes header-context-cell-enter {
-  from { opacity: 0.72; transform: translateY(4px) scale(0.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
 @keyframes identity-note-sway { 0%,20%,80%,100%{rotate:0deg;translate:0 0} 40%{rotate:-6deg;translate:-.5px -1px} 60%{rotate:6deg;translate:.5px -1px} }
 @keyframes identity-pin-bounce { 0%,65%,100%{translate:0 0} 30%{translate:0 -2.5px} 48%{translate:0 .5px} }
 @keyframes identity-person-sway { 0%,100%{translate:0 0} 25%{translate:-1.5px 0} 75%{translate:1.5px 0} }

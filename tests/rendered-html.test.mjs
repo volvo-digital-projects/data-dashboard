@@ -2906,14 +2906,7 @@ test("uses Volvo Centum for English and numeric values in both 2x2 header grids"
     css,
     /\.dashboard-identity-header \.header-context-volvo-value\s*\{[^}]*font-family:\s*var\(--font-volvo\), var\(--font-korean\), sans-serif;/,
   );
-  assert.match(
-    css,
-    /@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\.dashboard \.dashboard-identity-header:not\(\.metric-detail-page-header\)[\s\S]*?\.competitive-analysis-page \.dashboard-identity-header \.analysis-context > \.analysis-context-item\s*\{[^}]*animation:\s*header-context-cell-enter 420ms cubic-bezier\(0\.2, 0\.75, 0\.24, 1\) both;/,
-  );
-  assert.match(
-    css,
-    /@keyframes header-context-cell-enter\s*\{[\s\S]*?opacity:\s*0\.72;[^}]*translateY\(4px\) scale\(0\.985\);[\s\S]*?opacity:\s*1;[^}]*translateY\(0\) scale\(1\);/,
-  );
+  assert.doesNotMatch(css, /header-context-cell-enter/);
   assert.match(
     css,
     /@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\.metric-detail-context-icon-box\.metric \.metric-detail-bar\s*\{[^}]*transform-origin:\s*center bottom;[^}]*animation:\s*metric-detail-icon-bar-pulse 3\.2s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.showroom \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-showroom 4\.4s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.week \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-calendar 3\.8s ease-in-out infinite;[\s\S]*?\.metric-detail-context-icon-box\.update \.metric-detail-context-icon\s*\{[^}]*animation:\s*metric-detail-icon-refresh 3\.2s ease-in-out infinite;/,
@@ -2928,6 +2921,10 @@ test("uses Volvo Centum for English and numeric values in both 2x2 header grids"
   assert.doesNotMatch(
     css,
     /\.dashboard-identity-header \.identity-analysis-entry:has\(\.identity-analysis-hit:active\),[\s\S]*?\.dashboard-identity-header \.analysis-context-item:active\s*\{[^}]*transform:\s*scale\(/,
+  );
+  assert.match(
+    css,
+    /\.dashboard-identity-header \.identity-analysis-entry:has\(\.identity-analysis-hit:active\) \.identity-icon,[\s\S]*?\.dashboard-identity-header \.analysis-context-item:active \.identity-icon\s*\{[^}]*background:[^}]*transform:\s*scale\(0\.9\);/,
   );
 });
 
