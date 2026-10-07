@@ -5003,6 +5003,10 @@ test("aligns the DSC score group with the integrated competitiveness rail", asyn
   assert.match(dashboardSource, /V3S_EVIDENCE_SEEN_KEY[\s\S]*?metric-resource-new/);
   assert.match(
     dashboardSource,
+    /const isReportUnseen =\s*hasReport &&\s*\(resourceQuarter === "q3" \|\|\s*unseenReportQuarters\.includes\(resourceQuarter\)\);/,
+  );
+  assert.match(
+    dashboardSource,
     /const isEvidenceUnseen =\s*hasEvidence &&\s*\(resourceQuarter === "q3" \|\|\s*unseenEvidenceQuarters\.includes\(resourceQuarter\)\);/,
   );
   assert.doesNotMatch(dashboardSource, /2026 SCORE BOARD|scoreboard-quarter-table|scoreboard-summary/);

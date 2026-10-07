@@ -858,7 +858,9 @@ function MetricCard({
             const hasReport = reportQuarters.includes(resourceQuarter);
             const hasEvidence = evidenceQuarters.includes(resourceQuarter);
             const isReportUnseen =
-              unseenReportQuarters.includes(resourceQuarter);
+              hasReport &&
+              (resourceQuarter === "q3" ||
+                unseenReportQuarters.includes(resourceQuarter));
             const isEvidenceUnseen =
               hasEvidence &&
               (resourceQuarter === "q3" ||
