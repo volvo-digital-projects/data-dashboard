@@ -132,6 +132,13 @@ def merge_channel(old, fresh, shared=False):
     if len({v['id'] for v in all_videos}) != len(all_videos):
         raise ValueError("Duplicate public video IDs")
     videos = scoped_videos(old, all_videos)
+    reviewed = None
+    if shared:
+        reviewed = {v['id']:v for v in old['sharedVideos']}
+        # A shared channel cannot safely attribute a newly discovered video from
+        # title metadata alone. Keep it out of published metrics until its
+        # on-screen presenter has been reviewed and recorded explicitly.
+        videos = [v for v in videos if reviewed.get(v['id'], {}).get('names')]
     values = [fresh.get("subscribers"), *[v.get("views") for v in videos]]
     if not old.get('videoBrandFilter'):
         values.append(fresh.get("totalViews"))
@@ -151,10 +158,9 @@ def merge_channel(old, fresh, shared=False):
     if old.get('videoBrandFilter'):
         result['scopeVideoIds'] = [v['id'] for v in videos]
     if shared:
-        reviewed = {v['id']:v for v in old['sharedVideos']}
         result['sharedVideos'] = [dict(id=v['id'], title=v['title'], kind=v['kind'], views=v['views'],
-            names=reviewed.get(v['id'], {}).get('names', []),
-            basis=reviewed.get(v['id'], {}).get('basis', '출연자 이름 근거 미확인')) for v in videos]
+            names=reviewed[v['id']]['names'],
+            basis=reviewed[v['id']].get('basis', '출연자 이름 근거 확인')) for v in videos]
     return result
 
 def daily_close(original, checked, channels=None, capture=False):
