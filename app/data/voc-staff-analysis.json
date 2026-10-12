@@ -21050,36 +21050,6 @@
           "latestResponseDate": "2026-09-26"
         },
         {
-          "name": "조석원",
-          "role": "영업직원",
-          "jobTitle": "대리",
-          "hireDate": "2026-04-20",
-          "tenureMonths": 5,
-          "tenureBucket": "under-1y",
-          "tenureBucketLabel": "1년 이내",
-          "years": {
-            "2026": {
-              "responses": 3,
-              "scoreSum": 27.0,
-              "sent": 36,
-              "rateResponses": 3
-            }
-          },
-          "commentResponses": 3,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 2
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [],
-          "latestResponseDate": "2026-08-14"
-        },
-        {
           "years": {
             "2026": {
               "responses": 0,
@@ -21510,7 +21480,40 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "조석원",
+          "role": "영업직원",
+          "jobTitle": "대리",
+          "hireDate": "2026-04-20",
+          "tenureMonths": 5,
+          "tenureBucket": "under-1y",
+          "tenureBucketLabel": "1년 이내",
+          "years": {
+            "2026": {
+              "responses": 3,
+              "scoreSum": 27.0,
+              "sent": 36,
+              "rateResponses": 3
+            }
+          },
+          "commentResponses": 3,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 2
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-08-14",
+          "archivedAt": "2026-10-12",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR6871": {
       "showroom": "볼보 진주",
