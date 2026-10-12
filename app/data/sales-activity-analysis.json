@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-10-12",
-    "salesSyncedAt": "2026-10-12T08:58:28+09:00",
+    "salesSyncedAt": "2026-10-12T09:55:47+09:00",
     "salesPeriod": "2026-01-01~2026-10-12",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -10665,46 +10665,6 @@
           }
         },
         {
-          "name": "조석원",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 1,
-          "deliveredCustomers": 1,
-          "monthlyDeliveredSales": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0
-          ],
-          "segmentSales": {
-            "30": 0,
-            "40": 0,
-            "60": 1,
-            "90": 0
-          }
-        },
-        {
           "name": "최승호",
           "activityStatus": "missing",
           "lastActivityDate": null,
@@ -10866,12 +10826,12 @@
         }
       ],
       "summary": {
-        "staffCount": 12,
+        "staffCount": 11,
         "activityStaffCount": 1,
         "consultationCustomers": 5,
         "testDriveCustomers": 3,
         "contractCustomers": 0,
-        "deliveredSales": 248,
+        "deliveredSales": 247,
         "monthlyDeliveredSales": [
           14,
           22,
@@ -10881,13 +10841,13 @@
           40,
           10,
           21,
-          40,
+          39,
           1
         ],
         "segmentSales": {
           "30": 60,
           "40": 24,
-          "60": 89,
+          "60": 88,
           "90": 75
         }
       }
