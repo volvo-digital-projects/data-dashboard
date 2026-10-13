@@ -4,7 +4,7 @@ import raw from "./data/youtube-comments.json";
 import reviewed from "./data/youtube-creators.json";
 
 type Entry = {id:string;category:string;topic:string;summary:string;url:string;videoId:string;kind:string};
-type ChannelComments = {status?:string;total:number;videos:number;completeVideos:number;partialVideos:number;unavailableVideos:number;counts:Record<string,number>;entries:Entry[];coverage:{id:string;kind:string;status:string;reported:number|null}[]};
+type ChannelComments = {status?:string;excludedOwnerPromotions?:number;total:number;videos:number;completeVideos:number;partialVideos:number;unavailableVideos:number;counts:Record<string,number>;entries:Entry[];coverage:{id:string;kind:string;status:string;reported:number|null}[]};
 export const commentData = raw as {checkedAt:string|null;method:string;channels:Record<string,ChannelComments>};
 
 export default function YouTubeCommentAnalysis({channelId, shared, onTopicChange}:{channelId:string;shared:boolean;onTopicChange?:()=>void}) {
@@ -17,13 +17,14 @@ export default function YouTubeCommentAnalysis({channelId, shared, onTopicChange
     counts:{positive:evidence.filter(entry=>entry.kind==="positive").length,suggestion:evidence.filter(entry=>entry.kind==="suggestion").length,other:0,review:0,owner:0},
     entries:evidence.map(entry=>({id:entry.commentId,category:entry.kind,topic:entry.topic,summary:entry.summary,url:entry.url,videoId:entry.videoId,kind:"video"})),coverage:[]};
   const selected = data.entries.filter(entry=>`${entry.category}:${entry.topic}`===topic);
-  return <section className="yt-comments yt-all-comments"><h4>유지/강화 · 수정/보완 댓글 분석</h4>
+  return <section className="yt-comments yt-all-comments"><h4>긍정 / 부정 댓글 분석</h4>
     <p className="yt-muted">{sampleOnly?`전체 댓글 수집 미완료 · YouTube 요청 제한 / API 연결 필요. 현재는 기존 표본 중 검토한 ${data.total}건만 표시합니다.`:`채널 전체 공개 댓글 페이지 순회 · 댓글이 확인된 영상 ${data.videos}개 · 댓글·답글 ${data.total.toLocaleString("ko-KR")}건 · ${commentData.checkedAt?.slice(0,10).replaceAll("-",".") ?? ""} 수집`}</p>
     <p className="yt-muted">{sampleOnly?"기존 수동 검토 의견입니다.":"자동 키워드 분류이며 원문 문맥 확인이 필요합니다."} 실제 고객 여부·직원 능력은 판정하지 않습니다. 삭제·비공개·차단 댓글은 수집할 수 없습니다.{shared?" 공동 채널 전체 의견이며 특정 직원에게 자동 귀속하지 않습니다.":""}</p>
+    {!sampleOnly && <p className="yt-muted">운영자의 전화번호 홍보 댓글 {data.excludedOwnerPromotions ?? 0}건은 집계·분석에서 제외했습니다. 그 외 운영자 답글도 긍정·부정 분석에는 포함하지 않습니다.</p>}
     <div className="yt-comment-panels">{["positive","suggestion"].map(category=>{
       const items = data.entries.filter(entry=>entry.category===category);
       const topics = [...new Set(items.map(entry=>entry.topic))];
-      return <div className={`yt-comment-panel ${category}`} key={category}><h5>{category==="positive"?"유지/강화":"수정/보완"}<span>{items.length}건</span></h5>
+      return <div className={`yt-comment-panel ${category}`} key={category}><h5>{category==="positive"?"긍정 · 유지/강화":"부정 · 수정/보완"}<span>{items.length}건</span></h5>
         {topics.length?topics.map(label=>{const count=items.filter(entry=>entry.topic===label).length;return <button key={label} type="button" aria-pressed={topic===`${category}:${label}`} onClick={()=>setTopic(`${category}:${label}`)}><span>{label}</span><i><b style={{width:`${count/Math.max(1,items.length)*100}%`}}/></i><em>{count}건</em><small>상세보기</small></button>}):<p>이 방향으로 분류된 표현이 없습니다.</p>}
       </div>
     })}</div>

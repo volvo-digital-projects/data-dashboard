@@ -73,3 +73,23 @@ class CommentsTest(unittest.TestCase):
         self.assertEqual(module.classify("상담 불친절")[0], "suggestion")
         self.assertEqual(module.classify("영상 감사합니다 하지만 아쉽네요")[0], "review")
         self.assertEqual(module.classify("안녕하세요")[0], "other")
+
+    def test_general_reactions_and_mixed_opinions(self):
+        self.assertEqual(module.classify("정말 최고입니다")[0], "positive")
+        self.assertEqual(module.classify("최악입니다 실망했어요")[0], "suggestion")
+        self.assertEqual(module.classify("정보 감사합니다 하지만 불편해요")[0], "review")
+
+    def test_excludes_owner_phone_promotion_but_keeps_viewer_and_replies(self):
+        def api(endpoint, **params):
+            return {"items":[{"snippet":{"videoId":"v", "topLevelComment":comment("promo", "상담 010-1234-5678", "channel"), "totalReplyCount":2},
+                              "replies":{"comments":[comment("viewer", "설명 감사합니다 010-1111-2222"), comment("owner", "감사합니다", "channel")]}}]}
+        result = module.collect_channel(api, "channel")
+        self.assertEqual(result["total"], 2)
+        self.assertEqual(result["excludedOwnerPromotions"], 1)
+        self.assertEqual(result["counts"]["positive"], 1)
+        self.assertEqual(result["counts"]["owner"], 1)
+        self.assertNotIn("promo", [entry["id"] for entry in result["entries"]])
+        self.assertNotIn("010-", json.dumps(result))
+        for phone in ["01012345678", "+82 10 1234 5678", "０１０－１２３４－５６７８", "02-123-4567"]:
+            self.assertTrue(module.owner_phone_promotion(phone, True))
+            self.assertFalse(module.owner_phone_promotion(phone, False))
