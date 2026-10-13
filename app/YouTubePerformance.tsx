@@ -17,9 +17,6 @@ const silhouetteForGender = (gender: string) => gender === "여성"
   ? "/staff-profiles/female-human-silhouette.png"
   : "/staff-profiles/neutral-human-silhouette.png";
 const profilePhotos = staffProfilePhotos.showrooms as Record<string, { employees: Record<string, { image: string }> }>;
-const silhouettePhotoOverrides: Record<string, string> = {
-  "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg": "/staff-profiles/kolon/songpa/kim-jeongho-cutout.png",
-};
 const dealers = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
 const dealerCodes: Record<string, string> = {에이치:"H", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
 type SharedVideo = { id: string; title: string; kind: string; views: number; names: string[]; basis: string };
@@ -53,8 +50,8 @@ const creators = data.creators.map(person => {
   const nameCount = Object.values(sales).flatMap(showroom => showroom.staff).filter(staff => staff.name === person.name).length;
   const certifications = ["Grand", "Advanced", "Certified"].map(level => certificationData.records.filter(record => record.name === person.name && (nameCount === 1 || record.showroom === person.showroom) && record.level === level).length);
   const profileImage = profilePhotos[person.cdsid]?.employees[person.name]?.image;
-  const silhouetteImage = profileImage ? (silhouettePhotoOverrides[profileImage] ?? profileImage) : silhouetteForGender(person.gender);
-  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: silhouetteImage, hasProfilePhoto: Boolean(profileImage),
+  const displayImage = profileImage ?? silhouetteForGender(person.gender);
+  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: displayImage, hasProfilePhoto: Boolean(profileImage),
     delivered: result?.deliveredSales ?? null,
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
     months: result?.monthlyDeliveredSales ?? [], responses: survey?.responses ?? 0,
@@ -212,7 +209,7 @@ export default function YouTubePerformance() {
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
-          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 사진 실루엣" : `${person.gender} 실루엣`}><img className={person.hasProfilePhoto ? "yt-photo-silhouette" : undefined} src={person.image} alt="" loading="lazy"/></span><span><strong>{person.name}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 프로필 사진" : `${person.gender} 실루엣`}><img className={person.hasProfilePhoto ? "yt-profile-photo" : "yt-fallback-silhouette"} src={person.image} alt="" loading="lazy"/></span><span><strong>{person.name}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={subscriberDeltaTitle}><span>전일 대비</span><b className={subscriberDeltaTone}><span className={`yt-subscriber-count${includesSubscriberChange ? "" : " is-excluded"}`}>{includesSubscriberChange&&<i>{subscriberDelta.direction}</i>}<em>{subscriberDelta.count}</em></span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
@@ -232,6 +229,6 @@ export default function YouTubePerformance() {
         if(section && scroller) scroller.scrollTop+=(section.getBoundingClientRect().top-scroller.getBoundingClientRect().top)/(scroller.getBoundingClientRect().height/scroller.offsetHeight);
       }}/>
     </details>}
-    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 공식 사진이 있는 직원은 사진의 인물 윤곽을 검은 실루엣으로 표시하고, 사진이 없으면 명단의 성별에 맞는 기본 실루엣을 표시합니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
+    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 공식 사진이 있는 직원은 페이지 2와 같은 프로필 사진을 표시하고, 사진이 없으면 명단의 성별에 맞는 기본 실루엣을 표시합니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
   </section>;
 }

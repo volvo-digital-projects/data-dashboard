@@ -405,7 +405,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(table, /class="yt-cert-cell"/);
   assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 16);
   assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 16);
-  assert.match(table, /aria-label="직원 사진 실루엣"/);
+  assert.match(table, /aria-label="직원 프로필 사진"/);
   assert.doesNotMatch(table, /class="yt-gender-icon"|전시장 \/ 성별/);
   assert.doesNotMatch(html, /<label>성별/);
   assert.match(html, /class="dealer-analysis-scroll"/);
@@ -443,35 +443,29 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.doesNotMatch(table, /yt-person-results|yt-score/);
 });
 
-test("uses blacked-out portrait shapes in creator rows and gender silhouettes when photos are absent", async () => {
+test("reuses page 2 staff portraits in creator rows without changing avatar boxes", async () => {
   const response = await render("/dashboard/6KR6834/dealer-analysis");
   const html = await response.text();
   const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1] ?? "";
   const roster = JSON.parse(await readFile(new URL("../app/data/youtube-creators.json", import.meta.url), "utf8"));
   const photos = JSON.parse(await readFile(new URL("../app/data/staff-profile-photos.json", import.meta.url), "utf8"));
+  const voc = JSON.parse(await readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8"));
   const rows = [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((match) => match[1]);
   for (const person of roster.creators) {
-    const row = rows.find((item) => item.includes(`<strong>${person.name}</strong>`));
+    const staffCdsid = voc.showrooms[person.cdsid]?.employees.find((employee) => employee.name === person.name)?.staffCdsid;
+    const row = rows.find((item) => item.includes(`<strong>${person.name}</strong>`) || (staffCdsid && item.includes(`<strong>${staffCdsid}</strong>`)));
     assert.ok(row, `${person.name} 행을 찾을 수 있어야 합니다.`);
     const profileImage = photos.showrooms[person.cdsid]?.employees[person.name]?.image;
-    const image = profileImage?.endsWith("kim-jeongho-kolon.jpg")
-      ? "/staff-profiles/kolon/songpa/kim-jeongho-cutout.png"
-      : profileImage ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
-    assert.ok(row.includes(image), `${person.name}의 사진 윤곽 또는 기본 실루엣이 일치해야 합니다.`);
-    assert.equal(row.includes('class="yt-photo-silhouette"'), Boolean(profileImage), `${person.name}의 실제 사진에만 검은 필터가 적용되어야 합니다.`);
-    if (profileImage) {
-      const asset = await readFile(new URL(`../public${image}`, import.meta.url));
-      const hasAlpha = image.endsWith(".png")
-        ? asset.toString("ascii", 1, 4) === "PNG" && asset[25] === 6
-        : asset.toString("ascii", 12, 16) === "VP8X" && (asset[20] & 0x10) !== 0;
-      assert.ok(hasAlpha, `${person.name}의 검은 실루엣 원본은 투명 배경이어야 합니다.`);
-    }
+    const image = profileImage ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
+    assert.ok(row.includes(image), `${person.name}의 페이지 2 사진 또는 기본 실루엣이 일치해야 합니다.`);
+    assert.equal(row.includes('class="yt-profile-photo"'), Boolean(profileImage), `${person.name}의 실제 사진은 원본 색상으로 표시해야 합니다.`);
     assert.doesNotMatch(row, /yt-gender-icon/);
   }
   const css = await readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8");
-  assert.match(css, /img\.yt-photo-silhouette\{filter:brightness\(0\);object-fit:contain;object-position:center center;transform:scale\(\.86\);transform-origin:center center\}/);
+  assert.match(css, /\.yt-compact \.yt-row-avatar,\.yt-compact \.yt-row-avatar img\{width:28px;height:30px\}/);
+  assert.match(css, /img\.yt-profile-photo\{filter:none;object-fit:cover;object-position:center top;transform:scale\(1\.35\);transform-origin:center top\}/);
   const source = await readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8");
-  assert.match(source, /profileImage \? \(silhouettePhotoOverrides\[profileImage\] \?\? profileImage\) : silhouetteForGender\(person\.gender\)/);
+  assert.match(source, /const displayImage = profileImage \?\? silhouetteForGender\(person\.gender\)/);
   assert.equal((html.match(/class="yt-donut-gender-icon"/g) ?? []).length, 2);
   assert.match(html, /class="yt-donut-gender-icon"[^>]*>♀<\/text>/);
   assert.match(html, /class="yt-donut-gender-icon"[^>]*>♂<\/text>/);
