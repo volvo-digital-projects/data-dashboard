@@ -10,7 +10,7 @@ import YouTubeCommentAnalysis, { commentData } from "./YouTubeCommentAnalysis";
 import "./youtube-performance.css";
 
 type Sales = { staff: { name: string; deliveredSales: number; monthlyDeliveredSales: number[] }[] };
-type Voc = { employees: { name: string; years: Record<string, {responses: number; scoreSum: number}> }[] };
+type Voc = { employees: { name: string; role: string; jobTitle?: string; years: Record<string, {responses: number; scoreSum: number}> }[] };
 const sales = salesData.showrooms as Record<string, Sales>;
 const voc = vocData.showrooms as Record<string, Voc>;
 const silhouetteForGender = (gender: string) => gender === "여성"
@@ -54,13 +54,15 @@ const creators = data.creators.map(person => {
     ? `${profileImage}?portrait=${staffProfilePhotos.updatedAt}`
     : silhouetteForGender(person.gender);
 
+  const rosterEmployee = voc[person.cdsid]?.employees.find(employee => employee.name === person.name);
+  const isTeamLeader = rosterEmployee?.role === "영업팀장" || rosterEmployee?.jobTitle === "팀장";
   return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: displayImage, hasProfilePhoto: Boolean(profileImage),
     delivered: result?.deliveredSales ?? null,
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
     months: result?.monthlyDeliveredSales ?? [], responses: survey?.responses ?? 0,
     score: survey?.responses ? survey.scoreSum / survey.responses : null,
     hireDate: voc[person.cdsid]?.employees.find(employee => employee.name === person.name)?.hireDate,
-    certifications, shared,
+    certifications, shared, isTeamLeader,
   };
 });
 const dealerCounts = Object.fromEntries(dealers.map(name => [name, creators.filter(person => person.dealer === name).length])) as Record<string, number>;
@@ -212,7 +214,7 @@ export default function YouTubePerformance() {
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
-          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 사진의 검은 실루엣과 흰 셔츠" : `${person.gender} 실루엣`}>{person.hasProfilePhoto ? <><span className="yt-profile-solid-silhouette" style={{ maskImage: `url("${person.image}")`, WebkitMaskImage: `url("${person.image}")` }} /><img className="yt-profile-white-shirt" src={person.image} alt="" loading="lazy" /></> : <img className="yt-fallback-silhouette" src={person.image} alt="" loading="lazy" />}</span><span><strong>{person.name}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 사진의 검은 실루엣과 흰 셔츠" : `${person.gender} 실루엣`}>{person.hasProfilePhoto ? <><span className="yt-profile-solid-silhouette" style={{ maskImage: `url("${person.image}")`, WebkitMaskImage: `url("${person.image}")` }} /><img className="yt-profile-white-shirt" src={person.image} alt="" loading="lazy" /></> : <img className="yt-fallback-silhouette" src={person.image} alt="" loading="lazy" />}</span><span><strong>{person.name}{person.isTeamLeader && <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={subscriberDeltaTitle}><span>전일 대비</span><b className={subscriberDeltaTone}><span className={`yt-subscriber-count${includesSubscriberChange ? "" : " is-excluded"}`}>{includesSubscriberChange&&<i>{subscriberDelta.direction}</i>}<em>{subscriberDelta.count}</em></span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
