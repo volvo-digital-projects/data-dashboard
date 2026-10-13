@@ -469,7 +469,7 @@ test("uses blacked-out portrait shapes in creator rows and gender silhouettes wh
     assert.doesNotMatch(row, /yt-gender-icon/);
   }
   const css = await readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8");
-  assert.match(css, /img\.yt-photo-silhouette\{filter:brightness\(0\)\}/);
+  assert.match(css, /img\.yt-photo-silhouette\{filter:brightness\(0\);object-fit:contain;object-position:center center;transform:scale\(\.86\);transform-origin:center center\}/);
   const source = await readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8");
   assert.match(source, /profileImage \? \(silhouettePhotoOverrides\[profileImage\] \?\? profileImage\) : silhouetteForGender\(person\.gender\)/);
   assert.equal((html.match(/class="yt-donut-silhouette"/g) ?? []).length, 2);
