@@ -4,6 +4,12 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('Monthly sales header has no slash before the cumulative unit',()=>{
+ const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
+ assert.ok(source.includes('26년 월평균 판매<small>누적 · 대</small>'));
+ assert.ok(!source.includes('<small>/ 누적 · 대</small>'));
+});
+
 test('Dealer filter labels show the requested dealer abbreviations',()=>{
  const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
  for(const [name,code] of Object.entries({코오롱:'KA',아주:'AJ',천하:'CA',에이치:'HM',태영:'TY',아이언:'IR',아이비:'IV'})){
