@@ -4,6 +4,11 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('YouTube comment counts and channel labels share the right cell edge',()=>{
+ const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
+ assert.match(css,/\.yt-cell-comments button\{[^}]*width:100%;text-align:right/);
+});
+
 test('Every YouTube channel has a concise three-part review without opinions or raw-comment drilldowns',()=>{
  const editorial=read('youtube-comment-editorial');
  assert.ok(Number.isFinite(Date.parse(editorial.reviewedAt)));
