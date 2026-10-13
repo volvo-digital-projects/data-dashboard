@@ -4066,6 +4066,21 @@ export default function CompetitiveAnalysis({
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 만족도 ${(point.finalScore / 10).toFixed(1)} · 회신 ${point.responses}건`}</title></circle>
                         ))}
                       </g>
+                      {staffScatterNationalAverage !== null ? (
+                        <g
+                          className="growth-scatter-average-label"
+                          transform={`translate(${staffScatterPlot.right - 32} ${staffScatterY(staffScatterNationalAverage) - 36})`}
+                        >
+                          <path
+                            className="callout-shape"
+                            d="M 4 0 H 46 Q 50 0 50 4 V 26 Q 50 30 46 30 H 39 L 32 36 L 25 30 H 4 Q 0 30 0 26 V 4 Q 0 0 4 0 Z"
+                          />
+                          <text x="25" y="11" textAnchor="middle">전국 평균</text>
+                          <text className="score" x="25" y="23" textAnchor="middle">
+                            {(staffScatterNationalAverage / 10).toFixed(2)}점
+                          </text>
+                        </g>
+                      ) : null}
                       {selectedStaffScatterPoint ? (
                         <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffScatterPoint.tenureYears)} ${staffScatterY(selectedStaffScatterPoint.finalScore)})`} key={`consultation-photo-${selectedStaffEmployee?.name ?? "selected"}`}>
                           <g className="photo-reveal">
@@ -4084,21 +4099,6 @@ export default function CompetitiveAnalysis({
                             />
                             <circle className="photo-ring" r="8" />
                           </g>
-                        </g>
-                      ) : null}
-                      {staffScatterNationalAverage !== null ? (
-                        <g
-                          className="growth-scatter-average-label"
-                          transform={`translate(${staffScatterPlot.right - 32} ${staffScatterY(staffScatterNationalAverage) - 36})`}
-                        >
-                          <path
-                            className="callout-shape"
-                            d="M 4 0 H 46 Q 50 0 50 4 V 26 Q 50 30 46 30 H 39 L 32 36 L 25 30 H 4 Q 0 30 0 26 V 4 Q 0 0 4 0 Z"
-                          />
-                          <text x="25" y="11" textAnchor="middle">전국 평균</text>
-                          <text className="score" x="25" y="23" textAnchor="middle">
-                            {(staffScatterNationalAverage / 10).toFixed(2)}점
-                          </text>
                         </g>
                       ) : null}
                     </svg>
@@ -4361,26 +4361,6 @@ export default function CompetitiveAnalysis({
                           ><title>{`${point.name} · ${displayShowroomNameWithoutBrand(selected.showroom)} 전시장 · 누적판매 ${point.deliveredSales}대`}</title></circle>
                         ))}
                       </g>
-                      {selectedStaffSalesScatterPoint ? (
-                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`} key={`sales-photo-${selectedStaffEmployee?.name ?? "selected"}`}>
-                          <g className="photo-reveal">
-                            <circle className="photo-acquire-flash" r="9.8" />
-                            <circle className="photo-halo" r="9.8" />
-                            <circle className="photo-backdrop" r="9.4" />
-                            <image
-                              className="photo-fallback-silhouette"
-                              href={selectedStaffFallbackProfileImage}
-                              x="-10.125"
-                              y="-7.5"
-                              width="20.25"
-                              height="20.25"
-                              preserveAspectRatio="xMidYMin slice"
-                              clipPath="url(#sales-selected-staff-photo)"
-                            />
-                            <circle className="photo-ring" r="8" />
-                          </g>
-                        </g>
-                      ) : null}
                       {staffSalesNationalAverage !== null ? (
                         <g
                           className="growth-scatter-average-label"
@@ -4399,6 +4379,26 @@ export default function CompetitiveAnalysis({
                             <tspan x="40.5" textAnchor="end">{staffSalesNationalMonthlyAverage?.toFixed(1) ?? "―"}대</tspan>
                             <tspan x="40.5" textAnchor="start">/ 월</tspan>
                           </text>
+                        </g>
+                      ) : null}
+                      {selectedStaffSalesScatterPoint ? (
+                        <g className="growth-scatter-selected-photo" transform={`translate(${staffScatterX(selectedStaffSalesScatterPoint.tenureYears)} ${staffSalesScatterY(selectedStaffSalesScatterPoint.deliveredSales)})`} key={`sales-photo-${selectedStaffEmployee?.name ?? "selected"}`}>
+                          <g className="photo-reveal">
+                            <circle className="photo-acquire-flash" r="9.8" />
+                            <circle className="photo-halo" r="9.8" />
+                            <circle className="photo-backdrop" r="9.4" />
+                            <image
+                              className="photo-fallback-silhouette"
+                              href={selectedStaffFallbackProfileImage}
+                              x="-10.125"
+                              y="-7.5"
+                              width="20.25"
+                              height="20.25"
+                              preserveAspectRatio="xMidYMin slice"
+                              clipPath="url(#sales-selected-staff-photo)"
+                            />
+                            <circle className="photo-ring" r="8" />
+                          </g>
                         </g>
                       ) : null}
                     </svg>

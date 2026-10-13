@@ -925,6 +925,13 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@keyframes growth-scatter-preview-life\s*\{[\s\S]*?82%[\s\S]*?100% \{ opacity: 0; \}/);
   assert.match(css, /\.growth-scatter-card svg\s*\{[^}]*image-rendering:\s*auto;/);
   assert.equal((navigation.match(/className="growth-scatter-selected-photo"/g) ?? []).length, 2);
+  for (const chart of ["consultation", "sales"]) {
+    const svg = navigation.match(new RegExp(`<svg ref=\\{${chart}ScatterZoom\\.svgRef\\}[\\s\\S]*?<\\/svg>`))?.[0] ?? "";
+    assert.ok(svg, `${chart} 산포도 SVG가 있어야 합니다.`);
+    const averageLabelIndex = svg.indexOf('className="growth-scatter-average-label"');
+    const selectedPhotoIndex = svg.indexOf('className="growth-scatter-selected-photo"');
+    assert.ok(averageLabelIndex >= 0 && selectedPhotoIndex > averageLabelIndex, `${chart} 직원 아이콘은 평균 설명보다 위에 그려져야 합니다.`);
+  }
   assert.equal((navigation.match(/className="growth-scatter-selected-guides is-targeting"/g) ?? []).length, 2);
   assert.equal((navigation.match(/className="growth-scatter-selected-guides is-targeting"[\s\S]*?className="growth-scatter-population"/g) ?? []).length, 2);
   assert.match(navigation, /className="guide-arm guide-arm-from-top"[\s\S]*?className="guide-arm guide-arm-from-bottom"[\s\S]*?className="guide-arm guide-arm-from-left"[\s\S]*?className="guide-arm guide-arm-from-right"/);
