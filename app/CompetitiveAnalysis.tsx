@@ -2434,7 +2434,7 @@ export default function CompetitiveAnalysis({
   const selectedSegmentDonuts = [
     {
       key: "staff",
-      label: selectedStaffEmployee?.name ?? "영업직원",
+      label: "개인 누적",
       counts: selectedStaffSegmentSales,
     },
     {
@@ -3581,16 +3581,12 @@ export default function CompetitiveAnalysis({
           <section className="growth-profile-strip" aria-label="영업직원 상담 분석 요약">
               <div className="growth-profile-person">
                 <span className="growth-profile-photo" aria-hidden="true">
-                  {selectedStaffProfile ? (
-                    <img src={selectedStaffProfile.image} alt="" draggable={false} />
-                  ) : (
-                    <img
-                      className="staff-profile-silhouette"
-                      src={selectedStaffFallbackProfileImage}
-                      alt=""
-                      draggable={false}
-                    />
-                  )}
+                  <img
+                    className="staff-profile-silhouette"
+                    src={selectedStaffFallbackProfileImage}
+                    alt=""
+                    draggable={false}
+                  />
                 </span>
                 <span className="growth-profile-person-identity">
                   <small className="growth-profile-role">
@@ -3849,8 +3845,8 @@ export default function CompetitiveAnalysis({
                                   <circle className="photo-halo" r="9.8" />
                                   <circle className="photo-backdrop" r="9.4" />
                                   <image
-                                    className={selectedStaffProfile ? "" : "photo-fallback-silhouette"}
-                                    href={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
+                                    className="photo-fallback-silhouette"
+                                    href={selectedStaffFallbackProfileImage}
                                     x="-10.125"
                                     y="-7.5"
                                     width="20.25"
@@ -4076,28 +4072,16 @@ export default function CompetitiveAnalysis({
                             <circle className="photo-acquire-flash" r="9.8" />
                             <circle className="photo-halo" r="9.8" />
                             <circle className="photo-backdrop" r="9.4" />
-                            {selectedStaffProfile ? (
-                              <image
-                                href={selectedStaffProfile.image}
-                                x="-10.125"
-                                y="-7.5"
-                                width="20.25"
-                                height="20.25"
-                                preserveAspectRatio="xMidYMin slice"
-                                clipPath="url(#consultation-selected-staff-photo)"
-                              />
-                            ) : (
-                              <image
-                                className="photo-fallback-silhouette"
-                                href={selectedStaffFallbackProfileImage}
-                                x="-7.5"
-                                y="-7.5"
-                                width="15"
-                                height="15"
-                                preserveAspectRatio="xMidYMin slice"
-                                clipPath="url(#consultation-selected-staff-photo)"
-                              />
-                            )}
+                            <image
+                              className="photo-fallback-silhouette"
+                              href={selectedStaffFallbackProfileImage}
+                              x="-10.125"
+                              y="-7.5"
+                              width="20.25"
+                              height="20.25"
+                              preserveAspectRatio="xMidYMin slice"
+                              clipPath="url(#consultation-selected-staff-photo)"
+                            />
                             <circle className="photo-ring" r="8" />
                           </g>
                         </g>
@@ -4220,7 +4204,7 @@ export default function CompetitiveAnalysis({
                           <section className="growth-segment-donut" key={donut.key}>
                             <div className="growth-segment-donut-shell">
                               <div
-                                className={`growth-segment-donut-disc${donutIndex === 0 ? " has-staff-photo" : ""}`}
+                                className="growth-segment-donut-disc"
                                 role="img"
                                 aria-label={`${donut.label} 세그먼트 판매비중: ${salesSegmentKeys.map((segment) => `${segment} ${salesSegmentShare(donut.counts, segment).toFixed(1)}%`).join(", ")}`}
                                 style={{
@@ -4228,14 +4212,6 @@ export default function CompetitiveAnalysis({
                                   "--segment-donut-index": donutIndex,
                                 } as CSSProperties}
                               >
-                                {donutIndex === 0 ? (
-                                  <img
-                                    className={selectedStaffProfile ? "" : "staff-profile-silhouette"}
-                                    src={selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage}
-                                    alt=""
-                                    draggable={false}
-                                  />
-                                ) : null}
                               </div>
                               <div className="growth-segment-donut-counts" aria-hidden="true">
                                 {salesSegmentKeys.map((segment) => {
@@ -4251,8 +4227,8 @@ export default function CompetitiveAnalysis({
                                   );
                                 })}
                               </div>
-                              <span className={`growth-segment-donut-center${donutIndex === 0 ? " has-staff-photo" : ""}`}>
-                                {donutIndex === 0 ? null : <em>{donut.label}</em>}
+                              <span className="growth-segment-donut-center">
+                                <em>{donut.label}</em>
                                 <span><b>{total}</b><small>대</small></span>
                               </span>
                             </div>
@@ -4391,28 +4367,16 @@ export default function CompetitiveAnalysis({
                             <circle className="photo-acquire-flash" r="9.8" />
                             <circle className="photo-halo" r="9.8" />
                             <circle className="photo-backdrop" r="9.4" />
-                            {selectedStaffProfile ? (
-                              <image
-                                href={selectedStaffProfile.image}
-                                x="-10.125"
-                                y="-7.5"
-                                width="20.25"
-                                height="20.25"
-                                preserveAspectRatio="xMidYMin slice"
-                                clipPath="url(#sales-selected-staff-photo)"
-                              />
-                            ) : (
-                              <image
-                                className="photo-fallback-silhouette"
-                                href={selectedStaffFallbackProfileImage}
-                                x="-7.5"
-                                y="-7.5"
-                                width="15"
-                                height="15"
-                                preserveAspectRatio="xMidYMin slice"
-                                clipPath="url(#sales-selected-staff-photo)"
-                              />
-                            )}
+                            <image
+                              className="photo-fallback-silhouette"
+                              href={selectedStaffFallbackProfileImage}
+                              x="-10.125"
+                              y="-7.5"
+                              width="20.25"
+                              height="20.25"
+                              preserveAspectRatio="xMidYMin slice"
+                              clipPath="url(#sales-selected-staff-photo)"
+                            />
                             <circle className="photo-ring" r="8" />
                           </g>
                         </g>
@@ -4472,7 +4436,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-sales-monthly-card">
                     <header>
-                      <strong>{selectedStaffEmployee?.name ?? "선택 직원"} 누적판매 <span className="growth-sales-heading-number">{selectedStaffDeliveredSales}</span>대</strong>
+                      <strong>누적판매 <span className="growth-sales-heading-number">{selectedStaffDeliveredSales}</span>대</strong>
                     </header>
                     <div className="growth-sales-monthly-body">
                       <div className="growth-sales-monthly-trend">
@@ -4530,7 +4494,7 @@ export default function CompetitiveAnalysis({
                             />
                           </svg>
                           <div className="growth-sales-share-callout">
-                            <span>{selectedStaffEmployee?.name ?? "선택 직원"} 판매비중</span>
+                            <span>판매비중</span>
                             <strong>
                               {selectedStaffDeliveredSales}대 · {selectedStaffSalesShare === null ? "―" : `${selectedStaffSalesShare.toFixed(1)}%`}
                             </strong>
