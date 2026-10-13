@@ -472,9 +472,11 @@ test("uses blacked-out portrait shapes in creator rows and gender silhouettes wh
   assert.match(css, /img\.yt-photo-silhouette\{filter:brightness\(0\);object-fit:contain;object-position:center center;transform:scale\(\.86\);transform-origin:center center\}/);
   const source = await readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8");
   assert.match(source, /profileImage \? \(silhouettePhotoOverrides\[profileImage\] \?\? profileImage\) : silhouetteForGender\(person\.gender\)/);
-  assert.equal((html.match(/class="yt-donut-silhouette"/g) ?? []).length, 2);
-  assert.match(html, /class="yt-donut-silhouette"[^>]*female-human-silhouette\.png/);
-  assert.match(html, /class="yt-donut-silhouette"[^>]*neutral-human-silhouette\.png/);
+  assert.equal((html.match(/class="yt-donut-gender-icon"/g) ?? []).length, 2);
+  assert.match(html, /class="yt-donut-gender-icon"[^>]*>♀<\/text>/);
+  assert.match(html, /class="yt-donut-gender-icon"[^>]*>♂<\/text>/);
+  assert.doesNotMatch(html, /class="yt-donut-silhouette"/);
+  assert.match(css, /\.yt-donut-gender-icon\{[^}]*font-size:19px;/);
 });
 
 test("softly lands fast wheel and touch scrolling at the creator section before continuing", async () => {

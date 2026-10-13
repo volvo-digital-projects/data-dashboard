@@ -120,8 +120,9 @@ function GenderDonut() {
       const x=110+29*Math.cos(item.angle), y=38+29*Math.sin(item.angle);
       const bendX=110+35*Math.cos(item.angle), bendY=38+35*Math.sin(item.angle);
       const endX=item.left?60:160;
-      const iconX = item.left ? endX - 17 : endX;
-      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${bendX},${bendY} ${endX},${bendY}`} fill="none" stroke={item.color} strokeWidth=".8"/><rect className="yt-donut-silhouette-frame" x={iconX} y={bendY-22} width="17" height="17" rx="3"/><image className="yt-donut-silhouette" href={silhouetteForGender(item.label)} x={iconX} y={bendY-22} width="17" height="17" preserveAspectRatio="xMidYMid meet"/><text x={endX} y={bendY+10} textAnchor={item.left?"end":"start"} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
+      const iconX = item.left ? endX - 20 : endX;
+      const iconY = bendY - 24;
+      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${bendX},${bendY} ${endX},${bendY}`} fill="none" stroke={item.color} strokeWidth=".8"/><rect className="yt-donut-gender-frame" x={iconX} y={iconY} width="20" height="20" rx="4"/><text className="yt-donut-gender-icon" x={iconX+10} y={iconY+10} textAnchor="middle" dominantBaseline="central">{item.label === "여성" ? "♀" : "♂"}</text><text x={endX} y={bendY+10} textAnchor={item.left?"end":"start"} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
     })}
   </svg>;
 }
