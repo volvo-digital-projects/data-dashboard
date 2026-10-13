@@ -3643,7 +3643,7 @@ export default function CompetitiveAnalysis({
                 </strong>
               </div>
               <div className="growth-profile-metric">
-                <span>VOC 고객상담 만족평균(23 ~ 26 YTD)</span>
+                <span>VOC 고객상담 평균만족도(23 ~ 26 YTD)</span>
                 <strong>
                   {selectedStaffScoring?.average?.toFixed(1) ?? "―"}
                   {selectedStaffScoring?.average === null || !selectedStaffScoring ? null : <small>점</small>}
