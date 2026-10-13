@@ -223,7 +223,7 @@ export default function YouTubePerformance() {
           <td><strong>{person.channel.short.count}<i>개</i></strong><small>≈{number(person.channel.short.averageViews)}회</small></td>
           <td className="yt-cell-voc"><strong>{decimal(person.score)}<i>점</i></strong><small>{person.responses?`${person.responses}건 회신`:"회신 없음"}</small></td>
           <td className="yt-cell-sales"><strong>{decimal(person.monthly)}<i>대</i></strong><small>누적 {number(person.delivered)}대</small></td>
-          <td className="yt-cell-comments"><button type="button" onClick={()=>{setSelectedName(person.name);setDetailOpen(true);}} aria-controls="yt-channel-detail">{comments && comments.status==="complete"?`${number(comments.total)}건`:"수집 대기"}<small>채널 해석</small></button></td>
+          <td className="yt-cell-comments"><button type="button" onClick={()=>{setSelectedName(person.name);setDetailOpen(true);}} aria-controls="yt-channel-detail">{comments && comments.status==="complete"?`${number(comments.total)}건`:"수집 대기"}<small>댓글분석 결과</small></button></td>
         </tr>;
       })}</tbody></table>
     </div> : <div className="yt-empty"><strong>{dealer}의 등록 직원이 없습니다.</strong><p>첨부 명단 기준이며 실제 채널 부재를 단정하지 않습니다.</p></div>}

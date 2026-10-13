@@ -4,6 +4,13 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('Comment result buttons use an underlined clickable label',()=>{
+ const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
+ const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
+ assert.ok(source.includes('<small>댓글분석 결과</small></button>'));
+ assert.match(css,/\.yt-cell-comments button small\{text-decoration:underline;text-underline-offset:2px/);
+});
+
 test('Monthly sales header has no slash before the cumulative unit',()=>{
  const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
  assert.ok(source.includes('26년 월평균 판매<small>누적 · 대</small>'));
