@@ -3300,6 +3300,7 @@ export default function CompetitiveAnalysis({
             <ul className="analysis-summary-breakdown">
               <li>VOC 상담 후 해피콜(24시간 이내 시행)</li>
               <li>ONE Voice 출고 후 해피콜(24시간 이내 시행)</li>
+              <li>ONE Voice 시승제공 후 해피콜(27년 신설항목)</li>
             </ul>
           </div>
           <AnimatedAnalysisScore value={selectedPoint.happyScore} sequence={1} />
