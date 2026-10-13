@@ -3774,6 +3774,9 @@ export default function CompetitiveAnalysis({
                           <clipPath id="growth-gauge-selected-staff-photo">
                             <circle cx="0" cy="0" r="7.5" />
                           </clipPath>
+                          <filter id="growth-gauge-photo-blackout" colorInterpolationFilters="sRGB">
+                            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+                          </filter>
                         </defs>
                         <g className="growth-gauge-segments">
                           <path className={selectedStaffGrowthZone === 0 ? "coaching active" : "coaching"} d="M75 224 A135 135 0 0 1 142.5 107.1 L169 153 A82 82 0 0 0 128 224 Z" />
@@ -3865,6 +3868,7 @@ export default function CompetitiveAnalysis({
                                     height="20.25"
                                     preserveAspectRatio="xMidYMin slice"
                                     clipPath="url(#growth-gauge-selected-staff-photo)"
+                                    filter={selectedStaffHasProfilePhoto ? "url(#growth-gauge-photo-blackout)" : undefined}
                                   />
                                   <circle className="photo-ring" r="8" />
                                 </g>
@@ -3976,6 +3980,9 @@ export default function CompetitiveAnalysis({
                         <clipPath id="consultation-selected-staff-photo">
                           <circle r="7.5" />
                         </clipPath>
+                        <filter id="consultation-photo-blackout" colorInterpolationFilters="sRGB">
+                          <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+                        </filter>
                         <radialGradient id="consultation-showroom-gradient" cx="32%" cy="28%" r="72%">
                           <stop offset="0%" stopColor="#7fe0bd" />
                           <stop offset="48%" stopColor="#18a578" />
@@ -4108,6 +4115,7 @@ export default function CompetitiveAnalysis({
                               height="20.25"
                               preserveAspectRatio="xMidYMin slice"
                               clipPath="url(#consultation-selected-staff-photo)"
+                              filter={selectedStaffHasProfilePhoto ? "url(#consultation-photo-blackout)" : undefined}
                             />
                             <circle className="photo-ring" r="8" />
                           </g>
@@ -4271,6 +4279,9 @@ export default function CompetitiveAnalysis({
                         <clipPath id="sales-selected-staff-photo">
                           <circle r="7.5" />
                         </clipPath>
+                        <filter id="sales-photo-blackout" colorInterpolationFilters="sRGB">
+                          <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+                        </filter>
                         <radialGradient id="sales-showroom-gradient" cx="32%" cy="28%" r="72%">
                           <stop offset="0%" stopColor="#7fe0bd" />
                           <stop offset="48%" stopColor="#18a578" />
@@ -4408,6 +4419,7 @@ export default function CompetitiveAnalysis({
                               height="20.25"
                               preserveAspectRatio="xMidYMin slice"
                               clipPath="url(#sales-selected-staff-photo)"
+                              filter={selectedStaffHasProfilePhoto ? "url(#sales-photo-blackout)" : undefined}
                             />
                             <circle className="photo-ring" r="8" />
                           </g>

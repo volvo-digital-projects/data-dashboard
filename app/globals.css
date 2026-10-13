@@ -1931,7 +1931,6 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-benchmark-staff-photo .photo-profile-blackout,
 .growth-scatter-selected-photo image.photo-profile-blackout {
-  filter: brightness(0);
   pointer-events: none;
 }
 
