@@ -79,7 +79,7 @@ def pages(api, endpoint, **params):
         seen.add(token)
         params["pageToken"] = token
 
-def collect_channel(api, channel_id, allowed_video_ids=None):
+def collect_channel(api, channel_id, allowed_video_ids=None, review_texts=None):
     found = {}
     coverage = {}
     excluded = set()
@@ -92,6 +92,10 @@ def collect_channel(api, channel_id, allowed_video_ids=None):
             excluded.add(cid)
             return
         category, topic, summary = classify(text, owner)
+        if review_texts is not None and not owner:
+            clean = re.sub(r"(?<!\d)(?:\+?82[\s().-]*0?|0)(?:1[016789]|2|[3-6]\d|70)[\s().-]*\d{3,4}[\s().-]*\d{4}(?!\d)", "[연락처 제외]", unicodedata.normalize("NFKC", text))
+            clean = re.sub(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[이메일 제외]", clean)
+            review_texts[cid] = clean
         found[cid] = dict(id=cid, category=category, topic=topic, summary=summary,
                          videoId=video_id, kind="video",
                          url=f"https://www.youtube.com/watch?v={video_id}&lc={cid}")
@@ -129,9 +133,13 @@ def refresh(key, source, destination):
         raise RuntimeError("YOUTUBE_API_KEY is not configured; previous snapshot retained")
     api = Api(key)
     channels = {}
+    review = {}
     for channel in source["channels"]:
         allowed = set(channel.get("scopeVideoIds", [])) if channel.get("videoBrandFilter") else None
-        channels[channel["id"]] = collect_channel(api, channel["id"], allowed)
+        texts = {} if os.environ.get("COMMENT_REVIEW_OUTPUT") else None
+        channels[channel["id"]] = collect_channel(api, channel["id"], allowed, texts)
+        if texts is not None:
+            review[channel["id"]] = list(texts.values())
     output = dict(checkedAt=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                   method="YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 자동 긍정/부정 분류",
                   channels=channels, apiCalls=api.calls)
@@ -139,6 +147,8 @@ def refresh(key, source, destination):
     temporary = destination.with_suffix(".tmp")
     temporary.write_text(json.dumps(output, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     temporary.replace(destination)
+    if os.environ.get("COMMENT_REVIEW_OUTPUT"):
+        Path(os.environ["COMMENT_REVIEW_OUTPUT"]).write_text(json.dumps(dict(checkedAt=output["checkedAt"], channels=review), ensure_ascii=False), encoding="utf-8")
 
 def main():
     source = json.loads((ROOT / "app/data/youtube-creators.json").read_text(encoding="utf-8"))

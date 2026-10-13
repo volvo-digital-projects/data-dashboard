@@ -1,0 +1,27 @@
+name: Prepare private YouTube comment review
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect anonymized public comments for editorial review
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          COMMENT_REVIEW_OUTPUT: ${{ runner.temp }}/youtube-comment-review.json
+        run: python scripts/refresh-youtube-comments.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: private-youtube-comment-review
+          path: ${{ runner.temp }}/youtube-comment-review.json
+          retention-days: 1
