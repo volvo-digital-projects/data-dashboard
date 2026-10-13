@@ -442,12 +442,12 @@ test("shows every creator metric together with detail collapsed by default", asy
   const dealerDistribution = html.match(/<div class="yt-dealers" aria-label="딜러사 필터">([\s\S]*?)<\/div>/)?.[1];
   assert.ok(dealerDistribution);
   const expectedDealerOrder = ["코오롱", "아주", "천하", "에이치", "아이언", "태영", "아이비"];
-  const dealerPositions = expectedDealerOrder.map(name => dealerDistribution.indexOf(`>${name}</span>`));
+  const dealerPositions = expectedDealerOrder.map(name => dealerDistribution.indexOf(`>${name}<!-- -->(`));
   assert.ok(dealerPositions.every(position => position >= 0), "every dealer appears in the distribution");
   assert.deepEqual([...dealerPositions].sort((a, b) => a - b), dealerPositions, "dealer distribution follows creator-count rank and tie order");
   assert.doesNotMatch(html, /class="yt-staff-stat"><span>활동 영업직원<\/span>/);
   assert.doesNotMatch(html, /class="yt-gender-ring"|class="yt-channel-facts"|class="yt-sales-mini"/);
-  assert.match(html, /신수경<!-- --> · 댓글 분석/);
+  assert.doesNotMatch(html, /id="yt-channel-detail"/);
   assert.doesNotMatch(html, /VOLVO CREATOR INTELLIGENCE|크리에이터 종합 매트릭스|dealer-certification-reconcile|dealer-analysis-data-note|class="yt-icon-filter"/);
   for (const label of ["구독자 많은 순", "평균 만족도 높은 순", "월평균 판매 높은 순", "평균 조회 높은 순"]) assert.match(html, new RegExp(`>${label}<\\/button>`));
   assert.match(html, /class="yt-sort-filter" aria-pressed="true">구독자 많은 순<\/button>/);
@@ -465,7 +465,7 @@ test("shows every creator metric together with detail collapsed by default", asy
     const score = totals.responses ? (totals.score / totals.responses).toFixed(1) : "—";
     assert.ok(row.includes(`<td class="yt-cell-voc"><strong>${score}<i>점</i></strong>`), person.name);
   }
-  assert.match(html, /<details class="yt-detail yt-detail-disclosure" id="yt-channel-detail">/);
+  assert.doesNotMatch(html, /class="yt-inline-detail"/);
   assert.doesNotMatch(table, /yt-person-results|yt-score/);
 });
 

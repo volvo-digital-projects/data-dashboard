@@ -4,6 +4,16 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('Comment panels toggle below the selected creator row without covering it',()=>{
+ const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
+ assert.ok(source.includes('setDetailOpen(!(detailOpen && selected?.name===name))'));
+ assert.equal((source.match(/toggleComments\(person\.name\)/g)??[]).length,3);
+ assert.ok(source.includes('<tr className="yt-inline-detail"><td colSpan={10}>'));
+ assert.ok(source.includes('data-comment-selected='));
+ assert.ok(source.includes('scroller.scrollBy'));
+ assert.ok(!source.includes('has-comment-detail'));
+});
+
 test('Comment result buttons use an underlined clickable label',()=>{
  const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
  const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
@@ -59,8 +69,8 @@ test('Every YouTube channel has a concise three-part review without opinions or 
   }
  }
  const component=readFileSync(new URL('../app/YouTubeCommentAnalysis.tsx',import.meta.url),'utf8');
- for(const label of ['채널 총평','긍정 반응','부정 반응']) assert.ok(component.includes(label));
- assert.doesNotMatch(component, /내 의견|review\.opinion|<a\b|<button\b|<details\b|댓글 원문|원문 확인|자동 키워드|직원 능력 판정/);
+ for(const label of ['긍정 반응','부정 반응']) assert.ok(component.includes(label));
+ assert.doesNotMatch(component, /채널 총평|내 의견|review\.opinion|<a\b|<button\b|<details\b|댓글 원문|원문 확인|자동 키워드|직원 능력 판정/);
 });
 
 test('YouTube roster joins official photos, DMS sales and VOC by showroom and name',()=>{
