@@ -3274,8 +3274,8 @@ export default function CompetitiveAnalysis({
           <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selected.q1?.voc)}, Q2 ${displayQuarterNumber(selected.voc)}, Q3 ${displayQuarterNumber(selectedQ3Voc)}, Q4 미집계`}>
             <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.voc)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selected.voc)}</strong></span>
-            <span className="current"><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Voc)}</strong></span>
-            <span><b>Q4</b></span>
+            <span><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Voc)}</strong></span>
+            <span className="current"><b>Q4</b></span>
           </p>
           <em
             className={
@@ -3307,8 +3307,8 @@ export default function CompetitiveAnalysis({
           <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selectedQ1HappyCall)}, Q2 ${displayQuarterNumber(selectedQ2HappyCall)}, Q3 ${displayQuarterNumber(selectedQ3HappyCall)}, Q4 ${displayQuarterNumber(selectedQ4HappyCall)}`}>
             <span><b>Q1</b><strong>{displayQuarterNumber(selectedQ1HappyCall)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selectedQ2HappyCall)}</strong></span>
-            <span className={typeof selectedQ4HappyCall === "number" ? undefined : "current"}><b>Q3</b><strong>{displayQuarterNumber(selectedQ3HappyCall)}</strong></span>
-            <span className={typeof selectedQ4HappyCall === "number" ? "current" : undefined}><b>Q4</b><strong>{displayQuarterNumber(selectedQ4HappyCall)}</strong></span>
+            <span><b>Q3</b><strong>{displayQuarterNumber(selectedQ3HappyCall)}</strong></span>
+            <span className="current"><b>Q4</b><strong>{displayQuarterNumber(selectedQ4HappyCall)}</strong></span>
           </p>
           <em
             className={
@@ -3341,8 +3341,8 @@ export default function CompetitiveAnalysis({
           <p className="analysis-quarter-values" aria-label={`Q1 ${displayQuarterNumber(selectedQ1Combined)}, Q2 ${displayQuarterNumber(selectedQ2Combined)}, Q3 ${displayQuarterNumber(selectedQ3Combined)}, Q4 미집계`}>
             <span><b>Q1</b><strong>{displayQuarterNumber(selectedQ1Combined)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selectedQ2Combined)}</strong></span>
-            <span className="current"><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Combined)}</strong></span>
-            <span><b>Q4</b></span>
+            <span><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Combined)}</strong></span>
+            <span className="current"><b>Q4</b></span>
           </p>
           <em>
             {summaryRankLabel} {summaryRank}위 / 전체 {summaryRankTotal}

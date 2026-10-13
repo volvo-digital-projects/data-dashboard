@@ -7540,13 +7540,13 @@ input:focus-visible {
 }
 
 .analysis-quarter-values span.current b {
-  border-color: rgba(214, 89, 41, 0.58);
-  color: var(--es90-orange);
-  background: #fff8f4;
+  border-color: rgba(230, 66, 71, 0.58);
+  color: #e64247;
+  background: #fff5f5;
 }
 
 .analysis-quarter-values span.current strong {
-  color: var(--es90-orange);
+  color: #e64247;
 }
 
 .analysis-quarter-values span.pending strong {
