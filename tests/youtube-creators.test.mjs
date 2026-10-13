@@ -4,6 +4,16 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('Comment reaction headings share matching font-sized SVG faces',()=>{
+ const source=readFileSync(new URL('../app/YouTubeCommentAnalysis.tsx',import.meta.url),'utf8');
+ const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
+ assert.match(source,/긍정 반응<ReactionFace positive=\{true\}/);
+ assert.match(source,/부정 반응<ReactionFace positive=\{false\}/);
+ assert.match(source,/stroke="currentColor"/);
+ assert.match(source,/aria-hidden="true"/);
+ assert.match(css,/\.yt-reaction-face\{width:1em;height:1em;flex-shrink:0\}/);
+});
+
 test('YouTube staff badges use HM for H Motors',()=>{
  const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
  assert.match(source,/에이치:"HM"/);
