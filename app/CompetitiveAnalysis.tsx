@@ -4448,7 +4448,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-sales-monthly-card">
                     <header>
-                      <strong>2026년 월별 판매대수</strong>
+                      <strong><span className="growth-sales-heading-number">2026</span>년 월별 판매대수</strong>
                     </header>
                     <div className="growth-sales-monthly-body">
                       <div className="growth-sales-monthly-trend">
