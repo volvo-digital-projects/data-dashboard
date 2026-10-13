@@ -1456,6 +1456,14 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   transform-origin: center top;
 }
 
+.growth-profile-photo img.staff-photo-blackout {
+  filter: brightness(0);
+  object-fit: contain;
+  object-position: center top;
+  transform: scale(1.35);
+  transform-origin: center top;
+}
+
 .growth-profile-person-identity,
 .growth-profile-metric {
   min-width: 0;
@@ -1898,6 +1906,12 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-gauge-benchmark-staff-photo .photo-fallback-silhouette {
   opacity: 0.88;
+}
+
+.growth-gauge-benchmark-staff-photo .photo-profile-blackout,
+.growth-scatter-selected-photo image.photo-profile-blackout {
+  filter: brightness(0);
+  pointer-events: none;
 }
 
 .growth-gauge-benchmark-staff-photo .photo-ring {

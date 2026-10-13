@@ -2553,6 +2553,10 @@ export default function CompetitiveAnalysis({
   const selectedStaffFallbackProfileImage = selectedStaffEmployee?.gender === "female"
     ? staffFemaleFallbackProfileImage
     : staffFallbackProfileImage;
+  const selectedStaffSilhouetteImage = selectedStaffProfile?.image === "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg"
+    ? "/staff-profiles/kolon/songpa/kim-jeongho-cutout.png"
+    : selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage;
+  const selectedStaffHasProfilePhoto = Boolean(selectedStaffProfile);
   const selectedStaffCertificationCounts = {
     Grand: 0,
     Advanced: 0,
@@ -3582,8 +3586,8 @@ export default function CompetitiveAnalysis({
               <div className="growth-profile-person">
                 <span className="growth-profile-photo" aria-hidden="true">
                   <img
-                    className="staff-profile-silhouette"
-                    src={selectedStaffFallbackProfileImage}
+                    className={selectedStaffHasProfilePhoto ? "staff-photo-blackout" : "staff-profile-silhouette"}
+                    src={selectedStaffSilhouetteImage}
                     alt=""
                     draggable={false}
                   />
@@ -3845,8 +3849,8 @@ export default function CompetitiveAnalysis({
                                   <circle className="photo-halo" r="9.8" />
                                   <circle className="photo-backdrop" r="9.4" />
                                   <image
-                                    className="photo-fallback-silhouette"
-                                    href={selectedStaffFallbackProfileImage}
+                                    className={selectedStaffHasProfilePhoto ? "photo-profile-blackout" : "photo-fallback-silhouette"}
+                                    href={selectedStaffSilhouetteImage}
                                     x="-10.125"
                                     y="-7.5"
                                     width="20.25"
@@ -4088,8 +4092,8 @@ export default function CompetitiveAnalysis({
                             <circle className="photo-halo" r="9.8" />
                             <circle className="photo-backdrop" r="9.4" />
                             <image
-                              className="photo-fallback-silhouette"
-                              href={selectedStaffFallbackProfileImage}
+                              className={selectedStaffHasProfilePhoto ? "photo-profile-blackout" : "photo-fallback-silhouette"}
+                              href={selectedStaffSilhouetteImage}
                               x="-10.125"
                               y="-7.5"
                               width="20.25"
@@ -4388,8 +4392,8 @@ export default function CompetitiveAnalysis({
                             <circle className="photo-halo" r="9.8" />
                             <circle className="photo-backdrop" r="9.4" />
                             <image
-                              className="photo-fallback-silhouette"
-                              href={selectedStaffFallbackProfileImage}
+                              className={selectedStaffHasProfilePhoto ? "photo-profile-blackout" : "photo-fallback-silhouette"}
+                              href={selectedStaffSilhouetteImage}
                               x="-10.125"
                               y="-7.5"
                               width="20.25"

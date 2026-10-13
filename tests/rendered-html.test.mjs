@@ -945,14 +945,14 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@keyframes growth-scatter-photo-reveal\s*\{[\s\S]*?scale\(0\.28\)[\s\S]*?scale\(1\.12\)[\s\S]*?scale\(1\)/);
   assert.equal((navigation.match(/className="photo-acquire-flash"/g) ?? []).length, 3);
   assert.equal((navigation.match(/className="photo-halo" r="9\.8"/g) ?? []).length, 3);
-  assert.equal((navigation.match(/href=\{selectedStaffProfile\.image\}/g) ?? []).length, 0);
-  assert.equal((navigation.match(/className="photo-fallback-silhouette"/g) ?? []).length, 3);
-  assert.equal((source.match(/className="staff-profile-silhouette"/g) ?? []).length, 2);
+  assert.equal((navigation.match(/className=\{selectedStaffHasProfilePhoto \? "photo-profile-blackout" : "photo-fallback-silhouette"\}/g) ?? []).length, 3);
+  assert.match(source, /const selectedStaffSilhouetteImage = selectedStaffProfile\?\.image/);
+  assert.match(navigation, /className=\{selectedStaffHasProfilePhoto \? "staff-photo-blackout" : "staff-profile-silhouette"\}/);
   assert.match(source, /const staffFallbackProfileImage = "\/staff-profiles\/neutral-human-silhouette\.png";/);
   assert.match(source, /const staffFemaleFallbackProfileImage = "\/staff-profiles\/female-human-silhouette\.png";/);
   assert.match(source, /selectedStaffEmployee\?\.gender === "female"[\s\S]*?staffFemaleFallbackProfileImage[\s\S]*?: staffFallbackProfileImage/);
   assert.equal(staffAnalysis.showrooms["6KR6846"].employees.find((employee) => employee.name === "김예소")?.gender, "female");
-  assert.equal((navigation.match(/(?:src|href)=\{selectedStaffFallbackProfileImage\}/g) ?? []).length, 4);
+  assert.equal((navigation.match(/(?:src|href)=\{selectedStaffSilhouetteImage\}/g) ?? []).length, 4);
   assert.doesNotMatch(source, /(?:src|href)=\{staffFallbackProfileImage\}/);
   assert.doesNotMatch(navigation, /selectedStaffInitials/);
   assert.doesNotMatch(navigation, /<span className="staff-profile-silhouette"/);
@@ -962,6 +962,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center top;[^}]*transform: scale\(1\.35\);[^}]*transform-origin: center top;[^}]*image-rendering: auto;/);
   assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 3);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
+  assert.match(css, /\.growth-gauge-benchmark-staff-photo \.photo-profile-blackout,[\s\S]*?\.growth-scatter-selected-photo image\.photo-profile-blackout\s*\{[^}]*filter: brightness\(0\);[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
   assert.equal((navigation.match(/<circle className="photo-backdrop" r="9\.4" \/>/g) ?? []).length, 3);
@@ -1043,7 +1044,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(navigation, /className="growth-segment-donut-center"[\s\S]*?<em>\{donut\.label\}<\/em>/);
   assert.match(navigation, /<span><b>\{total\}<\/b><small>대<\/small><\/span>/);
   assert.doesNotMatch(navigation, /has-staff-photo/);
-  assert.match(navigation, /className="photo-fallback-silhouette"[\s\S]*?href=\{selectedStaffFallbackProfileImage\}/);
+  assert.match(navigation, /className=\{selectedStaffHasProfilePhoto \? "photo-profile-blackout" : "photo-fallback-silhouette"\}[\s\S]*?href=\{selectedStaffSilhouetteImage\}/);
   assert.match(css, /\.growth-segment-donut-center\s*\{[^}]*top:\s*31px;[^}]*height:\s*38px;[^}]*flex-direction:\s*column;[^}]*gap:\s*1px;/);
   assert.match(css, /\.growth-segment-donut-center > em\s*\{[^}]*font-size:\s*8px;[^}]*line-height:\s*1;[^}]*white-space:\s*nowrap;/);
   assert.doesNotMatch(css, /\.growth-segment-donut-(?:disc|center)\.has-staff-photo/);
