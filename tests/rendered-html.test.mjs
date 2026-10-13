@@ -2373,7 +2373,11 @@ test("server-renders the selected CDSID dashboard", async () => {
     ),
   ];
   assert.equal(statusQuarterStrips.length, 2);
-  statusQuarterStrips.forEach(([, strip]) => assert.match(strip, /<strong/));
+  statusQuarterStrips.forEach(([, strip]) => {
+    assert.match(strip, /<strong/);
+    assert.match(strip, /<button[^>]*class="complete"[^>]*><small>Q3<\/small><strong>평가완료<\/strong><\/button>/);
+    assert.match(strip, /<button[^>]*class="planned"[^>]*><small>Q4<\/small><strong>평가 중<\/strong><\/button>/);
+  });
   assert.match(
     visibleHtml,
     /class="metric-benchmark"[\s\S]*?<strong class="negative caution">▼ \d+\.\d점<\/strong>/,

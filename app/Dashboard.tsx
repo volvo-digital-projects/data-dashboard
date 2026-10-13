@@ -764,12 +764,14 @@ function MetricCard({
         key: available ? quarterKey : null,
         label: quarterKey.toUpperCase(),
         state: available
-          ? quarter === quarterKey
-            ? "current"
-            : "complete"
+          ? metric !== "v3s" && quarterKey === "q3"
+            ? "complete"
+            : quarter === quarterKey
+              ? "current"
+              : "complete"
           : "planned",
         available,
-        status: available ? "평가완료" : "평가 전",
+        status: available ? "평가완료" : quarterKey === "q4" ? "평가 중" : "평가 전",
       };
     },
   );
