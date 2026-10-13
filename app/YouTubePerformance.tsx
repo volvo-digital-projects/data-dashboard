@@ -4,17 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import data from "./data/youtube-creators.json";
 import salesData from "./data/sales-activity-analysis.json";
 import vocData from "./data/voc-staff-analysis.json";
-import photoData from "./data/staff-profile-photos.json";
 import certificationData from "./data/staff-certifications.json";
 import YouTubeCommentAnalysis, { commentData } from "./YouTubeCommentAnalysis";
 import "./youtube-performance.css";
 
 type Sales = { staff: { name: string; deliveredSales: number; monthlyDeliveredSales: number[] }[] };
 type Voc = { employees: { name: string; years: Record<string, {responses: number; scoreSum: number}> }[] };
-type Photos = { sourcePage: string; employees: Record<string, {image: string}> };
 const sales = salesData.showrooms as Record<string, Sales>;
 const voc = vocData.showrooms as Record<string, Voc>;
-const photos = photoData.showrooms as Record<string, Photos>;
+const silhouetteForGender = (gender: string) => gender === "여성"
+  ? "/staff-profiles/female-human-silhouette.png"
+  : "/staff-profiles/neutral-human-silhouette.png";
 const dealers = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
 const dealerCodes: Record<string, string> = {에이치:"H", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
 type SharedVideo = { id: string; title: string; kind: string; views: number; names: string[]; basis: string };
@@ -47,7 +47,7 @@ const creators = data.creators.map(person => {
   const survey = Object.values(history ?? {}).reduce((sum, year) => ({responses: sum.responses + year.responses, scoreSum: sum.scoreSum + year.scoreSum}), {responses:0, scoreSum:0});
   const nameCount = Object.values(sales).flatMap(showroom => showroom.staff).filter(staff => staff.name === person.name).length;
   const certifications = ["Grand", "Advanced", "Certified"].map(level => certificationData.records.filter(record => record.name === person.name && (nameCount === 1 || record.showroom === person.showroom) && record.level === level).length);
-  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: photos[person.cdsid]?.employees[person.name]?.image ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png"),
+  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: silhouetteForGender(person.gender),
     delivered: result?.deliveredSales ?? null,
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
     months: result?.monthlyDeliveredSales ?? [], responses: survey?.responses ?? 0,
@@ -113,14 +113,12 @@ function GenderDonut() {
       const x=110+29*Math.cos(item.angle), y=38+29*Math.sin(item.angle);
       const bendX=110+35*Math.cos(item.angle), bendY=38+35*Math.sin(item.angle);
       const endX=item.left?60:160;
-      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${bendX},${bendY} ${endX},${bendY}`} fill="none" stroke={item.color} strokeWidth=".8"/><text x={endX} y={bendY-5} textAnchor={item.left?"end":"start"} className="yt-donut-label">{item.label}</text><text x={endX} y={bendY+10} textAnchor={item.left?"end":"start"} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
+      const iconX = item.left ? endX - 17 : endX;
+      return <g key={item.label} fill={item.color}><polyline points={`${x},${y} ${bendX},${bendY} ${endX},${bendY}`} fill="none" stroke={item.color} strokeWidth=".8"/><rect className="yt-donut-silhouette-frame" x={iconX} y={bendY-22} width="17" height="17" rx="3"/><image className="yt-donut-silhouette" href={silhouetteForGender(item.label)} x={iconX} y={bendY-22} width="17" height="17" preserveAspectRatio="xMidYMid meet"/><text x={endX} y={bendY+10} textAnchor={item.left?"end":"start"} className="yt-donut-value">{item.count}명 · {(total ? item.count/total*100 : 0).toFixed(1)}%</text></g>;
     })}
   </svg>;
 }
 
-function GenderIcon({gender}:{gender:string}) {
-  return <svg className="yt-gender-icon" viewBox="0 0 16 20" role="img" aria-label={gender} fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="8" cy="9" r="4"/>{gender==="남성"?<path d="M8 5V0M5 3 8 0l3 3"/>:<path d="M8 13v7M5 17h6"/>}</svg>;
-}
 export default function YouTubePerformance() {
   const [dealer, setDealer] = useState("전체");
   const [selectedName, setSelectedName] = useState("신수경");
@@ -186,7 +184,7 @@ export default function YouTubePerformance() {
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">
       <table className="yt-comparison-table"><caption className="yt-table-caption">{creators.length}명 채널·상담·판매 정량 지표. 조회수 평균은 공개 표시값 기준 근삿값.</caption><thead><tr>
-        <th scope="col">딜러사 / 직원<small>전시장 / 성별</small></th><th scope="col" className="yt-date-heading"><span>볼보 입사일</span><span>채널 개설일</span></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
+        <th scope="col">딜러사 / 직원<small>전시장</small></th><th scope="col" className="yt-date-heading"><span>볼보 입사일</span><span>채널 개설일</span></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">누적 고객만족도 평균<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>/ 누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
       </tr></thead><tbody>{visible.map((person,index)=>{
         const comments=commentData.channels[person.channelId];
         const priorDaySubscribers=dailyClose?.channelSubscribers[person.channelId] ?? null;
@@ -206,7 +204,7 @@ export default function YouTubePerformance() {
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
-          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar"><img src={person.image} alt="" loading="lazy"/></span><span><strong>{person.name} <GenderIcon gender={person.gender}/></strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={`${person.gender} 실루엣`}><img src={person.image} alt="" loading="lazy"/></span><span><strong>{person.name}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={subscriberDeltaTitle}><span>전일 대비</span><b className={subscriberDeltaTone}><span className={`yt-subscriber-count${includesSubscriberChange ? "" : " is-excluded"}`}>{includesSubscriberChange&&<i>{subscriberDelta.direction}</i>}<em>{subscriberDelta.count}</em></span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
@@ -226,6 +224,6 @@ export default function YouTubePerformance() {
         if(section && scroller) scroller.scrollTop+=(section.getBoundingClientRect().top-scroller.getBoundingClientRect().top)/(scroller.getBoundingClientRect().height/scroller.offsetHeight);
       }}/>
     </details>}
-    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 얼굴은 기존 공식 딜러사 프로필과 이름·전시장으로 연결했습니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
+    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 화면의 직원 사진은 명단의 성별에 맞는 실루엣으로 표시합니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 매시간 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 API 키 연결 후 같은 시간별 작업에서 갱신하며, 댓글 수집일은 상세 분석에 별도로 표시합니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>댓글은 API 키 연결 후 채널 전체 공개 댓글·답글 페이지를 순회합니다. 연결 전에는 기존 검토 표본만 표시하며, 삭제·비공개·검토 대기 댓글은 포함할 수 없습니다. 분류는 키워드 기반 자동 검토 보조이며 원문 확인이 필요합니다.</li><li>모든 수집 댓글을 유지/강화·수정/보완·중립/기타·복합 검토·운영자 답글로 집계합니다. 댓글 작성자가 실제 고객인지 검증되지 않았으며, 직원의 객관적 능력 점수나 인사 순위로 사용하지 않습니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
   </section>;
 }

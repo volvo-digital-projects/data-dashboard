@@ -34,13 +34,11 @@
 @media(min-width:761px) and (max-width:1100px){.youtube-performance.yt-compact{padding:12px}.yt-comparison-table th,.yt-comparison-table td{padding:3px 5px}.yt-comparison-table td>strong{font-size:12px}.yt-compact .yt-hero h2{font-size:17px}.yt-compact .yt-headline-stats strong{font-size:21px}.yt-compact .yt-filters>span{display:none}}
 @media(max-width:760px){.youtube-performance.yt-compact{padding:10px}.yt-compact .yt-hero{grid-template-columns:1fr;gap:8px}.yt-compact .yt-headline-stats{padding:0}.yt-compact .yt-distribution{grid-template-columns:1fr;gap:7px}.yt-compact .yt-gender{justify-content:flex-start}.yt-compact .yt-matrix-heading{align-items:flex-start}.yt-comparison-table th:first-child{position:sticky;left:0;background:#fcfaf7;z-index:1}.yt-comparison-table thead th:first-child{background:#f4ede6}.yt-compact .yt-dealers button{padding:4px}.yt-compact .yt-period{font-size:8px!important}}
 .yt-row-avatar{display:block;width:27px;height:30px;overflow:hidden;border-radius:3px;flex-shrink:0}
-.yt-row-avatar img[src*="kim-jeongho-channel-20260915"]{object-position:center;transform:scale(2);transform-origin:80% 32%}
 @media(min-width:761px){.yt-row-avatar{width:24px;height:26px}}
 .yt-row-person .yt-dealer-code{width:24px;height:24px;flex:0 0 24px;display:grid;place-items:center;border:1px solid #c9d8dd;border-radius:3px;background:#eaf1f3;color:#23586b;font-size:9px;font-weight:650}
 .yt-row-person .yt-row-avatar,.yt-row-person .yt-row-avatar img{width:24px;height:24px}
 .yt-row-person .yt-certifications{display:inline-flex;gap:3px;font-size:7px;font-weight:500;white-space:nowrap}
 .yt-certifications span:nth-child(1){color:#247d9b}.yt-certifications span:nth-child(2){color:#438f88}.yt-certifications span:nth-child(3){color:#b76742}
-.yt-row-person .yt-gender-icon{font-size:12px;line-height:1;color:#536e7a}
 .yt-compact .yt-comparison-table th:first-child{width:26%}.yt-compact .yt-comparison-table th:nth-child(3){width:10%}.yt-compact .yt-comparison-table th:nth-child(9){width:10%}
 .yt-compact .yt-row-person{gap:5px}.yt-compact .yt-row-person strong{gap:4px}
 .yt-compact .yt-comparison-table tr > :not(:first-child){position:relative;padding-inline:9px}
@@ -48,7 +46,7 @@
 .yt-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.yt-compact .yt-title-row h2{display:flex;align-items:center;gap:5px;white-space:nowrap}.yt-title-icon{width:21px;height:15px;flex-shrink:0;margin-right:3px}.yt-update-stamp{display:inline-flex;align-items:center;gap:4px;border:1px solid #d1e0e6;background:#f6fafb;border-radius:20px;padding:3px 7px;color:#4b6b80;font-size:8px;white-space:nowrap}.yt-update-stamp b{color:#d4683d;font-size:7px}.yt-subscriber-sort{border:0;background:transparent;padding:0;color:#275064;font-size:12px;cursor:pointer}.yt-subscriber-sort[aria-pressed=true]{font-weight:650}.yt-compact{--yt-snap-inset:17px}@media(max-width:1100px) and (min-width:761px){.yt-compact{--yt-snap-inset:13px}}@media(max-width:760px){.yt-compact{--yt-snap-inset:11px}}
 .yt-compact .yt-title-row{flex-direction:column;align-items:flex-start;gap:6px}
 .yt-compact .yt-comparison-table{min-width:920px}.yt-compact .yt-comparison-table th:first-child{width:20%}.yt-compact .yt-comparison-table th:nth-child(2){width:9%}.yt-compact .yt-comparison-table th:nth-child(3){width:6%}.yt-compact .yt-comparison-table th:nth-child(4){width:9%}.yt-compact .yt-comparison-table th:nth-child(5){width:10%}.yt-compact .yt-comparison-table th:nth-child(6),.yt-compact .yt-comparison-table th:nth-child(7),.yt-compact .yt-comparison-table th:nth-child(8),.yt-compact .yt-comparison-table th:nth-child(9){width:9%}.yt-compact .yt-comparison-table th:nth-child(10){width:10%}
-.yt-cert-cell .yt-certifications{display:flex;justify-content:center;gap:4px;font-size:11px;font-weight:650;white-space:nowrap}.yt-row-person .yt-gender-icon{display:inline-block;width:11px;height:15px;font-style:normal;transform:none;flex-shrink:0}.yt-cell-comments button{border:0;background:transparent;color:#245d71;font-size:12px;font-weight:650;padding:1px 0;cursor:pointer}.yt-compact .yt-detail-body{grid-template-columns:minmax(0,1fr)}
+.yt-cert-cell .yt-certifications{display:flex;justify-content:center;gap:4px;font-size:11px;font-weight:650;white-space:nowrap}.yt-cell-comments button{border:0;background:transparent;color:#245d71;font-size:12px;font-weight:650;padding:1px 0;cursor:pointer}.yt-compact .yt-detail-body{grid-template-columns:minmax(0,1fr)}
 .yt-comment-panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.yt-comment-panel{border:1px solid #d9e6e9;border-top:3px solid #489e87;background:#f7fbfb;padding:12px;border-radius:5px}.yt-comment-panel.suggestion{border-top-color:#cb6b5e;background:#fffaf4}.yt-comment-panel h5{display:flex;justify-content:space-between;color:#17766e;font-size:13px;margin:0 0 12px}.yt-comment-panel.suggestion h5{color:#b35d47}.yt-comment-panel button{display:grid;grid-template-columns:minmax(110px,1fr) 70px 34px 42px;gap:7px;width:100%;align-items:center;border:0;background:transparent;padding:7px 0;text-align:left;font-size:10px;color:#416778}.yt-comment-panel button i{height:7px;background:#e4eeee;border-radius:3px;overflow:hidden}.yt-comment-panel button b{display:block;height:100%;background:linear-gradient(90deg,#a3dbcc,#398c75)}.yt-comment-panel.suggestion button b{background:linear-gradient(90deg,#eacd8a,#ad7b23)}.yt-comment-panel button em{font-style:normal;text-align:right}.yt-comment-panel button small{font-size:8px;color:#62818d}.yt-comment-panel button[aria-pressed=true]{background:#e7f0f1}.yt-comment-drilldown{margin-top:12px;border:1px solid #dce7ec;border-radius:5px;padding:12px}.yt-comment-drilldown h5{margin:0;font-size:13px}.yt-comment-drilldown h5 button{float:right}.yt-comment-drilldown ol{max-height:320px;overflow:auto;margin:10px 0;padding-left:22px}.yt-comment-drilldown li{padding:8px;border-bottom:1px solid #e4ebed;font-size:11px}.yt-comment-drilldown p,.yt-comment-other p{font-size:10px;color:#6c808a;margin:7px 0}.yt-comment-drilldown li span{font-size:9px;color:#5a8093}.yt-comment-other,.yt-comment-coverage{font-size:10px;padding:8px 0}.yt-comment-other button{border:1px solid #dce7ec;background:#f6f9fa;padding:5px 8px;margin:6px 5px 0 0}.yt-comment-coverage ul{max-height:200px;overflow:auto}@media(max-width:760px){.yt-comment-panels{grid-template-columns:1fr}}
 /* A full-width dealer strip and a comments-first, viewport-sized workspace. */
 .yt-compact .yt-distribution{grid-template-columns:minmax(0,1fr)}
@@ -59,7 +57,6 @@
 .yt-compact .yt-gender-summary>span{display:flex;align-items:center;gap:3px;font-size:8px;white-space:nowrap;color:#426b7e}
 .yt-compact .yt-gender-summary>span:last-child{color:#b76742}
 .yt-compact .yt-gender-summary small{font-size:7px}
-.yt-gender-icon{width:10px;height:13px;flex-shrink:0;transform:none}
 .yt-compact .yt-headline-stats{grid-template-columns:1.3fr 1fr 1fr}
 .yt-compact .yt-comparison-table tbody tr{height:42px}
 .yt-compact .yt-comparison-table tbody td,.yt-compact .yt-comparison-table tbody th{padding-block:5px}
@@ -85,7 +82,6 @@
 .yt-compact .yt-row-person{gap:7px;min-height:30px}
 .yt-compact .yt-row-person strong{font-size:13px;gap:5px}
 .yt-compact .yt-row-person small{font-size:10px;line-height:1.25}
-.yt-compact .yt-row-person .yt-gender-icon{width:14px;height:18px}
 .yt-compact .yt-cert-cell .yt-certifications{font-size:12px}
 .yt-compact .yt-comparison-table td>strong{font-size:15px}
 .yt-compact .yt-comparison-table small{font-size:9px}
@@ -105,7 +101,7 @@
 .yt-compact .yt-cert-cell .yt-certifications{flex-direction:column;align-items:flex-end;text-align:right;gap:0;font-size:10px;line-height:12px}
 .yt-gender-donut{display:block;width:220px;max-width:100%;height:auto;overflow:visible;font-family:var(--font-ui)}
 .yt-donut-caption{font-size:7px;fill:#677d86}.yt-donut-total{font-size:13px;font-weight:650;fill:#173e50}
-.yt-donut-label{font-size:8px}.yt-donut-value{font-size:9px;font-weight:650}
+.yt-donut-silhouette-frame{fill:#e7f0f3;stroke:#bdd4dd;stroke-width:.7}.yt-donut-silhouette{pointer-events:none}.yt-donut-value{font-size:9px;font-weight:650}
 .yt-donut-reveal{stroke-dasharray:100 100;stroke-dashoffset:0}
 @media(prefers-reduced-motion:no-preference){.yt-compact.has-entered .yt-donut-reveal{animation:yt-donut-fill 1.1s ease-out both}@keyframes yt-donut-fill{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}}
 .yt-metric-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}.yt-metric-title i{font-style:normal;color:#9aabb2}.yt-metric-title em{font-style:normal;font-size:7px;color:#b76742}

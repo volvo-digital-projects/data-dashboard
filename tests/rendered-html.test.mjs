@@ -405,8 +405,9 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(table, /class="yt-cert-cell"/);
   assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 16);
   assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 16);
-  assert.match(table, /aria-label="남성"/);
-  assert.match(table, /aria-label="여성"/);
+  assert.match(table, /aria-label="남성 실루엣"/);
+  assert.match(table, /aria-label="여성 실루엣"/);
+  assert.doesNotMatch(table, /class="yt-gender-icon"|전시장 \/ 성별/);
   assert.doesNotMatch(html, /<label>성별/);
   assert.match(html, /class="dealer-analysis-scroll"/);
   assert.match(html, /class="yt-title-icon"/);
@@ -441,6 +442,24 @@ test("shows every creator metric together with detail collapsed by default", asy
   }
   assert.match(html, /<details class="yt-detail yt-detail-disclosure" id="yt-channel-detail">/);
   assert.doesNotMatch(table, /yt-person-results|yt-score/);
+});
+
+test("uses matching gender silhouettes in creator rows and the gender donut", async () => {
+  const response = await render("/dashboard/6KR6834/dealer-analysis");
+  const html = await response.text();
+  const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1] ?? "";
+  const roster = JSON.parse(await readFile(new URL("../app/data/youtube-creators.json", import.meta.url), "utf8"));
+  const rows = [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((match) => match[1]);
+  for (const person of roster.creators) {
+    const row = rows.find((item) => item.includes(person.name));
+    assert.ok(row, `${person.name} 행을 찾을 수 있어야 합니다.`);
+    const image = person.gender === "여성" ? "female-human-silhouette.png" : "neutral-human-silhouette.png";
+    assert.ok(row.includes(image), `${person.name}의 실루엣 성별이 일치해야 합니다.`);
+    assert.doesNotMatch(row, /yt-gender-icon/);
+  }
+  assert.equal((html.match(/class="yt-donut-silhouette"/g) ?? []).length, 2);
+  assert.match(html, /class="yt-donut-silhouette"[^>]*female-human-silhouette\.png/);
+  assert.match(html, /class="yt-donut-silhouette"[^>]*neutral-human-silhouette\.png/);
 });
 
 test("softly lands fast wheel and touch scrolling at the creator section before continuing", async () => {
