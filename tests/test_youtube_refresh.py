@@ -45,11 +45,12 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(validate_refresh_scope(payload), (16, 15))
         payload['creators'].pop()
         with self.assertRaises(ValueError): validate_refresh_scope(payload)
-    def test_refreshes_hourly_without_duplicate_watchdog_runs(self):
+    def test_refreshes_every_four_hours_without_duplicate_watchdog_runs(self):
         now = datetime.datetime(2026, 9, 21, 9, 0, tzinfo=datetime.timezone.utc)
-        payload = dict(lastSuccessfulRefreshAt=(now - datetime.timedelta(minutes=54)).isoformat())
+        payload = dict(lastSuccessfulRefreshAt=(now - datetime.timedelta(minutes=239)).isoformat())
         self.assertFalse(refresh_due(payload, now))
-        payload['lastSuccessfulRefreshAt'] = (now - datetime.timedelta(minutes=55)).isoformat()
+        self.assertTrue(refresh_due(payload, now, force=True))
+        payload['lastSuccessfulRefreshAt'] = (now - datetime.timedelta(hours=4)).isoformat()
         self.assertTrue(refresh_due(payload, now))
         self.assertTrue(refresh_due(payload, now, force=True))
     def test_retries_transient_channel_identity_failures(self):

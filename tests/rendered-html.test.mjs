@@ -425,13 +425,13 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.ok(table);
   assert.equal((table.match(/scope="row"/g) ?? []).length, 16);
   assert.equal((table.match(/scope="col"/g) ?? []).length, 10);
-  for (const heading of ["볼보 입사일", "채널 개설일", "롱폼", "숏츠", "누적 고객만족도 평균", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수"]) assert.ok(table.includes(heading));
+  for (const heading of ["볼보 입사일", "채널 개설일", "롱폼", "숏츠", "고객상담 평균만족도", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수"]) assert.ok(table.includes(heading));
   assert.match(table, /260225/);
   assert.match(table, /260225/);
   assert.match(table, /class="yt-cert-cell"/);
   assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 16);
   assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 16);
-  assert.match(table, /aria-label="직원 프로필 사진"/);
+  assert.match(table, /aria-label="직원 사진의 검은 실루엣과 흰 셔츠"/);
   assert.doesNotMatch(table, /class="yt-gender-icon"|전시장 \/ 성별/);
   assert.doesNotMatch(html, /<label>성별/);
   assert.match(html, /class="dealer-analysis-scroll"/);
@@ -539,17 +539,17 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
   assert.match(workflow, /cron: "59 14 \* \* \*"/);
   assert.match(workflow, /CAPTURE_YOUTUBE_DAILY_CLOSE: \$\{\{ github\.event\.schedule == '59 14 \* \* \*' && '1' \|\| '0' \}\}/);
-  assert.match(workflow, /cron: "7,22,37,52 \* \* \* \*"/);
+  assert.match(workflow, /cron: "59 2,6,10,18,22 \* \* \*"/);
   assert.match(creatorSource, /전일 24:00 마감 대비/);
   assert.match(workflow, /steps\.collect\.outputs\.refreshed == 'true'/);
   assert.match(workflow, /steps\.publish\.outputs\.changed == 'true'/);
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
-  assert.match(creatorSource, /`\$\{creators\.length\}명 크리에이터 채널 지표 매시간 확인 · 전체 수집 성공 시각 \(KST\)`/);
+  assert.match(creatorSource, /`\$\{creators\.length\}명 크리에이터 채널 지표 4시간마다 확인 · 전체 수집 성공 시각 \(KST\)`/);
   assert.match(creatorSource, /김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만/);
   assert.match(creatorSource, /이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만/);
   assert.match(creatorSource, /김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
-  assert.match(workflow, /git commit -m "Auto update hourly YouTube and staff sales metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
+  assert.match(workflow, /git commit -m "Auto update four-hour YouTube and staff sales metrics"[\s\S]*?git restore --worktree public\/dashboard-release\.json[\s\S]*?git pull --rebase origin main/);
   assert.match(creatorCss, /\.yt-subscriber-change\{display:grid;grid-template-columns:34px 68px[\s\S]*?width:105px[\s\S]*?\.yt-subscriber-change b\{display:grid;grid-template-columns:26px 3px minmax\(0,1fr\)[\s\S]*?width:68px[\s\S]*?\.yt-subscriber-count\{display:grid;grid-template-columns:7px minmax\(0,1fr\)[\s\S]*?\.yt-subscriber-count>em\{text-align:right\}[\s\S]*?b>span:last-child\{text-align:right\}[\s\S]*?\.yt-subscriber-change b\.positive\{color:var\(--trend-rise\);background:linear-gradient\(135deg,rgba\(240,68,82,\.13\)[\s\S]*?\.yt-subscriber-change b\.negative\{color:var\(--trend-fall\);background:linear-gradient\(135deg,rgba\(49,130,246,\.13\)/);
   assert.match(globalCss, /\.dealer-sales-comparison \.difference\.positive,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.positive[\s\S]*?color: var\(--trend-rise\);/);
   assert.match(globalCss, /\.dealer-sales-comparison \.difference\.negative,[\s\S]*?\.dealer-satisfaction-comparison \.difference\.negative[\s\S]*?color: var\(--trend-fall\);/);
@@ -623,7 +623,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-person small,\s*\.growth-profile-metric > span\s*\{[^}]*font-size:\s*10px;[^}]*line-height:\s*15px;/);
   assert.match(css, /\.growth-profile-person strong\s*\{[^}]*font-size:\s*19px;[^}]*line-height:\s*20px;/);
   assert.match(css, /\.growth-profile-metric strong\s*\{[^}]*min-height:\s*20px;[^}]*font-size:\s*20px;[^}]*line-height:\s*20px;/);
-  assert.match(navigation, /VOC 고객상담 만족평균/);
+  assert.match(navigation, /VOC 고객상담 평균만족도/);
   assert.equal((navigation.match(/<span>고객상담 평균만족도<\/span>/g) ?? []).length, 1);
   assert.doesNotMatch(navigation, /<span>평균 상담만족도<\/span>|<span>상담 만족도<\/span>/);
   assert.match(navigation, /누적 판매대수/);
@@ -908,11 +908,11 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(css, /\.growth-under-construction\s*\{/);
   assert.match(css, /\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;/);
   assert.match(css, /\.growth-position-card > header strong,[\s\S]*?\.growth-sales-funnel-card > header strong,[\s\S]*?\.growth-sales-monthly-card > header strong\s*\{[^}]*font-size: 13px;[^}]*color: #244f64;/);
-  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">2026<\/span>년 누적 판매/);
+  assert.match(navigation, /<span className="growth-sales-heading-number">2026<\/span>년 누적 판매대수 × 근속기간/);
   assert.doesNotMatch(navigation, /근속기간 × 2026 누적판매/);
-  assert.match(navigation, /근속기간 × 고객상담 평균만족도/);
+  assert.match(navigation, /고객상담 평균만족도 × 근속기간/);
   assert.doesNotMatch(navigation, /근속기간 × 상담만족/);
-  assert.match(navigation, /근속기간 × <span className="growth-sales-heading-number">2026<\/span>년 누적 판매대수/);
+  assert.match(navigation, /<span className="growth-sales-heading-number">2026<\/span>년 누적 판매대수 × 근속기간/);
   assert.match(navigation, /전국 영업직원 근속기간별 2026년 누적 판매대수 분포/);
   assert.match(navigation, /2026년 누적판매\(대\)/);
   assert.match(navigation, /staffSalesNationalAverage\.toFixed\(1\)\}대/);
@@ -989,7 +989,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center top;[^}]*transform: scale\(1\.35\);[^}]*transform-origin: center top;[^}]*image-rendering: auto;/);
   assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 3);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
-  assert.match(css, /\.growth-gauge-benchmark-staff-photo \.photo-profile-blackout,[\s\S]*?\.growth-scatter-selected-photo image\.photo-profile-blackout\s*\{[^}]*filter: brightness\(0\);[^}]*pointer-events: none;/);
+  assert.match(css, /\.growth-gauge-benchmark-staff-photo \.photo-profile-blackout,[\s\S]*?\.growth-scatter-selected-photo image\.photo-profile-blackout\s*\{[^}]*pointer-events: none;/);
   assert.match(navigation, /clipPath="url\(#consultation-selected-staff-photo\)"/);
   assert.match(navigation, /clipPath="url\(#sales-selected-staff-photo\)"/);
   assert.equal((navigation.match(/<circle className="photo-backdrop" r="9\.4" \/>/g) ?? []).length, 3);
@@ -1018,7 +1018,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-scatter-showroom circle\s*\{[^}]*fill-opacity:\s*0\.94;[^}]*stroke:\s*#fff;/);
   assert.match(css, /\.growth-scatter-card footer \.showroom i\s*\{[^}]*linear-gradient\(135deg, #7fe0bd 0%, #18a578 48%, #05684c 100%\);/);
   assert.doesNotMatch(navigation, /<span>2026 월별 출고 실적<\/span>/);
-  assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong>누적판매 <span className="growth-sales-heading-number">\{selectedStaffDeliveredSales\}<\/span>대<\/strong>/);
+  assert.match(navigation, /<article className="growth-sales-monthly-card">[\s\S]*?<header>[\s\S]*?<strong><span className="growth-sales-heading-number">2026<\/span>년 월별 판매대수<\/strong>/);
   assert.match(css, /\.growth-sales-funnel-card > header strong > \.growth-sales-heading-number,[\s\S]*?\.growth-sales-monthly-card > header strong > \.growth-sales-heading-number\s*\{[^}]*display: inline;[^}]*margin: 0;[^}]*font-family: var\(--font-volvo\);[^}]*font-size: inherit;[^}]*line-height: inherit;[^}]*color: inherit;[^}]*font-variant-numeric: tabular-nums;/);
   assert.doesNotMatch(navigation, /원자료 갱신 필요|개인정보 제외 집계|고객 흐름 연결/);
   assert.doesNotMatch(navigation, /2026 영업활동 기록 없음|최근 기록|활동 \{salesActivitySource\.activityAsOf/);
@@ -1085,12 +1085,12 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-segment-donut-values b\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-size: 10px;/);
   assert.match(css, /\.growth-segment-donut-values em\s*\{[^}]*font-family: var\(--font-volvo\);[^}]*font-variant-numeric: tabular-nums;[^}]*text-align: right;/);
   assert.match(source, /Array\.from\(\s*\{ length: 12 \}/);
-  assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계/);
+  assert.match(navigation, /2026년 1월부터 12월까지 월별 출고 실적, 월평균 \$\{selectedStaffMonthlySalesAverage\?\.toFixed\(1\) \?\? "미집계"\}대, 미도래 월은 미집계/);
   assert.match(navigation, /<i className="staff" \/>\{selectedStaffEmployee\?\.name \?\? "선택 직원"\}<\/span>/);
   assert.match(navigation, /<i className="average" \/>\{displayShowroomNameWithoutBrand\(selected\.showroom\)\} 1인 평균/);
   assert.doesNotMatch(navigation, />소속 전시장 1인 평균<\/span>/);
   assert.match(css, /\.growth-sales-monthly-chart\s*\{[^}]*grid-template-columns: repeat\(12, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.growth-sales-monthly-body\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 190px;/);
+  assert.match(css, /\.growth-sales-monthly-body\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) 180px;/);
   assert.match(css, /\.growth-sales-monthly-trend\s*\{[^}]*padding-bottom:\s*5px;[^}]*box-sizing:\s*border-box;/);
   assert.match(css, /\.growth-sales-month\s*\{[^}]*height:\s*76%;[^}]*min-height:\s*84px;[^}]*align-self:\s*center;/);
   assert.doesNotMatch(css, /\.growth-sales-monthly-chart::before\s*\{/);
@@ -1137,7 +1137,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading i\s*\{[^}]*display: none;/);
   assert.match(navigation, /selectedStaffSalesTopPercent\.toFixed\(1\)\}%\)<\/i>/);
   const stabilityIndex = navigation.indexOf("VOC 점수 신뢰도");
-  const satisfactionIndex = navigation.indexOf("VOC 고객상담 만족평균");
+  const satisfactionIndex = navigation.indexOf("VOC 고객상담 평균만족도");
   const salesIndex = navigation.indexOf("2026년 누적 판매대수");
   assert.ok(stabilityIndex > profileStart && satisfactionIndex > stabilityIndex && salesIndex > satisfactionIndex);
   assert.match(css, /\.growth-profile-strip\s*\{[^}]*grid-template-columns: 500px repeat\(3, minmax\(0, 1fr\)\);/);
@@ -1823,7 +1823,7 @@ test("automatically detects, announces, and applies new dashboard releases", asy
   assert.match(noticeChunk, new RegExp(release.id));
 });
 
-test("downloads privacy-safe Sales-DMS staff sales with every hourly YouTube refresh", async () => {
+test("downloads privacy-safe Sales-DMS staff sales with every four-hour YouTube refresh", async () => {
   const [workflow, hourlyWorkflow, source] = await Promise.all([
     readFile(new URL("../.github/workflows/sync-sales-dms-sales.yml", import.meta.url), "utf8"),
     readFile(new URL("../.github/workflows/refresh-youtube.yml", import.meta.url), "utf8"),
@@ -1832,8 +1832,8 @@ test("downloads privacy-safe Sales-DMS staff sales with every hourly YouTube ref
 
   assert.match(workflow, /workflow_dispatch:/);
   assert.doesNotMatch(workflow, /cron:/);
-  assert.match(hourlyWorkflow, /cron: "7,22,37,52 \* \* \* \*"/);
-  assert.match(hourlyWorkflow, /Refresh staff sales with the hourly YouTube snapshot/);
+  assert.match(hourlyWorkflow, /cron: "59 2,6,10,18,22 \* \* \*"/);
+  assert.match(hourlyWorkflow, /Refresh staff sales with the four-hour YouTube snapshot/);
   assert.match(hourlyWorkflow, /if: steps\.collect\.outputs\.refreshed == 'true'/);
   assert.match(hourlyWorkflow, /for attempt in 1 2 3/);
   assert.match(workflow, /actions: write/);
@@ -3052,15 +3052,15 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span class="current"><b>Q4<\/b><\/span>/,
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span class="current"><b>Q3<\/b><strong>\d+(?:\.\d+)?<\/strong><\/span><span><b>Q4<\/b><strong>―<\/strong><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>100<\/strong><\/span><span><b>Q2<\/b><strong>100<\/strong><\/span><span><b>Q3<\/b><strong>\d+(?:\.\d+)?<\/strong><\/span><span class="current"><b>Q4<\/b><strong>―<\/strong><\/span>/,
   );
   assert.match(
     visibleHtml,
-    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span class="current"><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span><b>Q4<\/b><\/span>/,
+    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span class="current"><b>Q4<\/b><\/span>/,
   );
   assert.match(
     css,
@@ -4789,7 +4789,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /className="future-window future-window-upcoming"[\s\S]{0,500}?평가 전/,
+    /className="future-window future-window-upcoming"[\s\S]{0,500}?평가 중/,
   );
   assert.doesNotMatch(
     dashboardSource,

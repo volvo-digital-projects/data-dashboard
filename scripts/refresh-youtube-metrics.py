@@ -13,7 +13,7 @@ import runpy
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "app/data/youtube-creators.json"
 EXPECTED_CREATOR_ENTRIES = 16
-MINIMUM_REFRESH_INTERVAL = datetime.timedelta(minutes=55)
+MINIMUM_REFRESH_INTERVAL = datetime.timedelta(hours=4)
 VOLVO_MODELS = r'(?:EX30|EX40|EX90|EC40|ES90|XC40|XC60|XC70|XC90|S60|S90|V40|V60CC|V60|V90CC|V90|C40)'
 VOLVO_VIDEO_TITLE = re.compile(
     rf'(?:볼보|VOLVO|(?<![A-Z0-9]){VOLVO_MODELS}(?![A-Z0-9]))',
