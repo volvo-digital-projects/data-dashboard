@@ -19,7 +19,7 @@ test('Comment reaction headings share matching font-sized SVG faces',()=>{
  assert.match(source,/부정 반응<ReactionFace positive=\{false\}/);
  assert.match(source,/stroke="currentColor"/);
  assert.match(source,/aria-hidden="true"/);
- assert.match(css,/\.yt-reaction-face\{width:1em;height:1em;flex-shrink:0\}/);
+ assert.match(css,/\.yt-reaction-face\{width:calc\(1em \+ 2px\);height:calc\(1em \+ 2px\);flex-shrink:0\}/);
 });
 
 test('YouTube staff badges use HM for H Motors',()=>{
