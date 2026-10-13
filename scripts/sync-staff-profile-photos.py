@@ -369,6 +369,71 @@ def save_portrait(content: bytes, destination: Path) -> bool:
     return True
 
 
+def save_clean_silhouette(portrait: Path) -> None:
+    """Keep the original outline black and a single clean, neutral-white shirt.
+
+    Skin and jacket highlights must never become shirt pixels. Detect the face
+    before extracting low-saturation light fabric below the chin, then retain
+    only the central torso component and fill fabric texture holes.
+    """
+    with Image.open(portrait) as image:
+        rgba = np.asarray(image.convert("RGBA"))
+    rgb = rgba[:, :, :3]
+    height, width = rgb.shape[:2]
+    faces = FACE_CLASSIFIER.detectMultiScale(
+        cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY),
+        scaleFactor=1.08, minNeighbors=5, minSize=(30, 30),
+    )
+    if len(faces):
+        face_x, face_y, face_width, face_height = max(
+            faces, key=lambda box: int(box[2]) * int(box[3])
+        )
+        center = face_x + face_width / 2
+        chin = face_y + face_height * 1.04
+        torso_width = face_width * 0.9
+    else:
+        center, chin, torso_width = width / 2, height * 0.56, width * 0.32
+    rows, columns = np.indices((height, width))
+    hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV)
+    shirt = (
+        (np.min(rgb, axis=2) >= 165)
+        & (hsv[:, :, 1] <= 36)
+        & (rgba[:, :, 3] >= 200)
+        & (rows >= chin)
+        & (np.abs(columns - center) < torso_width)
+    ).astype(np.uint8) * 255
+    shirt = cv2.morphologyEx(shirt, cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
+    shirt = cv2.morphologyEx(shirt, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    contours, _ = cv2.findContours(shirt, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    central = []
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        if cv2.contourArea(contour) >= 200 and x <= center <= x + w and y + h > height * 0.72:
+            central.append(contour)
+    clean_shirt = np.zeros((height, width), np.uint8)
+    if central:
+        contour = max(central, key=cv2.contourArea)
+        contour = cv2.approxPolyDP(contour, 1.5, True)
+        cv2.drawContours(clean_shirt, [contour], -1, 255, cv2.FILLED)
+    output = np.zeros_like(rgba)
+    output[:, :, :3] = clean_shirt[:, :, None]
+    output[:, :, 3] = rgba[:, :, 3]
+    Image.fromarray(output).save(
+        portrait.with_suffix(".silhouette.webp"), "WEBP", lossless=True, method=6, exact=True
+    )
+
+
+def refresh_clean_silhouettes() -> int:
+    data = json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+    count = 0
+    for showroom in data["showrooms"].values():
+        for employee in showroom["employees"].values():
+            save_clean_silhouette(PUBLIC_ROOT / employee["image"].lstrip("/"))
+            count += 1
+    print(f"Clean silhouettes: {count}")
+    return 0
+
+
 def normalize_portrait_file(portrait: Path) -> bool:
     with Image.open(portrait) as source:
         image = ImageOps.exif_transpose(source).convert("RGB")
@@ -475,6 +540,7 @@ def main() -> int:
                     )
                 if not portrait_available:
                     raise RuntimeError(f"공식 사진을 정규화하지 못했습니다: {cdsid} / {name}")
+                save_clean_silhouette(local_file)
                 employees[name] = {
                     "image": "/" + local_file.relative_to(PUBLIC_ROOT).as_posix(),
                 }
@@ -512,6 +578,8 @@ if __name__ == "__main__":
     try:
         if "--normalize-existing" in sys.argv:
             raise SystemExit(normalize_existing_portraits())
+        if "--refresh-silhouettes" in sys.argv:
+            raise SystemExit(refresh_clean_silhouettes())
         raise SystemExit(main())
     except Exception as error:
         print(f"사진 동기화 실패: {error}", file=sys.stderr)

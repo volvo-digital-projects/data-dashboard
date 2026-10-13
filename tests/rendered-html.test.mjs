@@ -14,11 +14,11 @@ const loginCookie = cookieFor("VCK-ES90");
 test("keeps the page two portrait black with a white shirt", async () => {
   const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(source, /selectedStaffProfile\.image\}\?portrait=\$\{staffProfilePhotosJson\.updatedAt\}/);
+  assert.match(source, /selectedStaffProfile\.image\.replace\(/);
   assert.match(source, /className="staff-photo-solid-silhouette"[\s\S]*?maskImage: `url\("\$\{selectedStaffSilhouetteImage\}"\)`/);
   assert.match(css, /\.growth-profile-photo \.staff-photo-solid-silhouette\s*\{[^}]*background: #000;[^}]*mask-size: contain;[^}]*transform: scale\(1\.35\);/);
   assert.match(source, /<img className="staff-photo-white-shirt" src=\{selectedStaffSilhouetteImage\}/);
-  assert.match(css, /\.growth-profile-photo img\.staff-photo-white-shirt\s*\{[^}]*filter: grayscale\(1\) contrast\(8\);[^}]*clip-path: inset\(47% 0 0\);/);
+  assert.match(css, /\.growth-profile-photo img\.staff-photo-white-shirt\s*\{[^}]*object-fit: contain;[^}]*transform: scale\(1\.35\);/);
   assert.match(source, /<img className="staff-profile-silhouette" src=\{selectedStaffSilhouetteImage\}/);
 });
 
@@ -32,6 +32,7 @@ test("uses current official portraits across all 39 showrooms", async () => {
   assert.ok(profiles.every((profile) => Object.keys(profile).join() === "image"));
   for (const profile of profiles) {
     await access(new URL(`../public${profile.image}`, import.meta.url));
+    await access(new URL(`../public${profile.image.replace(/\.webp$/, ".silhouette.webp")}`, import.meta.url));
   }
   assert.ok(photos.showrooms["6KR6867"].employees["송민경"].image.endsWith(".webp"));
 });
@@ -478,10 +479,10 @@ test("reuses page 2 staff portraits in creator rows without changing avatar boxe
   const rows = [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((match) => match[1]);
   for (const person of roster.creators) {
     const staffCdsid = voc.showrooms[person.cdsid]?.employees.find((employee) => employee.name === person.name)?.staffCdsid;
-    const row = rows.find((item) => item.includes(`<strong>${person.name}</strong>`) || (staffCdsid && item.includes(`<strong>${staffCdsid}</strong>`)));
-    assert.ok(row, `${person.name} 행을 찾을 수 있어야 합니다.`);
     const profileImage = photos.showrooms[person.cdsid]?.employees[person.name]?.image;
-    const image = profileImage ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
+    const image = profileImage?.replace(/\.webp$/, ".silhouette.webp") ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
+    const row = rows.find((item) => item.includes(`<strong>${person.name}`) || (staffCdsid && item.includes(`<strong>${staffCdsid}`)) || (profileImage && item.includes(image)));
+    assert.ok(row, `${person.name} 행을 찾을 수 있어야 합니다.`);
     assert.ok(row.includes(image), `${person.name}의 페이지 2 사진 또는 기본 실루엣이 일치해야 합니다.`);
     assert.equal(row.includes('class="yt-profile-solid-silhouette"'), Boolean(profileImage), `${person.name}의 실제 사진 윤곽은 단색 검정으로 표시해야 합니다.`);
     assert.equal(row.includes('class="yt-profile-white-shirt"'), Boolean(profileImage), `${person.name}의 원본 흰 셔츠 레이어를 유지해야 합니다.`);
@@ -492,9 +493,9 @@ test("reuses page 2 staff portraits in creator rows without changing avatar boxe
   const css = await readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8");
   assert.match(css, /\.yt-compact \.yt-row-avatar,\.yt-compact \.yt-row-avatar img\{width:28px;height:30px\}/);
   assert.match(css, /\.yt-profile-solid-silhouette\{[^}]*background:#000;[^}]*mask-size:contain;[^}]*transform:scale\(1\.35\);transform-origin:center top\}/);
-  assert.match(css, /img\.yt-profile-white-shirt\{[^}]*filter:grayscale\(1\) contrast\(8\);clip-path:inset\(47% 0 0\);/);
+  assert.match(css, /img\.yt-profile-white-shirt\{[^}]*object-fit:contain;[^}]*transform:scale\(1\.35\);/);
   const source = await readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8");
-  assert.match(source, /const displayImage = profileImage[\s\S]*?`\$\{profileImage\}\?portrait=\$\{staffProfilePhotos\.updatedAt\}`[\s\S]*?: silhouetteForGender\(person\.gender\)/);
+  assert.match(source, /const displayImage = profileImage[\s\S]*?profileImage\.replace\([\s\S]*?: silhouetteForGender\(person\.gender\)/);
   assert.equal((html.match(/class="yt-donut-gender-icon"/g) ?? []).length, 2);
   assert.match(html, /class="yt-donut-gender-icon"[^>]*>♀<\/text>/);
   assert.match(html, /class="yt-donut-gender-icon"[^>]*>♂<\/text>/);
@@ -984,7 +985,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-photo img\s*\{[^}]*display: block;[^}]*width: 100%;[^}]*height: auto;[^}]*object-fit: cover;/);
   assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?transform: scale\(1\.04\);/);
   assert.match(css, /\.growth-profile-photo \.staff-photo-solid-silhouette\s*\{[^}]*background: #000;[^}]*mask-size: contain;[^}]*mask-position: center top;[^}]*mask-repeat: no-repeat;[^}]*transform: scale\(1\.35\);/);
-  assert.match(css, /\.growth-profile-photo img\.staff-photo-white-shirt\s*\{[^}]*filter: grayscale\(1\) contrast\(8\);[^}]*clip-path: inset\(47% 0 0\);/);
+  assert.match(css, /\.growth-profile-photo img\.staff-photo-white-shirt\s*\{[^}]*object-fit: contain;[^}]*transform: scale\(1\.35\);/);
   assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center top;[^}]*transform: scale\(1\.35\);[^}]*transform-origin: center top;[^}]*image-rendering: auto;/);
   assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 3);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);

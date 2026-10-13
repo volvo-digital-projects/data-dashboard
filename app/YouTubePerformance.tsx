@@ -51,7 +51,7 @@ const creators = data.creators.map(person => {
   const certifications = ["Grand", "Advanced", "Certified"].map(level => certificationData.records.filter(record => record.name === person.name && (nameCount === 1 || record.showroom === person.showroom) && record.level === level).length);
   const profileImage = profilePhotos[person.cdsid]?.employees[person.name]?.image;
   const displayImage = profileImage
-    ? `${profileImage}?portrait=${staffProfilePhotos.updatedAt}`
+    ? `${profileImage.replace(/\.webp$/, ".silhouette.webp")}?portrait=${staffProfilePhotos.updatedAt}`
     : silhouetteForGender(person.gender);
 
   const rosterEmployee = voc[person.cdsid]?.employees.find(employee => employee.name === person.name);
