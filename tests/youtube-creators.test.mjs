@@ -4,6 +4,14 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('Dealer filter labels show the requested dealer abbreviations',()=>{
+ const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
+ for(const [name,code] of Object.entries({코오롱:'KA',아주:'AJ',천하:'CA',에이치:'HM',태영:'TY',아이언:'IR',아이비:'IV'})){
+  assert.ok(source.includes(`${name}:"${code}"`));
+ }
+ assert.ok(source.includes('<span>{name}({dealerCodes[name]})</span>'));
+});
+
 test('Comment reaction headings share matching font-sized SVG faces',()=>{
  const source=readFileSync(new URL('../app/YouTubeCommentAnalysis.tsx',import.meta.url),'utf8');
  const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');

@@ -18,7 +18,7 @@ const silhouetteForGender = (gender: string) => gender === "여성"
   : "/staff-profiles/neutral-human-silhouette.png";
 const profilePhotos = staffProfilePhotos.showrooms as Record<string, { employees: Record<string, { image: string }> }>;
 const dealers = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
-const dealerCodes: Record<string, string> = {에이치:"HM", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
+const dealerCodes: Record<string, string> = {에이치:"HM", 천하:"CA", 아주:"AJ", 코오롱:"KA", 아이비:"IV", 아이언:"IR", 태영:"TY"};
 type SharedVideo = { id: string; title: string; kind: string; views: number; names: string[]; basis: string };
 const assignedVideoSummary = (videos: SharedVideo[]) => ({
   count: videos.length,
@@ -185,7 +185,7 @@ export default function YouTubePerformance() {
       <div className="yt-section-label"><span>01 / NETWORK</span><h3>딜러사별 크리에이터 분포</h3><p>비율 기준: 첨부 명단의 전체 {creators.length}명</p></div>
       <div className="yt-dealers" aria-label="딜러사 필터">
         {rankedDealers.map(name=>{const count=dealerCounts[name];return <button key={name} type="button" aria-pressed={dealer===name} onClick={()=>setDealer(dealer===name ? "전체" : name)} className={count===0?"is-zero":""}>
-          <span>{name}</span><strong>{count}<small>명 / {creators.length}</small></strong><em>{(count / creators.length * 100).toFixed(1)}%</em><i aria-hidden="true">{Array.from({length:count},(_,i)=><b key={i}/>)}</i>
+          <span>{name}({dealerCodes[name]})</span><strong>{count}<small>명 / {creators.length}</small></strong><em>{(count / creators.length * 100).toFixed(1)}%</em><i aria-hidden="true">{Array.from({length:count},(_,i)=><b key={i}/>)}</i>
         </button>;})}
       </div>
     </div>
