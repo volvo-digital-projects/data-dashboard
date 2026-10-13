@@ -464,16 +464,19 @@ test("reuses page 2 staff portraits in creator rows without changing avatar boxe
     const row = rows.find((item) => item.includes(`<strong>${person.name}</strong>`) || (staffCdsid && item.includes(`<strong>${staffCdsid}</strong>`)));
     assert.ok(row, `${person.name} 행을 찾을 수 있어야 합니다.`);
     const profileImage = photos.showrooms[person.cdsid]?.employees[person.name]?.image;
-    const image = profileImage ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
+    const image = profileImage === "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg"
+      ? "/staff-profiles/kolon/songpa/kim-jeongho-cutout.png"
+      : profileImage ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
     assert.ok(row.includes(image), `${person.name}의 페이지 2 사진 또는 기본 실루엣이 일치해야 합니다.`);
-    assert.equal(row.includes('class="yt-profile-photo"'), Boolean(profileImage), `${person.name}의 실제 사진은 원본 색상으로 표시해야 합니다.`);
+    assert.equal(row.includes('class="yt-profile-solid-silhouette"'), Boolean(profileImage), `${person.name}의 실제 사진 윤곽은 단색 검정으로 표시해야 합니다.`);
+    assert.equal(row.includes('class="yt-fallback-silhouette"'), !profileImage, `${person.name}의 사진이 없으면 성별 기본 실루엣을 사용해야 합니다.`);
     assert.doesNotMatch(row, /yt-gender-icon/);
   }
   const css = await readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8");
   assert.match(css, /\.yt-compact \.yt-row-avatar,\.yt-compact \.yt-row-avatar img\{width:28px;height:30px\}/);
-  assert.match(css, /img\.yt-profile-photo\{filter:none;object-fit:cover;object-position:center top;transform:scale\(1\.35\);transform-origin:center top\}/);
+  assert.match(css, /\.yt-profile-solid-silhouette\{[^}]*background:#000;[^}]*mask-size:contain;[^}]*transform:scale\(1\.35\);transform-origin:center top\}/);
   const source = await readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8");
-  assert.match(source, /const displayImage = profileImage \?\? silhouetteForGender\(person\.gender\)/);
+  assert.match(source, /const displayImage = profileImage === "\/staff-profiles\/kolon\/songpa\/kim-jeongho-kolon\.jpg"[\s\S]*?kim-jeongho-cutout\.png"[\s\S]*?: profileImage \?\? silhouetteForGender\(person\.gender\)/);
   assert.equal((html.match(/class="yt-donut-gender-icon"/g) ?? []).length, 2);
   assert.match(html, /class="yt-donut-gender-icon"[^>]*>♀<\/text>/);
   assert.match(html, /class="yt-donut-gender-icon"[^>]*>♂<\/text>/);

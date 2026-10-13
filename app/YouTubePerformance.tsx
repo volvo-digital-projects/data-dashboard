@@ -50,7 +50,10 @@ const creators = data.creators.map(person => {
   const nameCount = Object.values(sales).flatMap(showroom => showroom.staff).filter(staff => staff.name === person.name).length;
   const certifications = ["Grand", "Advanced", "Certified"].map(level => certificationData.records.filter(record => record.name === person.name && (nameCount === 1 || record.showroom === person.showroom) && record.level === level).length);
   const profileImage = profilePhotos[person.cdsid]?.employees[person.name]?.image;
-  const displayImage = profileImage ?? silhouetteForGender(person.gender);
+  const displayImage = profileImage === "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg"
+    ? "/staff-profiles/kolon/songpa/kim-jeongho-cutout.png"
+    : profileImage ?? silhouetteForGender(person.gender);
+
   return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: displayImage, hasProfilePhoto: Boolean(profileImage),
     delivered: result?.deliveredSales ?? null,
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
@@ -209,7 +212,7 @@ export default function YouTubePerformance() {
 
 
         return <tr key={person.name} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
-          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 프로필 사진" : `${person.gender} 실루엣`}><img className={person.hasProfilePhoto ? "yt-profile-photo" : "yt-fallback-silhouette"} src={person.image} alt="" loading="lazy"/></span><span><strong>{person.name}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={()=>{setSelectedName(person.name);setDetailOpen(!(detailOpen&&selected?.name===person.name));}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 사진의 검은 실루엣" : `${person.gender} 실루엣`}>{person.hasProfilePhoto ? <span className="yt-profile-solid-silhouette" style={{ maskImage: `url("${person.image}")`, WebkitMaskImage: `url("${person.image}")` }} /> : <img className="yt-fallback-silhouette" src={person.image} alt="" loading="lazy" />}</span><span><strong>{person.name}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={subscriberDeltaTitle}><span>전일 대비</span><b className={subscriberDeltaTone}><span className={`yt-subscriber-count${includesSubscriberChange ? "" : " is-excluded"}`}>{includesSubscriberChange&&<i>{subscriberDelta.direction}</i>}<em>{subscriberDelta.count}</em></span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
