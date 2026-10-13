@@ -3662,7 +3662,7 @@ export default function CompetitiveAnalysis({
               <span>고객상담 평균만족도</span>
               <span className="growth-roster-sales-heading">
                 <b>누적 판매대수</b>
-                <i>2026년 누적 판매대수</i>
+                <i>누적 판매대수</i>
               </span>
             </div>
             <div className="growth-navigation-pinned-capabilities" aria-hidden="true">
