@@ -1921,7 +1921,7 @@ function WeeklyTrend({
                   dominantBaseline="middle"
                   className="future-window-label"
                 >
-                  평가 전
+                  평가 중
                 </text>
               </g>
             )}
