@@ -2816,7 +2816,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 190px;
+  grid-template-columns: minmax(0, 1fr) 180px;
   margin-top: 6px;
 }
 
@@ -3068,8 +3068,9 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 
 .growth-sales-monthly-average-callout {
   position: absolute;
-  right: 2px;
-  bottom: 6px;
+  right: 0;
+  top: 0;
+  transform: translateY(-50%);
   display: grid;
   gap: 2px;
   min-width: 44px;
@@ -3090,14 +3091,14 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
 .growth-sales-monthly-average-callout::after {
   content: "";
   position: absolute;
-  right: 8px;
-  bottom: -4px;
+  left: -4px;
+  top: calc(50% - 3px);
   width: 6px;
   height: 6px;
   border-right: 1px solid #79b7d1;
   border-bottom: 1px solid #79b7d1;
   background: #edf7fc;
-  transform: rotate(45deg);
+  transform: rotate(135deg);
 }
 
 .growth-sales-monthly-average-callout small {
@@ -3240,7 +3241,7 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   align-items: stretch;
   justify-content: space-between;
   gap: 5px;
-  padding: 6px 8px 5px 12px;
+  padding: 6px 0 5px 12px;
   border-left: 1px solid #c9d8de;
 }
 
@@ -3681,6 +3682,21 @@ html.analysis-entry-top-locked body {
 
   .competitive-analysis-page .growth-sales-monthly-body {
     margin-top: 3px;
+  }
+
+  .competitive-analysis-page .growth-sales-share-panel {
+    position: relative;
+    border-left-color: transparent;
+  }
+
+  .competitive-analysis-page .growth-sales-share-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 12px;
+    left: -1px;
+    width: 1px;
+    background: #c9d8de;
   }
 
   .competitive-analysis-page .growth-sales-monthly-trend {
