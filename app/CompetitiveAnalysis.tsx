@@ -3585,12 +3585,17 @@ export default function CompetitiveAnalysis({
           <section className="growth-profile-strip" aria-label="영업직원 상담 분석 요약">
               <div className="growth-profile-person">
                 <span className="growth-profile-photo" aria-hidden="true">
-                  <img
-                    className={selectedStaffHasProfilePhoto ? "staff-photo-blackout" : "staff-profile-silhouette"}
-                    src={selectedStaffSilhouetteImage}
-                    alt=""
-                    draggable={false}
-                  />
+                  {selectedStaffHasProfilePhoto ? (
+                    <span
+                      className="staff-photo-solid-silhouette"
+                      style={{
+                        maskImage: `url("${selectedStaffSilhouetteImage}")`,
+                        WebkitMaskImage: `url("${selectedStaffSilhouetteImage}")`,
+                      }}
+                    />
+                  ) : (
+                    <img className="staff-profile-silhouette" src={selectedStaffSilhouetteImage} alt="" draggable={false} />
+                  )}
                 </span>
                 <span className="growth-profile-person-identity">
                   <small className="growth-profile-role">

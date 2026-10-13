@@ -1456,10 +1456,17 @@ html.dsc-guide-open .dashboard-identity-header > .analysis-context {
   transform-origin: center top;
 }
 
-.growth-profile-photo img.staff-photo-blackout {
-  filter: brightness(0);
-  object-fit: contain;
-  object-position: center top;
+.growth-profile-photo .staff-photo-solid-silhouette {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center top;
+  -webkit-mask-position: center top;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
   transform: scale(1.35);
   transform-origin: center top;
 }

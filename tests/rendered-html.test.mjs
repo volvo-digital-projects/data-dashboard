@@ -11,6 +11,14 @@ const cookieFor = (cdsid) =>
   `volvo-dashboard-access=${loginCookieBase}--${cdsid.toUpperCase()}`;
 const loginCookie = cookieFor("VCK-ES90");
 
+test("fills the page two portrait as one solid black silhouette", async () => {
+  const source = await readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8");
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(source, /className="staff-photo-solid-silhouette"[\s\S]*?maskImage: `url\("\$\{selectedStaffSilhouetteImage\}"\)`/);
+  assert.match(css, /\.growth-profile-photo \.staff-photo-solid-silhouette\s*\{[^}]*background: #000;[^}]*mask-size: contain;[^}]*transform: scale\(1\.35\);/);
+  assert.match(source, /<img className="staff-profile-silhouette" src=\{selectedStaffSilhouetteImage\}/);
+});
+
 test("uses the current Jeju showroom manager", async () => {
   const dashboard = JSON.parse(
     await readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8"),
@@ -941,7 +949,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.equal((navigation.match(/className="photo-halo" r="9\.8"/g) ?? []).length, 3);
   assert.equal((navigation.match(/className=\{selectedStaffHasProfilePhoto \? "photo-profile-blackout" : "photo-fallback-silhouette"\}/g) ?? []).length, 3);
   assert.match(source, /const selectedStaffSilhouetteImage = selectedStaffProfile\?\.image/);
-  assert.match(navigation, /className=\{selectedStaffHasProfilePhoto \? "staff-photo-blackout" : "staff-profile-silhouette"\}/);
+  assert.match(navigation, /selectedStaffHasProfilePhoto \? \([\s\S]*?className="staff-photo-solid-silhouette"[\s\S]*?maskImage: `url\("\$\{selectedStaffSilhouetteImage\}"\)`/);
+  assert.match(navigation, /<img className="staff-profile-silhouette" src=\{selectedStaffSilhouetteImage\}/);
   assert.match(source, /const staffFallbackProfileImage = "\/staff-profiles\/neutral-human-silhouette\.png";/);
   assert.match(source, /const staffFemaleFallbackProfileImage = "\/staff-profiles\/female-human-silhouette\.png";/);
   assert.match(source, /selectedStaffEmployee\?\.gender === "female"[\s\S]*?staffFemaleFallbackProfileImage[\s\S]*?: staffFallbackProfileImage/);
@@ -953,6 +962,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /\.growth-profile-photo\s*\{[^}]*width: 42px;[^}]*height: auto;[^}]*aspect-ratio: 21 \/ 22;/);
   assert.match(css, /\.growth-profile-photo img\s*\{[^}]*display: block;[^}]*width: 100%;[^}]*height: auto;[^}]*object-fit: cover;/);
   assert.match(css, /\.growth-profile-photo img\.staff-profile-silhouette,[\s\S]*?object-fit: cover;[\s\S]*?object-position: center top;[\s\S]*?transform: scale\(1\.04\);/);
+  assert.match(css, /\.growth-profile-photo \.staff-photo-solid-silhouette\s*\{[^}]*background: #000;[^}]*mask-size: contain;[^}]*mask-position: center top;[^}]*mask-repeat: no-repeat;[^}]*transform: scale\(1\.35\);/);
   assert.match(css, /\.growth-profile-photo img:not\(\.staff-profile-silhouette\),[\s\S]*?\.analysis-staff-profile-photo img:not\(\.staff-profile-silhouette\)\s*\{[^}]*width: 100%;[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center top;[^}]*transform: scale\(1\.35\);[^}]*transform-origin: center top;[^}]*image-rendering: auto;/);
   assert.equal((navigation.match(/preserveAspectRatio="xMidYMin slice"/g) ?? []).length, 3);
   assert.match(css, /\.growth-scatter-selected-photo image\.photo-fallback-silhouette\s*\{[^}]*pointer-events: none;/);
