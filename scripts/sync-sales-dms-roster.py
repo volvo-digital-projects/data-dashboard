@@ -1,7 +1,8 @@
-"""Safely reconcile the dashboard staff roster with Sales-DMS.
+"""Reconcile the dashboard staff roster with Sales-DMS.
 
-Only showroom, employee name, role, effective title and hire date are retained.
-Employee IDs, CDSIDs, email addresses and phone numbers are never written.
+Only the active employee CDSID is published in addition to the existing roster
+fields. Employee numbers, email addresses, phone numbers and credentials are
+never written. A published CDSID is visible in the public GitHub Pages bundle.
 """
 
 from __future__ import annotations
@@ -83,8 +84,11 @@ def normalize_row(raw: dict[str, Any]) -> dict[str, str] | None:
         return None
     hire_date = parse_date(raw.get("입사일자"))
     name = text(raw.get("직원명"))
+    staff_cdsid = text(raw.get("직원 CDSID"))
     if not showroom or not name:
         raise RuntimeError("전시장명 또는 직원명이 비어 있는 Sales-DMS 행이 있습니다.")
+    if staff_cdsid and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", staff_cdsid):
+        raise RuntimeError("Sales-DMS 직원 CDSID 형식이 올바르지 않습니다.")
     title = effective_job_title(role, raw.get("직급"))
     if not title:
         raise RuntimeError(f"직급이 비어 있습니다: {showroom} / {name}")
@@ -93,6 +97,7 @@ def normalize_row(raw: dict[str, Any]) -> dict[str, str] | None:
         "role": role,
         "jobTitle": title,
         "name": name,
+        "staffCdsid": staff_cdsid,
         "hireDate": hire_date.isoformat(),
     }
 
@@ -101,7 +106,7 @@ def load_workbook_rows(path: Path) -> tuple[list[dict[str, Any]], str]:
     workbook = openpyxl.load_workbook(path, read_only=True, data_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
     headers = header_map(next(worksheet.iter_rows(min_row=3, max_row=3, values_only=True)))
-    required = {"전시장명", "직원권한", "직원명", "직급", "입사일자"}
+    required = {"전시장명", "직원권한", "직원명", "직원 CDSID", "직급", "입사일자"}
     if missing := required - set(headers):
         raise RuntimeError(f"직원 명단 필수 열이 없습니다: {sorted(missing)}")
     rows = [
@@ -247,6 +252,9 @@ def reconcile(payload: dict[str, Any], raw_rows: list[dict[str, Any]], as_of: da
     keys = [(item["dmsShowroom"], item["name"]) for item in normalized]
     if len(keys) != len(set(keys)):
         raise RuntimeError("Sales-DMS 명단에 전시장·직원명 중복이 있습니다.")
+    staff_cdsids = [item["staffCdsid"] for item in normalized if item["staffCdsid"]]
+    if len(staff_cdsids) != len(set(staff_cdsids)):
+        raise RuntimeError("Sales-DMS 재직 직원 CDSID가 중복되어 동기화를 중단했습니다.")
     if len(normalized) < MINIMUM_SAFE_ROSTER:
         raise RuntimeError(f"명단이 비정상적으로 적어 동기화를 중단했습니다: {len(normalized)}명")
     found_showrooms = {item["dmsShowroom"] for item in normalized}
@@ -293,17 +301,24 @@ def reconcile(payload: dict[str, Any], raw_rows: list[dict[str, Any]], as_of: da
                     "tenureBucketLabel": bucket_label,
                 }
             )
+            if item["staffCdsid"]:
+                employee["staffCdsid"] = item["staffCdsid"]
+            else:
+                employee.pop("staffCdsid", None)
             if previous is not None and before != {key: employee.get(key) for key in before}:
                 updated += 1
             next_employees.append(employee)
 
-        archived = [item for name, item in former.items() if name not in active_names]
+        archived = [
+            {key: value for key, value in item.items() if key != "staffCdsid"}
+            for name, item in former.items() if name not in active_names
+        ]
         for name, employee in current.items():
             if name in active_names:
                 continue
             removed += 1
             archived.append(
-                {**employee, "archivedAt": as_of.isoformat(), "archiveReason": "Sales-DMS 현재 명단 제외"}
+                {**{key: value for key, value in employee.items() if key != "staffCdsid"}, "archivedAt": as_of.isoformat(), "archiveReason": "Sales-DMS 현재 명단 제외"}
             )
         showroom["employees"] = sorted(next_employees, key=lambda item: (item["role"] != "영업직원", item["name"]))
         showroom["formerEmployees"] = sorted(archived, key=lambda item: item["name"])
@@ -316,7 +331,7 @@ def reconcile(payload: dict[str, Any], raw_rows: list[dict[str, Any]], as_of: da
             "jobTitleSourceDate": as_of.isoformat(),
         }
     )
-    return {"employees": len(normalized), "added": added, "removed": removed, "updated": updated}
+    return {"employees": len(normalized), "added": added, "removed": removed, "updated": updated, "missingCdsids": len(normalized) - len(staff_cdsids)}
 
 
 def main() -> int:
@@ -346,7 +361,8 @@ def main() -> int:
     print(
         "Sales-DMS 명단 동기화 완료: "
         f"{summary['employees']}명, 신규 {summary['added']}명, "
-        f"변경 {summary['updated']}명, 이전 명단 {summary['removed']}명"
+        f"변경 {summary['updated']}명, 이전 명단 {summary['removed']}명, "
+        f"직원 CDSID 미등록 {summary['missingCdsids']}명"
     )
     return 0
 
