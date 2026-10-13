@@ -3968,7 +3968,7 @@ export default function CompetitiveAnalysis({
 
                   <article className="growth-scatter-card" ref={growthConsultationScatterRef}>
                     <header>
-                      <div><strong>근속기간 × 고객상담 평균만족도</strong></div>
+                      <div><strong>고객상담 평균만족도 × 근속기간</strong></div>
                     </header>
                     <div className="growth-scatter-zoom-surface" data-zoomed={consultationScatterZoom.scale > 1.001}>
                     <svg ref={consultationScatterZoom.svgRef} viewBox={consultationScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 고객상담 평균만족도 분포, 상단 점수 구간 확대. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소하고, 확대 후 드래그하여 이동합니다.">
@@ -4263,7 +4263,7 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-scatter-card growth-sales-scatter-card">
                     <header>
-                      <div><strong>근속기간 × <span className="growth-sales-heading-number">2026</span>년 누적 판매대수</strong></div>
+                      <div><strong><span className="growth-sales-heading-number">2026</span>년 누적 판매대수 × 근속기간</strong></div>
                     </header>
                     <div className="growth-scatter-zoom-surface" data-zoomed={salesScatterZoom.scale > 1.001}>
                     <svg ref={salesScatterZoom.svgRef} viewBox={salesScatterZoom.viewBox} role="img" aria-label="전국 영업직원 근속기간별 2026년 누적 판매대수 분포. PC에서는 Ctrl과 마우스 휠, 아이패드에서는 두 손가락으로 확대하거나 축소하고, 확대 후 드래그하여 이동합니다.">
