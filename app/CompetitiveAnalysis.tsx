@@ -4448,11 +4448,11 @@ export default function CompetitiveAnalysis({
                   </article>
                   <article className="growth-sales-monthly-card">
                     <header>
-                      <strong>누적판매 <span className="growth-sales-heading-number">{selectedStaffDeliveredSales}</span>대</strong>
+                      <strong>2026년 월별 판매대수</strong>
                     </header>
                     <div className="growth-sales-monthly-body">
                       <div className="growth-sales-monthly-trend">
-                        <div className="growth-sales-monthly-chart" key={`monthly-sales-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`} role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 미도래 월은 미집계`}>
+                        <div className="growth-sales-monthly-chart" key={`monthly-sales-${selectedStaffEmployee?.cdsid ?? selectedStaffEmployee?.name ?? "none"}`} role="img" aria-label={`${selectedStaffEmployee?.name ?? "선택 직원"} 2026년 1월부터 12월까지 월별 출고 실적, 월평균 ${selectedStaffMonthlySalesAverage?.toFixed(1) ?? "미집계"}대, 미도래 월은 미집계`}>
                           {selectedStaffMonthlyDeliveredSales.map((count, index) => (
                             <div className={`growth-sales-month${count === null ? " unreported" : ""}`} key={`sales-month-${index + 1}`}>
                               <strong>{count ?? "―"}</strong>
@@ -4472,6 +4472,21 @@ export default function CompetitiveAnalysis({
                               <small>{index + 1}월</small>
                             </div>
                           ))}
+                          {selectedStaffMonthlySalesAverage !== null ? (
+                            <div className="growth-sales-monthly-average-track" aria-hidden="true">
+                              <i>
+                                <span
+                                  className="growth-sales-monthly-average-line"
+                                  style={{ bottom: `${(selectedStaffMonthlySalesAverage / selectedSalesMonthScale) * 100}%` }}
+                                >
+                                  <span className="growth-sales-monthly-average-callout">
+                                    <small>월 평균</small>
+                                    <b>{selectedStaffMonthlySalesAverage.toFixed(1)}대</b>
+                                  </span>
+                                </span>
+                              </i>
+                            </div>
+                          ) : null}
                         </div>
                         <div className="growth-sales-monthly-legend">
                           <span><i className="staff" />{selectedStaffEmployee?.name ?? "선택 직원"}</span>
