@@ -4,21 +4,21 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
-test('Every YouTube channel has a four-part authored comment review without raw-comment drilldowns',()=>{
+test('Every YouTube channel has a concise three-part review without opinions or raw-comment drilldowns',()=>{
  const editorial=read('youtube-comment-editorial');
  assert.ok(Number.isFinite(Date.parse(editorial.reviewedAt)));
  assert.deepEqual(Object.keys(editorial.channels).sort(), data.channels.map(channel=>channel.id).sort());
  for(const review of Object.values(editorial.channels)){
-  assert.ok(review.overall.length>20);
-  assert.ok(review.opinion.length>20);
+  assert.ok(review.overall.length>10 && review.overall.length<=65);
+  assert.ok(!Object.hasOwn(review,'opinion'));
   for(const reactions of [review.positive,review.negative]){
-   assert.ok(reactions.length>0);
-   assert.ok(reactions.every(text=>typeof text==='string'&&text.length>10));
+   assert.ok(reactions.length>0 && reactions.length<=4);
+   assert.ok(reactions.every(text=>typeof text==='string'&&text.length>5&&text.length<=45));
   }
  }
  const component=readFileSync(new URL('../app/YouTubeCommentAnalysis.tsx',import.meta.url),'utf8');
- for(const label of ['채널 총평','긍정 반응','부정 반응','내 의견']) assert.ok(component.includes(label));
- assert.doesNotMatch(component, /<a\b|<button\b|<details\b|댓글 원문|원문 확인|자동 키워드|직원 능력 판정/);
+ for(const label of ['채널 총평','긍정 반응','부정 반응']) assert.ok(component.includes(label));
+ assert.doesNotMatch(component, /내 의견|review\.opinion|<a\b|<button\b|<details\b|댓글 원문|원문 확인|자동 키워드|직원 능력 판정/);
 });
 
 test('YouTube roster joins official photos, DMS sales and VOC by showroom and name',()=>{

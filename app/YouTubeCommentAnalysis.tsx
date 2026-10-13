@@ -4,7 +4,7 @@ import editorial from "./data/youtube-comment-editorial.json";
 
 type ChannelComments = {status?:string;total:number;counts:Record<string,number>;videos:number;completeVideos:number;excludedOwnerPromotions?:number};
 export const commentData = raw as {checkedAt:string|null;method:string;channels:Record<string,ChannelComments>};
-type Review = {overall:string;positive:string[];negative:string[];opinion:string};
+type Review = {overall:string;positive:string[];negative:string[]};
 const reviews = editorial.channels as Record<string, Review>;
 
 export default function YouTubeCommentAnalysis({channelId}:{channelId:string;shared:boolean;onTopicChange?:()=>void}) {
@@ -16,6 +16,5 @@ export default function YouTubeCommentAnalysis({channelId}:{channelId:string;sha
       <article className="positive"><h4>긍정 반응</h4><ul>{review.positive.map(text=><li key={text}>{text}</li>)}</ul></article>
       <article className="negative"><h4>부정 반응</h4><ul>{review.negative.map(text=><li key={text}>{text}</li>)}</ul></article>
     </div>
-    <article className="yt-editorial-opinion"><h4>내 의견</h4><p>{review.opinion}</p></article>
   </section>;
 }

@@ -138,5 +138,4 @@
 .yt-editorial-reactions .positive h4{color:#178376}
 .yt-editorial-reactions .negative{border-top:3px solid #d46a55;background:#fffbf8}
 .yt-editorial-reactions .negative h4{color:#bc5541}
-.yt-editorial-opinion{background:#edf5f9!important}
 @media(max-width:700px){.yt-editorial-reactions{grid-template-columns:1fr}.yt-editorial article{padding:13px 14px}}
