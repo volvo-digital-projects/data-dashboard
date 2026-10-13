@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-13T18:34:11+09:00",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 368,
+  "consultantCount": 366,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -186,6 +186,9 @@
         "김진형": {
           "image": "/staff-profiles/taeyoung/daegu/consultant-8a590d73a1e0.webp"
         },
+        "박종윤": {
+          "image": "/staff-profiles/taeyoung/daegu/consultant-4a75d7cd4802.webp"
+        },
         "방준호": {
           "image": "/staff-profiles/taeyoung/daegu/consultant-a95db0a65b88.webp"
         },
@@ -197,9 +200,6 @@
         },
         "임효현": {
           "image": "/staff-profiles/taeyoung/daegu/consultant-7dffd40118d8.webp"
-        },
-        "조광래": {
-          "image": "/staff-profiles/taeyoung/daegu/consultant-7a5e3d93c610.webp"
         }
       }
     },
@@ -313,8 +313,7 @@
           "image": "/staff-profiles/h-motors/gangnam-daechi/kang-suk.webp"
         },
         "김대준": {
-          "image": "/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.webp",
-          "smileImage": "/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun-smile.png"
+          "image": "/staff-profiles/h-motors/gangnam-daechi/kim-dae-jun.webp"
         },
         "김성경": {
           "image": "/staff-profiles/h-motors/gangnam-daechi/kim-sung-kyung.webp"
@@ -677,8 +676,7 @@
           "image": "/staff-profiles/kolon/songpa/consultant-db3f4ba9aede.webp"
         },
         "김정호": {
-          "image": "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg",
-          "sourceOverride": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B9%80%EB%8C%80%EB%A6%AC"
+          "image": "/staff-profiles/kolon/songpa/kim-jeongho-kolon.webp"
         },
         "김종민": {
           "image": "/staff-profiles/kolon/songpa/consultant-0879123dedec.webp"
@@ -958,9 +956,6 @@
         "방영민": {
           "image": "/staff-profiles/cheonha/uijeongbu/consultant-7b173a807785.webp"
         },
-        "백승환": {
-          "image": "/staff-profiles/cheonha/uijeongbu/consultant-55bfeb66e05d.webp"
-        },
         "오영재": {
           "image": "/staff-profiles/cheonha/uijeongbu/consultant-5cb1dac1ef51.webp"
         },
@@ -1035,9 +1030,6 @@
       "showroom": "제주",
       "sourcePage": "https://ivy.volvocars.co.kr/sales/sales_consultant.asp?branchCd=100004",
       "employees": {
-        "고영우": {
-          "image": "/staff-profiles/ivy/jeju/consultant-c2f26074452c.webp"
-        },
         "김민성": {
           "image": "/staff-profiles/ivy/jeju/consultant-05583d23355d.webp"
         },
@@ -1175,8 +1167,8 @@
         "변종민": {
           "image": "/staff-profiles/taeyoung/seodaegu/consultant-92c9d5328a09.webp"
         },
-        "이승규": {
-          "image": "/staff-profiles/taeyoung/seodaegu/consultant-5196455eea70.webp"
+        "이상진": {
+          "image": "/staff-profiles/taeyoung/seodaegu/consultant-1c496ecb01bd.webp"
         },
         "이영재": {
           "image": "/staff-profiles/taeyoung/seodaegu/consultant-a2051ce04652.webp"

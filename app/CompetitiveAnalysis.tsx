@@ -2553,9 +2553,9 @@ export default function CompetitiveAnalysis({
   const selectedStaffFallbackProfileImage = selectedStaffEmployee?.gender === "female"
     ? staffFemaleFallbackProfileImage
     : staffFallbackProfileImage;
-  const selectedStaffSilhouetteImage = selectedStaffProfile?.image === "/staff-profiles/kolon/songpa/kim-jeongho-kolon.jpg"
-    ? "/staff-profiles/kolon/songpa/kim-jeongho-cutout.png"
-    : selectedStaffProfile?.image ?? selectedStaffFallbackProfileImage;
+  const selectedStaffSilhouetteImage = selectedStaffProfile?.image
+    ? `${selectedStaffProfile.image}?portrait=${staffProfilePhotosJson.updatedAt}`
+    : selectedStaffFallbackProfileImage;
   const selectedStaffHasProfilePhoto = Boolean(selectedStaffProfile);
   const selectedStaffCertificationCounts = {
     Grand: 0,
@@ -3586,13 +3586,16 @@ export default function CompetitiveAnalysis({
               <div className="growth-profile-person">
                 <span className="growth-profile-photo" aria-hidden="true">
                   {selectedStaffHasProfilePhoto ? (
-                    <span
-                      className="staff-photo-solid-silhouette"
-                      style={{
-                        maskImage: `url("${selectedStaffSilhouetteImage}")`,
-                        WebkitMaskImage: `url("${selectedStaffSilhouetteImage}")`,
-                      }}
-                    />
+                    <>
+                      <span
+                        className="staff-photo-solid-silhouette"
+                        style={{
+                          maskImage: `url("${selectedStaffSilhouetteImage}")`,
+                          WebkitMaskImage: `url("${selectedStaffSilhouetteImage}")`,
+                        }}
+                      />
+                      <img className="staff-photo-white-shirt" src={selectedStaffSilhouetteImage} alt="" draggable={false} />
+                    </>
                   ) : (
                     <img className="staff-profile-silhouette" src={selectedStaffSilhouetteImage} alt="" draggable={false} />
                   )}
@@ -4690,7 +4693,7 @@ export default function CompetitiveAnalysis({
                     <>
                       <img
                         className="base"
-                        src={selectedStaffProfile.image}
+                        src={selectedStaffSilhouetteImage}
                         alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
                         draggable={false}
                       />

@@ -226,7 +226,9 @@ def portrait_path(cdsid: str, dealer_dir: str, showroom_dir: str, name: str) -> 
     return PUBLIC_ROOT / "staff-profiles" / dealer_dir / showroom_dir / f"consultant-{digest}.webp"
 
 
-def remove_uniform_light_background(image: Image.Image) -> tuple[Image.Image, bool]:
+def remove_uniform_light_background(
+    image: Image.Image, face_box: tuple[int, int, int, int]
+) -> tuple[Image.Image, bool]:
     """Remove only a light, nearly uniform background connected to the image edge.
 
     Dealer portraits commonly use white studio backgrounds. Restricting removal to
@@ -260,11 +262,27 @@ def remove_uniform_light_background(image: Image.Image) -> tuple[Image.Image, bo
     if component_count <= 1:
         return image.convert("RGBA"), False
 
+    # A white shirt often reaches the bottom edge between dark jacket panels.
+    # Only top/side-connected regions are studio background; bottom-only
+    # regions must retain their original white pixels and opacity.
     edge_labels = np.unique(
-        np.concatenate((labels[0], labels[-1], labels[:, 0], labels[:, -1]))
+        np.concatenate((labels[0], labels[:, 0], labels[:, -1]))
     )
     edge_labels = edge_labels[edge_labels != 0]
     background_region = np.isin(labels, edge_labels).astype(np.uint8)
+    face_x, face_y, face_width, face_height = face_box
+    center_x = face_x + face_width / 2
+    shirt_start = face_y + face_height * 1.05
+    rows = np.arange(image.height, dtype=np.float32)[:, None]
+    columns = np.arange(image.width, dtype=np.float32)[None, :]
+    torso_progress = np.clip(
+        (rows - shirt_start) / max(1, image.height - shirt_start), 0, 1
+    )
+    shirt_half_width = face_width * (0.25 + 0.55 * torso_progress)
+    protected_shirt = (rows >= shirt_start) & (
+        np.abs(columns - center_x) <= shirt_half_width
+    )
+    background_region[protected_shirt] = 0
     if np.count_nonzero(background_region) < source.shape[0] * source.shape[1] * 0.08:
         return image.convert("RGBA"), False
 
@@ -296,7 +314,9 @@ def normalized_portrait(image: Image.Image) -> Image.Image | None:
         faces,
         key=lambda box: int(box[2]) * int(box[3]),
     )
-    cutout, _ = remove_uniform_light_background(image)
+    cutout, _ = remove_uniform_light_background(
+        image, (int(face_x), int(face_y), int(face_width), int(face_height))
+    )
     alpha = np.asarray(cutout.getchannel("A"))
     foreground_y, foreground_x = np.nonzero(alpha > 18)
     if foreground_x.size < 50:
@@ -435,15 +455,6 @@ def main() -> int:
                 if not name or name in employees:
                     raise RuntimeError(f"직원명 누락 또는 중복: {showroom} / {name!r}")
                 image_url = urljoin(page_url, html.unescape(image_src))
-                previous = existing_profile(cdsid, name)
-                # Reviewed channel portraits replace blurred dealer originals.
-                # Keep their original pixels and CSS crop on subsequent syncs.
-                if previous.get("sourceOverride"):
-                    override_file = PUBLIC_ROOT / previous["image"].lstrip("/")
-                    if not override_file.is_file():
-                        raise RuntimeError(f"프로필 대체 사진 누락: {cdsid} / {name}")
-                    employees[name] = previous
-                    continue
                 local_file = portrait_path(
                     cdsid,
                     source["directory"],
@@ -463,9 +474,8 @@ def main() -> int:
                         local_file,
                     )
                 if not portrait_available:
-                    continue
+                    raise RuntimeError(f"공식 사진을 정규화하지 못했습니다: {cdsid} / {name}")
                 employees[name] = {
-                    **existing_profile(cdsid, name),
                     "image": "/" + local_file.relative_to(PUBLIC_ROOT).as_posix(),
                 }
 
@@ -478,8 +488,13 @@ def main() -> int:
             total_consultants += len(employees)
             print(f"{cdsid} {showroom}: {len(employees)}명")
 
+    if len(showrooms) != 39 or total_consultants < 300:
+        raise RuntimeError(
+            f"공식 사진 수집 결과가 비정상적입니다: {len(showrooms)}개 전시장, {total_consultants}명"
+        )
+
     output = {
-        "updatedAt": datetime.now(ZoneInfo("Asia/Seoul")).date().isoformat(),
+        "updatedAt": datetime.now(ZoneInfo("Asia/Seoul")).isoformat(timespec="seconds"),
         "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
         "showroomCount": len(showrooms),
         "consultantCount": total_consultants,
