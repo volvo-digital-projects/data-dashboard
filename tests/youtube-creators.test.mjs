@@ -4,6 +4,12 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('YouTube staff badges use HM for H Motors',()=>{
+ const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
+ assert.match(source,/에이치:"HM"/);
+ assert.doesNotMatch(source,/에이치:"H"/);
+});
+
 test('YouTube comment counts and channel labels share the right cell edge',()=>{
  const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
  assert.match(css,/\.yt-cell-comments button\{[^}]*width:100%;text-align:right/);

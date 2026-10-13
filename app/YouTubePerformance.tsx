@@ -18,7 +18,7 @@ const silhouetteForGender = (gender: string) => gender === "여성"
   : "/staff-profiles/neutral-human-silhouette.png";
 const profilePhotos = staffProfilePhotos.showrooms as Record<string, { employees: Record<string, { image: string }> }>;
 const dealers = ["코오롱", "아주", "에이치", "천하", "아이언", "태영", "아이비"];
-const dealerCodes: Record<string, string> = {에이치:"H", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
+const dealerCodes: Record<string, string> = {에이치:"HM", 천하:"CA", 아주:"AJ", 코오롱:"KL", 아이비:"IV", 아이언:"IR", 태영:"TY"};
 type SharedVideo = { id: string; title: string; kind: string; views: number; names: string[]; basis: string };
 const assignedVideoSummary = (videos: SharedVideo[]) => ({
   count: videos.length,
