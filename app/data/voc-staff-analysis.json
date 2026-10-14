@@ -2,14 +2,14 @@
   "source": {
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-09-27",
-    "rosterCheckedAt": "2026-10-13",
+    "rosterCheckedAt": "2026-10-14",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-10-13",
+    "jobTitleSourceDate": "2026-10-14",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-09-27",
     "latestResponseThrough": "2026-09-27",
@@ -434,7 +434,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2024-05-14",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -911,7 +911,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2024-05-14",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -2550,7 +2550,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2016-03-14",
-          "tenureMonths": 126,
+          "tenureMonths": 127,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -15070,7 +15070,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-05-14",
-          "tenureMonths": 100,
+          "tenureMonths": 101,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -15173,7 +15173,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2018-05-14",
-          "tenureMonths": 100,
+          "tenureMonths": 101,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -19945,7 +19945,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-07-14",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "staffCdsid": "S-CHOI15"
@@ -22008,7 +22008,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-07-14",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -23927,7 +23927,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-12-14",
-          "tenureMonths": 69,
+          "tenureMonths": 70,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -26126,7 +26126,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-12-14",
-          "tenureMonths": 69,
+          "tenureMonths": 70,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28903,7 +28903,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-09-14",
-          "tenureMonths": 0,
+          "tenureMonths": 1,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "staffCdsid": "J-LEE199"
@@ -30389,7 +30389,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2025-07-14",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
