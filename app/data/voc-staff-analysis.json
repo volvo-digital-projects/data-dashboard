@@ -2,14 +2,14 @@
   "source": {
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-09-27",
-    "rosterCheckedAt": "2026-10-14",
+    "rosterCheckedAt": "2026-10-15",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-10-14",
+    "jobTitleSourceDate": "2026-10-15",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-09-27",
     "latestResponseThrough": "2026-09-27",
@@ -256,7 +256,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2022-03-15",
-          "tenureMonths": 54,
+          "tenureMonths": 55,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -1848,7 +1848,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2022-09-15",
-          "tenureMonths": 48,
+          "tenureMonths": 49,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -2822,7 +2822,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2025-01-15",
-          "tenureMonths": 20,
+          "tenureMonths": 21,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -5161,7 +5161,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2024-04-15",
-          "tenureMonths": 29,
+          "tenureMonths": 30,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -6948,7 +6948,7 @@
           "role": "영업직원",
           "jobTitle": "팀장",
           "hireDate": "2024-01-15",
-          "tenureMonths": 32,
+          "tenureMonths": 33,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -7377,7 +7377,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2019-03-15",
-          "tenureMonths": 90,
+          "tenureMonths": 91,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -8269,7 +8269,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-12-15",
-          "tenureMonths": 105,
+          "tenureMonths": 106,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -9970,7 +9970,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2016-02-15",
-          "tenureMonths": 127,
+          "tenureMonths": 128,
           "tenureBucket": "over-10y",
           "tenureBucketLabel": "10년 이상",
           "years": {
@@ -14436,7 +14436,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2022-09-15",
-          "tenureMonths": 48,
+          "tenureMonths": 49,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -14614,7 +14614,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-11-15",
-          "tenureMonths": 94,
+          "tenureMonths": 95,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -17330,6 +17330,97 @@
       "dmsShowroom": "IVY Motors Jeju",
       "employees": [
         {
+          "name": "고영우",
+          "role": "영업직원",
+          "jobTitle": "과장",
+          "hireDate": "2026-10-14",
+          "tenureMonths": 0,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내",
+          "years": {
+            "2023": {
+              "responses": 6,
+              "scoreSum": 58.0,
+              "sent": 10
+            },
+            "2024": {
+              "responses": 10,
+              "scoreSum": 95.0,
+              "sent": 51
+            },
+            "2025": {
+              "responses": 4,
+              "scoreSum": 30.0,
+              "sent": 14
+            },
+            "2026": {
+              "responses": 2,
+              "scoreSum": 20.0,
+              "sent": 55,
+              "rateResponses": 2
+            }
+          },
+          "commentResponses": 22,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 18
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 13
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 8
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 3
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 3
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 2
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 2
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 2
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "대기시간 관리미흡",
+              "mentions": 1
+            },
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 1
+            },
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "시설 편의 미제공",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-08-12",
+          "staffCdsid": "Y-KO"
+        },
+        {
           "name": "김민성",
           "role": "영업직원",
           "jobTitle": "대리",
@@ -17700,100 +17791,7 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": [
-        {
-          "name": "고영우",
-          "role": "영업직원",
-          "jobTitle": "과장",
-          "hireDate": "2020-04-03",
-          "tenureMonths": 77,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 6,
-              "scoreSum": 58.0,
-              "sent": 10
-            },
-            "2024": {
-              "responses": 10,
-              "scoreSum": 95.0,
-              "sent": 51
-            },
-            "2025": {
-              "responses": 4,
-              "scoreSum": 30.0,
-              "sent": 14
-            },
-            "2026": {
-              "responses": 2,
-              "scoreSum": 20.0,
-              "sent": 55,
-              "rateResponses": 2
-            }
-          },
-          "commentResponses": 22,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 18
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 13
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 8
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 3
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 3
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 2
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 2
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "대기시간 관리미흡",
-              "mentions": 1
-            },
-            {
-              "label": "시승기회·시간 확대",
-              "mentions": 1
-            },
-            {
-              "label": "구체적 설명 부족",
-              "mentions": 1
-            },
-            {
-              "label": "시설 편의 미제공",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-08-12",
-          "archivedAt": "2026-09-29",
-          "archiveReason": "Sales-DMS 현재 명단 제외"
-        }
-      ]
+      "formerEmployees": []
     },
     "6KR6856": {
       "showroom": "볼보 순천",
@@ -24715,9 +24713,9 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2025-09-15",
-          "tenureMonths": 12,
-          "tenureBucket": "under-1y",
-          "tenureBucketLabel": "1년 이내",
+          "tenureMonths": 13,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
           "years": {
             "2026": {
               "responses": 4,
@@ -27071,7 +27069,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2019-04-15",
-          "tenureMonths": 89,
+          "tenureMonths": 90,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -29675,7 +29673,7 @@
           "role": "영업직원",
           "jobTitle": "부장",
           "hireDate": "2017-02-15",
-          "tenureMonths": 115,
+          "tenureMonths": 116,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -31785,7 +31783,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-09-15",
-          "tenureMonths": 0,
+          "tenureMonths": 1,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "latestResponseDate": "2026-09-27",
