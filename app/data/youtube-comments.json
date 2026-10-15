@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-10-15T13:32:11.403365+00:00",
+  "checkedAt": "2026-10-15T15:23:58.989059+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 자동 긍정/부정 분류",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 309,
-      "videos": 45,
-      "completeVideos": 45,
+      "total": 310,
+      "videos": 46,
+      "completeVideos": 46,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
@@ -13,9 +13,18 @@
         "suggestion": 5,
         "other": 143,
         "review": 3,
-        "owner": 143
+        "owner": 144
       },
       "entries": [
+        {
+          "id": "Ugwk2P_F5gRGae1YwcR4AaABAg.AbzfvC-dGesAbzfxUQG8dm",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "2vrr7n_ArNw",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=Ugwk2P_F5gRGae1YwcR4AaABAg.AbzfvC-dGesAbzfxUQG8dm"
+        },
         {
           "id": "UgxEGUjgjTjmEwh--614AaABAg",
           "category": "other",
@@ -2800,6 +2809,12 @@
       ],
       "coverage": [
         {
+          "id": "2vrr7n_ArNw",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "UEJTXB5x8JY",
           "kind": "video",
           "status": "complete",
@@ -3071,7 +3086,7 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 40
+      "excludedOwnerPromotions": 41
     },
     "UCq4Nmcrr-dEmZqT-NhbSdpQ": {
       "total": 166,
