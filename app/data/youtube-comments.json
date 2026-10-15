@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-10-15T18:51:44.622169+00:00",
+  "checkedAt": "2026-10-15T21:53:00.477129+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 자동 긍정/부정 분류",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 310,
+      "total": 311,
       "videos": 46,
       "completeVideos": 46,
       "partialVideos": 0,
@@ -11,7 +11,7 @@
       "counts": {
         "positive": 15,
         "suggestion": 5,
-        "other": 143,
+        "other": 144,
         "review": 3,
         "owner": 144
       },
@@ -24,6 +24,15 @@
           "videoId": "2vrr7n_ArNw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=Ugwk2P_F5gRGae1YwcR4AaABAg.AbzfvC-dGesAbzfxUQG8dm"
+        },
+        {
+          "id": "Ugwk2P_F5gRGae1YwcR4AaABAg.AbzfvC-dGesAc-Q7Z0h8h8",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "2vrr7n_ArNw",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=Ugwk2P_F5gRGae1YwcR4AaABAg.AbzfvC-dGesAc-Q7Z0h8h8"
         },
         {
           "id": "UgxEGUjgjTjmEwh--614AaABAg",
