@@ -4777,7 +4777,7 @@ test("aligns every quarter boundary to the same 52-week grid", async () => {
   );
   assert.match(
     dashboardSource,
-    /label: "Q4"[\s\S]{0,180}?statusText: "평가\\u00a0전"/,
+    /label: "Q4"[\s\S]{0,180}?statusText: "평가\\u00a0중"/,
   );
   assert.match(
     dashboardSource,

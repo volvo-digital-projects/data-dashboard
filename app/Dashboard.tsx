@@ -1018,7 +1018,7 @@ function V3SPerformance({
       value: null,
       average: null,
       benchmarks: peerBenchmarks(null),
-      statusText: "평가\u00a0전",
+      statusText: "평가\u00a0중",
       state: "upcoming",
     },
   ];
