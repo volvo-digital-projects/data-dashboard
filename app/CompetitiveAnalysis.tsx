@@ -4383,7 +4383,7 @@ export default function CompetitiveAnalysis({
                             className="callout-shape"
                             d="M 4 0 H 66 Q 70 0 70 4 V 40 Q 70 44 66 44 H 52 L 44 51 L 36 44 H 4 Q 0 44 0 40 V 4 Q 0 0 4 0 Z"
                           />
-                          <text x="35" y="11" textAnchor="middle">전국 평균</text>
+                          <text x="35" y="11" textAnchor="middle">전국 재직자 평균</text>
                           <text className="score" y="24">
                             <tspan x="40.5" textAnchor="end">{staffSalesNationalAverage.toFixed(1)}대</tspan>
                             <tspan x="40.5" textAnchor="start">/ 년</tspan>
