@@ -1,8 +1,41 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync, existsSync} from 'node:fs';
+import {workbookBytes,youtubeSheets} from '../app/youtube-export.mjs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
+
+test('YouTube Excel export includes every creator and complete positive and negative reactions',()=>{
+ const comments=read('youtube-comments'), editorial=read('youtube-comment-editorial');
+ const people=data.creators.map(p=>({...p,channel:data.channels.find(c=>c.id===p.channelId),certifications:[0,0,0],score:null,responses:0,monthly:null,delivered:null,shared:data.creators.filter(c=>c.channelId===p.channelId).length>1}));
+ const sheets=youtubeSheets({people,metrics:data,comments,editorial,codes:{},dailyClose:null});
+ assert.deepEqual(sheets.map(s=>s.name),['유튜브 성과표','댓글분석']);
+ assert.equal(sheets[0].rows.length,data.creators.length);
+ assert.equal(sheets[1].rows.length,data.creators.length);
+ for(const p of people){
+  const row=sheets[1].rows.find(r=>r[2]===p.name);
+  assert.equal(row[4],editorial.channels[p.channelId].positive.join('\n'));
+  assert.equal(row[5],editorial.channels[p.channelId].negative.join('\n'));
+ }
+ const bytes=workbookBytes(sheets), view=new DataView(bytes.buffer), files={};let offset=0;
+ while(view.getUint32(offset,true)===0x04034b50){
+  const length=view.getUint32(offset+18,true), nameLength=view.getUint16(offset+26,true), extraLength=view.getUint16(offset+28,true), start=offset+30+nameLength+extraLength;
+  files[new TextDecoder().decode(bytes.slice(offset+30,offset+30+nameLength))]=new TextDecoder().decode(bytes.slice(start,start+length));offset=start+length;
+ }
+ assert.ok(files['xl/worksheets/sheet1.xml'].includes('state="frozen"'));
+ assert.ok(files['xl/worksheets/sheet2.xml'].includes('<autoFilter'));
+ assert.ok(files['xl/styles.xml'].includes('formatCode="0.0"'));
+ assert.ok(!Object.values(files).join('').includes('직원 ID'));
+});
+
+test('XLSX literal text is escaped and never interpreted as an injected formula',()=>{
+ const sheet={name:'테스트',title:'테스트',notes:['기준','출처'],headers:['값'],widths:[30],rows:[['=HYPERLINK("https://example.invalid") & <text>'],[0],[null]]};
+ const text=new TextDecoder().decode(workbookBytes([sheet]));
+ assert.ok(text.includes('t="inlineStr"'));
+ assert.ok(text.includes('&amp; &lt;text&gt;'));
+ assert.ok(text.includes('<v>0</v>'));
+ assert.ok(!text.includes('<f>'));
+});
 
 test('Comment panels toggle below the selected creator row without covering it',()=>{
  const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');

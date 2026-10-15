@@ -7,6 +7,8 @@ import vocData from "./data/voc-staff-analysis.json";
 import certificationData from "./data/staff-certifications.json";
 import staffProfilePhotos from "./data/staff-profile-photos.json";
 import YouTubeCommentAnalysis, { commentData } from "./YouTubeCommentAnalysis";
+import commentEditorial from "./data/youtube-comment-editorial.json";
+import { downloadYoutubeWorkbook } from "./youtube-export.mjs";
 import "./youtube-performance.css";
 
 type Sales = { staff: { name: string; deliveredSales: number; monthlyDeliveredSales: number[] }[] };
@@ -203,6 +205,7 @@ export default function YouTubePerformance() {
       </div>
     </div>
     <div className="yt-matrix-heading">
+      <button type="button" className="yt-excel-download" onClick={()=>downloadYoutubeWorkbook({people:creators,metrics:data,comments:commentData,editorial:commentEditorial,codes:dealerCodes,dailyClose})} title="전체 유튜브 직원 성과표와 긍정·부정 댓글분석 다운로드">엑셀 다운로드</button>
       <div className="yt-filters" aria-label="크리에이터 정렬">{([["subscribers","구독자 많은 순"],["voc","평균 만족도 높은 순"],["sales","월평균 판매 높은 순"],["views","평균 조회 높은 순"]] as const).map(([value,label])=><button key={value} type="button" className="yt-sort-filter" aria-pressed={sort===value} onClick={()=>setSort(value)}>{label}</button>)}</div>
     </div>
     {visible.length ? <div className="yt-table-wrap" tabIndex={0} role="region" aria-label="크리에이터 정량 지표 비교표">

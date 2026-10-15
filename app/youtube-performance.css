@@ -128,6 +128,8 @@
 .youtube-performance.yt-compact .yt-row-person .yt-row-avatar img.yt-profile-white-shirt{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;transform:scale(1.35);transform-origin:center top}
 .youtube-performance.yt-compact .yt-row-person .yt-row-avatar img.yt-fallback-silhouette{filter:none;object-fit:cover;object-position:center top;transform:scale(1.04);transform-origin:center top}
 .yt-editorial{display:grid;gap:6px;padding-top:0}
+.yt-excel-download{border:1px solid #247a62;background:#f3faf6;color:#21634f;border-radius:5px;padding:5px 10px;font-size:10px;font-weight:650;white-space:nowrap;cursor:pointer}
+.yt-excel-download:hover{background:#e6f3eb}
 .yt-cell-comments button small{text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
 .yt-editorial article{padding:8px 10px;border:1px solid #d8e5eb;border-radius:5px;background:#f9fcfd}
 .yt-editorial h4{margin:0 0 5px;font-size:13px;font-weight:700;color:#245d73}
