@@ -3275,7 +3275,7 @@ export default function CompetitiveAnalysis({
             <span><b>Q1</b><strong>{displayQuarterNumber(selected.q1?.voc)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selected.voc)}</strong></span>
             <span><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Voc)}</strong></span>
-            <span className="current"><b>Q4</b></span>
+            <span className="current"><b>Q4</b><strong>{displayQuarterNumber(null)}</strong></span>
           </p>
           <em
             className={
@@ -3342,7 +3342,7 @@ export default function CompetitiveAnalysis({
             <span><b>Q1</b><strong>{displayQuarterNumber(selectedQ1Combined)}</strong></span>
             <span><b>Q2</b><strong>{displayQuarterNumber(selectedQ2Combined)}</strong></span>
             <span><b>Q3</b><strong>{displayQuarterNumber(selectedQ3Combined)}</strong></span>
-            <span className="current"><b>Q4</b></span>
+            <span className="current"><b>Q4</b><strong>{displayQuarterNumber(null)}</strong></span>
           </p>
           <em>
             {summaryRankLabel} {summaryRank}위 / 전체 {summaryRankTotal}

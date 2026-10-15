@@ -3052,7 +3052,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span class="current"><b>Q4<\/b><\/span>/,
+    /class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>93\.1<\/strong><\/span><span><b>Q2<\/b><strong>87\.5<\/strong><\/span><span><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span class="current"><b>Q4<\/b><strong>―<\/strong><\/span>/,
   );
   assert.match(
     visibleHtml,
@@ -3060,7 +3060,7 @@ test("shows Q1-Q4 badges and available quarter values in the analysis summary ca
   );
   assert.match(
     visibleHtml,
-    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span class="current"><b>Q4<\/b><\/span>/,
+    /분기별 합산점수 평균[\s\S]*?class="analysis-quarter-values"[^>]*><span><b>Q1<\/b><strong>193\.1<\/strong><\/span><span><b>Q2<\/b><strong>187\.5<\/strong><\/span><span><b>Q3<\/b><strong>\d+\.\d<\/strong><\/span><span class="current"><b>Q4<\/b><strong>―<\/strong><\/span>/,
   );
   assert.match(
     css,
