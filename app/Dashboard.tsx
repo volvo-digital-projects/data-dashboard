@@ -2591,9 +2591,9 @@ export default function Dashboard({
   const linkedMetricTimerRef = useRef<number | null>(null);
   const [oneVoiceInView, setOneVoiceInView] = useState(false);
   const [oneVoiceScores, setOneVoiceScores] = useState<OneVoiceScores>({
-    carHandoverScore: 94.0,
-    testDriveScore: 88.1,
-    capturedAt: "2026-10-06T16:08:27+09:00",
+    carHandoverScore: 94.1,
+    testDriveScore: 88.0,
+    capturedAt: "2026-10-16T10:26:22+09:00",
   });
   const [accessDate, setAccessDate] = useState(() =>
     formatSeoulDate(new Date()),
