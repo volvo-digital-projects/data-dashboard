@@ -4565,7 +4565,9 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
     weekly.happyCall.newCar.quarters.byCdsid["6KR6834"].slice(0, 3),
     [100, 100, 94.7],
   );
-  assert.equal(typeof weekly.happyCall.newCar.average[weekly.meta.vocLatestWeek - 1], "number");
+  const latestHappyCallIndex = weekly.happyCall.newCar.average.findLastIndex(value => value !== null);
+  assert.ok(latestHappyCallIndex >= 36 && latestHappyCallIndex < 52);
+  assert.ok(weekly.happyCall.newCar.average.every(value => value === null || (Number.isFinite(value) && value >= 0 && value <= 100)));
   assert.match(syncSource, /quarterlyResult\(loaded\.newCarHappyCall, \{[\s\S]*?useLastHeader: true/);
   assert.doesNotMatch(
     analysisSource,
