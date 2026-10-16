@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-10-16T07:36:21.893081+00:00",
+  "checkedAt": "2026-10-16T12:15:35.692667+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 313,
+      "total": 314,
       "videos": 46,
       "completeVideos": 46,
       "partialVideos": 0,
@@ -11,11 +11,20 @@
       "counts": {
         "positive": 15,
         "suggestion": 0,
-        "other": 146,
+        "other": 147,
         "review": 8,
         "owner": 144
       },
       "entries": [
+        {
+          "id": "Ugx4zNbu3cLFz_yFKTx4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "2vrr7n_ArNw",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=Ugx4zNbu3cLFz_yFKTx4AaABAg"
+        },
         {
           "id": "UgwXeDS4wZY2jdIE_Yd4AaABAg",
           "category": "other",
@@ -9549,8 +9558,8 @@
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
       "total": 975,
-      "videos": 49,
-      "completeVideos": 49,
+      "videos": 50,
+      "completeVideos": 50,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
@@ -18339,6 +18348,12 @@
       ],
       "coverage": [
         {
+          "id": "AZ_qtrKCgt0",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "srlkNSogRJs",
           "kind": "video",
           "status": "complete",
@@ -18634,7 +18649,7 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 18
+      "excludedOwnerPromotions": 19
     },
     "UC0QgBtIY01DBw2UC4v_I2eA": {
       "total": 96,
@@ -27773,7 +27788,7 @@
       "excludedOwnerPromotions": 93
     },
     "UCBB6SFAvxC756EpH93qWSSg": {
-      "total": 189,
+      "total": 190,
       "videos": 55,
       "completeVideos": 55,
       "partialVideos": 0,
@@ -27781,11 +27796,20 @@
       "counts": {
         "positive": 22,
         "suggestion": 0,
-        "other": 91,
+        "other": 92,
         "review": 6,
         "owner": 70
       },
       "entries": [
+        {
+          "id": "UgzOuvnljv3SfAogE2x4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "4CvELegsXM0",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=4CvELegsXM0&lc=UgzOuvnljv3SfAogE2x4AaABAg"
+        },
         {
           "id": "UgxvG6UfdPmXz6jrDLF4AaABAg",
           "category": "other",
@@ -40759,5 +40783,5 @@
       "excludedOwnerPromotions": 1
     }
   },
-  "apiCalls": 46
+  "apiCalls": 47
 }
