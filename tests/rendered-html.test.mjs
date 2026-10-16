@@ -2698,9 +2698,10 @@ test("server-renders the selected CDSID dashboard", async () => {
 });
 
 test("renders the simplified VOC and CX weekly detail pages", async () => {
-  const [detailCss, weekly] = await Promise.all([
+  const [detailCss, weekly, weeklyDetails] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/weekly-details.json", import.meta.url), "utf8").then(JSON.parse),
   ]);
   const vocResponse = await render("/dashboard/6KR6834/details/voc");
   assert.equal(vocResponse.status, 200);
@@ -2848,7 +2849,7 @@ test("renders the simplified VOC and CX weekly detail pages", async () => {
   assert.equal((cxBody.match(/class="metric-detail-series-reveal"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-data-series"/g) ?? []).length, 5);
   assert.equal((cxBody.match(/class="metric-detail-update-guide-layer"/g) ?? []).length, 1);
-  assert.match(cxBody, new RegExp(`aria-label="현재 업데이트 기준 W${Math.max(weekly.meta.vocLatestWeek, weekly.meta.cxLatestWeek)}"`));
+  assert.match(cxBody, new RegExp(`aria-label="현재 업데이트 기준 W${weeklyDetails.cx.components[0].latestWeek}"`));
   assert.match(cxBody, /class="metric-detail-update-guide" style="left:\d+\.\d+%"/);
   assert.match(
     cxBody,
@@ -4385,7 +4386,12 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.deepEqual(weekly.v3s.quarters.byCdsid["6KR6830"], [65.3, 96.7, 94.6, null]);
   assert.deepEqual(weekly.voc.quarters.byCdsid["6KR6830"], [99.1, 89.7, 94.1, null]);
   assert.deepEqual(weekly.cx.quarters.byCdsid["6KR6830"], [276.3, 304.5, 303.4, null]);
-  assert.deepEqual(weekly.cx.quarters.average, [293, 297.5, 296.2, null]);
+  assert.deepEqual(weekly.cx.quarters.average, Array.from({length:4}, (_, quarter) => {
+    if (quarter >= weekly.meta.cxClosedQuarter) return null;
+    const parts = details.cx.components.map(component => component.quarters.average[quarter]);
+    assert.ok(parts.every(value => typeof value === "number" && Number.isFinite(value)));
+    return Math.round(parts.reduce((sum, value) => sum + value, 0) * 10) / 10;
+  }));
   assert.equal(weekly.voc.byCdsid["6KR6834"][0], 0);
   assert.equal(weekly.voc.byCdsid["6KR6834"][1], 100);
   assert.equal(weekly.voc.byCdsid["6KR6834"][2], 94);
