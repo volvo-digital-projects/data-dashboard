@@ -4,7 +4,7 @@ import editorial from "./data/youtube-comment-editorial.json";
 
 type ChannelComments = {status?:string;total:number;counts:Record<string,number>;videos:number;completeVideos:number;excludedOwnerPromotions?:number};
 export const commentData = raw as {checkedAt:string|null;method:string;channels:Record<string,ChannelComments>};
-type Review = {overall:string;positive:string[];negative:string[]};
+type Review = {overall:string;positive:string[];negative:string[];negativeEvidence?:{summary:string;sourceSha256:string[]}[]};
 const reviews = editorial.channels as Record<string, Review>;
 
 function ReactionFace({positive}:{positive:boolean}) {
@@ -18,10 +18,15 @@ function ReactionFace({positive}:{positive:boolean}) {
 export default function YouTubeCommentAnalysis({channelId}:{channelId:string;shared:boolean;onTopicChange?:()=>void}) {
   const review = reviews[channelId];
   if (!review) return <section className="yt-comments"><h4>댓글 분석 준비 중</h4></section>;
+  const verifiedNegative = review.negative.filter(text => review.negativeEvidence?.some(evidence =>
+    evidence.summary === text && evidence.sourceSha256.length > 0 &&
+    evidence.sourceSha256.every(hash => /^[a-f0-9]{64}$/.test(hash))
+  ));
+  const negative = verifiedNegative.length ? verifiedNegative : ["명확히 확인된 부정 반응 없음"];
   return <section className="yt-comments yt-editorial" aria-label="채널별 댓글 해석">
     <div className="yt-editorial-reactions">
       <article className="positive"><h4>긍정 반응<ReactionFace positive={true}/></h4><ul>{review.positive.map(text=><li key={text}>{text}</li>)}</ul></article>
-      <article className="negative"><h4>부정 반응<ReactionFace positive={false}/></h4><ul>{review.negative.map(text=><li key={text}>{text}</li>)}</ul></article>
+      <article className="negative"><h4>부정 반응<ReactionFace positive={false}/></h4><ul>{negative.map(text=><li key={text}>{text}</li>)}</ul></article>
     </div>
   </section>;
 }

@@ -73,6 +73,32 @@ test('Every YouTube channel has a concise three-part review without opinions or 
  assert.doesNotMatch(component, /채널 총평|내 의견|review\.opinion|<a\b|<button\b|<details\b|댓글 원문|원문 확인|자동 키워드|직원 능력 판정/);
 });
 
+test('Negative summaries require text-review evidence and never inherit keyword verdicts',()=>{
+ const editorial=read('youtube-comment-editorial');
+ assert.ok(Number.isFinite(Date.parse(editorial.negativeReview.sourceCheckedAt)));
+ assert.equal(editorial.negativeReview.sourceRunId,38835431607);
+ assert.equal(editorial.negativeReview.sourceViewerCommentCount,2597);
+ for(const review of Object.values(editorial.channels)){
+  const evidence=review.negativeEvidence;
+  assert.ok(Array.isArray(evidence));
+  for(const summary of review.negative){
+   if(summary==='명확히 확인된 부정 반응 없음'){
+    assert.equal(evidence.length,0);
+    continue;
+   }
+   const source=evidence.find(item=>item.summary===summary);
+   assert.ok(source,summary);
+   assert.ok(source.sourceIndexes.length>0);
+   assert.equal(source.sourceIndexes.length,source.sourceSha256.length);
+   assert.ok(source.sourceSha256.every(hash=>/^[a-f0-9]{64}$/.test(hash)));
+  }
+ }
+ const component=readFileSync(new URL('../app/YouTubeCommentAnalysis.tsx',import.meta.url),'utf8');
+ assert.match(component,/const verifiedNegative = review\.negative\.filter/);
+ assert.match(component,/evidence\.summary === text/);
+ assert.match(component,/negative\.map/);
+});
+
 test('YouTube roster joins official photos, DMS sales and VOC by showroom and name',()=>{
  const photos=read('staff-profile-photos').showrooms;
  const sales=read('sales-activity-analysis').showrooms;

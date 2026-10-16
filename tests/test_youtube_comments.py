@@ -70,14 +70,27 @@ class CommentsTest(unittest.TestCase):
         self.assertEqual(result["total"], 0)
 
     def test_conservative_classification(self):
-        self.assertEqual(module.classify("상담 불친절")[0], "suggestion")
+        self.assertEqual(module.classify("상담 불친절")[0], "review")
         self.assertEqual(module.classify("영상 감사합니다 하지만 아쉽네요")[0], "review")
         self.assertEqual(module.classify("안녕하세요")[0], "other")
 
     def test_general_reactions_and_mixed_opinions(self):
         self.assertEqual(module.classify("정말 최고입니다")[0], "positive")
-        self.assertEqual(module.classify("최악입니다 실망했어요")[0], "suggestion")
+        self.assertEqual(module.classify("최악입니다 실망했어요")[0], "review")
         self.assertEqual(module.classify("정보 감사합니다 하지만 불편해요")[0], "review")
+
+    def test_keyword_matches_never_decide_negative_sentiment(self):
+        for text in [
+            "배경음이 시끄러운가요?",
+            "이 기능은 불편하지 않나요?",
+            "틀린 내용은 없고 좋습니다",
+            "차량 수리비가 불만입니다",
+            "무이자 한도가 얼마인가요?",
+            "골프백 시연을 보여주세요",
+            "설명이 부족해서 실망했습니다",
+        ]:
+            with self.subTest(text=text):
+                self.assertNotIn(module.classify(text)[0], {"suggestion", "negative"})
 
     def test_excludes_owner_phone_promotion_but_keeps_viewer_and_replies(self):
         def api(endpoint, **params):

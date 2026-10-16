@@ -9,9 +9,38 @@
         "재구매·상담 추천 의향"
       ],
       "negative": [
-        "고급유·배터리·트림 차이 설명 부족 지적",
-        "연식·할부 계산 정정 요청",
-        "일부 콜백·댓글 답변 지연 불만"
+        "콜백을 받지 못했다는 의견",
+        "엔진·배터리 설명이 잘못됐다는 지적",
+        "3열 수동 시트 관련 설명에 대한 반박"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "콜백을 받지 못했다는 의견",
+          "sourceIndexes": [
+            157
+          ],
+          "sourceSha256": [
+            "59f816d3c919e1c04840c1457dfe41ec4822616ea8a555e16907286bfc7ba303"
+          ]
+        },
+        {
+          "summary": "엔진·배터리 설명이 잘못됐다는 지적",
+          "sourceIndexes": [
+            515
+          ],
+          "sourceSha256": [
+            "cc349ed390d6d5a1062f08145f81e9ba0e75767b6bd3cc118a7fd229b0e08830"
+          ]
+        },
+        {
+          "summary": "3열 수동 시트 관련 설명에 대한 반박",
+          "sourceIndexes": [
+            337
+          ],
+          "sourceSha256": [
+            "9095489b207fc452c5897d419d25cbf97e44426ffb493f72682a34c1c8e7f795"
+          ]
+        }
       ]
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
@@ -22,10 +51,38 @@
         "진행 상황 안내·출고 준비 만족"
       ],
       "negative": [
-        "시작 가격과 실제 주문 조건 차이 불만",
-        "배터리 안전 설명 부족 지적",
-        "골프백 4개 시연·뒷좌석 실측 요청",
-        "겨울철 타이어 설명 오해·이후 사과도 있음"
+        "겨울철 타이어 관련 설명에 대한 비판",
+        "배터리 안전 설명에 대한 불만",
+        "영상 도입부가 길다는 지적"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "겨울철 타이어 관련 설명에 대한 비판",
+          "sourceIndexes": [
+            34
+          ],
+          "sourceSha256": [
+            "b6f2a2333f8c342eb97712acf8418792b9266a6ed9bc293d445a14f394cdec86"
+          ]
+        },
+        {
+          "summary": "배터리 안전 설명에 대한 불만",
+          "sourceIndexes": [
+            266
+          ],
+          "sourceSha256": [
+            "6c64fbe3ceae4b1697986dcdb3367aec5792e9a6dbfde3115109a63a56c2536a"
+          ]
+        },
+        {
+          "summary": "영상 도입부가 길다는 지적",
+          "sourceIndexes": [
+            171
+          ],
+          "sourceSha256": [
+            "e90b2862231d74a458ea0f7bfdc3e622eabb40e0424be830e397079f2725e024"
+          ]
+        }
       ]
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
@@ -36,10 +93,38 @@
         "전화 상담 후 계약·혜택 안내 만족"
       ],
       "negative": [
-        "배터리·국내 칩·음악 앱 안내 혼선",
-        "민감한 문제 설명 부족 지적",
-        "골프백 시연 조건·실물 장면 부족",
-        "설명 속도가 빠르다는 반응"
+        "골프백 2개 적재 시연에 대한 비판",
+        "이미지보다 말 설명이 많다는 지적",
+        "차량: 음악 앱 사용 제한에 대한 불만"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "골프백 2개 적재 시연에 대한 비판",
+          "sourceIndexes": [
+            107
+          ],
+          "sourceSha256": [
+            "208004e47f16ff7e5d7324510b9d3a2b550da636d721062e28588de4f232871b"
+          ]
+        },
+        {
+          "summary": "이미지보다 말 설명이 많다는 지적",
+          "sourceIndexes": [
+            481
+          ],
+          "sourceSha256": [
+            "f9658a7fdfef2179aef1f22f3feba88114cfa5c8abb1f96b73fafebe9defe984"
+          ]
+        },
+        {
+          "summary": "차량: 음악 앱 사용 제한에 대한 불만",
+          "sourceIndexes": [
+            272
+          ],
+          "sourceSha256": [
+            "a4aceed8e156d03382214750d2a86a84eaaee4d24b5ef24d93ebf86c7e8f39bc"
+          ]
+        }
       ]
     },
     "UC6LM-e4xY2PkXzE1-f3qSrg": {
@@ -49,8 +134,18 @@
         "골프백으로 보여준 적재 공간이 유용"
       ],
       "negative": [
-        "큰 배경음·코어 가격 정정 요청",
-        "브랜드: 정비 대기·유지비 우려"
+        "배경음이 커서 거슬린다는 의견"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "배경음이 커서 거슬린다는 의견",
+          "sourceIndexes": [
+            1
+          ],
+          "sourceSha256": [
+            "2449a9b0e95c121f2d91898fd5f1d4103785c01868dfbc5a7649e4b2fbe89447"
+          ]
+        }
       ]
     },
     "UCIN-EGXvd_Tv720IqzD8rQQ": {
@@ -60,9 +155,30 @@
         "실내 분위기·오디오·기능에 관심"
       ],
       "negative": [
-        "좌우 반전 화면으로 집중 어렵다는 지적",
-        "오디오·소음 시연 환경에 의문",
-        "차량: 2열·트렁크 때문에 계약 보류"
+        "운전석이 반대로 보여 집중하기 어렵다는 의견",
+        "차량: 2열·트렁크 때문에 구매 보류"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "운전석이 반대로 보여 집중하기 어렵다는 의견",
+          "sourceIndexes": [
+            0
+          ],
+          "sourceSha256": [
+            "8bc9bd2abf760b0668ed0ff3ea2090597a3a4d3601aed9bc20729852220d4d73"
+          ]
+        },
+        {
+          "summary": "차량: 2열·트렁크 때문에 구매 보류",
+          "sourceIndexes": [
+            23,
+            24
+          ],
+          "sourceSha256": [
+            "1da7f66867af2b42c92d1cae66d6f19001430f97ddb8c351599eb8dccd872aff",
+            "29a3e136c6382da07cfde7ec1a01912e460fed7309bf6df089b46450c5593a5e"
+          ]
+        }
       ]
     },
     "UC9-es-82mhByLp4nafGK1CA": {
@@ -72,8 +188,28 @@
         "2·3열 활용·편의 기능 안내 유용"
       ],
       "negative": [
-        "무이자 한도·가격·제원 안내 요청",
-        "차량: 버튼·통풍·선블라인드 아쉬움"
+        "차량: 2열 선블라인드 부재에 아쉬움",
+        "차량: 물리버튼 부재·터치화면 지문 불편"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "차량: 2열 선블라인드 부재에 아쉬움",
+          "sourceIndexes": [
+            16
+          ],
+          "sourceSha256": [
+            "291db947c581c9b842a30e3093d2bb6b90a1a263e87e907a39ba8b864d37f64f"
+          ]
+        },
+        {
+          "summary": "차량: 물리버튼 부재·터치화면 지문 불편",
+          "sourceIndexes": [
+            21
+          ],
+          "sourceSha256": [
+            "8bea7facaa8ec28318c951037b64e8f38a6b18c0f94fd8ccc767b0517f7f1c94"
+          ]
+        }
       ]
     },
     "UC33UQnHJTzabySfSKvo5ECA": {
@@ -82,8 +218,9 @@
         "확인된 긍정 반응 없음"
       ],
       "negative": [
-        "확인된 부정 반응 없음"
-      ]
+        "명확히 확인된 부정 반응 없음"
+      ],
+      "negativeEvidence": []
     },
     "UCDwl98BzOnfYsrL9DXRRm6w": {
       "overall": "설명·디자인에 호감. 할인·보조금과 차량 조건에는 우려.",
@@ -93,9 +230,38 @@
         "출고·결제·수납 등 구매 질문"
       ],
       "negative": [
-        "가격 인하에 기존 구매자 불만",
-        "보조금 안내 혼선·배터리 우려",
-        "차량: 2열·화면·빠진 기능 아쉬움"
+        "브랜드: 구매 직후 가격 인하에 대한 불만",
+        "차량: 화면 터치로 전화를 받아야 하는 불편",
+        "차량: 실내 디스플레이에 대한 불만"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "브랜드: 구매 직후 가격 인하에 대한 불만",
+          "sourceIndexes": [
+            45
+          ],
+          "sourceSha256": [
+            "38c4f0f9625828e4dfc27ea8e15de87fa32bc5a961331aa9a3639609f389d934"
+          ]
+        },
+        {
+          "summary": "차량: 화면 터치로 전화를 받아야 하는 불편",
+          "sourceIndexes": [
+            18
+          ],
+          "sourceSha256": [
+            "901001d377bfb8bbdf020cc9c2f54b436477bf3593b86508690d4f3894509266"
+          ]
+        },
+        {
+          "summary": "차량: 실내 디스플레이에 대한 불만",
+          "sourceIndexes": [
+            28
+          ],
+          "sourceSha256": [
+            "6bd99b8ca8b879798354012f18275d185cc067095619a7f1231a8b2d4914717f"
+          ]
+        }
       ]
     },
     "UCurMOPSGnB1qrFabcfzu7Ig": {
@@ -105,9 +271,18 @@
         "빠른 답변·실용적인 구매 정보"
       ],
       "negative": [
-        "블랙박스 충격 감지·주차 녹화 혼동 지적",
-        "트림별 사양 구분·가격 정정 요청",
-        "과장된 제목·판매자 관점에 대한 의심"
+        "차량: 2열 시트 높이 때문에 구매 보류"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "차량: 2열 시트 높이 때문에 구매 보류",
+          "sourceIndexes": [
+            10
+          ],
+          "sourceSha256": [
+            "22283e96c075d14c70eedbf1b363d3cbd36459c25602d02ef7899343dd68f7d7"
+          ]
+        }
       ]
     },
     "UCLLQ98a0tBqu2SoTI_IqmwQ": {
@@ -117,9 +292,38 @@
         "시승·구매·출고 문의 활발"
       ],
       "negative": [
-        "시작 가격·기본 트림·무이자 홍보에 불만",
-        "국내 사양·칩·원산지 정정 요청",
-        "반복 말투·큰 배경음 지적"
+        "무이자 할부 적용 금액이 적다는 아쉬움",
+        "반복되는 말끝맺음에 대한 지적",
+        "큰 배경음으로 설명에 집중하기 어렵다는 불만"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "무이자 할부 적용 금액이 적다는 아쉬움",
+          "sourceIndexes": [
+            2
+          ],
+          "sourceSha256": [
+            "a8d6cb119c53ae1bf0e542864024401e538a07a8083c94bd5c8e126e4be913f0"
+          ]
+        },
+        {
+          "summary": "반복되는 말끝맺음에 대한 지적",
+          "sourceIndexes": [
+            20
+          ],
+          "sourceSha256": [
+            "9847fdfe9d9fe6638d38e2c57e2c33495f2c2fe97c568ec6f50bab7c5e5892af"
+          ]
+        },
+        {
+          "summary": "큰 배경음으로 설명에 집중하기 어렵다는 불만",
+          "sourceIndexes": [
+            77
+          ],
+          "sourceSha256": [
+            "595af94fbffbe6ea5298c857260153ab6d3da99111efb18e62ad5928e63134ab"
+          ]
+        }
       ]
     },
     "UC0QgBtIY01DBw2UC4v_I2eA": {
@@ -129,9 +333,38 @@
         "외형 비교·직접 적재 실험이 유용"
       ],
       "negative": [
-        "골프채 없는 가방 시연은 비현실적이라는 지적",
-        "TOPS·윤거 등 기술 용어 정정 요청",
-        "배경음이 설명보다 크다는 불만"
+        "골프채 없는 가방 적재 시연에 대한 지적",
+        "기술 용어 설명의 전문성에 대한 비판",
+        "큰 배경음으로 말소리가 안 들린다는 불만"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "골프채 없는 가방 적재 시연에 대한 지적",
+          "sourceIndexes": [
+            1
+          ],
+          "sourceSha256": [
+            "e49518c494e270c22d1fc54a606c043c2526218bbc97ca321f63aed282cddec4"
+          ]
+        },
+        {
+          "summary": "기술 용어 설명의 전문성에 대한 비판",
+          "sourceIndexes": [
+            23
+          ],
+          "sourceSha256": [
+            "3d5bfb14bf82db74553160d6f4616d8d062410ce1389b3a47f1ca65c8d02e52a"
+          ]
+        },
+        {
+          "summary": "큰 배경음으로 말소리가 안 들린다는 불만",
+          "sourceIndexes": [
+            57
+          ],
+          "sourceSha256": [
+            "60b510723052439d100336f928a8d4b828cfcb4b73b55fb5052fd481fbc61cb9"
+          ]
+        }
       ]
     },
     "UCBB6SFAvxC756EpH93qWSSg": {
@@ -142,9 +375,28 @@
         "출고 후 문의에도 빠른 안내"
       ],
       "negative": [
-        "반복적인 말 끝맺음 지적",
-        "다른 채널과 비슷한 내용이라는 반응",
-        "국내 신차 실물을 더 보여달라는 요청"
+        "ES90 실물로 설명하지 않은 점에 아쉬움",
+        "차량: 2열 시트가 불편하다는 의견"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "ES90 실물로 설명하지 않은 점에 아쉬움",
+          "sourceIndexes": [
+            107
+          ],
+          "sourceSha256": [
+            "4c0d3670e3b5742e5ed9b4ff5e84cb68a172794494bf22a337916cc86e288c1d"
+          ]
+        },
+        {
+          "summary": "차량: 2열 시트가 불편하다는 의견",
+          "sourceIndexes": [
+            60
+          ],
+          "sourceSha256": [
+            "1d65d602f36efe92e71de974fec695e737a3d32ac16f75dbe86b5fbb579c51cb"
+          ]
+        }
       ]
     },
     "UCcV36lNLeotgr02P605R2yA": {
@@ -154,9 +406,28 @@
         "차량 처분·빠른 출고·친절한 상담 만족"
       ],
       "negative": [
-        "인증 시점·화면 크기 정정 요청",
-        "국내 칩·센서 변경 안내 부족 지적",
-        "차량: 색상 제한·수리비·배터리 우려"
+        "차량: 휠 디자인에 대한 불만",
+        "브랜드: 칩 사양 변경 안내에 대한 불만"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "차량: 휠 디자인에 대한 불만",
+          "sourceIndexes": [
+            9
+          ],
+          "sourceSha256": [
+            "7adc1cb5cf9eb17f992b9689928cb86f7908aa2cc75a0c3fd290e400434e94b4"
+          ]
+        },
+        {
+          "summary": "브랜드: 칩 사양 변경 안내에 대한 불만",
+          "sourceIndexes": [
+            83
+          ],
+          "sourceSha256": [
+            "0840bc530e2d66e07be7310e070bcff532d95f166b6b31a0c2a172729f3ef704"
+          ]
+        }
       ]
     },
     "UCq4Nmcrr-dEmZqT-NhbSdpQ": {
@@ -166,9 +437,28 @@
         "차량 디자인 호감·시승 관심"
       ],
       "negative": [
-        "얼굴보다 차량·기능을 보여달라는 요청",
-        "소프트 클로징 시연 부족",
-        "뒤집힌 화면·후방카메라·음성 불만"
+        "목소리가 이상하다는 의견",
+        "차량: 디지털키 기능·시트 길이에 불편"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "목소리가 이상하다는 의견",
+          "sourceIndexes": [
+            108
+          ],
+          "sourceSha256": [
+            "105cb358b8a2ba15e71dbcf72098489ba6edd00291230fbd72e83f7e81465300"
+          ]
+        },
+        {
+          "summary": "차량: 디지털키 기능·시트 길이에 불편",
+          "sourceIndexes": [
+            104
+          ],
+          "sourceSha256": [
+            "051de13a18f97fbc12ca2f50d4e8d8b2d10e77652424227b8841d866a236b3ea"
+          ]
+        }
       ]
     },
     "UC7ab9iDdrs3cLnW_zACCcIg": {
@@ -179,9 +469,16 @@
         "꼼꼼한 검수·출고 준비에 구매 관심"
       ],
       "negative": [
-        "과한 도입·연출이 민망하다는 반응",
-        "차량: 빠진 기능·보증·배터리 우려"
-      ]
+        "명확히 확인된 부정 반응 없음"
+      ],
+      "negativeEvidence": []
     }
+  },
+  "negativeReview": {
+    "sourceCheckedAt": "2026-10-16T01:30:25.189199+00:00",
+    "sourceRunId": 38835431607,
+    "policy": "명시적인 불만·비판만 요약. 질문·단순 정정 요청·추가 요청·우려·대상 불명·다른 딜러 평가 제외. 차량·브랜드 불만은 대상을 명시. 키워드는 후보 탐색에만 사용하며 부정 확정에 사용하지 않음.",
+    "scope": "기존 부정 요약 및 새 수집 댓글의 부정 후보 문맥 재검토. 긍정 요약은 이번 검토 대상 아님.",
+    "sourceViewerCommentCount": 2597
   }
 }

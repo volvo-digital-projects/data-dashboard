@@ -22,10 +22,11 @@ def classify(text, owner=False):
         return "owner", "운영자 답글", "채널 운영자 답글로 의견 분석에서 분리했습니다."
     positive = bool(re.search(r"감사|(?<!불)친절|잘 ?봤|좋[네요습니다아요]|도움|최고|꼼꼼|유익|명확|멋[져지]|만족|추천|thank|great|excellent|helpful", text, re.I))
     negative = bool(re.search(r"불친절|불만|아쉽|부족|어렵|불편|시끄|안 ?들|잘못|틀[렸린]|개선|별로|최악|실망|짜증|싫[어요다]|bad|terrible|disappoint", text, re.I))
-    if positive and negative:
-        return "review", "복합 의견·검토 필요", "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다."
     if negative:
-        return "suggestion", "부정·개선 의견", "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다."
+        # Words alone cannot establish complaint, target, negation or intent.
+        # Never publish a negative verdict from keyword matches; the visible
+        # negative summaries require a separate, evidence-backed text review.
+        return "review", "문맥 검토 대기", "표현만으로 부정 여부를 확정하지 않습니다."
     if positive:
         topic = "친절·상담 응대" if re.search(r"친절|상담|응대|딜러", text) else "설명·정보 전달" if re.search(r"설명|정보|전문", text) else "영상·콘텐츠 반응"
         return "positive", topic, "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다."
@@ -141,7 +142,7 @@ def refresh(key, source, destination):
         if texts is not None:
             review[channel["id"]] = list(texts.values())
     output = dict(checkedAt=datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                  method="YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 자동 긍정/부정 분류",
+                  method="YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
                   channels=channels, apiCalls=api.calls)
     # Write only after every channel succeeds, then replace atomically.
     temporary = destination.with_suffix(".tmp")
