@@ -253,6 +253,7 @@ def refresh_consultation(path: Path, output: Path, staff_payload: dict[str, Any]
             if within_rate_cutoff:
                 showroom_rate_counts[key] += 1
 
+    workbook.close()
     showroom_by_name = {
         normalise_showroom_name(item["showroom"]): cdsid
         for cdsid, item in staff_payload["showrooms"].items()

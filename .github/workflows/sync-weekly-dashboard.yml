@@ -36,6 +36,7 @@ jobs:
       - name: Read and validate the latest public workbook
         id: sync
         run: |
+          python -m unittest discover -s tests -p "test_voc*.py"
           sent_workbook="$RUNNER_TEMP/VOC발신건수.xlsx"
           response_workbook="$RUNNER_TEMP/voc회신건수.xlsx"
           trap 'rm -f "$sent_workbook" "$response_workbook"' EXIT

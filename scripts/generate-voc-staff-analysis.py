@@ -187,7 +187,10 @@ def normalise_header(value: Any) -> str:
 
 
 def normalise_showroom_name(value: Any) -> str:
-    return str(value or "").strip().removeprefix("볼보 ").replace(" ", "")
+    name = str(value or "").strip().replace(" ", "").removeprefix("볼보")
+    # Source-sheet display aliases for the same established DMS showrooms.
+    # Keep canonical names/codes and history; never infer unknown showrooms.
+    return {"대치": "강남대치", "신사": "강남신사", "분당서현": "분당"}.get(name, name)
 
 
 def staff_source_keys(showroom: Any, name: Any) -> tuple[tuple[str, str], ...]:

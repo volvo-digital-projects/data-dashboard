@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import runpy
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -12,6 +13,9 @@ import openpyxl
 
 YEARS = {"2023", "2024", "2025", "2026"}
 YEAR_ORDER = tuple(sorted(YEARS))
+normalise_showroom_name = runpy.run_path(
+    str(Path(__file__).with_name("generate-voc-staff-analysis.py"))
+)["normalise_showroom_name"]
 
 
 def normalise(value: Any) -> str:
@@ -56,7 +60,7 @@ def main() -> None:
     payload = json.loads(args.analysis.read_text(encoding="utf-8"))
     employee_index: dict[tuple[str, str], dict[str, Any]] = {}
     for showroom in payload["showrooms"].values():
-        showroom_name = normalise(showroom["showroom"]).removeprefix("볼보")
+        showroom_name = normalise_showroom_name(showroom["showroom"])
         for employee in showroom["employees"]:
             employee_index[(showroom_name, normalise(employee["name"]))] = employee
 
@@ -79,7 +83,7 @@ def main() -> None:
     latest_sent_at: datetime | None = None
     for row in worksheet.iter_rows(min_row=3, values_only=True):
         year = sent_year(row[date_index])
-        showroom = normalise(row[showroom_index])
+        showroom = normalise_showroom_name(row[showroom_index])
         employee = normalise(row[employee_index_column])
         if not year:
             continue
@@ -98,7 +102,7 @@ def main() -> None:
         raise RuntimeError("VOC 발송 원본에서 유효한 전시장 방문일시를 찾지 못했습니다.")
 
     showroom_cdsid = {
-        normalise(showroom["showroom"]).removeprefix("볼보"): cdsid
+        normalise_showroom_name(showroom["showroom"]): cdsid
         for cdsid, showroom in payload["showrooms"].items()
     }
     source_showrooms = {showroom for showroom, _ in showroom_counts}
@@ -140,7 +144,7 @@ def main() -> None:
         voc_employee_index = voc_headers["상담영업직원"]
         for row in voc_sheet.iter_rows(min_row=3, values_only=True):
             visited_at = response_date(row[visit_index])
-            showroom = normalise(row[voc_showroom_index]) if voc_showroom_index is not None else ""
+            showroom = normalise_showroom_name(row[voc_showroom_index]) if voc_showroom_index is not None else ""
             employee = normalise(row[voc_employee_index])
             key = (showroom, employee)
             if visited_at and key in employee_index and (
