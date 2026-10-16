@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-10-16T00:52:48.786229+00:00",
-  "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 자동 긍정/부정 분류",
+  "checkedAt": "2026-10-16T04:57:10.401780+00:00",
+  "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
       "total": 314,
@@ -10,9 +10,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 15,
-        "suggestion": 5,
+        "suggestion": 0,
         "other": 147,
-        "review": 3,
+        "review": 8,
         "owner": 144
       },
       "entries": [
@@ -99,9 +99,9 @@
         },
         {
           "id": "UgwuDrDTT4Cdv5w7WIB4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "lAdirS20-TA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=lAdirS20-TA&lc=UgwuDrDTT4Cdv5w7WIB4AaABAg"
@@ -136,8 +136,8 @@
         {
           "id": "Ugxje1Xq4LWAhP22bqp4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YCY1Bw7Pkow",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YCY1Bw7Pkow&lc=Ugxje1Xq4LWAhP22bqp4AaABAg"
@@ -235,8 +235,8 @@
         {
           "id": "UgxA0dR8yiCqp4QWmph4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AQdR0HzEWH4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AQdR0HzEWH4&lc=UgxA0dR8yiCqp4QWmph4AaABAg"
@@ -666,9 +666,9 @@
         },
         {
           "id": "Ugx74e4uDcIIHWIv4ql4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "8kCB1J9L5gg",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=8kCB1J9L5gg&lc=Ugx74e4uDcIIHWIv4ql4AaABAg"
@@ -1395,9 +1395,9 @@
         },
         {
           "id": "UgzHptGMXrynTNhYki94AaABAg.A_fXfgDBmvAA_gD2R8fDh9",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YCY1Bw7Pkow",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YCY1Bw7Pkow&lc=UgzHptGMXrynTNhYki94AaABAg.A_fXfgDBmvAA_gD2R8fDh9"
@@ -1629,9 +1629,9 @@
         },
         {
           "id": "UgwFi61E1bProZcZk5Z4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Bt5QzCNL8sY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Bt5QzCNL8sY&lc=UgwFi61E1bProZcZk5Z4AaABAg"
@@ -2250,9 +2250,9 @@
         },
         {
           "id": "Ugz6Q5J_MzcbVncsWAd4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "HMqL6jyyBYQ",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=HMqL6jyyBYQ&lc=Ugz6Q5J_MzcbVncsWAd4AaABAg"
@@ -2665,8 +2665,8 @@
         {
           "id": "UgwRXVEBU8mZM_g6m8R4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "BH8r53KNNRY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=BH8r53KNNRY&lc=UgwRXVEBU8mZM_g6m8R4AaABAg"
@@ -3132,9 +3132,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 11,
-        "suggestion": 3,
+        "suggestion": 0,
         "other": 100,
-        "review": 0,
+        "review": 3,
         "owner": 52
       },
       "entries": [
@@ -3752,9 +3752,9 @@
         },
         {
           "id": "UgzQudWgqua_ycmpRxp4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Buyu6ZOhe44",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Buyu6ZOhe44&lc=UgzQudWgqua_ycmpRxp4AaABAg"
@@ -4094,9 +4094,9 @@
         },
         {
           "id": "UgztduSg0kkSalubqd54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wKWvpsGfWsw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wKWvpsGfWsw&lc=UgztduSg0kkSalubqd54AaABAg"
@@ -4517,9 +4517,9 @@
         },
         {
           "id": "UgyejKw3UEk3lTBb68x4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AUBRs9QAxB8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AUBRs9QAxB8&lc=UgyejKw3UEk3lTBb68x4AaABAg"
@@ -4844,9 +4844,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 25,
-        "suggestion": 2,
+        "suggestion": 0,
         "other": 62,
-        "review": 1,
+        "review": 3,
         "owner": 1
       },
       "entries": [
@@ -5059,9 +5059,9 @@
         },
         {
           "id": "UgwrBhECpm7E94N8tFR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "9O5QGxCcuEw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=9O5QGxCcuEw&lc=UgwrBhECpm7E94N8tFR4AaABAg"
@@ -5374,9 +5374,9 @@
         },
         {
           "id": "UgzV7ET_f1pzuXiT7lR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "xKmkfdqbBqs",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=xKmkfdqbBqs&lc=UgzV7ET_f1pzuXiT7lR4AaABAg"
@@ -5465,8 +5465,8 @@
         {
           "id": "UgxeXn7UYr8Ueo-MlWV4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "y2Ak71FfQRU",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=y2Ak71FfQRU&lc=UgxeXn7UYr8Ueo-MlWV4AaABAg"
@@ -5737,9 +5737,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 27,
-        "suggestion": 12,
+        "suggestion": 0,
         "other": 175,
-        "review": 2,
+        "review": 14,
         "owner": 159
       },
       "entries": [
@@ -5881,8 +5881,8 @@
         {
           "id": "UgzHzNm0CuDZmTJJVTF4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "G_Y56loFRaA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=G_Y56loFRaA&lc=UgzHzNm0CuDZmTJJVTF4AaABAg"
@@ -5898,9 +5898,9 @@
         },
         {
           "id": "UgzvCZqVD5P0PefEI9Z4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "G_Y56loFRaA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=G_Y56loFRaA&lc=UgzvCZqVD5P0PefEI9Z4AaABAg"
@@ -6051,9 +6051,9 @@
         },
         {
           "id": "Ugw0hGYh8orm4H9dnK94AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "mDpzmHV4OiU",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=mDpzmHV4OiU&lc=Ugw0hGYh8orm4H9dnK94AaABAg"
@@ -6087,9 +6087,9 @@
         },
         {
           "id": "UgxWHZ3J7u2sGFihUcJ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "vNKqsqzPA40",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=vNKqsqzPA40&lc=UgxWHZ3J7u2sGFihUcJ4AaABAg"
@@ -6106,8 +6106,8 @@
         {
           "id": "UgwLxNS2mNJHQSO6Sqt4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "vNKqsqzPA40",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=vNKqsqzPA40&lc=UgwLxNS2mNJHQSO6Sqt4AaABAg"
@@ -6186,9 +6186,9 @@
         },
         {
           "id": "Ugw_OIFzjDZ0kKrP-e14AaABAg.Aaz0S67yQ6nAazF7teYt8p",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "vNKqsqzPA40",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=vNKqsqzPA40&lc=Ugw_OIFzjDZ0kKrP-e14AaABAg.Aaz0S67yQ6nAazF7teYt8p"
@@ -6204,9 +6204,9 @@
         },
         {
           "id": "UgwsQQbWZ0IdkTvElHV4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "vNKqsqzPA40",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=vNKqsqzPA40&lc=UgwsQQbWZ0IdkTvElHV4AaABAg"
@@ -6312,9 +6312,9 @@
         },
         {
           "id": "Ugzn2WSB9WGbULBpK1t4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "9xWexJvOl1c",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=9xWexJvOl1c&lc=Ugzn2WSB9WGbULBpK1t4AaABAg"
@@ -6474,9 +6474,9 @@
         },
         {
           "id": "Ugy_TFE1ow0D6gtlktx4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "EqIuZlkEJ4I",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=EqIuZlkEJ4I&lc=Ugy_TFE1ow0D6gtlktx4AaABAg"
@@ -7014,9 +7014,9 @@
         },
         {
           "id": "Ugzkk2ad32T2KRi13ox4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "rLir_zLHMVA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=rLir_zLHMVA&lc=Ugzkk2ad32T2KRi13ox4AaABAg"
@@ -7248,9 +7248,9 @@
         },
         {
           "id": "UgyD7CJEv_UfrPXEc9F4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "DZkmdJW6woY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=DZkmdJW6woY&lc=UgyD7CJEv_UfrPXEc9F4AaABAg"
@@ -7356,9 +7356,9 @@
         },
         {
           "id": "Ugw1-jxS7vTUzc7wQrF4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "9Osk-wClg7Y",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=9Osk-wClg7Y&lc=Ugw1-jxS7vTUzc7wQrF4AaABAg"
@@ -7401,9 +7401,9 @@
         },
         {
           "id": "Ugy1YG1IL0DBspmgIzl4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "syLQvUHu_04",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=syLQvUHu_04&lc=Ugy1YG1IL0DBspmgIzl4AaABAg"
@@ -7914,9 +7914,9 @@
         },
         {
           "id": "UgxDWy1m7ZiCf_5RDDd4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "syLQvUHu_04",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=syLQvUHu_04&lc=UgxDWy1m7ZiCf_5RDDd4AaABAg"
@@ -9557,19 +9557,28 @@
       "excludedOwnerPromotions": 44
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
-      "total": 974,
+      "total": 975,
       "videos": 49,
       "completeVideos": 49,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
         "positive": 34,
-        "suggestion": 34,
-        "other": 504,
-        "review": 3,
+        "suggestion": 0,
+        "other": 505,
+        "review": 37,
         "owner": 399
       },
       "entries": [
+        {
+          "id": "UgzpLCTSf0aA1GdN-L94AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "srlkNSogRJs",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=srlkNSogRJs&lc=UgzpLCTSf0aA1GdN-L94AaABAg"
+        },
         {
           "id": "Ugy_yJBxwtgm0yT8Kth4AaABAg",
           "category": "other",
@@ -9617,9 +9626,9 @@
         },
         {
           "id": "UgwVuhGp4_FxSbTfaNF4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YPNcMLTwRG4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YPNcMLTwRG4&lc=UgwVuhGp4_FxSbTfaNF4AaABAg"
@@ -9977,9 +9986,9 @@
         },
         {
           "id": "Ugz_aaLDV0e3ti0ioyp4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wh7Lst4qZDo",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wh7Lst4qZDo&lc=Ugz_aaLDV0e3ti0ioyp4AaABAg"
@@ -10112,9 +10121,9 @@
         },
         {
           "id": "UgxZGtfuNW7hCiavLZx4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "ueh4NWXn5IA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=ueh4NWXn5IA&lc=UgxZGtfuNW7hCiavLZx4AaABAg"
@@ -10886,9 +10895,9 @@
         },
         {
           "id": "UgwRJZOL4xTCo8U6Em94AaABAg.A_lugjAJ8B1A_xs5MLt0DC",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "HC0BsUR83Tc",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=HC0BsUR83Tc&lc=UgwRJZOL4xTCo8U6Em94AaABAg.A_lugjAJ8B1A_xs5MLt0DC"
@@ -11030,9 +11039,9 @@
         },
         {
           "id": "UgzAOEo9H548YMVxO7V4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YxlIhJ8gWD8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YxlIhJ8gWD8&lc=UgzAOEo9H548YMVxO7V4AaABAg"
@@ -11255,9 +11264,9 @@
         },
         {
           "id": "UgxENd0N46oSOEo54UJ4AaABAg.A_PmzpelpYiA_Pw4oBOsbJ",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "xcM1ZxUtcsE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=xcM1ZxUtcsE&lc=UgxENd0N46oSOEo54UJ4AaABAg.A_PmzpelpYiA_Pw4oBOsbJ"
@@ -11462,9 +11471,9 @@
         },
         {
           "id": "UgxwFw32vsMVVAjMZ294AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YxlIhJ8gWD8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YxlIhJ8gWD8&lc=UgxwFw32vsMVVAjMZ294AaABAg"
@@ -11597,9 +11606,9 @@
         },
         {
           "id": "UgzdMos9bXLfeSGYupx4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Ex_gQjkTRyY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Ex_gQjkTRyY&lc=UgzdMos9bXLfeSGYupx4AaABAg"
@@ -11660,9 +11669,9 @@
         },
         {
           "id": "UgyawhQXtSFPHrMHgkN4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YxlIhJ8gWD8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YxlIhJ8gWD8&lc=UgyawhQXtSFPHrMHgkN4AaABAg"
@@ -11795,9 +11804,9 @@
         },
         {
           "id": "UgyLketU15sQV5AfEXZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YxlIhJ8gWD8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YxlIhJ8gWD8&lc=UgyLketU15sQV5AfEXZ4AaABAg"
@@ -12029,9 +12038,9 @@
         },
         {
           "id": "UgyUSaChq33-_ZyPdqx4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Ogbvr006gyc",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Ogbvr006gyc&lc=UgyUSaChq33-_ZyPdqx4AaABAg"
@@ -12362,9 +12371,9 @@
         },
         {
           "id": "UgyXeHIhnh6SgRkub-x4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YPNcMLTwRG4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YPNcMLTwRG4&lc=UgyXeHIhnh6SgRkub-x4AaABAg"
@@ -12524,9 +12533,9 @@
         },
         {
           "id": "UgwxKoJZGjBRwOMsxJ54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "udQQnPVlnV8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=UgwxKoJZGjBRwOMsxJ54AaABAg"
@@ -12542,9 +12551,9 @@
         },
         {
           "id": "Ugy33R8lZ7V9WWBcYJt4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "udQQnPVlnV8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=Ugy33R8lZ7V9WWBcYJt4AaABAg"
@@ -12587,9 +12596,9 @@
         },
         {
           "id": "Ugw9chDve4qEdQwbxvd4AaABAg.AZ9qMDg3BVyAZB3DA3BF-E",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "udQQnPVlnV8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=Ugw9chDve4qEdQwbxvd4AaABAg.AZ9qMDg3BVyAZB3DA3BF-E"
@@ -12795,8 +12804,8 @@
         {
           "id": "UgxzXHdkR-aylEb44J14AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "udQQnPVlnV8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=UgxzXHdkR-aylEb44J14AaABAg"
@@ -12812,9 +12821,9 @@
         },
         {
           "id": "Ugx2n9HqEKRQ5cP_G194AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "udQQnPVlnV8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=Ugx2n9HqEKRQ5cP_G194AaABAg"
@@ -13424,9 +13433,9 @@
         },
         {
           "id": "UgxkwsQPA6LZYHWItzp4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AuRoKifkNyw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AuRoKifkNyw&lc=UgxkwsQPA6LZYHWItzp4AaABAg"
@@ -13443,8 +13452,8 @@
         {
           "id": "UgxkwsQPA6LZYHWItzp4AaABAg.AYCoK9nMpwWAYDGfCPNAdA",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AuRoKifkNyw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AuRoKifkNyw&lc=UgxkwsQPA6LZYHWItzp4AaABAg.AYCoK9nMpwWAYDGfCPNAdA"
@@ -13469,9 +13478,9 @@
         },
         {
           "id": "UgwQ5bW5uXc8SfcftNd4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AuRoKifkNyw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AuRoKifkNyw&lc=UgwQ5bW5uXc8SfcftNd4AaABAg"
@@ -13505,18 +13514,18 @@
         },
         {
           "id": "UgwdjqiQHKxUzVoPihx4AaABAg.AYCHsCFI_nNAYD8kprK2MR",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AuRoKifkNyw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AuRoKifkNyw&lc=UgwdjqiQHKxUzVoPihx4AaABAg.AYCHsCFI_nNAYD8kprK2MR"
         },
         {
           "id": "UgwdjqiQHKxUzVoPihx4AaABAg.AYCHsCFI_nNAYDXV_RqTfz",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "AuRoKifkNyw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=AuRoKifkNyw&lc=UgwdjqiQHKxUzVoPihx4AaABAg.AYCHsCFI_nNAYDXV_RqTfz"
@@ -14414,9 +14423,9 @@
         },
         {
           "id": "Ugxm6eJZumQ_jqMlNtd4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "YPNcMLTwRG4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YPNcMLTwRG4&lc=Ugxm6eJZumQ_jqMlNtd4AaABAg"
@@ -14585,9 +14594,9 @@
         },
         {
           "id": "UgyJL5rBNDyjXmKH51t4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "KL7HpCOHELY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=KL7HpCOHELY&lc=UgyJL5rBNDyjXmKH51t4AaABAg"
@@ -15008,9 +15017,9 @@
         },
         {
           "id": "Ugy5IqO8d_pJI_-UQkJ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "BeDgyhimCKI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=BeDgyhimCKI&lc=Ugy5IqO8d_pJI_-UQkJ4AaABAg"
@@ -15179,9 +15188,9 @@
         },
         {
           "id": "UgyBrQsv01OEQGq5G094AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "3sWGIZHvr9I",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=3sWGIZHvr9I&lc=UgyBrQsv01OEQGq5G094AaABAg"
@@ -15431,9 +15440,9 @@
         },
         {
           "id": "Ugy8gxp146dixSaD7v14AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "H1ONU_FUTYY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=H1ONU_FUTYY&lc=Ugy8gxp146dixSaD7v14AaABAg"
@@ -15512,9 +15521,9 @@
         },
         {
           "id": "UgwWsXbytC_bTHc3Dhx4AaABAg.AX-z30EzVHgAY4eoQPMUyf",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "T4h1VbWQ6IY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=T4h1VbWQ6IY&lc=UgwWsXbytC_bTHc3Dhx4AaABAg.AX-z30EzVHgAY4eoQPMUyf"
@@ -15557,9 +15566,9 @@
         },
         {
           "id": "UgydoMBa0F_4ndOcGNR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "T4h1VbWQ6IY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=T4h1VbWQ6IY&lc=UgydoMBa0F_4ndOcGNR4AaABAg"
@@ -16574,9 +16583,9 @@
         },
         {
           "id": "Ugy1nmjX2MfrpNt_KaV4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "SBjfPVPCFYY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=SBjfPVPCFYY&lc=Ugy1nmjX2MfrpNt_KaV4AaABAg"
@@ -17519,18 +17528,18 @@
         },
         {
           "id": "UgyRqWpDfoSR-SRJGWl4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y2aN_owkzJ8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y2aN_owkzJ8&lc=UgyRqWpDfoSR-SRJGWl4AaABAg"
         },
         {
           "id": "UgxJOtO6MUqxXFYn_X54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y2aN_owkzJ8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y2aN_owkzJ8&lc=UgxJOtO6MUqxXFYn_X54AaABAg"
@@ -17618,9 +17627,9 @@
         },
         {
           "id": "UgxVzXzbiSwo-xEyCPh4AaABAg.ATnwXDDL5MAATo8gVJyREA",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "CS_a-hzBUSA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=CS_a-hzBUSA&lc=UgxVzXzbiSwo-xEyCPh4AaABAg.ATnwXDDL5MAATo8gVJyREA"
@@ -17834,18 +17843,18 @@
         },
         {
           "id": "Ugy3EvoHbSF7Mt1nivF4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y2aN_owkzJ8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y2aN_owkzJ8&lc=Ugy3EvoHbSF7Mt1nivF4AaABAg"
         },
         {
           "id": "Ugy3EvoHbSF7Mt1nivF4AaABAg.ATjQcXIDE3QATjWvyV3hXd",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y2aN_owkzJ8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y2aN_owkzJ8&lc=Ugy3EvoHbSF7Mt1nivF4AaABAg.ATjQcXIDE3QATjWvyV3hXd"
@@ -17978,9 +17987,9 @@
         },
         {
           "id": "Ugzm2j70MGvHHVCfzjN4AaABAg.ATjFadJXV5rATjL9YSPna6",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y2aN_owkzJ8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y2aN_owkzJ8&lc=Ugzm2j70MGvHHVCfzjN4AaABAg.ATjFadJXV5rATjL9YSPna6"
@@ -18033,8 +18042,8 @@
         {
           "id": "UgxgZFun9fpx5dNwWv14AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "5K2xls6xV2M",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=5K2xls6xV2M&lc=UgxgZFun9fpx5dNwWv14AaABAg"
@@ -18644,9 +18653,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 8,
-        "suggestion": 3,
+        "suggestion": 0,
         "other": 49,
-        "review": 0,
+        "review": 3,
         "owner": 36
       },
       "entries": [
@@ -18661,9 +18670,9 @@
         },
         {
           "id": "Ugxuy7FjbyWr_MmEVc94AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wMrXcxHFEoc",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wMrXcxHFEoc&lc=Ugxuy7FjbyWr_MmEVc94AaABAg"
@@ -18841,9 +18850,9 @@
         },
         {
           "id": "UgwBl8UsdajfZ8GKCE94AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wMrXcxHFEoc",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wMrXcxHFEoc&lc=UgwBl8UsdajfZ8GKCE94AaABAg"
@@ -19471,9 +19480,9 @@
         },
         {
           "id": "UgzFKr7NoxRmdckP6-d4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "O-vGLu4gkbs",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=O-vGLu4gkbs&lc=UgzFKr7NoxRmdckP6-d4AaABAg"
@@ -19618,9 +19627,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 89,
-        "suggestion": 24,
+        "suggestion": 0,
         "other": 491,
-        "review": 7,
+        "review": 31,
         "owner": 229
       },
       "entries": [
@@ -19671,9 +19680,9 @@
         },
         {
           "id": "UgyY7hhkRlfiWBwF2014AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "P24hOkq2BwQ",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=P24hOkq2BwQ&lc=UgyY7hhkRlfiWBwF2014AaABAg"
@@ -19698,9 +19707,9 @@
         },
         {
           "id": "UgyHuKPWmqk-1UNe-JB4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "P24hOkq2BwQ",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=P24hOkq2BwQ&lc=UgyHuKPWmqk-1UNe-JB4AaABAg"
@@ -19932,9 +19941,9 @@
         },
         {
           "id": "Ugz9OMX6WqZG29z6sx54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "ZmJfe27b8ag",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=ZmJfe27b8ag&lc=Ugz9OMX6WqZG29z6sx54AaABAg"
@@ -20220,9 +20229,9 @@
         },
         {
           "id": "Ugw6U9qaD65m2tNXd154AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "BlkzB_MM4tw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=BlkzB_MM4tw&lc=Ugw6U9qaD65m2tNXd154AaABAg"
@@ -20526,9 +20535,9 @@
         },
         {
           "id": "UgzNgXQYCyzqA52bVBZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "ZmJfe27b8ag",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=ZmJfe27b8ag&lc=UgzNgXQYCyzqA52bVBZ4AaABAg"
@@ -20688,9 +20697,9 @@
         },
         {
           "id": "UgxfiYi3UklslhbNn9B4AaABAg.AaU8PB6WfZcAabvbTV1KHb",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_puiOifcxsE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_puiOifcxsE&lc=UgxfiYi3UklslhbNn9B4AaABAg.AaU8PB6WfZcAabvbTV1KHb"
@@ -20977,8 +20986,8 @@
         {
           "id": "UgxEOj1SVvHc3ykZtGJ4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "ZmJfe27b8ag",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=ZmJfe27b8ag&lc=UgxEOj1SVvHc3ykZtGJ4AaABAg"
@@ -21624,9 +21633,9 @@
         },
         {
           "id": "UgwCIxdHxEV-rQk2ysF4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "CJIMN9x7stM",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=CJIMN9x7stM&lc=UgwCIxdHxEV-rQk2ysF4AaABAg"
@@ -21724,8 +21733,8 @@
         {
           "id": "UgzzO-RQv4OzvRkwki94AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_puiOifcxsE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_puiOifcxsE&lc=UgzzO-RQv4OzvRkwki94AaABAg"
@@ -21958,8 +21967,8 @@
         {
           "id": "Ugxcx_q93YTS5NgGXMx4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "qgH43G3uu7w",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=qgH43G3uu7w&lc=Ugxcx_q93YTS5NgGXMx4AaABAg"
@@ -22056,9 +22065,9 @@
         },
         {
           "id": "Ugw54CMCx6gSFxAAnTh4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "1OcMqH0fDDY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=1OcMqH0fDDY&lc=Ugw54CMCx6gSFxAAnTh4AaABAg"
@@ -22570,8 +22579,8 @@
         {
           "id": "UgxYoEl4S2CqGVtMo4V4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_puiOifcxsE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_puiOifcxsE&lc=UgxYoEl4S2CqGVtMo4V4AaABAg"
@@ -22848,9 +22857,9 @@
         },
         {
           "id": "UgxTO5jcuLMiHj4yaCx4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "h5AD5YpqOUQ",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=h5AD5YpqOUQ&lc=UgxTO5jcuLMiHj4yaCx4AaABAg"
@@ -22929,9 +22938,9 @@
         },
         {
           "id": "Ugxq4uU8PIaQr1JLlz54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "L28vCazolWA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=L28vCazolWA&lc=Ugxq4uU8PIaQr1JLlz54AaABAg"
@@ -23226,9 +23235,9 @@
         },
         {
           "id": "Ugy0m4qh1ht21kJ659Z4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "BlkzB_MM4tw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=BlkzB_MM4tw&lc=Ugy0m4qh1ht21kJ659Z4AaABAg"
@@ -23460,9 +23469,9 @@
         },
         {
           "id": "UgyzI5_STqdRMhKKmE94AaABAg.AYnXYHufIrIAYn_PEeLVVj",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "CJIMN9x7stM",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=CJIMN9x7stM&lc=UgyzI5_STqdRMhKKmE94AaABAg.AYnXYHufIrIAYn_PEeLVVj"
@@ -23523,9 +23532,9 @@
         },
         {
           "id": "UgyzI5_STqdRMhKKmE94AaABAg.AYnXYHufIrIA_ERvS17C2t",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "CJIMN9x7stM",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=CJIMN9x7stM&lc=UgyzI5_STqdRMhKKmE94AaABAg.AYnXYHufIrIA_ERvS17C2t"
@@ -25044,9 +25053,9 @@
         },
         {
           "id": "UgxsozgXtqKUKH0dhL54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "KeCviA7QgM8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=KeCviA7QgM8&lc=UgxsozgXtqKUKH0dhL54AaABAg"
@@ -25342,8 +25351,8 @@
         {
           "id": "UgyiA7Ji_jtG3UW_fRN4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgyiA7Ji_jtG3UW_fRN4AaABAg"
@@ -25368,9 +25377,9 @@
         },
         {
           "id": "UgzKLkXZRmDceCEFzIh4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgzKLkXZRmDceCEFzIh4AaABAg"
@@ -25395,18 +25404,18 @@
         },
         {
           "id": "UgzFbxKnrtuHWuc1R5F4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgzFbxKnrtuHWuc1R5F4AaABAg"
         },
         {
           "id": "UgzFbxKnrtuHWuc1R5F4AaABAg.AV85zoopD_rAVKiUXoOG4I",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgzFbxKnrtuHWuc1R5F4AaABAg.AV85zoopD_rAVKiUXoOG4I"
@@ -25656,18 +25665,18 @@
         },
         {
           "id": "UgzRdHdxk8eI3F_6Oi94AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "W9g7_hTbY2M",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=W9g7_hTbY2M&lc=UgzRdHdxk8eI3F_6Oi94AaABAg"
         },
         {
           "id": "UgyKi0qeyl88vjsn4-J4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "qec4We-GQYM",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=qec4We-GQYM&lc=UgyKi0qeyl88vjsn4-J4AaABAg"
@@ -25836,9 +25845,9 @@
         },
         {
           "id": "UgzV9F-TGaw_VDNIjAJ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "W9g7_hTbY2M",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=W9g7_hTbY2M&lc=UgzV9F-TGaw_VDNIjAJ4AaABAg"
@@ -26053,8 +26062,8 @@
         {
           "id": "Ugx-7EEKbpQyBR6Wqth4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=Ugx-7EEKbpQyBR6Wqth4AaABAg"
@@ -26187,9 +26196,9 @@
         },
         {
           "id": "UgxwafbcOY8dOUpXVCh4AaABAg.AUXfq0TPqHmAU_BWljvxlJ",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgxwafbcOY8dOUpXVCh4AaABAg.AUXfq0TPqHmAU_BWljvxlJ"
@@ -26358,9 +26367,9 @@
         },
         {
           "id": "UgwCZYJJRmYSfg_-EUt4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgwCZYJJRmYSfg_-EUt4AaABAg"
@@ -26476,8 +26485,8 @@
         {
           "id": "UgyzZfKp0zuXBro4IIh4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Xse1ChNfah0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xse1ChNfah0&lc=UgyzZfKp0zuXBro4IIh4AaABAg"
@@ -26853,18 +26862,18 @@
         },
         {
           "id": "UgyqG4SzNi8G_-5KMOZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "czm-ZTtWjhU",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=czm-ZTtWjhU&lc=UgyqG4SzNi8G_-5KMOZ4AaABAg"
         },
         {
           "id": "UgyqG4SzNi8G_-5KMOZ4AaABAg.ATkmbZdybCJATkte4X46Ed",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "czm-ZTtWjhU",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=czm-ZTtWjhU&lc=UgyqG4SzNi8G_-5KMOZ4AaABAg.ATkmbZdybCJATkte4X46Ed"
@@ -27780,9 +27789,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 22,
-        "suggestion": 6,
+        "suggestion": 0,
         "other": 91,
-        "review": 0,
+        "review": 6,
         "owner": 70
       },
       "entries": [
@@ -28031,9 +28040,9 @@
         },
         {
           "id": "UgxxNIpUvIpmBryzDkF4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wC1F_QR6jqc",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wC1F_QR6jqc&lc=UgxxNIpUvIpmBryzDkF4AaABAg"
@@ -28076,9 +28085,9 @@
         },
         {
           "id": "Ugzp6zwjuDUa9qn1w4V4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "1sp_WtjTOfs",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=Ugzp6zwjuDUa9qn1w4V4AaABAg"
@@ -28661,9 +28670,9 @@
         },
         {
           "id": "UgwzhFOVm1fFErWbDql4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "1sp_WtjTOfs",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=UgwzhFOVm1fFErWbDql4AaABAg"
@@ -28868,9 +28877,9 @@
         },
         {
           "id": "UgxEXSmtLHw53BLUeRl4AaABAg.A_AXx9oPgBwA_AYzhU6v8t",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "1sp_WtjTOfs",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=UgxEXSmtLHw53BLUeRl4AaABAg.A_AXx9oPgBwA_AYzhU6v8t"
@@ -29210,9 +29219,9 @@
         },
         {
           "id": "UgzZtvuN65mj-hWLMf54AaABAg.AYb3O_8nUt0AYgANW5gNUe",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "J_ZV1HD_52Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=J_ZV1HD_52Q&lc=UgzZtvuN65mj-hWLMf54AaABAg.AYb3O_8nUt0AYgANW5gNUe"
@@ -29291,9 +29300,9 @@
         },
         {
           "id": "UgxzI1Qmh8cp0Q-GB6x4AaABAg.AYRnHuKyid4AYUFZl8ewd3",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "6dZGEwDabyo",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=6dZGEwDabyo&lc=UgxzI1Qmh8cp0Q-GB6x4AaABAg.AYRnHuKyid4AYUFZl8ewd3"
@@ -29831,9 +29840,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 19,
-        "suggestion": 12,
+        "suggestion": 0,
         "other": 109,
-        "review": 0,
+        "review": 12,
         "owner": 118
       },
       "entries": [
@@ -30082,9 +30091,9 @@
         },
         {
           "id": "Ugw_qtxcHZEq8-oCLlF4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "X4bSSxxPzgY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=X4bSSxxPzgY&lc=Ugw_qtxcHZEq8-oCLlF4AaABAg"
@@ -30100,9 +30109,9 @@
         },
         {
           "id": "Ugw_qtxcHZEq8-oCLlF4AaABAg.AaaytWMnIluAaoFqQyEDF8",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "X4bSSxxPzgY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=X4bSSxxPzgY&lc=Ugw_qtxcHZEq8-oCLlF4AaABAg.AaaytWMnIluAaoFqQyEDF8"
@@ -30145,9 +30154,9 @@
         },
         {
           "id": "UgwPVxvpmzMA6DLH3UN4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_cTLn6Zu76Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=UgwPVxvpmzMA6DLH3UN4AaABAg"
@@ -30559,9 +30568,9 @@
         },
         {
           "id": "UgzPCUES1U0vV9jMT514AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_cTLn6Zu76Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=UgzPCUES1U0vV9jMT514AaABAg"
@@ -30631,9 +30640,9 @@
         },
         {
           "id": "UgwvQzCkJeqH5tJX1CB4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "vSqalM1gBf8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=vSqalM1gBf8&lc=UgwvQzCkJeqH5tJX1CB4AaABAg"
@@ -30748,9 +30757,9 @@
         },
         {
           "id": "UgxuORQx6CqeZXY5Ojh4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_cTLn6Zu76Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=UgxuORQx6CqeZXY5Ojh4AaABAg"
@@ -30838,9 +30847,9 @@
         },
         {
           "id": "Ugz0PuPnIrdInnZJAoR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_cTLn6Zu76Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=Ugz0PuPnIrdInnZJAoR4AaABAg"
@@ -31135,9 +31144,9 @@
         },
         {
           "id": "UgxFnscHA5qjpRlKqRN4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_cTLn6Zu76Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=UgxFnscHA5qjpRlKqRN4AaABAg"
@@ -31234,9 +31243,9 @@
         },
         {
           "id": "UgzTBOezAoR8uQ3JEXJ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "spWaGtpOYJ4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=spWaGtpOYJ4&lc=UgzTBOezAoR8uQ3JEXJ4AaABAg"
@@ -31315,9 +31324,9 @@
         },
         {
           "id": "Ugw64X3P7aYJK245UoZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "spWaGtpOYJ4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=spWaGtpOYJ4&lc=Ugw64X3P7aYJK245UoZ4AaABAg"
@@ -31711,9 +31720,9 @@
         },
         {
           "id": "UgzDVdc9PrYxPlfSSQZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "_cTLn6Zu76Q",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=UgzDVdc9PrYxPlfSSQZ4AaABAg"
@@ -32116,9 +32125,9 @@
         },
         {
           "id": "Ugxo8xCbls_dtOMKw_N4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "X4bSSxxPzgY",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=X4bSSxxPzgY&lc=Ugxo8xCbls_dtOMKw_N4AaABAg"
@@ -32299,9 +32308,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 8,
-        "suggestion": 2,
+        "suggestion": 0,
         "other": 21,
-        "review": 0,
+        "review": 2,
         "owner": 11
       },
       "entries": [
@@ -32379,9 +32388,9 @@
         },
         {
           "id": "UgzvQQMXQHOrAADBmMZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "4d9F7m8g7cI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=4d9F7m8g7cI&lc=UgzvQQMXQHOrAADBmMZ4AaABAg"
@@ -32613,9 +32622,9 @@
         },
         {
           "id": "Ugxt8bHJFm_LkoHFJOl4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "jk6fFpJeBHI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=jk6fFpJeBHI&lc=Ugxt8bHJFm_LkoHFJOl4AaABAg"
@@ -32744,19 +32753,37 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 590,
+      "total": 592,
       "videos": 70,
       "completeVideos": 70,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
         "positive": 23,
-        "suggestion": 23,
-        "other": 282,
-        "review": 1,
+        "suggestion": 0,
+        "other": 284,
+        "review": 24,
         "owner": 261
       },
       "entries": [
+        {
+          "id": "UgzRPDh8u4f9_Q4HRax4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "pGI-NZC9jJQ",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=pGI-NZC9jJQ&lc=UgzRPDh8u4f9_Q4HRax4AaABAg"
+        },
+        {
+          "id": "Ugy0yhWp8P380un9rgl4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "Y5ZDAID_5SI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=Y5ZDAID_5SI&lc=Ugy0yhWp8P380un9rgl4AaABAg"
+        },
         {
           "id": "UgwI2OfRKBX0cNn7TDp4AaABAg",
           "category": "other",
@@ -32894,9 +32921,9 @@
         },
         {
           "id": "Ugww9afOfNYeiBE58qh4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y5ZDAID_5SI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y5ZDAID_5SI&lc=Ugww9afOfNYeiBE58qh4AaABAg"
@@ -33083,9 +33110,9 @@
         },
         {
           "id": "UgwEIzupSEgM4HqnFJR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y5ZDAID_5SI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y5ZDAID_5SI&lc=UgwEIzupSEgM4HqnFJR4AaABAg"
@@ -33101,9 +33128,9 @@
         },
         {
           "id": "UgwoS2PLTAXXNv6q9eV4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y5ZDAID_5SI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y5ZDAID_5SI&lc=UgwoS2PLTAXXNv6q9eV4AaABAg"
@@ -33119,9 +33146,9 @@
         },
         {
           "id": "UgwoS2PLTAXXNv6q9eV4AaABAg.AbT3TXXrExXAbUxWpxxRE5",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "Y5ZDAID_5SI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Y5ZDAID_5SI&lc=UgwoS2PLTAXXNv6q9eV4AaABAg.AbT3TXXrExXAbUxWpxxRE5"
@@ -33551,9 +33578,9 @@
         },
         {
           "id": "UgyNEeT_3YZDXZoyn2N4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=UgyNEeT_3YZDXZoyn2N4AaABAg"
@@ -33731,9 +33758,9 @@
         },
         {
           "id": "UgwdpahjF9cPI6Ylipt4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=UgwdpahjF9cPI6Ylipt4AaABAg"
@@ -33776,9 +33803,9 @@
         },
         {
           "id": "UgxfAC-nkaopHc7uJSt4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "4ypw2mNdIYg",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=4ypw2mNdIYg&lc=UgxfAC-nkaopHc7uJSt4AaABAg"
@@ -34298,9 +34325,9 @@
         },
         {
           "id": "Ugzq8y5QCcvSXsEnUtZ4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "7yjhIaooat0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=7yjhIaooat0&lc=Ugzq8y5QCcvSXsEnUtZ4AaABAg"
@@ -34415,9 +34442,9 @@
         },
         {
           "id": "UgxP5qCetWAfv9GDc-54AaABAg.A_jMrDI1om8A_lcAH4Sdjw",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "7yjhIaooat0",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=7yjhIaooat0&lc=UgxP5qCetWAfv9GDc-54AaABAg.A_jMrDI1om8A_lcAH4Sdjw"
@@ -34748,27 +34775,27 @@
         },
         {
           "id": "UgxbsvlasoCOciEGesh4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=UgxbsvlasoCOciEGesh4AaABAg"
         },
         {
           "id": "UgwJAlIU2SagTQiZl-V4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=UgwJAlIU2SagTQiZl-V4AaABAg"
         },
         {
           "id": "UgwJAlIU2SagTQiZl-V4AaABAg.A_NdH04bBrwA_P5KewmKkk",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=UgwJAlIU2SagTQiZl-V4AaABAg.A_NdH04bBrwA_P5KewmKkk"
@@ -34856,9 +34883,9 @@
         },
         {
           "id": "Ugw2bSzzhfjQzYP4QfR4AaABAg.A_Bh-qylsQqA_P5elXe4yv",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=Ugw2bSzzhfjQzYP4QfR4AaABAg.A_Bh-qylsQqA_P5elXe4yv"
@@ -34910,9 +34937,9 @@
         },
         {
           "id": "Ugxorxw_tUwNR-WRlJJ4AaABAg.A_AEGLYflL9A_P507-e9fu",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nXlpQ5MSavE",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nXlpQ5MSavE&lc=Ugxorxw_tUwNR-WRlJJ4AaABAg.A_AEGLYflL9A_P507-e9fu"
@@ -35324,9 +35351,9 @@
         },
         {
           "id": "Ugzcyn-eiC2DUlMSE-h4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "8yNSAVaLvEk",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=8yNSAVaLvEk&lc=Ugzcyn-eiC2DUlMSE-h4AaABAg"
@@ -35387,9 +35414,9 @@
         },
         {
           "id": "UgySyFRc6YrlQ1WwWDV4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "8yNSAVaLvEk",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=8yNSAVaLvEk&lc=UgySyFRc6YrlQ1WwWDV4AaABAg"
@@ -36315,8 +36342,8 @@
         {
           "id": "UgzyUL7mw7lVq5b1OEp4AaABAg",
           "category": "review",
-          "topic": "복합 의견·검토 필요",
-          "summary": "긍정·개선 표현이 함께 있어 문맥 검토가 필요합니다.",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "98DOENxRU40",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=98DOENxRU40&lc=UgzyUL7mw7lVq5b1OEp4AaABAg"
@@ -36386,9 +36413,9 @@
         },
         {
           "id": "UgxeeGOQnNzOrpg9nl54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "t4C62QO2ROo",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=t4C62QO2ROo&lc=UgxeeGOQnNzOrpg9nl54AaABAg"
@@ -36431,9 +36458,9 @@
         },
         {
           "id": "UgwhfA-nGYrfEeLeNd14AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "t4C62QO2ROo",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=t4C62QO2ROo&lc=UgwhfA-nGYrfEeLeNd14AaABAg"
@@ -36566,9 +36593,9 @@
         },
         {
           "id": "Ugwo_1q6YISW6xPA50x4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "t4C62QO2ROo",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=t4C62QO2ROo&lc=Ugwo_1q6YISW6xPA50x4AaABAg"
@@ -36584,9 +36611,9 @@
         },
         {
           "id": "Ugwo_1q6YISW6xPA50x4AaABAg.AXagzfYgzDCAXcSoGNfX0R",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "t4C62QO2ROo",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=t4C62QO2ROo&lc=Ugwo_1q6YISW6xPA50x4AaABAg.AXagzfYgzDCAXcSoGNfX0R"
@@ -36791,9 +36818,9 @@
         },
         {
           "id": "UgxezRBMlsb5Tek_nwR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wIJVutVzU-g",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wIJVutVzU-g&lc=UgxezRBMlsb5Tek_nwR4AaABAg"
@@ -36809,9 +36836,9 @@
         },
         {
           "id": "UgzEI_VzbOS0ovxvb3x4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "wIJVutVzU-g",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=wIJVutVzU-g&lc=UgzEI_VzbOS0ovxvb3x4AaABAg"
@@ -36827,9 +36854,9 @@
         },
         {
           "id": "UgwDgHq2EcFPhue9qrh4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "VJjkkZ3uEGc",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=VJjkkZ3uEGc&lc=UgwDgHq2EcFPhue9qrh4AaABAg"
@@ -38076,6 +38103,12 @@
           "reported": null
         },
         {
+          "id": "Y5ZDAID_5SI",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "4mSbt7SFhTU",
           "kind": "video",
           "status": "complete",
@@ -38107,12 +38140,6 @@
         },
         {
           "id": "IrkXYRUZzGk",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "Y5ZDAID_5SI",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -38501,9 +38528,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 9,
-        "suggestion": 3,
+        "suggestion": 0,
         "other": 39,
-        "review": 0,
+        "review": 3,
         "owner": 19
       },
       "entries": [
@@ -38545,9 +38572,9 @@
         },
         {
           "id": "UgzyGhJksujIbRr6gIl4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nvxbeZSyyh8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nvxbeZSyyh8&lc=UgzyGhJksujIbRr6gIl4AaABAg"
@@ -38743,9 +38770,9 @@
         },
         {
           "id": "Ugw2ZSZsCd-Nc6pyLzN4AaABAg.Ab9hoPDzkXkAbIDAis-ncy",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nvxbeZSyyh8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nvxbeZSyyh8&lc=Ugw2ZSZsCd-Nc6pyLzN4AaABAg.Ab9hoPDzkXkAbIDAis-ncy"
@@ -38788,9 +38815,9 @@
         },
         {
           "id": "UgxMMmHHiJtLAru1Ns14AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "nvxbeZSyyh8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=nvxbeZSyyh8&lc=UgxMMmHHiJtLAru1Ns14AaABAg"
@@ -39253,9 +39280,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 11,
-        "suggestion": 3,
+        "suggestion": 0,
         "other": 25,
-        "review": 0,
+        "review": 3,
         "owner": 7
       },
       "entries": [
@@ -39432,9 +39459,9 @@
         },
         {
           "id": "UgxqWvjwiLb31ImbNC54AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "FM8q6N75qS4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=FM8q6N75qS4&lc=UgxqWvjwiLb31ImbNC54AaABAg"
@@ -39486,9 +39513,9 @@
         },
         {
           "id": "UgxsoOsNUEmUNDscvYR4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "FM8q6N75qS4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=FM8q6N75qS4&lc=UgxsoOsNUEmUNDscvYR4AaABAg"
@@ -39504,9 +39531,9 @@
         },
         {
           "id": "UgxsoOsNUEmUNDscvYR4AaABAg.AY5RES_CPoKAZPIYYkhMTN",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "FM8q6N75qS4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=FM8q6N75qS4&lc=UgxsoOsNUEmUNDscvYR4AaABAg.AY5RES_CPoKAZPIYYkhMTN"
@@ -39819,9 +39846,9 @@
       "unavailableVideos": 0,
       "counts": {
         "positive": 11,
-        "suggestion": 2,
+        "suggestion": 0,
         "other": 39,
-        "review": 0,
+        "review": 2,
         "owner": 37
       },
       "entries": [
@@ -39899,9 +39926,9 @@
         },
         {
           "id": "Ugz4TlzY53sBs6v_ltp4AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "1Xktkr4Aibw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=1Xktkr4Aibw&lc=Ugz4TlzY53sBs6v_ltp4AaABAg"
@@ -40070,9 +40097,9 @@
         },
         {
           "id": "Ugw2pmkdSa078nEhi994AaABAg",
-          "category": "suggestion",
-          "topic": "부정·개선 의견",
-          "summary": "부정·불편·개선 표현을 자동 탐지했습니다. 원문 문맥 확인이 필요합니다.",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
           "videoId": "R3REtzbizXM",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=R3REtzbizXM&lc=Ugw2pmkdSa078nEhi994AaABAg"
