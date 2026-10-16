@@ -54,26 +54,26 @@
       "label": "3개월 이내",
       "employeeCount": 21,
       "respondingEmployees": 16,
-      "responses": 161,
-      "scoreSum": 1508.0,
-      "average": 9.37
+      "responses": 176,
+      "scoreSum": 1643.0,
+      "average": 9.34
     },
     {
       "id": "under-1y",
       "label": "1년 이내",
-      "employeeCount": 40,
-      "respondingEmployees": 40,
+      "employeeCount": 39,
+      "respondingEmployees": 39,
       "responses": 287,
-      "scoreSum": 2654.0,
-      "average": 9.25
+      "scoreSum": 2658.0,
+      "average": 9.26
     },
     {
       "id": "1-3y",
       "label": "1~3년",
-      "employeeCount": 93,
-      "respondingEmployees": 91,
-      "responses": 1523,
-      "scoreSum": 14209.0,
+      "employeeCount": 94,
+      "respondingEmployees": 92,
+      "responses": 1527,
+      "scoreSum": 14246.0,
       "average": 9.33
     },
     {
