@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-10-17T14:01:08.372131+00:00",
+  "checkedAt": "2026-10-17T17:43:54.529138+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 325,
+      "total": 326,
       "videos": 47,
       "completeVideos": 47,
       "partialVideos": 0,
@@ -11,11 +11,20 @@
       "counts": {
         "positive": 15,
         "suggestion": 0,
-        "other": 152,
+        "other": 153,
         "review": 8,
         "owner": 150
       },
       "entries": [
+        {
+          "id": "UgxrFqP_kEqRWKhdTMp4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "2vrr7n_ArNw",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=UgxrFqP_kEqRWKhdTMp4AaABAg"
+        },
         {
           "id": "UgyX9jU3RE-qSTIDfrF4AaABAg",
           "category": "other",
@@ -32900,7 +32909,7 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 594,
+      "total": 595,
       "videos": 70,
       "completeVideos": 70,
       "partialVideos": 0,
@@ -32908,11 +32917,20 @@
       "counts": {
         "positive": 23,
         "suggestion": 0,
-        "other": 284,
+        "other": 285,
         "review": 25,
         "owner": 262
       },
       "entries": [
+        {
+          "id": "Ugy9tevBPHy9H3JTCwF4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "OvkoZh-u6Dc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=OvkoZh-u6Dc&lc=Ugy9tevBPHy9H3JTCwF4AaABAg"
+        },
         {
           "id": "UgxdUKlsx4JDqoWNlh54AaABAg",
           "category": "review",
@@ -38262,6 +38280,12 @@
       ],
       "coverage": [
         {
+          "id": "OvkoZh-u6Dc",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "AdNus567qw4",
           "kind": "video",
           "status": "complete",
@@ -38281,12 +38305,6 @@
         },
         {
           "id": "4mSbt7SFhTU",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "OvkoZh-u6Dc",
           "kind": "video",
           "status": "complete",
           "reported": null
