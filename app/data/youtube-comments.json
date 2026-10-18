@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-10-17T21:06:36.242459+00:00",
+  "checkedAt": "2026-10-18T00:30:19.002255+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 326,
+      "total": 327,
       "videos": 47,
       "completeVideos": 47,
       "partialVideos": 0,
@@ -13,7 +13,7 @@
         "suggestion": 0,
         "other": 153,
         "review": 8,
-        "owner": 150
+        "owner": 151
       },
       "entries": [
         {
@@ -24,6 +24,15 @@
           "videoId": "2vrr7n_ArNw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=UgxrFqP_kEqRWKhdTMp4AaABAg"
+        },
+        {
+          "id": "UgxrFqP_kEqRWKhdTMp4AaABAg.Ac47CPamR9ZAc4dukdJ-5X",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "2vrr7n_ArNw",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=2vrr7n_ArNw&lc=UgxrFqP_kEqRWKhdTMp4AaABAg.Ac47CPamR9ZAc4dukdJ-5X"
         },
         {
           "id": "UgyX9jU3RE-qSTIDfrF4AaABAg",
