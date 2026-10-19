@@ -3,6 +3,7 @@ import CompetitiveAnalysis from "../../../CompetitiveAnalysis";
 import { canAccessDashboard } from "../../../dashboard-access";
 import dashboardJson from "../../../data/showrooms.json";
 import { requireDashboardLogin } from "../../../login-session";
+import { canViewOriginalStaffPortraits } from "../../../staff-portrait-visibility";
 
 export const dynamic = "force-dynamic";
 
@@ -43,6 +44,7 @@ export default async function CompetitiveAnalysisPage({
       initialCdsid={cdsid}
       initialView={initialView}
       accessRole={access.role}
+      showOriginalPortraits={canViewOriginalStaffPortraits(access.loginCdsid)}
     />
   );
 }

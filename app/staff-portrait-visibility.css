@@ -1,0 +1,4 @@
+.growth-profile-photo img.staff-photo-original {
+  object-fit: contain;
+  filter: none;
+}

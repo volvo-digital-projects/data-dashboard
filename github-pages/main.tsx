@@ -10,6 +10,7 @@ import DealerAnalysis from "../app/DealerAnalysis";
 import MetricDetails from "../app/MetricDetails";
 import ReleaseUpdateNotice from "../app/ReleaseUpdateNotice";
 import { canAccessDashboard, getDashboardAccess } from "../app/dashboard-access";
+import { canViewOriginalStaffPortraits } from "../app/staff-portrait-visibility";
 import { resetPageScrollToTop } from "../app/pageScroll";
 import "../app/globals.css";
 
@@ -214,7 +215,7 @@ function PagesApp() {
       view === "showroom" || view === "region" || view === "size"
         ? view
         : "dealer";
-    return <CompetitiveAnalysis initialCdsid={cdsid} initialView={initialView} accessRole={access.role} />;
+    return <CompetitiveAnalysis initialCdsid={cdsid} initialView={initialView} accessRole={access.role} showOriginalPortraits={canViewOriginalStaffPortraits(access.loginCdsid)} />;
   }
 
   if (segments[2] === "criteria") return <CriteriaGuide cdsid={cdsid} />;

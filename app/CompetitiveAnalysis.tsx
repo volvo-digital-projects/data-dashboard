@@ -22,6 +22,7 @@ import staffCertificationsJson from "./data/staff-certifications.json";
 import DashboardHeaderLead from "./DashboardHeaderLead";
 import { lockPageScrollToTop } from "./pageScroll";
 import type { DashboardRole } from "./dashboard-access";
+import "./staff-portrait-visibility.css";
 
 type AnalysisView = "dealer" | "showroom" | "region" | "size";
 
@@ -1221,10 +1222,12 @@ export default function CompetitiveAnalysis({
   initialCdsid,
   initialView,
   accessRole,
+  showOriginalPortraits = false,
 }: {
   initialCdsid: string;
   initialView: AnalysisView;
   accessRole: DashboardRole;
+  showOriginalPortraits?: boolean;
 }) {
   const selected =
     showrooms.find((item) => item.cdsid === initialCdsid) ?? showrooms[0];
@@ -2554,7 +2557,7 @@ export default function CompetitiveAnalysis({
     ? staffFemaleFallbackProfileImage
     : staffFallbackProfileImage;
   const selectedStaffSilhouetteImage = selectedStaffProfile?.image
-    ? `${selectedStaffProfile.image.replace(/\.webp$/, ".silhouette.webp")}?portrait=${staffProfilePhotosJson.updatedAt}`
+    ? `${showOriginalPortraits ? selectedStaffProfile.image : selectedStaffProfile.image.replace(/\.webp$/, ".silhouette.webp")}?portrait=${staffProfilePhotosJson.updatedAt}`
     : selectedStaffFallbackProfileImage;
   const selectedStaffHasProfilePhoto = Boolean(selectedStaffProfile);
   const selectedStaffCertificationCounts = {
@@ -3587,7 +3590,9 @@ export default function CompetitiveAnalysis({
               <div className="growth-profile-person">
                 <span className="growth-profile-photo" aria-hidden="true">
                   {selectedStaffHasProfilePhoto ? (
-                    <>
+                    showOriginalPortraits ? (
+                      <img className="staff-photo-original" src={selectedStaffSilhouetteImage} alt="" draggable={false} />
+                    ) : <>
                       <span
                         className="staff-photo-solid-silhouette"
                         style={{
@@ -4686,7 +4691,7 @@ export default function CompetitiveAnalysis({
                       ? " smiling"
                       : ""
                   }`}
-                  disabled={!selectedStaffProfile?.smileImage}
+                  disabled={!showOriginalPortraits || !selectedStaffProfile?.smileImage}
                   aria-label={
                     selectedStaffProfile?.smileImage
                       ? `${selectedStaffEmployee?.name ?? "선택 직원"} 미소 표정 전환`
@@ -4709,11 +4714,11 @@ export default function CompetitiveAnalysis({
                     <>
                       <img
                         className="base"
-                        src={`${selectedStaffProfile.image}?portrait=${staffProfilePhotosJson.updatedAt}`}
+                        src={selectedStaffSilhouetteImage}
                         alt={`${selectedStaffEmployee?.name ?? "선택 직원"} 공식 프로필`}
                         draggable={false}
                       />
-                      {selectedStaffProfile.smileImage ? (
+                      {showOriginalPortraits && selectedStaffProfile.smileImage ? (
                         <img
                           className="smile"
                           src={selectedStaffProfile.smileImage}
