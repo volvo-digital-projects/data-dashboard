@@ -125,7 +125,8 @@
 .yt-comparison-table .yt-subscriber-change b.negative{color:var(--trend-fall);background:linear-gradient(135deg,rgba(49,130,246,.13),rgba(49,130,246,.05));box-shadow:inset 0 2px 0 rgba(49,130,246,.25)}
 .yt-comparison-table .yt-subscriber-change b.neutral{color:#607985;background:linear-gradient(135deg,rgba(96,121,133,.08),rgba(96,121,133,.03));box-shadow:inset 0 2px 0 rgba(96,121,133,.16)}
 .youtube-performance.yt-compact .yt-row-person .yt-row-avatar .yt-profile-solid-silhouette{display:block;width:100%;height:100%;background:#000;mask-size:contain;-webkit-mask-size:contain;mask-position:center top;-webkit-mask-position:center top;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;transform:scale(1.35);transform-origin:center top}
-.youtube-performance.yt-compact .yt-row-person .yt-row-avatar img.yt-profile-white-shirt{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;transform:scale(1.35);transform-origin:center top}
+.youtube-performance.yt-compact .yt-row-person .yt-row-avatar img.yt-profile-white-shirt,
+.youtube-performance.yt-compact .yt-row-person .yt-row-avatar img.yt-profile-original{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;transform:scale(1.35);transform-origin:center top}
 .youtube-performance.yt-compact .yt-row-person .yt-row-avatar img.yt-fallback-silhouette{filter:none;object-fit:cover;object-position:center top;transform:scale(1.04);transform-origin:center top}
 .yt-editorial{display:grid;gap:6px;padding-top:0}
 .yt-cell-comments button small{text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}

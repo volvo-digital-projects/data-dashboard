@@ -206,7 +206,7 @@ function PagesApp() {
       );
       return null;
     }
-    return <DealerAnalysis initialCdsid={cdsid} />;
+    return <DealerAnalysis initialCdsid={cdsid} showOriginalPortraits={canViewOriginalStaffPortraits(access.loginCdsid)} />;
   }
 
   if (segments[2] === "analysis") {

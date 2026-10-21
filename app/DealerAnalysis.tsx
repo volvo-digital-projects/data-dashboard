@@ -440,7 +440,7 @@ function SatisfactionPerformanceComparison({ performance }: { performance: Satis
   );
 }
 
-export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string }) {
+export default function DealerAnalysis({ initialCdsid, showOriginalPortraits = false }: { initialCdsid: string; showOriginalPortraits?: boolean }) {
   const scrollArea = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const area = scrollArea.current;
@@ -685,7 +685,7 @@ export default function DealerAnalysis({ initialCdsid }: { initialCdsid: string 
         </div>
       </section>
 
-      <YouTubePerformance />
+      <YouTubePerformance showOriginalPortraits={showOriginalPortraits} />
       </div>
     </main>
   );

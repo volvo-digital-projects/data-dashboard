@@ -56,7 +56,7 @@ const creators = data.creators.map(person => {
 
   const rosterEmployee = voc[person.cdsid]?.employees.find(employee => employee.name === person.name);
   const isTeamLeader = rosterEmployee?.role === "영업팀장" || rosterEmployee?.jobTitle === "팀장";
-  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: displayImage, hasProfilePhoto: Boolean(profileImage),
+  return {...person, channel: channelMetricsForCreator(channel, person.name, shared), image: displayImage, originalImage: profileImage ? `${profileImage}?portrait=${staffProfilePhotos.updatedAt}` : undefined, hasProfilePhoto: Boolean(profileImage),
     delivered: result?.deliveredSales ?? null,
     monthly: result?.monthlyDeliveredSales.length ? result.deliveredSales / result.monthlyDeliveredSales.length : null,
     months: result?.monthlyDeliveredSales ?? [], responses: survey?.responses ?? 0,
@@ -129,7 +129,7 @@ function GenderDonut() {
   </svg>;
 }
 
-export default function YouTubePerformance() {
+export default function YouTubePerformance({ showOriginalPortraits = false }: { showOriginalPortraits?: boolean } = {}) {
   const [dealer, setDealer] = useState("전체");
   const [selectedName, setSelectedName] = useState("신수경");
   const [entered, setEntered] = useState(false);
@@ -210,6 +210,8 @@ export default function YouTubePerformance() {
         <th scope="col">딜러사 / 직원<small>전시장</small></th><th scope="col" className="yt-date-heading"><span>볼보 입사일</span><span>채널 개설일</span></th><th scope="col">인증레벨<small>누적 횟수</small></th><th scope="col">구독자<small>명</small></th><th scope="col">평균 조회수<small>/ 누적 · 회</small></th><th scope="col">롱폼<small>개수 / 평균 조회</small></th><th scope="col">숏츠<small>개수 / 평균 조회</small></th><th scope="col">고객상담 평균만족도<small>10점 / 회신 수</small></th><th scope="col">26년 월평균 판매<small>누적 · 대</small></th><th scope="col">공개 댓글·답글<small>롱폼 + 숏츠</small></th>
       </tr></thead><tbody>{visible.map((person,index)=>{
         const comments=commentData.channels[person.channelId];
+        const showOriginalPhoto = showOriginalPortraits && person.hasProfilePhoto;
+        const avatarImage = showOriginalPhoto ? person.originalImage : person.image;
         const priorDaySubscribers=dailyClose?.channelSubscribers[person.channelId] ?? null;
         const subscriberChangeOwner=subscriberChangeOwnerByChannel.get(person.channelId);
         const includesSubscriberChange=subscriberChangeOwner===person.name;
@@ -227,7 +229,7 @@ export default function YouTubePerformance() {
 
 
         return <Fragment key={person.name}><tr data-comment-selected={detailOpen && selected?.name===person.name ? "true" : undefined} onClick={()=>toggleComments(person.name)} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
-          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={event=>{event.stopPropagation();toggleComments(person.name);}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={person.hasProfilePhoto ? "직원 사진의 검은 실루엣과 흰 셔츠" : `${person.gender} 실루엣`}>{person.hasProfilePhoto ? <><span className="yt-profile-solid-silhouette" style={{ maskImage: `url("${person.image}")`, WebkitMaskImage: `url("${person.image}")` }} /><img className="yt-profile-white-shirt" src={person.image} alt="" loading="lazy" /></> : <img className="yt-fallback-silhouette" src={person.image} alt="" loading="lazy" />}</span><span><strong>{person.name}{person.isTeamLeader && <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
+          <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={event=>{event.stopPropagation();toggleComments(person.name);}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={showOriginalPhoto ? "직원 원본 사진" : person.hasProfilePhoto ? "직원 사진의 검은 실루엣과 흰 셔츠" : `${person.gender} 실루엣`}>{showOriginalPhoto ? <img className="yt-profile-original" src={avatarImage} alt="" loading="lazy" /> : person.hasProfilePhoto ? <><span className="yt-profile-solid-silhouette" style={{ maskImage: `url("${person.image}")`, WebkitMaskImage: `url("${person.image}")` }} /><img className="yt-profile-white-shirt" src={person.image} alt="" loading="lazy" /></> : <img className="yt-fallback-silhouette" src={person.image} alt="" loading="lazy" />}</span><span><strong>{person.name}{person.isTeamLeader && <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>
           <td className="yt-subscriber-cell"><strong>{number(person.channel.subscribers)}<i>명</i></strong><small className="yt-subscriber-change" title={subscriberDeltaTitle}><span>전일 대비</span><b className={subscriberDeltaTone}><span className={`yt-subscriber-count${includesSubscriberChange ? "" : " is-excluded"}`}>{includesSubscriberChange&&<i>{subscriberDelta.direction}</i>}<em>{subscriberDelta.count}</em></span>{subscriberDelta.rate&&<><i>·</i><span>{subscriberDelta.rate}</span></>}</b></small></td>
@@ -250,3 +252,4 @@ export default function YouTubePerformance() {
     <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 공식 사진이 있는 직원은 페이지 2와 같은 프로필 사진을 표시하고, 사진이 없으면 명단의 성별에 맞는 기본 실루엣을 표시합니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 4시간마다 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글 수집은 4시간 주기로 갱신하며, 채널 해석은 2026년 10월 13일 댓글을 읽고 작성한 총평입니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
   </section>;
 }
+

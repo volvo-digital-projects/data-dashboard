@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import DealerAnalysis from "../../../DealerAnalysis";
 import dashboardJson from "../../../data/showrooms.json";
 import { requireDashboardLogin } from "../../../login-session";
+import { canViewOriginalStaffPortraits } from "../../../staff-portrait-visibility";
 
 export const dynamic = "force-dynamic";
 
@@ -21,5 +22,5 @@ export default async function DealerAnalysisPage({
   const access = await requireDashboardLogin();
   if (access.role !== "master") redirect(`/dashboard/${access.dashboardCdsid}`);
 
-  return <DealerAnalysis initialCdsid={cdsid} />;
+  return <DealerAnalysis initialCdsid={cdsid} showOriginalPortraits={canViewOriginalStaffPortraits(access.loginCdsid)} />;
 }
