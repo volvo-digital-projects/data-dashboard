@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-10-13T18:34:11+09:00",
+  "updatedAt": "2026-10-22T08:54:06+09:00",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 366,
+  "consultantCount": 368,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -576,6 +576,9 @@
         "조석원": {
           "image": "/staff-profiles/iron/haeundae/consultant-9f85e67752aa.webp"
         },
+        "최승호": {
+          "image": "/staff-profiles/iron/haeundae/consultant-755617f00be6.webp"
+        },
         "한창우": {
           "image": "/staff-profiles/iron/haeundae/consultant-e9e2c57d5383.webp"
         },
@@ -1030,6 +1033,9 @@
       "showroom": "제주",
       "sourcePage": "https://ivy.volvocars.co.kr/sales/sales_consultant.asp?branchCd=100004",
       "employees": {
+        "고영우": {
+          "image": "/staff-profiles/ivy/jeju/consultant-c2f26074452c.webp"
+        },
         "김민성": {
           "image": "/staff-profiles/ivy/jeju/consultant-05583d23355d.webp"
         },
