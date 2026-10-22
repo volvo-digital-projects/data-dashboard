@@ -437,7 +437,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(table, /class="yt-cert-cell"/);
   assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 16);
   assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 16);
-  assert.match(table, /aria-label="직원 사진의 검은 실루엣과 흰 셔츠"/);
+  assert.match(table, /aria-label="직원 원본 사진"/);
   assert.doesNotMatch(table, /class="yt-gender-icon"|전시장 \/ 성별/);
   assert.doesNotMatch(html, /<label>성별/);
   assert.match(html, /class="dealer-analysis-scroll"/);
@@ -486,12 +486,13 @@ test("reuses page 2 staff portraits in creator rows without changing avatar boxe
   for (const person of roster.creators) {
     const staffCdsid = voc.showrooms[person.cdsid]?.employees.find((employee) => employee.name === person.name)?.staffCdsid;
     const profileImage = photos.showrooms[person.cdsid]?.employees[person.name]?.image;
-    const image = profileImage?.replace(/\.webp$/, ".silhouette.webp") ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
+    const image = profileImage ?? (person.gender === "여성" ? "/staff-profiles/female-human-silhouette.png" : "/staff-profiles/neutral-human-silhouette.png");
     const row = rows.find((item) => item.includes(`<strong>${person.name}`) || (staffCdsid && item.includes(`<strong>${staffCdsid}`)) || (profileImage && item.includes(image)));
     assert.ok(row, `${person.name} 행을 찾을 수 있어야 합니다.`);
     assert.ok(row.includes(image), `${person.name}의 페이지 2 사진 또는 기본 실루엣이 일치해야 합니다.`);
-    assert.equal(row.includes('class="yt-profile-solid-silhouette"'), Boolean(profileImage), `${person.name}의 실제 사진 윤곽은 단색 검정으로 표시해야 합니다.`);
-    assert.equal(row.includes('class="yt-profile-white-shirt"'), Boolean(profileImage), `${person.name}의 원본 흰 셔츠 레이어를 유지해야 합니다.`);
+    assert.equal(row.includes('class="yt-profile-original"'), Boolean(profileImage), `${person.name}의 VCK-ES90 화면은 원본 사진을 표시해야 합니다.`);
+    assert.equal(row.includes('class="yt-profile-solid-silhouette"'), false);
+    assert.equal(row.includes('class="yt-profile-white-shirt"'), false);
     assert.equal(row.includes('?portrait='), Boolean(profileImage), `${person.name}의 교체 사진은 이전 캐시를 사용하면 안 됩니다.`);
     assert.equal(row.includes('class="yt-fallback-silhouette"'), !profileImage, `${person.name}의 사진이 없으면 성별 기본 실루엣을 사용해야 합니다.`);
     assert.doesNotMatch(row, /yt-gender-icon/);
@@ -499,7 +500,7 @@ test("reuses page 2 staff portraits in creator rows without changing avatar boxe
   const css = await readFile(new URL("../app/youtube-performance.css", import.meta.url), "utf8");
   assert.match(css, /\.yt-compact \.yt-row-avatar,\.yt-compact \.yt-row-avatar img\{width:28px;height:30px\}/);
   assert.match(css, /\.yt-profile-solid-silhouette\{[^}]*background:#000;[^}]*mask-size:contain;[^}]*transform:scale\(1\.35\);transform-origin:center top\}/);
-  assert.match(css, /img\.yt-profile-white-shirt\{[^}]*object-fit:contain;[^}]*transform:scale\(1\.35\);/);
+  assert.match(css, /img\.yt-profile-white-shirt,\s*[^{}]*img\.yt-profile-original\{[^}]*object-fit:contain;[^}]*transform:scale\(1\.35\);/);
   const source = await readFile(new URL("../app/YouTubePerformance.tsx", import.meta.url), "utf8");
   assert.match(source, /const displayImage = profileImage[\s\S]*?profileImage\.replace\([\s\S]*?: silhouetteForGender\(person\.gender\)/);
   assert.equal((html.match(/class="yt-donut-gender-icon"/g) ?? []).length, 2);
@@ -824,7 +825,8 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
       "시설 편의 미제공",
     ],
   );
-  const analyzedEmployees = Object.values(staffAnalysis.showrooms).flatMap(({ employees }) => employees);
+  // Historical feedback remains valid after roster changes; include preserved leavers.
+  const analyzedEmployees = Object.values(staffAnalysis.showrooms).flatMap(({ employees, formerEmployees = [] }) => [...employees, ...formerEmployees]);
   const splitPressureMentions = Object.fromEntries(
     ["자율관람 방해", "구매·계약 압박", "과도한 응대 부담"].map((label) => [
       label,
@@ -983,7 +985,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffFemaleFallbackProfileImage = "\/staff-profiles\/female-human-silhouette\.png";/);
   assert.match(source, /selectedStaffEmployee\?\.gender === "female"[\s\S]*?staffFemaleFallbackProfileImage[\s\S]*?: staffFallbackProfileImage/);
   assert.equal(staffAnalysis.showrooms["6KR6846"].employees.find((employee) => employee.name === "김예소")?.gender, "female");
-  assert.equal((navigation.match(/(?:src|href)=\{selectedStaffSilhouetteImage\}/g) ?? []).length, 5);
+  assert.equal((navigation.match(/(?:src|href)=\{selectedStaffSilhouetteImage\}/g) ?? []).length, 6);
   assert.doesNotMatch(source, /(?:src|href)=\{staffFallbackProfileImage\}/);
   assert.doesNotMatch(navigation, /selectedStaffInitials/);
   assert.doesNotMatch(navigation, /<span className="staff-profile-silhouette"/);
@@ -3720,9 +3722,11 @@ test("serves the dual-metric competitive analysis sample", async () => {
       (showroom) => showroom.employees.length > 0,
     ),
   );
-  assert.equal(staffAnalysisShowrooms["6KR6834"].employees.length, 14);
-  assert.equal(staffAnalysisShowrooms["6KR6802"].employees.length, 19);
-  assert.equal(staffAnalysisShowrooms["6KR6873"].employees.length, 2);
+  // Daily sync may change headcounts; keep the 39-showroom/300-person guards
+  // above and verify that each current roster contains no duplicate people.
+  for (const showroom of Object.values(staffAnalysisShowrooms)) {
+    assert.equal(new Set(showroom.employees.map(({ name }) => name)).size, showroom.employees.length);
+  }
   assert.ok(
     Object.values(staffAnalysisShowrooms).every((showroom) =>
       showroom.employees.every(
