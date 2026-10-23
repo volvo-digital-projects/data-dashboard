@@ -126,9 +126,15 @@ def visible(locator: Any) -> bool:
 def employee_grid(page: Any) -> tuple[Any, Any] | None:
     for candidate_page in reversed(page.context.pages):
         for frame in candidate_page.frames:
-            body = frame.locator("body").inner_text(timeout=5_000)
-            if frame.locator("#com_cd").count() and "직원 목록" in body and "직원 CDSID" in body:
-                return candidate_page, frame
+            try:
+                if not frame.locator("#com_cd").count():
+                    continue
+                body = frame.locator("body").inner_text(timeout=2_000)
+                if "직원 목록" in body and "직원 CDSID" in body:
+                    return candidate_page, frame
+            except Exception:
+                # Navigation may detach a frame; the next bounded poll retries it.
+                continue
     return None
 
 
@@ -221,7 +227,7 @@ def collect_dms_rows(user_id: str, password: str) -> list[dict[str, str]]:
                     frame.locator(selector).fill("")
             set_page_size(page)
             collected: list[dict[str, str]] = []
-            for role in sorted(TARGET_ROLES):
+            for role in sorted(TARGET_ROLES | {"SELEKT 영업직원", "SELEKT 영업팀장"}):
                 _, frame = wait_for_grid(page)
                 frame.locator("#com_cd").select_option(label=role)
                 search = frame.locator("#search")
@@ -354,6 +360,31 @@ def main() -> int:
         sheet = "Sales-DMS 직원등록"
         source_name = "Sales-DMS 직원등록"
     summary = reconcile(payload, rows, as_of)
+    selekt_locations = {
+        "AJU Autorium Gangseo SELEKT": ("아주", "강서 Selekt"),
+        "Cheonha Auto Seongsu SELEKT": ("천하", "성수 Selekt"),
+        "H Motors Daejeon SELEKT": ("에이치", "대전 Selekt"),
+        "H Motors Suwon SELEKT": ("에이치", "수원 Selekt"),
+        "Iron Motors Busan Selekt": ("아이언", "부산 Selekt"),
+        "IVY Motors Gwangju SELEKT": ("아이비", "광주 Selekt"),
+        "Kolon Automotive Gimpo SELEKT": ("코오롱", "김포 Selekt"),
+        "Taeyoung Motors Daegu SELEKT": ("태영", "대구 Selekt"),
+    }
+    selekt_staff = []
+    for row in rows:
+        location = selekt_locations.get(text(row.get("전시장명")))
+        role = text(row.get("직원권한"))
+        if not location or role not in {"SELEKT 영업직원", "SELEKT 영업팀장"} or text(row.get("퇴사일자")):
+            continue
+        name = text(row.get("직원명"))
+        hire_date = parse_date(row.get("입사일자")).isoformat()
+        if not name:
+            raise RuntimeError("SELEKT 직원명이 비어 있습니다.")
+        selekt_staff.append(dict(key=f"selekt:{location[0]}:{location[1]}:{name}:{hire_date}", dealer=location[0], showroom=location[1], name=name, role=role, hireDate=hire_date))
+    if not args.roster:
+        if {e["showroom"] for e in selekt_staff} != {v[1] for v in selekt_locations.values()}:
+            raise RuntimeError("SELEKT 8개 전시장 명단이 완전하지 않습니다.")
+        (ROOT / "app/data/training-selekt-roster.json").write_text(json.dumps({"checkedAt": as_of.isoformat(), "employees": selekt_staff}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     payload["source"].update(
         {"jobTitleSourceWorkbook": source_name, "jobTitleSourceSheet": sheet}
     )

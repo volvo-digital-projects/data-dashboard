@@ -1,4 +1,4 @@
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -21,6 +21,12 @@ if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.
   const target=path.resolve(root,process.argv[2]||'work/github-pages-stage/training-roster.json');
   mkdirSync(path.dirname(target),{recursive:true});
   const roster=trainingRoster(data);
+  const supplement=path.join(root,'app/data/training-selekt-roster.json');
+  if(existsSync(supplement)) {
+    const selekt=JSON.parse(readFileSync(supplement,'utf8'));
+    if(selekt.checkedAt!==roster.checkedAt) throw new Error('SELEKT roster date mismatch');
+    roster.employees.push(...selekt.employees);
+  }
   writeFileSync(target,JSON.stringify(roster));
   console.log(`Training roster: ${roster.employees.length} active staff, checked ${roster.checkedAt}`);
 }
