@@ -1,0 +1,245 @@
+{
+  "checkedAt": "2026-10-23",
+  "employees": [
+    {
+      "key": "selekt:아주:강서 Selekt:김대호:2025-08-11",
+      "dealer": "아주",
+      "showroom": "강서 Selekt",
+      "name": "김대호",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-08-11"
+    },
+    {
+      "key": "selekt:아주:강서 Selekt:김수지:2026-03-12",
+      "dealer": "아주",
+      "showroom": "강서 Selekt",
+      "name": "김수지",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-03-12"
+    },
+    {
+      "key": "selekt:아주:강서 Selekt:박창용:2026-04-01",
+      "dealer": "아주",
+      "showroom": "강서 Selekt",
+      "name": "박창용",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-04-01"
+    },
+    {
+      "key": "selekt:아주:강서 Selekt:홍기한:2025-08-18",
+      "dealer": "아주",
+      "showroom": "강서 Selekt",
+      "name": "홍기한",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-08-18"
+    },
+    {
+      "key": "selekt:천하:성수 Selekt:김은구:2022-08-08",
+      "dealer": "천하",
+      "showroom": "성수 Selekt",
+      "name": "김은구",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2022-08-08"
+    },
+    {
+      "key": "selekt:천하:성수 Selekt:정연성:2025-09-08",
+      "dealer": "천하",
+      "showroom": "성수 Selekt",
+      "name": "정연성",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-09-08"
+    },
+    {
+      "key": "selekt:천하:성수 Selekt:최영두:2025-09-29",
+      "dealer": "천하",
+      "showroom": "성수 Selekt",
+      "name": "최영두",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-09-29"
+    },
+    {
+      "key": "selekt:에이치:대전 Selekt:최명철:2026-05-06",
+      "dealer": "에이치",
+      "showroom": "대전 Selekt",
+      "name": "최명철",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-05-06"
+    },
+    {
+      "key": "selekt:에이치:수원 Selekt:김태형:2021-10-12",
+      "dealer": "에이치",
+      "showroom": "수원 Selekt",
+      "name": "김태형",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2021-10-12"
+    },
+    {
+      "key": "selekt:에이치:수원 Selekt:박도형:2025-06-09",
+      "dealer": "에이치",
+      "showroom": "수원 Selekt",
+      "name": "박도형",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-06-09"
+    },
+    {
+      "key": "selekt:에이치:수원 Selekt:유범용:2024-01-02",
+      "dealer": "에이치",
+      "showroom": "수원 Selekt",
+      "name": "유범용",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2024-01-02"
+    },
+    {
+      "key": "selekt:에이치:수원 Selekt:장이현:2020-03-09",
+      "dealer": "에이치",
+      "showroom": "수원 Selekt",
+      "name": "장이현",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2020-03-09"
+    },
+    {
+      "key": "selekt:에이치:수원 Selekt:조용환:2020-03-09",
+      "dealer": "에이치",
+      "showroom": "수원 Selekt",
+      "name": "조용환",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2020-03-09"
+    },
+    {
+      "key": "selekt:에이치:수원 Selekt:한태현:2022-12-01",
+      "dealer": "에이치",
+      "showroom": "수원 Selekt",
+      "name": "한태현",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2022-12-01"
+    },
+    {
+      "key": "selekt:아이언:부산 Selekt:김구영:2024-09-23",
+      "dealer": "아이언",
+      "showroom": "부산 Selekt",
+      "name": "김구영",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2024-09-23"
+    },
+    {
+      "key": "selekt:아이언:부산 Selekt:박진현:2024-10-02",
+      "dealer": "아이언",
+      "showroom": "부산 Selekt",
+      "name": "박진현",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2024-10-02"
+    },
+    {
+      "key": "selekt:아이언:부산 Selekt:지진혁:2022-04-01",
+      "dealer": "아이언",
+      "showroom": "부산 Selekt",
+      "name": "지진혁",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2022-04-01"
+    },
+    {
+      "key": "selekt:아이언:부산 Selekt:최정원:2024-01-08",
+      "dealer": "아이언",
+      "showroom": "부산 Selekt",
+      "name": "최정원",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2024-01-08"
+    },
+    {
+      "key": "selekt:아이비:광주 Selekt:유강근:2025-09-02",
+      "dealer": "아이비",
+      "showroom": "광주 Selekt",
+      "name": "유강근",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-09-02"
+    },
+    {
+      "key": "selekt:아이비:광주 Selekt:윤대원:2025-07-08",
+      "dealer": "아이비",
+      "showroom": "광주 Selekt",
+      "name": "윤대원",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-07-08"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:강기훈:2026-09-02",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "강기훈",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-09-02"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:김재학:2018-09-13",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "김재학",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2018-09-13"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:김홍민:2025-05-07",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "김홍민",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-05-07"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:박현수:2026-03-24",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "박현수",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-03-24"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:송현우:2025-11-17",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "송현우",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2025-11-17"
+    },
+    {
+      "key": "selekt:태영:대구 Selekt:김명환:2026-05-01",
+      "dealer": "태영",
+      "showroom": "대구 Selekt",
+      "name": "김명환",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-05-01"
+    },
+    {
+      "key": "selekt:태영:대구 Selekt:성기석:2026-04-27",
+      "dealer": "태영",
+      "showroom": "대구 Selekt",
+      "name": "성기석",
+      "role": "SELEKT 영업직원",
+      "hireDate": "2026-04-27"
+    },
+    {
+      "key": "selekt:아이비:광주 Selekt:주지성:2025-07-01",
+      "dealer": "아이비",
+      "showroom": "광주 Selekt",
+      "name": "주지성",
+      "role": "SELEKT 영업팀장",
+      "hireDate": "2025-07-01"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:강성민:2018-09-13",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "강성민",
+      "role": "SELEKT 영업팀장",
+      "hireDate": "2018-09-13"
+    },
+    {
+      "key": "selekt:코오롱:김포 Selekt:최완섭:2022-03-14",
+      "dealer": "코오롱",
+      "showroom": "김포 Selekt",
+      "name": "최완섭",
+      "role": "SELEKT 영업팀장",
+      "hireDate": "2022-03-14"
+    }
+  ]
+}
