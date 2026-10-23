@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-10-23",
-    "salesSyncedAt": "2026-10-23T14:13:13+09:00",
+    "salesSyncedAt": "2026-10-23T17:02:22+09:00",
     "salesPeriod": "2026-01-01~2026-10-23",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -12491,8 +12491,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -12503,13 +12503,13 @@
             0,
             1,
             4,
-            1
+            0
           ],
           "segmentSales": {
             "30": 6,
             "40": 2,
             "60": 7,
-            "90": 5
+            "90": 4
           }
         },
         {
@@ -12719,7 +12719,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 336,
+        "deliveredSales": 335,
         "monthlyDeliveredSales": [
           29,
           37,
@@ -12730,13 +12730,13 @@
           25,
           17,
           45,
-          24
+          23
         ],
         "segmentSales": {
           "30": 79,
           "40": 45,
           "60": 110,
-          "90": 102
+          "90": 101
         }
       }
     },
