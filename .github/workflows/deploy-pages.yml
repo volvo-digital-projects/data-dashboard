@@ -29,6 +29,8 @@ jobs:
         run: npm ci
       - name: Build GitHub Pages artifact
         run: npm run build:github-pages
+      - name: Export training survey roster
+        run: node scripts/export-training-roster.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
