@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-25T12:04:35.623093+00:00",
+  "checkedAt": "2026-10-25T14:38:33.899110+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -9872,7 +9872,7 @@
       "excludedOwnerPromotions": 46
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
-      "total": 994,
+      "total": 995,
       "videos": 51,
       "completeVideos": 51,
       "partialVideos": 0,
@@ -9880,11 +9880,20 @@
       "counts": {
         "positive": 34,
         "suggestion": 0,
-        "other": 516,
+        "other": 517,
         "review": 37,
         "owner": 407
       },
       "entries": [
+        {
+          "id": "UgwzKIQZI1iDgSuBJLR4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "oelvc9_s3t4",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=oelvc9_s3t4&lc=UgwzKIQZI1iDgSuBJLR4AaABAg"
+        },
         {
           "id": "UgwFBB8lmp9MY-xLw294AaABAg",
           "category": "other",
@@ -39595,7 +39604,7 @@
       "excludedOwnerPromotions": 68
     },
     "UCIN-EGXvd_Tv720IqzD8rQQ": {
-      "total": 72,
+      "total": 73,
       "videos": 18,
       "completeVideos": 18,
       "partialVideos": 0,
@@ -39603,11 +39612,20 @@
       "counts": {
         "positive": 9,
         "suggestion": 0,
-        "other": 40,
+        "other": 41,
         "review": 3,
         "owner": 20
       },
       "entries": [
+        {
+          "id": "Ugzl_13d2nosdQ8iiHh4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "TXSpmway9ps",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=TXSpmway9ps&lc=Ugzl_13d2nosdQ8iiHh4AaABAg"
+        },
         {
           "id": "UgwXTUM74_UbHubdAHN4AaABAg",
           "category": "other",
@@ -40259,6 +40277,12 @@
       ],
       "coverage": [
         {
+          "id": "TXSpmway9ps",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "tRrM6i0XTTI",
           "kind": "video",
           "status": "complete",
@@ -40290,12 +40314,6 @@
         },
         {
           "id": "m4IImmyyQ-w",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "TXSpmway9ps",
           "kind": "video",
           "status": "complete",
           "reported": null
