@@ -1,7 +1,7 @@
 {
   "source": {
     "workbook": "voc회신건수.xlsx",
-    "vocThrough": "2026-10-06",
+    "vocThrough": "2026-10-14",
     "rosterCheckedAt": "2026-10-26",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
@@ -12,7 +12,7 @@
     "jobTitleSourceDate": "2026-10-26",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-10-14",
-    "latestResponseThrough": "2026-10-06",
+    "latestResponseThrough": "2026-10-14",
     "commentAnalysis": "2023-2026 YTD 원문 문장별 긍정·부정 맥락 분리 · 14개 강점/18개 보완 주제",
     "commentAnalysisEmployees": 383,
     "refreshScope": "기존 2023-2025 집계 보존 · 기존 원문 분석 보존 · 2026 점수/회신 갱신 · 이름이 유일한 재직 직원의 전시장 이동 이력 자동 통합",
@@ -41,21 +41,21 @@
       "averageResponsesPerEmployee": 4.4
     },
     "2026": {
-      "responses": 2511,
-      "scoreSum": 23252.0,
-      "average": 9.26,
+      "responses": 2643,
+      "scoreSum": 24484.0,
+      "average": 9.264,
       "respondingEmployees": 401,
-      "averageResponsesPerEmployee": 6.3
+      "averageResponsesPerEmployee": 6.6
     }
   },
   "tenureCohorts": [
     {
       "id": "under-3m",
       "label": "3개월 이내",
-      "employeeCount": 21,
+      "employeeCount": 24,
       "respondingEmployees": 18,
-      "responses": 183,
-      "scoreSum": 1723.0,
+      "responses": 189,
+      "scoreSum": 1781.0,
       "average": 9.42
     },
     {
@@ -63,45 +63,45 @@
       "label": "1년 이내",
       "employeeCount": 39,
       "respondingEmployees": 39,
-      "responses": 304,
-      "scoreSum": 2821.0,
-      "average": 9.28
+      "responses": 314,
+      "scoreSum": 2906.0,
+      "average": 9.25
     },
     {
       "id": "1-3y",
       "label": "1~3년",
-      "employeeCount": 92,
-      "respondingEmployees": 91,
-      "responses": 1491,
-      "scoreSum": 13928.0,
-      "average": 9.34
+      "employeeCount": 91,
+      "respondingEmployees": 90,
+      "responses": 1526,
+      "scoreSum": 14264.0,
+      "average": 9.35
     },
     {
       "id": "3-5y",
       "label": "3~5년",
       "employeeCount": 71,
       "respondingEmployees": 71,
-      "responses": 2665,
-      "scoreSum": 25030.0,
+      "responses": 2692,
+      "scoreSum": 25286.0,
       "average": 9.39
     },
     {
       "id": "5-10y",
       "label": "5~10년",
-      "employeeCount": 126,
-      "respondingEmployees": 126,
-      "responses": 5164,
-      "scoreSum": 47815.0,
+      "employeeCount": 125,
+      "respondingEmployees": 125,
+      "responses": 5159,
+      "scoreSum": 47757.0,
       "average": 9.26
     },
     {
       "id": "over-10y",
       "label": "10년 이상",
-      "employeeCount": 28,
-      "respondingEmployees": 28,
-      "responses": 1415,
-      "scoreSum": 13025.0,
-      "average": 9.2
+      "employeeCount": 29,
+      "respondingEmployees": 29,
+      "responses": 1473,
+      "scoreSum": 13571.0,
+      "average": 9.21
     }
   ],
   "showrooms": {
@@ -276,10 +276,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 76.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 43,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 16,
@@ -331,7 +331,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-25",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "H-JUN2"
         },
         {
@@ -359,10 +359,10 @@
               "sent": 18
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 82.0,
+              "responses": 11,
+              "scoreSum": 92.0,
               "sent": 53,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 35,
@@ -426,7 +426,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-04",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-HA7"
         },
         {
@@ -646,10 +646,10 @@
               "sent": 14
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 90.0,
+              "responses": 11,
+              "scoreSum": 100.0,
               "sent": 85,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 87,
@@ -733,7 +733,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-25",
+          "latestResponseDate": "2026-10-07",
           "staffCdsid": "S-SIN"
         }
       ],
@@ -801,10 +801,10 @@
               "sent": 17
             },
             "2026": {
-              "responses": 3,
-              "scoreSum": 28.0,
+              "responses": 5,
+              "scoreSum": 47.0,
               "sent": 43,
-              "rateResponses": 3
+              "rateResponses": 5
             }
           },
           "commentResponses": 46,
@@ -864,7 +864,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-22",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "S-KIM63"
         },
         {
@@ -926,10 +926,10 @@
               "sent": 3
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 35.0,
+              "responses": 5,
+              "scoreSum": 44.0,
               "sent": 43,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 6,
@@ -965,7 +965,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-09",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-KIM129"
         },
         {
@@ -1377,10 +1377,10 @@
               "sent": 4
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 69.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 61,
-              "rateResponses": 7
+              "rateResponses": 9
             }
           },
           "commentResponses": 49,
@@ -1436,7 +1436,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-03",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "M-SONG11"
         }
       ],
@@ -1528,10 +1528,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 5,
-              "scoreSum": 50.0,
+              "responses": 6,
+              "scoreSum": 55.0,
               "sent": 27,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 5,
@@ -1554,7 +1554,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-06",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-KANG17"
         },
         {
@@ -1868,10 +1868,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 45.0,
+              "responses": 7,
+              "scoreSum": 63.0,
               "sent": 33,
-              "rateResponses": 5
+              "rateResponses": 7
             }
           },
           "commentResponses": 42,
@@ -1947,7 +1947,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-04",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "D-HONG5"
         },
         {
@@ -2082,10 +2082,10 @@
               "sent": 10
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 59.0,
+              "responses": 7,
+              "scoreSum": 69.0,
               "sent": 40,
-              "rateResponses": 6
+              "rateResponses": 7
             }
           },
           "commentResponses": 40,
@@ -2140,7 +2140,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-17",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "G-JUNG2"
         }
       ],
@@ -2336,10 +2336,10 @@
               "sent": 13
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 50.0,
+              "responses": 6,
+              "scoreSum": 60.0,
               "sent": 34,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 31,
@@ -2399,7 +2399,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "H-KIM27"
         },
         {
@@ -2512,10 +2512,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 78.0,
+              "responses": 9,
+              "scoreSum": 88.0,
               "sent": 55,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 9,
@@ -2542,7 +2542,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "B-JUNG8"
         },
         {
@@ -2832,10 +2832,10 @@
               "sent": 3
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 76.0,
+              "responses": 10,
+              "scoreSum": 96.0,
               "sent": 66,
-              "rateResponses": 8
+              "rateResponses": 10
             }
           },
           "commentResponses": 5,
@@ -2859,7 +2859,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "S-HWANG6"
         },
         {
@@ -3741,10 +3741,10 @@
               "sent": 14
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 48.0,
+              "responses": 6,
+              "scoreSum": 58.0,
               "sent": 54,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 53,
@@ -3824,7 +3824,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-10",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-PARK19"
         }
       ],
@@ -4158,10 +4158,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 1,
-              "scoreSum": 10.0,
+              "responses": 3,
+              "scoreSum": 24.0,
               "sent": 24,
-              "rateResponses": 1
+              "rateResponses": 3
             }
           },
           "commentResponses": 1,
@@ -4176,7 +4176,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-07",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "M-PARK18"
         },
         {
@@ -4589,10 +4589,10 @@
               "sent": 4
             },
             "2026": {
-              "responses": 3,
-              "scoreSum": 29.0,
+              "responses": 4,
+              "scoreSum": 39.0,
               "sent": 23,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 19,
@@ -4652,7 +4652,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-28",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "W-YOON"
         },
         {
@@ -5367,10 +5367,10 @@
               "sent": 42
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 42.0,
+              "responses": 6,
+              "scoreSum": 52.0,
               "sent": 25,
-              "rateResponses": 5
+              "rateResponses": 6
             },
             "2025": {
               "responses": 0,
@@ -5419,7 +5419,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-26",
+          "latestResponseDate": "2026-10-08",
           "staffCdsid": "J-YOON5"
         },
         {
@@ -5442,10 +5442,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 78.0,
+              "responses": 9,
+              "scoreSum": 88.0,
               "sent": 29,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 29,
@@ -5509,7 +5509,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "Y-LEE28"
         }
       ],
@@ -5592,10 +5592,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 1,
-              "scoreSum": 10.0,
+              "responses": 2,
+              "scoreSum": 20.0,
               "sent": 7,
-              "rateResponses": 1
+              "rateResponses": 2
             }
           },
           "commentResponses": 4,
@@ -5623,7 +5623,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-01-17",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "J-PARK76"
         },
         {
@@ -6116,10 +6116,10 @@
               "sent": 19
             },
             "2026": {
-              "responses": 12,
-              "scoreSum": 110.0,
+              "responses": 13,
+              "scoreSum": 120.0,
               "sent": 75,
-              "rateResponses": 12
+              "rateResponses": 13
             }
           },
           "commentResponses": 107,
@@ -6187,7 +6187,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-04",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "H-KIM37"
         },
         {
@@ -6621,10 +6621,10 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2026": {
-              "responses": 3,
-              "scoreSum": 30.0,
+              "responses": 4,
+              "scoreSum": 40.0,
               "sent": 8,
-              "rateResponses": 3
+              "rateResponses": 4
             },
             "2025": {
               "responses": 0,
@@ -6640,7 +6640,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-08-12",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "S-KIM106"
         },
         {
@@ -6663,10 +6663,10 @@
               "sent": 5
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 64.0,
+              "responses": 9,
+              "scoreSum": 84.0,
               "sent": 27,
-              "rateResponses": 7
+              "rateResponses": 9
             }
           },
           "commentResponses": 13,
@@ -6714,7 +6714,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-18",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "J-PARK58"
         },
         {
@@ -6737,10 +6737,10 @@
               "sent": 5
             },
             "2026": {
-              "responses": 3,
-              "scoreSum": 28.0,
+              "responses": 4,
+              "scoreSum": 38.0,
               "sent": 10,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 10,
@@ -6775,7 +6775,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-07",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-SEO10"
         },
         {
@@ -6871,10 +6871,10 @@
               "sent": 6
             },
             "2026": {
-              "responses": 3,
-              "scoreSum": 30.0,
+              "responses": 4,
+              "scoreSum": 40.0,
               "sent": 11,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 10,
@@ -6913,7 +6913,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-01",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "Y-YUN4"
         },
         {
@@ -8104,10 +8104,10 @@
               "sent": 5
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 36.0,
+              "responses": 6,
+              "scoreSum": 56.0,
               "sent": 30,
-              "rateResponses": 4
+              "rateResponses": 6
             }
           },
           "commentResponses": 23,
@@ -8162,7 +8162,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-24",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "J-JIN16"
         },
         {
@@ -8562,10 +8562,10 @@
           "tenureBucketLabel": "3개월 이내",
           "years": {
             "2026": {
-              "responses": 10,
-              "scoreSum": 97.0,
+              "responses": 12,
+              "scoreSum": 116.0,
               "sent": 41,
-              "rateResponses": 10
+              "rateResponses": 12
             }
           },
           "commentResponses": 5,
@@ -8584,7 +8584,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "T-KO"
         },
         {
@@ -8724,10 +8724,10 @@
               "sent": 15
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 77.0,
+              "responses": 10,
+              "scoreSum": 87.0,
               "sent": 58,
-              "rateResponses": 9
+              "rateResponses": 10
             }
           },
           "commentResponses": 24,
@@ -8787,7 +8787,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-12",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-LEE39"
         },
         {
@@ -8810,10 +8810,10 @@
               "sent": 10
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 86.0,
+              "responses": 11,
+              "scoreSum": 94.0,
               "sent": 119,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 35,
@@ -8865,7 +8865,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-12",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "Y-CHOI11"
         },
         {
@@ -9166,10 +9166,10 @@
               "sent": 19
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 86.0,
+              "responses": 10,
+              "scoreSum": 96.0,
               "sent": 105,
-              "rateResponses": 9
+              "rateResponses": 10
             }
           },
           "commentResponses": 25,
@@ -9221,7 +9221,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-13",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "J-KIM127"
         },
         {
@@ -9344,10 +9344,10 @@
               "sent": 46
             },
             "2026": {
-              "responses": 13,
-              "scoreSum": 123.0,
+              "responses": 15,
+              "scoreSum": 141.0,
               "sent": 93,
-              "rateResponses": 13
+              "rateResponses": 15
             }
           },
           "commentResponses": 82,
@@ -9427,7 +9427,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-29",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "B-LEE15"
         },
         {
@@ -9554,10 +9554,10 @@
               "sent": 27
             },
             "2026": {
-              "responses": 11,
-              "scoreSum": 107.0,
+              "responses": 12,
+              "scoreSum": 117.0,
               "sent": 63,
-              "rateResponses": 11
+              "rateResponses": 12
             }
           },
           "commentResponses": 60,
@@ -9641,7 +9641,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "S-LEE50"
         },
         {
@@ -9772,10 +9772,10 @@
               "sent": 30
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 45.0,
+              "responses": 6,
+              "scoreSum": 55.0,
               "sent": 66,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 77,
@@ -9867,7 +9867,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-30",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "H-JUNG3"
         },
         {
@@ -9990,10 +9990,10 @@
               "sent": 14
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 47.0,
+              "responses": 8,
+              "scoreSum": 73.0,
               "sent": 55,
-              "rateResponses": 5
+              "rateResponses": 8
             }
           },
           "commentResponses": 60,
@@ -10069,7 +10069,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-29",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "J-CHOI21"
         },
         {
@@ -10182,10 +10182,10 @@
               "sent": 16
             },
             "2026": {
-              "responses": 14,
-              "scoreSum": 129.0,
+              "responses": 16,
+              "scoreSum": 147.0,
               "sent": 99,
-              "rateResponses": 14
+              "rateResponses": 16
             }
           },
           "commentResponses": 17,
@@ -10236,7 +10236,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-28",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "J-HAN56"
         },
         {
@@ -10355,10 +10355,10 @@
               "sent": 26
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 92.0,
+              "responses": 11,
+              "scoreSum": 102.0,
               "sent": 103,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 58,
@@ -10442,7 +10442,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-16",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "Y-SHIN6"
         },
         {
@@ -10702,10 +10702,10 @@
               "sent": 6
             },
             "2026": {
-              "responses": 3,
-              "scoreSum": 29.0,
+              "responses": 4,
+              "scoreSum": 39.0,
               "sent": 21,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 25,
@@ -10769,7 +10769,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-12",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "S-KIM56"
         },
         {
@@ -10882,10 +10882,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 4,
-              "scoreSum": 28.0,
+              "responses": 5,
+              "scoreSum": 38.0,
               "sent": 35,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 5,
@@ -10912,7 +10912,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-08-25",
+          "latestResponseDate": "2026-10-07",
           "staffCdsid": "J-PARK85"
         },
         {
@@ -11206,10 +11206,10 @@
               "sent": 5
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 54.0,
+              "responses": 8,
+              "scoreSum": 72.0,
               "sent": 42,
-              "rateResponses": 6
+              "rateResponses": 8
             }
           },
           "commentResponses": 29,
@@ -11264,7 +11264,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-07",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "H-CHUNG"
         },
         {
@@ -11579,10 +11579,10 @@
               "sent": 17
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 49.0,
+              "responses": 7,
+              "scoreSum": 59.0,
               "sent": 27,
-              "rateResponses": 6
+              "rateResponses": 7
             }
           },
           "commentResponses": 46,
@@ -11654,7 +11654,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-25",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "S-BYUN"
         },
         {
@@ -11940,10 +11940,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 2,
-              "scoreSum": 20.0,
+              "responses": 3,
+              "scoreSum": 30.0,
               "sent": 15,
-              "rateResponses": 2
+              "rateResponses": 3
             }
           },
           "commentResponses": 18,
@@ -11999,7 +11999,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-06-29",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "Y-KIM41"
         },
         {
@@ -12392,10 +12392,10 @@
               "sent": 4
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 35.0,
+              "responses": 5,
+              "scoreSum": 45.0,
               "sent": 25,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 9,
@@ -12430,7 +12430,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-08-07",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-AN4"
         },
         {
@@ -12534,10 +12534,10 @@
           "tenureBucketLabel": "3개월 이내",
           "years": {
             "2026": {
-              "responses": 1,
-              "scoreSum": 10.0,
+              "responses": 2,
+              "scoreSum": 20.0,
               "sent": 9,
-              "rateResponses": 1
+              "rateResponses": 2
             }
           },
           "commentResponses": 1,
@@ -12548,7 +12548,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-09",
+          "latestResponseDate": "2026-10-08",
           "staffCdsid": "M-LEE46"
         },
         {
@@ -12576,10 +12576,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 2,
-              "scoreSum": 20.0,
+              "responses": 3,
+              "scoreSum": 30.0,
               "sent": 36,
-              "rateResponses": 2
+              "rateResponses": 3
             }
           },
           "commentResponses": 12,
@@ -12635,7 +12635,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-17",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "C-LEE22"
         },
         {
@@ -12954,10 +12954,10 @@
               "sent": 5
             },
             "2026": {
-              "responses": 2,
-              "scoreSum": 20.0,
+              "responses": 3,
+              "scoreSum": 30.0,
               "sent": 17,
-              "rateResponses": 2
+              "rateResponses": 3
             }
           },
           "commentResponses": 10,
@@ -12992,7 +12992,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-05",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "S-JUNG7"
         }
       ],
@@ -13132,10 +13132,10 @@
               "sent": 18
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 78.0,
+              "responses": 9,
+              "scoreSum": 88.0,
               "sent": 67,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 20,
@@ -13187,7 +13187,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-18",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "M-KIM50"
         },
         {
@@ -13316,10 +13316,10 @@
               "sent": 20
             },
             "2026": {
-              "responses": 12,
-              "scoreSum": 105.0,
+              "responses": 13,
+              "scoreSum": 115.0,
               "sent": 83,
-              "rateResponses": 12
+              "rateResponses": 13
             }
           },
           "commentResponses": 19,
@@ -13367,7 +13367,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-26",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "H-PARK28"
         },
         {
@@ -13380,10 +13380,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 3,
-              "scoreSum": 30.0,
+              "responses": 4,
+              "scoreSum": 40.0,
               "sent": 43,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 3,
@@ -13402,7 +13402,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-07-25",
+          "latestResponseDate": "2026-10-07",
           "staffCdsid": "S-BOK"
         },
         {
@@ -13646,10 +13646,10 @@
               "sent": 10
             },
             "2026": {
-              "responses": 11,
-              "scoreSum": 86.0,
+              "responses": 12,
+              "scoreSum": 94.0,
               "sent": 52,
-              "rateResponses": 11
+              "rateResponses": 12
             }
           },
           "commentResponses": 16,
@@ -13705,7 +13705,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-22",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "J-CHA1"
         },
         {
@@ -14036,10 +14036,10 @@
               "sent": 33
             },
             "2026": {
-              "responses": 16,
-              "scoreSum": 152.0,
+              "responses": 17,
+              "scoreSum": 162.0,
               "sent": 100,
-              "rateResponses": 16
+              "rateResponses": 17
             }
           },
           "commentResponses": 71,
@@ -14119,7 +14119,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-11",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "H-YU40"
         },
         {
@@ -14381,10 +14381,10 @@
               "sent": 14
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 33.0,
+              "responses": 5,
+              "scoreSum": 41.0,
               "sent": 36,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 44,
@@ -14456,7 +14456,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-08",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "S-KIM52"
         },
         {
@@ -15221,10 +15221,10 @@
               "sent": 31
             },
             "2026": {
-              "responses": 2,
-              "scoreSum": 20.0,
+              "responses": 4,
+              "scoreSum": 32.0,
               "sent": 36,
-              "rateResponses": 2
+              "rateResponses": 4
             }
           },
           "commentResponses": 34,
@@ -15288,7 +15288,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-04",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "S-JEON4"
         },
         {
@@ -16644,10 +16644,10 @@
               "sent": 31
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 36.0,
+              "responses": 5,
+              "scoreSum": 46.0,
               "sent": 33,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 22,
@@ -16707,7 +16707,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-23",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "J-PARK61"
         },
         {
@@ -17246,10 +17246,10 @@
               "sent": 52
             },
             "2026": {
-              "responses": 13,
-              "scoreSum": 123.0,
+              "responses": 14,
+              "scoreSum": 133.0,
               "sent": 90,
-              "rateResponses": 13
+              "rateResponses": 14
             }
           },
           "commentResponses": 95,
@@ -17329,7 +17329,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "K-LEE34"
         }
       ],
@@ -17918,10 +17918,10 @@
           "tenureBucketLabel": "3개월 이내",
           "years": {
             "2026": {
-              "responses": 4,
-              "scoreSum": 39.0,
+              "responses": 5,
+              "scoreSum": 48.0,
               "sent": 30,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 2,
@@ -17932,7 +17932,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-10-04",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-JU7"
         },
         {
@@ -17950,10 +17950,10 @@
               "sent": 64
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 62.0,
+              "responses": 9,
+              "scoreSum": 81.0,
               "sent": 73,
-              "rateResponses": 7
+              "rateResponses": 9
             }
           },
           "commentResponses": 11,
@@ -17996,7 +17996,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-10",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "S-HA2"
         },
         {
@@ -18019,10 +18019,10 @@
               "sent": 18
             },
             "2026": {
-              "responses": 13,
-              "scoreSum": 119.0,
+              "responses": 14,
+              "scoreSum": 128.0,
               "sent": 53,
-              "rateResponses": 13
+              "rateResponses": 14
             }
           },
           "commentResponses": 17,
@@ -18074,7 +18074,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "S-HAN34"
         },
         {
@@ -18258,10 +18258,10 @@
               "sent": 35
             },
             "2026": {
-              "responses": 18,
-              "scoreSum": 169.0,
+              "responses": 19,
+              "scoreSum": 177.0,
               "sent": 83,
-              "rateResponses": 18
+              "rateResponses": 19
             }
           },
           "commentResponses": 77,
@@ -18333,7 +18333,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "S-KIM81"
         },
         {
@@ -18373,10 +18373,10 @@
               "sent": 2
             },
             "2026": {
-              "responses": 12,
-              "scoreSum": 115.0,
+              "responses": 13,
+              "scoreSum": 125.0,
               "sent": 70,
-              "rateResponses": 12
+              "rateResponses": 13
             }
           },
           "commentResponses": 13,
@@ -18419,7 +18419,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-20",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "H-SHIN3"
         },
         {
@@ -18590,10 +18590,10 @@
               "sent": 21
             },
             "2026": {
-              "responses": 18,
-              "scoreSum": 164.0,
+              "responses": 19,
+              "scoreSum": 174.0,
               "sent": 81,
-              "rateResponses": 18
+              "rateResponses": 19
             }
           },
           "commentResponses": 84,
@@ -18673,7 +18673,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "N-KIM6"
         },
         {
@@ -19117,10 +19117,10 @@
               "sent": 17
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 90.0,
+              "responses": 10,
+              "scoreSum": 100.0,
               "sent": 56,
-              "rateResponses": 9
+              "rateResponses": 10
             }
           },
           "commentResponses": 50,
@@ -19188,7 +19188,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-03",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "T-LIM3"
         },
         {
@@ -19311,10 +19311,10 @@
               "sent": 31
             },
             "2026": {
-              "responses": 16,
-              "scoreSum": 152.0,
+              "responses": 19,
+              "scoreSum": 180.0,
               "sent": 86,
-              "rateResponses": 16
+              "rateResponses": 19
             }
           },
           "commentResponses": 55,
@@ -19382,7 +19382,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "K-KIM33"
         },
         {
@@ -19513,10 +19513,10 @@
               "sent": 24
             },
             "2026": {
-              "responses": 11,
-              "scoreSum": 98.0,
+              "responses": 12,
+              "scoreSum": 108.0,
               "sent": 89,
-              "rateResponses": 11
+              "rateResponses": 12
             }
           },
           "commentResponses": 54,
@@ -19592,7 +19592,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-03",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "S-AHN1"
         }
       ],
@@ -19968,10 +19968,10 @@
               "sent": 38
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 75.0,
+              "responses": 10,
+              "scoreSum": 95.0,
               "sent": 47,
-              "rateResponses": 8
+              "rateResponses": 10
             }
           },
           "commentResponses": 72,
@@ -20035,7 +20035,7 @@
               "mentions": 2
             }
           ],
-          "latestResponseDate": "2026-08-27",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-PARK14"
         },
         {
@@ -20614,10 +20614,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 47.0,
+              "responses": 6,
+              "scoreSum": 57.0,
               "sent": 49,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 26,
@@ -20677,7 +20677,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "J-CHOI22"
         },
         {
@@ -21331,10 +21331,10 @@
         {
           "years": {
             "2026": {
-              "responses": 1,
-              "scoreSum": 10.0,
+              "responses": 3,
+              "scoreSum": 30.0,
               "sent": 14,
-              "rateResponses": 1
+              "rateResponses": 3
             }
           },
           "commentResponses": 0,
@@ -21348,7 +21348,7 @@
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "staffCdsid": "S-CHOI23",
-          "latestResponseDate": "2026-10-03"
+          "latestResponseDate": "2026-10-12"
         },
         {
           "name": "한창우",
@@ -21375,10 +21375,10 @@
               "sent": 10
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 77.0,
+              "responses": 9,
+              "scoreSum": 87.0,
               "sent": 56,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 53,
@@ -21450,7 +21450,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-04",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "C-HAN8"
         },
         {
@@ -21967,10 +21967,10 @@
               "sent": 16
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 36.0,
+              "responses": 5,
+              "scoreSum": 46.0,
               "sent": 46,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 29,
@@ -22034,7 +22034,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-06",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "J-KIM122"
         },
         {
@@ -22101,10 +22101,10 @@
               "sent": 15
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 51.0,
+              "responses": 9,
+              "scoreSum": 80.0,
               "sent": 61,
-              "rateResponses": 6
+              "rateResponses": 9
             }
           },
           "commentResponses": 36,
@@ -22164,7 +22164,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-06",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-SEONG3"
         },
         {
@@ -22187,10 +22187,10 @@
               "sent": 14
             },
             "2026": {
-              "responses": 16,
-              "scoreSum": 152.0,
+              "responses": 18,
+              "scoreSum": 172.0,
               "sent": 71,
-              "rateResponses": 16
+              "rateResponses": 18
             }
           },
           "commentResponses": 42,
@@ -22254,7 +22254,7 @@
               "mentions": 2
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "J-SEONG2"
         }
       ],
@@ -22356,10 +22356,10 @@
               "sent": 12
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 52.0,
+              "responses": 7,
+              "scoreSum": 58.0,
               "sent": 39,
-              "rateResponses": 6
+              "rateResponses": 7
             }
           },
           "commentResponses": 49,
@@ -22423,7 +22423,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "Y-KIM43"
         },
         {
@@ -22489,10 +22489,10 @@
           "tenureBucketLabel": "10년 이상",
           "years": {
             "2026": {
-              "responses": 9,
-              "scoreSum": 86.0,
+              "responses": 11,
+              "scoreSum": 106.0,
               "sent": 30,
-              "rateResponses": 9
+              "rateResponses": 11
             },
             "2023": {
               "responses": 13,
@@ -22595,7 +22595,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-30",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "K-JUN"
         },
         {
@@ -23478,10 +23478,10 @@
               "sent": 14
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 60.0,
+              "responses": 8,
+              "scoreSum": 70.0,
               "sent": 55,
-              "rateResponses": 7
+              "rateResponses": 8
             }
           },
           "commentResponses": 39,
@@ -23557,7 +23557,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-03",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-JEON11"
         },
         {
@@ -23618,10 +23618,10 @@
               "sent": 3
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 38.0,
+              "responses": 6,
+              "scoreSum": 47.0,
               "sent": 55,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 5,
@@ -23652,7 +23652,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-20",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "M-HUH"
         },
         {
@@ -23779,10 +23779,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 37.0,
+              "responses": 5,
+              "scoreSum": 47.0,
               "sent": 42,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 32,
@@ -23850,7 +23850,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-19",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "S-PARK40"
         },
         {
@@ -23878,10 +23878,10 @@
               "sent": 11
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 48.0,
+              "responses": 6,
+              "scoreSum": 56.0,
               "sent": 34,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 37,
@@ -23957,7 +23957,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-31",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "D-SHIN7"
         },
         {
@@ -24187,10 +24187,10 @@
               "sent": 13
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 77.0,
+              "responses": 9,
+              "scoreSum": 87.0,
               "sent": 80,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 55,
@@ -24270,7 +24270,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "J-KIM63"
         },
         {
@@ -24298,10 +24298,10 @@
               "sent": 20
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 87.0,
+              "responses": 10,
+              "scoreSum": 97.0,
               "sent": 46,
-              "rateResponses": 9
+              "rateResponses": 10
             }
           },
           "commentResponses": 67,
@@ -24365,7 +24365,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-KIM50"
         },
         {
@@ -24492,10 +24492,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 38.0,
+              "responses": 5,
+              "scoreSum": 46.0,
               "sent": 40,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 29,
@@ -24559,7 +24559,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-09",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "D-SHIN6"
         },
         {
@@ -24587,10 +24587,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 76.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 39,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 37,
@@ -24654,7 +24654,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-08",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "Y-AHN"
         },
         {
@@ -24682,10 +24682,10 @@
               "sent": 17
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 78.0,
+              "responses": 10,
+              "scoreSum": 88.0,
               "sent": 54,
-              "rateResponses": 9
+              "rateResponses": 10
             }
           },
           "commentResponses": 31,
@@ -24745,7 +24745,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-20",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "D-YANG12"
         },
         {
@@ -25149,10 +25149,10 @@
               "sent": 7
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 65.0,
+              "responses": 8,
+              "scoreSum": 75.0,
               "sent": 60,
-              "rateResponses": 7
+              "rateResponses": 8
             }
           },
           "commentResponses": 38,
@@ -25228,7 +25228,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-03",
+          "latestResponseDate": "2026-10-11",
           "staffCdsid": "D-HEO1"
         },
         {
@@ -25256,10 +25256,10 @@
               "sent": 22
             },
             "2026": {
-              "responses": 9,
-              "scoreSum": 83.0,
+              "responses": 10,
+              "scoreSum": 93.0,
               "sent": 60,
-              "rateResponses": 9
+              "rateResponses": 10
             }
           },
           "commentResponses": 38,
@@ -25319,7 +25319,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "J-KIM83"
         },
         {
@@ -25342,10 +25342,10 @@
               "sent": 11
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 94.0,
+              "responses": 11,
+              "scoreSum": 104.0,
               "sent": 66,
-              "rateResponses": 10
+              "rateResponses": 11
             },
             "2023": {
               "responses": 0,
@@ -25414,7 +25414,7 @@
               "mentions": 2
             }
           ],
-          "latestResponseDate": "2026-09-26",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "D-YANG16"
         },
         {
@@ -25442,10 +25442,10 @@
               "sent": 13
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 46.0,
+              "responses": 6,
+              "scoreSum": 56.0,
               "sent": 31,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 20,
@@ -25484,7 +25484,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-09-12",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "G-JANG"
         }
       ],
@@ -25662,10 +25662,10 @@
               "sent": 9
             },
             "2026": {
-              "responses": 5,
-              "scoreSum": 46.0,
+              "responses": 6,
+              "scoreSum": 56.0,
               "sent": 79,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 34,
@@ -25733,7 +25733,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-JANG6"
         },
         {
@@ -25761,10 +25761,10 @@
               "sent": 27
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 78.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 65,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 37,
@@ -25824,7 +25824,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-12",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "Y-KIM45"
         }
       ],
@@ -25954,10 +25954,10 @@
               "sent": 9
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 90.0,
+              "responses": 11,
+              "scoreSum": 100.0,
               "sent": 74,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 52,
@@ -26025,7 +26025,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "M-KIM23"
         },
         {
@@ -26184,10 +26184,10 @@
               "sent": 13
             },
             "2026": {
-              "responses": 17,
-              "scoreSum": 142.0,
+              "responses": 19,
+              "scoreSum": 149.0,
               "sent": 76,
-              "rateResponses": 17
+              "rateResponses": 19
             }
           },
           "commentResponses": 48,
@@ -26263,7 +26263,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-24",
+          "latestResponseDate": "2026-10-07",
           "staffCdsid": "H-MOON1"
         },
         {
@@ -26510,10 +26510,10 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2026": {
-              "responses": 5,
-              "scoreSum": 49.0,
+              "responses": 6,
+              "scoreSum": 58.0,
               "sent": 45,
-              "rateResponses": 5
+              "rateResponses": 6
             }
           },
           "commentResponses": 3,
@@ -26532,7 +26532,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "J-YOU10"
         },
         {
@@ -26560,10 +26560,10 @@
               "sent": 18
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 50.0,
+              "responses": 7,
+              "scoreSum": 60.0,
               "sent": 55,
-              "rateResponses": 6
+              "rateResponses": 7
             }
           },
           "commentResponses": 46,
@@ -26643,7 +26643,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-30",
+          "latestResponseDate": "2026-10-07",
           "staffCdsid": "J-JU5"
         },
         {
@@ -26671,10 +26671,10 @@
               "sent": 3
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 66.0,
+              "responses": 8,
+              "scoreSum": 76.0,
               "sent": 38,
-              "rateResponses": 7
+              "rateResponses": 8
             }
           },
           "commentResponses": 27,
@@ -26734,7 +26734,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-05",
+          "latestResponseDate": "2026-10-09",
           "staffCdsid": "Y-KIM46"
         }
       ],
@@ -27310,10 +27310,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 8,
-              "scoreSum": 71.0,
+              "responses": 9,
+              "scoreSum": 81.0,
               "sent": 64,
-              "rateResponses": 8
+              "rateResponses": 9
             }
           },
           "commentResponses": 24,
@@ -27381,7 +27381,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-29",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "J-LEE110"
         },
         {
@@ -27672,10 +27672,10 @@
               "sent": 3
             },
             "2026": {
-              "responses": 3,
-              "scoreSum": 25.0,
+              "responses": 4,
+              "scoreSum": 34.0,
               "sent": 24,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 23,
@@ -27731,7 +27731,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-09",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "H-LIM3"
         },
         {
@@ -27965,10 +27965,10 @@
               "sent": 3
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 26.0,
+              "responses": 5,
+              "scoreSum": 34.0,
               "sent": 21,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 4,
@@ -27996,7 +27996,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-07-27",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "G-KIM13"
         },
         {
@@ -28198,10 +28198,10 @@
               "sent": 87
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 60.0,
+              "responses": 10,
+              "scoreSum": 88.0,
               "sent": 40,
-              "rateResponses": 7
+              "rateResponses": 10
             },
             "2025": {
               "responses": 2,
@@ -28278,7 +28278,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-06",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "J-LEE89"
         }
       ],
@@ -29039,10 +29039,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 3,
-              "scoreSum": 28.0,
+              "responses": 4,
+              "scoreSum": 35.0,
               "sent": 51,
-              "rateResponses": 3
+              "rateResponses": 4
             }
           },
           "commentResponses": 3,
@@ -29073,7 +29073,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-07-14",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "J-HA11"
         },
         {
@@ -29272,10 +29272,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 6,
-              "scoreSum": 55.0,
+              "responses": 7,
+              "scoreSum": 63.0,
               "sent": 50,
-              "rateResponses": 6
+              "rateResponses": 7
             }
           },
           "commentResponses": 48,
@@ -29339,7 +29339,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-10-06",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "S-CHOI9"
         },
         {
@@ -30352,10 +30352,10 @@
               "sent": 12
             },
             "2026": {
-              "responses": 4,
-              "scoreSum": 38.0,
+              "responses": 5,
+              "scoreSum": 48.0,
               "sent": 39,
-              "rateResponses": 4
+              "rateResponses": 5
             }
           },
           "commentResponses": 39,
@@ -30419,7 +30419,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-08-15",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "D-KIM32"
         },
         {
@@ -30693,10 +30693,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 8,
-              "scoreSum": 76.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 60,
-              "rateResponses": 8
+              "rateResponses": 9
             },
             "2023": {
               "responses": 2,
@@ -30749,7 +30749,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-06",
+          "latestResponseDate": "2026-10-12",
           "staffCdsid": "J-AHN9"
         },
         {
@@ -30762,10 +30762,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 13,
-              "scoreSum": 116.0,
+              "responses": 14,
+              "scoreSum": 126.0,
               "sent": 53,
-              "rateResponses": 13
+              "rateResponses": 14
             }
           },
           "commentResponses": 8,
@@ -30805,7 +30805,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "H-LIM8"
         },
         {
@@ -30893,10 +30893,10 @@
               "sent": 28
             },
             "2026": {
-              "responses": 11,
-              "scoreSum": 104.0,
+              "responses": 13,
+              "scoreSum": 124.0,
               "sent": 40,
-              "rateResponses": 11
+              "rateResponses": 13
             }
           },
           "commentResponses": 84,
@@ -30972,7 +30972,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-19",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "J-KIM105"
         },
         {
@@ -31356,10 +31356,10 @@
               "sent": 8
             },
             "2026": {
-              "responses": 7,
-              "scoreSum": 66.0,
+              "responses": 9,
+              "scoreSum": 86.0,
               "sent": 49,
-              "rateResponses": 7
+              "rateResponses": 9
             }
           },
           "commentResponses": 9,
@@ -31390,7 +31390,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-08-21",
+          "latestResponseDate": "2026-10-14",
           "staffCdsid": "H-KIM75"
         },
         {
@@ -31901,10 +31901,10 @@
           "tenureBucketLabel": "1년 이내",
           "years": {
             "2026": {
-              "responses": 10,
-              "scoreSum": 94.0,
+              "responses": 11,
+              "scoreSum": 104.0,
               "sent": 59,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 8,
@@ -31931,7 +31931,7 @@
             }
           ],
           "improvementKeywords": [],
-          "latestResponseDate": "2026-10-03",
+          "latestResponseDate": "2026-10-13",
           "staffCdsid": "J-JEON18"
         },
         {
@@ -31954,10 +31954,10 @@
               "sent": 71
             },
             "2026": {
-              "responses": 10,
-              "scoreSum": 94.0,
+              "responses": 11,
+              "scoreSum": 103.0,
               "sent": 60,
-              "rateResponses": 10
+              "rateResponses": 11
             }
           },
           "commentResponses": 48,
@@ -32025,7 +32025,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-27",
+          "latestResponseDate": "2026-10-08",
           "staffCdsid": "H-JUNG11"
         },
         {
@@ -32038,10 +32038,10 @@
           "tenureBucketLabel": "1~3년",
           "years": {
             "2026": {
-              "responses": 8,
-              "scoreSum": 74.0,
+              "responses": 9,
+              "scoreSum": 83.0,
               "sent": 53,
-              "rateResponses": 8
+              "rateResponses": 9
             },
             "2025": {
               "responses": 0,
@@ -32090,7 +32090,7 @@
               "mentions": 1
             }
           ],
-          "latestResponseDate": "2026-09-05",
+          "latestResponseDate": "2026-10-10",
           "staffCdsid": "D-JO1"
         },
         {
