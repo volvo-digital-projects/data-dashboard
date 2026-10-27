@@ -19737,5 +19737,17 @@ main.dealer-analysis-page {
 
   .growth-profile-person-certification {
     width: 120px;
+    height: 44px;
+    align-self: center;
+  }
+
+  .growth-profile-person-certification::before {
+    top: 0;
+    bottom: 0;
+  }
+
+  .growth-profile-strip > .growth-profile-metric {
+    padding-left: 20px;
+    padding-right: 4px;
   }
 }
