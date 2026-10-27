@@ -19728,14 +19728,14 @@ main.dealer-analysis-page {
 /* Reclaim the identity area's spare width for three equal iPad metrics. */
 @media (min-width: 768px) and (max-width: 1366px) {
   .growth-profile-strip {
-    grid-template-columns: clamp(340px, 32vw, 400px) repeat(3, minmax(0, 1fr));
+    grid-template-columns: clamp(370px, 35vw, 430px) repeat(3, minmax(0, 1fr));
   }
 
   .growth-profile-person {
-    grid-template-columns: auto minmax(0, 1fr) 100px;
+    grid-template-columns: auto minmax(0, 1fr) 120px;
   }
 
   .growth-profile-person-certification {
-    width: 100px;
+    width: 120px;
   }
 }
