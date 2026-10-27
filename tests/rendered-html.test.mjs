@@ -618,7 +618,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.doesNotMatch(navigation, /<small>선택 영업직원<\/small>/);
   assert.match(navigation, /selectedStaffEmployee\?\.jobTitle \?\? ""\} · \{displayTwoDigitCount\(selectedStaffTenureYears \?\? 0\)\}년 \{displayTwoDigitCount\(selectedStaffTenureMonths \?\? 0\)\}개월/);
   assert.match(source, /const selectedStaffCommentTotalMentions =\s*selectedStaffStrengthTotalMentions \+ selectedStaffImprovementTotalMentions;/);
-  assert.match(navigation, /<span>VOC 회신\(\{vocResponseEvidenceLabel\}\)<\/span>/);
+  assert.match(navigation, /<span>VOC 고객피드백\(\{vocResponseEvidenceLabel\}\)<\/span>/);
   assert.match(source, /vocResponseEvidence\.totalResponses\.toLocaleString\("ko-KR"\)/);
   assert.match(navigation, /selectedStaffScoreStability\.label\}[\s\S]*?growth-profile-evidence-count">\{selectedStaffScoreStability\.note\}누적 회신 \{selectedStaffResponses\}건 · 코멘트 \{selectedStaffCommentTotalMentions\}건\(중복포함\)<\/small>/);
   assert.match(source, /responses >= 50[\s\S]*?label: "최고"[\s\S]*?responses >= 30[\s\S]*?label: "높음"[\s\S]*?responses >= 15[\s\S]*?label: "보통"[\s\S]*?responses >= 8[\s\S]*?label: "낮음"[\s\S]*?label: "보류"/);
@@ -1145,7 +1145,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading b\s*\{[^}]*display: inline;/);
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.growth-roster-sales-heading i\s*\{[^}]*display: none;/);
   assert.match(navigation, /selectedStaffSalesTopPercent\.toFixed\(1\)\}%\)<\/i>/);
-  const stabilityIndex = navigation.indexOf("VOC 회신");
+  const stabilityIndex = navigation.indexOf("VOC 고객피드백");
   const satisfactionIndex = navigation.indexOf("VOC 고객상담 평균만족도");
   const salesIndex = navigation.indexOf("2026년 누적 판매대수");
   assert.ok(stabilityIndex > profileStart && satisfactionIndex > stabilityIndex && salesIndex > satisfactionIndex);
