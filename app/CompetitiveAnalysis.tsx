@@ -16,6 +16,7 @@ import {
 import dashboardJson from "./data/showrooms.json";
 import weeklyJson from "./data/weekly.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
+import vocResponseEvidence from "./data/voc-response-evidence.json";
 import salesActivityAnalysisJson from "./data/sales-activity-analysis.json";
 import staffProfilePhotosJson from "./data/staff-profile-photos.json";
 import staffCertificationsJson from "./data/staff-certifications.json";
@@ -531,6 +532,10 @@ const staffAnalysisByCdsid = vocStaffAnalysisJson.showrooms as Record<
   StaffAnalysisShowroom
 >;
 const staffAnalysisSource = vocStaffAnalysisJson.source;
+const vocResponseChangePercent = vocResponseEvidence.previousTotalResponses > 0
+  ? ((vocResponseEvidence.totalResponses - vocResponseEvidence.previousTotalResponses) / vocResponseEvidence.previousTotalResponses) * 100
+  : 0;
+const vocResponseEvidenceLabel = `전체 회신 ${vocResponseEvidence.totalResponses.toLocaleString("ko-KR")}건, 직전대비 ${Math.abs(vocResponseChangePercent).toFixed(1)}% ${vocResponseChangePercent < 0 ? "감소" : "증가"}`;
 const staffNationalYears = vocStaffAnalysisJson.nationalYears as Record<
   StaffYear,
   StaffNationalYear
@@ -3642,7 +3647,7 @@ export default function CompetitiveAnalysis({
                 className="growth-profile-metric growth-profile-stability"
                 title="누적 VOC 회신 기준: 50건 이상 최고, 30~49건 높음, 15~29건 보통, 8~14건 낮음, 8건 미만 보류"
               >
-                <span>VOC 점수 신뢰도</span>
+                <span>VOC 점수 신뢰도({vocResponseEvidenceLabel})</span>
                 <strong className={`confidence-${selectedStaffScoreStability.tone}`}>
                   {selectedStaffScoreStability.label}
                   <small className="growth-profile-evidence-count">{selectedStaffScoreStability.note}누적 회신 {selectedStaffResponses}건 · 코멘트 {selectedStaffCommentTotalMentions}건(중복포함)</small>

@@ -50,6 +50,7 @@ jobs:
             --voc "$response_workbook" \
             --analysis app/data/voc-staff-analysis.json
           python scripts/update-voc-2026-analysis.py --voc "$response_workbook"
+          python scripts/sync-voc-response-evidence.py
 
           if git diff -I '"syncedAt":' --quiet -- app/data/weekly.json app/data/weekly-details.json; then
             git restore --worktree app/data/weekly.json app/data/weekly-details.json
@@ -58,6 +59,7 @@ jobs:
             app/data/weekly.json \
             app/data/weekly-details.json \
             app/data/voc-staff-analysis.json \
+            app/data/voc-response-evidence.json \
             app/data/voc-consultation.json \
             app/data/voc-sent.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -77,6 +79,7 @@ jobs:
             app/data/weekly.json \
             app/data/weekly-details.json \
             app/data/voc-staff-analysis.json \
+            app/data/voc-response-evidence.json \
             app/data/voc-consultation.json \
             app/data/voc-sent.json
           git commit -m "Auto update weekly VOC and CX data"
