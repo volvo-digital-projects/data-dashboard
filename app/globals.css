@@ -19744,10 +19744,19 @@ main.dealer-analysis-page {
   .growth-profile-person-certification::before {
     top: 0;
     bottom: 0;
+    /* Follow the existing 288px roster border without moving that border. */
+    left: calc(413px - clamp(370px, 35vw, 430px));
   }
 
   .growth-profile-strip > .growth-profile-metric {
     padding-left: 20px;
     padding-right: 4px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .growth-profile-person-certification::before {
+    /* The existing roster switches to 260px at this breakpoint. */
+    left: calc(385px - clamp(370px, 35vw, 430px));
   }
 }
