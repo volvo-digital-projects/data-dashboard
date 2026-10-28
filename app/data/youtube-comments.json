@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-28T01:53:13.171544+00:00",
+  "checkedAt": "2026-10-28T06:10:00.321766+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -19300,19 +19300,28 @@
       "excludedOwnerPromotions": 19
     },
     "UC0QgBtIY01DBw2UC4v_I2eA": {
-      "total": 104,
+      "total": 105,
       "videos": 16,
       "completeVideos": 16,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
-        "positive": 8,
+        "positive": 9,
         "suggestion": 0,
         "other": 55,
         "review": 3,
         "owner": 38
       },
       "entries": [
+        {
+          "id": "Ugx8wzhytQUrXBIared4AaABAg",
+          "category": "positive",
+          "topic": "설명·정보 전달",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "3CtMYRYqRVo",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=3CtMYRYqRVo&lc=Ugx8wzhytQUrXBIared4AaABAg"
+        },
         {
           "id": "UgxUZWHqmsiRJxvyj_B4AaABAg",
           "category": "other",
