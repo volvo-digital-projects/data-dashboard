@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-10-28",
-    "salesSyncedAt": "2026-10-28T07:42:18+09:00",
+    "salesSyncedAt": "2026-10-28T10:52:18+09:00",
     "salesPeriod": "2026-01-01~2026-10-28",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -13441,46 +13441,6 @@
           }
         },
         {
-          "name": "김상우",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 10,
-          "deliveredCustomers": 10,
-          "monthlyDeliveredSales": [
-            1,
-            0,
-            1,
-            1,
-            0,
-            2,
-            1,
-            2,
-            1,
-            1
-          ],
-          "segmentSales": {
-            "30": 1,
-            "40": 1,
-            "60": 7,
-            "90": 1
-          }
-        },
-        {
           "name": "김재식",
           "activityStatus": "missing",
           "lastActivityDate": null,
@@ -14002,29 +13962,29 @@
         }
       ],
       "summary": {
-        "staffCount": 15,
+        "staffCount": 14,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 335,
+        "deliveredSales": 325,
         "monthlyDeliveredSales": [
-          33,
+          32,
           40,
-          36,
-          28,
+          35,
+          27,
           26,
-          49,
-          17,
-          25,
-          31,
-          50
+          47,
+          16,
+          23,
+          30,
+          49
         ],
         "segmentSales": {
-          "30": 59,
-          "40": 36,
-          "60": 131,
-          "90": 109
+          "30": 58,
+          "40": 35,
+          "60": 124,
+          "90": 108
         }
       }
     },
@@ -14665,46 +14625,6 @@
           }
         },
         {
-          "name": "허재무",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 0,
-          "deliveredCustomers": 0,
-          "monthlyDeliveredSales": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "segmentSales": {
-            "30": 0,
-            "40": 0,
-            "60": 0,
-            "90": 0
-          }
-        },
-        {
           "name": "윤덕인",
           "activityStatus": "missing",
           "lastActivityDate": null,
@@ -14866,7 +14786,7 @@
         }
       ],
       "summary": {
-        "staffCount": 15,
+        "staffCount": 14,
         "activityStaffCount": 0,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
