@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-10-28T09:15:07+09:00",
+  "updatedAt": "2026-10-29T09:35:40+09:00",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 368,
+  "consultantCount": 367,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -572,9 +572,6 @@
         },
         "이철": {
           "image": "/staff-profiles/iron/haeundae/consultant-1bb3c7d12910.webp"
-        },
-        "조석원": {
-          "image": "/staff-profiles/iron/haeundae/consultant-9f85e67752aa.webp"
         },
         "최승호": {
           "image": "/staff-profiles/iron/haeundae/consultant-755617f00be6.webp"

@@ -2,14 +2,14 @@
   "source": {
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-10-14",
-    "rosterCheckedAt": "2026-10-28",
+    "rosterCheckedAt": "2026-10-29",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-10-28",
+    "jobTitleSourceDate": "2026-10-29",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-10-14",
     "latestResponseThrough": "2026-10-14",
@@ -26033,7 +26033,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2021-03-29",
-          "tenureMonths": 66,
+          "tenureMonths": 67,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28765,7 +28765,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-07-29",
-          "tenureMonths": 14,
+          "tenureMonths": 15,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -31530,7 +31530,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-06-29",
-          "tenureMonths": 75,
+          "tenureMonths": 76,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -31650,20 +31650,6 @@
       "dealer": "태영",
       "dmsShowroom": "Taeyoung Motors Seodaegu",
       "employees": [
-        {
-          "years": {},
-          "commentResponses": 0,
-          "strengthKeywords": [],
-          "improvementKeywords": [],
-          "name": "도형진",
-          "role": "영업직원",
-          "jobTitle": "주임",
-          "hireDate": "2026-10-19",
-          "tenureMonths": 0,
-          "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내",
-          "staffCdsid": "H-DOH"
-        },
         {
           "name": "박찬희",
           "role": "영업직원",
@@ -31941,7 +31927,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-01-29",
-          "tenureMonths": 8,
+          "tenureMonths": 9,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -32330,6 +32316,21 @@
         }
       ],
       "formerEmployees": [
+        {
+          "years": {},
+          "commentResponses": 0,
+          "strengthKeywords": [],
+          "improvementKeywords": [],
+          "name": "도형진",
+          "role": "영업직원",
+          "jobTitle": "주임",
+          "hireDate": "2026-10-19",
+          "tenureMonths": 0,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내",
+          "archivedAt": "2026-10-29",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        },
         {
           "name": "이승규",
           "role": "영업직원",
