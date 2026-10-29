@@ -14,6 +14,7 @@ import {
   type WheelEvent as ReactWheelEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
+import { showroomManagerName } from "./showroom-manager";
 import weeklyJson from "./data/weekly.json";
 import vocStaffAnalysisJson from "./data/voc-staff-analysis.json";
 import vocResponseEvidence from "./data/voc-response-evidence.json";
@@ -3238,7 +3239,7 @@ export default function CompetitiveAnalysis({
           >
             <span className="identity-profile-icon" aria-hidden="true" />
             <small>지점장</small>
-            <strong>{selected.manager}</strong>
+            <strong>{showroomManagerName(selected)}</strong>
           </Link>
         </div>
         </header>

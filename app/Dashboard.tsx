@@ -10,6 +10,7 @@ import {
   type FormEvent,
 } from "react";
 import dashboardJson from "./data/showrooms.json";
+import { showroomManagerName } from "./showroom-manager";
 import cxQ2DscJson from "./data/cx-q2-dsc.json";
 import v3sHistoryJson from "./data/v3s-history.json";
 import vocConsultationJson from "./data/voc-consultation.json";
@@ -3170,20 +3171,20 @@ export default function Dashboard({
                 aria-expanded={profileOpen}
                 aria-haspopup="menu"
                 aria-controls="showroom-switcher"
-                aria-label={`${selected.manager} 지점장 · 다른 전시장 선택`}
+                aria-label={`${showroomManagerName(selected)} 지점장 · 다른 전시장 선택`}
               >
                 <span className="identity-profile-icon" aria-hidden="true" />
                 <span className="identity-profile-role">지점장</span>
-                <strong>{selected.manager}</strong>
+                <strong>{showroomManagerName(selected)}</strong>
               </button>
             ) : (
               <div
                 className="identity-profile identity-profile--static"
-                aria-label={`${selected.manager} 지점장`}
+                aria-label={`${showroomManagerName(selected)} 지점장`}
               >
                 <span className="identity-profile-icon" aria-hidden="true" />
                 <span className="identity-profile-role">지점장</span>
-                <strong>{selected.manager}</strong>
+                <strong>{showroomManagerName(selected)}</strong>
               </div>
             )}
             {canSwitchShowrooms && profileOpen && (
@@ -3213,7 +3214,7 @@ export default function Dashboard({
                           {item.cdsid.padEnd(showroomCodeWidth, "\u2007")}
                         </span>
                         <strong>{displayShowroomName(item.showroom)}</strong>
-                        <small>{item.manager} 지점장</small>
+                        <small>{showroomManagerName(item)} 지점장</small>
                       </button>
                     ))}
                 </div>
