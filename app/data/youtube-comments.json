@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-30T22:44:38.018711+00:00",
+  "checkedAt": "2026-10-31T01:57:06.135875+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -10160,7 +10160,7 @@
       "excludedOwnerPromotions": 46
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
-      "total": 998,
+      "total": 999,
       "videos": 51,
       "completeVideos": 51,
       "partialVideos": 0,
@@ -10168,11 +10168,20 @@
       "counts": {
         "positive": 34,
         "suggestion": 0,
-        "other": 518,
+        "other": 519,
         "review": 37,
         "owner": 409
       },
       "entries": [
+        {
+          "id": "UgyRQK9DUPQ8CVmeUft4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "B1zsnqmwwIU",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=B1zsnqmwwIU&lc=UgyRQK9DUPQ8CVmeUft4AaABAg"
+        },
         {
           "id": "Ugwdukb7251u9zMcqwh4AaABAg",
           "category": "other",
@@ -19158,13 +19167,13 @@
       ],
       "coverage": [
         {
-          "id": "oelvc9_s3t4",
+          "id": "B1zsnqmwwIU",
           "kind": "video",
           "status": "complete",
           "reported": null
         },
         {
-          "id": "B1zsnqmwwIU",
+          "id": "oelvc9_s3t4",
           "kind": "video",
           "status": "complete",
           "reported": null
