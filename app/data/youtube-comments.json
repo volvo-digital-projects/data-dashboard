@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-01T09:50:30.378554+00:00",
+  "checkedAt": "2026-11-01T14:42:57.680094+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 377,
+      "total": 378,
       "videos": 50,
       "completeVideos": 50,
       "partialVideos": 0,
@@ -13,7 +13,7 @@
         "suggestion": 0,
         "other": 172,
         "review": 9,
-        "owner": 174
+        "owner": 175
       },
       "entries": [
         {
@@ -24,6 +24,15 @@
           "videoId": "Xl3_JLsYUdA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xl3_JLsYUdA&lc=Ugxc90KkIG5WQpR-u0t4AaABAg"
+        },
+        {
+          "id": "Ugxc90KkIG5WQpR-u0t4AaABAg.AcerCV0TpZ5AcfCBDjpm2N",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "Xl3_JLsYUdA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=Xl3_JLsYUdA&lc=Ugxc90KkIG5WQpR-u0t4AaABAg.AcerCV0TpZ5AcfCBDjpm2N"
         },
         {
           "id": "UgyjREgKjaFdj67quph4AaABAg",
@@ -10232,7 +10241,7 @@
       "excludedOwnerPromotions": 46
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
-      "total": 997,
+      "total": 1000,
       "videos": 51,
       "completeVideos": 51,
       "partialVideos": 0,
@@ -10240,9 +10249,9 @@
       "counts": {
         "positive": 34,
         "suggestion": 0,
-        "other": 517,
+        "other": 519,
         "review": 37,
-        "owner": 409
+        "owner": 410
       },
       "entries": [
         {
@@ -10253,6 +10262,15 @@
           "videoId": "B1zsnqmwwIU",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=B1zsnqmwwIU&lc=UgyRQK9DUPQ8CVmeUft4AaABAg"
+        },
+        {
+          "id": "UgyRQK9DUPQ8CVmeUft4AaABAg.AcbSsLWjy7LAcfA9_krn5q",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "B1zsnqmwwIU",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=B1zsnqmwwIU&lc=UgyRQK9DUPQ8CVmeUft4AaABAg.AcbSsLWjy7LAcfA9_krn5q"
         },
         {
           "id": "Ugwdukb7251u9zMcqwh4AaABAg",
@@ -13547,6 +13565,24 @@
           "videoId": "udQQnPVlnV8",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=UgztFRJFY5p4HkvzTRR4AaABAg"
+        },
+        {
+          "id": "UgyZCrPgKqOQ5POret14AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "udQQnPVlnV8",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=UgyZCrPgKqOQ5POret14AaABAg"
+        },
+        {
+          "id": "UgyZCrPgKqOQ5POret14AaABAg.AZ4x1icglDEAZWeQeuEgLv",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "udQQnPVlnV8",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=udQQnPVlnV8&lc=UgyZCrPgKqOQ5POret14AaABAg.AZ4x1icglDEAZWeQeuEgLv"
         },
         {
           "id": "UgzxP0k1UkjqpKpWpgJ4AaABAg",
@@ -34511,7 +34547,7 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 606,
+      "total": 608,
       "videos": 70,
       "completeVideos": 70,
       "partialVideos": 0,
@@ -34519,11 +34555,29 @@
       "counts": {
         "positive": 23,
         "suggestion": 0,
-        "other": 290,
+        "other": 291,
         "review": 25,
-        "owner": 268
+        "owner": 269
       },
       "entries": [
+        {
+          "id": "Ugzf2N-CeSaShH1Gw-J4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "4mSbt7SFhTU",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=4mSbt7SFhTU&lc=Ugzf2N-CeSaShH1Gw-J4AaABAg"
+        },
+        {
+          "id": "Ugzf2N-CeSaShH1Gw-J4AaABAg.Acf4f3r_AucAcfNj5Q4Lbw",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "4mSbt7SFhTU",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=4mSbt7SFhTU&lc=Ugzf2N-CeSaShH1Gw-J4AaABAg.Acf4f3r_AucAcfNj5Q4Lbw"
+        },
         {
           "id": "Ugxj366Uh65ldHzLcIp4AaABAg",
           "category": "other",
