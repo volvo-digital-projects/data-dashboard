@@ -2,14 +2,14 @@
   "source": {
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-10-20",
-    "rosterCheckedAt": "2026-11-02",
+    "rosterCheckedAt": "2026-11-03",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-11-02",
+    "jobTitleSourceDate": "2026-11-03",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-10-27",
     "latestResponseThrough": "2026-10-20",
@@ -115,7 +115,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2026-08-03",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -1163,7 +1163,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2023-04-03",
-          "tenureMonths": 42,
+          "tenureMonths": 43,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -1625,7 +1625,7 @@
           "role": "영업직원",
           "jobTitle": "매니저",
           "hireDate": "2026-03-03",
-          "tenureMonths": 7,
+          "tenureMonths": 8,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -3085,7 +3085,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-07-03",
-          "tenureMonths": 111,
+          "tenureMonths": 112,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -3721,7 +3721,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2019-06-03",
-          "tenureMonths": 88,
+          "tenureMonths": 89,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -4184,7 +4184,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-03-03",
-          "tenureMonths": 7,
+          "tenureMonths": 8,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -4479,7 +4479,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2023-04-03",
-          "tenureMonths": 42,
+          "tenureMonths": 43,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -5126,7 +5126,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-08-03",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -6921,7 +6921,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2025-11-03",
-          "tenureMonths": 11,
+          "tenureMonths": 12,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -9324,7 +9324,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2020-02-03",
-          "tenureMonths": 80,
+          "tenureMonths": 81,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -9875,7 +9875,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2017-07-03",
-          "tenureMonths": 111,
+          "tenureMonths": 112,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -11662,7 +11662,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2019-06-03",
-          "tenureMonths": 88,
+          "tenureMonths": 89,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -13040,7 +13040,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2026-08-03",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -13117,7 +13117,7 @@
           "role": "영업직원",
           "jobTitle": "주임",
           "hireDate": "2024-06-03",
-          "tenureMonths": 28,
+          "tenureMonths": 29,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -13596,7 +13596,7 @@
           "role": "영업직원",
           "jobTitle": "차장",
           "hireDate": "2026-03-03",
-          "tenureMonths": 7,
+          "tenureMonths": 8,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -16917,7 +16917,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2018-09-03",
-          "tenureMonths": 97,
+          "tenureMonths": 98,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -17131,7 +17131,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2018-04-03",
-          "tenureMonths": 102,
+          "tenureMonths": 103,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -19763,7 +19763,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-11-03",
-          "tenureMonths": 11,
+          "tenureMonths": 12,
           "tenureBucket": "under-1y",
           "tenureBucketLabel": "1년 이내",
           "years": {
@@ -21239,7 +21239,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2021-05-03",
-          "tenureMonths": 65,
+          "tenureMonths": 66,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -21454,133 +21454,6 @@
           "staffCdsid": "C-HAN8"
         },
         {
-          "name": "양지승",
-          "role": "영업팀장",
-          "jobTitle": "팀장",
-          "hireDate": "2019-01-10",
-          "tenureMonths": 93,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 20,
-              "scoreSum": 190.0,
-              "sent": 98
-            },
-            "2024": {
-              "responses": 20,
-              "scoreSum": 187.0,
-              "sent": 83
-            },
-            "2025": {
-              "responses": 12,
-              "scoreSum": 114.0,
-              "sent": 36
-            },
-            "2026": {
-              "responses": 18,
-              "scoreSum": 169.0,
-              "sent": 52,
-              "rateResponses": 18
-            }
-          },
-          "commentResponses": 67,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 35
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 26
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 13
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 11
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 10
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 9
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 7
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 6
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 4
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 3
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 3
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 3
-            },
-            {
-              "label": "맞춤형 설명",
-              "mentions": 2
-            },
-            {
-              "label": "지속적 후속관리",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "시승기회·시간 확대",
-              "mentions": 2
-            },
-            {
-              "label": "구체적 설명 부족",
-              "mentions": 2
-            },
-            {
-              "label": "전시차량 다양화 필요",
-              "mentions": 1
-            },
-            {
-              "label": "상담자료 활용미흡",
-              "mentions": 1
-            },
-            {
-              "label": "응대 태도 불량",
-              "mentions": 1
-            },
-            {
-              "label": "전문지식 정확성부족",
-              "mentions": 1
-            },
-            {
-              "label": "시설 편의 미제공",
-              "mentions": 1
-            },
-            {
-              "label": "가격혜택 안내부족",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-10-03",
-          "staffCdsid": "J-YANG98"
-        },
-        {
           "name": "홍승찬",
           "role": "영업팀장",
           "jobTitle": "팀장",
@@ -21766,6 +21639,134 @@
         }
       ],
       "formerEmployees": [
+        {
+          "name": "양지승",
+          "role": "영업팀장",
+          "jobTitle": "팀장",
+          "hireDate": "2019-01-10",
+          "tenureMonths": 93,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2023": {
+              "responses": 20,
+              "scoreSum": 190.0,
+              "sent": 98
+            },
+            "2024": {
+              "responses": 20,
+              "scoreSum": 187.0,
+              "sent": 83
+            },
+            "2025": {
+              "responses": 12,
+              "scoreSum": 114.0,
+              "sent": 36
+            },
+            "2026": {
+              "responses": 18,
+              "scoreSum": 169.0,
+              "sent": 52,
+              "rateResponses": 18
+            }
+          },
+          "commentResponses": 67,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 35
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 26
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 13
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 11
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 10
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 9
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 7
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 4
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 2
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "시승기회·시간 확대",
+              "mentions": 2
+            },
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 2
+            },
+            {
+              "label": "전시차량 다양화 필요",
+              "mentions": 1
+            },
+            {
+              "label": "상담자료 활용미흡",
+              "mentions": 1
+            },
+            {
+              "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "전문지식 정확성부족",
+              "mentions": 1
+            },
+            {
+              "label": "시설 편의 미제공",
+              "mentions": 1
+            },
+            {
+              "label": "가격혜택 안내부족",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-10-03",
+          "archivedAt": "2026-11-03",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        },
         {
           "name": "조석원",
           "role": "영업직원",
@@ -23660,7 +23661,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2020-02-03",
-          "tenureMonths": 80,
+          "tenureMonths": 81,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -25129,7 +25130,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2020-02-03",
-          "tenureMonths": 80,
+          "tenureMonths": 81,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
