@@ -25,6 +25,9 @@ test('NEW compares any +1 YouTube metric against the last successful update', as
  const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
  assert.match(css,/\.yt-format-new/);
  assert.match(css,/background:#d92332;color:#fff/);
+ assert.match(css,/\.yt-format-metric\{position:relative\}/);
+ assert.match(css,/\.yt-format-new\{position:absolute;left:8px;top:8px;/);
+ assert.ok(!css.includes('right:calc(100% + 3px)'));
  assert.ok(!css.includes('tr[data-youtube-new='));
  assert.equal(hasYouTubeIncrease(current,'A','long'),true);
  assert.equal(hasYouTubeIncrease(current,'A','short'),false);

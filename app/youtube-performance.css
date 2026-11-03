@@ -153,5 +153,6 @@
 .yt-comparison-table tbody tr:not(.yt-inline-detail){cursor:pointer}
 @keyframes yt-panel-open{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.yt-inline-panel{animation:none}}
-.yt-comparison-table .yt-format-metric>strong{position:relative;display:inline-block}
-.yt-comparison-table .yt-format-new{position:absolute;right:calc(100% + 3px);top:50%;transform:translateY(-50%);background:#d92332;color:#fff;font:700 5px/1 var(--font-latin),sans-serif;padding:2px;border-radius:2px;white-space:nowrap}
+.yt-comparison-table .yt-format-metric{position:relative}
+.yt-comparison-table .yt-format-metric>strong{display:inline-block}
+.yt-comparison-table .yt-format-new{position:absolute;left:8px;top:8px;background:#d92332;color:#fff;font:700 5px/1 var(--font-latin),sans-serif;padding:2px;border-radius:2px;white-space:nowrap}
