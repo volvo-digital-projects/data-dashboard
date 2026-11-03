@@ -17,9 +17,10 @@ const values = (metrics: Metrics, name?: string): (number | null | undefined)[] 
     metrics.long?.count, metrics.long?.averageViews, metrics.short?.count, metrics.short?.averageViews];
 };
 /** Compare successful collection snapshots, not the previous-day subscriber close. */
-export function hasYouTubeIncrease(channel: Metrics & { previousMetrics?: Metrics }, sharedCreatorName?: string): boolean {
+export function hasYouTubeIncrease(channel: Metrics & { previousMetrics?: Metrics }, sharedCreatorName?: string, kind?: "long" | "short"): boolean {
   if (!channel.previousMetrics) return false;
   const previous = values(channel.previousMetrics, sharedCreatorName);
   return values(channel, sharedCreatorName).some((value, index) =>
+    (!kind || (kind === "long" ? index === 4 || index === 5 : index === 6 || index === 7)) &&
     typeof value === "number" && typeof previous[index] === "number" && value - previous[index]! >= 1);
 }

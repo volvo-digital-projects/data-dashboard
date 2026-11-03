@@ -23,8 +23,16 @@ test('NEW compares any +1 YouTube metric against the last successful update', as
  assert.equal(hasYouTubeIncrease(current,'A'),true);
  assert.equal(hasYouTubeIncrease(current,'B'),false);
  const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
- assert.match(css,/content:"NEW"/);
+ assert.match(css,/\.yt-format-new/);
  assert.match(css,/background:#d92332;color:#fff/);
+ assert.ok(!css.includes('tr[data-youtube-new='));
+ assert.equal(hasYouTubeIncrease(current,'A','long'),true);
+ assert.equal(hasYouTubeIncrease(current,'A','short'),false);
+ assert.equal(hasYouTubeIncrease({...previous,subscribers:11,previousMetrics:previous},undefined,'long'),false);
+ assert.equal(hasYouTubeIncrease({...previous,short:{count:2,averageViews:40},previousMetrics:previous},undefined,'short'),true);
+ const ui=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
+ assert.ok(ui.includes('{newLong && <span className="yt-format-new"'));
+ assert.ok(ui.includes('{newShort && <span className="yt-format-new"'));
 });
 
 test('Comment panels toggle below the selected creator row without covering it',()=>{
