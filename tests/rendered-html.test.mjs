@@ -4086,7 +4086,20 @@ test("serves a master-only seven-dealer administrator analysis", async () => {
   assert.match(css, /\.dealer-mix,[\s\S]*?\.dealer-employment\s*\{[^}]*display:\s*grid;[^}]*grid-template-rows:\s*12px 18px;[^}]*align-content:\s*center;[^}]*justify-content:\s*stretch;/);
   assert.match(css, /\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*width:\s*1px;[^}]*top:\s*9px;[^}]*bottom:\s*9px;[^}]*background:\s*#dce7ec;/);
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*?\.dealer-certification-row > \* \+ \*::before\s*\{[^}]*display:\s*none;/);
-  assert.match(html, /현재 재직 67명 \/ 전체 인증 180명 · 재직률 37\.2%/);
+  const [currentRoster, currentCertifications, showroomData] = await Promise.all([
+    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/staff-certifications.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/showrooms.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
+  const certifiedNames = new Set(currentCertifications.records.map(record => record.name));
+  const currentCertified = ["아주", "천하", "에이치", "아이언", "아이비", "코오롱", "태영"].reduce((sum, dealer) => {
+    const names = new Set(showroomData.showrooms.filter(showroom => showroom.dealer === dealer)
+      .flatMap(showroom => (currentRoster.showrooms[showroom.cdsid]?.employees ?? []).map(employee => employee.name)));
+    return sum + [...names].filter(name => certifiedNames.has(name)).length;
+  }, 0);
+  const certificationTotal = currentCertifications.records.length;
+  assert.ok(currentCertified > 0 && currentCertified <= certificationTotal);
+  assert.ok(html.includes(`현재 재직 ${currentCertified}명 / 전체 인증 ${certificationTotal}명 · 재직률 ${(currentCertified / certificationTotal * 100).toFixed(1)}%`));
   assert.doesNotMatch(html, />기본순<\/button>/);
   assert.match(source, /useState<DealerSortKey>\("total-desc"\)/);
   for (const sortLabel of ["전체 인증 많은 순", "재직률 높은 순", "현재 재직 많은 순"]) {

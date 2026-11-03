@@ -153,3 +153,6 @@
 .yt-comparison-table tbody tr:not(.yt-inline-detail){cursor:pointer}
 @keyframes yt-panel-open{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.yt-inline-panel{animation:none}}
+.yt-comparison-table tbody tr[data-youtube-new="true"]>th{position:relative}
+.yt-comparison-table tbody tr[data-youtube-new="true"]>th::before{content:"NEW";position:absolute;left:1px;top:50%;transform:translateY(-50%);background:#d92332;color:#fff;font:700 7px/1.2 var(--font-latin),sans-serif;padding:3px 2px;border-radius:3px;z-index:1;pointer-events:none}
+.yt-comparison-table tbody tr[data-youtube-new="true"]>th .yt-row-person{padding-left:22px}

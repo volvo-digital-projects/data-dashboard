@@ -8,6 +8,7 @@ import certificationData from "./data/staff-certifications.json";
 import staffProfilePhotos from "./data/staff-profile-photos.json";
 import YouTubeCommentAnalysis, { commentData } from "./YouTubeCommentAnalysis";
 import "./youtube-performance.css";
+import { hasYouTubeIncrease } from "./youtube-update";
 
 type Sales = { staff: { name: string; deliveredSales: number; monthlyDeliveredSales: number[] }[] };
 type Voc = { employees: { name: string; role: string; jobTitle?: string; years: Record<string, {responses: number; scoreSum: number}> }[] };
@@ -228,7 +229,9 @@ export default function YouTubePerformance({ showOriginalPortraits = false }: { 
           : `공동 채널 증감은 ${subscriberChangeOwner} 행에서 한 번만 합산`;
 
 
-        return <Fragment key={person.name}><tr data-comment-selected={detailOpen && selected?.name===person.name ? "true" : undefined} onClick={()=>toggleComments(person.name)} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
+        const updatedChannel = data.channels.find(channel => channel.id === person.channelId)!;
+        const hasIncrease = hasYouTubeIncrease(updatedChannel, person.shared ? person.name : undefined);
+        return <Fragment key={person.name}><tr data-youtube-new={hasIncrease ? "true" : undefined} data-comment-selected={detailOpen && selected?.name===person.name ? "true" : undefined} onClick={()=>toggleComments(person.name)} className={`${detailOpen && selected?.name===person.name?"is-selected":""} ${index>0 && visible[index-1].dealer!==person.dealer && sort==="dealer"?"yt-dealer-start":""}`}>
           <th scope="row"><button type="button" className="yt-row-person" aria-expanded={detailOpen && selected?.name===person.name} aria-controls="yt-channel-detail" onClick={event=>{event.stopPropagation();toggleComments(person.name);}}><span className="yt-dealer-code" title={person.dealer}>{dealerCodes[person.dealer]}</span><span className="yt-row-avatar" role="img" aria-label={showOriginalPhoto ? "직원 원본 사진" : person.hasProfilePhoto ? "직원 사진의 검은 실루엣과 흰 셔츠" : `${person.gender} 실루엣`}>{showOriginalPhoto ? <img className="yt-profile-original" src={avatarImage} alt="" loading="lazy" /> : person.hasProfilePhoto ? <><span className="yt-profile-solid-silhouette" style={{ maskImage: `url("${person.image}")`, WebkitMaskImage: `url("${person.image}")` }} /><img className="yt-profile-white-shirt" src={person.image} alt="" loading="lazy" /></> : <img className="yt-fallback-silhouette" src={person.image} alt="" loading="lazy" />}</span><span><strong>{person.name}{person.isTeamLeader && <i className="growth-staff-lead-badge" aria-label="팀장" title="팀장">L</i>}</strong><small>/ {person.showroom}{person.shared&&<b title="조선별·곽지명 공동 채널, 채널 지표 중복 합산 금지">공동</b>}</small></span></button></th>
           <td className="yt-dates"><span title="볼보 입사일">{formatCompactDate(person.hireDate)}</span><span title="채널 개설일">{formatCompactDate(person.channel.joined)}</span></td>
           <td className="yt-cert-cell"><span className="yt-certifications" aria-label={`누적 인증 Grand ${person.certifications[0]}회, Advanced ${person.certifications[1]}회, Certified ${person.certifications[2]}회`}>{person.certifications.map((count,i)=><span key={i}>{["G","A","C"][i]}-{count}</span>)}</span></td>

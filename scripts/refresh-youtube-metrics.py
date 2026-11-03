@@ -148,6 +148,8 @@ def merge_channel(old, fresh, shared=False):
     if any(v.get("kind") not in ("long", "short") for v in videos):
         raise ValueError("Unknown video format")
     result = copy.deepcopy(old)
+    result['previousMetrics'] = {key: copy.deepcopy(old[key]) for key in
+        ('subscribers', 'totalViews', 'averageViews', 'videoCount', 'long', 'short', 'sharedVideos') if key in old}
     result.update(previousSubscribers=old.get('subscribers'), previousCheckedAt=old.get('checkedAt'))
     total_views = sum(v['views'] for v in videos) if old.get('videoBrandFilter') else fresh['totalViews']
     result.update(subscribers=fresh['subscribers'], totalViews=total_views, videoCount=len(videos), viewsSample=len(videos),

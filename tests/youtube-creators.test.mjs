@@ -4,6 +4,29 @@ import {readFileSync, existsSync} from 'node:fs';
 const read = name => JSON.parse(readFileSync(new URL(`../app/data/${name}.json`,import.meta.url),'utf8'));
 const data=read('youtube-creators');
 
+test('NEW compares any +1 YouTube metric against the last successful update', async()=>{
+ const ts = await import('typescript');
+ const source=readFileSync(new URL('../app/youtube-update.ts',import.meta.url),'utf8');
+ const js=ts.default.transpileModule(source,{compilerOptions:{module:ts.default.ModuleKind.ESNext}}).outputText;
+ const {hasYouTubeIncrease}=await import(`data:text/javascript;base64,${Buffer.from(js).toString('base64')}`);
+ const previous={subscribers:10,totalViews:100,videoCount:2,averageViews:50,long:{count:1,averageViews:60},short:{count:1,averageViews:40}};
+ assert.equal(hasYouTubeIncrease(previous),false);
+ assert.equal(hasYouTubeIncrease({...previous,previousMetrics:previous}),false);
+ for(const metric of ['subscribers','totalViews','videoCount','averageViews']) {
+  assert.equal(hasYouTubeIncrease({...previous,[metric]:previous[metric]+1,previousMetrics:previous}),true);
+  assert.equal(hasYouTubeIncrease({...previous,[metric]:previous[metric]-1,previousMetrics:previous}),false);
+ }
+ assert.equal(hasYouTubeIncrease({...previous,long:{count:2,averageViews:60},previousMetrics:previous}),true);
+ assert.equal(hasYouTubeIncrease({...previous,averageViews:null,previousMetrics:{...previous,averageViews:null}}),false);
+ const shared={...previous,sharedVideos:[{names:['A'],kind:'long',views:10},{names:['B'],kind:'short',views:20}]};
+ const current={...shared,sharedVideos:[{names:['A'],kind:'long',views:11},{names:['B'],kind:'short',views:20}],previousMetrics:shared};
+ assert.equal(hasYouTubeIncrease(current,'A'),true);
+ assert.equal(hasYouTubeIncrease(current,'B'),false);
+ const css=readFileSync(new URL('../app/youtube-performance.css',import.meta.url),'utf8');
+ assert.match(css,/content:"NEW"/);
+ assert.match(css,/background:#d92332;color:#fff/);
+});
+
 test('Comment panels toggle below the selected creator row without covering it',()=>{
  const source=readFileSync(new URL('../app/YouTubePerformance.tsx',import.meta.url),'utf8');
  assert.ok(source.includes('setDetailOpen(!(detailOpen && selected?.name===name))'));

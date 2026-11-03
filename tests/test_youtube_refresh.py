@@ -189,4 +189,14 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(close['date'], '2026-09-26')
         self.assertEqual(close['checkedAt'], checked)
 
+    def test_previous_metrics_are_the_immediately_prior_snapshot(self):
+        self.old.update(subscribers=9, totalViews=80, videoCount=1, averageViews=80,
+                        long=dict(count=1, averageViews=80), short=dict(count=0, averageViews=None),
+                        previousMetrics=dict(subscribers=2))
+        output = merge(self.old, self.fresh)
+        self.assertEqual(output['previousMetrics']['subscribers'], 9)
+        self.assertEqual(output['previousMetrics']['long']['count'], 1)
+        self.assertNotIn('previousMetrics', output['previousMetrics'])
+        self.assertEqual(self.old['previousMetrics']['subscribers'], 2)
+
 if __name__ == '__main__': unittest.main()
