@@ -2,6 +2,11 @@ name: Prepare private YouTube comment review
 
 on:
   workflow_dispatch:
+    inputs:
+      channel_id:
+        description: Optional channel ID for a scoped review
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -19,9 +24,25 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           COMMENT_REVIEW_OUTPUT: ${{ runner.temp }}/youtube-comment-review.json
-        run: python scripts/refresh-youtube-comments.py
+          TARGET_CHANNEL_ID: ${{ inputs.channel_id }}
+        run: |
+          python - <<'PY'
+          import json, os, runpy
+          from pathlib import Path
+          module = runpy.run_path('scripts/refresh-youtube-comments.py')
+          source = json.loads(Path('app/data/youtube-creators.json').read_text())
+          target = os.environ.get('TARGET_CHANNEL_ID', '').strip()
+          if target:
+              channels = [channel for channel in source['channels'] if channel['id'] == target]
+              if len(channels) != 1:
+                  raise RuntimeError('Unknown review channel')
+              source = dict(source, channels=channels)
+          module['refresh'](os.environ.get('YOUTUBE_API_KEY'), source, Path(os.environ['RUNNER_TEMP']) / 'youtube-comments.json')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: private-youtube-comment-review
-          path: ${{ runner.temp }}/youtube-comment-review.json
+          path: |
+            ${{ runner.temp }}/youtube-comment-review.json
+            ${{ runner.temp }}/youtube-comments.json
           retention-days: 1
