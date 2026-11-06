@@ -19,3 +19,10 @@
 - Keep the preserved original D folder until separate cleanup approval. Do not treat old deployment archives as disposable without review.
 - Local verification uses local D1/R2 only, without production credentials. Never run remote migrations, collection jobs, or deploy as part of environment recovery.
 - Use pnpm 11.25.0 and pnpm-lock.yaml locally. Existing npm-based CI remains supported. A recovery branch push must not target main or trigger deployment.
+
+## Local preview lifecycle
+
+- The Windows task Volvo-Data-Dashboard-Local maintains localhost:4187 independently of Codex command sessions. Do not replace it with a temporary exec-session server.
+- When the user asks to load or open this project, check localhost readiness; if needed run scripts/local-dashboard.ps1 -Mode Start, then open the local browser panel. Use the Open mode or open-dashboard.cmd for a standalone browser.
+- Do not stop the supervisor or its server at the end of routine work. An explicit Stop mode is available when the user requests shutdown.
+- Status, runtime and logs live in ignored work/local-server. Never commit runtime executables, local DB state or logs.

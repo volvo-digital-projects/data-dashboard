@@ -1,0 +1,10 @@
+version = 1
+name = "Volvo Data Dashboard"
+
+[setup]
+script = ""
+
+[[actions]]
+name = "Dashboard"
+icon = "run"
+command = '.\open-dashboard.cmd'
