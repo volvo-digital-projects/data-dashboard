@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-11-06",
-    "salesSyncedAt": "2026-11-06T08:53:30+09:00",
+    "salesSyncedAt": "2026-11-06T16:13:20+09:00",
     "salesPeriod": "2026-01-01~2026-11-06",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -1625,47 +1625,6 @@
           }
         },
         {
-          "name": "김예소",
-          "activityStatus": "missing",
-          "lastActivityDate": null,
-          "activityEvents": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "customers": {
-            "consultation": 0,
-            "testDrive": 0,
-            "contract": 0
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 3,
-          "deliveredCustomers": 3,
-          "monthlyDeliveredSales": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            3,
-            0
-          ],
-          "segmentSales": {
-            "30": 1,
-            "40": 0,
-            "60": 0,
-            "90": 2
-          }
-        },
-        {
           "name": "박상현",
           "activityStatus": "available",
           "lastActivityDate": "2026-08-25",
@@ -1954,12 +1913,12 @@
         }
       ],
       "summary": {
-        "staffCount": 9,
+        "staffCount": 8,
         "activityStaffCount": 7,
         "consultationCustomers": 58,
         "testDriveCustomers": 8,
         "contractCustomers": 4,
-        "deliveredSales": 242,
+        "deliveredSales": 239,
         "monthlyDeliveredSales": [
           13,
           25,
@@ -1970,14 +1929,14 @@
           11,
           10,
           36,
-          40,
+          37,
           1
         ],
         "segmentSales": {
-          "30": 57,
+          "30": 56,
           "40": 22,
           "60": 84,
-          "90": 79
+          "90": 77
         }
       }
     },
@@ -6309,47 +6268,6 @@
       "salesDealerCodeEvidence": 270,
       "staff": [
         {
-          "name": "권보미",
-          "activityStatus": "available",
-          "lastActivityDate": "2026-09-04",
-          "activityEvents": {
-            "consultation": 6,
-            "testDrive": 3,
-            "contract": 1
-          },
-          "customers": {
-            "consultation": 6,
-            "testDrive": 3,
-            "contract": 1
-          },
-          "transitions": {
-            "consultationToTestDrive": 0,
-            "testDriveToContract": 0,
-            "contractToDelivered": 0
-          },
-          "deliveredSales": 15,
-          "deliveredCustomers": 15,
-          "monthlyDeliveredSales": [
-            1,
-            1,
-            3,
-            1,
-            2,
-            2,
-            2,
-            0,
-            1,
-            2,
-            0
-          ],
-          "segmentSales": {
-            "30": 2,
-            "40": 0,
-            "60": 7,
-            "90": 6
-          }
-        },
-        {
           "name": "권영진",
           "activityStatus": "available",
           "lastActivityDate": "2026-09-04",
@@ -6925,30 +6843,30 @@
         }
       ],
       "summary": {
-        "staffCount": 15,
-        "activityStaffCount": 14,
+        "staffCount": 14,
+        "activityStaffCount": 13,
         "consultationCustomers": 119,
         "testDriveCustomers": 16,
         "contractCustomers": 17,
-        "deliveredSales": 361,
+        "deliveredSales": 346,
         "monthlyDeliveredSales": [
-          33,
-          28,
-          38,
-          20,
-          31,
-          59,
-          34,
-          25,
-          36,
+          32,
+          27,
+          35,
+          19,
+          29,
           57,
+          32,
+          25,
+          35,
+          55,
           0
         ],
         "segmentSales": {
-          "30": 92,
+          "30": 90,
           "40": 42,
-          "60": 116,
-          "90": 111
+          "60": 109,
+          "90": 105
         }
       }
     },
