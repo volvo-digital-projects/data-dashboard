@@ -1,17 +1,14 @@
 {
-  "updatedAt": "2026-11-05T10:17:09+09:00",
+  "updatedAt": "2026-11-06T10:22:04+09:00",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 365,
+  "consultantCount": 364,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
       "showroom": "강남 신사",
       "sourcePage": "https://h.volvocars.co.kr/sales/sales_consultant.asp?branchCd=100002",
       "employees": {
-        "권보미": {
-          "image": "/staff-profiles/h-motors/gangnam-sinsa/consultant-13e25358c3e2.webp"
-        },
         "권영진": {
           "image": "/staff-profiles/h-motors/gangnam-sinsa/consultant-3a165bb434fc.webp"
         },

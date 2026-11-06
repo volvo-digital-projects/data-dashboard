@@ -289,3 +289,18 @@ test('Curated comments retain evidence links without raw author identities or ab
   assert.equal(item.score,undefined);
  }
 });
+
+test('Bae comment review uses only Volvo video evidence without invented sentiment',()=>{
+ const id='UCTET6Q4mF4cSL1SGXmyQU0Q';
+ const channel=data.channels.find(c=>c.id===id);
+ const comments=read('youtube-comments').channels[id];
+ assert.equal(comments.status,'complete');
+ assert.ok(comments.entries.every(e=>channel.scopeVideoIds.includes(e.videoId)));
+ assert.ok(channel.videoScopeExcludeIds.every(id=>!channel.scopeVideoIds.includes(id)));
+ const review=read('youtube-comment-editorial').channels[id];
+ assert.equal(review.sourceRunId,42171356073);
+ assert.equal(review.sourceViewerCommentCount,2);
+ assert.deepEqual(review.negative,['명확히 확인된 부정 반응 없음']);
+ assert.deepEqual(review.negativeEvidence,[]);
+ assert.match(review.positive[0],/근거 부족/);
+});

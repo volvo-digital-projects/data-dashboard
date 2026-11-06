@@ -985,7 +985,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.match(source, /const staffFallbackProfileImage = "\/staff-profiles\/neutral-human-silhouette\.png";/);
   assert.match(source, /const staffFemaleFallbackProfileImage = "\/staff-profiles\/female-human-silhouette\.png";/);
   assert.match(source, /selectedStaffEmployee\?\.gender === "female"[\s\S]*?staffFemaleFallbackProfileImage[\s\S]*?: staffFallbackProfileImage/);
-  assert.equal(staffAnalysis.showrooms["6KR6846"].employees.find((employee) => employee.name === "김예소")?.gender, "female");
+  assert.equal([...staffAnalysis.showrooms["6KR6846"].employees, ...(staffAnalysis.showrooms["6KR6846"].formerEmployees ?? [])].find((employee) => employee.name === "김예소")?.gender, "female");
   assert.equal((navigation.match(/(?:src|href)=\{selectedStaffSilhouetteImage\}/g) ?? []).length, 6);
   assert.doesNotMatch(source, /(?:src|href)=\{staffFallbackProfileImage\}/);
   assert.doesNotMatch(navigation, /selectedStaffInitials/);

@@ -439,6 +439,20 @@
         "명확히 확인된 부정 반응 없음"
       ],
       "negativeEvidence": []
+    },
+    "UCTET6Q4mF4cSL1SGXmyQU0Q": {
+      "overall": "댓글 2건은 색상 언급·이모지로, 평가를 단정하기 어려움.",
+      "positive": [
+        "긍정 평가를 확정할 댓글 근거 부족"
+      ],
+      "negative": [
+        "명확히 확인된 부정 반응 없음"
+      ],
+      "negativeEvidence": [],
+      "reviewedAt": "2026-11-06T05:56:38.013463+00:00",
+      "sourceCheckedAt": "2026-11-06T05:56:38.013463+00:00",
+      "sourceRunId": 42171356073,
+      "sourceViewerCommentCount": 2
     }
   },
   "negativeReview": {
@@ -448,7 +462,5 @@
     "scope": "기존 부정 요약 및 새 수집 댓글의 부정 후보 문맥 재검토. 긍정 요약은 이번 검토 대상 아님.",
     "sourceViewerCommentCount": 2597
   },
-  "pendingChannels": [
-    "UCTET6Q4mF4cSL1SGXmyQU0Q"
-  ]
+  "pendingChannels": []
 }
