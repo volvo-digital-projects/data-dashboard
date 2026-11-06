@@ -447,7 +447,7 @@ test("shows every creator metric together with detail collapsed by default", asy
   assert.match(html, /class="yt-gender-summary"/);
   const dealerDistribution = html.match(/<div class="yt-dealers" aria-label="딜러사 필터">([\s\S]*?)<\/div>/)?.[1];
   assert.ok(dealerDistribution);
-  const expectedDealerOrder = ["코오롱", "아주", "천하", "에이치", "아이언", "태영", "아이비"];
+  const expectedDealerOrder = ["코오롱", "아주", "천하", "에이치", "아이언", "아이비", "태영"];
   const dealerPositions = expectedDealerOrder.map(name => dealerDistribution.indexOf(`>${name}<!-- -->(`));
   assert.ok(dealerPositions.every(position => position >= 0), "every dealer appears in the distribution");
   assert.deepEqual([...dealerPositions].sort((a, b) => a - b), dealerPositions, "dealer distribution follows creator-count rank and tie order");
@@ -552,7 +552,7 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(workflow, /steps\.publish\.outputs\.changed == 'true'/);
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
   assert.match(creatorSource, /`\$\{creators\.length\}명 크리에이터 채널 지표 4시간마다 확인 · 전체 수집 성공 시각 \(KST\)`/);
-  assert.match(creatorSource, /김예소의 MINI·Volvo 혼합 채널은 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만/);
+  assert.match(creatorSource, /배정우의 혼합 채널은 르노·현대 등 다른 브랜드 영상을 제외하고 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만/);
   assert.match(creatorSource, /이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만/);
   assert.match(creatorSource, /김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계/);
   assert.doesNotMatch(workflow, /git add[^\n]*public\/dashboard-release\.json/);
@@ -714,7 +714,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     ["6KR6858:나수연", "260529"], ["6KR6870:이정훈", "260515"],
     ["6KR6849:신수경", "260225"], ["6KR6846:신승희", "260203"],
     ["6KR6847:김정호", "260107"], ["6KR6861:곽지명", "260730"],
-    ["6KR6846:박형진", "260608"], ["6KR6846:김예소", "260902"],
+    ["6KR6846:박형진", "260608"], ["6KR6840:배정우", "260730"],
     ["6KR6858:조선별", "260730"], ["6KR6852:이규환", "260325"],
     ["6KR6839:박준수", "260413"], ["6KR6839:김명준", "260405"],
     ["6KR6838:이유성", "260218"], ["6KR6841:정지윤", "260410"],

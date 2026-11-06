@@ -90,10 +90,12 @@ test('YouTube comment counts and channel labels share the right cell edge',()=>{
  assert.match(css,/\.yt-cell-comments button\{[^}]*width:100%;text-align:right/);
 });
 
-test('Every YouTube channel has a concise three-part review without opinions or raw-comment drilldowns',()=>{
+test('Reviewed channels have evidence-backed summaries and new channels remain pending',()=>{
  const editorial=read('youtube-comment-editorial');
  assert.ok(Number.isFinite(Date.parse(editorial.reviewedAt)));
- assert.deepEqual(Object.keys(editorial.channels).sort(), data.channels.map(channel=>channel.id).sort());
+ const pending=editorial.pendingChannels ?? [];
+ assert.deepEqual([...Object.keys(editorial.channels),...pending].sort(), data.channels.map(channel=>channel.id).sort());
+ assert.ok(pending.every(id=>!editorial.channels[id]));
  for(const review of Object.values(editorial.channels)){
   assert.ok(review.overall.length>10 && review.overall.length<=65);
   assert.ok(!Object.hasOwn(review,'opinion'));
@@ -149,7 +151,7 @@ test('YouTube roster joins official photos, DMS sales and VOC by showroom and na
   assert.ok(data.channels.some(c=>c.id===p.channelId));
  }
 });
-test('YouTube roster and channel URLs include the supplied 2026-10-07 addition',()=>{
+test('YouTube roster and channel URLs include the supplied 2026-11-06 replacement',()=>{
  const actual=data.creators.map(p=>[p.dealer,p.showroom,p.name,p.gender,data.channels.find(c=>c.id===p.channelId)?.url]);
  assert.deepEqual(actual,[
   ['코오롱','서수원','이정훈','남성','https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EC%99%95%EC%9E%90%EC%9D%B4%EC%A0%95%ED%9B%88'],
@@ -163,11 +165,11 @@ test('YouTube roster and channel URLs include the supplied 2026-10-07 addition',
   ['아주','고양','송민경','여성','https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EC%86%A1%EB%AF%BC%EA%B2%BD'],
   ['아주','목동','신승희','남성','https://www.youtube.com/@volvogodseunghee'],
   ['아주','목동','박형진','남성','https://www.youtube.com/@%EB%B3%BC%EB%B3%B4PARK'],
-  ['아주','목동','김예소','여성','https://www.youtube.com/@%EB%B3%BC%EB%A7%A4%EA%B9%80%EC%98%88%EC%86%8C'],
   ['천하','용산','박준수','남성','https://www.youtube.com/@volvodesk'],
   ['천하','용산','김명준','남성','https://www.youtube.com/@volvo_kmj'],
   ['천하','동대문','정지윤','여성','https://www.youtube.com/@jjy1220'],
   ['아이언','창원','이유성','남성','https://www.youtube.com/@volvo_91ys'],
+  ['아이비','전주','배정우','남성','https://www.youtube.com/@baetzby'],
  ]);
 });
 test('YouTube shared channel is counted once and every video is attributed from reviewed evidence',()=>{
@@ -200,9 +202,9 @@ test('YouTube shared channel is counted once and every video is attributed from 
 });
 test('Dealer and gender distribution reconcile to the supplied roster',()=>{
  const counts={};for(const p of data.creators)counts[p.dealer]=(counts[p.dealer]??0)+1;
- assert.deepEqual(counts,{'코오롱':6,'에이치':1,'아주':5,'천하':3,'아이언':1});
- assert.equal(data.creators.filter(p=>p.gender==='남성').length,9);
- assert.equal(data.creators.filter(p=>p.gender==='여성').length,7);
+ assert.deepEqual(counts,{'코오롱':6,'에이치':1,'아주':4,'천하':3,'아이언':1,'아이비':1});
+ assert.equal(data.creators.filter(p=>p.gender==='남성').length,10);
+ assert.equal(data.creators.filter(p=>p.gender==='여성').length,6);
 });
 test('Every YouTube channel publishes only the reviewed Volvo automotive scope',()=>{
  for(const channel of data.channels){
@@ -213,8 +215,9 @@ test('Every YouTube channel publishes only the reviewed Volvo automotive scope',
   assert.equal(channel.long.count+channel.short.count,channel.videoCount,channel.title);
  }
 });
-test('Kim Yeso mixed-brand channel counts Volvo videos only',()=>{
- const person=data.creators.find(person=>person.name==='김예소');
+test('Bae Jeong-woo replaces Kim Yeso and excludes other-brand videos',()=>{
+ assert.ok(!data.creators.some(person=>person.name==='김예소'));
+ const person=data.creators.find(person=>person.name==='배정우');
  const channel=data.channels.find(channel=>channel.id===person.channelId);
  assert.equal(channel.videoBrandFilter,'volvo');
  assert.equal(channel.scopeVideoIds.length,channel.videoCount);

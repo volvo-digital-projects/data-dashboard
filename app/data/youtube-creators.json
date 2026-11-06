@@ -1,28 +1,12 @@
 {
   "dailyClose": {
-    "date": "2026-11-05",
-    "subscribers": 6358,
-    "videos": 729,
-    "checkedAt": "2026-11-04T21:00:38.505763+00:00",
-    "channelSubscribers": {
-      "UCcV36lNLeotgr02P605R2yA": 534,
-      "UCq4Nmcrr-dEmZqT-NhbSdpQ": 251,
-      "UC7ab9iDdrs3cLnW_zACCcIg": 239,
-      "UCLLQ98a0tBqu2SoTI_IqmwQ": 370,
-      "UCk1BctjD6nPVTIEA52FACcw": 582,
-      "UC0QgBtIY01DBw2UC4v_I2eA": 87,
-      "UCUGnMnHdpXTdEI_j8-Vk7Eg": 1440,
-      "UCBB6SFAvxC756EpH93qWSSg": 416,
-      "UCurMOPSGnB1qrFabcfzu7Ig": 178,
-      "UC6LM-e4xY2PkXzE1-f3qSrg": 98,
-      "UCatA_IUpH_m1ihLDjU8u38g": 360,
-      "UCIN-EGXvd_Tv720IqzD8rQQ": 905,
-      "UC9-es-82mhByLp4nafGK1CA": 387,
-      "UC33UQnHJTzabySfSKvo5ECA": 380,
-      "UCDwl98BzOnfYsrL9DXRRm6w": 131
-    }
+    "date": "2026-11-06",
+    "subscribers": null,
+    "videos": null,
+    "checkedAt": null,
+    "channelSubscribers": {}
   },
-  "rosterDate": "2026-10-07",
+  "rosterDate": "2026-11-06",
   "source": "사용자 제공 볼보 유튜브 영업직원 명단 · 공개 YouTube 채널/영상",
   "creators": [
     {
@@ -114,14 +98,6 @@
       "channelId": "UC6LM-e4xY2PkXzE1-f3qSrg"
     },
     {
-      "dealer": "아주",
-      "showroom": "목동",
-      "name": "김예소",
-      "gender": "여성",
-      "cdsid": "6KR6846",
-      "channelId": "UCIN-EGXvd_Tv720IqzD8rQQ"
-    },
-    {
       "dealer": "천하",
       "showroom": "용산",
       "name": "박준수",
@@ -152,6 +128,14 @@
       "gender": "남성",
       "cdsid": "6KR6838",
       "channelId": "UCDwl98BzOnfYsrL9DXRRm6w"
+    },
+    {
+      "dealer": "아이비",
+      "showroom": "전주",
+      "name": "배정우",
+      "gender": "남성",
+      "cdsid": "6KR6840",
+      "channelId": "UCTET6Q4mF4cSL1SGXmyQU0Q"
     }
   ],
   "channels": [
@@ -1740,73 +1724,6 @@
       }
     },
     {
-      "id": "UCIN-EGXvd_Tv720IqzD8rQQ",
-      "previousSubscribers": 905,
-      "previousCheckedAt": "2026-11-05T09:56:38.653619+00:00",
-      "url": "https://www.youtube.com/@%EB%B3%BC%EB%A7%A4%EA%B9%80%EC%98%88%EC%86%8C",
-      "title": "볼매김예소",
-      "checkedAt": "2026-11-05T14:22:21.320854+00:00",
-      "joined": "2018. 9. 6.",
-      "subscribers": 906,
-      "totalViews": 76300,
-      "videoCount": 18,
-      "averageViews": 4239,
-      "viewsSample": 18,
-      "long": {
-        "count": 3,
-        "viewsSample": 3,
-        "averageViews": 11867
-      },
-      "short": {
-        "count": 15,
-        "viewsSample": 15,
-        "averageViews": 2713
-      },
-      "sampledVideos": 0,
-      "commentSamples": 0,
-      "availableCommentVideos": 0,
-      "sharedVideos": [],
-      "videoBrandFilter": "volvo",
-      "videoContentFilter": "automotive",
-      "scopeVideoIds": [
-        "tj92Ka0xIYE",
-        "nvxbeZSyyh8",
-        "m4IImmyyQ-w",
-        "F7eUJf2pl1A",
-        "4FjsmxqMdns",
-        "TXSpmway9ps",
-        "27SC7-NFdqk",
-        "gcR3NWTmJ_w",
-        "Rgkr22Xg7mQ",
-        "BOcvat4qtxw",
-        "ooFIERqcgAw",
-        "pgr9qzyaTHU",
-        "9EX9eblH6YM",
-        "6IcEakbhaZI",
-        "tRrM6i0XTTI",
-        "ehT3FG-1Dzk",
-        "RFhSZQvUzEU",
-        "FaXXV92pxp0"
-      ],
-      "previousMetrics": {
-        "subscribers": 905,
-        "totalViews": 76300,
-        "averageViews": 4239,
-        "videoCount": 18,
-        "long": {
-          "count": 3,
-          "viewsSample": 3,
-          "averageViews": 11867
-        },
-        "short": {
-          "count": 15,
-          "viewsSample": 15,
-          "averageViews": 2713
-        },
-        "sharedVideos": []
-      }
-    },
-    {
       "id": "UC9-es-82mhByLp4nafGK1CA",
       "previousSubscribers": 387,
       "previousCheckedAt": "2026-11-05T09:56:38.653619+00:00",
@@ -2041,6 +1958,56 @@
         },
         "sharedVideos": []
       }
+    },
+    {
+      "id": "UCTET6Q4mF4cSL1SGXmyQU0Q",
+      "previousSubscribers": null,
+      "previousCheckedAt": null,
+      "url": "https://www.youtube.com/@baetzby",
+      "title": "배츠비",
+      "checkedAt": "2026-11-06T05:48:28.500Z",
+      "joined": "2015. 9. 8.",
+      "subscribers": 4,
+      "totalViews": 10953,
+      "videoCount": 6,
+      "averageViews": 1826,
+      "viewsSample": 6,
+      "long": {
+        "count": 0,
+        "viewsSample": 0,
+        "averageViews": null
+      },
+      "short": {
+        "count": 6,
+        "viewsSample": 6,
+        "averageViews": 1826
+      },
+      "sampledVideos": 0,
+      "commentSamples": 0,
+      "availableCommentVideos": 0,
+      "sharedVideos": [],
+      "videoBrandFilter": "volvo",
+      "videoContentFilter": "automotive",
+      "videoScopeIncludeIds": [],
+      "videoScopeExcludeIds": [
+        "D_fiWEcOWmo",
+        "3NnbMOtzM5g",
+        "EBikQwNeYGg",
+        "s1MdYyLR4mU",
+        "_CK_n0XZO2w",
+        "S6IncytFMXo",
+        "buSczXsSzQ4",
+        "nmfFIAgVuqg",
+        "Bc-QnnifEyU"
+      ],
+      "scopeVideoIds": [
+        "OLuKdedWwUg",
+        "DBbd7ehKUtw",
+        "BO_yvmkMupY",
+        "GHPvf30vmAo",
+        "EzTwIqMtTqk",
+        "bad4ABgMlJQ"
+      ]
     }
   ],
   "evidence": [

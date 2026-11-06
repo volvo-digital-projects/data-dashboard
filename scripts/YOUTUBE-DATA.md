@@ -1,9 +1,8 @@
 # YouTube creator snapshot
 
-## Hourly public metrics
+## Four-hour public metrics
 
-`refresh-youtube.yml` has staggered watchdog opportunities at minutes 7, 22, 37 and 52 because GitHub schedules may be delayed or dropped. The collector enforces a 55-minute minimum interval, so verified data is still published at most once per hour,
-or via workflow_dispatch. It reads the existing 15-person roster / 14 unique channels,
+`refresh-youtube.yml` schedules six collections daily, every four hours, and the collector enforces a four-hour minimum interval unless explicitly forced. It reads the current 16-person roster / 15 unique channels,
 collects complete public long/short catalogs, and rejects the entire refresh if any
 channel identity or count is missing after three per-channel retries. The previous snapshot stays intact on failure.
 Every channel uses the same Volvo-only scope: a title must identify Volvo or a Volvo
@@ -59,3 +58,9 @@ boilerplate alone is not proof. Unknown videos remain unassigned.
 Sales and VOC are joined at render time from the existing maintained datasets by name
 and showroom CDSID. No VOC responses means unscored, never zero points. Monthly sales
 includes the current partial month, and is not attributed to YouTube conversion.
+
+## November 6 roster replacement
+
+The supplied November 6 roster removes Kim Yeso from the YouTube roster only and adds Bae Jeong-woo (Ivy, Jeonju, showroom 6KR6840), channel https://www.youtube.com/@baetzby. The November 6 public catalog review found 15 uploads; six Volvo Shorts were included, while nine Renault/Hyundai/other-brand videos were explicitly excluded by ID. Apply the same scope to video counts, views, averages and API comment collection. Subscribers remain a channel-wide public count, not a Volvo-only attribution.
+
+The earliest verified included Volvo upload is July 30, 2026 in KST. The new channel has no previous snapshot, midnight baseline or reviewed comment interpretation; show pending rather than inventing comments or sentiment. Existing comments/reviews for the removed channel are removed from the YouTube dataset. The midnight aggregate baseline is invalidated when the roster changes, until the next genuine midnight capture.

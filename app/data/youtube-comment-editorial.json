@@ -148,39 +148,6 @@
         }
       ]
     },
-    "UCIN-EGXvd_Tv720IqzD8rQQ": {
-      "overall": "체험형 영상에 호감. 화면 방향과 가족용 공간에는 아쉬움.",
-      "positive": [
-        "친절한 시승 설명·체험 구성 호평",
-        "실내 분위기·오디오·기능에 관심"
-      ],
-      "negative": [
-        "운전석이 반대로 보여 집중하기 어렵다는 의견",
-        "차량: 2열·트렁크 때문에 구매 보류"
-      ],
-      "negativeEvidence": [
-        {
-          "summary": "운전석이 반대로 보여 집중하기 어렵다는 의견",
-          "sourceIndexes": [
-            0
-          ],
-          "sourceSha256": [
-            "8bc9bd2abf760b0668ed0ff3ea2090597a3a4d3601aed9bc20729852220d4d73"
-          ]
-        },
-        {
-          "summary": "차량: 2열·트렁크 때문에 구매 보류",
-          "sourceIndexes": [
-            23,
-            24
-          ],
-          "sourceSha256": [
-            "1da7f66867af2b42c92d1cae66d6f19001430f97ddb8c351599eb8dccd872aff",
-            "29a3e136c6382da07cfde7ec1a01912e460fed7309bf6df089b46450c5593a5e"
-          ]
-        }
-      ]
-    },
     "UC9-es-82mhByLp4nafGK1CA": {
       "overall": "꼼꼼한 설명에 호평. 구매 조건을 더 알려달라는 반응.",
       "positive": [
@@ -480,5 +447,8 @@
     "policy": "명시적인 불만·비판만 요약. 질문·단순 정정 요청·추가 요청·우려·대상 불명·다른 딜러 평가 제외. 차량·브랜드 불만은 대상을 명시. 키워드는 후보 탐색에만 사용하며 부정 확정에 사용하지 않음.",
     "scope": "기존 부정 요약 및 새 수집 댓글의 부정 후보 문맥 재검토. 긍정 요약은 이번 검토 대상 아님.",
     "sourceViewerCommentCount": 2597
-  }
+  },
+  "pendingChannels": [
+    "UCTET6Q4mF4cSL1SGXmyQU0Q"
+  ]
 }
