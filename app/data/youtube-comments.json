@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-07T09:21:53.525822+00:00",
+  "checkedAt": "2026-11-07T14:26:23.628442+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 393,
+      "total": 394,
       "videos": 50,
       "completeVideos": 50,
       "partialVideos": 0,
@@ -13,7 +13,7 @@
         "suggestion": 0,
         "other": 176,
         "review": 9,
-        "owner": 181
+        "owner": 182
       },
       "entries": [
         {
@@ -33,6 +33,15 @@
           "videoId": "Xl3_JLsYUdA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=Xl3_JLsYUdA&lc=UgxaqH8Mbm33e2VBt5p4AaABAg"
+        },
+        {
+          "id": "UgxaqH8Mbm33e2VBt5p4AaABAg.AcpefmVF8rrAcuoRV-zqBs",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "Xl3_JLsYUdA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=Xl3_JLsYUdA&lc=UgxaqH8Mbm33e2VBt5p4AaABAg.AcpefmVF8rrAcuoRV-zqBs"
         },
         {
           "id": "UgzTqapKLF5pjb3NhIp4AaABAg",
@@ -35105,17 +35114,17 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 617,
+      "total": 619,
       "videos": 71,
       "completeVideos": 71,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
-        "positive": 27,
+        "positive": 28,
         "suggestion": 0,
         "other": 292,
         "review": 26,
-        "owner": 272
+        "owner": 273
       },
       "entries": [
         {
@@ -35126,6 +35135,24 @@
           "videoId": "3H3ugtaRxCQ",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=3H3ugtaRxCQ&lc=UgwPhD8zeWEvEq0-OPt4AaABAg"
+        },
+        {
+          "id": "UgwPhD8zeWEvEq0-OPt4AaABAg.AcuGdvt-B0vAcuSyDAxqNO",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "3H3ugtaRxCQ",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=3H3ugtaRxCQ&lc=UgwPhD8zeWEvEq0-OPt4AaABAg.AcuGdvt-B0vAcuSyDAxqNO"
+        },
+        {
+          "id": "UgwPhD8zeWEvEq0-OPt4AaABAg.AcuGdvt-B0vAcuVyNhBM8c",
+          "category": "positive",
+          "topic": "영상·콘텐츠 반응",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "3H3ugtaRxCQ",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=3H3ugtaRxCQ&lc=UgwPhD8zeWEvEq0-OPt4AaABAg.AcuGdvt-B0vAcuVyNhBM8c"
         },
         {
           "id": "Ugxjzu4OA1VYmONF4lJ4AaABAg",
