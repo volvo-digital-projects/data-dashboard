@@ -53,7 +53,7 @@
     {
       "id": "under-3m",
       "label": "3개월 이내",
-      "employeeCount": 17,
+      "employeeCount": 18,
       "respondingEmployees": 13,
       "responses": 136,
       "scoreSum": 1294.0,
@@ -71,10 +71,10 @@
     {
       "id": "1-3y",
       "label": "1~3년",
-      "employeeCount": 91,
-      "respondingEmployees": 91,
-      "responses": 1576,
-      "scoreSum": 14729.0,
+      "employeeCount": 90,
+      "respondingEmployees": 90,
+      "responses": 1527,
+      "scoreSum": 14270.0,
       "average": 9.35
     },
     {
