@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-09T10:13:46.128993+00:00",
+  "checkedAt": "2026-11-09T21:41:53.724184+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -21105,7 +21105,7 @@
       "excludedOwnerPromotions": 12
     },
     "UCUGnMnHdpXTdEI_j8-Vk7Eg": {
-      "total": 901,
+      "total": 903,
       "videos": 102,
       "completeVideos": 102,
       "partialVideos": 0,
@@ -21113,11 +21113,29 @@
       "counts": {
         "positive": 95,
         "suggestion": 0,
-        "other": 522,
-        "review": 33,
+        "other": 523,
+        "review": 34,
         "owner": 251
       },
       "entries": [
+        {
+          "id": "UgxCCGXU3aMRn9IePH14AaABAg",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
+          "videoId": "n5DPgshM4bc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=n5DPgshM4bc&lc=UgxCCGXU3aMRn9IePH14AaABAg"
+        },
+        {
+          "id": "UgxRrf8Bn1U41Oyv1EB4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "n5DPgshM4bc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=n5DPgshM4bc&lc=UgxRrf8Bn1U41Oyv1EB4AaABAg"
+        },
         {
           "id": "UgzXiQmaI0KZo4QzmYh4AaABAg",
           "category": "other",
@@ -29230,6 +29248,12 @@
       ],
       "coverage": [
         {
+          "id": "n5DPgshM4bc",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "USj4Nxl9h9E",
           "kind": "video",
           "status": "complete",
@@ -29237,12 +29261,6 @@
         },
         {
           "id": "YqQZji6PE3U",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "n5DPgshM4bc",
           "kind": "video",
           "status": "complete",
           "reported": null
