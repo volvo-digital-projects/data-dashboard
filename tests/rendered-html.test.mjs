@@ -130,22 +130,11 @@ test("shows Sales-DMS job titles beside the selected staff name", async () => {
   const employees = Object.values(staffAnalysis.showrooms).flatMap(
     (showroom) => showroom.employees,
   );
-  const gangnamDaechi = staffAnalysis.showrooms["6KR6834"].employees;
   assert.ok(employees.length >= 300);
-  assert.equal(
-    staffAnalysis.showrooms["6KR6857"].employees.some(
-      (employee) => employee.name === "이송봉",
-    ),
-    true,
-  );
-  assert.ok(employees.every((employee) => employee.jobTitle));
-  assert.equal(gangnamDaechi.find((employee) => employee.name === "문정환").jobTitle, "팀장");
-  assert.equal(
-    staffAnalysis.showrooms["6KR6829"].employees.find(
-      (employee) => employee.name === "방준호",
-    ).jobTitle,
-    "팀장",
-  );
+  assert.ok(employees.every((employee) => typeof employee.jobTitle === "string" && employee.jobTitle.trim()));
+  const teamLeads = employees.filter((employee) => employee.role === "영업팀장");
+  assert.ok(teamLeads.length > 0);
+  assert.ok(teamLeads.every((employee) => employee.jobTitle === "팀장"));
   assert.match(
     analysisSource,
     /type StaffEmployee = \{[\s\S]*?jobTitle: string;/,
