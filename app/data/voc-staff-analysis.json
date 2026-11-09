@@ -2,15 +2,15 @@
   "source": {
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-10-27",
-    "rosterCheckedAt": "2026-11-09",
-    "rosterSyncedAt": "2026-11-09T19:07:39+09:00",
+    "rosterCheckedAt": "2026-11-10",
+    "rosterSyncedAt": "2026-11-10T06:35:25+09:00",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
     "historyRange": "2023-2026 YTD",
     "jobTitleSourceWorkbook": "Sales-DMS 직원등록",
     "jobTitleSourceSheet": "Sales-DMS 직원등록",
-    "jobTitleSourceDate": "2026-11-09",
+    "jobTitleSourceDate": "2026-11-10",
     "sentWorkbook": "VOC발신건수.xlsx",
     "sentThrough": "2026-11-03",
     "latestResponseThrough": "2026-10-27",
@@ -2868,7 +2868,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-07-10",
-          "tenureMonths": 111,
+          "tenureMonths": 112,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -5564,7 +5564,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2026-08-10",
-          "tenureMonths": 2,
+          "tenureMonths": 3,
           "tenureBucket": "under-3m",
           "tenureBucketLabel": "3개월 이내",
           "years": {
@@ -7488,7 +7488,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2019-07-10",
-          "tenureMonths": 87,
+          "tenureMonths": 88,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -9065,7 +9065,7 @@
           "role": "영업직원",
           "jobTitle": "과장",
           "hireDate": "2016-11-10",
-          "tenureMonths": 119,
+          "tenureMonths": 120,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -14944,7 +14944,7 @@
           "role": "영업직원",
           "jobTitle": "사원",
           "hireDate": "2024-10-10",
-          "tenureMonths": 24,
+          "tenureMonths": 25,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -15611,7 +15611,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-05-10",
-          "tenureMonths": 113,
+          "tenureMonths": 114,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -18088,7 +18088,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2019-05-10",
-          "tenureMonths": 89,
+          "tenureMonths": 90,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -20049,7 +20049,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2022-01-10",
-          "tenureMonths": 57,
+          "tenureMonths": 58,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -22610,7 +22610,7 @@
           "role": "영업직원",
           "jobTitle": "팀장",
           "hireDate": "2023-07-10",
-          "tenureMonths": 39,
+          "tenureMonths": 40,
           "tenureBucket": "3-5y",
           "tenureBucketLabel": "3~5년",
           "years": {
@@ -23865,7 +23865,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-07-10",
-          "tenureMonths": 111,
+          "tenureMonths": 112,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
@@ -28026,7 +28026,7 @@
           "role": "영업직원",
           "jobTitle": "대리",
           "hireDate": "2025-02-10",
-          "tenureMonths": 20,
+          "tenureMonths": 21,
           "tenureBucket": "1-3y",
           "tenureBucketLabel": "1~3년",
           "years": {
@@ -29361,7 +29361,7 @@
           "role": "영업팀장",
           "jobTitle": "팀장",
           "hireDate": "2017-07-10",
-          "tenureMonths": 111,
+          "tenureMonths": 112,
           "tenureBucket": "5-10y",
           "tenureBucketLabel": "5~10년",
           "years": {
