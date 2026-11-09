@@ -3,7 +3,7 @@
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-10-27",
     "rosterCheckedAt": "2026-11-09",
-    "rosterSyncedAt": "2026-11-09T10:13:54+09:00",
+    "rosterSyncedAt": "2026-11-09T15:59:09+09:00",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
@@ -26860,6 +26860,20 @@
           "staffCdsid": "J-KIM130"
         },
         {
+          "years": {},
+          "commentResponses": 0,
+          "strengthKeywords": [],
+          "improvementKeywords": [],
+          "name": "김형준",
+          "role": "영업직원",
+          "jobTitle": "주임",
+          "hireDate": "2026-11-04",
+          "tenureMonths": 0,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내",
+          "staffCdsid": "H-KIM96"
+        },
+        {
           "name": "나희진",
           "role": "영업직원",
           "jobTitle": "대리",
@@ -30588,117 +30602,6 @@
           "staffCdsid": "S-KIM112"
         },
         {
-          "years": {
-            "2023": {
-              "responses": 36,
-              "scoreSum": 343.0,
-              "sent": 153
-            },
-            "2024": {
-              "responses": 31,
-              "scoreSum": 293.0,
-              "sent": 113
-            },
-            "2025": {
-              "responses": 2,
-              "scoreSum": 18.0,
-              "sent": 3
-            },
-            "2026": {
-              "responses": 1,
-              "scoreSum": 10.0,
-              "sent": 17,
-              "rateResponses": 1
-            }
-          },
-          "commentResponses": 69,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 39
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 36
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 20
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 19
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 16
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 13
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 12
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 7
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 6
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 3
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 2
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 2
-            },
-            {
-              "label": "맞춤형 설명",
-              "mentions": 2
-            },
-            {
-              "label": "지속적 후속관리",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "전문지식 정확성부족",
-              "mentions": 2
-            },
-            {
-              "label": "대기시간 관리미흡",
-              "mentions": 1
-            },
-            {
-              "label": "시설 편의 미제공",
-              "mentions": 1
-            },
-            {
-              "label": "전시차량 다양화 필요",
-              "mentions": 1
-            }
-          ],
-          "name": "박종윤",
-          "role": "영업직원",
-          "jobTitle": "과장",
-          "hireDate": "2026-09-07",
-          "tenureMonths": 2,
-          "tenureBucket": "under-3m",
-          "tenureBucketLabel": "3개월 이내",
-          "latestResponseDate": "2026-09-24",
-          "staffCdsid": "J-PARK92"
-        },
-        {
           "name": "안재현",
           "role": "영업직원",
           "jobTitle": "과장",
@@ -30991,103 +30894,115 @@
           "staffCdsid": "J-KIM105"
         },
         {
-          "name": "방준호",
-          "role": "영업팀장",
-          "jobTitle": "팀장",
-          "hireDate": "2025-03-17",
-          "tenureMonths": 19,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
           "years": {
-            "2025": {
-              "responses": 6,
-              "scoreSum": 56.0,
-              "sent": 16
-            },
-            "2026": {
-              "responses": 15,
-              "scoreSum": 143.0,
-              "sent": 96,
-              "rateResponses": 15
-            },
             "2023": {
-              "responses": 15,
-              "scoreSum": 139.0,
-              "sent": 0
+              "responses": 36,
+              "scoreSum": 343.0,
+              "sent": 153
             },
             "2024": {
-              "responses": 13,
-              "scoreSum": 121.0,
-              "sent": 0
+              "responses": 31,
+              "scoreSum": 293.0,
+              "sent": 113
+            },
+            "2025": {
+              "responses": 2,
+              "scoreSum": 18.0,
+              "sent": 3
+            },
+            "2026": {
+              "responses": 1,
+              "scoreSum": 10.0,
+              "sent": 17,
+              "rateResponses": 1
             }
           },
-          "commentResponses": 47,
+          "commentResponses": 69,
           "strengthKeywords": [
             {
               "label": "친절·정중 응대",
-              "mentions": 26
+              "mentions": 39
             },
             {
               "label": "상세·꼼꼼한 설명",
-              "mentions": 23
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 13
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 9
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 9
+              "mentions": 36
             },
             {
               "label": "이해하기 쉬운 설명",
-              "mentions": 7
+              "mentions": 20
             },
             {
-              "label": "시승·차량체험 지원",
-              "mentions": 6
+              "label": "비교·장단점 안내",
+              "mentions": 19
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 16
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 13
             },
             {
               "label": "전문지식·정확성",
-              "mentions": 4
+              "mentions": 12
             },
             {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 3
+              "label": "시승·차량체험 지원",
+              "mentions": 7
             },
             {
               "label": "편안한 상담",
+              "mentions": 6
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "신속한 응답",
               "mentions": 2
             },
             {
               "label": "맞춤형 설명",
-              "mentions": 1
+              "mentions": 2
             },
             {
-              "label": "구매결정 지원",
-              "mentions": 1
-            },
-            {
-              "label": "신속한 응답",
+              "label": "지속적 후속관리",
               "mentions": 1
             }
           ],
           "improvementKeywords": [
             {
-              "label": "응대 태도 불량",
+              "label": "전문지식 정확성부족",
+              "mentions": 2
+            },
+            {
+              "label": "대기시간 관리미흡",
               "mentions": 1
             },
             {
-              "label": "시승모델 다양화 필요",
+              "label": "시설 편의 미제공",
+              "mentions": 1
+            },
+            {
+              "label": "전시차량 다양화 필요",
               "mentions": 1
             }
           ],
+          "name": "박종윤",
+          "role": "영업팀장",
+          "jobTitle": "팀장",
+          "hireDate": "2026-09-07",
+          "tenureMonths": 2,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내",
           "latestResponseDate": "2026-09-24",
-          "staffCdsid": "J-BANG3"
+          "staffCdsid": "J-PARK92"
         },
         {
           "name": "송용운",
@@ -31258,7 +31173,108 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "방준호",
+          "role": "영업팀장",
+          "jobTitle": "팀장",
+          "hireDate": "2025-03-17",
+          "tenureMonths": 19,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
+          "years": {
+            "2025": {
+              "responses": 6,
+              "scoreSum": 56.0,
+              "sent": 16
+            },
+            "2026": {
+              "responses": 15,
+              "scoreSum": 143.0,
+              "sent": 96,
+              "rateResponses": 15
+            },
+            "2023": {
+              "responses": 15,
+              "scoreSum": 139.0,
+              "sent": 0
+            },
+            "2024": {
+              "responses": 13,
+              "scoreSum": 121.0,
+              "sent": 0
+            }
+          },
+          "commentResponses": 47,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 26
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 23
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 13
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 9
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 9
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 7
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 4
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 3
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 2
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 1
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 1
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "응대 태도 불량",
+              "mentions": 1
+            },
+            {
+              "label": "시승모델 다양화 필요",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-09-24",
+          "archivedAt": "2026-11-09",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR6854": {
       "showroom": "볼보 포항",
