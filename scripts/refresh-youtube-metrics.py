@@ -169,9 +169,7 @@ def daily_close(original, checked, channels=None, capture=False):
     kst = datetime.timezone(datetime.timedelta(hours=9))
     local_checked = datetime.datetime.fromisoformat(checked).astimezone(kst)
     date = local_checked.date()
-    # The close job is scheduled for 23:59 KST to avoid GitHub's busy top-of-hour
-    # window. If it starts before midnight it belongs to the following day; if
-    # GitHub delays it past midnight, it belongs to the current day.
+    # The final daily collection supplies the following day's comparison.
     if capture and local_checked.hour >= 12:
         date += datetime.timedelta(days=1)
     saved = original.get('dailyClose')
@@ -182,10 +180,9 @@ def daily_close(original, checked, channels=None, capture=False):
         return dict(date=date.isoformat(), subscribers=sum(c['subscribers'] for c in snapshot),
                     videos=sum(c['long']['count'] + c['short']['count'] for c in snapshot), checkedAt=checked,
                     channelSubscribers={c['id']:c['subscribers'] for c in snapshot})
-    if saved and saved.get('date') == date.isoformat():
+    if saved and saved.get('date', '') >= date.isoformat():
         return saved
-    # Never substitute an arbitrary previous-day collection for the midnight close.
-    # The dedicated 00:00 KST workflow is the only writer of a populated baseline.
+    # Preserve the prepared next-day baseline on standalone manual updates.
     return dict(date=date.isoformat(), subscribers=None, videos=None, checkedAt=None, channelSubscribers={})
 
 def main():
@@ -205,6 +202,9 @@ def main():
                            for old, fresh in zip(original['channels'], results)]
     checked = checked_at.isoformat()
     updated['dailyClose'] = daily_close(original, checked, updated['channels'], capture_close)
+    previous_close = original.get('dailyClose', {})
+    if capture_close and previous_close.get('checkedAt') and previous_close['date'] != updated['dailyClose']['date']:
+        updated['previousDailyClose'] = previous_close
     updated['lastSuccessfulRefreshAt'] = checked
     for channel in updated['channels']:
         channel['checkedAt'] = checked

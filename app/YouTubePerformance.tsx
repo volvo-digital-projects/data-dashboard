@@ -137,7 +137,8 @@ export default function YouTubePerformance({ showOriginalPortraits = false }: { 
   const [sort, setSort] = useState("subscribers");
   const [detailOpen, setDetailOpen] = useState(false);
   const root = useRef<HTMLElement>(null);
-  const dailyClose = data.dailyClose.date === kstDate() ? data.dailyClose : null;
+  const previousDailyClose = (data as typeof data & { previousDailyClose?: typeof data.dailyClose }).previousDailyClose;
+  const dailyClose = [data.dailyClose, previousDailyClose].find(close => close?.date === kstDate()) ?? null;
   const visible = creators.filter(person=>(dealer === "전체" || person.dealer === dealer)).sort((a,b)=>{
     if (sort === "subscribers") return (b.channel.subscribers ?? -1) - (a.channel.subscribers ?? -1);
     if (sort === "views") return (b.channel.averageViews ?? -1) - (a.channel.averageViews ?? -1);
@@ -187,12 +188,12 @@ export default function YouTubePerformance({ showOriginalPortraits = false }: { 
   return <section ref={root} className={`youtube-performance yt-compact ${entered ? "has-entered" : ""}`} aria-labelledby="yt-heading">
     <header className="yt-hero">
       <div className="yt-hero-copy">
-        <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title={`${creators.length}명 크리에이터 채널 지표 4시간마다 확인 · 전체 수집 성공 시각 (KST)`}><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
+        <div className="yt-title-row"><h2 id="yt-heading"><svg className="yt-title-icon" viewBox="0 0 24 17" aria-hidden="true"><rect width="24" height="17" rx="4" fill="#ff0033"/><path d="M10 4.5 16 8.5 10 12.5Z" fill="white"/></svg>유튜브 크리에이터 <em>성과 비교</em></h2><span className="yt-update-stamp" title={`${creators.length}명 크리에이터 채널 지표 매일 06·10·14·18시 확인 · 전체 수집 성공 시각 (KST)`}><span aria-hidden="true">◷</span><b>UPDATE</b> {updateLabel} 기준</span></div>
       </div>
       <div className="yt-headline-stats">
         <div className="yt-staff-stat"><div className="yt-staff-total"><div className="yt-gender-summary"><GenderDonut/></div></div></div>
-        <div><span className="yt-metric-title">합산 구독자 <i aria-hidden="true">/</i> <em>전일 24:00 마감 대비</em></span><div className="yt-metric-value"><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p></div><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
-        <div><span className="yt-metric-title">공개 영상 수 <i aria-hidden="true">/</i> <em>전일 24:00 마감 대비</em></span><div className="yt-metric-value"><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p></div><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
+        <div><span className="yt-metric-title">합산 구독자 <i aria-hidden="true">/</i> <em>전일 마지막 수집 대비</em></span><div className="yt-metric-value"><strong>{number(sumSubscribers)}<small>명</small></strong><p className="yt-close-change">{changeLabel(sumSubscribers, dailyClose?.subscribers ?? null, "명")}</p></div><p>채널 중복 집계 제외 · 구독자 간 중복 가능</p></div>
+        <div><span className="yt-metric-title">공개 영상 수 <i aria-hidden="true">/</i> <em>전일 마지막 수집 대비</em></span><div className="yt-metric-value"><strong>{number(videoTotal)}<small>개</small></strong><p className="yt-close-change">{changeLabel(videoTotal, dailyClose?.videos ?? null, "개")}</p></div><p>롱폼 {data.channels.reduce((s,c)=>s+c.long.count,0)} · 숏츠 {data.channels.reduce((s,c)=>s+c.short.count,0)}</p></div>
       </div>
     </header>
     <div className="yt-distribution">
@@ -224,8 +225,8 @@ export default function YouTubePerformance({ showOriginalPortraits = false }: { 
           : "neutral";
         const subscriberDeltaTitle=includesSubscriberChange
           ? dailyClose?.checkedAt
-            ? `전일 24:00 마감 수집: ${dailyClose.checkedAt}`
-            : "전일 24:00 마감 기록 없음"
+            ? `전일 마지막 수집 수집: ${dailyClose.checkedAt}`
+            : "전일 마지막 수집 기록 없음"
           : `공동 채널 증감은 ${subscriberChangeOwner} 행에서 한 번만 합산`;
 
 
@@ -253,7 +254,7 @@ export default function YouTubePerformance({ showOriginalPortraits = false }: { 
         </Fragment>;
       })}</tbody></table>
     </div> : <div className="yt-empty"><strong>{dealer}의 등록 직원이 없습니다.</strong><p>첨부 명단 기준이며 실제 채널 부재를 단정하지 않습니다.</p></div>}
-    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 배정우의 혼합 채널은 르노·현대 등 다른 브랜드 영상을 제외하고 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 공식 사진이 있는 직원은 페이지 2와 같은 프로필 사진을 표시하고, 사진이 없으면 명단의 성별에 맞는 기본 실루엣을 표시합니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 4시간마다 수집을 시도하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글 수집은 4시간 주기로 갱신하며, 기존 채널 해석은 2026년 10월 13일, 배정우 채널 해석은 2026년 11월 6일 댓글을 읽고 작성했습니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
+    <details className="yt-method"><summary>데이터 기준과 해석 가이드</summary><ul><li>직원·성별·소속은 제공 명단 기준입니다. 공동 채널은 직원 2명, 채널 1개로 집계하며 구독자는 공동 채널 값, 영상 수·조회수는 영상 설명과 실제 출연 화면으로 확인한 직원별 값입니다. 배정우의 혼합 채널은 르노·현대 등 다른 브랜드 영상을 제외하고 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만 영상 수·조회수·댓글 집계에 포함합니다. 이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만 포함합니다. 김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계합니다. 공식 사진이 있는 직원은 페이지 2와 같은 프로필 사진을 표시하고, 사진이 없으면 명단의 성별에 맞는 기본 실루엣을 표시합니다.</li><li>구독자·영상·조회는 수집 시점의 공개 스냅샷입니다. 공개 채널 지표는 한국시간 매일 06·10·14·18시에 수집을 예약하며 UPDATE는 마지막 전체 수집 성공 시각입니다. 실행 지연·수집 실패 시 이전 정상값을 유지합니다. 댓글은 같은 네 회차에 API로 수집하며, 기존 채널 해석은 2026년 10월 13일, 배정우 채널 해석은 2026년 11월 6일 댓글을 읽고 작성했습니다. 평균 조회수는 공개 롱폼·숏츠의 표시 조회수를 합산한 영상당 평균으로, 반올림된 공개 수치에 따른 근삿값입니다.</li><li>판매는 직원명·전시장 코드의 단일 일치, 상담 만족도는 2023~2026 누적 VOC 총점÷총 회신 수입니다. 유튜브 활동과 판매의 인과관계나 유튜브 유입 매출을 뜻하지 않습니다.</li></ul></details>
   </section>;
 }
 

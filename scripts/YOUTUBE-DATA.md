@@ -1,8 +1,8 @@
 # YouTube creator snapshot
 
-## Four-hour public metrics
+## Four daily update slots
 
-`refresh-youtube.yml` schedules six collections daily, every four hours, and the collector enforces a four-hour minimum interval unless explicitly forced. It reads the current 16-person roster / 15 unique channels,
+The dashboard batch starts at 06:00, 10:00, 14:00 and 18:00 KST daily. It calls the roster, Google Sheets and YouTube workflows in order, retries failed stages, then publishes once after all sources pass. YouTube reads the current 16-person roster / 15 unique channels,
 collects complete public long/short catalogs, and rejects the entire refresh if any
 channel identity or count is missing after three per-channel retries. The previous snapshot stays intact on failure.
 Every channel uses the same Volvo-only scope: a title must identify Volvo or a Volvo
@@ -17,7 +17,7 @@ remain unassigned. The verified Sales-DMS staff-sales snapshot is refreshed and 
 atomically with YouTube; VOC is not refreshed by this workflow.
 
 After tests pass it commits only the metrics/release files to canonical main and
-explicitly dispatches deploy-pages.yml (GITHUB_TOKEN pushes do not trigger push CI).
+requests deployment for standalone manual runs. The batch handles Pages deployment itself.
 UPDATE in the heading is the last complete successful collection time in KST,
 not the current clock or the workflow's scheduled time.
 
@@ -63,4 +63,4 @@ includes the current partial month, and is not attributed to YouTube conversion.
 
 The supplied November 6 roster removes Kim Yeso from the YouTube roster only and adds Bae Jeong-woo (Ivy, Jeonju, showroom 6KR6840), channel https://www.youtube.com/@baetzby. The November 6 public catalog review found 15 uploads; six Volvo Shorts were included, while nine Renault/Hyundai/other-brand videos were explicitly excluded by ID. Apply the same scope to video counts, views, averages and API comment collection. Subscribers remain a channel-wide public count, not a Volvo-only attribution.
 
-The earliest verified included Volvo upload is July 30, 2026 in KST. The new channel has no previous snapshot or midnight baseline. A scoped API review (run 42171356073) on November 6 found two public comments on included Volvo videos: a color reference and an emoji. Neither supports a definite positive or negative assessment; the editorial summary states that evidence is insufficient. Existing comments/reviews for the removed channel are removed from the YouTube dataset. The midnight aggregate baseline is invalidated when the roster changes, until the next genuine midnight capture.
+The earliest verified included Volvo upload is July 30, 2026 in KST. The new channel has no previous snapshot or midnight baseline. A scoped API review (run 42171356073) on November 6 found two public comments on included Volvo videos: a color reference and an emoji. Neither supports a definite positive or negative assessment; the editorial summary states that evidence is insufficient. Existing comments/reviews for the removed channel are removed from the YouTube dataset. The midnight aggregate baseline is invalidated when the roster changes, until the next successful 18:00 slot.

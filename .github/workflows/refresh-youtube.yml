@@ -1,12 +1,16 @@
 name: Refresh YouTube metrics every 4 hours
 
 on:
-  schedule:
-    # Six collections per day, every four hours (KST).
-    # Keep the 23:59 KST collection as the midnight comparison baseline.
-    - cron: "59 14 * * *"
-    - cron: "59 2,6,10,18,22 * * *"
   workflow_dispatch:
+    inputs:
+      defer_deploy:
+        description: Let the batch publish after all sources complete
+        type: boolean
+        default: false
+      capture_daily_close:
+        description: Save the final daily collection for tomorrow’s comparison
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -30,9 +34,9 @@ jobs:
       - name: Collect and validate all public channels
         id: collect
         env:
-          # Scheduled slots must not be skipped when the previous slot was delayed.
+          # Every batch slot collects a fresh snapshot.
           FORCE_YOUTUBE_REFRESH: '1'
-          CAPTURE_YOUTUBE_DAILY_CLOSE: ${{ github.event.schedule == '59 14 * * *' && '1' || '0' }}
+          CAPTURE_YOUTUBE_DAILY_CLOSE: ${{ inputs.capture_daily_close && '1' || '0' }}
         run: |
           python scripts/refresh-youtube-metrics.py
           if git diff --quiet -- app/data/youtube-creators.json; then
@@ -69,16 +73,12 @@ jobs:
           cache: npm
       - if: steps.collect.outputs.refreshed == 'true'
         run: npm ci
-      - name: Refresh public comments when API is configured
+      - name: Refresh public comments and verify API access
         if: steps.collect.outputs.refreshed == 'true'
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          if [ -n "$YOUTUBE_API_KEY" ]; then
-            python scripts/refresh-youtube-comments.py
-          else
-            echo "YouTube API key not configured; retaining reviewed sample / last snapshot."
-          fi
+          python scripts/refresh-youtube-comments.py
       - name: Verify dashboard and data
         if: steps.collect.outputs.refreshed == 'true'
         run: |
@@ -104,7 +104,7 @@ jobs:
           fi
       # GITHUB_TOKEN pushes do not trigger other push workflows.
       - name: Deploy updated snapshot
-        if: steps.publish.outputs.changed == 'true'
+        if: steps.publish.outputs.changed == 'true' && !inputs.defer_deploy
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy-pages.yml --ref main

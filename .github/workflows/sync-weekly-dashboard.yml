@@ -1,10 +1,12 @@
 name: Sync weekly VOC and CX dashboard data
 
 on:
-  schedule:
-    # Every Monday at 08:00 KST (23:00 UTC on Sunday).
-    - cron: "0 23 * * 0"
   workflow_dispatch:
+    inputs:
+      defer_deploy:
+        description: Let the batch publish after all sources complete
+        type: boolean
+        default: false
 
 permissions:
   actions: write
@@ -88,7 +90,7 @@ jobs:
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Deploy updated weekly data
-        if: steps.publish.outputs.changed == 'true'
+        if: steps.publish.outputs.changed == 'true' && !inputs.defer_deploy
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy-pages.yml --ref main

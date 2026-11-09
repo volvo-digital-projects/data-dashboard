@@ -170,7 +170,7 @@ test("keeps the Sales-DMS roster sync private and scheduled once each morning", 
     readFile(new URL("../scripts/generate-voc-staff-analysis.py", import.meta.url), "utf8"),
     readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
   ]);
-  assert.match(workflow, /cron: "0 21 \* \* \*"/);
+  assert.doesNotMatch(workflow, /\n  schedule:/);
   assert.match(workflow, /secrets\.VOLVO_SALES_ID/);
   assert.match(workflow, /secrets\.VOLVO_SALES_PASSWORD/);
   assert.match(syncScript, /return "팀장" if normalized_role == "영업팀장"/);
@@ -544,14 +544,14 @@ test("shows previous-day subscriber changes and keeps metric refresh commits dat
   assert.match(creatorSource, /<span>전일 대비<\/span><b className=\{subscriberDeltaTone\}><span className=\{`yt-subscriber-count\$\{includesSubscriberChange \? "" : " is-excluded"\}`\}>\{includesSubscriberChange&&<i>\{subscriberDelta\.direction\}<\/i>\}<em>\{subscriberDelta\.count\}<\/em><\/span>/);
   assert.doesNotMatch(creatorSource, />직전 대비 /);
   assert.match(workflow, /git add app\/data\/youtube-creators\.json app\/data\/youtube-comments\.json/);
-  assert.match(workflow, /cron: "59 14 \* \* \*"/);
-  assert.match(workflow, /CAPTURE_YOUTUBE_DAILY_CLOSE: \$\{\{ github\.event\.schedule == '59 14 \* \* \*' && '1' \|\| '0' \}\}/);
-  assert.match(workflow, /cron: "59 2,6,10,18,22 \* \* \*"/);
-  assert.match(creatorSource, /전일 24:00 마감 대비/);
+  assert.doesNotMatch(workflow, /\n  schedule:/);
+  assert.match(workflow, /inputs\.capture_daily_close/);
+  assert.doesNotMatch(workflow, /\n  schedule:/);
+  assert.match(creatorSource, /전일 마지막 수집 대비/);
   assert.match(workflow, /steps\.collect\.outputs\.refreshed == 'true'/);
   assert.match(workflow, /steps\.publish\.outputs\.changed == 'true'/);
   assert.match(creatorSource, /const lastChannelUpdate = new Date\(data\.lastSuccessfulRefreshAt\);/);
-  assert.match(creatorSource, /`\$\{creators\.length\}명 크리에이터 채널 지표 4시간마다 확인 · 전체 수집 성공 시각 \(KST\)`/);
+  assert.match(creatorSource, /`\$\{creators\.length\}명 크리에이터 채널 지표 매일 06·10·14·18시 확인 · 전체 수집 성공 시각 \(KST\)`/);
   assert.match(creatorSource, /배정우의 혼합 채널은 르노·현대 등 다른 브랜드 영상을 제외하고 제목에서 Volvo 또는 Volvo 모델이 확인되는 영상만/);
   assert.match(creatorSource, /이유성의 BMW·맛집·일상 혼합 채널도 Volvo 차량·브랜드 내용이 확인되는 영상만/);
   assert.match(creatorSource, /김명준 채널 역시 같은 Volvo 자동차 콘텐츠 기준으로만 영상 지표를 집계/);
@@ -1841,7 +1841,7 @@ test("downloads privacy-safe Sales-DMS staff sales with every four-hour YouTube 
 
   assert.match(workflow, /workflow_dispatch:/);
   assert.doesNotMatch(workflow, /cron:/);
-  assert.match(hourlyWorkflow, /cron: "59 2,6,10,18,22 \* \* \*"/);
+  assert.doesNotMatch(hourlyWorkflow, /\n  schedule:/);
   assert.match(hourlyWorkflow, /Refresh staff sales with the four-hour YouTube snapshot/);
   assert.match(hourlyWorkflow, /if: steps\.collect\.outputs\.refreshed == 'true'/);
   assert.match(hourlyWorkflow, /for attempt in 1 2 3/);
@@ -4594,7 +4594,7 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.doesNotMatch(detailsText, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /docs\.google\.com|1KZust31/);
   assert.doesNotMatch(detailsSource, /W01~W52 원본값 보기/);
-  assert.match(workflow, /cron: "0 23 \* \* 0"/);
+  assert.doesNotMatch(workflow, /\n  schedule:/);
   assert.match(workflow, /node scripts\/sync-google-sheet-data\.mjs/);
   assert.match(workflow, /python scripts\/download-google-sheet-voc-raw\.py/);
   assert.match(workflow, /python scripts\/sync-voc-sent-to-staff-analysis\.py/);

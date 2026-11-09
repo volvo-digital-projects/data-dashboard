@@ -1,0 +1,37 @@
+name: Update dashboard at 06, 10, 14 and 18 KST
+run-name: Dashboard batch ${{ inputs.slot || github.event.schedule || 'manual' }}
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+    - cron: "0 1 * * *"
+    - cron: "0 5 * * *"
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: Optional missed slot in KST (YYYY-MM-DDTHH:00:00+09:00)
+        type: string
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: dashboard-update-batch
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 245
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.0'
+      - name: Sync, retry, and publish the dashboard
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DASHBOARD_SLOT: ${{ inputs.slot }}
+        run: node scripts/update-dashboard-batch.mjs

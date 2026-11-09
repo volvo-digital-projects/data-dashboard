@@ -1,10 +1,12 @@
 name: Sync Sales-DMS staff roster
 
 on:
-  schedule:
-    # 06:00 every morning in Asia/Seoul (21:00 UTC on the previous day).
-    - cron: "0 21 * * *"
   workflow_dispatch:
+    inputs:
+      defer_deploy:
+        description: Let the batch publish after all sources complete
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -61,7 +63,7 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
       # GITHUB_TOKEN pushes do not trigger other push workflows.
       - name: Deploy updated roster
-        if: steps.publish.outputs.changed == 'true'
+        if: steps.publish.outputs.changed == 'true' && !inputs.defer_deploy
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy-pages.yml --ref main
