@@ -538,7 +538,7 @@ const staffAnalysisSource = vocStaffAnalysisJson.source as typeof vocStaffAnalys
 const rosterBadgeDate = (staffAnalysisSource.rosterSyncedAt?.slice(0, 10) ?? staffAnalysisSource.rosterCheckedAt)
   .replaceAll("-", "").slice(2);
 const rosterBadgeTime = staffAnalysisSource.rosterSyncedAt?.slice(11, 16);
-const rosterBadgeLabel = `${rosterBadgeDate} ${rosterBadgeTime ?? "기준"}`;
+const rosterBadgeLabel = rosterBadgeTime ? `${rosterBadgeDate} ${rosterBadgeTime} 기준` : `${rosterBadgeDate} 기준`;
 const vocResponseChangePercent = vocResponseEvidence.previousTotalResponses > 0
   ? ((vocResponseEvidence.totalResponses - vocResponseEvidence.previousTotalResponses) / vocResponseEvidence.previousTotalResponses) * 100
   : 0;
@@ -3585,7 +3585,7 @@ export default function CompetitiveAnalysis({
               <h2>소속 영업직원 성장 내비게이션</h2>
             </div>
             <div className="growth-navigation-source" aria-label="분석 기준">
-              <span title={staffAnalysisSource.rosterSyncedAt ? `Sales-DMS 수집 ${rosterBadgeLabel} KST` : undefined}>
+              <span title={rosterBadgeTime ? `Sales-DMS 수집 ${rosterBadgeDate} ${rosterBadgeTime} KST` : undefined}>
                 <b>Sales-DMS</b>
                 <i aria-hidden="true">/</i>
                 <strong>{rosterBadgeLabel}</strong>
