@@ -338,6 +338,10 @@ html {
   font-weight: 650;
 }
 
+.growth-navigation-source > span:first-child {
+  padding-inline: 13px;
+}
+
 .growth-navigation-source i {
   color: #9aabb3;
   font-style: normal;

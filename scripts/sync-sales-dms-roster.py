@@ -333,7 +333,7 @@ def reconcile(payload: dict[str, Any], raw_rows: list[dict[str, Any]], as_of: da
         {
             "rosterCheckedAt": as_of.isoformat(),
             "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
-            "rosterUpdateSchedule": "매일 06:00 KST · 1일 1회",
+            "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
             "jobTitleSourceDate": as_of.isoformat(),
         }
     )
@@ -360,6 +360,10 @@ def main() -> int:
         sheet = "Sales-DMS 직원등록"
         source_name = "Sales-DMS 직원등록"
     summary = reconcile(payload, rows, as_of)
+    if args.roster:
+        payload["source"].pop("rosterSyncedAt", None)
+    else:
+        payload["source"]["rosterSyncedAt"] = datetime.now(ZoneInfo("Asia/Seoul")).isoformat(timespec="seconds")
     selekt_locations = {
         "AJU Autorium Gangseo SELEKT": ("아주", "강서 Selekt"),
         "Cheonha Auto Seongsu SELEKT": ("천하", "성수 Selekt"),

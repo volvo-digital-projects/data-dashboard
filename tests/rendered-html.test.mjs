@@ -607,7 +607,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
   assert.ok(start >= 0 && end > start);
   assert.ok(profileStart >= 0 && profileEnd > profileStart);
   assert.match(navigation, /소속 영업직원 성장 내비게이션/);
-  assert.match(navigation, /<b>Sales-DMS<\/b>[\s\S]*?<i aria-hidden="true">\/<\/i>[\s\S]*?<strong>\{staffAnalysisSource\.rosterCheckedAt[\s\S]*? 기준<\/strong>/);
+  assert.match(navigation, /<b>Sales-DMS<\/b>[\s\S]*?<i aria-hidden="true">\/<\/i>[\s\S]*?<strong>\{rosterBadgeLabel\}<\/strong>/);
   assert.match(navigation, /<b>VOC 상담만족도<\/b>[\s\S]*?<i aria-hidden="true">\/<\/i>[\s\S]*?<strong>23 ~ 26 YTD 기준<\/strong>/);
   assert.doesNotMatch(navigation, /등수 대신 상담 근거와 면담 행동을 연결합니다/);
   assert.match(navigation, /영업직원 \/ 입사일자/);
