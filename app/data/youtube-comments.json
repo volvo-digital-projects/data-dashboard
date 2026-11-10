@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-10T01:49:07.129243+00:00",
+  "checkedAt": "2026-11-10T05:50:27.405965+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 395,
+      "total": 396,
       "videos": 50,
       "completeVideos": 50,
       "partialVideos": 0,
@@ -13,7 +13,7 @@
         "suggestion": 0,
         "other": 176,
         "review": 10,
-        "owner": 182
+        "owner": 183
       },
       "entries": [
         {
@@ -24,6 +24,15 @@
           "videoId": "ApOI1Ep4dgg",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=ApOI1Ep4dgg&lc=Ugwq51oIIyONoQpDWYN4AaABAg"
+        },
+        {
+          "id": "Ugwq51oIIyONoQpDWYN4AaABAg.Ad0GJ55CX8jAd0WG4DWh8D",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "ApOI1Ep4dgg",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=ApOI1Ep4dgg&lc=Ugwq51oIIyONoQpDWYN4AaABAg.Ad0GJ55CX8jAd0WG4DWh8D"
         },
         {
           "id": "UgwOtGrhct_Xiz9nFu94AaABAg",
@@ -21114,7 +21123,7 @@
       "excludedOwnerPromotions": 12
     },
     "UCUGnMnHdpXTdEI_j8-Vk7Eg": {
-      "total": 903,
+      "total": 904,
       "videos": 102,
       "completeVideos": 102,
       "partialVideos": 0,
@@ -21122,11 +21131,20 @@
       "counts": {
         "positive": 95,
         "suggestion": 0,
-        "other": 523,
+        "other": 524,
         "review": 34,
         "owner": 251
       },
       "entries": [
+        {
+          "id": "UgyDPbKgU8sziRWEmb54AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "n5DPgshM4bc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=n5DPgshM4bc&lc=UgyDPbKgU8sziRWEmb54AaABAg"
+        },
         {
           "id": "UgxCCGXU3aMRn9IePH14AaABAg",
           "category": "review",
