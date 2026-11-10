@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-09T21:41:53.724184+00:00",
+  "checkedAt": "2026-11-10T01:49:07.129243+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 394,
+      "total": 395,
       "videos": 50,
       "completeVideos": 50,
       "partialVideos": 0,
@@ -12,10 +12,19 @@
         "positive": 27,
         "suggestion": 0,
         "other": 176,
-        "review": 9,
+        "review": 10,
         "owner": 182
       },
       "entries": [
+        {
+          "id": "Ugwq51oIIyONoQpDWYN4AaABAg",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
+          "videoId": "ApOI1Ep4dgg",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=ApOI1Ep4dgg&lc=Ugwq51oIIyONoQpDWYN4AaABAg"
+        },
         {
           "id": "UgwOtGrhct_Xiz9nFu94AaABAg",
           "category": "positive",
@@ -3565,6 +3574,12 @@
       ],
       "coverage": [
         {
+          "id": "ApOI1Ep4dgg",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "Xl3_JLsYUdA",
           "kind": "video",
           "status": "complete",
@@ -3704,12 +3719,6 @@
         },
         {
           "id": "Nm8ZFIEaucw",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "ApOI1Ep4dgg",
           "kind": "video",
           "status": "complete",
           "reported": null
