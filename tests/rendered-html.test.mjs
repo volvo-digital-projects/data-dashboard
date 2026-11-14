@@ -2220,9 +2220,10 @@ test("server-renders the selected CDSID dashboard", async () => {
     new URL("../app/Dashboard.tsx", import.meta.url),
     "utf8",
   );
-  const [consultation, sent] = await Promise.all([
+  const [consultation, sent, weekly] = await Promise.all([
     readFile(new URL("../app/data/voc-consultation.json", import.meta.url), "utf8").then(JSON.parse),
     readFile(new URL("../app/data/voc-sent.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../app/data/weekly.json", import.meta.url), "utf8").then(JSON.parse),
   ]);
   const seoulToday = new Intl.DateTimeFormat("sv-SE", {
     timeZone: "Asia/Seoul",
@@ -2335,7 +2336,10 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.doesNotMatch(visibleHtml, /VOC해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /신차해피콜<\/span>만 교차검증 후/);
   assert.doesNotMatch(visibleHtml, /교차검증 후, 사후보정 가능/);
-  assert.equal((visibleHtml.match(/<strong>평가완료<\/strong>/g) ?? []).length, 6);
+  assert.equal(
+    (visibleHtml.match(/<strong>평가완료<\/strong>/g) ?? []).length,
+    weekly.meta.vocClosedQuarter + weekly.meta.cxClosedQuarter,
+  );
   assert.doesNotMatch(visibleHtml, /검증완료/);
   assert.equal((html.match(/metric-quarter-strip--status/g) ?? []).length, 2);
   assert.doesNotMatch(visibleHtml, /사후 보정 가능/);
@@ -2398,10 +2402,15 @@ test("server-renders the selected CDSID dashboard", async () => {
     ),
   ];
   assert.equal(statusQuarterStrips.length, 2);
-  statusQuarterStrips.forEach(([, strip]) => {
+  const closedQuarters = [weekly.meta.vocClosedQuarter, weekly.meta.cxClosedQuarter];
+  statusQuarterStrips.forEach(([, strip], index) => {
     assert.match(strip, /<strong/);
     assert.match(strip, /<button[^>]*class="complete"[^>]*><small>Q3<\/small><strong>평가완료<\/strong><\/button>/);
-    assert.match(strip, /<button[^>]*class="planned"[^>]*><small>Q4<\/small><strong>평가 중<\/strong><\/button>/);
+    if (closedQuarters[index] === 4) {
+      assert.match(strip, /<button[^>]*class="(?:complete|current)"[^>]*><small>Q4<\/small><strong>평가완료<\/strong><\/button>/);
+    } else {
+      assert.match(strip, /<button[^>]*class="planned"[^>]*><small>Q4<\/small><strong>평가 중<\/strong><\/button>/);
+    }
   });
   assert.match(
     visibleHtml,
@@ -4373,7 +4382,11 @@ test("ships Google Sheet weekly VOC, CX, and lazy detail series", async () => {
   assert.ok(weekly.meta.vocLatestWeek >= 37);
   assert.equal(weekly.meta.cxLatestWeek, 39);
   assert.equal(weekly.meta.v3sClosedQuarter, 3);
-  assert.equal(weekly.meta.vocClosedQuarter, 3);
+  const vocQuarterSeries = Object.values(weekly.voc.quarters.byCdsid);
+  assert.equal(vocQuarterSeries.length, 39);
+  const hasCompleteVocQ4 = Number.isFinite(weekly.voc.quarters.average[3]) &&
+    vocQuarterSeries.every((series) => Number.isFinite(series[3]));
+  assert.equal(weekly.meta.vocClosedQuarter, hasCompleteVocQ4 ? 4 : 3);
   assert.equal(weekly.meta.cxClosedQuarter, 3);
   assert.equal(weekly.meta.weekRanges.length, 52);
   assert.deepEqual(weekly.meta.weekRanges[0], {
