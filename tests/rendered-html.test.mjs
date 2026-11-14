@@ -2360,11 +2360,13 @@ test("server-renders the selected CDSID dashboard", async () => {
   assert.equal((html.match(/class="metric-resource-button/g) ?? []).length, 8);
   assert.equal((html.match(/class="metric-resource-pdf"/g) ?? []).length, 4);
   assert.equal((html.match(/class="metric-resource-photo"/g) ?? []).length, 4);
+  const closedMetricQuarters = weekly.meta.v3sClosedQuarter +
+    weekly.meta.vocClosedQuarter + weekly.meta.cxClosedQuarter;
   assert.equal(
     (html.match(/상세 영역으로 이동/g) ?? []).length,
-    9,
+    closedMetricQuarters,
   );
-  assert.equal((html.match(/평가 미완료/g) ?? []).length, 3);
+  assert.equal((html.match(/평가 미완료/g) ?? []).length, 12 - closedMetricQuarters);
   assert.equal(
     (visibleHtml.match(/class="metric-benchmark-quarter">Q[23]<\/span>/g) ?? [])
       .length,
