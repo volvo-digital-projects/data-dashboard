@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-12T05:54:53.798041+00:00",
+  "checkedAt": "2026-11-14T05:44:18.287069+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
-      "total": 411,
+      "total": 413,
       "videos": 50,
       "completeVideos": 50,
       "partialVideos": 0,
@@ -11,11 +11,29 @@
       "counts": {
         "positive": 27,
         "suggestion": 0,
-        "other": 177,
+        "other": 178,
         "review": 10,
-        "owner": 197
+        "owner": 198
       },
       "entries": [
+        {
+          "id": "UgxfHwwbUNQ6UX0kAJp4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "Xl3_JLsYUdA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=Xl3_JLsYUdA&lc=UgxfHwwbUNQ6UX0kAJp4AaABAg"
+        },
+        {
+          "id": "UgxfHwwbUNQ6UX0kAJp4AaABAg.Ad7zUgEBFpxAd82ykfRuIW",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "Xl3_JLsYUdA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=Xl3_JLsYUdA&lc=UgxfHwwbUNQ6UX0kAJp4AaABAg.Ad7zUgEBFpxAd82ykfRuIW"
+        },
         {
           "id": "UgySdpK1G1GcmIlZHFZ4AaABAg",
           "category": "other",
@@ -10643,7 +10661,7 @@
       "excludedOwnerPromotions": 46
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
-      "total": 1008,
+      "total": 1007,
       "videos": 52,
       "completeVideos": 52,
       "partialVideos": 0,
@@ -10653,7 +10671,7 @@
         "suggestion": 0,
         "other": 525,
         "review": 37,
-        "owner": 412
+        "owner": 411
       },
       "entries": [
         {
@@ -14356,6 +14374,15 @@
           "url": "https://www.youtube.com/watch?v=QsQkhXpmftA&lc=Ugz93ntOnY1TPae6DuR4AaABAg.AYsUmQaev9yAYv9uRk5DZ8"
         },
         {
+          "id": "Ugz93ntOnY1TPae6DuR4AaABAg.AYsUmQaev9yAd9SdeCBMv9",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "QsQkhXpmftA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=QsQkhXpmftA&lc=Ugz93ntOnY1TPae6DuR4AaABAg.AYsUmQaev9yAd9SdeCBMv9"
+        },
+        {
           "id": "Ugz5-aXt7k9N97j-Di94AaABAg",
           "category": "other",
           "topic": "중립·기타",
@@ -15182,24 +15209,6 @@
           "videoId": "K3-RLc2F7_w",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=K3-RLc2F7_w&lc=UgzHmf3SlNVjaJ3HjWJ4AaABAg.AY3Igd_4FMAAY4PAvfykhS"
-        },
-        {
-          "id": "UgzMttQoAFIpJRl9mxJ4AaABAg",
-          "category": "other",
-          "topic": "중립·기타",
-          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
-          "videoId": "ueh4NWXn5IA",
-          "kind": "video",
-          "url": "https://www.youtube.com/watch?v=ueh4NWXn5IA&lc=UgzMttQoAFIpJRl9mxJ4AaABAg"
-        },
-        {
-          "id": "UgzMttQoAFIpJRl9mxJ4AaABAg.AY34UJwuILrAY4AlrYlNe4",
-          "category": "owner",
-          "topic": "운영자 답글",
-          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
-          "videoId": "ueh4NWXn5IA",
-          "kind": "video",
-          "url": "https://www.youtube.com/watch?v=ueh4NWXn5IA&lc=UgzMttQoAFIpJRl9mxJ4AaABAg.AY34UJwuILrAY4AlrYlNe4"
         },
         {
           "id": "UgytSFzV3QSA0HgNITd4AaABAg",
@@ -21273,19 +21282,91 @@
       "excludedOwnerPromotions": 12
     },
     "UCUGnMnHdpXTdEI_j8-Vk7Eg": {
-      "total": 911,
-      "videos": 102,
-      "completeVideos": 102,
+      "total": 919,
+      "videos": 103,
+      "completeVideos": 103,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
-        "positive": 95,
+        "positive": 98,
         "suggestion": 0,
-        "other": 529,
+        "other": 534,
         "review": 34,
         "owner": 253
       },
       "entries": [
+        {
+          "id": "UgxJeiv6dY27ZY2RzwZ4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "n5DPgshM4bc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=n5DPgshM4bc&lc=UgxJeiv6dY27ZY2RzwZ4AaABAg"
+        },
+        {
+          "id": "Ugz9RxyQGHGLRxuz1ct4AaABAg",
+          "category": "positive",
+          "topic": "영상·콘텐츠 반응",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=Ugz9RxyQGHGLRxuz1ct4AaABAg"
+        },
+        {
+          "id": "Ugy1vXsuQCgDP5b8z614AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=Ugy1vXsuQCgDP5b8z614AaABAg"
+        },
+        {
+          "id": "UgyObdgPNSO3RR_esaR4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=UgyObdgPNSO3RR_esaR4AaABAg"
+        },
+        {
+          "id": "UgwB6aiKXyoXzrb2MmF4AaABAg",
+          "category": "positive",
+          "topic": "친절·상담 응대",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=UgwB6aiKXyoXzrb2MmF4AaABAg"
+        },
+        {
+          "id": "UgxZ8MUP_N4pXLNBcLp4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=UgxZ8MUP_N4pXLNBcLp4AaABAg"
+        },
+        {
+          "id": "Ugwy638svpHw970n7Sp4AaABAg",
+          "category": "positive",
+          "topic": "설명·정보 전달",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=Ugwy638svpHw970n7Sp4AaABAg"
+        },
+        {
+          "id": "UgyuY5lGr_sfgZsAZtZ4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=UgyuY5lGr_sfgZsAZtZ4AaABAg"
+        },
         {
           "id": "UgwYWRV2S_p-ty120yt4AaABAg",
           "category": "other",
@@ -29488,6 +29569,18 @@
       ],
       "coverage": [
         {
+          "id": "n5DPgshM4bc",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "N_GhqEhjaYI",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "4lYI5AC8T3Q",
           "kind": "video",
           "status": "complete",
@@ -29495,12 +29588,6 @@
         },
         {
           "id": "P24hOkq2BwQ",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "n5DPgshM4bc",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -30101,22 +30188,31 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 95
+      "excludedOwnerPromotions": 96
     },
     "UCBB6SFAvxC756EpH93qWSSg": {
-      "total": 200,
-      "videos": 56,
-      "completeVideos": 56,
+      "total": 201,
+      "videos": 72,
+      "completeVideos": 72,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
         "positive": 22,
         "suggestion": 0,
-        "other": 99,
+        "other": 100,
         "review": 7,
         "owner": 72
       },
       "entries": [
+        {
+          "id": "UgztSCW_H9RRfRueSCJ4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "YUZFolUcZe4",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=YUZFolUcZe4&lc=UgztSCW_H9RRfRueSCJ4AaABAg"
+        },
         {
           "id": "UgziDMQPU-9KV5s3ArN4AaABAg",
           "category": "other",
@@ -31920,6 +32016,108 @@
       ],
       "coverage": [
         {
+          "id": "dth0mIjDYHg",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "YUZFolUcZe4",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "uSjgi7aIhq0",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "loZWm3TxPU8",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "ZnV06PcZ2Wc",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "b8i3nYAE8nQ",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "FekrYt_gWXE",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "5ugWRguH4BA",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "Lcd3-2yGNe4",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "AhFb4NI4Dao",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "VxgteqJJLHY",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "93gaEy6I7PM",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "Cnke8qOzux0",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "6QmCECMZPAw",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "9b5bBnyPErk",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "jFLBg8fs_48",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "70fS1DyH0w4",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "84hp9cyb1s0",
           "kind": "video",
           "status": "complete",
@@ -31945,12 +32143,6 @@
         },
         {
           "id": "1sp_WtjTOfs",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "9b5bBnyPErk",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -32257,22 +32449,94 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 77
+      "excludedOwnerPromotions": 94
     },
     "UCurMOPSGnB1qrFabcfzu7Ig": {
-      "total": 275,
-      "videos": 23,
-      "completeVideos": 23,
+      "total": 283,
+      "videos": 25,
+      "completeVideos": 25,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
-        "positive": 21,
+        "positive": 22,
         "suggestion": 0,
-        "other": 115,
-        "review": 12,
-        "owner": 127
+        "other": 118,
+        "review": 13,
+        "owner": 130
       },
       "entries": [
+        {
+          "id": "Ugw2JulK-cTn8frigyZ4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "O9BIsiky_VA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=O9BIsiky_VA&lc=Ugw2JulK-cTn8frigyZ4AaABAg"
+        },
+        {
+          "id": "Ugx7zxw0vu9xNQC-GYB4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "_cTLn6Zu76Q",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=Ugx7zxw0vu9xNQC-GYB4AaABAg"
+        },
+        {
+          "id": "Ugx7zxw0vu9xNQC-GYB4AaABAg.Ad9K6uH0EqAAd9KxaB06Wl",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "_cTLn6Zu76Q",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=_cTLn6Zu76Q&lc=Ugx7zxw0vu9xNQC-GYB4AaABAg.Ad9K6uH0EqAAd9KxaB06Wl"
+        },
+        {
+          "id": "UgzypPxR-hCMUqjrSE14AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "UBxrdWje14k",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=UBxrdWje14k&lc=UgzypPxR-hCMUqjrSE14AaABAg"
+        },
+        {
+          "id": "UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8Ad6kubVOyWY",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "UBxrdWje14k",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=UBxrdWje14k&lc=UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8Ad6kubVOyWY"
+        },
+        {
+          "id": "UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8Ad87_HaeN7Z",
+          "category": "review",
+          "topic": "문맥 검토 대기",
+          "summary": "표현만으로 부정 여부를 확정하지 않습니다.",
+          "videoId": "UBxrdWje14k",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=UBxrdWje14k&lc=UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8Ad87_HaeN7Z"
+        },
+        {
+          "id": "UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8Ad9L04GLpAX",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "UBxrdWje14k",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=UBxrdWje14k&lc=UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8Ad9L04GLpAX"
+        },
+        {
+          "id": "UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8AdAi6dJNAJT",
+          "category": "positive",
+          "topic": "영상·콘텐츠 반응",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "UBxrdWje14k",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=UBxrdWje14k&lc=UgzypPxR-hCMUqjrSE14AaABAg.Ad6inXGQAj8AdAi6dJNAJT"
+        },
         {
           "id": "UgwciRAqo0fhMfUmH7p4AaABAg",
           "category": "other",
@@ -34751,6 +35015,24 @@
       ],
       "coverage": [
         {
+          "id": "O9BIsiky_VA",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "_cTLn6Zu76Q",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "UBxrdWje14k",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "VKkTSIcJz7A",
           "kind": "video",
           "status": "complete",
@@ -34800,12 +35082,6 @@
         },
         {
           "id": "vSqalM1gBf8",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "_cTLn6Zu76Q",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -35474,7 +35750,7 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 625,
+      "total": 627,
       "videos": 72,
       "completeVideos": 72,
       "partialVideos": 0,
@@ -35482,11 +35758,29 @@
       "counts": {
         "positive": 29,
         "suggestion": 0,
-        "other": 294,
+        "other": 295,
         "review": 26,
-        "owner": 276
+        "owner": 277
       },
       "entries": [
+        {
+          "id": "UgzQki79EAV9RuA2JrF4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "EJmdfor67Lc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=EJmdfor67Lc&lc=UgzQki79EAV9RuA2JrF4AaABAg"
+        },
+        {
+          "id": "UgzQki79EAV9RuA2JrF4AaABAg.AdAPbZnRg1fAdAbdZI6cSv",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "EJmdfor67Lc",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=EJmdfor67Lc&lc=UgzQki79EAV9RuA2JrF4AaABAg.AdAPbZnRg1fAdAbdZI6cSv"
+        },
         {
           "id": "UgwAkdEdq0zUT3fxVW14AaABAg",
           "category": "other",
@@ -41115,6 +41409,12 @@
       ],
       "coverage": [
         {
+          "id": "EJmdfor67Lc",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "6_AScPoW-3o",
           "kind": "video",
           "status": "complete",
@@ -41188,12 +41488,6 @@
         },
         {
           "id": "BcbxBqKzELc",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "EJmdfor67Lc",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -42132,9 +42426,9 @@
       "excludedOwnerPromotions": 0
     },
     "UCDwl98BzOnfYsrL9DXRRm6w": {
-      "total": 89,
-      "videos": 15,
-      "completeVideos": 15,
+      "total": 90,
+      "videos": 16,
+      "completeVideos": 16,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
@@ -42142,9 +42436,18 @@
         "suggestion": 0,
         "other": 39,
         "review": 2,
-        "owner": 37
+        "owner": 38
       },
       "entries": [
+        {
+          "id": "Ugzwy6eu88Vfgcfni9J4AaABAg",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "5r5mEjf2avA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=5r5mEjf2avA&lc=Ugzwy6eu88Vfgcfni9J4AaABAg"
+        },
         {
           "id": "Ugwd_--Buf--fg0zxL14AaABAg",
           "category": "other",
@@ -42949,6 +43252,12 @@
       ],
       "coverage": [
         {
+          "id": "5r5mEjf2avA",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "1Xktkr4Aibw",
           "kind": "video",
           "status": "complete",
@@ -43449,9 +43758,8 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 13,
-      "checkedAt": "2026-11-14T05:35:03.035002+00:00"
+      "excludedOwnerPromotions": 13
     }
   },
-  "apiCalls": 45
+  "apiCalls": 46
 }
