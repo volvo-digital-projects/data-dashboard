@@ -1,12 +1,12 @@
 {
   "dailyClose": {
-    "date": "2026-11-12",
+    "date": "2026-11-14",
     "subscribers": null,
     "videos": null,
     "checkedAt": null,
     "channelSubscribers": {}
   },
-  "rosterDate": "2026-11-06",
+  "rosterDate": "2026-11-14",
   "source": "사용자 제공 볼보 유튜브 영업직원 명단 · 공개 YouTube 채널/영상",
   "creators": [
     {
@@ -136,6 +136,14 @@
       "gender": "남성",
       "cdsid": "6KR6840",
       "channelId": "UCTET6Q4mF4cSL1SGXmyQU0Q"
+    },
+    {
+      "dealer": "천하",
+      "showroom": "의정부",
+      "name": "김민석",
+      "gender": "남성",
+      "cdsid": "6KR6857",
+      "channelId": "UCxIbUlFEU03p12qJqLIHyIA"
     }
   ],
   "channels": [
@@ -2040,6 +2048,52 @@
         },
         "sharedVideos": []
       }
+    },
+    {
+      "id": "UCxIbUlFEU03p12qJqLIHyIA",
+      "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B9%80%EB%AF%BC%EC%84%9D",
+      "title": "볼보천하 김민석",
+      "checkedAt": "2026-11-14T05:33:42.372Z",
+      "joined": "2022. 5. 16.",
+      "subscribers": 111,
+      "totalViews": 112084,
+      "videoCount": 16,
+      "averageViews": 7005,
+      "viewsSample": 16,
+      "long": {
+        "count": 6,
+        "viewsSample": 6,
+        "averageViews": 17000
+      },
+      "short": {
+        "count": 10,
+        "viewsSample": 10,
+        "averageViews": 1008
+      },
+      "sampledVideos": 0,
+      "commentSamples": 0,
+      "availableCommentVideos": 0,
+      "sharedVideos": [],
+      "videoBrandFilter": "volvo",
+      "videoContentFilter": "automotive",
+      "scopeVideoIds": [
+        "W6K9RNONvCM",
+        "fYy_U9nZ_9k",
+        "Gew0136CayE",
+        "c4rhUSyqxeY",
+        "TOmbf48WI98",
+        "7SJdpQDsTAI",
+        "aIJZrDYpSsY",
+        "3rEnRSK2KWk",
+        "w3ZgZiOvb84",
+        "Bwml8yuOSgE",
+        "ItJTp6dhJhU",
+        "qvqGD8_jxlo",
+        "hqyW9jyYgWo",
+        "xk-7V5T0Yhc",
+        "3wrZNnDV6l0",
+        "E3BkP4E2k_Q"
+      ]
     }
   ],
   "evidence": [
