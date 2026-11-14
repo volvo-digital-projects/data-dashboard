@@ -139,8 +139,8 @@ test('YouTube roster joins official photos, DMS sales and VOC by showroom and na
  const photos=read('staff-profile-photos').showrooms;
  const sales=read('sales-activity-analysis').showrooms;
  const voc=read('voc-staff-analysis').showrooms;
- assert.equal(data.creators.length,16);
- assert.equal(new Set(data.creators.map(p=>`${p.cdsid}:${p.name}`)).size,16);
+ assert.equal(data.creators.length,17);
+ assert.equal(new Set(data.creators.map(p=>`${p.cdsid}:${p.name}`)).size,17);
  for(const p of data.creators){
   const image=photos[p.cdsid]?.employees[p.name]?.image ?? (p.gender==='여성'?'/staff-profiles/female-human-silhouette.png':'/staff-profiles/neutral-human-silhouette.png');
   assert.ok(image, p.name);
@@ -170,11 +170,12 @@ test('YouTube roster and channel URLs include the supplied 2026-11-06 replacemen
   ['천하','동대문','정지윤','여성','https://www.youtube.com/@jjy1220'],
   ['아이언','창원','이유성','남성','https://www.youtube.com/@volvo_91ys'],
   ['아이비','전주','배정우','남성','https://www.youtube.com/@baetzby'],
+  ['천하','의정부','김민석','남성','https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B9%80%EB%AF%BC%EC%84%9D'],
  ]);
 });
 test('YouTube shared channel is counted once and every video is attributed from reviewed evidence',()=>{
- assert.equal(data.channels.length,15);
- assert.equal(new Set(data.channels.map(c=>c.id)).size,15);
+ assert.equal(data.channels.length,16);
+ assert.equal(new Set(data.channels.map(c=>c.id)).size,16);
  const pair=data.creators.filter(p=>['조선별','곽지명'].includes(p.name));
  assert.equal(pair[0].channelId,pair[1].channelId);
  const channel=data.channels.find(c=>c.id===pair[0].channelId);
@@ -202,8 +203,8 @@ test('YouTube shared channel is counted once and every video is attributed from 
 });
 test('Dealer and gender distribution reconcile to the supplied roster',()=>{
  const counts={};for(const p of data.creators)counts[p.dealer]=(counts[p.dealer]??0)+1;
- assert.deepEqual(counts,{'코오롱':6,'에이치':1,'아주':4,'천하':3,'아이언':1,'아이비':1});
- assert.equal(data.creators.filter(p=>p.gender==='남성').length,10);
+ assert.deepEqual(counts,{'코오롱':6,'에이치':1,'아주':4,'천하':4,'아이언':1,'아이비':1});
+ assert.equal(data.creators.filter(p=>p.gender==='남성').length,11);
  assert.equal(data.creators.filter(p=>p.gender==='여성').length,6);
 });
 test('Every YouTube channel publishes only the reviewed Volvo automotive scope',()=>{

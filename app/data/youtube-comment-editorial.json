@@ -453,6 +453,51 @@
       "sourceCheckedAt": "2026-11-06T05:56:38.013463+00:00",
       "sourceRunId": 42171356073,
       "sourceViewerCommentCount": 2
+    },
+    "UCxIbUlFEU03p12qJqLIHyIA": {
+      "overall": "재고·출고·혜택 질문이 많고 기능 설명에 감사 의견이 있었습니다.",
+      "positive": [
+        "트렁크 조절 기능 설명에 감사",
+        "원가 절감에 대한 솔직한 설명에 호응"
+      ],
+      "negative": [
+        "가격이 높다는 의견",
+        "가격 대비 편의성과 전비에 아쉬움",
+        "도어 손잡이가 손목에 불편할 수 있다는 의견"
+      ],
+      "negativeEvidence": [
+        {
+          "summary": "가격이 높다는 의견",
+          "sourceIndexes": [
+            8
+          ],
+          "sourceSha256": [
+            "cf65cf734bf2b7f632494ee0f4d8a3cc966a6ed2dcdd3fd41138eebbede894c8"
+          ]
+        },
+        {
+          "summary": "가격 대비 편의성과 전비에 아쉬움",
+          "sourceIndexes": [
+            12
+          ],
+          "sourceSha256": [
+            "c08027b708966d3cf40e0eb528cca9674efecbc86094c6d80e6a9438c1e5d075"
+          ]
+        },
+        {
+          "summary": "도어 손잡이가 손목에 불편할 수 있다는 의견",
+          "sourceIndexes": [
+            18
+          ],
+          "sourceSha256": [
+            "247742f9e6150c64a1b04742b2064164a5df11e66944d9b1ed111c6cd1cbf6a3"
+          ]
+        }
+      ],
+      "reviewedAt": "2026-11-14T05:35:03.035002+00:00",
+      "sourceCheckedAt": "2026-11-14T05:35:03.035002+00:00",
+      "sourceRunId": 43562220225,
+      "sourceViewerCommentCount": 22
     }
   },
   "negativeReview": {

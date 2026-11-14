@@ -34,15 +34,15 @@ class RefreshTests(unittest.TestCase):
             fresh=copy.deepcopy(self.fresh)
             fresh[field]=value
             with self.assertRaises(ValueError): merge(self.old, fresh)
-    def test_requires_all_sixteen_creator_entries(self):
+    def test_requires_all_seventeen_creator_entries(self):
         payload = dict(
-            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(16)],
+            creators=[dict(channelId='shared' if index < 2 else f'channel-{index}') for index in range(17)],
             channels=[dict(id='shared', videoBrandFilter='volvo', videoContentFilter='automotive')] + [
                 dict(id=f'channel-{index}', videoBrandFilter='volvo', videoContentFilter='automotive')
-                for index in range(2, 16)
+                for index in range(2, 17)
             ],
         )
-        self.assertEqual(validate_refresh_scope(payload), (16, 15))
+        self.assertEqual(validate_refresh_scope(payload), (17, 16))
         payload['creators'].pop()
         with self.assertRaises(ValueError): validate_refresh_scope(payload)
     def test_refreshes_every_four_hours_without_duplicate_watchdog_runs(self):

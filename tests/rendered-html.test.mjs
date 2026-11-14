@@ -418,14 +418,14 @@ test("shows every creator metric together with detail collapsed by default", asy
   const html = await response.text();
   const table = html.match(/<table class="yt-comparison-table">([\s\S]*?)<\/table>/)?.[1];
   assert.ok(table);
-  assert.equal((table.match(/scope="row"/g) ?? []).length, 16);
+  assert.equal((table.match(/scope="row"/g) ?? []).length, 17);
   assert.equal((table.match(/scope="col"/g) ?? []).length, 10);
   for (const heading of ["볼보 입사일", "채널 개설일", "롱폼", "숏츠", "고객상담 평균만족도", "26년 월평균 판매", "공개 댓글·답글", "인증레벨", "평균 조회수"]) assert.ok(table.includes(heading));
   assert.match(table, /260225/);
   assert.match(table, /260225/);
   assert.match(table, /class="yt-cert-cell"/);
-  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 16);
-  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 16);
+  assert.equal((table.match(/class="yt-dealer-code"/g) ?? []).length, 17);
+  assert.equal((table.match(/class="yt-certifications"/g) ?? []).length, 17);
   assert.match(table, /aria-label="직원 원본 사진"/);
   assert.doesNotMatch(table, /class="yt-gender-icon"|전시장 \/ 성별/);
   assert.doesNotMatch(html, /<label>성별/);
@@ -703,7 +703,7 @@ test("renders an evidence-first growth navigation without recency scoring", asyn
     ["6KR6858:나수연", "260529"], ["6KR6870:이정훈", "260515"],
     ["6KR6849:신수경", "260225"], ["6KR6846:신승희", "260203"],
     ["6KR6847:김정호", "260107"], ["6KR6861:곽지명", "260730"],
-    ["6KR6846:박형진", "260608"], ["6KR6840:배정우", "260730"],
+    ["6KR6846:박형진", "260608"], ["6KR6840:배정우", "260730"], ["6KR6857:김민석", "260831"],
     ["6KR6858:조선별", "260730"], ["6KR6852:이규환", "260325"],
     ["6KR6839:박준수", "260413"], ["6KR6839:김명준", "260405"],
     ["6KR6838:이유성", "260218"], ["6KR6841:정지윤", "260410"],
