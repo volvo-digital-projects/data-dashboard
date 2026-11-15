@@ -71,20 +71,20 @@
     {
       "id": "1-3y",
       "label": "1~3년",
-      "employeeCount": 92,
-      "respondingEmployees": 92,
-      "responses": 1537,
-      "scoreSum": 14354.0,
-      "average": 9.34
+      "employeeCount": 90,
+      "respondingEmployees": 90,
+      "responses": 1435,
+      "scoreSum": 13424.0,
+      "average": 9.35
     },
     {
       "id": "3-5y",
       "label": "3~5년",
-      "employeeCount": 68,
-      "respondingEmployees": 68,
-      "responses": 2620,
-      "scoreSum": 24610.0,
-      "average": 9.39
+      "employeeCount": 70,
+      "respondingEmployees": 70,
+      "responses": 2722,
+      "scoreSum": 25540.0,
+      "average": 9.38
     },
     {
       "id": "5-10y",
