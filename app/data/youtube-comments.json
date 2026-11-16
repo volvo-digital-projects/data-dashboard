@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-15T23:00:09.805504+00:00",
+  "checkedAt": "2026-11-16T02:05:20.236130+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -43483,7 +43483,7 @@
       "excludedOwnerPromotions": 0
     },
     "UCxIbUlFEU03p12qJqLIHyIA": {
-      "total": 30,
+      "total": 33,
       "videos": 13,
       "completeVideos": 13,
       "partialVideos": 0,
@@ -43493,7 +43493,7 @@
         "suggestion": 0,
         "other": 20,
         "review": 1,
-        "owner": 8
+        "owner": 11
       },
       "entries": [
         {
@@ -43504,6 +43504,33 @@
           "videoId": "TOmbf48WI98",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=TOmbf48WI98&lc=Ugz9dseIa2z8RpHq_Lt4AaABAg"
+        },
+        {
+          "id": "Ugz9dseIa2z8RpHq_Lt4AaABAg.AczKvWrWq5UAdFgn8aPi7K",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "TOmbf48WI98",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=TOmbf48WI98&lc=Ugz9dseIa2z8RpHq_Lt4AaABAg.AczKvWrWq5UAdFgn8aPi7K"
+        },
+        {
+          "id": "Ugz9dseIa2z8RpHq_Lt4AaABAg.AczKvWrWq5UAdFgnW0bzV2",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "TOmbf48WI98",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=TOmbf48WI98&lc=Ugz9dseIa2z8RpHq_Lt4AaABAg.AczKvWrWq5UAdFgnW0bzV2"
+        },
+        {
+          "id": "Ugz9dseIa2z8RpHq_Lt4AaABAg.AczKvWrWq5UAdFgnkk8uIT",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "TOmbf48WI98",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=TOmbf48WI98&lc=Ugz9dseIa2z8RpHq_Lt4AaABAg.AczKvWrWq5UAdFgnkk8uIT"
         },
         {
           "id": "UgxzqX7G4VrWL-x8UPt4AaABAg",
