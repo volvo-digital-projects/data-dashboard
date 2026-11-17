@@ -3,7 +3,7 @@
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-11-03",
     "rosterCheckedAt": "2026-11-17",
-    "rosterSyncedAt": "2026-11-17T07:58:24+09:00",
+    "rosterSyncedAt": "2026-11-17T11:06:43+09:00",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
@@ -24475,101 +24475,6 @@
           "staffCdsid": "C-SONG15"
         },
         {
-          "name": "신동규",
-          "role": "영업직원",
-          "jobTitle": "과장",
-          "hireDate": "2017-08-21",
-          "tenureMonths": 110,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 11,
-              "scoreSum": 103.0,
-              "sent": 46
-            },
-            "2024": {
-              "responses": 11,
-              "scoreSum": 103.0,
-              "sent": 45
-            },
-            "2025": {
-              "responses": 3,
-              "scoreSum": 30.0,
-              "sent": 7
-            },
-            "2026": {
-              "responses": 5,
-              "scoreSum": 46.0,
-              "sent": 43,
-              "rateResponses": 5
-            }
-          },
-          "commentResponses": 29,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 18
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 14
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 7
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 7
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 7
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 5
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 4
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 3
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 3
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 2
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "구체적 설명 부족",
-              "mentions": 1
-            },
-            {
-              "label": "진행상황 안내 미흡",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-10-11",
-          "staffCdsid": "D-SHIN6"
-        },
-        {
           "name": "안영민",
           "role": "영업직원",
           "jobTitle": "과장",
@@ -25029,109 +24934,6 @@
           "staffCdsid": "J-LEE179"
         },
         {
-          "name": "최건우",
-          "role": "영업직원",
-          "jobTitle": "대리",
-          "hireDate": "2020-07-01",
-          "tenureMonths": 76,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 14,
-              "scoreSum": 130.0,
-              "sent": 72
-            },
-            "2024": {
-              "responses": 25,
-              "scoreSum": 237.0,
-              "sent": 103
-            },
-            "2025": {
-              "responses": 8,
-              "scoreSum": 76.0,
-              "sent": 38
-            },
-            "2026": {
-              "responses": 8,
-              "scoreSum": 78.0,
-              "sent": 56,
-              "rateResponses": 8
-            }
-          },
-          "commentResponses": 55,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 36
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 27
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 12
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 11
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 11
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 9
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 8
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 6
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 5
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 4
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 3
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 3
-            },
-            {
-              "label": "지속적 후속관리",
-              "mentions": 2
-            },
-            {
-              "label": "맞춤형 설명",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "구체적 설명 부족",
-              "mentions": 1
-            },
-            {
-              "label": "시승모델 다양화 필요",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-09-04",
-          "staffCdsid": "G-CHOI"
-        },
-        {
           "name": "허동환",
           "role": "영업직원",
           "jobTitle": "과장",
@@ -25512,7 +25314,208 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "신동규",
+          "role": "영업직원",
+          "jobTitle": "과장",
+          "hireDate": "2017-08-21",
+          "tenureMonths": 110,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2023": {
+              "responses": 11,
+              "scoreSum": 103.0,
+              "sent": 46
+            },
+            "2024": {
+              "responses": 11,
+              "scoreSum": 103.0,
+              "sent": 45
+            },
+            "2025": {
+              "responses": 3,
+              "scoreSum": 30.0,
+              "sent": 7
+            },
+            "2026": {
+              "responses": 5,
+              "scoreSum": 46.0,
+              "sent": 43,
+              "rateResponses": 5
+            }
+          },
+          "commentResponses": 29,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 18
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 14
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 7
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 7
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "진행상황 안내 미흡",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-10-11",
+          "archivedAt": "2026-11-17",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        },
+        {
+          "name": "최건우",
+          "role": "영업직원",
+          "jobTitle": "대리",
+          "hireDate": "2020-07-01",
+          "tenureMonths": 76,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2023": {
+              "responses": 14,
+              "scoreSum": 130.0,
+              "sent": 72
+            },
+            "2024": {
+              "responses": 25,
+              "scoreSum": 237.0,
+              "sent": 103
+            },
+            "2025": {
+              "responses": 8,
+              "scoreSum": 76.0,
+              "sent": 38
+            },
+            "2026": {
+              "responses": 8,
+              "scoreSum": 78.0,
+              "sent": 56,
+              "rateResponses": 8
+            }
+          },
+          "commentResponses": 55,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 36
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 27
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 12
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 11
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 11
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 9
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 8
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 6
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 5
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 3
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 2
+            },
+            {
+              "label": "맞춤형 설명",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "시승모델 다양화 필요",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-09-04",
+          "archivedAt": "2026-11-17",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR6868": {
       "showroom": "볼보 강릉",
