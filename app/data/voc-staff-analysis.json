@@ -3,7 +3,7 @@
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-11-03",
     "rosterCheckedAt": "2026-11-17",
-    "rosterSyncedAt": "2026-11-17T11:06:43+09:00",
+    "rosterSyncedAt": "2026-11-17T15:21:00+09:00",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
@@ -12199,84 +12199,6 @@
           "staffCdsid": "T-KIM24"
         },
         {
-          "name": "민슬기",
-          "role": "영업직원",
-          "jobTitle": "주임",
-          "hireDate": "2022-05-02",
-          "tenureMonths": 54,
-          "tenureBucket": "3-5y",
-          "tenureBucketLabel": "3~5년",
-          "years": {
-            "2023": {
-              "responses": 6,
-              "scoreSum": 59.0,
-              "sent": 23
-            },
-            "2024": {
-              "responses": 4,
-              "scoreSum": 39.0,
-              "sent": 16
-            },
-            "2025": {
-              "responses": 4,
-              "scoreSum": 38.0,
-              "sent": 7
-            },
-            "2026": {
-              "responses": 3,
-              "scoreSum": 25.0,
-              "sent": 22,
-              "rateResponses": 3
-            }
-          },
-          "commentResponses": 17,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 9
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 6
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 5
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 4
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 4
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 4
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 4
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 2
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 1
-            },
-            {
-              "label": "지속적 후속관리",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [],
-          "latestResponseDate": "2026-09-13",
-          "staffCdsid": "S-MIN6"
-        },
-        {
           "name": "안희철",
           "role": "영업직원",
           "jobTitle": "차장",
@@ -13032,6 +12954,85 @@
           ],
           "latestResponseDate": "2026-05-20",
           "archivedAt": "2026-11-06",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        },
+        {
+          "name": "민슬기",
+          "role": "영업직원",
+          "jobTitle": "주임",
+          "hireDate": "2022-05-02",
+          "tenureMonths": 54,
+          "tenureBucket": "3-5y",
+          "tenureBucketLabel": "3~5년",
+          "years": {
+            "2023": {
+              "responses": 6,
+              "scoreSum": 59.0,
+              "sent": 23
+            },
+            "2024": {
+              "responses": 4,
+              "scoreSum": 39.0,
+              "sent": 16
+            },
+            "2025": {
+              "responses": 4,
+              "scoreSum": 38.0,
+              "sent": 7
+            },
+            "2026": {
+              "responses": 3,
+              "scoreSum": 25.0,
+              "sent": 22,
+              "rateResponses": 3
+            }
+          },
+          "commentResponses": 17,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 9
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 6
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 5
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 4
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 4
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 4
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 4
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 2
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 1
+            },
+            {
+              "label": "지속적 후속관리",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-09-13",
+          "archivedAt": "2026-11-17",
           "archiveReason": "Sales-DMS 현재 명단 제외"
         }
       ]
@@ -24475,6 +24476,101 @@
           "staffCdsid": "C-SONG15"
         },
         {
+          "name": "신동규",
+          "role": "영업직원",
+          "jobTitle": "과장",
+          "hireDate": "2017-08-21",
+          "tenureMonths": 110,
+          "tenureBucket": "5-10y",
+          "tenureBucketLabel": "5~10년",
+          "years": {
+            "2023": {
+              "responses": 11,
+              "scoreSum": 103.0,
+              "sent": 46
+            },
+            "2024": {
+              "responses": 11,
+              "scoreSum": 103.0,
+              "sent": 45
+            },
+            "2025": {
+              "responses": 3,
+              "scoreSum": 30.0,
+              "sent": 7
+            },
+            "2026": {
+              "responses": 5,
+              "scoreSum": 46.0,
+              "sent": 43,
+              "rateResponses": 5
+            }
+          },
+          "commentResponses": 29,
+          "strengthKeywords": [
+            {
+              "label": "친절·정중 응대",
+              "mentions": 18
+            },
+            {
+              "label": "상세·꼼꼼한 설명",
+              "mentions": 14
+            },
+            {
+              "label": "전문지식·정확성",
+              "mentions": 7
+            },
+            {
+              "label": "이해하기 쉬운 설명",
+              "mentions": 7
+            },
+            {
+              "label": "적극적 응대",
+              "mentions": 7
+            },
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 5
+            },
+            {
+              "label": "성실한 답변",
+              "mentions": 4
+            },
+            {
+              "label": "구매결정 지원",
+              "mentions": 3
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 3
+            },
+            {
+              "label": "신속한 응답",
+              "mentions": 2
+            },
+            {
+              "label": "편안한 상담",
+              "mentions": 1
+            },
+            {
+              "label": "신뢰·솔직한 상담",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [
+            {
+              "label": "구체적 설명 부족",
+              "mentions": 1
+            },
+            {
+              "label": "진행상황 안내 미흡",
+              "mentions": 1
+            }
+          ],
+          "latestResponseDate": "2026-10-11",
+          "staffCdsid": "D-SHIN6"
+        },
+        {
           "name": "안영민",
           "role": "영업직원",
           "jobTitle": "과장",
@@ -25315,102 +25411,6 @@
         }
       ],
       "formerEmployees": [
-        {
-          "name": "신동규",
-          "role": "영업직원",
-          "jobTitle": "과장",
-          "hireDate": "2017-08-21",
-          "tenureMonths": 110,
-          "tenureBucket": "5-10y",
-          "tenureBucketLabel": "5~10년",
-          "years": {
-            "2023": {
-              "responses": 11,
-              "scoreSum": 103.0,
-              "sent": 46
-            },
-            "2024": {
-              "responses": 11,
-              "scoreSum": 103.0,
-              "sent": 45
-            },
-            "2025": {
-              "responses": 3,
-              "scoreSum": 30.0,
-              "sent": 7
-            },
-            "2026": {
-              "responses": 5,
-              "scoreSum": 46.0,
-              "sent": 43,
-              "rateResponses": 5
-            }
-          },
-          "commentResponses": 29,
-          "strengthKeywords": [
-            {
-              "label": "친절·정중 응대",
-              "mentions": 18
-            },
-            {
-              "label": "상세·꼼꼼한 설명",
-              "mentions": 14
-            },
-            {
-              "label": "전문지식·정확성",
-              "mentions": 7
-            },
-            {
-              "label": "이해하기 쉬운 설명",
-              "mentions": 7
-            },
-            {
-              "label": "적극적 응대",
-              "mentions": 7
-            },
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 5
-            },
-            {
-              "label": "성실한 답변",
-              "mentions": 4
-            },
-            {
-              "label": "구매결정 지원",
-              "mentions": 3
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 3
-            },
-            {
-              "label": "신속한 응답",
-              "mentions": 2
-            },
-            {
-              "label": "편안한 상담",
-              "mentions": 1
-            },
-            {
-              "label": "신뢰·솔직한 상담",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [
-            {
-              "label": "구체적 설명 부족",
-              "mentions": 1
-            },
-            {
-              "label": "진행상황 안내 미흡",
-              "mentions": 1
-            }
-          ],
-          "latestResponseDate": "2026-10-11",
-          "archivedAt": "2026-11-17",
-          "archiveReason": "Sales-DMS 현재 명단 제외"
-        },
         {
           "name": "최건우",
           "role": "영업직원",
