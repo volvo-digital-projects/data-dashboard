@@ -1,10 +1,27 @@
 {
   "dailyClose": {
-    "date": "2026-11-17",
-    "subscribers": null,
-    "videos": null,
-    "checkedAt": null,
-    "channelSubscribers": {}
+    "date": "2026-11-18",
+    "subscribers": 5755,
+    "videos": 781,
+    "checkedAt": "2026-11-17T09:22:42.662228+00:00",
+    "channelSubscribers": {
+      "UCcV36lNLeotgr02P605R2yA": 556,
+      "UCq4Nmcrr-dEmZqT-NhbSdpQ": 263,
+      "UC7ab9iDdrs3cLnW_zACCcIg": 246,
+      "UCLLQ98a0tBqu2SoTI_IqmwQ": 378,
+      "UCk1BctjD6nPVTIEA52FACcw": 585,
+      "UC0QgBtIY01DBw2UC4v_I2eA": 97,
+      "UCUGnMnHdpXTdEI_j8-Vk7Eg": 1490,
+      "UCBB6SFAvxC756EpH93qWSSg": 438,
+      "UCurMOPSGnB1qrFabcfzu7Ig": 180,
+      "UC6LM-e4xY2PkXzE1-f3qSrg": 103,
+      "UCatA_IUpH_m1ihLDjU8u38g": 395,
+      "UC9-es-82mhByLp4nafGK1CA": 387,
+      "UC33UQnHJTzabySfSKvo5ECA": 384,
+      "UCDwl98BzOnfYsrL9DXRRm6w": 135,
+      "UCTET6Q4mF4cSL1SGXmyQU0Q": 4,
+      "UCxIbUlFEU03p12qJqLIHyIA": 114
+    }
   },
   "rosterDate": "2026-11-14",
   "source": "사용자 제공 볼보 유튜브 영업직원 명단 · 공개 YouTube 채널/영상",
@@ -149,8 +166,8 @@
   "channels": [
     {
       "id": "UCcV36lNLeotgr02P605R2yA",
-      "previousSubscribers": 554,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousSubscribers": 555,
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EC%99%95%EC%9E%90%EC%9D%B4%EC%A0%95%ED%9B%88",
       "title": "볼보왕자 이훈둥 - 이정훈 팀장",
       "videoBrandFilter": "volvo",
@@ -161,17 +178,17 @@
         "pHKhKTP-YVg",
         "9AxoPYIEpyw"
       ],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 5. 15.",
-      "subscribers": 555,
-      "totalViews": 379224,
-      "videoCount": 59,
-      "averageViews": 6428,
-      "viewsSample": 59,
+      "subscribers": 556,
+      "totalViews": 380229,
+      "videoCount": 60,
+      "averageViews": 6337,
+      "viewsSample": 60,
       "long": {
-        "count": 11,
-        "viewsSample": 11,
-        "averageViews": 17564
+        "count": 12,
+        "viewsSample": 12,
+        "averageViews": 16183
       },
       "short": {
         "count": 48,
@@ -183,6 +200,7 @@
       "availableCommentVideos": 6,
       "sharedVideos": [],
       "scopeVideoIds": [
+        "pa9HgEgYufQ",
         "Xl3_JLsYUdA",
         "2vrr7n_ArNw",
         "x8gn31kXh4U",
@@ -244,7 +262,7 @@
         "h0lhvN6O0Xk"
       ],
       "previousMetrics": {
-        "subscribers": 554,
+        "subscribers": 555,
         "totalViews": 379224,
         "averageViews": 6428,
         "videoCount": 59,
@@ -264,15 +282,15 @@
     {
       "id": "UCq4Nmcrr-dEmZqT-NhbSdpQ",
       "previousSubscribers": 263,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@volvo_nasubari",
       "title": "볼보나수바리",
       "videoBrandFilter": "volvo",
       "videoContentFilter": "automotive",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 5. 27.",
       "subscribers": 263,
-      "totalViews": 191823,
+      "totalViews": 191833,
       "videoCount": 54,
       "averageViews": 3552,
       "viewsSample": 54,
@@ -348,13 +366,13 @@
       ],
       "previousMetrics": {
         "subscribers": 263,
-        "totalViews": 191820,
+        "totalViews": 191823,
         "averageViews": 3552,
         "videoCount": 54,
         "long": {
           "count": 13,
           "viewsSample": 13,
-          "averageViews": 4244
+          "averageViews": 4245
         },
         "short": {
           "count": 41,
@@ -367,7 +385,7 @@
     {
       "id": "UC7ab9iDdrs3cLnW_zACCcIg",
       "previousSubscribers": 246,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EB%9F%AC%EA%B0%80%EC%9E%90-g8p",
       "title": "VOLVO l 볼보러가자",
       "videoBrandFilter": "volvo",
@@ -383,7 +401,7 @@
       "videoScopeExcludeIds": [
         "6u1rmo0xfCQ"
       ],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2021. 5. 24.",
       "subscribers": 246,
       "totalViews": 106969,
@@ -786,7 +804,7 @@
     {
       "id": "UCLLQ98a0tBqu2SoTI_IqmwQ",
       "previousSubscribers": 378,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EC%9D%B4%EA%B7%9C%ED%99%98-volkyou",
       "title": "볼보이규환",
       "videoBrandFilter": "volvo",
@@ -805,10 +823,10 @@
         "q7i6_6-sY2k",
         "a9hU5Utr6LI"
       ],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 3. 24.",
       "subscribers": 378,
-      "totalViews": 320987,
+      "totalViews": 320992,
       "videoCount": 113,
       "averageViews": 2841,
       "viewsSample": 113,
@@ -943,8 +961,8 @@
       ],
       "previousMetrics": {
         "subscribers": 378,
-        "totalViews": 320886,
-        "averageViews": 2840,
+        "totalViews": 320987,
+        "averageViews": 2841,
         "videoCount": 113,
         "long": {
           "count": 39,
@@ -954,7 +972,7 @@
         "short": {
           "count": 74,
           "viewsSample": 74,
-          "averageViews": 2281
+          "averageViews": 2282
         },
         "sharedVideos": []
       }
@@ -962,22 +980,22 @@
     {
       "id": "UCk1BctjD6nPVTIEA52FACcw",
       "previousSubscribers": 585,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B9%80%EB%8C%80%EB%A6%AC",
       "title": "Hi, VOLVO | 볼보 김정호 대리",
       "videoBrandFilter": "volvo",
       "videoContentFilter": "automotive",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2011. 5. 4.",
       "subscribers": 585,
-      "totalViews": 563300,
+      "totalViews": 563500,
       "videoCount": 60,
-      "averageViews": 9388,
+      "averageViews": 9392,
       "viewsSample": 60,
       "long": {
         "count": 32,
         "viewsSample": 32,
-        "averageViews": 10659
+        "averageViews": 10666
       },
       "short": {
         "count": 28,
@@ -1071,15 +1089,15 @@
     {
       "id": "UC0QgBtIY01DBw2UC4v_I2eA",
       "previousSubscribers": 97,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EB%B9%85%EB%A7%A8",
       "title": "볼보빅맨",
       "videoBrandFilter": "volvo",
       "videoContentFilter": "automotive",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 7. 5.",
       "subscribers": 97,
-      "totalViews": 61725,
+      "totalViews": 61733,
       "videoCount": 25,
       "averageViews": 2469,
       "viewsSample": 25,
@@ -1126,13 +1144,13 @@
       ],
       "previousMetrics": {
         "subscribers": 97,
-        "totalViews": 61708,
-        "averageViews": 2468,
+        "totalViews": 61725,
+        "averageViews": 2469,
         "videoCount": 25,
         "long": {
           "count": 8,
           "viewsSample": 8,
-          "averageViews": 3498
+          "averageViews": 3500
         },
         "short": {
           "count": 17,
@@ -1145,7 +1163,7 @@
     {
       "id": "UCUGnMnHdpXTdEI_j8-Vk7Eg",
       "previousSubscribers": 1490,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B3%B5%EC%A3%BC-%EC%8B%A0%EC%88%98%EA%B2%BD%ED%8C%80%EC%9E%A5",
       "title": "볼보 공주 - 신수경 팀장",
       "videoBrandFilter": "volvo",
@@ -1160,17 +1178,17 @@
         "pbk46tWaaqo",
         "0AsrtpokrvY"
       ],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 2. 25.",
       "subscribers": 1490,
-      "totalViews": 796053,
+      "totalViews": 796154,
       "videoCount": 109,
-      "averageViews": 7303,
+      "averageViews": 7304,
       "viewsSample": 109,
       "long": {
         "count": 21,
         "viewsSample": 21,
-        "averageViews": 20004
+        "averageViews": 20009
       },
       "short": {
         "count": 88,
@@ -1294,18 +1312,18 @@
       ],
       "previousMetrics": {
         "subscribers": 1490,
-        "totalViews": 795453,
-        "averageViews": 7298,
+        "totalViews": 796053,
+        "averageViews": 7303,
         "videoCount": 109,
         "long": {
           "count": 21,
           "viewsSample": 21,
-          "averageViews": 19995
+          "averageViews": 20004
         },
         "short": {
           "count": 88,
           "viewsSample": 88,
-          "averageViews": 4268
+          "averageViews": 4272
         },
         "sharedVideos": []
       }
@@ -1313,7 +1331,7 @@
     {
       "id": "UCBB6SFAvxC756EpH93qWSSg",
       "previousSubscribers": 438,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EC%86%A1%EB%AF%BC%EA%B2%BD",
       "title": "볼보 송민경팀장",
       "videoBrandFilter": "volvo",
@@ -1342,12 +1360,12 @@
         "VuwUB1aEVQU",
         "SHufxJlJOUE"
       ],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 5. 22.",
       "subscribers": 438,
-      "totalViews": 344904,
+      "totalViews": 345106,
       "videoCount": 76,
-      "averageViews": 4538,
+      "averageViews": 4541,
       "viewsSample": 76,
       "long": {
         "count": 9,
@@ -1357,7 +1375,7 @@
       "short": {
         "count": 67,
         "viewsSample": 67,
-        "averageViews": 1821
+        "averageViews": 1824
       },
       "sampledVideos": 6,
       "commentSamples": 32,
@@ -1443,13 +1461,13 @@
       ],
       "previousMetrics": {
         "subscribers": 438,
-        "totalViews": 344700,
-        "averageViews": 4536,
+        "totalViews": 344904,
+        "averageViews": 4538,
         "videoCount": 76,
         "long": {
           "count": 9,
           "viewsSample": 9,
-          "averageViews": 24744
+          "averageViews": 24767
         },
         "short": {
           "count": 67,
@@ -1462,22 +1480,22 @@
     {
       "id": "UCurMOPSGnB1qrFabcfzu7Ig",
       "previousSubscribers": 180,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@volvogodseunghee",
       "title": "볼보의신승희",
       "videoBrandFilter": "volvo",
       "videoContentFilter": "automotive",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2012. 6. 29.",
       "subscribers": 180,
-      "totalViews": 183373,
+      "totalViews": 183390,
       "videoCount": 44,
       "averageViews": 4168,
       "viewsSample": 44,
       "long": {
         "count": 23,
         "viewsSample": 23,
-        "averageViews": 6865
+        "averageViews": 6866
       },
       "short": {
         "count": 21,
@@ -1536,13 +1554,13 @@
       ],
       "previousMetrics": {
         "subscribers": 180,
-        "totalViews": 183357,
-        "averageViews": 4167,
+        "totalViews": 183373,
+        "averageViews": 4168,
         "videoCount": 44,
         "long": {
           "count": 23,
           "viewsSample": 23,
-          "averageViews": 6864
+          "averageViews": 6865
         },
         "short": {
           "count": 21,
@@ -1555,27 +1573,27 @@
     {
       "id": "UC6LM-e4xY2PkXzE1-f3qSrg",
       "previousSubscribers": 103,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4PARK",
       "title": "볼보 PARK",
       "videoBrandFilter": "volvo",
       "videoContentFilter": "automotive",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 5. 23.",
       "subscribers": 103,
-      "totalViews": 86615,
+      "totalViews": 87026,
       "videoCount": 32,
-      "averageViews": 2707,
+      "averageViews": 2720,
       "viewsSample": 32,
       "long": {
         "count": 10,
         "viewsSample": 10,
-        "averageViews": 6470
+        "averageViews": 6500
       },
       "short": {
         "count": 22,
         "viewsSample": 22,
-        "averageViews": 996
+        "averageViews": 1001
       },
       "sampledVideos": 6,
       "commentSamples": 9,
@@ -1617,18 +1635,18 @@
       ],
       "previousMetrics": {
         "subscribers": 103,
-        "totalViews": 86273,
-        "averageViews": 2696,
+        "totalViews": 86615,
+        "averageViews": 2707,
         "videoCount": 32,
         "long": {
           "count": 10,
           "viewsSample": 10,
-          "averageViews": 6440
+          "averageViews": 6470
         },
         "short": {
           "count": 22,
           "viewsSample": 22,
-          "averageViews": 994
+          "averageViews": 996
         },
         "sharedVideos": []
       }
@@ -1636,7 +1654,7 @@
     {
       "id": "UCatA_IUpH_m1ihLDjU8u38g",
       "previousSubscribers": 396,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@volvodesk",
       "title": "볼보데스크 VolvoDesk",
       "videoBrandFilter": "volvo",
@@ -1646,12 +1664,12 @@
         "5V-QQld6b3M",
         "7P6YbYyPFeQ"
       ],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2026. 4. 9.",
-      "subscribers": 396,
-      "totalViews": 563913,
+      "subscribers": 395,
+      "totalViews": 563933,
       "videoCount": 74,
-      "averageViews": 7620,
+      "averageViews": 7621,
       "viewsSample": 74,
       "long": {
         "count": 15,
@@ -1661,7 +1679,7 @@
       "short": {
         "count": 59,
         "viewsSample": 59,
-        "averageViews": 6167
+        "averageViews": 6168
       },
       "sampledVideos": 6,
       "commentSamples": 48,
@@ -1745,8 +1763,8 @@
       ],
       "previousMetrics": {
         "subscribers": 396,
-        "totalViews": 563786,
-        "averageViews": 7619,
+        "totalViews": 563913,
+        "averageViews": 7620,
         "videoCount": 74,
         "long": {
           "count": 15,
@@ -1756,7 +1774,7 @@
         "short": {
           "count": 59,
           "viewsSample": 59,
-          "averageViews": 6165
+          "averageViews": 6167
         },
         "sharedVideos": []
       }
@@ -1764,13 +1782,13 @@
     {
       "id": "UC9-es-82mhByLp4nafGK1CA",
       "previousSubscribers": 387,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@jjy1220",
       "title": "볼보 정꼼꼼tv",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2023. 2. 26.",
       "subscribers": 387,
-      "totalViews": 24154,
+      "totalViews": 24155,
       "videoCount": 24,
       "averageViews": 1006,
       "viewsSample": 24,
@@ -1818,7 +1836,7 @@
       ],
       "previousMetrics": {
         "subscribers": 387,
-        "totalViews": 24147,
+        "totalViews": 24154,
         "averageViews": 1006,
         "videoCount": 24,
         "long": {
@@ -1836,25 +1854,25 @@
     },
     {
       "id": "UC33UQnHJTzabySfSKvo5ECA",
-      "previousSubscribers": 383,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousSubscribers": 384,
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@volvo_kmj",
       "title": "볼보 용산 전시장 김명준",
       "videoBrandFilter": "volvo",
       "videoContentFilter": "automotive",
       "videoScopeIncludeIds": [],
       "videoScopeExcludeIds": [],
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2016. 8. 8.",
       "subscribers": 384,
-      "totalViews": 63554,
+      "totalViews": 63655,
       "videoCount": 33,
-      "averageViews": 1926,
+      "averageViews": 1929,
       "viewsSample": 33,
       "long": {
         "count": 17,
         "viewsSample": 17,
-        "averageViews": 2773
+        "averageViews": 2779
       },
       "short": {
         "count": 16,
@@ -1901,14 +1919,14 @@
         "Q2cl_Z_sjFc"
       ],
       "previousMetrics": {
-        "subscribers": 383,
-        "totalViews": 63449,
-        "averageViews": 1923,
+        "subscribers": 384,
+        "totalViews": 63554,
+        "averageViews": 1926,
         "videoCount": 33,
         "long": {
           "count": 17,
           "viewsSample": 17,
-          "averageViews": 2767
+          "averageViews": 2773
         },
         "short": {
           "count": 16,
@@ -1921,20 +1939,20 @@
     {
       "id": "UCDwl98BzOnfYsrL9DXRRm6w",
       "previousSubscribers": 135,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@volvo_91ys",
       "title": "볼보유",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2016. 10. 23.",
       "subscribers": 135,
-      "totalViews": 76555,
+      "totalViews": 76560,
       "videoCount": 36,
       "averageViews": 2127,
       "viewsSample": 36,
       "long": {
         "count": 5,
         "viewsSample": 5,
-        "averageViews": 4161
+        "averageViews": 4162
       },
       "short": {
         "count": 31,
@@ -2006,13 +2024,13 @@
     {
       "id": "UCTET6Q4mF4cSL1SGXmyQU0Q",
       "previousSubscribers": 4,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00",
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00",
       "url": "https://www.youtube.com/@baetzby",
       "title": "배츠비",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2015. 9. 8.",
       "subscribers": 4,
-      "totalViews": 11948,
+      "totalViews": 11951,
       "videoCount": 8,
       "averageViews": 1494,
       "viewsSample": 8,
@@ -2056,8 +2074,8 @@
       ],
       "previousMetrics": {
         "subscribers": 4,
-        "totalViews": 11935,
-        "averageViews": 1492,
+        "totalViews": 11948,
+        "averageViews": 1494,
         "videoCount": 8,
         "long": {
           "count": 0,
@@ -2067,7 +2085,7 @@
         "short": {
           "count": 8,
           "viewsSample": 8,
-          "averageViews": 1492
+          "averageViews": 1494
         },
         "sharedVideos": []
       }
@@ -2076,7 +2094,7 @@
       "id": "UCxIbUlFEU03p12qJqLIHyIA",
       "url": "https://www.youtube.com/@%EB%B3%BC%EB%B3%B4%EA%B9%80%EB%AF%BC%EC%84%9D",
       "title": "볼보천하 김민석",
-      "checkedAt": "2026-11-17T06:25:01.229150+00:00",
+      "checkedAt": "2026-11-17T09:22:42.662228+00:00",
       "joined": "2022. 5. 16.",
       "subscribers": 114,
       "totalViews": 113097,
@@ -2119,8 +2137,8 @@
       ],
       "previousMetrics": {
         "subscribers": 114,
-        "totalViews": 113096,
-        "averageViews": 7068,
+        "totalViews": 113097,
+        "averageViews": 7069,
         "videoCount": 16,
         "long": {
           "count": 6,
@@ -2135,7 +2153,7 @@
         "sharedVideos": []
       },
       "previousSubscribers": 114,
-      "previousCheckedAt": "2026-11-17T02:10:11.619166+00:00"
+      "previousCheckedAt": "2026-11-17T06:25:01.229150+00:00"
     }
   ],
   "evidence": [
@@ -2230,7 +2248,7 @@
       "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=UgwR_WpwwRbpo22wDwF4AaABAg"
     }
   ],
-  "lastSuccessfulRefreshAt": "2026-11-17T06:25:01.229150+00:00",
+  "lastSuccessfulRefreshAt": "2026-11-17T09:22:42.662228+00:00",
   "previousDailyClose": {
     "date": "2026-11-15",
     "subscribers": 5697,
