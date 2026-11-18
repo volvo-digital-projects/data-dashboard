@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-18T09:50:48.912034+00:00",
+  "checkedAt": "2026-11-18T21:37:42.106773+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -30283,13 +30283,13 @@
       },
       "entries": [
         {
-          "id": "Ugz-ipFb6BNcEBZ65Ph4AaABAg",
+          "id": "UgwIJ8ifI0PuoF3V2ax4AaABAg",
           "category": "other",
           "topic": "중립·기타",
           "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
-          "videoId": "1sp_WtjTOfs",
+          "videoId": "YUZFolUcZe4",
           "kind": "video",
-          "url": "https://www.youtube.com/watch?v=1sp_WtjTOfs&lc=Ugz-ipFb6BNcEBZ65Ph4AaABAg"
+          "url": "https://www.youtube.com/watch?v=YUZFolUcZe4&lc=UgwIJ8ifI0PuoF3V2ax4AaABAg"
         },
         {
           "id": "UgyBAdqerbDiMUdtMGV4AaABAg",
@@ -32175,12 +32175,6 @@
       ],
       "coverage": [
         {
-          "id": "1sp_WtjTOfs",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
           "id": "YUZFolUcZe4",
           "kind": "video",
           "status": "complete",
@@ -32302,6 +32296,12 @@
         },
         {
           "id": "wC1F_QR6jqc",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
+          "id": "1sp_WtjTOfs",
           "kind": "video",
           "status": "complete",
           "reported": null
