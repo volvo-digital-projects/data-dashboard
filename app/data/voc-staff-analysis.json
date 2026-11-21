@@ -53,7 +53,7 @@
     {
       "id": "under-3m",
       "label": "3개월 이내",
-      "employeeCount": 18,
+      "employeeCount": 17,
       "respondingEmployees": 13,
       "responses": 139,
       "scoreSum": 1324.0,
@@ -62,7 +62,7 @@
     {
       "id": "under-1y",
       "label": "1년 이내",
-      "employeeCount": 41,
+      "employeeCount": 42,
       "respondingEmployees": 41,
       "responses": 408,
       "scoreSum": 3802.0,
