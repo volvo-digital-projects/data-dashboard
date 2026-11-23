@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-23T15:03:05+09:00",
+  "updatedAt": "2026-11-24T07:57:25+09:00",
   "sourcePolicy": "7개 공식 딜러사 세일즈 컨설턴트 페이지의 전시장·이름 정확 일치",
   "showroomCount": 39,
-  "consultantCount": 362,
+  "consultantCount": 360,
   "showrooms": {
     "6KR342": {
       "dealer": "에이치모터스",
@@ -715,9 +715,6 @@
         "송찬우": {
           "image": "/staff-profiles/kolon/cheonan/consultant-e29466fd475c.webp"
         },
-        "신동규": {
-          "image": "/staff-profiles/kolon/cheonan/consultant-aae8648d0903.webp"
-        },
         "안영민": {
           "image": "/staff-profiles/kolon/cheonan/consultant-aa711d5371f7.webp"
         },
@@ -741,9 +738,6 @@
         },
         "장경호": {
           "image": "/staff-profiles/kolon/cheonan/consultant-40ca9050189e.webp"
-        },
-        "최건우": {
-          "image": "/staff-profiles/kolon/cheonan/consultant-0256b7cd2e68.webp"
         },
         "허동환": {
           "image": "/staff-profiles/kolon/cheonan/consultant-88ba31b6ca92.webp"
