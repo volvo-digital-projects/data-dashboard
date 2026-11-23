@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-22T23:08:14.591504+00:00",
+  "checkedAt": "2026-11-23T02:09:57.049327+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -4112,7 +4112,7 @@
       "excludedOwnerPromotions": 43
     },
     "UCq4Nmcrr-dEmZqT-NhbSdpQ": {
-      "total": 176,
+      "total": 177,
       "videos": 35,
       "completeVideos": 35,
       "partialVideos": 0,
@@ -4120,7 +4120,7 @@
       "counts": {
         "positive": 12,
         "suggestion": 0,
-        "other": 105,
+        "other": 106,
         "review": 3,
         "owner": 56
       },
@@ -4151,6 +4151,15 @@
           "videoId": "mK70GE27his",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=mK70GE27his&lc=Ugxa8PJWmvzKVG-LjrJ4AaABAg.AdQLToLnZDWAdTJf5bdO-a"
+        },
+        {
+          "id": "Ugxa8PJWmvzKVG-LjrJ4AaABAg.AdQLToLnZDWAdXdoRsnKtx",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "mK70GE27his",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=mK70GE27his&lc=Ugxa8PJWmvzKVG-LjrJ4AaABAg.AdQLToLnZDWAdXdoRsnKtx"
         },
         {
           "id": "UgzRC7kwOqbwG1GhbfJ4AaABAg",
@@ -6837,7 +6846,7 @@
       "excludedOwnerPromotions": 0
     },
     "UCLLQ98a0tBqu2SoTI_IqmwQ": {
-      "total": 390,
+      "total": 391,
       "videos": 76,
       "completeVideos": 76,
       "partialVideos": 0,
@@ -6845,7 +6854,7 @@
       "counts": {
         "positive": 29,
         "suggestion": 0,
-        "other": 182,
+        "other": 183,
         "review": 14,
         "owner": 165
       },
@@ -6885,6 +6894,15 @@
           "videoId": "8-iKVqtQVEk",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=8-iKVqtQVEk&lc=UgwHPyWQaz3zuc0rw6x4AaABAg.AdQL1N0gE_YAdTK44ullnX"
+        },
+        {
+          "id": "UgwHPyWQaz3zuc0rw6x4AaABAg.AdQL1N0gE_YAdXdWjzf3WX",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "8-iKVqtQVEk",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=8-iKVqtQVEk&lc=UgwHPyWQaz3zuc0rw6x4AaABAg.AdQL1N0gE_YAdXdWjzf3WX"
         },
         {
           "id": "UgxTdU6nD-wQwynIyy14AaABAg",
@@ -10820,10 +10838,10 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 46
+      "excludedOwnerPromotions": 47
     },
     "UCk1BctjD6nPVTIEA52FACcw": {
-      "total": 1007,
+      "total": 1008,
       "videos": 52,
       "completeVideos": 52,
       "partialVideos": 0,
@@ -10831,11 +10849,20 @@
       "counts": {
         "positive": 34,
         "suggestion": 0,
-        "other": 525,
+        "other": 526,
         "review": 37,
         "owner": 411
       },
       "entries": [
+        {
+          "id": "Ugy9UK_s8RuJ6N7p86l4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "Fy_papZhI4U",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=Fy_papZhI4U&lc=Ugy9UK_s8RuJ6N7p86l4AaABAg"
+        },
         {
           "id": "UgxeSAkarnnjFYhy-3t4AaABAg",
           "category": "other",
@@ -19902,6 +19929,12 @@
       ],
       "coverage": [
         {
+          "id": "Fy_papZhI4U",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "yAtDKqTqTng",
           "kind": "video",
           "status": "complete",
@@ -20197,12 +20230,6 @@
         },
         {
           "id": "Tk-EDBrVHZg",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "Fy_papZhI4U",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -35655,7 +35682,7 @@
       "excludedOwnerPromotions": 1
     },
     "UC6LM-e4xY2PkXzE1-f3qSrg": {
-      "total": 65,
+      "total": 66,
       "videos": 14,
       "completeVideos": 14,
       "partialVideos": 0,
@@ -35665,7 +35692,7 @@
         "suggestion": 0,
         "other": 32,
         "review": 3,
-        "owner": 22
+        "owner": 23
       },
       "entries": [
         {
@@ -35676,6 +35703,15 @@
           "videoId": "lCEtqgpbViI",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=lCEtqgpbViI&lc=UgxuAquRjhjYVUHdbMN4AaABAg"
+        },
+        {
+          "id": "UgxuAquRjhjYVUHdbMN4AaABAg.AdXSMkT4Mr4AdXUb9-CO96",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "lCEtqgpbViI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=lCEtqgpbViI&lc=UgxuAquRjhjYVUHdbMN4AaABAg.AdXSMkT4Mr4AdXUb9-CO96"
         },
         {
           "id": "UgznACpeuaITlKfrmv54AaABAg",
@@ -43278,7 +43314,7 @@
       "excludedOwnerPromotions": 0
     },
     "UCDwl98BzOnfYsrL9DXRRm6w": {
-      "total": 94,
+      "total": 95,
       "videos": 16,
       "completeVideos": 16,
       "partialVideos": 0,
@@ -43286,7 +43322,7 @@
       "counts": {
         "positive": 11,
         "suggestion": 0,
-        "other": 41,
+        "other": 42,
         "review": 2,
         "owner": 40
       },
@@ -43326,6 +43362,15 @@
           "videoId": "1Xktkr4Aibw",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=1Xktkr4Aibw&lc=Ugw3Zhj0Sx7Dwsab9UF4AaABAg.AdQKWKQwTe_AdTKlGzU-AO"
+        },
+        {
+          "id": "Ugw3Zhj0Sx7Dwsab9UF4AaABAg.AdQKWKQwTe_AdXdNeOjnWM",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "1Xktkr4Aibw",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=1Xktkr4Aibw&lc=Ugw3Zhj0Sx7Dwsab9UF4AaABAg.AdQKWKQwTe_AdXdNeOjnWM"
         },
         {
           "id": "Ugzwy6eu88Vfgcfni9J4AaABAg",
@@ -44237,7 +44282,7 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 1
+      "excludedOwnerPromotions": 2
     },
     "UCTET6Q4mF4cSL1SGXmyQU0Q": {
       "total": 2,

@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-11-23",
-    "salesSyncedAt": "2026-11-23T08:07:05+09:00",
+    "salesSyncedAt": "2026-11-23T11:08:27+09:00",
     "salesPeriod": "2026-01-01~2026-11-23",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -199,8 +199,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -212,12 +212,12 @@
             2,
             2,
             7,
-            0
+            1
           ],
           "segmentSales": {
             "30": 4,
             "40": 6,
-            "60": 7,
+            "60": 8,
             "90": 8
           }
         },
@@ -281,8 +281,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 120,
-          "deliveredCustomers": 120,
+          "deliveredSales": 123,
+          "deliveredCustomers": 123,
           "monthlyDeliveredSales": [
             4,
             5,
@@ -294,12 +294,12 @@
             7,
             16,
             18,
-            6
+            9
           ],
           "segmentSales": {
             "30": 28,
-            "40": 15,
-            "60": 33,
+            "40": 16,
+            "60": 35,
             "90": 44
           }
         }
@@ -310,7 +310,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 321,
+        "deliveredSales": 325,
         "monthlyDeliveredSales": [
           13,
           20,
@@ -322,12 +322,12 @@
           17,
           41,
           49,
-          10
+          14
         ],
         "segmentSales": {
           "30": 84,
-          "40": 37,
-          "60": 93,
+          "40": 38,
+          "60": 96,
           "90": 107
         }
       }
@@ -437,8 +437,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 36,
+          "deliveredSales": 37,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             5,
             5,
@@ -450,12 +450,12 @@
             2,
             3,
             2,
-            2
+            3
           ],
           "segmentSales": {
             "30": 8,
             "40": 5,
-            "60": 13,
+            "60": 14,
             "90": 10
           }
         },
@@ -478,8 +478,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 29,
+          "deliveredSales": 30,
+          "deliveredCustomers": 30,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -491,12 +491,12 @@
             1,
             2,
             4,
-            0
+            1
           ],
           "segmentSales": {
             "30": 13,
             "40": 1,
-            "60": 5,
+            "60": 6,
             "90": 10
           }
         },
@@ -560,8 +560,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -573,13 +573,13 @@
             2,
             4,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 2,
             "40": 1,
             "60": 13,
-            "90": 11
+            "90": 12
           }
         },
         {
@@ -601,8 +601,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -614,12 +614,12 @@
             2,
             4,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 11,
             "40": 2,
-            "60": 7,
+            "60": 8,
             "90": 11
           }
         },
@@ -671,7 +671,7 @@
         "consultationCustomers": 14,
         "testDriveCustomers": 3,
         "contractCustomers": 2,
-        "deliveredSales": 214,
+        "deliveredSales": 218,
         "monthlyDeliveredSales": [
           19,
           17,
@@ -683,13 +683,13 @@
           12,
           28,
           25,
-          9
+          13
         ],
         "segmentSales": {
           "30": 62,
           "40": 16,
-          "60": 72,
-          "90": 64
+          "60": 75,
+          "90": 65
         }
       }
     },
@@ -880,8 +880,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 51,
-          "deliveredCustomers": 51,
+          "deliveredSales": 52,
+          "deliveredCustomers": 52,
           "monthlyDeliveredSales": [
             3,
             6,
@@ -893,13 +893,13 @@
             4,
             5,
             4,
-            0
+            1
           ],
           "segmentSales": {
             "30": 16,
             "40": 5,
             "60": 20,
-            "90": 10
+            "90": 11
           }
         },
         {
@@ -1032,7 +1032,7 @@
         "consultationCustomers": 10,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 245,
+        "deliveredSales": 246,
         "monthlyDeliveredSales": [
           13,
           22,
@@ -1044,13 +1044,13 @@
           12,
           35,
           34,
-          5
+          6
         ],
         "segmentSales": {
           "30": 75,
           "40": 26,
           "60": 82,
-          "90": 62
+          "90": 63
         }
       }
     },
@@ -1323,8 +1323,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 34,
-          "deliveredCustomers": 34,
+          "deliveredSales": 36,
+          "deliveredCustomers": 36,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -1336,12 +1336,12 @@
             1,
             2,
             3,
-            0
+            2
           ],
           "segmentSales": {
             "30": 9,
-            "40": 5,
-            "60": 14,
+            "40": 6,
+            "60": 15,
             "90": 6
           }
         },
@@ -1405,8 +1405,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 44,
-          "deliveredCustomers": 44,
+          "deliveredSales": 45,
+          "deliveredCustomers": 45,
           "monthlyDeliveredSales": [
             4,
             3,
@@ -1418,12 +1418,12 @@
             0,
             6,
             14,
-            1
+            2
           ],
           "segmentSales": {
             "30": 10,
             "40": 4,
-            "60": 18,
+            "60": 19,
             "90": 12
           }
         },
@@ -1446,8 +1446,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 44,
-          "deliveredCustomers": 44,
+          "deliveredSales": 45,
+          "deliveredCustomers": 45,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -1459,13 +1459,13 @@
             1,
             8,
             3,
-            3
+            4
           ],
           "segmentSales": {
             "30": 13,
             "40": 5,
             "60": 10,
-            "90": 16
+            "90": 17
           }
         },
         {
@@ -1557,7 +1557,7 @@
         "consultationCustomers": 5,
         "testDriveCustomers": 1,
         "contractCustomers": 0,
-        "deliveredSales": 400,
+        "deliveredSales": 404,
         "monthlyDeliveredSales": [
           23,
           32,
@@ -1569,13 +1569,13 @@
           21,
           59,
           58,
-          12
+          16
         ],
         "segmentSales": {
           "30": 114,
-          "40": 46,
-          "60": 123,
-          "90": 117
+          "40": 47,
+          "60": 125,
+          "90": 118
         }
       }
     },
@@ -1602,8 +1602,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             3,
             3,
@@ -1615,13 +1615,13 @@
             2,
             3,
             4,
-            0
+            1
           ],
           "segmentSales": {
             "30": 5,
             "40": 3,
             "60": 17,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -1918,7 +1918,7 @@
         "consultationCustomers": 58,
         "testDriveCustomers": 8,
         "contractCustomers": 4,
-        "deliveredSales": 249,
+        "deliveredSales": 250,
         "monthlyDeliveredSales": [
           13,
           25,
@@ -1930,13 +1930,13 @@
           10,
           36,
           37,
-          11
+          12
         ],
         "segmentSales": {
           "30": 56,
           "40": 23,
           "60": 88,
-          "90": 82
+          "90": 83
         }
       }
     },
@@ -2045,8 +2045,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 47,
-          "deliveredCustomers": 47,
+          "deliveredSales": 49,
+          "deliveredCustomers": 49,
           "monthlyDeliveredSales": [
             7,
             5,
@@ -2058,13 +2058,13 @@
             3,
             4,
             7,
-            1
+            3
           ],
           "segmentSales": {
             "30": 7,
             "40": 5,
             "60": 16,
-            "90": 19
+            "90": 21
           }
         },
         {
@@ -2086,8 +2086,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 35,
-          "deliveredCustomers": 35,
+          "deliveredSales": 37,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -2099,13 +2099,13 @@
             2,
             7,
             7,
-            1
+            3
           ],
           "segmentSales": {
             "30": 5,
             "40": 4,
             "60": 12,
-            "90": 14
+            "90": 16
           }
         },
         {
@@ -2127,8 +2127,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 19,
-          "deliveredCustomers": 19,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -2140,12 +2140,12 @@
             0,
             4,
             2,
-            1
+            2
           ],
           "segmentSales": {
             "30": 4,
             "40": 1,
-            "60": 4,
+            "60": 5,
             "90": 10
           }
         },
@@ -2209,8 +2209,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 43,
-          "deliveredCustomers": 43,
+          "deliveredSales": 45,
+          "deliveredCustomers": 45,
           "monthlyDeliveredSales": [
             8,
             5,
@@ -2222,13 +2222,13 @@
             2,
             3,
             5,
-            1
+            3
           ],
           "segmentSales": {
             "30": 5,
             "40": 2,
-            "60": 25,
-            "90": 11
+            "60": 26,
+            "90": 12
           }
         },
         {
@@ -2414,8 +2414,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             3,
             3,
@@ -2427,12 +2427,12 @@
             1,
             4,
             4,
-            1
+            2
           ],
           "segmentSales": {
             "30": 12,
             "40": 2,
-            "60": 9,
+            "60": 10,
             "90": 4
           }
         }
@@ -2443,7 +2443,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 328,
+        "deliveredSales": 336,
         "monthlyDeliveredSales": [
           29,
           30,
@@ -2455,13 +2455,13 @@
           13,
           42,
           52,
-          11
+          19
         ],
         "segmentSales": {
           "30": 74,
           "40": 34,
-          "60": 118,
-          "90": 102
+          "60": 121,
+          "90": 107
         }
       }
     },
@@ -2570,8 +2570,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             3,
             3,
@@ -2583,11 +2583,11 @@
             1,
             3,
             2,
-            1
+            2
           ],
           "segmentSales": {
             "30": 9,
-            "40": 3,
+            "40": 4,
             "60": 5,
             "90": 7
           }
@@ -2693,8 +2693,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             6,
             0,
@@ -2706,13 +2706,13 @@
             1,
             2,
             3,
-            0
+            2
           ],
           "segmentSales": {
             "30": 5,
             "40": 1,
             "60": 13,
-            "90": 6
+            "90": 8
           }
         },
         {
@@ -2734,8 +2734,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 22,
-          "deliveredCustomers": 21,
+          "deliveredSales": 23,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -2747,13 +2747,13 @@
             2,
             2,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 8,
             "40": 1,
             "60": 7,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -2775,8 +2775,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 32,
-          "deliveredCustomers": 31,
+          "deliveredSales": 33,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -2788,13 +2788,13 @@
             3,
             3,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 7,
             "40": 4,
             "60": 10,
-            "90": 11
+            "90": 12
           }
         },
         {
@@ -2816,8 +2816,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 61,
-          "deliveredCustomers": 61,
+          "deliveredSales": 63,
+          "deliveredCustomers": 63,
           "monthlyDeliveredSales": [
             9,
             5,
@@ -2829,13 +2829,13 @@
             3,
             4,
             8,
-            3
+            5
           ],
           "segmentSales": {
             "30": 20,
-            "40": 8,
+            "40": 9,
             "60": 17,
-            "90": 16
+            "90": 17
           }
         }
       ],
@@ -2845,7 +2845,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 261,
+        "deliveredSales": 268,
         "monthlyDeliveredSales": [
           31,
           25,
@@ -2857,13 +2857,13 @@
           15,
           25,
           33,
-          6
+          13
         ],
         "segmentSales": {
           "30": 73,
-          "40": 23,
+          "40": 25,
           "60": 88,
-          "90": 77
+          "90": 82
         }
       }
     },
@@ -3013,8 +3013,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 28,
-          "deliveredCustomers": 28,
+          "deliveredSales": 29,
+          "deliveredCustomers": 29,
           "monthlyDeliveredSales": [
             5,
             2,
@@ -3026,13 +3026,13 @@
             1,
             2,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
             "40": 3,
             "60": 10,
-            "90": 9
+            "90": 10
           }
         },
         {
@@ -3095,8 +3095,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 46,
-          "deliveredCustomers": 46,
+          "deliveredSales": 47,
+          "deliveredCustomers": 47,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -3108,12 +3108,12 @@
             7,
             5,
             4,
-            0
+            1
           ],
           "segmentSales": {
             "30": 5,
             "40": 9,
-            "60": 12,
+            "60": 13,
             "90": 20
           }
         },
@@ -3177,8 +3177,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -3190,11 +3190,11 @@
             1,
             3,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 3,
-            "40": 1,
+            "40": 2,
             "60": 1,
             "90": 7
           }
@@ -3259,8 +3259,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -3272,12 +3272,12 @@
             1,
             2,
             5,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
             "40": 4,
-            "60": 7,
+            "60": 8,
             "90": 7
           }
         },
@@ -3329,7 +3329,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 232,
+        "deliveredSales": 236,
         "monthlyDeliveredSales": [
           18,
           18,
@@ -3341,13 +3341,13 @@
           12,
           30,
           38,
-          2
+          6
         ],
         "segmentSales": {
           "30": 53,
-          "40": 29,
-          "60": 64,
-          "90": 86
+          "40": 30,
+          "60": 66,
+          "90": 87
         }
       }
     },
@@ -3497,8 +3497,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 67,
-          "deliveredCustomers": 66,
+          "deliveredSales": 68,
+          "deliveredCustomers": 67,
           "monthlyDeliveredSales": [
             4,
             2,
@@ -3510,12 +3510,12 @@
             4,
             15,
             17,
-            1
+            2
           ],
           "segmentSales": {
             "30": 32,
             "40": 2,
-            "60": 20,
+            "60": 21,
             "90": 13
           }
         },
@@ -3743,8 +3743,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -3756,13 +3756,13 @@
             1,
             1,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 2,
             "40": 0,
             "60": 9,
-            "90": 1
+            "90": 2
           }
         },
         {
@@ -3784,8 +3784,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 26,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -3797,13 +3797,13 @@
             4,
             2,
             5,
-            0
+            1
           ],
           "segmentSales": {
             "30": 5,
             "40": 1,
             "60": 14,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -3907,8 +3907,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 41,
-          "deliveredCustomers": 41,
+          "deliveredSales": 42,
+          "deliveredCustomers": 42,
           "monthlyDeliveredSales": [
             4,
             2,
@@ -3920,12 +3920,12 @@
             3,
             5,
             6,
-            1
+            2
           ],
           "segmentSales": {
             "30": 9,
             "40": 5,
-            "60": 14,
+            "60": 15,
             "90": 13
           }
         }
@@ -3936,7 +3936,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 357,
+        "deliveredSales": 361,
         "monthlyDeliveredSales": [
           26,
           26,
@@ -3948,13 +3948,13 @@
           21,
           49,
           69,
-          6
+          10
         ],
         "segmentSales": {
           "30": 123,
           "40": 38,
-          "60": 112,
-          "90": 84
+          "60": 114,
+          "90": 86
         }
       }
     },
@@ -4022,8 +4022,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 56,
-          "deliveredCustomers": 56,
+          "deliveredSales": 57,
+          "deliveredCustomers": 57,
           "monthlyDeliveredSales": [
             4,
             5,
@@ -4035,13 +4035,13 @@
             1,
             6,
             6,
-            1
+            2
           ],
           "segmentSales": {
             "30": 17,
             "40": 3,
             "60": 21,
-            "90": 15
+            "90": 16
           }
         },
         {
@@ -4063,8 +4063,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 33,
-          "deliveredCustomers": 33,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -4076,13 +4076,13 @@
             1,
             5,
             7,
-            3
+            4
           ],
           "segmentSales": {
             "30": 6,
             "40": 10,
             "60": 11,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -4186,8 +4186,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 15,
-          "deliveredCustomers": 15,
+          "deliveredSales": 16,
+          "deliveredCustomers": 16,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -4199,13 +4199,13 @@
             0,
             2,
             4,
-            3
+            4
           ],
           "segmentSales": {
             "30": 2,
             "40": 0,
             "60": 7,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -4350,8 +4350,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 34,
+          "deliveredSales": 37,
+          "deliveredCustomers": 35,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -4363,12 +4363,12 @@
             0,
             9,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 14,
             "40": 1,
-            "60": 12,
+            "60": 13,
             "90": 9
           }
         },
@@ -4514,8 +4514,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 42,
-          "deliveredCustomers": 42,
+          "deliveredSales": 43,
+          "deliveredCustomers": 43,
           "monthlyDeliveredSales": [
             4,
             5,
@@ -4527,12 +4527,12 @@
             1,
             3,
             7,
-            2
+            3
           ],
           "segmentSales": {
             "30": 11,
             "40": 2,
-            "60": 14,
+            "60": 15,
             "90": 15
           }
         }
@@ -4543,7 +4543,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 391,
+        "deliveredSales": 396,
         "monthlyDeliveredSales": [
           30,
           35,
@@ -4555,13 +4555,13 @@
           29,
           50,
           56,
-          14
+          19
         ],
         "segmentSales": {
           "30": 92,
           "40": 39,
-          "60": 142,
-          "90": 118
+          "60": 144,
+          "90": 121
         }
       }
     },
@@ -4588,8 +4588,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 39,
-          "deliveredCustomers": 39,
+          "deliveredSales": 40,
+          "deliveredCustomers": 40,
           "monthlyDeliveredSales": [
             0,
             5,
@@ -4601,13 +4601,13 @@
             1,
             1,
             8,
-            0
+            1
           ],
           "segmentSales": {
             "30": 9,
             "40": 7,
             "60": 10,
-            "90": 13
+            "90": 14
           }
         },
         {
@@ -4752,8 +4752,8 @@
             "testDriveToContract": 1,
             "contractToDelivered": 1
           },
-          "deliveredSales": 39,
-          "deliveredCustomers": 37,
+          "deliveredSales": 41,
+          "deliveredCustomers": 39,
           "monthlyDeliveredSales": [
             5,
             4,
@@ -4765,13 +4765,13 @@
             2,
             7,
             6,
-            1
+            3
           ],
           "segmentSales": {
             "30": 10,
             "40": 5,
             "60": 10,
-            "90": 14
+            "90": 16
           }
         },
         {
@@ -4834,8 +4834,8 @@
             "testDriveToContract": 1,
             "contractToDelivered": 4
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             4,
             1,
@@ -4847,12 +4847,12 @@
             1,
             3,
             3,
-            2
+            3
           ],
           "segmentSales": {
             "30": 2,
             "40": 8,
-            "60": 11,
+            "60": 12,
             "90": 10
           }
         },
@@ -4875,8 +4875,8 @@
             "testDriveToContract": 1,
             "contractToDelivered": 1
           },
-          "deliveredSales": 41,
-          "deliveredCustomers": 41,
+          "deliveredSales": 42,
+          "deliveredCustomers": 42,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -4888,13 +4888,13 @@
             0,
             4,
             5,
-            1
+            2
           ],
           "segmentSales": {
             "30": 18,
             "40": 0,
             "60": 14,
-            "90": 9
+            "90": 10
           }
         }
       ],
@@ -4904,7 +4904,7 @@
         "consultationCustomers": 166,
         "testDriveCustomers": 54,
         "contractCustomers": 51,
-        "deliveredSales": 246,
+        "deliveredSales": 251,
         "monthlyDeliveredSales": [
           18,
           24,
@@ -4916,13 +4916,13 @@
           7,
           29,
           39,
-          8
+          13
         ],
         "segmentSales": {
           "30": 65,
           "40": 24,
-          "60": 74,
-          "90": 83
+          "60": 75,
+          "90": 87
         }
       }
     },
@@ -4990,8 +4990,8 @@
             "testDriveToContract": 1,
             "contractToDelivered": 3
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -5003,13 +5003,13 @@
             0,
             1,
             1,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
             "40": 2,
             "60": 7,
-            "90": 10
+            "90": 11
           }
         },
         {
@@ -5072,8 +5072,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 14
           },
-          "deliveredSales": 52,
-          "deliveredCustomers": 51,
+          "deliveredSales": 53,
+          "deliveredCustomers": 52,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -5085,13 +5085,13 @@
             2,
             9,
             4,
-            4
+            5
           ],
           "segmentSales": {
             "30": 8,
             "40": 7,
             "60": 18,
-            "90": 19
+            "90": 20
           }
         },
         {
@@ -5154,8 +5154,8 @@
             "testDriveToContract": 16,
             "contractToDelivered": 16
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             4,
             1,
@@ -5167,12 +5167,12 @@
             0,
             3,
             1,
-            2
+            3
           ],
           "segmentSales": {
             "30": 13,
             "40": 3,
-            "60": 10,
+            "60": 11,
             "90": 5
           }
         },
@@ -5195,8 +5195,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 8
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 15,
+          "deliveredCustomers": 15,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -5208,13 +5208,13 @@
             0,
             1,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 1,
             "40": 3,
             "60": 8,
-            "90": 2
+            "90": 3
           }
         },
         {
@@ -5236,8 +5236,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 8
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             4,
             3,
@@ -5249,13 +5249,13 @@
             0,
             5,
             2,
-            0
+            2
           ],
           "segmentSales": {
             "30": 7,
             "40": 0,
-            "60": 7,
-            "90": 6
+            "60": 8,
+            "90": 7
           }
         },
         {
@@ -5277,8 +5277,8 @@
             "testDriveToContract": 3,
             "contractToDelivered": 11
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             4,
             0,
@@ -5290,12 +5290,12 @@
             1,
             3,
             2,
-            0
+            1
           ],
           "segmentSales": {
             "30": 10,
             "40": 1,
-            "60": 5,
+            "60": 6,
             "90": 8
           }
         },
@@ -5400,8 +5400,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 30,
+          "deliveredSales": 37,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -5413,13 +5413,13 @@
             3,
             3,
             12,
-            2
+            3
           ],
           "segmentSales": {
             "30": 11,
             "40": 4,
             "60": 7,
-            "90": 14
+            "90": 15
           }
         },
         {
@@ -5441,8 +5441,8 @@
             "testDriveToContract": 2,
             "contractToDelivered": 4
           },
-          "deliveredSales": 19,
-          "deliveredCustomers": 19,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -5454,13 +5454,13 @@
             0,
             2,
             4,
-            2
+            3
           ],
           "segmentSales": {
             "30": 6,
             "40": 1,
             "60": 7,
-            "90": 5
+            "90": 6
           }
         },
         {
@@ -5552,7 +5552,7 @@
         "consultationCustomers": 3072,
         "testDriveCustomers": 388,
         "contractCustomers": 363,
-        "deliveredSales": 403,
+        "deliveredSales": 412,
         "monthlyDeliveredSales": [
           37,
           43,
@@ -5564,13 +5564,13 @@
           14,
           44,
           55,
-          16
+          25
         ],
         "segmentSales": {
           "30": 113,
           "40": 47,
-          "60": 120,
-          "90": 123
+          "60": 123,
+          "90": 129
         }
       }
     },
@@ -5720,8 +5720,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 32,
-          "deliveredCustomers": 32,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             6,
             3,
@@ -5733,13 +5733,13 @@
             3,
             3,
             3,
-            4
+            6
           ],
           "segmentSales": {
             "30": 8,
-            "40": 4,
+            "40": 5,
             "60": 12,
-            "90": 8
+            "90": 9
           }
         },
         {
@@ -6130,8 +6130,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -6143,11 +6143,11 @@
             1,
             2,
             1,
-            2
+            3
           ],
           "segmentSales": {
             "30": 3,
-            "40": 5,
+            "40": 6,
             "60": 5,
             "90": 12
           }
@@ -6212,8 +6212,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 29,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -6225,13 +6225,13 @@
             1,
             5,
             3,
-            2
+            4
           ],
           "segmentSales": {
             "30": 10,
             "40": 4,
             "60": 11,
-            "90": 4
+            "90": 6
           }
         }
       ],
@@ -6241,7 +6241,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 372,
+        "deliveredSales": 377,
         "monthlyDeliveredSales": [
           29,
           41,
@@ -6253,13 +6253,13 @@
           18,
           43,
           47,
-          14
+          19
         ],
         "segmentSales": {
           "30": 89,
-          "40": 47,
+          "40": 49,
           "60": 123,
-          "90": 113
+          "90": 116
         }
       }
     },
@@ -6286,8 +6286,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 25,
+          "deliveredSales": 27,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             0,
             1,
@@ -6299,12 +6299,12 @@
             0,
             3,
             5,
-            1
+            2
           ],
           "segmentSales": {
             "30": 10,
             "40": 1,
-            "60": 7,
+            "60": 8,
             "90": 8
           }
         },
@@ -6409,8 +6409,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 23,
+          "deliveredSales": 25,
+          "deliveredCustomers": 24,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -6422,12 +6422,12 @@
             2,
             0,
             2,
-            0
+            1
           ],
           "segmentSales": {
             "30": 4,
             "40": 3,
-            "60": 9,
+            "60": 10,
             "90": 8
           }
         },
@@ -6450,8 +6450,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 48,
-          "deliveredCustomers": 24,
+          "deliveredSales": 51,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             3,
             1,
@@ -6463,13 +6463,13 @@
             3,
             7,
             6,
-            1
+            4
           ],
           "segmentSales": {
             "30": 5,
             "40": 8,
             "60": 21,
-            "90": 14
+            "90": 17
           }
         },
         {
@@ -6655,8 +6655,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 18,
+          "deliveredCustomers": 18,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -6668,12 +6668,12 @@
             0,
             1,
             3,
-            2
+            3
           ],
           "segmentSales": {
             "30": 6,
             "40": 1,
-            "60": 4,
+            "60": 5,
             "90": 6
           }
         },
@@ -6737,8 +6737,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 28,
+          "deliveredSales": 37,
+          "deliveredCustomers": 29,
           "monthlyDeliveredSales": [
             4,
             3,
@@ -6750,13 +6750,13 @@
             10,
             2,
             2,
-            0
+            1
           ],
           "segmentSales": {
             "30": 9,
             "40": 8,
             "60": 13,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -6807,7 +6807,7 @@
         "consultationCustomers": 119,
         "testDriveCustomers": 16,
         "contractCustomers": 17,
-        "deliveredSales": 338,
+        "deliveredSales": 345,
         "monthlyDeliveredSales": [
           29,
           26,
@@ -6819,13 +6819,13 @@
           25,
           34,
           53,
-          11
+          18
         ],
         "segmentSales": {
           "30": 85,
           "40": 40,
-          "60": 112,
-          "90": 101
+          "60": 115,
+          "90": 105
         }
       }
     },
@@ -7221,8 +7221,8 @@
             "testDriveToContract": 4,
             "contractToDelivered": 12
           },
-          "deliveredSales": 31,
-          "deliveredCustomers": 31,
+          "deliveredSales": 32,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -7234,13 +7234,13 @@
             1,
             2,
             5,
-            1
+            2
           ],
           "segmentSales": {
             "30": 14,
             "40": 3,
             "60": 7,
-            "90": 7
+            "90": 8
           }
         },
         {
@@ -7303,8 +7303,8 @@
             "testDriveToContract": 7,
             "contractToDelivered": 13
           },
-          "deliveredSales": 43,
-          "deliveredCustomers": 43,
+          "deliveredSales": 44,
+          "deliveredCustomers": 44,
           "monthlyDeliveredSales": [
             2,
             6,
@@ -7316,12 +7316,12 @@
             0,
             7,
             9,
-            1
+            2
           ],
           "segmentSales": {
             "30": 15,
             "40": 4,
-            "60": 12,
+            "60": 13,
             "90": 12
           }
         },
@@ -7385,8 +7385,8 @@
             "testDriveToContract": 2,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 26,
+          "deliveredSales": 28,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -7398,13 +7398,13 @@
             2,
             2,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 7,
             "40": 4,
             "60": 10,
-            "90": 6
+            "90": 7
           }
         }
       ],
@@ -7414,7 +7414,7 @@
         "consultationCustomers": 1093,
         "testDriveCustomers": 189,
         "contractCustomers": 273,
-        "deliveredSales": 413,
+        "deliveredSales": 416,
         "monthlyDeliveredSales": [
           24,
           29,
@@ -7426,13 +7426,13 @@
           17,
           55,
           60,
-          15
+          18
         ],
         "segmentSales": {
           "30": 125,
           "40": 50,
-          "60": 121,
-          "90": 117
+          "60": 122,
+          "90": 119
         }
       }
     },
@@ -7541,8 +7541,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 35,
+          "deliveredSales": 37,
+          "deliveredCustomers": 36,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -7554,13 +7554,13 @@
             2,
             4,
             7,
-            1
+            2
           ],
           "segmentSales": {
             "30": 8,
             "40": 2,
             "60": 12,
-            "90": 14
+            "90": 15
           }
         },
         {
@@ -7828,8 +7828,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 47,
-          "deliveredCustomers": 47,
+          "deliveredSales": 48,
+          "deliveredCustomers": 48,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -7841,13 +7841,13 @@
             4,
             9,
             6,
-            3
+            4
           ],
           "segmentSales": {
             "30": 9,
             "40": 3,
             "60": 16,
-            "90": 19
+            "90": 20
           }
         },
         {
@@ -7910,8 +7910,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -7923,12 +7923,12 @@
             1,
             2,
             2,
-            0
+            1
           ],
           "segmentSales": {
             "30": 4,
             "40": 3,
-            "60": 6,
+            "60": 7,
             "90": 5
           }
         },
@@ -7992,8 +7992,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 24,
+          "deliveredSales": 26,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -8005,13 +8005,13 @@
             1,
             1,
             3,
-            2
+            3
           ],
           "segmentSales": {
             "30": 4,
             "40": 3,
             "60": 8,
-            "90": 10
+            "90": 11
           }
         },
         {
@@ -8074,8 +8074,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 38,
-          "deliveredCustomers": 36,
+          "deliveredSales": 39,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -8087,13 +8087,13 @@
             3,
             4,
             5,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
             "40": 5,
             "60": 13,
-            "90": 14
+            "90": 15
           }
         },
         {
@@ -8115,8 +8115,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 27,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -8128,13 +8128,13 @@
             0,
             2,
             4,
-            2
+            4
           ],
           "segmentSales": {
             "30": 10,
             "40": 1,
-            "60": 7,
-            "90": 7
+            "60": 8,
+            "90": 8
           }
         },
         {
@@ -8226,7 +8226,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 570,
+        "deliveredSales": 577,
         "monthlyDeliveredSales": [
           26,
           37,
@@ -8238,13 +8238,13 @@
           28,
           63,
           87,
-          16
+          23
         ],
         "segmentSales": {
           "30": 158,
           "40": 53,
-          "60": 174,
-          "90": 185
+          "60": 176,
+          "90": 190
         }
       }
     },
@@ -8468,8 +8468,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 28,
+          "deliveredSales": 30,
+          "deliveredCustomers": 29,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -8481,13 +8481,13 @@
             0,
             4,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 7,
             "40": 2,
             "60": 7,
-            "90": 13
+            "90": 14
           }
         },
         {
@@ -8632,8 +8632,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             0,
             3,
@@ -8645,13 +8645,13 @@
             2,
             3,
             5,
-            1
+            2
           ],
           "segmentSales": {
             "30": 4,
             "40": 2,
             "60": 8,
-            "90": 10
+            "90": 11
           }
         },
         {
@@ -8673,8 +8673,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 33,
-          "deliveredCustomers": 33,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -8686,10 +8686,10 @@
             2,
             4,
             3,
-            2
+            3
           ],
           "segmentSales": {
-            "30": 7,
+            "30": 8,
             "40": 4,
             "60": 15,
             "90": 7
@@ -8714,8 +8714,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 38,
-          "deliveredCustomers": 37,
+          "deliveredSales": 39,
+          "deliveredCustomers": 38,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -8727,13 +8727,13 @@
             1,
             6,
             3,
-            0
+            1
           ],
           "segmentSales": {
             "30": 8,
             "40": 3,
             "60": 12,
-            "90": 15
+            "90": 16
           }
         },
         {
@@ -8755,8 +8755,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 42,
-          "deliveredCustomers": 42,
+          "deliveredSales": 43,
+          "deliveredCustomers": 43,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -8768,10 +8768,10 @@
             3,
             5,
             3,
-            1
+            2
           ],
           "segmentSales": {
-            "30": 13,
+            "30": 14,
             "40": 2,
             "60": 14,
             "90": 13
@@ -8825,7 +8825,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 335,
+        "deliveredSales": 340,
         "monthlyDeliveredSales": [
           18,
           31,
@@ -8837,13 +8837,13 @@
           22,
           41,
           42,
-          9
+          14
         ],
         "segmentSales": {
-          "30": 79,
+          "30": 81,
           "40": 28,
           "60": 100,
-          "90": 128
+          "90": 131
         }
       }
     },
@@ -9231,8 +9231,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 47,
-          "deliveredCustomers": 46,
+          "deliveredSales": 48,
+          "deliveredCustomers": 47,
           "monthlyDeliveredSales": [
             9,
             7,
@@ -9244,13 +9244,13 @@
             2,
             5,
             5,
-            1
+            2
           ],
           "segmentSales": {
             "30": 13,
             "40": 2,
             "60": 16,
-            "90": 16
+            "90": 17
           }
         },
         {
@@ -9301,7 +9301,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 127,
+        "deliveredSales": 128,
         "monthlyDeliveredSales": [
           13,
           17,
@@ -9313,13 +9313,13 @@
           6,
           18,
           20,
-          4
+          5
         ],
         "segmentSales": {
           "30": 39,
           "40": 6,
           "60": 35,
-          "90": 47
+          "90": 48
         }
       }
     },
@@ -9469,8 +9469,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 17,
-          "deliveredCustomers": 17,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             3,
             2,
@@ -9482,12 +9482,12 @@
             0,
             2,
             3,
-            0
+            2
           ],
           "segmentSales": {
-            "30": 4,
+            "30": 5,
             "40": 2,
-            "60": 7,
+            "60": 8,
             "90": 4
           }
         },
@@ -9551,8 +9551,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 38,
-          "deliveredCustomers": 38,
+          "deliveredSales": 39,
+          "deliveredCustomers": 39,
           "monthlyDeliveredSales": [
             3,
             8,
@@ -9564,13 +9564,13 @@
             1,
             5,
             2,
-            4
+            5
           ],
           "segmentSales": {
             "30": 6,
             "40": 7,
             "60": 9,
-            "90": 16
+            "90": 17
           }
         },
         {
@@ -9592,8 +9592,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 37,
-          "deliveredCustomers": 37,
+          "deliveredSales": 38,
+          "deliveredCustomers": 38,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -9605,10 +9605,10 @@
             4,
             4,
             5,
-            0
+            1
           ],
           "segmentSales": {
-            "30": 2,
+            "30": 3,
             "40": 7,
             "60": 15,
             "90": 13
@@ -9621,7 +9621,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 204,
+        "deliveredSales": 208,
         "monthlyDeliveredSales": [
           15,
           20,
@@ -9633,13 +9633,13 @@
           8,
           27,
           47,
-          7
+          11
         ],
         "segmentSales": {
-          "30": 47,
+          "30": 49,
           "40": 22,
-          "60": 55,
-          "90": 80
+          "60": 56,
+          "90": 81
         }
       }
     },
@@ -9666,8 +9666,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 20,
-          "deliveredCustomers": 20,
+          "deliveredSales": 21,
+          "deliveredCustomers": 21,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -9679,10 +9679,10 @@
             2,
             1,
             3,
-            0
+            1
           ],
           "segmentSales": {
-            "30": 8,
+            "30": 9,
             "40": 2,
             "60": 7,
             "90": 3
@@ -9789,8 +9789,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 33,
+          "deliveredCustomers": 33,
           "monthlyDeliveredSales": [
             2,
             2,
@@ -9802,10 +9802,10 @@
             1,
             3,
             4,
-            1
+            4
           ],
           "segmentSales": {
-            "30": 11,
+            "30": 14,
             "40": 4,
             "60": 10,
             "90": 5
@@ -9871,8 +9871,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 35,
-          "deliveredCustomers": 35,
+          "deliveredSales": 36,
+          "deliveredCustomers": 36,
           "monthlyDeliveredSales": [
             1,
             3,
@@ -9884,13 +9884,13 @@
             1,
             7,
             3,
-            2
+            3
           ],
           "segmentSales": {
             "30": 12,
             "40": 3,
             "60": 6,
-            "90": 14
+            "90": 15
           }
         },
         {
@@ -9912,8 +9912,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 36,
+          "deliveredSales": 41,
+          "deliveredCustomers": 41,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -9925,13 +9925,13 @@
             4,
             6,
             2,
-            1
+            6
           ],
           "segmentSales": {
-            "30": 10,
+            "30": 12,
             "40": 1,
-            "60": 12,
-            "90": 13
+            "60": 13,
+            "90": 15
           }
         },
         {
@@ -9994,8 +9994,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -10007,10 +10007,10 @@
             3,
             3,
             6,
-            1
+            2
           ],
           "segmentSales": {
-            "30": 9,
+            "30": 10,
             "40": 5,
             "60": 6,
             "90": 10
@@ -10023,7 +10023,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 271,
+        "deliveredSales": 282,
         "monthlyDeliveredSales": [
           13,
           19,
@@ -10035,13 +10035,13 @@
           18,
           32,
           41,
-          7
+          18
         ],
         "segmentSales": {
-          "30": 106,
+          "30": 113,
           "40": 18,
-          "60": 66,
-          "90": 81
+          "60": 67,
+          "90": 84
         }
       }
     },
@@ -10068,8 +10068,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 38,
-          "deliveredCustomers": 38,
+          "deliveredSales": 40,
+          "deliveredCustomers": 40,
           "monthlyDeliveredSales": [
             1,
             3,
@@ -10081,13 +10081,13 @@
             3,
             7,
             6,
-            0
+            2
           ],
           "segmentSales": {
             "30": 10,
             "40": 5,
             "60": 13,
-            "90": 10
+            "90": 12
           }
         },
         {
@@ -10191,8 +10191,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 14,
-          "deliveredCustomers": 14,
+          "deliveredSales": 15,
+          "deliveredCustomers": 15,
           "monthlyDeliveredSales": [
             1,
             0,
@@ -10204,13 +10204,13 @@
             1,
             3,
             1,
-            0
+            1
           ],
           "segmentSales": {
             "30": 1,
             "40": 3,
             "60": 4,
-            "90": 6
+            "90": 7
           }
         },
         {
@@ -10232,8 +10232,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 33,
-          "deliveredCustomers": 33,
+          "deliveredSales": 34,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -10245,13 +10245,13 @@
             5,
             4,
             2,
-            1
+            2
           ],
           "segmentSales": {
             "30": 7,
             "40": 7,
             "60": 6,
-            "90": 13
+            "90": 14
           }
         },
         {
@@ -10273,8 +10273,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 29,
+          "deliveredSales": 30,
+          "deliveredCustomers": 30,
           "monthlyDeliveredSales": [
             3,
             6,
@@ -10286,13 +10286,13 @@
             0,
             4,
             4,
-            1
+            2
           ],
           "segmentSales": {
             "30": 11,
             "40": 7,
             "60": 6,
-            "90": 5
+            "90": 6
           }
         }
       ],
@@ -10302,7 +10302,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 178,
+        "deliveredSales": 183,
         "monthlyDeliveredSales": [
           14,
           21,
@@ -10314,13 +10314,13 @@
           13,
           28,
           24,
-          6
+          11
         ],
         "segmentSales": {
           "30": 42,
           "40": 32,
           "60": 53,
-          "90": 51
+          "90": 56
         }
       }
     },
@@ -10667,8 +10667,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 33,
-          "deliveredCustomers": 33,
+          "deliveredSales": 35,
+          "deliveredCustomers": 35,
           "monthlyDeliveredSales": [
             1,
             2,
@@ -10680,13 +10680,13 @@
             6,
             5,
             2,
-            2
+            4
           ],
           "segmentSales": {
             "30": 9,
             "40": 2,
-            "60": 12,
-            "90": 10
+            "60": 13,
+            "90": 11
           }
         },
         {
@@ -10954,8 +10954,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 26,
-          "deliveredCustomers": 26,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -10967,13 +10967,13 @@
             3,
             2,
             1,
-            1
+            3
           ],
           "segmentSales": {
             "30": 6,
             "40": 4,
-            "60": 9,
-            "90": 7
+            "60": 10,
+            "90": 8
           }
         },
         {
@@ -10995,8 +10995,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 53,
-          "deliveredCustomers": 52,
+          "deliveredSales": 54,
+          "deliveredCustomers": 53,
           "monthlyDeliveredSales": [
             2,
             6,
@@ -11008,13 +11008,13 @@
             4,
             10,
             7,
-            1
+            2
           ],
           "segmentSales": {
             "30": 12,
             "40": 4,
             "60": 14,
-            "90": 23
+            "90": 24
           }
         }
       ],
@@ -11024,7 +11024,7 @@
         "consultationCustomers": 5,
         "testDriveCustomers": 3,
         "contractCustomers": 0,
-        "deliveredSales": 255,
+        "deliveredSales": 260,
         "monthlyDeliveredSales": [
           11,
           16,
@@ -11036,13 +11036,13 @@
           20,
           33,
           38,
-          11
+          16
         ],
         "segmentSales": {
           "30": 53,
           "40": 22,
-          "60": 88,
-          "90": 92
+          "60": 90,
+          "90": 95
         }
       }
     },
@@ -11069,8 +11069,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 44,
-          "deliveredCustomers": 44,
+          "deliveredSales": 46,
+          "deliveredCustomers": 46,
           "monthlyDeliveredSales": [
             4,
             4,
@@ -11082,13 +11082,13 @@
             5,
             7,
             7,
-            1
+            3
           ],
           "segmentSales": {
             "30": 5,
             "40": 6,
             "60": 14,
-            "90": 19
+            "90": 21
           }
         },
         {
@@ -11192,8 +11192,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 19,
+          "deliveredCustomers": 19,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -11205,12 +11205,12 @@
             2,
             1,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 2,
             "40": 4,
-            "60": 6,
+            "60": 7,
             "90": 6
           }
         },
@@ -11303,7 +11303,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 157,
+        "deliveredSales": 160,
         "monthlyDeliveredSales": [
           8,
           9,
@@ -11315,13 +11315,13 @@
           11,
           23,
           21,
-          5
+          8
         ],
         "segmentSales": {
           "30": 35,
           "40": 15,
-          "60": 46,
-          "90": 61
+          "60": 47,
+          "90": 63
         }
       }
     },
@@ -11627,8 +11627,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 63,
-          "deliveredCustomers": 59,
+          "deliveredSales": 65,
+          "deliveredCustomers": 61,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -11640,13 +11640,13 @@
             3,
             12,
             7,
-            1
+            3
           ],
           "segmentSales": {
             "30": 24,
             "40": 6,
-            "60": 20,
-            "90": 13
+            "60": 21,
+            "90": 14
           }
         },
         {
@@ -11668,8 +11668,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 28,
-          "deliveredCustomers": 28,
+          "deliveredSales": 29,
+          "deliveredCustomers": 29,
           "monthlyDeliveredSales": [
             5,
             4,
@@ -11681,12 +11681,12 @@
             1,
             3,
             0,
-            0
+            1
           ],
           "segmentSales": {
             "30": 4,
             "40": 5,
-            "60": 15,
+            "60": 16,
             "90": 4
           }
         },
@@ -11750,8 +11750,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 11,
-          "deliveredCustomers": 11,
+          "deliveredSales": 12,
+          "deliveredCustomers": 12,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -11763,12 +11763,12 @@
             2,
             4,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 2,
             "40": 2,
-            "60": 3,
+            "60": 4,
             "90": 4
           }
         },
@@ -11832,8 +11832,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 28,
-          "deliveredCustomers": 28,
+          "deliveredSales": 30,
+          "deliveredCustomers": 30,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -11845,13 +11845,13 @@
             1,
             2,
             8,
-            1
+            3
           ],
           "segmentSales": {
             "30": 3,
             "40": 2,
             "60": 13,
-            "90": 10
+            "90": 12
           }
         },
         {
@@ -11955,8 +11955,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 29,
+          "deliveredSales": 30,
+          "deliveredCustomers": 30,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -11968,12 +11968,12 @@
             1,
             6,
             7,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
             "40": 4,
-            "60": 6,
+            "60": 7,
             "90": 13
           }
         },
@@ -11996,8 +11996,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 41,
-          "deliveredCustomers": 41,
+          "deliveredSales": 43,
+          "deliveredCustomers": 43,
           "monthlyDeliveredSales": [
             2,
             0,
@@ -12009,13 +12009,13 @@
             2,
             6,
             6,
-            0
+            2
           ],
           "segmentSales": {
             "30": 22,
             "40": 4,
             "60": 10,
-            "90": 5
+            "90": 7
           }
         },
         {
@@ -12201,8 +12201,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 36,
-          "deliveredCustomers": 36,
+          "deliveredSales": 37,
+          "deliveredCustomers": 37,
           "monthlyDeliveredSales": [
             4,
             8,
@@ -12214,12 +12214,12 @@
             0,
             4,
             3,
-            1
+            2
           ],
           "segmentSales": {
             "30": 8,
             "40": 4,
-            "60": 13,
+            "60": 14,
             "90": 11
           }
         }
@@ -12230,7 +12230,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 1,
-        "deliveredSales": 522,
+        "deliveredSales": 532,
         "monthlyDeliveredSales": [
           45,
           50,
@@ -12242,13 +12242,13 @@
           18,
           73,
           66,
-          9
+          19
         ],
         "segmentSales": {
           "30": 144,
           "40": 41,
-          "60": 189,
-          "90": 148
+          "60": 194,
+          "90": 153
         }
       }
     },
@@ -12275,8 +12275,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 23,
-          "deliveredCustomers": 23,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -12288,13 +12288,13 @@
             1,
             4,
             3,
-            0
+            2
           ],
           "segmentSales": {
             "30": 4,
             "40": 2,
             "60": 6,
-            "90": 11
+            "90": 13
           }
         },
         {
@@ -12316,8 +12316,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 25,
-          "deliveredCustomers": 25,
+          "deliveredSales": 26,
+          "deliveredCustomers": 26,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -12329,11 +12329,11 @@
             3,
             4,
             5,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
-            "40": 4,
+            "40": 5,
             "60": 5,
             "90": 10
           }
@@ -12480,8 +12480,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             4,
             2,
@@ -12493,12 +12493,12 @@
             0,
             1,
             6,
-            1
+            2
           ],
           "segmentSales": {
             "30": 7,
             "40": 1,
-            "60": 8,
+            "60": 9,
             "90": 8
           }
         },
@@ -12685,8 +12685,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 24,
-          "deliveredCustomers": 24,
+          "deliveredSales": 25,
+          "deliveredCustomers": 25,
           "monthlyDeliveredSales": [
             0,
             4,
@@ -12698,12 +12698,12 @@
             0,
             2,
             7,
-            1
+            2
           ],
           "segmentSales": {
             "30": 6,
             "40": 5,
-            "60": 3,
+            "60": 4,
             "90": 10
           }
         },
@@ -12837,7 +12837,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 348,
+        "deliveredSales": 353,
         "monthlyDeliveredSales": [
           26,
           36,
@@ -12849,13 +12849,13 @@
           15,
           41,
           53,
-          6
+          11
         ],
         "segmentSales": {
           "30": 79,
-          "40": 44,
-          "60": 111,
-          "90": 114
+          "40": 45,
+          "60": 113,
+          "90": 116
         }
       }
     },
@@ -13079,8 +13079,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             0,
             1,
@@ -13092,12 +13092,12 @@
             0,
             5,
             8,
-            0
+            1
           ],
           "segmentSales": {
             "30": 9,
             "40": 2,
-            "60": 9,
+            "60": 10,
             "90": 10
           }
         },
@@ -13202,8 +13202,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 39,
-          "deliveredCustomers": 39,
+          "deliveredSales": 41,
+          "deliveredCustomers": 41,
           "monthlyDeliveredSales": [
             3,
             5,
@@ -13215,12 +13215,12 @@
             3,
             2,
             4,
-            0
+            2
           ],
           "segmentSales": {
             "30": 7,
             "40": 2,
-            "60": 18,
+            "60": 20,
             "90": 12
           }
         },
@@ -13313,7 +13313,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 225,
+        "deliveredSales": 228,
         "monthlyDeliveredSales": [
           13,
           26,
@@ -13325,12 +13325,12 @@
           13,
           25,
           28,
-          1
+          4
         ],
         "segmentSales": {
           "30": 63,
           "40": 27,
-          "60": 70,
+          "60": 73,
           "90": 65
         }
       }
@@ -13399,8 +13399,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 12,
-          "deliveredCustomers": 12,
+          "deliveredSales": 13,
+          "deliveredCustomers": 13,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -13412,12 +13412,12 @@
             0,
             2,
             2,
-            1
+            2
           ],
           "segmentSales": {
             "30": 2,
             "40": 1,
-            "60": 4,
+            "60": 5,
             "90": 5
           }
         },
@@ -13440,8 +13440,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 27,
-          "deliveredCustomers": 27,
+          "deliveredSales": 28,
+          "deliveredCustomers": 28,
           "monthlyDeliveredSales": [
             0,
             2,
@@ -13453,13 +13453,13 @@
             2,
             6,
             5,
-            0
+            1
           ],
           "segmentSales": {
             "30": 12,
             "40": 3,
             "60": 8,
-            "90": 4
+            "90": 5
           }
         },
         {
@@ -13510,7 +13510,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 95,
+        "deliveredSales": 97,
         "monthlyDeliveredSales": [
           1,
           7,
@@ -13522,13 +13522,13 @@
           6,
           18,
           17,
-          2
+          4
         ],
         "segmentSales": {
           "30": 31,
           "40": 7,
-          "60": 29,
-          "90": 28
+          "60": 30,
+          "90": 29
         }
       }
     },
@@ -13801,8 +13801,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 9,
-          "deliveredCustomers": 9,
+          "deliveredSales": 10,
+          "deliveredCustomers": 10,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -13814,12 +13814,12 @@
             2,
             1,
             4,
-            0
+            1
           ],
           "segmentSales": {
             "30": 1,
             "40": 2,
-            "60": 1,
+            "60": 2,
             "90": 5
           }
         },
@@ -13842,8 +13842,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 34,
-          "deliveredCustomers": 34,
+          "deliveredSales": 36,
+          "deliveredCustomers": 36,
           "monthlyDeliveredSales": [
             1,
             5,
@@ -13855,13 +13855,13 @@
             1,
             4,
             7,
-            2
+            4
           ],
           "segmentSales": {
             "30": 6,
             "40": 3,
-            "60": 9,
-            "90": 16
+            "60": 10,
+            "90": 17
           }
         },
         {
@@ -14158,7 +14158,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 357,
+        "deliveredSales": 360,
         "monthlyDeliveredSales": [
           32,
           40,
@@ -14170,13 +14170,13 @@
           23,
           30,
           72,
-          9
+          12
         ],
         "segmentSales": {
           "30": 62,
           "40": 35,
-          "60": 131,
-          "90": 129
+          "60": 133,
+          "90": 130
         }
       }
     },
@@ -14244,8 +14244,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 47,
-          "deliveredCustomers": 33,
+          "deliveredSales": 48,
+          "deliveredCustomers": 34,
           "monthlyDeliveredSales": [
             6,
             3,
@@ -14257,12 +14257,12 @@
             0,
             4,
             4,
-            2
+            3
           ],
           "segmentSales": {
             "30": 11,
             "40": 4,
-            "60": 19,
+            "60": 20,
             "90": 13
           }
         },
@@ -14437,7 +14437,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 222,
+        "deliveredSales": 223,
         "monthlyDeliveredSales": [
           16,
           21,
@@ -14449,12 +14449,12 @@
           8,
           30,
           37,
-          7
+          8
         ],
         "segmentSales": {
           "30": 71,
           "40": 17,
-          "60": 73,
+          "60": 74,
           "90": 61
         }
       }
@@ -14564,8 +14564,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 40,
-          "deliveredCustomers": 40,
+          "deliveredSales": 41,
+          "deliveredCustomers": 41,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -14577,13 +14577,13 @@
             3,
             7,
             9,
-            3
+            4
           ],
           "segmentSales": {
             "30": 14,
             "40": 1,
             "60": 10,
-            "90": 15
+            "90": 16
           }
         },
         {
@@ -15044,7 +15044,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 409,
+        "deliveredSales": 410,
         "monthlyDeliveredSales": [
           24,
           29,
@@ -15056,13 +15056,13 @@
           45,
           68,
           66,
-          12
+          13
         ],
         "segmentSales": {
           "30": 113,
           "40": 43,
           "60": 133,
-          "90": 120
+          "90": 121
         }
       }
     },
@@ -15409,8 +15409,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 40,
-          "deliveredCustomers": 40,
+          "deliveredSales": 42,
+          "deliveredCustomers": 42,
           "monthlyDeliveredSales": [
             2,
             5,
@@ -15422,13 +15422,13 @@
             2,
             3,
             5,
-            0
+            2
           ],
           "segmentSales": {
             "30": 9,
             "40": 8,
             "60": 13,
-            "90": 10
+            "90": 12
           }
         },
         {
@@ -15450,8 +15450,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 46,
-          "deliveredCustomers": 46,
+          "deliveredSales": 47,
+          "deliveredCustomers": 47,
           "monthlyDeliveredSales": [
             5,
             2,
@@ -15463,13 +15463,13 @@
             3,
             3,
             5,
-            0
+            1
           ],
           "segmentSales": {
             "30": 10,
             "40": 6,
             "60": 13,
-            "90": 17
+            "90": 18
           }
         },
         {
@@ -15532,8 +15532,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 33,
+          "deliveredCustomers": 33,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -15545,13 +15545,13 @@
             2,
             3,
             5,
-            2
+            5
           ],
           "segmentSales": {
             "30": 8,
             "40": 1,
             "60": 14,
-            "90": 7
+            "90": 10
           }
         },
         {
@@ -15573,8 +15573,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 18,
-          "deliveredCustomers": 18,
+          "deliveredSales": 20,
+          "deliveredCustomers": 20,
           "monthlyDeliveredSales": [
             1,
             1,
@@ -15586,13 +15586,13 @@
             2,
             0,
             3,
-            0
+            2
           ],
           "segmentSales": {
             "30": 5,
             "40": 0,
-            "60": 8,
-            "90": 5
+            "60": 9,
+            "90": 6
           }
         },
         {
@@ -15889,7 +15889,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 355,
+        "deliveredSales": 363,
         "monthlyDeliveredSales": [
           34,
           34,
@@ -15901,13 +15901,13 @@
           21,
           27,
           53,
-          8
+          16
         ],
         "segmentSales": {
           "30": 80,
           "40": 37,
-          "60": 131,
-          "90": 107
+          "60": 132,
+          "90": 114
         }
       }
     },
@@ -15934,8 +15934,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             0,
             8,
@@ -15947,11 +15947,11 @@
             1,
             3,
             4,
-            0
+            1
           ],
           "segmentSales": {
             "30": 10,
-            "40": 3,
+            "40": 4,
             "60": 9,
             "90": 8
           }
@@ -15975,8 +15975,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 59,
-          "deliveredCustomers": 59,
+          "deliveredSales": 60,
+          "deliveredCustomers": 60,
           "monthlyDeliveredSales": [
             2,
             6,
@@ -15988,13 +15988,13 @@
             1,
             9,
             10,
-            1
+            2
           ],
           "segmentSales": {
             "30": 27,
             "40": 8,
             "60": 13,
-            "90": 11
+            "90": 12
           }
         },
         {
@@ -16057,8 +16057,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             2,
             4,
@@ -16070,13 +16070,13 @@
             2,
             4,
             7,
-            0
+            1
           ],
           "segmentSales": {
             "30": 6,
             "40": 4,
             "60": 11,
-            "90": 9
+            "90": 10
           }
         },
         {
@@ -16127,7 +16127,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 178,
+        "deliveredSales": 181,
         "monthlyDeliveredSales": [
           6,
           24,
@@ -16139,13 +16139,13 @@
           7,
           21,
           28,
-          3
+          6
         ],
         "segmentSales": {
           "30": 59,
-          "40": 23,
+          "40": 24,
           "60": 54,
-          "90": 42
+          "90": 44
         }
       }
     },
@@ -16213,8 +16213,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 30,
-          "deliveredCustomers": 30,
+          "deliveredSales": 31,
+          "deliveredCustomers": 31,
           "monthlyDeliveredSales": [
             2,
             3,
@@ -16226,13 +16226,13 @@
             1,
             2,
             3,
-            2
+            3
           ],
           "segmentSales": {
             "30": 9,
             "40": 2,
             "60": 9,
-            "90": 10
+            "90": 11
           }
         },
         {
@@ -16254,8 +16254,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 1,
-          "deliveredCustomers": 1,
+          "deliveredSales": 2,
+          "deliveredCustomers": 2,
           "monthlyDeliveredSales": [
             0,
             0,
@@ -16267,13 +16267,13 @@
             0,
             0,
             0,
-            1
+            2
           ],
           "segmentSales": {
             "30": 0,
             "40": 0,
             "60": 1,
-            "90": 0
+            "90": 1
           }
         },
         {
@@ -16377,8 +16377,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 29,
-          "deliveredCustomers": 26,
+          "deliveredSales": 30,
+          "deliveredCustomers": 27,
           "monthlyDeliveredSales": [
             0,
             1,
@@ -16390,11 +16390,11 @@
             1,
             4,
             10,
-            1
+            2
           ],
           "segmentSales": {
             "30": 7,
-            "40": 2,
+            "40": 3,
             "60": 6,
             "90": 14
           }
@@ -16459,8 +16459,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 38,
-          "deliveredCustomers": 38,
+          "deliveredSales": 39,
+          "deliveredCustomers": 39,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -16472,13 +16472,13 @@
             2,
             3,
             10,
-            2
+            3
           ],
           "segmentSales": {
             "30": 9,
             "40": 3,
             "60": 17,
-            "90": 9
+            "90": 10
           }
         },
         {
@@ -16500,8 +16500,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 21,
-          "deliveredCustomers": 21,
+          "deliveredSales": 22,
+          "deliveredCustomers": 22,
           "monthlyDeliveredSales": [
             2,
             1,
@@ -16513,12 +16513,12 @@
             0,
             2,
             4,
-            1
+            2
           ],
           "segmentSales": {
             "30": 5,
             "40": 6,
-            "60": 4,
+            "60": 5,
             "90": 6
           }
         }
@@ -16529,7 +16529,7 @@
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
         "contractCustomers": 0,
-        "deliveredSales": 218,
+        "deliveredSales": 223,
         "monthlyDeliveredSales": [
           17,
           18,
@@ -16541,13 +16541,13 @@
           9,
           25,
           42,
-          10
+          15
         ],
         "segmentSales": {
           "30": 49,
-          "40": 20,
-          "60": 69,
-          "90": 80
+          "40": 21,
+          "60": 70,
+          "90": 83
         }
       }
     }
