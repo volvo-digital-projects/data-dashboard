@@ -89,20 +89,20 @@
     {
       "id": "5-10y",
       "label": "5~10년",
-      "employeeCount": 125,
-      "respondingEmployees": 125,
-      "responses": 5215,
-      "scoreSum": 48288.0,
+      "employeeCount": 124,
+      "respondingEmployees": 124,
+      "responses": 5180,
+      "scoreSum": 47947.0,
       "average": 9.26
     },
     {
       "id": "over-10y",
       "label": "10년 이상",
-      "employeeCount": 29,
-      "respondingEmployees": 29,
-      "responses": 1512,
-      "scoreSum": 13949.0,
-      "average": 9.23
+      "employeeCount": 30,
+      "respondingEmployees": 30,
+      "responses": 1547,
+      "scoreSum": 14290.0,
+      "average": 9.24
     }
   ],
   "showrooms": {
