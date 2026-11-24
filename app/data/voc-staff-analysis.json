@@ -3,7 +3,7 @@
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-11-10",
     "rosterCheckedAt": "2026-11-24",
-    "rosterSyncedAt": "2026-11-24T07:56:44+09:00",
+    "rosterSyncedAt": "2026-11-24T15:40:23+09:00",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
@@ -23270,6 +23270,20 @@
           ],
           "latestResponseDate": "2026-09-24",
           "staffCdsid": "W-YANG71"
+        },
+        {
+          "years": {},
+          "commentResponses": 0,
+          "strengthKeywords": [],
+          "improvementKeywords": [],
+          "name": "윤상철",
+          "role": "영업직원",
+          "jobTitle": "대리",
+          "hireDate": "2026-11-23",
+          "tenureMonths": 0,
+          "tenureBucket": "under-3m",
+          "tenureBucketLabel": "3개월 이내",
+          "staffCdsid": "S-YOON11"
         },
         {
           "name": "이병진",
