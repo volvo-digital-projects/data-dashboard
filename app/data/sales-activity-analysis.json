@@ -3,7 +3,7 @@
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
     "salesAsOf": "2026-11-24",
-    "salesSyncedAt": "2026-11-24T08:03:39+09:00",
+    "salesSyncedAt": "2026-11-24T15:54:03+09:00",
     "salesPeriod": "2026-01-01~2026-11-24",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
@@ -11855,6 +11855,47 @@
           }
         },
         {
+          "name": "윤상철",
+          "activityStatus": "missing",
+          "lastActivityDate": null,
+          "activityEvents": {
+            "consultation": 0,
+            "testDrive": 0,
+            "contract": 0
+          },
+          "customers": {
+            "consultation": 0,
+            "testDrive": 0,
+            "contract": 0
+          },
+          "transitions": {
+            "consultationToTestDrive": 0,
+            "testDriveToContract": 0,
+            "contractToDelivered": 0
+          },
+          "deliveredSales": 0,
+          "deliveredCustomers": 0,
+          "monthlyDeliveredSales": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "segmentSales": {
+            "30": 0,
+            "40": 0,
+            "60": 0,
+            "90": 0
+          }
+        },
+        {
           "name": "이병진",
           "activityStatus": "available",
           "lastActivityDate": "2026-02-27",
@@ -12225,7 +12266,7 @@
         }
       ],
       "summary": {
-        "staffCount": 15,
+        "staffCount": 16,
         "activityStaffCount": 1,
         "consultationCustomers": 0,
         "testDriveCustomers": 0,
