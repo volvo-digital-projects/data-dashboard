@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-24T23:06:20.865072+00:00",
+  "checkedAt": "2026-11-25T02:11:15.664468+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -20281,7 +20281,7 @@
       "excludedOwnerPromotions": 19
     },
     "UC0QgBtIY01DBw2UC4v_I2eA": {
-      "total": 124,
+      "total": 125,
       "videos": 20,
       "completeVideos": 20,
       "partialVideos": 0,
@@ -20291,7 +20291,7 @@
         "suggestion": 0,
         "other": 61,
         "review": 4,
-        "owner": 48
+        "owner": 49
       },
       "entries": [
         {
@@ -20302,6 +20302,15 @@
           "videoId": "zNnJLZkFDeA",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=zNnJLZkFDeA&lc=Ugy8xpqoaSPo4k6b5IZ4AaABAg"
+        },
+        {
+          "id": "Ugy8xpqoaSPo4k6b5IZ4AaABAg.AdQM0i3H_qIAdbfbY1cGqZ",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "zNnJLZkFDeA",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=zNnJLZkFDeA&lc=Ugy8xpqoaSPo4k6b5IZ4AaABAg.AdQM0i3H_qIAdbfbY1cGqZ"
         },
         {
           "id": "Ugzx_R-8KTdx2THBsDB4AaABAg",
@@ -36461,7 +36470,7 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 658,
+      "total": 659,
       "videos": 73,
       "completeVideos": 73,
       "partialVideos": 0,
@@ -36471,7 +36480,7 @@
         "suggestion": 0,
         "other": 308,
         "review": 27,
-        "owner": 292
+        "owner": 293
       },
       "entries": [
         {
@@ -36518,6 +36527,15 @@
           "videoId": "3H3ugtaRxCQ",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=3H3ugtaRxCQ&lc=Ugy5KFmeF9lHVqqIbYR4AaABAg.AdXSZFMwnDuAdaRn4wR6y9"
+        },
+        {
+          "id": "Ugy5KFmeF9lHVqqIbYR4AaABAg.AdXSZFMwnDuAdboIReRWdW",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "3H3ugtaRxCQ",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=3H3ugtaRxCQ&lc=Ugy5KFmeF9lHVqqIbYR4AaABAg.AdXSZFMwnDuAdboIReRWdW"
         },
         {
           "id": "UgzwuVXeiB8z7qCPmfp4AaABAg",
