@@ -2,9 +2,9 @@
   "source": {
     "activityAsOf": "2026-09-07",
     "activityPeriod": "2026-01-01~2026-09-07",
-    "salesAsOf": "2026-11-26",
-    "salesSyncedAt": "2026-11-26T18:34:38+09:00",
-    "salesPeriod": "2026-01-01~2026-11-26",
+    "salesAsOf": "2026-11-27",
+    "salesSyncedAt": "2026-11-27T08:08:02+09:00",
+    "salesPeriod": "2026-01-01~2026-11-27",
     "privacy": "고객명은 연결 과정에서만 사용하고 결과에는 저장하지 않음",
     "activityJoin": "현재 직원명이 전국 재직자 명단에서 유일한 경우만 연결",
     "salesJoin": "현재 Sales-DMS 재직자의 직원명과 판매 전시장 코드를 함께 연결",
@@ -5400,8 +5400,8 @@
             "testDriveToContract": 0,
             "contractToDelivered": 0
           },
-          "deliveredSales": 37,
-          "deliveredCustomers": 31,
+          "deliveredSales": 38,
+          "deliveredCustomers": 32,
           "monthlyDeliveredSales": [
             3,
             4,
@@ -5413,13 +5413,13 @@
             3,
             3,
             12,
-            3
+            4
           ],
           "segmentSales": {
             "30": 11,
             "40": 4,
             "60": 7,
-            "90": 15
+            "90": 16
           }
         },
         {
@@ -5552,7 +5552,7 @@
         "consultationCustomers": 3072,
         "testDriveCustomers": 388,
         "contractCustomers": 363,
-        "deliveredSales": 414,
+        "deliveredSales": 415,
         "monthlyDeliveredSales": [
           37,
           43,
@@ -5564,13 +5564,13 @@
           14,
           44,
           55,
-          27
+          28
         ],
         "segmentSales": {
           "30": 113,
           "40": 47,
           "60": 124,
-          "90": 130
+          "90": 131
         }
       }
     },
