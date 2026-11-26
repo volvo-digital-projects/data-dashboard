@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-26T02:15:46.955374+00:00",
+  "checkedAt": "2026-11-26T06:26:17.205208+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -21547,8 +21547,8 @@
     },
     "UCUGnMnHdpXTdEI_j8-Vk7Eg": {
       "total": 937,
-      "videos": 103,
-      "completeVideos": 103,
+      "videos": 104,
+      "completeVideos": 104,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
@@ -29995,6 +29995,12 @@
       ],
       "coverage": [
         {
+          "id": "KNBRPPPEMTs",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "P24hOkq2BwQ",
           "kind": "video",
           "status": "complete",
@@ -30614,7 +30620,7 @@
         }
       ],
       "status": "complete",
-      "excludedOwnerPromotions": 96
+      "excludedOwnerPromotions": 97
     },
     "UCBB6SFAvxC756EpH93qWSSg": {
       "total": 213,
