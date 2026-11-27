@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-26T23:09:24.590998+00:00",
+  "checkedAt": "2026-11-27T02:14:47.682854+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -21564,7 +21564,7 @@
       "excludedOwnerPromotions": 12
     },
     "UCUGnMnHdpXTdEI_j8-Vk7Eg": {
-      "total": 935,
+      "total": 934,
       "videos": 105,
       "completeVideos": 105,
       "partialVideos": 0,
@@ -21572,11 +21572,20 @@
       "counts": {
         "positive": 102,
         "suggestion": 0,
-        "other": 542,
+        "other": 541,
         "review": 35,
         "owner": 256
       },
       "entries": [
+        {
+          "id": "UgwpW_OJjoHOh2fRmax4AaABAg",
+          "category": "other",
+          "topic": "중립·기타",
+          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
+          "videoId": "YqQZji6PE3U",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=YqQZji6PE3U&lc=UgwpW_OJjoHOh2fRmax4AaABAg"
+        },
         {
           "id": "UgxM4eVm02sAc9QKLkt4AaABAg",
           "category": "positive",
@@ -27446,15 +27455,6 @@
           "url": "https://www.youtube.com/watch?v=YqQZji6PE3U&lc=UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBV3dR3G7D"
         },
         {
-          "id": "UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBVmVQd6KD",
-          "category": "other",
-          "topic": "중립·기타",
-          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
-          "videoId": "YqQZji6PE3U",
-          "kind": "video",
-          "url": "https://www.youtube.com/watch?v=YqQZji6PE3U&lc=UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBVmVQd6KD"
-        },
-        {
           "id": "UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBXoNSQbXR",
           "category": "other",
           "topic": "중립·기타",
@@ -27471,15 +27471,6 @@
           "videoId": "YqQZji6PE3U",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=YqQZji6PE3U&lc=UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBXugaApvG"
-        },
-        {
-          "id": "UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBYW3WixH3",
-          "category": "other",
-          "topic": "중립·기타",
-          "summary": "긍정·개선 방향을 단정할 수 없는 질문 또는 기타 의견입니다.",
-          "videoId": "YqQZji6PE3U",
-          "kind": "video",
-          "url": "https://www.youtube.com/watch?v=YqQZji6PE3U&lc=UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelAZBYW3WixH3"
         },
         {
           "id": "UgzNjqVWs4ybSvhCADp4AaABAg.AWfyymXGcelA_ttF5QOO84",
@@ -29995,6 +29986,12 @@
       ],
       "coverage": [
         {
+          "id": "YqQZji6PE3U",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "KNBRPPPEMTs",
           "kind": "video",
           "status": "complete",
@@ -30056,12 +30053,6 @@
         },
         {
           "id": "USj4Nxl9h9E",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "YqQZji6PE3U",
           "kind": "video",
           "status": "complete",
           "reported": null
@@ -36482,7 +36473,7 @@
       "excludedOwnerPromotions": 6
     },
     "UCatA_IUpH_m1ihLDjU8u38g": {
-      "total": 660,
+      "total": 661,
       "videos": 73,
       "completeVideos": 73,
       "partialVideos": 0,
@@ -36492,7 +36483,7 @@
         "suggestion": 0,
         "other": 309,
         "review": 27,
-        "owner": 293
+        "owner": 294
       },
       "entries": [
         {
@@ -36503,6 +36494,15 @@
           "videoId": "X0WyTiMCNC4",
           "kind": "video",
           "url": "https://www.youtube.com/watch?v=X0WyTiMCNC4&lc=UgzmZCNbP8AoFFfeggd4AaABAg"
+        },
+        {
+          "id": "UgzmZCNbP8AoFFfeggd4AaABAg.AdfZEP8LGxAAdgx8TBMCkb",
+          "category": "owner",
+          "topic": "운영자 답글",
+          "summary": "채널 운영자 답글로 의견 분석에서 분리했습니다.",
+          "videoId": "X0WyTiMCNC4",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=X0WyTiMCNC4&lc=UgzmZCNbP8AoFFfeggd4AaABAg.AdfZEP8LGxAAdgx8TBMCkb"
         },
         {
           "id": "UgzITAOlmKOG39DcxsZ4AaABAg",
