@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-27T02:14:47.682854+00:00",
+  "checkedAt": "2026-11-27T06:13:36.114692+00:00",
   "method": "YouTube Data API v3 · 채널 전체 공개 댓글·답글 순회 · 운영자 전화번호 홍보 제외 · 부정 표현은 문맥 검토 대기",
   "channels": {
     "UCcV36lNLeotgr02P605R2yA": {
@@ -21564,19 +21564,28 @@
       "excludedOwnerPromotions": 12
     },
     "UCUGnMnHdpXTdEI_j8-Vk7Eg": {
-      "total": 934,
+      "total": 935,
       "videos": 105,
       "completeVideos": 105,
       "partialVideos": 0,
       "unavailableVideos": 0,
       "counts": {
-        "positive": 102,
+        "positive": 103,
         "suggestion": 0,
         "other": 541,
         "review": 35,
         "owner": 256
       },
       "entries": [
+        {
+          "id": "UgxduG3BUciOJgVsfJF4AaABAg",
+          "category": "positive",
+          "topic": "영상·콘텐츠 반응",
+          "summary": "관련 긍정 표현을 자동 탐지했습니다. 직원 능력 판정은 아닙니다.",
+          "videoId": "N_GhqEhjaYI",
+          "kind": "video",
+          "url": "https://www.youtube.com/watch?v=N_GhqEhjaYI&lc=UgxduG3BUciOJgVsfJF4AaABAg"
+        },
         {
           "id": "UgwpW_OJjoHOh2fRmax4AaABAg",
           "category": "other",
@@ -29986,6 +29995,12 @@
       ],
       "coverage": [
         {
+          "id": "N_GhqEhjaYI",
+          "kind": "video",
+          "status": "complete",
+          "reported": null
+        },
+        {
           "id": "YqQZji6PE3U",
           "kind": "video",
           "status": "complete",
@@ -30005,12 +30020,6 @@
         },
         {
           "id": "tx3XXJkX8NY",
-          "kind": "video",
-          "status": "complete",
-          "reported": null
-        },
-        {
-          "id": "N_GhqEhjaYI",
           "kind": "video",
           "status": "complete",
           "reported": null
