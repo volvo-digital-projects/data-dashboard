@@ -3,7 +3,7 @@
     "workbook": "voc회신건수.xlsx",
     "vocThrough": "2026-11-10",
     "rosterCheckedAt": "2026-11-27",
-    "rosterSyncedAt": "2026-11-27T07:59:45+09:00",
+    "rosterSyncedAt": "2026-11-27T10:56:37+09:00",
     "rosterSource": "Volvo Car Korea Sales DMS",
     "rosterRule": "퇴사일자 공란 재직자 · 39개 전시장 · 영업직원/영업팀장 · 직원권한 우선",
     "rosterUpdateSchedule": "매일 06:00·10:00·14:00·18:00 KST",
@@ -10934,37 +10934,6 @@
           "staffCdsid": "S-SUH2"
         },
         {
-          "name": "송용주",
-          "role": "영업직원",
-          "jobTitle": "차장",
-          "hireDate": "2025-04-28",
-          "tenureMonths": 18,
-          "tenureBucket": "1-3y",
-          "tenureBucketLabel": "1~3년",
-          "years": {
-            "2026": {
-              "responses": 1,
-              "scoreSum": 7.0,
-              "sent": 12,
-              "rateResponses": 1
-            }
-          },
-          "commentResponses": 1,
-          "strengthKeywords": [
-            {
-              "label": "비교·장단점 안내",
-              "mentions": 1
-            },
-            {
-              "label": "시승·차량체험 지원",
-              "mentions": 1
-            }
-          ],
-          "improvementKeywords": [],
-          "latestResponseDate": "2026-04-22",
-          "staffCdsid": "Y-SONG53"
-        },
-        {
           "name": "이민하",
           "role": "영업직원",
           "jobTitle": "차장",
@@ -11817,7 +11786,40 @@
           "reason": "현재 DMS 재직 명단 미확인"
         }
       ],
-      "formerEmployees": []
+      "formerEmployees": [
+        {
+          "name": "송용주",
+          "role": "영업직원",
+          "jobTitle": "차장",
+          "hireDate": "2025-04-28",
+          "tenureMonths": 18,
+          "tenureBucket": "1-3y",
+          "tenureBucketLabel": "1~3년",
+          "years": {
+            "2026": {
+              "responses": 1,
+              "scoreSum": 7.0,
+              "sent": 12,
+              "rateResponses": 1
+            }
+          },
+          "commentResponses": 1,
+          "strengthKeywords": [
+            {
+              "label": "비교·장단점 안내",
+              "mentions": 1
+            },
+            {
+              "label": "시승·차량체험 지원",
+              "mentions": 1
+            }
+          ],
+          "improvementKeywords": [],
+          "latestResponseDate": "2026-04-22",
+          "archivedAt": "2026-11-27",
+          "archiveReason": "Sales-DMS 현재 명단 제외"
+        }
+      ]
     },
     "6KR342": {
       "showroom": "볼보 강남 신사",
