@@ -1328,20 +1328,24 @@ test("links ranking selections to the scatter plot in every analysis view", asyn
 });
 
 test("orders review staff by hire date with the newest hire last", async () => {
-  const [staffData, analysisSource, css] = await Promise.all([
-    readFile(new URL("../app/data/voc-staff-analysis.json", import.meta.url), "utf8").then(JSON.parse),
+  const [analysisSource, css] = await Promise.all([
     readFile(new URL("../app/CompetitiveAnalysis.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
-  const orderedNames = staffData.showrooms["6KR6834"].employees
-    .filter((employee) => employee.role === "영업직원" || employee.role === "영업팀장")
-    .sort((a, b) => a.hireDate.localeCompare(b.hireDate) || a.name.localeCompare(b.name, "ko"))
-    .map((employee) => employee.name);
-
-  assert.ok(orderedNames.indexOf("김대준") < orderedNames.indexOf("강석"));
-  assert.ok(orderedNames.indexOf("강석") < orderedNames.indexOf("송용주"));
-  assert.ok(orderedNames.indexOf("송용주") < orderedNames.indexOf("박준수"));
-  assert.ok(orderedNames.indexOf("박준수") < orderedNames.indexOf("정지만"));
+  // Exercise the production comparator without depending on a changing live roster.
+  const comparator = analysisSource.match(
+    /const compareStaffHireDateAscending = \(a: StaffEmployee, b: StaffEmployee\) => \{([\s\S]*?)\n\};/,
+  );
+  assert.ok(comparator, "staff hire-date comparator must exist");
+  const compare = new Function("a", "b", comparator[1]);
+  const staff = [
+    { name: "다", hireDate: "2026-01-01" },
+    { name: "나", hireDate: "2020-01-01" },
+    { name: "가", hireDate: "2020-01-01" },
+    { name: "라", hireDate: "" },
+    { name: "마", hireDate: "" },
+  ];
+  assert.deepEqual(staff.sort(compare).map(({ name }) => name), ["가", "나", "다", "라", "마"]);
   assert.match(
     analysisSource,
     /\.sort\(\(a, b\) => compareStaffHireDateAscending\(a\.employee, b\.employee\)\)/,
